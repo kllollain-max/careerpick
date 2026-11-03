@@ -1,7 +1,7 @@
 import unittest
 import xml.etree.ElementTree as ET
 import gojobs
-from scripts.verify_gojobs_recent_window import collect_window
+from scripts.verify_gojobs_recent_window import collect_window, body_application_period
 
 
 def body(page, total, ids, registered='2026-11-03'):
@@ -21,6 +21,10 @@ class Fake(gojobs.Client):
 
 
 class WindowTests(unittest.TestCase):
+    def test_body_application_period_not_exam_dates(self):
+        self.assertEqual(body_application_period('접수기간 : 2026. 11. 3.(화) ~ 11. 16.(월), 09:00 ~ 18:00'),('2026-11-03','2026-11-16'))
+        self.assertEqual(body_application_period('원서접수: 2026년11월11일 ~ 2026년11월13일'),('2026-11-11','2026-11-13'))
+        self.assertIsNone(body_application_period('면접시험 : 2026. 11. 3. ~ 11.16.'))
     def test_all_pages_and_results_excluded(self):
         result=collect_window(Fake([body(1,101,range(1,101)),body(2,101,[101]),body(1,0,[])]),'2026-10-20','2026-11-03')
         self.assertEqual(len(result['records']),101)
