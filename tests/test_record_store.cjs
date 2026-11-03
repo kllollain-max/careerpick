@@ -37,3 +37,9 @@ test('existing legacy record and long multiline note remain compatible',async()=
  const out=await store.mutate(s,'apps',{},store.apps,rows=>store.replaceApp(rows,'a',{...old,st:'plan'},JSON.stringify(old)));
  assert.equal(out.a.memo,note);
 });
+
+test('backup preserves corrupt raw bytes and reports unreadable keys explicitly',()=>{
+ const raw='{corrupt original',s=storage({apps:raw,saved:'["a"]'});
+ const result=store.exportRecords(s,['saved','apps']);assert.equal(result.raw_records.apps,raw);assert.deepEqual(result.invalid_keys,['apps']);assert.deepEqual(result.data.saved,['a']);assert(!('apps' in result.data));
+ assert.deepEqual(store.exportRecords({getItem:()=>{throw Error('denied')}},['saved']).unavailable_keys,['saved']);
+});

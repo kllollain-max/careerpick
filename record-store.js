@@ -29,5 +29,15 @@
     if(JSON.stringify(data[id]??null)!==expected)throw Error('다른 탭에서 이 지원 기록이 변경됐습니다. 입력 내용을 복사한 뒤 기록을 다시 열어 주세요.');
     if(next===null)delete data[id];else data[id]=next;return data;
   }
-  return{read,mutate,replaceApp,saved,apps,prefs};
+  function exportRecords(storage,keys){
+    const result={data:{},raw_records:{},invalid_keys:[],unavailable_keys:[]},validators={saved,apps,prefs};
+    for(const key of keys){
+      let raw;try{raw=storage.getItem(key);}catch(_){result.unavailable_keys.push(key);continue;}
+      if(raw===null)continue;result.raw_records[key]=raw;
+      try{const value=JSON.parse(raw);if(validators[key]&&!validators[key](value))throw Error('schema');result.data[key]=value;}
+      catch(_){result.invalid_keys.push(key);}
+    }
+    return result;
+  }
+  return{read,mutate,replaceApp,saved,apps,prefs,exportRecords};
 });

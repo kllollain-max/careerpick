@@ -13,7 +13,7 @@ const feed={updated:new Date().toISOString(),posts:rows};
 const report={checked_at_kst:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),browser:'Chromium desktop, isolated contexts; mobile viewport simulation',actual_devices:false,push_delivery:false,public:[],candidate:[]};
 const sdk=`(()=>{const sub={optedIn:false,id:null,token:null,addEventListener(){},async optIn(){window.fakeOptIns=(window.fakeOptIns||0)+1;await new Promise(r=>setTimeout(r,120));Object.defineProperty(Notification,'permission',{configurable:true,get:()=> 'granted'});sub.optedIn=true;sub.id='synthetic-subscription';sub.token='synthetic-token';},async optOut(){window.fakeOptOuts=(window.fakeOptOuts||0)+1;sub.optedIn=false;sub.id=null;sub.token=null;}};const api={init:async()=>{},User:{PushSubscription:sub,addTags:async()=>{},getTags:async()=>({}),removeTags:async()=>{}}};window.OneSignal=api;for(const callback of window.OneSignalDeferred||[])callback(api);window.OneSignalDeferred={push:callback=>callback(api)};})();`;
 async function context(browser,{width=390,fixtures=true,seed={},deny=false,sdkFailFirst=false,slow=false,failFeeds=false}={}){
- const ctx=await browser.newContext({viewport:{width,height:900},locale:'ko-KR',timezoneId:'Asia/Seoul',serviceWorkers:'block'});
+ const ctx=await browser.newContext({viewport:{width,height:900},locale:'ko-KR',timezoneId:'Asia/Seoul',serviceWorkers:'block'});ctx.setDefaultTimeout(7000);
  let sdkLoads=0;
  await ctx.addInitScript(({seed,deny})=>{
   if(!sessionStorage.getItem('cp-audit-seeded')){for(const [k,v]of Object.entries(seed))localStorage.setItem(k,v);sessionStorage.setItem('cp-audit-seeded','1');}
@@ -120,6 +120,17 @@ async function savedAndApps(page){
    const x=await context(browser,{slow:true}),p=await x.ctx.newPage();await p.goto(BASE,{waitUntil:'domcontentloaded'});assert((await p.locator('#summary').innerText()).includes('불러오는'));await p.waitForFunction(()=>!CP_DATA_LOADING);await x.ctx.close();
    const y=await context(browser,{failFeeds:true}),q=await y.ctx.newPage();await q.goto(BASE);await q.locator('#cpRetryFeeds').waitFor();assert((await q.locator('#list').innerText()).includes('검색 결과 없음과 다릅니다'));await y.ctx.close();
   });
+  await check('application deletion cancellation and explicit confirmation preserve independent saves',async()=>{
+   const x=await context(browser,{seed:{saved:'["a900001"]',apps:'{"a900001":{"st":"applied","memo":"delete-test","ck":[]}}'}}),p=await x.ctx.newPage();await ready(p);
+   await p.getByRole('button',{name:'내 지원',exact:true}).click();await p.locator('#list [data-track="a900001"]').last().click();p.once('dialog',d=>d.dismiss());await p.locator('#tDel').click();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('apps')).a900001.memo),'delete-test');
+   p.once('dialog',d=>d.accept());await p.locator('#tDel').click();await p.waitForFunction(()=>!JSON.parse(localStorage.getItem('apps')).a900001);assert.deepEqual(await p.evaluate(()=>JSON.parse(localStorage.getItem('saved'))),['a900001']);await x.ctx.close();
+  });
+  await check('unsupported and denied browser permission never display subscribed (synthetic)',async()=>{
+   const x=await context(browser);await x.ctx.addInitScript(()=>{delete window.Notification;});const p=await x.ctx.newPage();await ready(p);await p.getByRole('button',{name:'알림 설정',exact:true}).click();assert((await p.locator('#sheetBody').innerText()).includes('지원하지 않습니다'));await x.ctx.close();
+   const y=await context(browser),q=await y.ctx.newPage();await ready(q);await q.getByRole('button',{name:'알림 설정',exact:true}).click();await q.waitForFunction(()=>cpPushSdkReady);
+   await q.evaluate(()=>{OneSignal.User.PushSubscription.optedIn=true;OneSignal.User.PushSubscription.id='synthetic-id';OneSignal.User.PushSubscription.token='synthetic-token';Object.defineProperty(Notification,'permission',{configurable:true,get:()=> 'denied'});cpRenderPushButtons();});
+   assert.equal(await q.evaluate(()=>cpPushRegistered()),false);assert((await q.locator('#cpPushMessage').innerText()).includes('차단'));await y.ctx.close();
+  });
   await check('SDK reload retry, registration truth, duplicate opt-in, opt-out and clipboard fallback (synthetic)',async()=>{
    const x=await context(browser,{sdkFailFirst:true}),p=await x.ctx.newPage();await ready(p);await p.getByRole('button',{name:'알림 설정',exact:true}).click();await p.waitForFunction(()=>document.querySelector('#cpPushMessage')?.textContent.includes('실패'));
    await p.locator('#cpPushSubscribe').click();await p.waitForFunction(()=>cpPushSdkReady);await p.waitForFunction(()=>!cpPushAction);assert(x.sdkLoads()>=2);assert.equal(await p.evaluate(()=>fakeOptIns),1);assert(await p.locator('#cpPushUnsubscribe').isVisible());
@@ -131,5 +142,5 @@ async function savedAndApps(page){
   });
   if(report.candidate.some(x=>x.result==='fail'))process.exitCode=1;
   console.log(JSON.stringify({public:report.public,candidate_passed:report.candidate.length,actual_devices:false,actual_push:false}));
- }finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));await browser.close();}
+ }finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'```json\n'+JSON.stringify(report,null,2)+'\n```\n');await browser.close();}
 })().catch(e=>{console.error(String(e.message));process.exit(1)});
