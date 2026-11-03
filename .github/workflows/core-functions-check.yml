@@ -43,6 +43,7 @@ jobs:
           CHROME_PATH: /usr/bin/google-chrome
         run: node scripts/verify_record_protection.cjs
       - name: Compare mobile readability against pre-change commit
+        if: ${{ !cancelled() }}
         env:
           NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
           CHROME_PATH: /usr/bin/google-chrome
@@ -55,6 +56,7 @@ jobs:
           python -m http.server 8001 --directory "$RUNNER_TEMP/cp-before-host" > "$RUNNER_TEMP/cp-before-http.log" 2>&1 &
           node scripts/verify_mobile_readability.cjs
       - name: Measure navigation performance against pre-change commit
+        if: ${{ !cancelled() }}
         env:
           NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
           CHROME_PATH: /usr/bin/google-chrome

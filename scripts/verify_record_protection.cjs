@@ -76,14 +76,14 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
    const legacy={format:'careerpick-backup',version:1,data:{saved:['a123456','legacy-unlinked'],apps:{a123456:{st:'applied',memo:'old-format 합성',ck:[{t:'제출',ph:'pre',d:1}],exam:'2099-12-01'}},prefs:{emp:['정규직'],edu:[],region:['강원'],cat:[],kw:''}}};const x=await fresh(browser);const r=await importFile(x.p,upload(legacy,'synthetic-old-origin.json'));assert(r.preview.includes('미제공 (과거 백업)'));assert(r.alert.includes('병합 완료'));assert.equal(await x.p.evaluate(()=>APPS.a123456.memo),'old-format 합성');assert(await x.p.evaluate(()=>SAVED.has('legacy-unlinked')));await x.ctx.close();
   });
   await check('site/service-worker update and cached offline reload preserve personal records',async()=>{
-   const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8');let x;
+   const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8');let x,stage='initial-load';
    try{
-    x=await fresh(browser,{sw:true,seed:{saved:'["a999999"]',apps:'{"a999999":{"st":"plan","memo":"SW-preserved","ck":[]}}'}});const p=x.p;await p.evaluate(()=>navigator.serviceWorker.ready);await p.waitForFunction(()=>!!navigator.serviceWorker.controller);const before=await records(p);
+    x=await fresh(browser,{sw:true,seed:{saved:'["a999999"]',apps:'{"a999999":{"st":"plan","memo":"SW-preserved","ck":[]}}'}});const p=x.p;stage='ready-controller';await p.evaluate(()=>navigator.serviceWorker.ready);await p.waitForFunction(()=>!!navigator.serviceWorker.controller);const before=await records(p);
     fs.writeFileSync(workerFile,original+'\nself.addEventListener("message",e=>{if(e.data==="CP_RECORDS_AUDIT")e.source.postMessage("CP_RECORDS_AUDIT_V2");});\n');const mtime=new Date(Date.now()+3000);fs.utimesSync(workerFile,mtime,mtime);
-    await p.evaluate(async()=>{navigator.serviceWorker.addEventListener('message',e=>{if(e.data==='CP_RECORDS_AUDIT_V2')window.__recordsWorkerV2=true;});const r=await navigator.serviceWorker.getRegistration();await r.update();});
+    stage='worker-update-ack';await p.evaluate(async()=>{navigator.serviceWorker.addEventListener('message',e=>{if(e.data==='CP_RECORDS_AUDIT_V2')window.__recordsWorkerV2=true;});const r=await navigator.serviceWorker.getRegistration();await r.update();});
     await p.waitForFunction(async()=>{navigator.serviceWorker.controller?.postMessage('CP_RECORDS_AUDIT');return window.__recordsWorkerV2===true;});
-    await p.reload();await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);await x.ctx.setOffline(true);await p.reload();await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
-   }finally{fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}
+    stage='online-reload';await p.reload();await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);stage='offline-reload';await x.ctx.setOffline(true);await p.reload();await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
+   }catch(error){throw Error(stage+': '+error.message);}finally{fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}
   });
   if(report.checks.some(x=>x.result==='fail'))process.exitCode=1;
   console.log(JSON.stringify({record_scenarios:report.checks.length,passed:report.checks.filter(x=>x.result==='pass').length,actual_user_records:false,actual_old_origin_backup:false,backup_files_uploaded:false}));
