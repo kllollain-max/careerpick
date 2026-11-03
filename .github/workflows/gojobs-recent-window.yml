@@ -1,0 +1,34 @@
+name: Verify recent GOJOBS registration window
+on:
+  push:
+    branches: [codex/gojobs-window-20261103]
+    paths: [scripts/verify_gojobs_recent_window.py, tests/test_gojobs_recent_window.py, .github/workflows/gojobs-recent-window.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gojobs-recent-window-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify complete-window safeguards
+        run: python -m unittest discover -s tests -p test_gojobs_recent_window.py
+      - name: Read recent pages without changing public data
+        env:
+          GOJOBS_KEY: ${{ secrets.GOJOBS_KEY }}
+        run: python scripts/verify_gojobs_recent_window.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gojobs-recent-window
+          path: gojobs-window-output/report.json
+          retention-days: 7
