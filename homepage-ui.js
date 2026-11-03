@@ -198,7 +198,7 @@ function cpRenderHomeFilters(){
   else if(state.sector==='enterprise' && cpEnterpriseState==='empty') $('cpApplied').textContent += ' · 현재 제공된 기업 공고가 없습니다.';
 }
 let cpFilterFocus = null;
-function cpToggleFilters(open){
+function cpToggleFilters(open,restoreFocus=true){
   $('panel').classList.toggle('open',open);
   $('toggle').setAttribute('aria-expanded',String(open));
   cpSyncDialogState();
@@ -210,7 +210,7 @@ function cpToggleFilters(open){
     }
   } else {
     $('panel').removeAttribute('role'); $('panel').removeAttribute('aria-modal');
-    cpFilterFocus?.focus();
+    if(restoreFocus)cpFilterFocus?.focus();
   }
 }
 function cpFocusTrap(event, box){
@@ -251,7 +251,7 @@ function cpSetupHome(){
     if(media.matches) $('cpFilterScroll').prepend($('cpPrimaryFilters'));
     else {$('panel').before($('cpPrimaryFilters'));$('panel').removeAttribute('role');$('panel').removeAttribute('aria-modal');}
   };
-  media.addEventListener('change',()=>{cpToggleFilters(false);place();});place();
+  media.addEventListener('change',()=>{cpToggleFilters(false,false);place();});place();
   const viewport=()=>{document.documentElement.style.setProperty('--cp-viewport',(window.visualViewport?.height || innerHeight)+'px');document.documentElement.style.setProperty('--cp-viewport-top',(window.visualViewport?.offsetTop || 0)+'px');};
   window.visualViewport?.addEventListener('resize',viewport);window.visualViewport?.addEventListener('scroll',viewport);window.addEventListener('resize',viewport);viewport();
 }
