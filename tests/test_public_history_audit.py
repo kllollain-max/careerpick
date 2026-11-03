@@ -5,8 +5,9 @@ import tempfile
 import unittest
 import urllib.parse
 from pathlib import Path
+from unittest.mock import patch
 
-from scripts.audit_public_history import KEY_NAMES, audit
+from scripts.audit_public_history import KEY_NAMES, REVIEWED_TEST_FIXTURES, audit
 
 
 class PublicHistoryAuditTests(unittest.TestCase):
@@ -86,6 +87,39 @@ class PublicHistoryAuditTests(unittest.TestCase):
         result = audit(self.repo, self.keys)
         self.assertEqual(result["findings"][0]["path"], "[redacted-path]")
         self.assertNotIn(escaped, json.dumps(result))
+
+    def test_reviewed_fixture_is_reported_but_changed_blob_still_blocks(self):
+        value = hashlib.sha256(b"reviewed-synthetic-fixture").hexdigest()
+        content = json.dumps({"api_key": value})
+        payload = content.encode()
+        blob_sha = hashlib.sha1(b"blob " + str(len(payload)).encode() + b"\0" + payload).hexdigest()
+        self.commit("test_mock.py", content)
+        with patch.dict(REVIEWED_TEST_FIXTURES, {blob_sha: "test_mock.py"}, clear=True):
+            result = audit(self.repo, self.keys)
+            self.assertEqual(result["status"], "passed")
+            self.assertEqual(result["reviewed_fixture_finding_count"], 1)
+            self.assertEqual(result["reviewed_fixture_findings"][0]["blob_sha"], blob_sha)
+            self.assertNotIn(value, json.dumps(result))
+            self.commit("test_mock.py", content + "\n# changed revision\n")
+            changed = audit(self.repo, self.keys)
+            self.assertEqual(changed["status"], "blocked")
+            self.assertEqual(changed["reviewed_fixture_finding_count"], 1)
+            self.assertEqual(changed["findings"][0]["category"], "hardcoded_api_credential")
+
+    def test_reviewed_fixture_never_suppresses_registered_or_token_findings(self):
+        token = "gh" + "p_" + "Z8" * 20
+        content = json.dumps({"api_key": self.keys["ALIO_KEY"]}) + "\n" + token
+        payload = content.encode()
+        blob_sha = hashlib.sha1(b"blob " + str(len(payload)).encode() + b"\0" + payload).hexdigest()
+        self.commit("test_mock.py", content)
+        with patch.dict(REVIEWED_TEST_FIXTURES, {blob_sha: "test_mock.py"}, clear=True):
+            result = audit(self.repo, self.keys)
+        self.assertEqual(result["status"], "blocked")
+        self.assertEqual(result["reviewed_fixture_finding_count"], 1)
+        self.assertEqual({finding["category"] for finding in result["findings"]},
+                         {"registered_secret_ALIO_KEY", "github_token"})
+        self.assertNotIn(self.keys["ALIO_KEY"], json.dumps(result))
+        self.assertNotIn(token, json.dumps(result))
 
 
 if __name__ == "__main__":
