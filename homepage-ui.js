@@ -82,7 +82,12 @@ function cpSetupBrowse(){
  window.addEventListener('pagehide',()=>cpSaveBrowse());
  document.addEventListener('visibilitychange',()=>{if(document.hidden)cpSaveBrowse();});
 }
-let cpQueuedFeedUpdate=null;
+let cpQueuedFeedUpdate=null,cpApplyingFeedUpdates=false;
+function cpFlushFeedUpdate(){
+ if(!cpQueuedFeedUpdate)return false;
+ const apply=cpQueuedFeedUpdate;cpQueuedFeedUpdate=null;if($('cpFeedUpdate'))$('cpFeedUpdate').hidden=true;
+ cpApplyingFeedUpdates=true;try{apply();}finally{cpApplyingFeedUpdates=false;}return true;
+}
 function cpOfferFeedUpdate(apply){
  if(!cpFeedEngaged||location.hash.startsWith('#job=')||!document.querySelector('#list .card')){apply();return;}
  const prior=cpQueuedFeedUpdate;cpQueuedFeedUpdate=prior?()=>{prior();apply();}:apply;
@@ -90,7 +95,7 @@ function cpOfferFeedUpdate(apply){
  if(!box){box=document.createElement('div');box.id='cpFeedUpdate';box.setAttribute('role','status');box.innerHTML='공고·조건 자료가 준비됐습니다. 현재 목록을 유지하고 있어요. <button type="button" id="cpApplyFeedUpdate">자료 갱신</button>';$('summary').parentElement.before(box);}
  box.hidden=false;if(anchor)cpBrowseRestorePosition({...cpBrowseSnapshot(),anchor});const summary=$('summary');if(summary)summary.innerHTML=summary.innerHTML.replace(' · 일부 출처 확인 중 · 최종 건수 미확정',' · 추가 자료 준비됨 (자료 갱신 후 전체 결과 확인)');
 }
-document.addEventListener('click',e=>{if(e.target.closest('#cpApplyFeedUpdate')&&cpQueuedFeedUpdate){const apply=cpQueuedFeedUpdate;cpQueuedFeedUpdate=null;$('cpFeedUpdate').hidden=true;apply();cpSaveBrowse();}});
+document.addEventListener('click',e=>{if(e.target.closest('#cpApplyFeedUpdate')&&cpQueuedFeedUpdate){cpFlushFeedUpdate();refresh();cpSaveBrowse();}});
 
 let cpVisibleLimit=30, cpLastFilter="";
 function cpCheckVisibleLimit(){ const key=JSON.stringify(state);if(key!==cpLastFilter){if(cpRestoringBrowse&&cpLastFilter){cpRestoringBrowse=false;cpBrowsePending=null;}cpVisibleLimit=30;cpLastFilter=key;cpBrowseGeneration++;if(cpBrowseReady&&!cpRestoringBrowse&&scrollY>($("summary")?.offsetTop||0))window.scrollTo({top:$("summary")?.offsetTop||0,behavior:"instant"});} }
