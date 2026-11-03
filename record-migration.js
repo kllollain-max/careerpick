@@ -5,7 +5,7 @@ const keys=['prefs','spec','saved','apps','careerpick-import-archive'];
 const recoveryKeys=['careerpick-record-checkpoints','careerpick-before-import'];
 const journalKey='careerpick-before-import',maxBytes=16*1024*1024;
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
-const secretKey=k=>/^(?:api[_-]?key|access[_-]?token|refresh[_-]?token|subscription[_-]?token|authorization|password|secret|client[_-]?secret|onesignal[_-]?token|token)$/i.test(k);
+const secretKey=k=>/(?:apikeys?|tokens?|password|authorization|privatekey|clientsecret|credentials?|secret)$/.test(String(k).replace(/[^a-z0-9]/gi,'').toLowerCase())||/^(?:alio|gojobs|mpmexam)key$/i.test(String(k).replace(/[^a-z0-9]/gi,''));
 function safe(v,depth=0){
  if(depth>15)throw Error('기록 구조가 너무 깊습니다.');
  if(v&&typeof v==='object')for(const k of Object.keys(v)){

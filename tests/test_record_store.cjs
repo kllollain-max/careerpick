@@ -67,3 +67,8 @@ test('unknown checkpoint version and unfinished import preserve input but reject
  const s=storage({saved:'["a1"]','careerpick-before-import':'{"format":"careerpick-before-import","version":99,"state":"complete"}'});
  assert(!store.read(s,'saved',[],store.saved).ok);await assert.rejects(store.mutate(s,'saved',[],store.saved,()=>[]));assert.equal(s.data.saved,'["a1"]');
 });
+
+test('credential names inside serialized intended recovery values are excluded from backups',()=>{
+ const s=storage({'careerpick-before-import':JSON.stringify({expected_after:{apps:'{"a1":{"st":"plan","CP_LEDGER_TOKEN":"held-token","CP_ONESIGNAL_REST_API_KEY":"held-key"}}'}})});
+ const result=store.exportRecords(s,['careerpick-before-import']),text=JSON.stringify(result);assert(!text.includes('held-token'));assert(!text.includes('held-key'));assert(result.excluded_secret_fields>0);
+});

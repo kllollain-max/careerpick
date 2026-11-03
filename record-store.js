@@ -57,7 +57,7 @@
   function exportRecords(storage,keys){
     const result={data:{},raw_records:{},recovery:{},invalid_keys:[],unavailable_keys:[],excluded_secret_fields:0,redacted_raw_keys:[]},validators={saved,apps,prefs,spec};
     const recoveryKeys=['careerpick-record-checkpoints','careerpick-before-import'];
-    const secret=k=>/^(?:api[_-]?key|access[_-]?token|refresh[_-]?token|subscription[_-]?token|authorization|password|secret|client[_-]?secret|onesignal[_-]?token|token)$/i.test(k);
+    const secret=k=>/(?:apikeys?|tokens?|password|authorization|privatekey|clientsecret|credentials?|secret)$/.test(String(k).replace(/[^a-z0-9]/gi,'').toLowerCase())||/^(?:alio|gojobs|mpmexam)key$/i.test(String(k).replace(/[^a-z0-9]/gi,''));
     function scrub(value,depth=0){
       if(depth>30)throw Error('depth');
       if(Array.isArray(value))return value.map(v=>scrub(v,depth+1));
@@ -66,7 +66,7 @@
           if(secret(k)){result.excluded_secret_fields++;continue;}
           if(!safeKey(k))throw Error('unsafe');
           if((k==='raw'||k==='raw_records')&&typeof v==='string')out[k]=scrubRaw(v);
-          else if(k==='raw_records'&&object(v))out[k]=Object.fromEntries(Object.entries(v).map(([name,raw])=>[name,typeof raw==='string'?scrubRaw(raw):raw]));
+          else if(['raw_records','expected_after'].includes(k)&&object(v))out[k]=Object.fromEntries(Object.entries(v).map(([name,raw])=>[name,typeof raw==='string'?scrubRaw(raw):raw]));
           else out[k]=scrub(v,depth+1);
         }return out;
       }return value;
