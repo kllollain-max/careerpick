@@ -23,7 +23,7 @@
     if(p.type !== 'j') return 'content';
     if(/공무직|무기계약/.test([p.title,...(p.emp||[])].join(' '))) return 'service';
     if(p.enterprise && p.group && p.group !== '기타') return 'enterprise';
-    if(p.alio || p.alioUrl || /공공기관|기관 공식/.test(p.cat||'')) return 'public';
+    if(p.gojobs || p.alio || p.alioUrl || /공공기관|기관 공식/.test(p.cat||'')) return 'public';
     return 'other';
   }
   function employment(p){
@@ -147,7 +147,7 @@
     return {rows,issues:[...new Set(issues)],states,updated:data.updated||data.updated_at||null};
   }
   function healthNotices(health, stamps, issues, now=new Date()){
-    const names={posts:'블로그',alio:'잡알리오',monitor:'기관 공고',enterprise:'기업 채용',detail:'상세 정보',work24:'고용24'};
+    const names={gojobs:'나라일터',posts:'블로그',alio:'잡알리오',monitor:'기관 공고',enterprise:'기업 채용',detail:'상세 정보',work24:'고용24'};
     const notes=[];
     for(const [key,status] of Object.entries(health)){
       if(status==='disabled')notes.push(names[key]+' 수집이 비활성 상태입니다.');

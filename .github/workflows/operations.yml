@@ -39,6 +39,12 @@ jobs:
         env:
           MPM_EXAM_KEY: ${{ secrets.MPM_EXAM_KEY }}
         run: python scripts/run_exam_operations.py
+      - name: Validate independent GOJOBS source
+        id: gojobs
+        continue-on-error: true
+        env:
+          GOJOBS_KEY: ${{ secrets.GOJOBS_KEY }}
+        run: python scripts/collect_gojobs.py
       - name: Select validated data
         id: candidate
         run: |
@@ -57,6 +63,12 @@ jobs:
           exam=json.loads(exam_report.read_text()) if exam_report.exists() else {}
           exam_ok=exam.get('status') in ('changed','unchanged')
           changed=changed or (exam_ok and (exam.get('changed') or not Path('exam-status.json').exists()))
+          gojobs_report=Path('gojobs-operation-output/report.json')
+          gojobs=json.loads(gojobs_report.read_text()) if gojobs_report.exists() else {}
+          gojobs_ok=gojobs.get('status') in ('changed','unchanged')
+          if gojobs_ok and gojobs.get('changed'):
+              shutil.copyfile('gojobs-operation-output/gojobs.json','gojobs.json')
+              changed=True
           if exam_ok and changed:
               shutil.copyfile('exam-operation-output/data/civil-service/2026.json','data/civil-service/2026.json')
               shutil.copyfile('exam-operation-output/exam-status.json','exam-status.json')
@@ -76,7 +88,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add alio.json alio-detail.json operations-status.json data/civil-service/2026.json
           if test -f exam-status.json; then git add exam-status.json; fi
-          git commit -m 'Update validated ALIO snapshot'
+          if test -f gojobs.json; then git add gojobs.json; fi
+          git commit -m 'Update validated public recruitment snapshots'
           git push origin HEAD:main
       - uses: actions/configure-pages@v5
         if: steps.candidate.outputs.changed == 'true'
@@ -108,9 +121,11 @@ jobs:
           r.update(trigger=os.environ['GITHUB_EVENT_NAME'],job_status=os.environ['JOB_STATUS'],deployment=os.environ['DEPLOYMENT_OUTCOME'] if os.environ['CHANGED']=='true' else ('unchanged' if os.environ['JOB_STATUS']=='success' else 'not_run_due_failure'),run_url=os.environ['GITHUB_SERVER_URL']+'/'+os.environ['GITHUB_REPOSITORY']+'/actions/runs/'+os.environ['GITHUB_RUN_ID'])
           exam_path=Path('exam-operation-output/report.json')
           r['exam_source']=json.loads(exam_path.read_text()) if exam_path.exists() else {'status':'not_run'}
+          gojobs_path=Path('gojobs-operation-output/report.json')
+          r['gojobs_source']=json.loads(gojobs_path.read_text()) if gojobs_path.exists() else {'status':'not_run'}
           r['storage']=os.environ['STORAGE_OUTCOME'] if os.environ['CHANGED']=='true' else 'unchanged'
           r['public_check']=os.environ['PUBLIC_OUTCOME']
-          r['overall']='success' if os.environ['JOB_STATUS']=='success' and r['exam_source'].get('status') in ('changed','unchanged') else 'partial_or_failed'
+          r['overall']='success' if os.environ['JOB_STATUS']=='success' and r['exam_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('official_page_failed',1)==0 else 'partial_or_failed'
           p.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n')
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('```json\n'+json.dumps(r,ensure_ascii=False,indent=2)+'\n```\n')
           PY
@@ -123,4 +138,5 @@ jobs:
             operations-output/previous-head.txt
             build-report.json
             exam-operation-output/report.json
+            gojobs-operation-output/report.json
           retention-days: 30

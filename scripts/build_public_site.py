@@ -23,7 +23,7 @@ HOST = "kllollain-max.github.io"
 PREFIX = "/careerpick/"
 BASE = "https://" + HOST + PREFIX
 OLD_HOST = "jobinfo-hub.github.io"
-SOURCE_JSON = ("alio.json", "alio-detail.json", "monitor.json", "posts.json", "qnet.json", "enterprise_jobs.json")
+SOURCE_JSON = ("gojobs.json", "alio.json", "alio-detail.json", "monitor.json", "posts.json", "qnet.json", "enterprise_jobs.json")
 BLOCKED_SCRIPT_MARKERS = ("googlesyndication.com", "wcs.pstatic.net", "wcs_add", "wcs_do(", "adsbygoogle")
 SCRIPT = re.compile(r"<script\b[^>]*>[\s\S]*?</script\s*>", re.I)
 
@@ -41,7 +41,7 @@ def load_module(name: str, relative: str):
 
 def public_files() -> list[Path]:
     manifest = json.loads((ROOT / "public-files.json").read_text(encoding="utf-8"))
-    names = list(manifest["root_files"]) + list(manifest["files"])
+    names = list(manifest["root_files"]) + list(manifest["files"]) + ["gojobs.json"]
     for directory, extensions in manifest["directories"].items():
         names.extend(str(p.relative_to(ROOT)) for p in (ROOT / directory).iterdir()
                      if p.is_file() and p.suffix in extensions)
