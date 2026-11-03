@@ -57,7 +57,7 @@ test('invalid dates, reversed ranges and partial matches never create an applica
     '2026-11-01~미정', '2026-11-01garbage', '2026-11-01~2026-11-04~2026-11-05']) {
     assert.deepEqual(Array.from(api.range(value)), ['', ''], value);
     assert.equal(api.status(row('일정', '2026-11-10', value)), '일정 확인 필요');
-    assert.equal(api.scheduleText(value), '공고 확인 필요');
+    assert.equal(api.scheduleText(value), '공고 확인 필요 · 원문: '+value);
   }
   assert.deepEqual(Array.from(api.range('2024-2-29')), ['2024-02-29', '2024-02-29']);
 });
@@ -129,7 +129,7 @@ test('a failed selected-year request clears stale counts and retrieval time', as
   elements.updated.textContent = 'old timestamp'; elements.count.textContent = 'old count';
   const pending = api.loadYear('2026');
   requests[0].resolve({ok: false}); await pending;
-  assert.equal(elements.updated.textContent, '');
+  assert.match(elements.updated.textContent, /조회 실패.*확인 불가/);
   assert.equal(elements.count.textContent, '');
   assert.match(elements.results.textContent, /불러오지 못했습니다/);
 });
@@ -145,4 +145,12 @@ test('shared detail URL selects stable name and stage while retaining dates', ()
   assert.match(elements.results.innerHTML,/원서접수/);
   assert.match(elements.results.innerHTML,/시행기관: 인사혁신처/);
   assert.match(elements.results.innerHTML,/전체 시험일정/);
+});
+
+
+test('same-year retry failure retains only previously known source timestamp',async()=>{
+ const {api,elements,requests}=harness();api.setYears([{year:2026,path:'data/civil-service/2026.json'}]);
+ const first=api.loadYear('2026');requests[0].resolve({ok:true,json:async()=>({records:[row('보관')],retrieved_at:'2026-10-25T22:39:58+00:00'})});await first;
+ const second=api.loadYear('2026');requests[2].resolve({ok:false});await second;
+ assert.match(elements.updated.textContent,/조회 실패.*2026-10-26 07:39:58/);assert.equal(elements.count.textContent,'');
 });

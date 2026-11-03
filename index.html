@@ -581,6 +581,7 @@ footer .src b{color:var(--ink)}
 .trk-item .m{white-space:pre-wrap;overflow-wrap:anywhere}
 
 .cp-record-tools{font-size:12px;line-height:1.6;color:var(--muted);margin:12px 0}.cp-record-tools button{min-height:44px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}.cp-record-archive{white-space:pre-wrap;overflow-wrap:anywhere;max-height:48vh;overflow:auto;font-size:12px}
+#cpCompareBar{margin:10px 0;font-size:14px}#cpCompareBar button,.cp-compare button{padding:10px;min-height:44px}.cp-compare-scroll{max-height:58vh;overflow:auto}.cp-compare{width:100%;table-layout:fixed;border-collapse:collapse;font-size:.875rem}.cp-compare th,.cp-compare td{border:1px solid var(--line);padding:8px;vertical-align:top;overflow-wrap:anywhere;white-space:pre-wrap}.cp-compare thead th{position:sticky;top:0;background:var(--surface);z-index:1}.cp-compare th:first-child{width:25%}.cp-compare td{line-height:1.65}.actions{flex-wrap:wrap}.card.row [data-compare]{font-size:12px;max-width:56px;white-space:normal;flex:none}
 </style>
 <link rel="stylesheet" href="homepage-ux.css">
 <script src="/jobs/available.js" defer></script>
@@ -757,6 +758,7 @@ footer .src b{color:var(--ink)}
 </div>
 
 <script src="push-config.js"></script>
+<script src="additional-features.js"></script>
 <script src="record-migration.js"></script>
 <script src="record-store.js"></script>
 <script src="homepage-ux.js"></script>
@@ -1314,6 +1316,39 @@ function renderFilters(){
   $("toggle").dataset.on = String(!!state.cat || !!state.region || !!state.q || state.status !== "all" || state.sort !== "due" || state.onlyNew || state.deadline !== "all");
 }
 
+
+let CP_COMPARE=[];
+function cpCompareButton(p){return `<button type="button" data-compare="${esc(p.id)}" aria-pressed="${CP_COMPARE.includes(p.id)}">${CP_COMPARE.includes(p.id)?'✓ 비교 선택':'비교 추가'}</button>`;}
+function cpCompareControls(){
+  document.querySelectorAll('[data-compare]').forEach(b=>{const on=CP_COMPARE.includes(b.dataset.compare);b.setAttribute('aria-pressed',String(on));b.textContent=on?'✓ 비교 선택':'비교 추가';});
+  let bar=$('cpCompareBar');if(!bar){bar=document.createElement('div');bar.id='cpCompareBar';$('summary').before(bar);}
+  bar.innerHTML=`<button type="button" data-show-compare="1">공고 비교 (${CP_COMPARE.length}/2)</button> <span>선택은 이 화면에서만 유지됩니다.</span>`;
+}
+function cpToggleCompare(id){
+  if(!POSTS.some(p=>p.id===id && isInternalJob(p)))return;
+  if(CP_COMPARE.includes(id))CP_COMPARE=CP_COMPARE.filter(x=>x!==id);
+  else if(CP_COMPARE.length<2)CP_COMPARE.push(id);else{toast('비교는 최대 2개입니다. 기존 선택을 해제해 주세요.');return;}
+  cpCompareControls();toast(CP_COMPARE.length+'개 공고 비교 선택');
+}
+async function cpShowCompare(){
+  const selected=CP_COMPARE.slice();if(!selected.length){toast('공고의 비교 추가 버튼을 눌러 주세요.');return;}
+  if(selected.some(id=>POSTS.find(p=>p.id===id)?.alio))await alioDetail();
+  if(selected.join('|')!==CP_COMPARE.join('|'))return;
+  const jobs=selected.map(id=>POSTS.find(p=>p.id===id)).filter(Boolean);
+  if(!jobs.length){toast('선택한 공고 자료를 확인할 수 없습니다. 목록에서 다시 선택해 주세요.');return;}
+  const cols=jobs.map(p=>CPExtras.comparison(p,p.gojobs?p.gojobsDetail||{}:(ALIO_DETAIL||{})[p.id]||{}));
+  sheet(`<p>공고 전체를 비교합니다. 복수 직무의 조건은 섞어 판단하지 말고 원문에서 직무별로 확인하세요. 보수 환산·추천 점수는 제공하지 않습니다.</p><div class="cp-compare-scroll"><table class="cp-compare"><caption>공고 비교 · 누락된 값은 미확인</caption><thead><tr><th scope="col">항목</th>${jobs.map((p,i)=>`<th scope="col">공고 ${i+1}<br>${esc(p.org)}<br><button data-remove-compare="${esc(p.id)}">제거</button> <a href="${esc(jobHref(p))}" data-compare-open="${esc(p.id)}">상세</a></th>`).join('')}</tr></thead><tbody>${cols[0].map((row,i)=>`<tr><th scope="row">${esc(row[0])}</th>${cols.map(c=>`<td>${esc(c[i][1])}</td>`).join('')}</tr>`).join('')}<tr><th scope="row">공식 링크</th>${jobs.map(p=>`<td><a href="${esc(officialLink(p).href)}" target="_blank" rel="noopener">원문 확인 ↗</a></td>`).join('')}</tr></tbody></table></div><p>개별 상세 조회 실패 시 확인 가능한 목록값만 유지합니다. 개인 저장·지원 기록은 변경하지 않습니다.</p><button data-close-compare="1">비교 닫기</button>`, '공고 2개 비교');
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-compare],[data-show-compare],[data-remove-compare],[data-compare-open],[data-close-compare],[data-job-calendar]');if(!b)return;
+ if(b.dataset.compare){cpToggleCompare(b.dataset.compare);}
+ else if(b.dataset.showCompare){cpShowCompare();}
+ else if(b.dataset.removeCompare){cpToggleCompare(b.dataset.removeCompare);if(CP_COMPARE.length)cpShowCompare();else closeSheet();}
+ else if(b.dataset.compareOpen){e.preventDefault();closeSheet();openJob(b.dataset.compareOpen);}
+ else if(b.dataset.closeCompare)closeSheet();
+ else if(b.dataset.jobCalendar)cpExportJobCalendar(b.dataset.jobCalendar);
+});
+
 function calLink(p){
   const f = d => { const k = kst(d); return `${k.getUTCFullYear()}${pad(k.getUTCMonth()+1)}${pad(k.getUTCDate())}T${pad(k.getUTCHours())}${pad(k.getUTCMinutes())}00`; };
   const start = new Date(p.due.getTime() - 3600e3);
@@ -1414,10 +1449,11 @@ function jobCard(p, now){
       </div>
     </a>
     <div class="actions">
+      ${isInternalJob(p)?cpCompareButton(p):""}
       <button class="save" data-save="${esc(cpSavedId(p))}" aria-pressed="${saved}">${saved ? "★ 저장됨" : "☆ 저장"}</button>
       <button class="track" data-track="${esc(cpApplicationId(p))}"${ap ? ` data-st="${ap.st}"` : ""}>${ap ? "📋 " + (ST[ap.st]||ST.plan).short : "📋 지원기록"}</button>
       ${isInternalJob(p) ? `<a href="${esc(jobHref(p))}" data-open="${esc(p.id)}">상세보기</a>` : `<a href="${esc(p.url)}" target="_blank" rel="noopener">해설보기</a>`}
-      ${p.due && d.cls !== "closed" && p.dueHasTime === true ? `<a href="${calLink(p)}" target="_blank" rel="noopener">📅 캘린더</a>` : ""}
+      ${p.due && d.cls !== "closed" && !p.alio ? `<button data-job-calendar="${esc(p.id)}">📅 ICS</button>` : ""}
       <a href="${esc(off.href)}" target="_blank" rel="noopener noreferrer">${off.label === "공식 공고 찾기" ? "공식 공고 찾기" : off.label} ↗</a>${cpMergedSourceLinks(p,off.href)}
       ${cpVerifiedRecruitLinks(p) ? `<a href="${esc(cpVerifiedRecruitLinks(p).apply)}" target="_blank" rel="noopener noreferrer">지원 사이트 ↗</a>` : ""}
     </div></li>`;
@@ -1442,6 +1478,7 @@ function rowCard(p, now){
       <span class="rm">${esc(meta.join(" · "))}</span>${preferenceBadge(p)}</span>
     </a>
     ${standaloneJobLink(p)}
+    ${isInternalJob(p)?cpCompareButton(p):""}
     <button class="save" data-save="${esc(cpSavedId(p))}" aria-pressed="${saved}" aria-label="${saved ? "저장 취소" : "관심 공고 저장"}">${saved ? "★" : "☆"}</button></li>`;
 }
 function miniCard(p, now){
@@ -1709,35 +1746,14 @@ const CERTS = [
 ];
 const certText = id => { const d = (ALIO_DETAIL || {})[id] || {}; return plainQ([d.aplyQlfcCn, d.prefCn, d.prefCondCn, d.recrutPbancTtl].join(" ")).replace(/\s+/g, ""); };
 function certPosts(name, now){
-  const re = (CERTS.find(c => c[0] === name) || [name, new RegExp(name)])[1];
-  return POSTS.filter(p => p.alio && statusOf(p, now) !== "closed" && re.test(certText(p.id)));
+  return POSTS.filter(p=>p.alio && statusOf(p,now)!=='closed' && CPExtras.certificateEvidence((ALIO_DETAIL||{})[p.id],name).length);
 }
 const qd = s => { const [y,m,d] = String(s).split("-").map(Number); return Date.UTC(y, m-1, d); };
 const qlabel = r => `${r.g} ${r.y !== new Date().getFullYear() ? r.y + "년 " : ""}제${r.r}회`;
-function certOpen(now){
-  const t = ymd(now), out = [];
-  for(const r of (QNET ? QNET.rows : [])){
-    if(r.wa1 && r.wa1 <= t && t <= r.wa2) out.push({r, step:"필기", end:r.wa2});
-    if(r.pa1 && r.pa1 <= t && t <= r.pa2) out.push({r, step:"실기", end:r.pa2});
-  }
-  return out.sort((a, b) => a.end < b.end ? -1 : 1);
-}
-function certEvents(now, days){
-  const t = ymd(now), lim = ymd(new Date(now.getTime() + days*864e5)), ev = [];
-  const push = (date, kind, label, r) => { if(date && date >= t && date <= lim) ev.push({date, kind, label, name:qlabel(r)}); };
-  for(const r of (QNET ? QNET.rows : [])){
-    push(r.wa1, "due", "필기접수 시작", r); push(r.wa2, "due", "필기접수 마감", r);
-    push(r.w1, "exam", "필기시험", r); push(r.wp, "itv", "필기 발표", r);
-    push(r.pa1, "due", "실기접수 시작", r); push(r.pa2, "due", "실기접수 마감", r);
-    push(r.p1, "exam", "실기시험", r); push(r.pp, "itv", "최종 발표", r);
-  }
-  return ev.sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
-}
-function certCal(o){
-  const [y,m,d] = o.end.split("-").map(Number);
-  const due = new Date(Date.UTC(y, m-1, d, 9));   // KST 18:00
-  return calLink({due, dueHasTime:true, org:"큐넷", title:`${qlabel(o.r)} ${o.step} 원서접수 마감`, url:"https://www.q-net.or.kr"});
-}
+// Preserved QNET rows lack per-qualification identity and cannot drive live statuses.
+function certOpen(){return [];}
+function certEvents(){return [];}
+
 const qspan = (a, b) => !a && !b ? "-" : a && b && a !== b ? `${ymdLabel(a)}~${ymdLabel(b)}` : ymdLabel(a || b);
 function renderCert(now){
   if(!QNET_TRIED){ $("summary").innerHTML = "시험일정을 불러오는 중이에요…"; $("list").innerHTML = ""; loadQnet().then(() => { renderTabs(); render(); }); return; }
@@ -1746,44 +1762,23 @@ function renderCert(now){
     if(!ALIO_DETAIL){ alioDetail().then(render); $("list").innerHTML = `<li class="empty">공고를 불러오는 중이에요…</li>`; return; }
     const rows = certPosts(state.certQ, now).sort((a, b) => cmp(sortKey(a, now), sortKey(b, now)));
     $("summary").innerHTML = `💼 <b>${esc(state.certQ)}</b>을(를) 지원 자격·우대 사항에 적은 마감 전·일정 확인 공고 <b>${rows.length}</b>건 <button class="linkbtn" id="certBack">← 자격증 일정으로</button>`;
-    $("list").innerHTML = rows.length ? rows.map(p => COMPACT ? rowCard(p, now) : jobCard(p, now)).join("") : `<li class="empty">지금은 해당 공고가 없어요.</li>`;
+    $("list").innerHTML = rows.length ? rows.map(p => `<li class="trk-box"><b>${esc(p.org)} · 자격명 언급 근거</b><p>${esc(CPExtras.certificateEvidence((ALIO_DETAIL||{})[p.id],state.certQ).join(" / "))}</p></li>`+(COMPACT ? rowCard(p,now) : jobCard(p,now))).join("") : `<li class="empty">지금은 해당 공고가 없어요.</li>`;
     return;
   }
   $("summary").innerHTML = `📝 국가자격 시험일정 · 큐넷 공식 자료 기준 <a class="linkbtn" href="certs.html">전체 일정표 →</a>`;
-  if(!QNET || !QNET.rows.length){
-    parts.push(`<li class="empty">자격증 시험일정을 준비하고 있어요.<br>곧 큐넷 공식 일정이 자동으로 채워져요.<br><a class="chip" href="https://www.q-net.or.kr" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;text-decoration:none;color:inherit">큐넷에서 보기 ↗</a></li>`);
-  } else {
-    const op = certOpen(now), t = ymd(now);
-    parts.push(`<li class="trk-box"><h3>🔥 지금 원서접수 중</h3>${op.length ? op.map(o => {
-      const n = Math.round((qd(o.end) - qd(t)) / 864e5);
-      return `<div class="sch"><span class="dt hot">${n === 0 ? "오늘 마감" : "D-" + n}</span><span class="nm" style="white-space:normal;line-height:1.35"><b>${esc(qlabel(o.r))} ${o.step} 원서접수</b><br><small style="color:var(--muted)">~${ymdLabel(o.end)} 18시 마감</small></span>
-        <a class="kd due" href="https://www.q-net.or.kr" target="_blank" rel="noopener" style="text-decoration:none">접수 ↗</a><a class="kd" href="${certCal(o)}" target="_blank" rel="noopener" style="text-decoration:none">📅</a></div>`; }).join("")
-      : (() => { const nx = certEvents(now, 400).find(e => /접수 시작/.test(e.label)); return `<div class="sch" style="color:var(--muted)">지금 접수 중인 시험은 없어요.${nx ? ` 다음 접수: <b style="color:var(--ink)">${ymdLabel(nx.date)} ${esc(nx.name)} ${nx.label.replace(" 시작", "")}</b>` : ""}</div>`; })()}</li>`);
-    const ev = certEvents(now, 60);
-    parts.push(`<li class="trk-box"><h3>🗓 앞으로 60일 시험 일정</h3>${ev.length ? ev.slice(0, 14).map(e =>
-      `<div class="sch"><span class="dt${e.date <= ymd(new Date(now.getTime() + 3*864e5)) ? " hot" : ""}">${e.date === t ? "오늘" : ymdLabel(e.date)}</span><span class="kd ${e.kind}">${e.label}</span><span class="nm">${esc(e.name)}</span></div>`).join("")
-      : `<div class="sch" style="color:var(--muted)">60일 안에 예정된 일정이 없어요.</div>`}</li>`);
-  }
+  parts.push(`<li class="trk-box"><h3>자격 일정 확인</h3><p>보관 자료 기준: ${esc(QNET?.updated||'미확인')}. 현재 회차의 공식 실조회가 아닙니다. 보관 자료에는 개별 자격명·종목 코드가 없어 접수 중 판단·개별 일정·임의 마감 시각을 제공하지 않습니다.</p><p><a href="certs.html">국가기술·국가전문·민간자격 공식 확인 경로 →</a></p></li>`);
   // 자격증 → 지원 가능한 공고 연결
   if(!ALIO_DETAIL){
-    parts.push(`<li class="trk-box"><h3>💼 이 자격증이 있으면 지원 가능한 공고</h3><div class="sch" style="color:var(--muted)">공고를 분석하는 중이에요…</div></li>`);
+    parts.push(`<li class="trk-box"><h3>💼 자격명 원문 언급 공고 (지원 가능 확정 아님)</h3><div class="sch" style="color:var(--muted)">공고를 분석하는 중이에요…</div></li>`);
     alioDetail().then(() => { if(state.tab === "cert") render(); });
   } else {
     const mine = SPEC ? specLics(SPEC) : [];
-    const list = CERTS.map(([name]) => ({name, n: certPosts(name, now).length, have: mine.some(l => name.includes(l) || l.includes(name))}))
+    const list = CERTS.map(([name]) => ({name, n: certPosts(name, now).length, have: mine.some(l => l===name)}))
       .filter(x => x.n > 0).sort((a, b) => (b.have - a.have) || b.n - a.n).slice(0, 18);
-    parts.push(`<li class="trk-box"><h3>💼 이 자격증이 있으면 지원 가능한 공고</h3>
-      <p style="margin:0 0 8px;font-size:12.5px;color:var(--muted)">마감 전·일정 확인 공식 공고 중 지원 자격·우대 사항에 자격증 이름이 들어간 공고 수예요. 누르면 공고를 보여드려요.</p>
+    parts.push(`<li class="trk-box"><h3>💼 자격명 원문 언급 공고 (지원 가능 확정 아님)</h3>
+      <p style="margin:0 0 8px;font-size:12.5px;color:var(--muted)">마감 전·일정 확인 공식 공고 중 지원자격·우대사항에 정확한 자격명이 언급된 공고 수예요. 필수 여부·직무별 예외는 원문을 확인하세요. 누르면 공고를 보여드려요.</p>
       <div class="chips">${list.map(x => `<button class="chip" data-certq="${esc(x.name)}"${x.have ? ' aria-pressed="true"' : ""}>${x.have ? "✓ " : ""}${esc(x.name)} <b>${x.n}</b></button>`).join("")}</div>
       ${SPEC ? "" : `<p style="margin:8px 0 0;font-size:12.5px"><button class="linkbtn" id="openSpec" style="margin:0">내 스펙에 자격증 등록하기</button> → 가진 자격증이 맨 앞에 표시돼요.</p>`}</li>`);
-  }
-  if(QNET && QNET.rows.length){
-    const groups = {};
-    QNET.rows.forEach(r => (groups[r.g] = groups[r.g] || []).push(r));
-    const t = ymd(now);
-    parts.push(`<li class="trk-box"><h3>📋 등급별 전체 일정</h3>${Object.entries(groups).map(([g, rs]) => `<details style="border-top:1px solid var(--line);padding:8px 0"><summary style="cursor:pointer;font-weight:700;font-size:14px">${esc(g)} <span style="color:var(--muted);font-weight:500;font-size:12.5px">${rs.length}회차</span></summary>
-      ${rs.map(r => `<div style="font-size:13px;line-height:1.6;padding:6px 0;border-top:1px dashed var(--line);${(r.pp || r.p2 || "9999") < t ? "color:var(--muted)" : ""}"><b>${r.y}년 제${esc(r.r)}회</b><br>필기 접수 ${qspan(r.wa1, r.wa2)} · 시험 ${qspan(r.w1, r.w2)} · 발표 ${qspan(r.wp)}<br>실기 접수 ${qspan(r.pa1, r.pa2)} · 시험 ${qspan(r.p1, r.p2)} · 최종 ${qspan(r.pp)}</div>`).join("")}</details>`).join("")}
-      <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">종목마다 시행하지 않는 회차가 있어요. 정확한 일정은 <a href="https://www.q-net.or.kr" target="_blank" rel="noopener">큐넷</a>에서 확인하세요.</p></li>`);
   }
   $("list").innerHTML = parts.join("");
 }
@@ -1834,27 +1829,22 @@ function nextCalendarDay(s){
   d.setUTCDate(d.getUTCDate()+1);
   return d.toISOString().slice(0,10).replace(/-/g,"");
 }
-function exportAppCalendar(){
-  const now = new Date(), rows = appEvents(now);
-  if(!rows.length){ toast("내보낼 일정이 없어요. 지원기록에 마감·필기·면접 일정을 추가하세요."); return; }
-  const stamp = now.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
-  const events = rows.map((e,i) => {
-    const d = calendarDay(e.date), end = nextCalendarDay(e.date);
-    if(!d || !end) return "";
-    const a = APPS[e.id] || {};
-    return ["BEGIN:VEVENT","UID:careerpick-"+encodeURIComponent(e.id)+"-"+e.kind+"-"+d+"@kllollain-max.github.io",
-      "DTSTAMP:"+stamp,"DTSTART;VALUE=DATE:"+d,"DTEND;VALUE=DATE:"+end,
-      "SUMMARY:"+calendarEscape("[커리어픽] "+e.label+" · "+e.name),
-      "DESCRIPTION:"+calendarEscape("지원 상태: "+(ST[a.st]?.label || "확인 필요")+(a.memo ? "\n메모: "+a.memo : "")+"\n정확한 일정은 공식 공고에서 재확인하세요."),
-      ...(a.url && /^https?:\/\//i.test(a.url) ? ["URL:"+a.url] : []),"END:VEVENT"].join("\r\n");
-  }).filter(Boolean);
-  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//CareerPick//Application Calendar//KO","CALSCALE:GREGORIAN",...events,"END:VCALENDAR"].join("\r\n")+"\r\n";
-  const url = URL.createObjectURL(new Blob([ics],{type:"text/calendar;charset=utf-8"}));
-  const a = document.createElement("a"); a.href=url; a.download="careerpick-application-calendar.ics";
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),3000);
-  toast("캘린더 파일을 만들었어요. 다운로드한 파일을 열어 일정을 추가하세요.");
+function cpDownloadCalendar(events,name){
+  const result=CPExtras.calendar(events);
+  if(!result.count){toast('내보낼 수 있는 확정 날짜가 없습니다. 원문에서 일정을 확인해 주세요.');return;}
+  const link=URL.createObjectURL(new Blob([result.text],{type:'text/calendar;charset=utf-8'}));
+  const a=document.createElement('a');a.href=link;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(link),3000);
+  toast(result.count+'개 일정 파일을 만들었습니다. 외부 캘린더 등록·갱신은 확인되지 않았습니다.');
 }
+function exportAppCalendar(){cpDownloadCalendar(CPExtras.applications(APPS),'careerpick-application-calendar.ics');}
+function cpExportJobCalendar(id){
+  const p=POSTS.find(x=>x.id===id);if(!p?.due)return;
+  // ALIO dates describe publication, not a verified application deadline.
+  if(p.alio){toast('ALIO 공고 게시기간을 접수마감 일정으로 내보내지 않습니다. 공식 접수기간을 확인해 주세요.');return;}
+  const raw=p.due instanceof Date?p.due.toISOString():p.due;
+  cpDownloadCalendar([{scope:'job',id:p.id,kind:'due',date:CPExtras.kstDay(raw),start:raw,end:raw,timed:p.dueHasTime===true,title:'[접수 마감] '+p.org+' '+p.title,url:officialLink(p).href,source:p.gojobs?'나라일터 공고':'저장된 채용공고',checkedAt:UPDATED||'미확인'}],'careerpick-job-calendar.ics');
+}
+
 function clashes(ev){
   const by = {};
   ev.filter(e => e.kind !== "due").forEach(e => (by[e.date] = by[e.date] || []).push(e));
@@ -1892,7 +1882,7 @@ function renderTrack(now){
   }).join("")}</li>`);
   const dueSoon = ev.filter(e => e.kind === "due" && e.date <= soonLimit);
   if(dueSoon.length) parts.push(`<li class="trk-box trk-urgent"><h3>⏰ 3일 이내 지원 마감 ${dueSoon.length}건</h3><p class="trk-help">지원 예정으로 기록한 공고의 마감일입니다. 공식 공고의 마감 시각을 다시 확인하세요.</p>${dueSoon.map(e => `<div class="sch"><span class="dt hot">${e.date === today ? "오늘" : ymdLabel(e.date)}</span><span class="nm">${esc(e.name)}</span><button class="trk-quick" data-track="${esc(e.id)}">확인</button></div>`).join("")}</li>`);
-  parts.push(`<li class="trk-box"><div class="trk-heading"><h3>🗓 다가오는 일정</h3><button class="trk-export" id="exportAppCalendar" ${ev.length ? "" : "disabled"}>📅 캘린더에 추가 (.ics)</button></div><p class="trk-help">다운로드한 파일을 열면 휴대폰·PC 캘린더에 등록할 수 있어요. 일정 변경은 자동 동기화되지 않습니다.</p>${ev.length ? ev.slice(0, 12).map(e =>
+  parts.push(`<li class="trk-box"><div class="trk-heading"><h3>🗓 다가오는 일정</h3><button class="trk-export" id="exportAppCalendar" ${ev.length ? "" : "disabled"}>📅 일정 파일 (.ics)</button></div><p class="trk-help">ICS 파일 다운로드입니다. 개인 메모·지원 상태는 포함하지 않습니다. 시각 미확인은 종일 일정입니다. 외부 등록·갱신은 자동 동기화되지 않으며 재가져오기 시 중복될 수 있습니다. 웹푸시와 캘린더 알림은 별도이고 기본 알림은 추가하지 않습니다.</p>${ev.length ? ev.slice(0, 12).map(e =>
     `<div class="sch"><span class="dt${e.date <= soonLimit ? " hot" : ""}">${e.date === today ? "오늘" : ymdLabel(e.date)}</span><span class="kd ${e.kind}">${e.label}</span><span class="nm">${esc(e.name)}</span></div>`).join("")
     : `<div class="sch" style="color:var(--muted)">등록된 일정이 없어요. 📋 지원기록에서 필기·면접 날짜를 넣어 보세요.</div>`}
     ${cl.map(([dte, v]) => `<p class="clash">⚠️ ${ymdLabel(dte)}에 일정 ${v.length}개가 겹쳐요: ${v.map(x => esc(x.name) + " " + x.label).join(", ")}</p>`).join("")}</li>`);
@@ -2219,9 +2209,10 @@ function jobViewHTML(p, det){
     <div class="jv-bar"><div class="in">
       <div class="main-btns"><a class="primary" href="${esc(links.primary)}" target="_blank" rel="noopener">${links.label}</a>${off}${cpMergedSourceLinks(p,links.primary)}</div>
       <div class="sub-btns">
+        ${cpCompareButton(p)}
         <button class="save" data-save="${esc(cpSavedId(p))}" aria-pressed="${saved}">${saved ? "★ 저장됨" : "☆ 저장"}</button>
         <button data-track="${esc(cpApplicationId(p))}">${ap ? "📋 " + (ST[ap.st]||ST.plan).short : "📋 지원기록"}</button>
-        ${d && d.cls !== "closed" && p.dueHasTime === true ? `<a href="${calLink(p)}" target="_blank" rel="noopener">📅 캘린더</a>` : ""}
+        ${d && d.cls !== "closed" && !p.alio ? `<button data-job-calendar="${esc(p.id)}">📅 ICS</button>` : ""}
       </div></div></div>`;
 }
 document.addEventListener("click", e => {
