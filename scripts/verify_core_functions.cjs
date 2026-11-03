@@ -79,6 +79,14 @@ async function savedAndApps(page){
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
  try{
+  for(const width of [320,360,390,430,1440])await check('detail source integrity and screenshot '+width,async()=>{
+   const {ctx}=await context(browser,{width});try{const page=await ctx.newPage();await ready(page);
+   await page.evaluate(()=>{const p=POSTS.find(p=>p.id==='a900001');JV=p.id;document.querySelector('#jobview').hidden=false;document.querySelector('#jvBody').innerHTML=jobViewHTML({...p,n:'2'},{recrutPblntSn:'900001',recrutNope:'약간명',pbancBgngYmd:'20990101',aplyQlfcCn:'공통 필수: 자격증 A 및 경력 B\n직무 1: C 또는 D\n기준일과 증빙은 원문 확인',prefCondCn:'우대: E',disqlfcRsn:'중복 지원 불가'});});
+   const text=await page.locator('#jvBody').innerText();assert(text.includes('약간명'));assert(text.includes('목록 2명 / 상세 약간명'));assert(text.includes('접수 시작일 미확인'));assert(text.includes('C 또는 D'));assert(text.includes('중복 지원 불가'));
+   await page.screenshot({path:OUT+'/detail-'+width+'.png',fullPage:true});
+   await page.evaluate(()=>{DATA_HEALTH.detail='error';document.querySelector('#jvBody').innerHTML=jobViewHTML(POSTS.find(p=>p.id==='a900001'),{});});assert(await page.locator('[data-detail-retry]').count());assert((await page.locator('#jvBody').innerText()).includes('상세 자료 조회 실패'));
+   }finally{await ctx.close();}
+  });
   // The current public site is exercised with a completely new profile; no personal storage or real push.
   const live=await context(browser,{fixtures:false});const lp=await live.ctx.newPage();const liveErrors=[];lp.on('pageerror',e=>liveErrors.push(e.message));
   await check('current public search, modal, refresh and saved state',async()=>{

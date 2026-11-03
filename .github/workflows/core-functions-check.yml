@@ -1,7 +1,7 @@
 name: Isolated core function audit
 on:
   push:
-    branches: [fix/core-function-audit-20261103]
+    branches: [fix/core-function-audit-20261103, fix/detail-integrity-20261104]
 concurrency:
   group: core-audit-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/test_browse_state.cjs tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_civil_service_exams.cjs tests/test_record_store.cjs
+      - run: node --test tests/test_detail_integrity.cjs tests/test_browse_state.cjs tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_civil_service_exams.cjs tests/test_record_store.cjs
       - name: Install Korean fonts for readable screenshot evidence
         run: |
           sudo apt-get update -qq

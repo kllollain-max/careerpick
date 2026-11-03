@@ -34,6 +34,11 @@ def clean(value):
     return str(value or '').strip()
 
 
+def count_label(value):
+    raw = '' if value is None else str(value).strip()
+    return raw + '명' if re.fullmatch(r'[0-9]+', raw) else raw or '미기재 · 공식 공고 확인'
+
+
 def safe_url(value):
     value = clean(value)
     try:
@@ -183,9 +188,7 @@ def render(post, detail, related_posts=()):
         ('기관명', org),
         (
             '모집인원',
-            clean(post.get('n')) + '명'
-            if post.get('n')
-            else '공고 확인'
+            count_label(post.get('n'))
         ),
         ('고용형태', clean(post.get('emp')) or '공고 확인'),
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
@@ -193,6 +196,10 @@ def render(post, detail, related_posts=()):
         ('접수마감', due_display),
     ]
 
+    conflicts = []
+    if post.get('n') is not None and detail.get('recrutNope') is not None and count_label(post['n']) != count_label(detail['recrutNope']):
+        conflicts.append('자료 간 정보가 달라 공식 확인이 필요합니다. 모집인원: 목록 ' + count_label(post['n']) + ' / 상세 ' + count_label(detail['recrutNope']))
+    conflict_html = ''.join('<p class="source-note">' + escape(item) + '</p>' for item in conflicts)
     rows = '\n'.join(
         f'<dt>{escape(k)}</dt><dd>{escape(v)}</dd>'
         for k, v in fields
@@ -395,7 +402,7 @@ def render(post, detail, related_posts=()):
         f'{org}의 {title} 채용공고입니다.',
         f'고용형태: {clean(post.get("emp"))}.' if post.get('emp') else '',
         f'근무지역: {clean(post.get("region"))}.' if post.get('region') else '',
-        f'모집인원: {clean(post.get("n"))}명.' if post.get('n') else '',
+        f'모집인원: {count_label(post.get("n"))}.' if post.get('n') else '',
         f'접수마감: {due_display}.' if due else '',
     ]
     # ALIO desc는 NCS 직무 분류이며 실제 담당업무가 아닙니다.
@@ -584,6 +591,7 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 {toc_html}
 <h2 id="job-summary">모집 요약</h2>
 <dl>{rows}</dl>
+{conflict_html}
 
 {f'<section><h2>직무 분류</h2><p>{escape(desc)}</p><p class="muted">직무 분류는 실제 담당업무 설명이 아닙니다. 세부 직무는 공식 공고를 확인하세요.</p></section>' if is_category_only else ''}
 <section id="job-checks" aria-label="지원 전 핵심 확인사항">
