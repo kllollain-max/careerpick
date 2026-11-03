@@ -1,0 +1,81 @@
+name: Isolated core function audit
+on:
+  push:
+    branches: [fix/core-function-audit-20261103]
+concurrency:
+  group: core-audit-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/test_browse_state.cjs tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_civil_service_exams.cjs tests/test_record_store.cjs
+      - name: Install Korean fonts for readable screenshot evidence
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+      - run: python scripts/build_public_site.py
+      - run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - name: Verify public baseline and isolated candidate with synthetic push only
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          python scripts/serve_audit_preview.py 8000 _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_core_functions.cjs
+      - name: Verify private record download, restore and recovery using synthetic data only
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node scripts/verify_record_protection.cjs
+      - name: Compare mobile readability against pre-change commit
+        if: ${{ !cancelled() }}
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          git fetch origin 89daa64f87957b6b4eb034bed0ceee258046b112
+          mkdir -p "$RUNNER_TEMP/cp-before-host"
+          git worktree add --detach "$RUNNER_TEMP/cp-before" FETCH_HEAD
+          (cd "$RUNNER_TEMP/cp-before" && python scripts/build_public_site.py)
+          ln -s "$RUNNER_TEMP/cp-before/dist" "$RUNNER_TEMP/cp-before-host/careerpick"
+          python scripts/serve_audit_preview.py 8001 "$RUNNER_TEMP/cp-before-host" > "$RUNNER_TEMP/cp-before-http.log" 2>&1 &
+          node scripts/verify_mobile_readability.cjs
+      - name: Measure navigation performance against pre-change commit
+        if: ${{ !cancelled() }}
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          git fetch origin 3c6386f1e2bedba59cd9e71edd86c150c70b5b4b
+          mkdir -p "$RUNNER_TEMP/cp-nav-before-host"
+          git worktree add --detach "$RUNNER_TEMP/cp-nav-before" FETCH_HEAD
+          (cd "$RUNNER_TEMP/cp-nav-before" && python scripts/build_public_site.py)
+          ln -s "$RUNNER_TEMP/cp-nav-before/dist" "$RUNNER_TEMP/cp-nav-before-host/careerpick"
+          python scripts/serve_audit_preview.py 8002 "$RUNNER_TEMP/cp-nav-before-host" > "$RUNNER_TEMP/cp-nav-http.log" 2>&1 &
+          node scripts/verify_navigation_performance.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: core-function-evidence
+          path: |
+            core-audit-output/
+            record-protection-output/report.json
+            mobile-readability-output/
+            navigation-performance-output/
+            build-report.json
+          retention-days: 14

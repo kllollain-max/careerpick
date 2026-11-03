@@ -1,0 +1,79 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const store=require('../record-store.js');
+function storage(seed={}){const data={...seed};return{data,getItem:k=>data[k]??null,setItem:(k,v)=>{data[k]=v}};}
+test('corrupt bytes and schema remain byte-for-byte preserved, writes fail closed',async()=>{
+ for(const [key,raw,valid,fallback]of [['saved','{bad',store.saved,[]],['saved','{}',store.saved,[]],['apps','{"old":null}',store.apps,{}],['prefs','{"emp":null}',store.prefs,{}]]){
+  const s=storage({[key]:raw});assert(!store.read(s,key,fallback,valid).ok);
+  await assert.rejects(store.mutate(s,key,fallback,valid,()=>fallback));assert.equal(s.data[key],raw);
+ }
+});
+test('quota failure does not report success or change old saved records',async()=>{
+ const s=storage({saved:'["old"]'});s.setItem=()=>{throw Error('quota');};
+ await assert.rejects(store.mutate(s,'saved',[],store.saved,rows=>[...rows,'new']),/기기 저장 실패/);assert.equal(s.data.saved,'["old"]');
+});
+test('latest records merge by identity; stale same-record edits cannot overwrite notes',async()=>{
+ const old={st:'plan',memo:'old',unknown_field:'keep'},s=storage({apps:JSON.stringify({a:old,b:{st:'applied'}})});
+ await store.mutate(s,'apps',{},store.apps,rows=>store.replaceApp(rows,'a',{...old,memo:'new'},JSON.stringify(old)));
+ assert.equal(JSON.parse(s.data.apps).b.st,'applied');assert.equal(JSON.parse(s.data.apps).a.unknown_field,'keep');
+ await assert.rejects(store.mutate(s,'apps',{},store.apps,rows=>store.replaceApp(rows,'a',null,JSON.stringify(old))),/다른 탭/);
+ assert.equal(JSON.parse(s.data.apps).a.memo,'new');
+});
+test('unlinked saved identities are retained and duplicate IDs collapse only on successful mutation',async()=>{
+ const s=storage({saved:'["missing","missing"]'});
+ const result=await store.mutate(s,'saved',[],store.saved,rows=>[...new Set([...rows,'a'])]);assert.deepEqual(result,['missing','a']);
+});
+test('denied reads and malicious prototype identities never overwrite raw data',async()=>{
+ const denied={getItem:()=>{throw Error('denied')},setItem:()=>assert.fail('write')};
+ assert(!store.read(denied,'apps',{},store.apps).ok);await assert.rejects(store.mutate(denied,'apps',{},store.apps,()=>({})));
+ assert(!store.apps(JSON.parse('{"__proto__":{"st":"plan"}}')));assert(!store.saved(['constructor']));
+});
+test('Web Locks serialize concurrent tab updates without losing unrelated IDs',async()=>{
+ let chain=Promise.resolve();const locks={request:(name,fn)=>{const next=chain.then(fn);chain=next.catch(()=>{});return next;}};
+ const s=storage({saved:'[]'});await Promise.all(['a','b'].map(id=>store.mutate(s,'saved',[],store.saved,rows=>[...rows,id],locks)));
+ assert.deepEqual(JSON.parse(s.data.saved),['a','b']);
+});
+test('existing legacy record and long multiline note remain compatible',async()=>{
+ const note='긴 메모\n<&>🙂'.repeat(1000),old={title:'원본',memo:note},s=storage({apps:JSON.stringify({a:old})});
+ const out=await store.mutate(s,'apps',{},store.apps,rows=>store.replaceApp(rows,'a',{...old,st:'plan'},JSON.stringify(old)));
+ assert.equal(out.a.memo,note);
+});
+
+test('backup preserves corrupt raw bytes and reports unreadable keys explicitly',()=>{
+ const raw='{corrupt original',s=storage({apps:raw,saved:'["a"]'});
+ const result=store.exportRecords(s,['saved','apps']);assert.equal(result.raw_records.apps,raw);assert.deepEqual(result.invalid_keys,['apps']);assert.deepEqual(result.data.saved,['a']);assert(!('apps' in result.data));
+ assert.deepEqual(store.exportRecords({getItem:()=>{throw Error('denied')}},['saved']).unavailable_keys,['saved']);
+});
+
+test('delete has a verified exact pre-write copy; checkpoint failure leaves active record unchanged',async()=>{
+ const raw=' {"a":{"st":"plan","memo":"original"}} ',s=storage({apps:raw});
+ await store.mutate(s,'apps',{},store.apps,rows=>store.replaceApp(rows,'a',null,JSON.stringify({st:'plan',memo:'original'})));
+ assert.equal(JSON.parse(s.data['careerpick-record-checkpoints']).records.apps.raw,raw);assert.equal(s.data.apps,'{}');
+ const denied=storage({apps:raw});const put=denied.setItem;denied.setItem=(k,v)=>{if(k==='careerpick-record-checkpoints')throw Error('quota');put(k,v);};
+ await assert.rejects(store.mutate(denied,'apps',{},store.apps,()=>({})));assert.equal(denied.data.apps,raw);
+});
+
+test('mixed damaged and healthy records display healthy entries without authorizing overwrite',async()=>{
+ const raw='{"good":{"st":"plan","memo":"preserved"},"bad":null}',s=storage({apps:raw});
+ const view=store.read(s,'apps',{},store.apps);assert(!view.ok);assert.equal(view.data.good.memo,'preserved');assert(!('bad' in view.data));
+ await assert.rejects(store.mutate(s,'apps',{},store.apps,()=>({})));assert.equal(s.data.apps,raw);
+});
+
+test('backup allowlist excludes SDK buckets and secret fields even inside recovery raw strings',()=>{
+ const s=storage({saved:'["a1"]',apps:'{"a1":{"st":"plan","memo":"메모🙂","access_token":"never-export-this"}}','onesignal-sdk':'{"token":"sdk-secret"}','careerpick-before-import':JSON.stringify({raw_records:{apps:'{"a1":{"st":"plan","api_key":"nested-secret"}}'}})});
+ const result=store.exportRecords(s,['saved','apps','careerpick-before-import']),text=JSON.stringify(result);
+ assert(!text.includes('never-export-this'));assert(!text.includes('sdk-secret'));assert(!text.includes('nested-secret'));assert(result.excluded_secret_fields>0);assert.equal(result.data.apps.a1.memo,'메모🙂');assert(result.redacted_raw_keys.includes('apps'));
+});
+test('unknown checkpoint version and unfinished import preserve input but reject new writes',async()=>{
+ const s=storage({saved:'["a1"]','careerpick-before-import':'{"format":"careerpick-before-import","version":99,"state":"complete"}'});
+ assert(!store.read(s,'saved',[],store.saved).ok);await assert.rejects(store.mutate(s,'saved',[],store.saved,()=>[]));assert.equal(s.data.saved,'["a1"]');
+});
+
+test('credential names inside serialized intended recovery values are excluded from backups',()=>{
+ const s=storage({'careerpick-before-import':JSON.stringify({expected_after:{apps:'{"a1":{"st":"plan","CP_LEDGER_TOKEN":"held-token","CP_ONESIGNAL_REST_API_KEY":"held-key"}}'}})});
+ const result=store.exportRecords(s,['careerpick-before-import']),text=JSON.stringify(result);assert(!text.includes('held-token'));assert(!text.includes('held-key'));assert(result.excluded_secret_fields>0);
+});
+
+test('malformed import archive is a partial backup rather than a false complete export',()=>{
+ const s=storage({'careerpick-import-archive':'{"broken":true}',saved:'["a1"]'}),result=store.exportRecords(s,['saved','careerpick-import-archive']);
+ assert(result.invalid_keys.includes('careerpick-import-archive'));assert(!('careerpick-import-archive' in result.data));assert.equal(result.raw_records['careerpick-import-archive'],'{"broken":true}');
+});

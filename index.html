@@ -577,6 +577,10 @@ footer .src b{color:var(--ink)}
 .card.row .rt{line-height:1.5}
 @media(max-width:600px){.list>.card.job .main{padding:14px 12px 10px;gap:10px}.list>.card.job .dd{min-width:54px;min-height:60px}.card.row .main{min-height:64px}}
 @media(prefers-reduced-motion:reduce){.list>.card.job,.card.row{transition:none}.list>.card.job:hover{transform:none}}
+
+.trk-item .m{white-space:pre-wrap;overflow-wrap:anywhere}
+
+.cp-record-tools{font-size:12px;line-height:1.6;color:var(--muted);margin:12px 0}.cp-record-tools button{min-height:44px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}.cp-record-archive{white-space:pre-wrap;overflow-wrap:anywhere;max-height:48vh;overflow:auto;font-size:12px}
 </style>
 <link rel="stylesheet" href="homepage-ux.css">
 <script src="/jobs/available.js" defer></script>
@@ -644,6 +648,12 @@ footer .src b{color:var(--ink)}
   <p class="cp-applied" id="cpApplied" role="status"></p>
 
 
+  <section class="cp-record-tools" aria-label="개인 기록 백업과 가져오기">
+    <details><summary>개인 기록 보관·이전 안내</summary><p>저장·지원 기록은 이 브라우저에만 보관됩니다. 다른 기기와 자동 동기화되지 않으며, 비공개 모드 종료·사이트 데이터 삭제·기기 변경으로 사라질 수 있습니다. 홈페이지 소스 백업에는 개인 기록이 포함되지 않습니다.</p>
+    <p>백업에는 개인 메모가 포함될 수 있습니다. 파일은 본인이 보관하고 공개 게시·채팅으로 공유하지 마세요. 구주소에서는 같은 브라우저로 JSON을 내보낸 뒤 새주소에서 가져옵니다.</p>
+    </details><div><button type="button" data-record-action="backup">개인 기록 백업(JSON)</button> <button type="button" data-record-action="import">백업 가져오기</button> <button type="button" data-record-action="archive">충돌·복구 사본 확인</button></div>
+
+  </section>
   <input id="cpBackupInput" type="file" accept=".json,application/json" hidden aria-label="커리어픽 백업 파일 선택">
   <div class="sumrow"><p class="summary" id="summary" aria-live="polite"></p><label class="cp-order">정렬<select id="cpOrder" aria-label="공고 정렬"><option value="due">마감 임박순</option><option value="new">최신 등록순</option></select></label><button class="viewbtn" id="viewbtn" aria-pressed="false">☰ 간단히</button></div>
   <ul class="list" id="list"><!--STATIC-LIST-->
@@ -690,8 +700,8 @@ footer .src b{color:var(--ink)}
 <li class="card mini"><a class="main" href="https://m.blog.naver.com/hid4989-3/224436992442"><div class="kind"><span class="pill p">취업준비</span></div><div class="t">2026 하반기 에너지 공기업 NCS 출제유형 비교표</div></a></li>
 <!--/STATIC-LIST--></ul>
   </main>
-  <details class="cp-support"><summary>나의 대시보드 · 마감 임박 · 취업 준비</summary>
   <div class="cp-feed-status" id="cpFeedStatus" role="status" aria-live="polite">📡 채용정보 업데이트 상태 확인 중…</div>
+  <details class="cp-support"><summary>나의 대시보드 · 마감 임박 · 취업 준비</summary>
   <div class="notice alert" id="savedAlert" hidden role="button" tabindex="0"></div>
   <div class="cp-alert-entry" style="margin:8px 0 10px">
     <button type="button" id="cpAlwaysAlert" style="display:block;width:100%;min-height:48px;border:2px solid #1d4ed8;border-radius:12px;background:#eff6ff;color:#1e3a8a;font-size:15px;font-weight:800;cursor:pointer;padding:10px 12px">🔔 내 맞춤 채용 알림 설정 · 구독/해지 (테스트 중)</button>
@@ -748,12 +758,14 @@ footer .src b{color:var(--ink)}
 
 <script src="push-config.js"></script>
 <script src="record-migration.js"></script>
+<script src="record-store.js"></script>
 <script src="homepage-ux.js"></script>
 <script src="homepage-ui.js"></script>
 <script>
 // ── 설정 ──
 const COUPANG = false;    // 쿠팡 추천 상품 표시 (ads.py 설정 후 true로)
 let POSTS = [], UPDATED = null, ADS = [];
+let CP_DATA_LOADING=true, CP_URL_APPLIED=false, cpQueryTouched=false, CP_USING_PREVIOUS=false;
 let CP_DEDUP_REMOVED = 0;
 const DATA_HEALTH = {posts:"pending", alio:"pending", monitor:"pending",detail:"pending"};
 // Preserve blog entries independently of merged official feeds for accurate search.
@@ -797,15 +809,17 @@ function cpRenderFeedStatus(){
   const el = $("cpFeedStatus");
   if(!el) return;
   const names = {gojobs:"나라일터",posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보",work24:"고용24"};
+  const cacheSource=k=>[...CP_FEED_CACHE.keys()].some(file=>({"alio-detail.json":"detail","enterprise_jobs.json":"enterprise","work24-policy.json":"work24"}[file]||file.replace(/\.json$/, ""))===k);
   const parts = Object.entries(DATA_HEALTH).map(([key,value]) =>
-    `${names[key] || key} ${value === "awaiting_approval" ? "수집 비활성" : value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
+    `${names[key] || key} ${cacheSource(key) ? "보관 자료 · " : ""}${value === "awaiting_approval" ? "수집 비활성" : value === "ok" ? (cacheSource(key) ? "최신 확인 불가" : "정상") : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
   const stamp = UPDATED ? new Date(UPDATED) : null;
   const valid = stamp && Number.isFinite(stamp.getTime());
   const hours = valid ? (Date.now()-stamp.getTime())/3600000 : Infinity;
   const old = !valid || hours > 48;
   const failures = Object.values(DATA_HEALTH).some(v=>v === "error");
-  el.dataset.state = failures || old ? "warn" : "ok";
-  el.textContent = `${failures || old ? "⚠️" : "✅"} 데이터 상태 · ${parts.join(" · ")} · 블로그 최근 갱신 ${valid ? stamp.toLocaleString("ko-KR",{timeZone:"Asia/Seoul",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}) : "확인 불가"}${old ? " · 48시간 이상 갱신 확인 필요" : ""}${CP_DEDUP_REMOVED ? ` · 중복 ${CP_DEDUP_REMOVED}건 정리` : ""} · 지원 전 원문 확인` + (CP_FEED_STAMPS.gojobs ? ` · 나라일터: 최근 14일 지방공무원 등록 목록 중 원문 검증 공고만 제공 · 자료 기준 ${new Date(CP_FEED_STAMPS.gojobs).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"})}` : "");
+  const cached=[...CP_FEED_CACHE].map(([file,at])=>{const key=file.replace(/\.json$/, "").replace("alio-detail","detail"),d=new Date(at);return (names[key]||"공고")+" ("+(at&&Number.isFinite(+d)?d.toLocaleString("ko-KR",{timeZone:"Asia/Seoul"}):"저장 시각 미확인")+")";});
+  el.dataset.state = failures || old || cached.length ? "warn" : "ok";
+  el.textContent = `${failures || old || cached.length ? "⚠️" : "✅"} 데이터 상태 · ${parts.join(" · ")} · 블로그 최근 갱신 ${valid ? stamp.toLocaleString("ko-KR",{timeZone:"Asia/Seoul",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}) : "확인 불가"}${old ? " · 48시간 이상 갱신 확인 필요" : ""}${CP_DEDUP_REMOVED ? ` · 중복 ${CP_DEDUP_REMOVED}건 정리` : ""} · 지원 전 원문 확인` + (cached.length ? " · 오프라인/통신 실패 보관 자료: "+cached.join(" · ")+" · 최신 접수 상태·외부 링크·알림은 연결 후 확인" : navigator.onLine===false ? " · 오프라인: 최신 접수 상태는 연결 후 확인" : "") + (CP_FEED_STAMPS.alio ? ` · 잡알리오 자료 기준 ${new Date(CP_FEED_STAMPS.alio).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"})}` : "") + (CP_FEED_STAMPS.gojobs ? ` · 나라일터: 최근 14일 지방공무원 등록 목록 중 원문 검증 공고만 제공 · 자료 기준 ${new Date(CP_FEED_STAMPS.gojobs).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"})}` : "");
 }
 // 공식 문서로 동일성이 검증된 ALIO·기관 공고만 표시 계층에서 통합합니다.
 // 원본 ID·URL·확인 이력은 sourceRecords/sourceIds로 보존합니다.
@@ -818,11 +832,33 @@ function cpMergedSourceLinks(p, exclude=""){
   return (p.officialSources || []).filter(s=>s.url!==exclude).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)} ↗</a>`).join("");
 }
 // ── 관심 공고 저장 (이 기기에만 저장) ──
+const CP_STORAGE_ERRORS=new Map();
+function cpStorageNotice(key,message){
+  message?CP_STORAGE_ERRORS.set(key,message):CP_STORAGE_ERRORS.delete(key);
+  let el=$('cpStorageNotice');
+  if(!el){el=document.createElement('p');el.id='cpStorageNotice';el.setAttribute('role','alert');$('list').before(el);}
+  el.hidden=!CP_STORAGE_ERRORS.size;el.textContent=[...new Set(CP_STORAGE_ERRORS.values())].join(' ');
+  if(CP_STORAGE_ERRORS.size){const backup=document.createElement('button');backup.id='cpRawBackup';backup.textContent='원본 포함 JSON 백업';el.append(' ',backup);}
+}
+function cpReadRecords(key,fallback,valid){
+  let result;try{result=CPStore.read(localStorage,key,fallback,valid);}catch(_){result={ok:false,data:fallback,error:'기기 저장소 접근이 차단되어 기록을 읽지 못했습니다.'};}
+  cpStorageNotice(key,result.ok?'':result.error);return result.data;
+}
+async function cpMutateRecords(key,fallback,valid,edit){
+  try{const result=await CPStore.mutate(localStorage,key,fallback,valid,edit,navigator.locks);cpStorageNotice(key,'');return result;}
+  catch(error){cpStorageNotice(key,error.message);toast(error.message);return null;}
+}
+const CP_SAVING_IDS=new Set();
 let SAVED = new Set();
-try { SAVED = new Set(JSON.parse(localStorage.getItem("saved") || "[]")); } catch(e) {}
-function toggleSave(id){
-  SAVED.has(id) ? SAVED.delete(id) : SAVED.add(id);
-  try { localStorage.setItem("saved", JSON.stringify([...SAVED])); } catch(e) {}
+SAVED = new Set(cpReadRecords("saved",[],CPStore.saved));
+async function toggleSave(id){
+  if(CP_SAVING_IDS.has(id))return false;
+  CP_SAVING_IDS.add(id);
+  try{
+    const data=await cpMutateRecords('saved',[],CPStore.saved,rows=>{const ids=new Set(rows);ids.has(id)?ids.delete(id):ids.add(id);return [...ids];});
+    if(data===null)return false;
+    SAVED=new Set(data);return true;
+  }finally{CP_SAVING_IDS.delete(id);}
 }
 
 // ── 잡알리오 공식 공고 합치기 (블로그 해설이 있는 공고는 블로그 카드를 우선) ──
@@ -869,28 +905,28 @@ async function loadMonitoredJobs(){
 }
 
 async function load(){
-  try{
-    POSTS = await cpReadFeed("posts.json","posts");
-    UPDATED = CP_FEED_STAMPS.posts;
-    DATA_HEALTH.posts = "ok";
-    CP_BLOG_SEARCH = POSTS.slice();
-  }catch(e){
-    DATA_HEALTH.posts = "error";
-    console.warn("posts.json 로딩 실패: HTML에 보관된 블로그 글을 표시합니다.", e);
-    POSTS=[]; CP_BLOG_SEARCH=[];
-    cpRenderFeedStatus();
-  }
+  const previousPosts=POSTS.slice();CP_USING_PREVIOUS=false;
+  POSTS=[];CP_BLOG_SEARCH=[];CP_SEARCH_TEXT=new WeakMap();
+  let published=false;
+  const publish=()=>{
+    if(!published&&POSTS.some(isInternalJob)){cpDedupePosts();published=true;initSeen();cpRenderFeedStatus();refresh();}
+  };
+  const blog=(async()=>{
+    try{const rows=await cpReadFeed('posts.json','posts');POSTS=POSTS.concat(rows);UPDATED=CP_FEED_STAMPS.posts;DATA_HEALTH.posts='ok';CP_BLOG_SEARCH=rows;}
+    catch(_){DATA_HEALTH.posts='error';}
+  })();
+  await Promise.all([blog,loadAlio(),loadGojobs(),loadMonitoredJobs(),cpLoadEnterprise(),cpLoadWork24()].map(task=>task.finally(publish)));
+  const officialFailed=['alio','gojobs','monitor','enterprise'].some(key=>DATA_HEALTH[key]==='error');
+  if(!POSTS.some(isInternalJob)&&previousPosts.some(isInternalJob)&&officialFailed){POSTS=previousPosts;CP_USING_PREVIOUS=true;}
+  else if(!POSTS.length&&previousPosts.length){POSTS=previousPosts;CP_USING_PREVIOUS=true;}
   initSeen();
-  await loadAlio();
-  await loadGojobs();
-  await loadMonitoredJobs();
-  await cpLoadEnterprise();
-  await cpLoadWork24();
+  CP_DATA_LOADING=false;
   cpDedupePosts();
   cpRenderFeedStatus();
   const qp = new URLSearchParams(location.search).get("q");
-  { const tp = new URLSearchParams(location.search).get("tab"); if(tp === "spec" || tp === "cert") state.tab = tp; }
-  if(qp){ state.q = qp; state.tab = "all"; $("q").value = qp; }
+  { const tp = new URLSearchParams(location.search).get("tab"); if(!CP_URL_APPLIED&&(tp === "spec" || tp === "cert")) state.tab = tp; }
+  if(qp&&!CP_URL_APPLIED&&!cpQueryTouched){ state.q = qp; state.tab = "all"; $("q").value = qp; }
+  CP_URL_APPLIED=true;
   const jm = location.hash.match(/^#job=(.+)$/);
   if(jm) setTimeout(() => openJob(decodeURIComponent(jm[1]), false), 0);
   const updateDate = UPDATED ? new Date(UPDATED) : null;
@@ -900,13 +936,14 @@ async function load(){
   const dateText = k ? `${k.getUTCMonth()+1}.${k.getUTCDate()} ${pad(k.getUTCHours())}:${pad(k.getUTCMinutes())}` : "확인 불가";
   $("updated").textContent = "공공기관·공무직·기업 채용을 한눈에";
   updateDataHealth(validUpdate ? updateDate : null);
-  refresh();
-  if(!POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
-  alioDetail().then(() => {
+  const completePosts=POSTS;
+  if(cpFeedEngaged&&!location.hash.startsWith("#job=")&&CP_LAST_VISIBLE_POSTS.length)POSTS=CP_LAST_VISIBLE_POSTS;
+  if(CP_USING_PREVIOUS){POSTS=completePosts;refresh();}else cpOfferFeedUpdate(()=>{POSTS=completePosts;refresh();});
+  // Late enrichment is applied explicitly while the reader is browsing.
+  alioDetail().then(() => {if(!ALIO_DETAIL){cpRenderFeedStatus();return;}cpOfferFeedUpdate(()=>{
     for(const p of POSTS){const det=p.alio && ALIO_DETAIL?.[p.id];if(det)Object.assign(p,CPHome.detailFields(p,det));}
-    renderTabs(); renderFilters(); render(); cpRenderFeedStatus();
-    if(!POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
-  });
+    CP_SEARCH_TEXT=new WeakMap();renderTabs();renderFilters();render();cpRenderFeedStatus();
+  });});
   loadQnet().then(q => { if(q){ renderTabs(); if(state.tab === "cert") render(); } });
   if(COUPANG) try{
     const a = await fetch("ads.json?t=" + Date.now(), {cache:"no-store"});
@@ -959,7 +996,7 @@ const PREF_RE = {
   "고졸 가능":/고졸/, "학력무관":/학력\s*(?:무관|제한\s*(?:이|은)?\s*없)/
 };
 let PREFS = {emp:[], edu:[], region:[], cat:[], kw:""};
-try { PREFS = Object.assign(PREFS, JSON.parse(localStorage.getItem("prefs") || "{}")); } catch(e) {}
+PREFS = Object.assign(PREFS, cpReadRecords("prefs",{},CPStore.prefs));
 function hasPrefs(){ return PREFS.emp.length || PREFS.edu.length || PREFS.region.length || PREFS.cat.length || PREFS.kw.trim(); }
 function savePrefs(){ try { localStorage.setItem("prefs", JSON.stringify(PREFS)); return localStorage.getItem("prefs") === JSON.stringify(PREFS); } catch(e) { return false; } }
 // ── 내 스펙으로 지원 가능 공고 찾기 (공식 공고의 지원 자격 문장을 읽어 자동 판정, 이 기기에만 저장) ──
@@ -975,7 +1012,7 @@ const SPEC_PRO = ["의사","전문의","치과의사","한의사","약사","한�
 const SPEC_LIC = ["한국사","컴퓨터활용능력","정보처리기사","전기기사","전기산업기사","전기기능사","산업안전기사","소방설비기사","건축기사","토목기사","기계기사","가스기사","위험물산업기사",
   "에너지관리기사","운전면허(1종)","지게차","조리사","간호사","사회복지사","요양보호사","영양사","약사","보육교사","임상병리사","방사선사","물리치료사"];
 let SPEC = null;
-try { SPEC = JSON.parse(localStorage.getItem("spec") || "null"); } catch(e) {}
+SPEC=cpReadRecords("spec",null,CPStore.spec);
 const emptySpec = () => ({edu:"", career:"", age:"", toeic:"", want:[], region:"", lic:[], licEtc:"", special:[]});
 // 예전 버전에서 '거주지'만 고른 사람은 그 지역을 희망 근무지역으로도 씀
 if(SPEC && !Array.isArray(SPEC.want)) SPEC.want = SPEC.region ? [SPEC.region] : [];
@@ -997,7 +1034,12 @@ function inWant(p, want){
 }
 const hasSpecObj = o => !!(o && (o.edu || o.toeic || o.age || o.region || (o.want||[]).length || (o.lic||[]).length || String(o.licEtc||"").trim() || (o.special||[]).length || (o.career !== undefined && o.career !== "")));
 const hasSpec = () => hasSpecObj(SPEC);
-function saveSpec(){ try { SPEC ? localStorage.setItem("spec", JSON.stringify(SPEC)) : localStorage.removeItem("spec"); } catch(e) {} }
+async function saveSpec(next,expected){
+  try{const stored=await CPStore.mutate(localStorage,'spec',null,CPStore.spec,current=>{
+    if(JSON.stringify(current)!==expected)throw Error('다른 탭에서 스펙이 변경됐습니다. 입력 내용을 복사한 뒤 다시 열어 주세요.');return next;
+  },navigator.locks);SPEC=stored;cpStorageNotice('spec','');return true;}
+  catch(error){cpStorageNotice('spec',error.message);toast(error.message);return false;}
+}
 
 const SPEC_CACHE = new Map();
 function specLics(spec){
@@ -1227,7 +1269,8 @@ function cpSavedId(p){return [p.id,...(p.sourceIds||[])].find(id=>SAVED.has(id))
 function cpApplicationId(p){return [p.id,...(p.sourceIds||[])].find(id=>APPS[id]) || p.id;}
 const inTab = p => (state.tab === "all" ? p.type === "j" : false) || (state.tab === "saved" ? SAVED.has(cpSavedId(p)) : state.tab === "mine" ? matchPrefs(p) : p.type === state.tab);
 const isNew = (p, now) => p.alio ? now - p.pub < 36*3600e3 : SEEN_BASE ? !SEEN_BASE.has(p.id) : now - p.pub < 24*3600e3;
-const haystack = p => [p.title, p.desc, p.cat, p.org, p.region, ...(p.emp||[]), ...(p.edu||[]), ...(p.exam||[])].join(" ").toLowerCase();
+let CP_SEARCH_TEXT=new WeakMap();
+const haystack = p => {if(!CP_SEARCH_TEXT.has(p))CP_SEARCH_TEXT.set(p,[p.title,p.desc,p.cat,p.org,p.region,...(p.emp||[]),...(p.edu||[]),...(p.exam||[])].join(" ").toLowerCase());return CP_SEARCH_TEXT.get(p);};
 // 지역은 공고의 근무지역 필드만 기준으로 판정합니다. 미기재 공고는 지역 선택 시 제외됩니다.
 function cpRegionMatches(p, region){
   if(!region) return true;
@@ -1238,7 +1281,7 @@ function cpRegionMatches(p, region){
 function renderTabs(){
   const now = new Date();
   $("tabs").innerHTML = tabsNow().map(t => {
-    const n = t.key === "all" ? POSTS.length : t.key === "saved" ? POSTS.filter(p => SAVED.has(cpSavedId(p))).length
+    const n = t.key === "all" ? POSTS.length : t.key === "saved" ? SAVED.size
       : t.key === "track" ? Object.keys(APPS).length
       : t.key === "mine" ? POSTS.filter(p => matchPrefs(p) && statusOf(p, now) !== "closed").length
       : t.key === "spec" ? (hasSpec() && ALIO_DETAIL ? specRows(now).filter(x => x.r.v !== "no").length : "")
@@ -1341,39 +1384,41 @@ function standaloneJobLink(p){
   }
   return `<a class="standalone-job-link" href="/jobs/${encodeURIComponent(id)}.html" aria-label="${esc(p.title || '채용공고')} 상세 채용정보">🔎 상세 채용정보</a>`;
 }
+function cpReceptionLabel(p, now){
+  return ({verified_open:"접수중",upcoming:"접수예정",expired:"마감",cancelled:"채용 취소",source_error:"상태 확인 실패"})[CPHome.receptionState(p, now)] || "일정 미확인 · 원문 확인";
+}
 function jobCard(p, now){
   const d = dday(p, now);
-  const tile = d
-    ? `<div class="dd ${d.cls}">${d.cls==="verify" ? "" : `<span class="big${d.n===0 ? " dday" : ""}">${d.big}</span>`}<span class="sm">${d.cls==="closed" ? md(p.due) : "~" + md(p.due)}</span></div>`
-    : `<div class="dd none"><span class="big">일정 확인</span></div>`;
   const tags = [];
-  if(p.n) tags.push(`<span class="tag n">${esc(p.n)}명</span>`);
-  (p.emp||[]).filter(e => !/^(신입|경력)$/.test(e)).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
+
+
   (p.edu||[]).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
   const off = officialLink(p);
   const saved = SAVED.has(cpSavedId(p));
   const ap = APPS[cpApplicationId(p)];
-  if(ap) tags.unshift(`<span class="stpill st-${ap.st}">${ST[ap.st].label}</span>`);
+  if(ap) tags.unshift(`<span class="stpill st-${ap.st}">${(ST[ap.st]||ST.plan).label}</span>`);
   const spr = specOf(p);
   if(spr) tags.unshift(specPill(p));
   const spw = spr ? (spr.v === "ok" ? [...spr.why].reverse().find(w => w[0] === "ok") : spr.why.find(w => w[0] === spr.v)) : null;
   return `<li class="card job ${d && d.cls==="closed" ? "is-closed" : ""}">
     <a class="main" href="${esc(jobHref(p))}"${jobAnchorAttrs(p)}>
-      ${tile}
       <div class="body">
-        <div class="org">${isNew(p,now) ? '<span class="new">NEW</span>' : ""}${p.gojobs ? '<span class="ofc">나라일터</span>' : isInternalJob(p) ? '<span class="ofc">공식</span>' : '<span class="hae">해설</span>'}${p.org ? `<span>${esc(p.org)}</span>` : `<span>${esc(p.cat)}</span>`}${regionLabel(p) ? `<span class="rg">· ${esc(regionLabel(p))}</span>` : ""}</div>
-        <h2 class="title">${esc(cleanTitle(p.title))}</h2>
+        <div class="org">${isNew(p,now) ? '<span class="new">NEW</span>' : ""}${p.gojobs ? '<span class="ofc">나라일터</span>' : isInternalJob(p) ? '<span class="ofc">공식</span>' : '<span class="hae">해설</span>'}${p.org ? `<span>${esc(p.org)}</span>` : `<span>${esc(p.cat)}</span>`}</div>
+        <h2 class="title">${esc(p.title)}</h2>
+        ${regionLabel(p) || (p.emp||[]).length ? `<div class="cp-card-conditions">${esc([regionLabel(p), ...(p.emp||[])].filter(Boolean).join(" · "))}</div>` : ""}
+        ${p.n ? `<div class="cp-card-count">모집 ${esc(String(p.n).replace(/명$/, ""))}명</div>` : ""}
         ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
         ${preferenceBadge(p)}
         ${spw && state.tab === "spec" ? `<div class="spwhy">${SPEC_V[spw[0]].icon} ${esc(spw[1])}${spr.why.filter(w => w[0] !== "ok").length > 1 ? ` 외 ${spr.why.filter(w => w[0] !== "ok").length - 1}건` : ""}</div>` : ""}
         ${CPHome.career(p).length ? `<div class="cp-card-career">${esc(CPHome.career(p).join(" · "))}</div>` : ""}
+        <div class="cp-card-status">${cpReceptionLabel(p, now)}</div>
         ${p.start || p.startDate ? `<div class="cp-card-footer">접수 시작 ${esc(p.start || p.startDate)}</div>` : ""}
         ${p.due ? `<div class="due ${d.cls==="hot" ? "hot" : d.cls==="closed" ? "closed" : ""}">접수 마감 ${dueLong(p.due, p.dueHasTime)}</div>` : `<div class="due closed">${p.always ? "상시 모집 (채용 시 마감)" : "마감일은 원문에서 확인"}</div>`}
       </div>
     </a>
     <div class="actions">
       <button class="save" data-save="${esc(cpSavedId(p))}" aria-pressed="${saved}">${saved ? "★ 저장됨" : "☆ 저장"}</button>
-      <button class="track" data-track="${esc(cpApplicationId(p))}"${ap ? ` data-st="${ap.st}"` : ""}>${ap ? "📋 " + ST[ap.st].short : "📋 지원기록"}</button>
+      <button class="track" data-track="${esc(cpApplicationId(p))}"${ap ? ` data-st="${ap.st}"` : ""}>${ap ? "📋 " + (ST[ap.st]||ST.plan).short : "📋 지원기록"}</button>
       ${isInternalJob(p) ? `<a href="${esc(jobHref(p))}" data-open="${esc(p.id)}">상세보기</a>` : `<a href="${esc(p.url)}" target="_blank" rel="noopener">해설보기</a>`}
       ${p.due && d.cls !== "closed" && p.dueHasTime === true ? `<a href="${calLink(p)}" target="_blank" rel="noopener">📅 캘린더</a>` : ""}
       <a href="${esc(off.href)}" target="_blank" rel="noopener noreferrer">${off.label === "공식 공고 찾기" ? "공식 공고 찾기" : off.label} ↗</a>${cpMergedSourceLinks(p,off.href)}
@@ -1383,10 +1428,12 @@ function jobCard(p, now){
 function rowCard(p, now){
   const d = dday(p, now), saved = SAVED.has(cpSavedId(p)), ap = APPS[cpApplicationId(p)];
   const meta = [];
-  if(ap) meta.push(ST[ap.st].label);
+  if(ap) meta.push((ST[ap.st]||ST.plan).label);
   const spr = specOf(p); if(spr) meta.unshift(SPEC_V[spr.v].icon + " " + SPEC_V[spr.v].label);
-  if(p.n) meta.push(p.n + "명");
-  if((p.emp||[])[0]) meta.push(p.emp[0]);
+  if(regionLabel(p)) meta.push(regionLabel(p));
+  meta.push(...(p.emp||[]));
+  if(p.n) meta.push("모집 " + String(p.n).replace(/명$/, "") + "명");
+  meta.push(cpReceptionLabel(p, now));
   if(p.due) meta.push("마감 " + dueLong(p.due, p.dueHasTime));
   const href = esc(jobHref(p));
   const attr = jobAnchorAttrs(p);
@@ -1394,7 +1441,7 @@ function rowCard(p, now){
     <a class="main" href="${href}"${attr}>
       <span class="rd ${d ? d.cls : ""}">${d ? (d.cls === "verify" ? "~" + md(p.due) : d.big) : "일정 확인"}</span>
       <span class="rb"><span class="ro">${isNew(p,now) ? "NEW · " : ""}${p.gojobs ? "나라일터" : isInternalJob(p) ? "공식" : "해설"} · ${esc(p.org || p.cat)}${regionLabel(p) ? " · " + esc(regionLabel(p)) : ""}</span>
-      <span class="rt">${esc(cleanTitle(p.title))}</span>
+      <span class="rt">${esc(p.title)}</span>
       <span class="rm">${esc(meta.join(" · "))}</span>${preferenceBadge(p)}</span>
     </a>
     ${standaloneJobLink(p)}
@@ -1462,8 +1509,10 @@ function prefCard(){
   if(off) return "";
   return `<li class="prefcard"><span class="grow"><b>내 조건</b>을 저장하면 맞는 공고만 맨 위에 모아 보여드려요. (고졸·인턴·지역 등)</span><button class="go" id="openPrefs">설정</button><button class="x" id="prefCardX" aria-label="닫기">×</button></li>`;
 }
-let DRAFT = null;
+let DRAFT = null, PBASE=null;
 function openPrefs(){
+  PREFS=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},cpReadRecords('prefs',{},CPStore.prefs));
+  PBASE=JSON.stringify(PREFS);
   DRAFT = JSON.parse(JSON.stringify(PREFS));
   const cats = [...new Set(POSTS.filter(p => p.type === "j").map(p => p.cat))];
   const grp = (key, label, items) => `<div class="grp"><span>${label}</span><div class="chips">${items.map(v =>
@@ -1472,7 +1521,7 @@ function openPrefs(){
   $("sheetBody").innerHTML = PREF_GROUPS.map(g => grp(g.key, g.label, g.items)).join("")
     + grp("cat", "분야", cats)
     + `<div class="grp"><span>키워드 (쉼표로 여러 개)</span><input type="text" id="prefKw" aria-label="관심 키워드" value="${esc(DRAFT.kw)}" placeholder="예: 간호, 전산, 사무"></div>`
-    + `<p class="hint">선택한 조건은 이 기기에 저장됩니다. 아래 저장 버튼을 누르면 완료 안내가 나타납니다. 맞춤 웹푸시 자동 발송은 아직 준비 중입니다.</p>`
+    + `<p class="hint">선택한 조건과 저장·지원 기록은 이 브라우저에만 보관됩니다. 비공개 모드 종료·사이트 데이터 삭제 시 사라질 수 있으며 다른 기기와 자동 동기화되지 않습니다. JSON 백업을 권장합니다. 아래 저장 버튼을 누르면 완료 안내가 나타납니다. 맞춤 웹푸시는 맞춤 조건과 새 공고에 따라 발송 대상이 결정됩니다. 실제 수신 여부는 별도로 확인해 주세요.</p>`
     + cpPushSetupPanel()
     + `<p class="live" id="prefLive"></p>`
     + `<div class="row"><button id="prefClear">초기화</button><button type="button" class="primary" id="prefSave" onclick="cpSavePreferenceSettings();return false">저장</button></div>`;
@@ -1485,7 +1534,9 @@ function openPrefs(){
   prefLive();
   cpRefreshPushPanel();
 }
-function cpSavePreferenceSettings(){
+let cpPreferenceBusy=false;
+async function cpSavePreferenceSettings(){
+  if(cpPreferenceBusy)return false;cpPreferenceBusy=true;
   const button=document.getElementById("prefSave");
   const live=document.getElementById("prefLive");
   if(button){button.textContent="저장 처리 중…";button.disabled=true;}
@@ -1495,8 +1546,12 @@ function cpSavePreferenceSettings(){
     if(input)DRAFT.kw=input.value;
     const next=JSON.parse(JSON.stringify(DRAFT));
     const serialized=JSON.stringify(next);
-    localStorage.setItem("prefs",serialized);
-    if(localStorage.getItem("prefs")!==serialized)throw Error("저장 후 값 검증 실패");
+    const stored=await cpMutateRecords('prefs',{},CPStore.prefs,current=>{
+      const previous=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},current);
+      if(JSON.stringify(previous)!==PBASE)throw Error('다른 탭에서 맞춤 조건이 변경됐습니다. 다시 열어 확인해 주세요.');
+      return next;
+    });
+    if(stored===null)throw Error('맞춤 조건을 저장하지 못했습니다. 기존 기록을 보존했습니다.');
     PREFS=next;
     if(live)live.textContent="✓ 맞춤 조건 저장 성공 · 진단 v2";
     if(button){button.textContent="✓ 저장 완료";button.disabled=false;}
@@ -1512,7 +1567,7 @@ function cpSavePreferenceSettings(){
       const pushStatus=document.getElementById("cpPushMessage");
       if(pushStatus)pushStatus.textContent=message;
     }).catch(error=>{
-      console.warn("Preference sync failed",error);
+      console.warn("Preference sync failed");
       const pushStatus=document.getElementById("cpPushMessage");
       if(pushStatus)pushStatus.textContent="✓ 기기에 저장 완료 · 알림 서버 동기화 오류";
     });
@@ -1522,7 +1577,7 @@ function cpSavePreferenceSettings(){
     if(live)live.textContent="⚠️ 저장 실패 (진단 v2): "+message;
     if(button){button.textContent="다시 저장";button.disabled=false;}
     return false;
-  }
+  }  finally{cpPreferenceBusy=false;}
 }
 
 function prefLive(){
@@ -1565,6 +1620,7 @@ function renderSpec(now){
     alioDetail().then(() => { renderTabs(); render(); });
     return;
   }
+  if(CP_DATA_LOADING&&!POSTS.length){$('summary').textContent='공고를 불러오는 중입니다.';$('list').innerHTML='<li class="empty" role="status">공고를 불러오는 중입니다. 잠시만 기다려 주세요.</li>';return;}
   const q = state.q.trim().toLowerCase();
   let all = specRows(now).filter(x => !q || haystack(x.p).includes(q) || plainQ((ALIO_DETAIL[x.p.id] || {}).aplyQlfcCn).toLowerCase().includes(q));
   const cnt = {ok:0, check:0, no:0}; all.forEach(x => cnt[x.r.v]++);
@@ -1600,8 +1656,9 @@ function specBoxHTML(p, det){
   return `<div class="spbox"><h3>내 스펙 체크 <span class="sppill ${m.cls}">${m.icon} ${m.label}</span></h3><ul>${items}</ul>
     <p class="note">지원 자격을 자동으로 읽은 참고용 결과예요. 분야별 세부 자격은 아래 지원 자격·원문 공고에서 확인하세요. <button class="linkbtn" id="openSpec">스펙 수정</button></p></div>`;
 }
-let SDRAFT = null;
+let SDRAFT = null, SBASE=null, CP_SPEC_BUSY=false;
 function openSpec(draft){
+  SPEC=cpReadRecords("spec",null,CPStore.spec);SBASE=JSON.stringify(SPEC);
   SDRAFT = draft || Object.assign(emptySpec(), JSON.parse(JSON.stringify(SPEC || {})));
   const one = (key, items) => `<div class="chips">${items.map(([lab, val]) =>
     `<button class="chip" data-specone="${key}" data-val="${esc(val)}" aria-pressed="${String(SDRAFT[key]) === String(val)}">${esc(lab)}</button>`).join("")}</div>`;
@@ -1741,8 +1798,21 @@ const ST = {
 };
 const ST_ORDER = ["plan","applied","doc","exam","itv","pass","fail"];
 let APPS = {};
-try { APPS = JSON.parse(localStorage.getItem("apps") || "{}") || {}; } catch(e) {}
-function saveApps(){ try { localStorage.setItem("apps", JSON.stringify(APPS)); } catch(e) {} }
+APPS=cpReadRecords("apps",{},CPStore.apps);
+async function cpStoreApp(id,next,expected=JSON.stringify(APPS[id]??null)){
+  const data=await cpMutateRecords('apps',{},CPStore.apps,rows=>CPStore.replaceApp(rows,id,next,expected));
+  if(data===null)return false;APPS=data;return true;
+}
+function cpRefreshRecords(){renderTabs();render();savedAlert();if(JV)refreshJobView();}
+window.addEventListener('storage',event=>{
+  if(event.key==='saved'||event.key===null)SAVED=new Set(cpReadRecords('saved',[],CPStore.saved));
+  if(event.key==='apps'||event.key===null)APPS=cpReadRecords('apps',{},CPStore.apps);
+  if(event.key==='prefs'||event.key===null)PREFS=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},cpReadRecords('prefs',{},CPStore.prefs));
+  if(event.key==='spec'||event.key===null){SPEC=cpReadRecords('spec',null,CPStore.spec);SPEC_CACHE.clear();}
+  if(['saved','apps','prefs','spec','careerpick-before-import',null].includes(event.key)){
+    const recovery=CPRecords.recoveryStatus(localStorage);cpStorageNotice('recovery',recovery.pending?recovery.message:'');cpRefreshRecords();
+  }
+});
 const ymd = d => { const k = kst(d); return `${k.getUTCFullYear()}-${pad(k.getUTCMonth()+1)}-${pad(k.getUTCDate())}`; };
 const ymdLabel = s => { const [y,m,d] = s.split("-").map(Number); const w = new Date(Date.UTC(y,m-1,d)).getUTCDay(); return `${m}.${d}(${WD[w]})`; };
 function appEvents(now){
@@ -1837,7 +1907,7 @@ function renderTrack(now){
     if(a.itv) meta.push("면접 " + ymdLabel(a.itv));
     if(a.memo) meta.push(a.memo);
     parts.push(`<li class="trk-item"><div class="grow">
-      <div class="o">${esc(a.org || "")} <span class="stpill st-${a.st}">${ST[a.st].label}</span></div>
+      <div class="o">${esc(a.org || "")} <span class="stpill st-${a.st}">${(ST[a.st]||ST.plan).label}</span></div>
       <a class="t" href="${esc(jobHref(POSTS.find(p => p.id === id) || {type:"j",id,url:a.url}))}" ${POSTS.some(p => p.id === id && isInternalJob(p)) ? `data-open="${esc(id)}"` : 'target="_blank" rel="noopener"'} style="color:inherit;text-decoration:none">${esc(cleanTitle(a.title || POSTS.find(p=>p.id===id || p.sourceIds?.includes(id))?.title || "공고 정보 미확인 (기록 보존)"))}</a>
       ${meta.length ? `<div class="m">${esc(meta.join(" · "))}</div>` : ""}
       ${a.ck && a.ck.length ? (() => { const n = ckDone(a.ck), nx = a.ck.indexOf(ckNext(a.ck));
@@ -1877,12 +1947,15 @@ const ckNext = ck => (ck || []).find(x => !x.d);
 function ckListHTML(ck, attr, editable){
   return `<div class="cklist">${ck.map((x, i) => `<button class="ck" ${attr}="${i}" aria-pressed="${!!x.d}"><span class="bx">${x.d ? "✓" : ""}</span><span class="tx">${esc(x.t)}</span>${editable ? `<span class="rm" data-ckrm="${i}" aria-label="항목 삭제">×</span>` : ""}</button>`).join("")}</div>`;
 }
-function ckToggle(id, i){
-  const a = APPS[id]; if(!a || !a.ck || !a.ck[i]) return;
-  a.ck[i].d = a.ck[i].d ? 0 : 1; a.upd = Date.now();
-  if(a.ck[i].k === "submit" && a.ck[i].d && a.st === "plan"){ a.st = "applied"; toast("서류 제출 완료! 단계를 '지원 완료'로 바꿨어요."); }
-  else if(ckDone(a.ck) === a.ck.length) toast("체크리스트를 모두 끝냈어요 👏");
-  saveApps(); renderTabs(); render(); savedAlert(); if(JV) refreshJobView();
+async function ckToggle(id,i){
+  const source=APPS[id];if(!source?.ck?.[i])return;
+  const expected=JSON.stringify(source),a=JSON.parse(expected);
+  a.ck[i].d=a.ck[i].d?0:1;a.upd=Date.now();
+  if(a.ck[i].k==='submit'&&a.ck[i].d&&a.st==='plan'){
+    if(!confirm('지원서를 실제로 제출하셨나요? 확인하면 지원 완료로 변경합니다.'))return;
+    a.st='applied';
+  }
+  if(await cpStoreApp(id,a,expected))cpRefreshRecords();
 }
 function ckBoxHTML(p){
   const a = APPS[cpApplicationId(p)];
@@ -1891,13 +1964,15 @@ function ckBoxHTML(p){
   const n = ckDone(a.ck), pct = Math.round(n * 100 / a.ck.length);
   return `<div class="ckbox"><h3>✅ 준비 체크리스트 <span class="ckpct">${n}/${a.ck.length}</span></h3><div class="ckbar"><i style="width:${pct}%"></i></div>${ckListHTML(a.ck, `data-ckid="${esc(cpApplicationId(p))}" data-ck`, false)}</div>`;
 }
-let TDRAFT = null, TID = null;
+let TDRAFT = null, TID = null, TBASE=null, CP_TRACK_BUSY=false;
 async function openTrack(id){
   const p = POSTS.find(x => x.id === id || x.sourceIds?.includes(id));
+  APPS=cpReadRecords("apps",{},CPStore.apps);
   const a = APPS[id] || {st:"plan"};
+  TBASE=JSON.stringify(APPS[id]??null);
   if(!a.ck && p && p.alio && !ALIO_DETAIL) await alioDetail();
   TID = id;
-  TDRAFT = {st:a.st, exam:a.exam || "", itv:a.itv || "", memo:a.memo || "",
+  TDRAFT = {st:a.st||"plan", exam:a.exam || "", itv:a.itv || "", memo:a.memo || "",
     ck: a.ck ? JSON.parse(JSON.stringify(a.ck)) : genChecklist(p, p && p.alio ? (ALIO_DETAIL || {})[p.id] : null)};
   const name = p ? (p.org || "") + " " + cleanTitle(p.title) : (a.org || "") + " " + cleanTitle(a.title || "");
   sheet(`<p style="margin:0 0 12px;font-weight:600;font-size:14px;line-height:1.45">${esc(name.trim())}</p>
@@ -1908,23 +1983,24 @@ async function openTrack(id){
       <label style="font-size:12.5px;color:var(--muted)">면접일<input type="date" id="tItv" value="${esc(TDRAFT.itv)}"></label></div></div>
     <div class="grp"><span>준비 체크리스트 ${a.ck ? "" : "(이 공고의 전형 절차에 맞춰 자동으로 만들었어요)"}</span><div id="tCk">${ckListHTML(TDRAFT.ck, "data-tck", true)}</div>
       <div class="ckadd"><input type="text" id="tCkNew" maxlength="40" placeholder="항목 추가 (예: 증명사진 준비)"><button id="tCkAdd">추가</button></div></div>
-    <div class="grp"><span>메모</span><textarea id="tMemo" aria-label="지원 메모" placeholder="예: 자소서 3번 문항 다시 보기, 수험번호 1234">${esc(TDRAFT.memo)}</textarea></div>
+    <div class="grp"><span>메모</span><textarea id="tMemo" aria-label="지원 메모" placeholder="예: 자소서 문항 다시 보기">${esc(TDRAFT.memo)}</textarea></div>
     <div class="row">${APPS[id] ? '<button id="tDel" class="danger">기록 삭제</button>' : '<button onclick="closeSheet()">취소</button>'}<button class="primary" id="tSave">저장</button></div>`, "📋 지원 기록");
   $("tCkNew").addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); $("tCkAdd").click(); } });
 }
-function saveTrack(){
-  const p = POSTS.find(x => x.id === TID || x.sourceIds?.includes(TID)), old = APPS[TID] || {};
-  APPS[TID] = {
-    st: TDRAFT.st, ck: TDRAFT.ck, exam: $("tExam").value, itv: $("tItv").value, memo: $("tMemo").value.trim().slice(0, 200),
-    title: p ? p.title : old.title, org: p ? (p.org || "") : old.org, url: p ? p.url : old.url,
-    due: p && p.due ? p.due.toISOString() : old.due || null, upd: Date.now()
-  };
-  if(TDRAFT.st !== "plan" && TDRAFT.st !== old.st) APPS[TID].ck.forEach(x => { if(x.ph === "pre") x.d = 1; });
-  saveApps(); closeSheet(); renderTabs(); render(); savedAlert(); if(JV) refreshJobView();
-  toast("지원 기록을 저장했어요. '📋 내 지원' 탭에서 모아 볼 수 있어요.");
+async function saveTrack(){
+  if(CP_TRACK_BUSY)return;CP_TRACK_BUSY=true;
+  try{
+    const id=TID,p=POSTS.find(x=>x.id===id||x.sourceIds?.includes(id)),old=APPS[id]||{};
+    const next={...old,st:TDRAFT.st,ck:TDRAFT.ck,exam:$('tExam').value,itv:$('tItv').value,memo:$('tMemo').value,
+      title:p?p.title:old.title,org:p?(p.org||''):old.org,url:p?p.url:old.url,
+      due:p?.due?p.due.toISOString():old.due||null,upd:Date.now()};
+    if(TDRAFT.st!=='plan'&&TDRAFT.st!==old.st)next.ck.forEach(x=>{if(x.ph==='pre')x.d=1;});
+    if(!await cpStoreApp(id,next,TBASE))return;
+    closeSheet();cpRefreshRecords();toast('지원 기록을 이 기기에 저장했습니다.');
+  }finally{CP_TRACK_BUSY=false;}
 }
 // ── 공식 공고 상세 화면 (잡알리오) ──
-let ALIO_DETAIL = null, JV = null, JV_PUSHED = false;
+let ALIO_DETAIL = null, ALIO_DETAIL_PENDING = null, JV = null, JV_PUSHED = false;
 const JV_SUMMARY = [
   ["recrutSeNm","채용 구분"], ["hireTypeNmLst","고용 형태"], ["recrutNope","모집 인원"], ["workRgnNmLst","근무 지역"],
   ["acbgCondNmLst","학력 조건"], ["ncsCdNmLst","직무 분야"], ["replmprYn","대체인력 채용"]
@@ -1941,21 +2017,27 @@ function plainText(s){
 }
 const ymdText = s => { const m = String(s || "").match(/(\d{4})-?(\d{2})-?(\d{2})/); if(!m) return ""; const w = new Date(Date.UTC(+m[1], +m[2]-1, +m[3])).getUTCDay(); return `${+m[2]}.${+m[3]}(${WD[w]})`; };
 async function alioDetail(){
-  if(ALIO_DETAIL) return ALIO_DETAIL;
-  try { const r = await fetch("alio-detail.json?t=" + encodeURIComponent(UPDATED || Date.now()));
-    if(!r.ok)throw Error("detail_http");
-    const data=await r.json();if(!data || typeof data!=="object" || Array.isArray(data))throw Error("detail_schema");
-    ALIO_DETAIL=data;DATA_HEALTH.detail="ok";
-  } catch(e){ALIO_DETAIL={};DATA_HEALTH.detail="error";}
-  updateDataHealth();
-  return ALIO_DETAIL;
+  if(ALIO_DETAIL)return ALIO_DETAIL;
+  if(ALIO_DETAIL_PENDING)return ALIO_DETAIL_PENDING;
+  ALIO_DETAIL_PENDING=(async()=>{
+    try{const data=await cpFetchJson('alio-detail.json?t='+encodeURIComponent(UPDATED||Date.now()));
+      if(!data||typeof data!=='object'||Array.isArray(data))throw Error('detail_schema');
+      ALIO_DETAIL=data;DATA_HEALTH.detail='ok';
+    }catch(_){ALIO_DETAIL=null;DATA_HEALTH.detail='error';}
+    finally{ALIO_DETAIL_PENDING=null;}
+    updateDataHealth();return ALIO_DETAIL||{};
+  })();
+  return ALIO_DETAIL_PENDING;
 }
+
 async function openJob(id, push = true){
   const p = POSTS.find(x => x.id === id || x.sourceIds?.includes(id));
   if(!p) return;
   id=p.id;
+  cpSaveBrowse(id);
   JV = id;
-  if(push && location.hash !== "#job=" + id){ history.pushState({job:id}, "", "#job=" + id); JV_PUSHED = true; }
+  if(!push)JV_PUSHED=!!history.state?.job;
+  if(push && location.hash !== "#job=" + id){try{history.replaceState({...history.state,cpBrowse:{...state},cpScroll:scrollY},"",location.href);history.pushState({job:id},"","#job="+id);JV_PUSHED=true;}catch(_){JV_PUSHED=false;}}
   $("jobview").hidden = false; cpSyncDialogState(); document.body.style.overflow = "hidden";
   $("jvBody").innerHTML = jobViewHTML(p, null);
   $("jvBack").focus();
@@ -1975,7 +2057,7 @@ function closeJob(fromPop){
   if(!JV) return;
   JV = null; $("jobview").hidden = true; cpSyncDialogState(); document.body.style.overflow = "";
   if(!fromPop && location.hash.startsWith("#job=")){
-    if(JV_PUSHED) history.back(); else history.replaceState(null, "", location.pathname + location.search);
+    try{if(JV_PUSHED)history.back();else history.replaceState(null,"",location.pathname+location.search);}catch(_){}
   }
   JV_PUSHED = false;
 }
@@ -2117,7 +2199,7 @@ function jobViewHTML(p, det){
       <div class="main-btns"><a class="primary" href="${esc(links.primary)}" target="_blank" rel="noopener">${links.label}</a>${off}${cpMergedSourceLinks(p,links.primary)}</div>
       <div class="sub-btns">
         <button class="save" data-save="${esc(cpSavedId(p))}" aria-pressed="${saved}">${saved ? "★ 저장됨" : "☆ 저장"}</button>
-        <button data-track="${esc(cpApplicationId(p))}">${ap ? "📋 " + ST[ap.st].short : "📋 지원기록"}</button>
+        <button data-track="${esc(cpApplicationId(p))}">${ap ? "📋 " + (ST[ap.st]||ST.plan).short : "📋 지원기록"}</button>
         ${d && d.cls !== "closed" && p.dueHasTime === true ? `<a href="${calLink(p)}" target="_blank" rel="noopener">📅 캘린더</a>` : ""}
       </div></div></div>`;
 }
@@ -2131,18 +2213,18 @@ window.addEventListener("popstate", (event) => {
   const m = location.hash.match(/^#job=(.+)$/);
   if(m){ openJob(decodeURIComponent(m[1]), false); return; }
   closeJob(true);
+  if(cpRestoreBrowseEntry(event.state))return;
   // 브라우저/스레드 뒤로가기를 사이트 내부 탭 이동에 연결합니다.
   if(event.state && event.state.cpTab){
     CP_RESTORING_TAB = true;
+    if(event.state.cpBrowse)Object.assign(state,event.state.cpBrowse);
     state.tab = event.state.cpTab;
-    state.q = event.state.cpQ || "";
+    state.q = event.state.cpBrowse?.q ?? event.state.cpQ ?? "";
     $("q").value = state.q;
-    state.cat = null;
-    state.status = "all";
-    state.onlyNew = false;
+    if(!event.state.cpBrowse){state.cat=null;state.status="all";state.onlyNew=false;}
     refresh();
     CP_RESTORING_TAB = false;
-    window.scrollTo({top:0,behavior:"instant"});
+    window.scrollTo({top:event.state.cpScroll||0,behavior:"instant"});
   }
 });
 // CareerPick 2.0 step 4: show only real counts from the loaded feed and local records.
@@ -2199,7 +2281,7 @@ function renderCareerDashboard(now){
 }
 document.getElementById("cpBackupInput").addEventListener("change", async e=>{await cpRestoreBackup(e.target.files[0]);e.target.value="";});
 // 개인 설정과 지원기록은 기기 내부 저장소에만 보관합니다. 백업/복원은 사용자가 직접 실행합니다.
-const CP_BACKUP_KEYS = CPRecords.keys;
+const CP_BACKUP_KEYS = [...CPRecords.keys,"careerpick-record-checkpoints","careerpick-before-import"];
 // 읽기용 보고서: 새 인쇄 창에서 브라우저의 'PDF로 저장' 기능을 사용합니다.
 // JSON 데이터 백업/복원과는 별개이며 외부 서버로 개인 기록을 전송하지 않습니다.
 function cpExportReport(){
@@ -2236,35 +2318,56 @@ function cpExportReport(){
   toast('보고서를 열었어요. 인쇄 / PDF로 저장을 선택하세요.');
 }
 function cpDownloadBackup(){
-  const data = {format:"careerpick-backup",version:1,exported_at:new Date().toISOString(),data:{}};
-  CP_BACKUP_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)data.data[k]=JSON.parse(v);}catch(e){}});
-  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json;charset=utf-8"}));
-  const a=document.createElement("a");a.href=url;a.download="careerpick-backup-"+ymd(new Date())+".json";document.body.appendChild(a);a.click();a.remove();
+  let exportResult;try{exportResult=CPStore.exportRecords(localStorage,CP_BACKUP_KEYS);}catch(_){toast('저장소 접근이 차단되어 백업을 만들 수 없습니다.');return false;}
+  const data={format:'careerpick-backup',version:1,service:{id:'careerpick',origin:location.origin,path:location.pathname},exported_at:new Date().toISOString(),...exportResult,recovery_required:CPRecords.recoveryStatus(localStorage).pending};
+  data.counts=CPRecords.counts(data.data);
+  const text=JSON.stringify(data,null,2),blob=new Blob([text],{type:'application/json;charset=utf-8'});
+  if(blob.size>CPRecords.maxBytes){toast('백업이 가져오기 지원 크기 16MB를 초과합니다. 원본 기록을 보존하고 지원을 요청하세요.');return false;}
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  const stamp=new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}).replace(' ','_').replace(/:/g,'-');
+  a.href=url;a.download='careerpick-backup-'+stamp+'_KST.json';document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),3000);
-  toast("개인 기록 백업 파일을 다운로드했어요. 다른 사람에게 공유하지 마세요.");
+  toast(data.recovery_required?'미완료 가져오기 복구 자료를 포함한 보존용 백업을 요청했습니다. 정상 복원 전 복구 사본을 확인하세요.':data.unavailable_keys.length?'일부 항목에 접근할 수 없는 부분 백업입니다. 파일의 unavailable_keys를 확인하세요.':data.invalid_keys.length?'손상 원문을 포함한 부분 백업을 요청했습니다. 원문 복구 후 가져오기할 수 있습니다.':'개인 기록 백업 다운로드를 요청했습니다. 파일의 시각·건수를 확인하고 본인만 보관하세요.');
+  return !data.unavailable_keys.length;
 }
+let CP_IMPORT_BUSY=false;
 async function cpRestoreBackup(file){
-  if(!file)return;
-  if(file.size>2*1024*1024){alert("백업 파일이 너무 큽니다(최대 2MB).");return;}
-  let backup;
-  try{backup=JSON.parse(await file.text());}catch(e){alert("올바른 JSON 백업 파일이 아닙니다.");return;}
-  if(!backup || backup.format!=="careerpick-backup" || backup.version!==1 || !backup.data || typeof backup.data!=="object" || Array.isArray(backup.data)){
-    alert("커리어픽 백업 파일 형식이 아닙니다.");return;
-  }
-  try{CPRecords.validate(backup);}catch(e){alert(e.message);return;}
-  if(!confirm("현재 기록을 백업한 뒤 가져온 기록을 병합합니다. 같은 공고의 기존 상태·메모는 유지하고 충돌 원본은 이 기기에 별도 보관합니다. 계속할까요?"))return;
-  cpDownloadBackup();
+  if(!file||CP_IMPORT_BUSY)return;CP_IMPORT_BUSY=true;
   try{
-    const result=CPRecords.apply(localStorage,backup);
+    if(file.size>CPRecords.maxBytes){alert('백업 파일이 너무 큽니다(최대 16MB). 기존 기록은 변경하지 않았습니다.');return;}
+    let backup;try{backup=JSON.parse(await file.text());}catch(_){alert('올바른 JSON 백업 파일이 아닙니다. 기존 기록은 변경하지 않았습니다.');return;}
+    const preview=CPRecords.preview(localStorage,backup),c=preview.counts;
+    const message=`백업 생성: ${preview.exportedAt?new Date(preview.exportedAt).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})+' KST':'미제공 (과거 백업)'} · 형식 버전 ${preview.version}\n가져올 항목: 저장 ${c.saved} · 지원 ${c.apps} · 메모 ${c.memos} · 체크리스트 ${c.checklist_items} · 일정 ${c.schedules} · 맞춤 ${c.prefs} · 스펙 ${c.spec} · 보관 ${c.archives}\n신규: 저장 ${preview.savedAdded} · 지원 ${preview.appsAdded}\n중복: 저장 ${preview.duplicates.saved+preview.internalDuplicates} · 지원 ${preview.duplicates.apps} · 설정 ${preview.duplicates.prefs+preview.duplicates.spec}\n충돌 ${preview.conflicts} · 가져올 수 없는 항목 ${preview.invalid}\n기존 기록은 우선 보존하며 가져온 충돌 원본은 보관함에 남깁니다. 수정 시각만으로 최신이라고 판단하지 않습니다. 현재 기록 백업을 요청한 뒤 병합할까요?`;
+    if(!confirm(message))return;
+    if(!cpDownloadBackup())throw Error('변경 전 백업을 요청하지 못했습니다. 가져오기를 중단했습니다.');
+    const apply=()=>CPRecords.apply(localStorage,backup,{expectedOriginals:preview.originals});
+    const result=await (navigator.locks?navigator.locks.request('careerpick-records',apply):apply());
     const linked=new Set(POSTS.flatMap(p=>[p.id,...(p.sourceIds||[])]));
     const orphan=[...new Set([...result.data.saved,...Object.keys(result.data.apps)])].filter(id=>!linked.has(id)).length;
-    alert(`병합 완료: 저장 ${result.savedAdded}건·지원 ${result.appsAdded}건 추가, 충돌 ${result.conflicts.length}건 원본 보관, 현재 목록 미연결 ${orphan}건 보존. 새로고침합니다.`);
-    location.reload();
-  }catch(e){alert(e.message);}
-
+    alert(`재검증 후 병합 완료: 저장 ${result.savedAdded}건·지원 ${result.appsAdded}건 추가, 충돌 ${result.conflicts.length}건 원본 보관, 현재 목록 미연결 ${orphan}건 보존. 새로고침합니다.`);location.reload();
+  }catch(error){alert(error.message);cpReadRecords('saved',[],CPStore.saved);}
+  finally{CP_IMPORT_BUSY=false;}
+}
+function cpShowRecordArchive(){
+  try{
+    const archive=JSON.parse(localStorage.getItem('careerpick-import-archive')||'[]'),journal=localStorage.getItem('careerpick-before-import'),checkpoint=localStorage.getItem('careerpick-record-checkpoints');
+    sheet('<p>기존 기록은 현재 상태로 남아 있습니다. 가져온 원본은 아래 보관 자료에서 확인할 수 있습니다. 최근 복구 사본은 전체 이력이 아니며 다른 변경이 있으면 자동 복구를 중단합니다.</p><pre id="cpArchiveText" class="cp-record-archive"></pre><button type="button" data-record-action="backup">원본 포함 백업(JSON)</button> <button type="button" data-record-action="recover">최근 가져오기 전으로 복구</button>','충돌·복구 사본');
+    const parse=value=>{try{return value?JSON.parse(value):null;}catch(_){return value;}};
+    $('cpArchiveText').textContent=JSON.stringify({imported_originals:archive,before_import:parse(journal),before_edit:parse(checkpoint)},null,2);
+  }catch(_){toast('보관 자료를 읽지 못했습니다. 원본 포함 JSON 백업을 먼저 보관하세요.');}
+}
+async function cpRecoverImport(){
+  if(CP_IMPORT_BUSY)return;
+  if(!confirm('최근 가져오기 직전 기록으로 원상복구합니다. 사본 이후 다른 변경이 있으면 덮어쓰지 않고 중단합니다. 현재 자료 백업을 요청한 뒤 복구할까요?'))return;
+  CP_IMPORT_BUSY=true;
+  try{if(!cpDownloadBackup())throw Error('복구 전 백업을 요청하지 못했습니다.');const restore=()=>CPRecords.recover(localStorage);await (navigator.locks?navigator.locks.request('careerpick-records',restore):restore());alert('원상복구 후 기존 기록을 다시 읽어 확인했습니다. 새로고침합니다.');location.reload();}
+  catch(error){alert(error.message);}finally{CP_IMPORT_BUSY=false;}
 }
 
+let CP_LAST_VISIBLE_POSTS=[];
 function render(){
+  if(cpApplyingFeedUpdates)return;
+  const cpAnchorBefore=cpLastFilter===JSON.stringify(state)&&scrollY>0&&!cpRestoringBrowse?cpBrowseAnchor():null;
   cpCheckVisibleLimit();
   updateDataHealth();
   cpRenderDeadlineTools();
@@ -2276,10 +2379,12 @@ function render(){
   if(state.tab === "track"){ renderTrack(now); return; }
   if(state.tab === "spec"){ renderSpec(now); return; }
   if(state.tab === "cert"){ renderCert(now); return; }
+  if(CP_DATA_LOADING&&!POSTS.length){$('summary').textContent='공고를 불러오는 중입니다.';$('list').innerHTML='<li class="empty" role="status">공고를 불러오는 중입니다. 잠시만 기다려 주세요.</li>';return;}
   const q = state.q.trim().toLowerCase();
   // Search the original blog feed as well as the merged feed. This prevents
   // a blog article from disappearing if a duplicate official notice replaces it.
-  const searchPool = q ? [...POSTS, ...CP_BLOG_SEARCH.filter(p => !POSTS.some(x => x.id === p.id))] : POSTS;
+  const postIds=q?new Set(POSTS.map(p=>p.id)):null;
+  const searchPool = q ? [...POSTS, ...CP_BLOG_SEARCH.filter(p => !postIds.has(p.id))] : POSTS;
   let rows = searchPool.filter(p => inTab(p) && (!state.cat || p.cat === state.cat) && CPHome.matches(p,state) && cpRegionMatches(p, state.region) && (!q || haystack(p).includes(q)));
   // During a keyword search, show undated blog notices as well: missing due
   // dates mean 'unverified', not 'expired'. Keep the user's explicit filters.
@@ -2308,12 +2413,23 @@ function render(){
   let sum = (state.tab === "p" || state.tab === "m")
     ? `글 <b>${rows.length}</b>개`
     : `검색 결과 <b>${rows.length}</b>건 · 마감 전 ${open}건` + (hot ? ` · 3일 내 마감 <span class="hot">${hot}</span>건` : "") + (state.tab === "mine" ? "" : ` · 접수 여부 원문 확인`);
+  if(cpQueuedFeedUpdate)sum+=" · 일부 자료 표시 중 · 자료 갱신 필요";
+  if(CP_FEED_CACHE.size)sum+=" · 보관 자료 포함 (최신 확인 불가)";
+  if(CP_USING_PREVIOUS)sum+=" · 이전 자료 표시 중 (최신 조회 실패 · 하단 자료 시점 확인)";
+  if(CP_DATA_LOADING)sum+=" · 일부 출처 확인 중 · 최종 건수 미확정";
+  if(Object.values(DATA_HEALTH).includes('error'))sum+=' · 일부 출처 조회 실패 (하단 갱신 상태 확인)';
   if(undated) sum += ` · <span title="마감일 확인이 필요한 공고">마감일 미확인 ${undated}건</span>`;
   if(state.tab === "mine") sum = `🎯 ${prefSummary()} ` + sum + `<button class="linkbtn" id="editPrefs">조건 수정</button>`;
   if(state.onlyNew) sum = `🆕 새 글 <b>${rows.length}</b>개만 보는 중 <button class="linkbtn" id="offNew">전체 보기</button>`;
   $("summary").innerHTML = sum;
 
-  if(!rows.length){
+  if(CP_DATA_LOADING&&!rows.length){$("summary").textContent="출처 확인 중 · 최종 결과 미확정";$("list").innerHTML='<li class="empty" role="status">공고를 확인하고 있습니다. 아직 검색 결과가 확정되지 않았습니다.</li>';return;}
+  if(!rows.length && Object.values(DATA_HEALTH).includes('error') && state.tab!=='saved'){
+    $('summary').textContent='공고 조회 일부 실패 · 검색 결과를 확인할 수 없습니다.';
+    $('list').innerHTML='<li class="empty" role="alert">일부 공고를 불러오지 못했습니다. 검색 결과 없음과 다릅니다.<br><button id="cpRetryFeeds">다시 불러오기</button></li>';return;
+  }
+  const orphanIds=state.tab==='saved'?[...SAVED].filter(id=>!POSTS.some(p=>p.id===id||p.sourceIds?.includes(id))):[];
+  if(!rows.length && !orphanIds.length){
     $("list").innerHTML = state.tab === "mine"
       ? `<li class="empty">지금 조건에 맞는 마감 전·일정 확인 공고가 없어요.<br>새 공고가 올라오면 여기에 바로 나타나요.<br><button class="chip" id="editPrefs">조건 수정</button></li>`
       : state.tab === "saved"
@@ -2321,8 +2437,11 @@ function render(){
       : `<li class="empty">조건에 맞는 글이 없습니다.<br><button class="chip" id="empty-reset">필터 초기화</button></li>`;
     return;
   }
+  if(cpRestoringBrowse&&cpBrowsePending&&typeof cpBrowseRangeForAnchor==='function')cpVisibleLimit=cpBrowseRangeForAnchor(rows,cpVisibleLimit,cpBrowsePending);
   const cards = rows.slice(0,cpVisibleLimit).map(p => p.type === "j" ? (COMPACT ? rowCard(p, now) : jobCard(p, now)) : miniCard(p, now));
   if(rows.length > cpVisibleLimit) cards.push(`<li class="cp-more"><button type="button" id="cpLoadMore">공고 더 보기 (${Math.min(cpVisibleLimit,rows.length)} / ${rows.length})</button></li>`);
+  for(const id of orphanIds)cards.push(`<li class="empty">현재 목록에 없는 저장 공고 · ${esc(id)}<br>저장 기록은 보존했습니다. 원문 상태는 미확인입니다.<br><button data-save="${esc(id)}" aria-pressed="true">★ 저장 해제</button></li>`);
+  if(state.tab==='saved'&&orphanIds.length)$('summary').insertAdjacentText('beforeend',` · 목록 미연결 ${orphanIds.length}건 보존`);
   const n = cards.length;
   if(ADS.length){
     cards.push(adBlock(1));
@@ -2333,6 +2452,8 @@ function render(){
   const pc = prefCard();
   if(pc) cards.push(pc);
   $("list").innerHTML = cards.join("");
+  CP_LAST_VISIBLE_POSTS=POSTS.slice();
+  cpBrowseAfterRender(cpAnchorBefore);
 }
 // 첫 방문 페이지는 기록에 남기고, 이후 탭 이동마다 브라우저 방문 기록을 쌓습니다.
 // 따라서 Threads의 시스템 뒤로가기도 앱 밖으로 나가지 않고 이전 탭으로 돌아갑니다.
@@ -2347,18 +2468,18 @@ function cpRecordTab(){
   if(CP_LAST_TAB === null){
     CP_LAST_TAB = state.tab;
     const initial = history.state && typeof history.state === "object" ? history.state : {};
-    history.replaceState({...initial, cpTab:state.tab, cpQ:state.q || "", cpDepth:0}, "", location.href);
+    try{history.replaceState({...initial,cpTab:state.tab,cpQ:state.q||"",cpDepth:0},"",location.href);}catch(_){}
   } else if(CP_RESTORING_TAB){
     CP_LAST_TAB = state.tab;
     CP_TAB_DEPTH = Math.max(0, Number(history.state?.cpDepth) || 0);
   } else if(CP_LAST_TAB !== state.tab){
     CP_LAST_TAB = state.tab;
     CP_TAB_DEPTH++;
-    history.pushState({cpTab:state.tab, cpQ:state.q || "", cpDepth:CP_TAB_DEPTH}, "", location.pathname + location.search);
+    try{history.pushState({cpBrowseId:cpNewBrowseEntry(),cpTab:state.tab,cpQ:state.q||"",cpDepth:CP_TAB_DEPTH},"",location.pathname+location.search);}catch(_){CP_TAB_DEPTH=Math.max(0,CP_TAB_DEPTH-1);}
   }
   cpUpdateBackButton();
 }
-function refresh(){ cpRecordTab(); renderTabs(); renderFilters(); render(); savedAlert();
+function refresh(){ if(cpQueuedFeedUpdate&&!cpApplyingFeedUpdates&&cpLastFilter!==JSON.stringify(state))cpFlushFeedUpdate();cpRecordTab(); renderTabs(); renderFilters(); render(); savedAlert();cpRememberBrowse();
   document.querySelectorAll("[data-cpnav]").forEach(b => {
     const active=b.dataset.cpnav===state.tab;
     if(active) b.setAttribute("aria-current","page");
@@ -2366,9 +2487,14 @@ function refresh(){ cpRecordTab(); renderTabs(); renderFilters(); render(); save
   });
 }
 
-document.addEventListener("click", e => {
+document.addEventListener("click", async e => {
   const t = e.target.closest("button");
   if(!t) return;
+  if(t.id==='cpRetryFeeds'){if(!CP_DATA_LOADING){CP_DATA_LOADING=true;render();load();}return;}
+  if(t.dataset.recordAction){
+    const action=t.dataset.recordAction;
+    if(action==='backup')cpDownloadBackup();else if(action==='import')$('cpBackupInput').click();else if(action==='archive')cpShowRecordArchive();else if(action==='recover')cpRecoverImport();return;
+  }
   if(t.id === "cpInternalBack"){
     if(CP_TAB_DEPTH > 0) history.back();
     else {state.tab="all";refresh();}
@@ -2383,10 +2509,10 @@ document.addEventListener("click", e => {
     if(a==="mine" && !hasPrefs()){state.tab="all";openPrefs();return;}
     refresh(); return;
   }
-  if(t.dataset.save){ toggleSave(t.dataset.save); renderTabs(); render(); savedAlert(); if(JV) refreshJobView(); }
+  if(t.dataset.save){ if(await toggleSave(t.dataset.save))cpRefreshRecords(); }
   else if(t.id === "jvBack"){ closeJob(false); }
   else if(t.id === "cpReport"){ cpExportReport(); }
-  else if(t.id === "cpBackup"){ cpDownloadBackup(); }
+  else if(t.id === "cpBackup" || t.id === "cpRawBackup"){ cpDownloadBackup(); }
   else if(t.id === "cpRestore"){ $("cpBackupInput").click(); }
   else if(t.id === "viewbtn"){ COMPACT = !COMPACT; try { localStorage.setItem("compact", COMPACT ? "1" : "0"); } catch(e) {} render(); }
   else if(t.id === "jvShare"){ shareJob(); }
@@ -2394,9 +2520,10 @@ document.addEventListener("click", e => {
     const id=t.dataset.markapplied, a=APPS[id];
     if(!a || a.st!=="plan") return;
     if(!confirm("지원서를 실제로 제출하셨나요? 제출 완료로 변경하면 마감 알림에서 제외됩니다.")) return;
-    a.st="applied"; a.upd=Date.now();
-    if(Array.isArray(a.ck)) a.ck.forEach(x=>{if(x.ph==="pre" || x.k==="submit") x.d=1;});
-    saveApps(); renderTabs(); render(); savedAlert();
+    const expected=JSON.stringify(a), next=JSON.parse(expected);
+    next.st="applied"; next.upd=Date.now();
+    if(Array.isArray(next.ck)) next.ck.forEach(x=>{if(x.ph==="pre" || x.k==="submit") x.d=1;});
+    if(!await cpStoreApp(id,next,expected))return;cpRefreshRecords();
     toast("지원 완료로 변경했습니다. '내 지원'에서 언제든 수정할 수 있어요.");
   }
   else if(t.dataset.track){ openTrack(t.dataset.track); }
@@ -2416,7 +2543,11 @@ document.addEventListener("click", e => {
     $("tCkNew").value = ""; $("tCk").innerHTML = ckListHTML(TDRAFT.ck, "data-tck", true);
   }
   else if(t.dataset.ckid){ ckToggle(t.dataset.ckid, +t.dataset.ck); }
-  else if(t.id === "tDel"){ if(confirm("이 지원 기록을 삭제할까요?")){ delete APPS[TID]; saveApps(); closeSheet(); renderTabs(); render(); savedAlert(); } }
+  else if(t.id === "tDel"){
+    if(!CP_TRACK_BUSY&&confirm('지원 상태·메모·체크리스트·일정을 삭제합니다. 저장 공고는 유지됩니다. 복구하려면 먼저 JSON 백업을 받아 주세요. 삭제할까요?')){
+      CP_TRACK_BUSY=true;try{if(await cpStoreApp(TID,null,TBASE)){closeSheet();cpRefreshRecords();}}finally{CP_TRACK_BUSY=false;}
+    }
+  }
   else if(t.dataset.tab){ if(["all","mine","saved","track"].includes(t.dataset.tab))cpResetBrowseFilters(); state.tab = t.dataset.tab; state.certQ = null; refresh(); }
   else if(t.dataset.cat !== undefined){ state.cat = t.dataset.cat || null; refresh(); }
   else if(t.dataset.region !== undefined){ state.region = t.dataset.region; refresh(); }
@@ -2447,7 +2578,9 @@ document.addEventListener("click", e => {
     SDRAFT = emptySpec(); openSpec(SDRAFT);
   }
   else if(t.id === "specSave"){
-    SPEC = hasSpecObj(SDRAFT) ? SDRAFT : null; saveSpec(); SPEC_CACHE.clear(); closeSheet();
+    if(CP_SPEC_BUSY)return;CP_SPEC_BUSY=true;
+    try{if(!await saveSpec(hasSpecObj(SDRAFT)?JSON.parse(JSON.stringify(SDRAFT)):null,SBASE))return;}finally{CP_SPEC_BUSY=false;}
+    SPEC_CACHE.clear(); closeSheet();
     state.tab = "spec"; state.specV = "all"; state.onlyNew = false;
     alioDetail().then(() => { refresh(); if(JV) refreshJobView(); });
     refresh(); window.scrollTo({top:0});
@@ -2474,7 +2607,11 @@ document.addEventListener("click", e => {
   else if(t.id === "toggle"){ cpToggleFilters(!$("panel").classList.contains("open")); }
   else if(t.id === "reset" || t.id === "empty-reset"){ cpResetBrowseFilters(); state.sort="due"; refresh(); }
 });
-$("q").addEventListener("input", e => { state.q = e.target.value; renderFilters(); render(); });
+let cpComposing=false;
+$('q').addEventListener('compositionstart',()=>{cpComposing=true;cpQueryTouched=true;});
+function cpSearchInput(e){cpQueryTouched=true;if(cpComposing||e.isComposing)return;state.q=e.target.value;try{const url=new URL(location.href);if(url.searchParams.has('q')){url.searchParams.delete('q');history.replaceState(history.state,'',url.pathname+url.search+url.hash);}}catch(_){}cpFlushFeedUpdate();renderFilters();render();cpRememberBrowse();}
+$('q').addEventListener('compositionend',e=>{cpComposing=false;cpSearchInput(e);});
+$('q').addEventListener('input',cpSearchInput);
 $("tabs").addEventListener("scroll", fadeHint, {passive:true});
 window.addEventListener("resize", fadeHint);
 
@@ -2487,7 +2624,7 @@ const IS_IOS = /iPhone|iPad|iPod/.test(UA) || (navigator.platform === "MacIntel"
 const IS_ANDROID = /Android/.test(UA);
 const INAPP = /KAKAOTALK|Instagram|Barcelona|Threads|FBAN|FBAV|NAVER\(inapp|Line\/|everytimeApp|DaumApps/i.test(UA);
 let installEvt = null;
-if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(() => {}); }
+if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).catch(() => {}); }
 window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; });
 window.addEventListener("appinstalled", () => { $("addbtn").hidden = true; $("addHint").hidden = true; });
 
@@ -2514,7 +2651,7 @@ window.addEventListener("popstate",()=>{
 /* Web push is opt-in. Public OneSignal App ID is set in push-config.js;
    private REST API keys must never be exposed in client-side code. */
 let cpPushSdkReady = false;
-let cpPushInitPromise = null;
+let cpPushInitPromise = null, cpPushAction=null, cpPushGeneration=0;
 function cpPushStatus(){
   const id = window.CP_ONESIGNAL_APP_ID;
   if(!id || !/^[0-9a-f-]{36}$/i.test(id)) return "setup";
@@ -2563,7 +2700,7 @@ async function cpSyncPushPreferences(){
       return true;
     }
   }catch(e){
-    console.warn("Push preference sync deferred",e);
+    console.warn("Push preference sync deferred");
   }
   return false;
 }
@@ -2574,9 +2711,11 @@ async function cpInitPush(){
   if(cpPushSdkReady) return;
   if(cpPushInitPromise) return cpPushInitPromise;
   if(cpPushStatus() !== "ready") throw Error("웹푸시 설정이 완료되지 않았습니다.");
+  const generation=++cpPushGeneration;
   cpPushInitPromise = cpPushWithTimeout(new Promise((resolve,reject)=>{
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     window.OneSignalDeferred.push(async function(sdk){
+      if(generation!==cpPushGeneration)return;
       try {
         try {
           await sdk.init({
@@ -2587,6 +2726,7 @@ async function cpInitPush(){
         } catch(e){
           if(!/already initialized/i.test(String(e && e.message || e))) throw e;
         }
+        if(generation!==cpPushGeneration)return;
         if(!sdk.User || !sdk.User.PushSubscription) throw Error("웹푸시 SDK가 준비되지 않았습니다.");
         sdk.User.PushSubscription.addEventListener("change",()=>cpRenderPushButtons());
         cpPushSdkReady=true;
@@ -2602,11 +2742,11 @@ async function cpInitPush(){
     }
   }),15000,"SDK 연결");
   try { await cpPushInitPromise; }
-  catch(e){cpPushInitPromise=null;throw e;}
+  catch(e){cpPushGeneration++;cpPushInitPromise=null;document.querySelector('script[data-cp-onesignal]')?.remove();throw e;}
 }
 function cpPushRegistered(){
   const sub=window.OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
-  return !!(cpPushSdkReady && sub && sub.optedIn && sub.id && sub.token);
+  return !!(cpPushSdkReady && typeof Notification!=="undefined" && Notification.permission==="granted" && sub && sub.optedIn && sub.id && sub.token);
 }
 async function cpWaitPushState(test,label){
   const until=Date.now()+12000;
@@ -2616,6 +2756,7 @@ async function cpWaitPushState(test,label){
   }
 }
 async function cpSubscribePush(){
+  if(cpPushAction)return;cpPushAction="subscribe";
   const btn=$("cpPushSubscribe"), status=$("cpPushMessage");
   if(btn){btn.disabled=true;btn.textContent="⏳ 연결 확인 중…";}
   if(status)status.textContent="OneSignal 연결과 브라우저 권한을 확인하고 있습니다.";
@@ -2630,11 +2771,11 @@ async function cpSubscribePush(){
     await cpSyncPushPreferences();
     if(btn){btn.textContent="✓ 웹푸시 구독 활성화";btn.disabled=true;}
     cpRenderPushButtons();
-    if(status)status.textContent="이 기기의 웹푸시 구독이 활성화되었습니다. 다른 휴대폰·PC에서는 별도로 구독해야 합니다. 자동 발송은 아직 준비 중입니다.";
+    if(status)status.textContent="이 기기의 웹푸시 구독이 활성화되었습니다. 다른 휴대폰·PC에서는 별도로 구독해야 합니다. 맞춤 조건과 새 공고에 따라 발송 대상이 결정됩니다. 실제 수신 여부는 별도로 확인해 주세요.";
   } catch(e){
     if(btn){btn.disabled=false;btn.textContent="🔔 다시 연결하기";}
     if(status)status.textContent="연결 실패: "+String(e.message||e).slice(0,180);
-  }
+  }finally{cpPushAction=null;cpRenderPushButtons();}
 }
 async function cpCopyPushSubscriptionId(){
   const status=$("cpPushMessage");
@@ -2643,12 +2784,12 @@ async function cpCopyPushSubscriptionId(){
     const sub=OneSignal.User.PushSubscription;
     const id=cpPushRegistered() && sub.id;
     if(!id) throw Error("먼저 웹푸시를 구독한 뒤 다시 시도해 주세요.");
-    if(status)status.textContent="테스트용 구독 ID: "+id;
+
     try{
       await navigator.clipboard.writeText(id);
-      if(status)status.textContent="복사 완료 · 테스트용 구독 ID: "+id;
+      if(status)status.textContent="구독 ID를 복사했습니다. 신뢰할 수 있는 지원 창구에만 전달하세요.";
     }catch(_){
-      if(status)status.textContent="자동 복사가 차단되었습니다. 아래 ID를 길게 눌러 복사해 주세요: "+id;
+      if(status){status.textContent='자동 복사가 차단되었습니다. 아래 선택 칸을 길게 눌러 복사하세요.';const field=document.createElement('input');field.readOnly=true;field.value=id;field.setAttribute('aria-label','직접 복사할 구독 ID');status.append(field);field.focus();field.select();}
     }
   }catch(e){
     cpRenderPushButtons();
@@ -2656,6 +2797,7 @@ async function cpCopyPushSubscriptionId(){
   }
 }
 async function cpUnsubscribePush(){
+  if(cpPushAction)return;cpPushAction="unsubscribe";
   const btn=$("cpPushUnsubscribe"), status=$("cpPushMessage");
   if(btn){btn.disabled=true;btn.textContent="해지 처리 중…";}
   try{
@@ -2667,15 +2809,25 @@ async function cpUnsubscribePush(){
   }catch(e){
     cpRenderPushButtons();
     if(status)status.textContent="해지 실패: "+String(e.message||e).slice(0,180);
-  }
+  }finally{cpPushAction=null;cpRenderPushButtons();}
 }
 function cpRenderPushButtons(){
   const on=cpPushRegistered();
   const subscribe=$("cpPushSubscribe"), unsubscribe=$("cpPushUnsubscribe");
-  if(subscribe){subscribe.style.display=on?"none":"block";subscribe.hidden=on;subscribe.disabled=false;subscribe.textContent="🔔 웹푸시 알림 허용하기";}
-  if(unsubscribe){unsubscribe.style.display=on?"block":"none";unsubscribe.hidden=!on;unsubscribe.disabled=false;unsubscribe.textContent="알림 구독 해지";}
-  const status=$("cpPushMessage");
-  if(status && (!status.textContent || /^(✓ 이 기기에서 웹푸시 구독 중|이 기기에서는 아직 웹푸시를 구독하지 않았습니다)/.test(status.textContent))) status.textContent=on?"✓ 이 기기에서 웹푸시 구독 중입니다. 아래에서 해지할 수 있습니다.":"이 기기에서는 아직 웹푸시를 구독하지 않았습니다.";
+  if(subscribe){subscribe.style.display=on?"none":"block";subscribe.hidden=on;subscribe.disabled=!!cpPushAction;subscribe.textContent=cpPushAction?"⏳ 처리 중…":"🔔 웹푸시 알림 허용하기";}
+  if(unsubscribe){unsubscribe.style.display=on?"block":"none";unsubscribe.hidden=!on;unsubscribe.disabled=!!cpPushAction;unsubscribe.textContent=cpPushAction?"해지 처리 중…":"알림 구독 해지";}
+  const status=$('cpPushMessage');
+  if(status && !cpPushAction){
+    const permission=typeof Notification==='undefined'?'unsupported':Notification.permission;
+    const marker=permission+':'+on;
+    const changed=status.dataset.registration!==undefined&&status.dataset.registration!==marker;
+    status.dataset.registration=marker;
+    if(changed || !status.textContent){
+      status.textContent=on?'✓ 이 기기에서 웹푸시 구독 중입니다. 아래에서 해지할 수 있습니다.':
+        permission==='denied'?'브라우저 알림이 차단돼 있어 수신할 수 없습니다. 사이트 설정에서 차단을 해제한 뒤 다시 연결해 주세요.':
+        permission==='granted'?'브라우저 권한은 허용됐지만 서버 구독은 등록되지 않았습니다. 다시 연결해 주세요.':'아직 알림 권한을 요청하거나 웹푸시를 구독하지 않았습니다.';
+    }
+  }
 }
 async function cpRefreshPushPanel(){
   if(cpPushStatus()!=="ready")return;
@@ -2696,7 +2848,7 @@ function cpPushSetupPanel(){
     +'<button type="button" id="cpPushUnsubscribe" hidden style="display:none;width:100%;margin-top:8px;padding:12px;border:1px solid #64748b;border-radius:10px;background:#fff;color:#334155;font-weight:700;cursor:pointer">알림 구독 해지</button>'
     +'<button type="button" id="cpPushCopyId" style="width:100%;margin-top:8px;padding:10px;border:1px solid #64748b;border-radius:10px;background:#fff;color:#334155;cursor:pointer">테스트용 구독 ID 복사</button>'
     +'<p id="cpPushMessage" role="status" aria-live="polite" style="font-size:13px;line-height:1.5;margin:9px 0"></p>'
-    +'<p style="font-size:12px;line-height:1.5;margin:6px 0">신규 공고 및 마감 D-1 자동 발송은 별도 서버 연동 후 제공됩니다.</p></div>';
+    +'<p style="font-size:12px;line-height:1.5;margin:6px 0">기기 구독 상태와 실제 알림 수신은 별개입니다. 맞춤 조건에 맞는 새 공고가 있어야 발송 대상으로 선정됩니다.</p></div>';
 }
 
 
@@ -2818,6 +2970,8 @@ function savedAlert(){
 $("cpAlwaysAlert").addEventListener("click", () => openPrefs());
 
 cpSetupHome();
+cpSetupBrowse();
+refresh();
 load();
 setInterval(() => POSTS.length && render(), 60000);
 </script>
