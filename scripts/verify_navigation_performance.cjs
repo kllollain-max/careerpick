@@ -1,0 +1,88 @@
+/* Isolated Chromium profiles; all push operations use a synthetic SDK, never a provider. */
+const fs=require('node:fs'),assert=require('node:assert/strict'),os=require('node:os'),path=require('node:path');
+const {chromium}=require('playwright');
+const BASE=process.env.CP_AUDIT_BASE||'http://127.0.0.1:8000/careerpick/';
+const LIVE='https://kllollain-max.github.io/careerpick/';
+const OUT='navigation-performance-output';fs.mkdirSync(OUT,{recursive:true});
+const rows=Array.from({length:150},(_,i)=>({id:'a'+(910000+i),type:'j',alio:true,verificationStatus:'verified',org:'강원시험기관',title:`${i%2?'간호':'연구'}직 시험 공고 ${i}`,region:'강원',emp:['정규직'],edu:['학력무관'],n:'2',pub:new Date(Date.UTC(2026,10,1)-i*60000).toISOString(),due:'2099-12-31T23:59:00+09:00',url:'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx='+(910000+i)}));
+const feed={updated:new Date().toISOString(),posts:rows};
+const report={checked_at_kst:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),browser:'Chromium desktop, isolated contexts; mobile viewport simulation',actual_devices:false,push_delivery:false,public:[],candidate:[]};
+const sdk=`(()=>{const sub={optedIn:false,id:null,token:null,addEventListener(){},async optIn(){window.fakeOptIns=(window.fakeOptIns||0)+1;await new Promise(r=>setTimeout(r,120));Object.defineProperty(Notification,'permission',{configurable:true,get:()=> 'granted'});sub.optedIn=true;sub.id='synthetic-subscription';sub.token='synthetic-token';},async optOut(){window.fakeOptOuts=(window.fakeOptOuts||0)+1;sub.optedIn=false;sub.id=null;sub.token=null;}};const api={init:async()=>{},User:{PushSubscription:sub,addTags:async()=>{},getTags:async()=>({}),removeTags:async()=>{}}};window.OneSignal=api;for(const callback of window.OneSignalDeferred||[])callback(api);window.OneSignalDeferred={push:callback=>callback(api)};})();`;
+async function context(browser,{width=390,fixtures=true,base=BASE,latency="normal",seed={},deny=false,sdkFailFirst=false,slow=false,failFeeds=false}={}){
+ const ctx=await browser.newContext({viewport:{width,height:900},locale:'ko-KR',timezoneId:'Asia/Seoul',serviceWorkers:'block'});ctx.setDefaultTimeout(7000);
+ let sdkLoads=0;
+ await ctx.addInitScript(({seed,deny})=>{
+  if(!sessionStorage.getItem('cp-audit-seeded')){for(const [k,v]of Object.entries(seed))localStorage.setItem(k,v);sessionStorage.setItem('cp-audit-seeded','1');}
+  if(deny){const put=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(['saved','apps','prefs'].includes(k))throw new DOMException('synthetic quota','QuotaExceededError');return put.call(this,k,v);};}
+ },{seed,deny});
+ await ctx.route('**/*',async route=>{
+  const u=new URL(route.request().url());
+  if(u.hostname==='cdn.onesignal.com'){sdkLoads++;if(sdkFailFirst&&sdkLoads===1)return route.abort();return route.fulfill({contentType:'application/javascript',body:sdk});}
+  const origin=new URL(fixtures?base:LIVE).origin;
+  if(u.hostname==='job.alio.go.kr')return route.fulfill({contentType:'text/html',body:'<h1>Synthetic official-link target</h1>'});
+  if(u.origin!==origin)return route.abort();
+  if(!fixtures)return route.continue();
+  const file=u.pathname.split('/').pop();
+  const delays=latency==='slow'?{'posts.json':250,'alio.json':350,'gojobs.json':1200,'monitor.json':1500,'enterprise_jobs.json':1800,'work24-policy.json':1800,'alio-detail.json':400}:{'posts.json':40,'alio.json':80,'gojobs.json':160,'monitor.json':200,'enterprise_jobs.json':300,'work24-policy.json':300,'alio-detail.json':80};
+  if(fixtures&&delays[file])await new Promise(r=>setTimeout(r,delays[file]));
+  if(slow&&file==='alio.json')await new Promise(r=>setTimeout(r,650));
+  if(failFeeds&&['posts.json','alio.json','monitor.json','gojobs.json','enterprise_jobs.json'].includes(file))return route.fulfill({status:503,body:'synthetic failure'});
+  const data={'posts.json':{updated:feed.updated,posts:[]},'alio.json':feed,'gojobs.json':{updated:feed.updated,posts:[]},'monitor.json':{updated:feed.updated,posts:[]},'enterprise_jobs.json':{updated_at:feed.updated,jobs:[]},'work24-policy.json':{approved:false},'alio-detail.json':Object.fromEntries(rows.map(p=>[p.id,{aplyQlfcCn:'시험용 지원 자격 본문입니다. 실제 공고가 아닙니다.',scrnprcdrMthdExpln:'서류 심사와 면접 전형을 진행합니다.'}])),'qnet.json':{rows:[]},'operations-status.json':{}};
+  if(file in data)return route.fulfill({contentType:'application/json',body:JSON.stringify(data[file])});
+  return route.continue();
+ });
+ await ctx.addInitScript(()=>{window.cpPerf={first:null,long:[],cls:0};new MutationObserver(()=>{if(window.cpPerf.first===null&&document.querySelector('#list [data-open="a910000"]'))window.cpPerf.first=performance.now();}).observe(document,{subtree:true,childList:true});try{new PerformanceObserver(list=>{for(const e of list.getEntries())window.cpPerf.long.push(e.duration);}).observe({type:'longtask',buffered:true});new PerformanceObserver(list=>{for(const e of list.getEntries())if(!e.hadRecentInput)window.cpPerf.cls+=e.value;}).observe({type:'layout-shift',buffered:true});}catch(_){}});
+ return {ctx,sdkLoads:()=>sdkLoads};
+}
+async function ready(page,url=BASE){await page.goto(url,{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.querySelector('#cpSectors')?.textContent.match(/전체공고[1-9]/));await page.locator('#list [data-save]').first().waitFor();}
+async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].push({name,result:'pass'});console.log('PASS '+bucket+' '+name);}catch(e){report[bucket].push({name,result:'fail',error:String(e.message).slice(0,320)});console.log('FAIL '+bucket+' '+name+' '+String(e.message).slice(0,320));}finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));}}
+
+const BEFORE='http://127.0.0.1:8002/careerpick/';
+const results={public:[],checked_at_kst:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),environment:'Linux Chromium; deterministic route delays, synthetic 150 notices; no CPU throttling; viewport simulation',repetitions:3,actual_devices:false,metrics:[],navigation:[],baseline:[]};
+const out=()=>fs.writeFileSync(OUT+'/report.json',JSON.stringify(results,null,2));
+async function readyNav(p,base){await p.goto(base,{waitUntil:'domcontentloaded'});await p.locator('#list [data-open="a910000"]').first().waitFor();}
+async function settle(p){await p.waitForFunction(()=>!CP_DATA_LOADING);if(await p.locator('#cpApplyFeedUpdate').isVisible())await p.locator('#cpApplyFeedUpdate').click();}
+async function frame(p){await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));}
+async function time(fn){const start=performance.now();await fn();return performance.now()-start;}
+async function range(p){await p.getByRole('searchbox',{name:'검색',exact:true}).fill('');await p.locator('#cpLoadMore').click();await p.locator('#cpLoadMore').click();assert.equal(await p.locator('#list .job').count(),90);}
+async function anchor(p,id='a910075'){const a=p.locator(`#list a[data-open="${id}"]`).first();await a.scrollIntoViewIfNeeded();return {id,top:await a.evaluate(e=>e.closest('li').getBoundingClientRect().top),y:await p.evaluate(()=>scrollY)};}
+async function benchmark(browser,base,side,latency,visit,repeat,ctx){
+ const p=await ctx.newPage();await readyNav(p,base);const first=await p.evaluate(()=>cpPerf.first);const interactive=await p.evaluate(()=>({t:performance.now(),q:!document.querySelector('#q').disabled,save:!document.querySelector('#list [data-save]').disabled}));
+ await settle(p);const query=[];for(const q of ['연구','간호','연구'])query.push(await time(()=>p.getByRole('searchbox',{name:'검색',exact:true}).fill(q)));assert.equal(await p.locator('#list .job').count(),30);assert((await p.locator('#summary').innerText()).includes('75'));
+ await range(p);const before=await anchor(p);const detail=await time(async()=>{await p.locator(`#list a[data-open="${before.id}"]`).first().click();await p.locator('#jvBody .jv-sec h3').first().waitFor();});
+ const back=await time(async()=>{await p.goBack();await p.locator('#jobview').waitFor({state:'hidden'});await frame(p);});
+ const after=await p.locator(`#list a[data-open="${before.id}"]`).first().evaluate(e=>e.closest('li').getBoundingClientRect().top);
+ const stats=await p.evaluate(()=>({cls:cpPerf.cls,long_tasks:cpPerf.long.length,max_long_ms:Math.max(0,...cpPerf.long),requests:performance.getEntriesByType('resource').length,transfer_bytes:performance.getEntriesByType('resource').reduce((n,r)=>n+r.transferSize,0),detail_requests:performance.getEntriesByType('resource').filter(r=>r.name.includes('alio-detail.json')).length}));
+ results.metrics.push({side,latency,visit,repeat,first_ms:first,interactive_ms:interactive.t,query_ms:query,detail_ms:detail,back_ms:back,anchor_delta_px:after-before.top,...stats});out();await p.close();
+}
+async function navCheck(browser,width){const {ctx}=await context(browser,{width});const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
+ try{
+  await readyNav(p,BASE);await settle(p);
+  const search=p.getByRole('searchbox',{name:'검색',exact:true});await search.fill('시험');
+  await p.locator('#cpOrder').selectOption('new');if(width<=700)await p.locator('#toggle').click();await p.locator('#cpRegion').selectOption('강원');await p.locator('#cpEmployment').selectOption('정규직');if(width<=700)await p.locator('#cpFilterDone').click();
+  await p.locator('#cpLoadMore').click();await p.locator('#cpLoadMore').click();const before=await anchor(p);const cond=await p.evaluate(()=>JSON.stringify(state));
+  await p.locator(`#list a[data-open="${before.id}"]`).first().click();await p.locator('#jvBody .jv-sec h3').first().waitFor();await p.goBack();await p.locator('#jobview').waitFor({state:'hidden'});await frame(p);
+  assert.equal(await p.evaluate(()=>JSON.stringify(state)),cond);assert.equal(await p.locator('#list .job').count(),90);let pos=await p.locator(`#list a[data-open="${before.id}"]`).first().evaluate(e=>e.closest('li').getBoundingClientRect().top);assert(Math.abs(pos-before.top)<=3,`anchor changed ${pos-before.top}`);assert.equal(await p.evaluate(()=>document.activeElement.dataset.open),before.id);
+  await p.goForward();await p.locator('#jobview').waitFor({state:'visible'});await p.reload();await p.locator('#jvBody .jv-sec h3').first().waitFor();await p.locator('#jvBack').click();await p.locator('#jobview').waitFor({state:'hidden'});await frame(p);assert.equal(await p.locator('#list .job').count(),90);assert.equal(await p.evaluate(()=>JSON.stringify(state)),cond);
+  pos=await p.locator(`#list a[data-open="${before.id}"]`).first().evaluate(e=>e.closest('li').getBoundingClientRect().top);assert(Math.abs(pos-before.top)<=3,`reload anchor ${pos-before.top}`);
+  // External destination is fulfilled locally; no real provider or Naver request.
+  const popupEvent=p.waitForEvent('popup');await p.locator(`#list a[data-open="${before.id}"]`).first().locator('xpath=ancestor::li').getByRole('link',{name:'공식 채용공고 ↗',exact:true}).click();const popup=await popupEvent;await popup.waitForLoadState();assert((await popup.locator('h1').innerText()).includes('Synthetic'));await popup.close();assert.equal(await p.evaluate(()=>JSON.stringify(state)),cond);
+  await p.locator(`#list a[data-open="${before.id}"]`).first().click();await p.evaluate(id=>{POSTS=POSTS.filter(x=>x.id!==id);},before.id);await p.goBack();await frame(p);assert.equal(await p.locator('#jobview').isVisible(),false);assert.equal(await p.locator(`#list a[data-open="${before.id}"]`).count(),0);
+  await p.setViewportSize({width:width<=700?700:390,height:650});await p.addStyleTag({content:'html{font-size:200% !important}'});await frame(p);assert(!await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth));
+  assert.deepEqual(errors,[]);results.navigation.push({width,status:'pass',anchor_delta:pos-before.top});
+ }catch(e){results.navigation.push({width,status:'fail',error:e.message});}finally{await ctx.close();out();}
+}
+(async()=>{const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});try{
+ for(const side of ['before','after'])for(const latency of ['normal','slow'])for(let repeat=1;repeat<=3;repeat++){
+  const base=side==='before'?BEFORE:BASE;const {ctx}=await context(browser,{base,latency});for(const visit of ['first','revisit'])await benchmark(browser,base,side,latency,visit,repeat,ctx);await ctx.close();
+ }
+ for(const width of [320,360,390,430,1440])await navCheck(browser,width);
+ // Reproduce pre-change range loss after reloading the detail history entry.
+ {const {ctx}=await context(browser,{base:BEFORE}),p=await ctx.newPage();await readyNav(p,BEFORE);await settle(p);await range(p);await anchor(p);await p.locator('#list a[data-open="a910075"]').first().click();await p.reload();await p.locator('#jobview').waitFor({state:'visible'});await p.goBack();await frame(p);results.baseline.push({name:'detail reload then back retains 90 cards',displayed:await p.locator('#list .job').count(),expected:90});await ctx.close();}
+ {const {ctx}=await context(browser),p=await ctx.newPage();await readyNav(p,BASE);await settle(p);await p.evaluate(()=>{sessionStorage.setItem('careerpick-browse-v1','{');history.replaceState(null,'',location.href);});await p.reload();await readyNav(p,BASE);await settle(p);assert.equal(await p.getByRole('searchbox',{name:'검색',exact:true}).inputValue(),'');results.navigation.push({name:'corrupt ephemeral state uses defaults',status:'pass'});await ctx.close();}
+ {const {ctx}=await context(browser),p=await ctx.newPage();await ctx.addInitScript(()=>{const put=Storage.prototype.setItem,get=Storage.prototype.getItem;Storage.prototype.setItem=function(k,v){if(k==='careerpick-browse-v1')throw Error('synthetic session denial');return put.call(this,k,v)};Storage.prototype.getItem=function(k){if(k==='careerpick-browse-v1')throw Error('synthetic session denial');return get.call(this,k)};});await readyNav(p,BASE);await settle(p);await range(p);await anchor(p);await p.locator('#list a[data-open="a910075"]').first().click();await p.goBack();await frame(p);assert.equal(await p.locator('#list .job').count(),90);results.navigation.push({name:'session access denial preserves in-memory history navigation',status:'pass'});await ctx.close();}
+ for(let repeat=1;repeat<=3;repeat++){const {ctx}=await context(browser,{fixtures:false});for(const visit of ['first','revisit']){const p=await ctx.newPage();try{const start=performance.now();await p.goto(LIVE,{waitUntil:'domcontentloaded'});await p.locator('#list [data-open]').first().waitFor({timeout:20000});results.public.push({repeat,visit,first_ms:performance.now()-start,method:'automation navigation to real client-rendered internal card; normal CI network, isolated profile'});}catch(e){results.public.push({repeat,visit,error:e.message});}await p.close();out();}await ctx.close();}
+ const med=a=>{const v=[...a].sort((x,y)=>x-y);return v[Math.floor(v.length/2)];};results.medians=[];
+ for(const side of ['before','after'])for(const latency of ['normal','slow'])for(const visit of ['first','revisit']){const r=results.metrics.filter(x=>x.side===side&&x.latency===latency&&x.visit===visit);results.medians.push({side,latency,visit,first_ms:med(r.map(x=>x.first_ms)),interactive_ms:med(r.map(x=>x.interactive_ms)),query_ms:med(r.flatMap(x=>x.query_ms)),detail_ms:med(r.map(x=>x.detail_ms)),back_ms:med(r.map(x=>x.back_ms)),cls:med(r.map(x=>x.cls)),requests:med(r.map(x=>x.requests)),transfer_bytes:med(r.map(x=>x.transfer_bytes)),max_long_ms:med(r.map(x=>x.max_long_ms)),detail_requests:med(r.map(x=>x.detail_requests))});}
+ console.log(JSON.stringify(results));if(results.navigation.some(x=>x.status==='fail'))process.exitCode=1;
+}finally{out();await browser.close();}})().catch(e=>{out();console.error(e);process.exit(1)});

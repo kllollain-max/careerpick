@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_civil_service_exams.cjs tests/test_record_store.cjs
+      - run: node --test tests/test_browse_state.cjs tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_civil_service_exams.cjs tests/test_record_store.cjs
       - name: Install Korean fonts for readable screenshot evidence
         run: |
           sudo apt-get update -qq
@@ -54,6 +54,18 @@ jobs:
           ln -s "$RUNNER_TEMP/cp-before/dist" "$RUNNER_TEMP/cp-before-host/careerpick"
           python -m http.server 8001 --directory "$RUNNER_TEMP/cp-before-host" > "$RUNNER_TEMP/cp-before-http.log" 2>&1 &
           node scripts/verify_mobile_readability.cjs
+      - name: Measure navigation performance against pre-change commit
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          git fetch origin 91d4db1eda391fccbad5af992ebd8015946fa598
+          mkdir -p "$RUNNER_TEMP/cp-nav-before-host"
+          git worktree add --detach "$RUNNER_TEMP/cp-nav-before" FETCH_HEAD
+          (cd "$RUNNER_TEMP/cp-nav-before" && python scripts/build_public_site.py)
+          ln -s "$RUNNER_TEMP/cp-nav-before/dist" "$RUNNER_TEMP/cp-nav-before-host/careerpick"
+          python -m http.server 8002 --directory "$RUNNER_TEMP/cp-nav-before-host" > "$RUNNER_TEMP/cp-nav-http.log" 2>&1 &
+          node scripts/verify_navigation_performance.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -62,5 +74,6 @@ jobs:
             core-audit-output/
             record-protection-output/report.json
             mobile-readability-output/
+            navigation-performance-output/
             build-report.json
           retention-days: 14

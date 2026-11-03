@@ -760,6 +760,7 @@ footer .src b{color:var(--ink)}
 <script src="record-migration.js"></script>
 <script src="record-store.js"></script>
 <script src="homepage-ux.js"></script>
+<script src="browse-state.js"></script>
 <script src="homepage-ui.js"></script>
 <script>
 // ── 설정 ──
@@ -817,7 +818,7 @@ function cpRenderFeedStatus(){
   const old = !valid || hours > 48;
   const failures = Object.values(DATA_HEALTH).some(v=>v === "error");
   el.dataset.state = failures || old ? "warn" : "ok";
-  el.textContent = `${failures || old ? "⚠️" : "✅"} 데이터 상태 · ${parts.join(" · ")} · 블로그 최근 갱신 ${valid ? stamp.toLocaleString("ko-KR",{timeZone:"Asia/Seoul",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}) : "확인 불가"}${old ? " · 48시간 이상 갱신 확인 필요" : ""}${CP_DEDUP_REMOVED ? ` · 중복 ${CP_DEDUP_REMOVED}건 정리` : ""} · 지원 전 원문 확인` + (CP_FEED_STAMPS.gojobs ? ` · 나라일터: 최근 14일 지방공무원 등록 목록 중 원문 검증 공고만 제공 · 자료 기준 ${new Date(CP_FEED_STAMPS.gojobs).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"})}` : "");
+  el.textContent = `${failures || old ? "⚠️" : "✅"} 데이터 상태 · ${parts.join(" · ")} · 블로그 최근 갱신 ${valid ? stamp.toLocaleString("ko-KR",{timeZone:"Asia/Seoul",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}) : "확인 불가"}${old ? " · 48시간 이상 갱신 확인 필요" : ""}${CP_DEDUP_REMOVED ? ` · 중복 ${CP_DEDUP_REMOVED}건 정리` : ""} · 지원 전 원문 확인` + (navigator.onLine===false ? " · 오프라인 보관 자료: 최신 접수 상태·외부 링크·알림은 연결 후 확인" : "") + (CP_FEED_STAMPS.alio ? ` · 잡알리오 자료 기준 ${new Date(CP_FEED_STAMPS.alio).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"})}` : "") + (CP_FEED_STAMPS.gojobs ? ` · 나라일터: 최근 14일 지방공무원 등록 목록 중 원문 검증 공고만 제공 · 자료 기준 ${new Date(CP_FEED_STAMPS.gojobs).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"})}` : "");
 }
 // 공식 문서로 동일성이 검증된 ALIO·기관 공고만 표시 계층에서 통합합니다.
 // 원본 ID·URL·확인 이력은 sourceRecords/sourceIds로 보존합니다.
@@ -903,24 +904,23 @@ async function loadMonitoredJobs(){
 }
 
 async function load(){
-  try{
-    POSTS = await cpReadFeed("posts.json","posts");
-    UPDATED = CP_FEED_STAMPS.posts;
-    DATA_HEALTH.posts = "ok";
-    CP_BLOG_SEARCH = POSTS.slice();
-  }catch(e){
-    DATA_HEALTH.posts = "error";
-    console.warn("posts.json 로딩 실패: HTML에 보관된 블로그 글을 표시합니다.", e);
-    POSTS=[]; CP_BLOG_SEARCH=[];
-    cpRenderFeedStatus();
-  }
+  POSTS=[];CP_BLOG_SEARCH=[];CP_SEARCH_TEXT=new WeakMap();
+  let published=false;
+  const publish=()=>{
+    cpDedupePosts();
+    if(!published&&POSTS.some(p=>p.type==='j')){published=true;initSeen();cpRenderFeedStatus();refresh();}
+  };
+  const blog=(async()=>{
+    try{const rows=await cpReadFeed('posts.json','posts');POSTS=POSTS.concat(rows);UPDATED=CP_FEED_STAMPS.posts;DATA_HEALTH.posts='ok';CP_BLOG_SEARCH=rows;}
+    catch(_){DATA_HEALTH.posts='error';}
+  })();
+  await Promise.all([blog,loadAlio(),loadGojobs(),loadMonitoredJobs(),cpLoadEnterprise(),cpLoadWork24()].map(task=>task.finally(publish)));
   initSeen();
-  await Promise.all([loadAlio(),loadGojobs(),loadMonitoredJobs(),cpLoadEnterprise(),cpLoadWork24()]);
   CP_DATA_LOADING=false;
   cpDedupePosts();
   cpRenderFeedStatus();
   const qp = new URLSearchParams(location.search).get("q");
-  { const tp = new URLSearchParams(location.search).get("tab"); if(tp === "spec" || tp === "cert") state.tab = tp; }
+  { const tp = new URLSearchParams(location.search).get("tab"); if(!CP_URL_APPLIED&&(tp === "spec" || tp === "cert")) state.tab = tp; }
   if(qp&&!CP_URL_APPLIED&&!cpQueryTouched){ state.q = qp; state.tab = "all"; $("q").value = qp; }
   CP_URL_APPLIED=true;
   const jm = location.hash.match(/^#job=(.+)$/);
@@ -932,13 +932,14 @@ async function load(){
   const dateText = k ? `${k.getUTCMonth()+1}.${k.getUTCDate()} ${pad(k.getUTCHours())}:${pad(k.getUTCMinutes())}` : "확인 불가";
   $("updated").textContent = "공공기관·공무직·기업 채용을 한눈에";
   updateDataHealth(validUpdate ? updateDate : null);
-  refresh();
-  // Feed errors are shown as errors rather than a fabricated empty search.
-  alioDetail().then(() => {
+  const completePosts=POSTS;
+  if(cpFeedEngaged&&!location.hash.startsWith("#job=")&&CP_LAST_VISIBLE_POSTS.length)POSTS=CP_LAST_VISIBLE_POSTS;
+  cpOfferFeedUpdate(()=>{POSTS=completePosts;refresh();});
+  // Late enrichment is applied explicitly while the reader is browsing.
+  alioDetail().then(() => {cpOfferFeedUpdate(()=>{
     for(const p of POSTS){const det=p.alio && ALIO_DETAIL?.[p.id];if(det)Object.assign(p,CPHome.detailFields(p,det));}
-    renderTabs(); renderFilters(); render(); cpRenderFeedStatus();
-    // Feed errors are shown as errors rather than a fabricated empty search.
-  });
+    CP_SEARCH_TEXT=new WeakMap();renderTabs();renderFilters();render();cpRenderFeedStatus();
+  });});
   loadQnet().then(q => { if(q){ renderTabs(); if(state.tab === "cert") render(); } });
   if(COUPANG) try{
     const a = await fetch("ads.json?t=" + Date.now(), {cache:"no-store"});
@@ -1264,7 +1265,8 @@ function cpSavedId(p){return [p.id,...(p.sourceIds||[])].find(id=>SAVED.has(id))
 function cpApplicationId(p){return [p.id,...(p.sourceIds||[])].find(id=>APPS[id]) || p.id;}
 const inTab = p => (state.tab === "all" ? p.type === "j" : false) || (state.tab === "saved" ? SAVED.has(cpSavedId(p)) : state.tab === "mine" ? matchPrefs(p) : p.type === state.tab);
 const isNew = (p, now) => p.alio ? now - p.pub < 36*3600e3 : SEEN_BASE ? !SEEN_BASE.has(p.id) : now - p.pub < 24*3600e3;
-const haystack = p => [p.title, p.desc, p.cat, p.org, p.region, ...(p.emp||[]), ...(p.edu||[]), ...(p.exam||[])].join(" ").toLowerCase();
+let CP_SEARCH_TEXT=new WeakMap();
+const haystack = p => {if(!CP_SEARCH_TEXT.has(p))CP_SEARCH_TEXT.set(p,[p.title,p.desc,p.cat,p.org,p.region,...(p.emp||[]),...(p.edu||[]),...(p.exam||[])].join(" ").toLowerCase());return CP_SEARCH_TEXT.get(p);};
 // 지역은 공고의 근무지역 필드만 기준으로 판정합니다. 미기재 공고는 지역 선택 시 제외됩니다.
 function cpRegionMatches(p, region){
   if(!region) return true;
@@ -1994,7 +1996,7 @@ async function saveTrack(){
   }finally{CP_TRACK_BUSY=false;}
 }
 // ── 공식 공고 상세 화면 (잡알리오) ──
-let ALIO_DETAIL = null, JV = null, JV_PUSHED = false;
+let ALIO_DETAIL = null, ALIO_DETAIL_PENDING = null, JV = null, JV_PUSHED = false;
 const JV_SUMMARY = [
   ["recrutSeNm","채용 구분"], ["hireTypeNmLst","고용 형태"], ["recrutNope","모집 인원"], ["workRgnNmLst","근무 지역"],
   ["acbgCondNmLst","학력 조건"], ["ncsCdNmLst","직무 분야"], ["replmprYn","대체인력 채용"]
@@ -2011,21 +2013,26 @@ function plainText(s){
 }
 const ymdText = s => { const m = String(s || "").match(/(\d{4})-?(\d{2})-?(\d{2})/); if(!m) return ""; const w = new Date(Date.UTC(+m[1], +m[2]-1, +m[3])).getUTCDay(); return `${+m[2]}.${+m[3]}(${WD[w]})`; };
 async function alioDetail(){
-  if(ALIO_DETAIL) return ALIO_DETAIL;
-  try {
-    const data=await cpFetchJson('alio-detail.json?t='+encodeURIComponent(UPDATED||Date.now()));
-    if(!data||typeof data!=='object'||Array.isArray(data))throw Error('detail_schema');
-    ALIO_DETAIL=data;DATA_HEALTH.detail='ok';
-  }catch(_){ALIO_DETAIL=null;DATA_HEALTH.detail='error';}
-  updateDataHealth();
-  return ALIO_DETAIL||{};
+  if(ALIO_DETAIL)return ALIO_DETAIL;
+  if(ALIO_DETAIL_PENDING)return ALIO_DETAIL_PENDING;
+  ALIO_DETAIL_PENDING=(async()=>{
+    try{const data=await cpFetchJson('alio-detail.json?t='+encodeURIComponent(UPDATED||Date.now()));
+      if(!data||typeof data!=='object'||Array.isArray(data))throw Error('detail_schema');
+      ALIO_DETAIL=data;DATA_HEALTH.detail='ok';
+    }catch(_){ALIO_DETAIL=null;DATA_HEALTH.detail='error';}
+    finally{ALIO_DETAIL_PENDING=null;}
+    updateDataHealth();return ALIO_DETAIL||{};
+  })();
+  return ALIO_DETAIL_PENDING;
 }
 
 async function openJob(id, push = true){
   const p = POSTS.find(x => x.id === id || x.sourceIds?.includes(id));
   if(!p) return;
   id=p.id;
+  cpSaveBrowse(id);
   JV = id;
+  if(!push)JV_PUSHED=!!history.state?.job;
   if(push && location.hash !== "#job=" + id){ history.replaceState({...history.state,cpBrowse:{...state},cpScroll:scrollY},"",location.href); history.pushState({job:id}, "", "#job=" + id); JV_PUSHED = true; }
   $("jobview").hidden = false; cpSyncDialogState(); document.body.style.overflow = "hidden";
   $("jvBody").innerHTML = jobViewHTML(p, null);
@@ -2202,6 +2209,7 @@ window.addEventListener("popstate", (event) => {
   const m = location.hash.match(/^#job=(.+)$/);
   if(m){ openJob(decodeURIComponent(m[1]), false); return; }
   closeJob(true);
+  if(cpRestoreBrowse(event.state?.cpNav))return;
   // 브라우저/스레드 뒤로가기를 사이트 내부 탭 이동에 연결합니다.
   if(event.state && event.state.cpTab){
     CP_RESTORING_TAB = true;
@@ -2352,7 +2360,9 @@ async function cpRecoverImport(){
   catch(error){alert(error.message);}finally{CP_IMPORT_BUSY=false;}
 }
 
+let CP_LAST_VISIBLE_POSTS=[];
 function render(){
+  const cpAnchorBefore=cpLastFilter===JSON.stringify(state)&&scrollY>0&&!cpRestoringBrowse?cpBrowseAnchor():null;
   cpCheckVisibleLimit();
   updateDataHealth();
   cpRenderDeadlineTools();
@@ -2368,7 +2378,8 @@ function render(){
   const q = state.q.trim().toLowerCase();
   // Search the original blog feed as well as the merged feed. This prevents
   // a blog article from disappearing if a duplicate official notice replaces it.
-  const searchPool = q ? [...POSTS, ...CP_BLOG_SEARCH.filter(p => !POSTS.some(x => x.id === p.id))] : POSTS;
+  const postIds=q?new Set(POSTS.map(p=>p.id)):null;
+  const searchPool = q ? [...POSTS, ...CP_BLOG_SEARCH.filter(p => !postIds.has(p.id))] : POSTS;
   let rows = searchPool.filter(p => inTab(p) && (!state.cat || p.cat === state.cat) && CPHome.matches(p,state) && cpRegionMatches(p, state.region) && (!q || haystack(p).includes(q)));
   // During a keyword search, show undated blog notices as well: missing due
   // dates mean 'unverified', not 'expired'. Keep the user's explicit filters.
@@ -2397,12 +2408,14 @@ function render(){
   let sum = (state.tab === "p" || state.tab === "m")
     ? `글 <b>${rows.length}</b>개`
     : `검색 결과 <b>${rows.length}</b>건 · 마감 전 ${open}건` + (hot ? ` · 3일 내 마감 <span class="hot">${hot}</span>건` : "") + (state.tab === "mine" ? "" : ` · 접수 여부 원문 확인`);
+  if(CP_DATA_LOADING)sum+=" · 일부 출처 확인 중 · 최종 건수 미확정";
   if(Object.values(DATA_HEALTH).includes('error'))sum+=' · 일부 출처 조회 실패 (하단 갱신 상태 확인)';
   if(undated) sum += ` · <span title="마감일 확인이 필요한 공고">마감일 미확인 ${undated}건</span>`;
   if(state.tab === "mine") sum = `🎯 ${prefSummary()} ` + sum + `<button class="linkbtn" id="editPrefs">조건 수정</button>`;
   if(state.onlyNew) sum = `🆕 새 글 <b>${rows.length}</b>개만 보는 중 <button class="linkbtn" id="offNew">전체 보기</button>`;
   $("summary").innerHTML = sum;
 
+  if(CP_DATA_LOADING&&!rows.length){$("summary").textContent="출처 확인 중 · 최종 결과 미확정";$("list").innerHTML='<li class="empty" role="status">공고를 확인하고 있습니다. 아직 검색 결과가 확정되지 않았습니다.</li>';return;}
   if(!rows.length && Object.values(DATA_HEALTH).includes('error') && state.tab!=='saved'){
     $('summary').textContent='공고 조회 일부 실패 · 검색 결과를 확인할 수 없습니다.';
     $('list').innerHTML='<li class="empty" role="alert">일부 공고를 불러오지 못했습니다. 검색 결과 없음과 다릅니다.<br><button id="cpRetryFeeds">다시 불러오기</button></li>';return;
@@ -2430,6 +2443,8 @@ function render(){
   const pc = prefCard();
   if(pc) cards.push(pc);
   $("list").innerHTML = cards.join("");
+  CP_LAST_VISIBLE_POSTS=POSTS.slice();
+  cpBrowseAfterRender(cpAnchorBefore);
 }
 // 첫 방문 페이지는 기록에 남기고, 이후 탭 이동마다 브라우저 방문 기록을 쌓습니다.
 // 따라서 Threads의 시스템 뒤로가기도 앱 밖으로 나가지 않고 이전 탭으로 돌아갑니다.
@@ -2946,6 +2961,7 @@ function savedAlert(){
 $("cpAlwaysAlert").addEventListener("click", () => openPrefs());
 
 cpSetupHome();
+cpSetupBrowse();
 refresh();
 load();
 setInterval(() => POSTS.length && render(), 60000);
