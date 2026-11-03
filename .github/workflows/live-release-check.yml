@@ -1,0 +1,32 @@
+name: Verify actual public release
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/live-release-check.yml
+      - scripts/verify_live_release.cjs
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - name: Test published homepage at mobile and desktop widths
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+        run: node scripts/verify_live_release.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: actual-public-release
+          path: live-release-output/
+          retention-days: 7
