@@ -7,6 +7,7 @@ Sending is disabled unless CP_ENABLE_LIVE_PUSH=1 and credentials exist.
 import json
 import os
 import re
+import uuid
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
@@ -39,6 +40,9 @@ def build_payload(job, subscription_id, app_id, *, test=False):
     suffix = " · 마감 " + deadline
     message = (str(job.get("org") or "공공기관") + " · " + str(job["title"]))[:160-len(suffix)] + suffix
     return {
+        # One UUID per logical request; all bounded 429 retries reuse this payload.
+        # Durable reserved/uncertain queue entries still forbid crash replays.
+        "idempotency_key": str(uuid.uuid4()),
         "app_id": app_id,
         "target_channel": "push",
         "include_subscription_ids": [subscription_id],

@@ -58,3 +58,24 @@ class RetryTests(unittest.TestCase):
     def test_invalid_budget(self):
         with self.assertRaises(ValueError):
             post(object(), retries=4)
+
+class IdempotencyTests(unittest.TestCase):
+    def test_request_key_is_uuid_and_reused_for_rate_limit_retry(self):
+        import json
+        import uuid
+        from urllib.request import Request
+        from scripts.onesignal_guarded_transport import build_payload
+        job = {"id": "a123", "title": "synthetic", "due": "2099-12-31"}
+        one = build_payload(job, "synthetic-sub", "synthetic-app")
+        other = build_payload(job, "synthetic-sub", "synthetic-app")
+        self.assertEqual(uuid.UUID(one["idempotency_key"]).version, 4)
+        self.assertNotEqual(one["idempotency_key"], other["idempotency_key"])
+        request = Request("https://api.onesignal.com/notifications", data=json.dumps(one).encode())
+        seen = []
+        def opener(req, timeout):
+            seen.append(json.loads(req.data)["idempotency_key"])
+            if len(seen) == 1:
+                raise HTTPError(req.full_url, 429, "rate", {}, io.BytesIO(b""))
+            return Response()
+        post(request, opener=opener, sleeper=lambda _: None)
+        self.assertEqual(seen, [one["idempotency_key"], one["idempotency_key"]])
