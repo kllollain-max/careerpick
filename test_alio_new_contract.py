@@ -15,9 +15,9 @@ class ContractTest(unittest.TestCase):
             self.assertTrue(req.full_url.startswith("https://opendata.alio.go.kr/new/v1/recruit/"))
             if "/detail.do?" in req.full_url:
                 self.assertIn("sn=123", req.full_url)
-                return self.response({"resultCode":0,"result":{"recrutPblntSn":123}})
+                return self.response({"resultCode":200,"result":{"recrutPblntSn":123}})
             self.assertIn("pageNo=1", req.full_url)
-            return self.response({"resultCode":0,"totalCount":1,"result":[{"recrutPblntSn":123}]})
+            return self.response({"resultCode":200,"totalCount":1,"result":[{"recrutPblntSn":123}]})
         with patch("alio.urllib.request.urlopen", side_effect=reply):
             self.assertEqual(alio.call("test+key",1)["totalCount"],1)
             self.assertEqual(alio.call_detail("test+key",123)["recrutPblntSn"],123)

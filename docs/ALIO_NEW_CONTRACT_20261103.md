@@ -12,3 +12,5 @@ No interchange with the legacy data.go.kr key. No credentials copied from browse
 Local validation: 3 contract test methods passed (POST/query encoding, list envelope/identity rejection, safe errors); original partial-fetch guard passed. Missing-key live runner preserves source bytes. These are not authenticated success.
 The ALIO live check workflow runs only on push to the existing restoration branch for the four named paths. No schedule, deployment, write permissions, data commits or main changes. Candidate pair and sanitized report are uploaded as a private Actions artifact. GitHub key presence and approval are determined by this run, not assumed.
 Date-expired counts are not official early-closure verification. Candidate remains review-only.
+
+Live server observation: resultCode 200 (run 41572665238) differs from Swagger example 0. Accept 0/200 only alongside strict list envelope/count and detail ID validation. Key presence confirmed by Actions, value never logged.

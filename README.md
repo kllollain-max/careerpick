@@ -28,9 +28,11 @@ Search, filters, matched conditions, saved notices and application tracking reus
 
 `alio.py` is reused from the emergency delivery snapshot; `scripts/collect_alio.py` stages collection and validates/merges by official ID, preserving archived notices and details. It has no history, qnet, social publishing or deployment side effects.
 
-Required Secret: `ALIO_KEY` for the preserved data.go.kr endpoint (`https://apis.data.go.kr/1051000/recruitment/list`). The newer ALIO `/v1/recruit/list.do` and `/v1/recruit/detail.do` contracts are not substituted without authoritative contract verification. Key availability/approval and the live endpoint response remain unverified. Do not confuse these API products or reuse a key between them blindly.
+Required Secret: `ALIO_KEY` for the official ALIO OpenData service. On 2026-11-03 the signed-in official Swagger UI verified POST/query endpoints `https://opendata.alio.go.kr/new/v1/recruit/list.do` and `detail.do`, required `serviceKey`, detail `sn`, and JSON envelopes. See `docs/ALIO_NEW_CONTRACT_20261103.md`. The legacy data.go.kr key is not interchangeable.
 
-The active verification workflow is manual only and has read permissions. Collector/deployer proposals live in `review-workflows/*.disabled`; they are inert. No scheduler exists in the active workflow. A production collection schedule still needs explicit approval, endpoint verification, a successful manual candidate run and reviewed data persistence wiring.
+`scripts/verify_alio_live.py` checks list and one independent detail identity, then collects in an isolated staging directory. It leaves repository snapshots untouched and produces private Actions candidate artifacts plus a sanitized report. A failed check does not prove bad credentials or missing approval unless an official numeric response identifies it.
+
+The ALIO live-check workflow has read-only contents permission and runs on pushes affecting named check files on the restoration branch only. There is no schedule or deployment. Existing manual static verification remains available. Pages proposals remain disabled. Production persistence and scheduling require separate approval.
 
 ## Approval and deployment
 
