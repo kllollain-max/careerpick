@@ -649,9 +649,10 @@ footer .src b{color:var(--ink)}
 
 
   <section class="cp-record-tools" aria-label="개인 기록 백업과 가져오기">
-    <p>저장·지원 기록은 이 브라우저에만 보관됩니다. 다른 기기와 자동 동기화되지 않으며, 비공개 모드 종료·사이트 데이터 삭제·기기 변경으로 사라질 수 있습니다. 홈페이지 소스 백업에는 개인 기록이 포함되지 않습니다.</p>
-    <div><button type="button" data-record-action="backup">개인 기록 백업(JSON)</button> <button type="button" data-record-action="import">백업 가져오기</button> <button type="button" data-record-action="archive">충돌·복구 사본 확인</button></div>
+    <details><summary>개인 기록 보관·이전 안내</summary><p>저장·지원 기록은 이 브라우저에만 보관됩니다. 다른 기기와 자동 동기화되지 않으며, 비공개 모드 종료·사이트 데이터 삭제·기기 변경으로 사라질 수 있습니다. 홈페이지 소스 백업에는 개인 기록이 포함되지 않습니다.</p>
     <p>백업에는 개인 메모가 포함될 수 있습니다. 파일은 본인이 보관하고 공개 게시·채팅으로 공유하지 마세요. 구주소에서는 같은 브라우저로 JSON을 내보낸 뒤 새주소에서 가져옵니다.</p>
+    </details><div><button type="button" data-record-action="backup">개인 기록 백업(JSON)</button> <button type="button" data-record-action="import">백업 가져오기</button> <button type="button" data-record-action="archive">충돌·복구 사본 확인</button></div>
+
   </section>
   <input id="cpBackupInput" type="file" accept=".json,application/json" hidden aria-label="커리어픽 백업 파일 선택">
   <div class="sumrow"><p class="summary" id="summary" aria-live="polite"></p><label class="cp-order">정렬<select id="cpOrder" aria-label="공고 정렬"><option value="due">마감 임박순</option><option value="new">최신 등록순</option></select></label><button class="viewbtn" id="viewbtn" aria-pressed="false">☰ 간단히</button></div>
@@ -1379,12 +1380,9 @@ function standaloneJobLink(p){
 }
 function jobCard(p, now){
   const d = dday(p, now);
-  const tile = d
-    ? `<div class="dd ${d.cls}">${d.cls==="verify" ? "" : `<span class="big${d.n===0 ? " dday" : ""}">${d.big}</span>`}<span class="sm">${d.cls==="closed" ? md(p.due) : "~" + md(p.due)}</span></div>`
-    : `<div class="dd none"><span class="big">일정 확인</span></div>`;
   const tags = [];
-  if(p.n) tags.push(`<span class="tag n">${esc(p.n)}명</span>`);
-  (p.emp||[]).filter(e => !/^(신입|경력)$/.test(e)).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
+
+
   (p.edu||[]).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
   const off = officialLink(p);
   const saved = SAVED.has(cpSavedId(p));
@@ -1395,14 +1393,16 @@ function jobCard(p, now){
   const spw = spr ? (spr.v === "ok" ? [...spr.why].reverse().find(w => w[0] === "ok") : spr.why.find(w => w[0] === spr.v)) : null;
   return `<li class="card job ${d && d.cls==="closed" ? "is-closed" : ""}">
     <a class="main" href="${esc(jobHref(p))}"${jobAnchorAttrs(p)}>
-      ${tile}
       <div class="body">
-        <div class="org">${isNew(p,now) ? '<span class="new">NEW</span>' : ""}${p.gojobs ? '<span class="ofc">나라일터</span>' : isInternalJob(p) ? '<span class="ofc">공식</span>' : '<span class="hae">해설</span>'}${p.org ? `<span>${esc(p.org)}</span>` : `<span>${esc(p.cat)}</span>`}${regionLabel(p) ? `<span class="rg">· ${esc(regionLabel(p))}</span>` : ""}</div>
-        <h2 class="title">${esc(cleanTitle(p.title))}</h2>
+        <div class="org">${isNew(p,now) ? '<span class="new">NEW</span>' : ""}${p.gojobs ? '<span class="ofc">나라일터</span>' : isInternalJob(p) ? '<span class="ofc">공식</span>' : '<span class="hae">해설</span>'}${p.org ? `<span>${esc(p.org)}</span>` : `<span>${esc(p.cat)}</span>`}</div>
+        <h2 class="title">${esc(p.title)}</h2>
+        ${regionLabel(p) || (p.emp||[]).length ? `<div class="cp-card-conditions">${esc([regionLabel(p), ...(p.emp||[])].filter(Boolean).join(" · "))}</div>` : ""}
+        ${p.n ? `<div class="cp-card-count">모집 ${esc(String(p.n).replace(/명$/, ""))}명</div>` : ""}
         ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
         ${preferenceBadge(p)}
         ${spw && state.tab === "spec" ? `<div class="spwhy">${SPEC_V[spw[0]].icon} ${esc(spw[1])}${spr.why.filter(w => w[0] !== "ok").length > 1 ? ` 외 ${spr.why.filter(w => w[0] !== "ok").length - 1}건` : ""}</div>` : ""}
         ${CPHome.career(p).length ? `<div class="cp-card-career">${esc(CPHome.career(p).join(" · "))}</div>` : ""}
+        <div class="cp-card-status">${d?.cls === "closed" ? "마감" : d?.cls === "upcoming" ? "접수예정" : d && d.cls !== "verify" ? "접수중" : "일정 미확인"}</div>
         ${p.start || p.startDate ? `<div class="cp-card-footer">접수 시작 ${esc(p.start || p.startDate)}</div>` : ""}
         ${p.due ? `<div class="due ${d.cls==="hot" ? "hot" : d.cls==="closed" ? "closed" : ""}">접수 마감 ${dueLong(p.due, p.dueHasTime)}</div>` : `<div class="due closed">${p.always ? "상시 모집 (채용 시 마감)" : "마감일은 원문에서 확인"}</div>`}
       </div>
@@ -1421,8 +1421,10 @@ function rowCard(p, now){
   const meta = [];
   if(ap) meta.push((ST[ap.st]||ST.plan).label);
   const spr = specOf(p); if(spr) meta.unshift(SPEC_V[spr.v].icon + " " + SPEC_V[spr.v].label);
-  if(p.n) meta.push(p.n + "명");
-  if((p.emp||[])[0]) meta.push(p.emp[0]);
+  if(regionLabel(p)) meta.push(regionLabel(p));
+  meta.push(...(p.emp||[]));
+  if(p.n) meta.push("모집 " + String(p.n).replace(/명$/, "") + "명");
+  meta.push(d?.cls === "closed" ? "마감" : d?.cls === "upcoming" ? "접수예정" : d && d.cls !== "verify" ? "접수중" : "일정 미확인");
   if(p.due) meta.push("마감 " + dueLong(p.due, p.dueHasTime));
   const href = esc(jobHref(p));
   const attr = jobAnchorAttrs(p);
@@ -1430,7 +1432,7 @@ function rowCard(p, now){
     <a class="main" href="${href}"${attr}>
       <span class="rd ${d ? d.cls : ""}">${d ? (d.cls === "verify" ? "~" + md(p.due) : d.big) : "일정 확인"}</span>
       <span class="rb"><span class="ro">${isNew(p,now) ? "NEW · " : ""}${p.gojobs ? "나라일터" : isInternalJob(p) ? "공식" : "해설"} · ${esc(p.org || p.cat)}${regionLabel(p) ? " · " + esc(regionLabel(p)) : ""}</span>
-      <span class="rt">${esc(cleanTitle(p.title))}</span>
+      <span class="rt">${esc(p.title)}</span>
       <span class="rm">${esc(meta.join(" · "))}</span>${preferenceBadge(p)}</span>
     </a>
     ${standaloneJobLink(p)}
