@@ -79,8 +79,9 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
    const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8'),outage=path.resolve('_preview/.cp-audit-outage');let x;
    try{
     x=await fresh(browser,{sw:true,seed:{saved:'["a999999"]',apps:'{"a999999":{"st":"plan","memo":"SW-preserved","ck":[]}}'}});const p=x.p;await p.evaluate(()=>navigator.serviceWorker.ready);await p.waitForFunction(()=>!!navigator.serviceWorker.controller);const before=await records(p);
-    for(let trial=1;trial<=3;trial++){let stage='worker-update-ack',previewOffline=false;
+    for(let trial=1;trial<=3;trial++){let stage='baseline-ready',previewOffline=false;
      try{
+      await p.evaluate(async()=>{const r=await navigator.serviceWorker.register('sw.js',{updateViaCache:'none'});await r.update();});await p.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return r&&!r.installing&&!r.waiting&&r.active?.state==='activated';});stage='worker-update-ack';
       const marker='CP_RECORDS_AUDIT_V2_'+trial;
       fs.writeFileSync(workerFile,original+'\nself.addEventListener("message",e=>{if(e.data==="CP_RECORDS_AUDIT")e.source.postMessage('+JSON.stringify(marker)+');});\n');const mtime=new Date(Date.now()+trial*3000);fs.utimesSync(workerFile,mtime,mtime);
       await p.evaluate(async marker=>{window.__recordsWorkerV2=false;navigator.serviceWorker.addEventListener('message',e=>{if(e.data===marker)window.__recordsWorkerV2=true;});await (await navigator.serviceWorker.getRegistration()).update();},marker);

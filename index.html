@@ -2621,7 +2621,7 @@ const IS_IOS = /iPhone|iPad|iPod/.test(UA) || (navigator.platform === "MacIntel"
 const IS_ANDROID = /Android/.test(UA);
 const INAPP = /KAKAOTALK|Instagram|Barcelona|Threads|FBAN|FBAV|NAVER\(inapp|Line\/|everytimeApp|DaumApps/i.test(UA);
 let installEvt = null;
-if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(() => {}); }
+if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).catch(() => {}); }
 window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; });
 window.addEventListener("appinstalled", () => { $("addbtn").hidden = true; $("addHint").hidden = true; });
 
