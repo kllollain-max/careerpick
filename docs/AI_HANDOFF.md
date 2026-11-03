@@ -1,0 +1,1 @@
+2026-11-03: Local source, build and browser validation completed. Private kllollain-max/careerpick created; base main is README-only 588c32425997db496c9498921d4781c975b1700d. Upload recovery branch and open Draft PR. No merge, visibility change, Pages activation or deployment authorized. Reuse prior successful checks for unchanged source.
