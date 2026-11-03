@@ -1,0 +1,53 @@
+name: CareerPick targeted job push
+on:
+  workflow_run:
+    workflows: ['CareerPick scheduled operation']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Check readiness or initialize private state without sending
+        type: choice
+        options: [check, initialize]
+        default: check
+permissions:
+  contents: read
+concurrency:
+  group: careerpick-targeted-push
+  cancel-in-progress: false
+jobs:
+  push:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (vars.CP_ENABLE_ALL_OPTED_IN_ROLLOUT == '1' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'schedule' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify targeted sender without network or publication
+        run: python tests/run_alert_recovery.py
+      - name: Validate private state and run approved targeted delivery
+        env:
+          CP_PUSH_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'run' }}
+          CP_ENABLE_ALL_OPTED_IN_ROLLOUT: ${{ github.event_name == 'workflow_run' && vars.CP_ENABLE_ALL_OPTED_IN_ROLLOUT == '1' && '1' || '0' }}
+          CP_ENABLE_LIVE_PUSH: ${{ github.event_name == 'workflow_run' && vars.CP_ENABLE_ALL_OPTED_IN_ROLLOUT == '1' && '1' || '0' }}
+          CP_ONESIGNAL_APP_ID: 31443bc9-bef0-4519-9817-2f916a548b6a
+          CP_ONESIGNAL_REST_API_KEY: ${{ secrets.CP_ONESIGNAL_REST_API_KEY }}
+          CP_LEDGER_REPOSITORY: ${{ secrets.CP_LEDGER_REPOSITORY }}
+          CP_LEDGER_TOKEN: ${{ secrets.CP_LEDGER_TOKEN }}
+        run: python -m scripts.run_targeted_push
+      - name: Record outcome without subscriber data
+        if: always()
+        env:
+          RESULT: ${{ job.status }}
+        run: echo "Targeted push status $RESULT. API acceptance is separate from device receipt. No automatic retry of uncertain delivery." >> "$GITHUB_STEP_SUMMARY"
