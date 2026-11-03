@@ -1,0 +1,37 @@
+name: Check GOJOBS current-notice sample
+on:
+  push:
+    branches: [codex/restore-careerpick-20261103]
+    paths:
+      - scripts/verify_gojobs_current_sample.py
+      - tests/test_gojobs_current_sample.py
+      - .github/workflows/gojobs-current-sample-check.yml
+permissions:
+  contents: read
+concurrency:
+  group: gojobs-current-sample-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate bounded sample probe and source preservation
+        run: python -m unittest discover -s tests -p test_gojobs_current_sample.py
+      - name: Observe one DESC sample using GOJOBS only
+        env:
+          GOJOBS_KEY: ${{ secrets.GOJOBS_KEY }}
+        run: python scripts/verify_gojobs_current_sample.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gojobs-current-sample-report
+          path: gojobs-current-sample-output/report.json
+          retention-days: 7
+          if-no-files-found: warn
