@@ -44,12 +44,17 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(result["retrieved_at"], self.snapshot()["retrieved_at"])
         self.assertEqual(report["mpm_exam"]["distinct_exam_names"], 10)
         self.assertEqual(report["mpm_exam"]["structural_validation"]["date_cells_verified"], 107)
-        self.assertEqual(report["mpm_exam"]["structural_validation"]["null_place_announcement_cells"], 5)
+        self.assertEqual(
+            report["mpm_exam"]["structural_validation"]["null_place_announcement_cells"],
+            sum(row["시험장소공고일"] is None for row in self.snapshot()["records"]),
+        )
         self.assertFalse(report["mpm_exam"]["authentication_retested"])
         self.assertEqual(report["api_requests"], {"gojobs": 0, "mpm_exam": 0})
         self.assertIn("2026-11-05~2026-11-06", [row["시험일"] for row in result["records"]])
         source_rows = json.loads((self.output / "mpm-source-records.json").read_text())["records"]
-        self.assertIn("2026-11-5~2026-11-6", [row["시험일"] for row in source_rows])
+        self.assertEqual(source_rows, mpm_exam.validate_records(
+            self.snapshot()["records"], expected_count=self.snapshot()["count"]
+        )["records"])
         self.assertEqual(report["source_count_before"], report["source_count_after"])
         self.assertEqual(len([p for p in self.output.rglob("*") if p.is_file()]), 7)
 
