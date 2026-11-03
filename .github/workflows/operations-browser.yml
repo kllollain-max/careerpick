@@ -1,0 +1,49 @@
+name: Verify restored operating UI
+on:
+  push:
+    branches: [codex/operations-recovery-20261103]
+    paths:
+      - .github/workflows/operations-browser.yml
+      - scripts/verify_alio_candidate_browser.cjs
+      - index.html
+      - homepage-ui.js
+      - record-migration.js
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/build_public_site.py
+      - run: node --test tests/test_record_migration.cjs tests/test_civil_service_exams.cjs
+      - name: Install browser test package
+        run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - name: Verify new notices at 320, 390 and 1440 px
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          ALIO_BEFORE: ${{ runner.temp }}/before-alio.json
+        run: |
+          git fetch origin main
+          git show FETCH_HEAD:alio.json > "$ALIO_BEFORE"
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_alio_candidate_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: operating-ui-check
+          path: |
+            candidate-validation/
+            build-report.json
+          retention-days: 7
