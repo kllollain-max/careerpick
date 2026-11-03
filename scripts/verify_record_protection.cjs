@@ -88,7 +88,7 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
       stage='online-reload';await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
       stage='cache-ready';await p.waitForFunction(async()=>{const c=await caches.open('careerpick-pages-v3'),urls=[location.pathname,...[...document.scripts].map(s=>s.src).filter(u=>u&&new URL(u).origin===location.origin)];for(const u of urls)if(!await c.match(u))return false;return true;},null,{timeout:15000});
       stage='offline-reload';fs.writeFileSync(outage,'synthetic 503');previewOffline=true;await x.ctx.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);assert(await p.evaluate(()=>CP_FEED_CACHE.size>0),'actual cached response required');console.log('PASS consecutive worker replacement/offline trial '+trial+' actual cached fallback');
-     }catch(error){throw Error('trial '+trial+' '+stage+': '+error.message);}finally{if(previewOffline)fs.unlinkSync(outage);fs.writeFileSync(workerFile,original);await x.ctx.setOffline(false);}
+     }catch(error){try{console.log('SW failure diagnostics '+JSON.stringify(await p.evaluate(()=>({ready:document.readyState,boot:typeof CP_DATA_LOADING,loading:typeof CP_DATA_LOADING==='undefined'?null:CP_DATA_LOADING,worker:!!navigator.serviceWorker.controller}))));}catch(_){}throw Error('trial '+trial+' '+stage+': '+error.message);}finally{if(previewOffline)fs.unlinkSync(outage);fs.writeFileSync(workerFile,original);await x.ctx.setOffline(false);}
     }
    }finally{fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}
   });
