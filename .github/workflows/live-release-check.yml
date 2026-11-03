@@ -24,9 +24,16 @@ jobs:
         env:
           NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
         run: node scripts/verify_live_release.cjs
+      - name: Test newly connected sources on the actual public site
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CP_TEST_BASE: https://kllollain-max.github.io/careerpick/
+        run: node scripts/verify_gojobs_ui.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: actual-public-release
-          path: live-release-output/
+          path: |
+            live-release-output/
+            gojobs-browser-output/
           retention-days: 7
