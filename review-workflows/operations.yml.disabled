@@ -1,0 +1,101 @@
+# Awaiting owner approval: copy to .github/workflows/operations.yml only after review.
+name: CareerPick hourly operation
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: careerpick-pages
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Record trigger and restore point
+        run: |
+          mkdir -p operations-output
+          git rev-parse HEAD > operations-output/previous-head.txt
+          echo "Trigger: ${{ github.event_name }}" >> "$GITHUB_STEP_SUMMARY"
+      - name: Collect and validate isolated candidate
+        env:
+          ALIO_KEY: ${{ secrets.ALIO_KEY }}
+        run: python scripts/run_operations.py
+      - name: Select validated data
+        id: candidate
+        run: |
+          python - <<'PY'
+          import json, os, shutil
+          from pathlib import Path
+          report=json.loads(Path('operations-output/report.json').read_text())
+          assert report['status'] in ('changed','unchanged') and report['originals_preserved']
+          changed=report['changed']
+          # End-of-day changes require a rebuild even when API content is unchanged.
+          status=Path('operations-status.json')
+          previous=json.loads(status.read_text()) if status.exists() else {}
+          changed=changed or previous.get('counts',{}).get('archived')!=report['counts']['archived']
+          if changed:
+              for name in ('alio.json','alio-detail.json','operations-status.json'):
+                  shutil.copyfile(Path('operations-output/candidate')/name,name)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('changed='+str(changed).lower()+'\n')
+          PY
+      - name: Build allowlisted public site
+        if: steps.candidate.outputs.changed == 'true'
+        run: python scripts/build_public_site.py
+      - name: Store validated data with fast-forward protection
+        if: steps.candidate.outputs.changed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add alio.json alio-detail.json operations-status.json
+          git commit -m 'Update validated ALIO snapshot'
+          git push origin HEAD:main
+      - uses: actions/configure-pages@v5
+        if: steps.candidate.outputs.changed == 'true'
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.candidate.outputs.changed == 'true'
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
+        id: deployment
+        if: steps.candidate.outputs.changed == 'true'
+      - name: Verify public snapshot hashes
+        if: steps.candidate.outputs.changed == 'true'
+        run: python scripts/verify_public_version.py
+      - name: Record unchanged or deployment result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+          CHANGED: ${{ steps.candidate.outputs.changed }}
+          DEPLOYMENT_OUTCOME: ${{ steps.deployment.outcome }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path('operations-output/report.json')
+          r=json.loads(p.read_text()) if p.exists() else {'status':'failed_before_collection'}
+          r.update(trigger=os.environ['GITHUB_EVENT_NAME'],job_status=os.environ['JOB_STATUS'],deployment=os.environ['DEPLOYMENT_OUTCOME'] if os.environ['CHANGED']=='true' else 'unchanged',run_url=os.environ['GITHUB_SERVER_URL']+'/'+os.environ['GITHUB_REPOSITORY']+'/actions/runs/'+os.environ['GITHUB_RUN_ID'])
+          p.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('```json\n'+json.dumps(r,ensure_ascii=False,indent=2)+'\n```\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: operation-${{ github.run_id }}
+          path: |
+            operations-output/report.json
+            operations-output/previous-head.txt
+            build-report.json
+          retention-days: 30

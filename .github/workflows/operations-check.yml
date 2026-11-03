@@ -1,0 +1,44 @@
+name: Isolated operating path verification
+on:
+  push:
+    branches: [codex/operations-recovery-20261103]
+    paths:
+      - scripts/run_operations.py
+      - tests/test_operations.py
+      - scripts/collect_alio.py
+      - .github/workflows/operations-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: careerpick-isolated-operations
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -p test_operations.py
+      - name: Run real collection without source replacement or deployment
+        env:
+          ALIO_KEY: ${{ secrets.ALIO_KEY }}
+        run: python scripts/run_operations.py
+      - name: Build validated candidate in isolated checkout
+        run: |
+          cp operations-output/candidate/alio.json alio.json
+          cp operations-output/candidate/alio-detail.json alio-detail.json
+          python scripts/build_public_site.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: operating-path-verification
+          path: |
+            operations-output/
+            build-report.json
+          retention-days: 7
