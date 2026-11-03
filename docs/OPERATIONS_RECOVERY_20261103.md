@@ -2,7 +2,7 @@
 
 ## 기준과 복원 지점
 
-2026-11-03 KST. main 시작점 fd47c198a27e2be65a2dee5c0213a3595a9973e6, PR #1 병합 완료. 공개 배포 원본 bee342c7c1db94e44172b47b78443540c7a34147, 배포 실행 41593785022. 복원 브랜치 restore-point/public-20261103은 해당 원본을 보존한다. 작업 브랜치는 codex/operations-recovery-20261103, Draft PR #3. PR #2의 71e38bfe2698f0606d887992fb08143fcbb0292a를 병합 부모로 재사용했고 main은 변경하지 않았다.
+2026-11-03 KST. main 시작점 fd47c198a27e2be65a2dee5c0213a3595a9973e6, PR #1 병합 완료. 작업 중 별도 PR #4가 main 0ca8c769751fff664207f703e23a3790577100d9로 병합된 것을 확인하고 해당 main을 후속 브랜치에 통합했다. 공개 배포 원본 bee342c7c1db94e44172b47b78443540c7a34147, 배포 실행 41593785022. 복원 브랜치 restore-point/public-20261103은 해당 원본을 보존한다. 작업 브랜치는 codex/operations-recovery-20261103, Draft PR #3. PR #2의 71e38bfe2698f0606d887992fb08143fcbb0292a를 병합 부모로 재사용했고 main은 변경하지 않았다.
 
 ## 실제 수집과 판정 정의
 
@@ -32,7 +32,7 @@ record-migration.js와 docs/RECORD_MIGRATION.md. localStorage saved/apps/prefs/s
 
 ## 기존 자동화
 
-비상 백업 SHA256: 2708bc98f652c544d862ab8ae843a684cd2ae5908123714d35726c36598d3457. snapshots/delivery-branch-716c86d에서 Threads 게시기·편집기·슬롯/중복 방지·조회 코드와 푸시 프리뷰·구독 검증/매칭 코드를 재사용했다. 원본 ZIP과 사본을 분리했다. 과거 Threads 원장 39기록/posted_ids33개를 격리 보존했으며 공개 소스·배포물에 복사하지 않았다. 발송과 쓰기 명령은 복원 모드에서 차단했다. 과거 상태와 신규 계정 연결 성공을 구분한다.
+비상 백업 SHA256: 2708bc98f652c544d862ab8ae843a684cd2ae5908123714d35726c36598d3457. snapshots/delivery-branch-716c86d에서 Threads 게시기·편집기·슬롯/중복 방지·조회 코드와 푸시 프리뷰·구독 검증/매칭 코드를 재사용했다. 원본 ZIP과 사본을 분리했다. 과거 Threads 원장 39기록/posted_ids33개를 격리 보존했으며 이번 작업은 공개 소스·배포물에 복사하지 않았다. 별도 PR #4에서 복원한 기존 Threads 공개 게시 이력 파일은 최신 main과 함께 보존하되 Pages 허용목록에서는 제외한다. 이용자의 개인 지원/구독 원장과 구분한다. 처음 복원 모드에서는 발송과 쓰기 명령을 차단했다. 이후 main에 병합된 PR #4의 최신 게시기와 migration gate를 우선 보존했다. 원격 계정/이력 대조 및 THREADS_ENABLED·THREADS_MIGRATION_READY 두 조건 전에는 게시 job을 실행하지 않는다. 중복된 예전 Threads workflow 검토본은 제거했다. 과거 상태와 신규 계정 연결 성공을 구분한다.
 
 현재 저장소 Secret 이름은 ALIO_KEY, DATA_GO_KR_KEY, GOJOBS_KEY, MPM_EXAM_KEY 네 개만 확인했다. SNS/푸시 인증의 실제 이전 성공은 미검증이다. 원본 Threads가 요구하는 THREADS_ACCESS_TOKEN/THREADS_USER_ID, OneSignal 코드가 요구하는 CP_ONESIGNAL_REST_API_KEY/CP_TEST_SUBSCRIPTION_ID 및 비공개 원장 연결은 현 계정에 미등록이다. 키 값을 채팅으로 받지 않는다. 비공개 원장을 옮기기 전에는 게시를 허용하지 않는다. 구주소 구독은 새주소로 자동 이전되지 않으며 새주소 OneSignal 설정과 이용자의 재동의/재구독이 필요하다. push-config.js는 빈 App ID를 유지한다.
 
@@ -56,3 +56,5 @@ PR #3 최종 검증 HEAD 병합, 정적 화면·622건 후보·기록 병합·�
 - 41598631547(코드4cc15c6) ALIO·MPM 실인증, 전체 수집, 검증, 후보 빌드와 복구 브랜치 저장 성공. 622→622 신규/수정/삭제0. ALIO 상세표본3건. MPM28행 정상 무변경, 자료시각2026-10-25를 새 확인시각으로 덮어쓰지 않았다. 실패 로그의 모의 TimeoutError 회귀검사와 실제 성공 호출을 구분한다.
 - 41598631552(같은 코드) Chromium 320/390/1440px 신규12건 중 표본 목록 검색·상세 직접 접속·가로 넘침·깨진 이미지·페이지 오류 검사 통과. 기록/일정 node 검사11개 및 복원SNS·푸시 오프라인39개 통과. 모의 API 게시 ID 출력은 실제 게시가 아니다.
 - 실사이트 공개 배포는 여전히 bee342c의610건이다. 이번 후보622건·기록 병합·일정수정은 아직 공개 반영하지 않았다.
+
+최신 main Threads 코드로 충돌을 해소한 뒤 복원 SNS25개와 main Threads18개 오프라인 검사를 통과했다. PR #4의 main 병합은 다른 작업에서 이미 수행된 사실이며, 이번 작업은 PR #3을 main에 병합하지 않았다.

@@ -218,8 +218,6 @@ def compose(job):
 
 
 def api(method, path, token, params=None):
-    if method.upper() != "GET":
-        raise RuntimeError("Recovery mode: live SNS writes are disabled pending separate approval")
     if os.getenv('THREADS_NO_SEND', 'false').lower() == 'true':
         raise RuntimeError('Threads API disabled in test mode')
     url = API + path
@@ -277,10 +275,6 @@ def api(method, path, token, params=None):
             print(
                 'Error type:',
                 error.get('type')
-            )
-            print(
-                'Error message:',
-                error.get('message')
             )
         except (ValueError, TypeError, AttributeError):
             print('Error response could not be parsed')
@@ -610,8 +604,6 @@ def publish_post(record, history):
 
 
 def main():
-    if len(sys.argv)>1 and sys.argv[1] not in ("preview",):
-        raise RuntimeError("Recovery mode: only local preview is available; reconcile private history before publishing")
     command = (
         sys.argv[1]
         if len(sys.argv) > 1
@@ -966,7 +958,7 @@ def main():
         'text': compose(job),
         'reply_text': compose_reply(job),
         'engagement_text': engagement(job),
-        'image_url': '' if text_first else 'https://kllollain-max.github.io/careerpick/threads-images/' + urllib.parse.quote(re.sub(r'[^A-Za-z0-9_-]', '_', job['id'])[:70] + '.jpg'),
+        'image_url': '' if text_first else 'https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/' + urllib.parse.quote(re.sub(r'[^A-Za-z0-9_-]', '_', job['id'])[:70] + '.jpg'),
         'image_job': None if text_first else job
     })
 
