@@ -1,0 +1,42 @@
+name: Isolated core function audit
+on:
+  push:
+    branches: [fix/core-function-audit-20261103]
+  pull_request:
+    paths: [index.html, homepage-ui.js, record-store.js, tests/test_record_store.cjs, scripts/verify_core_functions.cjs, .github/workflows/core-functions-check.yml]
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_civil_service_exams.cjs tests/test_record_store.cjs
+      - run: python scripts/build_public_site.py
+      - run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - name: Verify public baseline and isolated candidate with synthetic push only
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_core_functions.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: core-function-evidence
+          path: |
+            core-audit-output/
+            build-report.json
+          retention-days: 14

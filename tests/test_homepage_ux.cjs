@@ -56,7 +56,7 @@ test('cards precede optional dashboard and exploration',()=>{
 });
 test('search additions do not inject non-job content into all jobs',()=>assert(html.includes('CP_BLOG_SEARCH.filter(p => p.type === "j" && !p.due')));
 test('existing storage names are preserved',()=>{
-  for(const key of ['saved','apps','prefs','spec']) assert(new RegExp('(?:getItem|setItem)\\("'+key+'"').test(html),key);
+  for(const key of ['saved','apps','prefs','spec']) assert(new RegExp('(?:getItem|setItem|cpReadRecords)\\("'+key+'"').test(html),key);
 });
 test('shared organization homepages do not collapse distinct official notices',()=>{
   const one={id:'a1',alio:true,url:'https://job.alio.go.kr/recruitview.do?idx=1',src:'https://company.example/'};
@@ -142,7 +142,7 @@ async function work24PolicyCase(policy, receipt, data){
   const code=source.slice(start,source.indexOf('\nfunction cpRenderHomeFilters',start));
   const existing=[{id:'alio-fixture',alio:true},{id:'institution-fixture',monitor:true}];
   const calls=[];
-  const context={DATA_HEALTH:{alio:'ok',monitor:'ok'},CP_FEED_STAMPS:{alio:new Date().toISOString(),monitor:new Date().toISOString()},POSTS:existing.slice(),CPHome:home,
+  const context={AbortController,setTimeout,clearTimeout,DATA_HEALTH:{alio:'ok',monitor:'ok'},CP_FEED_STAMPS:{alio:new Date().toISOString(),monitor:new Date().toISOString()},POSTS:existing.slice(),CPHome:home,
     fetch:async(url,options)=>{
       const path=url.split('?')[0];calls.push(path);
       assert(!/^https?:/.test(url),'no provider request');
@@ -150,7 +150,8 @@ async function work24PolicyCase(policy, receipt, data){
       const value={'work24-policy.json':policy,'work24-status.json':receipt,'work24.json':data}[path];
       return{ok:value!==undefined,json:async()=>{if(value instanceof Error)throw value;return value;}};
     }};
-  await vm.runInNewContext(code+'\ncpLoadWork24()',context);
+  const bounded=source.slice(source.indexOf('async function cpFetchJson'),source.indexOf('async function cpReadFeed'));
+  await vm.runInNewContext(bounded+code+'\ncpLoadWork24()',context);
   assert.deepEqual(context.POSTS.slice(0,2),existing,'ALIO and institution rows preserved');
   assert.equal(context.DATA_HEALTH.alio,'ok');assert.equal(context.DATA_HEALTH.monitor,'ok');
   return{context,calls,notices:home.healthNotices(context.DATA_HEALTH,context.CP_FEED_STAMPS,{},new Date())};

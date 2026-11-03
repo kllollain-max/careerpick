@@ -748,12 +748,14 @@ footer .src b{color:var(--ink)}
 
 <script src="push-config.js"></script>
 <script src="record-migration.js"></script>
+<script src="record-store.js"></script>
 <script src="homepage-ux.js"></script>
 <script src="homepage-ui.js"></script>
 <script>
 // ── 설정 ──
 const COUPANG = false;    // 쿠팡 추천 상품 표시 (ads.py 설정 후 true로)
 let POSTS = [], UPDATED = null, ADS = [];
+let CP_DATA_LOADING=true;
 let CP_DEDUP_REMOVED = 0;
 const DATA_HEALTH = {posts:"pending", alio:"pending", monitor:"pending",detail:"pending"};
 // Preserve blog entries independently of merged official feeds for accurate search.
@@ -818,11 +820,32 @@ function cpMergedSourceLinks(p, exclude=""){
   return (p.officialSources || []).filter(s=>s.url!==exclude).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)} ↗</a>`).join("");
 }
 // ── 관심 공고 저장 (이 기기에만 저장) ──
+const CP_STORAGE_ERRORS=new Map();
+function cpStorageNotice(key,message){
+  message?CP_STORAGE_ERRORS.set(key,message):CP_STORAGE_ERRORS.delete(key);
+  let el=$('cpStorageNotice');
+  if(!el){el=document.createElement('p');el.id='cpStorageNotice';el.setAttribute('role','alert');$('list').before(el);}
+  el.hidden=!CP_STORAGE_ERRORS.size;el.textContent=[...CP_STORAGE_ERRORS.values()].join(' ');
+}
+function cpReadRecords(key,fallback,valid){
+  let result;try{result=CPStore.read(localStorage,key,fallback,valid);}catch(_){result={ok:false,data:fallback,error:'기기 저장소 접근이 차단되어 기록을 읽지 못했습니다.'};}
+  cpStorageNotice(key,result.ok?'':result.error);return result.data;
+}
+async function cpMutateRecords(key,fallback,valid,edit){
+  try{const result=await CPStore.mutate(localStorage,key,fallback,valid,edit,navigator.locks);cpStorageNotice(key,'');return result;}
+  catch(error){cpStorageNotice(key,error.message);toast(error.message);return null;}
+}
+const CP_SAVING_IDS=new Set();
 let SAVED = new Set();
-try { SAVED = new Set(JSON.parse(localStorage.getItem("saved") || "[]")); } catch(e) {}
-function toggleSave(id){
-  SAVED.has(id) ? SAVED.delete(id) : SAVED.add(id);
-  try { localStorage.setItem("saved", JSON.stringify([...SAVED])); } catch(e) {}
+SAVED = new Set(cpReadRecords("saved",[],CPStore.saved));
+async function toggleSave(id){
+  if(CP_SAVING_IDS.has(id))return false;
+  CP_SAVING_IDS.add(id);
+  try{
+    const data=await cpMutateRecords('saved',[],CPStore.saved,rows=>{const ids=new Set(rows);ids.has(id)?ids.delete(id):ids.add(id);return [...ids];});
+    if(data===null)return false;
+    SAVED=new Set(data);return true;
+  }finally{CP_SAVING_IDS.delete(id);}
 }
 
 // ── 잡알리오 공식 공고 합치기 (블로그 해설이 있는 공고는 블로그 카드를 우선) ──
@@ -881,11 +904,8 @@ async function load(){
     cpRenderFeedStatus();
   }
   initSeen();
-  await loadAlio();
-  await loadGojobs();
-  await loadMonitoredJobs();
-  await cpLoadEnterprise();
-  await cpLoadWork24();
+  await Promise.all([loadAlio(),loadGojobs(),loadMonitoredJobs(),cpLoadEnterprise(),cpLoadWork24()]);
+  CP_DATA_LOADING=false;
   cpDedupePosts();
   cpRenderFeedStatus();
   const qp = new URLSearchParams(location.search).get("q");
@@ -901,11 +921,11 @@ async function load(){
   $("updated").textContent = "공공기관·공무직·기업 채용을 한눈에";
   updateDataHealth(validUpdate ? updateDate : null);
   refresh();
-  if(!POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
+  // Feed errors are shown as errors rather than a fabricated empty search.
   alioDetail().then(() => {
     for(const p of POSTS){const det=p.alio && ALIO_DETAIL?.[p.id];if(det)Object.assign(p,CPHome.detailFields(p,det));}
     renderTabs(); renderFilters(); render(); cpRenderFeedStatus();
-    if(!POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
+    // Feed errors are shown as errors rather than a fabricated empty search.
   });
   loadQnet().then(q => { if(q){ renderTabs(); if(state.tab === "cert") render(); } });
   if(COUPANG) try{
@@ -959,7 +979,7 @@ const PREF_RE = {
   "고졸 가능":/고졸/, "학력무관":/학력\s*(?:무관|제한\s*(?:이|은)?\s*없)/
 };
 let PREFS = {emp:[], edu:[], region:[], cat:[], kw:""};
-try { PREFS = Object.assign(PREFS, JSON.parse(localStorage.getItem("prefs") || "{}")); } catch(e) {}
+PREFS = Object.assign(PREFS, cpReadRecords("prefs",{},CPStore.prefs));
 function hasPrefs(){ return PREFS.emp.length || PREFS.edu.length || PREFS.region.length || PREFS.cat.length || PREFS.kw.trim(); }
 function savePrefs(){ try { localStorage.setItem("prefs", JSON.stringify(PREFS)); return localStorage.getItem("prefs") === JSON.stringify(PREFS); } catch(e) { return false; } }
 // ── 내 스펙으로 지원 가능 공고 찾기 (공식 공고의 지원 자격 문장을 읽어 자동 판정, 이 기기에만 저장) ──
@@ -1238,7 +1258,7 @@ function cpRegionMatches(p, region){
 function renderTabs(){
   const now = new Date();
   $("tabs").innerHTML = tabsNow().map(t => {
-    const n = t.key === "all" ? POSTS.length : t.key === "saved" ? POSTS.filter(p => SAVED.has(cpSavedId(p))).length
+    const n = t.key === "all" ? POSTS.length : t.key === "saved" ? SAVED.size
       : t.key === "track" ? Object.keys(APPS).length
       : t.key === "mine" ? POSTS.filter(p => matchPrefs(p) && statusOf(p, now) !== "closed").length
       : t.key === "spec" ? (hasSpec() && ALIO_DETAIL ? specRows(now).filter(x => x.r.v !== "no").length : "")
@@ -1353,7 +1373,7 @@ function jobCard(p, now){
   const off = officialLink(p);
   const saved = SAVED.has(cpSavedId(p));
   const ap = APPS[cpApplicationId(p)];
-  if(ap) tags.unshift(`<span class="stpill st-${ap.st}">${ST[ap.st].label}</span>`);
+  if(ap) tags.unshift(`<span class="stpill st-${ap.st}">${(ST[ap.st]||ST.plan).label}</span>`);
   const spr = specOf(p);
   if(spr) tags.unshift(specPill(p));
   const spw = spr ? (spr.v === "ok" ? [...spr.why].reverse().find(w => w[0] === "ok") : spr.why.find(w => w[0] === spr.v)) : null;
@@ -1373,7 +1393,7 @@ function jobCard(p, now){
     </a>
     <div class="actions">
       <button class="save" data-save="${esc(cpSavedId(p))}" aria-pressed="${saved}">${saved ? "★ 저장됨" : "☆ 저장"}</button>
-      <button class="track" data-track="${esc(cpApplicationId(p))}"${ap ? ` data-st="${ap.st}"` : ""}>${ap ? "📋 " + ST[ap.st].short : "📋 지원기록"}</button>
+      <button class="track" data-track="${esc(cpApplicationId(p))}"${ap ? ` data-st="${ap.st}"` : ""}>${ap ? "📋 " + (ST[ap.st]||ST.plan).short : "📋 지원기록"}</button>
       ${isInternalJob(p) ? `<a href="${esc(jobHref(p))}" data-open="${esc(p.id)}">상세보기</a>` : `<a href="${esc(p.url)}" target="_blank" rel="noopener">해설보기</a>`}
       ${p.due && d.cls !== "closed" && p.dueHasTime === true ? `<a href="${calLink(p)}" target="_blank" rel="noopener">📅 캘린더</a>` : ""}
       <a href="${esc(off.href)}" target="_blank" rel="noopener noreferrer">${off.label === "공식 공고 찾기" ? "공식 공고 찾기" : off.label} ↗</a>${cpMergedSourceLinks(p,off.href)}
@@ -1383,7 +1403,7 @@ function jobCard(p, now){
 function rowCard(p, now){
   const d = dday(p, now), saved = SAVED.has(cpSavedId(p)), ap = APPS[cpApplicationId(p)];
   const meta = [];
-  if(ap) meta.push(ST[ap.st].label);
+  if(ap) meta.push((ST[ap.st]||ST.plan).label);
   const spr = specOf(p); if(spr) meta.unshift(SPEC_V[spr.v].icon + " " + SPEC_V[spr.v].label);
   if(p.n) meta.push(p.n + "명");
   if((p.emp||[])[0]) meta.push(p.emp[0]);
@@ -1472,7 +1492,7 @@ function openPrefs(){
   $("sheetBody").innerHTML = PREF_GROUPS.map(g => grp(g.key, g.label, g.items)).join("")
     + grp("cat", "분야", cats)
     + `<div class="grp"><span>키워드 (쉼표로 여러 개)</span><input type="text" id="prefKw" aria-label="관심 키워드" value="${esc(DRAFT.kw)}" placeholder="예: 간호, 전산, 사무"></div>`
-    + `<p class="hint">선택한 조건은 이 기기에 저장됩니다. 아래 저장 버튼을 누르면 완료 안내가 나타납니다. 맞춤 웹푸시 자동 발송은 아직 준비 중입니다.</p>`
+    + `<p class="hint">선택한 조건과 저장·지원 기록은 이 브라우저에만 보관됩니다. 비공개 모드 종료·사이트 데이터 삭제 시 사라질 수 있으며 다른 기기와 자동 동기화되지 않습니다. JSON 백업을 권장합니다. 아래 저장 버튼을 누르면 완료 안내가 나타납니다. 맞춤 웹푸시는 맞춤 조건과 새 공고에 따라 발송 대상이 결정됩니다. 실제 수신 여부는 별도로 확인해 주세요.</p>`
     + cpPushSetupPanel()
     + `<p class="live" id="prefLive"></p>`
     + `<div class="row"><button id="prefClear">초기화</button><button type="button" class="primary" id="prefSave" onclick="cpSavePreferenceSettings();return false">저장</button></div>`;
@@ -1485,7 +1505,9 @@ function openPrefs(){
   prefLive();
   cpRefreshPushPanel();
 }
-function cpSavePreferenceSettings(){
+let cpPreferenceBusy=false;
+async function cpSavePreferenceSettings(){
+  if(cpPreferenceBusy)return false;cpPreferenceBusy=true;
   const button=document.getElementById("prefSave");
   const live=document.getElementById("prefLive");
   if(button){button.textContent="저장 처리 중…";button.disabled=true;}
@@ -1495,8 +1517,8 @@ function cpSavePreferenceSettings(){
     if(input)DRAFT.kw=input.value;
     const next=JSON.parse(JSON.stringify(DRAFT));
     const serialized=JSON.stringify(next);
-    localStorage.setItem("prefs",serialized);
-    if(localStorage.getItem("prefs")!==serialized)throw Error("저장 후 값 검증 실패");
+    const stored=await cpMutateRecords('prefs',{},CPStore.prefs,()=>next);
+    if(stored===null)throw Error('맞춤 조건을 저장하지 못했습니다. 기존 기록을 보존했습니다.');
     PREFS=next;
     if(live)live.textContent="✓ 맞춤 조건 저장 성공 · 진단 v2";
     if(button){button.textContent="✓ 저장 완료";button.disabled=false;}
@@ -1512,7 +1534,7 @@ function cpSavePreferenceSettings(){
       const pushStatus=document.getElementById("cpPushMessage");
       if(pushStatus)pushStatus.textContent=message;
     }).catch(error=>{
-      console.warn("Preference sync failed",error);
+      console.warn("Preference sync failed");
       const pushStatus=document.getElementById("cpPushMessage");
       if(pushStatus)pushStatus.textContent="✓ 기기에 저장 완료 · 알림 서버 동기화 오류";
     });
@@ -1522,7 +1544,7 @@ function cpSavePreferenceSettings(){
     if(live)live.textContent="⚠️ 저장 실패 (진단 v2): "+message;
     if(button){button.textContent="다시 저장";button.disabled=false;}
     return false;
-  }
+  }  finally{cpPreferenceBusy=false;}
 }
 
 function prefLive(){
@@ -1565,6 +1587,7 @@ function renderSpec(now){
     alioDetail().then(() => { renderTabs(); render(); });
     return;
   }
+  if(CP_DATA_LOADING&&!POSTS.length){$('summary').textContent='공고를 불러오는 중입니다.';$('list').innerHTML='<li class="empty" role="status">공고를 불러오는 중입니다. 잠시만 기다려 주세요.</li>';return;}
   const q = state.q.trim().toLowerCase();
   let all = specRows(now).filter(x => !q || haystack(x.p).includes(q) || plainQ((ALIO_DETAIL[x.p.id] || {}).aplyQlfcCn).toLowerCase().includes(q));
   const cnt = {ok:0, check:0, no:0}; all.forEach(x => cnt[x.r.v]++);
@@ -1741,8 +1764,18 @@ const ST = {
 };
 const ST_ORDER = ["plan","applied","doc","exam","itv","pass","fail"];
 let APPS = {};
-try { APPS = JSON.parse(localStorage.getItem("apps") || "{}") || {}; } catch(e) {}
-function saveApps(){ try { localStorage.setItem("apps", JSON.stringify(APPS)); } catch(e) {} }
+APPS=cpReadRecords("apps",{},CPStore.apps);
+async function cpStoreApp(id,next,expected=JSON.stringify(APPS[id]??null)){
+  const data=await cpMutateRecords('apps',{},CPStore.apps,rows=>CPStore.replaceApp(rows,id,next,expected));
+  if(data===null)return false;APPS=data;return true;
+}
+function cpRefreshRecords(){renderTabs();render();savedAlert();if(JV)refreshJobView();}
+window.addEventListener('storage',event=>{
+  if(event.key==='saved'||event.key===null)SAVED=new Set(cpReadRecords('saved',[],CPStore.saved));
+  if(event.key==='apps'||event.key===null)APPS=cpReadRecords('apps',{},CPStore.apps);
+  if(event.key==='prefs'||event.key===null)PREFS=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},cpReadRecords('prefs',{},CPStore.prefs));
+  if(['saved','apps','prefs',null].includes(event.key))cpRefreshRecords();
+});
 const ymd = d => { const k = kst(d); return `${k.getUTCFullYear()}-${pad(k.getUTCMonth()+1)}-${pad(k.getUTCDate())}`; };
 const ymdLabel = s => { const [y,m,d] = s.split("-").map(Number); const w = new Date(Date.UTC(y,m-1,d)).getUTCDay(); return `${m}.${d}(${WD[w]})`; };
 function appEvents(now){
@@ -1837,7 +1870,7 @@ function renderTrack(now){
     if(a.itv) meta.push("면접 " + ymdLabel(a.itv));
     if(a.memo) meta.push(a.memo);
     parts.push(`<li class="trk-item"><div class="grow">
-      <div class="o">${esc(a.org || "")} <span class="stpill st-${a.st}">${ST[a.st].label}</span></div>
+      <div class="o">${esc(a.org || "")} <span class="stpill st-${a.st}">${(ST[a.st]||ST.plan).label}</span></div>
       <a class="t" href="${esc(jobHref(POSTS.find(p => p.id === id) || {type:"j",id,url:a.url}))}" ${POSTS.some(p => p.id === id && isInternalJob(p)) ? `data-open="${esc(id)}"` : 'target="_blank" rel="noopener"'} style="color:inherit;text-decoration:none">${esc(cleanTitle(a.title || POSTS.find(p=>p.id===id || p.sourceIds?.includes(id))?.title || "공고 정보 미확인 (기록 보존)"))}</a>
       ${meta.length ? `<div class="m">${esc(meta.join(" · "))}</div>` : ""}
       ${a.ck && a.ck.length ? (() => { const n = ckDone(a.ck), nx = a.ck.indexOf(ckNext(a.ck));
@@ -1877,12 +1910,15 @@ const ckNext = ck => (ck || []).find(x => !x.d);
 function ckListHTML(ck, attr, editable){
   return `<div class="cklist">${ck.map((x, i) => `<button class="ck" ${attr}="${i}" aria-pressed="${!!x.d}"><span class="bx">${x.d ? "✓" : ""}</span><span class="tx">${esc(x.t)}</span>${editable ? `<span class="rm" data-ckrm="${i}" aria-label="항목 삭제">×</span>` : ""}</button>`).join("")}</div>`;
 }
-function ckToggle(id, i){
-  const a = APPS[id]; if(!a || !a.ck || !a.ck[i]) return;
-  a.ck[i].d = a.ck[i].d ? 0 : 1; a.upd = Date.now();
-  if(a.ck[i].k === "submit" && a.ck[i].d && a.st === "plan"){ a.st = "applied"; toast("서류 제출 완료! 단계를 '지원 완료'로 바꿨어요."); }
-  else if(ckDone(a.ck) === a.ck.length) toast("체크리스트를 모두 끝냈어요 👏");
-  saveApps(); renderTabs(); render(); savedAlert(); if(JV) refreshJobView();
+async function ckToggle(id,i){
+  const source=APPS[id];if(!source?.ck?.[i])return;
+  const expected=JSON.stringify(source),a=JSON.parse(expected);
+  a.ck[i].d=a.ck[i].d?0:1;a.upd=Date.now();
+  if(a.ck[i].k==='submit'&&a.ck[i].d&&a.st==='plan'){
+    if(!confirm('지원서를 실제로 제출하셨나요? 확인하면 지원 완료로 변경합니다.'))return;
+    a.st='applied';
+  }
+  if(await cpStoreApp(id,a,expected))cpRefreshRecords();
 }
 function ckBoxHTML(p){
   const a = APPS[cpApplicationId(p)];
@@ -1891,13 +1927,15 @@ function ckBoxHTML(p){
   const n = ckDone(a.ck), pct = Math.round(n * 100 / a.ck.length);
   return `<div class="ckbox"><h3>✅ 준비 체크리스트 <span class="ckpct">${n}/${a.ck.length}</span></h3><div class="ckbar"><i style="width:${pct}%"></i></div>${ckListHTML(a.ck, `data-ckid="${esc(cpApplicationId(p))}" data-ck`, false)}</div>`;
 }
-let TDRAFT = null, TID = null;
+let TDRAFT = null, TID = null, TBASE=null, CP_TRACK_BUSY=false;
 async function openTrack(id){
   const p = POSTS.find(x => x.id === id || x.sourceIds?.includes(id));
+  APPS=cpReadRecords("apps",{},CPStore.apps);
   const a = APPS[id] || {st:"plan"};
+  TBASE=JSON.stringify(APPS[id]??null);
   if(!a.ck && p && p.alio && !ALIO_DETAIL) await alioDetail();
   TID = id;
-  TDRAFT = {st:a.st, exam:a.exam || "", itv:a.itv || "", memo:a.memo || "",
+  TDRAFT = {st:a.st||"plan", exam:a.exam || "", itv:a.itv || "", memo:a.memo || "",
     ck: a.ck ? JSON.parse(JSON.stringify(a.ck)) : genChecklist(p, p && p.alio ? (ALIO_DETAIL || {})[p.id] : null)};
   const name = p ? (p.org || "") + " " + cleanTitle(p.title) : (a.org || "") + " " + cleanTitle(a.title || "");
   sheet(`<p style="margin:0 0 12px;font-weight:600;font-size:14px;line-height:1.45">${esc(name.trim())}</p>
@@ -1908,20 +1946,21 @@ async function openTrack(id){
       <label style="font-size:12.5px;color:var(--muted)">면접일<input type="date" id="tItv" value="${esc(TDRAFT.itv)}"></label></div></div>
     <div class="grp"><span>준비 체크리스트 ${a.ck ? "" : "(이 공고의 전형 절차에 맞춰 자동으로 만들었어요)"}</span><div id="tCk">${ckListHTML(TDRAFT.ck, "data-tck", true)}</div>
       <div class="ckadd"><input type="text" id="tCkNew" maxlength="40" placeholder="항목 추가 (예: 증명사진 준비)"><button id="tCkAdd">추가</button></div></div>
-    <div class="grp"><span>메모</span><textarea id="tMemo" aria-label="지원 메모" placeholder="예: 자소서 3번 문항 다시 보기, 수험번호 1234">${esc(TDRAFT.memo)}</textarea></div>
+    <div class="grp"><span>메모</span><textarea id="tMemo" aria-label="지원 메모" placeholder="예: 자소서 문항 다시 보기">${esc(TDRAFT.memo)}</textarea></div>
     <div class="row">${APPS[id] ? '<button id="tDel" class="danger">기록 삭제</button>' : '<button onclick="closeSheet()">취소</button>'}<button class="primary" id="tSave">저장</button></div>`, "📋 지원 기록");
   $("tCkNew").addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); $("tCkAdd").click(); } });
 }
-function saveTrack(){
-  const p = POSTS.find(x => x.id === TID || x.sourceIds?.includes(TID)), old = APPS[TID] || {};
-  APPS[TID] = {
-    st: TDRAFT.st, ck: TDRAFT.ck, exam: $("tExam").value, itv: $("tItv").value, memo: $("tMemo").value.trim().slice(0, 200),
-    title: p ? p.title : old.title, org: p ? (p.org || "") : old.org, url: p ? p.url : old.url,
-    due: p && p.due ? p.due.toISOString() : old.due || null, upd: Date.now()
-  };
-  if(TDRAFT.st !== "plan" && TDRAFT.st !== old.st) APPS[TID].ck.forEach(x => { if(x.ph === "pre") x.d = 1; });
-  saveApps(); closeSheet(); renderTabs(); render(); savedAlert(); if(JV) refreshJobView();
-  toast("지원 기록을 저장했어요. '📋 내 지원' 탭에서 모아 볼 수 있어요.");
+async function saveTrack(){
+  if(CP_TRACK_BUSY)return;CP_TRACK_BUSY=true;
+  try{
+    const id=TID,p=POSTS.find(x=>x.id===id||x.sourceIds?.includes(id)),old=APPS[id]||{};
+    const next={...old,st:TDRAFT.st,ck:TDRAFT.ck,exam:$('tExam').value,itv:$('tItv').value,memo:$('tMemo').value,
+      title:p?p.title:old.title,org:p?(p.org||''):old.org,url:p?p.url:old.url,
+      due:p?.due?p.due.toISOString():old.due||null,upd:Date.now()};
+    if(TDRAFT.st!=='plan'&&TDRAFT.st!==old.st)next.ck.forEach(x=>{if(x.ph==='pre')x.d=1;});
+    if(!await cpStoreApp(id,next,TBASE))return;
+    closeSheet();cpRefreshRecords();toast('지원 기록을 이 기기에 저장했습니다.');
+  }finally{CP_TRACK_BUSY=false;}
 }
 // ── 공식 공고 상세 화면 (잡알리오) ──
 let ALIO_DETAIL = null, JV = null, JV_PUSHED = false;
@@ -1955,7 +1994,7 @@ async function openJob(id, push = true){
   if(!p) return;
   id=p.id;
   JV = id;
-  if(push && location.hash !== "#job=" + id){ history.pushState({job:id}, "", "#job=" + id); JV_PUSHED = true; }
+  if(push && location.hash !== "#job=" + id){ history.replaceState({...history.state,cpBrowse:{...state},cpScroll:scrollY},"",location.href); history.pushState({job:id}, "", "#job=" + id); JV_PUSHED = true; }
   $("jobview").hidden = false; cpSyncDialogState(); document.body.style.overflow = "hidden";
   $("jvBody").innerHTML = jobViewHTML(p, null);
   $("jvBack").focus();
@@ -2117,7 +2156,7 @@ function jobViewHTML(p, det){
       <div class="main-btns"><a class="primary" href="${esc(links.primary)}" target="_blank" rel="noopener">${links.label}</a>${off}${cpMergedSourceLinks(p,links.primary)}</div>
       <div class="sub-btns">
         <button class="save" data-save="${esc(cpSavedId(p))}" aria-pressed="${saved}">${saved ? "★ 저장됨" : "☆ 저장"}</button>
-        <button data-track="${esc(cpApplicationId(p))}">${ap ? "📋 " + ST[ap.st].short : "📋 지원기록"}</button>
+        <button data-track="${esc(cpApplicationId(p))}">${ap ? "📋 " + (ST[ap.st]||ST.plan).short : "📋 지원기록"}</button>
         ${d && d.cls !== "closed" && p.dueHasTime === true ? `<a href="${calLink(p)}" target="_blank" rel="noopener">📅 캘린더</a>` : ""}
       </div></div></div>`;
 }
@@ -2134,15 +2173,14 @@ window.addEventListener("popstate", (event) => {
   // 브라우저/스레드 뒤로가기를 사이트 내부 탭 이동에 연결합니다.
   if(event.state && event.state.cpTab){
     CP_RESTORING_TAB = true;
+    if(event.state.cpBrowse)Object.assign(state,event.state.cpBrowse);
     state.tab = event.state.cpTab;
-    state.q = event.state.cpQ || "";
+    state.q = event.state.cpBrowse?.q ?? event.state.cpQ ?? "";
     $("q").value = state.q;
-    state.cat = null;
-    state.status = "all";
-    state.onlyNew = false;
+    if(!event.state.cpBrowse){state.cat=null;state.status="all";state.onlyNew=false;}
     refresh();
     CP_RESTORING_TAB = false;
-    window.scrollTo({top:0,behavior:"instant"});
+    window.scrollTo({top:event.state.cpScroll||0,behavior:"instant"});
   }
 });
 // CareerPick 2.0 step 4: show only real counts from the loaded feed and local records.
@@ -2276,6 +2314,7 @@ function render(){
   if(state.tab === "track"){ renderTrack(now); return; }
   if(state.tab === "spec"){ renderSpec(now); return; }
   if(state.tab === "cert"){ renderCert(now); return; }
+  if(CP_DATA_LOADING&&!POSTS.length){$('summary').textContent='공고를 불러오는 중입니다.';$('list').innerHTML='<li class="empty" role="status">공고를 불러오는 중입니다. 잠시만 기다려 주세요.</li>';return;}
   const q = state.q.trim().toLowerCase();
   // Search the original blog feed as well as the merged feed. This prevents
   // a blog article from disappearing if a duplicate official notice replaces it.
@@ -2313,7 +2352,12 @@ function render(){
   if(state.onlyNew) sum = `🆕 새 글 <b>${rows.length}</b>개만 보는 중 <button class="linkbtn" id="offNew">전체 보기</button>`;
   $("summary").innerHTML = sum;
 
-  if(!rows.length){
+  if(!rows.length && Object.values(DATA_HEALTH).includes('error') && state.tab!=='saved'){
+    $('summary').textContent='공고 조회 일부 실패 · 검색 결과를 확인할 수 없습니다.';
+    $('list').innerHTML='<li class="empty" role="alert">일부 공고를 불러오지 못했습니다. 검색 결과 없음과 다릅니다.<br><button id="cpRetryFeeds">다시 불러오기</button></li>';return;
+  }
+  const orphanIds=state.tab==='saved'?[...SAVED].filter(id=>!POSTS.some(p=>p.id===id||p.sourceIds?.includes(id))):[];
+  if(!rows.length && !orphanIds.length){
     $("list").innerHTML = state.tab === "mine"
       ? `<li class="empty">지금 조건에 맞는 마감 전·일정 확인 공고가 없어요.<br>새 공고가 올라오면 여기에 바로 나타나요.<br><button class="chip" id="editPrefs">조건 수정</button></li>`
       : state.tab === "saved"
@@ -2323,6 +2367,8 @@ function render(){
   }
   const cards = rows.slice(0,cpVisibleLimit).map(p => p.type === "j" ? (COMPACT ? rowCard(p, now) : jobCard(p, now)) : miniCard(p, now));
   if(rows.length > cpVisibleLimit) cards.push(`<li class="cp-more"><button type="button" id="cpLoadMore">공고 더 보기 (${Math.min(cpVisibleLimit,rows.length)} / ${rows.length})</button></li>`);
+  for(const id of orphanIds)cards.push(`<li class="empty">현재 목록에 없는 저장 공고 · ${esc(id)}<br>저장 기록은 보존했습니다. 원문 상태는 미확인입니다.<br><button data-save="${esc(id)}" aria-pressed="true">★ 저장 해제</button></li>`);
+  if(state.tab==='saved'&&orphanIds.length)$('summary').insertAdjacentText('beforeend',` · 목록 미연결 ${orphanIds.length}건 보존`);
   const n = cards.length;
   if(ADS.length){
     cards.push(adBlock(1));
@@ -2366,9 +2412,10 @@ function refresh(){ cpRecordTab(); renderTabs(); renderFilters(); render(); save
   });
 }
 
-document.addEventListener("click", e => {
+document.addEventListener("click", async e => {
   const t = e.target.closest("button");
   if(!t) return;
+  if(t.id==='cpRetryFeeds'){if(!CP_DATA_LOADING){CP_DATA_LOADING=true;render();load();}return;}
   if(t.id === "cpInternalBack"){
     if(CP_TAB_DEPTH > 0) history.back();
     else {state.tab="all";refresh();}
@@ -2383,7 +2430,7 @@ document.addEventListener("click", e => {
     if(a==="mine" && !hasPrefs()){state.tab="all";openPrefs();return;}
     refresh(); return;
   }
-  if(t.dataset.save){ toggleSave(t.dataset.save); renderTabs(); render(); savedAlert(); if(JV) refreshJobView(); }
+  if(t.dataset.save){ if(await toggleSave(t.dataset.save))cpRefreshRecords(); }
   else if(t.id === "jvBack"){ closeJob(false); }
   else if(t.id === "cpReport"){ cpExportReport(); }
   else if(t.id === "cpBackup"){ cpDownloadBackup(); }
@@ -2394,9 +2441,10 @@ document.addEventListener("click", e => {
     const id=t.dataset.markapplied, a=APPS[id];
     if(!a || a.st!=="plan") return;
     if(!confirm("지원서를 실제로 제출하셨나요? 제출 완료로 변경하면 마감 알림에서 제외됩니다.")) return;
-    a.st="applied"; a.upd=Date.now();
-    if(Array.isArray(a.ck)) a.ck.forEach(x=>{if(x.ph==="pre" || x.k==="submit") x.d=1;});
-    saveApps(); renderTabs(); render(); savedAlert();
+    const expected=JSON.stringify(a), next=JSON.parse(expected);
+    next.st="applied"; next.upd=Date.now();
+    if(Array.isArray(next.ck)) next.ck.forEach(x=>{if(x.ph==="pre" || x.k==="submit") x.d=1;});
+    if(!await cpStoreApp(id,next,expected))return;cpRefreshRecords();
     toast("지원 완료로 변경했습니다. '내 지원'에서 언제든 수정할 수 있어요.");
   }
   else if(t.dataset.track){ openTrack(t.dataset.track); }
@@ -2416,7 +2464,11 @@ document.addEventListener("click", e => {
     $("tCkNew").value = ""; $("tCk").innerHTML = ckListHTML(TDRAFT.ck, "data-tck", true);
   }
   else if(t.dataset.ckid){ ckToggle(t.dataset.ckid, +t.dataset.ck); }
-  else if(t.id === "tDel"){ if(confirm("이 지원 기록을 삭제할까요?")){ delete APPS[TID]; saveApps(); closeSheet(); renderTabs(); render(); savedAlert(); } }
+  else if(t.id === "tDel"){
+    if(!CP_TRACK_BUSY&&confirm('지원 상태·메모·체크리스트·일정을 삭제합니다. 저장 공고는 유지됩니다. 복구하려면 먼저 JSON 백업을 받아 주세요. 삭제할까요?')){
+      CP_TRACK_BUSY=true;try{if(await cpStoreApp(TID,null,TBASE)){closeSheet();cpRefreshRecords();}}finally{CP_TRACK_BUSY=false;}
+    }
+  }
   else if(t.dataset.tab){ if(["all","mine","saved","track"].includes(t.dataset.tab))cpResetBrowseFilters(); state.tab = t.dataset.tab; state.certQ = null; refresh(); }
   else if(t.dataset.cat !== undefined){ state.cat = t.dataset.cat || null; refresh(); }
   else if(t.dataset.region !== undefined){ state.region = t.dataset.region; refresh(); }
@@ -2474,7 +2526,11 @@ document.addEventListener("click", e => {
   else if(t.id === "toggle"){ cpToggleFilters(!$("panel").classList.contains("open")); }
   else if(t.id === "reset" || t.id === "empty-reset"){ cpResetBrowseFilters(); state.sort="due"; refresh(); }
 });
-$("q").addEventListener("input", e => { state.q = e.target.value; renderFilters(); render(); });
+let cpComposing=false;
+$('q').addEventListener('compositionstart',()=>{cpComposing=true;});
+function cpSearchInput(e){if(cpComposing||e.isComposing)return;state.q=e.target.value;renderFilters();render();}
+$('q').addEventListener('compositionend',e=>{cpComposing=false;cpSearchInput(e);});
+$('q').addEventListener('input',cpSearchInput);
 $("tabs").addEventListener("scroll", fadeHint, {passive:true});
 window.addEventListener("resize", fadeHint);
 
@@ -2514,7 +2570,7 @@ window.addEventListener("popstate",()=>{
 /* Web push is opt-in. Public OneSignal App ID is set in push-config.js;
    private REST API keys must never be exposed in client-side code. */
 let cpPushSdkReady = false;
-let cpPushInitPromise = null;
+let cpPushInitPromise = null, cpPushAction=null, cpPushGeneration=0;
 function cpPushStatus(){
   const id = window.CP_ONESIGNAL_APP_ID;
   if(!id || !/^[0-9a-f-]{36}$/i.test(id)) return "setup";
@@ -2563,7 +2619,7 @@ async function cpSyncPushPreferences(){
       return true;
     }
   }catch(e){
-    console.warn("Push preference sync deferred",e);
+    console.warn("Push preference sync deferred");
   }
   return false;
 }
@@ -2574,9 +2630,11 @@ async function cpInitPush(){
   if(cpPushSdkReady) return;
   if(cpPushInitPromise) return cpPushInitPromise;
   if(cpPushStatus() !== "ready") throw Error("웹푸시 설정이 완료되지 않았습니다.");
+  const generation=++cpPushGeneration;
   cpPushInitPromise = cpPushWithTimeout(new Promise((resolve,reject)=>{
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     window.OneSignalDeferred.push(async function(sdk){
+      if(generation!==cpPushGeneration)return;
       try {
         try {
           await sdk.init({
@@ -2602,7 +2660,7 @@ async function cpInitPush(){
     }
   }),15000,"SDK 연결");
   try { await cpPushInitPromise; }
-  catch(e){cpPushInitPromise=null;throw e;}
+  catch(e){cpPushGeneration++;cpPushInitPromise=null;document.querySelector('script[data-cp-onesignal]')?.remove();throw e;}
 }
 function cpPushRegistered(){
   const sub=window.OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
@@ -2616,6 +2674,7 @@ async function cpWaitPushState(test,label){
   }
 }
 async function cpSubscribePush(){
+  if(cpPushAction)return;cpPushAction="subscribe";
   const btn=$("cpPushSubscribe"), status=$("cpPushMessage");
   if(btn){btn.disabled=true;btn.textContent="⏳ 연결 확인 중…";}
   if(status)status.textContent="OneSignal 연결과 브라우저 권한을 확인하고 있습니다.";
@@ -2630,11 +2689,11 @@ async function cpSubscribePush(){
     await cpSyncPushPreferences();
     if(btn){btn.textContent="✓ 웹푸시 구독 활성화";btn.disabled=true;}
     cpRenderPushButtons();
-    if(status)status.textContent="이 기기의 웹푸시 구독이 활성화되었습니다. 다른 휴대폰·PC에서는 별도로 구독해야 합니다. 자동 발송은 아직 준비 중입니다.";
+    if(status)status.textContent="이 기기의 웹푸시 구독이 활성화되었습니다. 다른 휴대폰·PC에서는 별도로 구독해야 합니다. 맞춤 조건과 새 공고에 따라 발송 대상이 결정됩니다. 실제 수신 여부는 별도로 확인해 주세요.";
   } catch(e){
     if(btn){btn.disabled=false;btn.textContent="🔔 다시 연결하기";}
     if(status)status.textContent="연결 실패: "+String(e.message||e).slice(0,180);
-  }
+  }finally{cpPushAction=null;cpRenderPushButtons();}
 }
 async function cpCopyPushSubscriptionId(){
   const status=$("cpPushMessage");
@@ -2643,12 +2702,12 @@ async function cpCopyPushSubscriptionId(){
     const sub=OneSignal.User.PushSubscription;
     const id=cpPushRegistered() && sub.id;
     if(!id) throw Error("먼저 웹푸시를 구독한 뒤 다시 시도해 주세요.");
-    if(status)status.textContent="테스트용 구독 ID: "+id;
+
     try{
       await navigator.clipboard.writeText(id);
-      if(status)status.textContent="복사 완료 · 테스트용 구독 ID: "+id;
+      if(status)status.textContent="구독 ID를 복사했습니다. 신뢰할 수 있는 지원 창구에만 전달하세요.";
     }catch(_){
-      if(status)status.textContent="자동 복사가 차단되었습니다. 아래 ID를 길게 눌러 복사해 주세요: "+id;
+      if(status){status.textContent='자동 복사가 차단되었습니다. 아래 선택 칸을 길게 눌러 복사하세요.';const field=document.createElement('input');field.readOnly=true;field.value=id;field.setAttribute('aria-label','직접 복사할 구독 ID');status.append(field);field.focus();field.select();}
     }
   }catch(e){
     cpRenderPushButtons();
@@ -2656,6 +2715,7 @@ async function cpCopyPushSubscriptionId(){
   }
 }
 async function cpUnsubscribePush(){
+  if(cpPushAction)return;cpPushAction="unsubscribe";
   const btn=$("cpPushUnsubscribe"), status=$("cpPushMessage");
   if(btn){btn.disabled=true;btn.textContent="해지 처리 중…";}
   try{
@@ -2667,13 +2727,13 @@ async function cpUnsubscribePush(){
   }catch(e){
     cpRenderPushButtons();
     if(status)status.textContent="해지 실패: "+String(e.message||e).slice(0,180);
-  }
+  }finally{cpPushAction=null;cpRenderPushButtons();}
 }
 function cpRenderPushButtons(){
   const on=cpPushRegistered();
   const subscribe=$("cpPushSubscribe"), unsubscribe=$("cpPushUnsubscribe");
-  if(subscribe){subscribe.style.display=on?"none":"block";subscribe.hidden=on;subscribe.disabled=false;subscribe.textContent="🔔 웹푸시 알림 허용하기";}
-  if(unsubscribe){unsubscribe.style.display=on?"block":"none";unsubscribe.hidden=!on;unsubscribe.disabled=false;unsubscribe.textContent="알림 구독 해지";}
+  if(subscribe){subscribe.style.display=on?"none":"block";subscribe.hidden=on;subscribe.disabled=!!cpPushAction;subscribe.textContent=cpPushAction?"⏳ 처리 중…":"🔔 웹푸시 알림 허용하기";}
+  if(unsubscribe){unsubscribe.style.display=on?"block":"none";unsubscribe.hidden=!on;unsubscribe.disabled=!!cpPushAction;unsubscribe.textContent=cpPushAction?"해지 처리 중…":"알림 구독 해지";}
   const status=$("cpPushMessage");
   if(status && (!status.textContent || /^(✓ 이 기기에서 웹푸시 구독 중|이 기기에서는 아직 웹푸시를 구독하지 않았습니다)/.test(status.textContent))) status.textContent=on?"✓ 이 기기에서 웹푸시 구독 중입니다. 아래에서 해지할 수 있습니다.":"이 기기에서는 아직 웹푸시를 구독하지 않았습니다.";
 }

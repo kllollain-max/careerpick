@@ -3,10 +3,13 @@ function cpCheckVisibleLimit(){ const key=JSON.stringify(state);if(key!==cpLastF
 /* UI wiring for the existing homepage; no changes to delivery or collection. */
 const CP_FEED_STAMPS={},CP_FEED_ISSUES={};
 const CP_UNCONFIRMED_IDS=new Set();
+async function cpFetchJson(path){
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
+  try{const response=await fetch(path,{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('feed_http');return await response.json();}
+  finally{clearTimeout(timer);}
+}
 async function cpReadFeed(path,key){
-  const response=await fetch(path+'?t='+Date.now(),{cache:'no-store'});
-  if(!response.ok)throw Error('feed_http');
-  const parsed=CPHome.parseFeed(await response.json());
+  const parsed=CPHome.parseFeed(await cpFetchJson(path+'?t='+Date.now()));
   CP_FEED_STAMPS[key]=parsed.updated;CP_FEED_ISSUES[key]=parsed.issues;
   return parsed.rows;
 }
@@ -20,9 +23,7 @@ function cpSyncDialogState(){
 let cpEnterpriseState = 'pending';
 async function cpLoadEnterprise(){
   try {
-    const res = await fetch('enterprise_jobs.json?t='+Date.now(), {cache:'no-store'});
-    if(!res.ok) throw Error('enterprise feed');
-    const data = await res.json();
+    const data = await cpFetchJson('enterprise_jobs.json?t='+Date.now());
     if(!Array.isArray(data.jobs)) throw Error('enterprise schema');
     const ids = new Set(POSTS.map(p=>p.id));
     POSTS.push(...data.jobs.map(CPHome.enterprise).filter(p=>p && !ids.has(p.id)));
@@ -33,23 +34,17 @@ async function cpLoadEnterprise(){
 }
 async function cpLoadWork24(){
   try{
-    const response=await fetch('work24-policy.json?t='+Date.now(),{cache:'no-store'});
-    if(!response.ok)throw Error('work24 policy');
-    const policy=await response.json();
+    const policy=await cpFetchJson('work24-policy.json?t='+Date.now());
     if(!policy || typeof policy!=='object' || Array.isArray(policy) || typeof policy.approved!=='boolean')throw Error('work24 policy schema');
     if(policy.approved===false){DATA_HEALTH.work24='awaiting_approval';return;}
   }catch(e){DATA_HEALTH.work24='config_error';return;}
   try{
-    const response=await fetch('work24-status.json?t='+Date.now(),{cache:'no-store'});
-    if(!response.ok)throw Error('work24 receipt');
-    const status=await response.json();
+    const status=await cpFetchJson('work24-status.json?t='+Date.now());
     if(['disabled','blocked_external','awaiting_approval'].includes(status.state)){DATA_HEALTH.work24='disabled';return;}
     if(!['ok','unchanged'].includes(status.state) || status.api_ok!==true)throw Error('work24 collection');
     const checked=Date.parse(status.last_success_at);
     if(!Number.isFinite(checked) || Date.now()-checked>24*3600000 || checked>Date.now()+300000)throw Error('work24 stale receipt');
-    const res=await fetch('work24.json?t='+Date.now(),{cache:'no-store'});
-    if(!res.ok)throw Error('work24 feed');
-    const data=await res.json();
+    const data=await cpFetchJson('work24.json?t='+Date.now());
     if(data.updated_at!==status.snapshot_updated_at || !Array.isArray(data.posts) || data.count!==data.posts.length || status.counts?.stored!==data.count)throw Error('work24 count');
     const ids=new Set(POSTS.map(p=>p.id));
     for(const row of data.posts){const p=CPHome.work24(row);if(p && !ids.has(p.id)){POSTS.push(p);ids.add(p.id);}}
