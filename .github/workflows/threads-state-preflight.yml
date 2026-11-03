@@ -1,0 +1,22 @@
+name: Verify Threads runner state access without publishing
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify state branch access and isolated write/readback
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISH_ENABLED: ${{ vars.THREADS_ENABLED }}
+          MIGRATION_READY: ${{ vars.THREADS_MIGRATION_READY }}
+        run: python scripts/threads_state_preflight.py

@@ -38,7 +38,7 @@ jobs:
       THREADS_EDITORIAL_ENABLED: ${{ vars.THREADS_EDITORIAL_ENABLED == 'true' }}
       THREADS_CONVERSATION_ENABLED: ${{ vars.THREADS_CONVERSATION_ENABLED != 'false' }}
       THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
-      THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+      THREADS_USER_ID: '28818095904512513'
 
     steps:
       - name: Checkout
