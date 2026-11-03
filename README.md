@@ -5,6 +5,29 @@ Restored from `CareerPick_kllollain_max_restore_20261101.zip`; original public s
 Repository: `kllollain-max/careerpick`, originally created as a private repository on 2026-11-03.
 Live site: [CareerPick](https://kllollain-max.github.io/careerpick/).
 
+## Current operating status (2026-11-03 KST)
+
+The website is public at https://kllollain-max.github.io/careerpick/.
+Scheduled collection is enabled at `17 */3 * * *` (every three hours).
+The latest verified operation, [run 41616105607](https://github.com/kllollain-max/careerpick/actions/runs/41616105607),
+collected, validated, stored and deployed 630 preserved ALIO notices, then verified the public snapshot hashes.
+The count includes archived notices; it is not the number of current vacancies.
+GOJOBS and MPM examination collection also completed successfully in that run.
+The examination source retained 28 stages; GOJOBS retained 8 reviewed notices (5 confirmed open and 3 with closing-day time uncertainty).
+
+Targeted push [run 41621955756](https://github.com/kllollain-max/careerpick/actions/runs/41621955756)
+reported `ready=true`, `sent=0`, and an empty queue. This confirms sender readiness for that run,
+not delivery to a phone. Earlier missing-secret failures must not be described as current failures after this recovery.
+Threads publication and phone notification receipt require their own evidence.
+
+Local audit of source `21ebd34f7f87a6045cb583288c17993e46794651`: public build completed,
+1,313 output files, 30,692 HTML links checked, zero missing local links;
+60 Node tests passed. The candidate test now compares preserved source rows and null counts against
+the input snapshot, so normal collection date normalization cannot cause a false regression.
+
+The following sections retain the initial restoration evidence. Their 610-notice counts,
+manual-only deployment and disabled-schedule statements describe that earlier release, not current operation.
+
 ## Initial release status
 
 On 2026-11-03 the owner approved making this repository public, merging PR #1 and running one manual GitHub Pages deployment for free operation. PR #1 was merged at 06:49:34 UTC in `643bd425621dc1ca5fcb479aee09733a346049ea`. The reviewed manual workflow was added to main in `d4d9681a935aa899a5605e5ae1ed7c803c795966`. The repository is now public and the approved manual Pages deployment succeeded.
