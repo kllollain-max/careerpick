@@ -1,6 +1,6 @@
 """잡알리오(공공기관 채용정보) 공식 공고를 가져와 alio.json에 저장하는 스크립트
 
-- 공공데이터포털 '기획재정부_공공기관 채용정보 조회서비스' (data.go.kr 15125273)
+- ALIO 오픈데이터 공식 POST/query 계약 (2026-11-03 확인)
 - GitHub Secrets 의 ALIO_KEY (일반 인증키, Decoding) 가 있을 때만 실행
 - 실패해도 기존 alio.json 을 그대로 두므로 사이트에는 영향이 없음
 """
@@ -15,7 +15,8 @@ from pathlib import Path
 OUT = Path(__file__).parent / "alio.json"
 DETAIL = Path(__file__).parent / "alio-detail.json"   # 카드를 눌렀을 때만 불러오는 상세 내용
 KST = timezone(timedelta(hours=9))
-ENDPOINTS = ["https://apis.data.go.kr/1051000/recruitment/list"]
+ENDPOINTS = ["https://opendata.alio.go.kr/new/v1/recruit/list.do"]
+DETAIL_ENDPOINT = "https://opendata.alio.go.kr/new/v1/recruit/detail.do"
 PER_PAGE = 100
 MAX_PAGES = 10
 
@@ -57,28 +58,47 @@ def unwrap(data):
     return data if isinstance(data, dict) else {"result": data}
 
 
+def request_api(key, base, params):
+    """Official POST/query contract; never log URL, key or response body."""
+    q = urllib.parse.urlencode({"serviceKey": key, "resultType": "json", **params})
+    req = urllib.request.Request(
+        f"{base}?{q}", data=b"", method="POST",
+        headers={"User-Agent": "CareerPick", "Accept": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except Exception as error:
+        raise RuntimeError("ALIO transport/JSON failure: " + type(error).__name__) from None
+    if not isinstance(payload, dict) or str(payload.get("resultCode")) != "0":
+        code = str(payload.get("resultCode")) if isinstance(payload, dict) else ""
+        safe_code = code if code in {"1", "2", "3", "5", "6", "7", "8", "10", "11"} else "unknown"
+        raise RuntimeError("ALIO API failure code=" + safe_code)
+    return payload
+
+
 def call(key, page, ongoing="Y"):
-    q = urllib.parse.urlencode({"serviceKey": key, "resultType": "json", "pageNo": page,
-                                "numOfRows": PER_PAGE, "ongoingYn": ongoing})
-    last = None
-    for base in ENDPOINTS:
-        try:
-            req = urllib.request.Request(f"{base}?{q}", headers={"User-Agent": "jobinfo-hub"})
-            with urllib.request.urlopen(req, timeout=30) as r:
-                text = r.read().decode("utf-8", "replace")
-            try:
-                data = json.loads(text)
-            except ValueError:
-                raise RuntimeError("JSON 이 아닌 응답: " + text[:300].replace("\n", " "))
-            data = unwrap(data)
-            code = str(data.get("resultCode", "200"))
-            if code not in ("200", "00", "0", "INFO-000", "NORMAL_SERVICE"):
-                raise RuntimeError(f"API 오류 {code}: {data.get('resultMsg')}")
-            return data
-        except Exception as e:
-            # HTTP errors can embed serviceKey in the request URL; never log it.
-            last = str(e).replace(key, "***").replace(urllib.parse.quote_plus(key), "***")
-    raise RuntimeError(last or "ALIO API request failed")
+    payload = request_api(key, ENDPOINTS[0], {
+        "pageNo": page, "numOfRows": PER_PAGE, "ongoingYn": ongoing})
+    if not isinstance(payload.get("result"), list):
+        raise RuntimeError("ALIO list shape mismatch")
+    try:
+        count = int(payload["totalCount"])
+        if count < 0:
+            raise ValueError()
+    except (KeyError, TypeError, ValueError):
+        raise RuntimeError("ALIO totalCount missing/invalid") from None
+    return payload
+
+
+def call_detail(key, sn):
+    identity = str(sn)
+    if not identity.isdigit():
+        raise ValueError("Invalid ALIO notice ID")
+    payload = request_api(key, DETAIL_ENDPOINT, {"sn": identity})
+    detail = payload.get("result")
+    if not isinstance(detail, dict) or str(detail.get("recrutPblntSn")) != identity:
+        raise RuntimeError("ALIO detail identity mismatch")
+    return detail
 
 
 EMP_MAP = [("무기", "무기계약직"), ("정규", "정규직"), ("인턴", "인턴"), ("비정규", "계약직"), ("기간제", "계약직"), ("계약", "계약직")]
