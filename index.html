@@ -1815,7 +1815,7 @@ window.addEventListener('storage',event=>{
   }
 });
 const ymd = d => { const k = kst(d); return `${k.getUTCFullYear()}-${pad(k.getUTCMonth()+1)}-${pad(k.getUTCDate())}`; };
-const ymdLabel = s => { const [y,m,d] = s.split("-").map(Number); const w = new Date(Date.UTC(y,m-1,d)).getUTCDay(); return `${m}.${d}(${WD[w]})`; };
+const ymdLabel = s => { if(!CPManage.date(s))return '일정 미확인';const [y,m,d] = s.split("-").map(Number); const w = new Date(Date.UTC(y,m-1,d)).getUTCDay(); return `${m}.${d}(${WD[w]})`; };
 function appEvents(now){
  return Object.entries(APPS).flatMap(([id,a])=>CPManage.events(a,POSTS.find(p=>p.id===id||p.sourceIds?.includes(id)),now).filter(e=>!e.past).map(e=>({...e,id,name:a.org||a.title||id}))).sort((a,b)=>a.date.localeCompare(b.date));
 }
