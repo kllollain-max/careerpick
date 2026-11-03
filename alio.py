@@ -7,6 +7,7 @@
 import json
 import os
 import re
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -67,6 +68,8 @@ def request_api(key, base, params):
     try:
         with urllib.request.urlopen(req, timeout=30) as response:
             payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as error:
+        raise RuntimeError("ALIO HTTP status=" + str(error.code)) from None
     except Exception as error:
         raise RuntimeError("ALIO transport/JSON failure: " + type(error).__name__) from None
     if not isinstance(payload, dict) or str(payload.get("resultCode")) != "0":

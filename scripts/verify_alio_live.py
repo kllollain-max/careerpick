@@ -57,6 +57,8 @@ def main():
         report["error_type"] = type(error).__name__
         safe = {"blocked_missing_secret", "empty_list_preserved", "collection_not_confirmed"}
         safe.update("ALIO API failure code=" + str(c) for c in (1,2,3,5,6,7,8,10,11))
+        safe.update("ALIO HTTP status=" + str(c) for c in range(400,600))
+        safe.update("ALIO transport/JSON failure: " + c for c in ("URLError","TimeoutError","JSONDecodeError"))
         if str(error) in safe:
             report["reason"] = str(error)
     finally:
