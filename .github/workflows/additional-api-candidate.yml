@@ -1,0 +1,78 @@
+name: Verify public API candidates
+on:
+  push:
+    branches: [codex/gojobs-notice-guard-20261103]
+    paths:
+      - mpm_exam.py
+      - civil-service-exams.html
+      - scripts/build_additional_api_candidate.py
+      - scripts/verify_additional_api_candidate_browser.cjs
+      - tests/test_mpm_exam.py
+      - tests/test_additional_api_candidate.py
+      - tests/test_civil_service_exams.cjs
+      - data/civil-service/**
+      - .github/workflows/additional-api-candidate.yml
+  workflow_dispatch:
+    inputs:
+      live_exam:
+        description: Read MPM API into a review candidate without replacing website data
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify API contracts, candidate guards and calendar behavior
+        run: |
+          python -m unittest discover -s tests -p test_mpm_exam.py
+          python -m unittest discover -s tests -p test_gojobs_notice_safety.py
+          python -m unittest discover -s tests -p test_gojobs_notice_review.py
+          python -m unittest discover -s tests -p test_additional_api_candidate.py
+          node --test tests/test_civil_service_exams.cjs
+      - name: Prepare offline candidate from preserved evidence
+        if: github.event_name != 'workflow_dispatch' || !inputs.live_exam
+        run: python scripts/build_additional_api_candidate.py
+      - name: Prepare explicitly requested MPM API candidate
+        if: github.event_name == 'workflow_dispatch' && inputs.live_exam
+        env:
+          MPM_EXAM_KEY: ${{ secrets.MPM_EXAM_KEY }}
+        run: python scripts/build_additional_api_candidate.py --live-exam
+      - name: Build the existing public site with the corrected calendar
+        run: python scripts/build_public_site.py
+      - name: Install browser and Korean fonts
+        run: |
+          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+          node "$RUNNER_TEMP/cp-browser/node_modules/playwright/cli.js" install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Check actual calendar and review pages on mobile and desktop
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+        run: |
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          ln -s "$GITHUB_WORKSPACE/additional-api-candidate-output" _preview/api-review
+          python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_additional_api_candidate_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: careerpick-public-api-candidate
+          path: |
+            additional-api-candidate-output/
+            candidate-browser-validation/
+            build-report.json
+          retention-days: 7
+          if-no-files-found: error
