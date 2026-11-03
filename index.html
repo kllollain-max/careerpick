@@ -909,14 +909,16 @@ async function load(){
   POSTS=[];CP_BLOG_SEARCH=[];CP_SEARCH_TEXT=new WeakMap();
   let published=false;
   const publish=()=>{
-    if(!published&&POSTS.some(p=>p.type==='j')){cpDedupePosts();published=true;initSeen();cpRenderFeedStatus();refresh();}
+    if(!published&&POSTS.some(isInternalJob)){cpDedupePosts();published=true;initSeen();cpRenderFeedStatus();refresh();}
   };
   const blog=(async()=>{
     try{const rows=await cpReadFeed('posts.json','posts');POSTS=POSTS.concat(rows);UPDATED=CP_FEED_STAMPS.posts;DATA_HEALTH.posts='ok';CP_BLOG_SEARCH=rows;}
     catch(_){DATA_HEALTH.posts='error';}
   })();
   await Promise.all([blog,loadAlio(),loadGojobs(),loadMonitoredJobs(),cpLoadEnterprise(),cpLoadWork24()].map(task=>task.finally(publish)));
-  if(!POSTS.length&&previousPosts.length){POSTS=previousPosts;CP_USING_PREVIOUS=true;}
+  const officialFailed=['alio','gojobs','monitor','enterprise'].some(key=>DATA_HEALTH[key]==='error');
+  if(!POSTS.some(isInternalJob)&&previousPosts.some(isInternalJob)&&officialFailed){POSTS=previousPosts;CP_USING_PREVIOUS=true;}
+  else if(!POSTS.length&&previousPosts.length){POSTS=previousPosts;CP_USING_PREVIOUS=true;}
   initSeen();
   CP_DATA_LOADING=false;
   cpDedupePosts();
