@@ -1,0 +1,33 @@
+name: Review unexpired notices absent from official list
+on:
+  push:
+    branches: [codex/restore-careerpick-20261103]
+    paths:
+      - scripts/audit_alio_absent.py
+      - tests/test_alio_absence.py
+      - .github/workflows/alio-absence-review.yml
+permissions:
+  contents: read
+jobs:
+  absence-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate conservative classification and preservation
+        run: python -m unittest discover -s tests -p test_alio_absence.py
+      - name: Review missing notices without changing snapshots
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python scripts/audit_alio_absent.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alio-absence-review
+          path: alio-absence-review/
+          retention-days: 7
