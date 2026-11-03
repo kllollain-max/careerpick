@@ -40,5 +40,14 @@ class ContractTest(unittest.TestCase):
                 alio.call("SECRET",1)
             self.assertNotIn("SECRET",str(caught.exception))
             self.assertNotIn("https",str(caught.exception))
+    def test_transient_transport_retries_once(self):
+        with patch("alio.time.sleep"), patch("alio.urllib.request.urlopen",side_effect=[TimeoutError(),self.response({"resultCode":200,"totalCount":1,"result":[{"recrutPblntSn":123}]})]) as call:
+            self.assertEqual(alio.call("test-key",1)["totalCount"],1)
+            self.assertEqual(call.call_count,2)
+    def test_authentication_http_failure_is_not_retried(self):
+        error=alio.urllib.error.HTTPError("hidden",403,"hidden",{},None)
+        with patch("alio.urllib.request.urlopen",side_effect=error) as call:
+            with self.assertRaises(RuntimeError):alio.call("test-key",1)
+            self.assertEqual(call.call_count,1)
 if __name__ == "__main__":
     unittest.main()

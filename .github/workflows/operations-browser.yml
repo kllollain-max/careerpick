@@ -26,6 +26,12 @@ jobs:
           node-version: '22'
       - run: python scripts/build_public_site.py
       - run: node --test tests/test_record_migration.cjs tests/test_civil_service_exams.cjs
+      - name: Verify restored social code without sending
+        run: |
+          python -m unittest discover -s tests -p 'test_recovered_*.py'
+          python -m unittest discover -s tests -p test_alert_known_subscriber.py
+          python -m unittest discover -s tests -p test_alert_subscriber_validation.py
+          python -m unittest discover -s tests -p test_alert_preference_matcher.py
       - name: Install browser test package
         run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
       - name: Verify new notices at 320, 390 and 1440 px
