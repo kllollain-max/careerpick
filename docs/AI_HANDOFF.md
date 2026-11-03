@@ -1,6 +1,15 @@
 # CareerPick 복구 인수인계 — 2026-11-03
 
-## 현재 상태
+## 2026-11-03 추가 API 후속 기록
+
+- 복구 PR #1은 병합됐고 저장소는 공개 상태다. 별도 복구 작업의 [Pages 1회 배포 41593785022](https://github.com/kllollain-max/careerpick/actions/runs/41593785022)는 success로 확인됐다. 아래 초기 기록의 미병합·private·Pages 미설정 설명은 당시 상태다.
+- 추가 API 보완은 [Draft PR #2](https://github.com/kllollain-max/careerpick/pull/2)에 있다. 실행 코드 `71e38bfe2698f0606d887992fb08143fcbb0292a`, [검증 41595833144](https://github.com/kllollain-max/careerpick/actions/runs/41595833144) success. 최신 세부 근거는 [후보 생성·화면 검증](ADDITIONAL_API_CANDIDATE_20261103.md)과 [JSON 증거](evidence/additional-api-candidate-20261103.json)를 우선한다.
+- MPM은 이미 있던 일정 페이지를 재사용한다. 전체 28행 반환 수집 경로, 오프라인 저장본 검사, 날짜·시간 표시 수정, 수동 후보 생성기를 추가했다. 기존 저장본 조회 시각은 **2026-10-26 07:39:58 KST**이며 11월 3일로 갱신하지 않았다.
+- GOJOBS 보존 6건은 제외 1·정합성 차단 1·추가 확인 4, 신규 지원 가능 자동 인정 0이다. ID 20의 분류 불일치를 해소됐다고 보고하지 않는다.
+- 71개 검사와 Chromium 9개 시나리오 통과. 기존 610건 및 일정·증거 원본 보존, 추가 API 호출 0회. artifact ZIP 다운로드·해시 대조·보고서 대조·모바일 화면 확인 완료.
+- 이번 추가 API 변경의 운영 데이터 자동 반영·정기 수집·배포는 실행하지 않았다. 수동 live-exam 경로는 구현·모의 검증됐으며 이번 CI에서는 선택하지 않았다. 기존 복구 공개 승인과 이 변경의 실행 범위를 혼동하지 않는다.
+
+## 초기 복구 당시 기록 — 최신 상태는 위 후속 기록 우선
 
 - 저장소: `kllollain-max/careerpick`; 기존 Draft PR **#1은 이미 생성되어 열려 있다**.
 - 작업 브랜치: `codex/restore-careerpick-20261103`.
@@ -43,7 +52,7 @@
 - 같은 날 공식 웹페이지를 직접 읽은 결과 4건 모두 `진행중`, 종료일 12월 31일로 표시됐다. 해당 URL·확인일은 최종 상태 증빙과 함께 유지한다.
 - 목록 부재 또는 상세 `no_data`만으로 마감·삭제하지 않는다. 4건을 유지하고 확인된 근거만 상태 판정에 사용한다.
 
-## 배포 준비와 다음 작업
+## 초기 배포 준비·승인 대기 기록 — 과거 상태
 
 - 기존 정적/UI 근거 [41573700536](https://github.com/kllollain-max/careerpick/actions/runs/41573700536)를 재사용한다. 정적/UI 입력과 스냅샷은 이번 수집 코드 수정으로 변경되지 않았다: 1,288개 출력 파일, 내부 링크 30,141개 확인·누락 0, 상세 27개·홈페이지 48개 검사, Chromium 320/390/1440px 검사 통과. 새 수집 코드의 검증과 구분해 보고한다.
 - `review-workflows/deploy-pages.yml.disabled`는 **비활성**이다. 필수 `approved_sha` 40자리 검증, 정확한 SHA checkout, 실제 HEAD 대조, 고정 concurrency를 적용했다. 빌드 허용목록을 거친 `dist/`만 배포 대상으로 삼는다.

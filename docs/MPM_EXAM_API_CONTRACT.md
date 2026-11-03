@@ -32,9 +32,10 @@ all been reflected, and does not claim any 2027 calendar coverage.
 
 All requests use fixed HTTPS endpoints, reject redirects, have a 20-second
 timeout and a 1 MiB response bound, and fail on credential echoes, malformed
-envelopes, inconsistent counts, duplicate rows, or unverified dates. Only safe
-error codes and a bounded public summary are returned; raw responses,
-credential-bearing URLs, keys and exception messages are not exported. The
+envelopes, inconsistent counts, duplicate rows, or unverified dates. The existing verify() interface returns a bounded public summary; collect()
+additionally returns all validated records within the same 100-row limit. Raw
+HTTP responses, credential-bearing URLs, keys and exception messages are not
+exported. The
 module never writes to existing ALIO snapshots or website files.
 
 For a live response that passes the envelope/count checks but differs from the
@@ -56,3 +57,23 @@ announcements. The adapter therefore converts JSON null to an empty string in
 date parsing for that empty cell. It does not infer a place-announcement date.
 All other fields retain their documented string requirement, including
 `선발예정인원`; integer selection counts were not observed or newly allowed.
+
+## Complete candidate records and offline validation
+
+`Client.collect()` returns `records` and `verification` after one complete bounded
+pagination pass. `verify()` delegates to it and returns the unchanged summary
+contract. Call collect directly when records are needed; do not verify then fetch
+again. Partial, duplicate, invalid or credential-containing responses return no
+candidate.
+
+`validate_records(records, expected_count=...)` validates saved data without a
+key, network, filesystem or timestamp. It returns independent normalized rows
+and aggregate metadata, preserving original date text. Saved row content alone
+does not establish source completeness, retrieval time or freshness.
+
+The candidate builder converts validated source dates to the existing calendar
+page format, preserves pre-display values separately, and refuses ambiguous
+multiple-date lists. Its default mode uses the preserved October snapshot and
+does not refresh its retrieval timestamp. The manual live mode is separate from
+production publication and scheduled collection. See
+[the candidate verification report](ADDITIONAL_API_CANDIDATE_20261103.md).

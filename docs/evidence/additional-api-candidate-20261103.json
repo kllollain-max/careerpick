@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "repository": "kllollain-max/careerpick",
+  "pull_request": 2,
+  "code_sha": "71e38bfe2698f0606d887992fb08143fcbb0292a",
+  "prepared_at": "2026-11-03T16:22:13+09:00",
+  "workflow": {
+    "id": 41595833144,
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/41595833144",
+    "conclusion": "success",
+    "job_id": 125782851144
+  },
+  "tests": {
+    "mpm_adapter": 23,
+    "gojobs_classifier": 22,
+    "gojobs_evidence_review": 8,
+    "candidate_generation": 10,
+    "calendar_behavior": 8,
+    "total": 71,
+    "conclusion": "passed"
+  },
+  "browser": {
+    "status": "passed",
+    "browser": "chromium",
+    "scenarios": [
+      {
+        "kind": "site",
+        "width": 320,
+        "records": 28,
+        "normalized_date_order": true,
+        "filters": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "candidate",
+        "width": 320,
+        "records": 28,
+        "normalized_date_order": true,
+        "filters": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "review",
+        "width": 320,
+        "gojobs_review_records": 6,
+        "unverified_candidates": 0,
+        "calendar_link": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "site",
+        "width": 390,
+        "records": 28,
+        "normalized_date_order": true,
+        "filters": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "candidate",
+        "width": 390,
+        "records": 28,
+        "normalized_date_order": true,
+        "filters": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "review",
+        "width": 390,
+        "gojobs_review_records": 6,
+        "unverified_candidates": 0,
+        "calendar_link": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "site",
+        "width": 1440,
+        "records": 28,
+        "normalized_date_order": true,
+        "filters": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "candidate",
+        "width": 1440,
+        "records": 28,
+        "normalized_date_order": true,
+        "filters": true,
+        "no_horizontal_overflow": true
+      },
+      {
+        "kind": "review",
+        "width": 1440,
+        "gojobs_review_records": 6,
+        "unverified_candidates": 0,
+        "calendar_link": true,
+        "no_horizontal_overflow": true
+      }
+    ],
+    "api_requests": 0,
+    "external_browser_requests_allowed": false
+  },
+  "artifact": {
+    "id": 13211673954,
+    "name": "careerpick-public-api-candidate",
+    "size_in_bytes": 4573638,
+    "sha256": "daf5e3ee6aca32d455e49eb45ff0697b19abd225f548eb8ae2484a3fbfcdef56",
+    "downloaded": true,
+    "digest_matched": true,
+    "entries": 18,
+    "reports_matched_job_logs": true,
+    "created_at": "2026-11-03T07:23:30Z",
+    "expires_at": "2026-11-10T07:23:28Z"
+  },
+  "candidate": {
+    "api_requests": {
+      "gojobs": 0,
+      "mpm_exam": 0
+    },
+    "code_sha": "71e38bfe2698f0606d887992fb08143fcbb0292a",
+    "deployment_performed": false,
+    "gojobs": {
+      "decisions": {
+        "blocked_source_integrity": 1,
+        "excluded_non_recruitment": 1,
+        "needs_review": 4
+      },
+      "new_application_candidates": 0,
+      "observations": 6,
+      "official_source_and_application_period_verified": false
+    },
+    "mode": "offline",
+    "mpm_exam": {
+      "authentication_retested": false,
+      "distinct_exam_names": 10,
+      "live_verification": null,
+      "next_year_verified": false,
+      "official_amendment_notices_checked": false,
+      "records": 28,
+      "retrieved_at": "2026-10-25T22:39:58.281891+00:00",
+      "structural_validation": {
+        "columns_verified": [
+          "시험명",
+          "선발예정인원",
+          "원서접수기간",
+          "시험단계구분",
+          "시험장소공고일",
+          "시험일",
+          "합격자발표일"
+        ],
+        "dataset_year": 2026,
+        "date_cells_verified": 107,
+        "date_cells_with_year_from_dataset_title": 0,
+        "distinct_exam_names": 10,
+        "duplicate_rows": 0,
+        "null_place_announcement_cells": 5,
+        "received_rows": 28,
+        "unscheduled_or_blank_date_cells": 5
+      }
+    },
+    "prepared_at": "2026-11-03T16:22:13+09:00",
+    "preserved_paths": [
+      "alio.json",
+      "alio-detail.json",
+      "data/civil-service/2026.json",
+      "data/civil-service/years.json",
+      "docs/evidence/gojobs-current-sample-20261103.json"
+    ],
+    "production_data_writes": 0,
+    "scheduled_collection_enabled": false,
+    "scope": "additional_api_candidate_preparation",
+    "source_count_after": 610,
+    "source_count_before": 610,
+    "source_preserved": true,
+    "source_sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d",
+      "data/civil-service/2026.json": "7325987b2117e7576f598bea8ee47d1f48ef42ba96706a4fcc22149ccc36d8c0",
+      "data/civil-service/years.json": "7e9a09bd2f89eca1a313b4f1af60dfe9f959a7720363225ffe0a3b4ab382d382",
+      "docs/evidence/gojobs-current-sample-20261103.json": "967f8957f4ed35907f35e441db650a3aa24a6a01da14e5ca008567d1c9dadf96"
+    },
+    "status": "verified"
+  },
+  "public_build": {
+    "built_at": "2026-11-03T07:22:19+00:00",
+    "site_url": "https://kllollain-max.github.io/careerpick/",
+    "source_snapshot": "delivery-branch-716c86d",
+    "source_commit": "716c86da48ae2e852f75655af746d3ac8e7c494b",
+    "alio_snapshot_at": "2026-11-03T12:32:01+09:00",
+    "alio_rows": 610,
+    "output_files": 1288,
+    "expired_archived_schema_removed": 1,
+    "source_sha256": {
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d",
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "monitor.json": "bf764228de3a7fbe847900189cd6581b133314eea22cb4c6c6628da123360c36",
+      "posts.json": "23e29ea515007e00d564f5ccc71a18d40287d02d03a4c2ce22f37f78fcebab1d",
+      "qnet.json": "74b9903db7a78008bafd0d6e66ee676d87d48ca13f4160a5b6f46887bd273e49",
+      "enterprise_jobs.json": "8ecb07e05ab5812f0e1aeeb51768b5979357f0ea5c5392ffc7b99a5aab2bf3c8"
+    },
+    "source_json_unchanged": true,
+    "network_collection_performed": false,
+    "deployed": false,
+    "html_files": 1257,
+    "html_links_checked": 30141,
+    "sitemap_urls": 1253,
+    "missing_local_links": 0
+  },
+  "visual_review": {
+    "mobile_review_width": 390,
+    "result": "readable_stacked_notices",
+    "calendar_visual_reused_from_run": 41595470619,
+    "calendar_file_unchanged_since_that_run": true
+  },
+  "limitations": {
+    "fresh_api_call_executed": false,
+    "live_exam_collection_path": "implemented_and_mock_tested_only_in_this_followup",
+    "official_gojobs_open_notices_verified": 0,
+    "public_deployment_of_this_change": false
+  }
+}
