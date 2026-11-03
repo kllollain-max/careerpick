@@ -2003,13 +2003,13 @@ const JV_SUMMARY = [
   ["acbgCondNmLst","학력 조건"], ["ncsCdNmLst","직무 분야"], ["replmprYn","대체인력 채용"]
 ];
 const JV_SECTIONS = [
-  ["aplyQlfcCn","지원 자격"], ["prefCondCn","우대 조건"], ["prefCn","우대 사항"], ["scrnprcdrMthdExpln","전형 절차·방법"],
-  ["disqlfcRsn","결격 사유"], ["nonatchRsn","기타 안내"]
+  ["aplyQlfcCn","필수 지원 자격 · 공통·직무별 원문"], ["prefCondCn","우대 조건"], ["prefCn","우대 사항"], ["scrnprcdrMthdExpln","전형 절차·방법"],
+  ["disqlfcRsn","결격 사유 · 지원 제한"], ["nonatchRsn","기타 안내"]
 ];
 const JV_SKIP = new Set(["recrutPblntSn","instNm","recrutPbancTtl","pbancBgngYmd","pbancEndYmd","srcUrl","ongoingYn","decimalDay"]);
 function plainText(s){
   const t = document.createElement("textarea");
-  t.innerHTML = String(s || "").replace(/<br\s*\/?>/gi, "\n").replace(/<\/(p|div|li)>/gi, "\n").replace(/<[^>]+>/g, "");
+  t.innerHTML = String(s || "").replace(/<br\s*\/?>/gi, "\n").replace(/<\/(p|div|li)>/gi, "\n").replace(/<\/?(?:p|div|span|li|ul|ol|strong|b|em|i|table|thead|tbody|tr|td|th|a|h[1-6])(?:\s[^>]*)?>/gi, "");
   return t.value.replace(/\r/g, "").replace(/\n{3,}/g, "\n\n").trim();
 }
 const ymdText = s => { const m = String(s || "").match(/(\d{4})-?(\d{2})-?(\d{2})/); if(!m) return ""; const w = new Date(Date.UTC(+m[1], +m[2]-1, +m[3])).getUTCDay(); return `${+m[2]}.${+m[3]}(${WD[w]})`; };
@@ -2041,6 +2041,11 @@ async function openJob(id, push = true){
   $("jobview").scrollTop = 0;
   const det = p.gojobs ? (p.gojobsDetail || {}) : p.alio ? ((await alioDetail())[id] || {}) : {};
   if(JV === id) $("jvBody").innerHTML = jobViewHTML(p, det);
+}
+function cpRefreshDetailClock(){
+ const p=POSTS.find(x=>x.id===JV),old=document.querySelector('#jvBody .jv-due');if(!p||!old)return;
+ const fragment=document.createElement('template');fragment.innerHTML=jobViewHTML(p,p.gojobs ? (p.gojobsDetail||{}) : ((ALIO_DETAIL||{})[JV]||{}));
+ const current=fragment.content.querySelector('.jv-due');if(current)old.innerHTML=current.innerHTML;
 }
 function refreshJobView(){ const p = POSTS.find(x => x.id === JV); if(p) $("jvBody").innerHTML = jobViewHTML(p, p.gojobs ? (p.gojobsDetail || {}) : p.alio ? ((ALIO_DETAIL || {})[JV] || {}) : {}); }
 async function shareJob(){
@@ -2203,7 +2208,9 @@ function jobViewHTML(p, det){
     ${det === null ? `<div class="jv-sec"><p style="color:var(--muted)">상세 내용을 불러오는 중이에요…</p></div>`
       : secs.length ? secs.map(([a,b],i) => `<section class="jv-sec" id="cpSection${i}"><h3>${esc(a)}</h3><p>${esc(plainText(b))}</p></section>`).join("")
       : `<div class="jv-sec" role="status"><p>${DATA_HEALTH.detail==='error' && p.alio ? '상세 자료 조회 실패' : '상세 자료 미확인'} · 지원자격이 없다는 뜻이 아닙니다. 공식 원문에서 자격·전형을 확인하세요.</p>${p.alio ? `<button type="button" data-detail-retry="${esc(p.id)}">상세 자료 다시 불러오기</button>` : ''}</div>`}
+    <section class="jv-sec"><h3>직무별 인원·근무조건 및 지원 준비</h3><p>상단 모집인원은 공고 단위 제공 값입니다. 직무별 인원 합계·근무지·고용형태·기준일·증빙·제출서류·접수방법은 공식 공고문과 첨부파일에서 직무별로 확인하세요. 중복 분류를 합산하거나 누락된 조건을 추정하지 않습니다.</p></section>
     ${cpApplicationGuide(p, det, links)}
+    <p class="jv-note">자료 묶음 확인 시각: ${esc(UPDATED || '미확인')} · 개별 원문 재확인 시각이 아닙니다. 정정·기간 연장 여부는 공식 원문에서 확인하세요.</p>
     ${p.alio && /^a[0-9]+$/.test(p.id) ? `<a class="jv-org-link" href="/jobs/${encodeURIComponent(p.id)}.html">🔎 채용공고 독립 상세페이지 보기 →</a>` : ""}
     ${p.gojobs ? "" : `<a class="jv-org-link" href="${orgFile(p.org)}">🏢 ${esc(p.org)} 채용 이력·다음 공고 예상 보기 →</a>`}
     <p class="jv-note">${p.alio ? "이 정보는 공공기관 경영정보 공개시스템(알리오)의 공고를 자동으로 정리한 것이에요." : "이 정보는 기관의 공개 채용공고를 바탕으로 정리한 것이에요."} 마감 시각·제출 서류·지원 자격은 반드시 원문 공고에서 확인하세요.</p>
@@ -2982,8 +2989,8 @@ cpSetupHome();
 cpSetupBrowse();
 refresh();
 load();
-setInterval(() => {if(POSTS.length)render();if(JV && !document.hidden)refreshJobView();}, 60000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden && JV)refreshJobView();});
+setInterval(() => {if(POSTS.length)render();if(JV && !document.hidden)cpRefreshDetailClock();}, 60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden && JV)cpRefreshDetailClock();});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-detail-retry]');if(b){ALIO_DETAIL=null;openJob(b.dataset.detailRetry,false);}});
 </script>
 <!-- 네이버 애널리틱스 (analytics.naver.com 공식 스크립트) -->
