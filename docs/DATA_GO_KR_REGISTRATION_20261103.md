@@ -1,5 +1,14 @@
 # Public Data Portal recruitment API registration check — 2026-11-03
 
+
+## Current status — registered and live-verified
+
+At **2026-11-03 13:18:59 KST**, the dedicated repository Secret
+`DATA_GO_KR_KEY` authenticated successfully. Workflow run `41573744168`,
+**attempt 2**, completed successfully after the user registered the key.
+List requests 6/6 and detail requests 3/3 succeeded. No user credential action
+remains. The previous missing-key and error-30 entries below are historical.
+
 ## Requested service
 
 The user supplied an approved development application for
@@ -56,7 +65,7 @@ step. Its `report.json` and candidate files are retained as Actions artifacts
 for seven days. Production deployment and regular collection remain pending
 the user's separate authorization.
 
-## Actual registration result and remaining user input
+## Registration troubleshooting history — resolved
 
 At 2026-11-03 12:37:58 KST, the initial isolated check using the existing
 `ALIO_KEY` made one list request and received HTTP 403. Both 520-record
@@ -90,5 +99,41 @@ no main merge, deployment, or schedule is needed to verify registration.
 
 Targeted verification: 11 adapter tests plus 4 isolated-runner tests passed
 locally, including safe gateway diagnostics and credential-echo rejection.
-Network registration remains pending a successful request with the dedicated
-public-data key; no delta counts or full-detail success are claimed.
+This was the state before key entry. The successful verification below resolves
+that registration blocker; full-detail verification remains outside the sampled scope.
+
+
+## Successful verification after key entry
+
+- Run: https://github.com/kllollain-max/careerpick/actions/runs/41573744168/attempts/2
+- Executed code: `3b9bfc14f456ccb98a171a7089955a98de5203e0`.
+- Compatible PR head before this documentation update: `79cceb2b7d8b6092bcd055c096425d554b602efe`.
+  The comparison changes only README.md; validator, workflow and source snapshots
+  are identical. No unchanged website tests were repeated.
+- Targeted CI: 11 adapter tests and 4 preservation tests passed; no skipped tests.
+- Actual ongoing list: **509 unique notices, 6 successful page requests**.
+- Actual independent details: **3 successful requests** (`a306640`, `a306348`,
+  `a201471`), IDs and application dates validated. Five attachment metadata
+  entries and the raw recruitment-stage arrays were retained in the sample.
+  Downloaded attachment contents were not inspected; the other 506 current
+  notices' detail endpoints were not exhaustively checked.
+- Candidate comparison: **610 → 610, added 0, changed 0, deleted 0**.
+  Existing cards and scalar detail records did not change.
+- The existing archive retains 101 notices absent from the ongoing list:
+  97 are already date-expired and 4 still have an unexpired/ongoing deadline.
+  Newly date-expired since the source snapshot: 0. Official early closure was
+  not independently verified; list absence was not treated as deletion.
+- Both source files were preserved byte-for-byte, matching the SHA256 values
+  recorded above. All candidate output remained isolated from repository data.
+- Artifact `13204001257` was downloaded and its SHA256 checked against GitHub:
+  `f14f4578063e80c80323c9f8611cbcb1defd4c090f541c9b11ed10be504b9c1f`.
+  The three candidate member hashes match the report. Candidate count/ID uniqueness
+  (610/610), per-notice detail availability, and all three raw detail sample IDs
+  were independently inspected after download. Artifact expires 2026-11-10.
+
+Sanitized machine-readable evidence is preserved in
+`docs/evidence/data-go-kr-registration-20261103.json` so the verification record
+survives artifact expiry. No credentials or raw credential-bearing request URLs
+are included. This follow-up changes documentation/evidence only. Main, public
+visibility, Pages deployment and recurring collection remain unchanged and await
+the user's separate authorization.
