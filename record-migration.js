@@ -33,8 +33,8 @@ function validate(backup){
  if(d.apps!==undefined){
   if(!object(d.apps)||Object.keys(d.apps).length>10000)throw Error('지원 기록이 올바르지 않습니다.');
   for(const [id,a]of Object.entries(d.apps)){
-   if(!id||id.length>128||!object(a)||(a.st!==undefined&&!['plan','applied','doc','exam','itv','pass','fail'].includes(a.st)))throw Error('지원 상태가 올바르지 않습니다.');
-   for(const k of ['memo','title','org','url','exam','itv','source'])if(a[k]!==undefined&&(typeof a[k]!=='string'||a[k].length>(k==='memo'?maxBytes:20000)))throw Error('지원 기록 필드가 올바르지 않습니다.');
+   if(!id||id.length>128||!object(a)||(a.st!==undefined&&!['plan','prepare','applied','doc','exam','itv','pass','fail','withdrawn'].includes(a.st)))throw Error('지원 상태가 올바르지 않습니다.');
+   for(const k of ['memo','title','org','url','submit','exam','itv','source'])if(a[k]!==undefined&&(typeof a[k]!=='string'||a[k].length>(k==='memo'?maxBytes:20000)))throw Error('지원 기록 필드가 올바르지 않습니다.');
    if(a.due!==undefined&&a.due!==null&&typeof a.due!=='string')throw Error('마감일 형식이 올바르지 않습니다.');
    if(a.ck!==undefined&&(!Array.isArray(a.ck)||a.ck.some(x=>!object(x)||typeof x.t!=='string'||(x.ph!==undefined&&!['pre','post'].includes(x.ph))||![0,1,false,true].includes(x.d))))throw Error('체크리스트가 올바르지 않습니다.');
    if(a.url&&!/^https?:\/\//i.test(a.url))throw Error('지원 기록 링크가 올바르지 않습니다.');
@@ -47,7 +47,7 @@ function validate(backup){
  if(d['careerpick-import-archive']!==undefined&&(!Array.isArray(d['careerpick-import-archive'])||d['careerpick-import-archive'].some(v=>!object(v))))throw Error('이전 보관 기록이 올바르지 않습니다.');
  return Object.fromEntries(keys.filter(k=>d[k]!==undefined).map(k=>[k,d[k]]));
 }
-function counts(d){return{saved:(d.saved||[]).length,apps:Object.keys(d.apps||{}).length,memos:Object.values(d.apps||{}).filter(a=>a.memo).length,checklist_items:Object.values(d.apps||{}).reduce((n,a)=>n+(a.ck||[]).length,0),schedules:Object.values(d.apps||{}).reduce((n,a)=>n+Number(!!a.exam)+Number(!!a.itv),0),prefs:d.prefs?1:0,spec:d.spec?1:0,archives:(d['careerpick-import-archive']||[]).length};}
+function counts(d){return{saved:(d.saved||[]).length,apps:Object.keys(d.apps||{}).length,memos:Object.values(d.apps||{}).filter(a=>a.memo).length,checklist_items:Object.values(d.apps||{}).reduce((n,a)=>n+(a.ck||[]).length,0),schedules:Object.values(d.apps||{}).reduce((n,a)=>n+Number(!!a.submit)+Number(!!a.exam)+Number(!!a.itv),0),prefs:d.prefs?1:0,spec:d.spec?1:0,archives:(d['careerpick-import-archive']||[]).length};}
 function merge(current,incoming){
  const d=validate({format:'careerpick-backup',version:1,data:incoming});validate({format:'careerpick-backup',version:1,data:current});
  const merged=JSON.parse(JSON.stringify(current)),conflicts=[],duplicates={saved:0,apps:0,prefs:0,spec:0};

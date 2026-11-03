@@ -1,0 +1,39 @@
+/* Synthetic source fixtures only; outbound requests blocked, no calendar service connection. */
+const fs=require('node:fs'),assert=require('node:assert/strict'),{chromium}=require('playwright');
+const BASE='http://127.0.0.1:8000/careerpick/',OUT='personal-management-output';fs.mkdirSync(OUT,{recursive:true});
+const rows=[{id:'a900001',org:'춘천공공기관',title:'전기직·기계직 정규직 공개채용',n:'약간명',emp:['정규직'],region:'강원'},{id:'a900002',org:'서울시험기관',title:'전기산업기사 채용',n:null,emp:['인턴'],region:'서울'},{id:'a900003',org:'다른기관',title:'비교 세 번째 공고',n:0,emp:['기간제'],region:'강원'}].map(p=>({type:'j',alio:true,cat:'공공기관',pub:'2026-11-01T00:00:00+09:00',due:'2099-12-31T23:59:00+09:00',dueHasTime:false,edu:['학력무관'],url:'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx='+p.id.slice(1),...p}));
+const detail={a900001:{recrutPblntSn:'900001',aplyQlfcCn:'필수: 전기기사 이상. 직무별 세부 조건 확인.',prefCn:'전기산업기사 우대',recrutNope:'약간명',scrnprcdrMthdExpln:'서류 및 면접'},a900002:{recrutPblntSn:'900002',aplyQlfcCn:'전기산업기사 보유',prefCn:'경력 우대'},a900003:{recrutPblntSn:'900003'}};
+const seed={saved:'["a900001"]',apps:JSON.stringify({a900001:{st:'plan',org:'시험기관',title:'지원 기록',memo:'PRIVATE_NOTE_DO_NOT_EXPORT',exam:'2099-12-31',itv:'2100-01-02',ck:[],upd:1793721600000}}),prefs:'{"region":["강원"],"emp":[],"edu":[],"cat":[],"kw":""}',spec:'{"edu":"대졸","lic":["전기산업기사"]}'};
+const report={checked_at_kst:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),browser:'Linux Chromium; isolated synthetic records, viewport/root-font 200% simulation',live_api_calls:0,calendar_service_writes:0,physical_devices:false,checks:[]};
+async function check(name,fn){try{await fn();report.checks.push({name,result:'pass'});console.log('PASS '+name);}catch(e){report.checks.push({name,result:'fail',error:e.message});console.log('FAIL '+name+' '+e.message);}fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));}
+async function context(browser,width){const ctx=await browser.newContext({viewport:{width,height:900},acceptDownloads:true,serviceWorkers:'block',locale:'ko-KR',timezoneId:'Asia/Seoul'});ctx.setDefaultTimeout(10000);await ctx.addInitScript(seed=>{if(!sessionStorage.getItem('seeded')){for(const [k,v]of Object.entries(seed))localStorage.setItem(k,v);sessionStorage.setItem('seeded','1');}},seed);await ctx.route('**/*',route=>{const u=new URL(route.request().url());if(u.origin!==new URL(BASE).origin)return route.abort();const file=u.pathname.split('/').pop(),stamp=new Date().toISOString();const fixtures={'alio.json':{updated:stamp,posts:rows},'alio-detail.json':detail,'posts.json':{posts:[]},'gojobs.json':{posts:[]},'monitor.json':{posts:[]},'enterprise_jobs.json':{jobs:[]},'work24-policy.json':{approved:false}};return file in fixtures?route.fulfill({contentType:'application/json',body:JSON.stringify(fixtures[file])}):route.continue();});return ctx;}
+async function download(page,click){const pending=page.waitForEvent('download');await click();const file=await pending;return fs.readFileSync(await file.path(),'utf8');}
+(async()=>{const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});try{
+for(const width of [320,360,390,430,1440]){
+ const ctx=await context(browser,width),p=await ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING&&POSTS.length===3);
+ await check('preference save, reload, accurate reason and independent priority '+width,async()=>{
+  await p.evaluate(()=>openPrefs());await p.locator('#prefOrder').selectOption('regular-count');await p.locator('#prefKw').fill('전기');await p.locator('#prefSave').click();await p.locator('#sheet.open').waitFor({state:'hidden'});
+  await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING&&POSTS.length===3);
+  assert.equal(await p.evaluate(()=>PREFS.order),'regular-count');assert.equal(await p.evaluate(()=>PREFS.kw),'전기');
+  const reasons=await p.evaluate(()=>preferenceReasons(POSTS.find(x=>x.id==='a900001')));assert(reasons.some(x=>x.includes('강원')));assert(reasons.some(x=>x.includes('전기')));
+  assert.equal(await p.evaluate(()=>matchPrefs({...POSTS[0],region:''},{emp:[],edu:[],cat:[],region:['강원'],kw:''})),false);
+  const before=await p.evaluate(()=>localStorage.getItem('apps'));await p.evaluate(()=>openPrefs());await p.locator('#prefClear').click();await p.locator('#prefSave').click();await p.locator('#sheet.open').waitFor({state:'hidden'});assert.equal(await p.evaluate(()=>localStorage.getItem('apps')),before);
+ });
+ await check('stage undo, exact memo, submission date, suggestions remain unchecked '+width,async()=>{
+  await p.evaluate(()=>openTrack('a900001'));await p.locator('[data-stpick="prepare"]').click();await p.locator('#tSubmit').fill('2099-12-29');await p.locator('#tMemo').fill('한글\n🙂 <img src=x onerror=alert(1)> '+ '긴 메모 '.repeat(100));await p.locator('#tCkNew').fill('내 증빙 확인');await p.locator('#tCkAdd').click();await p.locator('#tSave').click();await p.locator('#sheet.open').waitFor({state:'hidden'});
+  const a=await p.evaluate(()=>APPS.a900001);assert.equal(a.st,'prepare');assert.equal(a.submit,'2099-12-29');assert(a.memo.includes('한글\n🙂'));assert.equal(a.ck[0].d,0);assert.equal(a.ck[0].origin,'user');assert.equal(a.stageHistory.at(-1).to,'prepare');
+  await p.evaluate(()=>openTrack('a900001'));await p.locator('[data-stpick="plan"]').click();await p.locator('#tSave').click();await p.locator('#sheet.open').waitFor({state:'hidden'});assert.equal(await p.evaluate(()=>APPS.a900001.st),'plan');
+  await p.evaluate(()=>{state.tab='track';refresh();});await p.locator('#trackStage').selectOption('withdrawn');assert((await p.locator('#list').innerText()).includes('기존 기록'));await p.locator('#trackStage').selectOption('all');await p.locator('#trackOrder').selectOption('next');assert((await p.locator('#list').innerText()).includes('2099-12-29'));
+  const backup=JSON.parse(await download(p,()=>p.evaluate(()=>cpDownloadBackup())));assert.equal(backup.data.apps.a900001.submit,'2099-12-29');assert.equal(backup.data.apps.a900001.stageHistory.length,2);assert.equal(backup.data.apps.a900001.ck[0].d,0);
+ });
+ await check('write failure and in-session edit restoration, 200 percent '+width,async()=>{
+  await p.evaluate(()=>openTrack('a900001'));const old=await p.evaluate(()=>localStorage.getItem('apps'));await p.locator('#tMemo').fill('실패해도 보존\n🙂');
+  await p.evaluate(()=>{window.__put=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==='apps')throw Error('synthetic denied');return window.__put.call(this,k,v);};});await p.locator('#tSave').click();assert.equal(await p.locator('#tMemo').inputValue(),'실패해도 보존\n🙂');assert.equal(await p.evaluate(()=>localStorage.getItem('apps')),old);
+  await p.evaluate(()=>{Storage.prototype.setItem=window.__put;closeSheet();});await p.evaluate(()=>openTrack('a900001'));assert.equal(await p.locator('#tMemo').inputValue(),'실패해도 보존\n🙂');
+  await p.evaluate(()=>document.documentElement.style.fontSize='200%');assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p.screenshot({path:OUT+'/editor-'+width+'.png',fullPage:true});await p.locator('#tSave').click();await p.locator('#sheet.open').waitFor({state:'hidden'});assert.deepEqual(errors,[]);
+ });
+ await ctx.close();
+}
+if(report.checks.some(x=>x.result==='fail'))process.exitCode=1;console.log(JSON.stringify(report));
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1)});

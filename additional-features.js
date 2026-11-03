@@ -32,9 +32,9 @@ function calendar(events,now=new Date()){
 function applications(apps,now=new Date()){
  const today=kstDay(now),out=[];
  for(const [id,a] of Object.entries(apps||{})){
-  if(!a||['pass','fail'].includes(a.st))continue;
-  for(const [kind,label,raw] of [['due','접수 마감',a.st==='plan'?a.due:null],['exam','필기',a.exam],['itv','면접',a.itv]]){
-   if(!raw)continue;const day=kstDay(raw);if(!date(day)||day<today)continue;
+  if(!a||['pass','fail','withdrawn'].includes(a.st))continue;
+  for(const [kind,label,raw] of [['submit','서류 제출(직접 입력)',a.submit],['due','접수 마감',['plan','prepare'].includes(a.st)?a.due:null],['exam','필기',a.exam],['itv','면접',a.itv]]){
+   if(!raw||(kind==='due'&&a.dueIsPublication===true))continue;const day=kstDay(raw);if(!date(day)||day<today)continue;
    const verified=kind==='due'&&a.dueHasTime===true&&!!utc(raw);
    out.push({scope:'application',id,kind,date:day,timed:verified,start:raw,end:raw,title:'[커리어픽] '+label+' · '+(a.org||a.title||'공고 미확인'),url:a.url,source:'사용자가 저장한 지원 일정',checkedAt:'공식 변경 여부 재확인 필요',revision:Number.isSafeInteger(a.upd)?a.upd:0});
   }
