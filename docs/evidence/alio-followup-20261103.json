@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "verified_code_sha": "86548d2aa54191b10ff558368c29f940ba2446d9",
+  "verification_date_kst": "2026-11-03",
+  "repository": "kllollain-max/careerpick",
+  "pull_request": 1,
+  "branch": "codex/restore-careerpick-20261103",
+  "checks": [
+    {
+      "name": "ALIO isolated live contract check",
+      "run_id": 41578577872,
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/41578577872",
+      "head_sha": "86548d2aa54191b10ff558368c29f940ba2446d9",
+      "conclusion": "success",
+      "run_started_at": "2026-11-03T04:31:05Z",
+      "run_updated_at": "2026-11-03T04:31:53Z",
+      "unittest_count": 19,
+      "partial_fetch_guard": "passed",
+      "artifact_metadata": [
+        {
+          "id": 13204373589,
+          "name": "alio-isolated-live-check",
+          "sha256": "460d4b84c4433f3416d49b35de92180a8895c414255a3fbab34ab17bab435fb8",
+          "expires_at": "2026-11-06T04:31:48Z",
+          "validation": "GitHub artifact metadata; archive not independently downloaded in this follow-up"
+        }
+      ],
+      "reports": [
+        {
+          "status": "verified_candidate",
+          "list_verified": true,
+          "detail_verified": true,
+          "source_preserved": true,
+          "key_present": true,
+          "collection_status": "collected",
+          "before": 610,
+          "after": 610,
+          "added": 0,
+          "changed": 0,
+          "removed": 0,
+          "collected_at": "2026-11-03T12:32:01+09:00",
+          "deadline_expired": 97,
+          "closure_note": "Date-based expiration only; absence does not prove official closure",
+          "source_sha256": {
+            "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d",
+            "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data.go.kr isolated registration check",
+      "run_id": 41578578108,
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/41578578108",
+      "head_sha": "86548d2aa54191b10ff558368c29f940ba2446d9",
+      "conclusion": "success",
+      "run_started_at": "2026-11-03T04:31:05Z",
+      "run_updated_at": "2026-11-03T04:31:33Z",
+      "unittest_count": 16,
+      "partial_fetch_guard": null,
+      "artifact_metadata": [
+        {
+          "id": 13204107763,
+          "name": "data-go-kr-registration-check",
+          "sha256": "e67e1c7d2da87a100527696cadeef317148baaaac517a12757b6b6af4ec6f8df",
+          "expires_at": "2026-11-10T04:31:27Z",
+          "validation": "GitHub artifact metadata; archive not independently downloaded in this follow-up"
+        }
+      ],
+      "reports": [
+        {
+          "absent_from_active_list": 101,
+          "absent_with_unexpired_deadline": 4,
+          "active_candidate": 509,
+          "added": 0,
+          "after": 610,
+          "before": 610,
+          "candidate_sha256": {
+            "alio-detail.json": "00778feda69e80e4fc9fc3a7f3a03c5c341f5b02bf789fe8220faed58dea7aad",
+            "alio.json": "e86e7a1b1e79ac195d623a2c388903ae796e998190dbe67cc1fc8d552982a9ad",
+            "detail-samples.json": "a90f4ea2af4770c73c8005dfe1ec556129fdb858ccd1fa3f5bd2519aad914b63"
+          },
+          "changed": 0,
+          "checked_at": "2026-11-03T13:31:14+09:00",
+          "closure_note": "Date expiration and list absence are not official early-closure confirmation",
+          "date_filtered_from_live_list": 0,
+          "deadline_expired_in_baseline": 97,
+          "detail_sample_limit": 3,
+          "detail_samples": [
+            {
+              "end": "2026-11-10",
+              "files_count": 3,
+              "id": "a306640",
+              "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306640",
+              "start": "2026-11-03",
+              "steps_count": 2
+            },
+            {
+              "end": "2026-11-10",
+              "files_count": 1,
+              "id": "a306348",
+              "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306348",
+              "start": "2026-10-27",
+              "steps_count": 120
+            },
+            {
+              "end": "2050-12-31",
+              "files_count": 1,
+              "id": "a201471",
+              "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=201471",
+              "start": "2020-07-21",
+              "steps_count": 2
+            }
+          ],
+          "detail_scope": "sample_only",
+          "detail_total_unverified": 506,
+          "detail_verified": true,
+          "detail_verified_count": 3,
+          "details_changed": 0,
+          "endpoint_base": "https://apis.data.go.kr/1051000/recruitment",
+          "key_present": true,
+          "list_verified": true,
+          "newly_date_expired_since_baseline": 0,
+          "official_closed_verified": null,
+          "posts_changed": 0,
+          "received_unique": 509,
+          "removed": 0,
+          "requests": {
+            "detail": 3,
+            "list": 6
+          },
+          "retained": 101,
+          "service": "data_go_kr_15125273",
+          "source_preserved": true,
+          "source_sha256": {
+            "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+            "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+          },
+          "source_updated": "2026-11-03T12:32:01+09:00",
+          "status": "verified_candidate",
+          "successful_responses": {
+            "detail": 3,
+            "list": 6
+          }
+        }
+      ]
+    },
+    {
+      "name": "Review unexpired notices absent from official list",
+      "run_id": 41578577992,
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/41578577992",
+      "head_sha": "86548d2aa54191b10ff558368c29f940ba2446d9",
+      "conclusion": "success",
+      "run_started_at": "2026-11-03T04:31:05Z",
+      "run_updated_at": "2026-11-03T04:31:34Z",
+      "unittest_count": 6,
+      "partial_fetch_guard": null,
+      "artifact_metadata": [
+        {
+          "id": 13205156508,
+          "name": "alio-absence-review",
+          "sha256": "bede7d96e3ad0bea60fbac0cfd949bf32addf37934514010b13ef0e828793a9d",
+          "expires_at": "2026-11-10T04:31:30Z",
+          "validation": "GitHub artifact metadata; archive not independently downloaded in this follow-up"
+        }
+      ],
+      "reports": [
+        {
+          "absent_date_expired": 97,
+          "absent_total": 101,
+          "absent_unexpired": 4,
+          "checked_at": "2026-11-03T13:31:14+09:00",
+          "classification_rule": "Missing-list membership, missing detail, or null ongoingYn alone never proves closure",
+          "confirmed_not_ongoing": 0,
+          "key_present": true,
+          "live_unique": 509,
+          "requests": {
+            "detail": 4,
+            "list": 6
+          },
+          "reviews": [
+            {
+              "classification": "unresolved",
+              "detail_status": "no_data",
+              "id": "a303089",
+              "official_ongoing": null,
+              "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=303089",
+              "org": "충남대학교병원",
+              "stored_deadline": "2026-12-31T23:59:00+09:00",
+              "title": "[세종] 임상교수요원(류마티스내과) 공개채용 상시모집공고"
+            },
+            {
+              "classification": "unresolved",
+              "detail_status": "no_data",
+              "id": "a305089",
+              "official_ongoing": null,
+              "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305089",
+              "org": "충남대학교병원",
+              "stored_deadline": "2026-12-31T23:59:00+09:00",
+              "title": "2026년 하반기 신규의료진(임상교수요원) 공개채용 모집공고(상시모집)"
+            },
+            {
+              "classification": "unresolved",
+              "detail_status": "no_data",
+              "id": "a305090",
+              "official_ongoing": null,
+              "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305090",
+              "org": "충남대학교병원",
+              "stored_deadline": "2026-12-31T23:59:00+09:00",
+              "title": "2026년 하반기 신규의료진(진료교수) 공개채용 모집공고(상시모집)"
+            },
+            {
+              "classification": "unresolved",
+              "detail_status": "no_data",
+              "id": "a305091",
+              "official_ongoing": null,
+              "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305091",
+              "org": "충남대학교병원",
+              "stored_deadline": "2026-12-31T23:59:00+09:00",
+              "title": "2026년 하반기 신규의료진(전임의사) 공개채용 모집공고(상시모집)"
+            }
+          ],
+          "source_count": 610,
+          "source_preserved": true,
+          "source_sha256": {
+            "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+            "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+          },
+          "status": "reviewed",
+          "successful_responses": {
+            "detail": 0,
+            "list": 6
+          },
+          "target_ids": [
+            "a303089",
+            "a305089",
+            "a305090",
+            "a305091"
+          ],
+          "unresolved": 4
+        }
+      ]
+    }
+  ],
+  "test_summary": {
+    "distinct_unittests": 41,
+    "passed": 41,
+    "partial_fetch_guard": "passed"
+  },
+  "retained_snapshot": {
+    "count": 610,
+    "source_updated": "2026-11-03T12:32:01+09:00",
+    "sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+    },
+    "added": 0,
+    "changed": 0,
+    "removed": 0,
+    "source_preserved": true
+  },
+  "official_web_review": {
+    "checked_date_kst": "2026-11-03",
+    "method": "Official job.alio.go.kr page text fetched and read directly; all four pages displayed 진행중 and an end date of 2026-12-31.",
+    "notices": [
+      {
+        "id": "a303089",
+        "title": "[세종] 임상교수요원(류마티스내과) 공개채용 상시모집공고",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=303089",
+        "displayed_status": "진행중",
+        "displayed_end_date": "2026-12-31",
+        "api_detail_status": "no_data"
+      },
+      {
+        "id": "a305089",
+        "title": "2026년 하반기 신규의료진(임상교수요원) 공개채용 모집공고(상시모집)",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305089",
+        "displayed_status": "진행중",
+        "displayed_end_date": "2026-12-31",
+        "api_detail_status": "no_data"
+      },
+      {
+        "id": "a305090",
+        "title": "2026년 하반기 신규의료진(진료교수) 공개채용 모집공고(상시모집)",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305090",
+        "displayed_status": "진행중",
+        "displayed_end_date": "2026-12-31",
+        "api_detail_status": "no_data"
+      },
+      {
+        "id": "a305091",
+        "title": "2026년 하반기 신규의료진(전임의사) 공개채용 모집공고(상시모집)",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305091",
+        "displayed_status": "진행중",
+        "displayed_end_date": "2026-12-31",
+        "api_detail_status": "no_data"
+      }
+    ],
+    "decision": "Preserve the four notices. API list absence or no_data is not evidence of closure; official website displays ongoing. Employer application submission was not exercised."
+  },
+  "changes": [
+    "Require stable totals, complete pages, unique official IDs, and valid mapped records before saving the ALIO snapshot pair.",
+    "Preserve both original files on partial fetch, invalid data, or paired-write failure.",
+    "Treat a successful unchanged collection as collected without rewriting the source timestamp; retain detail-only changes.",
+    "Interpret explicit data.go.kr numeric error codes before validating extra success-envelope fields; record only bounded safe diagnostic metadata.",
+    "Audit unexpired notices absent from the active API list without modifying stored snapshots.",
+    "Require an explicit 40-character approved commit SHA in the inactive deployment proposal and verify checkout identity before building."
+  ],
+  "reused_static_ui_evidence": {
+    "run_id": 41573700536,
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/41573700536",
+    "verified_code_sha": "26d8c36200f62f71b7c952043b508e805467e716",
+    "rows": 610,
+    "output_files": 1288,
+    "html_links_checked": 30141,
+    "missing_links": 0,
+    "detail_tests": 27,
+    "homepage_tests": 48,
+    "browser_widths": [
+      320,
+      390,
+      1440
+    ],
+    "reason": "The follow-up changes do not modify frontend, build generator, or the stored snapshot pair."
+  },
+  "limits": [
+    "Data.go.kr separate detail validation is a three-notice sample; 506 current-list details remain unverified in that sample run.",
+    "The 97 expired notices are classified by stored deadline, not a newly confirmed official closure delta.",
+    "No early-closure decision is inferred from absent list membership, missing detail, or null ongoingYn.",
+    "The disabled collection proposal produces a candidate artifact and does not provide scheduled publication."
+  ],
+  "approval_boundary": {
+    "draft_pr": true,
+    "main_unchanged": "588c32425997db496c9498921d4781c975b1700d",
+    "main_merge": "held_by_prior_user_instruction",
+    "repository_visibility_change": "held_by_prior_user_instruction",
+    "pages_enablement": "held_by_prior_user_instruction",
+    "deployment": "held_by_prior_user_instruction",
+    "scheduled_collection": "held_by_prior_user_instruction"
+  }
+}

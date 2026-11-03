@@ -1,0 +1,45 @@
+name: Verify added public employment and exam APIs
+on:
+  push:
+    branches: [codex/restore-careerpick-20261103]
+    paths:
+      - gojobs.py
+      - mpm_exam.py
+      - tests/test_gojobs.py
+      - tests/test_mpm_exam.py
+      - tests/test_additional_apis_live.py
+      - scripts/verify_additional_apis.py
+      - .github/workflows/additional-apis-live-check.yml
+permissions:
+  contents: read
+concurrency:
+  group: additional-apis-verification-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate new API contracts and source preservation
+        run: |
+          python -m unittest discover -s tests -p test_gojobs.py
+          python -m unittest discover -s tests -p test_mpm_exam.py
+          python -m unittest discover -s tests -p test_additional_apis_live.py
+      - name: Verify both registered secrets with their own official APIs
+        env:
+          GOJOBS_KEY: ${{ secrets.GOJOBS_KEY }}
+          MPM_EXAM_KEY: ${{ secrets.MPM_EXAM_KEY }}
+        run: python scripts/verify_additional_apis.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: additional-api-registration-report
+          path: additional-api-check-output/report.json
+          retention-days: 7
+          if-no-files-found: warn

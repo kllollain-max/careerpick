@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>한국임업진흥원 공식 채용공고로 이동</title></head><body>
+<p>한국임업진흥원 공식 채용공고로 이동 중입니다.</p>
+<form id="go" method="post" action="https://www.kofpi.or.kr/notice/notice_04view.do">
+<input type="hidden" name="fileSeq" value="">
+<input type="hidden" name="bb_seq" id="seq" value="">
+<input type="hidden" name="cPage" value="1">
+<input type="hidden" name="searchKey" value="total">
+<input type="hidden" name="searchValue" value="">
+<button type="submit">공식 채용공고 열기</button>
+</form>
+<script>
+const seq = new URLSearchParams(location.search).get('seq');
+if (/^\d+$/.test(seq || '')) {
+  document.getElementById('seq').value = seq;
+  document.getElementById('go').submit();
+} else {
+  document.querySelector('p').textContent = '게시글 번호가 올바르지 않습니다.';
+  document.getElementById('go').hidden = true;
+}
+</script>
+</body></html>

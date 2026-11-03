@@ -1,0 +1,554 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-03T14:50:49+09:00",
+  "purpose": "Distinguish historical first-page samples from the existence of recent GOJOBS records without changing production data",
+  "scope": "Isolated fixed-page diagnostic, not production collection or deployment",
+  "prior_evidence": {
+    "code_sha": "e55c1a185e1abcbf1ee6ccd9162ac05c385b1467",
+    "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/41584479030",
+    "record": "https://github.com/kllollain-max/careerpick/blob/5f6b36b94b0d27a83443a8c1aeac0363ced9872b/docs/evidence/gojobs-followup-20261103.json",
+    "offline_tests_passed": 50,
+    "already_committed_overlapping_changes_preserved": true
+  },
+  "desc_experiment": {
+    "code_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb",
+    "checked_at": "2026-11-03T14:43:26+09:00",
+    "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/41585547056",
+    "job_id": 125750049849,
+    "conclusion": "failure",
+    "offline_tests": 7,
+    "artifact": {
+      "id": 13207089142,
+      "name": "gojobs-current-sample-report",
+      "size_in_bytes": 1825,
+      "url": "https://api.github.com/repos/kllollain-max/careerpick/actions/artifacts/13207089142",
+      "archive_download_url": "https://api.github.com/repos/kllollain-max/careerpick/actions/artifacts/13207089142/zip",
+      "expired": false,
+      "created_at": "2026-11-03T05:43:36Z",
+      "expires_at": "2026-11-10T05:43:35Z",
+      "updated_at": "2026-11-03T05:43:36Z",
+      "digest": "sha256:3cc897a2c96cf3b16bbb60c372924d98ba7138d67fae908df7dba7077ad0937f",
+      "workflow_run": {
+        "id": 41585547056,
+        "repository_id": 1443658410,
+        "head_repository_id": 1443658410,
+        "head_branch": "codex/restore-careerpick-20261103",
+        "head_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb"
+      }
+    },
+    "evidence_scope": "Sanitized structured stdout plus artifact metadata; ZIP not downloaded",
+    "comparison": {
+      "sample_ids_unchanged_from_sort_1": true,
+      "dates_unchanged": true,
+      "same_failed_notice_id": true,
+      "conclusion": "DESC and 1 returned identical observed first-page samples; this does not establish accepted sort-value semantics or absence of newer records."
+    },
+    "report": {
+      "authentication_basis": "one_or_more_validated_api_responses",
+      "authentication_verified": true,
+      "checked_at": "2026-11-03T14:43:26+09:00",
+      "code_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb",
+      "date_observations": {
+        "as_of_date": "2026-11-03",
+        "authoritative_open_status_verified": false,
+        "comparison_basis": "calendar_date_only",
+        "deadline": {
+          "max": "2009-03-20",
+          "min": "2008-08-28",
+          "missing_count": 0,
+          "provided_count": 5,
+          "year_counts": {
+            "2008": 3,
+            "2009": 2
+          }
+        },
+        "deadline_on_or_after_check_date_ids": [],
+        "filter_observations": {
+          "e01": {
+            "detail_verified_count": 2,
+            "query_verified": true,
+            "records_observed": true,
+            "sample_count": 5,
+            "total_count": 27656
+          },
+          "e02": {
+            "detail_verified_count": 0,
+            "query_verified": true,
+            "records_observed": false,
+            "sample_count": 0,
+            "total_count": 0
+          }
+        },
+        "latest_order_verified": false,
+        "registered_date": {
+          "max": "2009-02-11",
+          "min": "2008-08-01",
+          "missing_count": 0,
+          "provided_count": 5,
+          "year_counts": {
+            "2008": 3,
+            "2009": 2
+          }
+        },
+        "rows": [
+          {
+            "check_date_on_or_before_deadline": false,
+            "deadline": "2008-08-28",
+            "id": "4",
+            "recruitment_type": "e01",
+            "registered_date": "2008-08-01"
+          },
+          {
+            "check_date_on_or_before_deadline": false,
+            "deadline": "2008-09-11",
+            "id": "7",
+            "recruitment_type": "e01",
+            "registered_date": "2008-08-19"
+          },
+          {
+            "check_date_on_or_before_deadline": false,
+            "deadline": "2008-12-29",
+            "id": "20",
+            "recruitment_type": "e01",
+            "registered_date": "2008-12-22"
+          },
+          {
+            "check_date_on_or_before_deadline": false,
+            "deadline": "2009-02-18",
+            "id": "42",
+            "recruitment_type": "e01",
+            "registered_date": "2009-01-16"
+          },
+          {
+            "check_date_on_or_before_deadline": false,
+            "deadline": "2009-03-20",
+            "id": "45",
+            "recruitment_type": "e01",
+            "registered_date": "2009-02-11"
+          }
+        ],
+        "sample_basis": "validated_list_rows"
+      },
+      "deployment_performed": false,
+      "key_present": true,
+      "latest_order_verified": false,
+      "mpm_requests": 0,
+      "official_sort_mapping_verified": false,
+      "production_data_writes": 0,
+      "reason": "invalid_classification_pair",
+      "requests": {
+        "detail": 3,
+        "list": 2
+      },
+      "response_diagnostic": {
+        "observed_filters": {
+          "type01": "g01",
+          "type02": "unknown"
+        }
+      },
+      "scheduled_collection_enabled": false,
+      "scope": "isolated_gojobs_desc_parameter_probe",
+      "secret_name": "GOJOBS_KEY",
+      "service": "gojobs",
+      "sort_interpretation": "experimental_parameter_value",
+      "sort_order_tested": "DESC",
+      "source_count_after": 610,
+      "source_count_before": 610,
+      "source_preserved": true,
+      "source_sha256": {
+        "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+        "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+      },
+      "status": "failed",
+      "successful_responses": {
+        "detail": 2,
+        "list": 2
+      },
+      "verification_progress": {
+        "detail_samples": [
+          {
+            "content_present": true,
+            "field_layout": "documented_type01_institution",
+            "id": "4",
+            "institution_type": "g02",
+            "recruitment_type": "e01",
+            "source_link_status": {
+              "link01": "schemeless_reference",
+              "link02": "not_provided",
+              "link03": "not_provided"
+            },
+            "source_links": [],
+            "title": "2008년도경상북도 지방소방공무원 채용시험 시행계획공고"
+          },
+          {
+            "content_present": true,
+            "field_layout": "documented_type01_institution",
+            "id": "7",
+            "institution_type": "g02",
+            "recruitment_type": "e01",
+            "source_link_status": {
+              "link01": "schemeless_reference",
+              "link02": "not_provided",
+              "link03": "not_provided"
+            },
+            "source_links": [],
+            "title": "2008년도 전라북도 지방소방공무원 채용시험 시행계획 공고"
+          }
+        ],
+        "detail_verified_count": 2,
+        "failed_notice": {
+          "expected_institution_type": "g02",
+          "expected_recruitment_type": "e01",
+          "id": "20"
+        },
+        "list_count_returned": 5,
+        "list_queries_verified": 2,
+        "list_verified": true,
+        "observed_field_layouts": {
+          "detail": [
+            "documented_type01_institution"
+          ],
+          "list": [
+            "observed_type01_recruitment"
+          ]
+        },
+        "samples": [
+          {
+            "deadline": "2008-08-28",
+            "field_layout": "observed_type01_recruitment",
+            "id": "4",
+            "institution_type": "g02",
+            "modified_date": "2008-08-01",
+            "org": "경상북도",
+            "recruitment_type": "e01",
+            "registered_date": "2008-08-01",
+            "title": "2008년도경상북도 지방소방공무원 채용시험 시행계획공고"
+          },
+          {
+            "deadline": "2008-09-11",
+            "field_layout": "observed_type01_recruitment",
+            "id": "7",
+            "institution_type": "g02",
+            "modified_date": "2008-08-19",
+            "org": "전라북도",
+            "recruitment_type": "e01",
+            "registered_date": "2008-08-19",
+            "title": "2008년도 전라북도 지방소방공무원 채용시험 시행계획 공고"
+          },
+          {
+            "deadline": "2008-12-29",
+            "field_layout": "observed_type01_recruitment",
+            "id": "20",
+            "institution_type": "g02",
+            "modified_date": "2008-12-22",
+            "org": "전라북도 임실군",
+            "recruitment_type": "e01",
+            "registered_date": "2008-12-22",
+            "title": "임실치즈과학연구소 선임연구원 채용공고"
+          },
+          {
+            "deadline": "2009-02-18",
+            "field_layout": "observed_type01_recruitment",
+            "id": "42",
+            "institution_type": "g02",
+            "modified_date": "2009-01-16",
+            "org": "울산광역시",
+            "recruitment_type": "e01",
+            "registered_date": "2009-01-16",
+            "title": "울산광역시 2009년도 간호조무사 자격시험 시행계획 공고"
+          },
+          {
+            "deadline": "2009-03-20",
+            "field_layout": "observed_type01_recruitment",
+            "id": "45",
+            "institution_type": "g02",
+            "modified_date": "2009-02-11",
+            "org": "대구광역시",
+            "recruitment_type": "e01",
+            "registered_date": "2009-02-11",
+            "title": "2009년도 대구광역시지방공무원 임용시험계획 공고"
+          }
+        ],
+        "source_link_counts": {
+          "not_provided": 4,
+          "unverified": 2,
+          "validated": 0
+        },
+        "total_count_by_filter": {
+          "e01": 27656,
+          "e02": 0
+        },
+        "verification_complete": false
+      }
+    }
+  },
+  "last_page_experiment": {
+    "code_sha": "fb6f9af62f7a64a34fb7c7ca1abd2bea2ed2f577",
+    "checked_at": "2026-11-03T14:49:25+09:00",
+    "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/41586122438",
+    "job_id": 125751908711,
+    "conclusion": "success",
+    "offline_tests_passed": 11,
+    "artifact": {
+      "id": 13207893228,
+      "name": "gojobs-current-sample-report",
+      "size_in_bytes": 1867,
+      "url": "https://api.github.com/repos/kllollain-max/careerpick/actions/artifacts/13207893228",
+      "archive_download_url": "https://api.github.com/repos/kllollain-max/careerpick/actions/artifacts/13207893228/zip",
+      "expired": false,
+      "created_at": "2026-11-03T05:49:40Z",
+      "expires_at": "2026-11-10T05:49:39Z",
+      "updated_at": "2026-11-03T05:49:40Z",
+      "digest": "sha256:266dede7e81b01881363504c1bb0eb1c623ecf3c1549d4f5a4ec9cf7076f89c0",
+      "workflow_run": {
+        "id": 41586122438,
+        "repository_id": 1443658410,
+        "head_repository_id": 1443658410,
+        "head_branch": "codex/restore-careerpick-20261103",
+        "head_sha": "fb6f9af62f7a64a34fb7c7ca1abd2bea2ed2f577"
+      }
+    },
+    "evidence_scope": "Sanitized JSON from GitHub job stdout and artifact metadata; archive bytes were not downloaded",
+    "report": {
+      "authentication_basis": "one_or_more_validated_api_responses",
+      "authentication_verified": true,
+      "baseline_count": 27656,
+      "checked_at": "2026-11-03T14:49:25+09:00",
+      "code_sha": "fb6f9af62f7a64a34fb7c7ca1abd2bea2ed2f577",
+      "date_observations": {
+        "as_of_date": "2026-11-03",
+        "authoritative_open_status_verified": false,
+        "comparison_basis": "calendar_date_only",
+        "deadline": {
+          "max": "2026-11-13",
+          "min": "2026-11-13",
+          "missing_count": 0,
+          "provided_count": 1,
+          "year_counts": {
+            "2026": 1
+          }
+        },
+        "deadline_on_or_after_check_date_ids": [
+          "307403"
+        ],
+        "filter_observations": {
+          "e01": {
+            "detail_verified_count": 1,
+            "query_verified": true,
+            "records_observed": true,
+            "sample_count": 1,
+            "total_count": 27656
+          },
+          "e02": {
+            "detail_verified_count": 0,
+            "query_verified": true,
+            "records_observed": false,
+            "sample_count": 0,
+            "total_count": 0
+          }
+        },
+        "latest_order_verified": false,
+        "registered_date": {
+          "max": "2026-11-03",
+          "min": "2026-11-03",
+          "missing_count": 0,
+          "provided_count": 1,
+          "year_counts": {
+            "2026": 1
+          }
+        },
+        "rows": [
+          {
+            "check_date_on_or_before_deadline": true,
+            "deadline": "2026-11-13",
+            "id": "307403",
+            "recruitment_type": "e01",
+            "registered_date": "2026-11-03"
+          }
+        ],
+        "sample_basis": "validated_list_rows"
+      },
+      "deployment_performed": false,
+      "key_present": true,
+      "latest_order_verified": false,
+      "mode": "last-page",
+      "mpm_requests": 0,
+      "official_sort_mapping_verified": false,
+      "page_by_filter": {
+        "e01": 5532,
+        "e02": 1
+      },
+      "production_data_writes": 0,
+      "requests": {
+        "detail": 1,
+        "list": 2
+      },
+      "result": {
+        "active_status_verified": false,
+        "authentication_verified": true,
+        "detail_endpoint": "https://apis.data.go.kr/1760000/PblJobService/getItem",
+        "detail_samples": [
+          {
+            "content_present": true,
+            "field_layout": "documented_type01_institution",
+            "id": "307403",
+            "institution_type": "g02",
+            "recruitment_type": "e01",
+            "source_link_status": {
+              "link01": "not_provided",
+              "link02": "not_provided",
+              "link03": "not_provided"
+            },
+            "source_links": [],
+            "title": "2026년 제1회 대전광역시 중구의회 지방시간선택제임기제  공무원(나급) 채용시험 최종합격자 발표 및 임용후보자  임용 등록요령 공고"
+          }
+        ],
+        "detail_status": "verified_sample",
+        "detail_verified": true,
+        "detail_verified_count": 1,
+        "empty_list": false,
+        "endpoint_base": "https://apis.data.go.kr/1760000/PblJobService",
+        "filters": {
+          "Instt_se": "g02",
+          "Pblanc_ty": [
+            "e01",
+            "e02"
+          ],
+          "Sort_order": "1",
+          "numOfRows": 5,
+          "page_by_filter": {
+            "e01": 5532,
+            "e02": 1
+          }
+        },
+        "full_collection": false,
+        "list_count_returned": 1,
+        "list_endpoint": "https://apis.data.go.kr/1760000/PblJobService/getList",
+        "list_verified": true,
+        "observed_field_layouts": {
+          "detail": [
+            "documented_type01_institution"
+          ],
+          "list": [
+            "observed_type01_recruitment"
+          ]
+        },
+        "page_by_filter": {
+          "e01": 5532,
+          "e02": 1
+        },
+        "requests": {
+          "detail": 1,
+          "list": 2
+        },
+        "sample_scope": "fixed_last_page_local_public_and_first_page_career_recruitment",
+        "samples": [
+          {
+            "deadline": "2026-11-13",
+            "field_layout": "observed_type01_recruitment",
+            "id": "307403",
+            "institution_type": "g02",
+            "modified_date": "2026-11-03",
+            "org": "대전광역시 중구 의회사무국",
+            "recruitment_type": "e01",
+            "registered_date": "2026-11-03",
+            "title": "2026년 제1회 대전광역시 중구의회 지방시간선택제임기제  공무원(나급) 채용시험 최종합격자 발표 및 임용후보자  임용 등록요령 공고"
+          }
+        ],
+        "service": "data_go_kr_15156780",
+        "source_link_counts": {
+          "not_provided": 3,
+          "unverified": 0,
+          "validated": 0
+        },
+        "source_links_all_validated": false,
+        "source_url": "https://www.data.go.kr/data/15156780/openapi.do",
+        "successful_responses": {
+          "detail": 1,
+          "list": 2
+        },
+        "total_count_by_filter": {
+          "e01": 27656,
+          "e02": 0
+        },
+        "unverified_scope": [
+          "attachment_files",
+          "all_notices",
+          "official_closure",
+          "all_exam_schedules",
+          "source_link_contents"
+        ]
+      },
+      "scheduled_collection_enabled": false,
+      "scope": "isolated_gojobs_last_page_probe",
+      "secret_name": "GOJOBS_KEY",
+      "service": "gojobs",
+      "sort_interpretation": "documented_example_value_without_direction_mapping",
+      "sort_order_tested": "1",
+      "source_count_after": 610,
+      "source_count_before": 610,
+      "source_preserved": true,
+      "source_run": "41585547056",
+      "source_sha256": {
+        "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+        "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+      },
+      "status": "verified",
+      "successful_responses": {
+        "detail": 1,
+        "list": 2
+      }
+    }
+  },
+  "findings": {
+    "authentication_confirmed": true,
+    "recent_2026_record_observed": true,
+    "verified_recent_notice": {
+      "id": "307403",
+      "title": "2026년 제1회 대전광역시 중구의회 지방시간선택제임기제  공무원(나급) 채용시험 최종합격자 발표 및 임용후보자  임용 등록요령 공고",
+      "organization": "대전광역시 중구 의회사무국",
+      "registered_date": "2026-11-03",
+      "api_deadline": "2026-11-13",
+      "detail_cross_check_passed": true
+    },
+    "notice_type_interpretation": "The title announces final successful candidates and candidate registration. This observation is not evidence of a newly open application opportunity.",
+    "new_application_opportunity_verified": false,
+    "official_open_status_verified": false,
+    "sort_value_mapping_verified": false,
+    "all_notices_or_all_local_exams_verified": false,
+    "e02_observation": "Both selected queries returned totalCount=0 and no e02 detail was independently verified; do not infer national absence or permanent lack of service coverage.",
+    "historical_id_20_resolved": false,
+    "historical_failure_handling": "Preserve the failed classification and keep the failed detail outside verified detail samples. The last-page success does not convert the earlier failed run to success."
+  },
+  "implementation": {
+    "files_added": [
+      "scripts/verify_gojobs_current_sample.py",
+      "tests/test_gojobs_current_sample.py",
+      ".github/workflows/gojobs-current-sample-check.yml"
+    ],
+    "existing_adapter_and_runner_changed": false,
+    "one_run_limit": {
+      "list": 2,
+      "detail_max": 3
+    },
+    "retries": 0,
+    "sort_fallbacks": 0,
+    "pagination": "e01=5532 based on 27656 prior records with page size 5; actual response total, page, remaining row count verified. e02=1.",
+    "baseline_staleness": "If the calculated final page changes, fail pagination_changed rather than automatically retry or infer the last page.",
+    "mpm_calls_in_desc_and_last_page_runs": 0
+  },
+  "preservation": {
+    "existing_posts_before": 610,
+    "existing_posts_after": 610,
+    "source_preserved": true,
+    "sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+    },
+    "main_sha": "588c32425997db496c9498921d4781c975b1700d",
+    "draft_pr": "https://github.com/kllollain-max/careerpick/pull/1",
+    "production_data_writes": 0,
+    "deployment_performed": false,
+    "scheduled_collection_enabled": false
+  }
+}

@@ -1,0 +1,68 @@
+name: Verify collected ALIO candidate
+on:
+  push:
+    branches: [codex/restore-careerpick-20261103]
+    paths: [index.html, alio.json, alio-detail.json, .github/workflows/verify-alio-candidate.yml, scripts/verify_alio_candidate_browser.cjs]
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build static candidate and validate links/schema
+        run: python scripts/build_public_site.py
+      - run: python -m unittest discover -s tests -p 'test_job_pages.py'
+      - run: node --test tests/test_homepage_ux.cjs
+      - name: Prepare previous snapshot
+        run: git show 348d146de147f0aa0901abb9e5b635c749c5a6ac:alio.json > "$RUNNER_TEMP/alio-before.json"
+      - name: Validate candidate IDs and preservation
+        env:
+          ALIO_BEFORE: ${{ runner.temp }}/alio-before.json
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          old={p['id']:p for p in json.loads(Path(os.environ['ALIO_BEFORE']).read_text())['posts']}
+          data=json.loads(Path('alio.json').read_text())
+          rows=data['posts']; new={p['id']:p for p in rows}
+          details=json.loads(Path('alio-detail.json').read_text())
+          assert len(rows)==len(new)==610
+          assert old.keys()<=new.keys()
+          assert all(new[k]==p for k,p in old.items())
+          added=new.keys()-old.keys()
+          assert len(added)==90
+          for k in added:
+              assert k in details and str(details[k]['recrutPblntSn'])==k[1:]
+              assert (Path('dist/jobs')/(k+'.html')).is_file()
+          print('610 unique IDs; 90 new details generated; all 520 previous cards preserved')
+          PY
+      - name: Install Korean rendering fonts
+        run: sudo apt-get update -qq && sudo apt-get install -y fonts-noto-cjk
+      - name: Install browser test dependency
+        run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - name: Check changed data on desktop/mobile
+        env:
+          ALIO_BEFORE: ${{ runner.temp }}/alio-before.json
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+        run: |
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_alio_candidate_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: careerpick-610-candidate-validation
+          path: |
+            candidate-validation/
+            build-report.json
+            build-job-quality-report.json
+          retention-days: 7

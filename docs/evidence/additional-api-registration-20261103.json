@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-03T14:00:27+09:00",
+  "purpose": "Verify the two newly registered API secrets using bounded official API requests",
+  "code_sha": "8b2f1456dec43f0ebb078e1a6531e3ea1f03ca26",
+  "github_run": {
+    "id": 41581128729,
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/41581128729",
+    "job_id": 125735969460,
+    "conclusion": "failure",
+    "reason": "GOJOBS third detail failed strict classification validation"
+  },
+  "evidence_scope": {
+    "report_source": "Sanitized structured JSON in GitHub Actions job stdout",
+    "artifact_inspection": "Metadata only; ZIP bytes were not downloaded",
+    "artifact": {
+      "id": 13205308080,
+      "name": "additional-api-registration-report",
+      "size_in_bytes": 1532,
+      "url": "https://api.github.com/repos/kllollain-max/careerpick/actions/artifacts/13205308080",
+      "archive_download_url": "https://api.github.com/repos/kllollain-max/careerpick/actions/artifacts/13205308080/zip",
+      "expired": false,
+      "created_at": "2026-11-03T04:58:32Z",
+      "expires_at": "2026-11-10T04:58:31Z",
+      "updated_at": "2026-11-03T04:58:32Z",
+      "digest": "sha256:d500c8bd10e7688c8c1cc3622793ea25146708f11c9ec46067c7760c66005ab3",
+      "workflow_run": {
+        "id": 41581128729,
+        "repository_id": 1443658410,
+        "head_repository_id": 1443658410,
+        "head_branch": "codex/restore-careerpick-20261103",
+        "head_sha": "8b2f1456dec43f0ebb078e1a6531e3ea1f03ca26"
+      }
+    }
+  },
+  "conclusions": {
+    "gojobs": {
+      "secret_name": "GOJOBS_KEY",
+      "key_present": true,
+      "authentication_confirmed": true,
+      "authentication_basis": "Two list responses and two detail responses passed HTTP/application-envelope and record validation before a third detail failed.",
+      "connection_status": "confirmed",
+      "data_integrity_status": "partial",
+      "list_queries_verified": 2,
+      "details_verified": 2,
+      "detail_requests": 3,
+      "failure": "invalid_classification_pair",
+      "observed_safe_codes": {
+        "type01": "g01",
+        "type02": "unknown"
+      },
+      "explanation": "The runner sets authentication_verified only when the complete client.verify call returns. Its false value in the original report is therefore conservative overall verification, not evidence that this key was rejected.",
+      "unresolved": "The third requested detail passed ID comparison but its classification did not match either supported g/e layout. Its ID and raw unknown code were not retained in the sanitized report; do not infer or replace them."
+    },
+    "mpm_exam": {
+      "secret_name": "MPM_EXAM_KEY",
+      "key_present": true,
+      "authentication_confirmed": true,
+      "connection_status": "confirmed",
+      "data_integrity_status": "verified_2026_dataset",
+      "received_rows": 28,
+      "distinct_exam_names": 10,
+      "date_cells_verified": 107,
+      "null_place_announcement_cells": 5,
+      "next_year_verified": false
+    }
+  },
+  "offline_tests": {
+    "gojobs": 19,
+    "mpm_exam": 16,
+    "runner": 7,
+    "total": 42,
+    "github_result": "passed"
+  },
+  "preservation": {
+    "posts_before": 610,
+    "posts_after": 610,
+    "byte_for_byte_preserved": true,
+    "sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+    }
+  },
+  "changes": {
+    "existing_files_modified_by_this_task": false,
+    "new_api_code_and_tests": true,
+    "draft_pr": "https://github.com/kllollain-max/careerpick/pull/1",
+    "main_sha": "588c32425997db496c9498921d4781c975b1700d",
+    "main_changed": false,
+    "deployed": false,
+    "scheduled_collection_enabled": false
+  },
+  "earlier_attempts": [
+    {
+      "run_id": 41580295737,
+      "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/41580295737",
+      "checked_at": "2026-11-03T13:49:13+09:00",
+      "code_sha": "58db92ce512ddbefa21924e0d1ded645080164dc",
+      "status": "partial_or_blocked",
+      "services": {
+        "gojobs": {
+          "status": "failed",
+          "reason": "filter_mismatch",
+          "requests": {
+            "detail": 0,
+            "list": 1
+          },
+          "successful_responses": {
+            "detail": 0,
+            "list": 0
+          }
+        },
+        "mpm_exam": {
+          "status": "failed",
+          "reason": "invalid_field_type",
+          "requests": {
+            "list": 1
+          },
+          "successful_responses": {
+            "list": 0
+          }
+        }
+      },
+      "source_preserved": true
+    },
+    {
+      "run_id": 41580523270,
+      "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/41580523270",
+      "checked_at": "2026-11-03T13:51:38+09:00",
+      "code_sha": "f7592fc717dcc132f50ef4f66f0cfe27a62c1e78",
+      "status": "partial_or_blocked",
+      "services": {
+        "gojobs": {
+          "status": "failed",
+          "reason": "filter_mismatch",
+          "requests": {
+            "detail": 0,
+            "list": 1
+          },
+          "successful_responses": {
+            "detail": 0,
+            "list": 0
+          }
+        },
+        "mpm_exam": {
+          "status": "failed",
+          "reason": "invalid_field_type",
+          "requests": {
+            "list": 1
+          },
+          "successful_responses": {
+            "list": 0
+          }
+        }
+      },
+      "source_preserved": true
+    },
+    {
+      "run_id": 41580701424,
+      "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/41580701424",
+      "checked_at": "2026-11-03T13:53:48+09:00",
+      "code_sha": "4268ca508a6e6bf7f13ac43057a2e159a1538cf4",
+      "status": "partial_or_blocked",
+      "services": {
+        "gojobs": {
+          "status": "failed",
+          "reason": "invalid_source_link",
+          "requests": {
+            "detail": 1,
+            "list": 2
+          },
+          "successful_responses": {
+            "detail": 0,
+            "list": 2
+          }
+        },
+        "mpm_exam": {
+          "status": "verified",
+          "requests": {
+            "list": 1
+          },
+          "successful_responses": {
+            "list": 1
+          }
+        }
+      },
+      "source_preserved": true
+    }
+  ],
+  "original_runner_report": {
+    "checked_at": "2026-11-03T13:58:23+09:00",
+    "code_sha": "8b2f1456dec43f0ebb078e1a6531e3ea1f03ca26",
+    "deployment_performed": false,
+    "production_data_writes": 0,
+    "scheduled_collection_enabled": false,
+    "scope": "isolated_registration_check",
+    "services": {
+      "gojobs": {
+        "authentication_verified": false,
+        "key_present": true,
+        "reason": "invalid_classification_pair",
+        "requests": {
+          "detail": 3,
+          "list": 2
+        },
+        "response_diagnostic": {
+          "observed_filters": {
+            "type01": "g01",
+            "type02": "unknown"
+          }
+        },
+        "secret_name": "GOJOBS_KEY",
+        "status": "failed",
+        "successful_responses": {
+          "detail": 2,
+          "list": 2
+        }
+      },
+      "mpm_exam": {
+        "authentication_verified": true,
+        "key_present": true,
+        "requests": {
+          "list": 1
+        },
+        "result": {
+          "authentication_verified": true,
+          "columns_verified": [
+            "시험명",
+            "선발예정인원",
+            "원서접수기간",
+            "시험단계구분",
+            "시험장소공고일",
+            "시험일",
+            "합격자발표일"
+          ],
+          "contract_url": "https://infuser.odcloud.kr/oas/docs?namespace=3033611/v1",
+          "dataset_name": "인사혁신처_국가공무원 시험일정_20260216",
+          "dataset_year": 2026,
+          "dataset_year_source": "pinned_official_swagger_title_and_validated_dates",
+          "date_cells_verified": 107,
+          "date_cells_with_year_from_dataset_title": 0,
+          "date_verification_scope": "calendar_validity_and_2026_year_not_independent_official_change_notice_review",
+          "distinct_exam_names": 10,
+          "endpoint": "https://api.odcloud.kr/api/3033611/v1/uddi:99fb67de-ddf5-4a3e-8cfb-d3193c7156c5",
+          "list_verified": true,
+          "next_year_verified": false,
+          "null_place_announcement_cells": 5,
+          "received_rows": 28,
+          "row_scope": "exam_stage_rows_not_independent_recruitment_notices",
+          "samples": [
+            {
+              "선발예정인원": "98",
+              "시험단계구분": "제1차시험",
+              "시험명": "5급(과학기술)공개경쟁채용시험",
+              "시험일": "2026-03-07",
+              "시험장소공고일": "2026-02-27",
+              "원서접수기간": "2026-01-19~2026-01-23",
+              "합격자발표일": "2026-04-10"
+            },
+            {
+              "선발예정인원": "243",
+              "시험단계구분": "제1차시험",
+              "시험명": "5급(행정)공개경쟁채용시험",
+              "시험일": "2026-03-07",
+              "시험장소공고일": "2026-02-27",
+              "원서접수기간": "2026-01-19~2026-01-23",
+              "합격자발표일": "2026-04-10"
+            },
+            {
+              "선발예정인원": "40",
+              "시험단계구분": "제1차시험",
+              "시험명": "외교관후보자선발시험",
+              "시험일": "2026-03-07",
+              "시험장소공고일": "2026-02-27",
+              "원서접수기간": "2026-01-19~2026-01-23",
+              "합격자발표일": "2026-04-10"
+            }
+          ],
+          "service": "mpm_exam_3033611",
+          "source_url": "https://www.data.go.kr/data/3033611/fileData.do",
+          "total_rows": 28,
+          "unscheduled_or_blank_date_cells": 5,
+          "update_frequency": "annual_file_dataset"
+        },
+        "secret_name": "MPM_EXAM_KEY",
+        "status": "verified",
+        "successful_responses": {
+          "list": 1
+        }
+      }
+    },
+    "source_count_after": 610,
+    "source_count_before": 610,
+    "source_preserved": true,
+    "source_sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+    },
+    "status": "partial_or_blocked"
+  },
+  "limits": [
+    "GOJOBS verification is bounded to first-page samples for local-government public and career recruitment; no full or active-only collection claim.",
+    "Third GOJOBS detail has an unresolved source classification mismatch. The failed check was retained; acceptance rules were not relaxed.",
+    "Source-link pages and attachments were not fetched. Invalid optional references are omitted and separately classified.",
+    "MPM coverage is the pinned 2026 annual dataset, not 2027 or a review of all official amendment notices.",
+    "Original ALIO snapshots and existing website files were not changed."
+  ]
+}

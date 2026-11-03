@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "code_sha": "e55c1a185e1abcbf1ee6ccd9162ac05c385b1467",
+  "verified_at_kst": "2026-11-03T14:32:36+09:00",
+  "github_run": {
+    "id": 41584479030,
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/41584479030",
+    "conclusion": "failure",
+    "job_id": 125746656891
+  },
+  "test_summary": {
+    "gojobs": 23,
+    "mpm_exam": 16,
+    "runner": 11,
+    "total": 50,
+    "result": "passed"
+  },
+  "evidence_scope": {
+    "report": "Sanitized structured JSON from GitHub Actions stdout",
+    "artifact": "GitHub metadata only"
+  },
+  "artifact_metadata": [
+    {
+      "id": 13206738980,
+      "name": "additional-api-registration-report",
+      "digest": "sha256:24c868f4e61977a3e616306c77a45813ecd163a386888163f01c87a3ab049d46",
+      "size_in_bytes": 2239,
+      "expires_at": "2026-11-10T05:33:04Z"
+    }
+  ],
+  "interpretation": {
+    "authentication_confirmed": {
+      "gojobs": true,
+      "mpm_exam": true
+    },
+    "gojobs_data_integrity": "partial; strict classification failure retained",
+    "failed_notice": {
+      "deadline": "2008-12-29",
+      "field_layout": "observed_type01_recruitment",
+      "id": "20",
+      "institution_type": "g02",
+      "modified_date": "2008-12-22",
+      "org": "전라북도 임실군",
+      "recruitment_type": "e01",
+      "registered_date": "2008-12-22",
+      "title": "임실치즈과학연구소 선임연구원 채용공고"
+    },
+    "expected_classification": {
+      "expected_institution_type": "g02",
+      "expected_recruitment_type": "e01",
+      "id": "20"
+    },
+    "observed_classification": {
+      "observed_filters": {
+        "type01": "g01",
+        "type02": "unknown"
+      }
+    },
+    "verified_detail_ids": [
+      "4",
+      "7"
+    ],
+    "verified_detail_categories": [
+      "e01"
+    ],
+    "empty_requested_categories": [
+      "e02"
+    ],
+    "list_sample_scope": "page 1; five historical records with deadlines in 2008-2009; not current active recruitment",
+    "sort_order_used": "1",
+    "sort_direction_verified": false,
+    "valid_absolute_source_links_in_verified_details": 0,
+    "mpm_exam_scope": "2026 annual dataset: 28 stage rows, 10 distinct exam names",
+    "production_application": "No new API data applied to stored ALIO snapshots or website"
+  },
+  "changes": [
+    "Retain verified list/detail progress and the rejected public notice ID after a later sample failure.",
+    "Report authentication separately from complete sample integrity.",
+    "Preserve strict classification rejection and nonzero workflow exit.",
+    "Bound and credential-scan retained diagnostics; omit unsafe values."
+  ],
+  "preservation": {
+    "source_preserved": true,
+    "before": 610,
+    "after": 610,
+    "sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+    }
+  },
+  "original_runner_report": {
+    "checked_at": "2026-11-03T14:32:36+09:00",
+    "code_sha": "e55c1a185e1abcbf1ee6ccd9162ac05c385b1467",
+    "deployment_performed": false,
+    "production_data_writes": 0,
+    "scheduled_collection_enabled": false,
+    "scope": "isolated_registration_check",
+    "services": {
+      "gojobs": {
+        "authentication_basis": "one_or_more_validated_api_responses",
+        "authentication_verified": true,
+        "key_present": true,
+        "reason": "invalid_classification_pair",
+        "requests": {
+          "detail": 3,
+          "list": 2
+        },
+        "response_diagnostic": {
+          "observed_filters": {
+            "type01": "g01",
+            "type02": "unknown"
+          }
+        },
+        "secret_name": "GOJOBS_KEY",
+        "status": "failed",
+        "successful_responses": {
+          "detail": 2,
+          "list": 2
+        },
+        "verification_progress": {
+          "detail_samples": [
+            {
+              "content_present": true,
+              "field_layout": "documented_type01_institution",
+              "id": "4",
+              "institution_type": "g02",
+              "recruitment_type": "e01",
+              "source_link_status": {
+                "link01": "schemeless_reference",
+                "link02": "not_provided",
+                "link03": "not_provided"
+              },
+              "source_links": [],
+              "title": "2008년도경상북도 지방소방공무원 채용시험 시행계획공고"
+            },
+            {
+              "content_present": true,
+              "field_layout": "documented_type01_institution",
+              "id": "7",
+              "institution_type": "g02",
+              "recruitment_type": "e01",
+              "source_link_status": {
+                "link01": "schemeless_reference",
+                "link02": "not_provided",
+                "link03": "not_provided"
+              },
+              "source_links": [],
+              "title": "2008년도 전라북도 지방소방공무원 채용시험 시행계획 공고"
+            }
+          ],
+          "detail_verified_count": 2,
+          "failed_notice": {
+            "expected_institution_type": "g02",
+            "expected_recruitment_type": "e01",
+            "id": "20"
+          },
+          "list_count_returned": 5,
+          "list_queries_verified": 2,
+          "list_verified": true,
+          "observed_field_layouts": {
+            "detail": [
+              "documented_type01_institution"
+            ],
+            "list": [
+              "observed_type01_recruitment"
+            ]
+          },
+          "samples": [
+            {
+              "deadline": "2008-08-28",
+              "field_layout": "observed_type01_recruitment",
+              "id": "4",
+              "institution_type": "g02",
+              "modified_date": "2008-08-01",
+              "org": "경상북도",
+              "recruitment_type": "e01",
+              "registered_date": "2008-08-01",
+              "title": "2008년도경상북도 지방소방공무원 채용시험 시행계획공고"
+            },
+            {
+              "deadline": "2008-09-11",
+              "field_layout": "observed_type01_recruitment",
+              "id": "7",
+              "institution_type": "g02",
+              "modified_date": "2008-08-19",
+              "org": "전라북도",
+              "recruitment_type": "e01",
+              "registered_date": "2008-08-19",
+              "title": "2008년도 전라북도 지방소방공무원 채용시험 시행계획 공고"
+            },
+            {
+              "deadline": "2008-12-29",
+              "field_layout": "observed_type01_recruitment",
+              "id": "20",
+              "institution_type": "g02",
+              "modified_date": "2008-12-22",
+              "org": "전라북도 임실군",
+              "recruitment_type": "e01",
+              "registered_date": "2008-12-22",
+              "title": "임실치즈과학연구소 선임연구원 채용공고"
+            },
+            {
+              "deadline": "2009-02-18",
+              "field_layout": "observed_type01_recruitment",
+              "id": "42",
+              "institution_type": "g02",
+              "modified_date": "2009-01-16",
+              "org": "울산광역시",
+              "recruitment_type": "e01",
+              "registered_date": "2009-01-16",
+              "title": "울산광역시 2009년도 간호조무사 자격시험 시행계획 공고"
+            },
+            {
+              "deadline": "2009-03-20",
+              "field_layout": "observed_type01_recruitment",
+              "id": "45",
+              "institution_type": "g02",
+              "modified_date": "2009-02-11",
+              "org": "대구광역시",
+              "recruitment_type": "e01",
+              "registered_date": "2009-02-11",
+              "title": "2009년도 대구광역시지방공무원 임용시험계획 공고"
+            }
+          ],
+          "source_link_counts": {
+            "not_provided": 4,
+            "unverified": 2,
+            "validated": 0
+          },
+          "total_count_by_filter": {
+            "e01": 27656,
+            "e02": 0
+          },
+          "verification_complete": false
+        }
+      },
+      "mpm_exam": {
+        "authentication_basis": "one_or_more_validated_api_responses",
+        "authentication_verified": true,
+        "key_present": true,
+        "requests": {
+          "list": 1
+        },
+        "result": {
+          "authentication_verified": true,
+          "columns_verified": [
+            "시험명",
+            "선발예정인원",
+            "원서접수기간",
+            "시험단계구분",
+            "시험장소공고일",
+            "시험일",
+            "합격자발표일"
+          ],
+          "contract_url": "https://infuser.odcloud.kr/oas/docs?namespace=3033611/v1",
+          "dataset_name": "인사혁신처_국가공무원 시험일정_20260216",
+          "dataset_year": 2026,
+          "dataset_year_source": "pinned_official_swagger_title_and_validated_dates",
+          "date_cells_verified": 107,
+          "date_cells_with_year_from_dataset_title": 0,
+          "date_verification_scope": "calendar_validity_and_2026_year_not_independent_official_change_notice_review",
+          "distinct_exam_names": 10,
+          "endpoint": "https://api.odcloud.kr/api/3033611/v1/uddi:99fb67de-ddf5-4a3e-8cfb-d3193c7156c5",
+          "list_verified": true,
+          "next_year_verified": false,
+          "null_place_announcement_cells": 5,
+          "received_rows": 28,
+          "row_scope": "exam_stage_rows_not_independent_recruitment_notices",
+          "samples": [
+            {
+              "선발예정인원": "98",
+              "시험단계구분": "제1차시험",
+              "시험명": "5급(과학기술)공개경쟁채용시험",
+              "시험일": "2026-03-07",
+              "시험장소공고일": "2026-02-27",
+              "원서접수기간": "2026-01-19~2026-01-23",
+              "합격자발표일": "2026-04-10"
+            },
+            {
+              "선발예정인원": "243",
+              "시험단계구분": "제1차시험",
+              "시험명": "5급(행정)공개경쟁채용시험",
+              "시험일": "2026-03-07",
+              "시험장소공고일": "2026-02-27",
+              "원서접수기간": "2026-01-19~2026-01-23",
+              "합격자발표일": "2026-04-10"
+            },
+            {
+              "선발예정인원": "40",
+              "시험단계구분": "제1차시험",
+              "시험명": "외교관후보자선발시험",
+              "시험일": "2026-03-07",
+              "시험장소공고일": "2026-02-27",
+              "원서접수기간": "2026-01-19~2026-01-23",
+              "합격자발표일": "2026-04-10"
+            }
+          ],
+          "service": "mpm_exam_3033611",
+          "source_url": "https://www.data.go.kr/data/3033611/fileData.do",
+          "total_rows": 28,
+          "unscheduled_or_blank_date_cells": 5,
+          "update_frequency": "annual_file_dataset"
+        },
+        "secret_name": "MPM_EXAM_KEY",
+        "status": "verified",
+        "successful_responses": {
+          "list": 1
+        }
+      }
+    },
+    "source_count_after": 610,
+    "source_count_before": 610,
+    "source_preserved": true,
+    "source_sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+    },
+    "status": "partial_or_blocked"
+  },
+  "limits": [
+    "Historical first-page sample; no current-active or full-collection claim.",
+    "The e02 query returned zero rows; no e02 detail was verified.",
+    "ID 20 was rejected, not normalized into the requested g02/e01 classification.",
+    "Sorting and provider classification need an evidence-based decision before production ingestion.",
+    "Main merge, Pages, visibility, deployment and scheduled collection remain held by prior user instruction."
+  ]
+}

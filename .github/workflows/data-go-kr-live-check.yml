@@ -1,0 +1,40 @@
+name: Data.go.kr isolated registration check
+on:
+  push:
+    branches: [codex/restore-careerpick-20261103]
+    paths:
+      - data_go_kr.py
+      - test_data_go_kr.py
+      - tests/test_data_go_kr_live.py
+      - scripts/verify_data_go_kr_live.py
+      - .github/workflows/data-go-kr-live-check.yml
+permissions:
+  contents: read
+concurrency:
+  group: data-go-kr-registration-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  live-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check data.go.kr contract and snapshot preservation
+        run: |
+          python -m unittest test_data_go_kr
+          python -m unittest discover -s tests -p test_data_go_kr_live.py
+      - name: Validate the registered key with the requested data.go.kr service
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python scripts/verify_data_go_kr_live.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: data-go-kr-registration-check
+          path: data-go-kr-check-output/
+          retention-days: 7
