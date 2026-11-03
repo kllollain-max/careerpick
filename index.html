@@ -2581,7 +2581,7 @@ async function cpInitPush(){
         try {
           await sdk.init({
             appId: window.CP_ONESIGNAL_APP_ID,
-            serviceWorkerPath: "onesignal/OneSignalSDKWorker.js",
+            serviceWorkerPath: "careerpick/onesignal/OneSignalSDKWorker.js",
             serviceWorkerParam: {scope: "/onesignal/"}
           });
         } catch(e){
