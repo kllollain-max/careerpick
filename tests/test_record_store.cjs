@@ -51,3 +51,9 @@ test('delete has a verified exact pre-write copy; checkpoint failure leaves acti
  const denied=storage({apps:raw});const put=denied.setItem;denied.setItem=(k,v)=>{if(k==='careerpick-record-checkpoints')throw Error('quota');put(k,v);};
  await assert.rejects(store.mutate(denied,'apps',{},store.apps,()=>({})));assert.equal(denied.data.apps,raw);
 });
+
+test('mixed damaged and healthy records display healthy entries without authorizing overwrite',async()=>{
+ const raw='{"good":{"st":"plan","memo":"preserved"},"bad":null}',s=storage({apps:raw});
+ const view=store.read(s,'apps',{},store.apps);assert(!view.ok);assert.equal(view.data.good.memo,'preserved');assert(!('bad' in view.data));
+ await assert.rejects(store.mutate(s,'apps',{},store.apps,()=>({})));assert.equal(s.data.apps,raw);
+});

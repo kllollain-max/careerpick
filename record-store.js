@@ -8,9 +8,16 @@
     ['title','org','url','memo','exam','itv','due'].every(k=>a[k]==null||typeof a[k]==='string')&&
     (a.ck==null||Array.isArray(a.ck)&&a.ck.every(c=>object(c)&&typeof c.t==='string')));
   const prefs=x=>object(x)&&['emp','edu','region','cat'].every(k=>x[k]===undefined||Array.isArray(x[k])&&x[k].every(v=>typeof v==='string'))&&(x.kw===undefined||typeof x.kw==='string');
+  function readablePart(key,value,fallback){
+    if(key==='apps'&&object(value))return Object.fromEntries(Object.entries(value).filter(([id,a])=>safeKey(id)&&apps({[id]:a})));
+    if(key==='saved'&&Array.isArray(value))return value.filter(id=>saved([id]));
+    if(key==='prefs'&&object(value))return Object.fromEntries(Object.entries(value).filter(([k,v])=>['emp','edu','region','cat'].includes(k)?Array.isArray(v)&&v.every(x=>typeof x==='string'):k==='kw'&&typeof v==='string'));
+    return fallback;
+  }
   function read(storage,key,fallback,valid){
-    try{const raw=storage.getItem(key),data=raw===null?fallback:JSON.parse(raw);if(!valid(data))throw Error('invalid');return{ok:true,data,raw};}
-    catch(_){return{ok:false,data:fallback,error:'저장된 기록을 읽지 못했습니다. 원본은 보존했으며 덮어쓰지 않습니다. JSON 백업을 확인해 주세요.'};}
+    let raw=null,data=fallback;
+    try{raw=storage.getItem(key);data=raw===null?fallback:JSON.parse(raw);if(!valid(data))throw Error('invalid');return{ok:true,data,raw};}
+    catch(_){return{ok:false,data:readablePart(key,data,fallback),raw,error:'일부 기록을 읽지 못했습니다. 읽을 수 있는 기록을 표시하며 손상 원본은 보존했습니다. 덮어쓰지 않으므로 원본 포함 JSON 백업을 확인해 주세요.'};}
   }
   async function mutate(storage,key,fallback,valid,edit,locks){
     const work=()=>{

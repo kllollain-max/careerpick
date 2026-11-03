@@ -110,6 +110,9 @@ async function savedAndApps(page){
    const seed={saved:'[broken',apps:'{"broken":null}',prefs:'{"emp":null}'},x=await context(browser,{seed}),p=await x.ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await ready(p);
    await p.locator('#list [data-save="a900001"]').click();await p.locator('#cpStorageNotice').waitFor({state:'visible'});assert.deepEqual(await p.evaluate(()=>Object.fromEntries(['saved','apps','prefs'].map(k=>[k,localStorage.getItem(k)]))),seed);assert.deepEqual(errors,[]);await x.ctx.close();
   });
+  await check('healthy application stays visible when another record is damaged; raw bucket is preserved',async()=>{
+   const raw='{"a900001":{"st":"plan","memo":"healthy preserved","ck":[]},"bad":null}',x=await context(browser,{seed:{apps:raw}}),p=await x.ctx.newPage();await ready(p);await p.getByRole('button',{name:'내 지원',exact:true}).click();assert((await p.locator('#list').innerText()).includes('healthy preserved'));assert(await p.locator('#cpStorageNotice').isVisible());assert.equal(await p.evaluate(()=>localStorage.getItem('apps')),raw);await x.ctx.close();
+  });
   await check('unlinked and expired saved records remain visible; application memo survives removal from feed',async()=>{
    const x=await context(browser,{seed:{saved:'["missing-id","a900003"]',apps:'{"missing-id":{"st":"plan","title":"旧記録","memo":"preserved","ck":[]}}'}}),p=await x.ctx.newPage();await ready(p);await p.getByRole('button',{name:'저장 공고',exact:true}).click();assert((await p.locator('#list').innerText()).includes('missing-id'));assert((await p.locator('#list').innerText()).includes('마감된 사무직'));await p.getByRole('button',{name:'내 지원',exact:true}).click();assert((await p.locator('#list').innerText()).includes('preserved'));await x.ctx.close();
   });
