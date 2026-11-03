@@ -1,0 +1,321 @@
+
+name: CareerPick Threads Auto
+
+on:
+  schedule:
+    # UTC -> KST 08:00, 12:00, 16:00, 20:00 (4-hour spacing)
+    - cron: '0 23 * * *'
+    - cron: '0 3 * * *'
+    - cron: '0 7 * * *'
+    - cron: '0 11 * * *'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: careerpick-threads-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event_name == 'schedule' && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+
+    env:
+      TZ: Asia/Seoul
+      PYTHONUNBUFFERED: "1"
+      THREADS_SCHEDULE_CRON: ${{ github.event.schedule }}
+      THREADS_CLAIM_REPO: ${{ github.repository }}
+      THREADS_CLAIM_BRANCH: threads-publisher-state
+      THREADS_CLAIM_TOKEN: ${{ github.token }}
+      THREADS_NO_SEND: "false"
+      THREADS_NEW_CONTENT: "false"
+      THREADS_ENABLED: "true"
+      THREADS_EDITORIAL_ENABLED: ${{ vars.THREADS_EDITORIAL_ENABLED == 'true' }}
+      THREADS_CONVERSATION_ENABLED: ${{ vars.THREADS_CONVERSATION_ENABLED != 'false' }}
+      THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check files
+        run: |
+          test -f alio.json
+          test -f scripts/threads_auto.py
+          test -f threads_posted.json
+
+      - name: Preview (disabled mode)
+        if: env.THREADS_ENABLED != 'true'
+        run: python scripts/threads_auto.py preview
+
+      - name: Validate publishing credentials
+        if: env.THREADS_ENABLED == 'true'
+        run: |
+          test -n "$THREADS_ACCESS_TOKEN"
+          test -n "$THREADS_USER_ID"
+
+      - name: Reserve one job
+        id: reserve
+        if: env.THREADS_ENABLED == 'true'
+        run: |
+          # A rerun retains GITHUB_RUN_ID; its old pending reservation may
+          # already have reached Threads. Never publish it automatically again.
+          if [ "${GITHUB_RUN_ATTEMPT:-1}" != "1" ]; then
+            echo "::error::Threads rerun blocked; reconcile remote state before any new attempt"
+            exit 1
+          fi
+          echo "Reservation preparation started at $(date -u +%FT%TZ)"
+          python scripts/threads_auto.py prepare
+          echo "Reservation preparation finished at $(date -u +%FT%TZ)"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          records = json.loads(Path('threads_posted.json').read_text(encoding='utf-8')).get('records', [])
+          mine = [r for r in records if str(r.get('run_id')) == os.environ['GITHUB_RUN_ID'] and r.get('status') == 'pending']
+          ready = len(mine) == 1
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write(f"ready={'true' if ready else 'false'}\\n".replace('\\n', '\n'))
+              output.write('needs_image=' + ('true' if ready and mine[0].get('image_job') else 'false') + chr(10))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+              if ready:
+                  summary.write('Threads reservation created; proceeding to publish.\\n'.replace('\\n', '\n'))
+              else:
+                  summary.write('Threads publishing SKIPPED: no new reservation (possibly unresolved pending history). This is NOT a successful post.\\n'.replace('\\n', '\n'))
+          print('Threads reservation ready:', ready)
+          unresolved = [r for r in records if r.get('status') == 'pending' and not r.get('threads_post_id')]
+          if not ready and unresolved:
+              raise SystemExit('Unresolved Threads reservation; reconcile remote state before further posting')
+          PY
+
+      - name: Install Korean fonts and Pillow
+        id: image_tools
+        continue-on-error: true
+        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install 'Pillow>=10,<13'
+
+      - name: Generate recruitment image
+        id: image_generate
+        continue-on-error: true
+        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true' && steps.image_tools.outcome == 'success'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from scripts.create_thumbnail import generate
+          history = json.loads(Path('threads_posted.json').read_text(encoding='utf-8'))
+          matches = [r for r in history.get('records', []) if r.get('run_id') == __import__('os').environ['GITHUB_RUN_ID'] and r.get('status') == 'pending']
+          if len(matches) == 1 and matches[0].get('image_job'):
+              path = Path(generate(matches[0]['image_job']))
+              from PIL import Image
+              with Image.open(path) as image:
+                  if image.format != 'JPEG' or image.width < 1 or image.height < 1:
+                      raise ValueError('Generated image format or size invalid')
+                  image.verify()
+              print('Generated and verified image:', path)
+          else:
+              raise SystemExit('Expected image reservation not found')
+          PY
+
+      - name: Persist reservation before publishing
+        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
+        run: |
+          if [ -n "$(git status --porcelain -- threads_posted.json threads-images/)" ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add threads_posted.json
+            if [ "${{ steps.image_generate.outcome }}" = success ]; then
+              git add threads-images/
+            fi
+            git commit -m 'Reserve CareerPick Threads job'
+            # Other automation can commit between checkout and image generation.
+            # Rebase the committed reservation before pushing; fail closed on conflicts.
+            # Retry when another scheduled workflow pushes to main concurrently.
+            # Never force-push or discard reservation/history on conflicts.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Threads history rebase conflict; manual reconciliation required"
+                exit 1
+              fi
+              if git push origin HEAD:main; then
+                pushed=true
+                break
+              fi
+              echo "Concurrent main update; retrying push ($attempt/5)"
+              sleep $((attempt * 3))
+            done
+            if [ "$pushed" != true ]; then
+              echo "::error::Threads history push failed after retries"
+              exit 1
+            fi
+          fi
+
+      - name: Reload persisted reservation
+        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
+        run: |
+          git fetch origin main
+          git restore --source=origin/main -- threads_posted.json
+
+      - name: Check committed public image readiness
+        id: image_deploy
+        continue-on-error: true
+        if: steps.reserve.outputs.needs_image == 'true' && steps.image_generate.outcome == 'success'
+        run: |
+          python - <<'PYIMAGE'
+          import json, os, time, urllib.request
+          from pathlib import Path
+          rows = json.loads(Path('threads_posted.json').read_text())['records']
+          row = next(r for r in rows if str(r.get('run_id')) == os.environ['GITHUB_RUN_ID'])
+          ready = False
+          for attempt in range(12):
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(row['image_url'], method='HEAD'), timeout=10) as response:
+                      ready = response.status == 200 and response.headers.get('Content-Type', '').startswith('image/')
+              except Exception:
+                  ready = False
+              if ready:
+                  ready = True
+                  break
+              time.sleep(5)
+          if not ready:
+              raise SystemExit('Public image unavailable; publisher will decide before request')
+          print('Committed public image ready')
+          PYIMAGE
+
+      - name: Validate image readiness guard
+        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          workflow = Path('.github/workflows/threads_auto.yml').read_text(encoding='utf-8')
+          assert "ready = False" in workflow
+          assert "ready = True" in workflow
+          assert "if not ready:" in workflow
+          assert "Public image unavailable; publisher will decide before request" in workflow
+          print('Threads image readiness guard present')
+          PY
+
+      - name: Publish one Threads post
+        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
+        env:
+          THREADS_IMAGE_PREPARATION_FAILED: ${{ steps.reserve.outputs.needs_image == 'true' && (steps.image_tools.outcome != 'success' || steps.image_generate.outcome != 'success' || steps.image_deploy.outcome != 'success') }}
+        run: |
+          # Recheck the latest persisted history immediately before claiming.
+          # This does not replace the required legacy-publisher cutover barrier.
+          git fetch origin main
+          git restore --source=origin/main -- threads_posted.json
+          python scripts/threads_auto.py publish
+
+      - name: Persist successful publish
+        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
+        run: |
+          if [ -n "$(git status --porcelain -- threads_posted.json)" ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add threads_posted.json
+            git commit -m 'Record published CareerPick Threads job'
+            # Other automation can commit between checkout and image generation.
+            # Rebase the committed reservation before pushing; fail closed on conflicts.
+            # Retry when another scheduled workflow pushes to main concurrently.
+            # Never force-push or discard reservation/history on conflicts.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Threads history rebase conflict; manual reconciliation required"
+                exit 1
+              fi
+              if git push origin HEAD:main; then
+                pushed=true
+                break
+              fi
+              echo "Concurrent main update; retrying push ($attempt/5)"
+              sleep $((attempt * 3))
+            done
+            if [ "$pushed" != true ]; then
+              echo "::error::Threads history push failed after retries"
+              exit 1
+            fi
+          fi
+
+      - name: Verify published post and reply
+        if: ${{ always() && env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          records = json.loads(Path('threads_posted.json').read_text(encoding='utf-8')).get('records', [])
+          mine = [r for r in records if str(r.get('run_id')) == os.environ['GITHUB_RUN_ID']]
+          post_ok = len(mine) == 1 and mine[0].get('status') == 'published' and bool(mine[0].get('threads_post_id'))
+          optional_replies = post_ok and mine[0].get('content_type') in ('discussion', 'tip')
+          reply_ok = post_ok and (bool(mine[0].get('reply_post_id')) if not optional_replies or mine[0].get('reply_text') else True)
+          engagement_ok = post_ok and (bool(mine[0].get('engagement_text')) and bool(mine[0].get('engagement_post_id')) if not optional_replies else (not mine[0].get('engagement_text') or bool(mine[0].get('engagement_post_id'))))
+          lines = ['## Threads publication result', '', '- Main post recorded: **' + ('YES' if post_ok else 'NO') + '**', '- Detail reply recorded: **' + ('YES' if reply_ok else 'NO') + '**']
+          lines.append('- Engagement reply recorded: **' + ('YES' if engagement_ok else 'NO') + '**')
+          if not reply_ok or not engagement_ok:
+              lines.append('- **ACTION REQUIRED:** inspect this run and remote Threads state; do not blindly repost.')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
+              out.write(chr(10).join(lines) + chr(10))
+          if not post_ok or not reply_ok or not engagement_ok:
+              raise SystemExit('Threads publication incomplete; investigate without duplicate repost')
+          print('Verified main post and detail reply IDs')
+          PY
+
+  alert:
+    name: Alert on Threads publishing failure
+    needs: publish
+    if: ${{ always() && needs.publish.result == 'failure' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Open or update failure tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          repo = os.environ['REPO']
+          url = 'https://api.github.com/repos/' + repo + '/issues'
+          title = '[CareerPick] Threads auto-publish failure'
+          headers = {
+              'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+              'Content-Type': 'application/json',
+          }
+          def request(method, target, payload=None):
+              data = json.dumps(payload).encode() if payload is not None else None
+              req = urllib.request.Request(target, data=data, headers=headers, method=method)
+              with urllib.request.urlopen(req, timeout=20) as response:
+                  return json.load(response)
+          issues = request('GET', url + '?state=open&per_page=100')
+          existing = next((i for i in issues if not i.get('pull_request') and i.get('title') == title), None)
+          body = ('Scheduled Threads publishing failed. Inspect the run and reconcile remote posts before retrying.\n\n' + os.environ['RUN_URL'])
+          if existing:
+              result = request('POST', existing['comments_url'], {'body': body})
+              print('Updated existing failure issue with run URL')
+          else:
+              result = request('POST', url, {'title': title, 'body': body})
+              print('Created failure issue:', result.get('html_url'))
+          PY
