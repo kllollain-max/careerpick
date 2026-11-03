@@ -22,7 +22,13 @@ class StatePreflightTests(unittest.TestCase):
                 data = {'content':base64.b64encode(json.dumps({'run_id':'99','kind':'migration_write_probe','publishes':0}).encode()).decode()}
             return io.BytesIO(json.dumps(data).encode())
         env={'GITHUB_REPOSITORY':'a/b','GITHUB_RUN_ID':'99','GH_TOKEN':'mock','PUBLISH_ENABLED':'false','MIGRATION_READY':'false'}
-        with patch.dict(os.environ,env), patch('urllib.request.urlopen',side_effect=opener):
+        history = {'records': [{'status': 'posted'} for _ in range(39)] + [{
+            'status': 'posted', 'threads_post_id': '18029250455877919',
+            'reply_post_id': '17909910720593443', 'engagement_post_id': '18132626512765431',
+        }]}
+        with patch.dict(os.environ,env), patch('urllib.request.urlopen',side_effect=opener), patch(
+            'scripts.threads_state_preflight.Path.read_text', return_value=json.dumps(history)
+        ):
             if state == 'sending':
                 with self.assertRaises(SystemExit): main()
             else:
@@ -37,6 +43,13 @@ class StatePreflightTests(unittest.TestCase):
 
     def test_unresolved_remote_claim_prevents_any_write(self):
         self.assertFalse(any(method=='PUT' for method,_ in self.run_probe('sending')))
+
+    def test_incomplete_local_history_blocks_before_network(self):
+        with patch('scripts.threads_state_preflight.Path.read_text',
+                   return_value=json.dumps({'records': []})), patch('urllib.request.urlopen') as request:
+            with self.assertRaisesRegex(SystemExit, 'History incomplete'):
+                main()
+            request.assert_not_called()
 
     def test_enabled_gate_blocks_before_network(self):
         with patch.dict(os.environ,{'PUBLISH_ENABLED':'true'}),patch('urllib.request.urlopen') as request:
