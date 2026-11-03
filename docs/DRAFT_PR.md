@@ -12,9 +12,9 @@
 
 ## 검증 근거
 
-현재 검증한 코드 HEAD: `86548d2aa54191b10ff558368c29f940ba2446d9`. 이후 문서 커밋은 실행 코드·데이터 변경과 구분한다.
+ALIO·기존 공공데이터포털 검증 코드 HEAD: `86548d2aa54191b10ff558368c29f940ba2446d9`. 해당 회차의 문서·증빙 커밋은 [`e2a55e3`](https://github.com/kllollain-max/careerpick/commit/e2a55e311312fd6fb580110dbcfa66b03146712c)이며 실행 코드와 데이터는 동일하다.
 
-세 회차의 결과·원본 해시·공식 웹 관찰·검사 및 기존 UI 근거는 `docs/evidence/alio-followup-20261103.json`에 기록한다. 이번 세 실행의 증빙 범위는 실행 로그와 artifact 메타데이터다.
+세 회차의 결과·원본 해시·공식 웹 관찰·검사 및 기존 UI 근거는 [통합 검증 기록](https://github.com/kllollain-max/careerpick/blob/e2a55e311312fd6fb580110dbcfa66b03146712c/docs/evidence/alio-followup-20261103.json)에 기록했다. 이번 세 실행의 증빙 범위는 실행 로그와 artifact 메타데이터다.
 
 | 범위 | 결과·근거 |
 |---|---|
@@ -23,6 +23,18 @@
 | ALIO 최신 실검증 | [41578577872](https://github.com/kllollain-max/careerpick/actions/runs/41578577872) 성공. 계약 3개·수집 16개·부분 수집 방어 검사 통과. 목록·상세·격리 수집 성공, 610 → 610, 추가·변경·삭제 0, 원본 및 12:32:01 기준시각 보존. |
 | 공공데이터포털 최신 실검증 | [41578578108](https://github.com/kllollain-max/careerpick/actions/runs/41578578108) 성공. 13:31:14 KST 기준 509개 고유 목록, 목록 6회·상세 표본 3회, 첨부파일 정보 5개 확인. 610건 원본 보존. |
 | 목록 부재 공고 감사 | [41578577992](https://github.com/kllollain-max/careerpick/actions/runs/41578577992) 성공. 검사 6개, 목록 6회·상세 4회. 상세 `no_data` 4건은 `unresolved`로 보존했고 비진행 확정 0건. |
+
+## 추가 등록 API 후속 확인
+
+최신 격리 실검증은 **2026-11-03 14:32:36 KST**, 코드 `e55c1a185e1abcbf1ee6ccd9162ac05c385b1467`에서 수행했다. [실행 기록](https://github.com/kllollain-max/careerpick/actions/runs/41584479030)과 [후속 증빙](docs/evidence/gojobs-followup-20261103.json)을 보존했다.
+
+- **국가공무원 시험일정:** 인증 성공, 2026년 28개 단계별 행·시험명 10개·날짜 셀 107개 검증. 2027년 검증은 아니다.
+- **나라일터:** 인증 성공을 보고서에 정확히 반영했다. 목록 2회·상세 2건 검증 후 ID `20`에서 `invalid_classification_pair`로 중단됐다. 실패 전 결과와 공고의 식별값을 보존한다.
+- **실제 표본 범위:** `e01` 첫 페이지는 2008~2009년 공고 5건, `e02`는 0건이었다. 성공한 상세 ID `4`, `7`은 모두 `e01`이다. 최신 진행 공고 또는 경력경쟁 상세 검증으로 집계하지 않는다.
+- **테스트 50개 통과**(GOJOBS 23·시험일정 16·공통 검증기 11). 실 API 실행은 분류 불일치로 **failure 유지**다. 엄격한 분류 기준과 비정상 종료를 유지했다.
+- 기존 공고 **610 → 610**, 원본 JSON 두 파일의 바이트 보존. 새 API는 격리 확인 범위이며 기존 화면과 수집 데이터에 반영하지 않았다.
+
+세부 결과는 [추가 API 연결 확인](docs/ADDITIONAL_API_CONNECTION_CHECK_20261103.md)에 정리했다.
 
 ## 남아 있는 확인 범위
 
