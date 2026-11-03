@@ -6,7 +6,7 @@ const missing=v=>v===null||v===undefined||v===''||(Array.isArray(v)&&!v.length);
 const value=v=>missing(v)?'미기재 · 공식 원문 확인':Array.isArray(v)?v.map(text).join(' · '):text(v);
 function date(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return '';const d=new Date(s+'T00:00:00Z');return Number.isFinite(+d)&&d.toISOString().slice(0,10)===s?s:'';}
 function next(s){if(!date(s))return '';return new Date(Date.parse(s+'T00:00:00Z')+86400000).toISOString().slice(0,10);}
-function kstDay(v){if(typeof v==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(v))return date(v);const d=new Date(v);if(!Number.isFinite(+d))return '';return new Date(+d+32400000).toISOString().slice(0,10);}
+function kstDay(v){if(typeof v==='string'){if(/^\d{4}-\d{2}-\d{2}$/.test(v))return date(v);if(!utc(v))return '';}const d=new Date(v);if(!Number.isFinite(+d))return '';return new Date(+d+32400000).toISOString().slice(0,10);}
 function url(v){try{if(/[\r\n]/.test(v))return '';const u=new URL(v);return ['https:','http:'].includes(u.protocol)?u.href:'';}catch(_){return '';}}
 const escape=v=>String(v??'').replace(/\\/g,'\\\\').replace(/\r\n|\r|\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;');
 function fold(line){const enc=new TextEncoder();let out='',row='',n=0;for(const c of line){const len=enc.encode(c).length;if(n+len>75){out+=row+'\r\n';row=' ';n=1;}row+=c;n+=len;}return out+row;}
