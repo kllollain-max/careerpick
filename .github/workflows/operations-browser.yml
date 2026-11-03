@@ -8,6 +8,7 @@ on:
       - index.html
       - homepage-ui.js
       - record-migration.js
+      - civil-service-exams.html
 permissions:
   contents: read
 jobs:
@@ -45,11 +46,20 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
           python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
           node scripts/verify_alio_candidate_browser.cjs
+      - name: Check corrected calendar and source receipt display
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+        run: |
+          python scripts/build_additional_api_candidate.py
+          ln -s "$GITHUB_WORKSPACE/additional-api-candidate-output" _preview/api-review
+          node scripts/verify_additional_api_candidate_browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: operating-ui-check
           path: |
             candidate-validation/
+            candidate-browser-validation/
             build-report.json
           retention-days: 7

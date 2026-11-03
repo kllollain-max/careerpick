@@ -10,7 +10,7 @@ const output = path.join(root, 'candidate-browser-validation');
 fs.mkdirSync(output, {recursive: true});
 
 (async () => {
-  const browser = await chromium.launch({headless: true});
+  const browser = await chromium.launch({headless: true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
   const results = [];
   try {
     for (const width of [320, 390, 1440]) {

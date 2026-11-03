@@ -79,6 +79,14 @@ async function loadYear(year){
     records=data.records;
     document.querySelector('#updated').textContent='선택 연도: '+year+'년 · 데이터 조회 기준: '+retrievedAt(data.retrieved_at);
     render();
+    // Keep source snapshot time separate from the latest successful check.
+    (async()=>{try{
+      const response=await fetch('./exam-status.json',{cache:'no-store'});
+      if(!response.ok)return;
+      const receipt=await response.json();
+      if(request!==yearRequest||String(yearSelect.value)!==String(year)||receipt.dataset_year!==Number(year)||!['changed','unchanged'].includes(receipt.status)||!Number.isFinite(Date.parse(receipt.verified_at)))return;
+      document.querySelector('#updated').textContent+=' · 마지막 정상 확인: '+retrievedAt(receipt.verified_at);
+    }catch(_){}})();
   }catch(error){
     if(request!==yearRequest||String(yearSelect.value)!==String(year))return;
     records=[];
