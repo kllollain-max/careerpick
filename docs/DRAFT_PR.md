@@ -1,13 +1,35 @@
-Title: Restore CareerPick from preserved snapshots under /careerpick/
+## 필요한 이유
 
-Draft only; no merge/deployment authorization.
-수정 담당: ChatGPT/Codex
-검토 담당: 운영자 지정 대기
+기존 커리어픽 접근 장애 후 새 저장소에서 검색·맞춤 조건·공고 저장·지원 관리 기능과 보존 데이터를 복원한다. 이 PR은 **검토용 Draft #1**이며, main 병합·운영 공개 승인은 별도로 필요하다.
 
-Restores the original website and 520 ALIO snapshot notices. Reuses search, filters, matched conditions, saved notices and application tracking. The build scopes local and canonical links to `/careerpick/` while preserving calendar separators and external URL classification. PWA caches are isolated from sibling projects.
+## 변경 내용과 결과
 
-Only allowlisted static output enters `dist/`. The active workflow is manual verification only; collector and Pages workflow proposals remain inert outside `.github/workflows`.
+- 기존 화면과 브라우저 저장 기능을 재사용하고 링크·canonical·PWA 범위를 `/careerpick/`로 조정했다. 계정 로그인이나 서버 동기화 기능이 복원됐다고 주장하지 않는다.
+- 현재 데이터는 **610개 고유 공고**다. 기존 520건과 추가 복원한 90건을 보존하며, 수집 기준시각은 `2026-11-03T12:32:01+09:00`이다. 과거 공고를 포함한 수치다.
+- ALIO OpenData(`ALIO_KEY`)와 공공데이터포털(`DATA_GO_KR_KEY`)의 목록·상세 API를 실제 인증해 검증했다.
+- 수집 완전성, 정상 무변경 처리, 상세정보만 변경된 경우의 반영을 보완했다. 검증 실패 시 원본을 보존하며, 동일 결과에서는 기존 수집시각을 유지한다.
+- 배포 제안은 `review-workflows/deploy-pages.yml.disabled`에 비활성 상태로 둔다. 필수 `approved_sha` 검증과 정확한 SHA checkout·HEAD 대조, 고정 concurrency를 적용했다. 공개 허용목록으로 생성한 `dist/`만 업로드한다.
 
-Validation: 48 homepage tests, 27 detail tests, 6 expiry-schema tests, 3 collector preservation tests, sitemap regression and original partial-fetch guard pass. 373 generated JavaScript units parse. 27,580 internal links have no missing target. Cloud-browser search/filter/reset, matched-condition save, saved notice persistence/removal, application status persistence, modal, standalone detail/direct reload checked. List and detail iframe widths 320/390/1440 have no horizontal overflow/broken images. Browser extension metadata errors are excluded from site errors. One official ALIO notice checked; full live reception/attachment verification remains incomplete.
+## 검증 근거
 
-Blocks: ALIO_KEY/live API contract and manual collection not verified. Draft PR pending branch upload. GitHub Pages not enabled; no publishing or existing automation changes.
+현재 검증한 코드 HEAD: `86548d2aa54191b10ff558368c29f940ba2446d9`. 이후 문서 커밋은 실행 코드·데이터 변경과 구분한다.
+
+세 회차의 결과·원본 해시·공식 웹 관찰·검사 및 기존 UI 근거는 `docs/evidence/alio-followup-20261103.json`에 기록한다. 이번 세 실행의 증빙 범위는 실행 로그와 artifact 메타데이터다.
+
+| 범위 | 결과·근거 |
+|---|---|
+| 기존 정적·화면 기능 | [41573700536](https://github.com/kllollain-max/careerpick/actions/runs/41573700536) 성공. 상세 27개·홈페이지 48개, 320/390/1440px 검색·상세 검증. 1,288개 출력 파일·30,141개 내부 링크, 누락 0. 해당 입력은 변경되지 않아 기존 근거를 재사용했다. |
+| 이번 변경 대상 | unittest 41개와 기존 부분 수집 방어 검사가 로컬과 아래 GitHub 세 실행에서 모두 통과. ALIO 계약 3개·수집 16개·공공데이터 어댑터 12개·등록 검증기 4개·목록 부재 감사 6개. |
+| ALIO 최신 실검증 | [41578577872](https://github.com/kllollain-max/careerpick/actions/runs/41578577872) 성공. 계약 3개·수집 16개·부분 수집 방어 검사 통과. 목록·상세·격리 수집 성공, 610 → 610, 추가·변경·삭제 0, 원본 및 12:32:01 기준시각 보존. |
+| 공공데이터포털 최신 실검증 | [41578578108](https://github.com/kllollain-max/careerpick/actions/runs/41578578108) 성공. 13:31:14 KST 기준 509개 고유 목록, 목록 6회·상세 표본 3회, 첨부파일 정보 5개 확인. 610건 원본 보존. |
+| 목록 부재 공고 감사 | [41578577992](https://github.com/kllollain-max/careerpick/actions/runs/41578577992) 성공. 검사 6개, 목록 6회·상세 4회. 상세 `no_data` 4건은 `unresolved`로 보존했고 비진행 확정 0건. |
+
+## 남아 있는 확인 범위
+
+진행 중 목록에서 빠진 101건 중 97건은 기존에 날짜가 지난 공고이고, 4건은 기한이 남아 있다. 후자의 상세 API는 `no_data`였으나 같은 날 직접 읽은 공식 웹페이지는 모두 진행 중·12월 31일 종료로 표시됐다. 목록 부재를 마감이나 삭제로 처리하지 않는다. 상세 검증은 표본 및 해당 부재 공고 범위이며, 전체 공고의 첨부파일 내용을 검수한 것은 아니다.
+
+## 승인 경계
+
+**Draft를 유지한다. main 병합·저장소 공개 전환·Pages 활성화·실제 배포·정기 수집 활성화는 사용자 승인 전 실행하지 않는다.**
+
+비활성 수집 제안은 수동 후보 생성과 artifact 보관을 수행한다. 이를 정기 실행·원본 자동 반영·배포로 연결하는 운영 활성화는 별도 승인 범위다. 이전에 성공한 코드·화면 검증은 관련 입력이 바뀌지 않으면 재실행하지 않는다. 이번 PR은 아직 실사이트 복구 완료를 의미하지 않는다.

@@ -1,1 +1,45 @@
-2026-11-03: Local source, build and browser validation completed. Private kllollain-max/careerpick created; base main is README-only 588c32425997db496c9498921d4781c975b1700d. Upload recovery branch and open Draft PR. No merge, visibility change, Pages activation or deployment authorized. Reuse prior successful checks for unchanged source.
+# CareerPick 복구 인수인계 — 2026-11-03
+
+## 현재 상태
+
+- 저장소: `kllollain-max/careerpick`; 기존 Draft PR **#1은 이미 생성되어 열려 있다**.
+- 작업 브랜치: `codex/restore-careerpick-20261103`.
+- 검증한 코드 기준: `86548d2aa54191b10ff558368c29f940ba2446d9`. 이후 문서·증빙 커밋과 실행 코드 변경을 구분한다.
+- main 기준: `588c32425997db496c9498921d4781c975b1700d`; 복구 기능의 main 병합과 운영 공개는 보류 상태다.
+- 현재 원본 스냅샷: **610개 고유 공고**, 수집 기준시각 `2026-11-03T12:32:01+09:00`. 과거 520건과 새로 복원한 90건을 함께 보존한다. 610건 모두를 현재 모집 중인 공고로 표현하지 않는다.
+- 승인 후 대상 주소: `https://kllollain-max.github.io/careerpick/`. 실사이트 복구 완료를 주장하지 않는다.
+
+## API·수집 검증 완료
+
+두 서비스의 키와 호출 경로를 분리한다. 키 값은 읽기·출력·커밋하지 않는다.
+
+| 경로 | Secret | 검증 근거 |
+|---|---|---|
+| ALIO OpenData POST 목록·상세 | `ALIO_KEY` | [41578577872](https://github.com/kllollain-max/careerpick/actions/runs/41578577872), success |
+| 공공데이터포털 GET 목록·상세 | `DATA_GO_KR_KEY` | [41578578108](https://github.com/kllollain-max/careerpick/actions/runs/41578578108), success |
+
+- ALIO: 목록·상세 및 격리 수집 성공. **610 → 610, 추가 0·변경 0·삭제 0**, 원본 보존. 정상 무변경 시 원본 수집시각 12:32:01을 유지했다. CI에서 계약 검사 3개, 수집 검사 16개와 기존 부분 수집 방어 검사가 통과했다.
+- 공공데이터포털: 13:31:14 KST 기준 **509개 고유 공고**, 목록 6회·상세 표본 3회 성공. 첨부파일 정보 5개와 원본 `steps` 값을 확인했다. 비교 결과는 동일한 610건이며 원본을 변경하지 않았다. 상세·첨부 내용의 전수 검수로 확대해 표현하지 않는다.
+- 수집기는 완전성 검증, 정상 무변경과 실패 구분, 상세정보만 변경된 경우의 반영을 보완했다. 대상 unittest 41개와 기존 부분 수집 방어 스크립트가 로컬과 GitHub의 세 실행에서 모두 통과했다. 41개는 ALIO 계약 3개·수집 16개·공공데이터 어댑터 12개·등록 검증기 4개·목록 부재 감사 6개의 합계다.
+- 현재 API 등록·실인증 차단 요소는 해결됐다. 인증키 재등록이나 이전 실패 회차의 무조건 재실행을 요구하지 않는다.
+
+## 진행 중 목록에서 빠진 공고 처리
+
+통합 증빙: `docs/evidence/alio-followup-20261103.json`. 최신 세 회차의 실행 결과·원본 해시·공식 웹 관찰·41개 대상 검사와 재사용 UI 근거를 함께 읽는다. 이번 세 실행의 증빙 범위는 실행 로그와 artifact 메타데이터다.
+
+[41578577992](https://github.com/kllollain-max/careerpick/actions/runs/41578577992)는 상태 감사 검사 6개와 실제 목록 6회·상세 4회로 성공했다.
+
+- 보존 공고 중 목록 부재는 101건: 이미 날짜가 지난 97건과 기한이 남은 4건.
+- 기한이 남은 4건의 상세 API 결과는 모두 `no_data`이며 상태는 `unresolved`로 유지했다. **공식 비진행으로 확정한 건수는 0**이다.
+- 같은 날 공식 웹페이지를 직접 읽은 결과 4건 모두 `진행중`, 종료일 12월 31일로 표시됐다. 해당 URL·확인일은 최종 상태 증빙과 함께 유지한다.
+- 목록 부재 또는 상세 `no_data`만으로 마감·삭제하지 않는다. 4건을 유지하고 확인된 근거만 상태 판정에 사용한다.
+
+## 배포 준비와 다음 작업
+
+- 기존 정적/UI 근거 [41573700536](https://github.com/kllollain-max/careerpick/actions/runs/41573700536)를 재사용한다. 정적/UI 입력과 스냅샷은 이번 수집 코드 수정으로 변경되지 않았다: 1,288개 출력 파일, 내부 링크 30,141개 확인·누락 0, 상세 27개·홈페이지 48개 검사, Chromium 320/390/1440px 검사 통과. 새 수집 코드의 검증과 구분해 보고한다.
+- `review-workflows/deploy-pages.yml.disabled`는 **비활성**이다. 필수 `approved_sha` 40자리 검증, 정확한 SHA checkout, 실제 HEAD 대조, 고정 concurrency를 적용했다. 빌드 허용목록을 거친 `dist/`만 배포 대상으로 삼는다.
+- 사용자의 **main 병합·저장소 공개 전환·Pages 활성화·배포·정기 수집 활성화 보류** 지시를 유지한다. `ㄱ/계속 진행`을 이 보류 범위의 해제로 해석하지 않는다.
+- 승인 전에도 필요한 코드·데이터 정합성 수정과 문서·증빙 정리는 이어갈 수 있다. 관련 입력이 변경되지 않은 UI 검사나 성공한 인증 호출은 반복하지 않는다.
+- `review-workflows/collect-alio.yml.disabled`는 수동으로 후보 데이터를 생성해 artifact로 보관하는 제안이다. 정기 실행·원본 자동 반영·배포를 연결한 운영 시스템은 아직 활성화되지 않았다.
+- 사용자에게 승인받을 때는 정확한 커밋과 작업 범위를 제시한다. 정기 수집·원본 반영·배포 연결은 별도 운영 범위이며, 격리 검증 성공만으로 활성화됐다고 보고하지 않는다.
+- 승인 후 실제 공개 작업을 수행했다면 루트·상세 직접 접속·자산·저장 기능을 확인한 후 운영 복구 완료로 보고한다. 블로그·Threads·다른 저장소의 예약과 설정은 건드리지 않는다.
