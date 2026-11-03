@@ -92,6 +92,26 @@ class MPMExamTests(unittest.TestCase):
         del malformed["합격자발표일"]
         self.assert_code("invalid_columns", self.client([envelope([malformed])]).verify)
 
+    def test_runtime_type_diagnostic_is_values_free_and_does_not_relax_schema(self):
+        client = self.client([envelope([
+            row(선발예정인원=123456, 시험장소공고일=None),
+            row(title="PRIVATE SOURCE VALUE", stage="면접시험"),
+        ])])
+        self.assert_code("invalid_field_type", client.verify)
+        diagnostic = client.last_response_diagnostic
+        self.assertEqual(diagnostic["field_types"]["선발예정인원"], ["int", "str"])
+        self.assertEqual(diagnostic["field_types"]["시험장소공고일"], ["NoneType", "str"])
+        self.assertEqual(set(diagnostic["field_types"]), set(mpm_exam.FIELDS))
+        self.assertNotIn("123456", json.dumps(diagnostic))
+        self.assertNotIn("PRIVATE SOURCE VALUE", json.dumps(diagnostic))
+        self.assertNotIn(KEY, json.dumps(diagnostic))
+        self.assertEqual(client.success_counts["list"], 0)
+
+    def test_echo_is_rejected_before_any_response_diagnostic(self):
+        client = self.client([envelope([row(시험명=KEY)])])
+        self.assert_code("credential_echo", client.verify)
+        self.assertIsNone(client.last_response_diagnostic)
+
     def test_counts_must_match_real_rows_and_requested_page(self):
         self.assert_code("invalid_counts", self.client([envelope([row()], currentCount=2)]).verify)
         self.assert_code("invalid_counts", self.client([envelope([row()], totalCount=True)]).verify)

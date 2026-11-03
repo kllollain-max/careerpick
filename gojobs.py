@@ -91,6 +91,7 @@ class Client:
         self._credential_forms = tuple(x.casefold() for x in variants if x)
         self.request_counts = {"list": 0, "detail": 0}
         self.success_counts = {"list": 0, "detail": 0}
+        self.last_response_diagnostic = None
         self._opener = urllib.request.build_opener(_NoRedirect())
 
     def _reject_credential_echo(self, value):
@@ -194,6 +195,16 @@ class Client:
             institution_type = _text(row, "type01", required=True, limit=10)
             recruitment_type = _text(row, "type02", required=True, limit=10)
             if institution_type != "g02" or recruitment_type != notice_type:
+                # Emit only documented category codes; never expose arbitrary response strings.
+                known_codes = {"e01", "e02", "e03", "e04", "e05", "e06", "e07", "e08",
+                               "g01", "g02", "g03", "g04"}
+                self.last_response_diagnostic = {
+                    "observed_filters": {
+                        "requested": {"Pblanc_ty": notice_type, "Instt_se": "g02"},
+                        "type01": institution_type if institution_type in known_codes else "unknown",
+                        "type02": recruitment_type if recruitment_type in known_codes else "unknown",
+                    }
+                }
                 raise APIError("filter_mismatch")
             records.append({"id": identity, "title": _text(row, "title", required=True),
                             "org": _text(row, "insttname", required=True),

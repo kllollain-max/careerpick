@@ -36,3 +36,10 @@ envelopes, inconsistent counts, duplicate rows, or unverified dates. Only safe
 error codes and a bounded public summary are returned; raw responses,
 credential-bearing URLs, keys and exception messages are not exported. The
 module never writes to existing ALIO snapshots or website files.
+
+For a live response that passes the envelope/count checks but differs from the
+documented row types, `last_response_diagnostic.field_types` exposes only the
+seven fixed schema names and the observed JSON type names. It never includes
+cell values or unexpected source keys. The documented string contract remains
+enforced until an actual differing type has been confirmed; a schema error does
+not silently become a successful connection check.

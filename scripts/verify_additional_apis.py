@@ -124,6 +124,12 @@ def verify(root=ROOT, output=None, *, keys=None, factories=None, now=None):
                 if contains_credential(safe_code, forbidden):
                     safe_code = "credential_in_response_rejected"
                 state.update(status="failed", reason=safe_code)
+                diagnostic = getattr(client, "last_response_diagnostic", None)
+                if isinstance(diagnostic, dict):
+                    allowed = {"field_types", "observed_filters", "http_status", "result_code"}
+                    diagnostic = {k: v for k, v in diagnostic.items() if k in allowed}
+                    if diagnostic and len(encoded(diagnostic)) <= 4096 and not contains_credential(diagnostic, forbidden):
+                        state["response_diagnostic"] = diagnostic
             state["requests"] = counters(client, "request_counts")
             state["successful_responses"] = counters(client, "success_counts")
             report["services"][name] = state

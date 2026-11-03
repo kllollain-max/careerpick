@@ -139,6 +139,18 @@ class GOJOBSContractTests(unittest.TestCase):
             with self.subTest(code=code):
                 self.assert_code(code, lambda: self.client(payload).list_sample("e01"))
 
+    def test_filter_diagnostic_is_allowlisted_without_relaxing_validation(self):
+        client = self.client(list_xml(row(1, type01="e01", type02="g02")))
+        self.assert_code("filter_mismatch", lambda: client.list_sample("e01"))
+        self.assertEqual(client.last_response_diagnostic, {"observed_filters": {
+            "requested": {"Pblanc_ty": "e01", "Instt_se": "g02"},
+            "type01": "e01", "type02": "g02"}})
+        client = self.client(list_xml(row(1, type01="RAW_TEXT", type02="g02")))
+        self.assert_code("filter_mismatch", lambda: client.list_sample("e01"))
+        self.assertEqual(client.last_response_diagnostic["observed_filters"]["type01"], "unknown")
+        self.assertNotIn("RAW_TEXT", str(client.last_response_diagnostic))
+        self.assertEqual(client.success_counts["list"], 0)
+
     def test_dtd_and_large_responses_rejected(self):
         self.assert_code("unsafe_xml_declaration", lambda: self.client(b'<!DOCTYPE response [<!ENTITY x "bad">]>' + list_xml()).list_sample("e01"))
         self.assert_code("response_too_large", lambda: self.client(b"x" * (gojobs.MAX_BYTES + 1)).list_sample("e01"))

@@ -79,6 +79,23 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(report["status"], "failed")
         self.assertFalse(report["source_preserved"])
 
+    def test_only_safe_response_type_diagnostics_can_be_reported(self):
+        class Types(Good):
+            def verify(self):
+                self.last_response_diagnostic = {"field_types": {"선발예정인원": ["int"]},
+                                                 "raw_body": KEY1}
+                raise RuntimeError(KEY1)
+        report = self.run_case(factories={"gojobs": Types, "mpm_exam": Good})
+        diagnostic = report["services"]["gojobs"]["response_diagnostic"]
+        self.assertEqual(diagnostic, {"field_types": {"선발예정인원": ["int"]}})
+        self.assertNotIn(KEY1, json.dumps(report))
+        class Unsafe(Types):
+            def verify(self):
+                self.last_response_diagnostic = {"field_types": {"field": KEY2}}
+                raise RuntimeError(KEY1)
+        report = self.run_case(factories={"gojobs": Unsafe, "mpm_exam": Good})
+        self.assertNotIn("response_diagnostic", report["services"]["gojobs"])
+
     def test_duplicate_baseline_blocks_all_requests(self):
         (self.root / "alio.json").write_text('{"posts":[{"id":"a1"},{"id":"a1"}]}')
         class MustNotRun(Good):

@@ -109,6 +109,7 @@ class Client:
         self._opener = urllib.request.build_opener(_NoRedirect())
         self.request_counts = {"list": 0}
         self.success_counts = {"list": 0}
+        self.last_response_diagnostic = None
 
     def _reject_echo(self, text):
         # Normalize percent-encoding and HTML entities before checking. Do not
@@ -118,6 +119,7 @@ class Client:
             raise APIError("credential_echo")
 
     def _page(self, page):
+        self.last_response_diagnostic = None
         query = urllib.parse.urlencode({
             "page": page, "perPage": PER_PAGE, "returnType": "JSON", "serviceKey": self._key,
         })
@@ -163,6 +165,17 @@ class Client:
             raise APIError("pagination_mismatch")
         if payload["totalCount"] != payload["matchCount"]:
             raise APIError("total_count_mismatch")
+        # Fixed schema names and JSON type names only. No source values, extra
+        # keys, response body, URLs, or credentials enter this diagnostic.
+        self.last_response_diagnostic = {
+            "field_types": {
+                name: sorted({
+                    type(row[name]).__name__ if isinstance(row, dict) and name in row else "missing"
+                    for row in rows
+                })
+                for name in FIELDS
+            }
+        }
         for row in rows:
             if not isinstance(row, dict) or set(row) != set(FIELDS):
                 raise APIError("invalid_columns")

@@ -47,3 +47,9 @@ No live result is claimed by this contract document. Actual authentication and r
 `python -m unittest discover -s tests -p test_gojobs.py`
 
 The focused tests cover valid list/detail contracts, distribution across both recruitment types, three-detail bounds, empty results, application authentication errors, safe HTTP gateway diagnostics, raw/encoded/XML-entity credential echoes, encoded-key normalization, redirect rejection, identity mismatch, duplicates/filter/page/date failures, oversized/XML-DTD responses, and safe transport errors.
+
+## Response classification diagnostics
+
+The official specification names `type01` as the institution code (`g01`–`g04`) and `type02` as recruitment type (`e01` etc.). The first live check reached valid XML but failed `filter_mismatch`. That alone does not distinguish a parameter issue from a reversed-field response.
+
+A follow-up failure now exposes only `last_response_diagnostic.observed_filters`: the requested public enum codes and the two observed enum codes (or `unknown`). Arbitrary response values, raw payloads and credentials are excluded. Validation remains unchanged until the observed codes establish the exact discrepancy.
