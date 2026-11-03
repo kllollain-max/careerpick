@@ -13,6 +13,14 @@ KEY_NAMES = ("ALIO_KEY", "DATA_GO_KR_KEY", "GOJOBS_KEY", "MPM_EXAM_KEY")
 MAX_BLOB_BYTES = 64 * 1024 * 1024
 MAX_TOTAL_BYTES = 1024 * 1024 * 1024
 MAX_REPORTED_FINDINGS = 1000
+# These exact file revisions were reviewed: calls are mocked and the literals
+# are synthetic test/log-redaction markers. This is not a path-wide exemption.
+# Registered credentials and every other generic category remain blocking.
+REVIEWED_TEST_FIXTURES = {
+    "ff3e01dee05c08c60cab6f6329135a07e43dc4d5": "test_alio_partial_fetch.py",
+    "8449ddab872745ac08b6eba705a23344c640be43": "test_alio_partial_fetch.py",
+    "3fa0babf9d4a04940984c0cf1c40e8592bbad939": "tests/test_alio_collection_guards.py",
+}
 PATTERNS = {
     "github_token": re.compile(rb"\b(?:gh[pousr]_[A-Za-z0-9]{30,255}|github_pat_[A-Za-z0-9_]{40,255})\b"),
     "private_key": re.compile(rb"-----BEGIN (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----[\s\S]{40,20000}?-----END (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----"),
@@ -80,6 +88,7 @@ def audit(repo, credentials):
         "history_scan_complete": False,
         "commits_scanned": 0, "blobs_scanned": 0, "bytes_scanned": 0,
         "finding_count": 0, "findings": [], "status": "not_started",
+        "reviewed_fixture_finding_count": 0, "reviewed_fixture_findings": [],
         "limits": ["Registered credential values and high-signal token/private-key patterns only; not a guarantee that every unknown secret type is absent."]
     }
     process = None
@@ -128,6 +137,15 @@ def audit(repo, credentials):
             report["bytes_scanned"] += len(payload)
             lowered = payload.lower()
             categories = generic_categories(payload)
+            if ("hardcoded_api_credential" in categories
+                    and REVIEWED_TEST_FIXTURES.get(object_id) == objects[object_id]):
+                categories.remove("hardcoded_api_credential")
+                report["reviewed_fixture_finding_count"] += 1
+                report["reviewed_fixture_findings"].append({
+                    "blob_sha": object_id, "path": safe_path(objects[object_id], secrets),
+                    "category": "hardcoded_api_credential",
+                    "reason": "reviewed_mocked_test_placeholder",
+                })
             for name, values in secrets.items():
                 if any(value in lowered for value in values):
                     categories.add("registered_secret_" + name)
