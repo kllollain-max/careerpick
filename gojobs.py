@@ -107,6 +107,7 @@ class Client:
         self.request_counts = {"list": 0, "detail": 0}
         self.success_counts = {"list": 0, "detail": 0}
         self.last_response_diagnostic = None
+        self.verification_progress = None
         self._opener = urllib.request.build_opener(_NoRedirect())
 
     def _reject_credential_echo(self, value):
@@ -148,6 +149,7 @@ class Client:
         return root.find("body")
 
     def _request(self, operation, params):
+        self.last_response_diagnostic = None
         paths = {"list": "getList", "detail": "getItem"}
         if operation not in paths:
             raise APIError("unsupported_operation")
@@ -274,12 +276,49 @@ class Client:
         return record
 
     def verify(self):
-        totals, records = {}, []
+        totals, records, details = {}, [], []
+        lists_verified = False
+
+        def publish_progress(*, failed_notice=None, complete=False):
+            # Only fully validated list rows and cross-checked details reach this
+            # snapshot. Never copy a raw response, exception, or untrusted ID.
+            link_counts = {"validated": 0, "not_provided": 0, "unverified": 0}
+            for detail in details:
+                for status in detail["source_link_status"].values():
+                    counter = "validated" if status == "validated_http_url" else "not_provided" if status == "not_provided" else "unverified"
+                    link_counts[counter] += 1
+            progress = {
+                "verification_complete": complete,
+                "list_verified": lists_verified,
+                "list_queries_verified": len(totals),
+                "total_count_by_filter": totals,
+                "list_count_returned": len(records),
+                "samples": records,
+                "detail_verified_count": len(details),
+                "detail_samples": details,
+                "source_link_counts": link_counts,
+                "observed_field_layouts": {
+                    "list": sorted({record["field_layout"] for record in records}),
+                    "detail": sorted({detail["field_layout"] for detail in details}),
+                },
+            }
+            if failed_notice is not None:
+                progress["failed_notice"] = failed_notice
+            self._reject_credential_echo(progress)
+            # Detach from the mutable in-flight lists so a later failure cannot
+            # silently alter an already published verification checkpoint.
+            self.verification_progress = json.loads(json.dumps(progress, ensure_ascii=False))
+
+        self.last_response_diagnostic = None
+        publish_progress()
         for category in ("e01", "e02"):
             totals[category], sample = self.list_sample(category)
             records.extend(sample)
+            publish_progress()
         if len({record["id"] for record in records}) != len(records):
             raise APIError("duplicate_identifier_across_filters")
+        lists_verified = True
+        publish_progress()
         # Verify both recruitment types when available, then fill the remaining slot.
         selected = []
         for category in ("e01", "e02"):
@@ -288,14 +327,28 @@ class Client:
                 selected.append(first)
         selected_ids = {record["id"] for record in selected}
         selected.extend(record for record in records if record["id"] not in selected_ids)
-        details = []
         for record in selected[:DETAIL_LIMIT]:
-            detail = self.detail(record["id"])
-            if (detail["title"] != record["title"]
-                    or detail["institution_type"] != record["institution_type"]
-                    or detail["recruitment_type"] != record["recruitment_type"]):
-                raise APIError("detail_list_mismatch")
+            notice = {"id": record["id"],
+                      "expected_institution_type": record["institution_type"],
+                      "expected_recruitment_type": record["recruitment_type"]}
+            try:
+                detail = self.detail(record["id"])
+                if (detail["title"] != record["title"]
+                        or detail["institution_type"] != record["institution_type"]
+                        or detail["recruitment_type"] != record["recruitment_type"]):
+                    self.last_response_diagnostic = {"detail_list_classification": {
+                        "expected_institution_type": record["institution_type"],
+                        "expected_recruitment_type": record["recruitment_type"],
+                        "observed_institution_type": detail["institution_type"],
+                        "observed_recruitment_type": detail["recruitment_type"],
+                        "title_matches": detail["title"] == record["title"],
+                    }}
+                    raise APIError("detail_list_mismatch")
+            except Exception:
+                publish_progress(failed_notice=notice)
+                raise
             details.append(detail)
+            publish_progress()
         link_counts = {"validated": 0, "not_provided": 0, "unverified": 0}
         for detail in details:
             for status in detail["source_link_status"].values():
@@ -323,4 +376,5 @@ class Client:
                                         "all_exam_schedules", "source_link_contents"],
                    "requests": dict(self.request_counts), "successful_responses": dict(self.success_counts)}
         self._reject_credential_echo(summary)
+        publish_progress(complete=True)
         return summary

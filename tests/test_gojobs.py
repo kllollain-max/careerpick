@@ -1,4 +1,5 @@
 import io
+import json
 import unittest
 import urllib.error
 import urllib.parse
@@ -178,6 +179,64 @@ class GOJOBSContractTests(unittest.TestCase):
         client = self.client(list_xml(row(1, type01="e01", type02="g02")), list_xml(),
                              detail_xml(1, type01="e02", type02="g02"))
         self.assert_code("detail_list_mismatch", client.verify)
+        self.assertEqual(client.verification_progress["detail_verified_count"], 0)
+        self.assertEqual(client.verification_progress["failed_notice"], {
+            "id": "1", "expected_institution_type": "g02", "expected_recruitment_type": "e01"})
+        self.assertEqual(client.last_response_diagnostic["detail_list_classification"]["observed_recruitment_type"], "e02")
+
+    def test_third_detail_failure_preserves_verified_progress_and_failed_id(self):
+        client = self.client(list_xml(row(1), row(2)), list_xml(row(3, "e02")),
+                             detail_xml(1), detail_xml(3, "e02"),
+                             detail_xml(2, type01="g01", type02="RAW_CODE"))
+        self.assert_code("invalid_classification_pair", client.verify)
+        progress = client.verification_progress
+        self.assertFalse(progress["verification_complete"])
+        self.assertTrue(progress["list_verified"])
+        self.assertEqual(progress["list_queries_verified"], 2)
+        self.assertEqual(progress["total_count_by_filter"], {"e01": 2, "e02": 1})
+        self.assertEqual([item["id"] for item in progress["samples"]], ["1", "2", "3"])
+        self.assertEqual([item["id"] for item in progress["detail_samples"]], ["1", "3"])
+        self.assertEqual(progress["detail_verified_count"], 2)
+        self.assertEqual(progress["failed_notice"], {
+            "id": "2", "expected_institution_type": "g02", "expected_recruitment_type": "e01"})
+        self.assertEqual(progress["source_link_counts"], {"validated": 2, "not_provided": 4, "unverified": 0})
+        self.assertEqual(client.request_counts, {"list": 2, "detail": 3})
+        self.assertEqual(client.success_counts, {"list": 2, "detail": 2})
+        self.assertEqual(client.last_response_diagnostic, {"observed_filters": {
+            "type01": "g01", "type02": "unknown"}})
+        exported = json.dumps({"progress": progress, "diagnostic": client.last_response_diagnostic})
+        self.assertNotIn("RAW_CODE", exported)
+        self.assertNotIn(KEY, exported)
+
+    def test_later_list_failure_keeps_only_completed_list(self):
+        client = self.client(list_xml(row(1)), list_xml(row(2, "e02", type01="g01")))
+        self.assert_code("filter_mismatch", client.verify)
+        progress = client.verification_progress
+        self.assertFalse(progress["list_verified"])
+        self.assertEqual(progress["list_queries_verified"], 1)
+        self.assertEqual(progress["total_count_by_filter"], {"e01": 1})
+        self.assertEqual([item["id"] for item in progress["samples"]], ["1"])
+        self.assertEqual(progress["detail_samples"], [])
+        self.assertNotIn("failed_notice", progress)
+
+    def test_credential_like_identifier_never_reaches_progress(self):
+        numeric_key = "876543210"
+        client = self.client(list_xml(row(numeric_key)), key=numeric_key)
+        self.assert_code("credential_echo_rejected", client.verify)
+        self.assertEqual(client.verification_progress["samples"], [])
+        self.assertNotIn("failed_notice", client.verification_progress)
+        self.assertNotIn(numeric_key, json.dumps(client.verification_progress))
+
+    def test_new_verification_clears_stale_failure_context(self):
+        client = self.client(list_xml(row(1)), list_xml(), detail_xml(1, type01="g01", type02="RAW_CODE"))
+        self.assert_code("invalid_classification_pair", client.verify)
+        client._opener = Opener([list_xml(row(2)), list_xml(), detail_xml(2)])
+        result = client.verify()
+        self.assertEqual(result["detail_verified_count"], 1)
+        self.assertTrue(client.verification_progress["verification_complete"])
+        self.assertEqual([item["id"] for item in client.verification_progress["samples"]], ["2"])
+        self.assertNotIn("failed_notice", client.verification_progress)
+        self.assertIsNone(client.last_response_diagnostic)
 
     def test_dtd_and_large_responses_rejected(self):
         self.assert_code("unsafe_xml_declaration", lambda: self.client(b'<!DOCTYPE response [<!ENTITY x "bad">]>' + list_xml()).list_sample("e01"))

@@ -126,12 +126,34 @@ def verify(root=ROOT, output=None, *, keys=None, factories=None, now=None):
                 state.update(status="failed", reason=safe_code)
                 diagnostic = getattr(client, "last_response_diagnostic", None)
                 if isinstance(diagnostic, dict):
-                    allowed = {"field_types", "observed_filters", "http_status", "result_code"}
+                    allowed = {"field_types", "observed_filters", "http_status", "result_code",
+                               "detail_list_classification"}
                     diagnostic = {k: v for k, v in diagnostic.items() if k in allowed}
                     if diagnostic and len(encoded(diagnostic)) <= 4096 and not contains_credential(diagnostic, forbidden):
                         state["response_diagnostic"] = diagnostic
+                progress = getattr(client, "verification_progress", None)
+                if isinstance(progress, dict):
+                    allowed = {"verification_complete", "list_verified", "list_queries_verified",
+                               "total_count_by_filter", "list_count_returned", "samples",
+                               "detail_verified_count", "detail_samples", "source_link_counts",
+                               "observed_field_layouts", "failed_notice"}
+                    progress = {k: v for k, v in progress.items() if k in allowed}
+                    if len(encoded(progress)) > 65536:
+                        # Keep bounded identity/counter evidence even when a
+                        # validated public title or source URL is unusually long.
+                        progress = {k: v for k, v in progress.items()
+                                    if k not in {"samples", "detail_samples"}}
+                        state["verification_progress_truncated"] = True
+                    if (progress and len(encoded(progress)) <= 65536
+                            and not contains_credential(progress, forbidden)):
+                        state["verification_progress"] = progress
             state["requests"] = counters(client, "request_counts")
             state["successful_responses"] = counters(client, "success_counts")
+            # A later record failure does not undo an earlier authenticated,
+            # validated response. Keep overall failure separate from this fact.
+            if any(state["successful_responses"].values()):
+                state["authentication_verified"] = True
+                state["authentication_basis"] = "one_or_more_validated_api_responses"
             report["services"][name] = state
         report["status"] = ("verified" if all(
             value["status"] == "verified" for value in report["services"].values())

@@ -105,6 +105,83 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(report["status"], "failed")
         self.assertEqual(report["services"], {})
 
+    def test_record_failure_preserves_authentication_and_verified_progress(self):
+        class Partial(Good):
+            def verify(self):
+                self.request_counts = {"list": 2, "detail": 3}
+                self.success_counts = {"list": 2, "detail": 2}
+                self.verification_progress = {
+                    "verification_complete": False,
+                    "list_verified": True,
+                    "list_queries_verified": 2,
+                    "detail_verified_count": 2,
+                    "detail_samples": [{"id": "101"}, {"id": "201"}],
+                    "failed_notice": {"id": "102", "expected_institution_type": "g02",
+                                      "expected_recruitment_type": "e01"},
+                }
+                self.last_response_diagnostic = {"detail_list_classification": {
+                    "expected_institution_type": "g02", "observed_institution_type": "g01",
+                    "title_matches": True}}
+                error = RuntimeError("not serialized")
+                error.safe_code = "invalid_classification_pair"
+                raise error
+        report = self.run_case(factories={"gojobs": Partial, "mpm_exam": Good})
+        state = report["services"]["gojobs"]
+        self.assertEqual(report["status"], "partial_or_blocked")
+        self.assertEqual(state["status"], "failed")
+        self.assertTrue(state["authentication_verified"])
+        self.assertEqual(state["reason"], "invalid_classification_pair")
+        self.assertEqual(state["verification_progress"]["failed_notice"]["id"], "102")
+        self.assertEqual(state["verification_progress"]["detail_verified_count"], 2)
+        self.assertEqual(state["verification_progress"]["detail_samples"], [{"id": "101"}, {"id": "201"}])
+        self.assertEqual(state["response_diagnostic"]["detail_list_classification"]["observed_institution_type"], "g01")
+        self.assertTrue(report["source_preserved"])
+
+    def test_no_validated_response_does_not_claim_authentication(self):
+        class Rejected(Good):
+            def verify(self):
+                self.request_counts = {"list": 1, "detail": 0}
+                self.success_counts = {"list": 0, "detail": 0}
+                error = RuntimeError("not serialized")
+                error.safe_code = "service_key_not_registered"
+                raise error
+        report = self.run_case(factories={"gojobs": Rejected, "mpm_exam": Good})
+        state = report["services"]["gojobs"]
+        self.assertFalse(state["authentication_verified"])
+        self.assertNotIn("authentication_basis", state)
+        self.assertEqual(state["status"], "failed")
+
+    def test_partial_progress_cannot_expose_either_credential(self):
+        for leaked in (KEY1, KEY2, urllib.parse.quote(KEY2, safe="")):
+            class EchoProgress(Good):
+                def verify(self):
+                    self.verification_progress = {"samples": [{"title": leaked}]}
+                    raise RuntimeError("not serialized")
+            report = self.run_case(factories={"gojobs": EchoProgress, "mpm_exam": Good})
+            self.assertNotIn("verification_progress", report["services"]["gojobs"])
+            self.assertNotIn(leaked, json.dumps(report))
+            self.assertTrue(report["source_preserved"])
+
+    def test_unapproved_or_oversized_progress_is_omitted(self):
+        class SafeSubset(Good):
+            def verify(self):
+                self.verification_progress = {"detail_verified_count": 1, "raw_body": KEY1}
+                raise RuntimeError("not serialized")
+        report = self.run_case(factories={"gojobs": SafeSubset, "mpm_exam": Good})
+        self.assertEqual(report["services"]["gojobs"]["verification_progress"],
+                         {"detail_verified_count": 1})
+        class TooLarge(Good):
+            def verify(self):
+                self.verification_progress = {"samples": [{"title": "x" * 65536}],
+                                              "detail_verified_count": 2,
+                                              "failed_notice": {"id": "102"}}
+                raise RuntimeError("not serialized")
+        report = self.run_case(factories={"gojobs": TooLarge, "mpm_exam": Good})
+        state = report["services"]["gojobs"]
+        self.assertTrue(state["verification_progress_truncated"])
+        self.assertEqual(state["verification_progress"],
+                         {"detail_verified_count": 2, "failed_notice": {"id": "102"}})
+
 
 if __name__ == "__main__":
     unittest.main()
