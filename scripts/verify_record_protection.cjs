@@ -76,7 +76,7 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
    const legacy={format:'careerpick-backup',version:1,data:{saved:['a123456','legacy-unlinked'],apps:{a123456:{st:'applied',memo:'old-format 합성',ck:[{t:'제출',ph:'pre',d:1}],exam:'2099-12-01'}},prefs:{emp:['정규직'],edu:[],region:['강원'],cat:[],kw:''}}};const x=await fresh(browser);const r=await importFile(x.p,upload(legacy,'synthetic-old-origin.json'));assert(r.preview.includes('미제공 (과거 백업)'));assert(r.alert.includes('병합 완료'));assert.equal(await x.p.evaluate(()=>APPS.a123456.memo),'old-format 합성');assert(await x.p.evaluate(()=>SAVED.has('legacy-unlinked')));await x.ctx.close();
   });
   await check('site/service-worker update and cached offline reload preserve personal records',async()=>{
-   const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8'),preview=path.resolve('_preview/careerpick'),previewTarget=fs.readlinkSync(preview);let x;
+   const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8'),outage=path.resolve('_preview/.cp-audit-outage');let x;
    try{
     x=await fresh(browser,{sw:true,seed:{saved:'["a999999"]',apps:'{"a999999":{"st":"plan","memo":"SW-preserved","ck":[]}}'}});const p=x.p;await p.evaluate(()=>navigator.serviceWorker.ready);await p.waitForFunction(()=>!!navigator.serviceWorker.controller);const before=await records(p);
     for(let trial=1;trial<=3;trial++){let stage='worker-update-ack',previewOffline=false;
@@ -87,8 +87,8 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
       await p.waitForFunction(()=>{navigator.serviceWorker.controller?.postMessage('CP_RECORDS_AUDIT');return window.__recordsWorkerV2===true;});
       stage='online-reload';await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
       stage='cache-ready';await p.waitForFunction(async()=>{const c=await caches.open('careerpick-pages-v3'),urls=[location.pathname,...[...document.scripts].map(s=>s.src).filter(u=>u&&new URL(u).origin===location.origin)];for(const u of urls)if(!await c.match(u))return false;return true;},null,{timeout:15000});
-      stage='offline-reload';const empty=fs.mkdtempSync(path.join(os.tmpdir(),'cp-offline-'));fs.unlinkSync(preview);fs.symlinkSync(empty,preview);previewOffline=true;await x.ctx.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);assert(await p.evaluate(()=>CP_FEED_CACHE.size>0),'actual cached response required');console.log('PASS consecutive worker replacement/offline trial '+trial+' actual cached fallback');
-     }catch(error){throw Error('trial '+trial+' '+stage+': '+error.message);}finally{if(previewOffline){fs.unlinkSync(preview);fs.symlinkSync(previewTarget,preview);}fs.writeFileSync(workerFile,original);await x.ctx.setOffline(false);}
+      stage='offline-reload';fs.writeFileSync(outage,'synthetic 503');previewOffline=true;await x.ctx.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);assert(await p.evaluate(()=>CP_FEED_CACHE.size>0),'actual cached response required');console.log('PASS consecutive worker replacement/offline trial '+trial+' actual cached fallback');
+     }catch(error){throw Error('trial '+trial+' '+stage+': '+error.message);}finally{if(previewOffline)fs.unlinkSync(outage);fs.writeFileSync(workerFile,original);await x.ctx.setOffline(false);}
     }
    }finally{fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}
   });

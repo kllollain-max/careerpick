@@ -2412,6 +2412,7 @@ function render(){
     ? `글 <b>${rows.length}</b>개`
     : `검색 결과 <b>${rows.length}</b>건 · 마감 전 ${open}건` + (hot ? ` · 3일 내 마감 <span class="hot">${hot}</span>건` : "") + (state.tab === "mine" ? "" : ` · 접수 여부 원문 확인`);
   if(cpQueuedFeedUpdate)sum+=" · 일부 자료 표시 중 · 자료 갱신 필요";
+  if(CP_FEED_CACHE.size)sum+=" · 보관 자료 포함 (최신 확인 불가)";
   if(CP_USING_PREVIOUS)sum+=" · 이전 자료 표시 중 (최신 조회 실패 · 하단 자료 시점 확인)";
   if(CP_DATA_LOADING)sum+=" · 일부 출처 확인 중 · 최종 건수 미확정";
   if(Object.values(DATA_HEALTH).includes('error'))sum+=' · 일부 출처 조회 실패 (하단 갱신 상태 확인)';
