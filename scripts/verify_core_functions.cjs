@@ -35,7 +35,7 @@ async function context(browser,{width=390,fixtures=true,seed={},deny=false,sdkFa
  return {ctx,sdkLoads:()=>sdkLoads};
 }
 async function ready(page,url=BASE){await page.goto(url,{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.querySelector('#cpSectors')?.textContent.match(/전체공고[1-9]/));await page.locator('#list [data-save]').first().waitFor();}
-async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].push({name,result:'pass'});console.log('PASS '+bucket+' '+name);}catch(e){report[bucket].push({name,result:'fail',error:String(e.message).slice(0,320)});console.log('FAIL '+bucket+' '+name+' '+String(e.message).slice(0,320));if(bucket==='candidate')throw e;}finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));}}
+async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].push({name,result:'pass'});console.log('PASS '+bucket+' '+name);}catch(e){report[bucket].push({name,result:'fail',error:String(e.message).slice(0,320)});console.log('FAIL '+bucket+' '+name+' '+String(e.message).slice(0,320));}finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));}}
 async function searchAndBack(page){
  const q=page.getByRole('searchbox',{name:'검색',exact:true});
  for(const word of ['춘천연구원','전산직','정규직 채용']){await q.fill(word);assert.equal(await page.locator('#list .job').count(),1);}
@@ -59,7 +59,7 @@ async function savedAndApps(page){
  await page.locator('#list [data-open="a900001"]').first().click();assert.equal(await page.locator('#jvBody [data-save="a900001"]').getAttribute('aria-pressed'),'true');
  await page.locator('#jvBody [data-save="a900001"]').click();await page.waitForFunction(()=>!JSON.parse(localStorage.getItem('saved')||'[]').includes('a900001'));
  await page.locator('#jvBody [data-save="a900001"]').click();
- await page.locator('#jvBody [data-track="a900001"]').click();await page.locator('#tMemo').waitFor();
+ await page.locator('#jvBody [data-track="a900001"]').first().click();await page.locator('#tMemo').waitFor();
  const memo='  메모\n<&>🙂 긴 기록 '.repeat(35);await page.locator('#tMemo').fill(memo);
  await page.locator('#tExam').fill('2099-11-10');await page.locator('#tItv').fill('2099-11-12');await page.locator('#tCkNew').fill('시험 체크');await page.locator('#tCkAdd').click();
  await page.locator('#tSave').click();await page.waitForFunction(()=>!!JSON.parse(localStorage.getItem('apps'))?.a900001);
@@ -129,6 +129,7 @@ async function savedAndApps(page){
    await p.evaluate(()=>{Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw Error('synthetic clipboard denial')}}});});await p.locator('#cpPushCopyId').click();await p.getByRole('textbox',{name:'직접 복사할 구독 ID'}).waitFor();
    await p.locator('#cpPushUnsubscribe').click();await p.waitForFunction(()=>!cpPushAction);assert.equal(await p.evaluate(()=>fakeOptOuts),1);assert(await p.locator('#cpPushSubscribe').isVisible());await x.ctx.close();
   });
+  if(report.candidate.some(x=>x.result==='fail'))process.exitCode=1;
   console.log(JSON.stringify({public:report.public,candidate_passed:report.candidate.length,actual_devices:false,actual_push:false}));
  }finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));await browser.close();}
 })().catch(e=>{console.error(String(e.message));process.exit(1)});
