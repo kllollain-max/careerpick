@@ -53,6 +53,11 @@ class AbsenceAuditTest(unittest.TestCase):
         report = self.run_case(APIError("api_result_3"))
         self.assertEqual(report["confirmed_not_ongoing"], 0)
         self.assertEqual(report["reviews"][0]["detail_status"], "no_data")
+    def test_unrecognized_individual_response_is_preserved_as_unresolved(self):
+        report = self.run_case(APIError("unexpected_envelope_fields"))
+        self.assertEqual(report["status"], "reviewed")
+        self.assertEqual(report["confirmed_not_ongoing"], 0)
+        self.assertEqual(report["reviews"][0]["detail_status"], "unverified_response")
     def test_explicit_official_status_is_distinct_from_absence(self):
         report = self.run_case({**FakeClient.details["2"], "ongoingYn": "N"})
         self.assertEqual(report["confirmed_not_ongoing"], 1)

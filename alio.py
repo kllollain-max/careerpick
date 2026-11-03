@@ -7,6 +7,7 @@
 import json
 import os
 import re
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -85,10 +86,8 @@ def call(key, page, ongoing="Y"):
     if not isinstance(payload.get("result"), list):
         raise RuntimeError("ALIO list shape mismatch")
     try:
-        count = int(payload["totalCount"])
-        if count < 0:
-            raise ValueError()
-    except (KeyError, TypeError, ValueError):
+        _total_count(payload.get("totalCount"))
+    except ValueError:
         raise RuntimeError("ALIO totalCount missing/invalid") from None
     return payload
 
@@ -183,78 +182,141 @@ def detail_of(it):
     return out
 
 
+def _total_count(value):
+    if isinstance(value, bool) or not isinstance(value, (int, str)):
+        raise ValueError("invalid_total_count")
+    if not re.fullmatch(r"[0-9]+", str(value)):
+        raise ValueError("invalid_total_count")
+    return int(value)
+
+
+def _notice_id(item):
+    if not isinstance(item, dict):
+        raise ValueError("invalid_notice")
+    value = item.get("recrutPblntSn")
+    if isinstance(value, bool) or not isinstance(value, (int, str)):
+        raise ValueError("invalid_notice_id")
+    identity = str(value)
+    if not re.fullmatch(r"[1-9][0-9]*", identity):
+        raise ValueError("invalid_notice_id")
+    return identity
+
+
+def _save_pair(contents):
+    """Stage both files before replacement; restore both if any write fails."""
+    originals = {path: path.read_bytes() if path.exists() else None for path in contents}
+    staged = {}
+    try:
+        for path, content in contents.items():
+            with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                             prefix="." + path.name + ".", delete=False) as temp:
+                staged[path] = Path(temp.name)
+                temp.write(content)
+        for path, temporary in staged.items():
+            os.replace(temporary, path)
+    except Exception:
+        for path, original in originals.items():
+            if original is None:
+                path.unlink(missing_ok=True)
+            else:
+                path.write_bytes(original)
+        raise
+    finally:
+        for temporary in staged.values():
+            temporary.unlink(missing_ok=True)
+
+
 def main():
     key = os.environ.get("ALIO_KEY", "").strip()
     if not key:
         print("ALIO_KEY 가 없어 잡알리오 연동을 건너뜁니다.")
         return None
     now = datetime.now(KST)
-    items, total = [], None
+    items, total, received_ids = [], None, set()
     for page in range(1, MAX_PAGES + 1):
         try:
             data = call(key, page)
-        except Exception as e:
-            print("잡알리오 요청 실패:", type(e).__name__)
-            print("잡알리오 수집 중단: 일부 페이지만 수집되어 기존 데이터를 유지합니다.")
+            page_total = _total_count(data.get("totalCount"))
+            rows = data.get("result")
+            if not isinstance(rows, list) or len(rows) > PER_PAGE:
+                raise ValueError("invalid_page_rows")
+            if total is None:
+                total = page_total
+                if total == 0 or total > PER_PAGE * MAX_PAGES:
+                    raise ValueError("empty_or_over_cap_collection")
+                print(f"총 {total}건 응답")
+            elif page_total != total:
+                raise ValueError("total_count_changed")
+            for item in rows:
+                identity = _notice_id(item)
+                if identity in received_ids:
+                    raise ValueError("duplicate_notice_id")
+                received_ids.add(identity)
+            if len(items) + len(rows) > total:
+                raise ValueError("excess_records")
+            items.extend(rows)
+            if len(items) < total and len(rows) < PER_PAGE:
+                raise ValueError("incomplete_page")
+        except Exception as error:
+            # Exception strings and response fields may contain credentials or raw text.
+            print("잡알리오 수집 검증 실패:", type(error).__name__)
+            print("잡알리오 수집 중단: 기존 데이터 두 파일을 유지합니다.")
             return None
-        rows = data.get("result") or []
-        if isinstance(rows, dict):
-            rows = [rows]
-        if page == 1:
-            total = data.get("totalCount")
-            print(f"총 {total}건 응답")
-            if rows:
-                print("응답 필드:", ", ".join(sorted(rows[0].keys())))
-        items += rows
-        try:
-            done = bool(total) and len(items) >= int(total)
-        except (TypeError, ValueError):
-            done = False
-        if len(rows) < PER_PAGE or done:
+        if len(items) == total:
             break
-    # Never publish a truncated snapshot if the API reports more than our page cap.
-    try:
-        expected = int(total) if total is not None else None
-    except (TypeError, ValueError):
-        expected = None
-    if expected is not None and expected > len(items):
-        print(f"잡알리오 수집 불완전: 응답 {len(items)}건 / 전체 {expected}건. 기존 데이터를 유지합니다.")
+    if total is None or len(items) != total or len(received_ids) != total:
+        print("잡알리오 수집 불완전: 전체 고유 공고 수가 일치하지 않아 기존 데이터를 유지합니다.")
         return None
-    posts, seen = [], set()
-    bad = 0
-    details = {}
+    posts, details = [], {}
     for it in items:
         try:
-            p = convert(it, now) if isinstance(it, dict) else None
-        except Exception as e:
-            bad += 1
-            if bad <= 3:
-                print("공고 변환 실패:", e, str(it)[:200])
-            continue
-        if p and p["id"] not in seen:
-            seen.add(p["id"])
+            end = ymd(pick(it, "pbancEndYmd", "pbancEndDt"))
+            title = pick(it, "recrutPbancTtl", "title")
+            org = pick(it, "instNm")
+            start_value = pick(it, "pbancBgngYmd", "pbancBgngDt")
+            if (end is None or not isinstance(title, str) or not title.strip()
+                    or not isinstance(org, str) or not org.strip()
+                    or (start_value and ymd(start_value) is None)):
+                raise ValueError("invalid_notice_fields")
+            p = convert(it, now)
+            if p is None:
+                # A genuinely elapsed date may be filtered; malformed rows must fail the batch.
+                if end.replace(hour=23, minute=59) < now:
+                    continue
+                raise ValueError("notice_conversion_failed")
+            if not isinstance(p, dict) or p.get("id") != "a" + _notice_id(it):
+                raise ValueError("converted_identity_mismatch")
+            detail = detail_of(it)
+            if not isinstance(detail, dict) or str(detail.get("recrutPblntSn")) != _notice_id(it):
+                raise ValueError("detail_identity_mismatch")
             posts.append(p)
-            try:
-                details[p["id"]] = detail_of(it)
-            except Exception:
-                pass
+            details[p["id"]] = detail
+        except Exception as error:
+            print("공고 변환 검증 실패:", type(error).__name__)
+            print("잡알리오 수집 중단: 변환 누락 없이 기존 데이터 두 파일을 유지합니다.")
+            return None
     if not posts:
         print("가져온 공고가 없어 기존 alio.json 을 유지합니다.")
-        return items
+        return None
     posts.sort(key=lambda p: p["due"] or "9999")
-    det_text = json.dumps(details, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
-    if not DETAIL.exists() or DETAIL.read_text("utf-8") != det_text:
-        DETAIL.write_text(det_text, "utf-8")
-        print(f"alio-detail.json 갱신: {len(details)}건")
-    old = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
-    if old.get("posts") == posts:
-        print("잡알리오 변경 없음")
-        return items
-    OUT.write_text(json.dumps({"updated": now.isoformat(timespec="seconds"), "posts": posts},
-                              ensure_ascii=False, indent=1), "utf-8")
+    try:
+        old = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
+        old_details = json.loads(DETAIL.read_text("utf-8")) if DETAIL.exists() else {}
+        if old.get("posts") == posts and old_details == details:
+            print("잡알리오 변경 없음")
+            return items
+        det_text = json.dumps(details, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+        out_text = json.dumps({"updated": now.isoformat(timespec="seconds"), "posts": posts},
+                              ensure_ascii=False, indent=1)
+        _save_pair({OUT: out_text, DETAIL: det_text})
+    except Exception as error:
+        print("잡알리오 저장 실패:", type(error).__name__)
+        return None
+    print(f"alio-detail.json 갱신: {len(details)}건")
     print(f"alio.json 갱신: 모집 중 공식 공고 {len(posts)}건 (API 전체 {total})")
     return items
 
 
 if __name__ == "__main__":
     main()
+

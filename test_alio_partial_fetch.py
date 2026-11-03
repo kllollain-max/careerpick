@@ -18,7 +18,7 @@ def main():
         def fake_call(key, page):
             calls.append(page)
             if page == 1:
-                return {"totalCount": 200, "result": [{"id": str(i)} for i in range(alio.PER_PAGE)]}
+                return {"totalCount": 200, "result": [{"recrutPblntSn": str(i + 1)} for i in range(alio.PER_PAGE)]}
             raise TimeoutError("later page failed")
 
         with patch.object(alio, "OUT", out), patch.object(alio, "DETAIL", detail), patch.object(alio, "call", fake_call), patch.dict(alio.os.environ, {"ALIO_KEY": "offline-test-key"}):
@@ -32,7 +32,7 @@ def main():
         detail = Path(tmp) / "alio-detail.json"
         out.write_text('{"posts":[{"id":"a1"}]}', encoding="utf-8")
         detail.write_text('{"a1":{}}', encoding="utf-8")
-        with patch.object(alio, "OUT", out), patch.object(alio, "DETAIL", detail), patch.object(alio, "MAX_PAGES", 1), patch.object(alio, "call", lambda key, page: {"totalCount": 250, "result": [{"id": str(i)} for i in range(alio.PER_PAGE)]}), patch.dict(alio.os.environ, {"ALIO_KEY": "offline-test-key"}):
+        with patch.object(alio, "OUT", out), patch.object(alio, "DETAIL", detail), patch.object(alio, "MAX_PAGES", 1), patch.object(alio, "call", lambda key, page: {"totalCount": 250, "result": [{"recrutPblntSn": str(i + 1)} for i in range(alio.PER_PAGE)]}), patch.dict(alio.os.environ, {"ALIO_KEY": "offline-test-key"}):
             result = alio.main()
         assert result is None
         assert out.read_text(encoding="utf-8") == '{"posts":[{"id":"a1"}]}'
@@ -42,3 +42,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

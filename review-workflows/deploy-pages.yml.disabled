@@ -6,19 +6,48 @@ on:
       approval:
         description: Type DEPLOY_CAREERPICK after owner approval
         required: true
+        type: string
+      approved_sha:
+        description: Exact approved commit SHA (40 lowercase hexadecimal characters)
+        required: true
+        type: string
 permissions:
   contents: read
   pages: write
   id-token: write
+concurrency:
+  group: careerpick-pages
+  cancel-in-progress: false
 jobs:
   deploy:
     if: inputs.approval == 'DEPLOY_CAREERPICK'
     runs-on: ubuntu-latest
     environment: github-pages
+    env:
+      APPROVED_SHA: ${{ inputs.approved_sha }}
     steps:
+      - name: Validate approved commit input
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "$APPROVED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            printf '%s\n' 'approved_sha must be exactly 40 lowercase hexadecimal characters.' >&2
+            exit 1
+          fi
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.approved_sha }}
+          fetch-depth: 1
           persist-credentials: false
+      - name: Verify checked-out commit matches approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual_sha="$(git rev-parse HEAD)"
+          if [[ "$actual_sha" != "$APPROVED_SHA" ]]; then
+            printf '%s\n' 'Checked-out commit does not match approved_sha.' >&2
+            exit 1
+          fi
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

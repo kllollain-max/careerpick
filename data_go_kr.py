@@ -95,6 +95,7 @@ class Client:
         self.request_counts = {"list": 0, "detail": 0}
         self.success_counts = {"list": 0, "detail": 0}
         self.last_http_error = None
+        self.last_response_diagnostic = None
         self._opener = urllib.request.build_opener(_NoRedirect())
 
     def _request(self, operation, params):
@@ -145,12 +146,18 @@ class Client:
             raise APIError("invalid_json") from None
         if not isinstance(payload, dict) or "resultCode" not in payload:
             raise APIError("invalid_envelope")
-        if set(payload) - _ENVELOPE_FIELDS:
-            raise APIError("unexpected_envelope_fields")
         code = payload["resultCode"]
+        self.last_response_diagnostic = {
+            "operation": operation,
+            "fields": sorted(k for k in payload if re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]{0,39}", k))[:40],
+            "result_code": str(code) if re.fullmatch(r"[0-9]{1,3}", str(code)) else "unknown",
+            "result_type": type(payload.get("result")).__name__,
+        }
         if isinstance(code, bool) or not isinstance(code, (int, str)) or str(code) not in {"0", "200"}:
             diagnostic = "api_result_" + str(code) if isinstance(code, (int, str)) else ""
             raise APIError(diagnostic if diagnostic in _SAFE_CODES else "api_response_error")
+        if set(payload) - _ENVELOPE_FIELDS:
+            raise APIError("unexpected_envelope_fields")
         return payload
 
     def list_page(self, page):

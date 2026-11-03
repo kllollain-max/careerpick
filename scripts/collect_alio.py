@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Collect into an isolated staging tree; validate and merge by official ID.
 
-Uses preserved data.go.kr collector. No qnet/history/publish calls.
+Uses the verified ALIO OpenData collector. No qnet/history/publish calls.
 Missing key, incomplete responses or invalid payloads never replace snapshots.
 """
 import json
@@ -31,8 +31,8 @@ def collect(root=ROOT):
             response = alio.main()
         finally:
             alio.OUT, alio.DETAIL = previous_out, previous_detail
-        if response is None or (stage / 'alio.json').read_bytes() == originals['alio.json']:
-            return {'status': 'unchanged_or_collection_failed', 'changed': False}
+        if response is None:
+            return {'status': 'collection_failed_preserved', 'changed': False}
         new = json.loads((stage / 'alio.json').read_bytes())
         details = json.loads((stage / 'alio-detail.json').read_bytes())
         posts = new.get('posts')
@@ -52,6 +52,12 @@ def collect(root=ROOT):
         merged.update({p['id']: p for p in posts})
         new['posts'] = sorted(merged.values(), key=lambda p: (p.get('due') or '9999', p['id']))
         merged_details = {**old_details, **details}
+        result = {'status': 'collected', 'changed': False, 'received': len(posts),
+                  'retained': len(merged), 'new_ids': len(set(ids) - {p['id'] for p in old['posts']})}
+        old_posts = sorted(old['posts'], key=lambda p: (p.get('due') or '9999', p['id']))
+        if new['posts'] == old_posts and merged_details == old_details:
+            # A successful, unchanged fetch must not rewrite source bytes/timestamps or fail CI.
+            return result
         # Write candidate pair first. Workflow only uploads both after successful exit.
         candidates = {'alio.json': new, 'alio-detail.json': merged_details}
         try:
@@ -66,7 +72,8 @@ def collect(root=ROOT):
         finally:
             for name in candidates:
                 (root / (name + '.candidate')).unlink(missing_ok=True)
-        return {'status': 'collected', 'changed': True, 'received': len(posts), 'retained': len(merged), 'new_ids': len(set(ids) - {p['id'] for p in old['posts']})}
+        result['changed'] = True
+        return result
 
 
 if __name__ == '__main__':
@@ -79,3 +86,4 @@ if __name__ == '__main__':
         # Do not print exception messages or response bodies containing key-bearing URLs.
         print(json.dumps({'status': 'failed_preserved', 'error_type': type(error).__name__}))
         sys.exit(1)
+

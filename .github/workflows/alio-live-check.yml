@@ -21,6 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest test_alio_new_contract
+      - run: python -m unittest discover -s tests -p '*collection*.py'
       - run: python test_alio_partial_fetch.py
       - name: Verify live API into isolated candidate
         env:
@@ -32,3 +33,4 @@ jobs:
           name: alio-isolated-live-check
           path: live-check-output/
           retention-days: 3
+

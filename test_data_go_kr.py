@@ -120,6 +120,12 @@ class DataGoKrTest(unittest.TestCase):
         self.assertEqual(client.last_http_error["gateway_code"], "30")
         self.assertNotIn(secret, json.dumps(client.last_http_error))
 
+    def test_official_no_data_error_may_include_extra_diagnostics(self):
+        client, _ = self.client([{"resultCode": 3, "result": None, "error": "PRIVATE"}])
+        self.assert_code("api_result_3", lambda: client.detail(123))
+        self.assertEqual(client.last_response_diagnostic["result_code"], "3")
+        self.assertNotIn("PRIVATE", json.dumps(client.last_response_diagnostic))
+
     def test_malformed_envelopes_and_rows_fail_closed(self):
         samples = [
             ([], "invalid_envelope"),

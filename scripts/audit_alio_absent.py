@@ -53,9 +53,16 @@ def audit(root=ROOT, output=None, *, key=None, client_factory=Client, now=None):
                 try:
                     detail = client.detail(identity[1:])
                 except APIError as error:
-                    if error.safe_code != "api_result_3":
+                    if error.safe_code == "api_result_3":
+                        review["detail_status"] = "no_data"
+                    elif error.safe_code in {"unexpected_envelope_fields", "invalid_detail_shape",
+                                             "invalid_envelope", "detail_identity_mismatch", "invalid_notice_id"}:
+                        review["detail_status"] = "unverified_response"
+                        review["api_error"] = error.safe_code
+                        if getattr(client, "last_response_diagnostic", None):
+                            review["response_diagnostic"] = client.last_response_diagnostic
+                    else:
                         raise
-                    review["detail_status"] = "no_data"
                 else:
                     details[identity] = detail
                     end = alio.ymd(detail.get("pbancEndYmd"))
@@ -84,6 +91,8 @@ def audit(root=ROOT, output=None, *, key=None, client_factory=Client, now=None):
         report.update(status="failed_preserved", reason="unexpected_error", error_type=type(error).__name__)
     report["requests"] = dict(client.request_counts) if client else {"list": 0, "detail": 0}
     report["successful_responses"] = dict(client.success_counts) if client else {"list": 0, "detail": 0}
+    if report["status"] == "failed_preserved" and client and getattr(client, "last_response_diagnostic", None):
+        report["response_diagnostic"] = client.last_response_diagnostic
     report["source_preserved"] = all((root / n).read_bytes() == b for n, b in originals.items())
     report["source_sha256"] = {n: hashlib.sha256(b).hexdigest() for n, b in originals.items()}
     if not report["source_preserved"]:
