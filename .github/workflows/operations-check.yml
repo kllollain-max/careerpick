@@ -6,10 +6,12 @@ on:
       - scripts/run_operations.py
       - tests/test_operations.py
       - scripts/collect_alio.py
+      - record-migration.js
+      - tests/test_record_migration.cjs
       - .github/workflows/operations-check.yml
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: careerpick-isolated-operations
   cancel-in-progress: false
@@ -20,11 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -p test_operations.py
+      - run: node --test tests/test_record_migration.cjs
       - name: Run real collection without source replacement or deployment
         env:
           ALIO_KEY: ${{ secrets.ALIO_KEY }}
@@ -34,6 +37,24 @@ jobs:
           cp operations-output/candidate/alio.json alio.json
           cp operations-output/candidate/alio-detail.json alio-detail.json
           python scripts/build_public_site.py
+      - name: Store verified candidate on recovery branch only
+        run: |
+          python - <<'PYCODE'
+          import json,shutil
+          from pathlib import Path
+          r=json.loads(Path('operations-output/report.json').read_text())
+          assert r['validation']=='success' and r['originals_preserved']
+          for n in ('alio.json','alio-detail.json','operations-status.json'):
+              shutil.copyfile(Path('operations-output/candidate')/n,n)
+          PYCODE
+          test "$GITHUB_REF" = refs/heads/codex/operations-recovery-20261103
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add alio.json alio-detail.json operations-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Store isolated verified candidate for owner review'
+            git push origin HEAD:codex/operations-recovery-20261103
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:

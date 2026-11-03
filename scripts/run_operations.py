@@ -101,11 +101,15 @@ def run(root=ROOT, collector=collect, detail_call=None):
                         raise ValueError('live_detail_mismatch')
                 report['live_details_verified'] = len(sampled)
             report['counts'] = metrics(before, after, old_details, details, datetime.now(alio.KST))
+            received_ids = set(result.get('received_ids', []))
+            uncertain = sorted(p['id'] for p in after['posts'] if state(p, datetime.now(alio.KST)) in ('open','upcoming') and p['id'] not in received_ids)
+            report['counts']['confirmed_current'] = sum(p['id'] in received_ids and state(p, datetime.now(alio.KST)) == 'open' for p in after['posts'])
+            report['counts']['unconfirmed'] = len(uncertain)
             report.update(validation='success', verified_at=stamp(), changed=result['changed'], snapshot_at=after['updated'])
             candidate = output/'candidate'
             candidate.mkdir(exist_ok=True)
             for n in NAMES: shutil.copyfile(stage/n, candidate/n)
-            status = dict(source='alio', last_success_at=report['verified_at'], snapshot_at=after['updated'], last_received=received, counts=report['counts'])
+            status = dict(source='alio', last_success_at=report['verified_at'], snapshot_at=after['updated'], last_received=received, unconfirmed_ids=uncertain, counts=report['counts'])
             (candidate/'operations-status.json').write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n')
             report['storage'] = 'candidate_validated'
     except Exception as error:

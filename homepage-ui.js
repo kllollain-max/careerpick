@@ -2,6 +2,7 @@ let cpVisibleLimit=30, cpLastFilter="";
 function cpCheckVisibleLimit(){ const key=JSON.stringify(state);if(key!==cpLastFilter){cpVisibleLimit=30;cpLastFilter=key;} }
 /* UI wiring for the existing homepage; no changes to delivery or collection. */
 const CP_FEED_STAMPS={},CP_FEED_ISSUES={};
+const CP_UNCONFIRMED_IDS=new Set();
 async function cpReadFeed(path,key){
   const response=await fetch(path+'?t='+Date.now(),{cache:'no-store'});
   if(!response.ok)throw Error('feed_http');
@@ -128,3 +129,6 @@ function cpSetupHome(){
   const viewport=()=>{document.documentElement.style.setProperty('--cp-viewport',(window.visualViewport?.height || innerHeight)+'px');document.documentElement.style.setProperty('--cp-viewport-top',(window.visualViewport?.offsetTop || 0)+'px');};
   window.visualViewport?.addEventListener('resize',viewport);window.visualViewport?.addEventListener('scroll',viewport);window.addEventListener('resize',viewport);viewport();
 }
+
+// Per-source validation receipt; a failed attempt never replaces this file.
+(async()=>{try{const res=await fetch('operations-status.json',{cache:'no-store'});if(!res.ok)return;const r=await res.json();if(r.source!=='alio'||!r.snapshot_at)return;for(const id of r.unconfirmed_ids||[])CP_UNCONFIRMED_IDS.add(id);if(typeof refresh==='function')refresh();const note=document.createElement('p');note.className='muted';note.textContent='ALIO 자료 변경: '+r.snapshot_at+' · 마지막 정상 API 확인: '+r.last_success_at+' · 보관 '+r.counts.archived+'건 포함 · 공식 목록 접수 중 '+(r.counts.confirmed_current??'미확인')+'건 · 목록 부재 상태 미확인 '+(r.counts.unconfirmed??'미확인')+'건. 공식 공고를 확인하세요.';document.querySelector('footer')?.append(note);}catch(_){}})();
