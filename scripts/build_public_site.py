@@ -121,8 +121,11 @@ def validate(output: Path) -> dict:
             failures.append(missing)
     if json.loads((output / "work24-policy.json").read_text()) != {"approved": False}:
         failures.append("Work24 approval gate changed")
-    if 'window.CP_ONESIGNAL_APP_ID = "";' not in (output / "push-config.js").read_text():
-        failures.append("Push is not disabled")
+    push_config = (output / "push-config.js").read_text()
+    if not re.search(r'window\.CP_ONESIGNAL_APP_ID\s*=\s*"(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?";', push_config):
+        failures.append("Invalid public push app identifier")
+    if 'window.CP_PUSH_BROADCAST_ENABLED = false;' not in push_config:
+        failures.append("Push broadcast must remain disabled")
     forbidden = {"docs", "tests", "scripts", ".github", "instagram", "instagram-media", "threads-images", "local-git-objects-partial"}
     for path in output.rglob("*"):
         relative = path.relative_to(output)
