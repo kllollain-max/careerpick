@@ -30,7 +30,7 @@ jobs:
           python -m unittest discover -s tests -p test_data_go_kr_live.py
       - name: Validate the registered key with the requested data.go.kr service
         env:
-          DATA_GO_KR_KEY: ${{ secrets.ALIO_KEY }}
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python scripts/verify_data_go_kr_live.py
       - uses: actions/upload-artifact@v4
         if: always()
