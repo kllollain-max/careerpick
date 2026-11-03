@@ -5,6 +5,9 @@ import math
 import os
 from pathlib import Path
 import sys
+import re
+import html
+import urllib.request
 from datetime import datetime, timedelta, timezone
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import gojobs
@@ -14,6 +17,39 @@ PAGE_SIZE = 100
 MAX_PAGES = 10
 DETAIL_LIMIT = 8
 KST = timezone(timedelta(hours=9))
+
+
+def official_page(row, *, opener=urllib.request.urlopen):
+    """Verify one derived public URL against its visible table, not its API enddate."""
+    url = 'https://www.gojobs.go.kr/apmView.do?empmnsn=' + row['id']
+    with opener(url, timeout=20) as response:
+        if response.status != 200 or response.geturl() != url:
+            raise gojobs.APIError('official_page_redirect_or_status')
+        raw = response.read(2_000_001)
+    if len(raw)>2_000_000:
+        raise gojobs.APIError('official_page_too_large')
+    source = raw.decode('utf-8')
+    def plain(value):
+        return re.sub(r'\s+', ' ', html.unescape(re.sub('<[^>]*>', ' ', value))).strip()
+    def cell(label):
+        found = re.findall(r'<th\b[^>]*>\s*'+re.escape(label)+r'\s*</th>\s*<td\b[^>]*>(.*?)</td>',source,re.S)
+        if len(found)!=1:
+            raise gojobs.APIError('official_field_missing_or_duplicate')
+        return plain(found[0])
+    title, org = cell('공고명'), cell('기관명')
+    normalize=lambda value: re.sub(r'\s+', '', value)
+    if normalize(title)!=normalize(row['title']) or normalize(org)!=normalize(row['org']):
+        raise gojobs.APIError('official_identity_mismatch')
+    start, end = gojobs._date(cell('접수시작일')), gojobs._date(cell('접수마감일'))
+    if not start or not end or start>end:
+        raise gojobs.APIError('official_application_dates_invalid')
+    content=re.findall(r'<textarea\b[^>]*\bid="content"[^>]*>(.*?)</textarea>',source,re.S)
+    if len(content)!=1 or not plain(content[0]):
+        raise gojobs.APIError('official_content_missing')
+    return {'id':'gojobs-'+row['id'], 'source_id':row['id'], 'source':'나라일터',
+        'title':title,'org':org,'url':url,'application_start':start,'application_end':end,
+        'content':plain(content[0]),'region':cell('근무지역'),
+        'source_sha256':hashlib.sha256(raw).hexdigest()}
 
 
 def collect_window(client, start, end):
@@ -62,7 +98,7 @@ def collect_window(client, start, end):
                 totals[category] = {'records': total, 'pages': page}
                 break
             page += 1
-    details = []
+    details, official = [], []
     # Titles only select records for inspection; never establish availability.
     candidates = [row for row in rows if row['triage']['category'] == '상태 미확인']
     candidates.sort(key=lambda row: (row['registered_date'], int(row['id'])), reverse=True)
@@ -72,10 +108,23 @@ def collect_window(client, start, end):
                ('id', 'title', 'institution_type', 'recruitment_type')):
             raise gojobs.APIError('detail_list_mismatch')
         details.append(detail)
+        # The page must independently match the API identity and its application
+        # period. A result/registration title still cannot become recruitment.
+        try:
+            record=official_page(row)
+            record['classification']=classify_notice(row['title'],official_text=record['content'],
+                official_verified=True,application_open_verified=record['application_start']<=end<=record['application_end'],as_of=end,deadline=row['deadline'])
+            record['application_state']='접수예정' if record['application_start']>end else '접수마감' if record['application_end']<end else '모집중'
+            official.append(record)
+        except gojobs.APIError as error:
+            official.append({'id':'gojobs-'+row['id'],'verification_error':error.safe_code})
+        except Exception:
+            official.append({'id':'gojobs-'+row['id'],'verification_error':'official_page_unavailable'})
     return {'window': {'start': start, 'end': end, 'field': 'registered_date'},
         'scope': 'g02/e01,e02 only; bounded recent registration window, not full history',
         'complete_window': True, 'total_by_filter': totals, 'records': rows,
         'detail_samples': details, 'requests': client.request_counts,
+        'official_page_samples': official,
         'successful_responses': client.success_counts,
         'eligible_for_publication': 0, 'official_application_period_verified': False,
         'production_data_writes': 0}
