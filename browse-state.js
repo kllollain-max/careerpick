@@ -1,5 +1,9 @@
 /* Ephemeral, tab-scoped browsing state. Never touches personal record buckets. */
 const CP_BROWSE_KEY='careerpick-browse-v1';
+const cpBrowseMemory=new Map();let cpActiveBrowseId=null;
+function cpNewBrowseEntry(){cpActiveBrowseId=Date.now().toString(36)+Math.random().toString(36).slice(2,8);return cpActiveBrowseId;}
+function cpRememberBrowse(){if(cpBrowseReady&&!cpRestoringBrowse&&!JV&&cpActiveBrowseId){cpBrowseMemory.set(cpActiveBrowseId,cpBrowseSnapshot());if(cpBrowseMemory.size>50)cpBrowseMemory.delete(cpBrowseMemory.keys().next().value);}}
+function cpRestoreBrowseEntry(entry){cpActiveBrowseId=entry?.cpBrowseId||cpNewBrowseEntry();return cpRestoreBrowse(cpBrowseMemory.get(cpActiveBrowseId)||entry?.cpNav);}
 let cpRestoringBrowse=false,cpBrowseGeneration=0,cpBrowseTimer=null,cpBrowseReady=false,cpBrowsePending=null,cpFeedEngaged=false;
 const CP_BROWSE_FIELDS=['specV','tab','q','sector','employment','career','cat','region','status','sort','onlyNew','deadline','certQ'];
 function cpBrowseValid(raw){
@@ -27,7 +31,8 @@ function cpBrowseSnapshot(id){
 function cpSaveBrowse(id){
  if(!cpBrowseReady||cpRestoringBrowse||typeof JV!=='undefined'&&JV)return;
  const snapshot=cpBrowseSnapshot(id);
- try{history.replaceState({...history.state,cpNav:snapshot,cpBrowse:snapshot.state,cpScroll:snapshot.top},'',location.href);}catch(_){}
+ if(cpActiveBrowseId)cpBrowseMemory.set(cpActiveBrowseId,snapshot);
+ try{history.replaceState({...history.state,cpBrowseId:cpActiveBrowseId,cpNav:snapshot,cpBrowse:snapshot.state,cpScroll:snapshot.top},'',location.href);}catch(_){}
  try{sessionStorage.setItem(CP_BROWSE_KEY,JSON.stringify(snapshot));}catch(_){}
 }
 function cpBrowseRestorePosition(snapshot,restoreFocus=false){
@@ -50,11 +55,13 @@ function cpRestoreBrowse(raw,renderNow=true){
  return true;
 }
 function cpBrowseAfterRender(anchor){
+ cpRememberBrowse();
  if(cpBrowsePending&&(POSTS.length||!CP_DATA_LOADING)){const snapshot=cpBrowsePending;cpBrowsePending=null;cpBrowseRestorePosition(snapshot,true);}
  else if(anchor&&!cpRestoringBrowse)cpBrowseRestorePosition({...cpBrowseSnapshot(),anchor});
 }
 function cpSetupBrowse(){
- cpBrowseReady=true;
+ cpBrowseReady=true;cpActiveBrowseId=history.state?.cpBrowseId||cpNewBrowseEntry();
+ try{history.replaceState({...history.state,cpBrowseId:cpActiveBrowseId},"",location.href);}catch(_){}
  try{history.scrollRestoration='manual';}catch(_){}
  const fromURL=new URLSearchParams(location.search).has('q');
  let raw=history.state?.cpNav;
@@ -77,7 +84,7 @@ function cpOfferFeedUpdate(apply){
  if(!cpFeedEngaged||location.hash.startsWith('#job=')||!document.querySelector('#list .card')){apply();return;}
  const prior=cpQueuedFeedUpdate;cpQueuedFeedUpdate=prior?()=>{prior();apply();}:apply;
  const anchor=scrollY>0&&!cpRestoringBrowse?cpBrowseAnchor():null;let box=$('cpFeedUpdate');
- if(!box){box=document.createElement('div');box.id='cpFeedUpdate';box.setAttribute('role','status');box.innerHTML='추가 공고·조건 자료가 준비됐습니다. 현재 목록을 유지하고 있어요. <button type="button" id="cpApplyFeedUpdate">자료 갱신</button>';$('summary').parentElement.before(box);}
+ if(!box){box=document.createElement('div');box.id='cpFeedUpdate';box.setAttribute('role','status');box.innerHTML='공고·조건 자료가 준비됐습니다. 현재 목록을 유지하고 있어요. <button type="button" id="cpApplyFeedUpdate">자료 갱신</button>';$('summary').parentElement.before(box);}
  box.hidden=false;if(anchor)cpBrowseRestorePosition({...cpBrowseSnapshot(),anchor});const summary=$('summary');if(summary)summary.innerHTML=summary.innerHTML.replace(' · 일부 출처 확인 중 · 최종 건수 미확정',' · 추가 자료 준비됨 (자료 갱신 후 전체 결과 확인)');
 }
 document.addEventListener('click',e=>{if(e.target.closest('#cpApplyFeedUpdate')&&cpQueuedFeedUpdate){const apply=cpQueuedFeedUpdate;cpQueuedFeedUpdate=null;$('cpFeedUpdate').hidden=true;apply();cpSaveBrowse();}});

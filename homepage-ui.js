@@ -1,5 +1,5 @@
 let cpVisibleLimit=30, cpLastFilter="";
-function cpCheckVisibleLimit(){ const key=JSON.stringify(state);if(key!==cpLastFilter){cpVisibleLimit=30;cpLastFilter=key;cpBrowseGeneration++;if(cpBrowseReady&&!cpRestoringBrowse&&scrollY>($("summary")?.offsetTop||0))window.scrollTo({top:$("summary")?.offsetTop||0,behavior:"instant"});} }
+function cpCheckVisibleLimit(){ const key=JSON.stringify(state);if(key!==cpLastFilter){if(cpRestoringBrowse&&cpLastFilter){cpRestoringBrowse=false;cpBrowsePending=null;}cpVisibleLimit=30;cpLastFilter=key;cpBrowseGeneration++;if(cpBrowseReady&&!cpRestoringBrowse&&scrollY>($("summary")?.offsetTop||0))window.scrollTo({top:$("summary")?.offsetTop||0,behavior:"instant"});} }
 /* UI wiring for the existing homepage; no changes to delivery or collection. */
 const CP_FEED_STAMPS={},CP_FEED_ISSUES={};
 const CP_UNCONFIRMED_IDS=new Set();

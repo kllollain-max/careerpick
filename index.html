@@ -766,7 +766,7 @@ footer .src b{color:var(--ink)}
 // ── 설정 ──
 const COUPANG = false;    // 쿠팡 추천 상품 표시 (ads.py 설정 후 true로)
 let POSTS = [], UPDATED = null, ADS = [];
-let CP_DATA_LOADING=true, CP_URL_APPLIED=false, cpQueryTouched=false;
+let CP_DATA_LOADING=true, CP_URL_APPLIED=false, cpQueryTouched=false, CP_USING_PREVIOUS=false;
 let CP_DEDUP_REMOVED = 0;
 const DATA_HEALTH = {posts:"pending", alio:"pending", monitor:"pending",detail:"pending"};
 // Preserve blog entries independently of merged official feeds for accurate search.
@@ -904,6 +904,7 @@ async function loadMonitoredJobs(){
 }
 
 async function load(){
+  const previousPosts=POSTS.slice();CP_USING_PREVIOUS=false;
   POSTS=[];CP_BLOG_SEARCH=[];CP_SEARCH_TEXT=new WeakMap();
   let published=false;
   const publish=()=>{
@@ -915,6 +916,7 @@ async function load(){
     catch(_){DATA_HEALTH.posts='error';}
   })();
   await Promise.all([blog,loadAlio(),loadGojobs(),loadMonitoredJobs(),cpLoadEnterprise(),cpLoadWork24()].map(task=>task.finally(publish)));
+  if(!POSTS.length&&previousPosts.length){POSTS=previousPosts;CP_USING_PREVIOUS=true;}
   initSeen();
   CP_DATA_LOADING=false;
   cpDedupePosts();
@@ -934,9 +936,9 @@ async function load(){
   updateDataHealth(validUpdate ? updateDate : null);
   const completePosts=POSTS;
   if(cpFeedEngaged&&!location.hash.startsWith("#job=")&&CP_LAST_VISIBLE_POSTS.length)POSTS=CP_LAST_VISIBLE_POSTS;
-  cpOfferFeedUpdate(()=>{POSTS=completePosts;refresh();});
+  if(CP_USING_PREVIOUS){POSTS=completePosts;refresh();}else cpOfferFeedUpdate(()=>{POSTS=completePosts;refresh();});
   // Late enrichment is applied explicitly while the reader is browsing.
-  alioDetail().then(() => {cpOfferFeedUpdate(()=>{
+  alioDetail().then(() => {if(!ALIO_DETAIL){cpRenderFeedStatus();return;}cpOfferFeedUpdate(()=>{
     for(const p of POSTS){const det=p.alio && ALIO_DETAIL?.[p.id];if(det)Object.assign(p,CPHome.detailFields(p,det));}
     CP_SEARCH_TEXT=new WeakMap();renderTabs();renderFilters();render();cpRenderFeedStatus();
   });});
@@ -2209,7 +2211,7 @@ window.addEventListener("popstate", (event) => {
   const m = location.hash.match(/^#job=(.+)$/);
   if(m){ openJob(decodeURIComponent(m[1]), false); return; }
   closeJob(true);
-  if(cpRestoreBrowse(event.state?.cpNav))return;
+  if(cpRestoreBrowseEntry(event.state))return;
   // 브라우저/스레드 뒤로가기를 사이트 내부 탭 이동에 연결합니다.
   if(event.state && event.state.cpTab){
     CP_RESTORING_TAB = true;
@@ -2408,6 +2410,7 @@ function render(){
   let sum = (state.tab === "p" || state.tab === "m")
     ? `글 <b>${rows.length}</b>개`
     : `검색 결과 <b>${rows.length}</b>건 · 마감 전 ${open}건` + (hot ? ` · 3일 내 마감 <span class="hot">${hot}</span>건` : "") + (state.tab === "mine" ? "" : ` · 접수 여부 원문 확인`);
+  if(CP_USING_PREVIOUS)sum+=" · 이전 자료 표시 중 (최신 조회 실패 · 하단 자료 시점 확인)";
   if(CP_DATA_LOADING)sum+=" · 일부 출처 확인 중 · 최종 건수 미확정";
   if(Object.values(DATA_HEALTH).includes('error'))sum+=' · 일부 출처 조회 실패 (하단 갱신 상태 확인)';
   if(undated) sum += ` · <span title="마감일 확인이 필요한 공고">마감일 미확인 ${undated}건</span>`;
@@ -2466,11 +2469,11 @@ function cpRecordTab(){
   } else if(CP_LAST_TAB !== state.tab){
     CP_LAST_TAB = state.tab;
     CP_TAB_DEPTH++;
-    history.pushState({cpTab:state.tab, cpQ:state.q || "", cpDepth:CP_TAB_DEPTH}, "", location.pathname + location.search);
+    history.pushState({cpBrowseId:cpNewBrowseEntry(),cpTab:state.tab, cpQ:state.q || "", cpDepth:CP_TAB_DEPTH}, "", location.pathname + location.search);
   }
   cpUpdateBackButton();
 }
-function refresh(){ cpRecordTab(); renderTabs(); renderFilters(); render(); savedAlert();
+function refresh(){ cpRecordTab(); renderTabs(); renderFilters(); render(); savedAlert();cpRememberBrowse();
   document.querySelectorAll("[data-cpnav]").forEach(b => {
     const active=b.dataset.cpnav===state.tab;
     if(active) b.setAttribute("aria-current","page");
@@ -2600,7 +2603,7 @@ document.addEventListener("click", async e => {
 });
 let cpComposing=false;
 $('q').addEventListener('compositionstart',()=>{cpComposing=true;cpQueryTouched=true;});
-function cpSearchInput(e){cpQueryTouched=true;if(cpComposing||e.isComposing)return;state.q=e.target.value;renderFilters();render();}
+function cpSearchInput(e){cpQueryTouched=true;if(cpComposing||e.isComposing)return;state.q=e.target.value;renderFilters();render();cpRememberBrowse();}
 $('q').addEventListener('compositionend',e=>{cpComposing=false;cpSearchInput(e);});
 $('q').addEventListener('input',cpSearchInput);
 $("tabs").addEventListener("scroll", fadeHint, {passive:true});
