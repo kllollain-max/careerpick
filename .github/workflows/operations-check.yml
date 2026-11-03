@@ -36,6 +36,7 @@ jobs:
         run: |
           cp operations-output/candidate/alio.json alio.json
           cp operations-output/candidate/alio-detail.json alio-detail.json
+          cp operations-output/candidate/operations-status.json operations-status.json
           python scripts/build_public_site.py
       - name: Store verified candidate on recovery branch only
         run: |
