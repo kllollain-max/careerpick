@@ -33,6 +33,28 @@ MAX_DAYS = 20
 MAX_DAILY = 4
 
 
+def current_publication_slot(now):
+    """Use a genuine current manual minute, never impersonate a scheduled cron."""
+    from datetime import timedelta
+    from scripts.threads_transition_preview import slot_from_cron
+    if os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true':
+        if os.getenv('GITHUB_EVENT_NAME') != 'workflow_dispatch':
+            raise RuntimeError('Manual publication requires an explicit dispatch')
+        if os.getenv('GITHUB_RUN_ATTEMPT', '1') != '1':
+            raise RuntimeError('Manual publication rerun blocked')
+        slot = datetime.fromisoformat(os.environ.get('THREADS_MANUAL_SLOT', ''))
+        if slot.tzinfo is None or slot.utcoffset() != timedelta(hours=9) or slot.second or slot.microsecond:
+            raise RuntimeError('Aware KST minute-aligned manual slot required')
+        if not slot <= now < slot + timedelta(minutes=10):
+            raise RuntimeError('Manual slot expired or in the future')
+        return slot
+    hour = slot_from_cron(os.getenv('THREADS_SCHEDULE_CRON', ''))
+    slot = now.replace(hour=hour, minute=0, second=0, microsecond=0)
+    if not slot <= now < slot + timedelta(hours=2):
+        raise RuntimeError('Scheduled slot is not current')
+    return slot
+
+
 def load(path, default):
     if not path.exists():
         return default
@@ -438,6 +460,25 @@ def check_history_before_send(record, history):
             raise RuntimeError('Invalid historical slot; reconcile before sending') from None
         if other == slot:
             raise RuntimeError('Slot already present in history; do not send')
+
+
+def verify_published_record(record, token):
+    """Official read-only confirmation of the actual main and both replies."""
+    main_id = str(record['threads_post_id'])
+    result = []
+    for id_key, text_key in [('threads_post_id','text'),('reply_post_id','reply_text'),('engagement_post_id','engagement_text')]:
+        expected_id = str(record.get(id_key) or '')
+        if not expected_id.isdigit():
+            raise RuntimeError('Missing actual published object ID')
+        obj = api('GET', '/' + expected_id, token,
+                  {'fields':'id,text,permalink,is_reply,root_post,replied_to'})
+        if str(obj.get('id')) != expected_id or obj.get('text') != record.get(text_key):
+            raise RuntimeError('Published object content or ID mismatch')
+        if id_key != 'threads_post_id':
+            if obj.get('is_reply') is not True or str((obj.get('root_post') or {}).get('id')) != main_id or str((obj.get('replied_to') or {}).get('id')) != main_id:
+                raise RuntimeError('Actual reply parent/root mismatch')
+        result.append(obj)
+    return result
 
 
 def restore_accepted_receipt(record, history, remote):
@@ -925,14 +966,9 @@ def main():
         print('No new reservation created; avoiding possible duplicate post.')
         return
 
-    from scripts.threads_transition_preview import slot_from_cron
-    from datetime import timedelta
-    hour = slot_from_cron(os.getenv('THREADS_SCHEDULE_CRON', ''))
     now = datetime.now(KST)
-    scheduled = now.replace(hour=hour, minute=0, second=0, microsecond=0)
-    print('Scheduled slot:', scheduled.isoformat(), 'preparation:', now.isoformat(), flush=True)
-    if not scheduled <= now < scheduled + timedelta(hours=2):
-        raise RuntimeError('Scheduled slot is not current')
+    scheduled = current_publication_slot(now)
+    print('Publication slot:', scheduled.isoformat(), 'preparation:', now.isoformat(), flush=True)
     if any(r.get('reserved_date') == today and r.get('status') in ('pending', 'published') and not r.get('scheduled_at') for r in history['records']):
         raise RuntimeError('Legacy reservation lacks slot; reconcile before proceeding')
     claim_slot = scheduled.isoformat()
@@ -949,6 +985,7 @@ def main():
     history['records'].append({
         'job_id': job['id'],
         'scheduled_at': claim_slot,
+        'manual_publish': os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true',
         'reserved_date': today,
         'status': 'pending',
         'run_id': run_id,
