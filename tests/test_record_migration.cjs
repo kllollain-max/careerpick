@@ -7,7 +7,7 @@ test('preserves status notes and orphan ids while merging; repeated import idemp
  assert.equal(once.data['careerpick-import-archive'][0].apps.a1.memo,'old note');
 });
 test('rejects invalid types/status/prototype input',()=>{
- for(const d of [{saved:[3]},{apps:{a1:{st:'invented'}}},JSON.parse('{"__proto__":{"bad":1}}')])assert.throws(()=>r.validate(backup(d)));
+ for(const d of [{saved:[3]},{prefs:{region:3}},{apps:{a1:{st:'plan',ck:[null]}}},{apps:{a1:{st:'invented'}}},JSON.parse('{"__proto__":{"bad":1}}')])assert.throws(()=>r.validate(backup(d)));
 });
 test('storage failure rolls back every existing key',()=>{
  const m=new Map([['saved','["a1"]'],['apps','{}']]);let writes=0;

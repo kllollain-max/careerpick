@@ -69,6 +69,7 @@ jobs:
         if: steps.candidate.outputs.changed == 'true'
         run: python scripts/build_public_site.py
       - name: Store validated data with fast-forward protection
+        id: storage
         if: steps.candidate.outputs.changed == 'true'
         run: |
           git config user.name 'github-actions[bot]'
@@ -87,6 +88,7 @@ jobs:
         id: deployment
         if: steps.candidate.outputs.changed == 'true'
       - name: Verify public snapshot hashes
+        id: public_check
         if: steps.candidate.outputs.changed == 'true'
         run: python scripts/verify_public_version.py
       - name: Record unchanged or deployment result
@@ -95,6 +97,8 @@ jobs:
           JOB_STATUS: ${{ job.status }}
           CHANGED: ${{ steps.candidate.outputs.changed }}
           DEPLOYMENT_OUTCOME: ${{ steps.deployment.outcome }}
+          STORAGE_OUTCOME: ${{ steps.storage.outcome }}
+          PUBLIC_OUTCOME: ${{ steps.public_check.outcome }}
         run: |
           python - <<'PY'
           import json,os
@@ -102,6 +106,11 @@ jobs:
           p=Path('operations-output/report.json')
           r=json.loads(p.read_text()) if p.exists() else {'status':'failed_before_collection'}
           r.update(trigger=os.environ['GITHUB_EVENT_NAME'],job_status=os.environ['JOB_STATUS'],deployment=os.environ['DEPLOYMENT_OUTCOME'] if os.environ['CHANGED']=='true' else 'unchanged',run_url=os.environ['GITHUB_SERVER_URL']+'/'+os.environ['GITHUB_REPOSITORY']+'/actions/runs/'+os.environ['GITHUB_RUN_ID'])
+          exam_path=Path('exam-operation-output/report.json')
+          r['exam_source']=json.loads(exam_path.read_text()) if exam_path.exists() else {'status':'not_run'}
+          r['storage']=os.environ['STORAGE_OUTCOME'] if os.environ['CHANGED']=='true' else 'unchanged'
+          r['public_check']=os.environ['PUBLIC_OUTCOME'] if os.environ['CHANGED']=='true' else 'not_needed_unchanged'
+          r['overall']='success' if os.environ['JOB_STATUS']=='success' and r['exam_source'].get('status') in ('changed','unchanged') else 'partial_or_failed'
           p.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n')
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('```json\n'+json.dumps(r,ensure_ascii=False,indent=2)+'\n```\n')
           PY

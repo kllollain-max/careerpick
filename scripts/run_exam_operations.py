@@ -21,7 +21,7 @@ def run(root=ROOT,client_factory=mpm_exam.Client):
         mpm_exam.validate_records(records,expected_count=result['verification']['total_rows'])
         old=json.loads(original)
         # Normalized records are the semantic comparison, not fetch timestamps.
-        previous=display_records(old['records'])
+        previous=display_records(mpm_exam.validate_records(old['records'],expected_count=old['count'])['records'])
         changed=previous!=records
         candidate=dict(source=mpm_exam.DATASET_NAME,source_url=mpm_exam.SOURCE_URL,retrieved_at=stamp() if changed else old['retrieved_at'],count=len(records),records=records)
         target=output/PATH;target.parent.mkdir(parents=True,exist_ok=True)

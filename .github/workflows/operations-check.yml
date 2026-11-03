@@ -9,6 +9,7 @@ on:
       - record-migration.js
       - tests/test_record_migration.cjs
       - scripts/run_exam_operations.py
+      - tests/test_exam_operations.py
       - .github/workflows/operations-check.yml
   workflow_dispatch:
 permissions:
@@ -33,6 +34,7 @@ jobs:
         env:
           ALIO_KEY: ${{ secrets.ALIO_KEY }}
         run: python scripts/run_operations.py
+      - run: python -m unittest discover -s tests -p test_exam_operations.py
       - name: Validate independent exam candidate
         env:
           MPM_EXAM_KEY: ${{ secrets.MPM_EXAM_KEY }}

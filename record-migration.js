@@ -20,10 +20,12 @@ function validate(backup){
   for(const [id,a] of Object.entries(d.apps)){
    if(!id||id.length>128||!object(a)||!['plan','applied','doc','exam','itv','pass','fail'].includes(a.st))throw Error('지원 상태가 올바르지 않습니다.');
    for(const key of ['memo','title','org','url','exam','itv'])if(a[key]!==undefined && (typeof a[key]!=='string'||a[key].length>20000))throw Error('지원 기록 필드가 올바르지 않습니다.');
-   if(a.ck!==undefined && !Array.isArray(a.ck))throw Error('체크리스트가 올바르지 않습니다.');
+   if(a.ck!==undefined && (!Array.isArray(a.ck)||a.ck.some(x=>!object(x)||typeof x.t!=='string'||!['pre','post'].includes(x.ph)||![0,1,false,true].includes(x.d))))throw Error('체크리스트가 올바르지 않습니다.');
   }
  }
  for(const key of ['prefs','spec'])if(d[key]!==undefined&&!(key==='spec'&&d[key]===null)&&!object(d[key]))throw Error('맞춤 설정이 올바르지 않습니다.');
+ if(d.prefs){for(const k of ['emp','edu','region','cat'])if(d.prefs[k]!==undefined&&(!Array.isArray(d.prefs[k])||d.prefs[k].some(v=>typeof v!=='string')))throw Error('맞춤 조건 배열이 올바르지 않습니다.');if(d.prefs.kw!==undefined&&typeof d.prefs.kw!=='string')throw Error('검색 조건이 올바르지 않습니다.');}
+ if(d.spec){for(const k of ['want','lic','special'])if(d.spec[k]!==undefined&&(!Array.isArray(d.spec[k])||d.spec[k].some(v=>typeof v!=='string')))throw Error('스펙 배열이 올바르지 않습니다.');}
  if(d['careerpick-import-archive']!==undefined&&!Array.isArray(d['careerpick-import-archive']))throw Error('이전 보관 기록이 올바르지 않습니다.');
  return d;
 }
