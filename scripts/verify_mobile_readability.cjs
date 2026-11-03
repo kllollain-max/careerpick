@@ -67,6 +67,7 @@ async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].p
     await p.locator('#toggle').click();await p.screenshot({path:`${OUT}/filter-${theme}.png`});await p.locator('#cpFilterDone').click();
     await p.locator('#list [data-open="a900001"]').first().click();await p.locator('#jobview').waitFor({state:'visible'});
     assert.equal(await p.locator('.jv-title').innerText(),rows[0].title);
+   for(const b of await p.locator('.jv-top button').all())assert((await b.boundingBox()).height>=44);
     await p.screenshot({path:`${OUT}/detail-${theme}.png`,fullPage:true});await p.goBack();
    }
    if(width===320&&zoom===2)await p.screenshot({path:`${OUT}/after-${label}.png`,fullPage:false});
@@ -79,6 +80,7 @@ async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].p
    }
    await p.locator('#list [data-open="a900001"]').first().click();await p.locator('#jobview').waitFor({state:'visible'});
    assert.equal(await p.locator('.jv-title').innerText(),rows[0].title);
+   for(const b of await p.locator('.jv-top button').all())assert((await b.boundingBox()).height>=44);
    assert(await p.locator('#jobview').evaluate(e=>e.scrollWidth<=e.clientWidth+1));
    const action=p.locator('#jvBody [data-save="a900001"]');await action.scrollIntoViewIfNeeded();assert(await action.isVisible());
    await p.goBack();
