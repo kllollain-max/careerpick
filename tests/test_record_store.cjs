@@ -43,3 +43,11 @@ test('backup preserves corrupt raw bytes and reports unreadable keys explicitly'
  const result=store.exportRecords(s,['saved','apps']);assert.equal(result.raw_records.apps,raw);assert.deepEqual(result.invalid_keys,['apps']);assert.deepEqual(result.data.saved,['a']);assert(!('apps' in result.data));
  assert.deepEqual(store.exportRecords({getItem:()=>{throw Error('denied')}},['saved']).unavailable_keys,['saved']);
 });
+
+test('delete has a verified exact pre-write copy; checkpoint failure leaves active record unchanged',async()=>{
+ const raw=' {"a":{"st":"plan","memo":"original"}} ',s=storage({apps:raw});
+ await store.mutate(s,'apps',{},store.apps,rows=>store.replaceApp(rows,'a',null,JSON.stringify({st:'plan',memo:'original'})));
+ assert.equal(JSON.parse(s.data['careerpick-record-checkpoints']).records.apps.raw,raw);assert.equal(s.data.apps,'{}');
+ const denied=storage({apps:raw});const put=denied.setItem;denied.setItem=(k,v)=>{if(k==='careerpick-record-checkpoints')throw Error('quota');put(k,v);};
+ await assert.rejects(store.mutate(denied,'apps',{},store.apps,()=>({})));assert.equal(denied.data.apps,raw);
+});

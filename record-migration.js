@@ -53,14 +53,18 @@ function merge(current,incoming){
 function apply(storage,backup){
  const d=validate(backup),originals={},current={};
  for(const k of keys){originals[k]=storage.getItem(k);if(originals[k]!==null)current[k]=JSON.parse(originals[k]);}
+ validate({format:"careerpick-backup",version:1,data:current});
  const result=merge(current,d);
  try{
   // Local pre-import checkpoint, independent of the user's downloaded backup.
-  storage.setItem('careerpick-before-import',JSON.stringify(current));
+  const checkpoint=JSON.stringify({format:'careerpick-before-import',version:1,data:current,raw_records:originals});
+  storage.setItem('careerpick-before-import',checkpoint);
+  if(storage.getItem('careerpick-before-import')!==checkpoint)throw Error('checkpoint not verified');
   for(const k of keys)if(result.data[k]!==undefined)storage.setItem(k,JSON.stringify(result.data[k]));
  }catch(e){
-  for(const k of keys){try{originals[k]===null?storage.removeItem(k):storage.setItem(k,originals[k]);}catch(_) {}}
-  throw Error('저장하지 못했습니다. 가져오기 전 다운로드한 백업을 보관하세요.');
+  let restored=true;
+  for(const k of keys){try{originals[k]===null?storage.removeItem(k):storage.setItem(k,originals[k]);if(storage.getItem(k)!==originals[k])restored=false;}catch(_) {restored=false;}}
+  throw Error(restored?'저장하지 못했습니다. 기존 기록으로 복구했습니다. 다운로드한 백업을 보관하세요.':'가져오기 실패 후 일부 복구를 확인하지 못했습니다. careerpick-before-import의 원본 사본과 다운로드한 백업을 보관하고 추가 저장을 중단해 주세요.');
  }
  return result;
 }

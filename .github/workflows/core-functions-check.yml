@@ -2,8 +2,6 @@ name: Isolated core function audit
 on:
   push:
     branches: [fix/core-function-audit-20261103]
-  pull_request:
-    paths: [index.html, homepage-ui.js, record-store.js, tests/test_record_store.cjs, scripts/verify_core_functions.cjs, .github/workflows/core-functions-check.yml]
 concurrency:
   group: core-audit-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true

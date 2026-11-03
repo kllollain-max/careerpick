@@ -14,3 +14,14 @@ test('storage failure rolls back every existing key',()=>{
  const s={getItem:k=>m.get(k)??null,removeItem:k=>m.delete(k),setItem:(k,v)=>{if(++writes===3)throw Error('quota');m.set(k,v);}};
  assert.throws(()=>r.apply(s,backup({saved:['a2']})));assert.equal(m.get('saved'),'["a1"]');assert.equal(m.get('apps'),'{}');
 });
+
+test('invalid current records block import before any checkpoint or replacement write',()=>{
+ const raw='{"a":null}',m=new Map([['apps',raw]]);let writes=0;
+ const s={getItem:k=>m.get(k)??null,setItem:()=>{writes++;},removeItem:()=>assert.fail('remove')};
+ assert.throws(()=>r.apply(s,backup({saved:['a']})));assert.equal(writes,0);assert.equal(m.get('apps'),raw);
+});
+test('persistent rollback failure is reported and exact raw originals remain in verified checkpoint',()=>{
+ const raw=' ["a1"] ',m=new Map([['saved',raw],['apps','{}']]);let writes=0;
+ const s={getItem:k=>m.get(k)??null,removeItem:k=>m.delete(k),setItem:(k,v)=>{if(++writes>=3)throw Error('persistent quota');m.set(k,v);}};
+ assert.throws(()=>r.apply(s,backup({saved:['a2']})),/일부 복구/);assert.equal(JSON.parse(m.get('careerpick-before-import')).raw_records.saved,raw);
+});

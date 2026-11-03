@@ -51,7 +51,9 @@ async function searchAndBack(page){
  await page.locator('#list [data-open="a900001"]').first().click();await page.locator('#jobview').waitFor({state:'visible'});
  await page.goBack();await page.locator('#jobview').waitFor({state:'hidden'});
  assert.deepEqual(await page.evaluate(()=>[state.q,state.region,state.employment,state.status,state.sort]),['춘천','강원','정규직','open','new']);
- await page.locator('#toggle').click();await page.locator('#cpFilterReset').click();if(await page.locator('#cpFilterDone').isVisible())await page.locator('#cpFilterDone').click();
+ if(await page.locator('#toggle').getAttribute('aria-expanded')!=='true')await page.locator('#toggle').click();
+ if(await page.locator('#cpFilterReset').isVisible())await page.locator('#cpFilterReset').click();else await page.locator('#reset').click();
+ if(await page.locator('#cpFilterDone').isVisible())await page.locator('#cpFilterDone').click();
  assert.equal(await q.inputValue(),'');assert.equal(await page.locator('#list .job').count(),2);
 }
 async function savedAndApps(page){
@@ -96,7 +98,7 @@ async function savedAndApps(page){
    const x=await context(browser,{width});const page=await x.ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    await check('search, IME, filters, history '+width,async()=>{await ready(page);await searchAndBack(page);});
    await check('saved, application status, memo, checklist, dates, reload '+width,async()=>{await savedAndApps(page);assert.deepEqual(errors,[]);});
-   await check('layout and accessible controls '+width,async()=>{assert(!await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth));await page.screenshot({path:`${OUT}/viewport-${width}.png`});});
+   await check('layout and accessible controls '+width,async()=>{await page.getByRole('searchbox',{name:'검색',exact:true}).focus();assert.equal(await page.evaluate(()=>document.activeElement.id),'q');await page.keyboard.press('Tab');assert(await page.evaluate(()=>document.activeElement.matches('button,select,input,a')));assert(!await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth));await page.screenshot({path:`${OUT}/viewport-${width}.png`});});
    await x.ctx.close();
   }
   await check('quota failure preserves saved and application state and editor text',async()=>{

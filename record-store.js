@@ -19,11 +19,23 @@
       if(!valid(next))throw Error('기록 형식을 확인해 주세요. 기존 기록은 변경하지 않았습니다.');
       const text=JSON.stringify(next);
       if(storage.getItem(key)!==old.raw)throw Error('다른 탭에서 기록이 변경됐습니다. 다시 열어 확인해 주세요.');
-      try{storage.setItem(key,text);}catch(_){throw Error('기기 저장 실패: 저장 공간 또는 사이트 저장 권한을 확인해 주세요. 입력 내용은 화면에 남아 있습니다.');}
+      // Verify a recoverable pre-write copy before changing or deleting any bucket.
+      const checkpointKey='careerpick-record-checkpoints',checkpointRaw=storage.getItem(checkpointKey);
+      let checkpoints;
+      try{checkpoints=checkpointRaw===null?{version:1,records:{}}:JSON.parse(checkpointRaw);
+        if(checkpoints.version!==1||!object(checkpoints.records))throw Error('checkpoint');
+      }catch(_){throw Error('복구 사본을 읽지 못했습니다. 기존 기록을 변경하지 않았습니다. 원본 JSON 백업을 받아 주세요.');}
+      checkpoints.records[key]={raw:old.raw,at:new Date().toISOString()};
+      const checkpointText=JSON.stringify(checkpoints);
+      try{storage.setItem(checkpointKey,checkpointText);
+        if(storage.getItem(checkpointKey)!==checkpointText)throw Error('checkpoint');
+        if(storage.getItem(key)!==old.raw)throw Error('conflict');
+        storage.setItem(key,text);
+      }catch(_){throw Error('기기 저장 실패: 저장 공간 또는 사이트 저장 권한을 확인해 주세요. 입력 내용은 화면에 남아 있습니다.');}
       if(storage.getItem(key)!==text)throw Error('저장 결과를 확인하지 못했습니다. 다시 열어 확인해 주세요.');
       return next;
     };
-    return locks&&typeof locks.request==='function'?locks.request('careerpick-records-'+key,work):work();
+    return locks&&typeof locks.request==='function'?locks.request('careerpick-records',work):work();
   }
   function replaceApp(data,id,next,expected){
     if(JSON.stringify(data[id]??null)!==expected)throw Error('다른 탭에서 이 지원 기록이 변경됐습니다. 입력 내용을 복사한 뒤 기록을 다시 열어 주세요.');
