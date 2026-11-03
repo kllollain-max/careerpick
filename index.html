@@ -809,8 +809,9 @@ function cpRenderFeedStatus(){
   const el = $("cpFeedStatus");
   if(!el) return;
   const names = {gojobs:"나라일터",posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보",work24:"고용24"};
+  const cacheSource=k=>[...CP_FEED_CACHE.keys()].some(file=>({"alio-detail.json":"detail","enterprise_jobs.json":"enterprise","work24-policy.json":"work24"}[file]||file.replace(/\.json$/, ""))===k);
   const parts = Object.entries(DATA_HEALTH).map(([key,value]) =>
-    `${names[key] || key} ${value === "awaiting_approval" ? "수집 비활성" : value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
+    `${names[key] || key} ${cacheSource(key) ? "보관 자료 · " : ""}${value === "awaiting_approval" ? "수집 비활성" : value === "ok" ? (cacheSource(key) ? "최신 확인 불가" : "정상") : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
   const stamp = UPDATED ? new Date(UPDATED) : null;
   const valid = stamp && Number.isFinite(stamp.getTime());
   const hours = valid ? (Date.now()-stamp.getTime())/3600000 : Infinity;
