@@ -37,6 +37,8 @@ class CollectionTests(unittest.TestCase):
         self.assertFalse(post.get('alio',False))
         self.assertEqual(post['gojobsDetail']['공식 모집 내용'],'공식 모집 내용')
         self.assertFalse(post['dueHasTime'])
+        self.assertEqual(merge({'posts':[]},report(),datetime.fromisoformat('2026-11-04T12:00:00+09:00'))[2]['open'],0)
+        self.assertEqual(merge({'posts':[]},report(),datetime.fromisoformat('2026-11-04T12:00:00+09:00'))[2]['deadline_time_unconfirmed'],1)
 
 
 if __name__=='__main__':unittest.main()

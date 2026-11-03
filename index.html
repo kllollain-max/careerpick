@@ -1393,7 +1393,7 @@ function rowCard(p, now){
   return `<li class="card row ${d && d.cls === "closed" ? "is-closed" : ""}">
     <a class="main" href="${href}"${attr}>
       <span class="rd ${d ? d.cls : ""}">${d ? (d.cls === "verify" ? "~" + md(p.due) : d.big) : "일정 확인"}</span>
-      <span class="rb"><span class="ro">${isNew(p,now) ? "NEW · " : ""}${isInternalJob(p) ? "공식" : "해설"} · ${esc(p.org || p.cat)}${regionLabel(p) ? " · " + esc(regionLabel(p)) : ""}</span>
+      <span class="rb"><span class="ro">${isNew(p,now) ? "NEW · " : ""}${p.gojobs ? "나라일터" : isInternalJob(p) ? "공식" : "해설"} · ${esc(p.org || p.cat)}${regionLabel(p) ? " · " + esc(regionLabel(p)) : ""}</span>
       <span class="rt">${esc(cleanTitle(p.title))}</span>
       <span class="rm">${esc(meta.join(" · "))}</span>${preferenceBadge(p)}</span>
     </a>

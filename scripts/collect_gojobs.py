@@ -42,7 +42,8 @@ def merge(previous, report, now):
     metrics={'before':len(old),'new':len(rows.keys()-old.keys()),
         'modified':sum(rows[k]!=old[k] for k in old.keys()&rows.keys()),'deleted':0,
         'after':len(rows),'received_in_window':received,'verified_this_run':len(report['official_page_samples']),
-        'open':sum(p['start']<=now.date().isoformat()<=p['due'][:10] for p in posts),
+        'open':sum(p['start']<=now.date().isoformat()<p['due'][:10] for p in posts),
+        'deadline_time_unconfirmed':sum(p['due'][:10]==now.date().isoformat() for p in posts),
         'archived':sum(p['due'][:10]<now.date().isoformat() for p in posts)}
     feed={'updated':now.isoformat(timespec='seconds'),'last_received':received,
         'scope':'지방공무원 g02/e01,e02 · 최근 14일 등록 목록 전체 조회 · 마감 임박 후보 최대8건 원문 검증; 전국 전체 채용 아님',
