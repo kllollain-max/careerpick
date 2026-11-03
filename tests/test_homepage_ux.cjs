@@ -111,7 +111,7 @@ test('all official work regions reach filtering, without inventing nationwide co
 
 test('offline service worker always returns a Response for an uncached resource',async()=>{
   const handlers={};let promise;
-  const context={self:{addEventListener:(name,fn)=>handlers[name]=fn},URL,Response,Headers,location:{origin:'https://kllollain-max.github.io'},caches:{match:async()=>undefined,open:async()=>({match:async()=>undefined})},fetch:async()=>{throw Error('offline');}};
+  const context={self:{addEventListener:(name,fn)=>handlers[name]=fn},URL,Response,Headers,setTimeout,clearTimeout,location:{origin:'https://kllollain-max.github.io'},caches:{match:async()=>undefined,open:async()=>({match:async()=>undefined})},fetch:async()=>{throw Error('offline');}};
   vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);
   handlers.fetch({request:{url:'https://kllollain-max.github.io/alio.json?t=1',method:'GET'},respondWith:p=>promise=p,waitUntil:()=>{}});
   const missing=await promise;assert.equal(missing.status,503);assert.match(await missing.text(),/오프라인/);
@@ -281,10 +281,10 @@ test('service worker waits for code cache persistence before an offline transiti
  let delivered=false;response.then(()=>delivered=true);await new Promise(r=>setImmediate(r));assert.equal(delivered,false);assert.equal(stored,false);release();await lifetime;assert.equal(stored,true);assert.match(await (await response).text(),/ready/);
 });
 
-test('a stalled optional code cache cannot indefinitely block a healthy network response',async()=>{
- const handlers={};let response;
+test('a stalled optional code cache cannot indefinitely block a healthy network response',{timeout:1000},async()=>{
+ const handlers={};let response,lifetime;
  const context={self:{addEventListener:(n,fn)=>handlers[n]=fn},URL,Response,Headers,setTimeout:fn=>setImmediate(fn),clearTimeout:clearImmediate,location:{origin:'https://example.test'},caches:{open:async()=>({put:()=>new Promise(()=>{}),match:async()=>null})},fetch:async()=>new Response('usable code')};
  vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);
- handlers.fetch({request:{url:'https://example.test/homepage-ui.js',method:'GET'},respondWith:p=>response=p,waitUntil:()=>{}});
- assert.equal(await (await response).text(),'usable code');
+ handlers.fetch({request:{url:'https://example.test/homepage-ui.js',method:'GET'},respondWith:p=>response=p,waitUntil:p=>lifetime=p});
+ assert.equal(await (await response).text(),'usable code');await lifetime;
 });
