@@ -11,12 +11,12 @@ self.addEventListener("fetch", e => {
   const url = new URL(req.url);
   if (req.method !== "GET" || url.origin !== location.origin) return;
   if (/\.(png|webp|jpg|svg)$/.test(url.pathname)) {
-    e.respondWith(caches.open(STATIC).then(c => c.match(req).then(hit => hit || fetch(req).then(res => { if (res.ok) c.put(req, res.clone()); return res; }))));
+    e.respondWith(caches.open(STATIC).then(c => c.match(req).then(hit => hit || fetch(req).then(res => { if (res.ok) e.waitUntil(c.put(req, res.clone()).catch(() => {})); return res; }))));
     return;
   }
   // HTML·JSON: 네트워크 우선, 오프라인일 때만 마지막 버전
   e.respondWith(fetch(req).then(res => {
-    if (res.ok) { const copy = res.clone(); caches.open(PAGES).then(c => c.put(url.pathname, copy)); }
+    if (res.ok) { const copy = res.clone(); e.waitUntil(caches.open(PAGES).then(c => c.put(url.pathname, copy)).catch(() => {})); }
     return res;
   }).catch(async () => {
     try { const cached=await (await caches.open(PAGES)).match(url.pathname); if(cached)return cached; } catch(error) {}
