@@ -10,12 +10,6 @@ on:
     - cron: '0 11 * * *'
 
   workflow_dispatch:
-    inputs:
-      test_publish:
-        description: '실제 Threads 게시 1건 테스트'
-        required: true
-        type: boolean
-        default: false
 
 permissions:
   contents: write
