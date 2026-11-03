@@ -1,0 +1,35 @@
+name: Verify push subscription assets without sending
+on:
+  push:
+    branches: [codex/push-readiness-20261103]
+    paths: [push-config.js, public-files.json, scripts/build_public_site.py, onesignal/OneSignalSDKWorker.js, .github/workflows/push-readiness-check.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/build_public_site.py
+      - name: Verify scoped worker and disabled bulk delivery
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          worker=Path('dist/onesignal/OneSignalSDKWorker.js')
+          assert worker.is_file()
+          assert "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js" in worker.read_text()
+          assert 'scope: "/careerpick/onesignal/"' in Path('dist/index.html').read_text()
+          assert 'window.CP_PUSH_BROADCAST_ENABLED = false;' in Path('dist/push-config.js').read_text()
+          print('Public worker and project scope verified; no subscriptions or sends performed')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: push-assets-build-report
+          path: build-report.json
+          retention-days: 7
