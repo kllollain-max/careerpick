@@ -29,6 +29,17 @@ _SAFE_CODES = {
 _SAFE_CODES.update("api_result_" + str(code) for code in (1, 2, 3, 5, 6, 7, 8, 10, 11))
 _SAFE_CODES.update("http_status_" + str(code) for code in range(400, 600))
 _ENVELOPE_FIELDS = {"resultCode", "resultMsg", "totalCount", "result", "pageNo", "numOfRows"}
+_GATEWAY_TOKENS = {
+    "APPLICATION_ERROR": "01", "HTTP_ERROR": "04", "SERVICETIMEOUT_ERROR": "05",
+    "INVALID_REQUEST_PARAMETER_ERROR": "10", "NO_OPENAPI_SERVICE_ERROR": "12",
+    "SERVICE_KEY_IS_NULL": "20", "PERMISSION_DENIED": "20",
+    "SERVICE_ACCESS_DENIED_ERROR": "20",
+    "LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR": "22",
+    "LIMITED_NUMBER_OF_SERVICE_REQUESTS_PER_SECOND_EXCEEDS_ERROR": "23",
+    "BLACKLIST_IP_ACCESS_ERROR": "29", "SERVICE_KEY_IS_NOT_REGISTERED_ERROR": "30",
+    "DEADLINE_HAS_EXPIRED_ERROR": "31",
+}
+_SAFE_CODES.update("gateway_" + token for token in _GATEWAY_TOKENS)
 
 
 class APIError(RuntimeError):
@@ -83,6 +94,7 @@ class Client:
             raise APIError("invalid_key") from None
         self.request_counts = {"list": 0, "detail": 0}
         self.success_counts = {"list": 0, "detail": 0}
+        self.last_http_error = None
         self._opener = urllib.request.build_opener(_NoRedirect())
 
     def _request(self, operation, params):
@@ -102,6 +114,25 @@ class Client:
         except urllib.error.HTTPError as error:
             if 300 <= error.code < 400:
                 raise APIError("redirect_rejected") from None
+            diagnostic = {"http_status": error.code, "gateway_token": None, "gateway_code": None}
+            token = None
+            try:
+                body = error.read(16 * 1024)
+                message = body.decode("utf-8", errors="replace")
+                # Only exact tokens listed in the portal's official error guide can escape.
+                token = next((t for t in _GATEWAY_TOKENS
+                              if re.search(r"(?<![A-Z_])" + re.escape(t) + r"(?![A-Z_])", message)), None)
+                diagnostic["body_bytes_read"] = len(body)
+                diagnostic["body_format"] = (
+                    "json" if message.lstrip().startswith(("{", "[")) else
+                    "markup" if message.lstrip().startswith("<") else "text")
+                if token:
+                    diagnostic.update(gateway_token=token, gateway_code=_GATEWAY_TOKENS[token])
+            except Exception:
+                diagnostic["body_unavailable"] = True
+            self.last_http_error = diagnostic
+            if token:
+                raise APIError("gateway_" + token) from None
             raise APIError("http_status_" + str(error.code)) from None
         except Exception:
             # Transport exceptions often contain the full credential-bearing URL.

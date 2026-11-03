@@ -108,6 +108,18 @@ class DataGoKrTest(unittest.TestCase):
         self.assert_code("redirect_rejected", lambda: client.list_page(1))
         self.assertEqual(opener.open.call_count, 1)
 
+    def test_http_gateway_diagnostics_allow_only_official_tokens(self):
+        secret = "DO_NOT_LOG_THIS_CREDENTIAL"
+        body = ("<OpenAPI_ServiceResponse><returnAuthMsg>SERVICE_KEY_IS_NOT_REGISTERED_ERROR"
+                "</returnAuthMsg><request>" + secret + "</request></OpenAPI_ServiceResponse>").encode()
+        failure = urllib.error.HTTPError(BASE_URL + "/list?serviceKey=" + secret, 403,
+                                         secret, {}, io.BytesIO(body))
+        client, _ = self.client([failure], key=secret)
+        self.assert_code("gateway_SERVICE_KEY_IS_NOT_REGISTERED_ERROR", lambda: client.list_page(1))
+        self.assertEqual(client.last_http_error["http_status"], 403)
+        self.assertEqual(client.last_http_error["gateway_code"], "30")
+        self.assertNotIn(secret, json.dumps(client.last_http_error))
+
     def test_malformed_envelopes_and_rows_fail_closed(self):
         samples = [
             ([], "invalid_envelope"),

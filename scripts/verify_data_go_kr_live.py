@@ -176,6 +176,8 @@ def verify(root=ROOT, output=None, *, key=None, client_factory=Client, now=None)
     finally:
         report["requests"] = dict(client.request_counts) if client else {"list": 0, "detail": 0}
         report["successful_responses"] = dict(client.success_counts) if client else {"list": 0, "detail": 0}
+        if client and getattr(client, "last_http_error", None):
+            report["http_error"] = client.last_http_error
         report["source_sha256"] = {n: hashlib.sha256(b).hexdigest() for n, b in originals.items()}
         report["source_preserved"] = len(originals) == len(NAMES) and all(
             (root / n).read_bytes() == content for n, content in originals.items()
