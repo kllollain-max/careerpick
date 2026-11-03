@@ -44,8 +44,8 @@ jobs:
           CHROME_PATH: /usr/bin/google-chrome
         run: |
           git fetch origin 89daa64f87957b6b4eb034bed0ceee258046b112
-          mkdir -p "$RUNNER_TEMP/cp-before" "$RUNNER_TEMP/cp-before-host"
-          git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/cp-before"
+          mkdir -p "$RUNNER_TEMP/cp-before-host"
+          git worktree add --detach "$RUNNER_TEMP/cp-before" FETCH_HEAD
           (cd "$RUNNER_TEMP/cp-before" && python scripts/build_public_site.py)
           ln -s "$RUNNER_TEMP/cp-before/dist" "$RUNNER_TEMP/cp-before-host/careerpick"
           python -m http.server 8001 --directory "$RUNNER_TEMP/cp-before-host" > "$RUNNER_TEMP/cp-before-http.log" 2>&1 &

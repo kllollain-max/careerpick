@@ -8,7 +8,7 @@ const rows=[
  {id:'a900001',org:'춘천지역공공의료인공지능연구개발지원기관',title:'2026년도 전산직 정규직 및 연구직 전문계약직 공개채용 — 응시자격과 제출서류를 반드시 확인하세요',region:'강원, 서울, 경기',emp:['정규직']},
  {id:'a900002',org:'서울시험기관',title:'간호직 채용 (모집인원·일정 미기재)',region:'서울',emp:['인턴'],n:null,due:null},
  {id:'a900003',org:'과거기관',title:'마감된 사무직 공고',region:'경기',emp:['정규직'],due:'2020-01-01T23:59:00+09:00'}
-].map(p=>({type:'j',alio:true,cat:'공공기관 공식 공고',url:'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx='+p.id.slice(1),pub:'2026-11-01T00:00:00+09:00',due:'2099-12-31T23:59:00+09:00',edu:['학력무관'],n:'2',...p}));
+].map(p=>({type:'j',alio:true,verificationStatus:'verified',cat:'공공기관 공식 공고',url:'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx='+p.id.slice(1),pub:'2026-11-01T00:00:00+09:00',due:'2099-12-31T23:59:00+09:00',edu:['학력무관'],n:'2',...p}));
 const feed={updated:new Date().toISOString(),posts:rows};
 const report={checked_at_kst:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),browser:'Chromium desktop, isolated contexts; mobile viewport simulation',actual_devices:false,push_delivery:false,public:[],candidate:[]};
 const sdk=`(()=>{const sub={optedIn:false,id:null,token:null,addEventListener(){},async optIn(){window.fakeOptIns=(window.fakeOptIns||0)+1;await new Promise(r=>setTimeout(r,120));Object.defineProperty(Notification,'permission',{configurable:true,get:()=> 'granted'});sub.optedIn=true;sub.id='synthetic-subscription';sub.token='synthetic-token';},async optOut(){window.fakeOptOuts=(window.fakeOptOuts||0)+1;sub.optedIn=false;sub.id=null;sub.token=null;}};const api={init:async()=>{},User:{PushSubscription:sub,addTags:async()=>{},getTags:async()=>({}),removeTags:async()=>{}}};window.OneSignal=api;for(const callback of window.OneSignalDeferred||[])callback(api);window.OneSignalDeferred={push:callback=>callback(api)};})();`;
@@ -69,6 +69,18 @@ async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].p
     await p.screenshot({path:`${OUT}/detail-${theme}.png`,fullPage:true});await p.goBack();
    }
    if(width===320&&zoom===2)await p.screenshot({path:`${OUT}/after-${label}.png`,fullPage:true});
+   // Reflow, focus and dialog controls remain reachable at large text / reduced viewport height.
+   if(width<=700){
+    await p.setViewportSize({width,height:480});await p.locator('#toggle').click();
+    const done=p.locator('#cpFilterDone');await done.scrollIntoViewIfNeeded();assert(await done.isVisible());
+    await done.focus();assert.equal(await p.evaluate(()=>document.activeElement.id),'cpFilterDone');await done.press('Enter');
+    await p.setViewportSize({width,height:900});
+   }
+   await p.locator('#list [data-open="a900001"]').first().click();await p.locator('#jobview').waitFor({state:'visible'});
+   assert.equal(await p.locator('.jv-title').innerText(),rows[0].title);
+   assert(await p.locator('#jobview').evaluate(e=>e.scrollWidth<=e.clientWidth+1));
+   const action=p.locator('#jvBody [data-save="a900001"]');await action.scrollIntoViewIfNeeded();assert(await action.isVisible());
+   await p.goBack();
    result.checks.push({label,status:'pass',contrast});
   }catch(e){result.checks.push({label,status:'fail',error:e.message});await p.screenshot({path:`${OUT}/failure-${label}.png`,fullPage:true});}
   await x.ctx.close();save();

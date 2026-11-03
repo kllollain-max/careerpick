@@ -1378,6 +1378,9 @@ function standaloneJobLink(p){
   }
   return `<a class="standalone-job-link" href="/jobs/${encodeURIComponent(id)}.html" aria-label="${esc(p.title || '채용공고')} 상세 채용정보">🔎 상세 채용정보</a>`;
 }
+function cpReceptionLabel(p, now){
+  return ({verified_open:"접수중",upcoming:"접수예정",expired:"마감",cancelled:"채용 취소",source_error:"상태 확인 실패"})[CPHome.receptionState(p, now)] || "일정 미확인 · 원문 확인";
+}
 function jobCard(p, now){
   const d = dday(p, now);
   const tags = [];
@@ -1402,7 +1405,7 @@ function jobCard(p, now){
         ${preferenceBadge(p)}
         ${spw && state.tab === "spec" ? `<div class="spwhy">${SPEC_V[spw[0]].icon} ${esc(spw[1])}${spr.why.filter(w => w[0] !== "ok").length > 1 ? ` 외 ${spr.why.filter(w => w[0] !== "ok").length - 1}건` : ""}</div>` : ""}
         ${CPHome.career(p).length ? `<div class="cp-card-career">${esc(CPHome.career(p).join(" · "))}</div>` : ""}
-        <div class="cp-card-status">${d?.cls === "closed" ? "마감" : d?.cls === "upcoming" ? "접수예정" : d && d.cls !== "verify" ? "접수중" : "일정 미확인"}</div>
+        <div class="cp-card-status">${cpReceptionLabel(p, now)}</div>
         ${p.start || p.startDate ? `<div class="cp-card-footer">접수 시작 ${esc(p.start || p.startDate)}</div>` : ""}
         ${p.due ? `<div class="due ${d.cls==="hot" ? "hot" : d.cls==="closed" ? "closed" : ""}">접수 마감 ${dueLong(p.due, p.dueHasTime)}</div>` : `<div class="due closed">${p.always ? "상시 모집 (채용 시 마감)" : "마감일은 원문에서 확인"}</div>`}
       </div>
@@ -1424,7 +1427,7 @@ function rowCard(p, now){
   if(regionLabel(p)) meta.push(regionLabel(p));
   meta.push(...(p.emp||[]));
   if(p.n) meta.push("모집 " + String(p.n).replace(/명$/, "") + "명");
-  meta.push(d?.cls === "closed" ? "마감" : d?.cls === "upcoming" ? "접수예정" : d && d.cls !== "verify" ? "접수중" : "일정 미확인");
+  meta.push(cpReceptionLabel(p, now));
   if(p.due) meta.push("마감 " + dueLong(p.due, p.dueHasTime));
   const href = esc(jobHref(p));
   const attr = jobAnchorAttrs(p);

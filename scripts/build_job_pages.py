@@ -547,11 +547,13 @@ a:focus-visible{{outline:3px solid #f59e0b;outline-offset:3px;border-radius:3px}
 .closed{{padding:12px;background:#fff1f2;color:#9f1239;border-radius:8px;font-weight:700}}
 dl{{display:grid;grid-template-columns:minmax(100px,145px) 1fr;gap:8px 12px}}
 dt,dd{{margin:0;padding:8px 0;border-bottom:1px solid #e5e7eb}}
+table{{display:block;max-width:100%;overflow-x:auto}}
+main{{overflow-wrap:anywhere}}
 section p{{white-space:pre-line;overflow-wrap:anywhere}}
 .detail-text{{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.85;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px}}
 section{{margin-top:24px}}
 section h2{{margin-bottom:10px;line-height:1.45}}
-@media(max-width:480px){{.detail-text{{padding:12px;font-size:0.96rem}}}}
+@media(max-width:480px){{.detail-text{{padding:12px;font-size:1rem}}}}
 .checks{{padding-left:22px}}
 .checks li{{margin:10px 0}}
 .related-jobs li{{margin:9px 0;overflow-wrap:anywhere}}
@@ -562,8 +564,8 @@ section h2{{margin-bottom:10px;line-height:1.45}}
 .job-toc{{margin:18px 0;padding:15px;background:#f1f5ff;border:1px solid #dbe4ff;border-radius:12px}}
 .job-toc strong{{display:block;margin-bottom:9px}}
 .job-toc div{{display:flex;flex-wrap:wrap;gap:8px}}
-.job-toc a{{background:#fff;border:1px solid #c7d2fe;border-radius:999px;padding:7px 11px;text-decoration:none;font-size:13px;font-weight:700}}
-.source-meta{{font-size:12px;color:#475569;border-left:3px solid #1f3fbf;padding:8px 12px;background:#f8fafc}}
+.job-toc a{{background:#fff;border:1px solid #c7d2fe;border-radius:999px;padding:7px 11px;text-decoration:none;font-size:.875rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center}}
+.source-meta{{font-size:.875rem;color:#475569;border-left:3px solid #1f3fbf;padding:8px 12px;background:#f8fafc}}
 html{{scroll-behavior:smooth}}
 section[id],h2[id]{{scroll-margin-top:20px}}
 @media(max-width:480px){{dl{{grid-template-columns:1fr;gap:0}}dt{{border:0;padding-bottom:0}}dd{{padding-top:0}}}}
