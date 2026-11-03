@@ -1,0 +1,21 @@
+const assert=require('node:assert/strict'),fs=require('node:fs');const{chromium}=require('playwright');
+const BASE='https://kllollain-max.github.io/careerpick/';
+(async()=>{const feed=await (await fetch(BASE+'alio.json?check='+Date.now())).json();assert(feed.posts.length>=622);assert.equal(new Set(feed.posts.map(p=>p.id)).size,feed.posts.length);
+const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});const checks=[];fs.mkdirSync('live-release-output',{recursive:true});
+try{for(const width of [390,1440]){const context=await browser.newContext({viewport:{width,height:900},locale:'ko-KR',timezoneId:'Asia/Seoul'});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto(BASE,{waitUntil:'networkidle'});await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));
+await page.getByRole('searchbox',{name:'검색',exact:true}).fill('우체국시설관리단');await page.locator('a[href="/careerpick/jobs/a306653.html"]').first().waitFor();
+await page.getByRole('combobox',{name:'고용형태',exact:true}).selectOption('무기계약직');await page.locator('[data-save="a306653"]').click();await page.reload({waitUntil:'networkidle'});
+await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));await page.getByRole('button',{name:'저장 공고',exact:true}).click();await page.locator('[data-save="a306653"][aria-pressed="true"]').waitFor();
+assert((await page.locator('#list').innerText()).includes('우체국시설관리단'));await page.locator('[data-save="a306653"]').click();
+await page.getByRole('button',{name:'내 지원',exact:true}).click();assert((await page.locator('#summary').innerText()).includes('지원'));
+assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
+await page.goto(BASE+'jobs/a306653.html',{waitUntil:'networkidle'});await page.reload({waitUntil:'networkidle'});assert((await page.locator('h1').innerText()).includes('우체국시설관리단'));
+assert(await page.getByRole('link',{name:'ALIO 원본에서 공고 확인 ↗'}).getAttribute('href'));
+assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
+assert(!(await page.locator('img').evaluateAll(xs=>xs.some(x=>!x.complete||x.naturalWidth===0))));
+await page.screenshot({path:'live-release-output/detail-'+width+'.png',fullPage:true});
+await page.goto(BASE+'civil-service-exams.html',{waitUntil:'networkidle'});await page.locator('#results article').first().waitFor();const stages=await page.locator('#results article').count();assert.equal(stages,28);
+const text=await page.locator('#results article').first().innerText();for(const word of ['원서접수','시험일','합격자 발표'])assert(text.includes(word));
+assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));assert.deepEqual(errors,[]);checks.push({width,search:true,filter:true,savedAfterReload:true,applicationView:true,directDetailReload:true,examStages:stages,overflow:false,brokenImages:false,pageErrors:0});await context.close();}
+fs.writeFileSync('live-release-output/report.json',JSON.stringify({publicAlioRows:feed.posts.length,snapshotAt:feed.updated,checks},null,2));console.log(JSON.stringify({rows:feed.posts.length,checks}));}finally{await browser.close();}})().catch(e=>{console.error(e.message);process.exit(1)});
