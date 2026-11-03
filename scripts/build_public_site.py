@@ -45,6 +45,8 @@ def public_files() -> list[Path]:
     for directory, extensions in manifest["directories"].items():
         names.extend(str(p.relative_to(ROOT)) for p in (ROOT / directory).iterdir()
                      if p.is_file() and p.suffix in extensions)
+    if (ROOT / "exam-status.json").is_file():
+        names.append("exam-status.json")
     result = []
     for name in sorted(set(names)):
         posix = PurePosixPath(name)

@@ -1,4 +1,4 @@
-"""Read-only check of the pinned 2026 MPM examination calendar API.
+"""Read-only collection and validation of the pinned 2026 MPM exam calendar.
 
 Official contract: https://infuser.odcloud.kr/oas/docs?namespace=3033611/v1
 No repository data is read, written, merged, or published by this module.
@@ -98,6 +98,80 @@ def _date_tokens(value):
     return values, inferred
 
 
+def _normalize_rows(records):
+    normalized, null_place_cells = [], 0
+    for source_row in records:
+        if not isinstance(source_row, dict) or set(source_row) != set(FIELDS):
+            raise APIError("invalid_columns")
+        row = dict(source_row)
+        # Only this field was observed as JSON null in the verified response.
+        # Preserve date text and never infer a missing announcement date.
+        if row["시험장소공고일"] is None:
+            row["시험장소공고일"] = ""
+            null_place_cells += 1
+        if any(not isinstance(row[name], str) or len(row[name]) > 2048 for name in FIELDS):
+            raise APIError("invalid_field_type")
+        if not row["시험명"].strip() or not row["시험단계구분"].strip():
+            raise APIError("missing_exam_identity")
+        normalized.append(row)
+    return normalized, null_place_cells
+
+
+def validate_records(records, *, expected_count=None):
+    """Validate saved or collected rows without a key, network, or filesystem.
+
+    Return independent normalized ``records`` and aggregate ``meta``. Only a
+    null place-announcement cell is changed to an empty string; original date
+    text is retained. Pass a separately established ``expected_count`` when
+    validating a saved snapshot: rows alone cannot prove its completeness.
+    This validates content, not authentication, retrieval time, or freshness.
+    Invalid content raises APIError before any result is returned.
+    """
+    if not isinstance(records, list):
+        raise APIError("invalid_records")
+    if not records:
+        raise APIError("empty_dataset")
+    if len(records) > MAX_PAGES * PER_PAGE:
+        raise APIError("dataset_over_limit")
+    if expected_count is not None:
+        _int(expected_count)
+        if expected_count > MAX_PAGES * PER_PAGE:
+            raise APIError("dataset_over_limit")
+        if len(records) < expected_count:
+            raise APIError("incomplete_dataset")
+        if len(records) > expected_count:
+            raise APIError("excess_rows")
+    rows, null_place_cells = _normalize_rows(records)
+    fingerprints = {json.dumps(row, ensure_ascii=False, sort_keys=True) for row in rows}
+    if len(fingerprints) != len(rows):
+        raise APIError("duplicate_rows")
+    date_cells, unscheduled_cells, inferred_cells = 0, 0, 0
+    for row in rows:
+        for name in DATE_FIELDS:
+            dates, inferred = _date_tokens(row[name])
+            if dates:
+                date_cells += 1
+                inferred_cells += bool(inferred)
+            else:
+                unscheduled_cells += 1
+    if date_cells == 0:
+        raise APIError("no_verified_dates")
+    return {
+        "records": rows,
+        "meta": {
+            "dataset_year": DATASET_YEAR,
+            "columns_verified": list(FIELDS),
+            "received_rows": len(rows),
+            "distinct_exam_names": len({row["시험명"].strip() for row in rows}),
+            "duplicate_rows": 0,
+            "date_cells_verified": date_cells,
+            "unscheduled_or_blank_date_cells": unscheduled_cells,
+            "null_place_announcement_cells": null_place_cells,
+            "date_cells_with_year_from_dataset_title": inferred_cells,
+        },
+    }
+
+
 class Client:
     def __init__(self, key):
         if not isinstance(key, str) or not key.strip():
@@ -177,27 +251,19 @@ class Client:
                 for name in FIELDS
             }
         }
-        normalized_rows, null_place_cells = [], 0
-        for row in rows:
-            if not isinstance(row, dict) or set(row) != set(FIELDS):
-                raise APIError("invalid_columns")
-            # The official listing allows blank place-announcement dates for
-            # document-screening stages. A live response confirmed JSON null
-            # only in this field; do not infer a date or loosen other fields.
-            if row["시험장소공고일"] is None:
-                row = {**row, "시험장소공고일": ""}
-                null_place_cells += 1
-            if any(not isinstance(row[name], str) or len(row[name]) > 2048 for name in FIELDS):
-                raise APIError("invalid_field_type")
-            if not row["시험명"].strip() or not row["시험단계구분"].strip():
-                raise APIError("missing_exam_identity")
-            normalized_rows.append(row)
+        normalized_rows, null_place_cells = _normalize_rows(rows)
         payload["data"] = normalized_rows
         self._null_place_announcement_cells += null_place_cells
         self.success_counts["list"] += 1
         return payload
 
-    def verify(self):
+    def collect(self):
+        """Return all validated rows and the existing verification summary.
+
+        Collection performs one bounded pagination pass. Call this directly
+        when rows are needed, rather than calling verify() and fetching again.
+        No result is returned for an incomplete or invalid collection.
+        """
         self._null_place_announcement_cells = 0
         rows, total = [], None
         for page in range(1, MAX_PAGES + 1):
@@ -219,27 +285,15 @@ class Client:
                 raise APIError("incomplete_dataset")
         if len(rows) != total:
             raise APIError("incomplete_dataset")
-        fingerprints = {json.dumps(row, ensure_ascii=False, sort_keys=True) for row in rows}
-        if len(fingerprints) != len(rows):
-            raise APIError("duplicate_rows")
-        date_cells, unscheduled_cells, inferred_cells = 0, 0, 0
-        for row in rows:
-            for name in DATE_FIELDS:
-                dates, inferred = _date_tokens(row[name])
-                if dates:
-                    date_cells += 1
-                    inferred_cells += bool(inferred)
-                else:
-                    unscheduled_cells += 1
-        if date_cells == 0:
-            raise APIError("no_verified_dates")
+        validated = validate_records(rows, expected_count=total)
+        rows, meta = validated["records"], validated["meta"]
         samples, names = [], set()
         for row in rows:
             name = row["시험명"].strip()
             if name not in names and len(samples) < 3:
                 samples.append(dict(row))
             names.add(name)
-        return {
+        verification = {
             "service": SERVICE_ID,
             "endpoint": ENDPOINT,
             "source_url": SOURCE_URL,
@@ -249,17 +303,22 @@ class Client:
             "dataset_year_source": "pinned_official_swagger_title_and_validated_dates",
             "list_verified": True,
             "authentication_verified": True,
-            "columns_verified": list(FIELDS),
-            "received_rows": len(rows),
+            "columns_verified": meta["columns_verified"],
+            "received_rows": meta["received_rows"],
             "total_rows": total,
-            "distinct_exam_names": len(names),
+            "distinct_exam_names": meta["distinct_exam_names"],
             "row_scope": "exam_stage_rows_not_independent_recruitment_notices",
-            "date_cells_verified": date_cells,
-            "unscheduled_or_blank_date_cells": unscheduled_cells,
+            "date_cells_verified": meta["date_cells_verified"],
+            "unscheduled_or_blank_date_cells": meta["unscheduled_or_blank_date_cells"],
             "null_place_announcement_cells": self._null_place_announcement_cells,
-            "date_cells_with_year_from_dataset_title": inferred_cells,
+            "date_cells_with_year_from_dataset_title": meta["date_cells_with_year_from_dataset_title"],
             "date_verification_scope": "calendar_validity_and_2026_year_not_independent_official_change_notice_review",
             "update_frequency": "annual_file_dataset",
             "next_year_verified": False,
             "samples": samples,
         }
+        return {"records": rows, "verification": verification}
+
+    def verify(self):
+        """Preserve the summary-only interface using the same collection pass."""
+        return self.collect()["verification"]

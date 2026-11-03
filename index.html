@@ -796,9 +796,9 @@ function cpRenderFeedStatus(){
   updateDataHealth();
   const el = $("cpFeedStatus");
   if(!el) return;
-  const names = {posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보"};
+  const names = {posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보",work24:"고용24"};
   const parts = Object.entries(DATA_HEALTH).map(([key,value]) =>
-    `${names[key]} ${value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
+    `${names[key] || key} ${value === "awaiting_approval" ? "수집 비활성" : value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
   const stamp = UPDATED ? new Date(UPDATED) : null;
   const valid = stamp && Number.isFinite(stamp.getTime());
   const hours = valid ? (Date.now()-stamp.getTime())/3600000 : Infinity;
@@ -1827,7 +1827,7 @@ function renderTrack(now){
     if(a.memo) meta.push(a.memo);
     parts.push(`<li class="trk-item"><div class="grow">
       <div class="o">${esc(a.org || "")} <span class="stpill st-${a.st}">${ST[a.st].label}</span></div>
-      <a class="t" href="${esc(jobHref(POSTS.find(p => p.id === id) || {type:"j",id,url:a.url}))}" ${POSTS.some(p => p.id === id && isInternalJob(p)) ? `data-open="${esc(id)}"` : 'target="_blank" rel="noopener"'} style="color:inherit;text-decoration:none">${esc(cleanTitle(a.title))}</a>
+      <a class="t" href="${esc(jobHref(POSTS.find(p => p.id === id) || {type:"j",id,url:a.url}))}" ${POSTS.some(p => p.id === id && isInternalJob(p)) ? `data-open="${esc(id)}"` : 'target="_blank" rel="noopener"'} style="color:inherit;text-decoration:none">${esc(cleanTitle(a.title || POSTS.find(p=>p.id===id || p.sourceIds?.includes(id))?.title || "공고 정보 미확인 (기록 보존)"))}</a>
       ${meta.length ? `<div class="m">${esc(meta.join(" · "))}</div>` : ""}
       ${a.ck && a.ck.length ? (() => { const n = ckDone(a.ck), nx = a.ck.indexOf(ckNext(a.ck));
         return `<div class="ckbar"><i style="width:${Math.round(n * 100 / a.ck.length)}%"></i></div>

@@ -33,6 +33,12 @@ jobs:
         env:
           ALIO_KEY: ${{ secrets.ALIO_KEY }}
         run: python scripts/run_operations.py
+      - name: Validate independent examination source
+        id: exams
+        continue-on-error: true
+        env:
+          MPM_EXAM_KEY: ${{ secrets.MPM_EXAM_KEY }}
+        run: python scripts/run_exam_operations.py
       - name: Select validated data
         id: candidate
         run: |
@@ -45,7 +51,15 @@ jobs:
           # End-of-day changes require a rebuild even when API content is unchanged.
           status=Path('operations-status.json')
           previous=json.loads(status.read_text()) if status.exists() else {}
-          changed=changed or previous.get('counts',{}).get('archived')!=report['counts']['archived']
+          candidate_status=json.loads(Path('operations-output/candidate/operations-status.json').read_text())
+          changed=changed or previous.get('counts',{}).get('archived')!=report['counts']['archived'] or previous.get('unconfirmed_ids')!=candidate_status['unconfirmed_ids']
+          exam_report=Path('exam-operation-output/report.json')
+          exam=json.loads(exam_report.read_text()) if exam_report.exists() else {}
+          exam_ok=exam.get('status') in ('changed','unchanged')
+          changed=changed or (exam_ok and (exam.get('changed') or not Path('exam-status.json').exists()))
+          if exam_ok and changed:
+              shutil.copyfile('exam-operation-output/data/civil-service/2026.json','data/civil-service/2026.json')
+              shutil.copyfile('exam-operation-output/exam-status.json','exam-status.json')
           if changed:
               for name in ('alio.json','alio-detail.json','operations-status.json'):
                   shutil.copyfile(Path('operations-output/candidate')/name,name)
@@ -59,7 +73,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add alio.json alio-detail.json operations-status.json
+          git add alio.json alio-detail.json operations-status.json data/civil-service/2026.json
+          if test -f exam-status.json; then git add exam-status.json; fi
           git commit -m 'Update validated ALIO snapshot'
           git push origin HEAD:main
       - uses: actions/configure-pages@v5
@@ -98,4 +113,5 @@ jobs:
             operations-output/report.json
             operations-output/previous-head.txt
             build-report.json
+            exam-operation-output/report.json
           retention-days: 30

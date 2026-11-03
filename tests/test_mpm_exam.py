@@ -166,6 +166,114 @@ class MPMExamTests(unittest.TestCase):
         self.assert_code("response_too_large", self.client([b"x" * (mpm_exam.MAX_RESPONSE_BYTES + 1)]).verify)
         self.assert_code("request_failed", self.client([RuntimeError(KEY)]).verify)
 
+    def test_collect_returns_every_row_in_the_same_pass_as_verification(self):
+        rows = [row(title="시험 " + str(i), 시험장소공고일=None if i == 0 else "2026-03-27") for i in range(5)]
+        client = self.client([envelope(rows)])
+        collected = client.collect()
+        summary_client = self.client([envelope(rows)])
+        self.assertEqual(collected["verification"], summary_client.verify())
+        self.assertEqual(len(collected["records"]), 5)
+        self.assertEqual(len(collected["verification"]["samples"]), 3)
+        self.assertEqual(collected["records"][0]["시험장소공고일"], "")
+        self.assertEqual(collected["verification"]["null_place_announcement_cells"], 1)
+        for used_client in (client, summary_client):
+            self.assertEqual(used_client.request_counts, {"list": 1})
+            self.assertEqual(len(used_client._opener.requests), 1)
+        self.assertNotIn(KEY, json.dumps(collected, ensure_ascii=False))
+        self.assertNotIn("records", collected["verification"])
+
+    def test_collect_validates_both_pages_at_the_existing_hundred_row_limit(self):
+        rows = [row(title="시험 " + str(i)) for i in range(100)]
+        client = self.client([
+            envelope(rows[:50], totalCount=100, matchCount=100),
+            envelope(rows[50:], page=2, totalCount=100, matchCount=100),
+        ])
+        collected = client.collect()
+        self.assertEqual(collected["records"], rows)
+        self.assertEqual(collected["verification"]["received_rows"], 100)
+        self.assertEqual(collected["verification"]["date_cells_verified"], 400)
+        self.assertEqual(client.request_counts, {"list": 2})
+        requested_pages = [urllib.parse.parse_qs(urllib.parse.urlsplit(r.full_url).query)["page"] for r in client._opener.requests]
+        self.assertEqual(requested_pages, [["1"], ["2"]])
+
+    def test_collect_rejects_partial_duplicate_or_invalid_data_before_return(self):
+        cases = [
+            ("incomplete_dataset", envelope([row()], totalCount=2, matchCount=2)),
+            ("duplicate_rows", envelope([row(), row()])),
+            ("unexpected_dataset_year", envelope([row(시험일="2027-04-04")])),
+            ("credential_echo", envelope([row(시험명=urllib.parse.quote(KEY, safe=""))])),
+        ]
+        for code, payload in cases:
+            with self.subTest(code=code):
+                self.assert_code(code, self.client([payload]).collect)
+
+    def test_collect_rejects_a_duplicate_across_page_boundary(self):
+        rows = [row(title="시험 " + str(i)) for i in range(50)]
+        client = self.client([
+            envelope(rows, totalCount=51, matchCount=51),
+            envelope([rows[0]], page=2, totalCount=51, matchCount=51),
+        ])
+        self.assert_code("duplicate_rows", client.collect)
+        self.assertEqual(client.request_counts, {"list": 2})
+
+    def test_offline_validation_preserves_date_text_and_input_without_network(self):
+        records = [
+            row(시험장소공고일=None, 시험일="2026. 4. 4. (토)"),
+            row(stage="면접시험", 시험장소공고일="", 시험일="4.5."),
+            row(title="국가공무원 7급"),
+        ]
+        before = json.dumps(records, ensure_ascii=False)
+        with patch("urllib.request.build_opener", side_effect=AssertionError("offline validation attempted network setup")):
+            checked = mpm_exam.validate_records(records, expected_count=3)
+        self.assertEqual(json.dumps(records, ensure_ascii=False), before)
+        self.assertEqual(checked["records"][0]["시험일"], "2026. 4. 4. (토)")
+        self.assertEqual(checked["records"][1]["시험일"], "4.5.")
+        self.assertEqual(checked["records"][0]["시험장소공고일"], "")
+        meta = checked["meta"]
+        self.assertEqual(meta["received_rows"], 3)
+        self.assertEqual(meta["distinct_exam_names"], 2)
+        self.assertEqual(meta["date_cells_verified"], 10)
+        self.assertEqual(meta["null_place_announcement_cells"], 1)
+        self.assertEqual(meta["unscheduled_or_blank_date_cells"], 2)
+        self.assertEqual(meta["date_cells_with_year_from_dataset_title"], 1)
+        self.assertEqual(meta["duplicate_rows"], 0)
+        self.assertNotIn("authentication_verified", meta)
+        self.assertNotIn("retrieved_at", meta)
+        checked["records"][2]["시험명"] = "changed result"
+        self.assertEqual(records[2]["시험명"], "국가공무원 7급")
+
+    def test_offline_validation_enforces_count_and_size_bounds(self):
+        cases = [
+            ("invalid_records", {}, None),
+            ("empty_dataset", [], None),
+            ("dataset_over_limit", [row()] * 101, None),
+            ("incomplete_dataset", [row()], 2),
+            ("excess_rows", [row(), row(stage="면접시험")], 1),
+            ("invalid_counts", [row()], True),
+            ("dataset_over_limit", [row()], 101),
+        ]
+        for code, records, count in cases:
+            with self.subTest(code=code):
+                self.assert_code(code, lambda: mpm_exam.validate_records(records, expected_count=count))
+
+    def test_offline_validation_rejects_schema_dates_and_normalized_duplicates(self):
+        missing = row()
+        del missing["합격자발표일"]
+        cases = [
+            ("invalid_columns", [missing]),
+            ("invalid_field_type", [row(시험일=None)]),
+            ("missing_exam_identity", [row(title=" ")]),
+            ("duplicate_rows", [row(시험장소공고일=None), row(시험장소공고일="")]),
+            ("unexpected_dataset_year", [row(시험일="2027-04-04")]),
+            ("invalid_calendar_date", [row(시험일="2026-02-30")]),
+            ("invalid_date_range", [row(시험일="2026-06-02~2026-05-28")]),
+            ("unverified_date_format", [row(시험일="2026-04-04~99")]),
+            ("no_verified_dates", [row(**{field: "미정" for field in mpm_exam.DATE_FIELDS})]),
+        ]
+        for code, records in cases:
+            with self.subTest(code=code):
+                self.assert_code(code, lambda: mpm_exam.validate_records(records))
+
 
 if __name__ == "__main__":
     unittest.main()
