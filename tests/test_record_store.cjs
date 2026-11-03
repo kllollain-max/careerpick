@@ -72,3 +72,8 @@ test('credential names inside serialized intended recovery values are excluded f
  const s=storage({'careerpick-before-import':JSON.stringify({expected_after:{apps:'{"a1":{"st":"plan","CP_LEDGER_TOKEN":"held-token","CP_ONESIGNAL_REST_API_KEY":"held-key"}}'}})});
  const result=store.exportRecords(s,['careerpick-before-import']),text=JSON.stringify(result);assert(!text.includes('held-token'));assert(!text.includes('held-key'));assert(result.excluded_secret_fields>0);
 });
+
+test('malformed import archive is a partial backup rather than a false complete export',()=>{
+ const s=storage({'careerpick-import-archive':'{"broken":true}',saved:'["a1"]'}),result=store.exportRecords(s,['saved','careerpick-import-archive']);
+ assert(result.invalid_keys.includes('careerpick-import-archive'));assert(!('careerpick-import-archive' in result.data));assert.equal(result.raw_records['careerpick-import-archive'],'{"broken":true}');
+});

@@ -55,7 +55,7 @@
     if(next===null)delete data[id];else data[id]=next;return data;
   }
   function exportRecords(storage,keys){
-    const result={data:{},raw_records:{},recovery:{},invalid_keys:[],unavailable_keys:[],excluded_secret_fields:0,redacted_raw_keys:[]},validators={saved,apps,prefs,spec};
+    const result={data:{},raw_records:{},recovery:{},invalid_keys:[],unavailable_keys:[],excluded_secret_fields:0,redacted_raw_keys:[]},validators={saved,apps,prefs,spec,'careerpick-import-archive':x=>Array.isArray(x)&&x.every(object)};
     const recoveryKeys=['careerpick-record-checkpoints','careerpick-before-import'];
     const secret=k=>/(?:apikeys?|tokens?|password|authorization|privatekey|clientsecret|credentials?|secret)$/.test(String(k).replace(/[^a-z0-9]/gi,'').toLowerCase())||/^(?:alio|gojobs|mpmexam)key$/i.test(String(k).replace(/[^a-z0-9]/gi,''));
     function scrub(value,depth=0){
