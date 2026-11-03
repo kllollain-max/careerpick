@@ -1310,7 +1310,6 @@ function cpRenderDeadlineTools(){
 }
 function renderFilters(){
   cpRenderHomeFilters();
-  if(cpPrefDraft){DRAFT=JSON.parse(JSON.stringify(cpPrefDraft.draft));PBASE=cpPrefDraft.base;}cpPrefEditing=true;
   const cats = [...new Set(POSTS.filter(inTab).map(p => p.cat).filter(Boolean))];
   if(state.cat && !cats.includes(state.cat)) state.cat = null;
   chipRow($("cats"), [["","전체"], ...cats.map(c => [c,c])], state.cat || "", "cat");
@@ -1548,7 +1547,7 @@ function prefCard(){
   if(off) return "";
   return `<li class="prefcard"><span class="grow"><b>내 조건</b>을 저장하면 맞는 공고만 맨 위에 모아 보여드려요. (고졸·인턴·지역 등)</span><button class="go" id="openPrefs">설정</button><button class="x" id="prefCardX" aria-label="닫기">×</button></li>`;
 }
-let DRAFT = null, PBASE=null,cpPrefEditing=false,cpPrefDraft=null;
+let DRAFT = null, PBASE=null,cpPrefEditing=false,cpPrefDraft=null,cpPrefInitial=null;
 function cpCapturePrefs(){if(!cpPrefEditing||!$('prefKw'))return;DRAFT.kw=$('prefKw').value;DRAFT.order=$('prefOrder')?.value||'default';cpPrefDraft={draft:JSON.parse(JSON.stringify(DRAFT)),base:PBASE};}
 function openPrefs(){
   cpCaptureTrackDraft();cpTrackEditing=false;
@@ -1556,6 +1555,7 @@ function openPrefs(){
   PBASE=JSON.stringify(PREFS);
   DRAFT = JSON.parse(JSON.stringify(PREFS));
   if(cpPrefDraft){DRAFT=JSON.parse(JSON.stringify(cpPrefDraft.draft));PBASE=cpPrefDraft.base;}cpPrefEditing=true;
+  cpPrefInitial=JSON.stringify({...DRAFT,order:DRAFT.order||'default'});
   const cats = [...new Set(POSTS.filter(p => p.type === "j").map(p => p.cat))];
   const grp = (key, label, items) => `<div class="grp"><span>${label}</span><div class="chips">${items.map(v =>
     `<button class="chip" data-pref="${key}" data-val="${esc(v)}" aria-pressed="${DRAFT[key].includes(v)}">${esc(v)}</button>`).join("")}</div></div>`;
@@ -1947,7 +1947,7 @@ async function ckToggle(id,i){
   a.ck[i].d=a.ck[i].d?0:1;a.upd=Date.now();
   if(a.ck[i].k==='submit'&&a.ck[i].d&&['plan','prepare'].includes(a.st)){
     if(!confirm('지원서를 실제로 제출하셨나요? 확인하면 지원 완료로 변경합니다.'))return;
-    a.st='applied';
+    Object.assign(a,CPManage.transition(a,'applied',a.upd));
   }
   if(await cpStoreApp(id,a,expected))cpRefreshRecords();
 }
@@ -1958,11 +1958,11 @@ function ckBoxHTML(p){
   const n = ckDone(a.ck), pct = Math.round(n * 100 / a.ck.length);
   return `<div class="ckbox"><h3>✅ 준비 체크리스트 <span class="ckpct">${n}/${a.ck.length}</span></h3><div class="ckbar"><i style="width:${pct}%"></i></div>${ckListHTML(a.ck, `data-ckid="${esc(cpApplicationId(p))}" data-ck`, false)}</div>`;
 }
-let TDRAFT = null, TID = null, TBASE=null, CP_TRACK_BUSY=false,cpTrackEditing=false;
+let TDRAFT = null, TID = null, TBASE=null, CP_TRACK_BUSY=false,cpTrackEditing=false,cpTrackInitial=null;
 const cpTrackDrafts={};
 function cpCaptureTrackDraft(){if(!cpTrackEditing||!TID||!$('tMemo'))return;for(const [key,id]of [['memo','tMemo'],['submit','tSubmit'],['exam','tExam'],['itv','tItv']])TDRAFT[key]=$(id)?.value||'';cpTrackDrafts[TID]={draft:JSON.parse(JSON.stringify(TDRAFT)),base:TBASE};}
 document.addEventListener('input',e=>{if(e.target.closest('#sheetBody'))cpCaptureTrackDraft();});
-window.addEventListener('beforeunload',e=>{if(cpTrackEditing||cpPrefEditing){cpCaptureTrackDraft();cpCapturePrefs();e.preventDefault();e.returnValue='';}});
+window.addEventListener('beforeunload',e=>{cpCaptureTrackDraft();cpCapturePrefs();if((cpTrackEditing&&JSON.stringify(TDRAFT)!==cpTrackInitial)||(cpPrefEditing&&JSON.stringify({...DRAFT,order:DRAFT.order||'default'})!==cpPrefInitial)){e.preventDefault();e.returnValue='';}});
 
 async function openTrack(id){
   cpCaptureTrackDraft();cpTrackEditing=false;
@@ -1986,7 +1986,7 @@ async function openTrack(id){
       <div class="ckadd"><input type="text" id="tCkNew" maxlength="40" placeholder="항목 추가 (예: 증명사진 준비)"><button id="tCkAdd">추가</button></div></div>
     <div class="grp"><span>메모</span><textarea id="tMemo" aria-label="지원 메모" placeholder="예: 자소서 문항 다시 보기">${esc(TDRAFT.memo)}</textarea></div>
     <div class="row">${APPS[id] ? '<button id="tDel" class="danger">기록 삭제</button>' : '<button onclick="closeSheet()">취소</button>'}<button class="primary" id="tSave">저장</button></div>`, "📋 지원 기록 · 미저장 편집은 이 화면 세션에서 복원");
-  cpTrackEditing=true;
+  cpTrackInitial=JSON.stringify(TDRAFT);cpTrackEditing=true;
   $("tCkNew").addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); $("tCkAdd").click(); } });
 }
 async function saveTrack(){
