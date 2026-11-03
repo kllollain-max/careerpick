@@ -24,7 +24,14 @@ jobs:
           worker=Path('dist/onesignal/OneSignalSDKWorker.js')
           assert worker.is_file()
           assert "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js" in worker.read_text()
-          assert 'scope: "/careerpick/onesignal/"' in Path('dist/index.html').read_text()
+          import re
+          from urllib.parse import urljoin, urlparse
+          page=Path('dist/index.html').read_text()
+          sdk_path=re.search(r'serviceWorkerPath: "([^"]+)"',page)[1]
+          resolved=urlparse(urljoin('https://kllollain-max.github.io/',sdk_path)).path
+          assert resolved.startswith('/careerpick/')
+          assert Path('dist',resolved.removeprefix('/careerpick/')).is_file()
+          assert 'scope: "/careerpick/onesignal/"' in page
           assert 'window.CP_PUSH_BROADCAST_ENABLED = false;' in Path('dist/push-config.js').read_text()
           print('Public worker and project scope verified; no subscriptions or sends performed')
           PY
