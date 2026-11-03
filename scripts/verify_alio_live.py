@@ -3,6 +3,7 @@
 import hashlib
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -59,7 +60,7 @@ def main():
         safe.update("ALIO API failure code=" + str(c) for c in (1,2,3,5,6,7,8,10,11))
         safe.update("ALIO HTTP status=" + str(c) for c in range(400,600))
         safe.update("ALIO transport/JSON failure: " + c for c in ("URLError","TimeoutError","JSONDecodeError"))
-        if str(error) in safe:
+        if str(error) in safe or re.fullmatch(r"ALIO (API failure code=(?:-?\d{1,4}|unknown)|HTTP status=\d{3}|transport/JSON failure: [A-Za-z]+|list shape mismatch|totalCount missing/invalid|detail identity mismatch)", str(error)):
             report["reason"] = str(error)
     finally:
         report["source_preserved"] = all((ROOT / n).read_bytes()==b for n,b in originals.items())

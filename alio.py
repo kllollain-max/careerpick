@@ -74,7 +74,7 @@ def request_api(key, base, params):
         raise RuntimeError("ALIO transport/JSON failure: " + type(error).__name__) from None
     if not isinstance(payload, dict) or str(payload.get("resultCode")) != "0":
         code = str(payload.get("resultCode")) if isinstance(payload, dict) else ""
-        safe_code = code if code in {"1", "2", "3", "5", "6", "7", "8", "10", "11"} else "unknown"
+        safe_code = code if re.fullmatch(r"-?\d{1,4}", code) else "unknown"
         raise RuntimeError("ALIO API failure code=" + safe_code)
     return payload
 
