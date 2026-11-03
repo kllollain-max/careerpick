@@ -112,6 +112,20 @@ class MPMExamTests(unittest.TestCase):
         self.assert_code("credential_echo", client.verify)
         self.assertIsNone(client.last_response_diagnostic)
 
+    def test_observed_null_place_announcement_is_blank_and_counted_without_date_inference(self):
+        client = self.client([envelope([row(시험장소공고일=None)])])
+        result = client.verify()
+        self.assertEqual(result["samples"][0]["시험장소공고일"], "")
+        self.assertEqual(result["null_place_announcement_cells"], 1)
+        self.assertEqual(result["unscheduled_or_blank_date_cells"], 1)
+        self.assertEqual(result["date_cells_verified"], 3)
+        self.assertEqual(client.last_response_diagnostic["field_types"]["시험장소공고일"], ["NoneType"])
+
+    def test_null_in_other_fields_remains_invalid(self):
+        for field in set(mpm_exam.FIELDS) - {"시험장소공고일"}:
+            with self.subTest(field=field):
+                self.assert_code("invalid_field_type", self.client([envelope([row(**{field: None})])]).verify)
+
     def test_counts_must_match_real_rows_and_requested_page(self):
         self.assert_code("invalid_counts", self.client([envelope([row()], currentCount=2)]).verify)
         self.assert_code("invalid_counts", self.client([envelope([row()], totalCount=True)]).verify)

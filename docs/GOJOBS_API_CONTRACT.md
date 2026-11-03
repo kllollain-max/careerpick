@@ -52,4 +52,10 @@ The focused tests cover valid list/detail contracts, distribution across both re
 
 The official specification names `type01` as the institution code (`g01`–`g04`) and `type02` as recruitment type (`e01` etc.). The first live check reached valid XML but failed `filter_mismatch`. That alone does not distinguish a parameter issue from a reversed-field response.
 
-A follow-up failure now exposes only `last_response_diagnostic.observed_filters`: the requested public enum codes and the two observed enum codes (or `unknown`). Arbitrary response values, raw payloads and credentials are excluded. Validation remains unchanged until the observed codes establish the exact discrepancy.
+A follow-up failure now exposes only `last_response_diagnostic.observed_filters`: the requested public enum codes and the two observed enum codes (or `unknown`). Arbitrary response values, raw payloads and credentials are excluded. Validation remains strict on code meaning and the requested filters.
+
+### Observed field reversal confirmed
+
+Read-only diagnostic run [41580523270](https://github.com/kllollain-max/careerpick/actions/runs/41580523270), code HEAD `f7592fc`, observed `type01=e01`, `type02=g02` when requesting `Pblanc_ty=e01` and `Instt_se=g02`. This establishes that the actual list swaps the response field meanings compared with the documentation; the query parameter names themselves match the official specification.
+
+The adapter now recognizes exactly two unambiguous layouts: `type01` in the documented `g` namespace with `type02` in the documented `e` namespace, or the observed opposite. Both are normalized to institution/recruitment meanings before checking the exact requested `g02` and `e01`/`e02` values. Two `g` codes, two `e` codes, or unknown codes are rejected. Details are normalized independently and must still match list ID, title and normalized categories. `observed_field_layouts` records fixed tokens for the actually observed list and detail layouts. This correction does not assume that detail or the remaining fields have already passed live validation.

@@ -14,7 +14,7 @@ API connection check, not website publication or recurring collection.
 - Successful response: HTTP 200 with integer `page`, `perPage`, `totalCount`,
   `currentCount`, `matchCount` and array `data`. HTTP 401 and HTTP 500 are listed
   as authentication/server errors. There is no ALIO-style `resultCode` envelope.
-- Current row schema contains seven strings: `시험명`, `선발예정인원`,
+- The published row schema describes seven strings: `시험명`, `선발예정인원`,
   `원서접수기간`, `시험단계구분`, `시험장소공고일`, `시험일`, `합격자발표일`.
 
 The listing describes an annual file-derived API and reports 28 rows. The
@@ -43,3 +43,16 @@ seven fixed schema names and the observed JSON type names. It never includes
 cell values or unexpected source keys. The documented string contract remains
 enforced until an actual differing type has been confirmed; a schema error does
 not silently become a successful connection check.
+
+## Observed nullable place-announcement field
+
+The diagnostic run
+https://github.com/kllollain-max/careerpick/actions/runs/41580523270
+at code revision `f7592fc` confirmed strings in all fields except
+`시험장소공고일`, which contained both `str` and `NoneType`. This agrees with the
+official listing's explicit blank-field note for document-screening place
+announcements. The adapter therefore converts JSON null to an empty string in
+**that field alone**, counts it as `null_place_announcement_cells`, and skips
+date parsing for that empty cell. It does not infer a place-announcement date.
+All other fields retain their documented string requirement, including
+`선발예정인원`; integer selection counts were not observed or newly allowed.

@@ -16,6 +16,8 @@ PAGE_SIZE = 5
 DETAIL_LIMIT = 3
 SUCCESS_CODES = {"00", "0", "200"}
 SAFE_CODES = {"01", "02", "03", "04", "05", "10", "12", "20", "22", "23", "29", "30", "31", "99"}
+INSTITUTION_CODES = {"g01", "g02", "g03", "g04"}
+RECRUITMENT_CODES = {"e01", "e02", "e03", "e04", "e05", "e06", "e07", "e08"}
 
 
 class APIError(Exception):
@@ -172,6 +174,33 @@ class Client:
             raise APIError("response_too_large")
         return self._parse(raw)
 
+    def _classifications(self, row, notice_type=None):
+        """Normalize the two explicitly known layouts without weakening requested filters.
+
+        Live run 41580523270 confirmed type01=e01/type02=g02, opposite the
+        official response descriptions. Code namespaces themselves are unambiguous.
+        """
+        first = _text(row, "type01", required=True, limit=10)
+        second = _text(row, "type02", required=True, limit=10)
+        known_codes = INSTITUTION_CODES | RECRUITMENT_CODES
+        diagnostic = {
+            "type01": first if first in known_codes else "unknown",
+            "type02": second if second in known_codes else "unknown",
+        }
+        if notice_type is not None:
+            diagnostic["requested"] = {"Pblanc_ty": notice_type, "Instt_se": "g02"}
+        if first in INSTITUTION_CODES and second in RECRUITMENT_CODES:
+            institution, recruitment, layout = first, second, "documented_type01_institution"
+        elif first in RECRUITMENT_CODES and second in INSTITUTION_CODES:
+            institution, recruitment, layout = second, first, "observed_type01_recruitment"
+        else:
+            self.last_response_diagnostic = {"observed_filters": diagnostic}
+            raise APIError("invalid_classification_pair")
+        if notice_type is not None and (institution != "g02" or recruitment != notice_type):
+            self.last_response_diagnostic = {"observed_filters": diagnostic}
+            raise APIError("filter_mismatch")
+        return institution, recruitment, layout
+
     def list_sample(self, notice_type):
         if notice_type not in {"e01", "e02"}:
             raise APIError("unsupported_filter")
@@ -192,23 +221,11 @@ class Client:
             if identity in seen:
                 raise APIError("duplicate_identifier")
             seen.add(identity)
-            institution_type = _text(row, "type01", required=True, limit=10)
-            recruitment_type = _text(row, "type02", required=True, limit=10)
-            if institution_type != "g02" or recruitment_type != notice_type:
-                # Emit only documented category codes; never expose arbitrary response strings.
-                known_codes = {"e01", "e02", "e03", "e04", "e05", "e06", "e07", "e08",
-                               "g01", "g02", "g03", "g04"}
-                self.last_response_diagnostic = {
-                    "observed_filters": {
-                        "requested": {"Pblanc_ty": notice_type, "Instt_se": "g02"},
-                        "type01": institution_type if institution_type in known_codes else "unknown",
-                        "type02": recruitment_type if recruitment_type in known_codes else "unknown",
-                    }
-                }
-                raise APIError("filter_mismatch")
+            institution_type, recruitment_type, field_layout = self._classifications(row, notice_type)
             records.append({"id": identity, "title": _text(row, "title", required=True),
                             "org": _text(row, "insttname", required=True),
                             "institution_type": institution_type, "recruitment_type": recruitment_type,
+                            "field_layout": field_layout,
                             "deadline": _date(_text(row, "enddate", limit=20)),
                             "registered_date": _date(_text(row, "regdate", limit=20)),
                             "modified_date": _date(_text(row, "moddate", limit=20))})
@@ -226,9 +243,10 @@ class Client:
         actual_id = str(_integer(_text(row, "idx", required=True), positive=True))
         if actual_id != identity:
             raise APIError("detail_identity_mismatch")
+        institution_type, recruitment_type, field_layout = self._classifications(row)
         record = {"id": actual_id, "title": _text(row, "title", required=True),
-                  "institution_type": _text(row, "type01", required=True, limit=10),
-                  "recruitment_type": _text(row, "type02", required=True, limit=10),
+                  "institution_type": institution_type, "recruitment_type": recruitment_type,
+                  "field_layout": field_layout,
                   "source_links": [link for name in ("link01", "link02", "link03")
                                    if (link := _public_link(_text(row, name, limit=2048)))],
                   "content_present": bool(_text(row, "contents", limit=MAX_BYTES))}
@@ -271,6 +289,10 @@ class Client:
                    "filters": {"Instt_se": "g02", "Pblanc_ty": ["e01", "e02"], "pageNo": 1,
                                "numOfRows": PAGE_SIZE, "Sort_order": "1"},
                    "samples": records, "detail_samples": details,
+                   "observed_field_layouts": {
+                       "list": sorted({record["field_layout"] for record in records}),
+                       "detail": sorted({record["field_layout"] for record in details}),
+                   },
                    "unverified_scope": ["attachment_files", "all_notices", "official_closure",
                                         "all_exam_schedules", "source_link_contents"],
                    "requests": dict(self.request_counts), "successful_responses": dict(self.success_counts)}

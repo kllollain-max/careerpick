@@ -110,6 +110,7 @@ class Client:
         self.request_counts = {"list": 0}
         self.success_counts = {"list": 0}
         self.last_response_diagnostic = None
+        self._null_place_announcement_cells = 0
 
     def _reject_echo(self, text):
         # Normalize percent-encoding and HTML entities before checking. Do not
@@ -176,17 +177,28 @@ class Client:
                 for name in FIELDS
             }
         }
+        normalized_rows, null_place_cells = [], 0
         for row in rows:
             if not isinstance(row, dict) or set(row) != set(FIELDS):
                 raise APIError("invalid_columns")
+            # The official listing allows blank place-announcement dates for
+            # document-screening stages. A live response confirmed JSON null
+            # only in this field; do not infer a date or loosen other fields.
+            if row["시험장소공고일"] is None:
+                row = {**row, "시험장소공고일": ""}
+                null_place_cells += 1
             if any(not isinstance(row[name], str) or len(row[name]) > 2048 for name in FIELDS):
                 raise APIError("invalid_field_type")
             if not row["시험명"].strip() or not row["시험단계구분"].strip():
                 raise APIError("missing_exam_identity")
+            normalized_rows.append(row)
+        payload["data"] = normalized_rows
+        self._null_place_announcement_cells += null_place_cells
         self.success_counts["list"] += 1
         return payload
 
     def verify(self):
+        self._null_place_announcement_cells = 0
         rows, total = [], None
         for page in range(1, MAX_PAGES + 1):
             payload = self._page(page)
@@ -244,6 +256,7 @@ class Client:
             "row_scope": "exam_stage_rows_not_independent_recruitment_notices",
             "date_cells_verified": date_cells,
             "unscheduled_or_blank_date_cells": unscheduled_cells,
+            "null_place_announcement_cells": self._null_place_announcement_cells,
             "date_cells_with_year_from_dataset_title": inferred_cells,
             "date_verification_scope": "calendar_validity_and_2026_year_not_independent_official_change_notice_review",
             "update_frequency": "annual_file_dataset",

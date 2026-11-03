@@ -139,17 +139,44 @@ class GOJOBSContractTests(unittest.TestCase):
             with self.subTest(code=code):
                 self.assert_code(code, lambda: self.client(payload).list_sample("e01"))
 
+    def test_observed_reversed_fields_are_normalized_and_crosschecked(self):
+        client = self.client(list_xml(row(1, type01="e01", type02="g02")),
+                             list_xml(row(2, "e02", type01="e02", type02="g02")),
+                             detail_xml(1, type01="e01", type02="g02"),
+                             detail_xml(2, "e02", type01="e02", type02="g02"))
+        result = client.verify()
+        self.assertEqual(result["detail_verified_count"], 2)
+        self.assertEqual(result["observed_field_layouts"], {
+            "list": ["observed_type01_recruitment"],
+            "detail": ["observed_type01_recruitment"]})
+        self.assertEqual([item["recruitment_type"] for item in result["samples"]], ["e01", "e02"])
+        self.assertTrue(all(item["institution_type"] == "g02" for item in result["detail_samples"]))
+
+    def test_semantically_equal_different_list_detail_layouts_are_allowed(self):
+        client = self.client(list_xml(row(1, type01="e01", type02="g02")),
+                             list_xml(), detail_xml(1))
+        result = client.verify()
+        self.assertEqual(result["observed_field_layouts"], {
+            "list": ["observed_type01_recruitment"],
+            "detail": ["documented_type01_institution"]})
+
     def test_filter_diagnostic_is_allowlisted_without_relaxing_validation(self):
-        client = self.client(list_xml(row(1, type01="e01", type02="g02")))
+        client = self.client(list_xml(row(1, type01="e01", type02="g01")))
         self.assert_code("filter_mismatch", lambda: client.list_sample("e01"))
         self.assertEqual(client.last_response_diagnostic, {"observed_filters": {
             "requested": {"Pblanc_ty": "e01", "Instt_se": "g02"},
-            "type01": "e01", "type02": "g02"}})
-        client = self.client(list_xml(row(1, type01="RAW_TEXT", type02="g02")))
-        self.assert_code("filter_mismatch", lambda: client.list_sample("e01"))
-        self.assertEqual(client.last_response_diagnostic["observed_filters"]["type01"], "unknown")
-        self.assertNotIn("RAW_TEXT", str(client.last_response_diagnostic))
-        self.assertEqual(client.success_counts["list"], 0)
+            "type01": "e01", "type02": "g01"}})
+        for first, second in (("RAW_TEXT", "g02"), ("e01", "e02"), ("g01", "g02")):
+            with self.subTest(first=first, second=second):
+                client = self.client(list_xml(row(1, type01=first, type02=second)))
+                self.assert_code("invalid_classification_pair", lambda: client.list_sample("e01"))
+                self.assertNotIn("RAW_TEXT", str(client.last_response_diagnostic))
+                self.assertEqual(client.success_counts["list"], 0)
+
+    def test_normalized_detail_still_must_match_requested_list_category(self):
+        client = self.client(list_xml(row(1, type01="e01", type02="g02")), list_xml(),
+                             detail_xml(1, type01="e02", type02="g02"))
+        self.assert_code("detail_list_mismatch", client.verify)
 
     def test_dtd_and_large_responses_rejected(self):
         self.assert_code("unsafe_xml_declaration", lambda: self.client(b'<!DOCTYPE response [<!ENTITY x "bad">]>' + list_xml()).list_sample("e01"))
