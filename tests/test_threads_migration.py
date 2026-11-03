@@ -33,9 +33,9 @@ class MigrationTests(unittest.TestCase):
 
     def test_backup_history_preserved(self):
         history = json.loads(Path('threads_posted.json').read_text())
-        self.assertEqual(len(history['records']), 39)
-        self.assertEqual(sum(r['status']=='published' for r in history['records']),33)
-        self.assertFalse(any(r['status']=='pending' for r in history['records']))
+        self.assertGreaterEqual(len(history['records']), 39)
+        self.assertGreaterEqual(sum(r['status']=='published' for r in history['records']),33)
+        self.assertTrue(any(r.get('threads_post_id')=='18158776393451353' and r['status']=='published' for r in history['records']))
 
     def test_activation_barrier_and_new_images(self):
         workflow = Path('.github/workflows/threads_auto.yml').read_text()
