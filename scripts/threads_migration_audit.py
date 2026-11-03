@@ -40,8 +40,10 @@ def main():
     known = {str(r['threads_post_id']) for r in history['records'] if r.get('threads_post_id')}
     # These IDs are prior verified evidence, not invented history or new receipts.
     expected = ['18029250455877919', '17909910720593443', '18132626512765431']
-    evidence = [api('GET', '/' + post_id, token, {'fields': 'id,text,timestamp'}) for post_id in expected]
-    report = {'observed_at': datetime.now(timezone.utc).isoformat(), 'account_id': account,
+    evidence = [api('GET', '/' + post_id, token, {'fields': 'id,text,timestamp,media_type,is_reply,root_post,replied_to'}) for post_id in expected]
+    extra = [api('GET', '/18120384022755046', token, {'fields': 'id,text,timestamp,media_type,permalink'})]
+    limits = api('GET', '/me/threads_publishing_limit', token, {'fields': 'quota_usage,config'})
+    report = {'extra_objects': extra, 'publishing_limit': limits, 'observed_at': datetime.now(timezone.utc).isoformat(), 'account_id': account,
               'scan_complete': complete, 'posts': posts, 'previously_verified_objects': evidence,
               'not_in_backup_ids': [p['id'] for p in posts if str(p['id']) not in known],
               'migration_ready': False,
