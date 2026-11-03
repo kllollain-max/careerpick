@@ -834,7 +834,7 @@ function cpStorageNotice(key,message){
   message?CP_STORAGE_ERRORS.set(key,message):CP_STORAGE_ERRORS.delete(key);
   let el=$('cpStorageNotice');
   if(!el){el=document.createElement('p');el.id='cpStorageNotice';el.setAttribute('role','alert');$('list').before(el);}
-  el.hidden=!CP_STORAGE_ERRORS.size;el.textContent=[...CP_STORAGE_ERRORS.values()].join(' ');
+  el.hidden=!CP_STORAGE_ERRORS.size;el.textContent=[...new Set(CP_STORAGE_ERRORS.values())].join(' ');
   if(CP_STORAGE_ERRORS.size){const backup=document.createElement('button');backup.id='cpRawBackup';backup.textContent='원본 포함 JSON 백업';el.append(' ',backup);}
 }
 function cpReadRecords(key,fallback,valid){

@@ -57,10 +57,10 @@ function merge(current,incoming){
   if(!Object.hasOwn(merged.apps,id))merged.apps[id]=a;
   else if(stable(merged.apps[id])===stable(a))duplicates.apps++;
   else{
-   const old=merged.apps[id];conflicts.push(id);
-   // Different known sources are never combined just because an unprefixed ID is equal.
-   const oldSource=sourceOf(id,old),newSource=sourceOf(id,a);
-   if(oldSource===newSource||oldSource==='unknown'||newSource==='unknown')merged.apps[id]={...a,...old};
+   conflicts.push(id);
+   // Keep the existing record whole, even when a legacy ID has no reliable source.
+   // Incoming fields cannot silently fill a different notice's missing metadata.
+   // The complete incoming record is retained in the archive below.
   }
  }
  for(const k of ['prefs','spec'])if(d[k]!==undefined){if(current[k]===undefined||(k==='spec'&&current[k]===null))merged[k]=d[k];else if(stable(current[k])===stable(d[k]))duplicates[k]++;else conflicts.push(k);}

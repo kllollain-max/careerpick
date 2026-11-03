@@ -79,3 +79,8 @@ test('real process exit after partial write leaves durable hold and can restore 
  const data=JSON.parse(fs.readFileSync(file)),s=memory(data);assert(r.recoveryStatus(s).pending);r.recover(s);for(const [k,v]of Object.entries(seed))assert.equal(s.getItem(k),v);
  r.apply(s,backup({saved:['new']}));assert.deepEqual(JSON.parse(s.getItem('saved')),['old','new']);
 });
+
+test('ambiguous legacy ID conflict keeps the complete existing object without mixing missing fields',()=>{
+ const current={apps:{legacy:{st:'plan'}}},incoming={apps:{legacy:{st:'applied',memo:'other notice',exam:'2099-01-01',url:'https://other.example/notice'}}};
+ const result=r.merge(current,incoming);assert.deepEqual(result.data.apps.legacy,current.apps.legacy);assert.equal(result.data['careerpick-import-archive'][0].apps.legacy.memo,'other notice');
+});
