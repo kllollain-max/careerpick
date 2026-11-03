@@ -19,6 +19,22 @@ DETAIL_LIMIT = 8
 KST = timezone(timedelta(hours=9))
 
 
+def body_application_period(text):
+    """Read an explicitly labelled date range only; never use exam/result dates."""
+    match=re.search(r'(?:원서)?접수(?:기간)?\s*[:：]\s*(.{0,180})', text)
+    if not match:
+        return None
+    found=re.search(r'(20\d{2})[.년/-]\s*(\d{1,2})[.월/-]\s*(\d{1,2})[.일]?(?:\s*\([^)]{1,5}\))?\s*[~∼～–—]\s*(?:(20\d{2})[.년/-]\s*)?(\d{1,2})[.월/-]\s*(\d{1,2})[.일]?',match[1])
+    if not found:
+        return None
+    y,m,d,y2,m2,d2=found.groups()
+    try:
+        return (gojobs._date(f'{y}-{int(m):02d}-{int(d):02d}'),
+                gojobs._date(f'{y2 or y}-{int(m2):02d}-{int(d2):02d}'))
+    except gojobs.APIError:
+        raise gojobs.APIError('body_application_dates_invalid') from None
+
+
 def official_page(row, *, opener=urllib.request.urlopen):
     """Verify one derived public URL against its visible table, not its API enddate."""
     url = 'https://www.gojobs.go.kr/apmView.do?empmnsn=' + row['id']
@@ -46,6 +62,9 @@ def official_page(row, *, opener=urllib.request.urlopen):
     content=re.findall(r'<textarea\b[^>]*\bid="content"[^>]*>(.*?)</textarea>',source,re.S)
     if len(content)!=1 or not plain(content[0]):
         raise gojobs.APIError('official_content_missing')
+    body_period=body_application_period(plain(content[0]))
+    if body_period and body_period!=(start,end):
+        raise gojobs.APIError('official_table_body_period_conflict')
     return {'id':'gojobs-'+row['id'], 'source_id':row['id'], 'source':'나라일터',
         'title':title,'org':org,'url':url,'application_start':start,'application_end':end,
         'content':plain(content[0]),'region':cell('근무지역'),
@@ -100,8 +119,9 @@ def collect_window(client, start, end):
             page += 1
     details, official = [], []
     # Titles only select records for inspection; never establish availability.
-    candidates = [row for row in rows if row['triage']['category'] == '상태 미확인']
-    candidates.sort(key=lambda row: (row['registered_date'], int(row['id'])), reverse=True)
+    candidates = [row for row in rows if row['triage']['reason']=='official_source_unverified'
+                  and row['deadline'] and row['deadline']>=end]
+    candidates.sort(key=lambda row: (row['deadline'], row['registered_date'], int(row['id'])))
     for row in candidates[:DETAIL_LIMIT]:
         detail = client.detail(row['id'])
         if any(detail[field] != row[field] for field in
