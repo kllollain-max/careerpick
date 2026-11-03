@@ -1,0 +1,43 @@
+name: Verify Threads migration without publishing
+on:
+  pull_request:
+    paths:
+      - 'scripts/threads_*.py'
+      - 'scripts/create_thumbnail.py'
+      - 'tests/test_threads_*.py'
+      - 'threads_posted.json'
+      - '.github/workflows/threads*.yml'
+  workflow_dispatch:
+    inputs:
+      read_meta:
+        description: Read official account and public posts; never publish
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s tests -p 'test_threads_*.py' -v
+      - run: python scripts/threads_auto.py preview
+      - name: Read-only migration audit
+        if: github.event_name == 'workflow_dispatch' && inputs.read_meta
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ENABLED: 'false'
+          THREADS_EXPECTED_USERNAME: hid_119
+        run: python scripts/threads_migration_audit.py
+      - uses: actions/upload-artifact@v4
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.read_meta
+        with:
+          name: threads-migration-read-only-evidence
+          path: threads-migration-audit.json
+          if-no-files-found: ignore
