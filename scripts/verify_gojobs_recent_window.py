@@ -146,7 +146,7 @@ def collect_window(client, start, end):
         'detail_samples': details, 'requests': client.request_counts,
         'official_page_samples': official,
         'successful_responses': client.success_counts,
-        'eligible_for_publication': 0, 'official_application_period_verified': False,
+        'eligible_for_publication': sum(p.get('classification',{}).get('recruiting') is True for p in official), 'official_application_period_verified': any('application_start' in p for p in official),
         'production_data_writes': 0}
 
 

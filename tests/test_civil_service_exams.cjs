@@ -7,7 +7,7 @@ const vm = require('node:vm');
 const html = fs.readFileSync(path.join(__dirname, '..', 'civil-service-exams.html'), 'utf8');
 const source = html.match(/<script>([\s\S]*?)<\/script>/)[1];
 
-function harness() {
+function harness(search = "") {
   const ids = ['search', 'state', 'type', 'sort', 'count', 'results', 'updated', 'year'];
   const elements = Object.fromEntries(ids.map(id => [id, {
     value: ({state: 'all', type: 'all', sort: 'exam', year: '2026'})[id] || '',
@@ -19,7 +19,7 @@ function harness() {
     static now() { return new Date('2026-11-03T04:00:00Z').getTime(); }
   }
   const context = vm.createContext({
-    Intl, Date: Clock,
+    Intl, Date: Clock, URLSearchParams, location: {search},
     document: {
       querySelector: selector => elements[selector.slice(1)],
       getElementById: id => elements[id],
@@ -132,4 +132,17 @@ test('a failed selected-year request clears stale counts and retrieval time', as
   assert.equal(elements.updated.textContent, '');
   assert.equal(elements.count.textContent, '');
   assert.match(elements.results.textContent, /불러오지 못했습니다/);
+});
+
+
+test('shared detail URL selects stable name and stage while retaining dates', () => {
+  const key='9급 공개경쟁시험|면접시험';
+  const {api,elements}=harness('?year=2026&exam='+encodeURIComponent(key));
+  api.setRecords([row('9급 공개경쟁시험'),row('7급 공개경쟁시험')]);
+  api.render();
+  assert.match(elements.results.innerHTML,/9급 공개경쟁시험/);
+  assert.doesNotMatch(elements.results.innerHTML,/7급 공개경쟁시험/);
+  assert.match(elements.results.innerHTML,/원서접수/);
+  assert.match(elements.results.innerHTML,/시행기관: 인사혁신처/);
+  assert.match(elements.results.innerHTML,/전체 시험일정/);
 });
