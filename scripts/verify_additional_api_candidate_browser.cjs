@@ -59,6 +59,10 @@ fs.mkdirSync(output, {recursive: true});
       assert.match(await page.locator('main').innerText(), /신규 지원 가능 자동 인정 0건/);
       assert.match(await page.locator('main').innerText(), /원본 분류 불일치/);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+      if (width <= 600) {
+        const titleWidth = await page.locator('tbody tr').first().locator('td').nth(1).evaluate(cell => cell.getBoundingClientRect().width);
+        assert.ok(titleWidth >= width - 100, 'mobile notice titles need a readable full-width column');
+      }
       await page.screenshot({path: path.join(output, 'review-' + width + '.png'), fullPage: true});
       await page.getByRole('link', {name: '시험일정 화면 열기'}).click();
       await page.waitForFunction(() => document.querySelectorAll('#results article').length > 0);
