@@ -20,7 +20,7 @@ Serve `dist/` mounted under `/careerpick/`. The source files preserve the origin
 
 ## Data and limitations
 
-ALIO snapshot: 520 unique IDs, 2026-10-30 23:43:53 KST. Detail archive: 794 static pages. These are different populations, not 794 current vacancies. Date-based deadline states update at build/runtime; official corrections and early closures require live collection and source checks. Date-only deadlines remain uncertain on the closing day. Every notice's latest reception status has NOT been independently verified.
+ALIO review branch: 610 unique IDs, collected 2026-11-03 12:32:01 KST. This includes 520 preserved cards plus 90 new cards. Date-expired retained notices are not active vacancies. Archived and newly generated detail pages are a separate population. Date-based deadline states update at build/runtime; official corrections and early closures require live collection and source checks. Date-only deadlines remain uncertain on the closing day. Every notice's latest reception status has NOT been independently verified.
 
 Search, filters, matched conditions, saved notices and application tracking reuse the original code. Browser storage is local to the device/domain; there is no recovered account sign-in or server synchronization. Old-domain local storage cannot migrate automatically; original JSON import/export remains available.
 
@@ -44,3 +44,7 @@ The ALIO live-check workflow has read-only contents permission and runs on pushe
 6. Rollback: redeploy a previously verified static artifact/commit through the approved manual workflow; preserve JSON snapshots and browser data. For a first failed deployment, keep the last reviewed artifact and restore that exact artifact, or disable publication only with owner authorization.
 
 New certificate/recommendation/advertising functionality is not implemented. Existing archived pages remain for compatibility. Ads, push and external blog automations are not enabled.
+
+## Candidate integration validation
+
+The verified candidate pair is now applied to the recovery branch. All 520 previous cards are unchanged; all 90 new IDs have matching detail records and generated detail pages. Successful validation of code HEAD 26d8c36200f62f71b7c952043b508e805467e716: https://github.com/kllollain-max/careerpick/actions/runs/41573700536 . Build: 1,288 files, 30,141 HTML links, missing links 0; detail tests 27 and homepage tests 48 passed. Search/detail checks at 320/390/1440px passed with Korean fonts. This is predeployment validation, not a live-site recovery claim. No schedule, main merge or Pages publication.
