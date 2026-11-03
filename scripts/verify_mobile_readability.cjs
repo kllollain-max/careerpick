@@ -58,17 +58,18 @@ async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].p
    // Compare actual foreground/background pairs in both themes; text is at least 14px.
    const contrast=await p.evaluate(()=>{
     const rgb=c=>c.match(/[\d.]+/g).slice(0,3).map(Number),lum=a=>a.map(n=>{n/=255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4}).reduce((v,n,i)=>v+n*[.2126,.7152,.0722][i],0);
-    return ['.title','.org','.cp-card-conditions','.due','.tag','#cpSectors button[aria-pressed=true]'].map(sel=>{const e=document.querySelector(sel),s=getComputedStyle(e);let a=e,b;while(a){b=getComputedStyle(a).backgroundColor;if(!b.endsWith(', 0)')&&b!=='transparent')break;a=a.parentElement;}const l=[lum(rgb(s.color)),lum(rgb(b))].sort((a,b)=>b-a);return {sel,ratio:(l[0]+.05)/(l[1]+.05)};});
+    return ['.title','.org','.cp-card-conditions','.due','.tag','.ofc','#cpSectors button[aria-pressed=true]'].map(sel=>{const e=document.querySelector(sel),s=getComputedStyle(e);let a=e,b;while(a){b=getComputedStyle(a).backgroundColor;if(!b.endsWith(', 0)')&&b!=='transparent')break;a=a.parentElement;}const l=[lum(rgb(s.color)),lum(rgb(b))].sort((a,b)=>b-a);return {sel,ratio:(l[0]+.05)/(l[1]+.05)};});
    });
    for(const c of contrast)assert(c.ratio>=4.5,`${c.sel} contrast ${c.ratio}`);
    if(width===390&&zoom===1){
-    await p.screenshot({path:`${OUT}/after-${label}.png`,fullPage:true});
+    await p.screenshot({path:`${OUT}/after-${label}.png`,fullPage:false});
+    await p.locator('#list .job').first().screenshot({path:`${OUT}/card-after-${theme}.png`});
     await p.locator('#toggle').click();await p.screenshot({path:`${OUT}/filter-${theme}.png`});await p.locator('#cpFilterDone').click();
     await p.locator('#list [data-open="a900001"]').first().click();await p.locator('#jobview').waitFor({state:'visible'});
     assert.equal(await p.locator('.jv-title').innerText(),rows[0].title);
     await p.screenshot({path:`${OUT}/detail-${theme}.png`,fullPage:true});await p.goBack();
    }
-   if(width===320&&zoom===2)await p.screenshot({path:`${OUT}/after-${label}.png`,fullPage:true});
+   if(width===320&&zoom===2)await p.screenshot({path:`${OUT}/after-${label}.png`,fullPage:false});
    // Reflow, focus and dialog controls remain reachable at large text / reduced viewport height.
    if(width<=700){
     await p.setViewportSize({width,height:480});await p.locator('#toggle').click();
@@ -87,7 +88,7 @@ async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].p
  }
  // Same synthetic posts, settings, dimensions and theme against the pre-change commit.
  for(const theme of ['light','dark']){
-  const x=await context(browser,{width:390}),p=await x.ctx.newPage();await ready(p,'http://127.0.0.1:8001/careerpick/');await p.evaluate(t=>document.documentElement.dataset.theme=t,theme);await p.screenshot({path:`${OUT}/before-390-${theme}-1x.png`,fullPage:true});await x.ctx.close();
+  const x=await context(browser,{width:390}),p=await x.ctx.newPage();await ready(p,'http://127.0.0.1:8001/careerpick/');await p.evaluate(t=>document.documentElement.dataset.theme=t,theme);await p.screenshot({path:`${OUT}/before-390-${theme}-1x.png`,fullPage:false});await p.locator('#list .job').first().screenshot({path:`${OUT}/card-before-${theme}.png`});await x.ctx.close();
  }
  if(result.checks.some(x=>x.status==='fail'))process.exitCode=1;
  console.log(JSON.stringify(result));

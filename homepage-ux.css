@@ -50,3 +50,12 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD
 @media(max-width:700px){
  .wrap{padding:0 16px calc(140px + env(safe-area-inset-bottom))}header{flex-wrap:wrap}h1{font-size:1.5rem}.sub{font-size:.875rem;max-width:none}.hbtns button{font-size:.875rem}.cp-home-heading h2{font-size:1.375rem}.cp-sectors button,.cp-sectors small{font-size:.875rem}.list>.card.job .main{padding:16px}.title{font-size:1.1875rem}.cp-mobile-nav button{font-size:.75rem;line-height:1.35;overflow-wrap:anywhere;padding:4px 2px;min-height:56px}.cp-mobile-nav{align-items:stretch}.cp-filter-title h2{font-size:1.125rem}.panel .chip,.cp-filter-actions button{font-size:.875rem}.panel .cp-primary-filters select{width:auto;max-width:66%}.jv-grid{grid-template-columns:1fr;gap:0}.jv-grid dt{margin-top:10px}.jv-grid dd{margin-bottom:6px}.searchbar{min-width:0}.search{min-width:0}.search input{min-width:0;width:100%}.cp-order{flex-wrap:wrap}.sumrow{align-items:flex-start}.jv-bar .in{min-width:0}
 }
+/* Text states use readable foregrounds; the star remains a textual saved indicator. */
+.chip[aria-pressed=true]{color:var(--on-brand)}
+.actions .save[aria-pressed=true],.jv-bar .save[aria-pressed=true],.card.row .save[aria-pressed=true],.mini .save[aria-pressed=true]{color:var(--brand)}
+.ofc,.hae,.stpill{font-size:.875rem;line-height:1.6}.st-fail{color:var(--muted)}
+@media(max-width:700px){.cp-mobile-nav button{font-size:.875rem}.wrap{padding-bottom:calc(9rem + env(safe-area-inset-bottom))}}
+/* The narrow detail body uses 12px padding; no negative margin may extend beyond it. */
+.jobview{--bg:inherit;--surface:inherit;--ink:inherit;--muted:inherit;--line:inherit;--brand:inherit;--brand-soft:inherit;--hot:inherit;--hot-soft:inherit;--tile:inherit;--tile-ink:inherit;--closed:inherit;--chip:inherit;--green:inherit;--green-soft:inherit;color-scheme:inherit}
+.jobview .jv-title{font-size:1.25rem}.jobview .jv-body{padding-bottom:24px}.jobview .jv-bar{margin:20px 0 0}.jobview .jv-bar .main-btns a,.jobview .jv-bar .sub-btns>*{font-size:.875rem;min-height:48px}.jobview .ck,.jobview .ckadd input{font-size:1rem;min-height:44px}.jobview .ck .tx{min-width:0;overflow-wrap:anywhere}.jobview .ck .tg{font-size:.875rem;flex-shrink:1}.jobview .ckbox .go{color:var(--on-brand);font-size:.875rem;min-height:44px}
+@media(max-width:700px){.jobview .jv-grid{grid-template-columns:minmax(0,1fr)}}

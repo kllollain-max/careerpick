@@ -22,6 +22,10 @@ jobs:
         with:
           node-version: '22'
       - run: node --test tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_civil_service_exams.cjs tests/test_record_store.cjs
+      - name: Install Korean fonts for readable screenshot evidence
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
       - run: python scripts/build_public_site.py
       - run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
       - name: Verify public baseline and isolated candidate with synthetic push only
