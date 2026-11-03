@@ -757,7 +757,7 @@ footer .src b{color:var(--ink)}
 // ── 설정 ──
 const COUPANG = false;    // 쿠팡 추천 상품 표시 (ads.py 설정 후 true로)
 let POSTS = [], UPDATED = null, ADS = [];
-let CP_DATA_LOADING=true;
+let CP_DATA_LOADING=true, CP_URL_APPLIED=false, cpQueryTouched=false;
 let CP_DEDUP_REMOVED = 0;
 const DATA_HEALTH = {posts:"pending", alio:"pending", monitor:"pending",detail:"pending"};
 // Preserve blog entries independently of merged official feeds for accurate search.
@@ -913,7 +913,8 @@ async function load(){
   cpRenderFeedStatus();
   const qp = new URLSearchParams(location.search).get("q");
   { const tp = new URLSearchParams(location.search).get("tab"); if(tp === "spec" || tp === "cert") state.tab = tp; }
-  if(qp){ state.q = qp; state.tab = "all"; $("q").value = qp; }
+  if(qp&&!CP_URL_APPLIED&&!cpQueryTouched){ state.q = qp; state.tab = "all"; $("q").value = qp; }
+  CP_URL_APPLIED=true;
   const jm = location.hash.match(/^#job=(.+)$/);
   if(jm) setTimeout(() => openJob(decodeURIComponent(jm[1]), false), 0);
   const updateDate = UPDATED ? new Date(UPDATED) : null;
@@ -2541,8 +2542,8 @@ document.addEventListener("click", async e => {
   else if(t.id === "reset" || t.id === "empty-reset"){ cpResetBrowseFilters(); state.sort="due"; refresh(); }
 });
 let cpComposing=false;
-$('q').addEventListener('compositionstart',()=>{cpComposing=true;});
-function cpSearchInput(e){if(cpComposing||e.isComposing)return;state.q=e.target.value;renderFilters();render();}
+$('q').addEventListener('compositionstart',()=>{cpComposing=true;cpQueryTouched=true;});
+function cpSearchInput(e){cpQueryTouched=true;if(cpComposing||e.isComposing)return;state.q=e.target.value;renderFilters();render();}
 $('q').addEventListener('compositionend',e=>{cpComposing=false;cpSearchInput(e);});
 $('q').addEventListener('input',cpSearchInput);
 $("tabs").addEventListener("scroll", fadeHint, {passive:true});

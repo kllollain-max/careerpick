@@ -122,6 +122,15 @@ async function savedAndApps(page){
    const x=await context(browser,{slow:true}),p=await x.ctx.newPage();await p.goto(BASE,{waitUntil:'domcontentloaded'});assert((await p.locator('#summary').innerText()).includes('불러오는'));await p.waitForFunction(()=>!CP_DATA_LOADING);await x.ctx.close();
    const y=await context(browser,{failFeeds:true}),q=await y.ctx.newPage();await q.goto(BASE);await q.locator('#cpRetryFeeds').waitFor();assert((await q.locator('#list').innerText()).includes('검색 결과 없음과 다릅니다'));await y.ctx.close();
   });
+  await check('late feed completion cannot replace newer search input with old URL query',async()=>{
+   const x=await context(browser,{slow:true}),p=await x.ctx.newPage();await p.goto(BASE+'?q=서울',{waitUntil:'domcontentloaded'});await p.getByRole('searchbox',{name:'검색',exact:true}).fill('춘천');await p.waitForFunction(()=>!CP_DATA_LOADING);assert.equal(await p.evaluate(()=>state.q),'춘천');assert.equal(await p.locator('#list .job').count(),1);await x.ctx.close();
+  });
+  await check('saved and application records survive actual Chromium close and profile reopen (synthetic)',async()=>{
+   const profile=fs.mkdtempSync(path.join(os.tmpdir(),'cp-core-profile-'));
+   const persistent={newContext:options=>chromium.launchPersistentContext(profile,{executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox'],...options})};
+   const x=await context(persistent),p=await x.ctx.newPage();await ready(p);await p.locator('#list [data-save="a900001"]').click();await p.waitForFunction(()=>SAVED.has('a900001'));await p.locator('#list [data-track="a900001"]').click();await p.locator('#tMemo').fill('restart preserved');await p.locator('#tSave').click();await p.waitForFunction(()=>APPS.a900001?.memo==='restart preserved');await x.ctx.close();
+   const y=await context(persistent),q=await y.ctx.newPage();await ready(q);await q.getByRole('button',{name:'저장 공고',exact:true}).click();assert.equal(await q.locator('#list [data-save="a900001"]').getAttribute('aria-pressed'),'true');assert.equal(await q.evaluate(()=>APPS.a900001.memo),'restart preserved');await y.ctx.close();
+  });
   await check('application deletion cancellation and explicit confirmation preserve independent saves',async()=>{
    const x=await context(browser,{seed:{saved:'["a900001"]',apps:'{"a900001":{"st":"applied","memo":"delete-test","ck":[]}}'}}),p=await x.ctx.newPage();await ready(p);
    await p.getByRole('button',{name:'내 지원',exact:true}).click();await p.locator('#list [data-track="a900001"]').last().click();p.once('dialog',d=>d.dismiss());await p.locator('#tDel').click();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('apps')).a900001.memo),'delete-test');

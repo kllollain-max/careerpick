@@ -13,7 +13,7 @@ async function cpReadFeed(path,key){
   CP_FEED_STAMPS[key]=parsed.updated;CP_FEED_ISSUES[key]=parsed.issues;
   return parsed.rows;
 }
-function cpResetBrowseFilters(){Object.assign(state,{q:'',sector:'',employment:'',career:'',cat:null,region:'',status:'all',onlyNew:false,deadline:'all'});$('q').value='';}
+function cpResetBrowseFilters(){cpQueryTouched=true;Object.assign(state,{q:'',sector:'',employment:'',career:'',cat:null,region:'',status:'all',onlyNew:false,deadline:'all'});$('q').value='';}
 function cpSyncDialogState(){
   const sheet=$('sheet')?.classList.contains('open'),job=$('jobview') && !$('jobview').hidden,filter=$('panel')?.classList.contains('open') && matchMedia('(max-width:700px)').matches;
   const wrap=document.querySelector('.wrap');if(wrap)wrap.inert=!!(sheet||job);
