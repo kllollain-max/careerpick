@@ -7,8 +7,8 @@ async function check(name,fn){try{await fn();report.checks.push({name,result:'pa
 async function fresh(browser,{seed={},width=390,sw=false,denyReads=false}={}){
  const ctx=await browser.newContext({viewport:{width,height:900},timezoneId:'Asia/Seoul',locale:'ko-KR',serviceWorkers:sw?'allow':'block',acceptDownloads:true});ctx.setDefaultTimeout(10000);
  await ctx.addInitScript(({seed,denyReads})=>{if(!sessionStorage.getItem('record-e2e-seeded')){for(const[k,v]of Object.entries(seed))localStorage.setItem(k,v);sessionStorage.setItem('record-e2e-seeded','1');}if(denyReads){const get=Storage.prototype.getItem;Storage.prototype.getItem=function(k){if(this===localStorage&&k==='apps')throw Error('synthetic denied read');return get.call(this,k);};}},{seed,denyReads});
- await ctx.route('**/*',route=>new URL(route.request().url()).origin===new URL(BASE).origin?route.continue():route.abort());
- const p=await ctx.newPage();p.setDefaultTimeout(10000);await p.goto(BASE);await p.waitForFunction(()=>!CP_DATA_LOADING);return{ctx,p};
+ if(!sw)await ctx.route('**/*',route=>new URL(route.request().url()).origin===new URL(BASE).origin?route.continue():route.abort());
+ const p=await ctx.newPage();if(sw){const cdp=await ctx.newCDPSession(p);await cdp.send('Network.enable');await cdp.send('Network.setBlockedURLs',{urls:['*naver.com*','*naver.net*','*pstatic.net*','*cdn.onesignal.com*','*googlesyndication.com*','*google-analytics.com*']});}p.setDefaultTimeout(10000);await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);return{ctx,p};
 }
 async function records(p){return p.evaluate(()=>Object.fromEntries(CPRecords.keys.map(k=>[k,localStorage.getItem(k)])));}
 async function download(p){const event=p.waitForEvent('download');await p.getByRole('button',{name:'개인 기록 백업(JSON)',exact:true}).click();const d=await event,file=await d.path();assert(file&&fs.statSync(file).size>0);const data=JSON.parse(fs.readFileSync(file,'utf8'));return{data,file,name:d.suggestedFilename()};}
@@ -76,15 +76,15 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
    const legacy={format:'careerpick-backup',version:1,data:{saved:['a123456','legacy-unlinked'],apps:{a123456:{st:'applied',memo:'old-format 합성',ck:[{t:'제출',ph:'pre',d:1}],exam:'2099-12-01'}},prefs:{emp:['정규직'],edu:[],region:['강원'],cat:[],kw:''}}};const x=await fresh(browser);const r=await importFile(x.p,upload(legacy,'synthetic-old-origin.json'));assert(r.preview.includes('미제공 (과거 백업)'));assert(r.alert.includes('병합 완료'));assert.equal(await x.p.evaluate(()=>APPS.a123456.memo),'old-format 합성');assert(await x.p.evaluate(()=>SAVED.has('legacy-unlinked')));await x.ctx.close();
   });
   await check('site/service-worker update and cached offline reload preserve personal records',async()=>{
-   const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8');for(let trial=1;trial<=3;trial++){let x,stage='initial-load';
+   const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8'),preview=path.resolve('_preview/careerpick'),previewTarget=fs.readlinkSync(preview);for(let trial=1;trial<=3;trial++){let x,stage='initial-load',previewOffline=false;
    try{
     x=await fresh(browser,{sw:true,seed:{saved:'["a999999"]',apps:'{"a999999":{"st":"plan","memo":"SW-preserved","ck":[]}}'}});const p=x.p;stage='ready-controller';await p.evaluate(()=>navigator.serviceWorker.ready);await p.waitForFunction(()=>!!navigator.serviceWorker.controller);const before=await records(p);
     fs.writeFileSync(workerFile,original+'\nself.addEventListener("message",e=>{if(e.data==="CP_RECORDS_AUDIT")e.source.postMessage("CP_RECORDS_AUDIT_V2");});\n');const mtime=new Date(Date.now()+3000);fs.utimesSync(workerFile,mtime,mtime);
     stage='worker-update-ack';await p.evaluate(async()=>{navigator.serviceWorker.addEventListener('message',e=>{if(e.data==='CP_RECORDS_AUDIT_V2')window.__recordsWorkerV2=true;});const r=await navigator.serviceWorker.getRegistration();await r.update();});
     await p.waitForFunction(async()=>{navigator.serviceWorker.controller?.postMessage('CP_RECORDS_AUDIT');return window.__recordsWorkerV2===true;});
-    stage='online-reload';await p.reload();await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);stage='offline-reload';await x.ctx.setOffline(true);await p.reload();await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
-    console.log('PASS worker replacement/offline trial '+trial);
-   }catch(error){throw Error('trial '+trial+' '+stage+': '+error.message);}finally{fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}}
+    stage='online-reload';await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);stage='offline-reload';const empty=fs.mkdtempSync(path.join(os.tmpdir(),'cp-offline-'));fs.unlinkSync(preview);fs.symlinkSync(empty,preview);previewOffline=true;await x.ctx.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
+    assert(await p.evaluate(()=>CP_FEED_CACHE.size>0),'actual cached response required');console.log('PASS worker replacement/offline trial '+trial+' actual cached fallback');
+   }catch(error){throw Error('trial '+trial+' '+stage+': '+error.message);}finally{if(previewOffline){fs.unlinkSync(preview);fs.symlinkSync(previewTarget,preview);}fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}}
   });
   if(report.checks.some(x=>x.result==='fail'))process.exitCode=1;
   console.log(JSON.stringify({record_scenarios:report.checks.length,passed:report.checks.filter(x=>x.result==='pass').length,actual_user_records:false,actual_old_origin_backup:false,backup_files_uploaded:false}));
