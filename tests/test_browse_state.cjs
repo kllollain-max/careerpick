@@ -10,3 +10,5 @@ test('memo, credentials and arbitrary payloads never enter navigation snapshot',
 test('invalid numeric positions and huge ranges are bounded without altering records',()=>{const r=valid({...base,limit:1e8,top:-5,anchor:{id:'a',offset:1e9}});assert.equal(r.limit,30000);assert.equal(r.top,0);assert.equal(r.anchor.offset,5000);});
 
 test('optional public neighbor IDs survive restore and reject arbitrary payloads',()=>{const r=valid({...base,anchor:{...base.anchor,neighbors:['next',null,{memo:'private'},'previous','ignored'],memo:'private'}});assert.deepEqual(r.anchor,{...base.anchor,neighbors:['next','previous']});});
+
+test('new prefix expands only far enough to retain the restored public anchor',()=>{ctx.__rows=Array.from({length:251},(_,i)=>({id:'a'+i}));ctx.__snapshot={anchor:{id:'a175',neighbors:['a176','a174']}};assert.equal(vm.runInContext('cpBrowseRangeForAnchor(__rows,90,__snapshot)',ctx),180);ctx.__rows=ctx.__rows.filter(x=>x.id!=='a175');assert.equal(vm.runInContext('cpBrowseRangeForAnchor(__rows,90,__snapshot)',ctx),180);assert.equal(vm.runInContext('cpBrowseRangeForAnchor([],90,__snapshot)',ctx),90);});

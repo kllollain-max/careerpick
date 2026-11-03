@@ -42,6 +42,12 @@ function cpSaveBrowse(id,sessionOnly=false){
  if(!sessionOnly)try{history.replaceState({...history.state,cpBrowseId:cpActiveBrowseId,cpNav:snapshot,cpBrowse:snapshot.state,cpScroll:snapshot.top},'',location.href);}catch(_){}
  try{sessionStorage.setItem(CP_BROWSE_KEY,JSON.stringify(snapshot));}catch(_){}
 }
+function cpBrowseRangeForAnchor(rows,current,snapshot){
+ if(!snapshot?.anchor)return current;
+ const candidates=[snapshot.anchor.id,...(snapshot.anchor.neighbors||[])];
+ let index=-1;for(const id of candidates){index=rows.findIndex(p=>p.id===id||p.sourceIds?.includes(id));if(index>=0)break;}
+ return index<0?current:Math.min(30000,Math.max(current,Math.ceil((index+1)/30)*30));
+}
 function cpBrowseRestorePosition(snapshot,restoreFocus=false){
  const generation=++cpBrowseGeneration;
  requestAnimationFrame(()=>requestAnimationFrame(()=>{
