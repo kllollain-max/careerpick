@@ -10,6 +10,12 @@ on:
     - cron: '0 11 * * *'
 
   workflow_dispatch:
+    inputs:
+      publish_one_now:
+        description: Publish exactly one current job now (counts toward daily limit)
+        type: boolean
+        required: true
+        default: false
 
 permissions:
   contents: write
@@ -21,13 +27,14 @@ concurrency:
 
 jobs:
   publish:
-    if: github.event_name == 'schedule' && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.publish_one_now == true)) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
 
     env:
       TZ: Asia/Seoul
       PYTHONUNBUFFERED: "1"
+      THREADS_MANUAL_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_one_now == true }}
       THREADS_SCHEDULE_CRON: ${{ github.event.schedule }}
       THREADS_CLAIM_REPO: ${{ github.repository }}
       THREADS_CLAIM_BRANCH: threads-publisher-state
@@ -66,6 +73,19 @@ jobs:
         run: |
           test -n "$THREADS_ACCESS_TOKEN"
           test -n "$THREADS_USER_ID"
+
+      - name: Allocate current manual minute (not a past schedule)
+        if: github.event_name == 'workflow_dispatch' && inputs.publish_one_now == true
+        run: |
+          python - <<'PYMANUAL'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          slot = datetime.now(ZoneInfo('Asia/Seoul')).replace(second=0, microsecond=0).isoformat()
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as out:
+              out.write('THREADS_MANUAL_SLOT=' + slot + '\n')
+          print('Explicit manual slot:', slot)
+          PYMANUAL
 
       - name: Reserve one job
         id: reserve
@@ -277,7 +297,11 @@ jobs:
               out.write(chr(10).join(lines) + chr(10))
           if not post_ok or not reply_ok or not engagement_ok:
               raise SystemExit('Threads publication incomplete; investigate without duplicate repost')
-          print('Verified main post and detail reply IDs')
+          from scripts.threads_auto import verify_published_record
+          objects = verify_published_record(mine[0], os.environ['THREADS_ACCESS_TOKEN'])
+          for obj in objects:
+              print('Meta GET verified:', obj['id'], obj.get('permalink', ''))
+          print('Verified actual main and both reply IDs, text and parent/root links')
           PY
 
   alert:
