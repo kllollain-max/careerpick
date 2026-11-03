@@ -747,6 +747,7 @@ footer .src b{color:var(--ink)}
 </div>
 
 <script src="push-config.js"></script>
+<script src="record-migration.js"></script>
 <script src="homepage-ux.js"></script>
 <script src="homepage-ui.js"></script>
 <script>
@@ -795,9 +796,9 @@ function cpRenderFeedStatus(){
   updateDataHealth();
   const el = $("cpFeedStatus");
   if(!el) return;
-  const names = {posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보"};
+  const names = {posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보",work24:"고용24"};
   const parts = Object.entries(DATA_HEALTH).map(([key,value]) =>
-    `${names[key]} ${value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
+    `${names[key] || key} ${value === "awaiting_approval" ? "수집 비활성" : value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
   const stamp = UPDATED ? new Date(UPDATED) : null;
   const valid = stamp && Number.isFinite(stamp.getTime());
   const hours = valid ? (Date.now()-stamp.getTime())/3600000 : Infinity;
@@ -1210,7 +1211,7 @@ const SORTS = [["due","마감 가까운 순"],["new","최신순"]];
 const state = {specV:"all", tab: "all", q:"", sector:"", employment:"", career:"", cat:null, region:"", status:"all", sort:"due", onlyNew:false, deadline:"all"};
 
 function kstDay(d){ const k = kst(d); return Date.UTC(k.getUTCFullYear(), k.getUTCMonth(), k.getUTCDate()); }
-function dday(p, now){ return CPHome.deadline(p, now); }
+function dday(p, now){ if(CP_UNCONFIRMED_IDS.has(p.id) && (!p.due || p.due>now))return {cls:'verify',big:'상태 확인',n:0};return CPHome.deadline(p, now); }
 const statusOf = (p, now) => { const d = dday(p, now); return !d ? "none" : d.cls === "closed" ? "closed" : d.cls; };
 function cpSavedId(p){return [p.id,...(p.sourceIds||[])].find(id=>SAVED.has(id)) || p.id;}
 function cpApplicationId(p){return [p.id,...(p.sourceIds||[])].find(id=>APPS[id]) || p.id;}
@@ -1826,7 +1827,7 @@ function renderTrack(now){
     if(a.memo) meta.push(a.memo);
     parts.push(`<li class="trk-item"><div class="grow">
       <div class="o">${esc(a.org || "")} <span class="stpill st-${a.st}">${ST[a.st].label}</span></div>
-      <a class="t" href="${esc(jobHref(POSTS.find(p => p.id === id) || {type:"j",id,url:a.url}))}" ${POSTS.some(p => p.id === id && isInternalJob(p)) ? `data-open="${esc(id)}"` : 'target="_blank" rel="noopener"'} style="color:inherit;text-decoration:none">${esc(cleanTitle(a.title))}</a>
+      <a class="t" href="${esc(jobHref(POSTS.find(p => p.id === id) || {type:"j",id,url:a.url}))}" ${POSTS.some(p => p.id === id && isInternalJob(p)) ? `data-open="${esc(id)}"` : 'target="_blank" rel="noopener"'} style="color:inherit;text-decoration:none">${esc(cleanTitle(a.title || POSTS.find(p=>p.id===id || p.sourceIds?.includes(id))?.title || "공고 정보 미확인 (기록 보존)"))}</a>
       ${meta.length ? `<div class="m">${esc(meta.join(" · "))}</div>` : ""}
       ${a.ck && a.ck.length ? (() => { const n = ckDone(a.ck), nx = a.ck.indexOf(ckNext(a.ck));
         return `<div class="ckbar"><i style="width:${Math.round(n * 100 / a.ck.length)}%"></i></div>
@@ -2185,7 +2186,7 @@ function renderCareerDashboard(now){
 }
 document.getElementById("cpBackupInput").addEventListener("change", async e=>{await cpRestoreBackup(e.target.files[0]);e.target.value="";});
 // 개인 설정과 지원기록은 기기 내부 저장소에만 보관합니다. 백업/복원은 사용자가 직접 실행합니다.
-const CP_BACKUP_KEYS = ["prefs","spec","saved","apps"];
+const CP_BACKUP_KEYS = CPRecords.keys;
 // 읽기용 보고서: 새 인쇄 창에서 브라우저의 'PDF로 저장' 기능을 사용합니다.
 // JSON 데이터 백업/복원과는 별개이며 외부 서버로 개인 기록을 전송하지 않습니다.
 function cpExportReport(){
@@ -2237,17 +2238,17 @@ async function cpRestoreBackup(file){
   if(!backup || backup.format!=="careerpick-backup" || backup.version!==1 || !backup.data || typeof backup.data!=="object" || Array.isArray(backup.data)){
     alert("커리어픽 백업 파일 형식이 아닙니다.");return;
   }
-  const d=backup.data;
-  if((d.saved!==undefined && (!Array.isArray(d.saved) || d.saved.some(x=>typeof x!=="string"))) ||
-     (d.apps!==undefined && (!d.apps || typeof d.apps!=="object" || Array.isArray(d.apps))) ||
-     (d.prefs!==undefined && (!d.prefs || typeof d.prefs!=="object" || Array.isArray(d.prefs))) ||
-     (d.spec!==undefined && d.spec!==null && (typeof d.spec!=="object" || Array.isArray(d.spec)))){
-    alert("백업 데이터의 일부 항목이 올바르지 않습니다.");return;
-  }
-  if(!confirm("현재 기기에 저장된 맞춤 조건·스펙·관심 공고·지원 기록을 백업 파일 내용으로 교체할까요? 기존 기록은 덮어씁니다."))return;
-  try{CP_BACKUP_KEYS.forEach(k=>{if(Object.prototype.hasOwnProperty.call(d,k))localStorage.setItem(k,JSON.stringify(d[k]));});}
-  catch(e){alert("저장 공간 부족 또는 브라우저 제한으로 복원하지 못했습니다.");return;}
-  alert("복원했습니다. 변경된 기록을 불러오기 위해 페이지를 새로고침합니다.");location.reload();
+  try{CPRecords.validate(backup);}catch(e){alert(e.message);return;}
+  if(!confirm("현재 기록을 백업한 뒤 가져온 기록을 병합합니다. 같은 공고의 기존 상태·메모는 유지하고 충돌 원본은 이 기기에 별도 보관합니다. 계속할까요?"))return;
+  cpDownloadBackup();
+  try{
+    const result=CPRecords.apply(localStorage,backup);
+    const linked=new Set(POSTS.flatMap(p=>[p.id,...(p.sourceIds||[])]));
+    const orphan=[...new Set([...result.data.saved,...Object.keys(result.data.apps)])].filter(id=>!linked.has(id)).length;
+    alert(`병합 완료: 저장 ${result.savedAdded}건·지원 ${result.appsAdded}건 추가, 충돌 ${result.conflicts.length}건 원본 보관, 현재 목록 미연결 ${orphan}건 보존. 새로고침합니다.`);
+    location.reload();
+  }catch(e){alert(e.message);}
+
 }
 
 function render(){

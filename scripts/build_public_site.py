@@ -11,6 +11,7 @@ import importlib.util
 import json
 import re
 import shutil
+import subprocess
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
@@ -44,6 +45,8 @@ def public_files() -> list[Path]:
     for directory, extensions in manifest["directories"].items():
         names.extend(str(p.relative_to(ROOT)) for p in (ROOT / directory).iterdir()
                      if p.is_file() and p.suffix in extensions)
+    if (ROOT / "exam-status.json").is_file():
+        names.append("exam-status.json")
     result = []
     for name in sorted(set(names)):
         posix = PurePosixPath(name)
@@ -186,8 +189,8 @@ def main() -> dict:
     result = {
         "built_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "site_url": BASE,
-        "source_snapshot": "delivery-branch-716c86d",
-        "source_commit": "716c86da48ae2e852f75655af746d3ac8e7c494b",
+        "source_snapshot": "repository",
+        "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         "alio_snapshot_at": alio["updated"],
         "alio_rows": len(alio["posts"]),
         "output_files": sum(p.is_file() for p in output.rglob("*")),

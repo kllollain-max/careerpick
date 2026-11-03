@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "repository": "kllollain-max/careerpick",
+  "branch": "codex/gojobs-notice-guard-20261103",
+  "pull_request": 2,
+  "base_sha": "13b5e59280411940fdd7cb73617aa397a2ac9a44",
+  "code_sha": "eb386d63c2d7e9b2aa502c13f0f1419909f9618e",
+  "checked_at": "2026-11-03T16:00:54+09:00",
+  "verification_scope": "offline_notice_classification_and_source_preservation",
+  "workflow": {
+    "id": 41593487719,
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/41593487719",
+    "status": "completed",
+    "conclusion": "success",
+    "job_id": 125775364790,
+    "job_conclusion": "success"
+  },
+  "tests": {
+    "source": "GitHub Actions job log",
+    "classifier": 22,
+    "offline_review": 8,
+    "total": 30,
+    "conclusion": "passed"
+  },
+  "evidence_basis": {
+    "job_log_structured_report": true,
+    "artifact_metadata_read": true,
+    "artifact_archive_downloaded": false,
+    "live_api_retested": false
+  },
+  "artifacts": [
+    {
+      "id": 13210714609,
+      "name": "gojobs-notice-review",
+      "size_in_bytes": 1600,
+      "digest": "sha256:2542f900997f2be78a4b1e366d8d6d42eb37d0acfc4b90447837c6fdaa517ed0",
+      "created_at": "2026-11-03T07:00:55Z",
+      "expires_at": "2026-11-10T07:00:54Z"
+    }
+  ],
+  "report": {
+    "api_authentication_retested": false,
+    "api_requests": 0,
+    "categories": {
+      "상태 미확인": 5,
+      "합격자 발표": 1
+    },
+    "checked_at": "2026-11-03T16:00:54+09:00",
+    "code_sha": "eb386d63c2d7e9b2aa502c13f0f1419909f9618e",
+    "decisions": {
+      "blocked_source_integrity": 1,
+      "excluded_non_recruitment": 1,
+      "needs_review": 4
+    },
+    "deployment_performed": false,
+    "evidence_path": "docs/evidence/gojobs-current-sample-20261103.json",
+    "evidence_preserved": true,
+    "evidence_sha256": "967f8957f4ed35907f35e441db650a3aa24a6a01da14e5ca008567d1c9dadf96",
+    "new_application_candidate_count": 0,
+    "observation_count": 6,
+    "production_data_writes": 0,
+    "records": [
+      {
+        "api_deadline": "2008-08-28",
+        "api_deadline_elapsed": true,
+        "application_period_verified": false,
+        "classification": {
+          "category": "상태 미확인",
+          "reason": "not_established_recruitment",
+          "recruiting": false
+        },
+        "decision": "needs_review",
+        "evidence_code_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb",
+        "evidence_section": "desc_experiment",
+        "id": "4",
+        "new_application_eligible": false,
+        "official_source_verified": false,
+        "organization": "경상북도",
+        "reason": "official_source_and_application_period_unverified",
+        "registered_date": "2008-08-01",
+        "source": "gojobs",
+        "source_integrity_verified": true,
+        "title": "2008년도경상북도 지방소방공무원 채용시험 시행계획공고"
+      },
+      {
+        "api_deadline": "2008-09-11",
+        "api_deadline_elapsed": true,
+        "application_period_verified": false,
+        "classification": {
+          "category": "상태 미확인",
+          "reason": "not_established_recruitment",
+          "recruiting": false
+        },
+        "decision": "needs_review",
+        "evidence_code_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb",
+        "evidence_section": "desc_experiment",
+        "id": "7",
+        "new_application_eligible": false,
+        "official_source_verified": false,
+        "organization": "전라북도",
+        "reason": "official_source_and_application_period_unverified",
+        "registered_date": "2008-08-19",
+        "source": "gojobs",
+        "source_integrity_verified": true,
+        "title": "2008년도 전라북도 지방소방공무원 채용시험 시행계획 공고"
+      },
+      {
+        "api_deadline": "2008-12-29",
+        "api_deadline_elapsed": true,
+        "application_period_verified": false,
+        "classification": {
+          "category": "상태 미확인",
+          "reason": "deadline_elapsed_unverified",
+          "recruiting": false
+        },
+        "decision": "blocked_source_integrity",
+        "evidence_code_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb",
+        "evidence_section": "desc_experiment",
+        "id": "20",
+        "new_application_eligible": false,
+        "official_source_verified": false,
+        "organization": "전라북도 임실군",
+        "reason": "source_integrity_failed",
+        "registered_date": "2008-12-22",
+        "source": "gojobs",
+        "source_integrity_verified": false,
+        "title": "임실치즈과학연구소 선임연구원 채용공고"
+      },
+      {
+        "api_deadline": "2009-02-18",
+        "api_deadline_elapsed": true,
+        "application_period_verified": false,
+        "classification": {
+          "category": "상태 미확인",
+          "reason": "not_established_recruitment",
+          "recruiting": false
+        },
+        "decision": "needs_review",
+        "evidence_code_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb",
+        "evidence_section": "desc_experiment",
+        "id": "42",
+        "new_application_eligible": false,
+        "official_source_verified": false,
+        "organization": "울산광역시",
+        "reason": "detail_unverified",
+        "registered_date": "2009-01-16",
+        "source": "gojobs",
+        "source_integrity_verified": false,
+        "title": "울산광역시 2009년도 간호조무사 자격시험 시행계획 공고"
+      },
+      {
+        "api_deadline": "2009-03-20",
+        "api_deadline_elapsed": true,
+        "application_period_verified": false,
+        "classification": {
+          "category": "상태 미확인",
+          "reason": "not_established_recruitment",
+          "recruiting": false
+        },
+        "decision": "needs_review",
+        "evidence_code_sha": "9d26008cb37d48e0e98e198b9728c5b2416d30fb",
+        "evidence_section": "desc_experiment",
+        "id": "45",
+        "new_application_eligible": false,
+        "official_source_verified": false,
+        "organization": "대구광역시",
+        "reason": "detail_unverified",
+        "registered_date": "2009-02-11",
+        "source": "gojobs",
+        "source_integrity_verified": false,
+        "title": "2009년도 대구광역시지방공무원 임용시험계획 공고"
+      },
+      {
+        "api_deadline": "2026-11-13",
+        "api_deadline_elapsed": false,
+        "application_period_verified": false,
+        "classification": {
+          "category": "합격자 발표",
+          "reason": "announcement_title",
+          "recruiting": false
+        },
+        "decision": "excluded_non_recruitment",
+        "evidence_code_sha": "fb6f9af62f7a64a34fb7c7ca1abd2bea2ed2f577",
+        "evidence_section": "last_page_experiment",
+        "id": "307403",
+        "new_application_eligible": false,
+        "official_source_verified": false,
+        "organization": "대전광역시 중구 의회사무국",
+        "reason": "announcement_title",
+        "registered_date": "2026-11-03",
+        "source": "gojobs",
+        "source_integrity_verified": true,
+        "title": "2026년 제1회 대전광역시 중구의회 지방시간선택제임기제  공무원(나급) 채용시험 최종합격자 발표 및 임용후보자  임용 등록요령 공고"
+      }
+    ],
+    "scheduled_collection_enabled": false,
+    "scope": "offline_gojobs_notice_review",
+    "source_count_after": 610,
+    "source_count_before": 610,
+    "source_preserved": true,
+    "source_sha256": {
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d"
+    },
+    "status": "verified",
+    "unique_notice_count": 6
+  }
+}

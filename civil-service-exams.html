@@ -5,12 +5,39 @@
 <style>body{font-family:system-ui,'Noto Sans KR',sans-serif;background:#f5f7fb;color:#18253d;margin:0}header{background:#203fb2;color:white;padding:22px max(20px,calc((100% - 940px)/2))}a{color:#2448b9}header a{color:white}main{max-width:940px;margin:24px auto;padding:0 18px}section{background:white;border:1px solid #dfe5ee;border-radius:14px;padding:20px;margin:16px 0}.muted{color:#66748a;font-size:.9rem}.row{border-top:1px solid #e5e9f1;padding:15px 0}h2{font-size:1.1rem;margin-bottom:6px}.meta{display:flex;gap:12px;flex-wrap:wrap}input{padding:12px;width:100%;max-width:420px;box-sizing:border-box;border:1px solid #bbc7d8;border-radius:8px}label{display:block;margin-bottom:8px;font-weight:600}select{display:block;width:100%;min-width:125px;max-width:220px;padding:10px;border:1px solid #bbc7d8;border-radius:8px;background:white;color:#18253d;margin-top:6px}#results{overflow-wrap:anywhere}.row p{line-height:1.65}@media(max-width:600px){header{padding:20px 16px}header h1{font-size:1.5rem}main{margin:14px auto;padding:0 12px}section{padding:15px}.meta{gap:10px}.meta label{flex:1 1 135px;min-width:0}select{min-width:0;max-width:none}input{max-width:none}.row{padding:16px 0}.row h2{line-height:1.5}}
 </style></head>
 <body><header><a href="/">← 커리어픽 홈</a><h1>국가공무원 시험일정</h1><p>인사혁신처 공식 공개 데이터 · 제공 연도는 검증된 자료에 따라 표시</p></header>
-<main><section><label for="search">시험명 검색</label><input id="search" placeholder="예: 9급, 7급, 외교관"><p class="muted">접수 중·접수 예정 시험을 먼저 표시합니다. 원서접수·시험·합격자 발표 일정은 변경될 수 있으니 반드시 공식 공고를 확인하세요.</p><div class="meta" style="margin-top:14px"><label for="year">시험 연도 <select id="year"><option value="2026">2026년</option></select></label><label for="type">시험 종류 <select id="type"><option value="all">전체</option><option value="9급">9급</option><option value="7급">7급</option><option value="5급">5급</option><option value="외교관">외교관</option><option value="기타">기타</option></select></label><label for="state">접수 상태 <select id="state"><option value="all">전체</option><option value="접수 중">접수 중</option><option value="접수 예정">접수 예정</option><option value="접수 마감">접수 마감</option><option value="일정 확인 필요">일정 확인 필요</option></select></label><label for="sort">정렬 <select id="sort"><option value="exam">접수 상태 우선 · 시험일순</option><option value="apply">접수 상태 우선 · 접수일순</option></select></label></div><p id="count" class="muted"></p><p id="updated" class="muted"></p></section><section id="results" aria-live="polite">시험일정을 불러오는 중입니다.</section><p class="muted">출처: <a href="https://www.data.go.kr/data/3033611/fileData.do" target="_blank" rel="noopener">인사혁신처 국가공무원 시험일정 공공데이터</a> · <a href="https://www.gosi.kr/" target="_blank" rel="noopener">국가공무원 채용시스템(공식 확인)</a></p></main>
+<main><section><label for="search">시험명 검색</label><input id="search" placeholder="예: 9급, 7급, 외교관"><p class="muted">접수 상태는 저장된 일정 기준이며 접수 중·접수 예정 시험을 먼저 표시합니다. 접수 마감은 원서접수가 끝났다는 뜻으로 시험 종료와는 다릅니다. 정확한 접수 시간과 변경 일정은 공식 공고를 확인하세요.</p><div class="meta" style="margin-top:14px"><label for="year">시험 연도 <select id="year"><option value="2026">2026년</option></select></label><label for="type">시험 종류 <select id="type"><option value="all">전체</option><option value="9급">9급</option><option value="7급">7급</option><option value="5급">5급</option><option value="외교관">외교관</option><option value="기타">기타</option></select></label><label for="state">접수 상태 <select id="state"><option value="all">전체</option><option value="접수 중">접수 중</option><option value="접수 예정">접수 예정</option><option value="접수 마감">접수 마감</option><option value="일정 확인 필요">일정 확인 필요</option></select></label><label for="sort">정렬 <select id="sort"><option value="exam">접수 상태 우선 · 시험일순</option><option value="apply">접수 상태 우선 · 접수일순</option></select></label></div><p id="count" class="muted"></p><p id="updated" class="muted"></p></section><section id="results" aria-live="polite">시험일정을 불러오는 중입니다.</section><p class="muted">출처: <a href="https://www.data.go.kr/data/3033611/fileData.do" target="_blank" rel="noopener">인사혁신처 국가공무원 시험일정 공공데이터</a> · <a href="https://www.gosi.kr/" target="_blank" rel="noopener">국가공무원 채용시스템(공식 확인)</a></p></main>
 <script>
 let records=[];
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const today=()=>{const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const o=Object.fromEntries(p.map(x=>[x.type,x.value]));return o.year+'-'+o.month+'-'+o.day};
-const range=v=>{const dates=String(v??'').match(/\d{4}-\d{2}-\d{2}/g)||[];return [dates[0]||'',dates[dates.length-1]||'']};
+function calendarDate(value){
+  const match=/^(20\d{2})-(\d{1,2})-(\d{1,2})$/.exec(value);
+  if(!match)return '';
+  const [,year,month,day]=match.map(Number),date=new Date(Date.UTC(year,month-1,day));
+  if(date.getUTCFullYear()!==year||date.getUTCMonth()!==month-1||date.getUTCDate()!==day)return '';
+  return year+'-'+String(month).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+}
+function range(value){
+  if(typeof value!=='string')return ['',''];
+  const parts=value.trim().split(/\s*[~∼～–—]\s*/);
+  if(parts.length<1||parts.length>2)return ['',''];
+  const dates=parts.map(part=>calendarDate(part.trim()));
+  if(dates.some(date=>!date)||dates[0]>dates[dates.length-1])return ['',''];
+  return [dates[0],dates[dates.length-1]];
+}
+function scheduleText(value){
+  if(value==null||/^(?:\s*|\s*(?:[-―—]|미정|추후\s*공고|별도\s*공고)\s*)$/.test(String(value)))return '미정';
+  const [start,end]=range(value);
+  return start?(start===end?start:start+' ~ '+end):'공고 확인 필요';
+}
+function retrievedAt(value){
+  if(typeof value!=='string'||!/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)||!calendarDate(value.slice(0,10)))return '미확인';
+  const date=new Date(value);
+  if(!Number.isFinite(date.getTime()))return '미확인';
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(date);
+  const p=Object.fromEntries(parts.map(part=>[part.type,part.value]));
+  return p.year+'-'+p.month+'-'+p.day+' '+p.hour+':'+p.minute+':'+p.second+' (한국시간)';
+}
 function status(x){const [start,end]=range(x['원서접수기간']),now=today();if(!start||!end)return '일정 확인 필요';if(now<start)return '접수 예정';if(now<=end)return '접수 중';return '접수 마감'}
 function render(){
 const q=document.querySelector('#search').value.trim().toLowerCase();
@@ -21,31 +48,58 @@ const list=records.filter(x=>{const name=String(x['시험명']||'');const kind=/
 const key=x=>range(sort==='exam'?x['시험일']:x['원서접수기간'])[0]||'9999-99-99';
 const priority=x=>status(x)==='접수 중'?0:status(x)==='접수 예정'?1:status(x)==='일정 확인 필요'?2:3;
 list.sort((a,b)=>priority(a)-priority(b)||key(a).localeCompare(key(b))||String(a['시험명']).localeCompare(String(b['시험명']),'ko'));
-document.querySelector('#count').textContent='검색 결과 '+list.length+'건 · 한국시간 기준 '+today();
-document.querySelector('#results').innerHTML=list.length?list.map(x=>'<article class="row"><h2>'+safe(x['시험명'])+'</h2><div class="meta"><strong>'+safe(status(x))+'</strong><span>시험단계: '+safe(x['시험단계구분'])+'</span><span>선발예정인원: '+safe(x['선발예정인원'])+'</span></div><p>원서접수: '+safe(x['원서접수기간'])+'</p><p>시험일: '+safe(x['시험일'])+' · 시험장소 공고: '+safe(x['시험장소공고일'])+'</p><p>합격자 발표: '+safe(x['합격자발표일'])+'</p></article>').join(''):'해당 조건의 시험일정이 없습니다.';
+document.querySelector('#count').textContent='검색 결과 '+list.length+'개 시험단계 · 저장된 일정 기준 · 한국시간 '+today();
+document.querySelector('#results').innerHTML=list.length?list.map(x=>'<article class="row"><h2>'+safe(x['시험명'])+'</h2><div class="meta"><strong>'+safe(status(x))+'</strong><span>시험단계: '+safe(x['시험단계구분'])+'</span><span>선발예정인원: '+safe(x['선발예정인원'])+'</span></div><p>원서접수: '+safe(scheduleText(x['원서접수기간']))+'</p><p>시험일: '+safe(scheduleText(x['시험일']))+' · 시험장소 공고: '+safe(scheduleText(x['시험장소공고일']))+'</p><p>합격자 발표: '+safe(scheduleText(x['합격자발표일']))+'</p></article>').join(''):'해당 조건의 시험일정이 없습니다.';
 }
 ['search','type','state','sort'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',render));
 const yearSelect=document.getElementById('year');
-let availableYears=[];
+let availableYears=[],yearRequest=0;
+function manifestYears(manifest){
+  const seen=new Set();
+  return (Array.isArray(manifest.years)?manifest.years:[]).filter(item=>{
+    if(!item||!Number.isInteger(item.year)||item.year<2000||item.year>2099||item.path!=='data/civil-service/'+item.year+'.json'||seen.has(item.year))return false;
+    seen.add(item.year);return true;
+  });
+}
 async function loadYear(year){
+  const request=++yearRequest;
   const item=availableYears.find(x=>String(x.year)===String(year));
   if(!item)return;
+  records=[];
+  document.querySelector('#count').textContent='';
+  document.querySelector('#updated').textContent='';
   document.querySelector('#results').textContent='시험일정을 불러오는 중입니다.';
-  const url=item.path;
-  // Only paths from the repository's versioned manifest are used.
-  const response=await fetch('./'+url,{cache:'no-store'});
-  if(!response.ok)throw Error('year data unavailable');
-  const data=await response.json();
-  if(!Array.isArray(data.records))throw Error('invalid year data');
-  records=data.records;
-  document.querySelector('#updated').textContent='선택 연도: '+year+'년 · 데이터 조회 기준: '+(data.retrieved_at||'미확인')+' (UTC)';
-  render();
+  try{
+    // Only matching year/path pairs from the versioned manifest are used.
+    const response=await fetch('./'+item.path,{cache:'no-store'});
+    if(!response.ok)throw Error('year data unavailable');
+    const data=await response.json();
+    if(!Array.isArray(data.records))throw Error('invalid year data');
+    if(request!==yearRequest||String(yearSelect.value)!==String(year))return;
+    records=data.records;
+    document.querySelector('#updated').textContent='선택 연도: '+year+'년 · 데이터 조회 기준: '+retrievedAt(data.retrieved_at);
+    render();
+    // Keep source snapshot time separate from the latest successful check.
+    (async()=>{try{
+      const response=await fetch('./exam-status.json',{cache:'no-store'});
+      if(!response.ok)return;
+      const receipt=await response.json();
+      if(request!==yearRequest||String(yearSelect.value)!==String(year)||receipt.dataset_year!==Number(year)||!['changed','unchanged'].includes(receipt.status)||!Number.isFinite(Date.parse(receipt.verified_at)))return;
+      document.querySelector('#updated').textContent+=' · 마지막 정상 확인: '+retrievedAt(receipt.verified_at);
+    }catch(_){}})();
+  }catch(error){
+    if(request!==yearRequest||String(yearSelect.value)!==String(year))return;
+    records=[];
+    document.querySelector('#count').textContent='';
+    document.querySelector('#updated').textContent='';
+    document.querySelector('#results').textContent='선택한 연도의 데이터를 불러오지 못했습니다.';
+  }
 }
-yearSelect.addEventListener('change',()=>loadYear(yearSelect.value).catch(()=>{records=[];document.querySelector('#count').textContent='';document.querySelector('#results').textContent='선택한 연도의 데이터를 불러오지 못했습니다.';}));
+yearSelect.addEventListener('change',()=>loadYear(yearSelect.value));
 fetch('./data/civil-service/years.json',{cache:'no-store'})
   .then(r=>{if(!r.ok)throw Error('manifest unavailable');return r.json()})
   .then(async manifest=>{
-    availableYears=(Array.isArray(manifest.years)?manifest.years:[]).filter(x=>Number.isInteger(x.year)&&/^data\/civil-service\/20\d{2}\.json$/.test(x.path));
+    availableYears=manifestYears(manifest);
     if(!availableYears.length)throw Error('no verified years');
     availableYears.sort((a,b)=>b.year-a.year);
     yearSelect.innerHTML=availableYears.map(x=>'<option value="'+x.year+'">'+x.year+'년</option>').join('');

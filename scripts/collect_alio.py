@@ -53,7 +53,7 @@ def collect(root=ROOT):
         new['posts'] = sorted(merged.values(), key=lambda p: (p.get('due') or '9999', p['id']))
         merged_details = {**old_details, **details}
         result = {'status': 'collected', 'changed': False, 'received': len(posts),
-                  'retained': len(merged), 'new_ids': len(set(ids) - {p['id'] for p in old['posts']})}
+                  'received_ids': sorted(ids), 'retained': len(merged), 'new_ids': len(set(ids) - {p['id'] for p in old['posts']})}
         old_posts = sorted(old['posts'], key=lambda p: (p.get('due') or '9999', p['id']))
         if new['posts'] == old_posts and merged_details == old_details:
             # A successful, unchanged fetch must not rewrite source bytes/timestamps or fail CI.

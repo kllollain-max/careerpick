@@ -4,7 +4,7 @@ const { chromium } = require('playwright');
  const data=JSON.parse(fs.readFileSync('alio.json','utf8'));
  const old=new Set(JSON.parse(fs.readFileSync(process.env.ALIO_BEFORE,'utf8')).posts.map(p=>p.id));
  const added=data.posts.filter(p=>!old.has(p.id));
- if(added.length!==90 || data.posts.length!==610) throw Error('Unexpected candidate count');
+ if(!added.length || new Set(data.posts.map(p=>p.id)).size!==data.posts.length) throw Error('Unexpected candidate identities');
  const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
  const checks=[];
  fs.mkdirSync('candidate-validation',{recursive:true});

@@ -8,6 +8,7 @@ import json
 import os
 import re
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -66,13 +67,20 @@ def request_api(key, base, params):
     req = urllib.request.Request(
         f"{base}?{q}", data=b"", method="POST",
         headers={"User-Agent": "CareerPick", "Accept": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=30) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as error:
-        raise RuntimeError("ALIO HTTP status=" + str(error.code)) from None
-    except Exception as error:
-        raise RuntimeError("ALIO transport/JSON failure: " + type(error).__name__) from None
+    for attempt in range(2):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as error:
+            # Authentication, rate and other HTTP rejections are never retried.
+            raise RuntimeError("ALIO HTTP status=" + str(error.code)) from None
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as error:
+            if attempt == 1:
+                raise RuntimeError("ALIO transport failure: " + type(error).__name__) from None
+            time.sleep(1)
+        except Exception as error:
+            raise RuntimeError("ALIO transport/JSON failure: " + type(error).__name__) from None
     if not isinstance(payload, dict) or str(payload.get("resultCode")) not in ("0", "200"):
         code = str(payload.get("resultCode")) if isinstance(payload, dict) else ""
         safe_code = code if re.fullmatch(r"-?\d{1,4}", code) else "unknown"

@@ -1,0 +1,80 @@
+name: Isolated operating path verification
+on:
+  push:
+    branches: [codex/operations-recovery-20261103]
+    paths:
+      - alio.py
+      - scripts/run_operations.py
+      - tests/test_operations.py
+      - scripts/collect_alio.py
+      - record-migration.js
+      - tests/test_record_migration.cjs
+      - scripts/run_exam_operations.py
+      - tests/test_exam_operations.py
+      - .github/workflows/operations-check.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: careerpick-isolated-operations
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest test_alio_new_contract
+      - run: python -m unittest discover -s tests -p test_operations.py
+      - run: node --test tests/test_record_migration.cjs
+      - name: Run real collection without source replacement or deployment
+        env:
+          ALIO_KEY: ${{ secrets.ALIO_KEY }}
+        run: python scripts/run_operations.py
+      - run: python -m unittest discover -s tests -p test_exam_operations.py
+      - name: Validate independent exam candidate
+        env:
+          MPM_EXAM_KEY: ${{ secrets.MPM_EXAM_KEY }}
+        run: python scripts/run_exam_operations.py
+      - name: Build validated candidate in isolated checkout
+        run: |
+          cp operations-output/candidate/alio.json alio.json
+          cp operations-output/candidate/alio-detail.json alio-detail.json
+          cp operations-output/candidate/operations-status.json operations-status.json
+          cp exam-operation-output/data/civil-service/2026.json data/civil-service/2026.json
+          cp exam-operation-output/exam-status.json exam-status.json
+          python scripts/build_public_site.py
+      - name: Store verified candidate on recovery branch only
+        run: |
+          python - <<'PYCODE'
+          import json,shutil
+          from pathlib import Path
+          r=json.loads(Path('operations-output/report.json').read_text())
+          assert r['validation']=='success' and r['originals_preserved']
+          for n in ('alio.json','alio-detail.json','operations-status.json'):
+              shutil.copyfile(Path('operations-output/candidate')/n,n)
+          PYCODE
+          cp exam-operation-output/data/civil-service/2026.json data/civil-service/2026.json
+          cp exam-operation-output/exam-status.json exam-status.json
+          test "$GITHUB_REF" = refs/heads/codex/operations-recovery-20261103
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add alio.json alio-detail.json operations-status.json data/civil-service/2026.json exam-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Store isolated verified candidate for owner review'
+            git push origin HEAD:codex/operations-recovery-20261103
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: operating-path-verification
+          path: |
+            operations-output/
+            exam-operation-output/
+            build-report.json
+          retention-days: 7
