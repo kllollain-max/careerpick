@@ -34,7 +34,7 @@ function validate(backup){
   if(!object(d.apps)||Object.keys(d.apps).length>10000)throw Error('지원 기록이 올바르지 않습니다.');
   for(const [id,a]of Object.entries(d.apps)){
    if(!id||id.length>128||!object(a)||(a.st!==undefined&&!['plan','applied','doc','exam','itv','pass','fail'].includes(a.st)))throw Error('지원 상태가 올바르지 않습니다.');
-   for(const k of ['memo','title','org','url','exam','itv','source'])if(a[k]!==undefined&&(typeof a[k]!=='string'||a[k].length>20000))throw Error('지원 기록 필드가 올바르지 않습니다.');
+   for(const k of ['memo','title','org','url','exam','itv','source'])if(a[k]!==undefined&&(typeof a[k]!=='string'||a[k].length>(k==='memo'?maxBytes:20000)))throw Error('지원 기록 필드가 올바르지 않습니다.');
    if(a.due!==undefined&&a.due!==null&&typeof a.due!=='string')throw Error('마감일 형식이 올바르지 않습니다.');
    if(a.ck!==undefined&&(!Array.isArray(a.ck)||a.ck.some(x=>!object(x)||typeof x.t!=='string'||(x.ph!==undefined&&!['pre','post'].includes(x.ph))||![0,1,false,true].includes(x.d))))throw Error('체크리스트가 올바르지 않습니다.');
    if(a.url&&!/^https?:\/\//i.test(a.url))throw Error('지원 기록 링크가 올바르지 않습니다.');
@@ -92,7 +92,7 @@ function apply(storage,backup,options={}){
  if(recoveryStatus(storage).pending)throw Error('이전 가져오기 복구가 필요합니다. 기존 사본을 덮어쓰지 않았습니다.');
  if(options.expectedOriginals&&stable(old.raw)!==stable(options.expectedOriginals))throw Error('미리보기 후 다른 탭에서 기록이 변경됐습니다. 파일을 다시 선택해 비교하세요.');
  const result=merge(old.data,d),after={...old.raw};for(const k of keys)if(result.data[k]!==undefined)after[k]=JSON.stringify(result.data[k]);
- const journal={format:'careerpick-before-import',version:1,state:'prepared',created_at:new Date().toISOString(),exported_at:backup.exported_at||null,data:old.data,raw_records:old.raw,expected_after:after};
+ const journal={format:'careerpick-before-import',version:1,state:'prepared',created_at:new Date().toISOString(),exported_at:backup.exported_at||null,raw_records:old.raw,expected_after:after};
  // Failure before checkpoint verification cannot justify writing any active record.
  checkedWrite(storage,journalKey,JSON.stringify(journal));
  try{

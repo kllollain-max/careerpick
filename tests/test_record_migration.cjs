@@ -84,3 +84,7 @@ test('ambiguous legacy ID conflict keeps the complete existing object without mi
  const current={apps:{legacy:{st:'plan'}}},incoming={apps:{legacy:{st:'applied',memo:'other notice',exam:'2099-01-01',url:'https://other.example/notice'}}};
  const result=r.merge(current,incoming);assert.deepEqual(result.data.apps.legacy,current.apps.legacy);assert.equal(result.data['careerpick-import-archive'][0].apps.legacy.memo,'other notice');
 });
+
+test('long notes that fit the supported file limit round-trip without an unrelated 20000-character cutoff',()=>{
+ const memo='긴 메모🙂\n'.repeat(12000),s=memory();r.apply(s,backup({apps:{a1:{st:'plan',memo}}}));assert.equal(JSON.parse(s.getItem('apps')).a1.memo,memo);
+});
