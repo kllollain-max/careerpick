@@ -24,8 +24,9 @@ def list_xml(*rows, total=None, code="00"):
 
 
 def detail_xml(identity, category="e01", **fields):
+    values = {"contents": "공고 본문", "link01": "https://www.gojobs.go.kr/apmView.do?menuNo=401&idx=" + str(identity), **fields}
     return ("<response><header><resultCode>00</resultCode></header><body>"
-            + row(identity, category, contents="공고 본문", link01="https://www.gojobs.go.kr/apmView.do?menuNo=401&idx=" + str(identity), **fields)
+            + row(identity, category, **values)
             + "</body></response>").encode()
 
 
@@ -181,6 +182,35 @@ class GOJOBSContractTests(unittest.TestCase):
     def test_dtd_and_large_responses_rejected(self):
         self.assert_code("unsafe_xml_declaration", lambda: self.client(b'<!DOCTYPE response [<!ENTITY x "bad">]>' + list_xml()).list_sample("e01"))
         self.assert_code("response_too_large", lambda: self.client(b"x" * (gojobs.MAX_BYTES + 1)).list_sample("e01"))
+
+    def test_optional_unusable_links_do_not_hide_valid_detail(self):
+        client = self.client(list_xml(row(1)), list_xml(),
+                             detail_xml(1, link01="/RAW_PRIVATE_REFERENCE", link02="javascript:RAW_PRIVATE_REFERENCE",
+                                        link03="https://agency.go.kr/recruit/123"))
+        result = client.verify()
+        self.assertTrue(result["detail_verified"])
+        self.assertEqual(result["detail_verified_count"], 1)
+        self.assertEqual(result["source_link_counts"], {"validated": 1, "not_provided": 0, "unverified": 2})
+        self.assertFalse(result["source_links_all_validated"])
+        detail = result["detail_samples"][0]
+        self.assertEqual(detail["source_links"], ["https://agency.go.kr/recruit/123"])
+        self.assertEqual(detail["source_link_status"], {
+            "link01": "relative_reference", "link02": "unsupported_scheme", "link03": "validated_http_url"})
+        self.assertNotIn("RAW_PRIVATE_REFERENCE", str(result))
+        self.assertTrue(detail["content_present"])
+
+    def test_unusable_link_classifications_never_return_raw_values(self):
+        samples = [("", "not_provided"), ("bad-reference", "schemeless_reference"),
+                   ("https://", "invalid_url"), ("https://name:pass@agency.go.kr", "credential_component_rejected"),
+                   ("https://agency.go.kr:BAD", "invalid_url"), ("https://agency.go.kr/a\nb", "invalid_url")]
+        for value, status in samples:
+            with self.subTest(status=status):
+                self.assertEqual(gojobs._public_link(value), (None, status))
+
+    def test_optional_link_policy_does_not_weaken_essential_detail_or_key_checks(self):
+        self.assert_code("detail_identity_mismatch", lambda: self.client(detail_xml(2, link01="/bad")).detail("1"))
+        self.assert_code("invalid_title", lambda: self.client(detail_xml(1, title="", link01="/bad")).detail("1"))
+        self.assert_code("credential_echo_rejected", lambda: self.client(detail_xml(1, link01="/" + KEY)).detail("1"))
 
     def test_transport_exception_never_includes_credential(self):
         self.assert_code("transport_error", lambda: self.client(RuntimeError(KEY)).list_sample("e01"))

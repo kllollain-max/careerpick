@@ -64,18 +64,31 @@ def _date(value):
 
 
 def _public_link(value):
+    """Validate an optional source link without inventing or following a URL.
+
+    Missing or unusable optional references do not negate a valid detail record.
+    Unusable raw values never leave the client; only a fixed status is reported.
+    """
     if not value:
-        return None
+        return None, "not_provided"
+    if len(value) > 2048 or any(ord(c) < 33 for c in value):
+        return None, "invalid_url"
     try:
         parsed = urllib.parse.urlsplit(value)
+        hostname = parsed.hostname
+        port = parsed.port
     except ValueError:
-        raise APIError("invalid_source_link") from None
-    if (parsed.scheme not in {"http", "https"} or not parsed.hostname
-            or parsed.username or parsed.password or len(value) > 2048
-            or any(ord(c) < 32 for c in value)):
-        raise APIError("invalid_source_link")
-    # The API supplies source links; do not invent or follow them in this check.
-    return value
+        return None, "invalid_url"
+    if not parsed.scheme:
+        status = "relative_reference" if value.startswith(("/", ".", "#", "?")) else "schemeless_reference"
+        return None, status
+    if parsed.scheme not in {"http", "https"}:
+        return None, "unsupported_scheme"
+    if parsed.username is not None or parsed.password is not None:
+        return None, "credential_component_rejected"
+    if not hostname or any(character.isspace() for character in hostname):
+        return None, "invalid_url"
+    return value, "validated_http_url"
 
 
 class Client:
@@ -244,11 +257,17 @@ class Client:
         if actual_id != identity:
             raise APIError("detail_identity_mismatch")
         institution_type, recruitment_type, field_layout = self._classifications(row)
+        links, link_status = [], {}
+        for name in ("link01", "link02", "link03"):
+            value = _text(row, name, limit=MAX_BYTES)
+            link, status = _public_link(value)
+            link_status[name] = status
+            if link is not None:
+                links.append(link)
         record = {"id": actual_id, "title": _text(row, "title", required=True),
                   "institution_type": institution_type, "recruitment_type": recruitment_type,
-                  "field_layout": field_layout,
-                  "source_links": [link for name in ("link01", "link02", "link03")
-                                   if (link := _public_link(_text(row, name, limit=2048)))],
+                  "field_layout": field_layout, "source_links": links,
+                  "source_link_status": link_status,
                   "content_present": bool(_text(row, "contents", limit=MAX_BYTES))}
         self._reject_credential_echo(record)
         self.success_counts["detail"] += 1
@@ -277,6 +296,11 @@ class Client:
                     or detail["recruitment_type"] != record["recruitment_type"]):
                 raise APIError("detail_list_mismatch")
             details.append(detail)
+        link_counts = {"validated": 0, "not_provided": 0, "unverified": 0}
+        for detail in details:
+            for status in detail["source_link_status"].values():
+                counter = "validated" if status == "validated_http_url" else "not_provided" if status == "not_provided" else "unverified"
+                link_counts[counter] += 1
         summary = {"service": SERVICE_ID, "source_url": SOURCE_URL,
                    "endpoint_base": BASE_URL, "list_endpoint": BASE_URL + "/getList",
                    "detail_endpoint": BASE_URL + "/getItem", "list_verified": True,
@@ -289,6 +313,8 @@ class Client:
                    "filters": {"Instt_se": "g02", "Pblanc_ty": ["e01", "e02"], "pageNo": 1,
                                "numOfRows": PAGE_SIZE, "Sort_order": "1"},
                    "samples": records, "detail_samples": details,
+                   "source_link_counts": link_counts,
+                   "source_links_all_validated": bool(link_counts["validated"]) and not link_counts["unverified"],
                    "observed_field_layouts": {
                        "list": sorted({record["field_layout"] for record in records}),
                        "detail": sorted({record["field_layout"] for record in details}),

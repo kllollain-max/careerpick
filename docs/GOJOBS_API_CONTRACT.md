@@ -31,7 +31,7 @@ The detail schema returns `response/body/item` with `idx`, `title`, `type01`, `t
 - Maximum five API requests in one successful verification; no full collection or production snapshot update.
 - Report totals per filter, returned sample count, IDs, titles, organizations, parsed dates, supplied source links, and verification counters.
 - No claim that list totals are active opportunities, no inferred official closure, and no claim that this API covers every local exam schedule.
-- Source links are validated for ordinary HTTP(S) structure and reported as provided; neither their pages nor attachments are downloaded.
+- Optional source links are evaluated separately: only valid absolute HTTP(S) references are returned; absent/unusable references are reported with fixed status tokens. Their raw unusable values are omitted. Neither source pages nor attachments are downloaded or source URLs synthesized.
 - An authentic but empty list is explicitly reported with `empty_list=true`, `detail_verified=false`, and `detail_status=unverified_empty_list`. It is not an independent-detail success.
 
 ## Credential and failure handling
@@ -59,3 +59,9 @@ A follow-up failure now exposes only `last_response_diagnostic.observed_filters`
 Read-only diagnostic run [41580523270](https://github.com/kllollain-max/careerpick/actions/runs/41580523270), code HEAD `f7592fc`, observed `type01=e01`, `type02=g02` when requesting `Pblanc_ty=e01` and `Instt_se=g02`. This establishes that the actual list swaps the response field meanings compared with the documentation; the query parameter names themselves match the official specification.
 
 The adapter now recognizes exactly two unambiguous layouts: `type01` in the documented `g` namespace with `type02` in the documented `e` namespace, or the observed opposite. Both are normalized to institution/recruitment meanings before checking the exact requested `g02` and `e01`/`e02` values. Two `g` codes, two `e` codes, or unknown codes are rejected. Details are normalized independently and must still match list ID, title and normalized categories. `observed_field_layouts` records fixed tokens for the actually observed list and detail layouts. This correction does not assume that detail or the remaining fields have already passed live validation.
+
+### Optional source links kept separate from essential detail validation
+
+Run [41580701424](https://github.com/kllollain-max/careerpick/actions/runs/41580701424), code `4268ca508a6e6bf7f13ac43057a2e159a1538cf4`, verified both list queries and reached the first detail, but the old adapter failed `invalid_source_link` for an optional `link01`/`link02`/`link03` value. That error alone does not establish the original value's format; raw link content was not logged.
+
+The specification describes those link fields as strings/URLs and gives no relative-URL base. Therefore the adapter does not guess, resolve, or follow unusable references. It now retains only structurally valid absolute HTTP(S) links and reports fixed per-field statuses (`not_provided`, `relative_reference`, `schemeless_reference`, `unsupported_scheme`, `credential_component_rejected`, `invalid_url`, `validated_http_url`). The report separately counts validated, absent and unverified link slots. API/detail success never means every source link or linked page was verified. ID, title, normalized categories, list/detail identity and content-presence checks remain in place, as does credential-echo rejection before optional fields are processed.
