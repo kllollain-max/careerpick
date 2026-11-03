@@ -76,22 +76,22 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
    const legacy={format:'careerpick-backup',version:1,data:{saved:['a123456','legacy-unlinked'],apps:{a123456:{st:'applied',memo:'old-format 합성',ck:[{t:'제출',ph:'pre',d:1}],exam:'2099-12-01'}},prefs:{emp:['정규직'],edu:[],region:['강원'],cat:[],kw:''}}};const x=await fresh(browser);const r=await importFile(x.p,upload(legacy,'synthetic-old-origin.json'));assert(r.preview.includes('미제공 (과거 백업)'));assert(r.alert.includes('병합 완료'));assert.equal(await x.p.evaluate(()=>APPS.a123456.memo),'old-format 합성');assert(await x.p.evaluate(()=>SAVED.has('legacy-unlinked')));await x.ctx.close();
   });
   await check('site/service-worker update and cached offline reload preserve personal records',async()=>{
-   const workerFile=path.resolve('dist/sw.js'),original=fs.readFileSync(workerFile,'utf8'),outage=path.resolve('_preview/.cp-audit-outage');let x;
+   const version=path.resolve('_preview/.cp-worker-version'),outage=path.resolve('_preview/.cp-audit-outage');let x;
    try{
     x=await fresh(browser,{sw:true,seed:{saved:'["a999999"]',apps:'{"a999999":{"st":"plan","memo":"SW-preserved","ck":[]}}'}});const p=x.p;await p.evaluate(()=>navigator.serviceWorker.ready);await p.waitForFunction(()=>!!navigator.serviceWorker.controller);const before=await records(p);
     for(let trial=1;trial<=3;trial++){let stage='baseline-ready',previewOffline=false;
      try{
       await p.evaluate(async()=>{const r=await navigator.serviceWorker.register('sw.js',{updateViaCache:'none'});await r.update();});await p.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return r&&!r.installing&&!r.waiting&&r.active?.state==='activated';});stage='worker-update-ack';
       const marker='CP_RECORDS_AUDIT_V2_'+trial;
-      fs.writeFileSync(workerFile,original+'\nself.addEventListener("message",e=>{if(e.data==="CP_RECORDS_AUDIT")e.source.postMessage('+JSON.stringify(marker)+');});\n');const mtime=new Date(Date.now()+trial*3000);fs.utimesSync(workerFile,mtime,mtime);
+      fs.writeFileSync(version,marker);
       await p.evaluate(async marker=>{window.__recordsWorkerV2=false;navigator.serviceWorker.addEventListener('message',e=>{if(e.data===marker)window.__recordsWorkerV2=true;});await (await navigator.serviceWorker.getRegistration()).update();},marker);
       await p.waitForFunction(()=>{navigator.serviceWorker.controller?.postMessage('CP_RECORDS_AUDIT');return window.__recordsWorkerV2===true;});
       stage='online-reload';await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
       stage='cache-ready';await p.waitForFunction(async()=>{const c=await caches.open('careerpick-pages-v3'),urls=[location.pathname,...[...document.scripts].map(s=>s.src).filter(u=>u&&new URL(u).origin===location.origin)];for(const u of urls)if(!await c.match(u))return false;return true;},null,{timeout:15000});
       stage='offline-reload';fs.writeFileSync(outage,'synthetic 503');previewOffline=true;await x.ctx.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);assert(await p.evaluate(()=>CP_FEED_CACHE.size>0),'actual cached response required');console.log('PASS consecutive worker replacement/offline trial '+trial+' actual cached fallback');
-     }catch(error){try{console.log('SW failure diagnostics '+JSON.stringify(await p.evaluate(()=>({ready:document.readyState,boot:typeof CP_DATA_LOADING,loading:typeof CP_DATA_LOADING==='undefined'?null:CP_DATA_LOADING,worker:!!navigator.serviceWorker.controller}))));}catch(_){}throw Error('trial '+trial+' '+stage+': '+error.message);}finally{if(previewOffline)fs.unlinkSync(outage);fs.writeFileSync(workerFile,original);await x.ctx.setOffline(false);}
+     }catch(error){try{console.log('SW failure diagnostics '+JSON.stringify(await p.evaluate(()=>({ready:document.readyState,boot:typeof CP_DATA_LOADING,loading:typeof CP_DATA_LOADING==='undefined'?null:CP_DATA_LOADING,worker:!!navigator.serviceWorker.controller}))));}catch(_){}throw Error('trial '+trial+' '+stage+': '+error.message);}finally{if(previewOffline)fs.unlinkSync(outage);await x.ctx.setOffline(false);}
     }
-   }finally{fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}
+   }finally{if(fs.existsSync(version))fs.unlinkSync(version);if(fs.existsSync(outage))fs.unlinkSync(outage);if(x)await x.ctx.close();}
   });
   if(report.checks.some(x=>x.result==='fail'))process.exitCode=1;
   console.log(JSON.stringify({record_scenarios:report.checks.length,passed:report.checks.filter(x=>x.result==='pass').length,actual_user_records:false,actual_old_origin_backup:false,backup_files_uploaded:false}));
