@@ -60,7 +60,7 @@ function cpBrowseRestorePosition(snapshot,restoreFocus=false){
   const card=link?.closest('li'),top=card?scrollY+card.getBoundingClientRect().top-snapshot.anchor.offset:snapshot.top;
   cpBrowseIgnoreScrollUntil=performance.now()+250;window.scrollTo({top:Math.max(0,top),behavior:'instant'});
   if(link&&restoreFocus)link.focus({preventScroll:true});
-  cpRestoringBrowse=false;if(cpActiveBrowseId)cpBrowseMemory.set(cpActiveBrowseId,snapshot);
+  cpRestoringBrowse=false;if(cpActiveBrowseId)cpBrowseMemory.set(cpActiveBrowseId,link?{...snapshot,limit:cpVisibleLimit,top:scrollY,anchor:cpBrowseAnchorFor(link)}:snapshot);
  }));
 }
 function cpBrowseCanRestore(snapshot){
