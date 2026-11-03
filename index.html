@@ -760,7 +760,6 @@ footer .src b{color:var(--ink)}
 <script src="record-migration.js"></script>
 <script src="record-store.js"></script>
 <script src="homepage-ux.js"></script>
-<script src="browse-state.js"></script>
 <script src="homepage-ui.js"></script>
 <script>
 // ── 설정 ──
@@ -2035,7 +2034,7 @@ async function openJob(id, push = true){
   cpSaveBrowse(id);
   JV = id;
   if(!push)JV_PUSHED=!!history.state?.job;
-  if(push && location.hash !== "#job=" + id){ history.replaceState({...history.state,cpBrowse:{...state},cpScroll:scrollY},"",location.href); history.pushState({job:id}, "", "#job=" + id); JV_PUSHED = true; }
+  if(push && location.hash !== "#job=" + id){try{history.replaceState({...history.state,cpBrowse:{...state},cpScroll:scrollY},"",location.href);history.pushState({job:id},"","#job="+id);JV_PUSHED=true;}catch(_){JV_PUSHED=false;}}
   $("jobview").hidden = false; cpSyncDialogState(); document.body.style.overflow = "hidden";
   $("jvBody").innerHTML = jobViewHTML(p, null);
   $("jvBack").focus();
@@ -2055,7 +2054,7 @@ function closeJob(fromPop){
   if(!JV) return;
   JV = null; $("jobview").hidden = true; cpSyncDialogState(); document.body.style.overflow = "";
   if(!fromPop && location.hash.startsWith("#job=")){
-    if(JV_PUSHED) history.back(); else history.replaceState(null, "", location.pathname + location.search);
+    try{if(JV_PUSHED)history.back();else history.replaceState(null,"",location.pathname+location.search);}catch(_){}
   }
   JV_PUSHED = false;
 }
@@ -2462,14 +2461,14 @@ function cpRecordTab(){
   if(CP_LAST_TAB === null){
     CP_LAST_TAB = state.tab;
     const initial = history.state && typeof history.state === "object" ? history.state : {};
-    history.replaceState({...initial, cpTab:state.tab, cpQ:state.q || "", cpDepth:0}, "", location.href);
+    try{history.replaceState({...initial,cpTab:state.tab,cpQ:state.q||"",cpDepth:0},"",location.href);}catch(_){}
   } else if(CP_RESTORING_TAB){
     CP_LAST_TAB = state.tab;
     CP_TAB_DEPTH = Math.max(0, Number(history.state?.cpDepth) || 0);
   } else if(CP_LAST_TAB !== state.tab){
     CP_LAST_TAB = state.tab;
     CP_TAB_DEPTH++;
-    history.pushState({cpBrowseId:cpNewBrowseEntry(),cpTab:state.tab, cpQ:state.q || "", cpDepth:CP_TAB_DEPTH}, "", location.pathname + location.search);
+    try{history.pushState({cpBrowseId:cpNewBrowseEntry(),cpTab:state.tab,cpQ:state.q||"",cpDepth:CP_TAB_DEPTH},"",location.pathname+location.search);}catch(_){CP_TAB_DEPTH=Math.max(0,CP_TAB_DEPTH-1);}
   }
   cpUpdateBackButton();
 }

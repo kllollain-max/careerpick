@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const ctx=vm.createContext({document:{addEventListener(){}},setTimeout,clearTimeout});vm.runInContext(fs.readFileSync('browse-state.js','utf8'),ctx);
+const ctx=vm.createContext({document:{addEventListener(){}},setTimeout,clearTimeout});vm.runInContext(fs.readFileSync('homepage-ui.js','utf8').split('/* UI wiring')[0],ctx);
 const valid=raw=>JSON.parse(JSON.stringify(vm.runInContext('cpBrowseValid('+JSON.stringify(raw)+')',ctx)));
 const base={version:1,state:{tab:'all',sort:'due',q:'간호',region:'강원',onlyNew:false},limit:90,top:1234,anchor:{id:'a123',offset:31}};
 test('browse snapshot retains range and relative anchor',()=>assert.deepEqual(valid(base),base));
