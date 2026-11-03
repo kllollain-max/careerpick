@@ -1,9 +1,28 @@
-# CareerPick restoration — approval pending
+# CareerPick
 
 Restored from `CareerPick_kllollain_max_restore_20261101.zip`; original public snapshot commit `716c86da48ae2e852f75655af746d3ac8e7c494b`.
 
-Target repository: `kllollain-max/careerpick` (private repository created 2026-11-03).
-Target URL after approval: `https://kllollain-max.github.io/careerpick/`.
+Repository: `kllollain-max/careerpick`, originally created as a private repository on 2026-11-03.
+Live site: [CareerPick](https://kllollain-max.github.io/careerpick/).
+
+## Initial release status
+
+On 2026-11-03 the owner approved making this repository public, merging PR #1 and running one manual GitHub Pages deployment for free operation. PR #1 was merged at 06:49:34 UTC in `643bd425621dc1ca5fcb479aee09733a346049ea`. The reviewed manual workflow was added to main in `d4d9681a935aa899a5605e5ae1ed7c803c795966`. The repository is now public and the approved manual Pages deployment succeeded.
+
+The live deployment uses the approved source SHA below. Later audit/documentation commits on main do not change the published site automatically.
+
+| Release record | Actual result |
+|---|---|
+| Recorded at (KST) | `2026-11-03 16:15:32 KST` |
+| Repository visibility | `public` |
+| Main commit at deployment | `13b5e59280411940fdd7cb73617aa397a2ac9a44` |
+| Pages configuration | `GitHub Actions; HTTPS site enabled` |
+| Approved deployment source SHA | `bee342c7c1db94e44172b47b78443540c7a34147` |
+| Deployment run | `https://github.com/kllollain-max/careerpick/actions/runs/41593785022` |
+| Deployment result | `success — 2026-11-03 16:04:08 KST` |
+| Live root, direct detail, assets and browser storage | `PASS: root rendering; 한국잡월드 search returned 2 results; saved notice persisted across detail navigation and root return; test save removed (0 remaining); /careerpick/jobs/a306130.html direct open and refresh; sampled assets/data HTTP 200.` |
+
+Scheduled collection, automatic production-data updates and production integration of the new GOJOBS/MPM APIs remain on hold.
 
 ## Run locally
 
@@ -20,7 +39,7 @@ Serve `dist/` mounted under `/careerpick/`. The source files preserve the origin
 
 ## Data and limitations
 
-ALIO review branch: 610 unique IDs, collected 2026-11-03 12:32:01 KST. This includes 520 preserved cards plus 90 new cards. Date-expired retained notices are not active vacancies. Archived and newly generated detail pages are a separate population. Date-based deadline states update at build/runtime; official corrections and early closures require live collection and source checks. Date-only deadlines remain uncertain on the closing day. Every notice's latest reception status has NOT been independently verified.
+Published ALIO snapshot: 610 unique IDs, collected 2026-11-03 12:32:01 KST. This includes 520 preserved cards plus 90 new cards. Date-expired retained notices are not active vacancies. Archived and newly generated detail pages are a separate population. Date-based deadline states update at build/runtime; official corrections and early closures require live collection and source checks. Date-only deadlines remain uncertain on the closing day. Every notice's latest reception status has NOT been independently verified.
 
 Search, filters, matched conditions, saved notices and application tracking reuse the original code. Browser storage is local to the device/domain; there is no recovered account sign-in or server synchronization. Old-domain local storage cannot migrate automatically; original JSON import/export remains available.
 
@@ -30,21 +49,24 @@ Search, filters, matched conditions, saved notices and application tracking reus
 
 Required Secret: `ALIO_KEY` for the official ALIO OpenData service. On 2026-11-03 the signed-in official Swagger UI verified POST/query endpoints `https://opendata.alio.go.kr/new/v1/recruit/list.do` and `detail.do`, required `serviceKey`, detail `sn`, and JSON envelopes. See `docs/ALIO_NEW_CONTRACT_20261103.md`. The legacy data.go.kr key is not interchangeable.
 
-`scripts/verify_alio_live.py` checks list and one independent detail identity, then collects in an isolated staging directory. It leaves repository snapshots untouched and produces private Actions candidate artifacts plus a sanitized report. A failed check does not prove bad credentials or missing approval unless an official numeric response identifies it.
+`scripts/verify_alio_live.py` checks list and one independent detail identity, then collects in an isolated staging directory. It leaves repository snapshots untouched and produces Actions candidate artifacts plus a sanitized report. A failed check does not prove bad credentials or missing approval unless an official numeric response identifies it.
 
-The ALIO live-check workflow has read-only contents permission and runs on pushes affecting named check files on the restoration branch only. There is no schedule or deployment. Existing manual static verification remains available. Pages proposals remain disabled. Production persistence and scheduling require separate approval.
+The ALIO live-check workflow has read-only contents permission and runs on pushes affecting named check files on the restoration branch only. There is no schedule or deployment. Existing manual static verification remains available. The reviewed Pages workflow is active at `.github/workflows/deploy-pages.yml` and accepts manual dispatch only, with an exact `approved_sha`. Production persistence and scheduling remain on hold.
 
-## Approval and deployment
+## Deployment and operating scope
 
-1. Create a **private** `kllollain-max/careerpick` repository with an initial README and make it accessible through the existing GitHub connection. Repository created using the approved signed-in browser. GitHub connection confirms admin/push access.
-2. Import this recovery branch, open a Draft PR; reuse successful tests unless merge integration changes inputs.
-3. Review source/commit, data freshness, collection contract and secrets. Do not mix with automation-system PR #1/#5 or edit blog schedules.
-4. Only after owner approval: merge, adjust visibility if the account's Pages plan requires it, enable GitHub Actions Pages source, activate the reviewed manual Pages workflow and run it once.
-5. Verify live root, direct detail refresh, assets and browser storage. Only then report operational recovery.
-6. Rollback: redeploy a previously verified static artifact/commit through the approved manual workflow; preserve JSON snapshots and browser data. For a first failed deployment, keep the last reviewed artifact and restore that exact artifact, or disable publication only with owner authorization.
+The owner approved the initial public release. PR #1 is merged and the website is published using GitHub Pages from GitHub Actions. The active workflow `.github/workflows/deploy-pages.yml` runs only on manual dispatch, requires `approval=DEPLOY_CAREERPICK` and a reviewed 40-character `approved_sha`, verifies the checked-out SHA, and publishes only the generated `dist/`.
 
-New certificate/recommendation/advertising functionality is not implemented. Existing archived pages remain for compatibility. Ads, push and external blog automations are not enabled.
+Scheduled collection, automatic production-data updates and GOJOBS/MPM production integration remain on hold. The manual candidate collection proposal stays in `review-workflows/collect-alio.yml.disabled`. Blog, Threads and other repository schedules are outside this release.
+
+Rollback uses a previously verified source commit through the manual deployment workflow while preserving JSON snapshots and browser data. New certificate/recommendation/advertising functionality is not implemented; archived pages remain for compatibility.
 
 ## Candidate integration validation
 
-The verified candidate pair is now applied to the recovery branch. All 520 previous cards are unchanged; all 90 new IDs have matching detail records and generated detail pages. Successful validation of code HEAD 26d8c36200f62f71b7c952043b508e805467e716: https://github.com/kllollain-max/careerpick/actions/runs/41573700536 . Build: 1,288 files, 30,141 HTML links, missing links 0; detail tests 27 and homepage tests 48 passed. Search/detail checks at 320/390/1440px passed with Korean fonts. This is predeployment validation, not a live-site recovery claim. No schedule, main merge or Pages publication.
+The verified candidate pair is now applied to the recovery branch. All 520 previous cards are unchanged; all 90 new IDs have matching detail records and generated detail pages. Successful validation of code HEAD 26d8c36200f62f71b7c952043b508e805467e716: https://github.com/kllollain-max/careerpick/actions/runs/41573700536 . Build: 1,288 files, 30,141 HTML links, missing links 0; detail tests 27 and homepage tests 48 passed. Search/detail checks at 320/390/1440px passed with Korean fonts. This remains the predeployment validation record. The current release result is recorded above; scheduled collection remains disabled.
+
+## Release evidence
+
+[Deployment run](https://github.com/kllollain-max/careerpick/actions/runs/41593785022) succeeded with 610 ALIO rows, 1,288 output files and 30,141 checked HTML links with no missing local links. Public HTTP checks confirmed that both data JSON files exactly match their retained SHA256 hashes. See [release evidence](docs/evidence/public-release-20261103.json).
+
+[History audit](https://github.com/kllollain-max/careerpick/actions/runs/41593953112) passed: 36 reachable commits, 1,332 blobs, all four registered credentials checked, zero unresolved findings. Three exact historical mock-test fixtures were reviewed and recorded separately. This targets registered credentials and high-signal token/private-key patterns; it is not a guarantee about every unknown secret type.

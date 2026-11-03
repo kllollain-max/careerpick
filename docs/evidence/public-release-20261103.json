@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "repository": "kllollain-max/careerpick",
+  "site_url": "https://kllollain-max.github.io/careerpick/",
+  "release_authorization": "User requested free operation through a public repository; PR merge, Pages setup and one manual deployment were authorized.",
+  "repository_visibility": "public",
+  "pages_enabled": true,
+  "merge": {
+    "pr_number": 1,
+    "sha": "643bd425621dc1ca5fcb479aee09733a346049ea",
+    "merged_at": "2026-11-03T06:49:34Z"
+  },
+  "deployment": {
+    "run_id": 41593785022,
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/41593785022",
+    "job_id": 125776300749,
+    "event": "workflow_dispatch",
+    "workflow_ref": "main",
+    "workflow_head_sha": "13b5e59280411940fdd7cb73617aa397a2ac9a44",
+    "approved_source_sha": "bee342c7c1db94e44172b47b78443540c7a34147",
+    "checkout_sha_verified": true,
+    "conclusion": "success",
+    "reported_success_at": "2026-11-03T07:04:08.9771071Z",
+    "artifact_id": 13210549361,
+    "artifact_sha256": "ad645ab3587ef4716aff41f1855a579cff883d68fe0ae0692ae2fe2b088cd3cb"
+  },
+  "build_report": {
+    "built_at": "2026-11-03T07:03:44+00:00",
+    "site_url": "https://kllollain-max.github.io/careerpick/",
+    "source_snapshot": "delivery-branch-716c86d",
+    "source_commit": "716c86da48ae2e852f75655af746d3ac8e7c494b",
+    "alio_snapshot_at": "2026-11-03T12:32:01+09:00",
+    "alio_rows": 610,
+    "output_files": 1288,
+    "expired_archived_schema_removed": 1,
+    "source_sha256": {
+      "alio.json": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d",
+      "alio-detail.json": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+      "monitor.json": "bf764228de3a7fbe847900189cd6581b133314eea22cb4c6c6628da123360c36",
+      "posts.json": "23e29ea515007e00d564f5ccc71a18d40287d02d03a4c2ce22f37f78fcebab1d",
+      "qnet.json": "74b9903db7a78008bafd0d6e66ee676d87d48ca13f4160a5b6f46887bd273e49",
+      "enterprise_jobs.json": "8ecb07e05ab5812f0e1aeeb51768b5979357f0ea5c5392ffc7b99a5aab2bf3c8"
+    },
+    "source_json_unchanged": true,
+    "network_collection_performed": false,
+    "deployed": false,
+    "html_files": 1257,
+    "html_links_checked": 30141,
+    "sitemap_urls": 1253,
+    "missing_local_links": 0
+  },
+  "history_audit": {
+    "run_id": 41593953112,
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/41593953112",
+    "conclusion": "success",
+    "tests_passed": 8,
+    "report": {
+      "blobs_scanned": 1332,
+      "bytes_scanned": 24578218,
+      "commits_scanned": 36,
+      "finding_count": 0,
+      "findings": [],
+      "findings_truncated": false,
+      "head_sha": "47c464ec34078d06816a18818262cb3eb0eb1d90",
+      "history_scan_complete": true,
+      "key_present": {
+        "ALIO_KEY": true,
+        "DATA_GO_KR_KEY": true,
+        "GOJOBS_KEY": true,
+        "MPM_EXAM_KEY": true
+      },
+      "limits": [
+        "Registered credential values and high-signal token/private-key patterns only; not a guarantee that every unknown secret type is absent."
+      ],
+      "registered_credential_coverage_complete": true,
+      "reviewed_fixture_finding_count": 3,
+      "reviewed_fixture_findings": [
+        {
+          "blob_sha": "ff3e01dee05c08c60cab6f6329135a07e43dc4d5",
+          "category": "hardcoded_api_credential",
+          "path": "test_alio_partial_fetch.py",
+          "reason": "reviewed_mocked_test_placeholder"
+        },
+        {
+          "blob_sha": "3fa0babf9d4a04940984c0cf1c40e8592bbad939",
+          "category": "hardcoded_api_credential",
+          "path": "tests/test_alio_collection_guards.py",
+          "reason": "reviewed_mocked_test_placeholder"
+        },
+        {
+          "blob_sha": "8449ddab872745ac08b6eba705a23344c640be43",
+          "category": "hardcoded_api_credential",
+          "path": "test_alio_partial_fetch.py",
+          "reason": "reviewed_mocked_test_placeholder"
+        }
+      ],
+      "schema_version": 1,
+      "scope": "all_reachable_git_blob_history",
+      "status": "passed"
+    },
+    "first_run": {
+      "run_id": 41592753327,
+      "conclusion": "failure",
+      "reason": "Three synthetic mocked test markers were flagged. Exact blob revisions were reviewed; registered key comparisons found no match."
+    }
+  },
+  "scheduled_collection_enabled": false,
+  "automatic_data_persistence_enabled": false,
+  "gojobs_mpm_production_integration_enabled": false,
+  "limitations": [
+    "610 notices include retained historical notices; not all are active vacancies.",
+    "Saved notices and application tracking remain local to each browser/device/domain; no account sync.",
+    "The build report's deployed=false describes the build step before the later successful Pages deployment."
+  ],
+  "recorded_at_utc": "2026-11-03T07:15:32.000Z",
+  "documentation_parent_sha": "47c464ec34078d06816a18818262cb3eb0eb1d90",
+  "live_http_verification": {
+    "schema_version": 1,
+    "verified_at_utc": "2026-11-03T07:13:52.709528+00:00",
+    "site_url": "https://kllollain-max.github.io/careerpick/",
+    "deployment_run_id": 41593785022,
+    "approved_source_sha": "bee342c7c1db94e44172b47b78443540c7a34147",
+    "method": "Unauthenticated urllib GET, no API keys, no retries; sampled static HTTP checks only.",
+    "root": {
+      "url": "https://kllollain-max.github.io/careerpick/",
+      "final_url": "https://kllollain-max.github.io/careerpick/",
+      "http_status": 200,
+      "bytes": 224101,
+      "content_type": "text/html",
+      "sha256": "48b0d93aca44a99c4aed2a3603f14e845cefd82ccf0b58f2f1324632dfe924ec"
+    },
+    "checks": [
+      {
+        "path": "alio.json",
+        "url": "https://kllollain-max.github.io/careerpick/alio.json",
+        "http_status": 200,
+        "content_type": "application/json",
+        "bytes": 435109,
+        "final_url": "https://kllollain-max.github.io/careerpick/alio.json",
+        "sha256": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d",
+        "utf8_valid": true,
+        "json_valid": true,
+        "json_root_type": "dict",
+        "expected_sha256": "becc777857fcb5122a36f134480ee39326b1a8b00e55e18759e980ff54d5f04d",
+        "sha256_matches_retained_snapshot": true,
+        "format_matches_expected": true
+      },
+      {
+        "path": "alio-detail.json",
+        "url": "https://kllollain-max.github.io/careerpick/alio-detail.json",
+        "http_status": 200,
+        "content_type": "application/json",
+        "bytes": 2589237,
+        "final_url": "https://kllollain-max.github.io/careerpick/alio-detail.json",
+        "sha256": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+        "utf8_valid": true,
+        "json_valid": true,
+        "json_root_type": "dict",
+        "expected_sha256": "f40a642608d34a89239aa1650e85241fe6bf72acde6576ec58e10130850e4185",
+        "sha256_matches_retained_snapshot": true,
+        "format_matches_expected": true
+      },
+      {
+        "path": "homepage-ux.css",
+        "url": "https://kllollain-max.github.io/careerpick/homepage-ux.css",
+        "http_status": 200,
+        "content_type": "text/css",
+        "bytes": 9641,
+        "final_url": "https://kllollain-max.github.io/careerpick/homepage-ux.css",
+        "sha256": "613752a5677358d1ad22122b4fa8818b378a449040ddae78ff1bab1c72ee2d8d",
+        "utf8_valid": true,
+        "format_matches_expected": true
+      },
+      {
+        "path": "homepage-ui.js",
+        "url": "https://kllollain-max.github.io/careerpick/homepage-ui.js",
+        "http_status": 200,
+        "content_type": "application/javascript",
+        "bytes": 8812,
+        "final_url": "https://kllollain-max.github.io/careerpick/homepage-ui.js",
+        "sha256": "9175fe20e92129a2441377d65b6d44481409cb3692a88a587bfe2f7cf5c37c38",
+        "utf8_valid": true,
+        "format_matches_expected": true
+      },
+      {
+        "path": "jobs/available.js",
+        "url": "https://kllollain-max.github.io/careerpick/jobs/available.js",
+        "http_status": 200,
+        "content_type": "application/javascript",
+        "bytes": 9763,
+        "final_url": "https://kllollain-max.github.io/careerpick/jobs/available.js",
+        "sha256": "69e3145dcaed5d4d7f9cd31a7699b10c0af43f05eef38439fd42aaae3b55e895",
+        "utf8_valid": true,
+        "format_matches_expected": true
+      },
+      {
+        "path": "jobs/a305129.html",
+        "url": "https://kllollain-max.github.io/careerpick/jobs/a305129.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 12635,
+        "final_url": "https://kllollain-max.github.io/careerpick/jobs/a305129.html",
+        "sha256": "dc7b6dad5bc2f5bbeb4fb1a8e09cd847d081e56119983e8b8b8abae3dc812621",
+        "utf8_valid": true,
+        "format_matches_expected": true,
+        "has_title": true,
+        "has_body": true,
+        "selected_from_published_available_manifest": true
+      }
+    ],
+    "limits": [
+      "This checks public HTTP responses and selected static files, not browser rendering, navigation interactions, storage behavior or API freshness."
+    ],
+    "snapshot": {
+      "expected_record_count": 610,
+      "record_count": 610,
+      "unique_id_count": 610,
+      "all_ids_present": true,
+      "record_count_matches": true,
+      "expected_source_updated": "2026-11-03T12:32:01+09:00",
+      "source_updated": "2026-11-03T12:32:01+09:00",
+      "source_updated_matches": true,
+      "detail_record_count": 610,
+      "list_ids_with_detail": 610,
+      "all_list_ids_have_detail": true
+    },
+    "status": "passed"
+  },
+  "live_browser_verification": {
+    "status": "passed",
+    "root_url": "https://kllollain-max.github.io/careerpick/",
+    "detail_url": "https://kllollain-max.github.io/careerpick/jobs/a306130.html",
+    "observations": [
+      "Korean text, styles, icons and notice cards rendered normally.",
+      "Searching 한국잡월드 returned 2 results.",
+      "Saving a notice changed the action to 저장됨.",
+      "The notice detail panel opened.",
+      "The standalone detail URL opened directly and survived refresh.",
+      "After visiting the detail document and returning to root, one saved notice remained.",
+      "The test save was removed, saved count returned to 0, and the all-notices view was restored."
+    ],
+    "screenshot_basename": "careerpick-live-restored-root-1793690040920.jpg",
+    "additional_quantitative_layout_checks_performed": false
+  }
+}
