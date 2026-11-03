@@ -5,7 +5,7 @@ const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',hea
 try{for(const width of [390,1440]){const context=await browser.newContext({viewport:{width,height:900},locale:'ko-KR',timezoneId:'Asia/Seoul'});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
 await page.goto(BASE,{waitUntil:'networkidle'});await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));
 await page.getByRole('searchbox',{name:'검색',exact:true}).fill('우체국시설관리단');await page.locator('a[href="/careerpick/jobs/a306653.html"]').first().waitFor();
-await page.getByRole('combobox',{name:'고용형태',exact:true}).selectOption('무기계약직');await page.locator('[data-save="a306653"]').click();await page.reload({waitUntil:'networkidle'});
+if(width===1440){await page.locator('#cpEmployment').selectOption('무기계약직');}else{await page.locator('#toggle').click();await page.locator('#status [data-status="open"]').click();await page.locator('#cpFilterDone').click();}await page.locator('[data-save="a306653"]').click();await page.reload({waitUntil:'networkidle'});
 await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));await page.getByRole('button',{name:'저장 공고',exact:true}).click();await page.locator('[data-save="a306653"][aria-pressed="true"]').waitFor();
 assert((await page.locator('#list').innerText()).includes('우체국시설관리단'));await page.locator('[data-save="a306653"]').click();
 await page.getByRole('button',{name:'내 지원',exact:true}).click();assert((await page.locator('#summary').innerText()).includes('지원'));
