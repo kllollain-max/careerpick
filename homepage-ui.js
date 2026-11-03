@@ -18,17 +18,19 @@ function cpBrowseValid(raw){
  if(value.anchor&&Array.isArray(raw.anchor.neighbors))value.anchor.neighbors=raw.anchor.neighbors.filter(id=>typeof id==='string'&&id.length>0&&id.length<=160).slice(0,2);
  return value;
 }
-function cpBrowseAnchorFor(link){
+function cpBrowseAnchorFor(link,knownCards){
  if(!link)return null;
- const card=link.closest('li'),cards=[...document.querySelectorAll('#list>li.card')],index=cards.indexOf(card);
+ const card=link.closest('li'),cards=knownCards||[...document.querySelectorAll('#list>li.card')],index=cards.indexOf(card);
  const identify=card=>{const a=card?.querySelector('[data-open],[data-save]');return a?.dataset.open||a?.dataset.save;};
  return {id:link.dataset.open||link.dataset.save,offset:card.getBoundingClientRect().top,
   neighbors:[identify(cards[index+1]),identify(cards[index-1])].filter(Boolean)};
 }
 function cpBrowseAnchor(){
  const cards=[...document.querySelectorAll('#list>li.card')];
+ const remembered=cpBrowseMemory.get(cpActiveBrowseId)?.anchor?.id;
+ if(remembered){const link=[...document.querySelectorAll('#list [data-open],#list [data-save]')].find(e=>(e.dataset.open||e.dataset.save)===remembered),card=link?.closest('li');if(card){const rect=card.getBoundingClientRect();if(rect.bottom>0&&rect.top<innerHeight)return cpBrowseAnchorFor(link,cards);}}
  const el=cards.find(e=>e.getBoundingClientRect().bottom>0&&e.getBoundingClientRect().top<innerHeight);
- return cpBrowseAnchorFor(el?.querySelector('[data-open],[data-save]'));
+ return cpBrowseAnchorFor(el?.querySelector('[data-open],[data-save]'),cards);
 }
 function cpBrowseSnapshot(id){
  let anchor=cpBrowseAnchor();
