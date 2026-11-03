@@ -2588,6 +2588,7 @@ async function cpInitPush(){
           if(!/already initialized/i.test(String(e && e.message || e))) throw e;
         }
         if(!sdk.User || !sdk.User.PushSubscription) throw Error("웹푸시 SDK가 준비되지 않았습니다.");
+        sdk.User.PushSubscription.addEventListener("change",()=>cpRenderPushButtons());
         cpPushSdkReady=true;
         resolve();
       } catch(e){reject(e);}
@@ -2603,6 +2604,17 @@ async function cpInitPush(){
   try { await cpPushInitPromise; }
   catch(e){cpPushInitPromise=null;throw e;}
 }
+function cpPushRegistered(){
+  const sub=window.OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
+  return !!(cpPushSdkReady && sub && sub.optedIn && sub.id && sub.token);
+}
+async function cpWaitPushState(test,label){
+  const until=Date.now()+12000;
+  while(!test()){
+    if(Date.now()>=until)throw Error(label+"을 확인하지 못했습니다. 브라우저 알림 허용과 서버 구독 등록은 별개입니다. 다시 연결해 주세요.");
+    await new Promise(resolve=>setTimeout(resolve,200));
+  }
+}
 async function cpSubscribePush(){
   const btn=$("cpPushSubscribe"), status=$("cpPushMessage");
   if(btn){btn.disabled=true;btn.textContent="⏳ 연결 확인 중…";}
@@ -2614,10 +2626,8 @@ async function cpSubscribePush(){
     if(Notification.permission !== "granted"){
       throw Error("브라우저 알림 권한이 허용되지 않았습니다. 주소창 왼쪽 사이트 설정에서 알림을 허용해 주세요.");
     }
-    await cpPushWithTimeout(OneSignal.User.addTags(cpPushTags()),12000,"관심 조건 저장");
-    if(!OneSignal.User.PushSubscription.optedIn){
-      throw Error("알림 구독이 아직 활성화되지 않았습니다. OneSignal 웹 설정을 확인해 주세요.");
-    }
+    await cpWaitPushState(cpPushRegistered,"서버 구독 등록");
+    await cpSyncPushPreferences();
     if(btn){btn.textContent="✓ 웹푸시 구독 활성화";btn.disabled=true;}
     cpRenderPushButtons();
     if(status)status.textContent="이 기기의 웹푸시 구독이 활성화되었습니다. 다른 휴대폰·PC에서는 별도로 구독해야 합니다. 자동 발송은 아직 준비 중입니다.";
@@ -2631,11 +2641,17 @@ async function cpCopyPushSubscriptionId(){
   try{
     await cpInitPush();
     const sub=OneSignal.User.PushSubscription;
-    const id=sub && sub.optedIn && sub.id;
+    const id=cpPushRegistered() && sub.id;
     if(!id) throw Error("먼저 웹푸시를 구독한 뒤 다시 시도해 주세요.");
-    await navigator.clipboard.writeText(id);
-    if(status)status.textContent="테스트 기기 구독 ID를 복사했습니다. GitHub Secret CP_TEST_SUBSCRIPTION_ID에 등록하세요. 공개 게시물에 공유하지 마세요.";
+    if(status)status.textContent="테스트용 구독 ID: "+id;
+    try{
+      await navigator.clipboard.writeText(id);
+      if(status)status.textContent="복사 완료 · 테스트용 구독 ID: "+id;
+    }catch(_){
+      if(status)status.textContent="자동 복사가 차단되었습니다. 아래 ID를 길게 눌러 복사해 주세요: "+id;
+    }
   }catch(e){
+    cpRenderPushButtons();
     if(status)status.textContent="구독 ID 복사 실패: "+String(e.message||e).slice(0,140);
   }
 }
@@ -2645,16 +2661,16 @@ async function cpUnsubscribePush(){
   try{
     await cpInitPush();
     await cpPushWithTimeout(OneSignal.User.PushSubscription.optOut(),15000,"구독 해지");
-    if(OneSignal.User.PushSubscription.optedIn) throw Error("구독 해지 상태를 확인하지 못했습니다.");
+    await cpWaitPushState(()=>!OneSignal.User.PushSubscription.optedIn,"구독 해지");
     if(status)status.textContent="이 브라우저의 웹푸시 구독을 해지했습니다. 언제든 다시 구독할 수 있습니다.";
     cpRenderPushButtons();
   }catch(e){
-    if(btn){btn.disabled=false;btn.textContent="알림 구독 해지";}
+    cpRenderPushButtons();
     if(status)status.textContent="해지 실패: "+String(e.message||e).slice(0,180);
   }
 }
 function cpRenderPushButtons(){
-  const on=!!(cpPushSdkReady && window.OneSignal && OneSignal.User && OneSignal.User.PushSubscription && OneSignal.User.PushSubscription.optedIn);
+  const on=cpPushRegistered();
   const subscribe=$("cpPushSubscribe"), unsubscribe=$("cpPushUnsubscribe");
   if(subscribe){subscribe.style.display=on?"none":"block";subscribe.hidden=on;subscribe.disabled=false;subscribe.textContent="🔔 웹푸시 알림 허용하기";}
   if(unsubscribe){unsubscribe.style.display=on?"block":"none";unsubscribe.hidden=!on;unsubscribe.disabled=false;unsubscribe.textContent="알림 구독 해지";}
