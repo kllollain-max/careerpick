@@ -15,6 +15,12 @@ from test_gojobs import KEY, Opener, detail_xml, list_xml, row
 NOW = datetime(2026, 11, 3, tzinfo=timezone.utc)
 
 
+def last_page_xml(*rows, total=27656, page=5532, per_page=5):
+    return (f"<response><header><resultCode>00</resultCode></header><body>"
+            f"<totalCount>{total}</totalCount><numOfRows>{per_page}</numOfRows><pageNo>{page}</pageNo>"
+            "<items>" + "".join(rows) + "</items></body></response>").encode()
+
+
 class CurrentSampleProbeTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -29,8 +35,9 @@ class CurrentSampleProbeTests(unittest.TestCase):
         self.network.stop()
         self.tmp.cleanup()
 
-    def factory(self, *payloads):
-        client = probe.CurrentSampleClient(KEY)
+    def factory(self, *payloads, mode="desc"):
+        client_type = probe.CurrentSampleClient if mode == "desc" else probe.LastPageSampleClient
+        client = client_type(KEY)
         client._opener = Opener(payloads)
         return client, lambda key: client
 
@@ -168,6 +175,88 @@ class CurrentSampleProbeTests(unittest.TestCase):
         self.assertEqual(report["status"], "blocked")
         self.assertEqual(report["reason"], "missing_secret")
         self.assert_source_preserved(report)
+
+    def test_last_page_validates_partial_page_and_reports_actual_query_scope(self):
+        client, factory = self.factory(last_page_xml(row(999)), list_xml(), detail_xml(999), mode="last-page")
+        report = self.run_probe(factory, mode="last-page")
+        self.assertEqual(report["status"], "verified")
+        self.assertEqual(report["baseline_count"], 27656)
+        self.assertEqual(report["source_run"], "41585547056")
+        self.assertEqual(report["sort_order_tested"], "1")
+        self.assertEqual(report["page_by_filter"], {"e01": 5532, "e02": 1})
+        self.assertEqual(report["result"]["page_by_filter"], client.verified_page_by_filter)
+        self.assertEqual(report["result"]["list_count_returned"], 1)
+        self.assertEqual(report["result"]["detail_verified_count"], 1)
+        self.assertEqual(report["result"]["total_count_by_filter"], {"e01": 27656, "e02": 0})
+        self.assertNotIn("pageNo", report["result"]["filters"])
+        self.assertIn("first_page_career", report["result"]["sample_scope"])
+        self.assertEqual(report["requests"], {"list": 2, "detail": 1})
+        self.assertFalse(report["latest_order_verified"])
+        self.assertFalse(report["official_sort_mapping_verified"])
+        for index, expected_page in enumerate(("5532", "1")):
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(client._opener.requests[index].full_url).query)
+            self.assertEqual(query["pageNo"], [expected_page])
+            self.assertEqual(query["Sort_order"], ["1"])
+            self.assertEqual(query["numOfRows"], ["5"])
+            self.assertEqual(query["Pblanc_ty"], [["e01"], ["e02"]][index])
+            self.assertEqual(query["Instt_se"], ["g02"])
+        self.assertEqual(report["date_observations"]["registered_date"]["year_counts"], {"2026": 1})
+        self.assertFalse(report["date_observations"]["filter_observations"]["e02"]["records_observed"])
+        self.assertIsNone(probe._safe_evidence(report["result"], set(), complete=True, mode="last-page",
+                                               verified_pages={"e01": 1, "e02": 1}))
+        with mock.patch.object(probe, "verify", return_value=report) as verify_mock, contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(probe.main(["--mode", "last-page"]), 0)
+            verify_mock.assert_called_once_with(mode="last-page")
+        self.assert_source_preserved(report)
+
+    def test_changed_last_page_fails_without_retry_or_detail_request(self):
+        for total in (27655, 27661):
+            with self.subTest(total=total):
+                client, factory = self.factory(last_page_xml(row(999), total=total), mode="last-page")
+                report = self.run_probe(factory, mode="last-page")
+                self.assertEqual(report["status"], "failed")
+                self.assertEqual(report["reason"], "pagination_changed")
+                self.assertEqual(report["requests"], {"list": 1, "detail": 0})
+                self.assertEqual(client.verified_page_by_filter, {})
+                self.assertEqual(len(client._opener.requests), 1)
+                self.assert_source_preserved(report)
+
+    def test_last_page_checks_remaining_count_page_and_page_size(self):
+        cases = [(last_page_xml(row(1), row(2)), "sample_count_mismatch"),
+                 (last_page_xml(), "sample_count_mismatch"),
+                 (last_page_xml(row(1), page=1), "page_mismatch"),
+                 (last_page_xml(row(1), per_page=1), "pagination_mismatch")]
+        for payload, code in cases:
+            with self.subTest(code=code):
+                client, factory = self.factory(payload, mode="last-page")
+                report = self.run_probe(factory, mode="last-page")
+                self.assertEqual(report["status"], "failed")
+                self.assertEqual(report["reason"], code)
+                self.assertEqual(client.success_counts["list"], 0)
+        # A changed row count that keeps the same last page uses the actual total.
+        _, factory = self.factory(last_page_xml(row(1), row(2), total=27657), list_xml(),
+                                  detail_xml(1), detail_xml(2), mode="last-page")
+        report = self.run_probe(factory, mode="last-page")
+        self.assertEqual(report["status"], "verified")
+        self.assertEqual(report["result"]["total_count_by_filter"]["e01"], 27657)
+        self.assertEqual(report["result"]["list_count_returned"], 2)
+        self.assertEqual(report["requests"], {"list": 2, "detail": 2})
+
+    def test_last_page_retains_strict_classification_id_and_date_checks(self):
+        cases = [(row(1, type01="g01"), "filter_mismatch"),
+                 (row(1, type02="e02"), "filter_mismatch"),
+                 (row(1, type02="RAW_CODE"), "invalid_classification_pair"),
+                 (row(0), "invalid_identifier"),
+                 (row(1, enddate="20260230"), "invalid_date")]
+        for item, code in cases:
+            with self.subTest(code=code):
+                client, factory = self.factory(last_page_xml(item), mode="last-page")
+                report = self.run_probe(factory, mode="last-page")
+                self.assertEqual(report["status"], "failed")
+                self.assertEqual(report["reason"], code)
+                self.assertEqual(client.success_counts["list"], 0)
+                self.assertNotIn("RAW_CODE", json.dumps(report))
+                self.assertNotIn(KEY, json.dumps(report))
 
 
 if __name__ == "__main__":

@@ -24,10 +24,10 @@ jobs:
           python-version: '3.12'
       - name: Validate bounded sample probe and source preservation
         run: python -m unittest discover -s tests -p test_gojobs_current_sample.py
-      - name: Observe one DESC sample using GOJOBS only
+      - name: Observe the reported last page using GOJOBS only
         env:
           GOJOBS_KEY: ${{ secrets.GOJOBS_KEY }}
-        run: python scripts/verify_gojobs_current_sample.py
+        run: python scripts/verify_gojobs_current_sample.py --mode last-page
       - uses: actions/upload-artifact@v4
         if: always()
         with:

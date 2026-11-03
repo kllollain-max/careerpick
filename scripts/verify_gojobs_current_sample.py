@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""One bounded GOJOBS DESC experiment; no sort-direction or open-status claim."""
+"""One bounded GOJOBS sample probe; no sort-direction or open-status claim."""
+import argparse
 import contextlib
 import hashlib
 import io
@@ -20,6 +21,9 @@ from scripts.verify_additional_apis import (
 )
 
 SORT_ORDER_TESTED = "DESC"
+LAST_PAGE_BASELINE_COUNT = 27656
+LAST_PAGE_SOURCE_RUN = "41585547056"
+LAST_PAGE_BY_FILTER = {"e01": 5532, "e02": 1}
 MAX_EVIDENCE_BYTES = 262144
 PROGRESS_FIELDS = {
     "verification_complete", "list_verified", "list_queries_verified", "total_count_by_filter",
@@ -54,6 +58,51 @@ class CurrentSampleClient(gojobs.Client):
         return super()._request(operation, params)
 
 
+class LastPageSampleClient(gojobs.Client):
+    """Validate one fixed, previously observed last page without retrying changes."""
+
+    def __init__(self, key):
+        super().__init__(key)
+        self.verified_page_by_filter = {}
+
+    def list_sample(self, notice_type):
+        if notice_type not in LAST_PAGE_BY_FILTER:
+            raise gojobs.APIError("unsupported_filter")
+        page = LAST_PAGE_BY_FILTER[notice_type]
+        body = self._request("list", {"pageNo": page, "numOfRows": gojobs.PAGE_SIZE,
+                                      "Pblanc_ty": notice_type, "Instt_se": "g02", "Sort_order": "1"})
+        total = gojobs._integer(gojobs._text(body, "totalCount", required=True))
+        if notice_type == "e01" and (total + gojobs.PAGE_SIZE - 1) // gojobs.PAGE_SIZE != page:
+            raise gojobs.APIError("pagination_changed")
+        if gojobs._integer(gojobs._text(body, "pageNo", required=True)) != page:
+            raise gojobs.APIError("page_mismatch")
+        per_page = gojobs._integer(gojobs._text(body, "numOfRows", required=True), positive=True)
+        if per_page != gojobs.PAGE_SIZE or len(body.findall("items")) > 1:
+            raise gojobs.APIError("pagination_mismatch")
+        rows = body.findall("items/item")
+        expected_count = min(gojobs.PAGE_SIZE, max(0, total - (page - 1) * gojobs.PAGE_SIZE))
+        if len(rows) != expected_count:
+            raise gojobs.APIError("sample_count_mismatch")
+        records, seen = [], set()
+        for row in rows:
+            identity = str(gojobs._integer(gojobs._text(row, "idx", required=True), positive=True))
+            if identity in seen:
+                raise gojobs.APIError("duplicate_identifier")
+            seen.add(identity)
+            institution, recruitment, layout = self._classifications(row, notice_type)
+            records.append({"id": identity, "title": gojobs._text(row, "title", required=True),
+                            "org": gojobs._text(row, "insttname", required=True),
+                            "institution_type": institution, "recruitment_type": recruitment,
+                            "field_layout": layout,
+                            "deadline": gojobs._date(gojobs._text(row, "enddate", limit=20)),
+                            "registered_date": gojobs._date(gojobs._text(row, "regdate", limit=20)),
+                            "modified_date": gojobs._date(gojobs._text(row, "moddate", limit=20))})
+        self._reject_credential_echo(records)
+        self.success_counts["list"] += 1
+        self.verified_page_by_filter[notice_type] = page
+        return total, records
+
+
 def _iso_date(value):
     if value is None:
         return None
@@ -62,7 +111,7 @@ def _iso_date(value):
     return date.fromisoformat(value).isoformat()
 
 
-def _safe_evidence(value, forbidden, *, complete):
+def _safe_evidence(value, forbidden, *, complete, mode="desc", verified_pages=None):
     """Bound and project the existing adapter's already validated public evidence."""
     try:
         if not isinstance(value, dict) or len(encoded(value)) > MAX_EVIDENCE_BYTES:
@@ -111,9 +160,19 @@ def _safe_evidence(value, forbidden, *, complete):
             return None
         if result.get("list_verified") is True and set(totals) != {"e01", "e02"}:
             return None
+        pages = {}
         for category, count in totals.items():
-            if sum(row["recruitment_type"] == category for row in records.values()) != min(gojobs.PAGE_SIZE, count):
+            page = 1 if mode == "desc" else (verified_pages or {}).get(category)
+            if mode == "last-page":
+                if type(page) is not int or page != LAST_PAGE_BY_FILTER[category]:
+                    return None
+                if category == "e01" and (count + gojobs.PAGE_SIZE - 1) // gojobs.PAGE_SIZE != page:
+                    return None
+            expected_count = min(gojobs.PAGE_SIZE, max(0, count - (page - 1) * gojobs.PAGE_SIZE))
+            if sum(row["recruitment_type"] == category for row in records.values()) != expected_count:
                 return None
+            pages[category] = page
+        result["page_by_filter"] = pages
         failed = result.get("failed_notice")
         if failed is not None:
             if not isinstance(failed, dict) or failed.get("id") not in records:
@@ -126,10 +185,15 @@ def _safe_evidence(value, forbidden, *, complete):
         if complete:
             if result.get("authentication_verified") is not True or result.get("list_verified") is not True:
                 return None
-            # Base Client has a static reporting value of "1". Correct only this
-            # detached report to the value actually sent by our request override.
+            # Correct static base reporting to the requests this probe verified.
             result["filters"] = {"Instt_se": "g02", "Pblanc_ty": ["e01", "e02"],
-                                 "pageNo": 1, "numOfRows": gojobs.PAGE_SIZE, "Sort_order": SORT_ORDER_TESTED}
+                                 "numOfRows": gojobs.PAGE_SIZE,
+                                 "Sort_order": SORT_ORDER_TESTED if mode == "desc" else "1"}
+            if mode == "desc":
+                result["filters"]["pageNo"] = 1
+            else:
+                result["filters"]["page_by_filter"] = pages
+                result["sample_scope"] = "fixed_last_page_local_public_and_first_page_career_recruitment"
         return json.loads(json.dumps(result, ensure_ascii=False))
     except (KeyError, TypeError, ValueError, OverflowError):
         return None
@@ -193,7 +257,11 @@ def date_observations(evidence, check_date):
     return observations
 
 
-def verify(root=ROOT, *, key=None, client_factory=CurrentSampleClient, now=None):
+def verify(root=ROOT, *, key=None, client_factory=None, now=None, mode="desc"):
+    if mode not in {"desc", "last-page"}:
+        raise ValueError("unsupported_probe_mode")
+    if client_factory is None:
+        client_factory = CurrentSampleClient if mode == "desc" else LastPageSampleClient
     root = Path(root).resolve()
     output = root / "gojobs-current-sample-output"
     target = output / "report.json"
@@ -207,13 +275,18 @@ def verify(root=ROOT, *, key=None, client_factory=CurrentSampleClient, now=None)
     now = now.astimezone(KST)
     key = os.environ.get("GOJOBS_KEY", "").strip() if key is None else key.strip()
     forbidden = credential_forms([key])
-    report = {"checked_at": now.isoformat(timespec="seconds"), "scope": "isolated_gojobs_desc_parameter_probe",
+    report = {"checked_at": now.isoformat(timespec="seconds"),
+              "scope": "isolated_gojobs_desc_parameter_probe" if mode == "desc" else "isolated_gojobs_last_page_probe",
+              "mode": mode, "page_by_filter": {"e01": 1, "e02": 1} if mode == "desc" else dict(LAST_PAGE_BY_FILTER),
               "service": "gojobs", "secret_name": "GOJOBS_KEY", "key_present": bool(key),
               "status": "not_started", "authentication_verified": False,
-              "sort_order_tested": SORT_ORDER_TESTED, "official_sort_mapping_verified": False,
-              "sort_interpretation": "experimental_parameter_value", "latest_order_verified": False,
+              "sort_order_tested": SORT_ORDER_TESTED if mode == "desc" else "1", "official_sort_mapping_verified": False,
+              "sort_interpretation": "experimental_parameter_value" if mode == "desc" else "documented_example_value_without_direction_mapping",
+              "latest_order_verified": False,
               "source_preserved": False, "production_data_writes": 0,
               "scheduled_collection_enabled": False, "deployment_performed": False, "mpm_requests": 0}
+    if mode == "last-page":
+        report.update(baseline_count=LAST_PAGE_BASELINE_COUNT, source_run=LAST_PAGE_SOURCE_RUN)
     sha = os.environ.get("GITHUB_SHA", "")
     if re.fullmatch(r"[0-9a-f]{40}", sha):
         report["code_sha"] = sha
@@ -227,7 +300,8 @@ def verify(root=ROOT, *, key=None, client_factory=CurrentSampleClient, now=None)
                 with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
                     client = client_factory(key)
                     result = client.verify()
-                evidence = _safe_evidence(result, forbidden, complete=True)
+                evidence = _safe_evidence(result, forbidden, complete=True, mode=mode,
+                                          verified_pages=getattr(client, "verified_page_by_filter", None))
                 if evidence is None:
                     report.update(status="failed", reason="invalid_or_unsafe_verification_report")
                 else:
@@ -242,7 +316,8 @@ def verify(root=ROOT, *, key=None, client_factory=CurrentSampleClient, now=None)
                 diagnostic = _safe_diagnostic(getattr(client, "last_response_diagnostic", None), forbidden)
                 if diagnostic is not None:
                     report["response_diagnostic"] = diagnostic
-                evidence = _safe_evidence(getattr(client, "verification_progress", None), forbidden, complete=False)
+                evidence = _safe_evidence(getattr(client, "verification_progress", None), forbidden, complete=False,
+                                          mode=mode, verified_pages=getattr(client, "verified_page_by_filter", None))
                 if evidence is not None:
                     report["verification_progress"] = evidence
         report["requests"] = counters(client, "request_counts")
@@ -273,9 +348,12 @@ def verify(root=ROOT, *, key=None, client_factory=CurrentSampleClient, now=None)
     return report
 
 
-def main():
+def main(argv=()):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--mode", choices=("desc", "last-page"), default="desc")
+    args = parser.parse_args(argv)
     try:
-        report = verify()
+        report = verify(mode=args.mode)
         print(json.dumps(report, ensure_ascii=False, sort_keys=True))
         return 0 if report["status"] == "verified" and report["source_preserved"] else 2
     except Exception:
@@ -284,4 +362,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))
