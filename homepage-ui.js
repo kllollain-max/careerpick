@@ -102,7 +102,7 @@ function cpSetupBrowse(){
   viewportWidth=innerWidth;rootFont=font;
   if(!changed||!cpFeedEngaged||document.hidden||JV||cpRestoringBrowse||$('sheet')?.classList.contains('open')||$('panel')?.classList.contains('open'))return;
   const snapshot=cpBrowseMemory.get(cpActiveBrowseId);
-  if(snapshot?.anchor&&JSON.stringify(snapshot.state)===JSON.stringify(cpBrowseSnapshot().state))cpBrowseRestorePosition(snapshot);
+  if(snapshot?.anchor&&JSON.stringify(snapshot.state)===JSON.stringify(cpBrowseSnapshot().state)){cpRestoringBrowse=true;cpBrowseRestorePosition(snapshot);}
  };
  window.addEventListener('resize',restoreReflow,{passive:true});
  if(typeof ResizeObserver!=='undefined'){const observer=new ResizeObserver(restoreReflow);observer.observe($('list'));}
