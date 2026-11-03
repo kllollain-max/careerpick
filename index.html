@@ -2435,7 +2435,7 @@ function render(){
       : `<li class="empty">조건에 맞는 글이 없습니다.<br><button class="chip" id="empty-reset">필터 초기화</button></li>`;
     return;
   }
-  if(cpRestoringBrowse&&cpBrowsePending)cpVisibleLimit=cpBrowseRangeForAnchor(rows,cpVisibleLimit,cpBrowsePending);
+  if(cpRestoringBrowse&&cpBrowsePending&&typeof cpBrowseRangeForAnchor==='function')cpVisibleLimit=cpBrowseRangeForAnchor(rows,cpVisibleLimit,cpBrowsePending);
   const cards = rows.slice(0,cpVisibleLimit).map(p => p.type === "j" ? (COMPACT ? rowCard(p, now) : jobCard(p, now)) : miniCard(p, now));
   if(rows.length > cpVisibleLimit) cards.push(`<li class="cp-more"><button type="button" id="cpLoadMore">공고 더 보기 (${Math.min(cpVisibleLimit,rows.length)} / ${rows.length})</button></li>`);
   for(const id of orphanIds)cards.push(`<li class="empty">현재 목록에 없는 저장 공고 · ${esc(id)}<br>저장 기록은 보존했습니다. 원문 상태는 미확인입니다.<br><button data-save="${esc(id)}" aria-pressed="true">★ 저장 해제</button></li>`);
