@@ -8,15 +8,21 @@
     ['title','org','url','memo','exam','itv','due'].every(k=>a[k]==null||typeof a[k]==='string')&&
     (a.ck==null||Array.isArray(a.ck)&&a.ck.every(c=>object(c)&&typeof c.t==='string')));
   const prefs=x=>object(x)&&['emp','edu','region','cat'].every(k=>x[k]===undefined||Array.isArray(x[k])&&x[k].every(v=>typeof v==='string'))&&(x.kw===undefined||typeof x.kw==='string');
+  const spec=x=>x===null||object(x)&&['want','lic','special','licenses','certs'].every(k=>x[k]===undefined||Array.isArray(x[k])&&x[k].every(v=>typeof v==='string'));
   function readablePart(key,value,fallback){
     if(key==='apps'&&object(value))return Object.fromEntries(Object.entries(value).filter(([id,a])=>safeKey(id)&&apps({[id]:a})));
     if(key==='saved'&&Array.isArray(value))return value.filter(id=>saved([id]));
     if(key==='prefs'&&object(value))return Object.fromEntries(Object.entries(value).filter(([k,v])=>['emp','edu','region','cat'].includes(k)?Array.isArray(v)&&v.every(x=>typeof x==='string'):k==='kw'&&typeof v==='string'));
     return fallback;
   }
+  function importHold(storage){
+    const raw=storage.getItem('careerpick-before-import');if(raw===null)return false;
+    let journal;try{journal=JSON.parse(raw);}catch(_){return true;}
+    return journal.format==='careerpick-before-import'&&(journal.version!==1||!['complete','rolled_back'].includes(journal.state));
+  }
   function read(storage,key,fallback,valid){
     let raw=null,data=fallback;
-    try{raw=storage.getItem(key);data=raw===null?fallback:JSON.parse(raw);if(!valid(data))throw Error('invalid');return{ok:true,data,raw};}
+    try{raw=storage.getItem(key);data=raw===null?fallback:JSON.parse(raw);if(!valid(data))throw Error('invalid');if(importHold(storage))return{ok:false,data,raw,error:'미완료 가져오기·복구 확인이 필요합니다. 원본을 백업하고 복구 사본을 확인하세요.'};return{ok:true,data,raw};}
     catch(_){return{ok:false,data:readablePart(key,data,fallback),raw,error:'일부 기록을 읽지 못했습니다. 읽을 수 있는 기록을 표시하며 손상 원본은 보존했습니다. 덮어쓰지 않으므로 원본 포함 JSON 백업을 확인해 주세요.'};}
   }
   async function mutate(storage,key,fallback,valid,edit,locks){
@@ -49,14 +55,38 @@
     if(next===null)delete data[id];else data[id]=next;return data;
   }
   function exportRecords(storage,keys){
-    const result={data:{},raw_records:{},invalid_keys:[],unavailable_keys:[]},validators={saved,apps,prefs};
+    const result={data:{},raw_records:{},recovery:{},invalid_keys:[],unavailable_keys:[],excluded_secret_fields:0,redacted_raw_keys:[]},validators={saved,apps,prefs,spec};
+    const recoveryKeys=['careerpick-record-checkpoints','careerpick-before-import'];
+    const secret=k=>/^(?:api[_-]?key|access[_-]?token|refresh[_-]?token|subscription[_-]?token|authorization|password|secret|client[_-]?secret|onesignal[_-]?token|token)$/i.test(k);
+    function scrub(value,depth=0){
+      if(depth>30)throw Error('depth');
+      if(Array.isArray(value))return value.map(v=>scrub(v,depth+1));
+      if(object(value)){
+        const out={};for(const [k,v]of Object.entries(value)){
+          if(secret(k)){result.excluded_secret_fields++;continue;}
+          if(!safeKey(k))throw Error('unsafe');
+          if((k==='raw'||k==='raw_records')&&typeof v==='string')out[k]=scrubRaw(v);
+          else if(k==='raw_records'&&object(v))out[k]=Object.fromEntries(Object.entries(v).map(([name,raw])=>[name,typeof raw==='string'?scrubRaw(raw):raw]));
+          else out[k]=scrub(v,depth+1);
+        }return out;
+      }return value;
+    }
+    function scrubRaw(raw){
+      try{const parsed=JSON.parse(raw),before=result.excluded_secret_fields,clean=scrub(parsed);return before===result.excluded_secret_fields?raw:JSON.stringify(clean);}
+      catch(_){
+        if(/"(?:api[_-]?key|access[_-]?token|refresh[_-]?token|subscription[_-]?token|authorization|password|secret|token)"\s*:/i.test(raw)){result.excluded_secret_fields++;return '[비밀 필드가 포함된 손상 원문은 기기에만 보존했습니다.]';}
+        return raw;
+      }
+    }
     for(const key of keys){
       let raw;try{raw=storage.getItem(key);}catch(_){result.unavailable_keys.push(key);continue;}
-      if(raw===null)continue;result.raw_records[key]=raw;
-      try{const value=JSON.parse(raw);if(validators[key]&&!validators[key](value))throw Error('schema');result.data[key]=value;}
-      catch(_){result.invalid_keys.push(key);}
+      if(raw===null)continue;
+      const safeRaw=scrubRaw(raw);result.raw_records[key]=safeRaw;if(safeRaw!==raw)result.redacted_raw_keys.push(key);
+      try{const value=scrub(JSON.parse(raw));if(validators[key]&&!validators[key](value))throw Error('schema');
+        if(recoveryKeys.includes(key))result.recovery[key]=value;else result.data[key]=value;
+      }catch(_){result.invalid_keys.push(key);}
     }
     return result;
   }
-  return{read,mutate,replaceApp,saved,apps,prefs,exportRecords};
+  return{read,mutate,replaceApp,saved,apps,prefs,spec,exportRecords};
 });

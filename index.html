@@ -579,6 +579,8 @@ footer .src b{color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.list>.card.job,.card.row{transition:none}.list>.card.job:hover{transform:none}}
 
 .trk-item .m{white-space:pre-wrap;overflow-wrap:anywhere}
+
+.cp-record-tools{font-size:12px;line-height:1.6;color:var(--muted);margin:12px 0}.cp-record-tools button{min-height:44px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}.cp-record-archive{white-space:pre-wrap;overflow-wrap:anywhere;max-height:48vh;overflow:auto;font-size:12px}
 </style>
 <link rel="stylesheet" href="homepage-ux.css">
 <script src="/jobs/available.js" defer></script>
@@ -646,6 +648,11 @@ footer .src b{color:var(--ink)}
   <p class="cp-applied" id="cpApplied" role="status"></p>
 
 
+  <section class="cp-record-tools" aria-label="개인 기록 백업과 가져오기">
+    <p>저장·지원 기록은 이 브라우저에만 보관됩니다. 다른 기기와 자동 동기화되지 않으며, 비공개 모드 종료·사이트 데이터 삭제·기기 변경으로 사라질 수 있습니다. 홈페이지 소스 백업에는 개인 기록이 포함되지 않습니다.</p>
+    <div><button type="button" data-record-action="backup">개인 기록 백업(JSON)</button> <button type="button" data-record-action="import">백업 가져오기</button> <button type="button" data-record-action="archive">충돌·복구 사본 확인</button></div>
+    <p>백업에는 개인 메모가 포함될 수 있습니다. 파일은 본인이 보관하고 공개 게시·채팅으로 공유하지 마세요. 구주소에서는 같은 브라우저로 JSON을 내보낸 뒤 새주소에서 가져옵니다.</p>
+  </section>
   <input id="cpBackupInput" type="file" accept=".json,application/json" hidden aria-label="커리어픽 백업 파일 선택">
   <div class="sumrow"><p class="summary" id="summary" aria-live="polite"></p><label class="cp-order">정렬<select id="cpOrder" aria-label="공고 정렬"><option value="due">마감 임박순</option><option value="new">최신 등록순</option></select></label><button class="viewbtn" id="viewbtn" aria-pressed="false">☰ 간단히</button></div>
   <ul class="list" id="list"><!--STATIC-LIST-->
@@ -999,7 +1006,7 @@ const SPEC_PRO = ["의사","전문의","치과의사","한의사","약사","한�
 const SPEC_LIC = ["한국사","컴퓨터활용능력","정보처리기사","전기기사","전기산업기사","전기기능사","산업안전기사","소방설비기사","건축기사","토목기사","기계기사","가스기사","위험물산업기사",
   "에너지관리기사","운전면허(1종)","지게차","조리사","간호사","사회복지사","요양보호사","영양사","약사","보육교사","임상병리사","방사선사","물리치료사"];
 let SPEC = null;
-try { SPEC = JSON.parse(localStorage.getItem("spec") || "null"); } catch(e) {}
+SPEC=cpReadRecords("spec",null,CPStore.spec);
 const emptySpec = () => ({edu:"", career:"", age:"", toeic:"", want:[], region:"", lic:[], licEtc:"", special:[]});
 // 예전 버전에서 '거주지'만 고른 사람은 그 지역을 희망 근무지역으로도 씀
 if(SPEC && !Array.isArray(SPEC.want)) SPEC.want = SPEC.region ? [SPEC.region] : [];
@@ -1021,7 +1028,12 @@ function inWant(p, want){
 }
 const hasSpecObj = o => !!(o && (o.edu || o.toeic || o.age || o.region || (o.want||[]).length || (o.lic||[]).length || String(o.licEtc||"").trim() || (o.special||[]).length || (o.career !== undefined && o.career !== "")));
 const hasSpec = () => hasSpecObj(SPEC);
-function saveSpec(){ try { SPEC ? localStorage.setItem("spec", JSON.stringify(SPEC)) : localStorage.removeItem("spec"); } catch(e) {} }
+async function saveSpec(next,expected){
+  try{const stored=await CPStore.mutate(localStorage,'spec',null,CPStore.spec,current=>{
+    if(JSON.stringify(current)!==expected)throw Error('다른 탭에서 스펙이 변경됐습니다. 입력 내용을 복사한 뒤 다시 열어 주세요.');return next;
+  },navigator.locks);SPEC=stored;cpStorageNotice('spec','');return true;}
+  catch(error){cpStorageNotice('spec',error.message);toast(error.message);return false;}
+}
 
 const SPEC_CACHE = new Map();
 function specLics(spec){
@@ -1633,8 +1645,9 @@ function specBoxHTML(p, det){
   return `<div class="spbox"><h3>내 스펙 체크 <span class="sppill ${m.cls}">${m.icon} ${m.label}</span></h3><ul>${items}</ul>
     <p class="note">지원 자격을 자동으로 읽은 참고용 결과예요. 분야별 세부 자격은 아래 지원 자격·원문 공고에서 확인하세요. <button class="linkbtn" id="openSpec">스펙 수정</button></p></div>`;
 }
-let SDRAFT = null;
+let SDRAFT = null, SBASE=null, CP_SPEC_BUSY=false;
 function openSpec(draft){
+  SPEC=cpReadRecords("spec",null,CPStore.spec);SBASE=JSON.stringify(SPEC);
   SDRAFT = draft || Object.assign(emptySpec(), JSON.parse(JSON.stringify(SPEC || {})));
   const one = (key, items) => `<div class="chips">${items.map(([lab, val]) =>
     `<button class="chip" data-specone="${key}" data-val="${esc(val)}" aria-pressed="${String(SDRAFT[key]) === String(val)}">${esc(lab)}</button>`).join("")}</div>`;
@@ -1784,7 +1797,10 @@ window.addEventListener('storage',event=>{
   if(event.key==='saved'||event.key===null)SAVED=new Set(cpReadRecords('saved',[],CPStore.saved));
   if(event.key==='apps'||event.key===null)APPS=cpReadRecords('apps',{},CPStore.apps);
   if(event.key==='prefs'||event.key===null)PREFS=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},cpReadRecords('prefs',{},CPStore.prefs));
-  if(['saved','apps','prefs',null].includes(event.key))cpRefreshRecords();
+  if(event.key==='spec'||event.key===null){SPEC=cpReadRecords('spec',null,CPStore.spec);SPEC_CACHE.clear();}
+  if(['saved','apps','prefs','spec','careerpick-before-import',null].includes(event.key)){
+    const recovery=CPRecords.recoveryStatus(localStorage);cpStorageNotice('recovery',recovery.pending?recovery.message:'');cpRefreshRecords();
+  }
 });
 const ymd = d => { const k = kst(d); return `${k.getUTCFullYear()}-${pad(k.getUTCMonth()+1)}-${pad(k.getUTCDate())}`; };
 const ymdLabel = s => { const [y,m,d] = s.split("-").map(Number); const w = new Date(Date.UTC(y,m-1,d)).getUTCDay(); return `${m}.${d}(${WD[w]})`; };
@@ -2285,35 +2301,50 @@ function cpExportReport(){
   toast('보고서를 열었어요. 인쇄 / PDF로 저장을 선택하세요.');
 }
 function cpDownloadBackup(){
-  let exportResult;
-  try{exportResult=CPStore.exportRecords(localStorage,CP_BACKUP_KEYS);}catch(_){toast('저장소 접근이 차단되어 백업을 만들 수 없습니다.');return false;}
-  const data={format:'careerpick-backup',version:1,exported_at:new Date().toISOString(),...exportResult};
-  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json;charset=utf-8"}));
-  const a=document.createElement("a");a.href=url;a.download="careerpick-backup-"+ymd(new Date())+".json";document.body.appendChild(a);a.click();a.remove();
+  let exportResult;try{exportResult=CPStore.exportRecords(localStorage,CP_BACKUP_KEYS);}catch(_){toast('저장소 접근이 차단되어 백업을 만들 수 없습니다.');return false;}
+  const data={format:'careerpick-backup',version:1,service:{id:'careerpick',origin:location.origin,path:location.pathname},exported_at:new Date().toISOString(),...exportResult,recovery_required:CPRecords.recoveryStatus(localStorage).pending};
+  data.counts=CPRecords.counts(data.data);
+  const text=JSON.stringify(data,null,2),blob=new Blob([text],{type:'application/json;charset=utf-8'});
+  if(blob.size>CPRecords.maxBytes){toast('백업이 가져오기 지원 크기 16MB를 초과합니다. 원본 기록을 보존하고 지원을 요청하세요.');return false;}
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  const stamp=new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}).replace(' ','_').replace(/:/g,'-');
+  a.href=url;a.download='careerpick-backup-'+stamp+'_KST.json';document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),3000);
-  toast(data.unavailable_keys.length?'일부 저장소 접근이 차단됐습니다. 백업의 unavailable_keys를 확인하세요.':data.invalid_keys.length?'손상된 원본도 raw_records에 보관했습니다. 손상 항목은 자동 가져오기 전에 복구가 필요합니다.':'개인 기록 백업 파일을 다운로드했어요. 다른 사람에게 공유하지 마세요.');
+  toast(data.unavailable_keys.length?'일부 항목에 접근할 수 없는 부분 백업입니다. 파일의 unavailable_keys를 확인하세요.':data.invalid_keys.length?'손상 원문을 포함한 부분 백업을 요청했습니다. 원문 복구 후 가져오기할 수 있습니다.':'개인 기록 백업 다운로드를 요청했습니다. 파일의 시각·건수를 확인하고 본인만 보관하세요.');
   return !data.unavailable_keys.length;
 }
+let CP_IMPORT_BUSY=false;
 async function cpRestoreBackup(file){
-  if(!file)return;
-  if(file.size>2*1024*1024){alert("백업 파일이 너무 큽니다(최대 2MB).");return;}
-  let backup;
-  try{backup=JSON.parse(await file.text());}catch(e){alert("올바른 JSON 백업 파일이 아닙니다.");return;}
-  if(!backup || backup.format!=="careerpick-backup" || backup.version!==1 || !backup.data || typeof backup.data!=="object" || Array.isArray(backup.data)){
-    alert("커리어픽 백업 파일 형식이 아닙니다.");return;
-  }
-  try{CPRecords.validate(backup);}catch(e){alert(e.message);return;}
-  if(!confirm("현재 기록을 백업한 뒤 가져온 기록을 병합합니다. 같은 공고의 기존 상태·메모는 유지하고 충돌 원본은 이 기기에 별도 보관합니다. 계속할까요?"))return;
-  cpDownloadBackup();
+  if(!file||CP_IMPORT_BUSY)return;CP_IMPORT_BUSY=true;
   try{
-    const apply=()=>CPRecords.apply(localStorage,backup);
+    if(file.size>CPRecords.maxBytes){alert('백업 파일이 너무 큽니다(최대 16MB). 기존 기록은 변경하지 않았습니다.');return;}
+    let backup;try{backup=JSON.parse(await file.text());}catch(_){alert('올바른 JSON 백업 파일이 아닙니다. 기존 기록은 변경하지 않았습니다.');return;}
+    const preview=CPRecords.preview(localStorage,backup),c=preview.counts;
+    const message=`백업 생성: ${preview.exportedAt?new Date(preview.exportedAt).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})+' KST':'미제공 (과거 백업)'} · 형식 버전 ${preview.version}\n가져올 항목: 저장 ${c.saved} · 지원 ${c.apps} · 메모 ${c.memos} · 체크리스트 ${c.checklist_items} · 일정 ${c.schedules} · 맞춤 ${c.prefs} · 스펙 ${c.spec} · 보관 ${c.archives}\n신규: 저장 ${preview.savedAdded} · 지원 ${preview.appsAdded}\n중복: 저장 ${preview.duplicates.saved+preview.internalDuplicates} · 지원 ${preview.duplicates.apps} · 설정 ${preview.duplicates.prefs+preview.duplicates.spec}\n충돌 ${preview.conflicts} · 가져올 수 없는 항목 ${preview.invalid}\n기존 기록은 우선 보존하며 가져온 충돌 원본은 보관함에 남깁니다. 수정 시각만으로 최신이라고 판단하지 않습니다. 현재 기록 백업을 요청한 뒤 병합할까요?`;
+    if(!confirm(message))return;
+    if(!cpDownloadBackup())throw Error('변경 전 백업을 요청하지 못했습니다. 가져오기를 중단했습니다.');
+    const apply=()=>CPRecords.apply(localStorage,backup,{expectedOriginals:preview.originals});
     const result=await (navigator.locks?navigator.locks.request('careerpick-records',apply):apply());
     const linked=new Set(POSTS.flatMap(p=>[p.id,...(p.sourceIds||[])]));
     const orphan=[...new Set([...result.data.saved,...Object.keys(result.data.apps)])].filter(id=>!linked.has(id)).length;
-    alert(`병합 완료: 저장 ${result.savedAdded}건·지원 ${result.appsAdded}건 추가, 충돌 ${result.conflicts.length}건 원본 보관, 현재 목록 미연결 ${orphan}건 보존. 새로고침합니다.`);
-    location.reload();
-  }catch(e){alert(e.message);}
-
+    alert(`재검증 후 병합 완료: 저장 ${result.savedAdded}건·지원 ${result.appsAdded}건 추가, 충돌 ${result.conflicts.length}건 원본 보관, 현재 목록 미연결 ${orphan}건 보존. 새로고침합니다.`);location.reload();
+  }catch(error){alert(error.message);cpReadRecords('saved',[],CPStore.saved);}
+  finally{CP_IMPORT_BUSY=false;}
+}
+function cpShowRecordArchive(){
+  try{
+    const archive=JSON.parse(localStorage.getItem('careerpick-import-archive')||'[]'),journal=localStorage.getItem('careerpick-before-import'),checkpoint=localStorage.getItem('careerpick-record-checkpoints');
+    sheet('<p>기존 기록은 현재 상태로 남아 있습니다. 가져온 원본은 아래 보관 자료에서 확인할 수 있습니다. 최근 복구 사본은 전체 이력이 아니며 다른 변경이 있으면 자동 복구를 중단합니다.</p><pre id="cpArchiveText" class="cp-record-archive"></pre><button type="button" data-record-action="backup">원본 포함 백업(JSON)</button> <button type="button" data-record-action="recover">최근 가져오기 전으로 복구</button>','충돌·복구 사본');
+    const parse=value=>{try{return value?JSON.parse(value):null;}catch(_){return value;}};
+    $('cpArchiveText').textContent=JSON.stringify({imported_originals:archive,before_import:parse(journal),before_edit:parse(checkpoint)},null,2);
+  }catch(_){toast('보관 자료를 읽지 못했습니다. 원본 포함 JSON 백업을 먼저 보관하세요.');}
+}
+async function cpRecoverImport(){
+  if(CP_IMPORT_BUSY)return;
+  if(!confirm('최근 가져오기 직전 기록으로 원상복구합니다. 사본 이후 다른 변경이 있으면 덮어쓰지 않고 중단합니다. 현재 자료 백업을 요청한 뒤 복구할까요?'))return;
+  CP_IMPORT_BUSY=true;
+  try{if(!cpDownloadBackup())throw Error('복구 전 백업을 요청하지 못했습니다.');const restore=()=>CPRecords.recover(localStorage);await (navigator.locks?navigator.locks.request('careerpick-records',restore):restore());alert('원상복구 후 기존 기록을 다시 읽어 확인했습니다. 새로고침합니다.');location.reload();}
+  catch(error){alert(error.message);}finally{CP_IMPORT_BUSY=false;}
 }
 
 function render(){
@@ -2431,6 +2462,10 @@ document.addEventListener("click", async e => {
   const t = e.target.closest("button");
   if(!t) return;
   if(t.id==='cpRetryFeeds'){if(!CP_DATA_LOADING){CP_DATA_LOADING=true;render();load();}return;}
+  if(t.dataset.recordAction){
+    const action=t.dataset.recordAction;
+    if(action==='backup')cpDownloadBackup();else if(action==='import')$('cpBackupInput').click();else if(action==='archive')cpShowRecordArchive();else if(action==='recover')cpRecoverImport();return;
+  }
   if(t.id === "cpInternalBack"){
     if(CP_TAB_DEPTH > 0) history.back();
     else {state.tab="all";refresh();}
@@ -2514,7 +2549,9 @@ document.addEventListener("click", async e => {
     SDRAFT = emptySpec(); openSpec(SDRAFT);
   }
   else if(t.id === "specSave"){
-    SPEC = hasSpecObj(SDRAFT) ? SDRAFT : null; saveSpec(); SPEC_CACHE.clear(); closeSheet();
+    if(CP_SPEC_BUSY)return;CP_SPEC_BUSY=true;
+    try{if(!await saveSpec(hasSpecObj(SDRAFT)?JSON.parse(JSON.stringify(SDRAFT)):null,SBASE))return;}finally{CP_SPEC_BUSY=false;}
+    SPEC_CACHE.clear(); closeSheet();
     state.tab = "spec"; state.specV = "all"; state.onlyNew = false;
     alioDetail().then(() => { refresh(); if(JV) refreshJobView(); });
     refresh(); window.scrollTo({top:0});

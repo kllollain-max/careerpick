@@ -57,3 +57,13 @@ test('mixed damaged and healthy records display healthy entries without authoriz
  const view=store.read(s,'apps',{},store.apps);assert(!view.ok);assert.equal(view.data.good.memo,'preserved');assert(!('bad' in view.data));
  await assert.rejects(store.mutate(s,'apps',{},store.apps,()=>({})));assert.equal(s.data.apps,raw);
 });
+
+test('backup allowlist excludes SDK buckets and secret fields even inside recovery raw strings',()=>{
+ const s=storage({saved:'["a1"]',apps:'{"a1":{"st":"plan","memo":"메모🙂","access_token":"never-export-this"}}','onesignal-sdk':'{"token":"sdk-secret"}','careerpick-before-import':JSON.stringify({raw_records:{apps:'{"a1":{"st":"plan","api_key":"nested-secret"}}'}})});
+ const result=store.exportRecords(s,['saved','apps','careerpick-before-import']),text=JSON.stringify(result);
+ assert(!text.includes('never-export-this'));assert(!text.includes('sdk-secret'));assert(!text.includes('nested-secret'));assert(result.excluded_secret_fields>0);assert.equal(result.data.apps.a1.memo,'메모🙂');assert(result.redacted_raw_keys.includes('apps'));
+});
+test('unknown checkpoint version and unfinished import preserve input but reject new writes',async()=>{
+ const s=storage({saved:'["a1"]','careerpick-before-import':'{"format":"careerpick-before-import","version":99,"state":"complete"}'});
+ assert(!store.read(s,'saved',[],store.saved).ok);await assert.rejects(store.mutate(s,'saved',[],store.saved,()=>[]));assert.equal(s.data.saved,'["a1"]');
+});

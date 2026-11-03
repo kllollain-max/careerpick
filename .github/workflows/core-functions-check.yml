@@ -33,11 +33,17 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
           python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
           node scripts/verify_core_functions.cjs
+      - name: Verify private record download, restore and recovery using synthetic data only
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node scripts/verify_record_protection.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: core-function-evidence
           path: |
             core-audit-output/
+            record-protection-output/report.json
             build-report.json
           retention-days: 14
