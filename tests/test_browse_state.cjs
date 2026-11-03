@@ -8,3 +8,5 @@ test('unsupported menus and sorting cannot enter restore',()=>{for(const state o
 test('damaged field types cannot replace valid text with a boolean or object',()=>{const r=valid({...base,state:{...base.state,q:true,region:{},onlyNew:'yes'}});assert(!('q'in r.state));assert(!('region'in r.state));assert(!('onlyNew'in r.state));});
 test('memo, credentials and arbitrary payloads never enter navigation snapshot',()=>{const r=valid({...base,state:{...base.state,memo:'private',token:'private',prefs:{}}});assert.deepEqual(r.state,base.state);});
 test('invalid numeric positions and huge ranges are bounded without altering records',()=>{const r=valid({...base,limit:1e8,top:-5,anchor:{id:'a',offset:1e9}});assert.equal(r.limit,30000);assert.equal(r.top,0);assert.equal(r.anchor.offset,5000);});
+
+test('optional public neighbor IDs survive restore and reject arbitrary payloads',()=>{const r=valid({...base,anchor:{...base.anchor,neighbors:['next',null,{memo:'private'},'previous','ignored'],memo:'private'}});assert.deepEqual(r.anchor,{...base.anchor,neighbors:['next','previous']});});

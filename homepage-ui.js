@@ -15,17 +15,24 @@ function cpBrowseValid(raw){
  value.limit=Number.isInteger(raw.limit)&&raw.limit>=30?Math.min(raw.limit,30000):30;
  value.top=Number.isFinite(raw.top)?Math.max(0,Math.min(raw.top,1e7)):0;
  if(raw.anchor&&typeof raw.anchor.id==='string'&&raw.anchor.id.length<=160&&Number.isFinite(raw.anchor.offset))value.anchor={id:raw.anchor.id,offset:Math.max(-5000,Math.min(raw.anchor.offset,5000))};
+ if(value.anchor&&Array.isArray(raw.anchor.neighbors))value.anchor.neighbors=raw.anchor.neighbors.filter(id=>typeof id==='string'&&id.length>0&&id.length<=160).slice(0,2);
  return value;
+}
+function cpBrowseAnchorFor(link){
+ if(!link)return null;
+ const card=link.closest('li'),cards=[...document.querySelectorAll('#list>li.card')],index=cards.indexOf(card);
+ const identify=card=>{const a=card?.querySelector('[data-open],[data-save]');return a?.dataset.open||a?.dataset.save;};
+ return {id:link.dataset.open||link.dataset.save,offset:card.getBoundingClientRect().top,
+  neighbors:[identify(cards[index+1]),identify(cards[index-1])].filter(Boolean)};
 }
 function cpBrowseAnchor(){
  const cards=[...document.querySelectorAll('#list>li.card')];
  const el=cards.find(e=>e.getBoundingClientRect().bottom>0&&e.getBoundingClientRect().top<innerHeight);
- const link=el?.querySelector('[data-open],[data-save]');
- return link?{id:link.dataset.open||link.dataset.save,offset:el.getBoundingClientRect().top}:null;
+ return cpBrowseAnchorFor(el?.querySelector('[data-open],[data-save]'));
 }
 function cpBrowseSnapshot(id){
  let anchor=cpBrowseAnchor();
- if(id){const link=[...document.querySelectorAll('#list [data-open]')].find(e=>e.dataset.open===id);if(link)anchor={id,offset:link.closest('li').getBoundingClientRect().top};}
+ if(id){const link=[...document.querySelectorAll('#list [data-open]')].find(e=>e.dataset.open===id);if(link)anchor=cpBrowseAnchorFor(link);}
  return {version:1,state:Object.fromEntries(CP_BROWSE_FIELDS.filter(k=>state[k]!==undefined).map(k=>[k,state[k]])),limit:cpVisibleLimit,top:scrollY,anchor};
 }
 function cpSaveBrowse(id,sessionOnly=false){
@@ -39,7 +46,9 @@ function cpBrowseRestorePosition(snapshot,restoreFocus=false){
  const generation=++cpBrowseGeneration;
  requestAnimationFrame(()=>requestAnimationFrame(()=>{
   if(generation!==cpBrowseGeneration||typeof JV!=='undefined'&&JV)return;
-  const link=snapshot.anchor&&[...document.querySelectorAll('#list [data-open],#list [data-save]')].find(e=>(e.dataset.open||e.dataset.save)===snapshot.anchor.id);
+  const candidates=[...document.querySelectorAll('#list [data-open],#list [data-save]')];
+  const lookup=id=>candidates.find(e=>(e.dataset.open||e.dataset.save)===id);
+  const link=snapshot.anchor&&(lookup(snapshot.anchor.id)||(snapshot.anchor.neighbors||[]).map(lookup).find(Boolean));
   const card=link?.closest('li'),top=card?scrollY+card.getBoundingClientRect().top-snapshot.anchor.offset:snapshot.top;
   cpBrowseIgnoreScrollUntil=performance.now()+250;window.scrollTo({top:Math.max(0,top),behavior:'instant'});
   if(link&&restoreFocus)link.focus({preventScroll:true});
@@ -86,6 +95,18 @@ function cpSetupBrowse(){
  window.addEventListener('pageshow',e=>{if(e.persisted&&!JV)cpRestoreBrowseEntry(history.state);});
  window.addEventListener('pagehide',()=>cpSaveBrowse(null,true));
  document.addEventListener('visibilitychange',()=>{if(document.hidden)cpSaveBrowse(null,true);});
+ // Reflow changes card height without a user scroll; retain the last public card anchor.
+ let viewportWidth=innerWidth,rootFont=getComputedStyle(document.documentElement).fontSize;
+ const restoreReflow=()=>{
+  const font=getComputedStyle(document.documentElement).fontSize,changed=viewportWidth!==innerWidth||rootFont!==font;
+  viewportWidth=innerWidth;rootFont=font;
+  if(!changed||!cpFeedEngaged||document.hidden||JV||cpRestoringBrowse||$('sheet')?.classList.contains('open')||$('panel')?.classList.contains('open'))return;
+  const snapshot=cpBrowseMemory.get(cpActiveBrowseId);
+  if(snapshot?.anchor&&JSON.stringify(snapshot.state)===JSON.stringify(cpBrowseSnapshot().state))cpBrowseRestorePosition(snapshot);
+ };
+ window.addEventListener('resize',restoreReflow,{passive:true});
+ if(typeof ResizeObserver!=='undefined'){const observer=new ResizeObserver(restoreReflow);observer.observe($('list'));}
+
 }
 let cpQueuedFeedUpdate=null,cpApplyingFeedUpdates=false;
 function cpFlushFeedUpdate(){

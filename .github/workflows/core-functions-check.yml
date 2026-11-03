@@ -61,7 +61,7 @@ jobs:
           NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
           CHROME_PATH: /usr/bin/google-chrome
         run: |
-          git fetch origin 91d4db1eda391fccbad5af992ebd8015946fa598
+          git fetch origin 3c6386f1e2bedba59cd9e71edd86c150c70b5b4b
           mkdir -p "$RUNNER_TEMP/cp-nav-before-host"
           git worktree add --detach "$RUNNER_TEMP/cp-nav-before" FETCH_HEAD
           (cd "$RUNNER_TEMP/cp-nav-before" && python scripts/build_public_site.py)
