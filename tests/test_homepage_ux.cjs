@@ -111,13 +111,13 @@ test('all official work regions reach filtering, without inventing nationwide co
 
 test('offline service worker always returns a Response for an uncached resource',async()=>{
   const handlers={};let promise;
-  const context={self:{addEventListener:(name,fn)=>handlers[name]=fn},URL,Response,location:{origin:'https://kllollain-max.github.io'},caches:{match:async()=>undefined,open:async()=>({match:async()=>undefined})},fetch:async()=>{throw Error('offline');}};
+  const context={self:{addEventListener:(name,fn)=>handlers[name]=fn},URL,Response,Headers,location:{origin:'https://kllollain-max.github.io'},caches:{match:async()=>undefined,open:async()=>({match:async()=>undefined})},fetch:async()=>{throw Error('offline');}};
   vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);
-  handlers.fetch({request:{url:'https://kllollain-max.github.io/alio.json?t=1',method:'GET'},respondWith:p=>promise=p});
+  handlers.fetch({request:{url:'https://kllollain-max.github.io/alio.json?t=1',method:'GET'},respondWith:p=>promise=p,waitUntil:()=>{}});
   const missing=await promise;assert.equal(missing.status,503);assert.match(await missing.text(),/오프라인/);
-  context.caches.open=async()=>({match:async()=>new Response('cached')});
-  handlers.fetch({request:{url:'https://kllollain-max.github.io/alio.json?t=2',method:'GET'},respondWith:p=>promise=p});
-  assert.equal(await (await promise).text(),'cached');
+  context.caches.open=async()=>({match:async()=>new Response('cached',{headers:{'Content-Encoding':'gzip','Content-Length':'99'}})});
+  handlers.fetch({request:{url:'https://kllollain-max.github.io/alio.json?t=2',method:'GET'},respondWith:p=>promise=p,waitUntil:()=>{}});
+  const cached=await promise;assert.equal(await cached.text(),'cached');assert.equal(cached.headers.get('X-CareerPick-Cache'),'fallback');assert.equal(cached.headers.get('Content-Encoding'),null);assert.equal(cached.headers.get('Content-Length'),null);
 });
 
 test('unverified institution history never enters active homepage feed',()=>{
@@ -142,13 +142,13 @@ async function work24PolicyCase(policy, receipt, data){
   const code=source.slice(start,source.indexOf('\nfunction cpRenderHomeFilters',start));
   const existing=[{id:'alio-fixture',alio:true},{id:'institution-fixture',monitor:true}];
   const calls=[];
-  const context={AbortController,setTimeout,clearTimeout,DATA_HEALTH:{alio:'ok',monitor:'ok'},CP_FEED_STAMPS:{alio:new Date().toISOString(),monitor:new Date().toISOString()},POSTS:existing.slice(),CPHome:home,
+  const context={AbortController,setTimeout,clearTimeout,URL,Headers,location:{href:'https://example.test/'},CP_FEED_CACHE:new Map(),DATA_HEALTH:{alio:'ok',monitor:'ok'},CP_FEED_STAMPS:{alio:new Date().toISOString(),monitor:new Date().toISOString()},POSTS:existing.slice(),CPHome:home,
     fetch:async(url,options)=>{
       const path=url.split('?')[0];calls.push(path);
       assert(!/^https?:/.test(url),'no provider request');
       assert.equal(options.cache,'no-store');
       const value={'work24-policy.json':policy,'work24-status.json':receipt,'work24.json':data}[path];
-      return{ok:value!==undefined,json:async()=>{if(value instanceof Error)throw value;return value;}};
+      return{ok:value!==undefined,headers:new Headers(),json:async()=>{if(value instanceof Error)throw value;return value;}};
     }};
   const bounded=source.slice(source.indexOf('async function cpFetchJson'),source.indexOf('async function cpReadFeed'));
   await vm.runInNewContext(bounded+code+'\ncpLoadWork24()',context);
@@ -271,4 +271,12 @@ test('notice display: unified cards retain and escape both official source links
   c.p=home.unifyNotices(displayRows()).rows[0];const links=vm.runInContext('cpMergedSourceLinks(p)',c);
   for(const s of c.p.officialSources)assert(links.includes(s.url));assert(links.includes('rel="noopener noreferrer"'));
   c.p={officialSources:[{url:'https://example.com/?a="<',label:'<script>'}]};assert(!vm.runInContext('cpMergedSourceLinks(p)',c).includes('<script>'));
+});
+
+test('service worker waits for code cache persistence before an offline transition',async()=>{
+ const handlers={};let response,lifetime,release,stored=false;
+ const context={self:{addEventListener:(n,fn)=>handlers[n]=fn},URL,Response,Headers,location:{origin:'https://example.test'},caches:{open:async()=>({put:async()=>{await new Promise(r=>release=r);stored=true;},match:async()=>null})},fetch:async()=>new Response('window.ready=true;')};
+ vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);
+ handlers.fetch({request:{url:'https://example.test/homepage-ui.js?v=2',method:'GET'},respondWith:p=>response=p,waitUntil:p=>lifetime=p});
+ let delivered=false;response.then(()=>delivered=true);await new Promise(r=>setImmediate(r));assert.equal(delivered,false);assert.equal(stored,false);release();await lifetime;assert.equal(stored,true);assert.match(await (await response).text(),/ready/);
 });

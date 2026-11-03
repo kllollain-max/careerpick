@@ -46,18 +46,23 @@ function cpBrowseRestorePosition(snapshot,restoreFocus=false){
   cpRestoringBrowse=false;if(cpActiveBrowseId)cpBrowseMemory.set(cpActiveBrowseId,snapshot);
  }));
 }
+function cpBrowseCanRestore(snapshot){
+ if(CP_DATA_LOADING&&snapshot.anchor)return [...document.querySelectorAll('#list [data-open],#list [data-save]')].some(e=>(e.dataset.open||e.dataset.save)===snapshot.anchor.id);
+ return POSTS.length>0||!CP_DATA_LOADING;
+}
+function cpCancelBrowseRestore(){if(cpRestoringBrowse){cpRestoringBrowse=false;cpBrowsePending=null;cpBrowseGeneration++;}}
 function cpRestoreBrowse(raw,renderNow=true){
  const snapshot=cpBrowseValid(raw);if(!snapshot)return false;
  cpRestoringBrowse=true;cpBrowsePending=snapshot;Object.assign(state,snapshot.state);$('q').value=state.q;
  cpVisibleLimit=snapshot.limit;cpLastFilter=JSON.stringify(state);
  if(renderNow){CP_RESTORING_TAB=true;refresh();CP_RESTORING_TAB=false;}
- if(POSTS.length||!CP_DATA_LOADING){cpBrowsePending=null;cpBrowseRestorePosition(snapshot,true);}
+ if(cpBrowseCanRestore(snapshot)){cpBrowsePending=null;cpBrowseRestorePosition(snapshot,true);}
  return true;
 }
 function cpBrowseAfterRender(anchor){
  if(location.hash.startsWith('#job='))return;
  cpRememberBrowse();
- if(cpBrowsePending&&(POSTS.length||!CP_DATA_LOADING)){const snapshot=cpBrowsePending;cpBrowsePending=null;cpBrowseRestorePosition(snapshot,true);}
+ if(cpBrowsePending&&cpBrowseCanRestore(cpBrowsePending)){const snapshot=cpBrowsePending;cpBrowsePending=null;cpBrowseRestorePosition(snapshot,true);}
  else if(anchor&&!cpRestoringBrowse)cpBrowseRestorePosition({...cpBrowseSnapshot(),anchor});
 }
 function cpSetupBrowse(){
@@ -73,10 +78,10 @@ function cpSetupBrowse(){
  CP_URL_APPLIED=true;
  let scrollTimer;
  window.addEventListener('scroll',()=>{if(!JV&&!cpRestoringBrowse&&performance.now()>=cpBrowseIgnoreScrollUntil){cpFeedEngaged=true;clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>cpSaveBrowse(),180);}},{passive:true});
- document.addEventListener('pointerdown',()=>{cpFeedEngaged=true;cpBrowseIgnoreScrollUntil=0;},{passive:true});
- document.addEventListener('keydown',()=>{cpFeedEngaged=true;cpBrowseIgnoreScrollUntil=0;},{passive:true});
+ document.addEventListener('pointerdown',()=>{cpFeedEngaged=true;cpBrowseIgnoreScrollUntil=0;cpCancelBrowseRestore();},{passive:true});
+ document.addEventListener('keydown',()=>{cpFeedEngaged=true;cpBrowseIgnoreScrollUntil=0;cpCancelBrowseRestore();},{passive:true});
  window.addEventListener('wheel',()=>{cpBrowseIgnoreScrollUntil=0;},{passive:true});window.addEventListener('touchstart',()=>{cpBrowseIgnoreScrollUntil=0;},{passive:true});
- document.addEventListener('input',()=>{cpFeedEngaged=true;if(cpRestoringBrowse){cpRestoringBrowse=false;cpBrowsePending=null;cpBrowseGeneration++;}},true);
+ document.addEventListener('input',()=>{cpFeedEngaged=true;cpCancelBrowseRestore();},true);
  document.addEventListener('click',e=>{const a=e.target.closest('a[data-open],a[target="_blank"],[data-cpnav],[data-tab],[data-dash]');if(a)cpSaveBrowse(a.dataset.open);},true);
  window.addEventListener('pageshow',e=>{if(e.persisted&&!JV)cpRestoreBrowseEntry(history.state);});
  window.addEventListener('pagehide',()=>cpSaveBrowse());
@@ -100,11 +105,11 @@ document.addEventListener('click',e=>{if(e.target.closest('#cpApplyFeedUpdate')&
 let cpVisibleLimit=30, cpLastFilter="";
 function cpCheckVisibleLimit(){ const key=JSON.stringify(state);if(key!==cpLastFilter){if(cpRestoringBrowse&&cpLastFilter){cpRestoringBrowse=false;cpBrowsePending=null;}cpVisibleLimit=30;cpLastFilter=key;cpBrowseGeneration++;if(cpBrowseReady&&!cpRestoringBrowse&&scrollY>($("summary")?.offsetTop||0))window.scrollTo({top:$("summary")?.offsetTop||0,behavior:"instant"});} }
 /* UI wiring for the existing homepage; no changes to delivery or collection. */
-const CP_FEED_STAMPS={},CP_FEED_ISSUES={};
+const CP_FEED_STAMPS={},CP_FEED_ISSUES={},CP_FEED_CACHE=new Map();
 const CP_UNCONFIRMED_IDS=new Set();
 async function cpFetchJson(path){
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
-  try{const response=await fetch(path,{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('feed_http');return await response.json();}
+  try{const response=await fetch(path,{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('feed_http');const file=new URL(path,location.href).pathname.split('/').pop();if(response.headers.get('X-CareerPick-Cache')==='fallback')CP_FEED_CACHE.set(file,response.headers.get('X-CareerPick-Cached-At'));else CP_FEED_CACHE.delete(file);return await response.json();}
   finally{clearTimeout(timer);}
 }
 async function cpReadFeed(path,key){
