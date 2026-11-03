@@ -50,6 +50,7 @@ class ThreadsEditorialTests(unittest.TestCase):
             threads_auto.publish_post(record, history)
             threads_auto.publish_post(record, history)
         self.assertEqual(len(issued), 3)
+        self.assertEqual(record["request_status"], "confirmed")
         self.assertEqual(issued[1]["reply_to_id"], "main-id")
         self.assertEqual(issued[2]["reply_to_id"], "main-id")
         self.assertEqual(record["engagement_post_id"], "engagement-id")
