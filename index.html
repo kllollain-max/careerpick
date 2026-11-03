@@ -2796,7 +2796,7 @@ async function cpSubscribePush(){
   } catch(e){
     if(btn){btn.disabled=false;btn.textContent="🔔 다시 연결하기";}
     if(status)status.textContent="연결 실패: "+String(e.message||e).slice(0,180);
-  }finally{cpPushAction=null;cpRenderPushButtons();}
+  }finally{cpPushAction=null;const message=status?.textContent;cpRenderPushButtons();if(status && message)status.textContent=message;}
 }
 async function cpCopyPushSubscriptionId(){
   const status=$("cpPushMessage");
@@ -2830,7 +2830,7 @@ async function cpUnsubscribePush(){
   }catch(e){
     cpRenderPushButtons();
     if(status)status.textContent="해지 실패: "+String(e.message||e).slice(0,180);
-  }finally{cpPushAction=null;cpRenderPushButtons();}
+  }finally{cpPushAction=null;const message=status?.textContent;cpRenderPushButtons();if(status && message)status.textContent=message;}
 }
 function cpRenderPushButtons(){
   const on=cpPushRegistered();
