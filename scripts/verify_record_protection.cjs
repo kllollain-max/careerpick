@@ -82,7 +82,7 @@ function upload(data,name='synthetic-backup.json'){return{name,mimeType:'applica
     fs.writeFileSync(workerFile,original+'\nself.addEventListener("message",e=>{if(e.data==="CP_RECORDS_AUDIT")e.source.postMessage("CP_RECORDS_AUDIT_V2");});\n');const mtime=new Date(Date.now()+3000);fs.utimesSync(workerFile,mtime,mtime);
     await p.evaluate(async()=>{navigator.serviceWorker.addEventListener('message',e=>{if(e.data==='CP_RECORDS_AUDIT_V2')window.__recordsWorkerV2=true;});const r=await navigator.serviceWorker.getRegistration();await r.update();});
     await p.waitForFunction(async()=>{navigator.serviceWorker.controller?.postMessage('CP_RECORDS_AUDIT');return window.__recordsWorkerV2===true;});
-    await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);await x.ctx.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING);assert.deepEqual(await records(p),before);
+    console.log('SW audit online reload');await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!CP_DATA_LOADING,null,{timeout:30000});assert.deepEqual(await records(p),before);console.log('SW audit offline reload');await x.ctx.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});assert.deepEqual(await records(p),before);await p.waitForFunction(()=>!CP_DATA_LOADING,null,{timeout:30000});assert.deepEqual(await records(p),before);
    }finally{fs.writeFileSync(workerFile,original);if(x)await x.ctx.close();}
   });
   if(report.checks.some(x=>x.result==='fail'))process.exitCode=1;
