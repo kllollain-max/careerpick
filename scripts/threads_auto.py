@@ -583,6 +583,7 @@ def publish_post(record, history):
         print('Threads API returned post ID; reconcile if receipt write fails:', post_id, flush=True)
         # If this fails, the remote sending claim remains a permanent hold.
         remote.accept(record['scheduled_at'], record['run_id'], claim_sha, post_id)
+        record['request_status'] = 'confirmed'
         record['status'] = 'published'
         record['threads_post_id'] = post_id
         record['published_at'] = datetime.now(KST).isoformat()
