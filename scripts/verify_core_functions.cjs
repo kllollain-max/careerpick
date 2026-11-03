@@ -82,7 +82,7 @@ async function savedAndApps(page){
   // The current public site is exercised with a completely new profile; no personal storage or real push.
   const live=await context(browser,{fixtures:false});const lp=await live.ctx.newPage();const liveErrors=[];lp.on('pageerror',e=>liveErrors.push(e.message));
   await check('current public search, modal, refresh and saved state',async()=>{
-   await ready(lp,LIVE);const id=await lp.locator('#list [data-save]').first().getAttribute('data-save');
+   await ready(lp,LIVE);await lp.locator('#list [data-open]').first().waitFor({timeout:15000});const id=await lp.locator('#list [data-open]').first().evaluate(el=>el.closest('li').querySelector('[data-save]').dataset.save);
    await lp.locator(`#list [data-save="${id}"]`).first().click();await lp.reload();await ready(lp,LIVE);
    await lp.getByRole('button',{name:'저장 공고',exact:true}).click();assert.equal(await lp.locator(`#list [data-save="${id}"]`).first().getAttribute('aria-pressed'),'true');
    await lp.locator('#list [data-open]').first().click();await lp.locator('#jobview').waitFor({state:'visible'});await lp.goBack();await lp.locator('#jobview').waitFor({state:'hidden'});
