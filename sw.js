@@ -13,9 +13,10 @@ async function cpCacheFallback(name,key){
   return new Response(cached.body,{status:cached.status,statusText:cached.statusText,headers});
  }catch(_){return null;}
 }
+async function cpCacheReady(work){let timer;try{await Promise.race([work,new Promise(resolve=>timer=setTimeout(resolve,1500))]);}finally{clearTimeout(timer);}}
 self.addEventListener('fetch',e=>{
  const req=e.request,url=new URL(req.url);if(req.method!=='GET'||url.origin!==location.origin)return;
- const image=/\.(png|webp|jpg|svg)$/.test(url.pathname),code=/\.(js|css)$/.test(url.pathname)||req.mode==='navigate'||url.pathname.endsWith('/')||url.pathname.endsWith('.html');
+ const image=/\.(png|webp|jpg|svg)$/.test(url.pathname),code=/\.(js|css)$/.test(url.pathname);
  // Code query versions remain distinct; timestamped JSON requests share their data path.
  const key=/\.(js|css)$/.test(url.pathname)?url.href:url.pathname;
  const name=image?STATIC:PAGES;
@@ -24,7 +25,7 @@ self.addEventListener('fetch',e=>{
  const stored=network.then(res=>res.ok?cpCachePut(name,key,res.clone()):undefined).catch(()=>{});
  e.waitUntil(stored);
  e.respondWith((async()=>{
-  try{const res=await network;if(res.ok){if(code)await stored;return res;}return await cpCacheFallback(name,key)||res;}
+  try{const res=await network;if(res.ok){if(code)await cpCacheReady(stored);return res;}return await cpCacheFallback(name,key)||res;}
   catch(_){return await cpCacheFallback(name,key)||new Response('오프라인에서 이 자료를 찾을 수 없습니다. 연결 후 다시 확인해 주세요.',{status:503,headers:{'Content-Type':'text/plain; charset=utf-8'}});}
  })());
 });

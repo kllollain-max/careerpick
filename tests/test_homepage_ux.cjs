@@ -275,8 +275,16 @@ test('notice display: unified cards retain and escape both official source links
 
 test('service worker waits for code cache persistence before an offline transition',async()=>{
  const handlers={};let response,lifetime,release,stored=false;
- const context={self:{addEventListener:(n,fn)=>handlers[n]=fn},URL,Response,Headers,location:{origin:'https://example.test'},caches:{open:async()=>({put:async()=>{await new Promise(r=>release=r);stored=true;},match:async()=>null})},fetch:async()=>new Response('window.ready=true;')};
+ const context={self:{addEventListener:(n,fn)=>handlers[n]=fn},URL,Response,Headers,setTimeout,clearTimeout,location:{origin:'https://example.test'},caches:{open:async()=>({put:async()=>{await new Promise(r=>release=r);stored=true;},match:async()=>null})},fetch:async()=>new Response('window.ready=true;')};
  vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);
  handlers.fetch({request:{url:'https://example.test/homepage-ui.js?v=2',method:'GET'},respondWith:p=>response=p,waitUntil:p=>lifetime=p});
  let delivered=false;response.then(()=>delivered=true);await new Promise(r=>setImmediate(r));assert.equal(delivered,false);assert.equal(stored,false);release();await lifetime;assert.equal(stored,true);assert.match(await (await response).text(),/ready/);
+});
+
+test('a stalled optional code cache cannot indefinitely block a healthy network response',async()=>{
+ const handlers={};let response;
+ const context={self:{addEventListener:(n,fn)=>handlers[n]=fn},URL,Response,Headers,setTimeout:fn=>setImmediate(fn),clearTimeout:clearImmediate,location:{origin:'https://example.test'},caches:{open:async()=>({put:()=>new Promise(()=>{}),match:async()=>null})},fetch:async()=>new Response('usable code')};
+ vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);
+ handlers.fetch({request:{url:'https://example.test/homepage-ui.js',method:'GET'},respondWith:p=>response=p,waitUntil:()=>{}});
+ assert.equal(await (await response).text(),'usable code');
 });

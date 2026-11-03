@@ -700,8 +700,8 @@ footer .src b{color:var(--ink)}
 <li class="card mini"><a class="main" href="https://m.blog.naver.com/hid4989-3/224436992442"><div class="kind"><span class="pill p">취업준비</span></div><div class="t">2026 하반기 에너지 공기업 NCS 출제유형 비교표</div></a></li>
 <!--/STATIC-LIST--></ul>
   </main>
-  <details class="cp-support"><summary>나의 대시보드 · 마감 임박 · 취업 준비</summary>
   <div class="cp-feed-status" id="cpFeedStatus" role="status" aria-live="polite">📡 채용정보 업데이트 상태 확인 중…</div>
+  <details class="cp-support"><summary>나의 대시보드 · 마감 임박 · 취업 준비</summary>
   <div class="notice alert" id="savedAlert" hidden role="button" tabindex="0"></div>
   <div class="cp-alert-entry" style="margin:8px 0 10px">
     <button type="button" id="cpAlwaysAlert" style="display:block;width:100%;min-height:48px;border:2px solid #1d4ed8;border-radius:12px;background:#eff6ff;color:#1e3a8a;font-size:15px;font-weight:800;cursor:pointer;padding:10px 12px">🔔 내 맞춤 채용 알림 설정 · 구독/해지 (테스트 중)</button>
@@ -2604,7 +2604,7 @@ document.addEventListener("click", async e => {
 });
 let cpComposing=false;
 $('q').addEventListener('compositionstart',()=>{cpComposing=true;cpQueryTouched=true;});
-function cpSearchInput(e){cpQueryTouched=true;if(cpComposing||e.isComposing)return;state.q=e.target.value;cpFlushFeedUpdate();renderFilters();render();cpRememberBrowse();}
+function cpSearchInput(e){cpQueryTouched=true;if(cpComposing||e.isComposing)return;state.q=e.target.value;try{const url=new URL(location.href);if(url.searchParams.has('q')){url.searchParams.delete('q');history.replaceState(history.state,'',url.pathname+url.search+url.hash);}}catch(_){}cpFlushFeedUpdate();renderFilters();render();cpRememberBrowse();}
 $('q').addEventListener('compositionend',e=>{cpComposing=false;cpSearchInput(e);});
 $('q').addEventListener('input',cpSearchInput);
 $("tabs").addEventListener("scroll", fadeHint, {passive:true});
