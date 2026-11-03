@@ -1482,8 +1482,10 @@ function prefCard(){
   if(off) return "";
   return `<li class="prefcard"><span class="grow"><b>내 조건</b>을 저장하면 맞는 공고만 맨 위에 모아 보여드려요. (고졸·인턴·지역 등)</span><button class="go" id="openPrefs">설정</button><button class="x" id="prefCardX" aria-label="닫기">×</button></li>`;
 }
-let DRAFT = null;
+let DRAFT = null, PBASE=null;
 function openPrefs(){
+  PREFS=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},cpReadRecords('prefs',{},CPStore.prefs));
+  PBASE=JSON.stringify(PREFS);
   DRAFT = JSON.parse(JSON.stringify(PREFS));
   const cats = [...new Set(POSTS.filter(p => p.type === "j").map(p => p.cat))];
   const grp = (key, label, items) => `<div class="grp"><span>${label}</span><div class="chips">${items.map(v =>
@@ -1517,7 +1519,11 @@ async function cpSavePreferenceSettings(){
     if(input)DRAFT.kw=input.value;
     const next=JSON.parse(JSON.stringify(DRAFT));
     const serialized=JSON.stringify(next);
-    const stored=await cpMutateRecords('prefs',{},CPStore.prefs,()=>next);
+    const stored=await cpMutateRecords('prefs',{},CPStore.prefs,current=>{
+      const previous=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},current);
+      if(JSON.stringify(previous)!==PBASE)throw Error('다른 탭에서 맞춤 조건이 변경됐습니다. 다시 열어 확인해 주세요.');
+      return next;
+    });
     if(stored===null)throw Error('맞춤 조건을 저장하지 못했습니다. 기존 기록을 보존했습니다.');
     PREFS=next;
     if(live)live.textContent="✓ 맞춤 조건 저장 성공 · 진단 v2";
@@ -2645,6 +2651,7 @@ async function cpInitPush(){
         } catch(e){
           if(!/already initialized/i.test(String(e && e.message || e))) throw e;
         }
+        if(generation!==cpPushGeneration)return;
         if(!sdk.User || !sdk.User.PushSubscription) throw Error("웹푸시 SDK가 준비되지 않았습니다.");
         sdk.User.PushSubscription.addEventListener("change",()=>cpRenderPushButtons());
         cpPushSdkReady=true;
@@ -2664,7 +2671,7 @@ async function cpInitPush(){
 }
 function cpPushRegistered(){
   const sub=window.OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
-  return !!(cpPushSdkReady && sub && sub.optedIn && sub.id && sub.token);
+  return !!(cpPushSdkReady && typeof Notification!=="undefined" && Notification.permission==="granted" && sub && sub.optedIn && sub.id && sub.token);
 }
 async function cpWaitPushState(test,label){
   const until=Date.now()+12000;
@@ -2756,7 +2763,7 @@ function cpPushSetupPanel(){
     +'<button type="button" id="cpPushUnsubscribe" hidden style="display:none;width:100%;margin-top:8px;padding:12px;border:1px solid #64748b;border-radius:10px;background:#fff;color:#334155;font-weight:700;cursor:pointer">알림 구독 해지</button>'
     +'<button type="button" id="cpPushCopyId" style="width:100%;margin-top:8px;padding:10px;border:1px solid #64748b;border-radius:10px;background:#fff;color:#334155;cursor:pointer">테스트용 구독 ID 복사</button>'
     +'<p id="cpPushMessage" role="status" aria-live="polite" style="font-size:13px;line-height:1.5;margin:9px 0"></p>'
-    +'<p style="font-size:12px;line-height:1.5;margin:6px 0">신규 공고 및 마감 D-1 자동 발송은 별도 서버 연동 후 제공됩니다.</p></div>';
+    +'<p style="font-size:12px;line-height:1.5;margin:6px 0">기기 구독 상태와 실제 알림 수신은 별개입니다. 맞춤 조건에 맞는 새 공고가 있어야 발송 대상으로 선정됩니다.</p></div>';
 }
 
 
@@ -2878,6 +2885,7 @@ function savedAlert(){
 $("cpAlwaysAlert").addEventListener("click", () => openPrefs());
 
 cpSetupHome();
+refresh();
 load();
 setInterval(() => POSTS.length && render(), 60000);
 </script>

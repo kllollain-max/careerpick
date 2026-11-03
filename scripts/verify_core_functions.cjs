@@ -11,7 +11,7 @@ const rows=[
 ].map(p=>({type:'j',alio:true,cat:'공공기관 공식 공고',url:'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx='+p.id.slice(1),pub:'2026-11-01T00:00:00+09:00',due:'2099-12-31T23:59:00+09:00',edu:['학력무관'],n:'2',...p}));
 const feed={updated:new Date().toISOString(),posts:rows};
 const report={checked_at_kst:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Seoul'}),browser:'Chromium desktop, isolated contexts; mobile viewport simulation',actual_devices:false,push_delivery:false,public:[],candidate:[]};
-const sdk=`(()=>{const sub={optedIn:false,id:null,token:null,addEventListener(){},async optIn(){window.fakeOptIns=(window.fakeOptIns||0)+1;await new Promise(r=>setTimeout(r,120));sub.optedIn=true;sub.id='synthetic-subscription';sub.token='synthetic-token';},async optOut(){window.fakeOptOuts=(window.fakeOptOuts||0)+1;sub.optedIn=false;sub.id=null;sub.token=null;}};const api={init:async()=>{},User:{PushSubscription:sub,addTags:async()=>{},getTags:async()=>({}),removeTags:async()=>{}}};window.OneSignal=api;for(const callback of window.OneSignalDeferred||[])callback(api);window.OneSignalDeferred={push:callback=>callback(api)};})();`;
+const sdk=`(()=>{const sub={optedIn:false,id:null,token:null,addEventListener(){},async optIn(){window.fakeOptIns=(window.fakeOptIns||0)+1;await new Promise(r=>setTimeout(r,120));Object.defineProperty(Notification,'permission',{configurable:true,get:()=> 'granted'});sub.optedIn=true;sub.id='synthetic-subscription';sub.token='synthetic-token';},async optOut(){window.fakeOptOuts=(window.fakeOptOuts||0)+1;sub.optedIn=false;sub.id=null;sub.token=null;}};const api={init:async()=>{},User:{PushSubscription:sub,addTags:async()=>{},getTags:async()=>({}),removeTags:async()=>{}}};window.OneSignal=api;for(const callback of window.OneSignalDeferred||[])callback(api);window.OneSignalDeferred={push:callback=>callback(api)};})();`;
 async function context(browser,{width=390,fixtures=true,seed={},deny=false,sdkFailFirst=false,slow=false,failFeeds=false}={}){
  const ctx=await browser.newContext({viewport:{width,height:900},locale:'ko-KR',timezoneId:'Asia/Seoul',serviceWorkers:'block'});
  let sdkLoads=0;
@@ -35,7 +35,7 @@ async function context(browser,{width=390,fixtures=true,seed={},deny=false,sdkFa
  return {ctx,sdkLoads:()=>sdkLoads};
 }
 async function ready(page,url=BASE){await page.goto(url,{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.querySelector('#cpSectors')?.textContent.match(/전체공고[1-9]/));await page.locator('#list [data-save]').first().waitFor();}
-async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].push({name,result:'pass'});}catch(e){report[bucket].push({name,result:'fail',error:String(e.message).slice(0,320)});if(bucket==='candidate')throw e;}finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));}}
+async function check(name,fn,bucket='candidate'){try{await fn();report[bucket].push({name,result:'pass'});console.log('PASS '+bucket+' '+name);}catch(e){report[bucket].push({name,result:'fail',error:String(e.message).slice(0,320)});console.log('FAIL '+bucket+' '+name+' '+String(e.message).slice(0,320));if(bucket==='candidate')throw e;}finally{fs.writeFileSync(OUT+'/report.json',JSON.stringify(report,null,2));}}
 async function searchAndBack(page){
  const q=page.getByRole('searchbox',{name:'검색',exact:true});
  for(const word of ['춘천연구원','전산직','정규직 채용']){await q.fill(word);assert.equal(await page.locator('#list .job').count(),1);}
@@ -55,9 +55,9 @@ async function searchAndBack(page){
  assert.equal(await q.inputValue(),'');assert.equal(await page.locator('#list .job').count(),2);
 }
 async function savedAndApps(page){
- await page.locator('#list [data-save="a900001"]').click();await page.waitForFunction(()=>JSON.parse(localStorage.getItem('saved')).includes('a900001'));
+ await page.locator('#list [data-save="a900001"]').click();await page.waitForFunction(()=>JSON.parse(localStorage.getItem('saved')||'[]').includes('a900001'));
  await page.locator('#list [data-open="a900001"]').first().click();assert.equal(await page.locator('#jvBody [data-save="a900001"]').getAttribute('aria-pressed'),'true');
- await page.locator('#jvBody [data-save="a900001"]').click();await page.waitForFunction(()=>!JSON.parse(localStorage.getItem('saved')).includes('a900001'));
+ await page.locator('#jvBody [data-save="a900001"]').click();await page.waitForFunction(()=>!JSON.parse(localStorage.getItem('saved')||'[]').includes('a900001'));
  await page.locator('#jvBody [data-save="a900001"]').click();
  await page.locator('#jvBody [data-track="a900001"]').click();await page.locator('#tMemo').waitFor();
  const memo='  메모\n<&>🙂 긴 기록 '.repeat(35);await page.locator('#tMemo').fill(memo);
