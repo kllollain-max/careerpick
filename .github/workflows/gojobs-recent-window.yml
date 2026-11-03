@@ -1,0 +1,57 @@
+name: Verify recent GOJOBS registration window
+on:
+  push:
+    branches: [codex/gojobs-window-20261103]
+    paths: [scripts/verify_gojobs_recent_window.py, scripts/collect_gojobs.py, tests/test_gojobs_recent_window.py, tests/test_gojobs_collection.py, scripts/verify_gojobs_ui.cjs, civil-service-exams.html, tests/test_civil_service_exams.cjs, index.html, homepage-ux.js, .github/workflows/gojobs-recent-window.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gojobs-recent-window-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify complete-window safeguards
+        run: |
+          python -m unittest discover -s tests -p test_gojobs_recent_window.py
+          python -m unittest discover -s tests -p test_gojobs_collection.py
+          node --test tests/test_homepage_ux.cjs tests/test_civil_service_exams.cjs
+      - name: Read recent pages without changing public data
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GOJOBS_KEY: ${{ secrets.GOJOBS_KEY }}
+        run: |
+          python scripts/collect_gojobs.py
+          cp gojobs-operation-output/gojobs.json gojobs.json
+      - name: Build candidate and test only connected GOJOBS paths
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+        run: |
+          python scripts/build_public_site.py
+          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_gojobs_ui.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gojobs-recent-window
+          path: |
+            gojobs-operation-output/report.json
+            gojobs-operation-output/gojobs.json
+            gojobs-browser-output/
+            build-report.json
+          retention-days: 7

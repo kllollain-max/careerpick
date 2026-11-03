@@ -8,6 +8,9 @@
 <main><section><label for="search">시험명 검색</label><input id="search" placeholder="예: 9급, 7급, 외교관"><p class="muted">접수 상태는 저장된 일정 기준이며 접수 중·접수 예정 시험을 먼저 표시합니다. 접수 마감은 원서접수가 끝났다는 뜻으로 시험 종료와는 다릅니다. 정확한 접수 시간과 변경 일정은 공식 공고를 확인하세요.</p><div class="meta" style="margin-top:14px"><label for="year">시험 연도 <select id="year"><option value="2026">2026년</option></select></label><label for="type">시험 종류 <select id="type"><option value="all">전체</option><option value="9급">9급</option><option value="7급">7급</option><option value="5급">5급</option><option value="외교관">외교관</option><option value="기타">기타</option></select></label><label for="state">접수 상태 <select id="state"><option value="all">전체</option><option value="접수 중">접수 중</option><option value="접수 예정">접수 예정</option><option value="접수 마감">접수 마감</option><option value="일정 확인 필요">일정 확인 필요</option></select></label><label for="sort">정렬 <select id="sort"><option value="exam">접수 상태 우선 · 시험일순</option><option value="apply">접수 상태 우선 · 접수일순</option></select></label></div><p id="count" class="muted"></p><p id="updated" class="muted"></p></section><section id="results" aria-live="polite">시험일정을 불러오는 중입니다.</section><p class="muted">출처: <a href="https://www.data.go.kr/data/3033611/fileData.do" target="_blank" rel="noopener">인사혁신처 국가공무원 시험일정 공공데이터</a> · <a href="https://www.gosi.kr/" target="_blank" rel="noopener">국가공무원 채용시스템(공식 확인)</a></p></main>
 <script>
 let records=[];
+const scheduleParams=typeof location==='object'?new URLSearchParams(location.search):{get:()=>null};
+const scheduleKey=x=>String(x['시험명']||'')+'|'+String(x['시험단계구분']||'');
+const detailKey=scheduleParams.get('exam');
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const today=()=>{const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const o=Object.fromEntries(p.map(x=>[x.type,x.value]));return o.year+'-'+o.month+'-'+o.day};
 function calendarDate(value){
@@ -44,12 +47,12 @@ const q=document.querySelector('#search').value.trim().toLowerCase();
 const filter=document.querySelector('#state').value;
 const type=document.querySelector('#type').value;
 const sort=document.querySelector('#sort').value;
-const list=records.filter(x=>{const name=String(x['시험명']||'');const kind=/9급/.test(name)?'9급':/7급/.test(name)?'7급':/5급/.test(name)?'5급':/외교관/.test(name)?'외교관':'기타';return name.toLowerCase().includes(q)&&(filter==='all'||status(x)===filter)&&(type==='all'||type===kind)});
+const list=records.filter(x=>{if(detailKey)return scheduleKey(x)===detailKey;const name=String(x['시험명']||'');const kind=/9급/.test(name)?'9급':/7급/.test(name)?'7급':/5급/.test(name)?'5급':/외교관/.test(name)?'외교관':'기타';return name.toLowerCase().includes(q)&&(filter==='all'||status(x)===filter)&&(type==='all'||type===kind)});
 const key=x=>range(sort==='exam'?x['시험일']:x['원서접수기간'])[0]||'9999-99-99';
 const priority=x=>status(x)==='접수 중'?0:status(x)==='접수 예정'?1:status(x)==='일정 확인 필요'?2:3;
 list.sort((a,b)=>priority(a)-priority(b)||key(a).localeCompare(key(b))||String(a['시험명']).localeCompare(String(b['시험명']),'ko'));
 document.querySelector('#count').textContent='검색 결과 '+list.length+'개 시험단계 · 저장된 일정 기준 · 한국시간 '+today();
-document.querySelector('#results').innerHTML=list.length?list.map(x=>'<article class="row"><h2>'+safe(x['시험명'])+'</h2><div class="meta"><strong>'+safe(status(x))+'</strong><span>시험단계: '+safe(x['시험단계구분'])+'</span><span>선발예정인원: '+safe(x['선발예정인원'])+'</span></div><p>원서접수: '+safe(scheduleText(x['원서접수기간']))+'</p><p>시험일: '+safe(scheduleText(x['시험일']))+' · 시험장소 공고: '+safe(scheduleText(x['시험장소공고일']))+'</p><p>합격자 발표: '+safe(scheduleText(x['합격자발표일']))+'</p></article>').join(''):'해당 조건의 시험일정이 없습니다.';
+document.querySelector('#results').innerHTML=(detailKey?'<p><a href="civil-service-exams.html">← 전체 시험일정</a></p>':'')+(list.length?list.map(x=>'<article class="row"><h2>'+safe(x['시험명'])+'</h2><p>시행기관: 인사혁신처</p><p><a href="?year='+safe(yearSelect.value)+'&amp;exam='+encodeURIComponent(scheduleKey(x))+'">이 시험단계 상세 보기</a></p><div class="meta"><strong>'+safe(status(x))+'</strong><span>시험단계: '+safe(x['시험단계구분'])+'</span><span>선발예정인원: '+safe(x['선발예정인원'])+'</span></div><p>원서접수: '+safe(scheduleText(x['원서접수기간']))+'</p><p>시험일: '+safe(scheduleText(x['시험일']))+' · 시험장소 공고: '+safe(scheduleText(x['시험장소공고일']))+'</p><p>합격자 발표: '+safe(scheduleText(x['합격자발표일']))+'</p></article>').join(''):(detailKey?'요청한 시험단계를 찾지 못했습니다.':'해당 조건의 시험일정이 없습니다.'));
 }
 ['search','type','state','sort'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',render));
 const yearSelect=document.getElementById('year');
@@ -103,7 +106,8 @@ fetch('./data/civil-service/years.json',{cache:'no-store'})
     if(!availableYears.length)throw Error('no verified years');
     availableYears.sort((a,b)=>b.year-a.year);
     yearSelect.innerHTML=availableYears.map(x=>'<option value="'+x.year+'">'+x.year+'년</option>').join('');
-    const latest=availableYears.find(x=>x.year===manifest.latest_year)||availableYears[0];
+    if(scheduleParams.get('year') && !availableYears.some(x=>String(x.year)===scheduleParams.get('year')))throw Error('unverified requested year');
+    const latest=availableYears.find(x=>String(x.year)===scheduleParams.get('year'))||availableYears.find(x=>x.year===manifest.latest_year)||availableYears[0];
     yearSelect.value=String(latest.year);
     await loadYear(latest.year);
   })
