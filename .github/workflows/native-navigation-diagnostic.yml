@@ -1,0 +1,39 @@
+name: Native navigation timing diagnostic
+on:
+  push:
+    branches: [diag/native-navigation-20261104]
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+      - run: python scripts/build_public_site.py
+      - run: |
+          git fetch origin 3c6386f1e2bedba59cd9e71edd86c150c70b5b4b
+          git worktree add --detach "$RUNNER_TEMP/nav-native-before" FETCH_HEAD
+          (cd "$RUNNER_TEMP/nav-native-before" && python scripts/build_public_site.py)
+      - run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          NAV_BEFORE_ROOT: ${{ runner.temp }}/nav-native-before/dist
+        run: node scripts/diagnose_native_navigation.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-navigation-diagnostic
+          path: native-diagnostic-output/
+          retention-days: 14
