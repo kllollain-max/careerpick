@@ -1,0 +1,54 @@
+name: Personal management isolated audit
+on:
+  push:
+    branches: [fix/personal-management-20261104]
+permissions:
+  contents: read
+concurrency:
+  group: personal-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/test_personal_management.cjs tests/test_additional_features.cjs tests/test_civil_service_exams.cjs tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_record_store.cjs tests/test_browse_state.cjs
+      - run: python -m unittest discover -s tests -p 'test_exam_operations.py'
+      - run: python -m unittest discover -s tests -p 'test_mpm_exam.py'
+      - run: python scripts/build_public_site.py
+      - run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - name: Additional-feature browser scenarios with synthetic records only
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_personal_management.cjs
+          node scripts/verify_additional_features.cjs
+      - name: Existing personal records remain protected
+        if: ${{ !cancelled() }}
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node scripts/verify_record_protection.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: personal-management-evidence
+          path: |
+            personal-management-output/
+            additional-features-output/
+            record-protection-output/report.json
+            build-report.json
+          retention-days: 14

@@ -585,7 +585,7 @@ footer .src b{color:var(--ink)}
 </style>
 <link rel="stylesheet" href="homepage-ux.css">
 <script src="/jobs/available.js" defer></script>
-</head>
+<style>#sheetBody .dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px}#sheetBody input,#sheetBody select,#sheetBody textarea{max-width:100%;min-width:0;font-size:1rem;box-sizing:border-box}#sheetBody label{overflow-wrap:anywhere}#sheetBody p,#sheetBody .hint{line-height:1.8}#trackStage,#trackOrder{max-width:100%;font-size:1rem}.trk-item .m{white-space:pre-wrap;overflow-wrap:anywhere}</style></head>
 <body>
 <div class="wrap">
   <header>
@@ -761,6 +761,7 @@ footer .src b{color:var(--ink)}
 <script src="additional-features.js"></script>
 <script src="record-migration.js"></script>
 <script src="record-store.js"></script>
+<script src="personal-management.js"></script>
 <script src="homepage-ux.js"></script>
 <script src="homepage-ui.js"></script>
 <script>
@@ -1180,7 +1181,7 @@ function cpWorkRegionMatch(p, region){
 }
 function cpConditionMatches(p, prefs = PREFS){
   if(p.type !== 'j') return false;
-  if(p.due && new Date(p.due).getTime() < Date.now()) return false;
+  if(statusOf(p,new Date())==='closed' || /최종합격자 발표|합격자 발표|임용후보자 등록/.test(p.title||'')) return false;
   const emp = Array.isArray(p.emp) ? p.emp : [];
   const edu = Array.isArray(p.edu) ? p.edu : [];
   if(prefs.emp.length && !prefs.emp.some(e => emp.includes(e) || (e==='무기계약직' && emp.includes('무기계약')))) return false;
@@ -1198,7 +1199,7 @@ function preferenceReasons(p, prefs = PREFS){
   const reasons=[];
   const region=prefs.region.find(r=>cpWorkRegionMatch(p,r));
   if(region) { const rf=[p.region,p.alio && ALIO_DETAIL && ALIO_DETAIL[p.id] && ALIO_DETAIL[p.id].workRgnNmLst].filter(Boolean).join(' '); reasons.push(/전국|전 지역|전지역/.test(rf) ? '전국 모집(근무지역 확인 필요)' : '표기 근무지역 '+region); }
-  const emp=prefs.emp.find(e=>(p.emp||[]).includes(e));
+  const emp=prefs.emp.find(e=>(p.emp||[]).includes(e)||(e==='무기계약직'&&(p.emp||[]).includes('무기계약')));
   if(emp) reasons.push('고용형태 '+emp);
   const edu=prefs.edu.find(e=>(p.edu||[]).includes(e) || (e==='고졸 가능' && (p.edu||[]).includes('학력무관')));
   if(edu) reasons.push('표기 학력 '+edu);
@@ -1215,9 +1216,11 @@ function cpRecommendationConfidence(p, prefs = PREFS){
   const fields=[p.region, p.alio && ALIO_DETAIL && ALIO_DETAIL[p.id] && ALIO_DETAIL[p.id].workRgnNmLst].filter(Boolean).join(' ');
   if(prefs.region.length && /전국|전 지역|전지역/.test(fields)) uncertain.push('전국 모집: 희망지역 배치 여부 확인');
   if(prefs.region.length && !fields) uncertain.push('근무지역 확인 필요');
+  if(prefs.region.length && /[,·|]/.test(fields))uncertain.push('공고 단위 지역: 같은 직무에서 조건을 충족하는지 원문 확인');
   const emp=Array.isArray(p.emp)?p.emp:[];
   const empKinds=emp.filter(e=>/정규직|계약직|인턴|공무직|무기계약|파견|기간제/.test(e));
   if(prefs.emp.length && new Set(empKinds).size>1) uncertain.push('모집 분야별 고용형태 확인');
+  if(prefs.region.length&&prefs.emp.length)uncertain.push('공고 단위 조건 일치: 같은 직무의 지역·고용형태 동시 충족은 미확인');
   const extra=cpEligibilityNotes(p);
   uncertain.push(...extra);
   // 구조화된 공고 정보가 일치해도 면허·자격·세부 모집 분야는 별도로 확인해야 합니다.
@@ -1225,6 +1228,7 @@ function cpRecommendationConfidence(p, prefs = PREFS){
 }
 function cpConfidenceHtml(p){
   if(!hasPrefs() || p.type!=='j') return '';
+  if(!cpConditionMatches(p))return '<div class="cp-confidence cp-confidence-check">선택한 조건 전체와 일치하지 않음 · 지원자격은 원문 확인</div>';
   const c=cpRecommendationConfidence(p);
   return c.confirmed
     ? '<div class="cp-confidence cp-confidence-ok">✅ 표기 조건 일치 · 세부 지원 자격은 원문 확인</div>'
@@ -1534,7 +1538,7 @@ function prefCard(){
   if(state.tab !== "all" || state.q || state.onlyNew) return "";
   let spOff = false; try { spOff = localStorage.getItem("specCardOff") === "1"; } catch(e) {}
   if(!hasSpec() && !spOff && POSTS.some(p => p.alio))
-    return `<li class="prefcard"><span class="grow">✅ <b>내 스펙</b>(학력·자격증·토익 등)을 입력하면 <b>지원 가능한 공식 공고</b>만 골라드려요.</span><button class="go" id="openSpec">입력</button><button class="x" id="specCardX" aria-label="닫기">×</button></li>`;
+    return `<li class="prefcard"><span class="grow">✅ <b>내 스펙</b>(학력·자격증·토익 등)을 입력하면 <b>조건 확인이 필요한 공식 공고</b>를 찾아드려요.</span><button class="go" id="openSpec">입력</button><button class="x" id="specCardX" aria-label="닫기">×</button></li>`;
   if(hasPrefs()){
     const n = POSTS.filter(p => matchPrefs(p) && statusOf(p, new Date()) !== "closed").length;
     return `<li class="prefcard"><span class="grow">🎯 내 조건(${esc(prefSummary())})이 확인된 마감 전·일정 확인 공고 <b>${n}건</b></span><button class="go" data-tab="mine">보기</button></li>`;
@@ -1543,19 +1547,24 @@ function prefCard(){
   if(off) return "";
   return `<li class="prefcard"><span class="grow"><b>내 조건</b>을 저장하면 맞는 공고만 맨 위에 모아 보여드려요. (고졸·인턴·지역 등)</span><button class="go" id="openPrefs">설정</button><button class="x" id="prefCardX" aria-label="닫기">×</button></li>`;
 }
-let DRAFT = null, PBASE=null;
+let DRAFT = null, PBASE=null,cpPrefEditing=false,cpPrefDraft=null,cpPrefInitial=null;
+function cpCapturePrefs(){if(!cpPrefEditing||!$('prefKw'))return;DRAFT.kw=$('prefKw').value;DRAFT.order=$('prefOrder')?.value||'default';cpPrefDraft={draft:JSON.parse(JSON.stringify(DRAFT)),base:PBASE};}
 function openPrefs(){
+  cpCaptureTrackDraft();cpTrackEditing=false;
   PREFS=Object.assign({emp:[],edu:[],region:[],cat:[],kw:''},cpReadRecords('prefs',{},CPStore.prefs));
   PBASE=JSON.stringify(PREFS);
   DRAFT = JSON.parse(JSON.stringify(PREFS));
+  if(cpPrefDraft){DRAFT=JSON.parse(JSON.stringify(cpPrefDraft.draft));PBASE=cpPrefDraft.base;}cpPrefEditing=true;
+  cpPrefInitial=JSON.stringify({...DRAFT,order:DRAFT.order||'default'});
   const cats = [...new Set(POSTS.filter(p => p.type === "j").map(p => p.cat))];
   const grp = (key, label, items) => `<div class="grp"><span>${label}</span><div class="chips">${items.map(v =>
     `<button class="chip" data-pref="${key}" data-val="${esc(v)}" aria-pressed="${DRAFT[key].includes(v)}">${esc(v)}</button>`).join("")}</div></div>`;
-  $("sheetTitle").textContent = "🔔 맞춤 채용 알림 조건 설정";
+  $("sheetTitle").textContent = "맞춤 조건·신규 공고 알림 설정";
   $("sheetBody").innerHTML = PREF_GROUPS.map(g => grp(g.key, g.label, g.items)).join("")
     + grp("cat", "분야", cats)
     + `<div class="grp"><span>키워드 (쉼표로 여러 개)</span><input type="text" id="prefKw" aria-label="관심 키워드" value="${esc(DRAFT.kw)}" placeholder="예: 간호, 전산, 사무"></div>`
     + `<p class="hint">선택한 조건과 저장·지원 기록은 이 브라우저에만 보관됩니다. 비공개 모드 종료·사이트 데이터 삭제 시 사라질 수 있으며 다른 기기와 자동 동기화되지 않습니다. JSON 백업을 권장합니다. 아래 저장 버튼을 누르면 완료 안내가 나타납니다. 맞춤 웹푸시는 맞춤 조건과 새 공고에 따라 발송 대상이 결정됩니다. 실제 수신 여부는 별도로 확인해 주세요.</p>`
+    + `<div class="grp"><label for="prefOrder">맞춤 목록 정렬</label><select id="prefOrder"><option value="default">기존 마감일·최신순 사용</option><option value="regular-count" ${DRAFT.order==='regular-count'?'selected':''}>정규직 우선·모집인원 많은 순</option></select></div><p class="hint">같은 항목은 하나라도 일치(OR), 다른 항목은 모두 일치(AND)해야 합니다. 선택 없음은 해당 항목 제한 없음이며, 선택한 정보가 미기재면 일치로 처리하지 않습니다. 정규직 우선은 다른 고용형태를 제외하지 않습니다. 인원 미정·미기재는 숫자로 정렬하지 않고 뒤에 표시합니다. 정렬은 기기 목록 전용이며 알림 대상 조건을 바꾸지 않습니다.</p><p class="hint">공고별 저장·지원 일정은 이 브라우저 내부 기록입니다. 서버 발송기와의 동기화가 없어 하루 전·당일 마감 푸시는 제공하지 않습니다. 아래 구독은 맞춤 신규 공고용이며 저장 성공과 서버 조건 동기화·실제 기기 수신은 별도로 확인해야 합니다.</p>`
     + cpPushSetupPanel()
     + `<p class="live" id="prefLive"></p>`
     + `<div class="row"><button id="prefClear">초기화</button><button type="button" class="primary" id="prefSave" onclick="cpSavePreferenceSettings();return false">저장</button></div>`;
@@ -1577,7 +1586,7 @@ async function cpSavePreferenceSettings(){
   if(live)live.textContent="저장 버튼 입력 확인 · 처리 중… (진단 v2)";
   try{
     const input=document.getElementById("prefKw");
-    if(input)DRAFT.kw=input.value;
+    if(input)DRAFT.kw=input.value;DRAFT.order=$('prefOrder')?.value||'default';
     const next=JSON.parse(JSON.stringify(DRAFT));
     const serialized=JSON.stringify(next);
     const stored=await cpMutateRecords('prefs',{},CPStore.prefs,current=>{
@@ -1590,7 +1599,7 @@ async function cpSavePreferenceSettings(){
     if(live)live.textContent="✓ 맞춤 조건 저장 성공 · 진단 v2";
     if(button){button.textContent="✓ 저장 완료";button.disabled=false;}
     // Local save is complete. Close immediately; remote push sync must not block mobile UI.
-    closeSheet();
+    cpPrefEditing=false;cpPrefDraft=null;closeSheet();
     state.tab=hasPrefs()?"mine":"all";
     state.onlyNew=false;
     refresh();
@@ -1784,11 +1793,11 @@ function renderCert(now){
 }
 // ── 지원 현황 관리 (이 기기에만 저장) ──
 const ST = {
-  plan:{label:"지원 예정", short:"지원예정"}, applied:{label:"지원 완료", short:"지원완료"},
+  plan:{label:"지원 예정", short:"지원예정"}, prepare:{label:"서류 준비",short:"서류준비"}, withdrawn:{label:"지원 포기",short:"지원포기"}, applied:{label:"지원 완료", short:"지원완료"},
   doc:{label:"서류 합격", short:"서류합격"}, exam:{label:"필기 통과", short:"필기통과"},
   itv:{label:"면접 진행", short:"면접"}, pass:{label:"최종 합격", short:"최종합격"}, fail:{label:"불합격", short:"불합격"}
 };
-const ST_ORDER = ["plan","applied","doc","exam","itv","pass","fail"];
+const ST_ORDER = ["plan","prepare","applied","doc","exam","itv","pass","fail","withdrawn"];
 let APPS = {};
 APPS=cpReadRecords("apps",{},CPStore.apps);
 async function cpStoreApp(id,next,expected=JSON.stringify(APPS[id]??null)){
@@ -1806,18 +1815,11 @@ window.addEventListener('storage',event=>{
   }
 });
 const ymd = d => { const k = kst(d); return `${k.getUTCFullYear()}-${pad(k.getUTCMonth()+1)}-${pad(k.getUTCDate())}`; };
-const ymdLabel = s => { const [y,m,d] = s.split("-").map(Number); const w = new Date(Date.UTC(y,m-1,d)).getUTCDay(); return `${m}.${d}(${WD[w]})`; };
+const ymdLabel = s => { if(!CPManage.date(s))return '일정 미확인';const [y,m,d] = s.split("-").map(Number); const w = new Date(Date.UTC(y,m-1,d)).getUTCDay(); return `${m}.${d}(${WD[w]})`; };
 function appEvents(now){
-  const today = ymd(now), ev = [];
-  for(const [id, a] of Object.entries(APPS)){
-    if(a.st === "pass" || a.st === "fail") continue;
-    const name = a.org || a.title;
-    if(a.due && ["plan"].includes(a.st)){ const s = ymd(new Date(a.due)); if(s >= today) ev.push({date:s, kind:"due", label:"마감", name, id}); }
-    if(a.exam && a.exam >= today) ev.push({date:a.exam, kind:"exam", label:"필기", name, id});
-    if(a.itv && a.itv >= today) ev.push({date:a.itv, kind:"itv", label:"면접", name, id});
-  }
-  return ev.sort((x,y) => x.date < y.date ? -1 : x.date > y.date ? 1 : 0);
+ return Object.entries(APPS).flatMap(([id,a])=>CPManage.events(a,POSTS.find(p=>p.id===id||p.sourceIds?.includes(id)),now).filter(e=>!e.past).map(e=>({...e,id,name:a.org||a.title||id}))).sort((a,b)=>a.date.localeCompare(b.date));
 }
+let cpTrackFilter='all',cpTrackOrder='stage';
 // CareerPick 2.0 step 3: export application deadlines and exam/interview dates.
 function calendarEscape(v){
   return String(v || "").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;");
@@ -1858,12 +1860,13 @@ function renderTrack(now){
     return;
   }
   const cnt = s => ids.filter(id => APPS[id].st === s).length;
-  const active = ids.filter(id => !["pass","fail"].includes(APPS[id].st)).length;
+  const active = ids.filter(id => !CPManage.terminal(APPS[id].st)).length;
   $("summary").innerHTML = `📋 진행 중 <b>${active}</b>곳 · 전체 ${ids.length}곳`;
   const ev = appEvents(now), today = ymd(now);
   const soonLimit = ymd(new Date(now.getTime() + 3*864e5));
   const cl = clashes(ev);
   const parts = [];
+  parts.push(`<li class="trk-box"><label for="trackStage">단계 필터</label><select id="trackStage"><option value="all">전체 기록</option>${ST_ORDER.map(s=>`<option value="${s}" ${cpTrackFilter===s?'selected':''}>${ST[s].label}</option>`).join('')}</select><label for="trackOrder">정렬</label><select id="trackOrder"><option value="stage">지원 단계순</option><option value="next" ${cpTrackOrder==='next'?'selected':''}>가까운 일정순</option></select><p>필터로 숨긴 기록은 삭제되지 않습니다. 입력 일정은 사용자 일정이며 공식 일정과 자동 동기화되지 않습니다. 공고별 마감 푸시는 미제공입니다.</p></li>`);
   parts.push(`<li class="trk-sum">
     <div><b>${cnt("plan")}</b><span>지원 예정</span></div>
     <div><b>${cnt("applied")}</b><span>지원 완료</span></div>
@@ -1872,7 +1875,7 @@ function renderTrack(now){
   // 마감이 지난 지원 예정 공고는 삭제하거나 완료 처리하지 않고 별도 확인 목록으로 유지.
   const overdue = ids.filter(id => {
     const a=APPS[id];
-    if(a.st !== "plan" || !a.due) return false;
+    if(!["plan","prepare"].includes(a.st) || !a.due || (POSTS.find(p=>p.id===id)?.alio ?? a.dueIsPublication!==false)) return false;
     const date = new Date(a.due);
     return !Number.isNaN(date.getTime()) && date.getTime() < now.getTime();
   });
@@ -1886,10 +1889,14 @@ function renderTrack(now){
     `<div class="sch"><span class="dt${e.date <= soonLimit ? " hot" : ""}">${e.date === today ? "오늘" : ymdLabel(e.date)}</span><span class="kd ${e.kind}">${e.label}</span><span class="nm">${esc(e.name)}</span></div>`).join("")
     : `<div class="sch" style="color:var(--muted)">등록된 일정이 없어요. 📋 지원기록에서 필기·면접 날짜를 넣어 보세요.</div>`}
     ${cl.map(([dte, v]) => `<p class="clash">⚠️ ${ymdLabel(dte)}에 일정 ${v.length}개가 겹쳐요: ${v.map(x => esc(x.name) + " " + x.label).join(", ")}</p>`).join("")}</li>`);
-  const sorted = ids.map(id => [id, APPS[id]]).sort((a,b) => ST_ORDER.indexOf(a[1].st) - ST_ORDER.indexOf(b[1].st) || (b[1].upd||0) - (a[1].upd||0));
+  const sorted = ids.filter(id=>cpTrackFilter==='all'||APPS[id].st===cpTrackFilter).map(id => [id, APPS[id]]).sort((a,b) => cpTrackOrder==='next' ? (CPManage.next(a[1],POSTS.find(p=>p.id===a[0]),now)?.date||'9999').localeCompare(CPManage.next(b[1],POSTS.find(p=>p.id===b[0]),now)?.date||'9999') : ST_ORDER.indexOf(a[1].st) - ST_ORDER.indexOf(b[1].st) || (b[1].upd||0) - (a[1].upd||0));
+  if(!sorted.length)parts.push('<li class="empty">선택한 단계의 기록이 없습니다. 전체 기록을 선택하세요. 기존 기록은 보존됩니다.</li>');
   sorted.forEach(([id, a]) => {
     const meta = [];
-    if(a.st === "plan" && a.due) meta.push("마감 " + ymdLabel(ymd(new Date(a.due))));
+    if(a.st === "plan" && a.due) meta.push("보관 마감 자료·원문 확인 " + ymdLabel(ymd(new Date(a.due))));
+    const next=CPManage.next(a,POSTS.find(p=>p.id===id),now);
+    meta.push(next?`다음 일정: ${next.date} ${next.label}`:'다가오는 일정 없음 · 지난 일정/원문 확인');
+    if(a.submit)meta.push('서류 제출(직접 입력) '+a.submit);
     if(a.exam) meta.push("필기 " + ymdLabel(a.exam));
     if(a.itv) meta.push("면접 " + ymdLabel(a.itv));
     if(a.memo) meta.push(a.memo);
@@ -1911,7 +1918,7 @@ function genChecklist(p, det){
   const all = proc + " " + qual + " " + (p ? [p.title, p.desc, p.text].join(" ") : "");
   const known = !!proc.trim();
   const L = [];
-  const add = (t, ph, k) => L.push({t, d:0, ph, k: k || ""});
+  const add = (t, ph, k) => L.push({t, d:0, ph, k: k || "",origin:"suggestion"});
   add("공고문·지원 자격 꼼꼼히 확인", "pre");
   if(/자격증|면허|어학|TOEIC|토익|경력증명|증명서|증빙/.test(all)) add("증빙 서류 준비 (자격증·어학·경력증명서 등)", "pre");
   if(/가점|우대|보훈|취업지원대상|장애/.test(qual)) add("가점·우대 해당 여부 확인", "pre");
@@ -1932,15 +1939,15 @@ function genChecklist(p, det){
 const ckDone = ck => (ck || []).filter(x => x.d).length;
 const ckNext = ck => (ck || []).find(x => !x.d);
 function ckListHTML(ck, attr, editable){
-  return `<div class="cklist">${ck.map((x, i) => `<button class="ck" ${attr}="${i}" aria-pressed="${!!x.d}"><span class="bx">${x.d ? "✓" : ""}</span><span class="tx">${esc(x.t)}</span>${editable ? `<span class="rm" data-ckrm="${i}" aria-label="항목 삭제">×</span>` : ""}</button>`).join("")}</div>`;
+  return `<div class="cklist">${ck.map((x, i) => `<button class="ck" ${attr}="${i}" aria-pressed="${!!x.d}"><span class="bx">${x.d ? "✓" : ""}</span><span class="tx">${esc(x.t)}${x.origin==='suggestion'?' · 준비 제안(공식 제출서류 목록 아님)':x.origin==='user'?' · 직접 추가':' · 기존 항목(출처 미확인)'}</span>${editable ? `<span class="rm" data-ckrm="${i}" aria-label="항목 삭제">×</span>` : ""}</button>`).join("")}</div>`;
 }
 async function ckToggle(id,i){
   const source=APPS[id];if(!source?.ck?.[i])return;
   const expected=JSON.stringify(source),a=JSON.parse(expected);
   a.ck[i].d=a.ck[i].d?0:1;a.upd=Date.now();
-  if(a.ck[i].k==='submit'&&a.ck[i].d&&a.st==='plan'){
+  if(a.ck[i].k==='submit'&&a.ck[i].d&&['plan','prepare'].includes(a.st)){
     if(!confirm('지원서를 실제로 제출하셨나요? 확인하면 지원 완료로 변경합니다.'))return;
-    a.st='applied';
+    Object.assign(a,CPManage.transition(a,'applied',a.upd));
   }
   if(await cpStoreApp(id,a,expected))cpRefreshRecords();
 }
@@ -1951,39 +1958,47 @@ function ckBoxHTML(p){
   const n = ckDone(a.ck), pct = Math.round(n * 100 / a.ck.length);
   return `<div class="ckbox"><h3>✅ 준비 체크리스트 <span class="ckpct">${n}/${a.ck.length}</span></h3><div class="ckbar"><i style="width:${pct}%"></i></div>${ckListHTML(a.ck, `data-ckid="${esc(cpApplicationId(p))}" data-ck`, false)}</div>`;
 }
-let TDRAFT = null, TID = null, TBASE=null, CP_TRACK_BUSY=false;
+let TDRAFT = null, TID = null, TBASE=null, CP_TRACK_BUSY=false,cpTrackEditing=false,cpTrackInitial=null;
+const cpTrackDrafts={};
+function cpCaptureTrackDraft(){if(!cpTrackEditing||!TID||!$('tMemo'))return;for(const [key,id]of [['memo','tMemo'],['submit','tSubmit'],['exam','tExam'],['itv','tItv']])TDRAFT[key]=$(id)?.value||'';cpTrackDrafts[TID]={draft:JSON.parse(JSON.stringify(TDRAFT)),base:TBASE};}
+document.addEventListener('input',e=>{if(e.target.closest('#sheetBody'))cpCaptureTrackDraft();});
+window.addEventListener('beforeunload',e=>{cpCaptureTrackDraft();cpCapturePrefs();if((cpTrackEditing&&JSON.stringify(TDRAFT)!==cpTrackInitial)||(cpPrefEditing&&JSON.stringify({...DRAFT,order:DRAFT.order||'default'})!==cpPrefInitial)){e.preventDefault();e.returnValue='';}});
+
 async function openTrack(id){
+  cpCaptureTrackDraft();cpTrackEditing=false;
   const p = POSTS.find(x => x.id === id || x.sourceIds?.includes(id));
   APPS=cpReadRecords("apps",{},CPStore.apps);
   const a = APPS[id] || {st:"plan"};
   TBASE=JSON.stringify(APPS[id]??null);
   if(!a.ck && p && p.alio && !ALIO_DETAIL) await alioDetail();
   TID = id;
-  TDRAFT = {st:a.st||"plan", exam:a.exam || "", itv:a.itv || "", memo:a.memo || "",
+  TDRAFT = {st:a.st||"plan", submit:a.submit||"", exam:a.exam || "", itv:a.itv || "", memo:a.memo || "",
     ck: a.ck ? JSON.parse(JSON.stringify(a.ck)) : genChecklist(p, p && p.alio ? (ALIO_DETAIL || {})[p.id] : null)};
+  if(cpTrackDrafts[id]){TDRAFT=JSON.parse(JSON.stringify(cpTrackDrafts[id].draft));TBASE=cpTrackDrafts[id].base;}
   const name = p ? (p.org || "") + " " + cleanTitle(p.title) : (a.org || "") + " " + cleanTitle(a.title || "");
   sheet(`<p style="margin:0 0 12px;font-weight:600;font-size:14px;line-height:1.45">${esc(name.trim())}</p>
     <div class="grp"><span>진행 단계</span><div class="chips">${ST_ORDER.map(s =>
       `<button class="chip" data-stpick="${s}" aria-pressed="${TDRAFT.st === s}">${ST[s].label}</button>`).join("")}</div></div>
-    <div class="grp"><span>전형 일정 (겹치면 알려드려요)</span><div class="dates">
+    <div class="grp"><span>직접 입력 일정 · KST 날짜(시각 미지정)</span><div class="dates"><label>서류 제출일<input type="date" id="tSubmit" value="${esc(TDRAFT.submit)}"></label>
       <label style="font-size:12.5px;color:var(--muted)">필기시험일<input type="date" id="tExam" value="${esc(TDRAFT.exam)}"></label>
       <label style="font-size:12.5px;color:var(--muted)">면접일<input type="date" id="tItv" value="${esc(TDRAFT.itv)}"></label></div></div>
     <div class="grp"><span>준비 체크리스트 ${a.ck ? "" : "(이 공고의 전형 절차에 맞춰 자동으로 만들었어요)"}</span><div id="tCk">${ckListHTML(TDRAFT.ck, "data-tck", true)}</div>
       <div class="ckadd"><input type="text" id="tCkNew" maxlength="40" placeholder="항목 추가 (예: 증명사진 준비)"><button id="tCkAdd">추가</button></div></div>
     <div class="grp"><span>메모</span><textarea id="tMemo" aria-label="지원 메모" placeholder="예: 자소서 문항 다시 보기">${esc(TDRAFT.memo)}</textarea></div>
-    <div class="row">${APPS[id] ? '<button id="tDel" class="danger">기록 삭제</button>' : '<button onclick="closeSheet()">취소</button>'}<button class="primary" id="tSave">저장</button></div>`, "📋 지원 기록");
+    <div class="row">${APPS[id] ? '<button id="tDel" class="danger">기록 삭제</button>' : '<button onclick="closeSheet()">취소</button>'}<button class="primary" id="tSave">저장</button></div>`, "📋 지원 기록 · 미저장 편집은 이 화면 세션에서 복원");
+  cpTrackInitial=JSON.stringify(TDRAFT);cpTrackEditing=true;
   $("tCkNew").addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); $("tCkAdd").click(); } });
 }
 async function saveTrack(){
   if(CP_TRACK_BUSY)return;CP_TRACK_BUSY=true;
   try{
     const id=TID,p=POSTS.find(x=>x.id===id||x.sourceIds?.includes(id)),old=APPS[id]||{};
-    const next={...old,st:TDRAFT.st,ck:TDRAFT.ck,exam:$('tExam').value,itv:$('tItv').value,memo:$('tMemo').value,
+    const next={...CPManage.transition(old,TDRAFT.st),ck:TDRAFT.ck,submit:$('tSubmit').value,exam:$('tExam').value,itv:$('tItv').value,memo:$('tMemo').value,
       title:p?p.title:old.title,org:p?(p.org||''):old.org,url:p?p.url:old.url,
-      due:p?.due?p.due.toISOString():old.due||null,upd:Date.now()};
-    if(TDRAFT.st!=='plan'&&TDRAFT.st!==old.st)next.ck.forEach(x=>{if(x.ph==='pre')x.d=1;});
+      due:p?.due?p.due.toISOString():old.due||null,dueIsPublication:p?p.alio===true:old.dueIsPublication,upd:Date.now()};
+    for(const key of ['submit','exam','itv'])if(next[key]&&!CPManage.date(next[key])){toast('일정 날짜를 확인해 주세요. 입력 내용은 유지됩니다.');return;}
     if(!await cpStoreApp(id,next,TBASE))return;
-    closeSheet();cpRefreshRecords();toast('지원 기록을 이 기기에 저장했습니다.');
+    cpTrackEditing=false;delete cpTrackDrafts[id];closeSheet();cpRefreshRecords();toast('지원 기록을 이 기기에 저장했습니다.');
   }finally{CP_TRACK_BUSY=false;}
 }
 // ── 공식 공고 상세 화면 (잡알리오) ──
@@ -2251,10 +2266,11 @@ function renderCareerDashboard(now){
   const matched = hasPrefs() ? jobs.filter(p => matchPrefs(p)) : [];
   const newlyMatched = matched.filter(p => isNew(p,now));
   const fresh = jobs.filter(p => isNew(p,now));
-  const activeApps = Object.values(APPS).filter(a => a && !["pass","fail"].includes(a.st));
+  const activeApps = Object.values(APPS).filter(a => a && !CPManage.terminal(a.st));
   const events = appEvents(now);
   const soon = events.filter(e => e.kind === "due" && e.date <= ymd(new Date(now.getTime()+3*864e5)));
   const candidates = (hasPrefs() ? matched : jobs).filter(p => statusOf(p,now) !== "closed").slice().sort((a,b) => {
+    if(PREFS.order==='regular-count'){const order=CPManage.priority(a,b);if(order)return order;}
     const certaintyDiff = hasPrefs() ? Number(cpRecommendationConfidence(b).confirmed)-Number(cpRecommendationConfidence(a).confirmed) : 0;
     if(certaintyDiff) return certaintyDiff;
     const scoreDiff = cpRecommendationScore(b,now)-cpRecommendationScore(a,now);
@@ -2317,7 +2333,7 @@ function cpExportReport(){
   ] : [];
   const doc=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>커리어픽 취업관리 보고서</title><style>
   @page{size:A4;margin:16mm}*{box-sizing:border-box}body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;color:#152238;font-size:11px;line-height:1.6;margin:0}h1{font-size:23px;margin:0 0 4px;color:#1f3fbf}h2{font-size:15px;margin:25px 0 9px;border-bottom:2px solid #1f3fbf;padding-bottom:5px}p{margin:4px 0}.muted{color:#667085}.summary{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:17px 0}.stat{border:1px solid #dce2ed;border-radius:7px;text-align:center;padding:8px 3px}.stat strong{display:block;font-size:19px;color:#1f3fbf}table{border-collapse:collapse;width:100%;table-layout:fixed}th,td{border:1px solid #dce2ed;padding:6px 5px;vertical-align:top;overflow-wrap:anywhere}th{background:#edf2ff;text-align:left}tr{break-inside:avoid}.memo td{background:#f8f9fc}.note{background:#f4f6fb;padding:10px;border-radius:6px;margin-top:18px}a{color:#1f3fbf}button{border:0;border-radius:6px;background:#1f3fbf;color:white;padding:10px 16px;cursor:pointer}.actions{margin:0 0 18px}@media print{.actions{display:none}a{color:#152238;text-decoration:none}}@media screen{body{max-width:1050px;margin:28px auto;padding:0 18px}}
-  </style></head><body><div class="actions"><button onclick="window.print()">🖨 인쇄 / PDF로 저장</button> <span class="muted">인쇄 대상에서 'PDF로 저장'을 선택하세요.</span></div><h1>커리어픽 취업관리 보고서</h1><p class="muted">작성일: ${h(new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))} · 현재 브라우저에 저장된 개인 기록 기준</p>
+  </style><style>#sheetBody .dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px}#sheetBody input,#sheetBody select,#sheetBody textarea{max-width:100%;min-width:0;font-size:1rem;box-sizing:border-box}#sheetBody label{overflow-wrap:anywhere}#sheetBody p,#sheetBody .hint{line-height:1.8}#trackStage,#trackOrder{max-width:100%;font-size:1rem}.trk-item .m{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body><div class="actions"><button onclick="window.print()">🖨 인쇄 / PDF로 저장</button> <span class="muted">인쇄 대상에서 'PDF로 저장'을 선택하세요.</span></div><h1>커리어픽 취업관리 보고서</h1><p class="muted">작성일: ${h(new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))} · 현재 브라우저에 저장된 개인 기록 기준</p>
   <div class="summary">${[['지원 예정',counts.plan],['지원 완료',counts.applied],['전형 진행',counts.progress],['최종 합격',counts.pass],['관심 공고',savedIds.length]].map(([label,n])=>`<div class="stat"><strong>${n}</strong>${label}</div>`).join('')}</div>
   <h2>1. 희망 조건</h2><p>희망 지역: ${list(PREFS.region)} · 고용형태: ${list(PREFS.emp)} · 학력 조건: ${list(PREFS.edu)} · 관심 분야: ${list(PREFS.cat)} · 키워드: ${h(PREFS.kw||'미설정')}</p>
   <h2>2. 내 스펙</h2>${specInfo.length?specInfo.map(([k,v])=>`<p><b>${k}:</b> ${v}</p>`).join(''):'<p class="muted">입력된 내 스펙이 없습니다.</p>'}
@@ -2416,7 +2432,7 @@ function render(){
     return d.n >= 0 && d.n <= max;
   });
   if(state.tab === "mine") rows = rows.filter(p => statusOf(p, now) !== "closed");
-  rows.sort(state.sort === "due" && !state.onlyNew ? (a,b) => cmp(sortKey(a,now), sortKey(b,now)) : (a,b) => b.pub - a.pub);
+  rows.sort(state.tab==='mine' && PREFS.order==='regular-count' ? CPManage.priority : state.sort === "due" && !state.onlyNew ? (a,b) => cmp(sortKey(a,now), sortKey(b,now)) : (a,b) => b.pub - a.pub);
 
   const undated = rows.filter(p => p.type === "j" && !p.due).length;
   const open = rows.filter(p => p.type === "j" && ["open","hot"].includes(statusOf(p,now))).length;
@@ -2440,7 +2456,7 @@ function render(){
   const orphanIds=state.tab==='saved'?[...SAVED].filter(id=>!POSTS.some(p=>p.id===id||p.sourceIds?.includes(id))):[];
   if(!rows.length && !orphanIds.length){
     $("list").innerHTML = state.tab === "mine"
-      ? `<li class="empty">지금 조건에 맞는 마감 전·일정 확인 공고가 없어요.<br>새 공고가 올라오면 여기에 바로 나타나요.<br><button class="chip" id="editPrefs">조건 수정</button></li>`
+      ? `<li class="empty">지금 조건에 맞는 마감 전·일정 확인 공고가 없어요.<br>지역·고용형태 중 한 항목을 완화하거나 키워드를 줄여 다시 확인하세요. 조건은 자동으로 바꾸지 않습니다.<br><button class="chip" id="editPrefs">조건 수정</button></li>`
       : state.tab === "saved"
       ? `<li class="empty">아직 저장한 글이 없어요.<br>공고의 ☆ 저장을 누르면 여기에 모입니다. (이 기기에만 저장돼요)</li>`
       : `<li class="empty">조건에 맞는 글이 없습니다.<br><button class="chip" id="empty-reset">필터 초기화</button></li>`;
@@ -2530,7 +2546,7 @@ document.addEventListener("click", async e => {
     if(!confirm("지원서를 실제로 제출하셨나요? 제출 완료로 변경하면 마감 알림에서 제외됩니다.")) return;
     const expected=JSON.stringify(a), next=JSON.parse(expected);
     next.st="applied"; next.upd=Date.now();
-    if(Array.isArray(next.ck)) next.ck.forEach(x=>{if(x.ph==="pre" || x.k==="submit") x.d=1;});
+    next.stageHistory=CPManage.transition(a,"applied",next.upd).stageHistory;
     if(!await cpStoreApp(id,next,expected))return;cpRefreshRecords();
     toast("지원 완료로 변경했습니다. '내 지원'에서 언제든 수정할 수 있어요.");
   }
@@ -2547,13 +2563,13 @@ document.addEventListener("click", async e => {
   else if(t.id === "tCkAdd"){
     const v = $("tCkNew").value.trim(); if(!v) return;
     const at = TDRAFT.ck.findIndex(x => x.k === "submit");
-    TDRAFT.ck.splice(at >= 0 && TDRAFT.st === "plan" ? at : TDRAFT.ck.length, 0, {t:v.slice(0, 40), d:0, ph:"pre", k:""});
+    TDRAFT.ck.splice(at >= 0 && TDRAFT.st === "plan" ? at : TDRAFT.ck.length, 0, {t:v.slice(0, 40), d:0, ph:"pre", k:"",origin:"user"});
     $("tCkNew").value = ""; $("tCk").innerHTML = ckListHTML(TDRAFT.ck, "data-tck", true);
   }
   else if(t.dataset.ckid){ ckToggle(t.dataset.ckid, +t.dataset.ck); }
   else if(t.id === "tDel"){
     if(!CP_TRACK_BUSY&&confirm('지원 상태·메모·체크리스트·일정을 삭제합니다. 저장 공고는 유지됩니다. 복구하려면 먼저 JSON 백업을 받아 주세요. 삭제할까요?')){
-      CP_TRACK_BUSY=true;try{if(await cpStoreApp(TID,null,TBASE)){closeSheet();cpRefreshRecords();}}finally{CP_TRACK_BUSY=false;}
+      CP_TRACK_BUSY=true;try{if(await cpStoreApp(TID,null,TBASE)){cpTrackEditing=false;delete cpTrackDrafts[TID];closeSheet();cpRefreshRecords();}}finally{CP_TRACK_BUSY=false;}
     }
   }
   else if(t.dataset.tab){ if(["all","mine","saved","track"].includes(t.dataset.tab))cpResetBrowseFilters(); state.tab = t.dataset.tab; state.certQ = null; refresh(); }
@@ -2601,7 +2617,8 @@ document.addEventListener("click", async e => {
     t.setAttribute("aria-pressed", i < 0); prefLive();
   }
   else if(t.id === "prefClear"){
-    DRAFT = {emp:[], edu:[], region:[], cat:[], kw:""};
+    DRAFT = {emp:[], edu:[], region:[], cat:[], kw:"",order:"default"};
+    if($("prefOrder"))$("prefOrder").value="default";
     document.querySelectorAll("[data-pref]").forEach(b => b.setAttribute("aria-pressed","false"));
     $("prefKw").value = ""; prefLive();
   }
@@ -2637,8 +2654,9 @@ window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); instal
 window.addEventListener("appinstalled", () => { $("addbtn").hidden = true; $("addHint").hidden = true; });
 
 let cpSheetReturnFocus = null;
-function sheet(html, title = "홈 화면에 추가하기"){ cpSheetReturnFocus=document.activeElement; $("sheetTitle").textContent = title; $("sheetBody").innerHTML = html; $("sheet").classList.add("open"); cpSyncDialogState(); $("sheetBody").scrollTop = 0; document.querySelector(".sheet-close").focus(); }
+function sheet(html, title = "홈 화면에 추가하기"){ cpCaptureTrackDraft(); cpSheetReturnFocus=document.activeElement; $("sheetTitle").textContent = title; $("sheetBody").innerHTML = html; $("sheet").classList.add("open"); cpSyncDialogState(); $("sheetBody").scrollTop = 0; document.querySelector(".sheet-close").focus(); }
 function closeSheet(){
+  cpCaptureTrackDraft();cpCapturePrefs();cpTrackEditing=false;cpPrefEditing=false;
   $("sheet").classList.remove("open");
   cpSyncDialogState();
   cpSheetReturnFocus?.focus();
@@ -2653,7 +2671,7 @@ function cpOpenSheetHistory(){
 }
 window.addEventListener("popstate",()=>{
   const modal=$("sheet");
-  if(modal && modal.classList.contains("open")){modal.classList.remove("open");cpSyncDialogState();}
+  if(modal && modal.classList.contains("open")){cpCaptureTrackDraft();cpCapturePrefs();cpTrackEditing=false;cpPrefEditing=false;modal.classList.remove("open");cpSyncDialogState();}
 });
 
 /* Web push is opt-in. Public OneSignal App ID is set in push-config.js;
@@ -2947,7 +2965,7 @@ $("sheet").addEventListener("click", e => { if(e.target.id === "sheet") closeShe
 // ── 저장한 공고 마감 임박 알림 ──
 function savedAlert(){
   const now = new Date();
-  const soon = POSTS.filter(p => SAVED.has(cpSavedId(p)) && p.due && now < p.due && (p.due - now) < 3*864e5)
+  const soon = POSTS.filter(p => SAVED.has(cpSavedId(p)) && !p.alio && p.due && now < p.due && (p.due - now) < 3*864e5)
                     .sort((a,b) => a.due - b.due);
   const el = $("savedAlert");
   const ev = appEvents(now).filter(e => e.kind !== "due" && e.date <= ymd(new Date(now.getTime() + 3*864e5)));
@@ -2958,7 +2976,7 @@ function savedAlert(){
     el.onclick = () => { state.tab = "track"; refresh(); el.scrollIntoView({block:"start"}); };
     return;
   }
-  const todo = Object.entries(APPS).filter(([id, a]) => a.st === "plan" && a.due && a.ck && a.ck.some(x => x.ph === "pre" && !x.d))
+  const todo = Object.entries(APPS).filter(([id, a]) => a.st === "plan" && a.dueIsPublication===false && a.due && a.ck && a.ck.some(x => x.ph === "pre" && !x.d))
     .map(([id, a]) => ({id, a, due:new Date(a.due)})).filter(x => now < x.due && x.due - now < 3*864e5).sort((x, y) => x.due - y.due);
   if(todo.length){
     const f = todo[0], left = f.a.ck.filter(x => x.ph === "pre" && !x.d).length, d = dday({due:f.due}, now);
@@ -2969,7 +2987,7 @@ function savedAlert(){
   }
   if(!soon.length){ el.hidden = true; return; }
   const first = soon[0];
-  el.innerHTML = `⏰ 저장한 공고 ${soon.length}건이 3일 안에 마감돼요 · ${esc(first.org || first.title.slice(0,14))} ${dueLong(first.due, first.dueHasTime)}`;
+  el.innerHTML = `⏰ 저장한 공고 ${soon.length}건이 3일 이내 마감 자료 · 접수기간 원문 확인 · ${esc(first.org || first.title.slice(0,14))} ${dueLong(first.due, first.dueHasTime)}`;
   el.hidden = false;
   el.onclick = () => { state.tab = "saved"; state.sort = "due"; refresh(); el.scrollIntoView({block:"start"}); };
 }
@@ -2987,6 +3005,9 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-detail-ret
 </script>
 <!-- 네이버 애널리틱스 (analytics.naver.com 공식 스크립트) -->
 
+
+
+<script>document.addEventListener('change',e=>{if(e.target.id==='trackStage'){cpTrackFilter=e.target.value;renderTrack(new Date());}if(e.target.id==='trackOrder'){cpTrackOrder=e.target.value;renderTrack(new Date());}});</script>
 
 </body>
 </html>

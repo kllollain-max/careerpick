@@ -4,8 +4,8 @@
   const safeKey=k=>!['__proto__','prototype','constructor'].includes(k);
   const saved=x=>Array.isArray(x)&&x.every(id=>typeof id==='string'&&safeKey(id)&&id.length>0);
   const apps=x=>object(x)&&Object.entries(x).every(([id,a])=>safeKey(id)&&object(a)&&
-    (a.st===undefined||['plan','applied','doc','exam','itv','pass','fail'].includes(a.st))&&
-    ['title','org','url','memo','exam','itv','due'].every(k=>a[k]==null||typeof a[k]==='string')&&
+    (a.st===undefined||['plan','prepare','applied','doc','exam','itv','pass','fail','withdrawn'].includes(a.st))&&
+    ['title','org','url','memo','submit','exam','itv','due'].every(k=>a[k]==null||typeof a[k]==='string')&&
     (a.ck==null||Array.isArray(a.ck)&&a.ck.every(c=>object(c)&&typeof c.t==='string')));
   const prefs=x=>object(x)&&['emp','edu','region','cat'].every(k=>x[k]===undefined||Array.isArray(x[k])&&x[k].every(v=>typeof v==='string'))&&(x.kw===undefined||typeof x.kw==='string');
   const spec=x=>x===null||object(x)&&['want','lic','special','licenses','certs'].every(k=>x[k]===undefined||Array.isArray(x[k])&&x[k].every(v=>typeof v==='string'));
