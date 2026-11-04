@@ -97,6 +97,9 @@ jobs:
         if: steps.candidate.outputs.changed == 'true'
         with:
           path: dist
+      - name: Preserve newer main content before publication
+        if: steps.candidate.outputs.changed == 'true'
+        run: python scripts/check_approved_head.py --approved-sha "$(git rev-parse HEAD)"
       - uses: actions/deploy-pages@v4
         id: deployment
         if: steps.candidate.outputs.changed == 'true'
