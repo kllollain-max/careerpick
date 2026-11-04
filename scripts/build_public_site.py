@@ -237,7 +237,7 @@ def main() -> dict:
         if file.suffix not in {".html", ".js", ".css", ".xml", ".txt", ".webmanifest"}:
             continue
         text = file.read_text(encoding="utf-8")
-        text = re.sub(r"https://kllollain-max\.github\.io/(?!careerpick/)", BASE, text)
+        text = re.sub(r"https://kllollain-max\.github\.io/(?!careerpick/|supportpick/)", BASE, text)
         text = re.sub(r"((?:href|src|action)=[\"'])/(?!/|careerpick/|supportpick/)", lambda m: m[1] + PREFIX, text)
         text = re.sub(r"([\"'`])/(?=(?:jobs|guides|data|onesignal)/)", lambda m: m[1] + PREFIX, text)
         if file.name == "manifest.webmanifest":
