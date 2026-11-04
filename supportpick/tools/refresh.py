@@ -95,9 +95,28 @@ def mark_failure(state,code):
         'lastSuccessAt':current['lastSuccessAt'] if current else None,'count':current['count'] if current else 0,
         'published':False})
 
+def bundle_state(state,output):
+    state,output=Path(state),Path(output)
+    current,path=read_current(state)
+    if not current:raise ValueError('no_valid_current_state')
+    if output.exists() and any(output.iterdir()):raise ValueError('bundle_output_not_empty')
+    others=[]
+    for candidate in (state/'snapshots').iterdir():
+        if candidate==path or candidate.name.startswith('.') or not candidate.is_dir():continue
+        feed=verify_snapshot(candidate)
+        others.append((feed['collectionSucceededAt'],candidate))
+    selected=[path]+[p for _,p in sorted(others,reverse=True)[:1]]
+    for candidate in selected:shutil.copytree(candidate,output/'snapshots'/candidate.name)
+    shutil.copyfile(state/'current.json',output/'current.json')
+    shutil.copyfile(state/'status.json',output/'status.json')
+    read_current(output)
+    return {'status':'passed','generations':len(selected),'generation':current['generation'],'sourcePreserved':True}
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--state',required=True);p.add_argument('--generation');p.add_argument('--output');p.add_argument('--candidate');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--state',required=True);p.add_argument('--generation');p.add_argument('--output');p.add_argument('--candidate');p.add_argument('--bundle-output');args=p.parse_args()
     try:
+        if args.bundle_output:
+            print(json.dumps(bundle_state(args.state,args.bundle_output)));return 0
         candidate=args.candidate
         if not candidate:
             if not args.generation or not args.output:raise ValueError('missing_run_arguments')

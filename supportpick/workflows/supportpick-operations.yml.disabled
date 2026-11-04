@@ -25,6 +25,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Restore latest validated state or source baseline
+        id: restore
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python tools/restore_latest_state.py
@@ -37,19 +38,24 @@ jobs:
           SUPPORTPICK_GOV24_SERVICE_KEY: ${{ secrets.SUPPORTPICK_GOV24_SERVICE_KEY }}
         run: python tools/refresh.py --state collection-state --output output/current-run --generation gov24-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Build current data with accurate delay or failure status
+        id: build
         run: python tools/build.py --state collection-state --output dist --public-base https://kllollain-max.github.io/supportpick/
+      - name: Preserve current and previous validated generations
+        id: bundle
+        if: always() && steps.restore.outcome == 'success' && steps.build.outcome == 'success'
+        run: python tools/refresh.py --state collection-state --bundle-output runtime-state
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.bundle.outcome == 'success'
         with:
           name: supportpick-runtime-state
-          path: collection-state/
-          retention-days: 14
+          path: runtime-state/
+          retention-days: 3
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: supportpick-collection-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: output/current-run/
-          retention-days: 14
+          retention-days: 3
       - uses: actions/configure-pages@v5
         if: vars.SUPPORTPICK_SITE_PUBLIC_UPDATE_APPROVED == '1'
       - uses: actions/upload-pages-artifact@v3

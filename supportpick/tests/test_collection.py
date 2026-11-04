@@ -3,7 +3,7 @@ from unittest.mock import patch,Mock
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from collect_full import collect,period,region,GuardedOpener,APIError
-from refresh import install_candidate,read_current,mark_failure,verify_snapshot
+from refresh import install_candidate,read_current,mark_failure,verify_snapshot,bundle_state
 from build import build
 
 def rows(n=103):
@@ -124,5 +124,20 @@ class CollectionTests(unittest.TestCase):
         opener=Mock();opener.open.side_effect=[Response({'workflow_runs':[{'id':1,'run_number':1,'head_branch':'main','event':'schedule'}]}),Response({'artifacts':[]})]
         with patch.object(restore_latest_state,'ensure_bootstrap'),patch.object(restore_latest_state,'build_opener',return_value=opener),patch.dict('os.environ',{'GITHUB_REPOSITORY':'owner/supportpick','GITHUB_TOKEN':'test-only-placeholder','GITHUB_RUN_NUMBER':'2'}):
             with self.assertRaisesRegex(ValueError,'latest_runtime_state_unavailable'):restore_latest_state.main()
+    def test_runtime_bundle_bounds_size_without_deleting_source_history(self):
+        with tempfile.TemporaryDirectory() as p:
+            p=Path(p)
+            for n in range(3):
+                collect(Client(),p/f'run{n}',f'test{n}');install_candidate(p/f'run{n}',p/'state')
+            result=bundle_state(p/'state',p/'bundle')
+            self.assertEqual(result['generations'],2)
+            self.assertEqual(len(list((p/'state/snapshots').iterdir())),3)
+            self.assertEqual(len(list((p/'bundle/snapshots').iterdir())),2)
+            self.assertEqual(read_current(p/'bundle')[0]['generation'],'test2')
+    def test_corrupt_current_pointer_cannot_generate_runtime_bundle(self):
+        with tempfile.TemporaryDirectory() as p:
+            p=Path(p);collect(Client(),p/'run','test');install_candidate(p/'run',p/'state')
+            pointer=p/'state/current.json';v=json.loads(pointer.read_text());v['manifestSha256']='bad';pointer.write_text(json.dumps(v))
+            with self.assertRaises(ValueError):bundle_state(p/'state',p/'bundle')
 
 if __name__=='__main__':unittest.main()

@@ -57,7 +57,7 @@ python3 tools/build.py --output dist --public-base https://kllollain-max.github.
 
 한 회차의 통신 실패는 보존된 `output/current-run/`을 복원해 **같은 generation·같은 output 경로**로 `collect_full.py`를 재실행하면 완료 페이지를 재사용한다. 체크포인트 변조·원본 변경·ID 불일치라면 같은 자료를 무조건 재시도하지 않고 원인을 확인한 뒤 새 generation에서 시작한다. 검증 미완료 후보는 운영 포인터로 승격하지 않는다.
 
-`supportpick-runtime-state`와 수집 증거 artifact는14일 보존하며, 항상 초기 정상 자료의 bootstrap도 코드와 함께 유지한다. 장기간 중단 뒤 최신 artifact가 만료되면 자동 배포를 중단한다. 보존 패키지와 새 전체 수집으로 정상 상태를 다시 검증한 후 재개한다. 과거 자료를 최신으로 표시하거나 공개된 최신 정상 자료를 오래된 초기 자료로 덮어쓰지 않는다.
+`supportpick-runtime-state`는 현재·직전 정상 세대2개만 묶어 크기를 제한한다. 실행 폴더의 기존 세대를 삭제하지 않으며 과거 회차의 artifact도3일 보존한다. 상태 복원과 빌드가 모두 성공한 경우에만 다음 운영 상태 묶음을 올린다. 수집 증거 artifact도3일 보존하며, 항상 초기 정상 자료의 bootstrap도 코드와 함께 유지한다. 장기간 중단 뒤 최신 artifact가 만료되면 자동 배포를 중단한다. 보존 패키지와 새 전체 수집으로 정상 상태를 다시 검증한 후 재개한다. 과거 자료를 최신으로 표시하거나 공개된 최신 정상 자료를 오래된 초기 자료로 덮어쓰지 않는다.
 
 ## 복구
 
