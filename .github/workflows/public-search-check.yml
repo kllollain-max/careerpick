@@ -1,0 +1,44 @@
+name: Read-only public search checks
+on:
+  workflow_dispatch:
+    inputs:
+      all_urls:
+        description: One-pass audit of every sitemap URL (otherwise representative pages)
+        type: boolean
+        default: false
+  workflow_run:
+    workflows: [Deploy approved CareerPick, CareerPick scheduled operation]
+    branches: [main]
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: careerpick-public-search-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check existing public output without scripts or advertisements
+        env:
+          CP_AUDIT_ALL_URLS: ${{ inputs.all_urls || false }}
+        run: |
+          if [ "$CP_AUDIT_ALL_URLS" = "true" ]; then
+            python scripts/check_search_public.py --all-urls
+          else
+            python scripts/check_search_public.py
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-search-observations
+          path: public-search-report.json
+          retention-days: 14

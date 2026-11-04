@@ -1968,7 +1968,12 @@ async function openJob(id, push = true){
   if(!p) return;
   id=p.id;
   JV = id;
-  if(push && location.hash !== "#job=" + id){ history.pushState({job:id}, "", "#job=" + id); JV_PUSHED = true; }
+  if(!push) JV_PUSHED = !!history.state?.job;
+  if(push && location.hash !== "#job=" + id){
+    // Reuse PR #11's browse-state preservation without importing its unrelated changes.
+    history.replaceState({...history.state, cpBrowse:{...state}, cpLimit:cpVisibleLimit, cpScroll:scrollY, cpAnchor:id}, "", location.href);
+    history.pushState({job:id}, "", "#job=" + id); JV_PUSHED = true;
+  }
   $("jobview").hidden = false; cpSyncDialogState(); document.body.style.overflow = "hidden";
   $("jvBody").innerHTML = jobViewHTML(p, null);
   $("jvBack").focus();
@@ -2161,15 +2166,22 @@ window.addEventListener("popstate", (event) => {
   // 브라우저/스레드 뒤로가기를 사이트 내부 탭 이동에 연결합니다.
   if(event.state && event.state.cpTab){
     CP_RESTORING_TAB = true;
+    if(event.state.cpBrowse) Object.assign(state, event.state.cpBrowse);
     state.tab = event.state.cpTab;
-    state.q = event.state.cpQ || "";
+    state.q = event.state.cpBrowse?.q ?? event.state.cpQ ?? "";
     $("q").value = state.q;
-    state.cat = null;
-    state.status = "all";
-    state.onlyNew = false;
+    if(!event.state.cpBrowse){ state.cat = null; state.status = "all"; state.onlyNew = false; }
+    if(event.state.cpBrowse){
+      cpVisibleLimit = Math.max(30, Number(event.state.cpLimit) || 30);
+      cpLastFilter = JSON.stringify(state);
+    }
     refresh();
     CP_RESTORING_TAB = false;
-    window.scrollTo({top:0,behavior:"instant"});
+    requestAnimationFrame(() => {
+      const link = [...document.querySelectorAll('#list a[data-open]')].find(a => a.dataset.open === event.state.cpAnchor);
+      if(link) link.focus({preventScroll:true});
+      window.scrollTo({top:event.state.cpScroll || 0,behavior:"instant"});
+    });
   }
 });
 // CareerPick 2.0 step 4: show only real counts from the loaded feed and local records.
