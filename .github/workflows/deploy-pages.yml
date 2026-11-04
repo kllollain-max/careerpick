@@ -1,4 +1,4 @@
-# Review only. Move into .github/workflows after explicit deployment approval.
+# Owner-approved exact-SHA deployment, with a final current-main guard.
 name: Deploy approved CareerPick
 on:
   workflow_dispatch:
@@ -51,9 +51,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Reject stale source before building
+        run: python scripts/check_approved_head.py --approved-sha "$APPROVED_SHA"
       - run: python scripts/build_public_site.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      - name: Preserve newer main content before publication
+        run: python scripts/check_approved_head.py --approved-sha "$APPROVED_SHA"
       - uses: actions/deploy-pages@v4
