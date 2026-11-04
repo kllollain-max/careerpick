@@ -103,5 +103,29 @@ class PublicSearchAuditTests(unittest.TestCase):
         self.assertFalse(report['errors'])
         self.assertEqual(report['warnings'], ['sitemap_http_unverified'])
 
+    def test_transient_http_response_is_retried_once_and_recorded(self):
+        rows = [{'url': audit.BASE, 'status': 503, 'issues': []}]
+        load, calls = self.loader()
+        observations = audit.retry_observations(rows, load)
+        self.assertEqual(calls, [audit.BASE])
+        self.assertEqual(rows[0]['status'], 200)
+        self.assertEqual(observations[0]['initial_status'], 503)
+        self.assertTrue(observations[0]['recovered'])
+
+    def test_missing_page_is_not_retried_or_marked_recovered(self):
+        rows = [{'url': audit.BASE, 'status': 404, 'issues': []}]
+        observations = audit.retry_observations(rows, lambda _: self.fail('404 must not be retried'))
+        self.assertFalse(observations)
+        self.assertEqual(rows[0]['status'], 404)
+
+    def test_unicode_links_match_the_encoded_sitemap_without_duplicate_fetches(self):
+        url = audit.BASE + 'org-한국기관.html'
+        encoded = audit.encoded_url(url)
+        self.assertNotIn('한국', encoded)
+        self.assertEqual(audit.encoded_url(encoded), encoded)
+        source = page(audit.BASE) + ('<a href="' + url + '">기관</a>').encode()
+        _, links = audit.examine(audit.BASE, lambda _: ({'url': audit.BASE, 'status': 200, 'content_type': 'text/html'}, source))
+        self.assertIn(encoded, links)
+
 
 if __name__ == '__main__': unittest.main()
