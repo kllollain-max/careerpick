@@ -84,7 +84,7 @@ PSL 원본에 `github.io`가 등재되어 있고 Google은 PSL 플랫폼 하위 
 - 브라우저 검색에서 ‘국민건강보험공단’ 결과 3건과 상세의 59명·게시기간·접수기간 확인 안내를 확인했다. 초기 손상 조건으로 발생한 오류를 수정한 뒤 목록이 표시됐다.
 - 광고·외부 통계 스크립트는 빌드에서 제외한다. 실제 광고 클릭·반복 광고 요청, 실제 푸시 발송·구독 해지, 고객 기록 업로드는 실행하지 않았다.
 - 저장·가져오기·롤백·충돌 보존은 회귀 검사로 확인했다. 기존 PR #11의 전체 기록 보호·탐색 개선이 이 브랜치에 모두 통합된 것은 아니다. 다중 탭·정밀 스크롤 복원의 추가 개선은 해당 PR과 통합 시 재검증한다.
-- 문의 이메일은 기존 소스의 주소를 보존했다. 실제 수신함·답장 가능 여부는 미확인이고 확인 메일을 발송하지 않았다. 개인정보의 세부 보유·삭제·국외처리 계약 사항은 운영자 확인 대기다.
+- 문의 이메일은 기존 소스의 주소를 보존했다. 이후 2026년 11월 4일 사용자가 실제 수신 가능하다고 확인했다. 수신함을 열람하거나 확인 메일을 발송한 것은 아니다. 개인정보 보유·삭제 기준안은 `review-only/privacy-retention-proposal.md`에 작성했으며 아직 운영 적용·실제 삭제를 수행하지 않았다. 국외처리 계약 사항은 별도 확인 대기다.
 
 재현 명령:
 
@@ -124,7 +124,7 @@ python scripts/publisher_readiness.py
 ## 9. 사용자 확인 최소 항목
 
 1. **계정**: 현재 확인된 기존 계정을 계속 사용할지와 재활성화 절차. 전화·본인·지급정보는 공식 화면에서 직접 입력. 재활성화 후 기존 사이트 목록과 호스트 등록 수락 확인.
-2. **문의·개인정보**: 기존 이메일 실제 수신 가능 여부, 문의·구독·비공개 발송 이력의 보유기간·삭제 기한과 외부처리 계약 확인. 임의로 기간이나 자격을 만들어 확정하지 않음.
+2. **문의·개인정보**: 기존 이메일 수신 가능은 사용자 확인 완료. 문의·구독·비공개 발송 이력의 보유·삭제 기준안(별도 검토 문서) 승인과 외부처리 계약 확인이 남음. 제안 기간을 확정·구현된 것으로 표시하지 않음.
 3. **사람 검토·공개**: 가이드 6편과 정책 개정안을 운영자가 검토. 확정된 개인정보 안내와 최신 main 충돌 검사를 마친 후 이 PR의 병합·공개 배포 승인. 심사 신청과 광고 활성화는 그다음 별도 승인.
 
 ## 공식 근거 — 2026-11-04 확인
@@ -137,3 +137,7 @@ python scripts/publisher_readiness.py
 - [robots 안내](https://developers.google.com/search/docs/crawling-indexing/robots/intro), [JobPosting 지침](https://developers.google.com/search/docs/appearance/structured-data/job-posting)
 - [잡알리오 저작권](https://job.alio.go.kr/mobile2021/copyright.do), [NCS 공정채용 FAQ](https://ncs.go.kr/th07/qna_faq.do?faqTypeCd=10&searchCondition=&searchKeyword=)
 - [OneSignal 방침](https://onesignal.com/privacy_policy), [OneSignal 구독·사용자 삭제](https://documentation.onesignal.com/docs/en/delete-users), [GitHub 개인정보 안내](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement)
+
+## 운영자 답변 반영과 보유·삭제 기준안
+
+2026년 11월 4일 사용자가 문의메일 수신 가능을 확인하고 보유·삭제 기준안 작성을 요청했다. `contact.html`·`privacy.html`의 해당 사실 안내를 갱신했다. 기준안은 `review-only/privacy-retention-proposal.md`에서 검토하며 공개 배포 목록에서 제외한다. 일반 문의 목적 종료 시 삭제(필요한 후속 확인만 최대 30일), 해지·삭제 사유 확인 후 지체 없는 처리(내부 목표 5일), 상세 발송 로그 최대 30일·중복 방지 최소 기록 최대 90일을 제안한다. 5·30·90일은 법정기간이 아니며, 기존 코드에 자동 삭제 기능이 구현됐다는 뜻도 아니다. 기존 Git 이력·백업과 중복 재발송 방지 검증까지 적용 준비에 포함한다. 병합·배포·기존 자료 파기는 수행하지 않았다.
