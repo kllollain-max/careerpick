@@ -2,6 +2,8 @@ import sys,unittest,tempfile,json,copy
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from collect_full import collect,period,region,GuardedOpener,APIError
+from refresh import install_candidate,read_current,mark_failure,verify_snapshot
+from build import build
 
 def rows(n=103):
     return [{'서비스ID':f'B{i:05d}','서비스명':f'공식 혜택 {i}','소관기관명':'강원특별자치도 춘천시',
@@ -77,5 +79,34 @@ class CollectionTests(unittest.TestCase):
     def test_central_agency_is_not_inferred_as_nationwide(self):
         self.assertEqual(region('기후에너지환경부','특정 세대 지원')[0],'확인 필요')
         self.assertEqual(region('강원특별자치도 춘천시','원문 확인')[1],'agency_jurisdiction')
+    def test_promote_then_failure_preserves_data_and_success_time(self):
+        with tempfile.TemporaryDirectory() as p:
+            p=Path(p);collect(Client(),p/'run1','test1');installed=install_candidate(p/'run1',p/'state')
+            before=(p/'state/current.json').read_bytes();_,snapshot=read_current(p/'state')
+            first=(snapshot/'data.json').read_bytes()
+            collect(Client(fail_at=2),p/'run2','test2')
+            with self.assertRaises(ValueError):install_candidate(p/'run2',p/'state')
+            mark_failure(p/'state','network_error')
+            self.assertEqual((p/'state/current.json').read_bytes(),before)
+            self.assertEqual((snapshot/'data.json').read_bytes(),first)
+            status=json.loads((p/'state/status.json').read_text())
+            self.assertEqual(status['lastSuccessAt'],installed['lastSuccessAt']);self.assertEqual(status['status'],'failed')
+            result=build(p/'public',p/'state');self.assertEqual(result['benefits'],103);self.assertEqual(result['status'],'failed')
+            self.assertFalse((p/'public/tools').exists());self.assertFalse((p/'public/report.json').exists())
+    def test_abnormal_drop_never_replaces_current_generation(self):
+        with tempfile.TemporaryDirectory() as p:
+            p=Path(p);collect(Client(),p/'run1','test1');install_candidate(p/'run1',p/'state');old=(p/'state/current.json').read_bytes()
+            collect(Client(data=rows(5)),p/'run2','test2')
+            with self.assertRaisesRegex(ValueError,'abnormal_count_drop'):install_candidate(p/'run2',p/'state')
+            self.assertEqual((p/'state/current.json').read_bytes(),old)
+    def test_manifest_tamper_cannot_be_built_or_restored(self):
+        with tempfile.TemporaryDirectory() as p:
+            p=Path(p);collect(Client(),p/'run1','test1');install_candidate(p/'run1',p/'state');_,snapshot=read_current(p/'state')
+            (snapshot/'data.js').write_text('window.SUPPORTPICK_DATA = {};')
+            with self.assertRaises(ValueError):read_current(p/'state')
+            with self.assertRaises(ValueError):build(p/'public',p/'state')
+    def test_operational_build_requires_complete_snapshot(self):
+        with tempfile.TemporaryDirectory() as p:
+            with self.assertRaisesRegex(ValueError,'complete_snapshot_required'):build(Path(p)/'out',Path(p)/'missing')
 
 if __name__=='__main__':unittest.main()

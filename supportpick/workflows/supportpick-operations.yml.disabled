@@ -1,0 +1,63 @@
+name: SupportPick full-data operations (approval gated)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 9,21 * * *'
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+concurrency:
+  group: supportpick-pages-operations
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: vars.SUPPORTPICK_SITE_COLLECTION_APPROVED == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore latest validated state or source baseline
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/restore_latest_state.py
+      - name: Run completeness and data-preservation checks
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Collect and promote only a complete generation
+        id: collect
+        continue-on-error: true
+        env:
+          SUPPORTPICK_GOV24_SERVICE_KEY: ${{ secrets.SUPPORTPICK_GOV24_SERVICE_KEY }}
+        run: python tools/refresh.py --state collection-state --output output/current-run --generation gov24-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Build current data with accurate delay or failure status
+        run: python tools/build.py --state collection-state --output dist --public-base https://kllollain-max.github.io/supportpick/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: supportpick-runtime-state
+          path: collection-state/
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: supportpick-collection-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/current-run/
+          retention-days: 14
+      - uses: actions/configure-pages@v5
+        if: vars.SUPPORTPICK_SITE_PUBLIC_UPDATE_APPROVED == '1'
+      - uses: actions/upload-pages-artifact@v3
+        if: vars.SUPPORTPICK_SITE_PUBLIC_UPDATE_APPROVED == '1'
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
+        if: vars.SUPPORTPICK_SITE_PUBLIC_UPDATE_APPROVED == '1'
+      - name: Report collection failure after retaining last good data and status
+        if: steps.collect.outcome == 'failure'
+        run: exit 1

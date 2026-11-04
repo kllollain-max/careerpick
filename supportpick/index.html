@@ -30,6 +30,7 @@
   </nav>
   <main id="main" tabindex="-1">
     <div id="storageWarning" class="warning" role="alert" hidden></div>
+    <div id="feedWarning" class="warning" role="status" hidden></div>
     <section class="hero" id="hero">
       <div class="hero-content"><span class="eyebrow"><span class="status-dot"></span>공식 출처에서 시작하는 혜택 찾기</span><h1>생활에 보탬이 되는 혜택,<br>하나씩 챙겨보세요.</h1><p>나에게 필요한 지원정보를 찾고,<br class="mobile-only"> 신청 준비까지 한곳에서 관리하세요.</p><button class="primary" id="heroMatch">내 관심 조건 설정하기 <span aria-hidden="true">↗</span></button></div>
       <div class="hero-visual" aria-hidden="true"><div class="hero-orbit"></div><div class="benefit-ticket"><span class="ticket-label">나의 생활혜택</span><span class="ticket-mark">P<span>ICK</span></span><span class="ticket-line"></span><span class="ticket-caption">필요한 정보를, 놓치지 않게</span><span class="ticket-stamp">✓</span></div><div class="float-tag">찾고 <b>＋</b></div><div class="float-tag second">챙기고 <b>✓</b></div></div>
@@ -39,12 +40,14 @@
       <form class="searchbar" id="searchForm" role="search"><label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="query" type="search" aria-label="혜택 검색" placeholder="지원금, 기관명, 관심 키워드 검색" autocomplete="off"></label><button class="fbtn" id="filterToggle" type="button" aria-expanded="false" aria-controls="filterPanel">상세 필터</button></form>
       <div class="categories" id="categories" aria-label="혜택 분야"></div>
       <div class="filters" id="filterPanel" hidden>
-        <label>거주 지역 <select id="region"><option value="">전국 / 모든 지역</option><option>강원</option><option>서울</option><option>경기</option><option>인천</option><option>부산</option><option>대구</option><option>광주</option><option>대전</option><option>울산</option><option>세종</option><option>충북</option><option>충남</option><option>전북</option><option>전남</option><option>경북</option><option>경남</option><option>제주</option></select></label>
+        <label>관련 지역 <select id="region"><option value="">모든 지역</option><option>강원</option><option>서울</option><option>경기</option><option>인천</option><option>부산</option><option>대구</option><option>광주</option><option>대전</option><option>울산</option><option>세종</option><option>충북</option><option>충남</option><option>전북</option><option>전남</option><option>경북</option><option>경남</option><option>제주</option></select></label>
+        <label>안내 대상 <select id="audience"><option value="">모든 대상</option></select></label>
         <label>지원 방식 <select id="supportType"><option value="">모든 방식</option><option>현금</option><option>이용권</option><option>현물</option><option>서비스</option><option>융자</option></select></label>
         <button type="button" class="quiet" id="resetFilters">검색·필터 초기화</button>
+        <p class="data-note">관련 지역은 소관기관의 지역 또는 원문 표기입니다. 지역 미제공 자료도 함께 표시하며 실제 거주·수급 조건을 확정하지 않습니다.</p>
       </div>
       <div id="matchNotice" class="context-note" hidden></div>
-      <div class="results-line"><p id="resultCount" role="status" aria-live="polite"></p><label>정렬 <select id="sort"><option value="updated">자료 확인순</option><option value="deadline">기한순</option><option value="title">이름순</option></select></label></div>
+      <div class="results-line"><p id="resultCount" role="status" aria-live="polite"></p><label>정렬 <select id="sort"><option value="updated">원문 수정순</option><option value="deadline">기한순</option><option value="title">이름순</option></select></label></div>
       <p class="data-note" id="dataNote"></p>
       <div id="list" class="benefit-list"></div>
     </section>

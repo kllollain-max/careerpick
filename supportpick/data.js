@@ -29,5 +29,6 @@ window.SUPPORTPICK_DATA = {
       "verification": "source_only",
       "applicationOpenVerified": false
     }
-  ]
+  ],
+  "isSample": true
 };

@@ -2,24 +2,28 @@
   'use strict';
   const C=window.SupportPick,$=id=>document.getElementById(id),VIEW='supportpick:view:v1';
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const initial={tab:'all',query:'',category:'',region:'',supportType:'',sort:'updated',scroll:0};
+  const initial={tab:'all',query:'',category:'',region:'',audience:'',supportType:'',sort:'updated',scroll:0,limit:30};
   let view={...initial},snapshot={raw:null,data:C.blank()},writable=true,items=[],feedError='',toastTimer,detailFromList=false;
   const drafts=new Map();
+  const shardCache=new Map();let detailRequest=0;
   try{snapshot=C.load(localStorage);}catch(e){writable=false;warn(e.message);}
   try{const saved=JSON.parse(sessionStorage.getItem(VIEW)||'null');if(saved&&typeof saved==='object')for(const key of Object.keys(initial))if(typeof saved[key]===typeof initial[key])view[key]=saved[key];}catch(e){}
   if(!['all','matched','saved','apps','guide'].includes(view.tab))view.tab='all';
   try{items=C.parseFeed(window.SUPPORTPICK_DATA);}catch(e){feedError=e.message;}
+  $('audience').innerHTML='<option value="">모든 대상</option>'+[...new Set(items.flatMap(p=>p.audience||[]))].sort().map(s=>`<option>${esc(s)}</option>`).join('');
+  $('supportType').innerHTML='<option value="">모든 방식</option>'+[...new Set(items.flatMap(p=>p.supportTypes||[p.supportType]))].sort().map(s=>`<option>${esc(s)}</option>`).join('');
+  $('prefCategory').innerHTML='<option value="">모든 분야</option>'+[...new Set([...C.CATEGORIES,...items.map(p=>p.category)])].map(s=>`<option>${esc(s)}</option>`).join('');
   function warn(message){$('storageWarning').textContent=message;$('storageWarning').hidden=false;}
   function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,4200);}
   function remember(){try{sessionStorage.setItem(VIEW,JSON.stringify(view));}catch(e){}}
   function persist(next){if(!writable)throw Error('기존 기록을 확인할 수 없어 변경을 중단했습니다.');snapshot=C.save(localStorage,snapshot.raw,next);return snapshot.data;}
   function change(update){try{persist(update(structuredClone(snapshot.data)));render();return true;}catch(e){toast(e.message);warn(e.message);return false;}}
   function koreanTime(value){const d=new Date(value);return Number.isFinite(+d)?new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(d):'시각 미확인';}
-  function setTab(tab){view.tab=tab;view.scroll=0;remember();if(location.hash.startsWith('#benefit='))history.replaceState(null,'',location.pathname+location.search);render();window.scrollTo({top:0,behavior:'auto'});}
+  function setTab(tab){view.tab=tab;view.scroll=0;view.limit=30;remember();if(location.hash.startsWith('#benefit='))history.replaceState(null,'',location.pathname+location.search);render();window.scrollTo({top:0,behavior:'auto'});}
   function categories(){const all=['전체',...new Set([...C.CATEGORIES,...items.map(x=>x.category)])];$('categories').innerHTML=all.map(x=>`<button class="chip" type="button" data-category="${esc(x==='전체'?'':x)}" aria-pressed="${(x==='전체'?'':x)===view.category}">${esc(x)}</button>`).join('');}
   function card(p){
     const saved=snapshot.data.saved.includes(p.id),tracked=C.own(snapshot.data.apps,p.id),reason=view.tab==='matched'?C.matchReasons(p,snapshot.data.prefs):null;
-    return `<article class="benefit-card"><div class="card-content"><div class="card-top"><span class="category-badge">${esc(p.category)}</span><span class="badge">${esc(C.status(p))}</span></div><h3><button class="title-link" data-detail="${esc(p.id)}">${esc(p.title)}</button></h3><p class="organization">${esc(p.organization)} · ${esc(p.region)}</p><p class="card-summary">${esc(p.summary)}</p><dl class="card-meta"><dt>지원</dt><dd>${esc(p.supportType)}</dd><dt>기간</dt><dd>${esc(p.period||'공식 공고 확인')}</dd><dt>출처</dt><dd>${esc(p.source)} · ${esc(koreanTime(p.checkedAt))}</dd></dl>${reason&&reason.length?`<p class="match-reason">${esc(reason.join(' · '))}</p>`:''}</div><div class="card-actions"><button data-save="${esc(p.id)}" aria-pressed="${saved}" class="${saved?'saved':''}">${saved?'★ 저장됨':'☆ 관심 저장'}</button><button data-track="${esc(p.id)}">${tracked?'신청 기록 보기':'신청 준비하기'}</button></div></article>`;
+    return `<article class="benefit-card"><div class="card-content"><div class="card-top"><span class="category-badge">${esc(p.category)}</span><span class="badge">${esc(C.status(p))}</span></div><h3><button class="title-link" data-detail="${esc(p.id)}">${esc(p.title)}</button></h3><p class="organization">${esc(p.organization)} · ${esc(p.regionBasis==='agency_jurisdiction'?'기관 지역 '+p.region:p.region)}</p><p class="card-summary">${esc(p.summary)}</p><dl class="card-meta"><dt>지원</dt><dd>${esc(p.supportType)}</dd><dt>기간</dt><dd>${esc(p.period||'공식 공고 확인')}</dd><dt>출처</dt><dd>${esc(p.source)} · ${esc(koreanTime(p.checkedAt))}</dd></dl>${reason&&reason.length?`<p class="match-reason">${esc(reason.join(' · '))}</p>`:''}</div><div class="card-actions"><button data-save="${esc(p.id)}" aria-pressed="${saved}" class="${saved?'saved':''}">${saved?'★ 저장됨':'☆ 관심 저장'}</button><button data-track="${esc(p.id)}">${tracked?'신청 기록 보기':'신청 준비하기'}</button></div></article>`;
   }
   function empty(title,text,action='reset'){return `<div class="empty-state"><span class="empty-mark" aria-hidden="true">◎</span><h3>${esc(title)}</h3><p>${esc(text)}</p>${action==='preferences'?'<button class="primary" data-open-preferences>관심 조건 설정하기</button>':action==='all'?'<button class="quiet" data-show-all>전체 혜택 보기</button>':action==='reset'?'<button class="quiet" data-reset>검색·필터 초기화</button>':''}</div>`;}
   function render(){
@@ -29,19 +33,20 @@
     $('detailSection').hidden=!isDetail;$('hero').hidden=isDetail||view.tab!=='all';$('browseSection').hidden=isDetail||view.tab==='guide';$('guideSection').hidden=isDetail||view.tab!=='guide';$('portals').hidden=isDetail;
     if(isDetail){renderDetail();return;}
     $('preferencesButton').hidden=view.tab==='apps';$('searchForm').hidden=view.tab==='apps';$('categories').hidden=view.tab==='apps';$('filterPanel').hidden=view.tab==='apps'||$('filterToggle').getAttribute('aria-expanded')!=='true';$('sort').closest('label').hidden=view.tab==='apps';
-    $('query').value=view.query;$('region').value=view.region;$('supportType').value=view.supportType;$('sort').value=view.sort;categories();
+    $('query').value=view.query;$('region').value=view.region;$('audience').value=view.audience;$('supportType').value=view.supportType;$('sort').value=view.sort;categories();
     const titles={all:'관심 있는 혜택을 찾아보세요',matched:'내 관심 조건에 맞는 혜택',saved:'다시 보고 싶은 혜택',apps:'내가 챙기는 신청 기록'};
     $('sectionTitle').textContent=titles[view.tab]||titles.all;
     $('matchNotice').hidden=view.tab!=='matched';
     const prefs=snapshot.data.prefs;
     $('matchNotice').textContent=`${prefs.region||'모든 지역'} · ${prefs.category||'모든 분야'}. 관심 조건이 비슷한 정보이며 실제 수급 자격을 판정하지 않습니다.`;
-    $('dataNote').textContent=feedError||`${window.SUPPORTPICK_DATA.coverage} 자료 조회 ${koreanTime(window.SUPPORTPICK_DATA.updatedAt)} KST · 신청 가능 여부는 공식 원문에서 확인하세요.`;
+    $('dataNote').textContent=feedError||`${window.SUPPORTPICK_DATA.coverage} 수집 완료 ${koreanTime(window.SUPPORTPICK_DATA.collectionSucceededAt||window.SUPPORTPICK_DATA.updatedAt)} KST · 실제 신청 가능 여부는 원문 확인이 필요합니다.`;
     if(view.tab==='apps'){renderApps();return;}
     const rows=C.filter(items,view,snapshot.data);
     $('resultCount').textContent=`${view.tab==='saved'?'저장한 혜택':'혜택 정보'} ${rows.length}건`;
     if(feedError){$('list').innerHTML=empty('자료를 확인하지 못했어요',feedError,'none');return;}
     if(view.tab==='matched'&&!prefs.region&&!prefs.category){$('list').innerHTML=empty('어떤 혜택에 관심 있으세요?','관심 지역과 분야를 선택하면 관련 정보를 먼저 볼 수 있어요.','preferences');return;}
-    let body=rows.map(card).join('');
+    let body=rows.slice(0,view.limit).map(card).join('');
+    if(rows.length>view.limit)body+=`<div class="load-more" style="grid-column:1/-1;text-align:center;padding:16px"><button class="quiet" data-more>혜택 더 보기 (${view.limit.toLocaleString()} / ${rows.length.toLocaleString()})</button></div>`;
     if(view.tab==='saved'){
       const missing=snapshot.data.saved.filter(id=>!items.some(p=>p.id===id));
       body+=missing.map(id=>`<article class="benefit-card"><div class="card-content"><span class="badge">자료 미확인</span><h3>${esc(snapshot.data.apps[id]?.title||id)}</h3><p class="card-summary">현재 목록에서 이 혜택 자료를 찾지 못했습니다. 저장 기록은 보존됩니다.</p></div></article>`).join('');
@@ -49,14 +54,29 @@
     }
     $('list').innerHTML=body||empty(view.tab==='saved'?'저장한 혜택이 없어요':'조건에 맞는 정보가 없어요',view.tab==='saved'?'관심 혜택의 저장 버튼을 눌러 다시 확인하세요.':'검색 조건을 바꾸거나 공식 창구에서 더 많은 정보를 확인해보세요.',view.tab==='saved'?'all':'reset');
   }
-  function renderDetail(){
+  async function renderDetail(){
+    const request=++detailRequest;
     let id='';try{id=decodeURIComponent(location.hash.slice(9));}catch(e){}
-    const p=items.find(x=>x.id===id);
+    let p=items.find(x=>x.id===id);
     if(!p){$('detailSection').innerHTML='<button class="quiet back-button" data-back>← 목록으로</button>'+empty('혜택 자료를 찾지 못했어요','목록으로 돌아가 공식 정보를 다시 확인하세요.','all');return;}
+    if(p.detailShard){
+      $('detailSection').innerHTML='<button class="quiet back-button" data-back>← 목록으로 돌아가기</button><p role="status">공식 상세자료를 불러오고 있어요.</p>';
+      try{
+        const base=window.SUPPORTPICK_DATA.detailBase;
+        if(!/^details\/[A-Za-z0-9_-]{1,80}\/$/.test(base)||!/^\d{2}$/.test(p.detailShard))throw Error('상세 경로를 확인할 수 없습니다.');
+        const url=base+p.detailShard+'.json';
+        if(!shardCache.has(url)){
+          if(shardCache.size>=3)shardCache.delete(shardCache.keys().next().value);
+          shardCache.set(url,fetch(url,{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('상세 자료 조회에 실패했습니다.');return r.json();}).catch(e=>{shardCache.delete(url);throw e;}));
+        }
+        const payload=await shardCache.get(url);p=C.parseDetail(payload,p);
+        if(request!==detailRequest||location.hash!=='#benefit='+encodeURIComponent(id))return;
+      }catch(error){if(request!==detailRequest)return;$('detailSection').innerHTML='<button class="quiet back-button" data-back>← 목록으로 돌아가기</button>'+empty('상세 자료를 불러오지 못했어요',error.message,'none')+'<button class="quiet" data-detail-retry>다시 불러오기</button>';return;}
+    }
     document.title=p.title+' | 지원금픽';
     const isSaved=snapshot.data.saved.includes(p.id);
     const fields=[['지원대상',p.target],['지원내용',p.support],['신청방법',p.method],['구비서류',p.documents],['문의처',p.contact]];
-    $('detailSection').innerHTML=`<button class="quiet back-button" data-back>← 목록으로 돌아가기</button><article class="detail-header"><span class="category-badge">${esc(p.category)}</span> <span class="badge">${esc(C.status(p))}</span><h2 id="detailTitle" tabindex="-1">${esc(p.title)}</h2><p>${esc(p.organization)} · ${esc(p.region)}</p><dl class="card-meta"><dt>신청기간</dt><dd>${esc(p.period)}</dd><dt>지원방식</dt><dd>${esc(p.supportType)}</dd><dt>자료조회</dt><dd>${esc(koreanTime(p.checkedAt))} KST</dd></dl><p class="context-note">아래 내용은 공식 API에서 조회한 안내입니다. 실제 접수 여부·금액·대상은 최신 공식 공고와 대조해 확인하세요.</p><div class="detail-actions"><a class="primary" href="${esc(p.officialUrl)}" target="_blank" rel="noopener noreferrer">정부24 공식 안내 확인 ↗</a><button class="quiet" data-save="${esc(p.id)}" aria-pressed="${isSaved}">${isSaved?'★ 저장됨':'☆ 관심 저장'}</button><button class="quiet" data-track="${esc(p.id)}">내 신청에 기록</button></div></article>${fields.map(([title,value])=>`<section class="detail-block"><h3>${title}</h3><p class="source-text">${esc(value||'공식 안내 확인')}</p></section>`).join('')}<section class="detail-block"><h3>정보 출처</h3><p class="source-meta">${esc(p.source)} · 서비스 ID ${esc(p.id)}<br>출처 수정일 ${esc(p.sourceUpdatedAt)} · 조회 ${esc(koreanTime(p.checkedAt))} KST<br>API 조회 성공과 실제 신청 가능 여부는 별개입니다.</p><a href="${esc(p.officialUrl)}" target="_blank" rel="noopener noreferrer">공식 원문 다시 확인 ↗</a></section>`;
+    $('detailSection').innerHTML=`<button class="quiet back-button" data-back>← 목록으로 돌아가기</button><article class="detail-header"><span class="category-badge">${esc(p.category)}</span> <span class="badge">${esc(C.status(p))}</span><h2 id="detailTitle" tabindex="-1">${esc(p.title)}</h2><p>${esc(p.organization)} · ${esc(p.regionBasis==='agency_jurisdiction'?'기관 지역 '+p.region:p.region)}</p><dl class="card-meta"><dt>신청기간</dt><dd>${esc(p.period)}</dd><dt>지원방식</dt><dd>${esc(p.supportType)}</dd><dt>자료조회</dt><dd>${esc(koreanTime(p.checkedAt))} KST</dd></dl><p class="context-note">아래 내용은 공식 API에서 조회한 안내입니다. 실제 접수 여부·금액·대상은 최신 공식 공고와 대조해 확인하세요.</p><div class="detail-actions"><a class="primary" href="${esc(p.officialUrl||'https://plus.gov.kr/')}" target="_blank" rel="noopener noreferrer">${p.officialUrl?'정부24 공식 안내 확인 ↗':'정부24에서 서비스명 검색 ↗'}</a><button class="quiet" data-save="${esc(p.id)}" aria-pressed="${isSaved}">${isSaved?'★ 저장됨':'☆ 관심 저장'}</button><button class="quiet" data-track="${esc(p.id)}">내 신청에 기록</button></div></article>${fields.map(([title,value])=>`<section class="detail-block"><h3>${title}</h3><p class="source-text">${esc(value||'공식 안내 확인')}</p></section>`).join('')}${p.sourceDifferences&&Object.keys(p.sourceDifferences).length?'<section class="detail-block"><h3>목록·상세 표기 차이</h3><p class="context-note">공식 API의 목록과 상세 값이 다릅니다. 두 값을 함께 제공하며 실제 적용 기준은 원문에서 확인하세요.</p>'+Object.entries(p.sourceDifferences).map(([key,value])=>'<h4>'+esc(key)+'</h4><p class="source-text">목록: '+esc(value.list)+'\n\n상세: '+esc(value.detail)+'</p>').join('')+'</section>':''}<section class="detail-block"><h3>정보 출처</h3><p class="source-meta">${esc(p.source)} · 서비스 ID ${esc(p.id)}<br>출처 수정일 ${esc(typeof p.sourceUpdatedAt==='object'?'목록 '+(p.sourceUpdatedAt.list||'미제공')+' / 상세 '+(p.sourceUpdatedAt.detail||'미제공'):p.sourceUpdatedAt)} · 조회 ${esc(koreanTime(p.checkedAt))} KST<br>API 조회 성공과 실제 신청 가능 여부는 별개입니다.</p><a href="${esc(p.officialUrl||'https://plus.gov.kr/')}" target="_blank" rel="noopener noreferrer">${p.officialUrl?'공식 원문 다시 확인 ↗':'공식 링크 미제공 · 정부24에서 확인 ↗'}</a></section>`;
   }
   function renderApps(){
     const records=Object.entries(snapshot.data.apps).sort((a,b)=>b[1].updatedAt.localeCompare(a[1].updatedAt));
@@ -70,23 +90,25 @@
   function openPreferences(){const p=snapshot.data.prefs;$('prefRegion').value=p.region;$('prefCategory').value=p.category;$('preferencesError').textContent='';$('preferencesDialog').showModal();}
   function openDetail(id){view.scroll=window.scrollY;remember();detailFromList=true;history.pushState({supportpickDetail:true},'', '#benefit='+encodeURIComponent(id));render();window.scrollTo(0,0);$('detailTitle')?.focus({preventScroll:true});}
   function back(){if(detailFromList){history.back();return;}history.replaceState(null,'',location.pathname+location.search);render();window.scrollTo(0,view.scroll||0);}
-  function reset(){view={...view,query:'',category:'',region:'',supportType:'',sort:'updated',scroll:0};remember();render();}
+  function reset(){view={...view,query:'',category:'',region:'',supportType:'',audience:'',sort:'updated',scroll:0,limit:30};remember();render();}
   document.addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
     if(b.dataset.tab){document.title='지원금픽 · 한눈에 보는 생활혜택';setTab(b.dataset.tab);}
-    if(b.hasAttribute('data-category')){view.category=b.dataset.category;remember();render();}
+    if(b.hasAttribute('data-category')){view.category=b.dataset.category;view.limit=30;remember();render();}
     if(b.dataset.detail)openDetail(b.dataset.detail);
     if(b.hasAttribute('data-back'))back();
     if(b.hasAttribute('data-show-all'))setTab('all');
     if(b.hasAttribute('data-reset'))reset();
+    if(b.hasAttribute('data-more')){view.limit+=30;remember();render();}
+    if(b.hasAttribute('data-detail-retry'))renderDetail();
     if(b.hasAttribute('data-open-preferences'))openPreferences();
     if(b.hasAttribute('data-close-dialog'))b.closest('dialog').close();
     if(b.dataset.save){const id=b.dataset.save;if(change(s=>{s.saved=s.saved.includes(id)?s.saved.filter(x=>x!==id):[...s.saved,id];return s;}))toast(snapshot.data.saved.includes(id)?'관심 혜택에 저장했어요.':'관심 저장을 해제했어요.');}
     if(b.dataset.track){const id=b.dataset.track,p=items.find(x=>x.id===id);if(!p)return;if(!C.own(snapshot.data.apps,id)&&!change(s=>{s.apps[id]={title:p.title,stage:'관심',note:'',updatedAt:new Date().toISOString()};return s;}))return;setTab('apps');toast('이곳에서 신청 준비 상황을 직접 기록하세요.');}
   });
-  $('query').addEventListener('input',e=>{view.query=e.target.value;remember();render();});
+  $('query').addEventListener('input',e=>{view.query=e.target.value;view.limit=30;remember();render();});
   $('searchForm').addEventListener('submit',e=>{e.preventDefault();render();});
-  for(const [id,key] of [['region','region'],['supportType','supportType'],['sort','sort']])$(id).addEventListener('change',e=>{view[key]=e.target.value;remember();render();});
+  for(const [id,key] of [['region','region'],['audience','audience'],['supportType','supportType'],['sort','sort']])$(id).addEventListener('change',e=>{view[key]=e.target.value;view.limit=30;remember();render();});
   $('filterToggle').onclick=()=>{const expanded=$('filterToggle').getAttribute('aria-expanded')!=='true';$('filterToggle').setAttribute('aria-expanded',String(expanded));$('filterPanel').hidden=!expanded;};
   $('resetFilters').onclick=reset;$('heroMatch').onclick=openPreferences;$('preferencesButton').onclick=openPreferences;
   $('preferencesForm').onsubmit=e=>{e.preventDefault();try{persist({...snapshot.data,prefs:{region:$('prefRegion').value,category:$('prefCategory').value}});$('preferencesDialog').close();setTab('matched');toast('관심 조건을 저장했어요.');}catch(error){$('preferencesError').textContent=error.message;}};
@@ -104,4 +126,5 @@
   window.addEventListener('storage',e=>{if(e.key!==C.KEY)return;if(drafts.size){warn('다른 탭에서 기록이 변경되었습니다. 입력 중인 메모를 보관한 뒤 새로고침하세요.');return;}try{snapshot=C.load(localStorage);render();toast('다른 탭에서 변경한 기록을 반영했어요.');}catch(error){writable=false;warn(error.message);}});
   window.addEventListener('beforeunload',e=>{if(drafts.size){e.preventDefault();e.returnValue='';}});
   render();if(!location.hash)requestAnimationFrame(()=>window.scrollTo(0,view.scroll||0));
+  if(!feedError)fetch('status.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('status');return r.json();}).catch(()=>({status:'unavailable'})).then(state=>{const message=C.health(window.SUPPORTPICK_DATA,state);$('feedWarning').textContent=message;$('feedWarning').hidden=!message;});
 })();
