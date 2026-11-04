@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.error import HTTPError
-from urllib.parse import unquote, urljoin, urlparse
+from urllib.parse import quote, unquote, urljoin, urlparse, urlunparse
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 from urllib.robotparser import RobotFileParser
 import xml.etree.ElementTree as ET
@@ -33,6 +33,12 @@ SAMPLES = ('', 'about.html', 'privacy.html', 'contact.html', 'guides/',
            'guides/recruitment-corrections-guide.html', 'guides/self-introduction-star.html',
            'guides/ncs-study-plan.html', 'guides/after-application-checklist.html')
 NS = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+TRANSIENT = {408, 429, 500, 502, 503, 504}
+
+
+def encoded_url(url):
+    parts = urlparse(url)
+    return urlunparse(parts._replace(path=quote(parts.path, safe="/:@-._~!$&'()*+,;=%")))
 
 
 def in_scope(url):
@@ -66,6 +72,7 @@ class Body(HTMLParser):
 def fetch(url):
     if url != ROBOTS and not in_scope(url):
         return {'url': url, 'status': 'unverified', 'error': 'outside_allowed_scope'}, None
+    url = encoded_url(url)
     item = {'url': url}
     try:
         request = Request(url, headers={'User-Agent': 'CareerPick-Search-Readiness/1.0 (read-only)'})
@@ -143,7 +150,7 @@ def examine(url, loader=fetch):
                     elif dt < datetime.now(timezone.utc): item['issues'].append('expired_jobposting')
                 except (ValueError, TypeError): item['issues'].append('invalid_expiry')
     for href in doc.links:
-        target = urljoin(url, href).split('#', 1)[0]
+        target = encoded_url(urljoin(url, href).split('#', 1)[0])
         if in_scope(target) and (target.endswith('.html') or urlparse(target).path.endswith('/')):
             links.add(target)
     return item, links
@@ -160,6 +167,26 @@ def robots_result(item, data, urls):
         result['interpretation'] = 'standard_parser_check_requires_review_for_advanced_rules'
         result['blocked'] = [{'agent': agent, 'url': url} for agent in AGENTS for url in urls if not parser.can_fetch(agent, url)]
     return result
+
+
+def retry_observations(rows, loader):
+    """One bounded retry of transport failures, preserving the first observation.
+
+    Reuse SupportPick's validated release-check approach; never retry a 404 or
+    disguise invalid content as a successful response.
+    """
+    observations = []
+    for index, row in enumerate(rows):
+        retryable = row['status'] in TRANSIENT or (
+            row['status'] == 'unverified' and row.get('error') in
+            {'URLError', 'TimeoutError', 'ConnectionError', 'RemoteDisconnected', 'OSError'})
+        if not retryable: continue
+        second, _ = examine(row['url'], loader)
+        observations.append({'url': row['url'], 'initial_status': row['status'],
+                             'initial_error': row.get('error'), 'retry_status': second['status'],
+                             'recovered': second['status'] == 200 and not second['issues']})
+        rows[index] = second
+    return observations
 
 
 def run(all_urls=False, workers=4, loader=fetch):
@@ -214,6 +241,7 @@ def run(all_urls=False, workers=4, loader=fetch):
     extra_rows = []
     for url in extra[:100]:
         row, _ = loader(url); extra_rows.append(row)
+    report['transport_retries'] = retry_observations(rows, loader)
     report['additional_internal_html'] = extra_rows
     if len(extra) > 100: report['warnings'].append('additional_internal_html_audit_limit_reached')
     for row in rows:
