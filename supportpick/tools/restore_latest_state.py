@@ -23,12 +23,12 @@ def main():
         return data if binary else json.loads(data)
     try:runs=get('/actions/workflows/supportpick-operations.yml/runs?branch=main&status=completed&per_page=10')['workflow_runs']
     except Exception:
-        print('Previous operations state unavailable; using the validated source baseline.');return
+        raise ValueError('latest_state_lookup_failed') from None
     for run in runs:
         if run.get('head_branch')!='main' or run.get('event') not in ('schedule','workflow_dispatch') or run.get('run_number',0)>=int(os.environ.get('GITHUB_RUN_NUMBER','2147483647')):continue
         artifacts=get('/actions/runs/'+str(run['id'])+'/artifacts')['artifacts']
         selected=next((a for a in artifacts if a['name']=='supportpick-runtime-state' and not a['expired']),None)
-        if not selected:continue
+        if not selected:raise ValueError('latest_runtime_state_unavailable')
         raw=get('/actions/artifacts/'+str(selected['id'])+'/zip',binary=True)
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)
@@ -44,5 +44,5 @@ def main():
             if destination.exists():shutil.rmtree(destination)
             shutil.copytree(root,destination)
             print('Restored validated operations state for generation '+pointer['generation']);return
-    print('No reusable operations artifact; using the validated source baseline.')
+    print('No earlier trusted operations run; using the validated initial baseline.')
 if __name__=='__main__':main()

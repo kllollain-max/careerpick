@@ -1,4 +1,5 @@
 import sys,unittest,tempfile,json,copy
+from unittest.mock import patch,Mock
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from collect_full import collect,period,region,GuardedOpener,APIError
@@ -108,5 +109,20 @@ class CollectionTests(unittest.TestCase):
     def test_operational_build_requires_complete_snapshot(self):
         with tempfile.TemporaryDirectory() as p:
             with self.assertRaisesRegex(ValueError,'complete_snapshot_required'):build(Path(p)/'out',Path(p)/'missing')
+    def test_runtime_state_lookup_failure_blocks_instead_of_using_old_baseline(self):
+        import restore_latest_state
+        opener=Mock();opener.open.side_effect=OSError('network failure')
+        with patch.object(restore_latest_state,'ensure_bootstrap'),patch.object(restore_latest_state,'build_opener',return_value=opener),patch.dict('os.environ',{'GITHUB_REPOSITORY':'owner/supportpick','GITHUB_TOKEN':'test-only-placeholder'}):
+            with self.assertRaisesRegex(ValueError,'latest_state_lookup_failed'):restore_latest_state.main()
+    def test_latest_completed_run_without_state_does_not_fall_back_to_older_data(self):
+        import restore_latest_state
+        class Response:
+            def __init__(self,value):self.value=value
+            def __enter__(self):return self
+            def __exit__(self,*args):pass
+            def read(self,n):return json.dumps(self.value).encode()
+        opener=Mock();opener.open.side_effect=[Response({'workflow_runs':[{'id':1,'run_number':1,'head_branch':'main','event':'schedule'}]}),Response({'artifacts':[]})]
+        with patch.object(restore_latest_state,'ensure_bootstrap'),patch.object(restore_latest_state,'build_opener',return_value=opener),patch.dict('os.environ',{'GITHUB_REPOSITORY':'owner/supportpick','GITHUB_TOKEN':'test-only-placeholder','GITHUB_RUN_NUMBER':'2'}):
+            with self.assertRaisesRegex(ValueError,'latest_runtime_state_unavailable'):restore_latest_state.main()
 
 if __name__=='__main__':unittest.main()
