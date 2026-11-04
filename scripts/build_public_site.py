@@ -96,6 +96,8 @@ def check_local_url(value: str, page: Path, output: Path) -> str | None:
     parsed = urlparse(urljoin(base, value))
     if parsed.netloc != HOST:
         return None
+    if parsed.path == "/supportpick/" and parsed.query == "utm_source=careerpick&utm_medium=referral&utm_campaign=cross_site_banner" and value.startswith("https://kllollain-max.github.io/supportpick/?"):
+        return None  # Explicitly approved sibling-site referral, not a local file.
     if not parsed.path.startswith(PREFIX):
         return str(page.relative_to(output)) + " -> outside project: " + value
     relative = unquote(parsed.path[len(PREFIX):])
@@ -235,8 +237,8 @@ def main() -> dict:
         if file.suffix not in {".html", ".js", ".css", ".xml", ".txt", ".webmanifest"}:
             continue
         text = file.read_text(encoding="utf-8")
-        text = re.sub(r"https://kllollain-max\.github\.io/(?!careerpick/)", BASE, text)
-        text = re.sub(r"((?:href|src|action)=[\"'])/(?!/|careerpick/)", lambda m: m[1] + PREFIX, text)
+        text = re.sub(r"https://kllollain-max\.github\.io/(?!careerpick/|supportpick/)", BASE, text)
+        text = re.sub(r"((?:href|src|action)=[\"'])/(?!/|careerpick/|supportpick/)", lambda m: m[1] + PREFIX, text)
         text = re.sub(r"([\"'`])/(?=(?:jobs|guides|data|onesignal)/)", lambda m: m[1] + PREFIX, text)
         if file.name == "manifest.webmanifest":
             manifest = json.loads(text)
