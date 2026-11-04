@@ -61,4 +61,4 @@
 - [OneSignal Web SDK](https://documentation.onesignal.com/docs/en/web-sdk-reference): `optOut()`은 해당 구독을 수신 거부 상태로 만드는 기능이다.
 - [OneSignal 사용자·구독 삭제](https://documentation.onesignal.com/docs/en/delete-users): 구독 삭제·사용자 삭제·태그 잔존 조건과 제공자별 자동 삭제 조건이 별도다. 커리어픽이 해당 조건을 운영에서 충족했는지는 별도 확인해야 한다.
 
-확인일: 2026년 11월 4일. 최종 적용 전 필요한 운영자 결정은 이 기준안의 보관 상한·처리 목표 승인이다. 승인 자체가 삭제 기능 구현·배포·기존 자료 파기 완료를 뜻하지 않는다.
+확인일: 2026년 11월 4일. 이후 사용자의 계속 진행 요청에 따라 이 기준안을 바탕으로 검토용 판정 기능과 시험을 구현했다. 공개 시행과 실제 자료 삭제는 운영 연결·외부 처리 조건·사본 및 복구 검증이 완료된 별도 실행 범위이며, 현재 완료된 것으로 표시하지 않는다. 적용 준비 결과는 privacy-retention-implementation.md를 참고한다.

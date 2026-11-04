@@ -1,0 +1,39 @@
+{
+  "input_kind": "built_in_synthetic_metadata_only",
+  "policy_status": "implementation_preparation_not_live",
+  "new_tests": 26,
+  "review_example": {
+    "policy_version": "careerpick-retention-review-v1",
+    "mode": "review_only",
+    "records_reviewed": 6,
+    "actions": {
+      "blocked": 5,
+      "client_managed": 1
+    },
+    "reasons": {
+      "deletion_prerequisites_incomplete": 4,
+      "legacy_or_unverified_event": 1,
+      "user_controls_local_records": 1
+    },
+    "overdue_review_count": 3,
+    "stop_delivery_candidates": 1,
+    "actual_deleted": 0,
+    "actual_notifications_sent": 0,
+    "live_activation_ready": false
+  },
+  "production_workflows_changed": false,
+  "private_sources_or_identifiers_included": false,
+  "limitations": [
+    "No live provider deletion adapter",
+    "No Git history or backup erasure implementation",
+    "No production timestamp migration",
+    "No live operation activation"
+  ],
+  "static_output_write": "atomic_complete_file_replace",
+  "static_checks": {
+    "two_serial_builds": "passed",
+    "separate_process_checks": "passed",
+    "html": 1294,
+    "canonical_policy_ad_checks_failures": 0
+  }
+}

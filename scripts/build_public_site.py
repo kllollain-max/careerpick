@@ -9,9 +9,11 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import re
 import shutil
 import subprocess
+import tempfile
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
@@ -30,6 +32,21 @@ SCRIPT = re.compile(r"<script\b[^>]*>[\s\S]*?</script\s*>", re.I)
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write_text_atomic(path: Path, content: str) -> None:
+    """Publish a complete transformed file, never a partially written version."""
+    descriptor, temporary = tempfile.mkstemp(prefix='.cp-build-', dir=path.parent)
+    try:
+        with os.fdopen(descriptor, 'w', encoding='utf-8') as stream:
+            os.fchmod(stream.fileno(), 0o644)
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
 
 
 def load_module(name: str, relative: str):
@@ -169,7 +186,7 @@ def complete_public_navigation(output: Path, current_ids: set[str]) -> None:
                     '지원 가능 여부와 정정·기간 연장은 공식 원문에서 확인하세요.</aside>')
             html = html.replace('<body>', '<body>' + note, 1)
             html = html.replace('<dt>접수마감</dt>', '<dt>보관 당시 종료일 · 접수기간 미확인</dt>')
-        page.write_text(html, encoding='utf-8')
+        write_text_atomic(page, html)
 
 
 def main() -> dict:
@@ -224,7 +241,7 @@ def main() -> dict:
             manifest = json.loads(text)
             manifest["start_url"], manifest["scope"] = PREFIX + "?src=app", PREFIX
             text = json.dumps(manifest, ensure_ascii=False, indent=2)
-        file.write_text(text, encoding="utf-8")
+        write_text_atomic(file, text)
     checks = validate(output)
     for name, original in inputs.items():
         if digest(ROOT / name) != original or digest(output / name) != original:

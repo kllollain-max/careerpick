@@ -21,6 +21,9 @@ jobs:
           node-version: '22'
       - run: python -m unittest discover -s tests -p test_job_pages.py
       - run: python -m unittest discover -s tests -p test_publisher_readiness.py
+      - run: python -m unittest discover -s tests -p test_privacy_retention.py
+      - name: Review synthetic retention metadata without deletion
+        run: python scripts/privacy_retention.py --example --at 2026-11-04T00:00:00+00:00
       - run: python scripts/build_job_pages.py --self-test
       - run: python scripts/test_build_sitemap.py
       - run: node --test tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_publisher_state.cjs
