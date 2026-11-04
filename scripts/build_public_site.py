@@ -9,9 +9,11 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import re
 import shutil
 import subprocess
+import tempfile
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
@@ -30,6 +32,21 @@ SCRIPT = re.compile(r"<script\b[^>]*>[\s\S]*?</script\s*>", re.I)
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write_text_atomic(path: Path, content: str) -> None:
+    """Publish a complete transformed file, never a partially written version."""
+    descriptor, temporary = tempfile.mkstemp(prefix='.cp-build-', dir=path.parent)
+    try:
+        with os.fdopen(descriptor, 'w', encoding='utf-8') as stream:
+            os.fchmod(stream.fileno(), 0o644)
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
 
 
 def load_module(name: str, relative: str):
@@ -126,7 +143,7 @@ def validate(output: Path) -> dict:
         failures.append("Invalid public push app identifier")
     if 'window.CP_PUSH_BROADCAST_ENABLED = false;' not in push_config:
         failures.append("Push broadcast must remain disabled")
-    forbidden = {"docs", "tests", "scripts", ".github", "instagram", "instagram-media", "threads-images", "local-git-objects-partial"}
+    forbidden = {"docs", "tests", "scripts", "review-only", ".github", "instagram", "instagram-media", "threads-images", "local-git-objects-partial"}
     for path in output.rglob("*"):
         relative = path.relative_to(output)
         if any(part in forbidden for part in relative.parts) or path.suffix in {".py", ".zip", ".sqlite", ".pack"}:
@@ -134,6 +151,42 @@ def validate(output: Path) -> dict:
     if failures:
         raise ValueError("Public output checks failed:\n" + "\n".join(sorted(set(failures))[:50]))
     return {"html_files": html_count, "html_links_checked": checked_links, "sitemap_urls": len(urls), "missing_local_links": 0}
+
+
+def complete_public_navigation(output: Path, current_ids: set[str]) -> None:
+    """Preserve archived bodies while adding policy access and provenance.
+
+    Older archived templates predate the common footer. Do not delete them or
+    pretend their historical timestamps are newly verified application times.
+    """
+    for page in sorted(list(output.rglob('*.html'))):
+        html = page.read_text(encoding='utf-8')
+        relative = page.relative_to(output).as_posix()
+        if page.name.startswith('org-') or page.name in {'calendar.html', 'certs.html'}:
+            note = ('<p role="note" style="padding:12px;background:#eef2ff;overflow-wrap:anywhere">'
+                    '보관된 분석·일정입니다. 현재·모집 중·예상 표기는 이 자료의 작성 시점 기준이며 실시간 확인이 아닙니다. '
+                    '<a href="' + PREFIX + '">최신 수집 공고</a>와 해당 기관의 공식 원문을 함께 확인하세요.</p>')
+            html = re.sub(r'(<h1\b[^>]*>.*?</h1>)', lambda m: m[1] + note, html, count=1, flags=re.S)
+        if not re.search(r'<link\b[^>]*rel=["\']canonical["\']', html, re.I):
+            html = html.replace('</head>', '<link rel="canonical" href="' + BASE + relative + '">\n</head>', 1)
+        parser = LocalLinks()
+        parser.feed(html)
+        if not all(any(link.endswith('/' + name) or link == name for link in parser.links)
+                   for name in ('about.html', 'privacy.html', 'contact.html')):
+            footer = ('<footer aria-label="사이트 안내" style="max-width:720px;margin:24px auto;padding:16px;overflow-wrap:anywhere">'
+                      '<a href="' + PREFIX + 'guides/">취업 준비 가이드</a> · '
+                      '<a href="' + PREFIX + 'about.html">사이트 소개</a> · '
+                      '<a href="' + PREFIX + 'privacy.html">개인정보처리방침</a> · '
+                      '<a href="' + PREFIX + 'contact.html">문의·정정</a></footer>')
+            html = html.replace('</body>', footer + '</body>', 1)
+        if relative.startswith('jobs/') and page.stem not in current_ids:
+            note = ('<aside role="note" style="padding:16px;background:#fff1f2;color:#881337;overflow-wrap:anywhere">'
+                    '과거 보관 공고입니다. 현재 수집 목록에 없으며, 개별 원문의 최종 확인 시각은 미확인입니다. '
+                    '보관된 종료일·시각이 실제 원서 접수기간인지 확인되지 않았습니다. '
+                    '지원 가능 여부와 정정·기간 연장은 공식 원문에서 확인하세요.</aside>')
+            html = html.replace('<body>', '<body>' + note, 1)
+            html = html.replace('<dt>접수마감</dt>', '<dt>보관 당시 종료일 · 접수기간 미확인</dt>')
+        write_text_atomic(page, html)
 
 
 def main() -> dict:
@@ -154,10 +207,6 @@ def main() -> dict:
     alio = json.loads((output / "alio.json").read_text())
     blogs = json.loads((output / "posts.json").read_text())
     static_posts = alio["posts"] + [p for p in blogs["posts"] if p.get("type") != "j"]
-    sitegen = load_module("careerpick_sitegen", "sitegen.py")
-    sitegen.ROOT = output
-    sitegen.generate(static_posts)
-
     pages = load_module("careerpick_job_pages", "scripts/build_job_pages.py")
     pages.ROOT = output
     pages.DATA, pages.DETAIL, pages.OUT = output / "alio.json", output / "alio-detail.json", output / "jobs"
@@ -165,6 +214,11 @@ def main() -> dict:
     report = output / "job-quality-report.json"
     if report.exists():
         report.replace(ROOT / "build-job-quality-report.json")
+    # Generate notices first so newly collected IDs also have crawlable links
+    # in the first HTML response, before any client script executes.
+    sitegen = load_module("careerpick_sitegen", "sitegen.py")
+    sitegen.ROOT = output
+    sitegen.generate(static_posts)
     prune = load_module("careerpick_prune", "scripts/prune_expired_job_schema.py")
     removed = prune.run(output / "jobs")
     sitemap = load_module("careerpick_sitemap", "scripts/build_sitemap.py")
@@ -172,8 +226,12 @@ def main() -> dict:
     sitemap.main()
     (output / ".nojekyll").write_text("")
 
+    complete_public_navigation(output, {p['id'] for p in alio['posts']})
+
     # Scope canonical URLs, root links, PWA and inline JS to the project.
-    for file in output.rglob("*"):
+    # Snapshot directory entries before rewriting them. Some mounted filesystems
+    # invalidate an active directory iterator when child files are replaced.
+    for file in sorted(list(output.rglob("*"))):
         if file.suffix not in {".html", ".js", ".css", ".xml", ".txt", ".webmanifest"}:
             continue
         text = file.read_text(encoding="utf-8")
@@ -184,7 +242,10 @@ def main() -> dict:
             manifest = json.loads(text)
             manifest["start_url"], manifest["scope"] = PREFIX + "?src=app", PREFIX
             text = json.dumps(manifest, ensure_ascii=False, indent=2)
-        file.write_text(text, encoding="utf-8")
+        write_text_atomic(file, text)
+    search = load_module("careerpick_search", "scripts/search_readiness.py")
+    archived_schema_removed = search.remove_unverified_archived_schema(output, {p['id'] for p in alio['posts']}, write_text_atomic)
+    metadata_updates = search.normalize_duplicate_metadata(output, write_text_atomic)
     checks = validate(output)
     for name, original in inputs.items():
         if digest(ROOT / name) != original or digest(output / name) != original:
@@ -198,6 +259,8 @@ def main() -> dict:
         "alio_rows": len(alio["posts"]),
         "output_files": sum(p.is_file() for p in output.rglob("*")),
         "expired_archived_schema_removed": removed,
+        "search_metadata_updates": metadata_updates,
+        "unverified_archived_schema_removed": archived_schema_removed,
         "source_sha256": inputs,
         "source_json_unchanged": True,
         "network_collection_performed": False,

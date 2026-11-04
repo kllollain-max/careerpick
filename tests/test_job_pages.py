@@ -112,8 +112,8 @@ class JobPageTests(unittest.TestCase):
                              ['인천', '충남', '전북'])
             self.assertIn('지원 자격 원문 보존', html)
             self.assertIn('href="https://example.org/jobs/123"', html)
-            self.assertIn('rel="canonical" href="https://kllollain-max.github.io/jobs/a306304.html"', html)
-            self.assertEqual(schema['url'], 'https://kllollain-max.github.io/jobs/a306304.html')
+            self.assertIn('rel="canonical" href="https://kllollain-max.github.io/careerpick/jobs/a306304.html"', html)
+            self.assertEqual(schema['url'], 'https://kllollain-max.github.io/careerpick/jobs/a306304.html')
             self.assertEqual(other.read_bytes(), b'previous unrelated page')
             self.assertEqual((post, detail), before)
 

@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-SITE = "https://kllollain-max.github.io/"
+SITE = "https://kllollain-max.github.io/careerpick/"
 KST = timezone(timedelta(hours=9))
 WD = "월화수목금토일"
 STATIC_PAGES = ["about.html", "privacy.html", "contact.html"]
@@ -45,20 +45,32 @@ def open_jobs(posts, now):
     return sorted(jobs, key=lambda p: p["due"])
 
 
+def job_href(p):
+    """Link to a real static notice; retain the official fallback if unavailable."""
+    pid = str(p.get("id") or "")
+    if (p.get("type") == "j" and p.get("alio")
+            and re.fullmatch(r'a[0-9]+', pid)
+            and (ROOT / 'jobs' / (pid + '.html')).is_file()):
+        return SITE + 'jobs/' + pid + '.html'
+    return p.get('url') or p.get('src') or '#'
+
+
 def job_item(p, now):
     days = (dt(p["due"]).astimezone(KST).date() - now.date()).days
     dd = "D-DAY" if days == 0 else f"D-{days}"
     tags = []
     if p.get("n"):
-        tags.append(f"{e(p['n'])}명")
+        tags.append(e(str(p["n"])) + ("명" if str(p["n"]).isdigit() else ""))
     tags += [e(x) for x in (p.get("emp") or []) + (p.get("edu") or [])]
     if p.get("region"):
         tags.append(e(p["region"]))
     org = f'<span class="org">{e(p["org"])}</span>' if p.get("org") else ""
-    return (f'<li class="item"><a href="{e(p["url"])}" target="_blank" rel="noopener">'
+    href = job_href(p)
+    external = ' target="_blank" rel="noopener"' if href == p.get('url') else ''
+    return (f'<li class="item"><a href="{e(href)}"{external}>'
             f'<span class="dd{" hot" if days <= 3 else ""}">{dd}</span>'
             f'<span class="bd">{org}<span class="tt">{e(clean_title(p["title"]))}</span>'
-            f'<span class="meta">접수 마감 {due_text(p)}{" · " + " · ".join(tags) if tags else ""}</span></span></a></li>')
+            f'<span class="meta">{"ALIO 게시 종료 · 접수마감 원문 확인" if p.get("alio") else "접수 마감"} {due_text(p)}{" · " + " · ".join(tags) if tags else ""}</span></span></a></li>')
 
 
 # ── 1) index.html 안에 정적 목록 써 넣기 ──
@@ -75,8 +87,8 @@ def prerender_index(posts, now):
     items = []
     for p in jobs:
         org = f'{e(p["org"])} · ' if p.get("org") and not p["title"].startswith(p["org"]) else ""
-        items.append(f'<li class="card mini"><a class="main" href="{e(p["url"])}"><div class="kind">'
-                     f'<span class="pill p">마감 {due_text(p)}</span></div>'
+        items.append(f'<li class="card mini"><a class="main" href="{e(job_href(p))}"><div class="kind">'
+                     f'<span class="pill p">{"ALIO 게시 종료 · 접수마감 원문 확인" if p.get("alio") else "마감"} {due_text(p)}</span></div>'
                      f'<div class="t">{org}{e(clean_title(p["title"]))}</div></a></li>')
     for p in others:
         label = "정책" if p["type"] == "m" else "취업준비"
@@ -147,7 +159,8 @@ def page(fname, title, desc, body):
 <nav class="links">{nav}</nav>
 {body}
 <footer>
-<p>각 공고는 기관 공식 채용공고 원문을 확인해 정리한 블로그 글을 바탕으로 합니다. 지원 전 반드시 공식 공고(잡알리오·나라일터·기관 홈페이지)를 확인하세요.</p>
+<p>공식 API 자료와 기존 안내 글을 구분해 제공합니다. 자동 수집·형식 점검은 개별 첨부 공고에 대한 사람의 검토를 뜻하지 않습니다. 지원 전 기관의 최신 공식 공고를 확인하세요.</p>
+<a href="guides/">취업 준비 가이드</a>
 <a href="about.html">사이트 소개</a><a href="privacy.html">개인정보처리방침</a><a href="contact.html">문의</a>
 <p class="biz">📮 광고·제휴 문의: <a class="mail" href="contact.html" data-u="hid4989-3" data-d="naver.com">문의 페이지</a></p>
 </footer>
@@ -297,7 +310,9 @@ def gen_sitemap(now):
     # The public restoration enumerates actual files instead of publishing an internal inventory.
     import urllib.parse
     pages += [urllib.parse.quote(p.name) for p in sorted(ROOT.glob("org-*.html"))]
-    urls = "".join(f"<url><loc>{SITE}{p}</loc><lastmod>{now:%Y-%m-%d}</lastmod></url>\n" for p in pages)
+    # A build timestamp is not a verified content modification timestamp.
+    # lastmod is optional; omit it until a persistent, trustworthy source exists.
+    urls = "".join(f"<url><loc>{SITE}{p}</loc></url>\n" for p in pages)
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
 
@@ -328,7 +343,7 @@ def generate(posts):
             changed.append(fname)
     sm = gen_sitemap(now)
     old = (ROOT / "sitemap.xml").read_text("utf-8") if (ROOT / "sitemap.xml").exists() else ""
-    if re.sub(r"<lastmod>.*?</lastmod>", "", old) != re.sub(r"<lastmod>.*?</lastmod>", "", sm) or changed:
+    if old != sm:
         (ROOT / "sitemap.xml").write_text(sm, "utf-8")
         changed.append("sitemap.xml")
     print("정적 페이지 갱신:", ", ".join(changed) if changed else "변경 없음")

@@ -1,0 +1,45 @@
+name: Offline AdSense preparation checks
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m unittest discover -s tests -p test_job_pages.py
+      - run: python -m unittest discover -s tests -p test_publisher_readiness.py
+      - run: python -m unittest discover -s tests -p test_privacy_retention.py
+      - run: python -m unittest discover -s tests -p test_search_readiness.py
+      - name: Review synthetic retention metadata without deletion
+        run: python scripts/privacy_retention.py --example --at 2026-11-04T00:00:00+00:00
+      - run: python scripts/build_job_pages.py --self-test
+      - run: python scripts/test_build_sitemap.py
+      - run: node --test tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_publisher_state.cjs
+      - run: python scripts/build_ad_layout_preview.py
+      - run: python scripts/build_public_site.py
+      - run: python scripts/publisher_readiness.py
+      - run: python scripts/search_readiness.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adsense-offline-review
+          path: |
+            dist/
+            build-report.json
+            build-publisher-inventory.json
+            build-job-quality-report.json
+            build-search-report.json
+            review-only/ad-layout-preview.html
+          retention-days: 7
