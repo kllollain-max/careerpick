@@ -96,6 +96,8 @@ def check_local_url(value: str, page: Path, output: Path) -> str | None:
     parsed = urlparse(urljoin(base, value))
     if parsed.netloc != HOST:
         return None
+    if parsed.path == "/supportpick/" and parsed.query == "utm_source=careerpick&utm_medium=referral&utm_campaign=cross_site_banner" and value.startswith("https://kllollain-max.github.io/supportpick/?"):
+        return None  # Explicitly approved sibling-site referral, not a local file.
     if not parsed.path.startswith(PREFIX):
         return str(page.relative_to(output)) + " -> outside project: " + value
     relative = unquote(parsed.path[len(PREFIX):])
