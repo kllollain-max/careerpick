@@ -31,21 +31,21 @@ def main():
                 tree = ET.parse(site)
                 return [el.text for el in tree.findall("s:url/s:loc", ns)]
             found = urls()
-            assert "https://kllollain-max.github.io/" in found
-            assert "https://kllollain-max.github.io/jobs/a999.html" not in found
-            assert "https://kllollain-max.github.io/jobs/a100.html" in found
-            assert "https://kllollain-max.github.io/jobs/a200.html" in found
-            assert "https://kllollain-max.github.io/guides/" in found
-            assert "https://kllollain-max.github.io/guides/qualification-preference-guide.html" in found
-            assert "https://kllollain-max.github.io/guides/removed.html" not in found
+            assert "https://kllollain-max.github.io/careerpick/" in found
+            assert "https://kllollain-max.github.io/careerpick/jobs/a999.html" not in found
+            assert "https://kllollain-max.github.io/careerpick/jobs/a100.html" in found
+            assert "https://kllollain-max.github.io/careerpick/jobs/a200.html" in found
+            assert "https://kllollain-max.github.io/careerpick/guides/" in found
+            assert "https://kllollain-max.github.io/careerpick/guides/qualification-preference-guide.html" in found
+            assert "https://kllollain-max.github.io/careerpick/guides/removed.html" not in found
             assert len(found) == len(set(found))
             generator.main()
             assert urls() == found
             (root / "guides" / "index.html").unlink()
             (jobs / "a100.html").unlink()
             generator.main()
-            assert "https://kllollain-max.github.io/jobs/a100.html" not in urls()
-            assert "https://kllollain-max.github.io/guides/" not in urls()
+            assert "https://kllollain-max.github.io/careerpick/jobs/a100.html" not in urls()
+            assert "https://kllollain-max.github.io/careerpick/guides/" not in urls()
     print("Sitemap generator regression PASS: preserve, add, prune, idempotence")
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'alio.json'
 DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
-BASE = 'https://kllollain-max.github.io'
+BASE = 'https://kllollain-max.github.io/careerpick'
 
 DETAIL_LABELS = {
     'recrutSeNm': '채용 구분',
@@ -32,6 +32,12 @@ def clean(value):
     if isinstance(value, list):
         return ', '.join(map(str, value))
     return str(value or '').strip()
+
+
+def count_label(value):
+    # Reused from detail-integrity Draft PR #12; never sum ambiguous fields.
+    raw = '' if value is None else str(value).strip()
+    return raw + '명' if re.fullmatch(r'[0-9]+', raw) else raw or '미기재 · 공식 공고 확인'
 
 
 def safe_url(value):
@@ -183,15 +189,22 @@ def render(post, detail, related_posts=()):
         ('기관명', org),
         (
             '모집인원',
-            clean(post.get('n')) + '명'
-            if post.get('n')
-            else '공고 확인'
+            count_label(post.get('n'))
         ),
         ('고용형태', clean(post.get('emp')) or '공고 확인'),
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
-        ('접수마감', due_display),
+        ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
+        ('원서 접수기간', '시작일·마감일·마감시각은 공식 첨부 공고에서 확인'),
     ]
+
+    conflicts = []
+    if post.get('n') is not None and detail.get('recrutNope') is not None and count_label(post['n']) != count_label(detail['recrutNope']):
+        conflicts.append('자료 간 정보가 달라 공식 확인이 필요합니다. 모집인원: 목록 ' + count_label(post['n']) + ' / 상세 ' + count_label(detail['recrutNope']))
+    for field, label in [('pbancBgngYmd', '게시 시작일'), ('pbancEndYmd', '게시 종료일')]:
+        if detail.get(field):
+            fields.append(('ALIO ' + label, date_label(detail[field])))
+    conflict_html = ''.join('<p class="source-note">' + escape(item) + '</p>' for item in conflicts)
 
     rows = '\n'.join(
         f'<dt>{escape(k)}</dt><dd>{escape(v)}</dd>'
@@ -204,7 +217,7 @@ def render(post, detail, related_posts=()):
     process = clean(detail.get('scrnprcdrMthdExpln'))
     check_items = [
         ('지원 자격', '공고에 기재된 지원 자격을 확인하세요.' if qualification else '상세 자격조건은 공식 채용공고에서 확인하세요.'),
-        ('접수 마감', f'표시된 마감일은 {due_display}입니다. 실제 마감시각과 접수방법은 공식 공고를 확인하세요.' if due else '공식 채용공고에서 접수기간과 마감시각을 확인하세요.'),
+        ('기간 구분', f'ALIO 게시 종료일은 {due_display}입니다. 원서 접수기간·마감시각과 다를 수 있으므로 공식 공고에서 별도로 확인하세요.' if due else '공식 채용공고에서 접수기간과 마감시각을 확인하세요.'),
         ('전형 절차', '아래 채용 절차 항목과 공식 공고의 최신 일정을 비교하세요.' if process else '서류·필기·면접 실시 여부와 일정은 공식 공고에서 확인하세요.'),
     ]
     # 공고별 실제 데이터로 확인 항목을 구성합니다. 확인되지 않은 조건은 추정하지 않습니다.
@@ -229,10 +242,10 @@ def render(post, detail, related_posts=()):
     )
     # 공고에 확인된 정보와 직무 특성에 맞는 가이드를 우선 안내합니다.
     guide_items = [
-        ('/guides/application-checklist.html', '지원 전 7가지 확인사항'),
-        ('/guides/qualification-preference-guide.html', '지원자격·우대조건 해석법'),
-        ('/guides/after-application-checklist.html', '지원서 제출 후 확인사항'),
-        ('/guides/recruitment-corrections-guide.html', '정정공고·마감 변경 대응법'),
+        ('/careerpick/guides/application-checklist.html', '지원 전 7가지 확인사항'),
+        ('/careerpick/guides/qualification-preference-guide.html', '지원자격·우대조건 해석법'),
+        ('/careerpick/guides/after-application-checklist.html', '지원서 제출 후 확인사항'),
+        ('/careerpick/guides/recruitment-corrections-guide.html', '정정공고·마감 변경 대응법'),
     ]
     # 직무 분류나 기관 유형만으로 NCS 필기시험 실시를 추정하지 않습니다.
     context = ' '.join((title, clean(post.get('desc')), qualification, process))
@@ -260,9 +273,9 @@ def render(post, detail, related_posts=()):
             ncs_exam_confirmed = True
             break
     if ncs_exam_confirmed:
-        guide_items.append(('/guides/ncs-study-plan.html', 'NCS 4주 학습 계획'))
+        guide_items.append(('/careerpick/guides/ncs-study-plan.html', 'NCS 4주 학습 계획'))
     if any(word in context for word in ('자기소개서', '자소서', '서류전형', '입사지원서', '경험기술')):
-        guide_items.append(('/guides/self-introduction-star.html', 'STAR 자기소개서 작성법'))
+        guide_items.append(('/careerpick/guides/self-introduction-star.html', 'STAR 자기소개서 작성법'))
     guide_links = (
         '<nav class="guide-links" aria-label="관련 취업 준비 가이드">'
         + ''.join(
@@ -281,9 +294,9 @@ def render(post, detail, related_posts=()):
         if not other_title:
             continue
         related_items.append(
-            f'<li><a href="/jobs/{escape(other_id, quote=True)}.html">'
+            f'<li><a href="/careerpick/jobs/{escape(other_id, quote=True)}.html">'
             f'{escape(other_title)}</a>'
-            f' <span class="muted">· 마감 {escape(date_label(other.get("due")))}</span></li>'
+            f' <span class="muted">· ALIO 게시 종료일 {escape(date_label(other.get("due"), other.get("dueHasTime") is not False))}</span></li>'
         )
         if len(related_items) >= 4:
             break
@@ -311,7 +324,7 @@ def render(post, detail, related_posts=()):
             ('고용형태', bool(post.get('emp'))),
             ('학력조건', bool(post.get('edu'))),
             ('근무지역', bool(post.get('region'))),
-            ('접수마감', bool(due)),
+            ('ALIO 게시 종료일', bool(due)),
             ('상세 직무 설명', has_substantive_desc),
             ('지원 자격 상세', bool(qualification)),
             ('채용 절차 상세', bool(process)),
@@ -383,9 +396,11 @@ def render(post, detail, related_posts=()):
         + '</div></nav>'
     )
     # 생성 시각을 삽입하면 매 실행마다 모든 HTML이 변경되므로 출처만 표시합니다.
+    snapshot_at = clean(post.get('_snapshot_at')) or '미확인'
     source_html = (
         '<p class="source-meta">자료 출처: ALIO 제공 데이터 · '
-        '최신 수정·접수 정보는 반드시 공식 채용공고에서 확인하세요.</p>'
+        f'자료 묶음 조회 시각: {escape(snapshot_at)} · 개별 첨부 원문의 사람 검토 시각이 아닙니다. '
+        '게시기간과 원서 접수기간은 다를 수 있습니다. 최신 수정·접수 정보는 공식 원문에서 확인하세요.</p>'
     )
 
     # 공고마다 고유한 확인 가능 정보로 설명을 구성합니다.
@@ -395,8 +410,8 @@ def render(post, detail, related_posts=()):
         f'{org}의 {title} 채용공고입니다.',
         f'고용형태: {clean(post.get("emp"))}.' if post.get('emp') else '',
         f'근무지역: {clean(post.get("region"))}.' if post.get('region') else '',
-        f'모집인원: {clean(post.get("n"))}명.' if post.get('n') else '',
-        f'접수마감: {due_display}.' if due else '',
+        f'모집인원: {count_label(post.get("n"))}.' if post.get('n') else '',
+        f'ALIO 게시 종료일: {due_display}. 실제 접수마감은 원문 확인.' if due else '',
     ]
     # ALIO desc는 NCS 직무 분류이며 실제 담당업무가 아닙니다.
     is_category_only = bool(desc)
@@ -466,7 +481,9 @@ def render(post, detail, related_posts=()):
 
     # 마감된 공고는 JobPosting 구조화 데이터를 제거합니다.
     # 안내용 HTML 페이지는 그대로 유지합니다.
-    schema_json = '' if closed else (
+    # Publication end dates are not verified application deadlines. Keep the
+    # useful HTML, but do not emit a JobPosting with an invented validThrough.
+    schema_json = '' if closed or post.get('dueHasTime') is False else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
@@ -477,8 +494,8 @@ def render(post, detail, related_posts=()):
 
     notice = (
         '<p class="closed">'
-        '접수 마감된 공고입니다. '
-        '최신 모집 여부는 공식 공고를 확인하세요.'
+        '표시된 종료일이 지난 보관 공고입니다. '
+        '실제 접수 종료·연장 여부는 공식 공고를 확인하세요.'
         '</p>'
         if closed
         else ''
@@ -516,7 +533,7 @@ def render(post, detail, related_posts=()):
     if post.get('emp'):
         meta_parts.append('고용형태 ' + clean(post['emp']))
     if due:
-        meta_parts.append('접수마감 ' + due_display)
+        meta_parts.append('ALIO 게시 종료일 ' + due_display + ' · 접수마감 원문 확인')
     meta_description = ' | '.join(meta_parts)[:155]
 
     return f'''<!doctype html>
@@ -532,7 +549,7 @@ def render(post, detail, related_posts=()):
 <meta property="og:url" content="{escape(canonical, quote=True)}">
 {schema_json}
 <style>
-body{{margin:0;background:#f5f7fb;color:#14213d;font:16px/1.7 system-ui,'Malgun Gothic',sans-serif}}
+body{{margin:0;background:#f5f7fb;color:#14213d;font:16px/1.7 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}}
 main{{max-width:720px;margin:35px auto;padding:24px;background:white;border-radius:18px;box-sizing:border-box}}
 h1{{font-size:1.6rem;line-height:1.4}}
 dt{{font-weight:700;color:#475569}}
@@ -573,7 +590,7 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 <body>
 <a class="skip-link" href="#job-summary">본문으로 바로가기</a>
 <main>
-<nav><a href="/">← 커리어픽 전체 채용공고</a></nav>
+<nav><a href="/careerpick/">← 커리어픽 전체 채용공고</a></nav>
 <p class="muted">공공기관 채용정보</p>
 <h1>{escape(title)}</h1>
 <p>{escape(org)}</p>
@@ -582,6 +599,7 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 {toc_html}
 <h2 id="job-summary">모집 요약</h2>
 <dl>{rows}</dl>
+{conflict_html}
 
 {f'<section><h2>직무 분류</h2><p>{escape(desc)}</p><p class="muted">직무 분류는 실제 담당업무 설명이 아닙니다. 세부 직무는 공식 공고를 확인하세요.</p></section>' if is_category_only else ''}
 <section id="job-checks" aria-label="지원 전 핵심 확인사항">
@@ -605,10 +623,10 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 {guide_links}
 </section>
 {related_html}
-<a href="/">다른 채용공고 찾아보기</a>
+<a href="/careerpick/">다른 채용공고 찾아보기</a>
 <footer aria-label="사이트 안내">
 <p class="muted">커리어픽은 공식 채용공고를 안내하는 정보 서비스이며, 채용기관을 대신해 지원서를 접수하지 않습니다.</p>
-<nav class="guide-links" aria-label="사이트 정책 및 연락처"><a href="/about.html">사이트 소개</a><a href="/privacy.html">개인정보처리방침</a><a href="/contact.html">문의하기</a></nav>
+<nav class="guide-links" aria-label="사이트 정책 및 연락처"><a href="/careerpick/about.html">사이트 소개</a><a href="/careerpick/privacy.html">개인정보처리방침</a><a href="/careerpick/contact.html">문의하기</a></nav>
 </footer>
 </main>
 </body>
@@ -746,7 +764,7 @@ def main():
         })
 
         target = OUT / f'{pid}.html'
-        html = render(post, job_detail, by_org.get(clean(post.get('org')), ()))
+        html = render(dict(post, _snapshot_at=raw.get('updated', '')), job_detail, by_org.get(clean(post.get('org')), ()))
 
         if (
             not target.exists()
@@ -876,17 +894,16 @@ def self_test():
     # ALIO reports a date but not a verified closing time.
     date_only = dict(sample, due='2099-10-29T23:59:00+09:00', dueHasTime=False)
     date_only_html = render(date_only, {})
-    assert '<dt>접수마감</dt><dd>2099-10-29</dd>' in date_only_html
+    assert '<dt>ALIO 게시 종료일 · 접수마감 원문 확인</dt><dd>2099-10-29</dd>' in date_only_html
     assert '2099-10-29 23:59' not in date_only_html
     date_only_jsonld = re.search(
         r'<script type="application/ld\+json">(.*?)</script>',
         date_only_html, re.S
     )
-    assert date_only_jsonld
-    assert json.loads(date_only_jsonld.group(1))['validThrough'] == '2099-10-29'
+    assert not date_only_jsonld, 'Publication end date is not a verified application deadline'
     with_verified_time = dict(date_only, dueHasTime=True)
     with_time_html = render(with_verified_time, {})
-    assert '<dt>접수마감</dt><dd>2099-10-29 23:59</dd>' in with_time_html
+    assert '<dt>ALIO 게시 종료일 · 접수마감 원문 확인</dt><dd>2099-10-29 23:59</dd>' in with_time_html
     with_time_jsonld = re.search(
         r'<script type="application/ld\+json">(.*?)</script>',
         with_time_html, re.S
@@ -944,10 +961,10 @@ def self_test():
         {'id': 'invalid', 'title': '잘못된 ID'},
     ]
     related_html = render(sample, {}, related)
-    assert '/jobs/a12346.html' in related_html
+    assert '/careerpick/jobs/a12346.html' in related_html
     assert '&lt;b&gt;다른 공고&lt;/b&gt;' in related_html
-    assert 'href="/jobs/a12345.html"' not in related_html
-    assert 'href="/jobs/invalid.html"' not in related_html
+    assert 'href="/careerpick/jobs/a12345.html"' not in related_html
+    assert 'href="/careerpick/jobs/invalid.html"' not in related_html
     assert '같은 기관의 다른 채용공고' not in render(sample, {})
     # 기관 공고와 ALIO 링크가 다를 때만 보조 경로를 표시합니다.
     sample['src'] = 'https://agency.example.org/recruit/123'
@@ -972,7 +989,7 @@ def self_test():
     sample['src'] = 'https://job.alio.go.kr/example'
     sample['due'] = '2020-01-01'
     closed_html = render(sample, {})
-    assert '접수 마감된 공고입니다' in closed_html
+    assert '표시된 종료일이 지난 보관 공고입니다' in closed_html
     assert 'type="application/ld+json"' not in closed_html
     # 동일한 입력은 동일한 HTML을 생성해야 합니다.
     assert render(sample, {}) == closed_html

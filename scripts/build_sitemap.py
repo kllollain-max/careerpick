@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parent.parent
 SITEMAP = ROOT / "sitemap.xml"
 JOBS = ROOT / "jobs"
-BASE = "https://kllollain-max.github.io"
+BASE = "https://kllollain-max.github.io/careerpick"
 NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 KST = timezone(timedelta(hours=9))
@@ -43,6 +43,10 @@ def main():
     # sitemap verification fail even when generated job pages are valid.
     for entry in list(root.findall(TAG("url"))):
         loc = entry.findtext(TAG("loc"), default="").strip()
+        # Normalize legacy project-root addresses before deduplication/pruning.
+        if loc.startswith("https://kllollain-max.github.io/") and not loc.startswith(BASE + "/"):
+            loc = BASE + "/" + loc.split("github.io/", 1)[1]
+            entry.find(TAG("loc")).text = loc
         # This sitemap is exclusively for the canonical HTTPS GitHub Pages host.
         # External, HTTP and malformed locations must not enter Search Console.
         parsed = urlparse(loc)
@@ -78,7 +82,7 @@ def main():
         if (
             parsed.scheme == "https"
             and parsed.netloc == "kllollain-max.github.io"
-            and parsed.path.startswith("/jobs/")
+            and parsed.path.startswith("/careerpick/jobs/")
             and loc not in current_jobs
         ):
             root.remove(entry)
@@ -99,7 +103,7 @@ def main():
         if (
             parsed.scheme == "https"
             and parsed.netloc == "kllollain-max.github.io"
-            and parsed.path.startswith("/guides/")
+            and parsed.path.startswith("/careerpick/guides/")
             and loc not in guide_urls
         ):
             root.remove(entry)
