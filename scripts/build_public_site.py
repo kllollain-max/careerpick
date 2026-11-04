@@ -143,7 +143,7 @@ def validate(output: Path) -> dict:
         failures.append("Invalid public push app identifier")
     if 'window.CP_PUSH_BROADCAST_ENABLED = false;' not in push_config:
         failures.append("Push broadcast must remain disabled")
-    forbidden = {"docs", "tests", "scripts", ".github", "instagram", "instagram-media", "threads-images", "local-git-objects-partial"}
+    forbidden = {"docs", "tests", "scripts", "review-only", ".github", "instagram", "instagram-media", "threads-images", "local-git-objects-partial"}
     for path in output.rglob("*"):
         relative = path.relative_to(output)
         if any(part in forbidden for part in relative.parts) or path.suffix in {".py", ".zip", ".sqlite", ".pack"}:

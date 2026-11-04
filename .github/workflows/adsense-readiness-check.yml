@@ -27,6 +27,7 @@ jobs:
       - run: python scripts/build_job_pages.py --self-test
       - run: python scripts/test_build_sitemap.py
       - run: node --test tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_publisher_state.cjs
+      - run: python scripts/build_ad_layout_preview.py
       - run: python scripts/build_public_site.py
       - run: python scripts/publisher_readiness.py
       - uses: actions/upload-artifact@v4
@@ -37,4 +38,5 @@ jobs:
             build-report.json
             build-publisher-inventory.json
             build-job-quality-report.json
+            review-only/ad-layout-preview.html
           retention-days: 7
