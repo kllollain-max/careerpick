@@ -1,0 +1,20 @@
+name: Cross-site banner browser check
+on:
+  push:
+    branches:
+      - feature/cross-site-banner-20261105
+  workflow_dispatch:
+jobs:
+  browser-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser testing dependencies
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify mobile and desktop banner
+        run: node .github/scripts/check-cross-site-banner.cjs
