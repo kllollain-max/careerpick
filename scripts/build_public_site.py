@@ -207,10 +207,6 @@ def main() -> dict:
     alio = json.loads((output / "alio.json").read_text())
     blogs = json.loads((output / "posts.json").read_text())
     static_posts = alio["posts"] + [p for p in blogs["posts"] if p.get("type") != "j"]
-    sitegen = load_module("careerpick_sitegen", "sitegen.py")
-    sitegen.ROOT = output
-    sitegen.generate(static_posts)
-
     pages = load_module("careerpick_job_pages", "scripts/build_job_pages.py")
     pages.ROOT = output
     pages.DATA, pages.DETAIL, pages.OUT = output / "alio.json", output / "alio-detail.json", output / "jobs"
@@ -218,6 +214,11 @@ def main() -> dict:
     report = output / "job-quality-report.json"
     if report.exists():
         report.replace(ROOT / "build-job-quality-report.json")
+    # Generate notices first so newly collected IDs also have crawlable links
+    # in the first HTML response, before any client script executes.
+    sitegen = load_module("careerpick_sitegen", "sitegen.py")
+    sitegen.ROOT = output
+    sitegen.generate(static_posts)
     prune = load_module("careerpick_prune", "scripts/prune_expired_job_schema.py")
     removed = prune.run(output / "jobs")
     sitemap = load_module("careerpick_sitemap", "scripts/build_sitemap.py")
@@ -242,6 +243,9 @@ def main() -> dict:
             manifest["start_url"], manifest["scope"] = PREFIX + "?src=app", PREFIX
             text = json.dumps(manifest, ensure_ascii=False, indent=2)
         write_text_atomic(file, text)
+    search = load_module("careerpick_search", "scripts/search_readiness.py")
+    archived_schema_removed = search.remove_unverified_archived_schema(output, {p['id'] for p in alio['posts']}, write_text_atomic)
+    metadata_updates = search.normalize_duplicate_metadata(output, write_text_atomic)
     checks = validate(output)
     for name, original in inputs.items():
         if digest(ROOT / name) != original or digest(output / name) != original:
@@ -255,6 +259,8 @@ def main() -> dict:
         "alio_rows": len(alio["posts"]),
         "output_files": sum(p.is_file() for p in output.rglob("*")),
         "expired_archived_schema_removed": removed,
+        "search_metadata_updates": metadata_updates,
+        "unverified_archived_schema_removed": archived_schema_removed,
         "source_sha256": inputs,
         "source_json_unchanged": True,
         "network_collection_performed": False,

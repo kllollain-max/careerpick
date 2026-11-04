@@ -22,6 +22,7 @@ jobs:
       - run: python -m unittest discover -s tests -p test_job_pages.py
       - run: python -m unittest discover -s tests -p test_publisher_readiness.py
       - run: python -m unittest discover -s tests -p test_privacy_retention.py
+      - run: python -m unittest discover -s tests -p test_search_readiness.py
       - name: Review synthetic retention metadata without deletion
         run: python scripts/privacy_retention.py --example --at 2026-11-04T00:00:00+00:00
       - run: python scripts/build_job_pages.py --self-test
@@ -30,6 +31,7 @@ jobs:
       - run: python scripts/build_ad_layout_preview.py
       - run: python scripts/build_public_site.py
       - run: python scripts/publisher_readiness.py
+      - run: python scripts/search_readiness.py
       - uses: actions/upload-artifact@v4
         with:
           name: adsense-offline-review
@@ -38,5 +40,6 @@ jobs:
             build-report.json
             build-publisher-inventory.json
             build-job-quality-report.json
+            build-search-report.json
             review-only/ad-layout-preview.html
           retention-days: 7

@@ -1,7 +1,6 @@
 
 """CareerPick sitemap generator - preserve existing URLs."""
 from pathlib import Path
-from datetime import datetime, timezone, timedelta
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
@@ -10,20 +9,6 @@ SITEMAP = ROOT / "sitemap.xml"
 JOBS = ROOT / "jobs"
 BASE = "https://kllollain-max.github.io/careerpick"
 NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
-
-KST = timezone(timedelta(hours=9))
-
-def publication_date(instant=None):
-    """Korea date for newly published sitemap entries.
-
-    Existing entries preserve their lastmod so hourly rebuilds do not
-    falsely claim a new modification.
-    """
-    instant = instant if instant is not None else datetime.now(timezone.utc)
-    if instant.tzinfo is None:
-        raise ValueError("publication_date requires timezone-aware datetime")
-    return instant.astimezone(KST).date().isoformat()
-
 
 ET.register_namespace("", NS)
 TAG = lambda name: f"{{{NS}}}{name}"
@@ -42,6 +27,10 @@ def main():
     # Keep the first entry for each URL. Duplicates can make the hourly
     # sitemap verification fail even when generated job pages are valid.
     for entry in list(root.findall(TAG("url"))):
+        # Preserved snapshots and build clocks do not establish when this
+        # website's substantive content changed. Do not advertise false freshness.
+        for modified in list(entry.findall(TAG("lastmod"))):
+            entry.remove(modified)
         loc = entry.findtext(TAG("loc"), default="").strip()
         # Normalize legacy project-root addresses before deduplication/pruning.
         if loc.startswith("https://kllollain-max.github.io/") and not loc.startswith(BASE + "/"):
@@ -110,14 +99,12 @@ def main():
             existing.discard(loc)
 
     added = 0
-    today = publication_date()
 
     for loc in sorted(current_jobs):
         if loc in existing:
             continue
         entry = ET.SubElement(root, TAG("url"))
         ET.SubElement(entry, TAG("loc")).text = loc
-        ET.SubElement(entry, TAG("lastmod")).text = today
         added += 1
 
     # Keep the national civil-service exam page discoverable on every rebuild.
@@ -126,7 +113,6 @@ def main():
     if exam_page.is_file() and exam_url not in existing:
         entry = ET.SubElement(root, TAG("url"))
         ET.SubElement(entry, TAG("loc")).text = exam_url
-        ET.SubElement(entry, TAG("lastmod")).text = today
         existing.add(exam_url)
         added += 1
 
@@ -135,7 +121,6 @@ def main():
             continue
         entry = ET.SubElement(root, TAG("url"))
         ET.SubElement(entry, TAG("loc")).text = loc
-        ET.SubElement(entry, TAG("lastmod")).text = today
         existing.add(loc)
         added += 1
 
