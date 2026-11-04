@@ -238,7 +238,7 @@ def main() -> dict:
             continue
         text = file.read_text(encoding="utf-8")
         text = re.sub(r"https://kllollain-max\.github\.io/(?!careerpick/)", BASE, text)
-        text = re.sub(r"((?:href|src|action)=[\"'])/(?!/|careerpick/)", lambda m: m[1] + PREFIX, text)
+        text = re.sub(r"((?:href|src|action)=[\"'])/(?!/|careerpick/|supportpick/)", lambda m: m[1] + PREFIX, text)
         text = re.sub(r"([\"'`])/(?=(?:jobs|guides|data|onesignal)/)", lambda m: m[1] + PREFIX, text)
         if file.name == "manifest.webmanifest":
             manifest = json.loads(text)
