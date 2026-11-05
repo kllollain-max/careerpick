@@ -1,0 +1,44 @@
+name: Isolated push reliability audit
+on:
+  push:
+    branches: [fix/push-reliability-20261104]
+permissions:
+  contents: read
+concurrency:
+  group: push-reliability-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/test_push_reliability.cjs tests/test_homepage_ux.cjs tests/test_record_store.cjs
+      - run: python tests/run_alert_recovery.py
+      - run: python scripts/build_public_site.py
+      - run: npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+      - name: Synthetic SDK browser tests with no provider requests
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/dist" _preview/careerpick
+          python -m http.server 8000 --directory _preview > "$RUNNER_TEMP/cp-http.log" 2>&1 &
+          node scripts/verify_core_functions.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: push-reliability-evidence
+          path: |
+            core-audit-output/
+            build-report.json
+          retention-days: 14
