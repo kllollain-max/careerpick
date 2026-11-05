@@ -10,6 +10,7 @@ from urllib.parse import quote
 
 import sitegen
 from scripts import build_sitemap
+from scripts.build_public_site import complete_public_navigation
 from scripts.search_readiness import BASE, Page, inspect, normalize_duplicate_metadata, remove_unverified_archived_schema
 
 
@@ -36,6 +37,26 @@ def sitemap(root, paths):
 
 
 class SearchReadinessTests(unittest.TestCase):
+    def test_archived_search_and_share_dates_do_not_claim_verified_application_deadlines(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            body = '<h1>공고 원문</h1><p>보존할 본문과 공식 링크</p>'
+            for pid in ('a1', 'a2'):
+                p = write_page(root, 'jobs/' + pid + '.html', title='채용',
+                               description='기관 | 접수마감 2026-11-09 23:59', body=body)
+                p.write_text(p.read_text().replace('</head>',
+                    '<meta property="og:description" content="접수마감 2026-11-09 23:59">'
+                    "<meta name='twitter:description' content='접수마감 2026-11-09 23:59'>"
+                    '<meta name="unrelated" content="접수마감"></head>'))
+            complete_public_navigation(root, {'a2'})
+            archived = (root / 'jobs/a1.html').read_text()
+            current = (root / 'jobs/a2.html').read_text()
+            expected = '보관 당시 종료일 · 접수기간 미확인 2026-11-09 23:59'
+            self.assertEqual(archived.count(expected), 3)
+            self.assertIn(body, archived)
+            self.assertIn('<meta name="unrelated" content="접수마감">', archived)
+            self.assertEqual(current.count('접수마감 2026-11-09 23:59'), 3)
+
     def test_prerender_links_to_existing_internal_notice_without_changing_feed(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
