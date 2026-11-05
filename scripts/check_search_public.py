@@ -133,7 +133,7 @@ def examine(url, loader=fetch):
         item['issues'].append('missing_or_multiple_descriptions')
     if len(doc.canonicals) != 1 or not same_url(doc.canonicals[0], url):
         item['issues'].append('canonical_mismatch')
-    if doc.noindex or 'noindex' in re.split(r'[\s,]+', item.get('x_robots_tag', '').lower()):
+    if doc.noindex or {'noindex', 'none'} & set(re.split(r'[\s,]+', item.get('x_robots_tag', '').lower())):
         item['issues'].append('noindex_in_sitemap')
     if not doc.h1 or not item['visible_text_characters']:
         item['issues'].append('missing_html_body_or_h1')

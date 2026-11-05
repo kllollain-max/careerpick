@@ -30,6 +30,7 @@ jobs:
       - run: python scripts/build_job_pages.py --self-test
       - run: python scripts/test_build_sitemap.py
       - run: node --test tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_publisher_state.cjs tests/test_search_navigation.cjs
+      - run: python -m unittest discover -s tests -p test_public_readiness.py
       - run: python scripts/build_ad_layout_preview.py
       - run: python scripts/build_public_site.py
       - run: python scripts/publisher_readiness.py

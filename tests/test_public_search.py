@@ -67,6 +67,16 @@ class PublicSearchAuditTests(unittest.TestCase):
             row, _ = audit.examine(audit.BASE, load)
             self.assertIn('noindex_in_sitemap', row['issues'])
 
+    def test_none_alias_blocks_meta_and_header_but_preview_none_does_not(self):
+        for value, blocked in [('none', True), ('NONE', True), ('max-image-preview:none', False)]:
+            for field in ['meta', 'header']:
+                def load(url):
+                    return ({'url': url, 'status': 200, 'content_type': 'text/html',
+                             'x_robots_tag': value if field == 'header' else ''},
+                            page(url, '<meta name="googlebot" content="' + value + '">' if field == 'meta' else ''))
+                row, _ = audit.examine(audit.BASE, load)
+                self.assertEqual('noindex_in_sitemap' in row['issues'], blocked)
+
     def test_new_feed_notice_missing_from_sitemap_is_reported(self):
         load, _ = self.loader(feed=[{'id': 'a999'}])
         report = audit.run(loader=load)

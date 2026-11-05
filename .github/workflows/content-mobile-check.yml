@@ -1,0 +1,30 @@
+name: Content mobile readability check
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  content-mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/build_public_site.py
+      - run: npm install --no-save playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: node .github/scripts/check-content-mobile.cjs careerpick
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: content-mobile-evidence
+          path: mobile-evidence/
+          retention-days: 7
