@@ -74,7 +74,7 @@ class Page(HTMLParser):
 
     @property
     def noindex(self):
-        return any('noindex' in re.split(r'[\s,]+', value) for value in self.robots)
+        return any({'noindex', 'none'} & set(re.split(r'[\s,]+', value)) for value in self.robots)
 
 
 def normalize_duplicate_metadata(output, writer=None):

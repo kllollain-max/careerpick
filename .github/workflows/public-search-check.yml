@@ -1,5 +1,7 @@
 name: Read-only public search checks
 on:
+  schedule:
+    - cron: '35 23 * * *'
   workflow_dispatch:
     inputs:
       all_urls:
@@ -36,9 +38,14 @@ jobs:
           else
             python scripts/check_search_public.py
           fi
+      - name: Check shared host ownership and representative pages
+        if: always()
+        run: python scripts/check_public_readiness.py --project careerpick
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: public-search-observations
-          path: public-search-report.json
+          path: |
+            public-search-report.json
+            public-readiness-report.json
           retention-days: 14
