@@ -182,6 +182,14 @@ def complete_public_navigation(output: Path, current_ids: set[str]) -> None:
                       '<a href="' + PREFIX + 'contact.html">문의·정정</a></footer>')
             html = html.replace('</body>', footer + '</body>', 1)
         if relative.startswith('jobs/') and page.stem not in current_ids:
+            # The archive notice also applies to search/share descriptions.
+            # Preserve the stored value without claiming a verified deadline.
+            def archived_description(match):
+                tag = match[0]
+                if re.search(r'''(?:name|property)\s*=\s*(["'])(?:description|og:description|twitter:description)\1''', tag, re.I):
+                    return tag.replace('접수마감', '보관 당시 종료일 · 접수기간 미확인')
+                return tag
+            html = re.sub(r'<meta\b[^>]*>', archived_description, html, flags=re.I)
             note = ('<aside role="note" style="padding:16px;background:#fff1f2;color:#881337;overflow-wrap:anywhere">'
                     '과거 보관 공고입니다. 현재 수집 목록에 없으며, 개별 원문의 최종 확인 시각은 미확인입니다. '
                     '보관된 종료일·시각이 실제 원서 접수기간인지 확인되지 않았습니다. '
