@@ -21,7 +21,7 @@ permissions:
   contents: read
 concurrency:
   group: careerpick-cleaneye-review-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   offline:
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
         run: python scripts/build_public_site.py
       - name: Install browser and Korean fonts
         run: |
-          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright@1.56.1
           node "$RUNNER_TEMP/cp-browser/node_modules/playwright/cli.js" install --with-deps chromium
           sudo apt-get install -y fonts-noto-cjk
       - name: Verify source filters, details and preserved records with in-memory fixtures
@@ -88,7 +88,7 @@ jobs:
           python scripts/build_public_site.py
       - name: Install browser and Korean fonts
         run: |
-          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright@1.56.1
           node "$RUNNER_TEMP/cp-browser/node_modules/playwright/cli.js" install --with-deps chromium
           sudo apt-get install -y fonts-noto-cjk
       - name: Verify candidate cards, details and saved records at mobile and desktop widths
