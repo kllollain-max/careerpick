@@ -96,6 +96,7 @@ const server=http.createServer((req,res)=>{
       await page.screenshot({path:path.join(out,`matched-${width}.png`),fullPage:true});
       testFeed={source:'cleaneye',updated:null,collectionStatus:'not_collected',posts:[]};
       await page.goto(baseURL+'?q='+encodeURIComponent(token),{waitUntil:'networkidle'});
+      await page.waitForFunction(()=>DATA_HEALTH.cleaneye!=='pending');
       assert.equal(await page.evaluate(()=>DATA_HEALTH.cleaneye),'not_collected');
       assert((await page.locator('#cpFeedStatus').textContent()).includes('클린아이 잡플러스 첫 수집 전'));
       assert.deepEqual(errors,[]);
