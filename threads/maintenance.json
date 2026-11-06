@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-06T02:03:31Z",
+  "last_observed_at": "2026-11-06T02:03:31Z",
+  "account": "hid_119",
+  "repository": "kllollain-max/careerpick",
+  "activation": {
+    "status": "applied",
+    "at": "2026-11-06T02:03:31Z",
+    "pr": 27,
+    "pr_url": "https://github.com/kllollain-max/careerpick/pull/27",
+    "head_sha": "54577eb89e3212024cb3ec0c8af067f00ab24fd4",
+    "main_sha": "9ba4140d28ebef8a5ce9567a65ac11388e9d8560",
+    "tree_sha": "1c5fd6c6e6df73c3a9acc03156572f4e99f18eb5",
+    "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+    "automation_id": "6ae092084b988191a23a38300212ebdc",
+    "automation_title": "커리어픽 Threads 작성·자동복구",
+    "automation_schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261030T210000\nRRULE:FREQ=HOURLY\nEND:VEVENT",
+    "automation_prompt_readback_verified": true,
+    "local_tests": {
+      "threads": 72,
+      "recovered": 18,
+      "total": 90,
+      "status": "passed"
+    },
+    "remote_ci": [
+      {
+        "run_id": 42147257605,
+        "name": "Verify targeted push recovery without sending",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42147257605"
+      },
+      {
+        "run_id": 42147257559,
+        "name": "Offline AdSense preparation checks",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42147257559"
+      },
+      {
+        "run_id": 42147257642,
+        "name": "Content mobile readability check",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42147257642"
+      },
+      {
+        "run_id": 42147257636,
+        "name": "Verify Threads migration without publishing",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42147257636"
+      }
+    ]
+  },
+  "queue": {
+    "path": "threads/writer-queue.json",
+    "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
+    "blob_sha": "6b3e6fe9d009cd1c0be82a722135cc6531be6a1e",
+    "readback_verified": true,
+    "ready_entries": [
+      {
+        "scheduled_at": "2026-11-06T12:00:00+09:00",
+        "notice_id": "a306538",
+        "format_id": "key_facts",
+        "characters": 337
+      },
+      {
+        "scheduled_at": "2026-11-06T16:00:00+09:00",
+        "notice_id": "a306718",
+        "format_id": "job_explainer",
+        "characters": 370
+      },
+      {
+        "scheduled_at": "2026-11-06T20:00:00+09:00",
+        "notice_id": "a306356",
+        "format_id": "application_checklist",
+        "characters": 418
+      },
+      {
+        "scheduled_at": "2026-11-07T08:00:00+09:00",
+        "notice_id": "a306408",
+        "format_id": "reader_story",
+        "characters": 446
+      }
+    ]
+  },
+  "observed_runs": [
+    {
+      "run_id": "42129930266",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-05T23:32:57Z",
+      "head_sha": "caad27041513320b16abee96a54b790d2d081a99",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42129930266"
+    },
+    {
+      "run_id": "42021486045",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-05T11:47:02Z",
+      "head_sha": "8f9eae5fa7194a45286a17c08ef860be26248704",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42021486045"
+    },
+    {
+      "run_id": "41993358516",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-05T08:19:52Z",
+      "head_sha": "755d7e094b6459a7341838774d6d1f280ef6b25d",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/41993358516"
+    },
+    {
+      "run_id": "41963510648",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-05T03:46:56Z",
+      "head_sha": "568d6c934968b627c8ac430b7d27b1b814c44a77",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/41963510648"
+    }
+  ],
+  "last_confirmed_publication": {
+    "scheduled_at": "2026-11-06T08:00:00+09:00",
+    "post_id": "18107664995342724",
+    "run_id": "42129930266",
+    "image": true,
+    "policy": "previous"
+  },
+  "pending_records_at_activation": 0,
+  "first_new_policy_publication": {
+    "status": "not_yet_observed",
+    "expected_first_slot": "2026-11-06T12:00:00+09:00",
+    "reported": false
+  },
+  "incidents": [],
+  "prevention_rules": [
+    {
+      "key": "application_dates_are_not_publication_dates",
+      "implementation": "Official application-period evidence and exact image deadline are required; never infer from ALIO publication dates.",
+      "tests": "tests/test_threads_writer_queue.py"
+    },
+    {
+      "key": "immutable_reviewed_slot",
+      "implementation": "Pin prompt, source and complete reserved entry fingerprints; validate before claim and send.",
+      "tests": "tests/test_threads_writer_queue.py; tests/test_threads_master_pipeline.py"
+    },
+    {
+      "key": "mandatory_verified_image",
+      "implementation": "Alternate from last confirmed publication; validate full 1080 JPEG and public byte hash; no text downgrade.",
+      "tests": "tests/test_threads_thumbnail.py; tests/test_threads_master_pipeline.py"
+    },
+    {
+      "key": "ambiguous_post_no_replay",
+      "implementation": "Persist claim_attempted before remote claim, retain returned ID, recover only exact accepted receipt plus live Meta text/ID verification.",
+      "tests": "tests/test_threads_master_pipeline.py"
+    },
+    {
+      "key": "bounded_transient_read_retry",
+      "implementation": "GET/HEAD only, at most three attempts, respect bounded Retry-After; do not retry POST or auth failures.",
+      "tests": "tests/test_threads_master_pipeline.py"
+    },
+    {
+      "key": "persist_verified_partial_recovery",
+      "implementation": "Persist confirmed recoveries before unresolved-recovery gate; preserve artifacts and fail closed.",
+      "tests": "tests/test_threads_master_pipeline.py"
+    },
+    {
+      "key": "master_no_reply_is_normal",
+      "implementation": "Single main body and exact CTA; no detail/engagement reply requirement for master_job.",
+      "tests": "tests/test_threads_master_pipeline.py"
+    }
+  ],
+  "next_actions": [
+    "Inspect the first natural new-policy run and verify actual text, ID, media and format before one-time success report.",
+    "Preserve reserved entries; validate and replenish unstarted future drafts with current official evidence.",
+    "On a new incident, preserve cause, failing run/attempt/head, repair PR, regression check and observed recovery in this file using the latest blob SHA."
+  ]
+}
