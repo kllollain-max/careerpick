@@ -50,7 +50,11 @@ jobs:
       - name: Install browser and Korean fonts
         timeout-minutes: 5
         run: |
-          npx playwright install --with-deps chromium
+          if test -x /usr/bin/google-chrome; then
+            printf 'CHROME_PATH=%s\n' /usr/bin/google-chrome >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
           sudo apt-get install -y fonts-noto-cjk
       - name: Verify source filters, details and preserved records with in-memory fixtures
         run: node scripts/verify_cleaneye_fixture_browser.cjs
@@ -64,7 +68,6 @@ jobs:
           retention-days: 14
           if-no-files-found: error
   live:
-    needs: offline
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -77,6 +80,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate the API client and preservation rules before protected requests
+        run: python -m unittest discover -s tests -p 'test_cleaneye*.py'
       - name: Collect approved API into isolated candidate
         env:
           CLEANEYE_KEY: ${{ secrets.CLEANEYE_KEY || secrets.DATA_GO_KR_KEY }}
@@ -93,7 +98,11 @@ jobs:
       - name: Install browser and Korean fonts
         timeout-minutes: 5
         run: |
-          npx playwright install --with-deps chromium
+          if test -x /usr/bin/google-chrome; then
+            printf 'CHROME_PATH=%s\n' /usr/bin/google-chrome >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
           sudo apt-get install -y fonts-noto-cjk
       - name: Verify candidate cards, details and saved records at mobile and desktop widths
         env:

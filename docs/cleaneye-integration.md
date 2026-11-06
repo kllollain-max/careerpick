@@ -48,12 +48,12 @@ Local verification passed 54 Cleaneye Python tests, 68 frontend/storage/navigati
 
 `cleaneye.json` begins with `collectionStatus=not_collected` and an empty list. It is not presented as a successful zero-job collection. All synthetic test records are confined to tests or fulfilled in memory inside a disposable browser context. They are never written to the public feed.
 
-The candidate workflow has read-only repository permission and two distinct stages:
+The candidate workflow has read-only repository permission and two independent checks:
 
 1. Unit/regression checks, a public build, and 320/390/1440px browser checks using synthetic in-memory responses.
-2. An actual protected API collection; only a verified live candidate proceeds to a separate build and browser check.
+2. Client/preservation tests followed by an actual protected API collection; only a verified live candidate proceeds to a separate build and browser check. This job runs independently so a browser-installation delay does not hide an API-approval error.
 
-Passing the first stage must not be reported as passing the second. The live stage is expected to remain blocked until the region-code service is approved and its real response is validated.
+Passing the first check must not be reported as passing the second. The live check is expected to remain blocked until the region-code service is approved and its real response is validated.
 
 The operation change adds Cleaneye independently to the existing three-hour schedule. Only a successful, complete, source-preserving candidate is selected. Other sources continue if Cleaneye fails, and the combined report records partial failure explicitly. Public snapshot verification includes `cleaneye.json` after release. The schedule expression, personal-storage keys, push settings and social publication workflows are unchanged.
 
