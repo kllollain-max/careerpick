@@ -65,9 +65,21 @@ class GitHubClaims:
         data={'slot':slot,'run_id':str(run_id),'state':'accepted','post_id':post_id}
         payload={'message':'Record Threads post receipt','branch':self.branch,'sha':expected_sha,
                  'content':base64.b64encode(json.dumps(data).encode()).decode()}
-        result=self._request('PUT',slot,payload)
-        if not result.get('content',{}).get('sha'):
-            raise ClaimError('receipt persistence unconfirmed; reconcile manually')
+        try:
+            result=self._request('PUT',slot,payload)
+            if result.get('content',{}).get('sha'):
+                return
+        except ClaimError:
+            pass
+        # An accepted PUT response may be lost after GitHub commits it. Read
+        # back the exact receipt instead of sending the Threads post again.
+        try:
+            observed = self.read(slot)
+        except ClaimError:
+            raise ClaimError('receipt persistence unconfirmed; reconcile manually') from None
+        if observed == data:
+            return
+        raise ClaimError('receipt persistence unconfirmed; reconcile manually')
 
     def read(self, slot):
         result = self._request('GET',slot)

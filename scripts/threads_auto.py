@@ -2,6 +2,7 @@
 """CareerPick Threads publisher, diagnostics and explicit receipt recovery."""
 
 import json
+import hashlib
 import os
 import re
 import sys
@@ -31,6 +32,85 @@ API = 'https://graph.threads.net/v1.0'
 MIN_DAYS = 5
 MAX_DAYS = 20
 MAX_DAILY = 4
+
+
+def master_writer_enabled():
+    return os.getenv('THREADS_MASTER_WRITER', 'false').lower() == 'true'
+
+
+def writer_inputs():
+    """Load the exact approved prompt and current source, without an AI/API call."""
+    policy = load(ROOT / 'threads/writer-policy.json', {})
+    prompt = (ROOT / policy['prompt_path']).read_bytes()
+    if hashlib.sha256(prompt).hexdigest() != policy['prompt_sha256']:
+        raise RuntimeError('Master prompt hash mismatch; do not publish')
+    source = load(DATA, {})
+    source['_operations'] = load(ROOT / 'operations-status.json', {})
+    return policy, source, load(ROOT / 'alio-detail.json', {})
+
+
+def prepare_master(history, now, run_id):
+    """Consume AI-written, reviewed slot drafts; never fall back to old templates."""
+    from scripts.threads_writer_queue import select_ready, fingerprint
+    if os.getenv('GITHUB_RUN_ATTEMPT', '1') != '1':
+        raise RuntimeError('Reruns require remote reconciliation')
+    scheduled = current_publication_slot(now)
+    today = scheduled.date().isoformat()
+    if any(r.get('status') == 'pending' and not r.get('threads_post_id')
+           for r in history['records']):
+        raise RuntimeError('Unresolved prior reservation; reconcile without reposting')
+    if sum(r.get('reserved_date') == today and r.get('status') in ('pending', 'published')
+           for r in history['records']) >= MAX_DAILY:
+        print('Daily limit reached; no reservation created')
+        return
+    if any(r.get('scheduled_at') == scheduled.isoformat() for r in history['records']):
+        raise RuntimeError('Slot already reserved')
+    policy, source, details = writer_inputs()
+    queue = load(ROOT / '.threads-writer-queue.json', {})
+    selected = select_ready(queue, scheduled, now, history, source, details, policy)
+    entries = [e for e in queue['entries'] if e['scheduled_at'] == scheduled.isoformat()]
+    if len(entries) != 1:
+        raise RuntimeError('Unique writer entry required')
+    entry = entries[0]
+    # Failed attempts never consume an image turn or reset the alternation.
+    prior = next((r for r in reversed(history['records'])
+                  if r.get('status') == 'published' and r.get('threads_post_id')
+                  and 'image_url' in r), None)
+    image_turn = prior is not None and not bool(prior.get('image_url'))
+    image_job = selected['image_job'] if image_turn else None
+    identifier = re.sub(r'[^A-Za-z0-9_-]', '_', selected['job_id'])[:70]
+    record = {**selected, 'scheduled_at': scheduled.isoformat(),
+              'manual_publish': False, 'reserved_date': today, 'status': 'pending',
+              'run_id': run_id, 'created_at': now.isoformat(),
+              'writer_entry': entry, 'queue_entry_sha256': fingerprint(entry),
+              'image_url': ('https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/'
+                            + identifier + '.jpg') if image_turn else '',
+              'image_job': image_job}
+    history['records'].append(record)
+    save(history)
+    print('Reserved reviewed master-prompt draft:', selected['job_id'], selected['format_id'],
+          'IMAGE' if image_turn else 'TEXT')
+
+
+def validate_master_before_send(record, history, now):
+    from scripts.threads_writer_queue import select_ready, fingerprint
+    entry = record.get('writer_entry')
+    if not isinstance(entry, dict) or fingerprint(entry) != record.get('queue_entry_sha256'):
+        raise RuntimeError('Reserved writer entry changed')
+    policy, source, details = writer_inputs()
+    other_history = {**history, 'records': [r for r in history['records'] if r is not record]}
+    validated = select_ready({'schema_version': 1, 'entries': [entry]},
+                             datetime.fromisoformat(record['scheduled_at']), now,
+                             other_history, source, details, policy)
+    if record.get('text') != validated['text'] or record.get('format_id') != validated['format_id']:
+        raise RuntimeError('Reserved text or format changed')
+    if record.get('reply_text') or record.get('engagement_text'):
+        raise RuntimeError('Master prompt posts must not create extra CTA replies')
+    if record.get('image_url'):
+        if record.get('image_job') != validated['image_job']:
+            raise RuntimeError('Reserved image facts changed')
+        if not re.fullmatch(r'[0-9a-f]{64}', str(record.get('image_sha256', ''))):
+            raise RuntimeError('High-quality image has not been verified')
 
 
 def current_publication_slot(now):
@@ -266,10 +346,9 @@ def api(method, path, token, params=None):
     # Timings exclude credentials, URLs and content. No request retries here.
     print('Threads API request start:', datetime.now(KST).isoformat(), method, flush=True)
     try:
-        with urllib.request.urlopen(
-            request,
-            timeout=30
-        ) as response:
+        from scripts.threads_http import read_response
+        opener = read_response if method == 'GET' else urllib.request.urlopen
+        with opener(request, timeout=30) as response:
             result = json.load(response)
             print('Threads API response received:', datetime.now(KST).isoformat(), method, flush=True)
             return result
@@ -422,10 +501,17 @@ def create_media(token, params):
     return str(post_id)
 
 
-def image_ready(url):
+def image_ready(url, expected_sha=None):
     try:
-        req = urllib.request.Request(url, method='HEAD')
-        with urllib.request.urlopen(req, timeout=12) as response:
+        from scripts.threads_http import read_response
+        req = urllib.request.Request(url, method='GET' if expected_sha else 'HEAD')
+        with read_response(req, timeout=12) as response:
+            if expected_sha:
+                payload = response.read(8 * 1024 * 1024 + 1)
+                return (response.status == 200 and
+                        response.headers.get('Content-Type', '').startswith('image/') and
+                        len(payload) <= 8 * 1024 * 1024 and
+                        hashlib.sha256(payload).hexdigest() == expected_sha)
             return response.status == 200 and response.headers.get('Content-Type', '').startswith('image/')
     except (urllib.error.URLError, TimeoutError):
         return False
@@ -466,7 +552,12 @@ def verify_published_record(record, token):
     """Official read-only confirmation of the actual main and both replies."""
     main_id = str(record['threads_post_id'])
     result = []
-    for id_key, text_key in [('threads_post_id','text'),('reply_post_id','reply_text'),('engagement_post_id','engagement_text')]:
+    pairs = [('threads_post_id','text'),('reply_post_id','reply_text'),('engagement_post_id','engagement_text')]
+    if record.get('content_type') == 'master_job':
+        if record.get('reply_text') or record.get('engagement_text'):
+            raise RuntimeError('Unexpected reply in a master-prompt post')
+        pairs = pairs[:1]
+    for id_key, text_key in pairs:
         expected_id = str(record.get(id_key) or '')
         if not expected_id.isdigit():
             raise RuntimeError('Missing actual published object ID')
@@ -550,14 +641,18 @@ def publish_post(record, history):
     print('=== Threads Publishing ===')
     if not record.get('threads_post_id'):
         check_history_before_send(record, history)
-        if record.get('request_status') == 'attempted':
+        if record.get('content_type') == 'master_job':
+            validate_master_before_send(record, history, datetime.now(KST))
+        if record.get('request_status') in ('attempted', 'claim_attempted'):
             raise RuntimeError('Ambiguous request; reconcile before retry')
         image_url = record.get('image_url', '')
         force_text = os.getenv('THREADS_IMAGE_PREPARATION_FAILED', 'false').lower() == 'true'
-        if image_url and not force_text and image_ready(image_url):
+        if image_url and not force_text and image_ready(image_url, record.get('image_sha256')):
             print('Publishing image post')
             params = {'media_type': 'IMAGE', 'image_url': image_url, 'text': record['text']}
         elif image_url:
+            if record.get('content_type') == 'master_job':
+                raise RuntimeError('Required image unavailable; keep image turn and repair before sending')
             # This decision is made before any publishing request or slot claim.
             # Preserve the intended image for review, but record the actual format.
             text = record.get('text')
@@ -574,6 +669,10 @@ def publish_post(record, history):
         remote = GitHubClaims(os.environ.get('THREADS_CLAIM_REPO', ''),
                               os.environ.get('THREADS_CLAIM_BRANCH', ''),
                               os.environ.get('THREADS_CLAIM_TOKEN', ''))
+        # Save this marker before any remote mutation. Only its absence permits
+        # this same runner to finalize a positively known pre-send failure.
+        record['request_status'] = 'claim_attempted'
+        save(history)
         claim_sha = remote.begin(record['scheduled_at'], record['run_id'])
         record['request_status'] = 'attempted'
         save(history)
@@ -581,6 +680,8 @@ def publish_post(record, history):
         # Preserve the receipt in runner logs before the conditional remote write.
         # The sending claim remains a manual-review hold if recording fails.
         print('Threads API returned post ID; reconcile if receipt write fails:', post_id, flush=True)
+        record['api_returned_post_id'] = post_id
+        save(history)
         # If this fails, the remote sending claim remains a permanent hold.
         remote.accept(record['scheduled_at'], record['run_id'], claim_sha, post_id)
         record['request_status'] = 'confirmed'
@@ -592,7 +693,7 @@ def publish_post(record, history):
         save(history)
         print('Published Threads post ID:', post_id)
 
-    if record.get('content_type') in ('discussion', 'tip') and not record.get('reply_text') and not record.get('engagement_text'):
+    if record.get('content_type') in ('discussion', 'tip', 'master_job') and not record.get('reply_text') and not record.get('engagement_text'):
         return
 
     if record.get('reply_post_id') and (not record.get('engagement_text') or record.get('engagement_post_id') or record.get('engagement_status') == 'needs_review'):
@@ -775,6 +876,8 @@ def main():
             if r.get('status') == 'published'
             and r.get('threads_post_id')
             and not r.get('reply_post_id')
+            and not (r.get('content_type') in ('master_job', 'discussion', 'tip')
+                     and not r.get('reply_text'))
         ]
         print('Published posts missing recorded reply:', len(missing_replies))
         for record in missing_replies:
@@ -843,6 +946,16 @@ def main():
             history
         )
 
+        return
+
+    if command == 'prepare' and master_writer_enabled():
+        if os.getenv('THREADS_ENABLED', 'false').lower() != 'true':
+            print('Publishing disabled; no reservation made')
+            return
+        run_id = os.getenv('GITHUB_RUN_ID', '')
+        if not run_id.isdigit():
+            raise RuntimeError('GITHUB_RUN_ID is required')
+        prepare_master(history, datetime.now(KST), run_id)
         return
 
     # Stage 1: new material only for the scheduled midday and afternoon slots.

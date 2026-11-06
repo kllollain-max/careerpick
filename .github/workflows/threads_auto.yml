@@ -9,14 +9,6 @@ on:
     - cron: '0 7 * * *'
     - cron: '0 11 * * *'
 
-  workflow_dispatch:
-    inputs:
-      publish_one_now:
-        description: Publish exactly one current job now (counts toward daily limit)
-        type: boolean
-        required: true
-        default: false
-
 permissions:
   contents: write
   issues: write
@@ -27,20 +19,21 @@ concurrency:
 
 jobs:
   publish:
-    if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.publish_one_now == true)) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: github.event_name == 'schedule' && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
 
     env:
       TZ: Asia/Seoul
       PYTHONUNBUFFERED: "1"
-      THREADS_MANUAL_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_one_now == true }}
+      THREADS_MANUAL_PUBLISH: "false"
       THREADS_SCHEDULE_CRON: ${{ github.event.schedule }}
       THREADS_CLAIM_REPO: ${{ github.repository }}
       THREADS_CLAIM_BRANCH: threads-publisher-state
       THREADS_CLAIM_TOKEN: ${{ github.token }}
       THREADS_NO_SEND: "false"
       THREADS_NEW_CONTENT: "false"
+      THREADS_MASTER_WRITER: "true"
       THREADS_ENABLED: "true"
       THREADS_EDITORIAL_ENABLED: ${{ vars.THREADS_EDITORIAL_ENABLED == 'true' }}
       THREADS_CONVERSATION_ENABLED: ${{ vars.THREADS_CONVERSATION_ENABLED != 'false' }}
@@ -74,18 +67,25 @@ jobs:
           test -n "$THREADS_ACCESS_TOKEN"
           test -n "$THREADS_USER_ID"
 
-      - name: Allocate current manual minute (not a past schedule)
-        if: github.event_name == 'workflow_dispatch' && inputs.publish_one_now == true
+      - name: Recover only independently verified prior receipts
+        id: reconcile
+        continue-on-error: true
+        run: python scripts/threads_reconcile.py
+
+      - name: Persist any independently verified recoveries
+        if: ${{ always() && (steps.reconcile.outcome == 'success' || steps.reconcile.outcome == 'failure') }}
+        run: bash scripts/threads_persist.sh
+
+      - name: Require completed receipt reconciliation
+        if: steps.reconcile.outcome == 'failure'
         run: |
-          python - <<'PYMANUAL'
-          import os
-          from datetime import datetime
-          from zoneinfo import ZoneInfo
-          slot = datetime.now(ZoneInfo('Asia/Seoul')).replace(second=0, microsecond=0).isoformat()
-          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as out:
-              out.write('THREADS_MANUAL_SLOT=' + slot + '\n')
-          print('Explicit manual slot:', slot)
-          PYMANUAL
+          echo '::error::Unconfirmed prior receipt remains on hold; no new publication'
+          exit 1
+
+      - name: Read reviewed AI writer queue
+        run: |
+          git fetch origin threads-publisher-state
+          git show FETCH_HEAD:threads/writer-queue.json > .threads-writer-queue.json
 
       - name: Reserve one job
         id: reserve
@@ -122,7 +122,6 @@ jobs:
 
       - name: Install Korean fonts and Pillow
         id: image_tools
-        continue-on-error: true
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true'
         run: |
           sudo apt-get update -qq
@@ -131,22 +130,20 @@ jobs:
 
       - name: Generate recruitment image
         id: image_generate
-        continue-on-error: true
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true' && steps.image_tools.outcome == 'success'
         run: |
           python - <<'PY'
-          import json
+          import hashlib, json
           from pathlib import Path
-          from scripts.create_thumbnail import generate
+          from scripts.create_thumbnail import generate, verify_thumbnail
           history = json.loads(Path('threads_posted.json').read_text(encoding='utf-8'))
           matches = [r for r in history.get('records', []) if r.get('run_id') == __import__('os').environ['GITHUB_RUN_ID'] and r.get('status') == 'pending']
           if len(matches) == 1 and matches[0].get('image_job'):
               path = Path(generate(matches[0]['image_job']))
-              from PIL import Image
-              with Image.open(path) as image:
-                  if image.format != 'JPEG' or image.width < 1 or image.height < 1:
-                      raise ValueError('Generated image format or size invalid')
-                  image.verify()
+              quality = verify_thumbnail(path)
+              matches[0]['image_quality'] = quality
+              matches[0]['image_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+              Path('threads_posted.json').write_text(json.dumps(history, ensure_ascii=False, indent=2) + chr(10))
               print('Generated and verified image:', path)
           else:
               raise SystemExit('Expected image reservation not found')
@@ -192,7 +189,7 @@ jobs:
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
         run: |
           git fetch origin main
-          git restore --source=origin/main -- threads_posted.json
+          git merge --ff-only origin/main
 
       - name: Check committed public image readiness
         id: image_deploy
@@ -234,6 +231,7 @@ jobs:
           PY
 
       - name: Publish one Threads post
+        id: send
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
         env:
           THREADS_IMAGE_PREPARATION_FAILED: ${{ steps.reserve.outputs.needs_image == 'true' && (steps.image_tools.outcome != 'success' || steps.image_generate.outcome != 'success' || steps.image_deploy.outcome != 'success') }}
@@ -241,11 +239,15 @@ jobs:
           # Recheck the latest persisted history immediately before claiming.
           # This does not replace the required legacy-publisher cutover barrier.
           git fetch origin main
-          git restore --source=origin/main -- threads_posted.json
+          git merge --ff-only origin/main
           python scripts/threads_auto.py publish
 
-      - name: Persist successful publish
-        if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true'
+      - name: Finalize only known pre-send failures
+        if: ${{ failure() && env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' }}
+        run: python scripts/threads_reconcile.py --finalize-unsent
+
+      - name: Persist publishing outcome
+        if: ${{ always() && env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' }}
         run: |
           if [ -n "$(git status --porcelain -- threads_posted.json)" ]; then
             git config user.name 'github-actions[bot]'
@@ -286,7 +288,7 @@ jobs:
           records = json.loads(Path('threads_posted.json').read_text(encoding='utf-8')).get('records', [])
           mine = [r for r in records if str(r.get('run_id')) == os.environ['GITHUB_RUN_ID']]
           post_ok = len(mine) == 1 and mine[0].get('status') == 'published' and bool(mine[0].get('threads_post_id'))
-          optional_replies = post_ok and mine[0].get('content_type') in ('discussion', 'tip')
+          optional_replies = post_ok and mine[0].get('content_type') in ('discussion', 'tip', 'master_job')
           reply_ok = post_ok and (bool(mine[0].get('reply_post_id')) if not optional_replies or mine[0].get('reply_text') else True)
           engagement_ok = post_ok and (bool(mine[0].get('engagement_text')) and bool(mine[0].get('engagement_post_id')) if not optional_replies else (not mine[0].get('engagement_text') or bool(mine[0].get('engagement_post_id'))))
           lines = ['## Threads publication result', '', '- Main post recorded: **' + ('YES' if post_ok else 'NO') + '**', '- Detail reply recorded: **' + ('YES' if reply_ok else 'NO') + '**']
@@ -301,8 +303,21 @@ jobs:
           objects = verify_published_record(mine[0], os.environ['THREADS_ACCESS_TOKEN'])
           for obj in objects:
               print('Meta GET verified:', obj['id'], obj.get('permalink', ''))
-          print('Verified actual main and both reply IDs, text and parent/root links')
+          print('Verified actual publication IDs, text and any required reply links')
           PY
+
+      - name: Preserve recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            threads_posted.json
+            .threads-writer-queue.json
+            .threads-recovery-report.json
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 30
 
   alert:
     name: Alert on Threads publishing failure
