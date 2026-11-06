@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "prompt_path": "threads/prompts/master-v1.1.txt",
+  "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+  "cta": "자세한 채용정보는 프로필 링크를 확인하세요.",
+  "max_chars": 450,
+  "max_source_age_hours": 24,
+  "slots": [
+    8,
+    12,
+    16,
+    20
+  ],
+  "formats": {
+    "08": "reader_story",
+    "12": "key_facts",
+    "16": "job_explainer",
+    "20": "application_checklist"
+  },
+  "account": "hid_119",
+  "queue_branch": "threads-publisher-state",
+  "queue_path": "threads/writer-queue.json",
+  "image_policy": "alternate_last_confirmed",
+  "daily_limit": 4,
+  "replies_enabled": false,
+  "source_attachment_sha256": "291d510a496049c9e6b581d1e8a1b29e13651baf52d6cdaac7c7b32e33b33fbb"
+}
