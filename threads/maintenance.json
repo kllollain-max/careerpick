@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T08:47:24Z",
-  "last_observed_at": "2026-11-06T08:47:24Z",
+  "updated_at": "2026-11-06T09:39:55Z",
+  "last_observed_at": "2026-11-06T09:39:55Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -308,6 +308,49 @@
           }
         }
       }
+    },
+    "2026-11-07T16:00:00+09:00": {
+      "notice_id": "a306784",
+      "format_id": "job_explainer",
+      "checked_at": "2026-11-06T09:39:55Z",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "간호사 면허는 있지만 새 병원으로 옮길 시기를 고민 중이라면, 이번 공고는 임용예정일부터 근무할 수 있는지 먼저 살펴보세요.\n\n근로복지공단 안산병원이 의료직 6급 정규직 간호사 6명을 뽑아요. 원서 마감일 기준 간호사 면허가 있어야 하고, 임용일 기준 만 60세 미만이어야 해요. 병역의무 불이행 사실이 없어야 해요.\n\n먼저 응시원서로 서류 심사를 해요. 다음 단계에서는 면접과 직업성격검사를 진행해요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a306784",
+          "target_reader": "면허 보유 간호사 중 경기 안산에서 임용예정일에 바로 근무할 수 있는 지원자",
+          "central_message": "면허 보유 기준일과 바로 근무 가능한 시점을 먼저 판단",
+          "pattern_id": "P6",
+          "scheduled_at": "2026-11-07T16:00:00+09:00",
+          "reference_at": "2026-11-06T09:39:55Z",
+          "verification_basis": "provided_verified_data",
+          "source_refs": [
+            {
+              "ref": "alio.json:a306784 / alio-detail.json:306784",
+              "checked_at": "2026-11-06T16:28:07+09:00",
+              "excerpt": "간호사 면허 취득자; 원서 마감일 기준; 임용일 만 60세 미만; 임용예정일 즉시 근무; 서류 이후 면접 및 직업성격검사. 정규직 6명."
+            }
+          ],
+          "checked_at": "2026-11-06T16:28:07+09:00",
+          "missing_or_conflicting": [
+            "공식 공고문·직무기술서 미열람: 실제 원서 접수기간과 간호 업무, 배치·교대 및 수습 조건 미확인",
+            "현재 공개 Threads 프로필 rel=me 및 커리어픽 공고 상세 열람 미확인",
+            "현재 수집 근거는 예정 슬롯까지 24시간 이내지만 지연 실행 시 만료될 수 있어 최신 수집 대조 필요"
+          ],
+          "omitted_optional_facts": [
+            "급여 미확인"
+          ],
+          "repetition_check": "checked",
+          "cta_check": "needs_confirmation",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "characters": 251,
+          "pre_publish_checks": []
+        }
+      },
+      "resume": "공단의 2026-11-06 안산병원 공고와 직무기술서에서 실제 접수기간·업무·근무조건을 확인하고 공개 프로필 경로를 대조한다. 직무가 확인되면 설명문단을 보완한 뒤 검사한다."
     }
   }
 }
