@@ -116,7 +116,7 @@ def query(path, params):
 
 def main():
     OUT.mkdir(exist_ok=True)
-    form = inspect_region_form()
+    form = {'status':'not_retried_after_public_form_timeout'}
     region_info, regions = {'status':'not_retried_after_service_not_registered'}, []
     codes = []
     if region_info.get('total_count') == str(len(regions)) and regions:
@@ -125,16 +125,21 @@ def main():
             if re.fullmatch(r'[0-9]{1,12}', code) and code not in codes:
                 codes.append(code)
     region_info['regions'] = regions
-    # This one-region exploratory probe does not assert nationwide coverage.
-    # 11 is the Seoul administrative-region code, tested against this service.
-    selected = codes[0] if codes else '11'
-    employment_info, rows = query('openApiEmployInfo/openXmlEmployInfo', {'sidoCd':selected, 'type':'xml'})
+    # Bounded exploratory values: only successful responses can establish this
+    # service's code format. These candidates do not establish national scope.
+    attempts = []
+    rows = []
+    for selected in ('6110000', '1100000000', '110000', '1000', '01', '1'):
+        employment_info, rows = query('openApiEmployInfo/openXmlEmployInfo', {'sidoCd':selected, 'type':'xml'})
+        attempts.append({'region':selected, **employment_info})
+        if rows or employment_info.get('http_status') not in (None, 200):
+            break
     employment_info['queried_region'] = selected
     employment_info['unconfirmed_region_probe'] = not bool(codes)
     employment_info['statuses'] = sorted({row.get('STATUS', '') for row in rows})
     employment_info['employment_types'] = sorted({row.get('JOB_TYPE', '') for row in rows})
     employment_info['sample'] = [{key:row.get(key) for key in ('NO','ENT_NAME','ENT_TITLE','SIDO_CD','STATUS','JOB_TYPE','PUB_DATE','PUB_END_DATE','UPD_DATE','URL')} for row in rows[:3]]
-    report = {'public_region_form':form, 'region_service':region_info, 'employment_service':employment_info, 'codes':codes, 'api_requests':1}
+    report = {'public_region_form':form, 'region_service':region_info, 'employment_service':employment_info, 'codes':codes, 'exploratory_attempts':attempts, 'api_requests':len(attempts)}
     (OUT/'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     (OUT/'public-employment-rows.json').write_text(json.dumps(rows, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(report, ensure_ascii=False, indent=2))
