@@ -59,6 +59,7 @@ const server=http.createServer((req,res)=>{
       assert(!(await page.locator('#list').innerText()).includes('약 2명명'));
       await page.locator('[data-sector="public"]').click();
       assert.equal(await page.locator('#list .card').count(),3);
+      if(width<=700)await page.locator('#toggle').click();
       await page.locator('#cpEmployment').selectOption('정규직');
       assert.equal(await page.locator('#list .card').count(),1);
       assert(await page.locator('#list [data-open="cleaneye-TEST_UI_1"]').count()>0);
@@ -66,6 +67,7 @@ const server=http.createServer((req,res)=>{
       assert.equal(await page.locator('#list .card').count(),1);
       assert(await page.locator('#list [data-open="cleaneye-TEST_UI_2"]').count()>0);
       await page.locator('#cpEmployment').selectOption('');
+      if(width<=700)await page.locator('#cpFilterDone').click();
       await page.locator('#list [data-save="cleaneye-TEST_UI_1"]').click();
       await page.reload({waitUntil:'networkidle'});
       await page.locator('#list [data-save="cleaneye-TEST_UI_1"][aria-pressed="true"]').waitFor();
