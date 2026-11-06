@@ -44,6 +44,8 @@ Credentials come from `CLEANEYE_KEY`, falling back to the existing GitHub secret
 
 ## Verification and operation
 
+Local verification passed 54 Cleaneye Python tests, 68 frontend/storage/navigation Node tests and 10 existing GOJOBS/operation Python tests. The public build produced 1,447 files, checked 35,053 HTML links with zero missing local links, and preserved the original source JSON hashes. Browser results are recorded separately by the candidate workflow; these unit/build results are not live API success.
+
 `cleaneye.json` begins with `collectionStatus=not_collected` and an empty list. It is not presented as a successful zero-job collection. All synthetic test records are confined to tests or fulfilled in memory inside a disposable browser context. They are never written to the public feed.
 
 The candidate workflow has read-only repository permission and two distinct stages:

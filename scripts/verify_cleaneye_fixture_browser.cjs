@@ -90,7 +90,7 @@ const server=http.createServer((req,res)=>{
       await page.locator('#list [data-open="cleaneye-TEST_UI_1"]').first().waitFor();
       assert.equal(await page.locator('#list [data-open="cleaneye-TEST_UI_2"]').count(),0);
       assert.equal(await page.locator('#list [data-open="cleaneye-TEST_UI_3"]').count(),0);
-      assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('apps')).prior_record.memo),'이전 메모 보존');
+      assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('apps')).prior_record),{st:'plan',memo:'이전 메모 보존'});
       await page.screenshot({path:path.join(out,`matched-${width}.png`),fullPage:true});
       testFeed={source:'cleaneye',updated:null,collectionStatus:'not_collected',posts:[]};
       await page.goto(baseURL+'?q='+encodeURIComponent(token),{waitUntil:'networkidle'});

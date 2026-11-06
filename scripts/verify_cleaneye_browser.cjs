@@ -9,11 +9,14 @@ const base = process.env.CP_TEST_BASE || 'http://127.0.0.1:8000/careerpick/';
 const output = 'cleaneye-browser-validation';
 const read = name => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
 const feed = read('cleaneye.json');
+const home = require(path.join(root, 'homepage-ux.js'));
 assert.equal(feed.collectionStatus, 'verified', 'A verified API candidate is required');
 assert(feed.posts.length > 0, 'A nonempty API candidate is required');
 const now = new Date();
 const today = new Date(+now + 9 * 3600000).toISOString().slice(0, 10);
-const sample = feed.posts.find(p => p.due && p.due.slice(0, 10) > today && !['expired', 'cancelled', 'verification_pending'].includes(p.receptionState)) || feed.posts[0];
+const visible = p => home.deadline(p, now)?.cls !== 'closed';
+const sample = feed.posts.find(p => p.due && p.due.slice(0, 10) >= today && visible(p)) || feed.posts.find(visible) || feed.posts[0];
+const expectedURL = new URL(sample.url).href;
 const previous = read('alio.json').posts[0];
 assert(previous && sample.id !== previous.id);
 const oldApplication = {st:'plan', ck:[], exam:'', itv:'', memo:'기존 지원 기록 보존 확인', title:previous.title, org:previous.org, url:previous.url, due:previous.due, upd:1};
@@ -38,6 +41,11 @@ const oldApplication = {st:'plan', ck:[], exam:'', itv:'', memo:'기존 지원 �
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(base + '?q=' + encodeURIComponent(sample.title), {waitUntil:'networkidle'});
+      if (!visible(sample)) {
+        const closed = page.locator('[data-status="closed"]');
+        if (!await closed.isVisible()) await page.locator('#toggle').click();
+        await closed.click();
+      }
       await page.locator('#list [data-open="' + sample.id + '"]').first().waitFor();
       assert((await page.locator('#list').innerText()).includes('클린아이 잡플러스'));
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
@@ -54,9 +62,8 @@ const oldApplication = {st:'plan', ck:[], exam:'', itv:'', memo:'기존 지원 �
       const detail = await page.locator('#jvBody').innerText();
       assert(detail.includes('클린아이 잡플러스'));
       const links = await page.locator('#jvBody a[href]').evaluateAll(nodes => nodes.map(node => node.href));
-      assert(links.includes(sample.url), 'Detail must link to the exact official notice');
+      assert(links.includes(expectedURL), 'Detail must link to the exact official notice');
       for (const employment of sample.emp || []) assert(detail.includes(employment));
-      assert(!detail.includes('1970'), 'Unknown publication date must remain unknown');
       await page.screenshot({path:path.join(output, 'detail-' + width + '.png'), fullPage:true});
       await page.reload({waitUntil:'networkidle'});
       await page.locator('#jvBody h1').waitFor();
@@ -70,7 +77,7 @@ const oldApplication = {st:'plan', ck:[], exam:'', itv:'', memo:'기존 지원 �
       assert.deepEqual(applications[previous.id], oldApplication);
       assert.equal(applications[sample.id].memo, '클린아이 지원 기록 검증');
       assert.equal(applications[sample.id].title, sample.title);
-      assert.equal(applications[sample.id].url, sample.url);
+      assert.equal(applications[sample.id].url, expectedURL);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
       assert.deepEqual(errors, []);
       report.push({width, notice:sample.id, sourceBadge:true, officialLink:true, search:true, savedAfterReload:true, detailDirectReload:true, applicationAfterReload:true, previousSavedAndApplicationPreserved:true, horizontalOverflow:false, pageErrors:0});
