@@ -6,6 +6,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 from pathlib import Path
 
 OUT = Path('cleaneye-api-probe-output')
@@ -16,6 +17,58 @@ KEY = urllib.parse.unquote(os.environ.get('CLEANEYE_KEY', '').strip())
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
         raise RuntimeError('redirect_rejected')
+
+
+class RegionForm(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.select = None
+        self.option = None
+        self.fields = []
+        self.scripts = []
+        self.options = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'script' and attrs.get('src'):
+            self.scripts.append(attrs['src'])
+        if tag == 'select':
+            self.select = attrs.get('name') or attrs.get('id')
+        if tag == 'option':
+            self.option = {'select':self.select, 'value':attrs.get('value'), 'label':''}
+        if tag == 'input' and re.search(r'sido|region|work|local', attrs.get('name','') + attrs.get('id',''), re.I):
+            self.fields.append({k:attrs[k] for k in ('name','id','type','value') if k in attrs})
+
+    def handle_data(self, data):
+        if self.option is not None:
+            self.option['label'] += data.strip()
+
+    def handle_endtag(self, tag):
+        if tag == 'option' and self.option is not None:
+            self.options.append(self.option)
+            self.option = None
+        if tag == 'select':
+            self.select = None
+
+
+def inspect_region_form():
+    url = 'https://job.cleaneye.go.kr/user/ypRecruitment.do'
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0'}), timeout=30) as response:
+            raw = response.read(2_000_001)
+        if len(raw) > 2_000_000:
+            return {'error':'page_too_large'}
+        text = raw.decode('utf-8', errors='replace')
+        parser = RegionForm()
+        parser.feed(text)
+        relevant = []
+        for script in re.findall(r'<script\b[^>]*>([\s\S]*?)</script>', text, re.I):
+            for line in script.splitlines():
+                if re.search(r'sido|region|ajax|codeList|commonCode', line, re.I) and not re.search(r'token|password|secret|csrf', line, re.I):
+                    relevant.append(line.strip()[:500])
+        return {'url':url, 'options':parser.options[:300], 'fields':parser.fields[:100], 'scripts':parser.scripts[:100], 'code_lines':relevant[:100]}
+    except Exception:
+        return {'url':url, 'error':'public_form_unavailable'}
 
 
 def query(path, params):
@@ -63,7 +116,8 @@ def query(path, params):
 
 def main():
     OUT.mkdir(exist_ok=True)
-    region_info, regions = query('openApiSidoCd3/openXmlSidoCd2', {'pageNo':'1','numOfRows':'300','type':'xml','ac_year':'2026'})
+    form = inspect_region_form()
+    region_info, regions = {'status':'not_retried_after_service_not_registered'}, []
     codes = []
     if region_info.get('total_count') == str(len(regions)) and regions:
         for row in regions:
@@ -71,14 +125,16 @@ def main():
             if re.fullmatch(r'[0-9]{1,12}', code) and code not in codes:
                 codes.append(code)
     region_info['regions'] = regions
-    selected = codes[0] if codes else ''
+    # This one-region exploratory probe does not assert nationwide coverage.
+    # 11 is the Seoul administrative-region code, tested against this service.
+    selected = codes[0] if codes else '11'
     employment_info, rows = query('openApiEmployInfo/openXmlEmployInfo', {'sidoCd':selected, 'type':'xml'})
     employment_info['queried_region'] = selected
-    employment_info['empty_region_probe'] = not bool(codes)
+    employment_info['unconfirmed_region_probe'] = not bool(codes)
     employment_info['statuses'] = sorted({row.get('STATUS', '') for row in rows})
     employment_info['employment_types'] = sorted({row.get('JOB_TYPE', '') for row in rows})
     employment_info['sample'] = [{key:row.get(key) for key in ('NO','ENT_NAME','ENT_TITLE','SIDO_CD','STATUS','JOB_TYPE','PUB_DATE','PUB_END_DATE','UPD_DATE','URL')} for row in rows[:3]]
-    report = {'region_service':region_info, 'employment_service':employment_info, 'codes':codes, 'requests':2}
+    report = {'public_region_form':form, 'region_service':region_info, 'employment_service':employment_info, 'codes':codes, 'api_requests':1}
     (OUT/'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     (OUT/'public-employment-rows.json').write_text(json.dumps(rows, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(report, ensure_ascii=False, indent=2))
