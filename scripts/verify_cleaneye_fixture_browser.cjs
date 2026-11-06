@@ -96,11 +96,12 @@ const server=http.createServer((req,res)=>{
       await page.screenshot({path:path.join(out,`matched-${width}.png`),fullPage:true});
       testFeed={source:'cleaneye',updated:null,collectionStatus:'not_collected',posts:[]};
       await page.goto(baseURL+'?q='+encodeURIComponent(token),{waitUntil:'networkidle'});
-      await page.waitForFunction(()=>DATA_HEALTH.cleaneye!=='pending');
+      await page.waitForFunction(()=>DATA_HEALTH.cleaneye!=='pending' && document.querySelector('#cpFeedStatus')?.textContent.includes('클린아이 잡플러스 첫 수집 전'));
       assert.equal(await page.evaluate(()=>DATA_HEALTH.cleaneye),'not_collected');
       assert((await page.locator('#cpFeedStatus').textContent()).includes('클린아이 잡플러스 첫 수집 전'));
       assert.deepEqual(errors,[]);
       reports.push({width,sourceLabel:true,publicSector:true,regularContractFilters:true,unknownDateSafe:true,rawCountPreserved:true,savedAfterReload:true,previousSavedPreserved:true,previousApplicationPreserved:true,detailHashReload:true,officialLink:true,detailHtmlEscaped:true,personalizedConditions:true,noPhantomOrgPage:true,notCollectedDistinct:true,overflow:false,pageErrors:errors.length});
+      console.log(JSON.stringify({fixtureViewport:width,passed:true}));
       await context.close();
     }
     fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({fixtureOnly:true,liveApiCalled:false,results:reports},null,2));
