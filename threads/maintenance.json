@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T16:33:42Z",
-  "last_observed_at": "2026-11-06T16:33:42Z",
+  "updated_at": "2026-11-06T17:58:27Z",
+  "last_observed_at": "2026-11-06T17:58:27Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "6b3e6fe9d009cd1c0be82a722135cc6531be6a1e",
+    "blob_sha": "1693e5661d2d90b1582cc619e68717abc595ef65",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -83,8 +83,29 @@
         "notice_id": "a306408",
         "format_id": "reader_story",
         "characters": 446
+      },
+      {
+        "scheduled_at": "2026-11-07T12:00:00+09:00",
+        "notice_id": "a306799",
+        "format_id": "key_facts",
+        "characters": 434,
+        "entry_sha256": "688d4c9ef06fa81a9f1c080e3cfcb43f2571dfdaea3a88a6938e07d904143a33",
+        "official_source": "https://nmc.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=271667&systemKindCode=MRS2",
+        "official_attachment": "https://nmc.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=03a9c2d6-0705-4b8b-a7db-e64d4a041467.pdf",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306799.html"
+      },
+      {
+        "scheduled_at": "2026-11-07T20:00:00+09:00",
+        "notice_id": "a306759",
+        "format_id": "application_checklist",
+        "characters": 411,
+        "entry_sha256": "5f2f047807520787b19c77c22f16dbc9701514ee722d0ce8a81cdfeb0ee3e017",
+        "official_source": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271548",
+        "official_attachment": "https://nmc.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=cd17734f-211c-4424-ab8d-0aabb1fd5294.pdf",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306759.html"
       }
-    ]
+    ],
+    "last_update_commit_sha": "bb23c31d99d22a0b355579e002845e23e84dd4e4"
   },
   "observed_runs": [
     {
@@ -216,7 +237,7 @@
     }
   ],
   "next_actions": [
-    "Inspect the first natural new-policy run and verify actual text, ID, media and format before one-time success report.",
+    "Check new scheduled runs against accepted claims, main history and official Meta verification; the first natural publication has already been reported.",
     "Preserve reserved entries; validate and replenish unstarted future drafts with current official evidence.",
     "On a new incident, preserve cause, failing run/attempt/head, repair PR, regression check and observed recovery in this file using the latest blob SHA."
   ],
@@ -370,6 +391,14 @@
           },
           "resume": "공식 첨부와 공개 프로필 경로 열람 후 검수. 국가고시 및 어학 조건 유지."
         }
+      },
+      "resolution": {
+        "status": "ready_saved",
+        "checked_at": "2026-11-06T17:58:27Z",
+        "notice_id": "a306799",
+        "queue_blob_sha": "1693e5661d2d90b1582cc619e68717abc595ef65",
+        "entry_sha256": "688d4c9ef06fa81a9f1c080e3cfcb43f2571dfdaea3a88a6938e07d904143a33",
+        "reason": "기관 공고·PDF에서 접수기간, 필수 자격, 교대·배치 및 수습/재임용 조건을 확인했고, 공개 프로필 및 커리어픽 개별 공고 경로 재확인 후 대기열 검사를 통과함."
       }
     },
     "2026-11-07T16:00:00+09:00": {
@@ -534,7 +563,73 @@
           }
         }
       },
-      "resume": "공식 PDF의 제출서류·추가 근무조건 및 공개 프로필 경로를 확인한 뒤 재검수."
+      "resume": "공식 PDF의 제출서류·추가 근무조건 및 공개 프로필 경로를 확인한 뒤 재검수.",
+      "resolution": {
+        "status": "ready_saved",
+        "checked_at": "2026-11-06T17:58:27Z",
+        "notice_id": "a306759",
+        "queue_blob_sha": "1693e5661d2d90b1582cc619e68717abc595ef65",
+        "entry_sha256": "5f2f047807520787b19c77c22f16dbc9701514ee722d0ce8a81cdfeb0ee3e017",
+        "reason": "기관 공고·PDF에서 접수기간, 필수 자격, 교대·배치 및 수습/재임용 조건을 확인했고, 공개 프로필 및 커리어픽 개별 공고 경로 재확인 후 대기열 검사를 통과함."
+      }
+    }
+  },
+  "last_writer_check": {
+    "checked_at": "2026-11-06T17:58:27Z",
+    "main_sha": "a79556903e2a4d79c1d78619fb72caba04361ae2",
+    "schedule_runs_examined": 41,
+    "latest_scheduled_run": {
+      "run_id": "42212136298",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-06T11:42:24Z",
+      "head_sha": "b66b36dadf26508b7a32ea90e90e4d15aaa8039c",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42212136298"
+    },
+    "new_incident_detected": false,
+    "publish_action": "none",
+    "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+    "source_snapshot_at": "2026-11-07T00:58:42+09:00",
+    "validation": "python scripts/threads_writer_input.py --check-queue queue-next.json: validated 08:00, 12:00 and 20:00; remote read-back matched scratch",
+    "new_ready": [
+      {
+        "scheduled_at": "2026-11-07T12:00:00+09:00",
+        "notice_id": "a306799",
+        "format_id": "key_facts",
+        "characters": 434,
+        "entry_sha256": "688d4c9ef06fa81a9f1c080e3cfcb43f2571dfdaea3a88a6938e07d904143a33",
+        "official_source": "https://nmc.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=271667&systemKindCode=MRS2",
+        "official_attachment": "https://nmc.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=03a9c2d6-0705-4b8b-a7db-e64d4a041467.pdf",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306799.html"
+      },
+      {
+        "scheduled_at": "2026-11-07T20:00:00+09:00",
+        "notice_id": "a306759",
+        "format_id": "application_checklist",
+        "characters": 411,
+        "entry_sha256": "5f2f047807520787b19c77c22f16dbc9701514ee722d0ce8a81cdfeb0ee3e017",
+        "official_source": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271548",
+        "official_attachment": "https://nmc.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=cd17734f-211c-4424-ab8d-0aabb1fd5294.pdf",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306759.html"
+      }
+    ],
+    "unresolved": [
+      {
+        "scheduled_at": "2026-11-07T16:00:00+09:00",
+        "status": "hold",
+        "resume": "공식 첨부에서 직무·근무조건과 실제 접수 시작/종료를 모두 대조한 뒤 기존 공고 또는 중복 없는 대안을 다시 검수"
+      }
+    ],
+    "profile": {
+      "url": "https://www.threads.com/@hid_119",
+      "rel_me": "<link href=\"https://kllollain-max.github.io/careerpick/\" rel=\"me\"/>",
+      "checked_at": "2026-11-07T02:56:39+09:00",
+      "root_listing_verified": true,
+      "listing_sources": [
+        "https://kllollain-max.github.io/careerpick/alio.json",
+        "https://kllollain-max.github.io/careerpick/jobs/available.js"
+      ]
     }
   }
 }
