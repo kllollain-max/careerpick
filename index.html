@@ -737,7 +737,7 @@ footer .src b{color:var(--ink)}
     <div class="src">
       <b>정보 출처 안내</b><br>
       커리어픽은 공개 채용정보를 수집·정리하고 취업 준비 안내 콘텐츠를 제공합니다. 수집 이후 공식 원문이 정정되거나 접수가 종료될 수 있습니다. 마감 시각·자격 요건은 바뀔 수 있으니 지원 전 반드시 공식 공고를 확인하세요.<br>
-      공공기관 공식 공고: <a href="https://job.alio.go.kr" target="_blank" rel="noopener">잡알리오</a> · <a href="https://www.gojobs.go.kr" target="_blank" rel="noopener">나라일터</a> · <a href="https://www.work24.go.kr" target="_blank" rel="noopener">고용24</a>
+      공공기관 공식 공고: <a href="https://job.alio.go.kr" target="_blank" rel="noopener">잡알리오</a> · <a href="https://www.gojobs.go.kr" target="_blank" rel="noopener">나라일터</a> · <a href="https://job.cleaneye.go.kr" target="_blank" rel="noopener">클린아이 잡플러스</a> · <a href="https://www.work24.go.kr" target="_blank" rel="noopener">고용24</a>
     </div>
     <nav class="flinks"><a href="https://open.kakao.com/o/gcWQTaQi" target="_blank" rel="noopener">💬 홈페이지 건의·운영자 대화</a><a href="prep.html">🎓 취업 준비실</a><a href="guides/">취업 준비 가이드</a><a href="about.html">사이트 소개</a><a href="privacy.html">개인정보처리방침</a><a href="contact.html">문의</a><a href="https://m.blog.naver.com/hid4989-3" target="_blank" rel="noopener">블로그</a></nav>
     <p class="biz">📮 광고·제휴 문의: <a class="mail" href="contact.html" data-u="hid4989-3" data-d="naver.com">문의 페이지</a></p>
@@ -762,7 +762,7 @@ footer .src b{color:var(--ink)}
 const COUPANG = false;    // 쿠팡 추천 상품 표시 (ads.py 설정 후 true로)
 let POSTS = [], UPDATED = null, ADS = [];
 let CP_DEDUP_REMOVED = 0;
-const DATA_HEALTH = {posts:"pending", alio:"pending", monitor:"pending",detail:"pending"};
+const DATA_HEALTH = {posts:"pending", alio:"pending", cleaneye:"pending", monitor:"pending",detail:"pending"};
 // Preserve blog entries independently of merged official feeds for accurate search.
 let CP_BLOG_SEARCH = [];
 // Keep the pre-rendered blog cards as a fallback if posts.json is unavailable.
@@ -803,9 +803,9 @@ function cpRenderFeedStatus(){
   updateDataHealth();
   const el = $("cpFeedStatus");
   if(!el) return;
-  const names = {gojobs:"나라일터",posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보",work24:"고용24"};
+  const names = {cleaneye:"클린아이 잡플러스",gojobs:"나라일터",posts:"블로그",alio:"잡알리오",monitor:"기관 공고",enterprise:"기업 채용",detail:"상세 정보",work24:"고용24"};
   const parts = Object.entries(DATA_HEALTH).map(([key,value]) =>
-    `${names[key] || key} ${value === "awaiting_approval" ? "수집 비활성" : value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
+    `${names[key] || key} ${value === "awaiting_approval" ? "수집 비활성" : value === "not_collected" ? "첫 수집 전" : value === "ok" ? "정상" : value === "empty" ? "제공 공고 없음" : value === "error" ? "불러오기 실패" : "확인 중"}`);
   const stamp = UPDATED ? new Date(UPDATED) : null;
   const valid = stamp && Number.isFinite(stamp.getTime());
   const hours = valid ? (Date.now()-stamp.getTime())/3600000 : Infinity;
@@ -859,6 +859,18 @@ async function loadGojobs(){
   }catch(_){DATA_HEALTH.gojobs="error";}
 }
 
+async function loadCleaneye(){
+  try{
+    const list=await cpReadFeed("cleaneye.json","cleaneye");
+    const collection=CP_FEED_COLLECTION.cleaneye;
+    if(collection==="not_collected" && !list.length && !CP_FEED_ISSUES.cleaneye.length){DATA_HEALTH.cleaneye="not_collected";return;}
+    if(collection!=="verified" || list.some(p=>!p.cleaneye || !CPHome.cleaneye(p)))throw Error("cleaneye_feed");
+    const ids=new Set(POSTS.map(p=>p.id));
+    for(const p of list){if(!ids.has(p.id)){POSTS.push(p);ids.add(p.id);}}
+    DATA_HEALTH.cleaneye=CP_FEED_ISSUES.cleaneye.length ? "error" : list.length ? "ok" : "empty";
+  }catch(_){DATA_HEALTH.cleaneye="error";}
+}
+
 async function loadMonitoredJobs(){
   try{
     const list = await cpReadFeed("monitor.json","monitor");
@@ -890,6 +902,7 @@ async function load(){
   initSeen();
   await loadAlio();
   await loadGojobs();
+  await loadCleaneye();
   await loadMonitoredJobs();
   await cpLoadEnterprise();
   await cpLoadWork24();
@@ -1157,6 +1170,7 @@ function cpWorkRegionMatch(p, region){
 }
 function cpConditionMatches(p, prefs = PREFS){
   if(p.type !== 'j') return false;
+  if(p.cleaneye && CPHome.deadline(p)?.cls==='closed') return false;
   if(p.due && new Date(p.due).getTime() < Date.now()) return false;
   const emp = Array.isArray(p.emp) ? p.emp : [];
   const edu = Array.isArray(p.edu) ? p.edu : [];
@@ -1165,7 +1179,7 @@ function cpConditionMatches(p, prefs = PREFS){
   if(prefs.region.length && !prefs.region.some(r => cpWorkRegionMatch(p,r))) return false;
   if(prefs.cat.length && !prefs.cat.includes(p.cat)) return false;
   const kws = String(prefs.kw||'').split(/[,\s]+/).map(s=>s.trim().toLowerCase()).filter(Boolean);
-  const searchable = [p.title,p.org,p.cat,p.desc].join(' ').toLowerCase();
+  const searchable = [p.title,p.org,p.cat,p.desc,p.cleaneye ? p.text : ''].join(' ').toLowerCase();
   if(kws.length && !kws.some(k=>searchable.includes(k))) return false;
   return true;
 }
@@ -1181,7 +1195,7 @@ function preferenceReasons(p, prefs = PREFS){
   if(edu) reasons.push('표기 학력 '+edu);
   if(prefs.cat.includes(p.cat)) reasons.push('관심분야 '+p.cat);
   const words=String(prefs.kw||'').split(/[,\s]+/).filter(Boolean);
-  const search=[p.title,p.org,p.cat,p.desc].join(' ').toLowerCase();
+  const search=[p.title,p.org,p.cat,p.desc,p.cleaneye ? p.text : ''].join(' ').toLowerCase();
   const word=words.find(w=>search.includes(w.toLowerCase()));
   if(word) reasons.push('관심키워드 '+word);
   return reasons;
@@ -1216,6 +1230,7 @@ function cpRecommendationScore(p, now){
 function cpEligibilityNotes(p){
   if(!p || p.type !== 'j') return [];
   const notes=[];
+  if(p.cleaneye && (!p.due || ['verification_pending','source_error','invalid_date'].includes(p.receptionState)))notes.push('모집 상태·접수 일정 확인 필요');
   const emp=Array.isArray(p.emp)?p.emp:[];
   const empKinds=emp.filter(e=>/정규직|계약직|인턴|공무직|무기계약|파견|기간제/.test(e));
   if(new Set(empKinds).size>1) notes.push('모집 분야별 고용형태 확인 필요');
@@ -1245,7 +1260,7 @@ function cpSavedId(p){return [p.id,...(p.sourceIds||[])].find(id=>SAVED.has(id))
 function cpApplicationId(p){return [p.id,...(p.sourceIds||[])].find(id=>APPS[id]) || p.id;}
 const inTab = p => (state.tab === "all" ? p.type === "j" : false) || (state.tab === "saved" ? SAVED.has(cpSavedId(p)) : state.tab === "mine" ? matchPrefs(p) : p.type === state.tab);
 const isNew = (p, now) => p.alio ? now - p.pub < 36*3600e3 : SEEN_BASE ? !SEEN_BASE.has(p.id) : now - p.pub < 24*3600e3;
-const haystack = p => [p.title, p.desc, p.cat, p.org, p.region, ...(p.emp||[]), ...(p.edu||[]), ...(p.exam||[])].join(" ").toLowerCase();
+const haystack = p => [p.title, p.desc, p.cat, p.org, p.region, p.cleaneye ? p.text : '', ...(p.emp||[]), ...(p.edu||[]), ...(p.exam||[])].join(" ").toLowerCase();
 // 지역은 공고의 근무지역 필드만 기준으로 판정합니다. 미기재 공고는 지역 선택 시 제외됩니다.
 function cpRegionMatches(p, region){
   if(!region) return true;
@@ -1314,6 +1329,7 @@ function cpVerifiedRecruitLinks(p){
   return null;
 }
 function officialLink(p){
+  if(p.cleaneye){const l=cpJobLinks(p);return {href:l.primary,label:"클린아이 잡플러스 원문"};}
   if(p.gojobs) return {href:p.url,label:"나라일터 원문"};
   const verified = cpVerifiedRecruitLinks(p);
   if(verified) return {href:verified.notice, label:"공식 공고 원문"};
@@ -1362,10 +1378,10 @@ function standaloneJobLink(p){
 function jobCard(p, now){
   const d = dday(p, now);
   const tile = d
-    ? `<div class="dd ${d.cls}">${d.cls==="verify" ? "" : `<span class="big${d.n===0 ? " dday" : ""}">${d.big}</span>`}<span class="sm">${d.cls==="closed" ? md(p.due) : "~" + md(p.due)}</span></div>`
+    ? `<div class="dd ${d.cls}">${d.cls==="verify" && !p.cleaneye ? "" : `<span class="big${d.n===0 ? " dday" : ""}">${d.big}</span>`}${p.due ? `<span class="sm">${d.cls==="closed" ? md(p.due) : "~" + md(p.due)}</span>` : ""}</div>`
     : `<div class="dd none"><span class="big">일정 확인</span></div>`;
   const tags = [];
-  if(p.n) tags.push(`<span class="tag n">${esc(p.n)}명</span>`);
+  if(p.n) tags.push(`<span class="tag n">${esc(p.cleaneye ? cpRecruitCount(p.n) : p.n+'명')}</span>`);
   (p.emp||[]).filter(e => !/^(신입|경력)$/.test(e)).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
   (p.edu||[]).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
   const off = officialLink(p);
@@ -1379,7 +1395,7 @@ function jobCard(p, now){
     <a class="main" href="${esc(jobHref(p))}"${jobAnchorAttrs(p)}>
       ${tile}
       <div class="body">
-        <div class="org">${isNew(p,now) ? '<span class="new">NEW</span>' : ""}${p.gojobs ? '<span class="ofc">나라일터</span>' : isInternalJob(p) ? '<span class="ofc">공식</span>' : '<span class="hae">해설</span>'}${p.org ? `<span>${esc(p.org)}</span>` : `<span>${esc(p.cat)}</span>`}${regionLabel(p) ? `<span class="rg">· ${esc(regionLabel(p))}</span>` : ""}</div>
+        <div class="org">${isNew(p,now) ? '<span class="new">NEW</span>' : ""}${p.cleaneye ? '<span class="ofc">클린아이 잡플러스</span>' : p.gojobs ? '<span class="ofc">나라일터</span>' : isInternalJob(p) ? '<span class="ofc">공식</span>' : '<span class="hae">해설</span>'}${p.org ? `<span>${esc(p.org)}</span>` : `<span>${esc(p.cat)}</span>`}${regionLabel(p) ? `<span class="rg">· ${esc(regionLabel(p))}</span>` : ""}</div>
         <h2 class="title">${esc(cleanTitle(p.title))}</h2>
         ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
         ${preferenceBadge(p)}
@@ -1403,15 +1419,15 @@ function rowCard(p, now){
   const meta = [];
   if(ap) meta.push(ST[ap.st].label);
   const spr = specOf(p); if(spr) meta.unshift(SPEC_V[spr.v].icon + " " + SPEC_V[spr.v].label);
-  if(p.n) meta.push(p.n + "명");
+  if(p.n) meta.push(p.cleaneye ? cpRecruitCount(p.n) : p.n + "명");
   if((p.emp||[])[0]) meta.push(p.emp[0]);
   if(p.due) meta.push("마감 " + dueLong(p.due, p.dueHasTime));
   const href = esc(jobHref(p));
   const attr = jobAnchorAttrs(p);
   return `<li class="card row ${d && d.cls === "closed" ? "is-closed" : ""}">
     <a class="main" href="${href}"${attr}>
-      <span class="rd ${d ? d.cls : ""}">${d ? (d.cls === "verify" ? "~" + md(p.due) : d.big) : "일정 확인"}</span>
-      <span class="rb"><span class="ro">${isNew(p,now) ? "NEW · " : ""}${p.gojobs ? "나라일터" : isInternalJob(p) ? "공식" : "해설"} · ${esc(p.org || p.cat)}${regionLabel(p) ? " · " + esc(regionLabel(p)) : ""}</span>
+      <span class="rd ${d ? d.cls : ""}">${d ? (d.cls === "verify" && !p.cleaneye ? "~" + md(p.due) : d.big) : "일정 확인"}</span>
+      <span class="rb"><span class="ro">${isNew(p,now) ? "NEW · " : ""}${p.cleaneye ? "클린아이 잡플러스" : p.gojobs ? "나라일터" : isInternalJob(p) ? "공식" : "해설"} · ${esc(p.org || p.cat)}${regionLabel(p) ? " · " + esc(regionLabel(p)) : ""}</span>
       <span class="rt">${esc(cleanTitle(p.title))}</span>
       <span class="rm">${esc(meta.join(" · "))}</span>${preferenceBadge(p)}</span>
     </a>
@@ -1436,7 +1452,7 @@ function sortKey(p, now){
   // 마감순: 모집 중인 채용공고(마감 빠른 순) → 신청 마감 있는 정책 → 나머지(최신순) → 마감 지난 글
   const d = dday(p, now);
   if(d && d.cls === "closed") return [3, -p.pub];
-  if(p.type === "j" && d) return [0, d.n, p.due.getTime()];
+  if(p.type === "j" && d) return [0, d.n, p.due ? p.due.getTime() : Infinity];
   if(d) return [1, d.n];
   if(p.type === "j") return [1.5, -p.pub];
   return [2, -p.pub];
@@ -1984,10 +2000,10 @@ async function openJob(id, push = true){
   $("jvBody").innerHTML = jobViewHTML(p, null);
   $("jvBack").focus();
   $("jobview").scrollTop = 0;
-  const det = p.gojobs ? (p.gojobsDetail || {}) : p.alio ? ((await alioDetail())[id] || {}) : {};
+  const det = p.cleaneye ? (p.cleaneyeDetail || {}) : p.gojobs ? (p.gojobsDetail || {}) : p.alio ? ((await alioDetail())[id] || {}) : {};
   if(JV === id) $("jvBody").innerHTML = jobViewHTML(p, det);
 }
-function refreshJobView(){ const p = POSTS.find(x => x.id === JV); if(p) $("jvBody").innerHTML = jobViewHTML(p, p.gojobs ? (p.gojobsDetail || {}) : p.alio ? ((ALIO_DETAIL || {})[JV] || {}) : {}); }
+function refreshJobView(){ const p = POSTS.find(x => x.id === JV); if(p) $("jvBody").innerHTML = jobViewHTML(p, p.cleaneye ? (p.cleaneyeDetail || {}) : p.gojobs ? (p.gojobsDetail || {}) : p.alio ? ((ALIO_DETAIL || {})[JV] || {}) : {}); }
 async function shareJob(){
   const p = POSTS.find(x => x.id === JV); if(!p) return;
   const url = "https://kllollain-max.github.io/careerpick/?src=share#job=" + p.id;
@@ -2018,6 +2034,7 @@ function cpIsLandingPage(value){
   return (!path || path === "/") && !u.search;
 }
 function cpJobLinks(p){
+  if(p.cleaneye){const url=CPHome.cleaneyeUrl(p.url);if(url)return {primary:url,label:"클린아이 잡플러스 원문 ↗",exact:true,apply:null};}
   if(p.gojobs){const u=cpValidExternalUrl(p.url);if(u && u.hostname==="www.gojobs.go.kr" && u.pathname==="/apmView.do" && "gojobs-"+u.searchParams.get("empmnsn")===p.id)return {primary:u.href,label:"나라일터 공식 원문 ↗",exact:true,apply:null};}
 
   // 10단계: JOB-ALIO에서 확인된 모바일 개별 상세 주소를 사용합니다.
@@ -2107,7 +2124,7 @@ function jobViewHTML(p, det){
   if(!det?.hireTypeNmLst && (p.emp||[]).length) rows.push(["고용형태", p.emp.join(" · ")]);
   if(!det?.recrutSeNm && CPHome.career(p).length) rows.push(["경력", CPHome.career(p).join(" · ")]);
   const endTxt = p.due ? dueLong(p.due, p.dueHasTime) + (p.dueHasTime ? "" : " · 시각 미확인") : p.always ? "상시 모집 (원문 확인)" : "접수 일정 미확인";
-  const period = (p.officialNoticeNumber || p.gojobs) && p.start ? `${p.start} ~ ${endTxt}` : p.alio ? '실제 접수 시작일·마감일·마감시각은 공식 첨부 공고 확인' : `시작일 미확인 ~ ${endTxt}`;
+  const period = (p.officialNoticeNumber || p.gojobs || p.cleaneye) && p.start ? `${p.start} ~ ${endTxt}` : p.alio ? '실제 접수 시작일·마감일·마감시각은 공식 첨부 공고 확인' : `시작일 미확인 ~ ${endTxt}`;
   rows.push(["접수 기간", period]);
   if(det?.pbancBgngYmd || det?.pbancEndYmd)rows.push(["ALIO 게시기간 · 접수기간과 다를 수 있음",`${String(det.pbancBgngYmd || '미기재')} ~ ${String(det.pbancEndYmd || '미기재')}`]);
   for(const [k, label] of JV_SUMMARY){
@@ -2118,7 +2135,17 @@ function jobViewHTML(p, det){
     rows.push([label, plainText(v).replace(/,\s*/g, ", ")]);
   }
   const secs = [];
-  if(det){
+  if(p.cleaneye && det){
+    const labelKey=value=>plainText(value).replace(/\s+/g,"");
+    for(const [label,value] of Object.entries(det)){
+      if(!/[가-힣]/.test(label) || !["string","number"].includes(typeof value))continue;
+      const text=plainText(value);if(!text)continue;
+      const row=rows.find(([key])=>labelKey(key)===labelKey(label));
+      if(row)row[1]=text;
+      else if(text.length>160 || text.includes("\n") || /자격|전형|제출|절차|상세|내용|우대/.test(label))secs.push([label,text]);
+      else rows.push([label,text]);
+    }
+  }else if(det){
     const used = new Set([...JV_SKIP, ...JV_SUMMARY.map(x => x[0])]);
     for(const [k, label] of JV_SECTIONS){ if(det[k]){ secs.push([label, det[k]]); used.add(k); } }
     for(const [k, v] of Object.entries(det)){
@@ -2132,7 +2159,7 @@ function jobViewHTML(p, det){
   const off = links.apply ? `<a href="${esc(links.apply)}" target="_blank" rel="noopener noreferrer">${cpLinkIsSpecific(links.apply) ? "기관 채용공고 ↗" : "기관 채용 사이트 ↗"}</a>` : "";
   const linkNotice = links.exact ? "" : `<p class="cp-link-warning">⚠️ 개별 공고 원문 주소가 확인되지 않았습니다. 연결된 기관 페이지 또는 검색 결과에서 기관명·공고 제목·접수기간을 확인해 주세요.</p>`;
   return `<div class="jv-head">
-      <div class="jv-org"><span class="ofc">${p.gojobs ? "나라일터" : "공식 공고"}</span><span>${esc(p.org)}</span>${p.region ? `<span class="rg" style="color:var(--muted);font-weight:500">· ${esc(p.region)}</span>` : ""}</div>
+      <div class="jv-org"><span class="ofc">${p.cleaneye ? "클린아이 잡플러스" : p.gojobs ? "나라일터" : "공식 공고"}</span><span>${esc(p.org)}</span>${p.region ? `<span class="rg" style="color:var(--muted);font-weight:500">· ${esc(p.region)}</span>` : ""}</div>
       <h1 class="jv-title">${esc(p.title)}</h1>
       <div class="jv-due">${d ? `<span class="dd ${d.cls}"><span class="big">${d.big}</span></span>` : ""}<span class="${d && d.cls === "hot" ? "due hot" : "due"}">${p.due ? (p.alio ? "ALIO 게시 종료일 · 접수마감 원문 확인 " : "접수 마감 ") + endTxt : endTxt}</span></div>
       <dl class="jv-grid">${rows.map(([a,b]) => `<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("")}</dl>
@@ -2140,7 +2167,7 @@ function jobViewHTML(p, det){
     ${p.gojobs ? "" : `<a class="jv-primary" href="${esc(links.primary)}" target="_blank" rel="noopener noreferrer">${links.exact ? "공식 채용공고 바로가기 ↗" : links.label}</a>`}
     ${secs.length ? `<nav class="jv-toc" aria-label="상세 목차">${secs.map(([a],i)=>`<a href="#cpSection${i}">${esc(a)}</a>`).join("")}</nav>` : ""}
     ${warnings.map(w=>`<p class="cp-link-warning" role="note">${esc(w)}</p>`).join('')}
-    <p class="jv-note">자료 묶음 조회 시각: ${esc((p.alio ? CP_FEED_STAMPS.alio : p.gojobs ? CP_FEED_STAMPS.gojobs : UPDATED) || '미확인')} · 개별 원문에 대한 사람의 검토 시각이 아닙니다. 필수자격·우대조건·제출서류와 정정 내용은 공식 공고를 함께 확인하세요.</p>
+    <p class="jv-note">자료 묶음 조회 시각: ${esc((p.alio ? CP_FEED_STAMPS.alio : p.cleaneye ? CP_FEED_STAMPS.cleaneye : p.gojobs ? CP_FEED_STAMPS.gojobs : UPDATED) || '미확인')} · 개별 원문에 대한 사람의 검토 시각이 아닙니다. 필수자격·우대조건·제출서류와 정정 내용은 공식 공고를 함께 확인하세요.</p>
     ${specBoxHTML(p, det)}
     ${det === null ? "" : ckBoxHTML(p)}
     ${det === null ? `<div class="jv-sec"><p style="color:var(--muted)">상세 내용을 불러오는 중이에요…</p></div>`
@@ -2148,8 +2175,8 @@ function jobViewHTML(p, det){
       : `<div class="jv-sec"><p>자세한 지원 자격과 전형 절차는 아래 <b>원문 공고</b>에서 확인해 주세요.</p></div>`}
     ${cpApplicationGuide(p, det, links)}
     ${p.alio && /^a[0-9]+$/.test(p.id) ? `<a class="jv-org-link" href="/careerpick/jobs/${encodeURIComponent(p.id)}.html">🔎 채용공고 독립 상세페이지 보기 →</a>` : ""}
-    ${p.gojobs ? "" : `<a class="jv-org-link" href="${orgFile(p.org)}">🏢 ${esc(p.org)} 채용 이력·다음 공고 예상 보기 →</a>`}
-    <p class="jv-note">${p.alio ? "이 정보는 공공기관 경영정보 공개시스템(알리오)의 공고를 자동으로 정리한 것이에요." : "이 정보는 기관의 공개 채용공고를 바탕으로 정리한 것이에요."} 마감 시각·제출 서류·지원 자격은 반드시 원문 공고에서 확인하세요.</p>
+    ${p.gojobs || p.cleaneye ? "" : `<a class="jv-org-link" href="${orgFile(p.org)}">🏢 ${esc(p.org)} 채용 이력·다음 공고 예상 보기 →</a>`}
+    <p class="jv-note">${p.cleaneye ? "이 정보는 클린아이 잡플러스의 지방공공기관 채용정보를 바탕으로 정리한 것이에요." : p.alio ? "이 정보는 공공기관 경영정보 공개시스템(알리오)의 공고를 자동으로 정리한 것이에요." : "이 정보는 기관의 공개 채용공고를 바탕으로 정리한 것이에요."} 마감 시각·제출 서류·지원 자격은 반드시 원문 공고에서 확인하세요.</p>
     ${linkNotice}
     <div class="jv-bar"><div class="in">
       <div class="main-btns"><a class="primary" href="${esc(links.primary)}" target="_blank" rel="noopener">${links.label}</a>${off}${cpMergedSourceLinks(p,links.primary)}</div>

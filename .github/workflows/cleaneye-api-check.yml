@@ -1,0 +1,124 @@
+name: Verify Cleaneye employment API candidate
+on:
+  push:
+    branches: [codex/cleaneye-api-20261107]
+    paths:
+      - cleaneye.py
+      - cleaneye.json
+      - scripts/collect_cleaneye.py
+      - scripts/build_public_site.py
+      - scripts/verify_cleaneye_browser.cjs
+      - scripts/verify_cleaneye_fixture_browser.cjs
+      - tests/test_cleaneye*.py
+      - tests/test_cleaneye*.cjs
+      - homepage-ux.js
+      - homepage-ui.js
+      - index.html
+      - public-files.json
+      - .github/workflows/cleaneye-api-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: careerpick-cleaneye-review-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate collection, source preservation and existing homepage behavior
+        run: |
+          python -m unittest discover -s tests -p 'test_cleaneye*.py'
+          python -m unittest discover -s tests -p test_gojobs_collection.py
+          python -m unittest discover -s tests -p test_operations.py
+          node --test tests/test_cleaneye_ui.cjs tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_search_navigation.cjs
+      - name: Build public site without collecting or changing source data
+        run: python scripts/build_public_site.py
+      - name: Install browser and Korean fonts
+        run: |
+          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+          node "$RUNNER_TEMP/cp-browser/node_modules/playwright/cli.js" install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Verify source filters, details and preserved records with in-memory fixtures
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+        run: node scripts/verify_cleaneye_fixture_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cleaneye-offline-check-${{ github.run_id }}
+          path: |
+            cleaneye-fixture-validation/
+            build-report.json
+          retention-days: 14
+          if-no-files-found: error
+  live:
+    needs: offline
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect approved API into isolated candidate
+        env:
+          CLEANEYE_KEY: ${{ secrets.CLEANEYE_KEY || secrets.DATA_GO_KR_KEY }}
+        run: python scripts/collect_cleaneye.py
+      - name: Build candidate in a separate checkout
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/cleaneye-preview" HEAD
+          cp cleaneye-operation-output/cleaneye.json "$RUNNER_TEMP/cleaneye-preview/cleaneye.json"
+          cd "$RUNNER_TEMP/cleaneye-preview"
+          python scripts/build_public_site.py
+      - name: Install browser and Korean fonts
+        run: |
+          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright
+          node "$RUNNER_TEMP/cp-browser/node_modules/playwright/cli.js" install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Verify candidate cards, details and saved records at mobile and desktop widths
+        env:
+          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
+          CLEANEYE_PREVIEW_ROOT: ${{ runner.temp }}/cleaneye-preview
+        run: |
+          mkdir -p "$RUNNER_TEMP/cleaneye-http"
+          ln -s "$RUNNER_TEMP/cleaneye-preview/dist" "$RUNNER_TEMP/cleaneye-http/careerpick"
+          python -m http.server 8000 --directory "$RUNNER_TEMP/cleaneye-http" > "$RUNNER_TEMP/cleaneye-http.log" 2>&1 &
+          node scripts/verify_cleaneye_browser.cjs
+      - name: Record verification summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          report = Path('cleaneye-operation-output/report.json')
+          if report.exists():
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+                  summary.write('## Cleaneye API candidate\n\n```json\n' + report.read_text() + '\n```\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cleaneye-api-candidate-${{ github.run_id }}
+          path: |
+            cleaneye-operation-output/report.json
+            cleaneye-operation-output/cleaneye.json
+            cleaneye-browser-validation/
+            ${{ runner.temp }}/cleaneye-preview/build-report.json
+          retention-days: 14
+          if-no-files-found: error

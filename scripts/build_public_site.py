@@ -25,7 +25,7 @@ HOST = "kllollain-max.github.io"
 PREFIX = "/careerpick/"
 BASE = "https://" + HOST + PREFIX
 OLD_HOST = "jobinfo-hub.github.io"
-SOURCE_JSON = ("gojobs.json", "alio.json", "alio-detail.json", "monitor.json", "posts.json", "qnet.json", "enterprise_jobs.json")
+SOURCE_JSON = ("cleaneye.json", "gojobs.json", "alio.json", "alio-detail.json", "monitor.json", "posts.json", "qnet.json", "enterprise_jobs.json")
 BLOCKED_SCRIPT_MARKERS = ("googlesyndication.com", "wcs.pstatic.net", "wcs_add", "wcs_do(", "adsbygoogle")
 SCRIPT = re.compile(r"<script\b[^>]*>[\s\S]*?</script\s*>", re.I)
 

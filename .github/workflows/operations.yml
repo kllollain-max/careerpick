@@ -45,6 +45,12 @@ jobs:
         env:
           GOJOBS_KEY: ${{ secrets.GOJOBS_KEY }}
         run: python scripts/collect_gojobs.py
+      - name: Validate independent Cleaneye source
+        id: cleaneye
+        continue-on-error: true
+        env:
+          CLEANEYE_KEY: ${{ secrets.CLEANEYE_KEY || secrets.DATA_GO_KR_KEY }}
+        run: python scripts/collect_cleaneye.py
       - name: Select validated data
         id: candidate
         run: |
@@ -69,6 +75,12 @@ jobs:
           if gojobs_ok and gojobs.get('changed'):
               shutil.copyfile('gojobs-operation-output/gojobs.json','gojobs.json')
               changed=True
+          cleaneye_report=Path('cleaneye-operation-output/report.json')
+          cleaneye=json.loads(cleaneye_report.read_text()) if cleaneye_report.exists() else {}
+          cleaneye_ok=cleaneye.get('status') in ('changed','unchanged') and cleaneye.get('originals_preserved') is True
+          if cleaneye_ok and cleaneye.get('changed'):
+              shutil.copyfile('cleaneye-operation-output/cleaneye.json','cleaneye.json')
+              changed=True
           if exam_ok and changed:
               shutil.copyfile('exam-operation-output/data/civil-service/2026.json','data/civil-service/2026.json')
               shutil.copyfile('exam-operation-output/exam-status.json','exam-status.json')
@@ -89,6 +101,7 @@ jobs:
           git add alio.json alio-detail.json operations-status.json data/civil-service/2026.json
           if test -f exam-status.json; then git add exam-status.json; fi
           if test -f gojobs.json; then git add gojobs.json; fi
+          if test -f cleaneye.json; then git add cleaneye.json; fi
           git commit -m 'Update validated public recruitment snapshots'
           git push origin HEAD:main
       - uses: actions/configure-pages@v5
@@ -126,9 +139,11 @@ jobs:
           r['exam_source']=json.loads(exam_path.read_text()) if exam_path.exists() else {'status':'not_run'}
           gojobs_path=Path('gojobs-operation-output/report.json')
           r['gojobs_source']=json.loads(gojobs_path.read_text()) if gojobs_path.exists() else {'status':'not_run'}
+          cleaneye_path=Path('cleaneye-operation-output/report.json')
+          r['cleaneye_source']=json.loads(cleaneye_path.read_text()) if cleaneye_path.exists() else {'status':'not_run'}
           r['storage']=os.environ['STORAGE_OUTCOME'] if os.environ['CHANGED']=='true' else 'unchanged'
           r['public_check']=os.environ['PUBLIC_OUTCOME']
-          r['overall']='success' if os.environ['JOB_STATUS']=='success' and r['exam_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('official_page_failed',1)==0 else 'partial_or_failed'
+          r['overall']='success' if os.environ['JOB_STATUS']=='success' and r['exam_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('official_page_failed',1)==0 and r['cleaneye_source'].get('status') in ('changed','unchanged') else 'partial_or_failed'
           p.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n')
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('```json\n'+json.dumps(r,ensure_ascii=False,indent=2)+'\n```\n')
           PY
@@ -142,4 +157,5 @@ jobs:
             build-report.json
             exam-operation-output/report.json
             gojobs-operation-output/report.json
+            cleaneye-operation-output/report.json
           retention-days: 30
