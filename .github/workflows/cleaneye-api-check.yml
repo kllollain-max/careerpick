@@ -44,14 +44,15 @@ jobs:
           node --test tests/test_cleaneye_ui.cjs tests/test_homepage_ux.cjs tests/test_record_migration.cjs tests/test_search_navigation.cjs
       - name: Build public site without collecting or changing source data
         run: python scripts/build_public_site.py
+      - name: Install browser testing package
+        timeout-minutes: 2
+        run: npm install --no-save --no-package-lock --no-audit --no-fund --fetch-retries=1 --fetch-timeout=30000 playwright@1.56.1
       - name: Install browser and Korean fonts
+        timeout-minutes: 5
         run: |
-          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright@1.56.1
-          node "$RUNNER_TEMP/cp-browser/node_modules/playwright/cli.js" install --with-deps chromium
+          npx playwright install --with-deps chromium
           sudo apt-get install -y fonts-noto-cjk
       - name: Verify source filters, details and preserved records with in-memory fixtures
-        env:
-          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
         run: node scripts/verify_cleaneye_fixture_browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -86,14 +87,16 @@ jobs:
           cp cleaneye-operation-output/cleaneye.json "$RUNNER_TEMP/cleaneye-preview/cleaneye.json"
           cd "$RUNNER_TEMP/cleaneye-preview"
           python scripts/build_public_site.py
+      - name: Install browser testing package
+        timeout-minutes: 2
+        run: npm install --no-save --no-package-lock --no-audit --no-fund --fetch-retries=1 --fetch-timeout=30000 playwright@1.56.1
       - name: Install browser and Korean fonts
+        timeout-minutes: 5
         run: |
-          npm install --prefix "$RUNNER_TEMP/cp-browser" --no-package-lock --ignore-scripts playwright@1.56.1
-          node "$RUNNER_TEMP/cp-browser/node_modules/playwright/cli.js" install --with-deps chromium
+          npx playwright install --with-deps chromium
           sudo apt-get install -y fonts-noto-cjk
       - name: Verify candidate cards, details and saved records at mobile and desktop widths
         env:
-          NODE_PATH: ${{ runner.temp }}/cp-browser/node_modules
           CLEANEYE_PREVIEW_ROOT: ${{ runner.temp }}/cleaneye-preview
         run: |
           mkdir -p "$RUNNER_TEMP/cleaneye-http"
