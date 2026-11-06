@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T17:58:27Z",
-  "last_observed_at": "2026-11-06T17:58:27Z",
+  "updated_at": "2026-11-06T18:01:06Z",
+  "last_observed_at": "2026-11-06T18:01:06Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "1693e5661d2d90b1582cc619e68717abc595ef65",
+    "blob_sha": "014fd6eb3c5a35238d809e04625e9ee0c1d96c0a",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -95,6 +95,15 @@
         "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306799.html"
       },
       {
+        "scheduled_at": "2026-11-07T16:00:00+09:00",
+        "notice_id": "a306443",
+        "format_id": "job_explainer",
+        "characters": 338,
+        "entry_sha256": "be555ba182a7fc1f39e34e51ec8ef3e8e69cebc42b6f7438fef7382f1f5c3ceb",
+        "official_source": "https://recruit.incruit.com/kdemo/job/2610280004",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306443.html"
+      },
+      {
         "scheduled_at": "2026-11-07T20:00:00+09:00",
         "notice_id": "a306759",
         "format_id": "application_checklist",
@@ -105,7 +114,7 @@
         "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306759.html"
       }
     ],
-    "last_update_commit_sha": "bb23c31d99d22a0b355579e002845e23e84dd4e4"
+    "last_update_commit_sha": "5ca48cdc19488a7df5509bbaedf52ec332ff5fa4"
   },
   "observed_runs": [
     {
@@ -500,6 +509,14 @@
           },
           "resume": "공식 채용 공고문에서 해당 모집단위 계약조건·접수기간·직무를 확인하고 공개 경로를 대조한다."
         }
+      },
+      "resolution": {
+        "status": "ready_saved_with_alternative",
+        "checked_at": "2026-11-06T18:01:06Z",
+        "notice_id": "a306443",
+        "queue_blob_sha": "014fd6eb3c5a35238d809e04625e9ee0c1d96c0a",
+        "entry_sha256": "be555ba182a7fc1f39e34e51ec8ef3e8e69cebc42b6f7438fef7382f1f5c3ceb",
+        "reason": "기존 간호직 첨부 조건은 확인되지 않아 그대로 보존. 기관의 채용 접수처가 제공한 회계직 공식 공고에서 직무·조건·접수기간을 확인하고 중복 없는 대안을 검증함."
       }
     },
     "2026-11-07T20:00:00+09:00": {
@@ -575,7 +592,7 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-06T17:58:27Z",
+    "checked_at": "2026-11-06T18:01:06Z",
     "main_sha": "a79556903e2a4d79c1d78619fb72caba04361ae2",
     "schedule_runs_examined": 41,
     "latest_scheduled_run": {
@@ -591,7 +608,7 @@
     "publish_action": "none",
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "source_snapshot_at": "2026-11-07T00:58:42+09:00",
-    "validation": "python scripts/threads_writer_input.py --check-queue queue-next.json: validated 08:00, 12:00 and 20:00; remote read-back matched scratch",
+    "validation": "python scripts/threads_writer_input.py --check-queue queue-final.json: validated 08:00, 12:00, 16:00, 20:00; remote read-back matched scratch",
     "new_ready": [
       {
         "scheduled_at": "2026-11-07T12:00:00+09:00",
@@ -604,6 +621,15 @@
         "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306799.html"
       },
       {
+        "scheduled_at": "2026-11-07T16:00:00+09:00",
+        "notice_id": "a306443",
+        "format_id": "job_explainer",
+        "characters": 338,
+        "entry_sha256": "be555ba182a7fc1f39e34e51ec8ef3e8e69cebc42b6f7438fef7382f1f5c3ceb",
+        "official_source": "https://recruit.incruit.com/kdemo/job/2610280004",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306443.html"
+      },
+      {
         "scheduled_at": "2026-11-07T20:00:00+09:00",
         "notice_id": "a306759",
         "format_id": "application_checklist",
@@ -614,13 +640,7 @@
         "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306759.html"
       }
     ],
-    "unresolved": [
-      {
-        "scheduled_at": "2026-11-07T16:00:00+09:00",
-        "status": "hold",
-        "resume": "공식 첨부에서 직무·근무조건과 실제 접수 시작/종료를 모두 대조한 뒤 기존 공고 또는 중복 없는 대안을 다시 검수"
-      }
-    ],
+    "unresolved": [],
     "profile": {
       "url": "https://www.threads.com/@hid_119",
       "rel_me": "<link href=\"https://kllollain-max.github.io/careerpick/\" rel=\"me\"/>",
@@ -630,6 +650,22 @@
         "https://kllollain-max.github.io/careerpick/alio.json",
         "https://kllollain-max.github.io/careerpick/jobs/available.js"
       ]
-    }
+    },
+    "excluded_candidates": [
+      {
+        "notice_ids": [
+          "a306784",
+          "a306802"
+        ],
+        "reason": "공식 첨부에서 일부 필수 근무·직무·접수 조건을 읽어 대조할 수 없어 원래 초안을 보류로 보존"
+      },
+      {
+        "notice_ids": [
+          "a306612",
+          "a306433"
+        ],
+        "reason": "공식 접수기간과 공개 개별 경로를 확인했으나 직무·필수 자격 확인에 필요한 첨부를 해독하지 못함"
+      }
+    ]
   }
 }
