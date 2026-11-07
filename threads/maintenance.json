@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T04:21:51Z",
-  "last_observed_at": "2026-11-07T04:21:51Z",
+  "updated_at": "2026-11-07T05:09:31Z",
+  "last_observed_at": "2026-11-07T05:09:31Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "014fd6eb3c5a35238d809e04625e9ee0c1d96c0a",
+    "blob_sha": "8f9acabb26ff693d003756930bf413072e687f37",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -112,9 +112,19 @@
         "official_source": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271548",
         "official_attachment": "https://nmc.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=cd17734f-211c-4424-ab8d-0aabb1fd5294.pdf",
         "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306759.html"
+      },
+      {
+        "scheduled_at": "2026-11-08T08:00:00+09:00",
+        "notice_id": "a306732",
+        "format_id": "reader_story",
+        "characters": 450,
+        "entry_sha256": "cbe3d9896c1a64dd3a19bd373c11bf1283e8db5bd511c7366a36a06df144682b",
+        "official_source": "https://job.alio.go.kr/recruitview.do?idx=306732",
+        "official_attachment": "https://www.alio.go.kr/download/download.json?fileNo=3085304",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306732.html"
       }
     ],
-    "last_update_commit_sha": "5ca48cdc19488a7df5509bbaedf52ec332ff5fa4"
+    "last_update_commit_sha": "b60f08768e60a80c05112e47694fcded06962b3c"
   },
   "observed_runs": [
     {
@@ -720,6 +730,14 @@
         "publisher_visible_snapshot_at": "2026-11-07T00:58:42+09:00",
         "status": "hold_source_stale_at_slot",
         "reason": "10:12 KST 수집은 성공했지만 공고 변경 없음으로 검증된 데이터 저장 단계가 건너뛰어져 main의 게시기 입력 시각은 이전과 동일함. 실행 로그를 저장본의 새 확인 시각으로 대체하지 않음."
+      },
+      "resolution": {
+        "status": "ready_saved",
+        "checked_at": "2026-11-07T05:09:31Z",
+        "notice_id": "a306732",
+        "queue_blob_sha": "8f9acabb26ff693d003756930bf413072e687f37",
+        "entry_sha256": "cbe3d9896c1a64dd3a19bd373c11bf1283e8db5bd511c7366a36a06df144682b",
+        "reason": "main operations-status.json의 실제 새 last_success_at 2026-11-07T13:26:43+09:00 확인. ALIO 및 공식 PDF2종, 공개 프로필 rel=me, 개별 공고와 available.js를 실제 재열람. 남성 필수 병역증빙과 수습 취소 가능성을 본문에 보완하고 원본 지문 일치 및 대기열 검사 통과."
       }
     },
     "2026-11-08T12:00:00+09:00": {
@@ -765,12 +783,41 @@
               "checked_at": "2026-11-07T03:12:58Z",
               "excerpt": "서울대학교치과병원 / 정규직 / 7명 / 서울",
               "location": "공개 모집 요약"
+            },
+            {
+              "url": "https://snudh.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=d11ab03a-71cd-4de5-8081-bd71a3781e49.pdf",
+              "checked_at": "2026-11-07T05:08:17Z",
+              "excerpt": "직 무 기 술 서\n채용분야\n직종 직급 부서\n보건직(치과위생사) J1급 치위생행정교육팀\n업무내용\n❍ 임상진료 업무\n - 구강보건교육 및 예방치과처치\n - 진료준비, 기본재료 혼합, 치과방사선 촬영, 임상과 진료협조\n - 감염관리, 진료자료 및 물품관리, 의료장비 관리, 환자관리\n❍ 데스크 응대 업무\n - 진료 예약관리 및 진료상담, 환자 전화 응대\n - 처치/검사/투약 등 진료비 청구\n자격요건 ❍ 치과위생사 면허 보유자\n우대요건 ❍ 경력자\n필요지식 및 \n기술\n❍ 임상진료 업무\n - 잇솔질 및 구강위생용법 종류·방법 등 구강보건교육 관련 지식\n - 치아주위조직·치아형태의 이해, 스켈러의 종류·특성, 치태조절 방법 \n등 예방치과 관련 지식 \n - 기본기구 종류·용도 관련 지식, Unit Chair관리 관련 지식\n - 기구 세척·포장·멸균, 멸균물품 및 의료폐기물관리 관련 지식\n - 환자예약·변경·상담 관련 지식\n❍ 데스크 응대 업무\n - 환자관리(환자예약 및 변경, 상담 등) 관련 지식 등\n - 컴퓨터 활용능력 및 문서작업 능력\n직업기초능력\n❍ 의사소통능력, 문제해결능력, 자원관리능력, 대인관계능력, 정보처리\n능력, 조직이해능력, 직업윤리\n비고\n❍ 동종 직종 타 부서(분원, 수탁기관 포함), 타 업무에 배치될 수 있음\n❍ 본 직무기술서는 해당분야 대표적인 직무를 중심으로 기술한 것으로 \n실제 수행하는 모든 직무내용이 포함되어있지 않음"
+            },
+            {
+              "url": "https://snudh.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=918427df-826c-4bb2-9c2e-9ea669cf2ccc.pdf",
+              "checked_at": "2026-11-07T05:08:17Z",
+              "excerpt": "블라인드 채용 서류전형 기준\n■ 항목별 배점 기준\n○ 교육사항 (50점)\n 1) 일반직\n구분\n취득평점\n비고\nA+ A, A- B+ B, B- C+ C, C- D+ D, D-\n대학교 \n교육사항 10점 9점 8점 7점 6점 5점 4점 3점\n학점은행제 \n취득점수\n95점 이상\n90점 이상 \n~ \n95점 미만 \n85점 이상\n~\n90점 미만\n80점 이상\n~\n85점 미만\n75점 이상\n~\n80점 미만\n70점 이상\n~\n75점 미만\n65점 이상\n~\n70점 미만\n60점 이상\n~\n65점 미만\n※ 직무관련 전공과목 취득점수(10점 만점) × 5과목\n※ 이수학점 2학점 이상 전공과목 기준(P/F과목, 기초과목, 교양과목, 현장실습과목 제외)\n※ 자기소개서 작성 시 주의사항\n  - 알파벳 평점을 아래와 같이 숫자 평점으로 일괄 환산하여 작성해주시기 바랍니다.\n    ① A+ → 4.5  /   ② A0, A- → 4.0   /   ③ B+ → 3.5   /   ④ B0, B- → 3.0\n    ⑤ C+ → 2.5  /   ⑥ C0, C- → 2.0   /  ⑦ D+ → 1.5   /   ⑧ D0, D- → 1.0\n  - 예시 : 이수한 과목이 4.3 만점 중 3.7점(A-) 취득하였을 때\n     ① 환산점수를 확인하여 A- → 4.0점 확인\n     ② 평점만점: 4.5, 취득평점: 4.0 기입\n    \n  - 학점은행제 취득점수의 경우, 100점 만점에 취득점수를 입력해주시면 됩니다.\n\n2) 원무직/간호원무직\n구분\n부여점수\n비고\n50점 45점 40점 35점 30점 25점 20점 15점\n고등학교 \n성적 1 ~ 1 1 %1 2 ~ 2 3 %2 4 ~ 4 0 %4 1 ~ 6 0 %6 1 ~ 7 7 %7 8 ~ 8 9 %9 0 ~ 9 6 %9 7 ~ 1 0 0 %백 분 율\n검정고시 \n취득점수\n95점 이상\n90점 이상 \n~ \n95점 미만 \n85점 이상\n~\n90점 미만\n80점 이상\n~\n85점 미만\n75점 이상\n~\n80점 미만\n70점 이상\n~\n75점 미만\n65점 이상\n~\n70점 미만\n60점 이상\n~\n65점 미만\n고 졸\n검 정 고 시\n※ 원무직/간호원무직 학교성적 백분위 입력 방법\n  - 고등학교 성적표 발급\n    ① 2003년 이전 고등학교 졸업자 : 주민센터, 인근 학교, 졸업학교 등 방문하여 성적표 발급\n    ② 2003년 이후 고등학교 졸업자 : 나이스(https://www.neis.go.kr) - 홈에듀민원서비스\n    - 온라인발급민원 – 성적증명서(고등학교) 발급\n  - 발급한 성적표의 성적 표기방법 확인\n     ① 성적표에 내신등급이 표기된 경우 (예시 : 1~9등급, A~E등급 등)\n        - 엑셀 파일 1번 시트를 활용하여 백분위 환산\n     ② 성적표에 교과목별 석차가 표기된 경우 (예시 : 국어 17등/384명)  \n        - 엑셀 파일 2번 시트를 활용하여 백분위 환산\n     ③ 성적표에 교과목별 수우미양가 표기된 경우 (예시 : 국어(수), 영어(미) 등)\n        - 엑셀 파일 3번 시트를 활용하여 백분위 환산\n     \n  - 각 엑셀 파일별 안내문에 따라 성적 입력 후, 전체 백분위 산출\n   \n내신등급으로 산출 교과목별 석차로 산출 수우미양가로 산출\n   ※ 성적증명서 상 등급이 ‘우수’, "
+            },
+            {
+              "url": "https://snudh.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=bd728b2b-9ecd-4158-ad3b-000116fac4d1.pdf",
+              "checked_at": "2026-11-07T05:08:17Z",
+              "excerpt": "블라인드채용 위반사항 검토 기준\n ○ 입사지원서(자기소개서 포함) 내 인적 사항 입력란을 제외하고 블라인드 요인\n(출신학교·성명·출생/출신지·가족관계·성별·연령 등)과 관련하여 직·간접적으로 기\n재하거나 유추할 수 있는 경우 불합격 처리함\n ○ 부득이하게 기재가 필요한 경우 다음과 같이 기재한 부분에 대해서는 인정\n    예시) ○○에서 태어나, ○○대학교에서 기계공학을 전공하여~\n ○ ‘경험·경력사항’과 관련된 직장명 등은 기재 가능. 단, 학교 근무경력 기술 \n시 블라인드 사항의 직접적인 유추 여부를 고려하여 작성할 것\n ○ 블라인드 처리 위반사항 안내\n  \n구 분 기준 및 위반 예시\n출신학교\n(기 준) 자기소개서 전 항목에 출신학교명 기재 또는 직·간접적으로 \n유추할 수 있는 내용 기재 시 불합격 처리(고등학교명, \n대학교명, 동아리명 등)\n(예 시) 서울대학교 회장으로서 ~, 서울고등학교 총동창회 회장으로서 ~ , \n대학교 치어리더 동아리 ‘비상’에서 ~\n성 명 (기 준) 자기소개서 전 항목에 성명 기재 시 불합격 처리(예 시) 지원자 홍길동입니다(성, 이름), 홍씨 집안의(성) 등\n출생/출신지\n(기 준) 자기소개서 전 항목에 출생/출신지역을 직·간접적으로 \n       기재할 경우 불합격 처리\n(예 시) 부산에서 태어나 평생을 자라 왔으며~ , △△ 지역 기질 등\n가족관계\n(기 준) 자기소개서 전 항목에 가족관계를 직·간접적으로 유추할 \n수 있는 내용을 직·간접적으로 기재할 경우 불합격 처리\n(예 시) 아버지께서 서울대학교에서 교수로 재직하시고 ~\n성 별\n(기 준) 자기소개서 전 항목에 성별을 직접적으로 유추할 수 있는 내용을 \n직·간접적으로 기재할 경우 불합격 처리\n(예 시) 결혼 후 아내(남편)과 함께 생활하며 ~\n       자식들에게 부끄럽지 않은 아버지(어머니)가 되고자 \n       형(누나,언니,오빠)인 제가 ~\n       간호사인 어머니와 언니를 보며 ~\n       판매여왕 호칭을 얻었습니다~\n       여대를 졸업하고, 여성동아리(여학생회) ~, 여자축구대회~\n       군복무를 현역(운전병, 군수병, 전경, 의경 등)으로 입대하여~\n        의무복무를 하게 되었습니다~\n※ 의무복무(병)는 남성만 가능하므로 성별 직접적 유추 가능\n※ 장교 복무는 언급 가능(성별 미노출)\n연 령\n(기 준) 자기소개서 전 항목에 생년월일 또는 연령을 직접적으로 유추할 수 있는\n       내용을 직·간접적으로 기재할 경우 불합격 처리\n(예 시) 올림픽(월드컵)이 개최되던 해에 태어나, 30년간 살아오면서 ~"
+            },
+            {
+              "url": "https://snudh.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=09e99756-25ff-4f17-81f2-ed6ae04440bd.pdf",
+              "checked_at": "2026-11-07T05:08:17Z",
+              "excerpt": "입사지원서 작성 가이드\n◯ 채용공고의 채용분야, 지원자격 등 채용요강을 반드시 확인한 이후에 입사지원서를 작성\n해주시기 바랍니다.\n◯ 지원직종·분야별 직무기술서 내용을 반드시 확인하여 주시기 바랍니다.\n◯ 입사지원서 항목별 작성요령 및 주의사항을 반드시 확인하시기 바랍니다.\n◯ 입사지원서의 ’학교교육사항‘ ‘직업교육사항’, ‘자격사항’, ‘경험 혹은 경력사항’은 해당자에\n한하여 기입하되, 해당 내용을 기재하는 경우 관련 증빙서류를 반드시 제출하여야 합니다.\n※ 단, 자격/면허가 요구되는 직종(치과의사, 간호사, 치과위생사, 방사선사 등)에\n지원하는 경우에는 반드시 자격정보를 입력하시기 바랍니다.(미입력 시 불합격 처리)\n◯ 자격에 관련 학과 전공을 요구하는 직종은 관련 교육사항을 필히 입력하시기 바랍니다.\n(미입력시 불합격)\n◯ 자격,면허 등 자격요건이 있는 직종의 경우 공고 마감일 기준 해당 자격증을 소지하고\n있어야만 지원 가능합니다.\n◯ 자기소개서 등에 본인의 출신지역, 출신학교, 성별, 결혼·출산여부, 가족의 직업 등을\n직·간접적으로 표현하거나 이를 유추할 수 있는 내용을 기재하는 경우에는 불이익\n(불합격처리 등)을 받을 수 있으니 주의하시기 바랍니다.\n◯ 채용관련 인사 청탁자는 ‘부정청탁금지법’ 등 관련법령에 따라 처리될 예정이며, \n전형단계 및 점수에 관계없이 전형에서 제외됩니다.\n◯ 지원서 허위작성 또는 증빙서 위‧변조, 시험 부정행위자 등은 불합격 처리됩니다.\n◯ 지원서 접수 시 입력 착오 등으로 인한 불합격이나 손해에 대한 모든 책임은 지원자 본인에게\n있습니다.\n\n□ 블라인드 채용 위반사항 검토 기준\n○ 입사지원서(자기소개서 포함) 내 블라인드 요인(출신학교·성명·출생/출신지·가족관계·성별\n·연령 등)과 관련하여 직·간접적으로 기재하거나 유추할 수 있는 경우 불합격 처리함\n○ 부득이하게 기재가 필요한 경우 다음과 같이 기재한 부분에 대해서는 인정\n(예 시) ○○에서 태어나, ○○대학교에서 기계공학을 전공하여~\n○ ‘경력·경험사항’과 관련된 직장명 등은 기재 가능. 단, 학교 근무경력 기술 시 블라인드\n사항의 직접적인 유추 여부를 고려하여 작성할 것\n○ 블라인드 처리 위반 예시\n구 분 기준 및 위반 예시\n출신학교\n(기 준) 자기소개서 전 항목에 출신학교명 기재 또는 직·간접적으로 유추할 수 있는 내용\n기재 시 불합격 처리(고등학교명, 대학교명, 동아리명 등)\n(예 시) 서울대학교 회장으로서 ~, 서울고등학교 총동창회 회장으로서 ~ , \n대학교 치어리더 동아리 ‘비상’에서 ~\n성 명\n(기 준) 자기소개서 전 항목에 성명 기재 시 불합격 처리\n(예 시) 지원자 홍길동입니다(성, 이름), 홍씨 집안의(성) 등\n출생/출신지\n(기 준) 자기소개서 전 항목에 출생/출신지역을 직·간접적으로 기재할 경우 불합격 처리\n(예 시) 부산에서 태어나 평생을 자라 왔으며~ , △△ 지역 기질 등\n가족관계\n(기 준) 자기소개서전 항목에 가족관계를직·간접적으로유추할 수 있는 내용을 직·간접적\n으로 기재할 경우 불합격 처리\n(예 시) 아버지께서 서울대학교에서 교수로 재직하시고 ~\n성 별\n(기 준) 자기소개서전 항목에 성별을 직접적으로유추할 수 있는 내용을 직·간접적으로\n기재할 경우 불합격 처리\n(예 시) 결혼 후 아내(남편)과 "
+            },
+            {
+              "url": "https://snudh.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=81174d02-936f-4692-a0fe-fd2e5e01eeec.pdf",
+              "checked_at": "2026-11-07T05:08:17Z",
+              "excerpt": "직 무 기 술 서\n채용분야\n직종 직급 부서\n간호직 J1급 간호행정교육팀(병동, 수술장)\n업무내용\n❍ 간호수행\n   - 환자의 건강 회복 및 증진을 위해 의사의 처방이나 규정된 간호기술에 \n따른 전문적인 의료서비스 및 건강관리 관련 제반 업무 수행\n❍ 간호행정  관리\n   - 원활한 간호업무 수행을 위해 요구되는 행정, 물품, 시설 및 환경관리 \n관련 제반 업무 수행\n자격요건 ❍ 간호사 면허증 ❍ 병동, 수술실 경력 우대\n필요지식  및  기술\n❍ [지  식]\n - 정확한 환자 사정관련 지식\n - 응급상황 진단 및 대처법\n - 질환에 대한 이해 및 질환별 표준 환자 간호\n - 수술 및 시술 전후 표준 환자 간호\n - 기본 술기의 근거에 관한 지식\n - 의사의 처방을 온전히 이해할 수 있는 지식(의학용어 포함) \n - 의료장비의 사용 및 관리 사항\n - 약품의 효능, 부작용 및 투약 시 주의사항\n - 업무 우선순위 결정기준\n - 보험 관련 지식\n - 문제해결 프로세스 및 활용 가능한 지원 체계에 대한 지식\n - 문서작성, 업무용 소프트웨어의 특성 및 기능 이해\n❍ [기  술]\n - 환자 사정 능력\n - 혈압‧맥박‧호흡‧체온‧혈당 측정 능력\n - 다양한 경로별 안전한 투약(주사요법, 수혈요법 등) 능력\n - 기본 수기술(도뇨, 관장, 위관영양, 흡인, 산소요법 등) 능력\n - 응급상황(CPR 등) 대처 능력\n - 의료장비 활용 능력\n - 효과적인 환자상담 능력\n - 이해하기 쉬운 환자교육 능력\n - 환자의무기록 작성 능력\n - 직무관련 외국어 활용 능력\n\n - 타부서와 원활한 소통을 위한 커뮤니케이션 능력\n - 문서작성 및 관리 능력, 업무용 소프트웨어 및 사무기기 활용기술\n❍ [역  량]\n - 원칙준수 : 병원의 운영 원칙, 제반 규정 등을 명확히 이해하고,업무수\n행 시 항상 이를 실천할 수 있는 역량\n - 문제해결 : 문제발생 시 정확한 이해와 상황을 판단하고, 관련절차를 준\n수하여 순발력 있고 융통성 있게 문제를 해결할 수 있는 역량 \n - 전문성 : 담당 업무에 요구되는 전문적인 지식/기술을 숙지하고,이를 활\n용하여 효과적으로 업무를 수행할 수 있는 역량\n직업기초능력 ❍ 의사소통능력, 문제해결 능력, 자기개발능력, 자원관리능력, 대인관계능력, 기술능력, 조직이해능력, 직업윤리 \n비고\n❍ 본 직무기술서는 해당분야 대표적인 직무를 중심으로 기술한 것으로 \n실제 수행하는 모든 직무내용이 포함되어 있지 않음.\n❍ 직무 수행 중 조직의 필요와 개인의 역량 향상을 위해 동종 직종 타 부서      \n이동 배치 가능"
+            },
+            {
+              "url": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271404",
+              "checked_at": "2026-11-07T05:09:31Z",
+              "excerpt": "면허‧자격을 요하는 분야는 공고일 기준 해당 면허‧자격증 소지자에 한함. 3개월간의 조건부 기간을 거쳐 근무성적이 양호한 때 정규직원으로 임용. 인력수급상 특히 필요하다고 인정되는 경우 적용하지 않을 수 있음."
             }
           ],
           "missing_or_conflicting": [
-            "공식 PDF 5개 모두 timeout: 직무기술서의 교대·야간 및 수습·임용조건 확인 필요. 확인 전에는 본문 조건을 확정하지 않음.",
-            "현재 ALIO 수집본은 11월 8일 12시 기준 24시간을 넘어 SOURCE_STALE. 새 수집본·공고 해시 재대조 필요.",
-            "게시 예정 시각으로부터 24시간 안의 프로필 rel=me 및 공고 찾기 경로 재확인 필요."
+            "직종별 교대·야간 등 실제 근무시간은 본 공고 및 직무기술서에서 미기재로 확인하지 못함.",
+            "본 공고는 면허·자격을 공고일 기준 소지하도록 하나 공통 입사지원서 작성 가이드는 마감일 기준으로 기재되어 상충. 공식 직종별 기준을 재확인하기 전 ready로 저장하지 않음."
           ],
           "omitted_optional_facts": [
             "직무별 정확한 급여 미확인으로 금액 생략"
@@ -828,13 +875,28 @@
           "error": "timeout"
         }
       ],
-      "resume": "공식 첨부 직무기술서·수습/근무조건과 24시간 내 수집본 및 프로필 경로를 확인한 후에만 ready 검증·CAS 저장."
+      "resume": "근무시간·교대 조건과 면허 보유 기준일의 공고/공통 가이드 충돌을 기관 공식 자료로 해소한 뒤, 3개월 조건부 임용·증빙 요건을 본문에 반영하고 최신 원문/프로필 및 전체 대기열 검사 후 미래 슬롯에만 CAS 저장.",
+      "last_evidence_recheck": {
+        "checked_at": "2026-11-07T05:09:31Z",
+        "all_five_pdfs_read": true,
+        "previous_timeout_resolved": true,
+        "source_stale_resolved": true,
+        "profile_relme_rechecked": true,
+        "notice_page_rechecked": true,
+        "primary_url": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271404",
+        "primary_probation_excerpt": "인사규정 제21조에 의거하여 최종합격자는 채용될 직위에 3개월간의 조건부 기간을 거쳐 근무성적이 양호한 때 정규직원으로 임용함. 다만, 인력수급상 특히 필요하다고 인정되는 경우에는 적용하지 않을 수 있음",
+        "remaining_blockers": [
+          "직종별 교대·야간 등 실제 근무시간은 본 공고 및 직무기술서에서 미기재로 확인하지 못함.",
+          "본 공고는 면허·자격을 공고일 기준 소지하도록 하나 공통 입사지원서 작성 가이드는 마감일 기준으로 기재되어 상충. 공식 직종별 기준을 재확인하기 전 ready로 저장하지 않음."
+        ]
+      },
+      "attachment_failures_resolved_at": "2026-11-07T05:09:31Z"
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T04:21:51Z",
+    "checked_at": "2026-11-07T05:09:31Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T13:20:48.091444+09:00",
+    "input_reference_at": "2026-11-07T14:06:28.008089+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -853,27 +915,45 @@
         "format_id": "application_checklist",
         "chars": 411,
         "entry_sha256": "5f2f047807520787b19c77c22f16dbc9701514ee722d0ce8a81cdfeb0ee3e017"
+      },
+      {
+        "scheduled_at": "2026-11-08T08:00:00+09:00",
+        "notice_id": "a306732",
+        "format_id": "reader_story",
+        "chars": 450,
+        "entry_sha256": "cbe3d9896c1a64dd3a19bd373c11bf1283e8db5bd511c7366a36a06df144682b"
       }
     ],
     "new_drafts": 0,
-    "new_ready_saved": 0,
+    "new_ready_saved": 1,
     "preserved_hold_drafts": [
-      "a306732",
       "a306715"
     ],
     "hold_source_fingerprints_unchanged": true,
-    "hold_ready_simulation_result": "SOURCE_STALE",
     "source_snapshot_at": "2026-11-07T00:58:42+09:00",
-    "source_last_success_at": "2026-11-07T00:59:06+09:00",
+    "source_last_success_at": "2026-11-07T13:26:43+09:00",
     "history_duplicate_ids_checked": true,
     "recent_records_compared": 10,
-    "reason": "All four future slots have existing authored ready/hold drafts. Preserve unchanged bodies and original evidence times. Tomorrow 08/12 drafts still need a fresh validated ALIO snapshot; 12 also needs the original attachment and current profile-path evidence. No validator/policy change."
+    "reason": "Existing today16/20 originals untouched. Tomorrow08 authored draft completed with verified mandatory proof and conditional appointment terms, validated, CAS saved and read back. Tomorrow12 attachment access recovered but source conflict/work-hours ambiguity remains; no policy relaxation.",
+    "revised_hold_drafts": 1,
+    "collection_observation": {
+      "run_id": "42338197158",
+      "run_attempt": 1,
+      "job_id": 128299797412,
+      "alio_collection": "success",
+      "alio_validation": "success",
+      "changed": false,
+      "job_conclusion": "failure",
+      "failure_step": "Verify public snapshot hashes",
+      "failure_code": "public_version_not_verified",
+      "scope": "Other source/Pages pipeline; no Threads failure inferred and no website/other service changes made."
+    }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T04:21:51Z",
-    "main_sha": "91baef63915f47169c53e2182c97d299e602857a",
-    "state_head_before_write": "d40dee032f1585f0726aa8494e62cf77e899dbb7",
-    "queue_blob_sha": "014fd6eb3c5a35238d809e04625e9ee0c1d96c0a",
+    "checked_at": "2026-11-07T05:09:31Z",
+    "main_sha": "b28d40c018cd732754be1634b6a4f6f5c4aa5cc5",
+    "state_head_before_write": "b60f08768e60a80c05112e47694fcded06962b3c",
+    "queue_blob_sha": "8f9acabb26ff693d003756930bf413072e687f37",
     "latest_threads_run": {
       "run_id": "42334945888",
       "run_attempt": 1,
@@ -893,12 +973,12 @@
     "claims_inspected": 17,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T03:13:13Z",
+      "since": "2026-11-07T04:21:51Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T01:25:00Z",
+      "oldest_scanned": "2026-11-06T07:29:48Z",
       "scheduled_pages": [
         1
       ],
@@ -917,6 +997,6 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "New scheduled publication verified; no replay, dispatch, backfill, claim reset, or ledger recovery needed. D remains false."
+    "reason": "All observed Threads run versions unchanged; latest accepted ID and main ledger unchanged from prior official Meta text/ID verification. No recovery or retransmission required."
   }
 }
