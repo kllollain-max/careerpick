@@ -37,6 +37,16 @@ def xml(*rows, total=None, code="0", layout="standard"):
     ).encode()
 
 
+def no_data_xml(body=None, layout="documented"):
+    head, body_tag = ("header", "body") if layout == "standard" else (
+        "openXmlEmployInfo-header", "openXmlEmployInfo-body")
+    body_xml = "" if body is None else f"<{body_tag}>{body}</{body_tag}>"
+    return (
+        f"<response><{head}><resultCode>3</resultCode>"
+        f"<resultMsg>NONOTEXISTDATA_ERROR</resultMsg></{head}>{body_xml}</response>"
+    ).encode()
+
+
 def region_row(code, name="테스트 지역", number="1"):
     return ("<item><No>" + escape(number) + "</No><SIDO_CD>" + escape(code)
             + "</SIDO_CD><SIDO_NAME>" + escape(name) + "</SIDO_NAME></item>")
@@ -196,19 +206,107 @@ class CleaneyeContractTests(unittest.TestCase):
         self.assert_code("internal_error", lambda: (_ for _ in ()).throw(cleaneye.APIError(KEY)))
         self.assert_code("api_response_error", lambda: self.client(xml(code="untrusted-code")).list_region("001"))
 
-    def test_observed_header_only_business_error_preserves_its_safe_code(self):
-        # Run 42311038349 observed the header-only wrapper/code for empty sidoCd;
-        # the message below is synthetic and is not used for classification.
-        payload = (b"<response><openXmlEmployInfo-header><resultCode>3</resultCode>"
-                   b"<resultMsg>NOTEXISTDATA_ERROR</resultMsg>"
-                   b"</openXmlEmployInfo-header></response>")
+    def test_header_only_no_data_is_a_regional_zero_but_success_still_needs_a_body(self):
+        # Run 42336052565 observed the header-only code/message for region 007005.
+        payload = no_data_xml()
         client = self.client(payload)
-        self.assert_code("api_result_3", lambda: client.list_region("001"))
-        self.assertEqual(client.success_counts, {"list": 0})
-        self.assertIsNone(client.last_response_diagnostic)
+        self.assertEqual(client.list_region("001"), {"totalCount": 0, "result": []})
+        self.assertEqual(client.success_counts, {"list": 1})
+        self.assertEqual(client.region_counts, {"001": 0})
+        self.assertFalse(client.collection_complete)
         self.assert_code("invalid_body", lambda: self.client(
             payload.replace(b"<resultCode>3", b"<resultCode>0")
         ).list_region("001"))
+
+    def test_no_data_accepts_only_empty_optional_bodies_in_supported_envelopes(self):
+        for layout in ("standard", "documented"):
+            for body in (None, "", "<items/>", "<totalCount>0</totalCount>",
+                         "<totalCount>0</totalCount><items/>"):
+                with self.subTest(layout=layout, body=body):
+                    payload = no_data_xml(body, layout).replace(
+                        b"<response>", b'<response xmlns="urn:official-test">')
+                    client = self.client(payload)
+                    self.assertEqual(client.list_region("001"), {"totalCount": 0, "result": []})
+                    self.assertEqual(client.last_response_diagnostic["total_count"], 0)
+
+    def test_code_three_requires_the_exact_observed_no_data_message(self):
+        payloads = [no_data_xml().replace(
+            b"<resultMsg>NONOTEXISTDATA_ERROR</resultMsg>", b"")]
+        payloads.extend(no_data_xml().replace(b"NONOTEXISTDATA_ERROR", message.encode())
+                        for message in ("", "NOTEXISTDATA_ERROR", "unknown error",
+                                        "SERVICE_KEY_IS_NOT_REGISTERED_ERROR", "nonotexistdata_error"))
+        for payload in payloads:
+            with self.subTest(payload=payload):
+                client = self.client(payload)
+                self.assert_code("api_result_3", lambda: client.list_region("001"))
+                self.assertEqual(client.success_counts, {"list": 0})
+                self.assertEqual(client.region_counts, {})
+                self.assertIsNone(client.last_response_diagnostic)
+
+    def test_no_data_rejects_nonempty_contradictory_or_malformed_bodies(self):
+        for body, code in (
+            ("<totalCount>1</totalCount><items/>", "invalid_no_data_response"),
+            ("<totalCount>0</totalCount><items>" + row() + "</items>", "invalid_no_data_response"),
+            ("<items><item/></items>", "invalid_no_data_response"),
+            ("<items>unstructured result</items>", "invalid_no_data_response"),
+            ("unexpected result text", "invalid_no_data_response"),
+            ("<items/>unexpected result text", "invalid_no_data_response"),
+            ("<totalCount>-1</totalCount>", "invalid_total_count"),
+            ("<totalCount></totalCount>", "invalid_xml_field"),
+            ("<totalCount>0</totalCount><totalCount>0</totalCount>", "duplicate_xml_field"),
+            ("<items/><items/>", "duplicate_xml_field"),
+            ("<unexpected/>", "unexpected_body_field"),
+        ):
+            with self.subTest(body=body):
+                client = self.client(no_data_xml(body))
+                self.assert_code(code, lambda: client.list_region("001"))
+                self.assertEqual(client.success_counts, {"list": 0})
+                self.assertEqual(client.region_counts, {})
+                self.assertIsNone(client.last_response_diagnostic)
+
+    def test_no_data_region_does_not_stop_the_remaining_seventeen_region_collection(self):
+        codes = [f"fixture-region-{index}" for index in range(17)]
+        responses = [no_data_xml() if index == 4 else xml(row(f"notice-{index}"))
+                     for index in range(17)]
+        client = self.client(*responses)
+        records = client.collect_list(sido_codes=codes)
+        self.assertEqual(len(records), 16)
+        self.assertEqual(client.region_counts, {code: 0 if index == 4 else 1
+                                               for index, code in enumerate(codes)})
+        self.assertEqual(sum(client.region_counts.values()), len(records))
+        self.assertEqual(client.request_counts, {"list": 17})
+        self.assertEqual(client.success_counts, {"list": 17})
+        self.assertTrue(client.collection_complete)
+        self.assertEqual([urllib.parse.parse_qs(urllib.parse.urlsplit(request.full_url).query)["sidoCd"][0]
+                          for request in client._opener.requests], codes)
+
+    def test_all_no_data_regions_still_cannot_complete_an_empty_collection(self):
+        codes = [f"fixture-region-{index}" for index in range(17)]
+        client = self.client(*(no_data_xml() for _ in codes))
+        self.assert_code("empty_list", lambda: client.collect_list(sido_codes=codes))
+        self.assertEqual(client.region_counts, dict.fromkeys(codes, 0))
+        self.assertEqual(client.success_counts, {"list": 17})
+        self.assertFalse(client.collection_complete)
+
+    def test_no_data_does_not_mask_a_later_partial_response(self):
+        client = self.client(xml(row()), no_data_xml(), xml(total=1))
+        self.assert_code("incomplete_collection", lambda: client.collect_list(sido_codes=["001", "002", "003"]))
+        self.assertEqual(client.success_counts, {"list": 2})
+        self.assertEqual(client.region_counts, {"001": 1, "002": 0})
+        self.assertFalse(client.collection_complete)
+
+    def test_no_data_exception_does_not_apply_to_other_errors_or_region_code_lookup(self):
+        for code in ("1", "03", "30"):
+            with self.subTest(code=code):
+                payload = no_data_xml().replace(b"<resultCode>3", ("<resultCode>" + code).encode())
+                self.assert_code("api_result_" + code, lambda: self.client(payload).list_region("001"))
+        region_payload = regions_xml().replace(b"<resultCode>0", b"<resultCode>3")
+        client = self.client(region_payload)
+        self.assert_code("api_result_3", lambda: client.collect_region_codes(ac_year=2026))
+        self.assertFalse(client.region_code_metadata["complete"])
+        self.assertEqual(client.success_counts["region_codes"], 0)
+        error = urllib.error.HTTPError("https://apis.data.go.kr", 403, "", {}, io.BytesIO(no_data_xml()))
+        self.assert_code("api_result_3", lambda: self.client(error).list_region("001"))
 
     def test_credential_echo_raw_encoded_and_entity_forms_are_rejected(self):
         variants = [KEY]

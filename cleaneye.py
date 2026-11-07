@@ -77,7 +77,7 @@ _SAFE_CODES = {
     "transport_failed", "unexpected_http_status", "http_error",
     "response_too_large", "invalid_response_encoding", "credential_echo_rejected",
     "unsafe_xml_declaration", "invalid_xml", "invalid_envelope", "invalid_header",
-    "invalid_body", "duplicate_xml_field", "invalid_xml_field",
+    "invalid_body", "invalid_no_data_response", "duplicate_xml_field", "invalid_xml_field",
     "api_response_error", "gateway_error", "unexpected_body_field",
     "invalid_total_count", "region_record_limit_exceeded", "invalid_items",
     "invalid_record", "unexpected_record_field", "record_field_too_large",
@@ -189,7 +189,7 @@ class Client:
                 break
             text = decoded
 
-    def _envelope(self, raw, operation="list"):
+    def _envelope(self, raw, operation="list", *, allow_no_data=False):
         try:
             text = raw.decode("utf-8-sig")
         except (AttributeError, UnicodeDecodeError):
@@ -231,16 +231,44 @@ class Client:
         if any(child.tag not in {"resultCode", "resultMsg"} for child in header):
             raise APIError("invalid_header")
         code = _text(header, "resultCode", limit=32)
-        _text(header, "resultMsg", required=False, limit=4_096)
+        message = _text(header, "resultMsg", required=False, limit=4_096)
         if code not in SUCCESS_CODES:
-            raise APIError("api_result_" + code if code in _RESULT_CODES else "api_response_error")
+            if not (allow_no_data and operation == "list" and code == "3"
+                    and message == "NONOTEXISTDATA_ERROR"):
+                raise APIError("api_result_" + code if code in _RESULT_CODES else "api_response_error")
+            # Run 42336052565 observed this exact pair without a body for a
+            # verified region.  Do not extend the regional no-data exception to
+            # other messages, code lookup, HTTP errors or contradictory data.
+            if (root.text or "").strip() or any((node.tail or "").strip() for node in root):
+                raise APIError("invalid_no_data_response")
+            body = _one(root, body_name, required=False)
+            if body is not None:
+                if any(child.tag not in {"items", "totalCount"} for child in body):
+                    raise APIError("unexpected_body_field")
+                if (body.text or "").strip() or any((node.tail or "").strip() for node in body):
+                    raise APIError("invalid_no_data_response")
+                if _one(body, "totalCount", required=False) is not None:
+                    count = _text(body, "totalCount", limit=16)
+                    if not re.fullmatch(r"[0-9]{1,12}", count):
+                        raise APIError("invalid_total_count")
+                    if int(count) != 0:
+                        raise APIError("invalid_no_data_response")
+                items = _one(body, "items", required=False)
+                if items is not None and (len(items) or (items.text or "").strip()):
+                    raise APIError("invalid_no_data_response")
+            return None, layout
         if tags.count(body_name) != 1:
             raise APIError("invalid_body")
         body = _one(root, body_name)
         return body, layout
 
     def _parse(self, raw):
-        body, layout = self._envelope(raw, "list")
+        body, layout = self._envelope(raw, "list", allow_no_data=True)
+        if body is None:
+            self.last_response_diagnostic = {
+                "envelope_layout": layout, "result_code": "3", "total_count": 0, "record_count": 0,
+            }
+            return {"totalCount": 0, "result": []}
         if any(child.tag not in {"items", "totalCount"} for child in body):
             raise APIError("unexpected_body_field")
         count = _text(body, "totalCount", limit=16)
