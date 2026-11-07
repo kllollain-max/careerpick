@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T23:12:16Z",
-  "last_observed_at": "2026-11-06T23:12:16Z",
+  "updated_at": "2026-11-07T00:23:08Z",
+  "last_observed_at": "2026-11-07T00:23:08Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -118,6 +118,15 @@
   },
   "observed_runs": [
     {
+      "run_id": "42311790023",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-06T23:26:20Z",
+      "head_sha": "a79556903e2a4d79c1d78619fb72caba04361ae2",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42311790023"
+    },
+    {
       "run_id": "42212136298",
       "run_attempt": 1,
       "status": "completed",
@@ -183,16 +192,18 @@
   ],
   "last_confirmed_publication": {
     "status": "verified",
-    "scheduled_at": "2026-11-06T20:00:00+09:00",
-    "published_at": "2026-11-06T20:42:16.630626+09:00",
-    "run_id": "42212136298",
-    "post_id": "18639664255000167",
-    "url": "https://www.threads.com/@hid_119/post/DfZhiNckSJE",
-    "format_id": "application_checklist",
-    "image": false,
-    "meta_verified_at": "2026-11-06T11:42:19.0537727Z",
+    "scheduled_at": "2026-11-07T08:00:00+09:00",
+    "published_at": "2026-11-07T08:26:12.468777+09:00",
+    "run_id": "42311790023",
+    "post_id": "18211788178318854",
+    "url": "https://www.threads.com/@hid_119/post/DfayFgXld86",
+    "format_id": "reader_story",
+    "image": true,
+    "meta_verified_at": "2026-11-06T23:26:14.6899741Z",
     "policy": "master-v1.1",
-    "ledger_sha": "c31b3d2b81519af78f347d5b1aab5b94881d6eca"
+    "ledger_sha": "196058e628f0a8d1bfa0466fa340b0ccc14fcb51",
+    "claim_blob_sha": "25fa9cd3da5a7a79fb3a727b5ea22b7a19a435d4",
+    "queue_entry_sha256": "94f275f64bd9823140e8e3e374ea65d9c92470e75344756368199afb3a4e37a8"
   },
   "pending_records_at_activation": 0,
   "first_new_policy_publication": {
@@ -763,22 +774,27 @@
     ]
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-06T23:12:16Z",
-    "main_sha": "a79556903e2a4d79c1d78619fb72caba04361ae2",
+    "checked_at": "2026-11-07T00:23:08Z",
+    "main_sha": "55f72e1ee4fdd58807538addf92d16634b0aad7d",
     "queue_blob_sha": "014fd6eb3c5a35238d809e04625e9ee0c1d96c0a",
     "latest_threads_run": {
-      "run_id": "42212136298",
+      "run_id": "42311790023",
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-06T11:42:24Z",
-      "head_sha": "b66b36dadf26508b7a32ea90e90e4d15aaa8039c",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42212136298"
+      "updated_at": "2026-11-06T23:26:20Z",
+      "head_sha": "a79556903e2a4d79c1d78619fb72caba04361ae2",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42311790023"
     },
-    "status_0800": "no_workflow_observed_within_allowed_delay",
+    "status_0800": "published_within_allowed_delay_and_verified",
     "slot": "2026-11-07T08:00:00+09:00",
     "candidate_hold": "SOURCE_STALE",
     "candidate_notice_id": "a306732",
-    "no_send": true
+    "no_send": true,
+    "remaining_today_ready": [
+      "a306799",
+      "a306443",
+      "a306759"
+    ]
   }
 }
