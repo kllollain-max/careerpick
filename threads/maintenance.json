@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T13:55:20Z",
-  "last_observed_at": "2026-11-07T13:55:20Z",
+  "updated_at": "2026-11-07T14:40:24Z",
+  "last_observed_at": "2026-11-07T14:40:24Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T13:55:20Z",
+    "checked_at": "2026-11-07T14:40:24Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T22:54:49.328245+09:00",
+    "input_reference_at": "2026-11-07T23:39:52.201465+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1228,7 +1228,7 @@
         "reason": "November 8 20:00 source check blocked by SOURCE_STALE; official post and attachments verified."
       }
     ],
-    "reason": "Revalidated both upcoming ready drafts against current pinned source files and kept their original evidence and fingerprints. Separate 16:00/20:00 readiness probes still reject SOURCE_STALE. No new source state, no duplicate rewrites, and no queue changes.",
+    "reason": "Both existing ready drafts validated and retained exact digests. Both afternoon slots' readiness probes still reject SOURCE_STALE against the same saved source, so original hold drafts were preserved and no duplicate or queue changes were made.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "SOURCE_STALE",
     "collection_observation": {
@@ -1276,9 +1276,9 @@
     "stored_alio_clock_applies_until": "2026-11-08T13:26:43+09:00"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T13:55:20Z",
+    "checked_at": "2026-11-07T14:40:24Z",
     "main_sha": "050b94f4cd470bfaabf53e07c6ad43958c1e0fe7",
-    "state_head_before_write": "79aaff6dc081547ae52c13dc237712032ae360ba",
+    "state_head_before_write": "73c67318482a07ac585daa88fa6a17f9beecc656",
     "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
     "latest_threads_run": {
       "run_id": "42368080340",
@@ -1299,7 +1299,7 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T13:12:00Z",
+      "since": "2026-11-07T13:55:20Z",
       "all_runs_pages": [
         1
       ],
@@ -1324,7 +1324,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No changed publisher version, claim or unresolved send after the previous observation. Latest accepted claim, current main and official Meta log agree. No maintenance send, replay or code change.",
+    "reason": "No changed Threads run or claim after the preceding check. Latest accepted receipt agrees with main and official Meta GET log; no pending, reconciliation, replay or code change.",
     "last_confirmed_post_id": "18131171185889612",
     "prior_confirmed_post_id": "18138250501647531"
   },
