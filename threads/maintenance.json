@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T11:35:13Z",
-  "last_observed_at": "2026-11-07T11:35:13Z",
+  "updated_at": "2026-11-07T13:12:00Z",
+  "last_observed_at": "2026-11-07T13:12:00Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T11:35:13Z",
+    "checked_at": "2026-11-07T13:12:00Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T20:32:36.330976+09:00",
+    "input_reference_at": "2026-11-07T22:10:18.152962+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1189,7 +1189,7 @@
         "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132"
       }
     ],
-    "new_drafts": 1,
+    "new_drafts": 0,
     "new_ready_saved": 0,
     "preserved_hold_drafts": [
       "a306715",
@@ -1228,27 +1228,56 @@
         "reason": "November 8 20:00 source check blocked by SOURCE_STALE; official post and attachments verified."
       }
     ],
-    "reason": "Preserved the two upcoming ready entries and the Nov 8 16:00 holds. Authored a 366-character checklist for the Nov 8 20:00 slot using the issuer HWP and ALIO duty PDF. Actual profile route and application cutoff verified. Persisted source freshness prevents queue admission. Higher ranked candidates shared stale source clocks or had unresolved posting conditions; the verified standalone IT role also avoids repeating the two hospital posts.",
+    "reason": "Both existing ready entries validated and preserved. The prior written 16:00 and 20:00 options retain their original evidence and unchanged fingerprints; separate readiness probes each rejected SOURCE_STALE. No additional draft duplicates or queue changes.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "SOURCE_STALE",
     "collection_observation": {
-      "run_id": "42361811396",
+      "run_id": "42375098749",
       "run_attempt": 1,
-      "job_id": 128371594079,
+      "job_id": 128410949076,
       "alio_collection": "success",
       "alio_validation": "success",
+      "verified_at_in_log": "2026-11-07T22:02:50+09:00",
+      "hashes_matched_pinned_main": true,
       "changed": false,
       "store": "skipped_no_content_change",
-      "verified_at_in_log": "2026-11-07T18:57:02+09:00",
-      "note": "Persisted ALIO last_success_at remains 13:26:43; verified unchanged cleaneye retains persisted snapshot at 13:27:15."
+      "cleaneye_complete_collection": true,
+      "cleaneye_snapshot_at": "2026-11-07T13:27:15+09:00",
+      "note": "Successful unchanged collection does not update the persisted ALIO or Cleaneye input clock; both afternoon slots still reject SOURCE_STALE."
     },
     "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
-    "hold_alternative": "2026-11-08T16:00:00+09:00:a306515"
+    "hold_alternative": "2026-11-08T16:00:00+09:00:a306515",
+    "local_thumbnail_preflight": {
+      "mode": "scratch_only",
+      "results": [
+        {
+          "notice_id": "a306732",
+          "sha256": "503ba344682c70439782983cc3b12715f3ccfffb5f419ade7900f3e7f698ba40",
+          "format": "JPEG",
+          "dimensions": [
+            1080,
+            1080
+          ],
+          "bytes": 143071
+        },
+        {
+          "notice_id": "a306733",
+          "sha256": "ec75c547f9801f3d3b7181f2184cfc84423270208071ed5dbc7b5d99593438bc",
+          "format": "JPEG",
+          "dimensions": [
+            1080,
+            1080
+          ],
+          "bytes": 139452
+        }
+      ],
+      "visual_check": "Complete Korean institution, job, counts, and deadline; no clipping. Public-byte verification remains in the publishing workflow."
+    }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T11:35:13Z",
+    "checked_at": "2026-11-07T13:12:00Z",
     "main_sha": "050b94f4cd470bfaabf53e07c6ad43958c1e0fe7",
-    "state_head_before_write": "ba4ca62eecf88ad29b91e271d5418b0100c105a4",
+    "state_head_before_write": "2d4b4ebac2feaf01d8b43cc92625d0c59be7a744",
     "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
     "latest_threads_run": {
       "run_id": "42368080340",
@@ -1269,16 +1298,16 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T10:43:26Z",
+      "since": "2026-11-07T11:35:13Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T16:01:53Z",
+      "oldest_scanned": "2026-11-06T19:05:27Z",
       "scheduled_pages": [
         1
       ],
-      "scheduled_total": 52,
+      "scheduled_total": 53,
       "scheduled_scan_exhausted": true,
       "comparison_fields": [
         "run_id",
@@ -1288,23 +1317,13 @@
         "updated_at",
         "head_sha"
       ],
-      "changed_run_versions": [
-        {
-          "run_id": "42368080340",
-          "run_attempt": 1,
-          "status": "completed",
-          "conclusion": "success",
-          "updated_at": "2026-11-07T11:25:35Z",
-          "head_sha": "1d981f267ddbe64d72ec8b9b63c3e7f3f6e05e5d",
-          "url": "https://github.com/kllollain-max/careerpick/actions/runs/42368080340"
-        }
-      ]
+      "changed_run_versions": []
     },
     "related_open_prs": [],
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "Regular slot published as text after the last confirmed image. Accepted receipt, pinned main published record, writer entry, official Meta GET, and verified username agree. D is false in the runner log. No incident or reconciliation.",
+    "reason": "No change to publisher versions or claims. Last accepted publication still agrees with pinned main record and official Meta GET log. No incident, reconciliation, code change or send.",
     "last_confirmed_post_id": "18131171185889612",
     "prior_confirmed_post_id": "18138250501647531"
   },
