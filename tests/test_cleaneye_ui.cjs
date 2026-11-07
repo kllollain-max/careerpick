@@ -82,6 +82,23 @@ test('structured regular and contract jobs use public sector filters without sub
   assert.equal(home.sector({...regular, emp: ['무기계약직']}), 'service');
 });
 
+test('Cleaneye observed employment labels keep their source text while filters use exact aliases', () => {
+  for (const [label, expected] of [
+    ['일반정규직', ['정규직']], ['일반계약직', ['비정규직']], ['전문계약직', ['비정규직']],
+    ['비상임', []], ['비정규직', ['비정규직']], ['무기계약직', ['무기계약직']],
+  ]) {
+    const p = home.parseFeed(feed([row({emp: [label], cleaneyeDetail: {'고용형태 원문': label}})])).rows[0];
+    assert.deepEqual(p.emp, [label]);
+    assert.equal(p.cleaneyeDetail['고용형태 원문'], label);
+    assert.deepEqual(home.employment(p), expected);
+    for (const choice of ['정규직', '비정규직', '무기계약직', '인턴']) {
+      assert.equal(home.matches(p, {employment: choice}), expected.includes(choice), `${label}: ${choice}`);
+    }
+  }
+  assert.deepEqual(home.employment(row({emp: ['일반정규직 전환 예정']})), []);
+  assert.deepEqual(home.employment({emp: ['일반정규직']}), [], 'other sources keep their existing behavior');
+});
+
 test('Cleaneye dates keep the actual start and never turn date-only deadlines into exact cutoffs', () => {
   const p = home.parseFeed(feed([row({start: '2026-11-08', due: '2026-11-30', dueHasTime: true})])).rows[0];
   assert.equal(p.start, '2026-11-08');
@@ -203,13 +220,32 @@ test('personalized conditions use Cleaneye structured fields and exclude explici
   assert(!vm.runInContext('cpConditionMatches(p,prefs)', context));
 });
 
+test('Cleaneye personalized employment conditions and reasons use exact source aliases', () => {
+  const context = vm.createContext({CPHome: home, ALIO_DETAIL: null, CP_REGION_ALIASES: {}});
+  for (const name of ['cpWorkRegionMatch', 'cpConditionMatches', 'preferenceReasons']) {
+    vm.runInContext(functionCode(name), context);
+  }
+  for (const [label, expected] of [
+    ['일반정규직', '정규직'], ['일반계약직', '계약직'], ['전문계약직', '계약직'], ['비상임', null],
+  ]) {
+    context.p = home.parseFeed(feed([row({emp: [label], due: '2099-12-31', receptionState: 'verified_open'})])).rows[0];
+    for (const choice of ['정규직', '계약직', '무기계약직', '공무직', '인턴']) {
+      context.prefs = {emp: [choice], edu: [], region: [], cat: [], kw: ''};
+      assert.equal(vm.runInContext('cpConditionMatches(p,prefs)', context), choice === expected, `${label}: ${choice}`);
+      assert.deepEqual(Array.from(vm.runInContext('preferenceReasons(p,prefs)', context)),
+        choice === expected ? ['고용형태 ' + choice] : []);
+    }
+    assert.deepEqual(context.p.emp, [label], 'source display values remain unchanged');
+  }
+});
+
 function renderingContext(p) {
   const context = vm.createContext({
     CPHome: home, p, SAVED: new Set(), APPS: {}, ALIO_DETAIL: null,
+    Date: class extends Date { constructor(...args) { super(...(args.length ? args : [+now])); } },
     CP_FEED_STAMPS: {cleaneye: '2026-11-07T09:00:00+09:00'}, UPDATED: 'BLOG-ONLY-STAMP',
     JV_SUMMARY: [['recrutNope', '모집 인원'], ['workRgnNmLst', '근무 지역']], JV_SKIP: new Set(), JV_SECTIONS: [],
-    dday: p => home.deadline(p, now), dueLong: () => '12.31',
-    md: d => { assert(d instanceof Date, 'unknown dates must not be formatted'); return '12.31'; },
+    dday: p => home.deadline(p, now),
     isNew: () => false, regionLabel: p => p.region, isInternalJob: p => p.type === 'j',
     jobHref: p => '#job=' + p.id, jobAnchorAttrs: p => ` data-open="${p.id}"`,
     specOf: () => null, specPill: () => '', preferenceBadge: () => '',
@@ -220,6 +256,10 @@ function renderingContext(p) {
       set innerHTML(value) { this.value = value.replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&quot;', '"').replaceAll('&#39;', "'").replaceAll('&amp;', '&'); },
     })},
   });
+  const formatterStart = html.indexOf('const pad =');
+  const formatterEnd = html.indexOf('\n// Keep source health', formatterStart);
+  assert(formatterStart >= 0 && formatterEnd > formatterStart);
+  vm.runInContext(html.slice(formatterStart, formatterEnd), context);
   for (const name of ['esc', 'plainText', 'cpSavedId', 'cpApplicationId', 'cleanTitle', 'cpRecruitCount', 'cpDetailWarnings', 'cpJobLinks', 'officialLink', 'jobCard', 'rowCard', 'jobViewHTML', 'sortKey']) {
     vm.runInContext(functionCode(name), context);
   }
@@ -269,3 +309,80 @@ test('card counts preserve mixed official text without duplicating the people un
     }
   }
 });
+
+test('a source date review preserves the deadline and source status without a countdown', () => {
+  for (const due of ['2054-07-10', '2400-03-19', '2050-09-26']) {
+    const raw = row({
+      start: '2021-02-01', due: due + 'T23:59:59+09:00', dueHasTime: false,
+      sourceStatus: '모집중', receptionState: 'verification_pending',
+      deadlineReviewReason: 'far_future_source_date',
+    });
+    const before = JSON.stringify(raw);
+    const p = home.parseFeed(feed([raw])).rows[0];
+    assert.equal(p.due.getTime(), new Date(raw.due).getTime());
+    assert.equal(p.start, raw.start);
+    assert.equal(p.sourceStatus, '모집중');
+    assert.equal(p.dueHasTime, false);
+    assert.deepEqual(home.deadline(p, now), {cls: 'verify', big: '일정 확인', n: Infinity});
+    assert.equal(JSON.stringify(raw), before);
+  }
+  const flagged = row({due: '2054-07-10', deadlineReviewReason: 'far_future_source_date'});
+  assert.equal(home.deadline({...flagged, start: '2054-07-01'}, now).big, '일정 확인');
+  for (const receptionState of ['expired', 'cancelled']) {
+    assert.equal(home.deadline({...flagged, receptionState}, now).cls, 'closed');
+  }
+  assert.equal(home.deadline({...flagged, due: null}, now).cls, 'verify');
+  const otherSource = {...flagged, cleaneye: false, alio: true};
+  assert.deepEqual(home.deadline(otherSource, now), home.deadline({...otherSource, deadlineReviewReason: undefined}, now));
+});
+
+test('far future source dates remain visible with their year and review note in all job views', () => {
+  for (const [due, expected] of [
+    ['2054-07-10', '2054.7.10'], ['2400-03-19', '2400.3.19'], ['2050-09-26', '2050.9.26'],
+  ]) {
+    const p = home.parseFeed(feed([row({
+      start: '2021-02-01', due: due + 'T23:59:59+09:00', dueHasTime: false,
+      receptionState: 'verification_pending', deadlineReviewReason: 'far_future_source_date',
+      cleaneyeDetail: {'모집 상태': '모집중'},
+    })])).rows[0];
+    const context = renderingContext(p);
+    const card = vm.runInContext('jobCard(p,new Date())', context);
+    const compact = vm.runInContext('rowCard(p,new Date())', context);
+    const detail = vm.runInContext('jobViewHTML(p,p.cleaneyeDetail)', context);
+    for (const output of [card, compact, detail]) {
+      assert(output.includes(expected));
+      assert(output.includes('원문 마감일 확인 필요'));
+      assert(output.includes('일정 확인'));
+      assert(!/D-\d+/.test(output));
+      assert(!output.includes('23:59'));
+    }
+    assert(compact.includes('class="rm cp-date-review"'));
+    assert(detail.includes('<dt>모집 상태</dt><dd>모집중</dd>'));
+  }
+});
+
+test('Cleaneye dates show a different KST year without treating ordinary next-year dates as uncertain', () => {
+  const p = home.parseFeed(feed([row({due: '2027-01-02'})])).rows[0];
+  const context = renderingContext(p);
+  assert.equal(vm.runInContext('cpDueLabel(p)', context), '2027.1.2(토)');
+  assert.equal(vm.runInContext('cpDueLabel(p,{short:true})', context), '2027.1.2');
+  assert.equal(home.deadline(p, now).cls, 'open');
+  assert.equal(vm.runInContext('cpDueLabel(p,{now:new Date("2026-12-31T15:00:00Z")})', context), '1.2(토)');
+  context.p = home.parseFeed(feed([row({due: '2026-11-10'})])).rows[0];
+  assert.equal(vm.runInContext('cpDueLabel(p)', context), '11.10(화)');
+  assert.equal(home.deadline(context.p, now).big, 'D-3');
+  assert(!vm.runInContext('rowCard(p,new Date())', context).includes('cp-date-review'));
+});
+
+test('date review formatting leaves ALIO and other source labels unchanged', () => {
+  const p = {
+    ...row(), cleaneye: false, alio: true,
+    due: new Date('2054-07-10T16:30:00+09:00'), dueHasTime: true,
+    deadlineReviewReason: 'far_future_source_date',
+  };
+  const context = renderingContext(p);
+  assert.equal(vm.runInContext('cpDueLabel(p)', context), '7.10(금) 16:30');
+  assert.equal(vm.runInContext('cpDueLabel(p,{short:true})', context), '7.10');
+  assert.equal(vm.runInContext('cpDueLabel(p,{hasTime:false})', context), '7.10(금)');
+});
+

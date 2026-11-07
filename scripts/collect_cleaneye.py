@@ -44,6 +44,7 @@ DETAIL_FIELDS = {
 }
 EMPLOYMENT_LABELS = {
     "정규직", "비정규직", "계약직", "기간제", "기간제근로자", "기간제 근로자",
+    "일반정규직", "일반계약직", "전문계약직", "비상임",
     "무기계약직", "무기계약근로자", "공무직", "인턴", "청년인턴", "청년 인턴",
     "체험형인턴", "체험형 인턴", "채용형인턴", "채용형 인턴", "파견직", "일용직",
     "단시간근로자", "단시간 근로자", "상용직",
@@ -52,6 +53,9 @@ OPEN_STATUS = {"접수중", "모집중", "채용중", "진행중"}
 UPCOMING_STATUS = {"접수예정", "모집예정", "채용예정"}
 CLOSED_STATUS = {"마감", "접수마감", "채용마감", "모집마감", "모집완료", "채용완료", "종료", "접수종료"}
 CANCELLED_STATUS = {"취소", "채용취소", "공고취소", "모집취소"}
+# A deadline at least 10 calendar years after the collection year needs source
+# review. Preserve the original date; this threshold never establishes closure.
+FAR_FUTURE_REVIEW_YEARS = 10
 
 
 class CollectionError(ValueError):
@@ -169,18 +173,27 @@ def _reception_state(status, start, due, due_has_time, date_problem, now):
 def normalize(record, now):
     if not isinstance(record, dict) or any(not isinstance(v, str) for v in record.values()):
         raise CollectionError("invalid_record")
+    # The live source uses the exact text "null" for missing optional values.
+    # Do not substitute institution location, zero headcount, or guessed values.
+    required_or_date_fields = {"NO", "ENT_NAME", "ENT_TITLE", "PUB_DATE", "PUB_END_DATE", "UPD_DATE"}
+    record = {name: "" if value == "null" and name not in required_or_date_fields else value
+              for name, value in record.items()}
     identity = record.get("NO", "").strip()
-    if (not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,127}", identity)
+    if (identity == "null" or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,127}", identity)
             or len("cleaneye-" + identity) > 128):
         raise CollectionError("invalid_notice_id")
     title, org = (plain_text(record.get(field, "")) for field in ("ENT_TITLE", "ENT_NAME"))
-    if not title or not org:
+    if not title or not org or title == "null" or org == "null":
         raise CollectionError("missing_notice_title_or_org")
     url = _official_url(record.get("URL", ""))
     start, start_has_time, start_valid = _source_date(record.get("PUB_DATE", ""))
     due, due_has_time, due_valid = _source_date(record.get("PUB_END_DATE", ""), end=True)
     date_problem = "invalid" in (start_valid, due_valid) or bool(start and due and start > due)
     status = record.get("STATUS", "")
+    reception_state = _reception_state(status, start, due, due_has_time, date_problem, now)
+    far_future = bool(due and due.year >= now.year + FAR_FUTURE_REVIEW_YEARS)
+    if far_future and reception_state in {"verified_open", "upcoming"}:
+        reception_state = "verification_pending"
     employment = [label.strip() for label in re.split(r"[,/;·|]", record.get("JOB_TYPE", ""))]
     employment = list(dict.fromkeys(label for label in employment if label in EMPLOYMENT_LABELS))
     number = plain_text(record.get("EMPLOY_NUM", ""))
@@ -199,7 +212,8 @@ def normalize(record, now):
         "dueHasTime": bool(due and due_has_time), "emp": employment, "edu": [],
         "n": number if number != "" else None, "region": plain_text(record.get("WORK_PLACE", "")),
         "sourceRegion": plain_text(record.get("SIDO_CD", "")), "sourceStatus": status,
-        "receptionState": _reception_state(status, start, due, due_has_time, date_problem, now),
+        "receptionState": reception_state,
+        **({"deadlineReviewReason": "far_future_source_date"} if far_future else {}),
         "sourceMissing": False, "text": "\n".join(value for value in searchable if value),
         "cleaneyeDetail": detail,
     }
@@ -281,6 +295,7 @@ def merge(previous, records, now, *, sido_codes, region_counts, complete_collect
         "status_uncertain": sum(p.get("receptionState") in {"verification_pending", "invalid_date"} for p in posts),
         "deadline_time_uncertain": sum(bool(p.get("due")) and not p.get("dueHasTime") for p in posts),
         "deadline_unknown": sum(not p.get("due") for p in posts),
+        "far_future_source_date": sum(p.get("deadlineReviewReason") == "far_future_source_date" for p in posts),
         "current_candidates": current_candidates,
     }
     candidate = {

@@ -110,6 +110,71 @@ class CleaneyeNormalizationTests(unittest.TestCase):
         self.assertEqual(post["n"], "2명(예비 3명)")
         self.assertEqual(post["cleaneyeDetail"]["채용인원"], "2명(예비 3명)")
 
+    def test_observed_employment_labels_are_preserved_without_contract_inference(self):
+        for label in ("기간제", "무기계약직", "비상임", "인턴", "일반계약직", "일반정규직", "전문계약직"):
+            with self.subTest(label=label):
+                source = row(JOB_TYPE=label)
+                before = copy.deepcopy(source)
+                post = normalize(source, NOW)
+                self.assertEqual(post["emp"], [label])
+                self.assertEqual(post["cleaneyeDetail"]["고용형태 원문"], label)
+                self.assertEqual(source, before)
+        raw = "일반정규직 / 일반계약직 / 전문계약직 / 비상임 / 일반계약직"
+        post = normalize(row(JOB_TYPE=raw), NOW)
+        self.assertEqual(post["emp"], ["일반정규직", "일반계약직", "전문계약직", "비상임"])
+        self.assertEqual(post["cleaneyeDetail"]["고용형태 원문"], raw)
+
+    def test_literal_null_optional_fields_remain_unknown_and_never_fill_workplace_from_institution(self):
+        source = row(WORK_PLACE="null", OFFICE_HOURS="null", SPECIAL_ITEM="null",
+                     EMPLOY_NUM="null", ADDRESS="null")
+        before = copy.deepcopy(source)
+        post = normalize(source, NOW)
+        self.assertEqual(post["region"], "")
+        self.assertEqual(post["sourceRegion"], "서울특별시")
+        self.assertIsNone(post["n"])
+        for label in ("근무지", "근무시간", "우대사항", "채용인원", "기관주소"):
+            self.assertNotIn(label, post["cleaneyeDetail"])
+        self.assertNotIn("null", post["text"])
+        self.assertEqual(post["start"], "2026-11-01")
+        self.assertEqual(post["due"], "2026-11-20T23:59:59+09:00")
+        self.assertEqual(post["cleaneyeDetail"]["접수개시일 원문"], source["PUB_DATE"])
+        self.assertEqual(post["cleaneyeDetail"]["접수마감일 원문"], source["PUB_END_DATE"])
+        self.assertEqual(post["cleaneyeDetail"]["수정날짜 원문"], source["UPD_DATE"])
+        self.assertEqual(source, before)
+        text = "null 값을 점검하는 업무"
+        self.assertIn(text, normalize(row(DUTY_DETAIL=text), NOW)["text"])
+        self.assertEqual(normalize(row(EMPLOY_NUM="0"), NOW)["n"], 0)
+
+    def test_literal_null_cannot_masquerade_as_a_required_identity_title_or_institution(self):
+        for name in ("NO", "ENT_TITLE", "ENT_NAME"):
+            with self.subTest(name=name), self.assertRaises(CollectionError):
+                normalize(row(**{name: "null"}), NOW)
+
+    def test_far_future_source_dates_remain_unchanged_but_need_review(self):
+        for due in ("2050-09-26", "2054-07-10", "2400-03-19", "2036-01-01"):
+            for status, start in (("모집중", "2026-11-01"), ("모집예정", "2026-11-10")):
+                with self.subTest(due=due, status=status):
+                    post = normalize(row(STATUS=status, PUB_DATE=start, PUB_END_DATE=due), NOW)
+                    self.assertEqual(post["receptionState"], "verification_pending")
+                    self.assertEqual(post["deadlineReviewReason"], "far_future_source_date")
+                    self.assertEqual(post["start"], start)
+                    self.assertEqual(post["due"], due + "T23:59:59+09:00")
+                    self.assertFalse(post["dueHasTime"])
+                    self.assertEqual(post["cleaneyeDetail"]["접수마감일 원문"], due)
+
+    def test_far_future_review_uses_ten_calendar_years_and_keeps_explicit_closed_status(self):
+        for due, now in (("2027-11-20", NOW), ("2035-12-31", NOW),
+                         ("2036-01-01", NOW.replace(year=2027))):
+            with self.subTest(due=due, now=now):
+                post = normalize(row(STATUS="모집중", PUB_END_DATE=due), now)
+                self.assertEqual(post["receptionState"], "verified_open")
+                self.assertNotIn("deadlineReviewReason", post)
+        for status, expected in (("채용마감", "expired"), ("채용취소", "cancelled")):
+            with self.subTest(status=status):
+                post = normalize(row(STATUS=status, PUB_END_DATE="2054-07-10"), NOW)
+                self.assertEqual(post["receptionState"], expected)
+                self.assertEqual(post["due"], "2054-07-10T23:59:59+09:00")
+
     def test_optional_fields_stay_unknown_and_filename_does_not_become_a_url(self):
         raw = {key: row()[key] for key in ("NO", "ENT_TITLE", "ENT_NAME", "URL")}
         post = normalize(raw, NOW)
@@ -188,6 +253,19 @@ class CleaneyeNormalizationTests(unittest.TestCase):
 
 
 class CleaneyeMergeTests(unittest.TestCase):
+    def test_far_future_source_date_counts_remain_separate_from_active_and_upcoming(self):
+        feed, _, counts = staged(records=[
+            row("far-open", PUB_END_DATE="2054-07-10"),
+            row("far-upcoming", PUB_DATE="2026-11-10", PUB_END_DATE="2400-03-19"),
+            row("next-year", PUB_END_DATE="2027-11-20"),
+        ])
+        self.assertEqual(counts["far_future_source_date"], 2)
+        self.assertEqual(counts["active"], 1)
+        self.assertEqual(counts["upcoming"], 0)
+        self.assertEqual(counts["status_uncertain"], 2)
+        self.assertEqual(counts["received"], 3)
+        self.assertEqual(len(feed["posts"]), 3)
+
     def test_repeat_collection_has_no_content_or_timestamp_churn(self):
         feed, changed, counts = staged()
         self.assertTrue(changed)

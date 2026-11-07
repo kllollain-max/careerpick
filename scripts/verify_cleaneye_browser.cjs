@@ -68,7 +68,9 @@ const oldApplication = {st:'plan', ck:[], exam:'', itv:'', memo:'기존 지원 �
       await page.reload({waitUntil:'networkidle'});
       await page.locator('#jvBody h1').waitFor();
       assert.equal((await page.locator('#jvBody h1').innerText()).trim(), sample.title.trim());
-      await page.locator('#jvBody [data-track="' + sample.id + '"]').click();
+      const applicationButton = page.locator('#jvBody').getByRole('button', {name:'📋 지원기록', exact:true});
+      assert.equal(await applicationButton.getAttribute('data-track'), sample.id);
+      await applicationButton.click();
       await page.locator('#tMemo').fill('클린아이 지원 기록 검증');
       await page.locator('#tSave').click();
       await page.reload({waitUntil:'networkidle'});
@@ -87,3 +89,4 @@ const oldApplication = {st:'plan', ck:[], exam:'', itv:'', memo:'기존 지원 �
     console.log(JSON.stringify(report));
   } finally { await browser.close(); }
 })().catch(error => { console.error(error.message); process.exitCode = 1; });
+
