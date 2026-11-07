@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T05:09:31Z",
-  "last_observed_at": "2026-11-07T05:09:31Z",
+  "updated_at": "2026-11-07T05:50:02Z",
+  "last_observed_at": "2026-11-07T05:50:02Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "8f9acabb26ff693d003756930bf413072e687f37",
+    "blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -122,9 +122,20 @@
         "official_source": "https://job.alio.go.kr/recruitview.do?idx=306732",
         "official_attachment": "https://www.alio.go.kr/download/download.json?fileNo=3085304",
         "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306732.html"
+      },
+      {
+        "scheduled_at": "2026-11-08T12:00:00+09:00",
+        "notice_id": "a306733",
+        "format_id": "key_facts",
+        "chars": 430,
+        "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132",
+        "characters": 430,
+        "official_source": "https://job.alio.go.kr/recruitview.do?idx=306733",
+        "official_attachment": "https://www.alio.go.kr/download/download.json?fileNo=3085307",
+        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306733.html"
       }
     ],
-    "last_update_commit_sha": "b60f08768e60a80c05112e47694fcded06962b3c"
+    "last_update_commit_sha": "8e82be7be6ebda6c974181ea17f0519a3abe47bf"
   },
   "observed_runs": [
     {
@@ -890,13 +901,22 @@
           "본 공고는 면허·자격을 공고일 기준 소지하도록 하나 공통 입사지원서 작성 가이드는 마감일 기준으로 기재되어 상충. 공식 직종별 기준을 재확인하기 전 ready로 저장하지 않음."
         ]
       },
-      "attachment_failures_resolved_at": "2026-11-07T05:09:31Z"
+      "attachment_failures_resolved_at": "2026-11-07T05:09:31Z",
+      "resolution": {
+        "status": "alternative_ready_saved",
+        "checked_at": "2026-11-07T05:50:02Z",
+        "original_notice_id": "a306715",
+        "notice_id": "a306733",
+        "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
+        "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132",
+        "reason": "기존 치과병원 원고는 근무형태와 면허 보유 기준일 충돌로 계속 보류. 대체 후보는 공식 공고 PDF와 ZIP 내 환경사 미화 직무기술서 HWP를 실제 열어 13명 모집단위, 대전 근무, 시차·교대·주말/공휴일, 수습과 마감 확인."
+      }
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T05:09:31Z",
+    "checked_at": "2026-11-07T05:50:02Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T14:06:28.008089+09:00",
+    "input_reference_at": "2026-11-07T14:45:56.172189+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -922,38 +942,47 @@
         "format_id": "reader_story",
         "chars": 450,
         "entry_sha256": "cbe3d9896c1a64dd3a19bd373c11bf1283e8db5bd511c7366a36a06df144682b"
+      },
+      {
+        "scheduled_at": "2026-11-08T12:00:00+09:00",
+        "notice_id": "a306733",
+        "format_id": "key_facts",
+        "chars": 430,
+        "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132"
       }
     ],
-    "new_drafts": 0,
+    "new_drafts": 1,
     "new_ready_saved": 1,
     "preserved_hold_drafts": [
       "a306715"
     ],
-    "hold_source_fingerprints_unchanged": true,
     "source_snapshot_at": "2026-11-07T00:58:42+09:00",
     "source_last_success_at": "2026-11-07T13:26:43+09:00",
+    "cleaneye_source": {
+      "status": "verified",
+      "updated": "2026-11-07T13:27:15+09:00",
+      "candidates_in_top24": 10
+    },
     "history_duplicate_ids_checked": true,
     "recent_records_compared": 10,
-    "reason": "Existing today16/20 originals untouched. Tomorrow08 authored draft completed with verified mandatory proof and conditional appointment terms, validated, CAS saved and read back. Tomorrow12 attachment access recovered but source conflict/work-hours ambiguity remains; no policy relaxation.",
-    "revised_hold_drafts": 1,
-    "collection_observation": {
-      "run_id": "42338197158",
-      "run_attempt": 1,
-      "job_id": 128299797412,
-      "alio_collection": "success",
-      "alio_validation": "success",
-      "changed": false,
-      "job_conclusion": "failure",
-      "failure_step": "Verify public snapshot hashes",
-      "failure_code": "public_version_not_verified",
-      "scope": "Other source/Pages pipeline; no Threads failure inferred and no website/other service changes made."
-    }
+    "candidate_exclusions": [
+      {
+        "notice_id": "cleaneye-80848",
+        "reason": "기관 공고에서 모집단위·근무조건과 접수시각을 확인했지만 현재 커리어픽 개별 공고 경로가 404이고 공개 상세 ID 목록에도 없어 CTA 목적지 검증 미완료."
+      },
+      {
+        "notice_id": "a306715",
+        "reason": "면허 기준일 공식 문서 간 충돌 및 직무별 교대 조건 미확인으로 기존 보류 보존."
+      }
+    ],
+    "attachment_sha256": "527b8de420bd414c00e486b034f4b216e5962cf7eac36dff55504debd7bf7f9c  duties-306733.zip\n0aadda6aebed514def355b22b0e464aa6171983e0d6a730750eaa7f7278f5b1a  duties-environment.hwp",
+    "reason": "4개 미래 슬롯 모두 검증 통과. 이번에 11월 8일 12시용 a306733 원고 1건 작성·검수·조건부 저장·read-back. 기존 대기 3건과 게시/예약 원고 원문 유지."
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T05:09:31Z",
-    "main_sha": "b28d40c018cd732754be1634b6a4f6f5c4aa5cc5",
-    "state_head_before_write": "b60f08768e60a80c05112e47694fcded06962b3c",
-    "queue_blob_sha": "8f9acabb26ff693d003756930bf413072e687f37",
+    "checked_at": "2026-11-07T05:50:02Z",
+    "main_sha": "cd9ad444261b544f66a57b78c2e5fe4516582208",
+    "state_head_before_write": "8e82be7be6ebda6c974181ea17f0519a3abe47bf",
+    "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
     "latest_threads_run": {
       "run_id": "42334945888",
       "run_attempt": 1,
@@ -973,12 +1002,12 @@
     "claims_inspected": 17,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T04:21:51Z",
+      "since": "2026-11-07T05:09:31Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T07:29:48Z",
+      "oldest_scanned": "2026-11-06T10:15:18Z",
       "scheduled_pages": [
         1
       ],
@@ -997,6 +1026,6 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "All observed Threads run versions unchanged; latest accepted ID and main ledger unchanged from prior official Meta text/ID verification. No recovery or retransmission required."
+    "reason": "Publisher run versions, main ledger blob and accepted receipt unchanged from verified 12:39 KST actual publication; no pending or recovery required. No schedule, publish, or code mutation by this check."
   }
 }
