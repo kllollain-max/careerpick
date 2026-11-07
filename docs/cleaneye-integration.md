@@ -2,13 +2,13 @@
 
 ## Current state — 2026-11-07 KST
 
-This is a review candidate on `codex/cleaneye-api-20261107`. The employment service and the separate province-code service are approved development accounts for 2026-11-07 through 2028-11-07. The province-code approval blocker has been resolved using the existing protected public-data credential.
+PR #28 was merged and the Cleaneye source is now enabled in production. The employment service and the separate province-code service are approved development accounts for 2026-11-07 through 2028-11-07. The province-code approval blocker has been resolved using the existing protected public-data credential.
 
 The first complete protected collection, captured at **2026-11-07 12:57:55 KST**, obtained the official 2026 codes for all **17 regions** and **351 unique recruitment notices**. It made one province-code request and 17 employment requests, with all 18 requests successfully interpreted. Region `007005` had no matching records. The run produced an isolated candidate and preserved the existing source snapshots; it did not publish a feed.
 
 Inspection of that real response identified optional fields containing the literal string `null`, employment labels not yet recognized by the filters, and three unusually distant source deadlines. The candidate now handles those values explicitly while retaining notice identities, official links, and meaningful source fields. The final protected collection and browser verification below confirmed those changes.
 
-### Final candidate evidence
+### Pre-release candidate evidence
 
 **Verification status: Passed: complete protected collection and actual-data browser checks.**
 
@@ -29,9 +29,17 @@ Inspection of that real response identified optional fields containing the liter
 
 The final collection report confirms **265 open, 81 upcoming, and 5 requiring verification** from 351 notices. The five are two date-only notices closing on the collection date and three far-future source dates. `received` counts all retrieved notices; it must not be described as the number accepting applications.
 
-The final candidate SHA-256 is `6df47aa587edf0a8a12b5713ff43695c241226e491804a68cfcbefe043a7b229`. The downloaded artifact and the candidate were independently checked against their recorded hashes; the 320 px list and detail screenshots were visually reviewed.
+The pre-release candidate SHA-256 is `6df47aa587edf0a8a12b5713ff43695c241226e491804a68cfcbefe043a7b229`. The downloaded artifact and the candidate were independently checked against their recorded hashes; the 320 px list and detail screenshots were visually reviewed.
 
-The successful candidate workflow does not merge the PR, update the production feed, or deploy the website. Production release and post-release verification remain separate steps. Release status: **PR #28 is unmerged; no production collection or deployment has been run for this candidate**.
+### Verified production release
+
+The owner authorized release on 2026-11-07. [PR #28](https://github.com/kllollain-max/careerpick/pull/28) was merged as `56c9085a504ed0a1719c31fab559ef987dd6ba9f`. [Operation run 42338197158, attempt 2](https://github.com/kllollain-max/careerpick/actions/runs/42338197158/attempts/2) completed with `overall=success`, `storage=success`, `deployment=success` and `public_check=success`.
+
+The production collection timestamp is **2026-11-07 13:27:15 KST**. All 17 regions were checked: **351 notices, 265 open, 81 upcoming and 5 requiring verification**. The committed data revision is `b844bd9485fa32b7cc878bd73947e5951856d122`; the Cleaneye snapshot SHA-256 is `c3b4695baaae4bd12f179971148bcf64d09e77f38e38d78de25eff7c6908ab46`. The published snapshot matched the committed data in the public hash check, which passed at 13:30 KST.
+
+A browser check on the public site found the newly collected Wonju Facilities Management Corporation notice and opened its details with the correct original link: [published notice 80661](https://kllollain-max.github.io/careerpick/#job=cleaneye-80661). Notice IDs, original dates, source URLs and source employment labels passed independent checks on all 351 committed records.
+
+Attempt 1 stopped on `transport_failed` after five successful regional employment responses. It preserved all baseline files and did not deploy. Attempt 2 completed the entire collection. The earlier diagnostic does not identify the underlying transport exception type.
 
 ## Official API contracts
 
@@ -50,7 +58,7 @@ The official employment Swagger describes XML root `response`, a header containi
 
 This exception does not apply to province-code lookup, HTTP errors, authentication failures, or arbitrary code-3 responses. A valid empty region no longer aborts the other regions. An entirely empty new feed still cannot replace the baseline or be published as a successful initial collection.
 
-Credentials come from `CLEANEYE_KEY`, falling back to the existing GitHub secret `DATA_GO_KR_KEY` in the workflow. `ALIO_KEY` is not used. Requests remain on the fixed HTTPS API host and do not follow redirects. Logs contain bounded diagnostic codes and counts, never credential-bearing request URLs or raw exception strings.
+Credentials come from `CLEANEYE_KEY`, falling back to the existing GitHub secret `DATA_GO_KR_KEY` in the workflow. `ALIO_KEY` is not used. Requests remain on the fixed HTTPS API host and do not follow redirects. Typed timeouts, connection errors and temporary DNS failures (EAI_AGAIN) are retried for the same idempotent GET up to three total attempts, waiting 1 and 2 seconds. HTTP, SSL, API and payload-validation failures are not retried. Actual attempts are counted separately from successfully validated responses, and exhausted retries still reject incomplete collections. Unknown error strings are not interpreted as temporary failures. Logs contain bounded diagnostic codes and counts, never credential-bearing request URLs or raw exception strings.
 
 ## Data mapping and preservation
 
@@ -85,7 +93,7 @@ The candidate workflow has read-only repository permission and two independent c
 
 Passing the first check is not evidence that the second passed. Acceptance requires a final collector state of `changed` or `unchanged`, verified official region lookup, complete collection, preserved original snapshots, a candidate file with its recorded hash, and successful subsequent build/browser steps. Authentication and collection-completeness flags alone are insufficient if later normalization or validation fails.
 
-The tracked baseline `cleaneye.json` begins with `collectionStatus=not_collected` and an empty list. It is not a successful zero-job feed. Synthetic records stay confined to tests or disposable browser contexts and are never written to public job data. The actual source candidate is selected only after the complete validation path succeeds.
+The initial tracked baseline used `collectionStatus=not_collected` and an empty list; the production operation has now replaced it with the verified 351-notice snapshot. A not-collected baseline is not a successful zero-job feed. Synthetic records stay confined to tests or disposable browser contexts and are never written to public job data. The actual source candidate is selected only after the complete validation path succeeds.
 
 The operation change adds Cleaneye independently to the existing three-hour schedule. Other sources continue if Cleaneye fails, and the combined report records partial failure explicitly. Public snapshot verification includes `cleaneye.json` after release. The schedule expression, personal-storage keys, push settings and social publication workflows are unchanged.
 

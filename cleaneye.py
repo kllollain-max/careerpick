@@ -13,6 +13,9 @@ environment, follows notice URLs, prints response bodies, or writes files.
 
 import json
 import re
+import socket
+import ssl
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -31,6 +34,8 @@ REGION_PAGE_SIZE = 300
 MAX_REGION_PAGES = 32
 MAX_REGION_CODE_CHARS = 128
 TIMEOUT = 25
+# At most three attempts for one idempotent GET; no HTTP/API error retries.
+TRANSPORT_RETRY_DELAYS = (1, 2)
 MAX_RESPONSE_BYTES = 16 * 1024 * 1024
 MAX_REGIONS = 32
 MAX_REGION_RECORDS = 20_000
@@ -107,6 +112,19 @@ class APIError(RuntimeError):
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         raise APIError("redirect_rejected") from None
+
+
+def _retryable_transport_error(error):
+    # Inspect exception types only. Exception messages may contain the key URL,
+    # and an HTTPError is also a URLError but must never be retried here.
+    if isinstance(error, urllib.error.HTTPError):
+        return False
+    if isinstance(error, urllib.error.URLError):
+        error = error.reason
+    if isinstance(error, (ssl.SSLError, urllib.error.HTTPError)):
+        return False
+    return (isinstance(error, (TimeoutError, ConnectionError))
+            or isinstance(error, socket.gaierror) and error.errno == socket.EAI_AGAIN)
 
 
 def _region(value):
@@ -338,19 +356,31 @@ class Client:
             headers={"Accept": "application/xml", "User-Agent": "CareerPick"},
         )
         self.request_counts.setdefault(operation, 0)
-        self.request_counts[operation] += 1
         try:
-            with self._opener.open(request, timeout=TIMEOUT) as response:
-                if 300 <= response.status < 400:
-                    raise APIError("redirect_rejected")
-                if response.status != 200:
-                    raise APIError("unexpected_http_status")
-                actual = urllib.parse.urlsplit(response.geturl())
-                expected = urllib.parse.urlsplit(endpoint)
-                if (actual.scheme, actual.netloc, actual.path) != (
-                        expected.scheme, expected.netloc, expected.path):
-                    raise APIError("redirect_rejected")
-                raw = response.read(MAX_RESPONSE_BYTES + 1)
+            for attempt in range(len(TRANSPORT_RETRY_DELAYS) + 1):
+                # Count each open attempt, including timeouts and retries;
+                # successful regions are counted only after full validation.
+                self.request_counts[operation] += 1
+                try:
+                    with self._opener.open(request, timeout=TIMEOUT) as response:
+                        if 300 <= response.status < 400:
+                            raise APIError("redirect_rejected")
+                        if response.status != 200:
+                            raise APIError("unexpected_http_status")
+                        actual = urllib.parse.urlsplit(response.geturl())
+                        expected = urllib.parse.urlsplit(endpoint)
+                        if (actual.scheme, actual.netloc, actual.path) != (
+                                expected.scheme, expected.netloc, expected.path):
+                            raise APIError("redirect_rejected")
+                        raw = response.read(MAX_RESPONSE_BYTES + 1)
+                    break
+                except (APIError, urllib.error.HTTPError):
+                    raise
+                except Exception as error:
+                    if (attempt == len(TRANSPORT_RETRY_DELAYS)
+                            or not _retryable_transport_error(error)):
+                        raise
+                    time.sleep(TRANSPORT_RETRY_DELAYS[attempt])
         except APIError:
             raise
         except urllib.error.HTTPError as error:

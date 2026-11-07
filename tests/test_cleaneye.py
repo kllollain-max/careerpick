@@ -2,6 +2,9 @@
 
 import io
 import json
+import socket
+import ssl
+import traceback
 import unittest
 from unittest.mock import patch
 import urllib.error
@@ -205,6 +208,135 @@ class CleaneyeContractTests(unittest.TestCase):
         self.assert_code("transport_failed", lambda: self.client(error).list_region("001"))
         self.assert_code("internal_error", lambda: (_ for _ in ()).throw(cleaneye.APIError(KEY)))
         self.assert_code("api_response_error", lambda: self.client(xml(code="untrusted-code")).list_region("001"))
+
+    def test_transient_transport_errors_retry_the_same_get_and_count_attempts(self):
+        for error in (
+            TimeoutError(KEY), urllib.error.URLError(TimeoutError(KEY)),
+            ConnectionResetError(KEY), urllib.error.URLError(ConnectionAbortedError(KEY)),
+            urllib.error.URLError(socket.gaierror(socket.EAI_AGAIN, KEY)),
+        ):
+            with self.subTest(error_type=type(error).__name__), patch("cleaneye.time.sleep") as sleep:
+                client = self.client(error, xml(row()))
+                result = client.list_region("001")
+                self.assertEqual([record["NO"] for record in result["result"]], ["source-1"])
+                self.assertEqual(client.request_counts, {"list": 2})
+                self.assertEqual(client.success_counts, {"list": 1})
+                self.assertEqual(client.region_counts, {"001": 1})
+                requests = client._opener.requests
+                self.assertEqual(len(requests), 2)
+                self.assertTrue(all(request.method == "GET" for request in requests))
+                self.assertEqual(requests[0].full_url, requests[1].full_url)
+                sleep.assert_called_once_with(1)
+
+    def test_exhausted_retries_never_complete_partial_collection_or_expose_key(self):
+        client = self.client(xml(row("a")), *[TimeoutError(KEY) for _ in range(3)], xml(row("b")))
+        with patch("cleaneye.time.sleep") as sleep:
+            try:
+                client.collect_list(sido_codes=["001", "002"])
+            except cleaneye.APIError as error:
+                self.assertEqual(error.safe_code, "transport_failed")
+                formatted = "".join(traceback.format_exception(type(error), error, error.__traceback__))
+                self.assertNotIn(KEY, formatted)
+                self.assertNotIn(urllib.parse.quote(KEY, safe=""), formatted)
+            else:
+                self.fail("a timed-out region must not publish a partial collection")
+            self.assertEqual([call.args for call in sleep.call_args_list], [(1,), (2,)])
+        self.assertEqual(client.request_counts, {"list": 4})
+        self.assertEqual(client.success_counts, {"list": 1})
+        self.assertEqual(client.region_counts, {"001": 1})
+        self.assertFalse(client.collection_complete)
+        self.assertIsNone(client.last_response_diagnostic)
+        self.assertEqual([
+            urllib.parse.parse_qs(urllib.parse.urlsplit(request.full_url).query)["sidoCd"][0]
+            for request in client._opener.requests
+        ], ["001", "002", "002", "002"])
+
+    def test_tls_permanent_dns_and_untyped_transport_errors_are_not_retried(self):
+        for error in (
+            ssl.SSLError(KEY), urllib.error.URLError(ssl.SSLError(KEY)),
+            urllib.error.URLError(ssl.SSLCertVerificationError(KEY)),
+            urllib.error.URLError(socket.gaierror(socket.EAI_NONAME, KEY)),
+            urllib.error.URLError("timed out: " + KEY), OSError(KEY), RuntimeError(KEY),
+        ):
+            with self.subTest(error_type=type(error).__name__), patch("cleaneye.time.sleep") as sleep:
+                client = self.client(error, xml(row()))
+                self.assert_code("transport_failed", lambda: client.list_region("001"))
+                self.assertEqual(client.request_counts, {"list": 1})
+                self.assertEqual(client.success_counts, {"list": 0})
+                self.assertEqual(len(client._opener.requests), 1)
+                sleep.assert_not_called()
+
+    def test_http_errors_including_auth_rate_limit_and_server_errors_are_not_retried(self):
+        gateway = (b"<OpenAPI_ServiceResponse><cmmMsgHeader><returnReasonCode>30</returnReasonCode>"
+                   b"</cmmMsgHeader></OpenAPI_ServiceResponse>")
+        for status, body, code in (
+            (302, b"", "redirect_rejected"), (401, b"", "http_status_401"),
+            (403, gateway, "gateway_30"), (429, b"", "http_status_429"),
+            (503, b"", "http_status_503"),
+        ):
+            with self.subTest(status=status), patch("cleaneye.time.sleep") as sleep:
+                stream = io.BytesIO(body)
+                error = urllib.error.HTTPError("https://apis.data.go.kr/?serviceKey=" + KEY,
+                                               status, KEY, {}, stream)
+                client = self.client(error, xml(row()))
+                self.assert_code(code, lambda: client.list_region("001"))
+                self.assertEqual(client.request_counts, {"list": 1})
+                self.assertEqual(client.success_counts, {"list": 0})
+                self.assertEqual(len(client._opener.requests), 1)
+                self.assertTrue(stream.closed)
+                sleep.assert_not_called()
+
+    def test_api_and_payload_validation_errors_are_not_retried(self):
+        for payload, code in (
+            (xml(code="30"), "api_result_30"), (b"<broken", "invalid_xml"),
+            (xml(row(), total=2), "incomplete_collection"),
+            (xml(row(ENT_TITLE=KEY)), "credential_echo_rejected"),
+        ):
+            with self.subTest(code=code), patch("cleaneye.time.sleep") as sleep:
+                client = self.client(payload, xml(row()))
+                self.assert_code(code, lambda: client.list_region("001"))
+                self.assertEqual(client.request_counts, {"list": 1})
+                self.assertEqual(client.success_counts, {"list": 0})
+                self.assertEqual(len(client._opener.requests), 1)
+                sleep.assert_not_called()
+
+    def test_read_timeout_closes_response_before_retrying(self):
+        class TimedOutResponse(Response):
+            def read(self, *args):
+                raise TimeoutError(KEY)
+
+        url = cleaneye.BASE_URL + "/" + cleaneye.OPERATION
+        failed = TimedOutResponse(b"", url)
+        complete = Response(xml(row()), url)
+        client = self.client()
+        with patch("cleaneye.time.sleep") as sleep, patch.object(
+                client._opener, "open", side_effect=[failed, complete]) as open_request:
+            self.assertEqual(client.list_region("001")["totalCount"], 1)
+            self.assertEqual(open_request.call_count, 2)
+            sleep.assert_called_once_with(1)
+        self.assertTrue(failed.closed)
+        self.assertTrue(complete.closed)
+        self.assertEqual(client.request_counts, {"list": 2})
+        self.assertEqual(client.success_counts, {"list": 1})
+
+    def test_region_lookup_and_collection_keep_exact_counts_after_recovery(self):
+        client = self.client(
+            urllib.error.URLError(TimeoutError(KEY)),
+            regions_xml(region_row("A", "지역 가"), region_row("B", "지역 나", "2")),
+            xml(row("a")), urllib.error.URLError(ConnectionResetError(KEY)), xml(row("b")),
+        )
+        with patch("cleaneye.time.sleep") as sleep:
+            mapping = client.collect_region_codes(ac_year=2026)
+            records = client.collect_list(sido_codes=list(mapping))
+            self.assertEqual([call.args for call in sleep.call_args_list], [(1,), (1,)])
+        self.assertEqual(mapping, {"A": "지역 가", "B": "지역 나"})
+        self.assertEqual([record["NO"] for record in records], ["a", "b"])
+        self.assertEqual(client.request_counts, {"list": 3, "region_codes": 2})
+        self.assertEqual(client.success_counts, {"list": 2, "region_codes": 1})
+        self.assertEqual(client.region_counts, {"A": 1, "B": 1})
+        self.assertEqual(client.region_code_metadata["pages"], 1)
+        self.assertTrue(client.region_code_metadata["complete"])
+        self.assertTrue(client.collection_complete)
 
     def test_header_only_no_data_is_a_regional_zero_but_success_still_needs_a_body(self):
         # Run 42336052565 observed the header-only code/message for region 007005.
