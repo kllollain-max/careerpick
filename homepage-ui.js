@@ -1,13 +1,14 @@
 let cpVisibleLimit=30, cpLastFilter="";
 function cpCheckVisibleLimit(){ const key=JSON.stringify(state);if(key!==cpLastFilter){cpVisibleLimit=30;cpLastFilter=key;} }
 /* UI wiring for the existing homepage; no changes to delivery or collection. */
-const CP_FEED_STAMPS={},CP_FEED_ISSUES={};
+const CP_FEED_STAMPS={},CP_FEED_ISSUES={},CP_FEED_COLLECTION={};
 const CP_UNCONFIRMED_IDS=new Set();
 async function cpReadFeed(path,key){
   const response=await fetch(path+'?t='+Date.now(),{cache:'no-store'});
   if(!response.ok)throw Error('feed_http');
   const parsed=CPHome.parseFeed(await response.json());
   CP_FEED_STAMPS[key]=parsed.updated;CP_FEED_ISSUES[key]=parsed.issues;
+  CP_FEED_COLLECTION[key]=parsed.collectionStatus;
   return parsed.rows;
 }
 function cpResetBrowseFilters(){Object.assign(state,{q:'',sector:'',employment:'',career:'',cat:null,region:'',status:'all',onlyNew:false,deadline:'all'});$('q').value='';}

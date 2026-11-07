@@ -5,6 +5,12 @@ Restored from `CareerPick_kllollain_max_restore_20261101.zip`; original public s
 Repository: `kllollain-max/careerpick`, originally created as a private repository on 2026-11-03.
 Live site: [CareerPick](https://kllollain-max.github.io/careerpick/).
 
+## Cleaneye integration candidate (2026-11-07 KST)
+
+The approved Cleaneye recruitment development API is prepared in the review branch, including its source adapter, preserved public feed, homepage/search/detail/saved-record integration and an independent step in the existing operation. The existing `DATA_GO_KR_KEY` is reused through the workflow; it is never published.
+
+Live collection is currently blocked by the separate [province-code API approval](https://www.data.go.kr/data/15061217/openapi.do): the official lookup returned gateway code 30, while employment diagnostics returned provider code 3 without records. No real Cleaneye notices or successful nationwide collection are claimed. See [the integration contract and verification evidence](docs/cleaneye-integration.md). Production merge/deployment awaits the existing approval process after live validation.
+
 ## Current operating status (2026-11-03 KST)
 
 The website is public at https://kllollain-max.github.io/careerpick/.
