@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T00:23:08Z",
-  "last_observed_at": "2026-11-07T00:23:08Z",
+  "updated_at": "2026-11-07T01:56:15Z",
+  "last_observed_at": "2026-11-07T01:56:15Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -693,7 +693,19 @@
           "notice_id": "a306733",
           "reason": "21명 공고는 4개 직무의 별도 자격·근무조건을 ZIP 직무기술서와 대조하기 전까지 선택 보류"
         }
-      ]
+      ],
+      "last_source_recheck": {
+        "checked_at": "2026-11-07T01:56:15Z",
+        "collection_run_id": "42322784166",
+        "run_attempt": 1,
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42322784166",
+        "collected_and_validated": true,
+        "changed": false,
+        "store_step": "skipped",
+        "publisher_visible_snapshot_at": "2026-11-07T00:58:42+09:00",
+        "status": "hold_source_stale_at_slot",
+        "reason": "10:12 KST 수집은 성공했지만 공고 변경 없음으로 검증된 데이터 저장 단계가 건너뛰어져 main의 게시기 입력 시각은 이전과 동일함. 실행 로그를 저장본의 새 확인 시각으로 대체하지 않음."
+      }
     }
   },
   "last_writer_check": {
@@ -774,7 +786,7 @@
     ]
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T00:23:08Z",
+    "checked_at": "2026-11-07T01:56:15Z",
     "main_sha": "55f72e1ee4fdd58807538addf92d16634b0aad7d",
     "queue_blob_sha": "014fd6eb3c5a35238d809e04625e9ee0c1d96c0a",
     "latest_threads_run": {
@@ -795,6 +807,7 @@
       "a306799",
       "a306443",
       "a306759"
-    ]
+    ],
+    "source_recheck_run_id": "42322784166"
   }
 }
