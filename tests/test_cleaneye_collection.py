@@ -417,6 +417,47 @@ class CleaneyeStagingTests(unittest.TestCase):
         self.assertEqual(report["successful_responses"], {"region_codes": 1, "list": 2})
         self.assert_preserved()
 
+    def test_report_preserves_retry_attempts_above_the_region_limit(self):
+        class RetriedClient(FakeClient):
+            def collect_region_codes(self, *, ac_year):
+                mapping = super().collect_region_codes(ac_year=ac_year)
+                # Synthetic one-region pages, each recovered on its third try.
+                self.region_code_metadata["pages"] = len(mapping)
+                self.request_counts["region_codes"] = len(mapping) * 3
+                self.success_counts["region_codes"] = len(mapping)
+                return mapping
+
+            def collect_list(self, *, sido_codes):
+                records = super().collect_list(sido_codes=sido_codes)
+                self.request_counts["list"] = len(sido_codes) * 3
+                return records
+
+        for regions in (17, 32):
+            with self.subTest(regions=regions), patch.dict("os.environ", {"CLEANEYE_SIDO_CODES": ""}):
+                mapping = {f"R{i}": f"테스트 지역 {i}" for i in range(regions)}
+                fake = RetriedClient([row()], region_codes=mapping)
+                report = self.collect(fake, sido_codes=None, output=self.root / f"retry-{regions}")
+                self.assertEqual(report["status"], "changed")
+                self.assertEqual(report["requests"], {"region_codes": regions * 3, "list": regions * 3})
+                self.assertEqual(report["successful_responses"], {"region_codes": regions, "list": regions})
+                self.assertTrue(report["complete_collection"])
+                self.assertTrue(report["originals_preserved"])
+        self.assert_preserved()
+
+    def test_retry_report_keeps_request_and_success_limits_distinct(self):
+        class ImpossibleCountsClient(FakeClient):
+            def collect_list(self, *, sido_codes):
+                records = super().collect_list(sido_codes=sido_codes)
+                self.request_counts = {"region_codes": 97, "list": 97}
+                self.success_counts = {"region_codes": 33, "list": 33}
+                return records
+
+        report = self.collect(ImpossibleCountsClient([row()]))
+        self.assertEqual(report["status"], "changed")
+        self.assertEqual(report["requests"], {"region_codes": 0, "list": 0})
+        self.assertEqual(report["successful_responses"], {"region_codes": 0, "list": 0})
+        self.assert_preserved()
+
     def test_region_service_approval_error_is_separate_and_never_uses_guessed_codes(self):
         fake = FakeClient([row()], region_error=cleaneye.APIError("gateway_30"))
         with patch.dict("os.environ", {"CLEANEYE_SIDO_CODES": ""}):

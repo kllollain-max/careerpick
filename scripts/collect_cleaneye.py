@@ -334,6 +334,9 @@ def _safe_counts(client, name):
     for operation in ("region_codes", "list"):
         value = values.get(operation, 0) if isinstance(values, dict) else 0
         limit = cleaneye.MAX_REGION_PAGES if operation == "region_codes" else cleaneye.MAX_REGIONS
+        if name == "request_counts":
+            # Failed transport attempts count as requests, never successes.
+            limit *= len(cleaneye.TRANSPORT_RETRY_DELAYS) + 1
         counts[operation] = value if type(value) is int and 0 <= value <= limit else 0
     return counts
 
