@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T22:11:04Z",
-  "last_observed_at": "2026-11-07T22:11:04Z",
+  "updated_at": "2026-11-07T22:31:32Z",
+  "last_observed_at": "2026-11-07T22:31:32Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T22:11:04Z",
+    "checked_at": "2026-11-07T22:31:32Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T07:10:19.613574+09:00",
+    "input_reference_at": "2026-11-08T07:31:03.160475+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1176,29 +1176,29 @@
     "ready_entries": [
       {
         "scheduled_at": "2026-11-08T08:00:00+09:00",
-        "format_id": "reader_story",
         "notice_id": "a306732",
+        "format_id": "reader_story",
         "chars": 450,
         "entry_sha256": "cbe3d9896c1a64dd3a19bd373c11bf1283e8db5bd511c7366a36a06df144682b"
       },
       {
         "scheduled_at": "2026-11-08T12:00:00+09:00",
-        "format_id": "key_facts",
         "notice_id": "a306733",
+        "format_id": "key_facts",
         "chars": 430,
         "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132"
       },
       {
         "scheduled_at": "2026-11-08T16:00:00+09:00",
-        "format_id": "job_explainer",
         "notice_id": "a306515",
+        "format_id": "job_explainer",
         "chars": 395,
         "entry_sha256": "e44bed8c3ba8fc822f68c17588b2680c052a718f27543464b5c44f1589ca3002"
       },
       {
         "scheduled_at": "2026-11-08T20:00:00+09:00",
-        "format_id": "application_checklist",
         "notice_id": "a306612",
+        "format_id": "application_checklist",
         "chars": 366,
         "entry_sha256": "9511db3268737139410730fc9a1382f64ec79d4327797d056147a138e5bcd9a7"
       }
@@ -1232,7 +1232,7 @@
         "reason": "No new official shift/weekend evidence found; keep previously written draft and its evidence."
       }
     ],
-    "reason": "All four existing ready entries passed validation against the unchanged main and the exact prompt. Official and profile evidence remains fresh through the permitted delay. The successful 06:46 collection was unchanged and skipped storage; no queue replacement was needed.",
+    "reason": "All four existing ready entries pass the queue check and match the current main inputs and exact prompt. Stored evidence remains fresh through the permitted slot delay. Existing drafts, image facts and hashes are unchanged.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "resolved_and_verified_ready",
     "collection_observation": {
@@ -1320,9 +1320,9 @@
     "verified_source_freshness_through_slot_delay": true
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T22:11:04Z",
+    "checked_at": "2026-11-07T22:31:32Z",
     "main_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
-    "state_head_before_write": "1f0da257c8a70bc729b5b53c3309d5312bb0404f",
+    "state_head_before_write": "c8a4fcb76b40606fc291b28f4cbb8822cf9947fc",
     "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "latest_threads_run": {
       "run_id": "42368080340",
@@ -1343,7 +1343,7 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T21:18:09Z",
+      "since": "2026-11-07T22:11:04Z",
       "all_runs_pages": [
         1
       ],
@@ -1368,7 +1368,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No changed Threads run version or slot claim. Last accepted receipt agrees with the exact main body and official Meta GET. The 08:00 slot is not due; the last actual post was text and image selection and public byte verification remain with the publisher.",
+    "reason": "No changed Threads run version or claim. Last accepted receipt matches the exact main body and official Meta GET. The 08:00 KST slot is not due.",
     "last_confirmed_post_id": "18131171185889612",
     "prior_confirmed_post_id": "18138250501647531",
     "next_slot": "2026-11-08T08:00:00+09:00",
