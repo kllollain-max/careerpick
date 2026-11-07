@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T20:16:06Z",
-  "last_observed_at": "2026-11-07T20:16:06Z",
+  "updated_at": "2026-11-07T21:18:09Z",
+  "last_observed_at": "2026-11-07T21:18:09Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T20:16:06Z",
+    "checked_at": "2026-11-07T21:18:09Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T05:15:26.918305+09:00",
+    "input_reference_at": "2026-11-08T06:17:37.891503+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1232,7 +1232,7 @@
         "reason": "No new official shift/weekend evidence found; keep previously written draft and its evidence."
       }
     ],
-    "reason": "All four existing ready entries match latest main and passed queue checks. Stored source and profile evidence is within 24 hours through the allowed delay. No replacement was needed and the queue was not changed.",
+    "reason": "All four existing ready entries passed current checks and match their exact stored fingerprints. Stored source and profile evidence remains within 24 hours through the permitted delay. No replacement was needed.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "resolved_and_verified_ready",
     "collection_observation": {
@@ -1320,9 +1320,9 @@
     "verified_source_freshness_through_slot_delay": true
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T20:16:06Z",
+    "checked_at": "2026-11-07T21:18:09Z",
     "main_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
-    "state_head_before_write": "2696510ef5b418e42e6cb2803d8134af50381cd5",
+    "state_head_before_write": "f307375777c30e1465725aea8b2017520ea80ca5",
     "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "latest_threads_run": {
       "run_id": "42368080340",
@@ -1343,7 +1343,7 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T19:03:52Z",
+      "since": "2026-11-07T20:16:06Z",
       "all_runs_pages": [
         1
       ],
@@ -1368,7 +1368,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No changed Threads run version, main publication or slot claim. Last accepted receipt matches main and the official Meta GET. Next scheduled slot is not yet due.",
+    "reason": "No change in Threads run versions, slot claims, or main publication ledger. Last accepted receipt agrees with the main body and official Meta GET evidence. The 08:00 KST slot is not yet due.",
     "last_confirmed_post_id": "18131171185889612",
     "prior_confirmed_post_id": "18138250501647531",
     "next_slot": "2026-11-08T08:00:00+09:00",
