@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T08:57:02Z",
-  "last_observed_at": "2026-11-07T08:57:02Z",
+  "updated_at": "2026-11-07T10:08:59Z",
+  "last_observed_at": "2026-11-07T10:08:59Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1036,9 +1036,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T08:57:02Z",
+    "checked_at": "2026-11-07T10:08:59Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T17:54:45.917448+09:00",
+    "input_reference_at": "2026-11-07T19:04:42.932442+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1066,11 +1066,12 @@
         "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132"
       }
     ],
-    "new_drafts": 0,
+    "new_drafts": 1,
     "new_ready_saved": 0,
     "preserved_hold_drafts": [
       "a306715",
-      "a306784"
+      "a306784",
+      "a306515"
     ],
     "source_snapshot_at": "2026-11-07T00:58:42+09:00",
     "source_last_success_at": "2026-11-07T13:26:43+09:00",
@@ -1089,28 +1090,37 @@
       {
         "notice_id": "a306715",
         "reason": "면허 기준일 공식 문서 간 충돌 및 직무별 교대 조건 미확인으로 기존 보류 보존."
+      },
+      {
+        "notice_id": "a306784",
+        "reason": "No new official shift/weekend evidence found; keep previously written draft and its evidence."
+      },
+      {
+        "notice_id": "a306515",
+        "reason": "Official opening and 15:00 cutoff plus duty PDF verified; current persisted ALIO confirmation will be stale at the slot."
       }
     ],
-    "reason": "Validated and preserved the three existing unstarted ready entries. The 16:00 Nov 8 hold was preserved verbatim. Both persisted ALIO and Cleaneye validation clocks are older than 24 hours by that slot; no newer persisted source was observed. Resume on a fresh verified source snapshot plus confirmed work conditions (or next fully verified candidate). No new draft or queue write.",
+    "reason": "Preserved all three future ready entries. Authored and verified a 395-character alternate general administration job explanation for Nov 8 16:00. Its official source evidence and profile route pass, but intended-slot input is blocked by SOURCE_STALE; the alternative remains a non-publishable hold.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "SOURCE_STALE",
     "collection_observation": {
-      "run_id": "42350261489",
+      "run_id": "42361811396",
       "run_attempt": 1,
-      "job_id": 128336683587,
+      "job_id": 128371594079,
       "alio_collection": "success",
       "alio_validation": "success",
       "changed": false,
-      "store": "skipped",
-      "verified_at_in_log": "2026-11-07T16:12:36+09:00",
-      "note": "Unchanged collection success is not persisted input freshness; main operations-status.json remains 13:26:43."
+      "store": "skipped_no_content_change",
+      "verified_at_in_log": "2026-11-07T18:57:02+09:00",
+      "note": "Persisted ALIO last_success_at remains 13:26:43; verified unchanged cleaneye retains persisted snapshot at 13:27:15."
     },
-    "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2"
+    "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
+    "hold_alternative": "2026-11-08T16:00:00+09:00:a306515"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T08:57:02Z",
+    "checked_at": "2026-11-07T10:08:59Z",
     "main_sha": "1d981f267ddbe64d72ec8b9b63c3e7f3f6e05e5d",
-    "state_head_before_write": "1dd4d9537d7fed577274822f97ee765f4b22b2a6",
+    "state_head_before_write": "95aeeed9c4e6e8ca51ffa41d705b35e898334781",
     "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
     "latest_threads_run": {
       "run_id": "42353173433",
@@ -1131,16 +1141,16 @@
     "claims_inspected": 18,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T07:50:15Z",
+      "since": "2026-11-07T08:57:02Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T13:22:52Z",
+      "oldest_scanned": "2026-11-06T16:01:46Z",
       "scheduled_pages": [
         1
       ],
-      "scheduled_total": 50,
+      "scheduled_total": 51,
       "scheduled_scan_exhausted": true,
       "comparison_fields": [
         "run_id",
@@ -1150,23 +1160,153 @@
         "updated_at",
         "head_sha"
       ],
-      "changed_run_versions": [
-        {
-          "run_id": "42353173433",
-          "run_attempt": 1,
-          "status": "completed",
-          "conclusion": "success",
-          "updated_at": "2026-11-07T07:54:52Z",
-          "head_sha": "cd9ad444261b544f66a57b78c2e5fe4516582208",
-          "url": "https://github.com/kllollain-max/careerpick/actions/runs/42353173433"
-        }
-      ]
+      "changed_run_versions": []
     },
     "related_open_prs": [],
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "Natural schedule within the existing two-hour allowance. Accepted receipt, pinned main record, approved queue entry, official Meta GET, actual username, image byte SHA and JPEG dimensions agree. No incident requiring a repair or ledger reconciliation. Last actual format changed text → image. D remains false in the runner log.",
+    "reason": "No publisher version or claim changed; unchanged accepted receipt and main record matched the preceding Meta GET verification. The 20:00 slot has not started. No reconciliations, code changes, or sends.",
     "last_confirmed_post_id": "18138250501647531"
+  },
+  "writer_hold_alternatives": {
+    "2026-11-08T16:00:00+09:00:a306515": {
+      "scheduled_at": "2026-11-08T16:00:00+09:00",
+      "format_id": "job_explainer",
+      "notice_id": "a306515",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "source_post_sha256": "0a23189ad91315b7718ed125d7746a9c82e8cbc541c185ecdd2871ee46e7637d",
+      "source_detail_sha256": "360185a22c855592800b054ec97fb6185bc4116b5dca4eae079e94ac716863a4",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "의료분쟁 조정 신청이 들어오면 사건을 접수하고, 절차가 끝날 때까지 기록을 관리해요. 한국의료분쟁조정중재원이 서울 본원에서 이 일을 맡을 일반행정 6급 정규직 1명을 뽑아요.\n\n국가·지방공무원 8·9급 또는 공공기관 6급 재직 경력이 있거나, 채용 분야에 적합하다고 인정돼야 해요. 인사규정상 결격사유가 없어야 하고 정년은 만 60세예요.\n\n주 5일 9~18시 근무예요. 지원으로 순환근무할 수 있고 3개월 수습 후 평가를 거쳐 정규 임용해요.\n\n분야 간 중복지원은 안 돼요. 서류를 통과하면 개별과제와 면접을 보고, 12월 21일부터 근무할 수 있어야 해요. 겸직은 안 돼요. 경력을 적을 땐 증빙을 준비하고, 11월 13일 15시까지 온라인으로 접수하세요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a306515",
+          "target_reader": "의료분쟁 사건의 접수·기록 업무에 맞는 공공행정 지원자",
+          "central_message": "서울 본원 일반행정의 사건 흐름과 지원·근무 조건을 구분해 설명",
+          "pattern_id": "P6",
+          "scheduled_at": "2026-11-08T16:00:00+09:00",
+          "reference_at": "2026-11-07T19:08:31+09:00",
+          "verification_basis": "checked_official_source",
+          "checked_at": "2026-11-07T19:08:31+09:00",
+          "source_refs": [
+            {
+              "url": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf",
+              "checked_at": "2026-11-07T19:08:31+09:00",
+              "excerpt": "일반직 6급 (일반행정) / 정규직 (공개경쟁) / 서울 본원 / 1명\n접수기간 : ’26. 10. 29.(목) ~ ’26. 11. 13.(금) 15:00 까지",
+              "location": "공고문 1·5쪽 모집단위와 접수"
+            },
+            {
+              "ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf#page=5",
+              "checked_at": "2026-11-07T19:08:31+09:00",
+              "excerpt": "5일(40시간), 기본근무 09:00~18:00 / 서울본원(지원 순환근무 가능)",
+              "location": "공고문 5쪽 근로조건"
+            },
+            {
+              "ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf#page=4",
+              "checked_at": "2026-11-07T19:08:31+09:00",
+              "excerpt": "국가 또는 지방공무원 8급 또는 9급직으로 재직 / 공공기관에서 6급직으로 재직 / 채용예정 분야에 적합",
+              "location": "공고문 4쪽 일반직 자격기준"
+            },
+            {
+              "ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf#page=6",
+              "checked_at": "2026-11-07T19:08:31+09:00",
+              "excerpt": "개별과제(면접 참고자료) 수행 후 면접 / 임용일 26. 12. 21.",
+              "location": "공고문 6쪽 채용심사, 9쪽 임용일부터 근무·겸직·중복지원"
+            },
+            {
+              "url": "https://www.korea.kr/common/download.do?fileId=145814494&tblKey=GBD",
+              "checked_at": "2026-11-07T19:08:31+09:00",
+              "excerpt": "의료분쟁 상담 및 조정·중재 접수 / 사건을 접수하고 … 관련된 업무를 처리하고 관리",
+              "location": "직무기술서 ZIP 내 일반직 6급 PDF 1쪽 사건관리"
+            },
+            {
+              "url": "https://job.alio.go.kr/recruitview.do?idx=306515",
+              "checked_at": "2026-11-07T19:08:31+09:00",
+              "excerpt": "정규직 - 일반직 6급",
+              "location": "JOB-ALIO 응시자격과 전형 정보"
+            }
+          ],
+          "missing_or_conflicting": [
+            "게시기가 읽는 ALIO last_success_at=2026-11-07T13:26:43+09:00. 11월 8일 16시 기준 24시간 초과(SOURCE_STALE). 18:57 재검증 로그는 main에 반영되지 않음."
+          ],
+          "omitted_optional_facts": [
+            "급여는 내규 적용으로 금액 생략. 기본근무 외 교대·주말은 공식 자료에 별도 명시 없음. 구체 가점과 서류 배수 생략."
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "pre_publish_checks": [
+            "대기열과 원문 지문·정정·취소·중복 재확인. 이미지 순번이면 렌더와 공개 바이트 검증."
+          ],
+          "body_characters": 395,
+          "application_period": {
+            "start": "2026-10-29",
+            "end": "2026-11-13T15:00:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf",
+            "evidence": "접수기간 : ’26. 10. 29.(목) ~ ’26. 11. 13.(금) 15:00 까지"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306515.html",
+            "notice_id": "a306515",
+            "checked_at": "2026-11-07T19:08:31+09:00",
+            "verified": true,
+            "profile_url": "https://www.threads.com/@hid_119",
+            "rel_me_html": "<link rel=\"me\" href=\"https://kllollain-max.github.io/careerpick/\" />",
+            "evidence": "실제 공개 프로필 rel=me와 홈 HTTP 200, jobs/available.js 및 공개 ALIO 목록 ID, 개별 상세 정규 URL과 기관 제목 확인."
+          },
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "일반직 6급 (일반행정)",
+              "source_ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf",
+              "excerpt": "일반직 6급 (일반행정) / 정규직 (공개경쟁) / 서울 본원 / 1명"
+            },
+            {
+              "field": "count",
+              "value": 1,
+              "source_ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf",
+              "excerpt": "일반직 6급 (일반행정) / 정규직 (공개경쟁) / 서울 본원 / 1명"
+            },
+            {
+              "field": "employment",
+              "value": "정규직",
+              "source_ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf",
+              "excerpt": "일반직 6급 (일반행정) / 정규직 (공개경쟁) / 서울 본원 / 1명"
+            },
+            {
+              "field": "location",
+              "value": "서울 본원",
+              "source_ref": "https://www.k-medi.or.kr/download.do?uuid=e002bf6f-a059-42f2-abd1-7fd71c5ca698.pdf",
+              "excerpt": "일반직 6급 (일반행정) / 정규직 (공개경쟁) / 서울 본원 / 1명"
+            }
+          ]
+        }
+      },
+      "image_job": {
+        "id": "a306515",
+        "org": "한국의료분쟁조정중재원",
+        "title": "일반직 6급 (일반행정)",
+        "count": 1,
+        "employment": "정규직",
+        "location": "서울 본원",
+        "due": "2026-11-13",
+        "deadline_label": "2026-11-13 15:00"
+      },
+      "entry_sha256": "4b3af97610848b4829369e7c4046955897ff8618072091d18842057b1b5b55b8",
+      "attachment_sha256": {
+        "notice": "cbfd6ef2ef8575871656821081c3b5520801b7e7d55b32c52d7a38682e50345c",
+        "duties_zip": "fef78ca624e5340dac2506271863381ac515baf1eb8464e82d04288407e57868",
+        "general_admin_duty_pdf": "543db33bcb31b6840f37189e76ab9bdbc7664555fc327ade92eec224462f6af2"
+      },
+      "validation": "Body format/CTA/length/history, actual period, profile route and image facts verified independently. Scratch queue check blocked by SOURCE_STALE; not added to live queue.",
+      "resume": "main에 예정 시각 기준 24시간 이내의 ALIO 검증 시각이 실제 반영되면 최신 원문 지문과 기존 예약을 대조한 뒤 전체 대기열 검사. 기존 안산병원 보류안은 그대로 보존."
+    }
   }
 }
