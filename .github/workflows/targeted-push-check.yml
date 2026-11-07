@@ -1,7 +1,7 @@
 name: Verify targeted push recovery without sending
 on:
   pull_request:
-    paths: ['scripts/**', 'tests/test_alert*.py', '.github/workflows/targeted-push*.yml']
+    paths: ['cleaneye.py', 'scripts/**', 'tests/test_alert*.py', 'tests/run_alert_recovery.py', '.github/workflows/targeted-push*.yml']
 permissions:
   contents: read
 jobs:
@@ -13,3 +13,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: python tests/run_alert_recovery.py
+

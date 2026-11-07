@@ -4,6 +4,7 @@ on:
     paths:
       - 'scripts/threads_*.py'
       - 'scripts/threads_*.sh'
+      - 'scripts/cleaneye_source_adapter.py'
       - 'scripts/create_thumbnail.py'
       - 'threads/**'
       - 'tests/test_threads_*.py'
@@ -35,6 +36,23 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_threads_*.py' -v
       - run: python -m unittest discover -s tests -p 'test_recovered_threads_*.py' -v
       - run: python scripts/threads_auto.py preview
+      - name: Verify current writer inputs without creating a queue or publishing
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from scripts.threads_writer_input import build_input
+          result = build_input(datetime.now(ZoneInfo('Asia/Seoul')), limit=24)
+          candidates = result['candidates']
+          assert len(candidates) <= 24
+          assert len({row['notice_id'] for row in candidates}) == len(candidates)
+          print(json.dumps({'candidate_count': len(candidates),
+                            'sources': dict(Counter(row.get('source', 'alio') for row in candidates)),
+                            'cleaneye_snapshot': result['cleaneye_source'],
+                            'queue_writes': 0, 'published': 0}, ensure_ascii=False))
+          PY
       - name: Read-only migration audit
         if: github.event_name == 'workflow_dispatch' && inputs.read_meta
         env:

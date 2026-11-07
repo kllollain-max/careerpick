@@ -9,14 +9,15 @@ import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from scripts.detect_new_job_alerts import KST, parse_due
+from scripts.detect_new_job_alerts import KST, cleaneye_snapshot
 from scripts.private_onesignal_export_request import request_export
 from scripts.private_onesignal_export_download import read_export_ids
 from scripts.onesignal_known_subscriber import lookup
 from scripts.alert_preference_matcher import packed_preferences, matches
 from scripts.private_delivery_store import read_private_ledger
 from scripts.private_alert_backlog_store import read_backlog, save_backlog
-from scripts.alert_candidate_backlog import reconcile
+from scripts.alert_candidate_backlog import reconcile, refresh_existing_cleaneye
+from scripts.alert_source_contract import candidate_open
 from scripts.rollout_batch_planner import eligible_pairs
 from scripts.alert_delivery_ledger import delivery_key
 from scripts.onesignal_guarded_transport import send
@@ -48,9 +49,7 @@ def selection_diagnostics(candidates, verified, ledger, now):
               "reserved_pending_pairs": 0, "ready_pairs": 0}
     valid = []
     for job in candidates:
-        if (isinstance(job, dict) and str(job.get("id", "")).startswith("a")
-                and job.get("title") and (due := parse_due(job.get("due"))) is not None
-                and due > now):
+        if candidate_open(job, now):
             valid.append(job)
     counts["open_candidates"] = len(valid)
     for sub in verified:
@@ -160,11 +159,10 @@ def _process_window(candidates, verified, ledger, now, *, current_ids, scanned_i
         job, sub = pair_map[key]
         # Consent and job validity are checked again immediately before request.
         current = lookup(sub["subscription_id"])
-        due = parse_due(job.get("due"))
         if (not current or current.get("opted_in") is not True
                 or current.get("subscription_id") != sub["subscription_id"]
                 or packed_preferences(current.get("tags", {})) is None
-                or due is None or due <= datetime.now(KST)
+                or not candidate_open(job, datetime.now(KST))
                 or not matches(job, current["tags"])):
             queue.record_outcome(key, owner, "failed", "consent_or_preference_changed")
             continue
@@ -260,7 +258,10 @@ def _main():
     durable, _ = queue.read_queue()
     retained = {entry.get("job_id") for entry in durable["tasks"].values()
                 if entry["state"] in {"pending", "reserved", "uncertain"}}
-    backlog = reconcile(previous, report["new_jobs"], now=datetime.now(KST), retain_job_ids=retained)
+    backlog_now = datetime.now(KST)
+    _, current_cleaneye, _ = cleaneye_snapshot(backlog_now)
+    previous = refresh_existing_cleaneye(previous, current_cleaneye, now=backlog_now)
+    backlog = reconcile(previous, report["new_jobs"], now=backlog_now, retain_job_ids=retained)
     save_backlog(backlog, backlog_sha)
     restored, restored_sha = read_backlog()
     if restored_sha is None or restored != backlog:
@@ -309,3 +310,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

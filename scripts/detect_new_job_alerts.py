@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare CareerPick new-job and deadline D-1 candidates. Never sends push."""
+"""Prepare source-verified new-job and deadline D-1 candidates. Never sends."""
 import json
 import os
 import tempfile
@@ -22,7 +22,33 @@ def parse_due(value):
         return None
 
 def compact(p):
-    return {key: p.get(key) for key in ("id", "org", "title", "url", "due", "region", "emp", "edu", "cat", "desc")}
+    fields = ("id", "org", "title", "url", "due", "region", "emp", "edu", "cat", "desc")
+    if p.get("cleaneye") is True:
+        fields += ("cleaneye", "source", "src", "start", "dueHasTime", "receptionState",
+                   "sourceMissing", "sourceRegion", "sourceStatus", "cleaneyeDetail",
+                   "deadlineReviewReason", "dateReview", "dateReviewReason",
+                   "sourceUpdated", "text", "type", "n")
+    return {key: p.get(key) for key in fields}
+
+
+def cleaneye_snapshot(now):
+    """An unavailable optional source never advances its detection baseline."""
+    path = DATA.with_name("cleaneye.json")
+    if not path.exists():
+        return None, {}, "not_available"
+    try:
+        from scripts.cleaneye_source_adapter import (
+            eligible_cleaneye_post, validate_cleaneye_feed,
+        )
+        feed = json.loads(path.read_text(encoding="utf-8"))
+        validate_cleaneye_feed(feed, now)
+        all_posts = {p["id"]: p for p in feed["posts"]}
+        eligible = {key: dict(p, sourceUpdated=feed["updated"]) for key, p in all_posts.items()
+                    if eligible_cleaneye_post(p, feed, now)}
+        return all_posts, eligible, "verified"
+    except (OSError, ValueError, TypeError, KeyError):
+        # No provider payloads/URLs enter diagnostics, and ALIO stays available.
+        return None, {}, "unverified"
 
 def main(*, backlog_persister=None):
     payload = json.loads(DATA.read_text(encoding="utf-8"))
@@ -47,7 +73,22 @@ def main(*, backlog_persister=None):
     now = datetime.now(KST)
     tomorrow = (now + timedelta(days=1)).date()
 
+    initialized = previous_state.get("initialized_sources", [] if initial else ["alio"])
+    if (not isinstance(initialized, list)
+            or any(value not in {"alio", "cleaneye"} for value in initialized)
+            or len(initialized) != len(set(initialized))):
+        raise RuntimeError("Invalid source baseline; preserving detection history")
+    initialized = set(initialized)
+    cleaneye_all, cleaneye_eligible, cleaneye_status = cleaneye_snapshot(now)
+    bootstrap_cleaneye = cleaneye_all is not None and "cleaneye" not in initialized
+    current.update(cleaneye_eligible)
+
+    # A newly connected source is baselined independently of the existing ALIO
+    # source. Its current 351 (or later snapshot's) records are never a backlog.
+    suppressed_ids = set(cleaneye_all or {}) if bootstrap_cleaneye else set()
+
     new_jobs = [compact(p) for key, p in current.items() if not initial and key not in previous_ids
+                and key not in suppressed_ids
                 and (parse_due(p.get("due")) is None or parse_due(p.get("due")) > now)]
     deadline_jobs = []
     for key, p in current.items():
@@ -60,6 +101,9 @@ def main(*, backlog_persister=None):
     report = {"checked_at": now.isoformat(), "dry_run": True, "initial_run": initial,
               "new_count": len(new_jobs), "deadline_d1_count": len(deadline_jobs),
               "new_jobs": new_jobs, "deadline_d1_jobs": deadline_jobs,
+              "source_status": {"alio": "verified", "cleaneye": cleaneye_status},
+              "source_bootstrap": {"cleaneye": bootstrap_cleaneye,
+                                   "historical_jobs_enqueued": 0},
               "note": "Candidate report only; device-specific saved-job targeting and OneSignal sending are NOT enabled."}
     # Detection and delivery run separately. Persist and read back candidates
     # BEFORE advancing the shared baseline, or the later sender sees zero new
@@ -89,7 +133,13 @@ def main(*, backlog_persister=None):
     if "backlog_handoff" in report:
         summary["backlog_handoff"] = report["backlog_handoff"]
     if os.environ.get("CP_UPDATE_ALERT_STATE") == "1":
-        state = {"ids": sorted(current), "updated": now.isoformat()}
+        initialized.add("alio")
+        if cleaneye_all is not None:
+            initialized.add("cleaneye")
+        # Keep the independent source history even when a feed is stale,
+        # temporarily missing, or a previously seen record later reappears.
+        state = {"ids": sorted(previous_ids | set(current) | suppressed_ids),
+                 "initialized_sources": sorted(initialized), "updated": now.isoformat()}
         # Do not leave a truncated baseline if the runner stops during a write.
         descriptor, temporary = tempfile.mkstemp(prefix=".notification-", dir=STATE.parent)
         try:
@@ -106,3 +156,4 @@ def main(*, backlog_persister=None):
 
 if __name__ == "__main__":
     main()
+

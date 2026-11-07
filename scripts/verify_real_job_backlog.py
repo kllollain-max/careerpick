@@ -1,11 +1,11 @@
-"""Manually verify real ALIO candidate backlog persistence without sending."""
+"""Verify source-validated candidate backlog persistence without sending."""
 import json
 import os
 from datetime import datetime, timedelta
-from scripts.detect_new_job_alerts import KST
+from scripts.detect_new_job_alerts import KST, cleaneye_snapshot
 from pathlib import Path
 
-from scripts.alert_candidate_backlog import reconcile
+from scripts.alert_candidate_backlog import reconcile, refresh_existing_cleaneye
 from scripts.private_alert_backlog_store import read_backlog, save_backlog
 from scripts import private_push_delivery_queue as queue
 
@@ -20,7 +20,8 @@ def verify(report, *, reader=read_backlog, writer=save_backlog, queue_reader=Non
         checked_at = datetime.fromisoformat(str(report["checked_at"]))
         if checked_at.tzinfo is None:
             raise ValueError("missing timezone")
-        age = datetime.now(KST) - checked_at.astimezone(KST)
+        now = datetime.now(KST)
+        age = now - checked_at.astimezone(KST)
         if not timedelta(0) <= age <= timedelta(hours=2):
             raise ValueError("stale candidate report")
     except (KeyError, ValueError, TypeError, OverflowError):
@@ -31,14 +32,19 @@ def verify(report, *, reader=read_backlog, writer=save_backlog, queue_reader=Non
     durable, _ = (queue_reader or queue.read_queue)()
     queued_ids = {entry.get("job_id") for entry in durable["tasks"].values()
                   if entry["state"] in {"pending", "reserved", "uncertain"}}
-    merged = reconcile(previous, report["new_jobs"], retain_job_ids=queued_ids)
-    fresh_candidates = reconcile([], report["new_jobs"])
+    # Refresh known source IDs before pruning on their formerly stored deadline.
+    # Otherwise an official extension can be lost in this detection handoff,
+    # before the separate worker has any opportunity to refresh its candidates.
+    _, current_cleaneye, _ = cleaneye_snapshot(now)
+    previous = refresh_existing_cleaneye(previous, current_cleaneye, now=now)
+    merged = reconcile(previous, report["new_jobs"], now=now, retain_job_ids=queued_ids)
+    fresh_candidates = reconcile([], report["new_jobs"], now=now)
     writer(merged, sha)
     restored, restored_sha = reader()
     if restored_sha is None or restored != merged:
         raise RuntimeError("Private backlog persistence mismatch")
     # Second reconciliation with no fresh jobs verifies retention across runs.
-    next_run = reconcile(restored, [], retain_job_ids=queued_ids)
+    next_run = reconcile(restored, [], now=now, retain_job_ids=queued_ids)
     retained = {entry["job"]["id"] for entry in next_run}
     expected = {entry["job"]["id"] for entry in merged}
     if retained != expected:
@@ -60,3 +66,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -15,6 +15,11 @@ import re
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
+from scripts.cleaneye_source_adapter import (
+    SourceValidationError, source_date, source_text, validate_cleaneye_feed,
+    validate_cleaneye_post,
+)
+
 
 KST = ZoneInfo("Asia/Seoul")
 CTA = "자세한 채용정보는 프로필 링크를 확인하세요."
@@ -268,9 +273,27 @@ def _profile(review, notice_id, now, scheduled, max_age):
 
 
 def _source(entry, source_doc, details, now, scheduled, max_age):
+    notice_id = entry.get("notice_id")
+    if isinstance(notice_id, str) and notice_id.startswith("cleaneye-"):
+        feed = source_doc.get("_cleaneye") if isinstance(source_doc, dict) else None
+        try:
+            validate_cleaneye_feed(feed, now, scheduled=scheduled, max_age_hours=max_age.total_seconds() / 3600)
+            matches = [post for post in feed["posts"] if post.get("id") == notice_id]
+            if len(matches) != 1:
+                _fail("SOURCE_NOTICE_NOT_UNIQUE")
+            post = matches[0]
+            facts = validate_cleaneye_post(post, feed, now, scheduled=scheduled,
+                                           max_age_hours=max_age.total_seconds() / 3600)
+        except SourceValidationError as error:
+            _fail(str(error))
+        if entry.get("source") != "cleaneye" or entry.get("official_id") != facts["official_id"]:
+            _fail("CLEANEYE_ENTRY_IDENTITY")
+        detail = post["cleaneyeDetail"]
+        if fingerprint(post) != entry.get("source_post_sha256") or fingerprint(detail) != entry.get("source_detail_sha256"):
+            _fail("SOURCE_CHANGED")
+        return notice_id, post, detail
     if not isinstance(source_doc, dict) or not isinstance(source_doc.get("posts"), list) or not isinstance(details, dict):
         _fail("SOURCE_SCHEMA")
-    notice_id = entry.get("notice_id")
     if not isinstance(notice_id, str) or not re.fullmatch(r"a[1-9][0-9]*", notice_id):
         _fail("NOTICE_ID_INVALID")
     matches = [post for post in source_doc["posts"] if isinstance(post, dict) and post.get("id") == notice_id]
@@ -296,6 +319,31 @@ def _source(entry, source_doc, details, now, scheduled, max_age):
     if source_time != snapshot_time or source_time > verified_time:
         _fail("SOURCE_SNAPSHOT_MISMATCH")
     return notice_id, post, detail
+
+
+def _publication_facts(post, detail):
+    if post.get("cleaneye") is True:
+        return {name: source_text(detail.get(label)) for name, label in (
+            ("org", "기관명"), ("title", "채용제목"), ("count", "채용인원"),
+            ("employment", "고용형태 원문"), ("location", "근무지"),
+        )}
+    return {name: detail.get(label, "") for name, label in (
+        ("org", "instNm"), ("title", "recrutPbancTtl"), ("count", "recrutNope"),
+        ("employment", "hireTypeNmLst"), ("location", "workRgnNmLst"),
+    )}
+
+
+def _cleaneye_application_period(period, detail):
+    # API PUB_DATE/PUB_END_DATE are actual application dates. Do not substitute
+    # the normalized date-only 23:59:59 comparison value for an official time.
+    for name, flag, label in (("start", "start_date_only", "접수개시일 원문"),
+                              ("end", "date_only", "접수마감일 원문")):
+        official, has_time = source_date(detail[label])
+        if period.get(flag, False) is not (not has_time):
+            _fail("CLEANEYE_APPLICATION_PRECISION_CONFLICT")
+        reviewed = _date_or_time(period[name], not has_time, "CLEANEYE_APPLICATION_PERIOD_CONFLICT")
+        if reviewed != (official if has_time else official.date()):
+            _fail("CLEANEYE_APPLICATION_PERIOD_CONFLICT")
 
 
 def _fact_supported(field, value, review, refs, detail):
@@ -326,14 +374,30 @@ def _employment(value):
     return {_normal(part) for part in re.split(r"[,|·/]", str(value)) if _normal(part)}
 
 
+def _cleaneye_workplace_evidence(value, review, refs, detail):
+    # "기관 시도명" and an institution's address are not workplace evidence.
+    evidence = review.get("fact_evidence", [])
+    if not isinstance(evidence, list):
+        return False
+    for fact in evidence:
+        if (isinstance(fact, dict) and fact.get("field") == "location"
+                and isinstance(value, str) and value.strip()
+                and re.search(r"(?:근무(?:지|장소|지역|예정지)|배치(?:장소|지역))\s*(?:은|는)?\s*[:：-]?\s*"
+                              + re.escape(_normal(value)), _normal(fact.get("excerpt", "")))
+                and _fact_supported("location", value, {"fact_evidence": [fact]}, refs, detail)):
+            return True
+    return False
+
+
 def _image(entry, post, detail, review, refs, end_date, period):
+    facts = _publication_facts(post, detail)
     image = entry.get("image_job")
     if not isinstance(image, dict) or image.get("id") != entry["notice_id"]:
         _fail("IMAGE_NOTICE_IDENTITY")
-    if _normal(image.get("org")) != _normal(detail.get("instNm")):
+    if _normal(image.get("org")) != _normal(facts["org"]):
         _fail("IMAGE_ORGANIZATION_CONFLICT")
     title = image.get("title")
-    official_title = _normal(detail.get("recrutPbancTtl"))
+    official_title = _normal(facts["title"])
     if not isinstance(title, str) or len(_normal(title)) < 3:
         _fail("IMAGE_TITLE_INVALID")
     if _normal(title) not in official_title and not _fact_supported("title", title, review, refs, detail):
@@ -342,10 +406,10 @@ def _image(entry, post, detail, review, refs, end_date, period):
     if count is not None:
         if type(count) is not int or count < 1:
             _fail("IMAGE_COUNT_INVALID")
-        if count != _count(detail.get("recrutNope")) and not _fact_supported("count", count, review, refs, detail):
+        if count != _count(facts["count"]) and not _fact_supported("count", count, review, refs, detail):
             _fail("IMAGE_COUNT_UNSUPPORTED")
     employment = image.get("employment")
-    raw_employment = _employment(detail.get("hireTypeNmLst", ""))
+    raw_employment = _employment(facts["employment"])
     chosen_employment = _employment(employment)
     if not isinstance(employment, str) or not raw_employment or not chosen_employment or not chosen_employment <= raw_employment:
         if not _fact_supported("employment", employment, review, refs, detail):
@@ -354,11 +418,14 @@ def _image(entry, post, detail, review, refs, end_date, period):
         if not _fact_supported("employment", employment, review, refs, detail):
             _fail("IMAGE_EMPLOYMENT_UNIT_UNVERIFIED")
     location = image.get("location")
-    raw_location = _normal(detail.get("workRgnNmLst", ""))
+    raw_location = _normal(facts["location"])
     if not isinstance(location, str) or not location.strip():
         _fail("IMAGE_LOCATION_REQUIRED")
-    if _normal(location) not in raw_location and not _fact_supported("location", location, review, refs, detail):
-        _fail("IMAGE_LOCATION_UNSUPPORTED")
+    if _normal(location) not in raw_location:
+        supported = (_cleaneye_workplace_evidence(location, review, refs, detail) if post.get("cleaneye") is True
+                     else _fact_supported("location", location, review, refs, detail))
+        if not supported:
+            _fail("IMAGE_LOCATION_UNSUPPORTED")
     if image.get("due") != end_date:
         _fail("IMAGE_APPLICATION_DEADLINE_CONFLICT")
     label = image.get("deadline_label")
@@ -434,7 +501,8 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     """Validate one ready entry, including a future slot, without side effects.
 
     The caller verifies the actual master-prompt file bytes against the policy.
-    source_doc must contain the matched operations-status.json under _operations.
+    ALIO uses the matched operations-status.json under _operations; Cleaneye uses
+    its separately validated snapshot under _cleaneye, without relabelling it.
     Image assignment/creation and final API account checks occur in the publisher.
     """
     limit, max_age = _policy(policy)
@@ -448,6 +516,7 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     if entry.get("prompt_sha256") != policy["prompt_sha256"]:
         _fail("ENTRY_PROMPT_MISMATCH")
     notice_id, post, detail = _source(entry, source_doc, details, now, scheduled, max_age)
+    facts = _publication_facts(post, detail)
     writer = entry.get("writer")
     if not isinstance(writer, dict) or writer.get("status") != "ready":
         _fail("WRITER_NOT_READY")
@@ -462,7 +531,7 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
         _fail("BODY_LINK_OR_HASHTAG")
     if OTHER_ACTION_RE.search(body):
         _fail("BODY_OTHER_ACTION")
-    if _normal(detail["instNm"]) not in _normal(body):
+    if _normal(facts["org"]) not in _normal(body):
         _fail("BODY_ORGANIZATION_MISSING")
     _structure(body, expected_format)
     review = writer.get("review")
@@ -494,15 +563,19 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
         if isinstance(ref, dict) and ref.get("checked_at") is not None:
             _fresh(ref["checked_at"], now, scheduled, "REVIEW_SOURCE_STALE", max_age)
     end_date, period = _application_period(review, refs, detail, now, scheduled)
+    if post.get("cleaneye") is True:
+        _cleaneye_application_period(period, detail)
     _profile(review, notice_id, now, scheduled, max_age)
     image_job = _image(entry, post, detail, review, refs, end_date, period)
-    _history(history, notice_id, expected_format, scheduled, body, detail["instNm"])
+    _history(history, notice_id, expected_format, scheduled, body, facts["org"])
     has_published = any(record.get("status") == "published" and record.get("text") for record in history["records"])
     allowed_repetition = ("checked", "partial") if has_published else ("checked", "no_history")
     if review.get("repetition_check") not in allowed_repetition:
         _fail("REVIEW_REPETITION_UNCHECKED")
     return {
         "job_id": notice_id,
+        **({"source": "cleaneye", "official_id": post["cleaneyeDetail"]["공고 고유번호"].strip()}
+           if post.get("cleaneye") is True else {}),
         "text": body,
         "reply_text": "",
         "engagement_text": "",

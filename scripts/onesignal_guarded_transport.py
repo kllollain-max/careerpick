@@ -7,6 +7,7 @@ Sending is disabled unless CP_ENABLE_LIVE_PUSH=1 and credentials exist.
 import json
 import os
 import re
+import uuid
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
@@ -22,14 +23,21 @@ def build_payload(job, subscription_id, app_id, *, test=False):
         raise ValueError("Subscription id is required")
     if not isinstance(app_id, str) or not app_id.strip():
         raise ValueError("OneSignal app id is required")
-    # Link only canonical ALIO IDs to first-party job pages.
+    # Link only canonical source IDs to first-party pages or supported anchors.
     # Never trust a user-controlled URL supplied in job data.
     job_id = str(job["id"]).strip()
-    target = (
-        "https://kllollain-max.github.io/careerpick/jobs/" + job_id + ".html"
-        if re.fullmatch(r"a[0-9]+", job_id)
-        else "https://kllollain-max.github.io/careerpick/"
-    )
+    target = "https://kllollain-max.github.io/careerpick/"
+    if re.fullmatch(r"a[0-9]+", job_id):
+        target += "jobs/" + job_id + ".html"
+    elif re.fullmatch(r"cleaneye-[0-9]+", job_id):
+        target += "#job=" + job_id
+    # One logical job/subscriber delivery keeps its UUID across process retries.
+    # OneSignal accepts RFC 9562 UUIDs and retains notification keys for 30 days:
+    # https://documentation.onesignal.com/reference/idempotent-notification-requests
+    # The permanent private ledger and uncertain-send protections still apply.
+    operation = json.dumps(["careerpick:push:v1", app_id, job_id, subscription_id, bool(test)],
+                           ensure_ascii=False, separators=(",", ":"))
+    idempotency_key = str(uuid.uuid5(uuid.NAMESPACE_URL, operation))
     from scripts.detect_new_job_alerts import parse_due
     due = parse_due(job.get("due"))
     # Never invent a closing time for a date-only official deadline.
@@ -42,6 +50,7 @@ def build_payload(job, subscription_id, app_id, *, test=False):
         "app_id": app_id,
         "target_channel": "push",
         "include_subscription_ids": [subscription_id],
+        "idempotency_key": idempotency_key,
         "headings": {"en": "커리어픽 채용 알림 테스트" if test else "커리어픽 신규 채용공고",
                      "ko": "커리어픽 채용 알림 테스트" if test else "커리어픽 신규 채용공고"},
         "contents": {"en": message, "ko": message},
