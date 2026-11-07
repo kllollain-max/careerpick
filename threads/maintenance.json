@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T16:25:46Z",
-  "last_observed_at": "2026-11-07T16:25:46Z",
+  "updated_at": "2026-11-07T17:20:09Z",
+  "last_observed_at": "2026-11-07T17:20:09Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T16:25:46Z",
+    "checked_at": "2026-11-07T17:20:09Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T01:23:22.720195+09:00",
+    "input_reference_at": "2026-11-08T02:19:31.404071+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1204,7 +1204,7 @@
       }
     ],
     "new_drafts": 0,
-    "new_ready_saved": 2,
+    "new_ready_saved": 0,
     "preserved_hold_drafts": [
       "a306715",
       "a306784"
@@ -1240,7 +1240,7 @@
         "reason": "November 8 20:00 source check blocked by SOURCE_STALE; official post and attachments verified."
       }
     ],
-    "reason": "The two previously authored afternoon drafts were promoted after real issuer attachment, ALIO page, public profile rel=me and landing route rechecks. Exact attachment and source fingerprints remained unchanged. All four future slots passed the unmodified full validator. CAS queue write and read-back preserved the prior nine records.",
+    "reason": "Revalidated all four previously written entries against current main. All exact fingerprints preserved and no new source conflict. Nothing reauthored or written to queue.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "resolved_and_verified_ready",
     "collection_observation": {
@@ -1284,12 +1284,36 @@
       "visual_check": "Complete Korean institution, job, counts, and deadline; no clipping. Public-byte verification remains in the publishing workflow."
     },
     "stored_alio_clock_applies_until": "2026-11-09T00:49:02+09:00",
-    "queue_commit_sha": "f4fc1b80049975a6c423f7f3d2801aa258b671e8"
+    "queue_commit_sha": "f4fc1b80049975a6c423f7f3d2801aa258b671e8",
+    "afternoon_thumbnail_preflight": {
+      "mode": "local_preview_only",
+      "results": {
+        "a306515": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 164668,
+          "sha256": "f2be40c5f213c9a18c80c388ad8d467503cf2a2e09ac0ee58623c12863ddf676"
+        },
+        "a306612": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 158227,
+          "sha256": "cedf60bab36befb7fc266b82a967432051d41f6178d62dd93aee80f718698438"
+        }
+      },
+      "visual_check": "Complete Korean institution names, roles and actual cutoff; no clipping. Actual public byte check remains with the publisher."
+    }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T16:25:46Z",
+    "checked_at": "2026-11-07T17:20:09Z",
     "main_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
-    "state_head_before_write": "f4fc1b80049975a6c423f7f3d2801aa258b671e8",
+    "state_head_before_write": "5f1a84de3c03ba04e61eb91d2f46ac2a48d089ab",
     "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "latest_threads_run": {
       "run_id": "42368080340",
@@ -1310,7 +1334,7 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T14:40:24Z",
+      "since": "2026-11-07T16:25:46Z",
       "all_runs_pages": [
         1
       ],
@@ -1335,7 +1359,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No changed Threads publisher version or claim, confirmed against accepted receipt, pinned main and official Meta GET. No replay or repair. Fresh Operations collection removed both afternoon writer holds.",
+    "reason": "No changed Threads run or claim. Last accepted receipt matches current main and the official Meta verification. No new failures, unresolved sends or reconciliation.",
     "last_confirmed_post_id": "18131171185889612",
     "prior_confirmed_post_id": "18138250501647531"
   },
