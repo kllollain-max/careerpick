@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T17:20:09Z",
-  "last_observed_at": "2026-11-07T17:20:09Z",
+  "updated_at": "2026-11-07T18:30:35Z",
+  "last_observed_at": "2026-11-07T18:30:35Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T17:20:09Z",
+    "checked_at": "2026-11-07T18:30:35Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T02:19:31.404071+09:00",
+    "input_reference_at": "2026-11-08T03:29:11.032991+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1230,17 +1230,9 @@
       {
         "notice_id": "a306784",
         "reason": "No new official shift/weekend evidence found; keep previously written draft and its evidence."
-      },
-      {
-        "notice_id": "a306515",
-        "reason": "Official opening and 15:00 cutoff plus duty PDF verified; current persisted ALIO confirmation will be stale at the slot."
-      },
-      {
-        "notice_id": "a306612",
-        "reason": "November 8 20:00 source check blocked by SOURCE_STALE; official post and attachments verified."
       }
     ],
-    "reason": "Revalidated all four previously written entries against current main. All exact fingerprints preserved and no new source conflict. Nothing reauthored or written to queue.",
+    "reason": "All four existing future ready entries passed validation against unchanged current main and exact prompt bytes. No slot needs a replacement; queue unchanged.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "resolved_and_verified_ready",
     "collection_observation": {
@@ -1311,9 +1303,9 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T17:20:09Z",
+    "checked_at": "2026-11-07T18:30:35Z",
     "main_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
-    "state_head_before_write": "5f1a84de3c03ba04e61eb91d2f46ac2a48d089ab",
+    "state_head_before_write": "e716f87e4ebc560f472c520f1c213aba5234edbd",
     "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "latest_threads_run": {
       "run_id": "42368080340",
@@ -1334,7 +1326,7 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T16:25:46Z",
+      "since": "2026-11-07T17:20:09Z",
       "all_runs_pages": [
         1
       ],
@@ -1359,9 +1351,11 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No changed Threads run or claim. Last accepted receipt matches current main and the official Meta verification. No new failures, unresolved sends or reconciliation.",
+    "reason": "No Threads run version or claim changed. Last accepted receipt, exact reviewed queue entry in main, and official Meta GET verification agree. Next scheduled slot is not due.",
     "last_confirmed_post_id": "18131171185889612",
-    "prior_confirmed_post_id": "18138250501647531"
+    "prior_confirmed_post_id": "18138250501647531",
+    "next_slot": "2026-11-08T08:00:00+09:00",
+    "next_slot_status": "not_due"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
