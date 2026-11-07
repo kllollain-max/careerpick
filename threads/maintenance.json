@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T18:30:35Z",
-  "last_observed_at": "2026-11-07T18:30:35Z",
+  "updated_at": "2026-11-07T19:03:52Z",
+  "last_observed_at": "2026-11-07T19:03:52Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T18:30:35Z",
+    "checked_at": "2026-11-07T19:03:52Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T03:29:11.032991+09:00",
+    "input_reference_at": "2026-11-08T04:02:57.008252+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1214,7 +1214,7 @@
     "cleaneye_source": {
       "status": "verified",
       "updated": "2026-11-08T00:49:39+09:00",
-      "candidates_in_top24": 10
+      "candidates_in_top24": 9
     },
     "history_duplicate_ids_checked": true,
     "recent_records_compared": 10,
@@ -1232,7 +1232,7 @@
         "reason": "No new official shift/weekend evidence found; keep previously written draft and its evidence."
       }
     ],
-    "reason": "All four existing future ready entries passed validation against unchanged current main and exact prompt bytes. No slot needs a replacement; queue unchanged.",
+    "reason": "All four upcoming ready entries passed current validation. ALIO and Cleaneye collection succeeded with no changes and skipped storage; the persisted ALIO confirmation is still fresh for all four slots. Existing drafts and queue remain unchanged.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "resolved_and_verified_ready",
     "collection_observation": {
@@ -1300,12 +1300,28 @@
         }
       },
       "visual_check": "Complete Korean institution names, roles and actual cutoff; no clipping. Actual public byte check remains with the publisher."
+    },
+    "latest_collection_observation": {
+      "run_id": "42403686387",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-07T18:57:37Z",
+      "head_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
+      "job_id": 128496708811,
+      "alio_collection": "success",
+      "alio_validation": "success",
+      "changed": false,
+      "cleaneye_complete_collection": true,
+      "storage": "skipped",
+      "persisted_alio_confirmed_at": "2026-11-08T00:49:02+09:00",
+      "persisted_cleaneye_at": "2026-11-08T00:49:39+09:00"
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T18:30:35Z",
+    "checked_at": "2026-11-07T19:03:52Z",
     "main_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
-    "state_head_before_write": "e716f87e4ebc560f472c520f1c213aba5234edbd",
+    "state_head_before_write": "5e28740c3388afef5668f7b1a2045e72fa71c8f5",
     "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "latest_threads_run": {
       "run_id": "42368080340",
@@ -1326,16 +1342,16 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T17:20:09Z",
+      "since": "2026-11-07T18:30:35Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T21:52:24Z",
+      "oldest_scanned": "2026-11-06T23:23:15Z",
       "scheduled_pages": [
         1
       ],
-      "scheduled_total": 54,
+      "scheduled_total": 55,
       "scheduled_scan_exhausted": true,
       "comparison_fields": [
         "run_id",
@@ -1351,7 +1367,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No Threads run version or claim changed. Last accepted receipt, exact reviewed queue entry in main, and official Meta GET verification agree. Next scheduled slot is not due.",
+    "reason": "No changed Threads run or claim. Last accepted receipt agrees with the main record and the official Meta GET. The November 8 08:00 slot is not yet due.",
     "last_confirmed_post_id": "18131171185889612",
     "prior_confirmed_post_id": "18138250501647531",
     "next_slot": "2026-11-08T08:00:00+09:00",
