@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T06:48:46Z",
-  "last_observed_at": "2026-11-07T06:48:46Z",
+  "updated_at": "2026-11-07T07:50:15Z",
+  "last_observed_at": "2026-11-07T07:50:15Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -911,24 +911,118 @@
         "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132",
         "reason": "기존 치과병원 원고는 근무형태와 면허 보유 기준일 충돌로 계속 보류. 대체 후보는 공식 공고 PDF와 ZIP 내 환경사 미화 직무기술서 HWP를 실제 열어 13명 모집단위, 대전 근무, 시차·교대·주말/공휴일, 수습과 마감 확인."
       }
+    },
+    "2026-11-08T16:00:00+09:00": {
+      "scheduled_at": "2026-11-08T16:00:00+09:00",
+      "format_id": "job_explainer",
+      "notice_id": "a306784",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "source_post_sha256": "d9dac873600a41a828ef8d0dd2e9e8e96d47792cee66dcb8c28c8a2465fb7023",
+      "source_detail_sha256": "1abefe9b8a35b559c4d6d1699047fb8bc2ab414cd402ab89b7cf69fee68b41dc",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "환자 상태를 살피고 처방에 따라 투약하면서, 간호 물품과 장비도 관리하는 일이에요. 근로복지공단 안산병원이 경기 안산에서 의료직 6급 간호사 6명을 뽑아요.\n\n원서 마감일까지 간호사 면허가 필요해요. 임용일 기준 만 60세 미만이고 12월 9일 예정일에 바로 근무할 수 있어야 해요. 결격사유나 병역의무 불이행이 없어야 하고, 복무 중이면 임용 전 전역이 가능해야 해요.\n\n3개월 시보 평가가 양호하면 정규직으로 임용돼요. 임용일부터 5년간 안산병원에서 근무해야 해요.\n\n응시원서·자기소개서·개인정보 동의서를 PDF 1개로 제출해요. 원서에는 서명하고 면허와 최종학교 성적을 꼭 기재해요. 이메일은 11월 16일 17:30:00까지 도착해야 해요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a306784",
+          "target_reader": "안산에서 환자간호와 간호행정을 맡고 전보 제한 기간 동안 근무할 수 있는 면허 보유 지원자",
+          "central_message": "임상간호와 관리 업무, 시보 및 장기 근무 조건을 함께 판단한다.",
+          "pattern_id": "P6",
+          "scheduled_at": "2026-11-08T16:00:00+09:00",
+          "reference_at": "2026-11-07T07:49:32Z",
+          "verification_basis": "checked_official_source",
+          "checked_at": "2026-11-07T07:49:32Z",
+          "missing_or_conflicting": [
+            "현재 main의 ALIO 확인 시각 11월 7일 13:26:43 KST가 11월 8일 16시 기준 24시간 초과(SOURCE_STALE).",
+            "공고문·직무기술서에 교대·야간·주말 편성 미기재. 근무 조건 확인 전에는 ready로 올리지 않음."
+          ],
+          "omitted_optional_facts": [
+            "보수 액수 및 서류 점수 세부 배점"
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "pre_publish_checks": [],
+          "body_characters": 388,
+          "application_period": {
+            "start": "2026-11-06",
+            "end": "2026-11-16T17:30:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085597",
+            "evidence": "접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306784.html",
+            "notice_id": "a306784",
+            "checked_at": "2026-11-07T07:49:32Z",
+            "verified": true,
+            "profile_url": "https://www.threads.com/@hid_119",
+            "rel_me_html": "<link href=\"https://kllollain-max.github.io/careerpick/\" rel=\"me\"/>",
+            "evidence": "공개 프로필 rel=me, 홈페이지 검색 필터, jobs/available.js의 a306784, 실제 개별 공고 제목과 공식 링크 확인."
+          },
+          "source_refs": [
+            {
+              "url": "https://job.alio.go.kr/recruitview.do?idx=306784",
+              "checked_at": "2026-11-07T07:49:32Z",
+              "excerpt": "의료직(간호사) 6급, 신입, 정규직, 경기, 6명",
+              "location": "채용정보 요약과 응시자격 및 첨부 링크"
+            },
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3085597",
+              "checked_at": "2026-11-07T07:49:32Z",
+              "excerpt": "접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00\n경기 안산시 상록구 구룡로 87 (일동)\n임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한)\n3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용\n최종학교 기준으로 학교성적 미기재시 부적격(불합격) 처리",
+              "location": "1. 근로조건, 2. 자격, 3. 임용예정일, 4. 원서 접수, 붙임2 응시원서 작성 안내"
+            },
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3085599",
+              "checked_at": "2026-11-07T07:49:32Z",
+              "excerpt": "간호수행, 환자관리, 투약능력, 의료장비 점검 및 관리능력",
+              "location": "붙임3 직무수행내용 및 필요기술"
+            }
+          ],
+          "fact_evidence": [
+            {
+              "field": "location",
+              "value": "경기 안산",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085597",
+              "excerpt": "경기 안산시 상록구 구룡로 87 (일동)"
+            }
+          ]
+        }
+      },
+      "image_job": {
+        "id": "a306784",
+        "org": "근로복지공단",
+        "title": "[안산병원] 의료직(간호사) 6급 채용 공고",
+        "count": 6,
+        "employment": "정규직",
+        "location": "경기 안산",
+        "due": "2026-11-16",
+        "deadline_label": "2026-11-16 17:30:00"
+      },
+      "checked_at": "2026-11-07T07:49:32Z",
+      "entry_sha256": "132c2ee7f9e5d4ca71297c993c1532648def36e205617b854d7ef7a71ae44f6b",
+      "validation": "Hold JSON format and duplicate/source fingerprints checked; ready probe rejected SOURCE_STALE. No queue write.",
+      "attachment_sha256": {
+        "notice": "ef90314c4cac920389e7027328c551d3584596840cf68b3622532985fea0c0f0",
+        "duties": "f2b4470e48622bfbb60d2dc4876b969daa7b53c1f0cc2ff9507c6ad92c5262b7"
+      },
+      "resume": "새 검증 수집본이 main에 실제 반영되고, 교대·야간·주말 근무 조건을 기관 공식 자료에서 확인한 뒤 같은 원문 지문 및 대기열 재검증. 근무조건 근거가 부족하면 검증 가능한 다음 공고 사용."
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T06:48:46Z",
+    "checked_at": "2026-11-07T07:50:15Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T15:47:45.722810+09:00",
+    "input_reference_at": "2026-11-07T16:47:27.109590+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
     "queue_check": "validated",
     "ready_entries": [
-      {
-        "scheduled_at": "2026-11-07T16:00:00+09:00",
-        "notice_id": "a306443",
-        "format_id": "job_explainer",
-        "chars": 338,
-        "entry_sha256": "be555ba182a7fc1f39e34e51ec8ef3e8e69cebc42b6f7438fef7382f1f5c3ceb"
-      },
       {
         "scheduled_at": "2026-11-07T20:00:00+09:00",
         "notice_id": "a306759",
@@ -951,10 +1045,11 @@
         "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132"
       }
     ],
-    "new_drafts": 0,
+    "new_drafts": 1,
     "new_ready_saved": 0,
     "preserved_hold_drafts": [
-      "a306715"
+      "a306715",
+      "a306784"
     ],
     "source_snapshot_at": "2026-11-07T00:58:42+09:00",
     "source_last_success_at": "2026-11-07T13:26:43+09:00",
@@ -976,8 +1071,8 @@
       }
     ],
     "attachment_sha256": "527b8de420bd414c00e486b034f4b216e5962cf7eac36dff55504debd7bf7f9c  duties-306733.zip\n0aadda6aebed514def355b22b0e464aa6171983e0d6a730750eaa7f7278f5b1a  duties-environment.hwp",
-    "reason": "All four future slots already contain reviewed ready entries. Main prompt, source hashes and queue check passed. Preserve all entries, original evidence timestamps and retained hold; no replacement needed.",
-    "queue_readback_equal": true,
+    "reason": "Future ready three entries unchanged. Wrote and preserved one 388-character tomorrow16 job explanation hold after reading official HWP notice and duties; no queue changes.",
+    "queue_readback_equal": false,
     "local_thumbnail_preflight": {
       "mode": "offline_preview_only",
       "results": [
@@ -1027,12 +1122,24 @@
         "a306759"
       ],
       "public_byte_check": "Reserved for actual image publish path; no image uploaded or alternation advanced."
+    },
+    "hold_ready_simulation_result": "SOURCE_STALE",
+    "collection_observation": {
+      "run_id": "42350261489",
+      "run_attempt": 1,
+      "job_id": 128336683587,
+      "alio_collection": "success",
+      "alio_validation": "success",
+      "changed": false,
+      "store": "skipped",
+      "verified_at_in_log": "2026-11-07T16:12:36+09:00",
+      "note": "Unchanged collection success is not persisted input freshness; main operations-status.json remains 13:26:43."
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T06:48:46Z",
+    "checked_at": "2026-11-07T07:50:15Z",
     "main_sha": "cd9ad444261b544f66a57b78c2e5fe4516582208",
-    "state_head_before_write": "e3530c81e29b92f811155a36f936adb6a1eddafe",
+    "state_head_before_write": "bd291a5ac8b4490532576f13a4f64fccfd2be205",
     "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
     "latest_threads_run": {
       "run_id": "42334945888",
@@ -1043,26 +1150,26 @@
       "head_sha": "55f72e1ee4fdd58807538addf92d16634b0aad7d",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42334945888"
     },
-    "current_slot": "2026-11-07T12:00:00+09:00",
-    "current_slot_status": "published_within_allowed_delay_and_verified",
-    "claim_status": "accepted",
-    "post_id": "17898746280681075",
+    "current_slot": "2026-11-07T16:00:00+09:00",
+    "current_slot_status": "not_observed_yet_within_allowed_delay",
+    "claim_status": "no_claim_for_current_slot",
+    "post_id": null,
     "new_incidents": [],
     "active_publishers": [],
     "pending_records": 0,
     "claims_inspected": 17,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T05:50:02Z",
+      "since": "2026-11-07T06:48:46Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T10:15:18Z",
+      "oldest_scanned": "2026-11-06T13:22:34Z",
       "scheduled_pages": [
         1
       ],
-      "scheduled_total": 48,
+      "scheduled_total": 49,
       "scheduled_scan_exhausted": true,
       "comparison_fields": [
         "run_id",
@@ -1077,6 +1184,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No publisher run version change or new running publisher. Latest accepted receipt and main ledger blob match retained official Meta GET verification. At observation the next 16:00 KST slot had not started. No send, replay, code change or reconciliation needed."
+    "reason": "No new Threads execution version or current slot claim; observed within two-hour tolerance. Latest prior receipt and unchanged ledger blob correspond to prior official Meta GET. No replays or state mutations besides maintenance.",
+    "last_confirmed_post_id": "17898746280681075"
   }
 }
