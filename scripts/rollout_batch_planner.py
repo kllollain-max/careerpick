@@ -1,7 +1,7 @@
 """Pure, fail-closed rollout pair planner. Never sends or persists private IDs."""
-from scripts.detect_new_job_alerts import parse_due
 from scripts.alert_preference_matcher import matches, packed_preferences
 from scripts.alert_delivery_ledger import delivery_key
+from scripts.alert_source_contract import candidate_open
 
 
 def eligible_pairs(jobs, subscribers, ledger, now, limit=3):
@@ -27,10 +27,7 @@ def eligible_pairs(jobs, subscribers, ledger, now, limit=3):
         if packed_preferences(tags) is None:
             continue
         for job in jobs:
-            if not isinstance(job, dict) or not str(job.get("id", "")).startswith("a") or not job.get("title"):
-                continue
-            due = parse_due(job.get("due"))
-            if due is None or due <= now or not matches(job, tags):
+            if not candidate_open(job, now) or not matches(job, tags):
                 continue
             key = delivery_key(str(job["id"]), sid)
             if key in seen or key in pending or key in delivered:
@@ -40,3 +37,4 @@ def eligible_pairs(jobs, subscribers, ledger, now, limit=3):
             if len(pairs) >= limit:
                 return pairs
     return pairs
+

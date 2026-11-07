@@ -1,4 +1,4 @@
-"""Bounded ALIO detail recheck immediately before push; never sends or stores IDs.
+"""Bounded official detail recheck immediately before push; never sends.
 
 This checks ALIO's published status, not undisclosed employer amendments.
 Unknown/network failures defer a task instead of claiming cancellation.
@@ -52,6 +52,9 @@ def fetch_detail(job_id):
 
 
 def verify(job, now, *, fetcher=fetch_detail):
+    if re.fullmatch(r'cleaneye-[0-9]+', str(job.get('id', ''))):
+        from scripts.cleaneye_push_preflight import verify as verify_cleaneye
+        return verify_cleaneye(job, now)
     due = parse_due(job.get('due'))
     if due is None or due <= now:
         return {'allowed': False, 'definitive': True, 'reason': 'expired'}
@@ -84,3 +87,4 @@ def verify(job, now, *, fetcher=fetch_detail):
         return {'allowed': True, 'definitive': True, 'reason': 'alio_open_verified'}
     except Exception:
         return {'allowed': False, 'definitive': False, 'reason': 'official_unverified'}
+

@@ -38,15 +38,22 @@ def master_writer_enabled():
     return os.getenv('THREADS_MASTER_WRITER', 'false').lower() == 'true'
 
 
-def writer_inputs():
+def writer_inputs(root=None):
     """Load the exact approved prompt and current source, without an AI/API call."""
-    policy = load(ROOT / 'threads/writer-policy.json', {})
-    prompt = (ROOT / policy['prompt_path']).read_bytes()
+    base = ROOT if root is None else Path(root)
+    policy = load(base / 'threads/writer-policy.json', {})
+    prompt = (base / policy['prompt_path']).read_bytes()
     if hashlib.sha256(prompt).hexdigest() != policy['prompt_sha256']:
         raise RuntimeError('Master prompt hash mismatch; do not publish')
-    source = load(DATA, {})
-    source['_operations'] = load(ROOT / 'operations-status.json', {})
-    return policy, source, load(ROOT / 'alio-detail.json', {})
+    source = load(DATA if root is None else base / 'alio.json', {})
+    source['_operations'] = load(base / 'operations-status.json', {})
+    try:
+        source['_cleaneye'] = load(base / 'cleaneye.json', {})
+    except (OSError, ValueError):
+        # An unavailable optional source cannot replace ALIO or validate a
+        # reserved Cleaneye notice. Source-specific validation still fails closed.
+        source['_cleaneye'] = {}
+    return policy, source, load(base / 'alio-detail.json', {})
 
 
 def prepare_master(history, now, run_id):

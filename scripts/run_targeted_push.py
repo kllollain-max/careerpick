@@ -14,6 +14,161 @@ BASELINE = 'push-detection-baseline.json'
 REQUIRED = ('CP_ONESIGNAL_REST_API_KEY', 'CP_LEDGER_REPOSITORY', 'CP_LEDGER_TOKEN')
 
 
+def _require_send_guards_off(mode):
+    if (os.environ.get('CP_ENABLE_LIVE_PUSH') != '0'
+            or os.environ.get('CP_ENABLE_ALL_OPTED_IN_ROLLOUT') != '0'):
+        raise RuntimeError(mode + ' requires both send guards OFF')
+
+
+def _diagnostic_error(exc):
+    """Only allowlisted codes enter public logs, never raw provider exceptions."""
+    if isinstance(exc, HTTPError) and type(exc.code) is int and 100 <= exc.code <= 599:
+        return {'error_code': 'http_rejected', 'http_status': exc.code}
+    message = str(exc)
+    match = re.fullmatch(r'(OneSignal export request|Private export download) rejected \(HTTP ([1-5][0-9]{2})\)', message)
+    if match:
+        return {'error_code': 'http_rejected', 'http_status': int(match[2])}
+    match = re.fullmatch(r'OneSignal (?:subscriber|user) lookup HTTP error ([1-5][0-9]{2})', message)
+    if match:
+        return {'error_code': 'http_rejected', 'http_status': int(match[1])}
+    match = re.fullmatch(
+        r'Private export URL host not allowed \(provider category: (aws-s3|cloudfront|onesignal|onesignal-cdn|other)\); configure the exact verified host privately', message)
+    if match:
+        return {'error_code': 'export_host_not_allowed', 'provider_host_category': match[1]}
+    codes = {
+        'OneSignal export request network failure': 'export_request_network_failure',
+        'OneSignal authentication or permissions rejected': 'subscriber_lookup_auth_rejected',
+        'OneSignal subscriber lookup network error': 'subscriber_lookup_network_failure',
+        'OneSignal user lookup network error': 'subscriber_lookup_network_failure',
+        'Export URL not ready; retry in a separate controlled check': 'export_url_not_ready',
+        'Private export not ready after bounded checks (HTTP 404)': 'export_not_ready_after_bounded_checks',
+        'Invalid OneSignal app ID': 'invalid_app_id',
+        'Missing private API key': 'missing_provider_key',
+        'Invalid configured private export host': 'invalid_export_host_config',
+        'Invalid private export URL': 'invalid_export_url',
+        'Oversized export response': 'export_response_size_cap',
+        'Invalid export response': 'invalid_export_response',
+        'Private export redirect blocked': 'export_redirect_blocked',
+        'Export redirects are not permitted': 'export_redirect_blocked',
+        'Private export exceeds compressed size cap': 'export_compressed_size_cap',
+        'Private export exceeds decompressed size cap': 'export_decompressed_size_cap',
+        'Private export exceeds row cap': 'export_row_cap',
+        'Invalid or oversized private subscription export': 'invalid_export_csv',
+        'Invalid CSV encoding': 'invalid_export_csv',
+        'Invalid export header': 'invalid_export_csv',
+        'Missing subscription ID column': 'invalid_export_csv',
+        'Malformed private export row': 'invalid_export_csv',
+        'Private baseline not initialized or invalid': 'invalid_private_baseline',
+        'Private delivery state not initialized': 'private_state_not_initialized',
+        'Push control unavailable; no sending': 'control_unavailable',
+        'Invalid push control; no sending': 'invalid_control',
+        'Invalid private push checkpoint': 'invalid_private_cursor',
+    }
+    return {'error_code': codes.get(message, 'unclassified_diagnostic_error')}
+
+
+def diagnose():
+    """Read state and bounded provider export only; no delivery or state writes.
+
+    Export subscription IDs stay in memory and are reported as a count only.
+    A successful diagnosis never resumes a blocked circuit or authorizes sends.
+    """
+    _require_send_guards_off('Diagnose')  # Before even a private-state request.
+    from scripts.private_onesignal_export_request import request_export
+    from scripts.private_onesignal_export_download import read_export_ids
+    from scripts.private_rollout_cursor import read_cursor
+    from scripts.onesignal_known_subscriber import lookup
+    report = {'mode': 'diagnose', 'status': 'diagnostic_failed', 'sent': 0,
+              'state_changed': False, 'operator_review_required': True}
+    stage = 'preflight'
+    try:
+        preflight()
+        stage = 'ledger_read'
+        ledger, ledger_sha = read_private_ledger()
+        report['ledger'] = {'initialized': bool(ledger_sha),
+                            'delivered_count': len(ledger.get('delivered', [])),
+                            'pending_count': len(ledger.get('pending', []))}
+        stage = 'baseline_read'
+        baseline, baseline_sha = read_state(BASELINE)
+        if (not baseline_sha or not isinstance(baseline, dict)
+                or not isinstance(baseline.get('ids'), list)
+                or any(not isinstance(value, str) or not value for value in baseline['ids'])):
+            raise RuntimeError('Private baseline not initialized or invalid')
+        report['baseline'] = {'initialized': True, 'known_job_count': len(baseline['ids'])}
+        stage = 'queue_read'
+        state, queue_sha = queue.read_queue()
+        report['queue'] = {'initialized': bool(queue_sha), 'counts': queue.counts(state)}
+        stage = 'control_read'
+        control, control_sha = circuit.read()
+        reasons = {'initial_review_required', 'run_in_progress', 'run_fault_review_required',
+                   'operator_reviewed', 'run_completed', 'api_accepted'}
+        report['control'] = {
+            'initialized': bool(control_sha), 'state': control['state'],
+            'reason_code': control.get('reason') if control.get('reason') in reasons else 'other_redacted',
+            'failures': control['failures'],
+            'sha': control_sha if isinstance(control_sha, str) and re.fullmatch(r'[0-9a-f]{40}', control_sha) else None,
+        }
+        if not ledger_sha or not queue_sha or not control_sha:
+            raise RuntimeError('Private delivery state not initialized')
+        report['operator_review_required'] = bool(
+            control['state'] != 'ready' or ledger.get('pending')
+            or report['queue']['counts']['reserved'] or report['queue']['counts']['uncertain'])
+        stage = 'cursor_read'
+        cursor, cursor_sha = read_cursor()
+        report['cursor'] = {'initialized': bool(cursor_sha), 'next_index': cursor['next_index']}
+        stage = 'export_request'
+        url = request_export(os.environ.get('CP_ONESIGNAL_APP_ID', ''),
+                             os.environ.get('CP_ONESIGNAL_REST_API_KEY', ''))
+        stage = 'export_download'
+        ids = read_export_ids(url)
+        report['export'] = {'parsed_subscription_count': len(ids), 'consent_verified': False}
+        # At most one exported subscription, through the existing read-only
+        # identity/user lookup. It is never selected or authorized for delivery.
+        stage = 'subscriber_lookup'
+        subscriber = lookup(ids[0]) if ids else None
+        report['lookup'] = {'sample_count': min(len(ids), 1),
+                            'verified_opt_in_sample_count': int(bool(subscriber))}
+        report['status'] = 'diagnostic_complete'
+        report['stage'] = 'complete'
+    except Exception as exc:
+        report.update(stage=stage, operator_review_required=True, **_diagnostic_error(exc))
+        report['missing_secrets'] = [key for key in REQUIRED if not os.environ.get(key, '').strip()]
+    print(json.dumps(report, sort_keys=True))
+    return report
+
+
+def resume_after_review():
+    """Explicit operator CAS transition only; never called by scheduled run."""
+    _require_send_guards_off('Resume')
+    expected_sha = os.environ.get('CP_EXPECTED_CONTROL_SHA', '')
+    evidence = os.environ.get('CP_PUSH_REVIEW_REFERENCE', '').strip()
+    if not re.fullmatch(r'[0-9a-f]{40}', expected_sha):
+        raise RuntimeError('Exact reviewed control SHA required')
+    if not 1 <= len(evidence) <= 160 or any(ord(char) < 32 or ord(char) == 127 for char in evidence):
+        raise RuntimeError('Bounded non-sensitive review reference required')
+    # Reject a stale review or unresolved delivery before any provider request.
+    def reviewed_state():
+        ledger, ledger_sha = read_private_ledger()
+        state, queue_sha = queue.read_queue()
+        control, control_sha = circuit.read()
+        if (not ledger_sha or not queue_sha or control_sha != expected_sha
+                or control['state'] != 'blocked'):
+            raise RuntimeError('Control changed or is not a reviewed blocked state')
+        if ledger.get('pending') or any(task['state'] in {'reserved', 'uncertain'} for task in state['tasks'].values()):
+            raise RuntimeError('Unresolved prior delivery; review without retransmission')
+    preflight()
+    reviewed_state()
+    report = diagnose()
+    if report['status'] != 'diagnostic_complete':
+        raise RuntimeError('Read-only diagnosis failed; circuit remains blocked')
+    # The export may take time; re-read inflight state before the final CAS.
+    reviewed_state()
+    new_sha = circuit.resume(expected_sha, evidence=evidence, confirmed_no_inflight=True)
+    print(json.dumps({'mode': 'resume_after_review', 'resumed': True,
+                      'sent': 0, 'history_preserved': True,
+                      'control_sha': new_sha if isinstance(new_sha, str) and re.fullmatch(r'[0-9a-f]{40}', new_sha) else None}))
+
+
 def preflight():
     missing = [key for key in REQUIRED if not os.environ.get(key, '').strip()]
     if missing:
@@ -58,7 +213,13 @@ def current_baseline():
     ids = sorted({p['id'] for p in data['posts'] if p.get('type') == 'j' and p.get('alio')})
     if not ids or any(not re.fullmatch(r'a[0-9]+', value) for value in ids):
         raise RuntimeError('Invalid current ALIO baseline')
-    return {'ids': ids, 'updated': detection.datetime.now(detection.KST).isoformat()}
+    now = detection.datetime.now(detection.KST)
+    sources = ['alio']
+    cleaneye_posts, _, _ = detection.cleaneye_snapshot(now)
+    if cleaneye_posts is not None:
+        ids = sorted(set(ids) | set(cleaneye_posts))
+        sources.append('cleaneye')
+    return {'ids': ids, 'initialized_sources': sources, 'updated': now.isoformat()}
 
 
 def initialize():
@@ -108,8 +269,15 @@ def run():
 
 def main():
     mode = os.environ.get('CP_PUSH_MODE', 'check')
-    if mode not in {'check', 'initialize', 'run'}:
+    if mode not in {'check', 'diagnose', 'initialize', 'resume_after_review', 'run'}:
         raise RuntimeError('Invalid push mode')
+    if mode == 'diagnose':
+        if diagnose()['status'] != 'diagnostic_complete':
+            raise RuntimeError('Read-only diagnosis failed; no state change or sending')
+        return
+    if mode == 'resume_after_review':
+        resume_after_review()
+        return
     preflight()
     if mode == 'initialize':
         if os.environ.get('CP_ENABLE_LIVE_PUSH') != '0' or os.environ.get('CP_ENABLE_ALL_OPTED_IN_ROLLOUT') != '0':

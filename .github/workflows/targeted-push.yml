@@ -7,10 +7,18 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: Check readiness or initialize private state without sending
+        description: Check, diagnose, initialize, or explicitly resume reviewed private state without sending
         type: choice
-        options: [check, initialize]
+        options: [check, diagnose, initialize, resume_after_review]
         default: check
+      expected_control_sha:
+        description: Exact reviewed private control blob SHA; required only for resume_after_review
+        type: string
+        default: ''
+      review_reference:
+        description: Non-sensitive incident review reference, 1-160 characters; required only for resume_after_review
+        type: string
+        default: ''
 permissions:
   contents: read
 concurrency:
@@ -41,10 +49,13 @@ jobs:
           CP_PUSH_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'run' }}
           CP_ENABLE_ALL_OPTED_IN_ROLLOUT: ${{ github.event_name == 'workflow_run' && vars.CP_ENABLE_ALL_OPTED_IN_ROLLOUT == '1' && '1' || '0' }}
           CP_ENABLE_LIVE_PUSH: ${{ github.event_name == 'workflow_run' && vars.CP_ENABLE_ALL_OPTED_IN_ROLLOUT == '1' && '1' || '0' }}
+          CP_EXPECTED_CONTROL_SHA: ${{ inputs.expected_control_sha }}
+          CP_PUSH_REVIEW_REFERENCE: ${{ inputs.review_reference }}
           CP_ONESIGNAL_APP_ID: 31443bc9-bef0-4519-9817-2f916a548b6a
           CP_ONESIGNAL_REST_API_KEY: ${{ secrets.CP_ONESIGNAL_REST_API_KEY }}
           CP_LEDGER_REPOSITORY: ${{ secrets.CP_LEDGER_REPOSITORY }}
           CP_LEDGER_TOKEN: ${{ secrets.CP_LEDGER_TOKEN }}
+          CLEANEYE_KEY: ${{ secrets.CLEANEYE_KEY || secrets.DATA_GO_KR_KEY }}
         run: python -m scripts.run_targeted_push
       - name: Record outcome without subscriber data
         if: always()

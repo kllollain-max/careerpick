@@ -53,10 +53,11 @@ class BatchPlannerTests(unittest.TestCase):
         no_match = dict(self.jobs[0], region="부산")
         self.assertEqual(eligible_pairs([no_match], subs,
                          {"delivered": [], "pending": []}, self.now, 3), [])
-        self.assertEqual(len(eligible_pairs(self.jobs + [dict(self.jobs[0], id="anew")],
+        self.assertEqual(len(eligible_pairs(self.jobs + [dict(self.jobs[0], id="a999")],
                                             subs, {"delivered": [], "pending": []},
                                             self.now, 100)), 67)
 
 
 if __name__ == "__main__":
     unittest.main()
+
