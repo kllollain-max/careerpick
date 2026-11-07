@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T10:08:59Z",
-  "last_observed_at": "2026-11-07T10:08:59Z",
+  "updated_at": "2026-11-07T10:43:26Z",
+  "last_observed_at": "2026-11-07T10:43:26Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1036,9 +1036,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T10:08:59Z",
+    "checked_at": "2026-11-07T10:43:26Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T19:04:42.932442+09:00",
+    "input_reference_at": "2026-11-07T19:42:27.339973+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1066,7 +1066,7 @@
         "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132"
       }
     ],
-    "new_drafts": 1,
+    "new_drafts": 0,
     "new_ready_saved": 0,
     "preserved_hold_drafts": [
       "a306715",
@@ -1100,7 +1100,7 @@
         "reason": "Official opening and 15:00 cutoff plus duty PDF verified; current persisted ALIO confirmation will be stale at the slot."
       }
     ],
-    "reason": "Preserved all three future ready entries. Authored and verified a 395-character alternate general administration job explanation for Nov 8 16:00. Its official source evidence and profile route pass, but intended-slot input is blocked by SOURCE_STALE; the alternative remains a non-publishable hold.",
+    "reason": "Three future ready entries revalidated against pinned current inputs and preserved. The same two 16:00 draft options remain on hold: their intended slot still exceeds the persisted source verification freshness. Alternate digest unchanged and local queue readiness probe confirmed SOURCE_STALE; no queue mutation.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "SOURCE_STALE",
     "collection_observation": {
@@ -1118,9 +1118,9 @@
     "hold_alternative": "2026-11-08T16:00:00+09:00:a306515"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T10:08:59Z",
+    "checked_at": "2026-11-07T10:43:26Z",
     "main_sha": "1d981f267ddbe64d72ec8b9b63c3e7f3f6e05e5d",
-    "state_head_before_write": "95aeeed9c4e6e8ca51ffa41d705b35e898334781",
+    "state_head_before_write": "5619a074969d95ba03061609300ad01ad66f9bb3",
     "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
     "latest_threads_run": {
       "run_id": "42353173433",
@@ -1131,17 +1131,17 @@
       "head_sha": "cd9ad444261b544f66a57b78c2e5fe4516582208",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42353173433"
     },
-    "current_slot": "2026-11-07T16:00:00+09:00",
-    "current_slot_status": "published_verified_within_allowed_delay",
-    "claim_status": "accepted",
-    "post_id": "18138250501647531",
+    "current_slot": "2026-11-07T20:00:00+09:00",
+    "current_slot_status": "not_started",
+    "claim_status": "no_claim_for_current_slot",
+    "post_id": null,
     "new_incidents": [],
     "active_publishers": [],
     "pending_records": 0,
     "claims_inspected": 18,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T08:57:02Z",
+      "since": "2026-11-07T10:08:59Z",
       "all_runs_pages": [
         1
       ],
@@ -1166,8 +1166,9 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No publisher version or claim changed; unchanged accepted receipt and main record matched the preceding Meta GET verification. The 20:00 slot has not started. No reconciliations, code changes, or sends.",
-    "last_confirmed_post_id": "18138250501647531"
+    "reason": "No newer Threads run version or claim. The prior accepted receipt matches pinned main history and official Meta GET logs. The 20:00 slot has not started. No reconciliation, code changes, or maintenance sends.",
+    "last_confirmed_post_id": "18138250501647531",
+    "prior_confirmed_post_id": "18138250501647531"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
