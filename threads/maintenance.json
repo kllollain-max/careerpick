@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T14:40:24Z",
-  "last_observed_at": "2026-11-07T14:40:24Z",
+  "updated_at": "2026-11-07T16:25:46Z",
+  "last_observed_at": "2026-11-07T16:25:46Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1166,9 +1166,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-07T14:40:24Z",
+    "checked_at": "2026-11-07T16:25:46Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-07T23:39:52.201465+09:00",
+    "input_reference_at": "2026-11-08T01:23:22.720195+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1187,21 +1187,33 @@
         "notice_id": "a306733",
         "chars": 430,
         "entry_sha256": "dea9213664642cc0a5bb6e87cea7fc3e1370e8f9d0720c0cc618db7417cd4132"
+      },
+      {
+        "notice_id": "a306515",
+        "scheduled_at": "2026-11-08T16:00:00+09:00",
+        "format_id": "job_explainer",
+        "chars": 395,
+        "entry_sha256": "e44bed8c3ba8fc822f68c17588b2680c052a718f27543464b5c44f1589ca3002"
+      },
+      {
+        "notice_id": "a306612",
+        "scheduled_at": "2026-11-08T20:00:00+09:00",
+        "format_id": "application_checklist",
+        "chars": 366,
+        "entry_sha256": "9511db3268737139410730fc9a1382f64ec79d4327797d056147a138e5bcd9a7"
       }
     ],
     "new_drafts": 0,
-    "new_ready_saved": 0,
+    "new_ready_saved": 2,
     "preserved_hold_drafts": [
       "a306715",
-      "a306784",
-      "a306515",
-      "a306612"
+      "a306784"
     ],
-    "source_snapshot_at": "2026-11-07T00:58:42+09:00",
-    "source_last_success_at": "2026-11-07T13:26:43+09:00",
+    "source_snapshot_at": "2026-11-08T00:48:34+09:00",
+    "source_last_success_at": "2026-11-08T00:49:02+09:00",
     "cleaneye_source": {
       "status": "verified",
-      "updated": "2026-11-07T13:27:15+09:00",
+      "updated": "2026-11-08T00:49:39+09:00",
       "candidates_in_top24": 10
     },
     "history_duplicate_ids_checked": true,
@@ -1228,24 +1240,22 @@
         "reason": "November 8 20:00 source check blocked by SOURCE_STALE; official post and attachments verified."
       }
     ],
-    "reason": "Both existing ready drafts validated and retained exact digests. Both afternoon slots' readiness probes still reject SOURCE_STALE against the same saved source, so original hold drafts were preserved and no duplicate or queue changes were made.",
+    "reason": "The two previously authored afternoon drafts were promoted after real issuer attachment, ALIO page, public profile rel=me and landing route rechecks. Exact attachment and source fingerprints remained unchanged. All four future slots passed the unmodified full validator. CAS queue write and read-back preserved the prior nine records.",
     "queue_readback_equal": true,
-    "hold_ready_simulation_result": "SOURCE_STALE",
+    "hold_ready_simulation_result": "resolved_and_verified_ready",
     "collection_observation": {
-      "run_id": "42375098749",
+      "run_id": "42388154153",
       "run_attempt": 1,
-      "job_id": 128410949076,
+      "job_id": 128449853267,
       "alio_collection": "success",
       "alio_validation": "success",
-      "verified_at_in_log": "2026-11-07T22:02:50+09:00",
-      "hashes_matched_pinned_main": true,
-      "changed": false,
-      "store": "skipped_no_content_change",
+      "changed": true,
+      "store": "persisted_main_verified",
+      "verified_at_in_log": "2026-11-08T00:49:02+09:00",
       "cleaneye_complete_collection": true,
-      "cleaneye_snapshot_at": "2026-11-07T13:27:15+09:00",
-      "note": "Successful unchanged collection does not update the persisted ALIO or Cleaneye input clock; both afternoon slots still reject SOURCE_STALE."
+      "cleaneye_snapshot_at": "2026-11-08T00:49:39+09:00"
     },
-    "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
+    "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "hold_alternative": "2026-11-08T16:00:00+09:00:a306515",
     "local_thumbnail_preflight": {
       "mode": "scratch_only",
@@ -1273,13 +1283,14 @@
       ],
       "visual_check": "Complete Korean institution, job, counts, and deadline; no clipping. Public-byte verification remains in the publishing workflow."
     },
-    "stored_alio_clock_applies_until": "2026-11-08T13:26:43+09:00"
+    "stored_alio_clock_applies_until": "2026-11-09T00:49:02+09:00",
+    "queue_commit_sha": "f4fc1b80049975a6c423f7f3d2801aa258b671e8"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T14:40:24Z",
-    "main_sha": "050b94f4cd470bfaabf53e07c6ad43958c1e0fe7",
-    "state_head_before_write": "73c67318482a07ac585daa88fa6a17f9beecc656",
-    "queue_blob_sha": "ae4e4358b423f5afc139e688c87d0dc418be1eb2",
+    "checked_at": "2026-11-07T16:25:46Z",
+    "main_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
+    "state_head_before_write": "f4fc1b80049975a6c423f7f3d2801aa258b671e8",
+    "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "latest_threads_run": {
       "run_id": "42368080340",
       "run_attempt": 1,
@@ -1299,16 +1310,16 @@
     "claims_inspected": 19,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-07T13:55:20Z",
+      "since": "2026-11-07T14:40:24Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T19:05:27Z",
+      "oldest_scanned": "2026-11-06T21:52:24Z",
       "scheduled_pages": [
         1
       ],
-      "scheduled_total": 53,
+      "scheduled_total": 54,
       "scheduled_scan_exhausted": true,
       "comparison_fields": [
         "run_id",
@@ -1324,7 +1335,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No changed Threads run or claim after the preceding check. Latest accepted receipt agrees with main and official Meta GET log; no pending, reconciliation, replay or code change.",
+    "reason": "No changed Threads publisher version or claim, confirmed against accepted receipt, pinned main and official Meta GET. No replay or repair. Fresh Operations collection removed both afternoon writer holds.",
     "last_confirmed_post_id": "18131171185889612",
     "prior_confirmed_post_id": "18138250501647531"
   },
@@ -1466,6 +1477,32 @@
       },
       "validation": "Body format/CTA/length/history, actual period, profile route and image facts verified independently. Scratch queue check blocked by SOURCE_STALE; not added to live queue.",
       "resume": "main에 예정 시각 기준 24시간 이내의 ALIO 검증 시각이 실제 반영되면 최신 원문 지문과 기존 예약을 대조한 뒤 전체 대기열 검사. 기존 안산병원 보류안은 그대로 보존."
+    }
+  },
+  "writer_hold_resolutions": {
+    "2026-11-08T16:00:00+09:00": {
+      "notice_id": "a306515",
+      "previous_status": "hold",
+      "status": "ready_queued",
+      "reason": "SOURCE_STALE cleared with persisted collection and real official-source recheck",
+      "previous_entry_sha256": "4b3af97610848b4829369e7c4046955897ff8618072091d18842057b1b5b55b8",
+      "entry_sha256": "e44bed8c3ba8fc822f68c17588b2680c052a718f27543464b5c44f1589ca3002",
+      "verified_at": "2026-11-08T01:24:22+09:00",
+      "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
+      "queue_commit_sha": "f4fc1b80049975a6c423f7f3d2801aa258b671e8",
+      "publication_status": "not_yet_published"
+    },
+    "2026-11-08T20:00:00+09:00": {
+      "notice_id": "a306612",
+      "previous_status": "hold",
+      "status": "ready_queued",
+      "reason": "SOURCE_STALE cleared with persisted collection and real official-source recheck",
+      "previous_entry_sha256": "5a1a7dabb14c77e05942090c0529b046520adc7e32ca9a3adadbac46975619a3",
+      "entry_sha256": "9511db3268737139410730fc9a1382f64ec79d4327797d056147a138e5bcd9a7",
+      "verified_at": "2026-11-08T01:24:22+09:00",
+      "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
+      "queue_commit_sha": "f4fc1b80049975a6c423f7f3d2801aa258b671e8",
+      "publication_status": "not_yet_published"
     }
   }
 }
