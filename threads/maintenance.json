@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T03:13:13Z",
-  "last_observed_at": "2026-11-07T03:13:13Z",
+  "updated_at": "2026-11-07T04:21:51Z",
+  "last_observed_at": "2026-11-07T04:21:51Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -118,6 +118,15 @@
   },
   "observed_runs": [
     {
+      "run_id": "42334945888",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-07T03:39:23Z",
+      "head_sha": "55f72e1ee4fdd58807538addf92d16634b0aad7d",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42334945888"
+    },
+    {
       "run_id": "42311790023",
       "run_attempt": 1,
       "status": "completed",
@@ -192,18 +201,24 @@
   ],
   "last_confirmed_publication": {
     "status": "verified",
-    "scheduled_at": "2026-11-07T08:00:00+09:00",
-    "published_at": "2026-11-07T08:26:12.468777+09:00",
-    "run_id": "42311790023",
-    "post_id": "18211788178318854",
-    "url": "https://www.threads.com/@hid_119/post/DfayFgXld86",
-    "format_id": "reader_story",
-    "image": true,
-    "meta_verified_at": "2026-11-06T23:26:14.6899741Z",
+    "scheduled_at": "2026-11-07T12:00:00+09:00",
+    "published_at": "2026-11-07T12:39:17.067034+09:00",
+    "run_id": "42334945888",
+    "run_attempt": 1,
+    "head_sha": "55f72e1ee4fdd58807538addf92d16634b0aad7d",
+    "post_id": "17898746280681075",
+    "url": "https://www.threads.com/@hid_119/post/DfbPDJijBWI",
+    "format_id": "key_facts",
+    "image": false,
+    "meta_verified_at": "2026-11-07T03:39:18.9181099Z",
     "policy": "master-v1.1",
-    "ledger_sha": "196058e628f0a8d1bfa0466fa340b0ccc14fcb51",
-    "claim_blob_sha": "25fa9cd3da5a7a79fb3a727b5ea22b7a19a435d4",
-    "queue_entry_sha256": "94f275f64bd9823140e8e3e374ea65d9c92470e75344756368199afb3a4e37a8"
+    "ledger_sha": "b0efedc364f167e124cc35bdee456199bef15ffc",
+    "claim_blob_sha": "60b82e6caaba1775cf085d5c5dd8e68415a975f0",
+    "queue_entry_sha256": "688d4c9ef06fa81a9f1c080e3cfcb43f2571dfdaea3a88a6938e07d904143a33",
+    "body_equals_reviewed_entry": true,
+    "username_verified": "hid_119",
+    "replies_required": false,
+    "verification_job_id": 128289650610
   },
   "pending_records_at_activation": 0,
   "first_new_policy_publication": {
@@ -817,108 +832,91 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-06T18:01:06Z",
-    "main_sha": "a79556903e2a4d79c1d78619fb72caba04361ae2",
-    "schedule_runs_examined": 41,
-    "latest_scheduled_run": {
-      "run_id": "42212136298",
-      "run_attempt": 1,
-      "status": "completed",
-      "conclusion": "success",
-      "updated_at": "2026-11-06T11:42:24Z",
-      "head_sha": "b66b36dadf26508b7a32ea90e90e4d15aaa8039c",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42212136298"
-    },
-    "new_incident_detected": false,
-    "publish_action": "none",
+    "checked_at": "2026-11-07T04:21:51Z",
+    "input_script": "scripts/threads_writer_input.py --limit 24",
+    "input_reference_at": "2026-11-07T13:20:48.091444+09:00",
+    "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
-    "source_snapshot_at": "2026-11-07T00:58:42+09:00",
-    "validation": "python scripts/threads_writer_input.py --check-queue queue-final.json: validated 08:00, 12:00, 16:00, 20:00; remote read-back matched scratch",
-    "new_ready": [
-      {
-        "scheduled_at": "2026-11-07T12:00:00+09:00",
-        "notice_id": "a306799",
-        "format_id": "key_facts",
-        "characters": 434,
-        "entry_sha256": "688d4c9ef06fa81a9f1c080e3cfcb43f2571dfdaea3a88a6938e07d904143a33",
-        "official_source": "https://nmc.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=271667&systemKindCode=MRS2",
-        "official_attachment": "https://nmc.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=03a9c2d6-0705-4b8b-a7db-e64d4a041467.pdf",
-        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306799.html"
-      },
+    "prompt_exact_bytes_verified": true,
+    "queue_check": "validated",
+    "ready_entries": [
       {
         "scheduled_at": "2026-11-07T16:00:00+09:00",
         "notice_id": "a306443",
         "format_id": "job_explainer",
-        "characters": 338,
-        "entry_sha256": "be555ba182a7fc1f39e34e51ec8ef3e8e69cebc42b6f7438fef7382f1f5c3ceb",
-        "official_source": "https://recruit.incruit.com/kdemo/job/2610280004",
-        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306443.html"
+        "chars": 338,
+        "entry_sha256": "be555ba182a7fc1f39e34e51ec8ef3e8e69cebc42b6f7438fef7382f1f5c3ceb"
       },
       {
         "scheduled_at": "2026-11-07T20:00:00+09:00",
         "notice_id": "a306759",
         "format_id": "application_checklist",
-        "characters": 411,
-        "entry_sha256": "5f2f047807520787b19c77c22f16dbc9701514ee722d0ce8a81cdfeb0ee3e017",
-        "official_source": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271548",
-        "official_attachment": "https://nmc.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=cd17734f-211c-4424-ab8d-0aabb1fd5294.pdf",
-        "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306759.html"
+        "chars": 411,
+        "entry_sha256": "5f2f047807520787b19c77c22f16dbc9701514ee722d0ce8a81cdfeb0ee3e017"
       }
     ],
-    "unresolved": [],
-    "profile": {
-      "url": "https://www.threads.com/@hid_119",
-      "rel_me": "<link href=\"https://kllollain-max.github.io/careerpick/\" rel=\"me\"/>",
-      "checked_at": "2026-11-07T02:56:39+09:00",
-      "root_listing_verified": true,
-      "listing_sources": [
-        "https://kllollain-max.github.io/careerpick/alio.json",
-        "https://kllollain-max.github.io/careerpick/jobs/available.js"
-      ]
-    },
-    "excluded_candidates": [
-      {
-        "notice_ids": [
-          "a306784",
-          "a306802"
-        ],
-        "reason": "공식 첨부에서 일부 필수 근무·직무·접수 조건을 읽어 대조할 수 없어 원래 초안을 보류로 보존"
-      },
-      {
-        "notice_ids": [
-          "a306612",
-          "a306433"
-        ],
-        "reason": "공식 접수기간과 공개 개별 경로를 확인했으나 직무·필수 자격 확인에 필요한 첨부를 해독하지 못함"
-      }
-    ]
+    "new_drafts": 0,
+    "new_ready_saved": 0,
+    "preserved_hold_drafts": [
+      "a306732",
+      "a306715"
+    ],
+    "hold_source_fingerprints_unchanged": true,
+    "hold_ready_simulation_result": "SOURCE_STALE",
+    "source_snapshot_at": "2026-11-07T00:58:42+09:00",
+    "source_last_success_at": "2026-11-07T00:59:06+09:00",
+    "history_duplicate_ids_checked": true,
+    "recent_records_compared": 10,
+    "reason": "All four future slots have existing authored ready/hold drafts. Preserve unchanged bodies and original evidence times. Tomorrow 08/12 drafts still need a fresh validated ALIO snapshot; 12 also needs the original attachment and current profile-path evidence. No validator/policy change."
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-07T03:13:13Z",
-    "main_sha": "55f72e1ee4fdd58807538addf92d16634b0aad7d",
+    "checked_at": "2026-11-07T04:21:51Z",
+    "main_sha": "91baef63915f47169c53e2182c97d299e602857a",
+    "state_head_before_write": "d40dee032f1585f0726aa8494e62cf77e899dbb7",
     "queue_blob_sha": "014fd6eb3c5a35238d809e04625e9ee0c1d96c0a",
     "latest_threads_run": {
-      "run_id": "42311790023",
+      "run_id": "42334945888",
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-06T23:26:20Z",
-      "head_sha": "a79556903e2a4d79c1d78619fb72caba04361ae2",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42311790023"
+      "updated_at": "2026-11-07T03:39:23Z",
+      "head_sha": "55f72e1ee4fdd58807538addf92d16634b0aad7d",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42334945888"
     },
-    "status_0800": "published_within_allowed_delay_and_verified",
-    "slot": "2026-11-07T08:00:00+09:00",
-    "candidate_hold": "SOURCE_STALE",
-    "candidate_notice_id": "a306732",
-    "no_send": true,
-    "remaining_today_ready": [
-      "a306799",
-      "a306443",
-      "a306759"
-    ],
-    "source_recheck_run_id": "42322784166",
     "current_slot": "2026-11-07T12:00:00+09:00",
-    "current_slot_status": "not_observed_yet_within_allowed_delay",
-    "next_new_draft": "a306715"
+    "current_slot_status": "published_within_allowed_delay_and_verified",
+    "claim_status": "accepted",
+    "post_id": "17898746280681075",
+    "new_incidents": [],
+    "active_publishers": [],
+    "pending_records": 0,
+    "claims_inspected": 17,
+    "unresolved_sending_claims": 0,
+    "actions_scan": {
+      "since": "2026-11-07T03:13:13Z",
+      "all_runs_pages": [
+        1
+      ],
+      "all_runs_page_size": 100,
+      "oldest_scanned": "2026-11-06T01:25:00Z",
+      "scheduled_pages": [
+        1
+      ],
+      "scheduled_total": 48,
+      "scheduled_scan_exhausted": true,
+      "comparison_fields": [
+        "run_id",
+        "run_attempt",
+        "status",
+        "conclusion",
+        "updated_at",
+        "head_sha"
+      ]
+    },
+    "related_open_prs": [],
+    "code_changes": 0,
+    "posts_sent_by_maintenance": 0,
+    "reconcile_required": false,
+    "reason": "New scheduled publication verified; no replay, dispatch, backfill, claim reset, or ledger recovery needed. D remains false."
   }
 }
