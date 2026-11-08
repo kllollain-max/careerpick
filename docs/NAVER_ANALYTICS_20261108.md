@@ -57,10 +57,21 @@ The browser checks cover default-off behavior, 320px layout, explicit permission
 repeat initialization, persistent choices, withdrawal, provider failure, blocked
 storage, the sibling path, existing provider ID and cross-tab withdrawal.
 
-These checks do not establish a successful full repository build or live NAVER
-report. The existing pull-request checks can run the full build. After the owner
-approves this candidate and it is deployed, visit the public site, allow analytics
-and confirm its ID and pageview in NAVER's real-time report.
+The full repository build also passed in
+[CI 42490471149](https://github.com/kllollain-max/careerpick/actions/runs/42490471149):
+1,410 HTML pages, 37,876 checked HTML links, zero missing links and unchanged
+source JSON snapshots. That run validates the analytics implementation commit
+`c38e288fea9da1e238f4f80a1e88eb4014b71d4e`.
+
+The first mobile CI stopped before browser execution because Playwright 1.56.1
+does not support the runner's Ubuntu 26.04. The existing fix proposed in PR #36
+is reused here: pin only this job to `ubuntu-24.04`. The analytics build and
+browser checks are now included in that job. Its final rerun is recorded in the
+pull request's checks; none of the existing mobile checks are removed.
+
+No test establishes receipt in a live NAVER report. After the owner approves this
+candidate and it is deployed, visit the public site, allow analytics and confirm
+its ID and pageview in NAVER's real-time report.
 
 ## Operation and rollback
 
