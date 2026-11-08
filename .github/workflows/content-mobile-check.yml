@@ -18,6 +18,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Compile embedded operations reporting Python without API calls
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import textwrap
+          workflow = Path('.github/workflows/operations.yml').read_text()
+          marker = '      - name: Record unchanged or deployment result'
+          section = workflow.split(marker, 1)[1]
+          embedded = section.split("          python - <<'PY'", 1)[1].split('          PY', 1)[0]
+          compile(textwrap.dedent(embedded), 'operations-reporting-embedded.py', 'exec')
+          print('Embedded source-health reporting Python syntax valid')
+          PY
       - run: python scripts/build_public_site.py
       - run: npm install --no-save playwright@1.56.1
       - run: npx playwright install --with-deps chromium
