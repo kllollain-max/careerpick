@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T12:05:36.942Z",
-  "last_observed_at": "2026-11-08T12:05:36.942Z",
+  "updated_at": "2026-11-08T13:07:56.000Z",
+  "last_observed_at": "2026-11-08T13:07:56.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -138,6 +138,36 @@
     "last_update_commit_sha": "8e82be7be6ebda6c974181ea17f0519a3abe47bf"
   },
   "observed_runs": [
+    {
+      "run_id": "42483169119",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-08T13:04:36Z",
+      "head_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42483169119",
+      "workflow_path": ".github/workflows/targeted-push.yml"
+    },
+    {
+      "run_id": "42483169108",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-08T13:04:25Z",
+      "head_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42483169108",
+      "workflow_path": ".github/workflows/public-search-check.yml"
+    },
+    {
+      "run_id": "42483023354",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-08T13:04:07Z",
+      "head_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42483023354",
+      "workflow_path": ".github/workflows/operations.yml"
+    },
     {
       "run_id": "42475715354",
       "run_attempt": 1,
@@ -1754,15 +1784,15 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-08T12:05:36.942Z",
+    "checked_at": "2026-11-08T13:07:56.000Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
     "input_reference_at": "2026-11-08T15:55:56.450830+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "ready_08_12_pass_through_delay; 16_20_alternatives_still_hold",
+    "queue_check": "08_12_ready_pass_at_current_time_and_end_of_two_hour_delay; afternoon_holds_unchanged",
     "queue_blob_sha": "573831a3d71abc36b5d618783f378a4f7b66af07",
-    "new_drafts": 1,
+    "new_drafts": 0,
     "new_ready_saved": 0,
     "ready_entries": [
       {
@@ -1790,34 +1820,33 @@
     "history_duplicate_ids_checked": true,
     "recent_records_compared": 10,
     "preserved_holds": [
-      "a306716",
-      "a306586"
+      "a306731",
+      "a306637",
+      "a306802"
     ],
     "new_holds": [],
     "candidate_exclusions": [
       {
-        "notice_id": "a306802",
-        "reason": "Official annex describes fixed units as 정규직-무기계약직; do not label as 정규직."
+        "notice_id": "a306715",
+        "official_source": "https://job.alio.go.kr/recruitview.do?idx=306715",
+        "attachment": "https://www.alio.go.kr/download/download.json?fileNo=3085190",
+        "reason": "Archived official recruitment page shows distinct 일반직/원무직/운영지원직 application paths and units; do not use combined 15 hires as an 일반직 unit. This pass did not confirm all selected unit terms and stored source freshness."
       },
       {
-        "notice_id": "a306786",
-        "reason": "Official shift/weekend work terms remain unverified."
+        "notice_id": "a306784",
+        "official_source": "https://job.alio.go.kr/recruitview.do?idx=306784",
+        "attachment": "https://www.alio.go.kr/download/download.json?fileNo=3085597",
+        "reason": "Official notice and job description confirm 11/16 17:30 and three-month evaluation but do not substantiate shift/weekend terms."
       },
       {
-        "notice_id": "a306526",
-        "reason": "External open-position hires are 별정직 on a term; not the generic mixed employment label."
+        "notice_id": "a306760",
+        "official_source": "https://job.alio.go.kr/recruitview.do?idx=306760",
+        "attachment": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+        "reason": "Distinct official notice but overlaps editorially with recent a306759 (same center, shift structure, count, deadline); avoid repeating the topic in this cycle."
       }
     ],
     "main_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
-    "new_alternatives": [
-      {
-        "notice_id": "a306802",
-        "scheduled_at": "2026-11-09T20:00:00+09:00",
-        "entry_sha256": "6406606e6f061181b2b70c8278f614584fbe73f82e54046c881f1fda0be63f4e",
-        "chars": 364,
-        "reason": "SOURCE_STALE and detailed weekend roster not stated; contract classification confirmed."
-      }
-    ],
+    "new_alternatives": [],
     "profile_route_discovery": {
       "type": "dynamic_job_modal",
       "verified_notice_id": "cleaneye-80805",
@@ -1826,29 +1855,49 @@
       "note": "Static jobs/<id>.html and available.js are ALIO-only, not evidence that a Cleaneye notice is missing; verify #job route interactively."
     },
     "revised_drafts": [],
-    "reverified_holds": [],
+    "reverified_holds": [
+      {
+        "notice_id": "a306731",
+        "slot": "2026-11-09T16:00:00+09:00",
+        "reason": "Stored ALIO verification too old by the end of delay window."
+      },
+      {
+        "notice_id": "a306637",
+        "slot": "2026-11-09T20:00:00+09:00",
+        "reason": "Stored ALIO verification too old; detailed work schedule still unverified."
+      },
+      {
+        "notice_id": "a306802",
+        "slot": "2026-11-09T20:00:00+09:00",
+        "reason": "Stored ALIO verification too old; detailed weekend schedule still unverified."
+      }
+    ],
     "delay_window_preflight": [
       {
-        "slot": "2026-11-08T16:00:00+09:00",
-        "checked_for": "2026-11-08T17:59:59+09:00",
+        "slot": "2026-11-09T08:00:00+09:00",
+        "checked_for": "2026-11-09T09:59:59+09:00",
         "result": "passed_offline"
       },
       {
-        "slot": "2026-11-08T20:00:00+09:00",
-        "checked_for": "2026-11-08T21:59:59+09:00",
+        "slot": "2026-11-09T12:00:00+09:00",
+        "checked_for": "2026-11-09T13:59:59+09:00",
         "result": "passed_offline"
       }
     ],
     "local_card_checks": {
       "result": "decoded_and_visually_checked",
       "not_live": true,
+      "ids": [
+        "a306755"
+      ],
+      "valid": true,
+      "format": "JPEG",
       "width": 1080,
       "height": 1080,
-      "ids": [
-        "a306755",
-        "a306586",
-        "a306786"
-      ]
+      "mode": "RGB",
+      "file_size_bytes": 146903,
+      "local_preview_sha256": "70cc5d4820995938367e61c77e4f9d2e498dcddef177de544b0794b9a15e41e3",
+      "deadline_label": "2026-11-20 17:00"
     },
     "preserved_ready": [
       "a306755",
@@ -1856,7 +1905,7 @@
     ]
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-08T12:05:36.942Z",
+    "checked_at": "2026-11-08T13:07:56.000Z",
     "main_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
     "history_blob_sha": "96dddf640824a822afec4485a2cca047b12bd3aa",
     "claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
@@ -1870,18 +1919,8 @@
       "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "42475715354",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-08T11:27:17Z",
-        "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
-      }
-    ],
-    "status": "regular_20_slot_natural_text_body_and_reply_verified",
+    "new_publisher_runs": [],
+    "status": "source_collection_successful_unchanged_no_new_threads_incident",
     "slot": "2026-11-08T20:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -1896,19 +1935,22 @@
     "publication_style": "compact_with_detail_v1",
     "first_compact_success": "verified_previously",
     "source_collection": {
-      "run_id": "42469262905",
+      "run_id": "42483023354",
       "run_attempt": 1,
-      "status": "successful_unchanged_no_persist",
+      "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-08T09:58:11Z",
-      "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42469262905",
-      "job_id": "128695957140",
-      "alio_verified_at": "2026-11-08T18:56:45+09:00",
+      "updated_at": "2026-11-08T13:04:07Z",
+      "head_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42483023354",
+      "workflow_path": ".github/workflows/operations.yml",
+      "collection_result": "successful_unchanged_no_persist",
+      "job_id": "128738861709",
+      "alio_verified_at": "2026-11-08T22:02:57+09:00",
       "stored_alio_verified_at": "2026-11-08T16:15:07+09:00",
       "cleaneye_snapshot_at": "2026-11-08T16:15:47+09:00",
       "alio_received": 504,
-      "cleaneye_complete": true
+      "cleaneye_complete": true,
+      "operations_status_blob_sha": "ac16b80cb0ac623a5d824371110f86edf5808dad"
     },
     "pages_read": [
       1,
@@ -1917,31 +1959,52 @@
     "resume": "Recheck fresh persisted source before queueing held drafts; next image turn derives from last confirmed TEXT main.",
     "last_rechecked_at": "2026-11-08T06:58:41.797Z",
     "next_image_preview": {
-      "slot": "2026-11-08T16:00:00+09:00",
-      "notice_id": "a306515",
+      "slot": "2026-11-09T08:00:00+09:00",
+      "notice_id": "a306755",
       "media_turn": "IMAGE",
       "result": "local_visual_and_file_check_passed",
       "jpeg_width": 1080,
       "jpeg_height": 1080,
-      "file_size_bytes": 164668,
-      "local_preview_sha256": "f2be40c5f213c9a18c80c388ad8d467503cf2a2e09ac0ee58623c12863ddf676",
+      "file_size_bytes": 146903,
+      "local_preview_sha256": "70cc5d4820995938367e61c77e4f9d2e498dcddef177de544b0794b9a15e41e3",
       "live_public_image_verified": false
     },
     "observation_pages": [
       1,
       2
     ],
-    "next_action": "Observe natural 08:00 image slot. Recheck persisted ALIO freshness before releasing 16:00 and 20:00 drafts; do not retransmit.",
+    "next_action": "Observe natural 08:00 image slot. Recheck persisted ALIO/Cleaneye freshness against the full delay window and reverify official facts before releasing afternoon drafts; do not retransmit.",
     "last_existing_claim_blob_sha": "4271cefa64fa4fb2b8d3acba0a59fd135cc6f966",
     "observed_new_run_versions": [
       {
-        "run_id": "42475715354",
+        "run_id": "42483169119",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "failure",
+        "updated_at": "2026-11-08T13:04:36Z",
+        "head_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42483169119",
+        "workflow_path": ".github/workflows/targeted-push.yml"
+      },
+      {
+        "run_id": "42483169108",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "success",
-        "updated_at": "2026-11-08T11:27:17Z",
-        "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
+        "updated_at": "2026-11-08T13:04:25Z",
+        "head_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42483169108",
+        "workflow_path": ".github/workflows/public-search-check.yml"
+      },
+      {
+        "run_id": "42483023354",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-08T13:04:07Z",
+        "head_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42483023354",
+        "workflow_path": ".github/workflows/operations.yml"
       }
     ],
     "unrelated_pr_check": {
