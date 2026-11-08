@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T00:35:42Z",
-  "last_observed_at": "2026-11-08T00:35:42Z",
+  "updated_at": "2026-11-08T02:25:23Z",
+  "last_observed_at": "2026-11-08T02:25:23Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1306,9 +1306,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-08T00:35:42Z",
+    "checked_at": "2026-11-08T02:25:23Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T09:31:56.898712+09:00",
+    "input_reference_at": "2026-11-08T11:24:35.388003+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1381,7 +1381,7 @@
         "reason": "직무기술서와 프로필 경로 확인 완료. 슬롯 기준 ALIO 최신성과 미명시 근무 조건을 다시 확인할 때까지 보류."
       }
     ],
-    "reason": "Preserved all three existing ready entries. Updated November 9 08:00 held draft using the official duties PDF, application guide and live profile path. Current source still fails SOURCE_STALE for the slot. No queue write.",
+    "reason": "Three ready drafts revalidated and preserved. November 9 08:00 draft remains unchanged on hold. The 10:18 collection passed but no changes were persisted, so the slot still fails SOURCE_STALE; no queue write.",
     "queue_readback_equal": true,
     "hold_ready_simulation_result": "resolved_and_verified_ready",
     "collection_observation": {
@@ -1451,13 +1451,13 @@
       "visual_check": "Complete Korean institution names, roles and actual cutoff; no clipping. Actual public byte check remains with the publisher."
     },
     "latest_collection_observation": {
-      "run_id": "42417469275",
+      "run_id": "42433680431",
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-07T21:48:51Z",
-      "head_sha": "263c67862d7779b7b60d7850af00e9c804fce6ee",
-      "job_id": 128538559707,
+      "updated_at": "2026-11-08T01:20:42Z",
+      "head_sha": "c1f3ead27d2620a088386e01da18aa7ed9f381e9",
+      "job_id": 128587841982,
       "alio_collection": "success",
       "alio_validation": "success",
       "cleaneye_complete_collection": true,
@@ -1473,12 +1473,12 @@
       "chars": 360,
       "entry_sha256": "6e91f5be49ac7e0191c9f9f52509104403d2ed4117faf3b4c1c1a4e63b13ec30"
     },
-    "updated_drafts": 1
+    "updated_drafts": 0
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-08T00:35:42Z",
+    "checked_at": "2026-11-08T02:25:23Z",
     "main_sha": "c1f3ead27d2620a088386e01da18aa7ed9f381e9",
-    "state_head_before_write": "febe694982cd39ec466ded17209c134e89117481",
+    "state_head_before_write": "0e684a781b5adaf6aa6578cd3fbd3c179ade5f7a",
     "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
     "latest_threads_run": {
       "run_id": "42424964320",
@@ -1499,16 +1499,16 @@
     "claims_inspected": 20,
     "unresolved_sending_claims": 0,
     "actions_scan": {
-      "since": "2026-11-08T00:02:30Z",
+      "since": "2026-11-08T00:35:42Z",
       "all_runs_pages": [
         1
       ],
       "all_runs_page_size": 100,
-      "oldest_scanned": "2026-11-06T23:29:48Z",
+      "oldest_scanned": "2026-11-06T23:32:34Z",
       "scheduled_pages": [
         1
       ],
-      "scheduled_total": 58,
+      "scheduled_total": 59,
       "scheduled_scan_exhausted": true,
       "comparison_fields": [
         "run_id",
@@ -1524,7 +1524,7 @@
     "code_changes": 0,
     "posts_sent_by_maintenance": 0,
     "reconcile_required": false,
-    "reason": "No new Threads run or claim version. The 08:00 accepted image post still matches the exact main body and official Meta GET. Next regular slot is 12:00 KST.",
+    "reason": "No changed Threads run, claim, or main publication. Prior accepted image post matches the main body and official Meta GET; 12:00 KST not yet due.",
     "last_confirmed_post_id": "17890337451687328",
     "prior_confirmed_post_id": "18131171185889612",
     "next_slot": "2026-11-08T12:00:00+09:00",
