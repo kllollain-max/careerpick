@@ -32,6 +32,7 @@ API = 'https://graph.threads.net/v1.0'
 MIN_DAYS = 5
 MAX_DAYS = 20
 MAX_DAILY = 4
+COMPACT_STYLE = 'compact_with_detail_v1'
 
 
 def master_writer_enabled():
@@ -54,6 +55,29 @@ def writer_inputs(root=None):
         # reserved Cleaneye notice. Source-specific validation still fails closed.
         source['_cleaneye'] = {}
     return policy, source, load(base / 'alio-detail.json', {})
+
+
+def master_public_copy(selected, style):
+    """Build the public pair only after the writer's facts and text pass validation."""
+    if style is None:
+        return selected['text'], ''
+    if style != COMPACT_STYLE:
+        raise RuntimeError('Unsupported Threads publication style')
+
+    from scripts.threads_writer_queue import CTA, URL_RE
+    job = selected['image_job']
+    org, title, employment, location = (
+        ' '.join(job[key].split()) for key in ('org', 'title', 'employment', 'location')
+    )
+    count = f"{job['count']}명" if job['count'] is not None else '공고 확인'
+    main = (f"🏢 {org}\n📌 {title}\n👥 {employment} · {count}\n"
+            f"📍 근무지: {location}\n📅 접수 마감: {job['deadline_label']}\n\n{CTA}")
+    # The original CTA lives in the main post. The reviewed detail stays in one reply.
+    detail = selected['text'].removesuffix('\n\n' + CTA)
+    if not all(validated_reply(part) and not URL_RE.search(part) and '#' not in part and '＃' not in part
+               for part in (main, detail)):
+        raise RuntimeError('Reviewed compact post or detail reply is invalid')
+    return main, detail
 
 
 def prepare_master(history, now, run_id):
@@ -86,13 +110,18 @@ def prepare_master(history, now, run_id):
     image_turn = prior is not None and not bool(prior.get('image_url'))
     image_job = selected['image_job'] if image_turn else None
     identifier = re.sub(r'[^A-Za-z0-9_-]', '_', selected['job_id'])[:70]
-    record = {**selected, 'scheduled_at': scheduled.isoformat(),
+    style = policy.get('publication_style')
+    main_text, reply_text = master_public_copy(selected, style)
+    record = {**selected, 'text': main_text, 'reply_text': reply_text,
+              'scheduled_at': scheduled.isoformat(),
               'manual_publish': False, 'reserved_date': today, 'status': 'pending',
               'run_id': run_id, 'created_at': now.isoformat(),
               'writer_entry': entry, 'queue_entry_sha256': fingerprint(entry),
               'image_url': ('https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/'
                             + identifier + '.jpg') if image_turn else '',
               'image_job': image_job}
+    if style is not None:
+        record['publication_style'] = style
     history['records'].append(record)
     save(history)
     print('Reserved reviewed master-prompt draft:', selected['job_id'], selected['format_id'],
@@ -109,10 +138,10 @@ def validate_master_before_send(record, history, now):
     validated = select_ready({'schema_version': 1, 'entries': [entry]},
                              datetime.fromisoformat(record['scheduled_at']), now,
                              other_history, source, details, policy)
-    if record.get('text') != validated['text'] or record.get('format_id') != validated['format_id']:
-        raise RuntimeError('Reserved text or format changed')
-    if record.get('reply_text') or record.get('engagement_text'):
-        raise RuntimeError('Master prompt posts must not create extra CTA replies')
+    main_text, reply_text = master_public_copy(validated, record.get('publication_style'))
+    if (record.get('text') != main_text or record.get('format_id') != validated['format_id']
+            or (record.get('reply_text') or '') != reply_text or record.get('engagement_text')):
+        raise RuntimeError('Reserved text, detail reply or format changed')
     if record.get('image_url'):
         if record.get('image_job') != validated['image_job']:
             raise RuntimeError('Reserved image facts changed')
@@ -555,14 +584,21 @@ def check_history_before_send(record, history):
             raise RuntimeError('Slot already present in history; do not send')
 
 
-def verify_published_record(record, token):
-    """Official read-only confirmation of the actual main and both replies."""
+def verify_published_record(record, token, *, include_replies=True):
+    """Confirm the main and required replies through official read-only requests."""
     main_id = str(record['threads_post_id'])
     result = []
     pairs = [('threads_post_id','text'),('reply_post_id','reply_text'),('engagement_post_id','engagement_text')]
     if record.get('content_type') == 'master_job':
-        if record.get('reply_text') or record.get('engagement_text'):
-            raise RuntimeError('Unexpected reply in a master-prompt post')
+        if record.get('publication_style') == COMPACT_STYLE:
+            if not record.get('reply_text') or record.get('engagement_text'):
+                raise RuntimeError('Invalid detail reply in a compact post')
+            pairs = pairs[:2]
+        else:
+            if record.get('reply_text') or record.get('engagement_text'):
+                raise RuntimeError('Unexpected reply in a master-prompt post')
+            pairs = pairs[:1]
+    if not include_replies:
         pairs = pairs[:1]
     for id_key, text_key in pairs:
         expected_id = str(record.get(id_key) or '')
@@ -646,6 +682,11 @@ def publish_post(record, history):
 
     print('')
     print('=== Threads Publishing ===')
+    compact_post = record.get('content_type') == 'master_job' and record.get('publication_style') == COMPACT_STYLE
+    if compact_post and record.get('threads_post_id'):
+        # A prior invocation may have sent the reply before losing its receipt.
+        # Only the invocation that creates and records the parent may send it.
+        return
     if not record.get('threads_post_id'):
         check_history_before_send(record, history)
         if record.get('content_type') == 'master_job':
@@ -717,6 +758,9 @@ def publish_post(record, history):
             print('Waiting 20 seconds before first reply to new parent post')
             time.sleep(20)
         if not record.get('reply_post_id'):
+            if compact_post:
+                record['reply_status'] = 'attempted'
+                save(history)
             reply_id = create_media(token, {
                 'media_type': 'TEXT',
                 'text': record.get('reply_text', '🔗 자세한 채용공고: 커리어픽 프로필링크'),
@@ -724,6 +768,8 @@ def publish_post(record, history):
             })
             record['reply_post_id'] = reply_id
             record['reply_published_at'] = datetime.now(KST).isoformat()
+            if compact_post:
+                record['reply_status'] = 'confirmed'
             save(history)
             print('Published reply ID:', reply_id)
         if record.get('engagement_text') and not record.get('engagement_post_id') and record.get('engagement_status') != 'needs_review':

@@ -53,6 +53,78 @@ class MasterPipelineTests(unittest.TestCase):
                         publisher.prepare_master(history, self.now, '881')
                     save.assert_not_called()
 
+    def test_compact_publication_uses_verified_facts_and_one_detail_reply(self):
+        self.fixture.policy['publication_style'] = publisher.COMPACT_STYLE
+        history, record = self.prepare('https://previous/image.jpg')
+        self.assertFalse(record['image_url'])
+        self.assertIn('🏢 예시연구원', record['text'])
+        self.assertIn('👥 정규직 · 3명', record['text'])
+        self.assertIn('접수 마감: 2026-11-18 17:00', record['text'])
+        self.assertNotIn('2026-11-30', record['text'])
+        self.assertIn('정보보안 기사 자격이 필요해요.', record['reply_text'])
+        self.assertTrue(record['text'].endswith(queue_fixtures.CTA))
+        self.assertNotIn(queue_fixtures.CTA, record['reply_text'])
+        self.assertEqual(record['engagement_text'], '')
+        with patch.object(publisher, 'writer_inputs',
+                          return_value=(self.fixture.policy, self.fixture.source, self.fixture.details)):
+            publisher.validate_master_before_send(record, history, self.now)
+            record['reply_text'] += ' 확인되지 않은 문장'
+            with self.assertRaisesRegex(RuntimeError, 'Reserved text, detail reply or format changed'):
+                publisher.validate_master_before_send(record, history, self.now)
+
+    def test_compact_reply_is_attempted_once_and_verified_with_its_parent(self):
+        self.fixture.policy['publication_style'] = publisher.COMPACT_STYLE
+        history, record = self.prepare()
+        parent = {'id': '12345', 'text': record['text']}
+        reply = {'id': '12346', 'text': record['reply_text'], 'is_reply': True,
+                 'root_post': {'id': '12345'}, 'replied_to': {'id': '12345'}}
+        snapshots = []
+        with patch.dict(os.environ, self.env), patch.object(publisher, 'validate_master_before_send'), \
+                patch.object(publisher, 'verify_account', return_value='1'), \
+                patch.object(publisher, 'save', side_effect=lambda state: snapshots.append(deepcopy(state))), \
+                patch('scripts.threads_remote_claim.GitHubClaims'), patch.object(publisher.time, 'sleep'), \
+                patch.object(publisher, 'api', return_value=parent), \
+                patch.object(publisher, 'create_media', side_effect=['12345', '12346']) as media:
+            publisher.publish_post(record, history)
+            publisher.publish_post(record, history)
+            self.assertEqual(media.call_count, 2)
+            self.assertEqual(media.call_args.args[1]['reply_to_id'], '12345')
+        self.assertTrue(any(s['records'][-1].get('reply_status') == 'attempted' for s in snapshots))
+        self.assertEqual(record['reply_status'], 'confirmed')
+        with patch.object(publisher, 'api', side_effect=[parent, reply]):
+            self.assertEqual(publisher.verify_published_record(record, 'fake'), [parent, reply])
+        with patch.object(publisher, 'api', side_effect=[parent, {**reply, 'root_post': {'id': '9'}}]):
+            with self.assertRaisesRegex(RuntimeError, 'parent/root mismatch'):
+                publisher.verify_published_record(record, 'fake')
+
+    def test_ambiguous_compact_reply_is_not_replayed(self):
+        self.fixture.policy['publication_style'] = publisher.COMPACT_STYLE
+        history, record = self.prepare()
+        with patch.dict(os.environ, self.env), patch.object(publisher, 'validate_master_before_send'), \
+                patch.object(publisher, 'verify_account', return_value='1'), patch.object(publisher, 'save'), \
+                patch('scripts.threads_remote_claim.GitHubClaims'), patch.object(publisher.time, 'sleep'), \
+                patch.object(publisher, 'api', return_value={'id': '12345'}), \
+                patch.object(publisher, 'create_media', side_effect=['12345', RuntimeError('timeout')]) as media:
+            publisher.publish_post(record, history)
+            publisher.publish_post(record, history)
+            self.assertEqual(media.call_count, 2)
+        self.assertEqual(record['status'], 'published')
+        self.assertEqual(record['reply_status'], 'needs_review')
+
+    def test_compact_accepted_recovery_checks_main_without_sending_reply(self):
+        self.fixture.policy['publication_style'] = publisher.COMPACT_STYLE
+        history, record = self.prepare()
+        remote = Mock()
+        remote.read.return_value = {'slot': record['scheduled_at'], 'run_id': '880',
+                                   'state': 'accepted', 'post_id': '12345'}
+        with patch.object(publisher, 'api', return_value={'id': '12345', 'text': record['text']}) as api, \
+                patch.object(publisher, 'create_media') as send:
+            results = reconcile_accepted(history, remote, 'fake')
+            self.assertEqual(results[0]['status'], 'verified_recovered')
+            self.assertEqual(record['reply_status'], 'needs_review')
+            api.assert_called_once()
+            send.assert_not_called()
+
     def test_missing_required_image_never_falls_back_or_claims_slot(self):
         history, record = self.prepare('')
         with patch.dict(os.environ, self.env), \

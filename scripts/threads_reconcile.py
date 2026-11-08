@@ -31,7 +31,6 @@ def finalize_unsent(history, run_id):
 
 def reconcile_accepted(history, remote, token, verifier=None):
     """A remote accepted ID plus exact live text is necessary for local recovery."""
-    verifier = verifier or publisher.verify_published_record
     results = []
     for index, record in enumerate(history.get('records', [])):
         if record.get('content_type') != 'master_job' or record.get('status') != 'pending':
@@ -40,12 +39,15 @@ def reconcile_accepted(history, remote, token, verifier=None):
         candidate = trial['records'][index]
         try:
             publisher.restore_accepted_receipt(candidate, trial, remote)
-            objects = verifier(candidate, token)
+            objects = (verifier(candidate, token) if verifier else
+                       publisher.verify_published_record(candidate, token, include_replies=False))
         except (ClaimError, RuntimeError, ValueError, KeyError):
             results.append({'run_id': str(record.get('run_id')), 'status': 'hold'})
             continue
         if len(objects) != 1:
             raise RuntimeError('Unexpected recovered object count')
+        if candidate.get('publication_style') == publisher.COMPACT_STYLE and not candidate.get('reply_post_id'):
+            candidate['reply_status'] = 'needs_review'
         candidate['reconciled_at'] = datetime.now(publisher.KST).isoformat()
         candidate['verified_permalink'] = objects[0].get('permalink', '')
         record.clear()
