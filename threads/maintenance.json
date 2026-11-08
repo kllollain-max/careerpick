@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T09:12:39.212Z",
-  "last_observed_at": "2026-11-08T09:12:39.212Z",
+  "updated_at": "2026-11-08T10:29:00.424Z",
+  "last_observed_at": "2026-11-08T10:29:00.424Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -138,6 +138,15 @@
     "last_update_commit_sha": "8e82be7be6ebda6c974181ea17f0519a3abe47bf"
   },
   "observed_runs": [
+    {
+      "run_id": "42469262905",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-08T09:58:11Z",
+      "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42469262905"
+    },
     {
       "run_id": "42460707216",
       "run_attempt": 1,
@@ -1640,15 +1649,15 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-08T09:12:39.212Z",
+    "checked_at": "2026-11-08T10:29:00.424Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
     "input_reference_at": "2026-11-08T15:55:56.450830+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "unchanged_ready_queue_passed; new alternative only at nominal slot",
+    "queue_check": "ready_entries_passed_through_delay; revised alternate failed_delay_source_freshness",
     "queue_blob_sha": "573831a3d71abc36b5d618783f378a4f7b66af07",
-    "new_drafts": 1,
+    "new_drafts": 0,
     "new_ready_saved": 0,
     "ready_entries": [
       {
@@ -1695,14 +1704,7 @@
       }
     ],
     "main_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
-    "new_alternatives": [
-      {
-        "notice_id": "a306731",
-        "scheduled_at": "2026-11-09T16:00:00+09:00",
-        "entry_sha256": "f221f0c10bc19f92382de911ecfda4d85d91b944cff8af76d65c2f2b6c7ca563",
-        "reason": "SOURCE_STALE at +2h"
-      }
-    ],
+    "new_alternatives": [],
     "profile_route_discovery": {
       "type": "dynamic_job_modal",
       "verified_notice_id": "cleaneye-80805",
@@ -1710,7 +1712,17 @@
       "checked_at": "2026-11-08T13:44:53.940495+09:00",
       "note": "Static jobs/<id>.html and available.js are ALIO-only, not evidence that a Cleaneye notice is missing; verify #job route interactively."
     },
-    "revised_drafts": [],
+    "revised_drafts": [
+      {
+        "notice_id": "a306731",
+        "scheduled_at": "2026-11-09T16:00:00+09:00",
+        "previous_sha256": "f221f0c10bc19f92382de911ecfda4d85d91b944cff8af76d65c2f2b6c7ca563",
+        "entry_sha256": "4576928c3a260d418c10e9c52d9ca14c67e592dd49560e79fa72a2a45fe9f011",
+        "chars": 415,
+        "reason": "Separated age and disqualification rules; exact official files and profile route reverified.",
+        "hold_unchanged": "SOURCE_STALE at +2h"
+      }
+    ],
     "reverified_holds": [],
     "delay_window_preflight": [
       {
@@ -1742,7 +1754,7 @@
     ]
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-08T09:12:39.212Z",
+    "checked_at": "2026-11-08T10:29:00.424Z",
     "main_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
     "history_blob_sha": "db526a065315c7a8b2ce0c0056c1e2427dfe4825",
     "claim_blob_sha": "4271cefa64fa4fb2b8d3acba0a59fd135cc6f966",
@@ -1756,18 +1768,8 @@
       "head_sha": "dfb98b088059d13121c0ac613b3db84602f215aa",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42460707216"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "42460707216",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-08T07:56:28Z",
-        "head_sha": "dfb98b088059d13121c0ac613b3db84602f215aa",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42460707216"
-      }
-    ],
-    "status": "previously_delayed_slot_natural_image_body_and_reply_verified",
+    "new_publisher_runs": [],
+    "status": "next_20_slot_preflight_verified_no_new_publisher_run",
     "slot": "2026-11-08T16:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -1782,10 +1784,15 @@
     "publication_style": "compact_with_detail_v1",
     "first_compact_success": "verified_previously",
     "source_collection": {
-      "run_id": "42457972563",
-      "job_id": "128660948525",
-      "status": "main_readback_verified",
-      "alio_verified_at": "2026-11-08T16:15:07+09:00",
+      "run_id": "42469262905",
+      "run_attempt": 1,
+      "status": "successful_unchanged_no_persist",
+      "conclusion": "success",
+      "updated_at": "2026-11-08T09:58:11Z",
+      "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42469262905",
+      "job_id": "128695957140",
+      "alio_verified_at": "2026-11-08T18:56:45+09:00",
       "stored_alio_verified_at": "2026-11-08T16:15:07+09:00",
       "cleaneye_snapshot_at": "2026-11-08T16:15:47+09:00",
       "alio_received": 504,
@@ -1812,23 +1819,24 @@
       1,
       2
     ],
-    "next_action": "Observe the next natural 20:00 slot; last actual successful main was IMAGE, so the publisher's next turn is TEXT if no other actual success intervenes.",
-    "last_existing_claim_blob_sha": "b23849b94b7fafa6cda92574178d7cbf7b4e3c22",
+    "next_action": "Verify natural 20:00 run when it starts; then recheck for a persisted ALIO timestamp that covers November 9 16:00 through its allowed delay.",
+    "last_existing_claim_blob_sha": "4271cefa64fa4fb2b8d3acba0a59fd135cc6f966",
     "observed_new_run_versions": [
       {
-        "run_id": "42460707216",
+        "run_id": "42469262905",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "success",
-        "updated_at": "2026-11-08T07:56:28Z",
-        "head_sha": "dfb98b088059d13121c0ac613b3db84602f215aa",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42460707216"
+        "updated_at": "2026-11-08T09:58:11Z",
+        "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42469262905"
       }
     ],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
-    }
+    },
+    "observation_slot": "2026-11-08T20:00:00+09:00"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -2325,7 +2333,7 @@
       "writer": {
         "status": "hold",
         "post_text": null,
-        "draft_text": "항암제를 무균 조제하려면 먼저 처방이 적절한지 살펴야 해요. 처방 검토부터 조제·복약지도까지 맡는 대전 충남대학교병원 약제부에서 약무직 4급 약사 4명을 뽑아요.\n\n2027년 약사 면허 취득 예정자 대상이에요. 2027년 3월 임용 예정이며, 임용 전 면허를 못 따면 불합격이에요. 마감일 기준 만 60세를 초과하지 않고 결격사유가 없어야 해요.\n\n3개월 수습 평가가 양호하면 정규 임용돼요. 야간·휴일근무가 있을 수 있고, 인사발령으로 세종 분원에 배치될 수 있어요.\n\n다른 접수 중인 병원 공고와 중복지원은 안 돼요. 남성은 병역필·면제여야 하며 접수 중 병적증명서나 병역 기재 초본을 올려야 해요. 서류·면접 전형이며 11월 19일 17시까지 온라인으로 접수해요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "draft_text": "항암제를 무균 조제하려면 먼저 처방이 적절한지 살펴야 해요. 처방 검토부터 조제·복약지도까지 맡는 대전 충남대학교병원 약제부에서 약무직 4급 약사 4명을 뽑아요.\n\n2027년 약사 면허 취득 예정자 대상이에요. 2027년 3월 임용 예정이며, 임용 전 면허를 못 따면 불합격이에요. 나이는 마감일 기준 만 60세 이하여야 해요. 병원 규정과 법령상 결격사유가 없어야 해요.\n\n3개월 수습 평가가 양호하면 정규 임용돼요. 야간·휴일근무가 있을 수 있고, 인사발령으로 세종 분원에 배치될 수 있어요.\n\n다른 접수 중인 병원 공고와 중복지원은 안 돼요. 남성은 병역필·면제여야 하며 접수 중 병적증명서나 병역 기재 초본을 올려야 해요. 서류·면접 전형이며 11월 19일 17시까지 온라인으로 접수해요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
         "reply_texts": [],
         "review": {
           "notice_id": "a306731",
@@ -2333,27 +2341,27 @@
           "central_message": "처방 검토와 무균조제를 맡을 약사의 면허 제출 기한 및 야간·휴일, 세종 전보 조건을 설명해요.",
           "pattern_id": "P6",
           "scheduled_at": "2026-11-09T16:00:00+09:00",
-          "reference_at": "2026-11-08T18:11:33.206418+09:00",
+          "reference_at": "2026-11-08T19:28:24.540549+09:00",
           "verification_basis": "checked_official_source",
-          "checked_at": "2026-11-08T18:09:11.082891+09:00",
+          "checked_at": "2026-11-08T19:27:43.606101+09:00",
           "source_refs": [
             {
               "url": "https://job.alio.go.kr/recruitview.do?idx=306731",
-              "checked_at": "2026-11-08T18:09:11.082891+09:00",
+              "checked_at": "2026-11-08T19:27:43.606101+09:00",
               "sha256": "57a0c71ddfe1eb09ad8d3851132bb9ed6264e9c16a998a651f7b64e9a3952883",
               "location": "ALIO 공고 기본정보·응시자격 및 첨부 목록",
-              "excerpt": "[대전] 2026년 11월 충남대학교병원 약무직(면허취득예정자) 공개채용 공고 / 정규직 / 대전 / 4명"
+              "excerpt": "[대전] 2026년 11월 충남대학교병원 약무직(면허취득예정자) 공개채용 공고 / 정규직 / 대전 / 4명\n해당 시험의 최종시험 예정일(면접시험 최종예정일) 현재를 기준으로 본원 인사 규정 제24조 결격사유에 해당하거나, 기타 법령에 따라 응시자격이 정지된 자는 응시할 수 없음"
             },
             {
               "url": "https://www.alio.go.kr/download/download.json?fileNo=3085301",
-              "checked_at": "2026-11-08T18:09:38.632112+09:00",
+              "checked_at": "2026-11-08T19:27:49.318206+09:00",
               "sha256": "d30b76629b12ccfb4d602e1310d35f9a454ddc822b853aee9514f955a8f8443d",
               "location": "PDF Ⅰ 모집분야, Ⅱ 응시자격·제출서류, Ⅲ 접수·전형, Ⅴ 임용·기타",
               "excerpt": "원서접수 2026. 11. 5.(목) ~ 2026. 11. 19.(목) 17:00\n약무직 4급 약사 4\n[필수] 2027년 약사 면허 취득 예정자\n최종 임용 전 면허 미취득 시, 응시자격 없음으로 불합격 (2027. 3. 임용 예정)\n병원 정년(만60세)을 초과하지 않는 자\n남성의 경우 병역필 또는 병역면제자\n접수 중인 공고 간 중복지원 불가\n병적증명서 또는 주민등록초본(병역사항 기재)\n남성 지원자만 제출, 병역면제자도 제출 필수\n공고 기간 중 미제출(미업로드) 시 불합격 처리\n3개월간의 수습기간을 거쳐 근무 성적이 양호한 경우 정규직원으로 임용\n추후 인사발령에 의해 세종 분원으로 근무지가 변경될 수도 있음\n야간근무 및 휴일근무를 할 수 있음\n충남대학교병원 채용홈페이지 (https://cnuhinsa.recruiter.co.kr)을 통한 온라인 접수"
             },
             {
               "url": "https://www.alio.go.kr/download/download.json?fileNo=3085314",
-              "checked_at": "2026-11-08T18:09:33.176136+09:00",
+              "checked_at": "2026-11-08T19:27:43.510099+09:00",
               "sha256": "3a9b851d46ee86124bab86c9f39748d8a448d1605aecccd27f515117de3d9e68",
               "location": "직무기술서 HWP 채용분야·근무부서·직무수행 내용",
               "excerpt": "약무직(약사)\n(대전)충남대학교병원\n약제부\n처방 검토 : 약품 식별, 환자 약력관리, 적절성 검토, 약품정보 제공\n안전한 의약품 조제 및 감사, 투약 및 복약지도\n주사 항암제 감사, 취급 안전관리 및 무균조제 및 불출 업무"
@@ -2370,7 +2378,7 @@
           "cta_check": "passed",
           "media_check": "not_supplied",
           "length_check": "measured_within_limit",
-          "body_characters": 400,
+          "body_characters": 415,
           "pre_publish_checks": [],
           "application_period": {
             "start": "2026-11-05",
@@ -2384,11 +2392,11 @@
             "url": "https://kllollain-max.github.io/careerpick/",
             "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306731.html",
             "notice_id": "a306731",
-            "checked_at": "2026-11-08T18:09:30.906684+09:00",
+            "checked_at": "2026-11-08T19:27:41.435338+09:00",
             "verified": true,
             "profile_url": "https://www.threads.com/@hid_119",
             "rel_me_html": "<link rel=\"me\" href=\"https://kllollain-max.github.io/careerpick/\" />",
-            "profile_response_sha256": "6f66e250071686e99a3b99d349647155d2a5a5aa02b472d96207432877e36b2a",
+            "profile_response_sha256": "d290395ea1589ff6799301ad2c59fafbe99918bc91d9f5f4a437360a7cc66e43",
             "evidence": "공개 프로필 rel=me, 커리어픽 구직 검색 목록과 a306731 정적 상세의 원문 연결 확인."
           },
           "fact_evidence": [
@@ -2411,12 +2419,13 @@
         "due": "2026-11-19",
         "deadline_label": "2026-11-19 17:00"
       },
-      "entry_sha256": "f221f0c10bc19f92382de911ecfda4d85d91b944cff8af76d65c2f2b6c7ca563",
+      "entry_sha256": "4576928c3a260d418c10e9c52d9ca14c67e592dd49560e79fa72a2a45fe9f011",
       "validation": {
         "queue_written": false,
         "now": "passed",
         "scheduled": "passed",
-        "latest_allowed": "SOURCE_STALE"
+        "latest_allowed": "SOURCE_STALE",
+        "verified_exact_attachments_again": true
       },
       "resume": "ALIO가 검증된 새 시각을 main에 저장한 뒤 원문 지문과 지연 범위 전체 검수 결과를 다시 확인."
     }
