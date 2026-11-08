@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T16:14:50.000Z",
-  "last_observed_at": "2026-11-08T16:14:50.000Z",
+  "updated_at": "2026-11-08T17:12:06.000Z",
+  "last_observed_at": "2026-11-08T17:12:06.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -2124,48 +2124,56 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-08T16:14:50.000Z",
+    "checked_at": "2026-11-08T17:12:06.000Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-09T01:10:28.866908+09:00",
+    "input_reference_at": "2026-11-09T02:10:16.574597+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "08/12 preserved; 16/20 promoted and read back; no publish invoked",
+    "queue_check": "Four existing entries preserved and revalidated; publisher function produces one compact body and one CTA-stripped detail reply per entry",
     "queue_blob_sha": "acdadc7173ea23a8dd747a3a7e547f71bb43783f",
     "new_drafts": 0,
-    "new_ready_saved": 2,
+    "new_ready_saved": 0,
     "ready_entries": [
       {
         "scheduled_at": "2026-11-09T08:00:00+09:00",
         "notice_id": "a306755",
         "format_id": "reader_story",
-        "chars": 409,
         "entry_sha256": "8dc318bd3d01e0043fbd3d96d2011956fdec24e1ff33aef4ae629b9686be914d",
-        "validated_through_delay_window": true
+        "chars": 409,
+        "validated_through_delay_window": true,
+        "compact_body_chars": 94,
+        "detail_reply_chars": 383
       },
       {
         "scheduled_at": "2026-11-09T12:00:00+09:00",
         "notice_id": "a306586",
         "format_id": "key_facts",
-        "chars": 411,
         "entry_sha256": "68fe02c29a25b0f14e076d8df8394d50107b3535dd411153a173a749ff14244b",
-        "validated_through_delay_window": true
+        "chars": 411,
+        "validated_through_delay_window": true,
+        "compact_body_chars": 96,
+        "detail_reply_chars": 385
       },
       {
         "scheduled_at": "2026-11-09T16:00:00+09:00",
         "notice_id": "a306731",
         "format_id": "job_explainer",
-        "chars": 415,
         "entry_sha256": "4f7a28df6056fdd3ee166260c674bdca4c40aeb5d765efbf553eb90d78c3947e",
-        "validated_through_delay_window": true
+        "chars": 415,
+        "validated_through_delay_window": true,
+        "compact_body_chars": 94,
+        "detail_reply_chars": 389
       },
       {
         "scheduled_at": "2026-11-09T20:00:00+09:00",
         "notice_id": "a306802",
         "format_id": "application_checklist",
-        "chars": 347,
         "entry_sha256": "8fe7f4a6e29861df1786aeebc1408d37a59b95f7c4f1af4abe35b50c13f48ca6",
-        "validated_through_delay_window": true
+        "chars": 347,
+        "validated_through_delay_window": true,
+        "compact_body_chars": 98,
+        "detail_reply_chars": 321
       }
     ],
     "cleaneye_source": {
@@ -2208,9 +2216,7 @@
       "checked_at": "2026-11-08T13:44:53.940495+09:00",
       "note": "Static jobs/<id>.html and available.js are ALIO-only, not evidence that a Cleaneye notice is missing; verify #job route interactively."
     },
-    "revised_drafts": [
-      "a306802"
-    ],
+    "revised_drafts": [],
     "reverified_holds": [
       {
         "notice_id": "a306731",
@@ -2265,14 +2271,32 @@
     ],
     "profile_rel_me": {
       "url": "https://www.threads.com/@hid_119",
-      "checked_at": "2026-11-08T23:54:37.554029+09:00",
       "href": "https://kllollain-max.github.io/careerpick/",
-      "html_sha256": "711e2d44e20375a06e78caacc6bbf17b2d0cba9519acded94acbd66e5229eb12"
+      "checked_at": "2026-11-09T02:10:34.208442+09:00",
+      "html_sha256": "f047cc698284c7041def012e2c0d97d1cb90422d940eb31497ac1ef0434cd603",
+      "notice_paths": {
+        "a306755": {
+          "identity_found": true,
+          "checked_at": "2026-11-09T02:10:32.718430+09:00"
+        },
+        "a306586": {
+          "identity_found": true,
+          "checked_at": "2026-11-09T02:10:32.746256+09:00"
+        },
+        "a306731": {
+          "identity_found": true,
+          "checked_at": "2026-11-09T02:10:32.730299+09:00"
+        },
+        "a306802": {
+          "identity_found": true,
+          "checked_at": "2026-11-09T02:10:32.730299+09:00"
+        }
+      }
     },
     "queue_commit_sha": "46407b17274c21abe97628e9dfc189f9f4275d52"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-08T16:14:50.000Z",
+    "checked_at": "2026-11-08T17:12:06.000Z",
     "main_sha": "866c08c387f93f6690d316de246ad412ab76555b",
     "history_blob_sha": "96dddf640824a822afec4485a2cca047b12bd3aa",
     "claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
@@ -2287,7 +2311,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
     },
     "new_publisher_runs": [],
-    "status": "source_freshness_restored_two_future_slots_queued_no_new_threads_incident",
+    "status": "four_ready_unchanged_no_new_threads_run_or_incident",
     "slot": "2026-11-08T20:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -2341,40 +2365,9 @@
       1,
       2
     ],
-    "next_action": "Observe natural 08:00 slot and verify published body and reply, then afternoon slots. Keep other drafts on hold; no replay.",
+    "next_action": "Verify natural 08:00 run (image expected after last confirmed TEXT) against accepted claim, history, and Meta GET. Verify remote image bytes in publisher; no replay.",
     "last_existing_claim_blob_sha": "4271cefa64fa4fb2b8d3acba0a59fd135cc6f966",
-    "observed_new_run_versions": [
-      {
-        "run_id": "42496733915",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-08T15:49:46Z",
-        "head_sha": "866c08c387f93f6690d316de246ad412ab76555b",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42496733915",
-        "workflow_path": ".github/workflows/targeted-push.yml"
-      },
-      {
-        "run_id": "42496733854",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-08T15:49:27Z",
-        "head_sha": "866c08c387f93f6690d316de246ad412ab76555b",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42496733854",
-        "workflow_path": ".github/workflows/public-search-check.yml"
-      },
-      {
-        "run_id": "42496548677",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-08T15:49:16Z",
-        "head_sha": "0a9a1722be5aed1b3a98640193cee4217ec01c73",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42496548677",
-        "workflow_path": ".github/workflows/operations.yml"
-      }
-    ],
+    "observed_new_run_versions": [],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
