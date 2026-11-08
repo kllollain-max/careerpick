@@ -1,0 +1,95 @@
+/* Reused from CareerPick backup 161b601c; see PROVENANCE.json. */
+
+:root{
+  --bg:#F5F7FB; --surface:#FFFFFF; --ink:#14213D; --muted:#5B6475; --line:#DFE4EE;
+  --brand:#1F3FBF; --brand-soft:#E6EBFB; --hot:#D92D2A; --hot-soft:#FDE8E7;
+  --tile:#EEF1F6; --tile-ink:#3A4560; --closed:#9AA3B2; --chip:#F0F2F7; --star:#E8A400;
+  --green:#0E7C5B; --green-soft:#E1F4EC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1524; --surface:#172036; --ink:#E8ECF5; --muted:#9AA6BD; --line:#2A3550;
+    --brand:#7C95FF; --brand-soft:#212C4D; --hot:#FF6B66; --hot-soft:#3A1F27;
+    --tile:#1E2840; --tile-ink:#C3CBDD; --closed:#5E6880; --chip:#212B44; --star:#FFC233;
+    --green:#4CD3A5; --green-soft:#15332B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1524; --surface:#172036; --ink:#E8ECF5; --muted:#9AA6BD; --line:#2A3550;
+  --brand:#7C95FF; --brand-soft:#212C4D; --hot:#FF6B66; --hot-soft:#3A1F27;
+  --tile:#1E2840; --tile-ink:#C3CBDD; --closed:#5E6880; --chip:#212B44; --star:#FFC233;
+  --green:#4CD3A5; --green-soft:#15332B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px 40px}
+
+/* 헤더: 첫 화면에 카드가 2~3개 보이도록 압축 */
+header{padding:12px 0 8px;display:flex;align-items:center;gap:10px}
+.logo{width:38px;height:38px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:"Black Han Sans",sans-serif;font-size:12px;line-height:1.05;text-align:center;flex:none}
+h1{margin:0;font-family:"Black Han Sans","IBM Plex Sans KR",sans-serif;font-weight:400;font-size:21px;letter-spacing:-.3px;line-height:1.15}
+.sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* 검색창 + 필터 */
+.searchbar{display:flex;gap:8px;margin:4px 0 10px}
+.search{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 12px}
+.search svg{flex:none;color:var(--muted)}
+.search input{flex:1;min-width:0;border:0;background:none;color:var(--ink);font:inherit;padding:11px 0;outline:none}
+.search:focus-within{border-color:var(--brand)}
+.fbtn{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:0 14px;font-weight:600;font-size:14px;cursor:pointer;position:relative}
+.fbtn[data-on="true"]::after{content:"";position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--brand)}
+.panel{display:none;margin:-2px 0 10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.panel.open{display:block}
+.panel .h{display:block;font-size:12px;font-weight:600;color:var(--muted);margin:10px 0 6px}
+.panel .h:first-child{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{appearance:none;border:1px solid var(--line);background:var(--bg);font-size:13px;padding:5px 11px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.reset{margin-top:12px;appearance:none;border:0;background:none;color:var(--muted);font-size:13px;text-decoration:underline;cursor:pointer;padding:0}
+
+/* 탭: 잘리면 오른쪽 페이드로 스크롤 힌트 */
+.tabs-wrap{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs-wrap::after{content:"";position:absolute;top:0;right:0;bottom:1px;width:36px;background:linear-gradient(to right,transparent,var(--bg));pointer-events:none;opacity:0;transition:opacity .2s}
+.tabs-wrap.more::after{opacity:1}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:0;background:none;color:var(--muted);font-weight:600;font-size:14px;padding:11px 9px;white-space:nowrap;border-bottom:3px solid transparent;cursor:pointer}
+.tab .n{font-weight:500;font-size:12px;margin-left:2px}
+.tab[aria-selected="true"]{color:var(--brand);border-bottom-color:var(--brand)}
+
+.summary{margin:10px 2px 8px;font-size:13px;color:var(--muted)}
+.summary b{color:var(--ink)}
+.summary .hot{color:var(--hot);font-weight:700}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+
+/* 채용공고 카드: 기관명 → 공고명 → 조건 칩 → 마감 */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.job .main{display:flex;gap:12px;padding:12px 12px 8px;color:inherit;text-decoration:none}
+.dd{flex:none;width:58px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;text-align:center;background:var(--tile);color:var(--tile-ink);align-self:flex-start;min-height:62px}
+.dd .big{font-family:"Black Han Sans",sans-serif;font-size:21px;line-height:1}
+.dd .sm{font-size:10.5px;margin-top:4px;font-weight:600}
+.dd.hot{background:var(--hot-soft);color:var(--hot)}
+.dd.closed{background:var(--bg);color:var(--closed)}
+.dd .big.dday{font-size:16px}
+.dd.none .big{font-size:13px;font-family:inherit;font-weight:700}
+.body{min-width:0;flex:1}
+.org{font-size:13px;font-weight:700;color:var(--brand);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.org .rg{color:var(--muted);font-weight:500}
+.new{font-size:10px;font-weight:700;color:#fff;background:var(--hot);border-radius:4px;padding:0 4px;line-height:16px}
+.title{margin:2px 0 6px;font-size:15.5px;font-weight:700;line-height:1.38;word-break:keep-all}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.tag{font-size:12px;background:var(--chip);color:var(--ink);border-radius:6px;padding:1px 7px}
+.tag.n{font-weight:700}
+.due{font-size:13px;font-weight:600}
+.due.hot{color:var(--hot)}
+.due.closed{color:var(--closed);font-weight:500}
+.actions{display:flex;border-top:1px solid var(--line)}
+.actions > *{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:9px 4px;font-size:12.5px;color:var(--muted);text-decoration:none;background:none;border:0;cursor:pointer;white-space:nowrap}
+.actions > * + *{border-left:1px solid var(--line)}
+.save[aria-pressed="true"]{color:var(--star);font-weight:700}
+.is-closed .title,.is-closed .org{color:var(--closed)}
+

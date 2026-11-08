@@ -1,0 +1,42 @@
+name: Deploy approved SupportPick snapshot
+on:
+  workflow_dispatch:
+    inputs:
+      approved_sha:
+        description: Exact 40-character commit approved by the owner
+        required: true
+      approval:
+        description: Type DEPLOY_SUPPORTPICK after owner approval
+        required: true
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: supportpick-pages-operations
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: inputs.approval == 'DEPLOY_SUPPORTPICK'
+    runs-on: ubuntu-latest
+    environment: github-pages
+    env:
+      APPROVED_SHA: ${{ inputs.approved_sha }}
+    steps:
+      - name: Validate SHA format
+        run: '[[ "$APPROVED_SHA" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.approved_sha }}
+          persist-credentials: false
+      - name: Check approved checkout
+        run: 'test "$(git rev-parse HEAD)" = "$APPROVED_SHA"'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/build.py --output dist --public-base https://kllollain-max.github.io/supportpick/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
