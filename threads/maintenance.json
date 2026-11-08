@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T10:49:14.859Z",
-  "last_observed_at": "2026-11-08T10:49:14.859Z",
+  "updated_at": "2026-11-08T12:05:36.942Z",
+  "last_observed_at": "2026-11-08T12:05:36.942Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -138,6 +138,15 @@
     "last_update_commit_sha": "8e82be7be6ebda6c974181ea17f0519a3abe47bf"
   },
   "observed_runs": [
+    {
+      "run_id": "42475715354",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-08T11:27:17Z",
+      "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
+    },
     {
       "run_id": "42469262905",
       "run_attempt": 1,
@@ -284,45 +293,32 @@
     }
   ],
   "last_confirmed_publication": {
-    "run_id": "42460707216",
+    "run_id": "42475715354",
     "run_attempt": 1,
     "status": "completed",
     "conclusion": "success",
-    "updated_at": "2026-11-08T07:56:28Z",
-    "head_sha": "dfb98b088059d13121c0ac613b3db84602f215aa",
-    "url": "https://github.com/kllollain-max/careerpick/actions/runs/42460707216",
-    "slot": "2026-11-08T16:00:00+09:00",
-    "actual_published_at": "2026-11-08T16:55:41.220182+09:00",
-    "reply_published_at": "2026-11-08T16:56:21.757932+09:00",
-    "notice_id": "a306515",
-    "post_id": "18358544695170895",
-    "post_url": "https://www.threads.com/@hid_119/post/DfeRL3_myzz",
-    "reply_post_id": "17993461434027136",
-    "reply_url": "https://www.threads.com/@hid_119/post/DfeRRJbmwf8",
+    "updated_at": "2026-11-08T11:27:17Z",
+    "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354",
+    "slot": "2026-11-08T20:00:00+09:00",
+    "actual_published_at": "2026-11-08T20:26:30.056529+09:00",
+    "reply_published_at": "2026-11-08T20:27:11.246862+09:00",
+    "notice_id": "a306612",
+    "post_id": "18645816052000537",
+    "post_url": "https://www.threads.com/@hid_119/post/DfepUC2myO2",
+    "reply_post_id": "18127260815483772",
+    "reply_url": "https://www.threads.com/@hid_119/post/DfepZMnG2gm",
     "reply_count": 1,
-    "format_id": "job_explainer",
+    "format_id": "application_checklist",
     "publication_style": "compact_with_detail_v1",
-    "actual_media": "IMAGE",
-    "previous_success_media": "TEXT",
-    "github_job_id": "128669180843",
-    "verified_at": "2026-11-08T09:12:39.212Z",
+    "actual_media": "TEXT",
+    "previous_success_media": "IMAGE",
+    "github_job_id": "128716508659",
+    "verified_at": "2026-11-08T12:05:36.942Z",
     "meta_get": "verified_ids_text_and_reply_links",
-    "history_blob_sha": "db526a065315c7a8b2ce0c0056c1e2427dfe4825",
-    "claim_blob_sha": "4271cefa64fa4fb2b8d3acba0a59fd135cc6f966",
-    "entry_sha256": "e44bed8c3ba8fc822f68c17588b2680c052a718f27543464b5c44f1589ca3002",
-    "live_image": {
-      "valid": true,
-      "format": "JPEG",
-      "width": 1080,
-      "height": 1080,
-      "mode": "RGB",
-      "file_size_bytes": 173838,
-      "sha256": "ed17595d7dc760e5b719e13e50f92dedfd3f0e6e1905173a9d3fbd7e1677de11",
-      "url": "https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/a306515.jpg",
-      "remote_bytes_match": true,
-      "visually_checked": true
-    },
-    "reported_at": "2026-11-08T09:12:39.212Z"
+    "history_blob_sha": "96dddf640824a822afec4485a2cca047b12bd3aa",
+    "claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
+    "entry_sha256": "9511db3268737139410730fc9a1382f64ec79d4327797d056147a138e5bcd9a7"
   },
   "pending_records_at_activation": 0,
   "first_new_policy_publication": {
@@ -1758,13 +1754,13 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-08T10:49:14.859Z",
+    "checked_at": "2026-11-08T12:05:36.942Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
     "input_reference_at": "2026-11-08T15:55:56.450830+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "preserved_ready_passed; next evening draft remains on hold after SOURCE_STALE",
+    "queue_check": "ready_08_12_pass_through_delay; 16_20_alternatives_still_hold",
     "queue_blob_sha": "573831a3d71abc36b5d618783f378a4f7b66af07",
     "new_drafts": 1,
     "new_ready_saved": 0,
@@ -1797,15 +1793,7 @@
       "a306716",
       "a306586"
     ],
-    "new_holds": [
-      {
-        "notice_id": "a306637",
-        "scheduled_at": "2026-11-09T20:00:00+09:00",
-        "entry_sha256": "e483b65d458fbdae77db6e5e0d599603eb460434d45525e9e560f6dce6fe83c6",
-        "chars": 443,
-        "reason": "SOURCE_STALE; duty roster not specified in official attachments."
-      }
-    ],
+    "new_holds": [],
     "candidate_exclusions": [
       {
         "notice_id": "a306802",
@@ -1820,8 +1808,16 @@
         "reason": "External open-position hires are 별정직 on a term; not the generic mixed employment label."
       }
     ],
-    "main_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
-    "new_alternatives": [],
+    "main_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+    "new_alternatives": [
+      {
+        "notice_id": "a306802",
+        "scheduled_at": "2026-11-09T20:00:00+09:00",
+        "entry_sha256": "6406606e6f061181b2b70c8278f614584fbe73f82e54046c881f1fda0be63f4e",
+        "chars": 364,
+        "reason": "SOURCE_STALE and detailed weekend roster not stated; contract classification confirmed."
+      }
+    ],
     "profile_route_discovery": {
       "type": "dynamic_job_modal",
       "verified_notice_id": "cleaneye-80805",
@@ -1855,29 +1851,38 @@
       ]
     },
     "preserved_ready": [
-      "a306612",
       "a306755",
       "a306586"
     ]
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-08T10:49:14.859Z",
-    "main_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
-    "history_blob_sha": "db526a065315c7a8b2ce0c0056c1e2427dfe4825",
-    "claim_blob_sha": "4271cefa64fa4fb2b8d3acba0a59fd135cc6f966",
-    "last_confirmed_post_id": "18358544695170895",
+    "checked_at": "2026-11-08T12:05:36.942Z",
+    "main_sha": "cfbb3d26a5de23d0c2e322822fb0d8d323bc02a0",
+    "history_blob_sha": "96dddf640824a822afec4485a2cca047b12bd3aa",
+    "claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
+    "last_confirmed_post_id": "18645816052000537",
     "latest_publisher_run": {
-      "run_id": "42460707216",
+      "run_id": "42475715354",
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-08T07:56:28Z",
-      "head_sha": "dfb98b088059d13121c0ac613b3db84602f215aa",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42460707216"
+      "updated_at": "2026-11-08T11:27:17Z",
+      "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
     },
-    "new_publisher_runs": [],
-    "status": "no_new_publisher_result_before_regular_20_slot",
-    "slot": "2026-11-08T16:00:00+09:00",
+    "new_publisher_runs": [
+      {
+        "run_id": "42475715354",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-08T11:27:17Z",
+        "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
+      }
+    ],
+    "status": "regular_20_slot_natural_text_body_and_reply_verified",
+    "slot": "2026-11-08T20:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
       "run_id": "42460392100",
@@ -1926,9 +1931,19 @@
       1,
       2
     ],
-    "next_action": "Verify natural 20:00 run when it starts; then recheck for a persisted ALIO timestamp that covers November 9 16:00 through its allowed delay.",
+    "next_action": "Observe natural 08:00 image slot. Recheck persisted ALIO freshness before releasing 16:00 and 20:00 drafts; do not retransmit.",
     "last_existing_claim_blob_sha": "4271cefa64fa4fb2b8d3acba0a59fd135cc6f966",
-    "observed_new_run_versions": [],
+    "observed_new_run_versions": [
+      {
+        "run_id": "42475715354",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-08T11:27:17Z",
+        "head_sha": "1fdf842dc2f211fc3e504c841fcc28c8c39693a4",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42475715354"
+      }
+    ],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
@@ -2525,6 +2540,124 @@
         "verified_exact_attachments_again": true
       },
       "resume": "ALIO가 검증된 새 시각을 main에 저장한 뒤 원문 지문과 지연 범위 전체 검수 결과를 다시 확인."
+    },
+    "2026-11-09T20:00:00+09:00:a306802": {
+      "scheduled_at": "2026-11-09T20:00:00+09:00",
+      "format_id": "application_checklist",
+      "notice_id": "a306802",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "source_post_sha256": "ad791060f221d88f87344e05bce02fc289497001e34fc998047f68024266d0c5",
+      "source_detail_sha256": "9de0c099286b634f4e13fd02e5aec8fec91e28ec38681738e4001bc706be7fca",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "간호조무사 자격으로 병원 진료 보조 일을 찾고 있다면 이 조건을 확인해 보세요. 한국보훈복지의료공단 대구보훈병원이 기능직 간호조무사 계약직 1명을 뽑아요.\n\n1. 접수 마감일에 간호조무사 자격을 갖추고 만 60세를 넘지 않아야 해요. 공단 인사규정상 결격사유가 없어야 하고 교대·야간 근무가 가능해야 해요.\n2. 계약은 2026년 12월 16일부터 2027년 12월 15일까지예요. 활력징후 측정과 환자 위생 관리, 진료·검사 보조를 맡아요.\n3. 원서와 자기소개서를 작성하고 자격 증빙 사본을 올리세요. 합격증서는 인정되지 않아요. 11월 16일 오전 9시까지 온라인으로 접수하고, 서류·면접을 거쳐요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a306802",
+          "target_reader": "간호조무사 자격을 갖추고 대구에서 1년 계약과 교대·야간 근무가 가능한 지원자",
+          "central_message": "필수자격과 근무편성, 계약기간 및 자격 증빙 마감 체크리스트",
+          "pattern_id": "P7",
+          "scheduled_at": "2026-11-09T20:00:00+09:00",
+          "reference_at": "2026-11-08T21:04:58.137465+09:00",
+          "verification_basis": "checked_official_source",
+          "checked_at": "2026-11-08T21:03:48.828892+09:00",
+          "source_refs": [
+            {
+              "url": "https://www.bohun.or.kr/main/na/ntt/selectNttInfo.do?mi=37032&bbsId=1158&bbsSysId=main&nttSn=191073",
+              "checked_at": "2026-11-08T21:03:48.828892+09:00",
+              "sha256": "033b5008a5bb0d4ea8795c732dd2962147bb4d3510371a508ab4e8d06f4aa995",
+              "location": "대구보훈병원 채용공고 191073",
+              "excerpt": "[대구보훈병원] 정규직 업무지원직(급식, 고객지원_완화의료도우미), 계약직 보건직(영양사), 계약직 기능직(간호조무사) 긴급 채용공고"
+            },
+            {
+              "url": "https://job.alio.go.kr/recruitview.do?idx=306802",
+              "checked_at": "2026-11-08T21:03:19.348345+09:00",
+              "sha256": "2494cb90435e2136a1592df6b8cff22141c5c17284b8d556095e96080d04f34e",
+              "location": "ALIO 채용 기본정보 및 단위별 자격",
+              "excerpt": "근무지 대구 / 계약직 기능직(간호조무사) / 교대 및 야간근무 가능자"
+            },
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3085705",
+              "checked_at": "2026-11-08T21:03:19.676351+09:00",
+              "sha256": "501238d406e687b504332c88a1b39e0e8151a2bce3eff40ef7133cc386536a08",
+              "location": "공고 1~2 채용분야와 자격, 4 운영형태, 5~6 전형 및 접수",
+              "excerpt": "서류접수 : 2026. 11. 6.(금) ~ 2026. 11. 16.(월) 09:00까지\n기능직 1명 2026. 12. 16.~2027. 12. 15. (간호조무사)\n공단 인사규정 제 18조(결격사유)에 해당하지 않는 자\n공단 인사규정 제44조(정년)에 따른 정년(60세)을 초과하지 않는 자\n간호조무사 면허증 소지자\n교대 및 야간근무 가능자\n공고마감일자 기준, 자격요건 전부 충족해야 함.\n입사지원서 및 자기소개서(입사지원 사이트상 작성)\n공고 마감일 기준, 각 분야 해당 면허증 사본(합격증서 미인정)"
+            },
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3085707",
+              "checked_at": "2026-11-08T21:03:17.164304+09:00",
+              "sha256": "991455be442d08075d4dfe5157982c156a3aa46c957a5e937f2a03d504db26ff",
+              "location": "직무기술서 기능직 간호조무사, 직급·부서·담당 직무",
+              "excerpt": "기능직 계약직 간호실 (간호조무사)\n환자 활력징후 측정 및 간호보조, 기본위생생활 관리 및 환경유지, 진료 및 검사 보조 업무 수행 등"
+            }
+          ],
+          "missing_or_conflicting": [
+            "SOURCE_STALE: 저장 ALIO 검증 시각이 11월 9일 20:00 및 지연 허용 구간을 충족하지 못함.",
+            "교대·야간 가능은 명시됐지만 간호조무사 모집단위의 주말 근무 여부 및 구체 편성은 미명시. 완화의료 직종의 주말·공휴일 근무 표기를 이 직무에 가져오지 않음."
+          ],
+          "omitted_optional_facts": [
+            "공단 보수규정에 따르며 액수 미공개",
+            "세부 가점과 면접 일정"
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "body_characters": 364,
+          "pre_publish_checks": [],
+          "application_period": {
+            "start": "2026-11-06",
+            "end": "2026-11-16T09:00:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085705",
+            "evidence": "서류접수 : 2026. 11. 6.(금) ~ 2026. 11. 16.(월) 09:00까지"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306802.html",
+            "notice_id": "a306802",
+            "checked_at": "2026-11-08T21:03:16.348126+09:00",
+            "verified": true,
+            "profile_url": "https://www.threads.com/@hid_119",
+            "rel_me_html": "<link rel=\"me\" href=\"https://kllollain-max.github.io/careerpick/\" />",
+            "profile_response_sha256": "67b0bba15a6351b04f1847b0502f43e755aa6c91d8ba43dee139e0c726db086b",
+            "evidence": "공개 프로필 rel=me, 커리어픽 구직 검색 목록 및 a306802 실제 공고 상세를 확인."
+          },
+          "fact_evidence": [
+            {
+              "field": "count",
+              "value": 1,
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085705",
+              "excerpt": "기능직 1명 2026. 12. 16.~2027. 12. 15. (간호조무사)"
+            },
+            {
+              "field": "employment",
+              "value": "계약직",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085707",
+              "excerpt": "기능직 계약직 간호실 (간호조무사)"
+            }
+          ]
+        }
+      },
+      "image_job": {
+        "id": "a306802",
+        "org": "한국보훈복지의료공단",
+        "title": "기능직(간호조무사)",
+        "count": 1,
+        "employment": "계약직",
+        "location": "대구",
+        "due": "2026-11-16",
+        "deadline_label": "2026-11-16 09:00"
+      },
+      "entry_sha256": "6406606e6f061181b2b70c8278f614584fbe73f82e54046c881f1fda0be63f4e",
+      "validation": {
+        "queue_written": false,
+        "production_queue": "SOURCE_STALE",
+        "separate_evidence_checks": "application_period_image_fields_checklist_compact_pair_passed"
+      },
+      "resume": "검증된 새 ALIO 저장 시각과 계약직 기능직 모집단위의 근무 편성 확인 후 다시 검사."
     }
   },
   "writer_hold_resolutions": {
