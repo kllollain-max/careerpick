@@ -343,6 +343,23 @@ class WriterQueueTests(unittest.TestCase):
                 self.refresh_hashes()
                 self.validate()
 
+    def test_image_preserves_explicit_zero_seconds_from_application_end(self):
+        period = self.entry["writer"]["review"]["application_period"]
+        for official_clock in ("17:00:00", "오후 5시 0분 0초"):
+            with self.subTest(official_clock=official_clock):
+                excerpt = self.period_evidence.replace("17:00", official_clock)
+                period["evidence"] = excerpt
+                self.detail["scrnprcdrMthdExpln"] = excerpt
+                self.refresh_hashes()
+                self.entry["image_job"]["deadline_label"] = "2026-11-18 17:00:00"
+                self.assertEqual(self.validate()["image_job"]["deadline_label"], "2026-11-18 17:00:00")
+                self.entry["image_job"]["deadline_label"] = "2026-11-18 17:00"
+                self.reject("IMAGE_DEADLINE_LABEL_CONFLICT")
+
+    def test_image_does_not_add_seconds_missing_from_official_clock(self):
+        self.entry["image_job"]["deadline_label"] = "2026-11-18 17:00:00"
+        self.reject("IMAGE_DEADLINE_LABEL_CONFLICT")
+
     def test_image_clock_must_match_verified_application_end(self):
         self.entry["image_job"]["deadline_label"] = "2026-11-18 23:59"
         self.reject("IMAGE_DEADLINE_LABEL_CONFLICT")

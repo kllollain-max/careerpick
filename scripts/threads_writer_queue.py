@@ -188,12 +188,13 @@ def _stated_times(text):
             elif re.search(r"오전\s*$", prefix) and hour == 12:
                 hour = 0
             if hour < 24 and minute < 60 and second < 60:
-                found.append((hour, minute, second))
+                found.append(((hour, minute, second), match.group(3) is not None))
     return found
 
 
 def _period_matches_excerpt(period, start, end, detail):
     text = period["evidence"]
+    end_has_seconds = False
     for side, value, date_only in (
         ("START", start, period.get("start_date_only", False)),
         ("END", end, period["date_only"]),
@@ -205,10 +206,17 @@ def _period_matches_excerpt(period, start, end, detail):
         _, stop = matches[0] if side == "START" else matches[-1]
         next_date = next((a for a, _ in dates if a >= stop), len(text))
         stated = _stated_times(text[stop:next_date])
-        if not date_only and (value.hour, value.minute, value.second) not in stated:
+        if date_only:
+            if stated:
+                _fail("APPLICATION_" + side + "_PRECISION_CONFLICT")
+            continue
+        matching_precision = [has_seconds for clock, has_seconds in stated
+                              if clock == (value.hour, value.minute, value.second)]
+        if not matching_precision:
             _fail("APPLICATION_" + side + "_TIME_EVIDENCE_MISMATCH")
-        if date_only and stated:
-            _fail("APPLICATION_" + side + "_PRECISION_CONFLICT")
+        if side == "END":
+            end_has_seconds = any(matching_precision)
+    return end_has_seconds
 
 
 def _application_period(review, refs, detail, now, scheduled):
@@ -244,8 +252,8 @@ def _application_period(review, refs, detail, now, scheduled):
                 _fail("APPLICATION_END_TIME_UNKNOWN")
         elif moment >= end:
             _fail("APPLICATION_CLOSED")
-    _period_matches_excerpt(period, start, end, detail)
-    return end_day.isoformat(), period
+    end_has_seconds = _period_matches_excerpt(period, start, end, detail)
+    return end_day.isoformat(), period, end_has_seconds
 
 
 def _site_url(value):
@@ -389,7 +397,7 @@ def _cleaneye_workplace_evidence(value, review, refs, detail):
     return False
 
 
-def _image(entry, post, detail, review, refs, end_date, period):
+def _image(entry, post, detail, review, refs, end_date, period, end_has_seconds):
     facts = _publication_facts(post, detail)
     image = entry.get("image_job")
     if not isinstance(image, dict) or image.get("id") != entry["notice_id"]:
@@ -435,7 +443,9 @@ def _image(entry, post, detail, review, refs, end_date, period):
         end_time = _aware(period["end"], "APPLICATION_END_INVALID")
         if end_time.microsecond:
             _fail("APPLICATION_END_PRECISION_UNSUPPORTED")
-        expected_label = end_time.strftime("%Y-%m-%d %H:%M:%S" if end_time.second else "%Y-%m-%d %H:%M")
+        # ISO values often include :00 even when the source states only HH:MM.
+        # Preserve seconds only when the matching official clock states them.
+        expected_label = end_time.strftime("%Y-%m-%d %H:%M:%S" if end_has_seconds else "%Y-%m-%d %H:%M")
     if not isinstance(label, str) or len(label) > 32 or label != expected_label:
         _fail("IMAGE_DEADLINE_LABEL_CONFLICT")
     for field in ("org", "title", "employment", "location"):
@@ -562,11 +572,11 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     for ref in refs:
         if isinstance(ref, dict) and ref.get("checked_at") is not None:
             _fresh(ref["checked_at"], now, scheduled, "REVIEW_SOURCE_STALE", max_age)
-    end_date, period = _application_period(review, refs, detail, now, scheduled)
+    end_date, period, end_has_seconds = _application_period(review, refs, detail, now, scheduled)
     if post.get("cleaneye") is True:
         _cleaneye_application_period(period, detail)
     _profile(review, notice_id, now, scheduled, max_age)
-    image_job = _image(entry, post, detail, review, refs, end_date, period)
+    image_job = _image(entry, post, detail, review, refs, end_date, period, end_has_seconds)
     _history(history, notice_id, expected_format, scheduled, body, facts["org"])
     has_published = any(record.get("status") == "published" and record.get("text") for record in history["records"])
     allowed_repetition = ("checked", "partial") if has_published else ("checked", "no_history")
