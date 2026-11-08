@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T04:06:52.646Z",
+  "updated_at": "2026-11-08T04:10:35.675Z",
   "last_observed_at": "2026-11-08T04:06:52.646Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
@@ -1436,9 +1436,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-08T03:17:23.250Z",
+    "checked_at": "2026-11-08T04:10:35.675Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T12:12:50.240798+09:00",
+    "input_reference_at": "2026-11-08T13:06:20.561181+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -1448,28 +1448,16 @@
     "new_ready_saved": 0,
     "ready_entries": [
       {
-        "scheduled_at": "2026-11-08T12:00:00+09:00",
-        "notice_id": "a306733",
-        "format_id": "key_facts",
-        "chars": 430,
-        "compact_chars": 89,
-        "detail_chars": 404
-      },
-      {
         "scheduled_at": "2026-11-08T16:00:00+09:00",
         "notice_id": "a306515",
         "format_id": "job_explainer",
-        "chars": 395,
-        "compact_chars": 105,
-        "detail_chars": 369
+        "chars": 395
       },
       {
         "scheduled_at": "2026-11-08T20:00:00+09:00",
         "notice_id": "a306612",
         "format_id": "application_checklist",
-        "chars": 366,
-        "compact_chars": 100,
-        "detail_chars": 340
+        "chars": 366
       }
     ],
     "cleaneye_source": {
@@ -1480,32 +1468,27 @@
     "history_duplicate_ids_checked": true,
     "recent_records_compared": 10,
     "preserved_holds": [
-      "a306716"
-    ],
-    "new_holds": [
+      "a306716",
       "a306586"
     ],
+    "new_holds": [],
     "candidate_exclusions": [
       {
         "notice_id": "cleaneye-80848",
-        "reason": "Previously checked official source but CareerPick detail route absent in last check; no freshness at target slot."
+        "reason": "Prior official review did not establish a published CareerPick detail route and the stored snapshot cannot meet the target slot's 24-hour limit."
       },
       {
         "notice_id": "cleaneye-80951",
-        "reason": "Verified source feed exceeds 24 hours at target slot; role-specific qualifications and workplace not verified."
-      },
-      {
-        "notice_id": "a306715",
-        "reason": "Previously unresolved official licence cutoff conflict."
+        "reason": "Official role qualification and actual workplace are not available in the stored summary; freshness insufficient for November 9."
       },
       {
         "notice_id": "a306755",
-        "reason": "Mixed employment and deadline discrepancy need role-specific official evidence."
-      },
-      {
-        "notice_id": "a306586",
-        "reason": "Official attachments and CTA route checked; persisted collection exceeds slot freshness."
+        "reason": "Mixed employment clarified and unit verified in two byte-identical official attachments; alternative remains on hold because of SOURCE_STALE."
       }
+    ],
+    "main_sha": "a066699e8002861e5191db0703c9b661654763cc",
+    "new_alternatives": [
+      "2026-11-09T08:00:00+09:00:a306755"
     ]
   },
   "last_monitor_check": {
@@ -1553,13 +1536,31 @@
       "job_id": "128622268687",
       "status": "complete_unchanged_storage_skipped",
       "alio_received": 504,
-      "cleaneye_complete": true
+      "cleaneye_complete": true,
+      "alio_verified_at": "2026-11-08T13:02:20+09:00",
+      "stored_alio_verified_at": "2026-11-08T00:49:02+09:00",
+      "source_hashes_match_checkout": true,
+      "store_skip_reason": "No content, archive count, or unconfirmed ID changes requiring persistence; last_success_at retained.",
+      "tomorrow_08_and_12": "SOURCE_STALE reproduced in validation; no actual slot failure yet",
+      "next_action": "Use a newly persisted and verified source for upcoming slots; keep hold without changing timestamps or queue checks."
     },
     "pages_read": [
       1,
       2
     ],
-    "resume": "Recheck fresh persisted source before queueing held drafts; next image turn derives from last confirmed TEXT main."
+    "resume": "Recheck fresh persisted source before queueing held drafts; next image turn derives from last confirmed TEXT main.",
+    "last_rechecked_at": "2026-11-08T04:10:35.675Z",
+    "next_image_preview": {
+      "slot": "2026-11-08T16:00:00+09:00",
+      "notice_id": "a306515",
+      "media_turn": "IMAGE",
+      "result": "local_visual_and_file_check_passed",
+      "jpeg_width": 1080,
+      "jpeg_height": 1080,
+      "file_size_bytes": 164668,
+      "local_preview_sha256": "f2be40c5f213c9a18c80c388ad8d467503cf2a2e09ac0ee58623c12863ddf676",
+      "live_public_image_verified": false
+    }
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -1699,6 +1700,119 @@
       },
       "validation": "Body format/CTA/length/history, actual period, profile route and image facts verified independently. Scratch queue check blocked by SOURCE_STALE; not added to live queue.",
       "resume": "main에 예정 시각 기준 24시간 이내의 ALIO 검증 시각이 실제 반영되면 최신 원문 지문과 기존 예약을 대조한 뒤 전체 대기열 검사. 기존 안산병원 보류안은 그대로 보존."
+    },
+    "2026-11-09T08:00:00+09:00:a306755": {
+      "scheduled_at": "2026-11-09T08:00:00+09:00",
+      "format_id": "reader_story",
+      "notice_id": "a306755",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "source_post_sha256": "18005c8e76db6000bf741fdd11baaaeba56e8b20b4abcd90beb3313091df83e5",
+      "source_detail_sha256": "863edb790ab18e31f686bb94663580a0fe6da15fbfe7fc295e208543bd56914c",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "직원 행사나 민원 업무를 맡는 병원 총무직을 준비한다면, 직무계획서에 어떤 일을 어떻게 할지부터 생각해 보세요.\n\n한국원자력의학원 서울 총무복지팀에서 5급 사무기술원 정규직 신입 1명을 뽑아요. 4대보험, 직원 행사, 민원·정보공개 등을 맡아요.\n\n별도 자격증 요건은 없어요. 공고일 기준 만 60세 미만이고 병역 기피·불이행이나 임용 결격사유가 없어야 해요. 직무상 필요하면 야간·휴일·교대 근무가 가능해야 해요.\n\n서류 합격 후 직무계획 PT 자료를 미리 내야 해요. 인성검사와 최종면접을 거치고, 수습 3개월 평가가 60점 미만이면 심의를 거쳐 채용이 거부될 수 있어요. 진행 중인 의학원 공고나 다른 모집 분야와 중복지원은 불가해요. 온라인 접수는 11월 20일 17시까지예요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a306755",
+          "target_reader": "서울에서 4대보험·직원행사·민원 및 정보공개 업무를 맡는 신입 총무직을 찾고 PT를 준비할 지원자",
+          "central_message": "총무 담당 업무와 자격 제한, 직무계획 PT와 근무·수습 조건을 함께 설명한다.",
+          "pattern_id": "P1",
+          "scheduled_at": "2026-11-09T08:00:00+09:00",
+          "reference_at": "2026-11-08T13:09:59.239866+09:00",
+          "verification_basis": "checked_official_source",
+          "source_refs": [
+            {
+              "url": "https://job.alio.go.kr/recruitview.do?idx=306755",
+              "checked_at": "2026-11-08T04:08:29.712970+00:00",
+              "location": "기관·근무지·전형절차",
+              "excerpt": "한국원자력의학원 / 근무지 서울 / 접수기간: 2026. 11. 5.(목) ~ 2026. 11. 20.(금) 17시까지"
+            },
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3085456",
+              "checked_at": "2026-11-08T04:08:33.813042+00:00",
+              "location": "공고문 1·2·4·6·10쪽: 모집표, 자격·직무, 접수·전형, 중복·근무·수습",
+              "excerpt": "총무복지팀 사무기술직 5급 사무기술원 1 자격 제한 없음 신입 PT발표면접\n정규직: 방사성의약품제조팀, 영상의학과, 진단검사의학과, 고객지원팀, 총무복지팀\n접수기간: 2026년 11월 5일(목) ~ 11월 20일(금) 17시까지\n총무복지팀 총무업무 / 4대보험, 직원대상 행사 업무, 민원 및 정보공개\n별도 자격요건 없음 / 2차전형: PT 발표면접 / 3차전형: 최종면접\n공고일 기준 정년퇴직 기준연령(만60세)에 도달하지 않은 자\n직무 특성상 필요한 경우에는 야간근무, 휴일근무, 교대근무가 가능하여야 함\n수습평가결과 60점 미만일 경우 위원회 심의를 거쳐 채용을 거부할 수 있음",
+              "sha256": "0081876e1d649eba52ab50df4e5863694578f5c486bc5338ecaf3e1e8f8da580"
+            }
+          ],
+          "checked_at": "2026-11-08T04:08:33.813042+00:00",
+          "missing_or_conflicting": [
+            "SOURCE_STALE: 현재 main의 ALIO 수집 확인 시각이 11월 9일 08시 기준 24시간 초과."
+          ],
+          "omitted_optional_facts": [
+            "직무별 급여 수치 미기재",
+            "가점별 점수 및 전형별 배수"
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "body_characters": 409,
+          "pre_publish_checks": [
+            "공고의 정정·취소, 미청구 슬롯, main 수집 시각과 지문을 재대조."
+          ],
+          "application_period": {
+            "start": "2026-11-05",
+            "end": "2026-11-20T17:00:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085456",
+            "evidence": "접수기간: 2026년 11월 5일(목) ~ 11월 20일(금) 17시까지"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306755.html",
+            "notice_id": "a306755",
+            "checked_at": "2026-11-08T04:08:28.338631+00:00",
+            "verified": true,
+            "profile_url": "https://www.threads.com/@hid_119",
+            "rel_me_html": "<link rel=\"me\" href=\"https://kllollain-max.github.io/careerpick/\" />",
+            "profile_response_sha256": "c9d2fa3ef718a0f2063df389d3f3b13969cca657c89b10025f29b48ea4991bb6",
+            "notice_response_sha256": "aa316ef7edb235a56d10724e8d077b09ca5422d5de210c470c3b82accda2c284",
+            "evidence": "프로필 rel=me → 홈 HTTP 200 → jobs/available.js에 ID 존재 → 공개 공고 페이지 실제 제목 확인."
+          },
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "5급 사무기술원",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085456",
+              "excerpt": "총무복지팀 사무기술직 5급 사무기술원 1 자격 제한 없음 신입 PT발표면접"
+            },
+            {
+              "field": "count",
+              "value": 1,
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085456",
+              "excerpt": "총무복지팀 사무기술직 5급 사무기술원 1 자격 제한 없음 신입 PT발표면접"
+            },
+            {
+              "field": "employment",
+              "value": "정규직",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085456",
+              "excerpt": "정규직: 방사성의약품제조팀, 영상의학과, 진단검사의학과, 고객지원팀, 총무복지팀"
+            }
+          ]
+        }
+      },
+      "image_job": {
+        "id": "a306755",
+        "org": "한국원자력의학원",
+        "title": "5급 사무기술원",
+        "count": 1,
+        "employment": "정규직",
+        "location": "서울",
+        "due": "2026-11-20",
+        "deadline_label": "2026-11-20 17:00"
+      },
+      "entry_sha256": "598407767900ed22182f21751f40da02143090bdb0a9d5f243081736deecd41a",
+      "validation": {
+        "actual_queue_check": "SOURCE_STALE",
+        "offline_other_checks": "passed",
+        "queue_written": false,
+        "preview_main_chars": 94,
+        "preview_reply_chars": 383
+      },
+      "resume": "정상 최신 수집본이 main에 반영된 뒤, 기존 08시 후보보다 이 대안이 적합한 경우에만 공식 원문·지문·슬롯을 재검증해 검증된 단일 항목을 CAS 저장."
     }
   },
   "writer_hold_resolutions": {
