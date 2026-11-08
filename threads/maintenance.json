@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T05:44:36.768Z",
-  "last_observed_at": "2026-11-08T05:44:36.768Z",
+  "updated_at": "2026-11-08T06:58:41.797Z",
+  "last_observed_at": "2026-11-08T06:58:41.797Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1462,15 +1462,15 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-08T05:44:36.768Z",
+    "checked_at": "2026-11-08T06:58:41.797Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-08T14:41:51.939646+09:00",
+    "input_reference_at": "2026-11-08T15:55:56.450830+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
     "queue_check": "validated",
     "queue_blob_sha": "d3c93e3b0629dde39b10c7b23f757ccba6cd9db6",
-    "new_drafts": 0,
+    "new_drafts": 1,
     "new_ready_saved": 0,
     "ready_entries": [
       {
@@ -1500,20 +1500,22 @@
     "new_holds": [],
     "candidate_exclusions": [
       {
+        "notice_id": "cleaneye-80711",
+        "reason": "Exact official role, residence restriction, actual close time and dynamic CareerPick route verified; persisted source too old and role worksite not stated."
+      },
+      {
         "notice_id": "cleaneye-80805",
         "reason": "Official PDFs and dynamic homepage modal verified, but missing actual workplace and official deadline precision differs from the stored date-only feed; stored feed also fails freshness."
       },
       {
         "notice_id": "cleaneye-80951",
         "reason": "Static path is not the right Cleaneye route; stored feed stale and role-specific official facts still missing."
-      },
-      {
-        "notice_id": "cleaneye-80711",
-        "reason": "Stored feed stale; exact job restrictions, workplace and homepage modal not reverified for this candidate."
       }
     ],
     "main_sha": "a066699e8002861e5191db0703c9b661654763cc",
-    "new_alternatives": [],
+    "new_alternatives": [
+      "2026-11-09T08:00:00+09:00:cleaneye-80711"
+    ],
     "profile_route_discovery": {
       "type": "dynamic_job_modal",
       "verified_notice_id": "cleaneye-80805",
@@ -1521,9 +1523,7 @@
       "checked_at": "2026-11-08T13:44:53.940495+09:00",
       "note": "Static jobs/<id>.html and available.js are ALIO-only, not evidence that a Cleaneye notice is missing; verify #job route interactively."
     },
-    "revised_drafts": [
-      "a306586"
-    ],
+    "revised_drafts": [],
     "reverified_holds": [
       {
         "notice_id": "a306716",
@@ -1599,7 +1599,7 @@
       2
     ],
     "resume": "Recheck fresh persisted source before queueing held drafts; next image turn derives from last confirmed TEXT main.",
-    "last_rechecked_at": "2026-11-08T05:44:36.768Z",
+    "last_rechecked_at": "2026-11-08T06:58:41.797Z",
     "next_image_preview": {
       "slot": "2026-11-08T16:00:00+09:00",
       "notice_id": "a306515",
@@ -1994,6 +1994,113 @@
         "actual_queue_check": "CLEANEYE_SOURCE_STALE"
       },
       "resume": "새 verified_open 수집본, 실제 배치 근무지, 정확한 마감의 검증기 지원을 모두 확인할 때까지 게시 금지. 기관 주소나 비교용 시각으로 대체하지 않음."
+    },
+    "2026-11-09T08:00:00+09:00:cleaneye-80711": {
+      "scheduled_at": "2026-11-09T08:00:00+09:00",
+      "format_id": "reader_story",
+      "notice_id": "cleaneye-80711",
+      "source": "cleaneye",
+      "official_id": "80711",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "source_post_sha256": "5fd7736d45bedba0a5860c8b2c2c924d4558efe2aa924aabb6ca561252c59b5a",
+      "source_detail_sha256": "f4f695669d0720a592d6e0a48830e09ba42b46b1204340578ec1c39d6f1c36d4",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "충주에 산 이력이 있다면 주소를 옮긴 날짜부터 확인해 보세요. 충주시시설관리공단이 정규직 13명 중 행정 9급 일반행정 3명을 뽑아요. 회계와 사업 등 공단 행정을 맡아요.\n\n공고 전부터 면접일까지 충주 주민등록을 계속 유지하며 말소·거주불명 기록이 없거나, 공고 전 충주에 주민등록을 둔 기간을 합쳐 3년 이상이어야 해요. 공고일 기준 만 19세 이상 60세 미만이고, 남성은 병역필·면제여야 해요. 별도 자격증은 필요 없어요.\n\n주 5일·하루 8시간이지만 교대·야간·휴일근무가 있을 수 있어요. 3개월 수습 평가에서 부적합하면 계약이 끝날 수 있고, 합격 후 최대 1년 임용 대기가 가능해요.\n\n복수지원은 안 돼요. 서류·필기·면접을 거치며, 원서는 11월 23일 18시까지 온라인으로 내세요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "cleaneye-80711",
+          "target_reader": "충주 거주 이력 요건을 충족하고 회계·사업 행정과 교대근무를 검토할 지원자",
+          "central_message": "거주지 두 자격 경로와 실제 근무조건·수습을 함께 설명한다.",
+          "pattern_id": "P1",
+          "scheduled_at": "2026-11-09T08:00:00+09:00",
+          "reference_at": "2026-11-08T15:58:27.365394+09:00",
+          "verification_basis": "checked_official_source",
+          "source_refs": [
+            {
+              "url": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+              "checked_at": "2026-11-08T15:56:43.031262+09:00",
+              "sha256": "da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb",
+              "location": "공고문 1~3쪽 모집·거주지·자격, 7쪽 접수, 8~9쪽 근로조건·임용",
+              "excerpt": "일반직 행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무\n원서접수 2026. 11. 2. ~ 2026. 11. 23. / 접수마감 : 2026년 11월 23일 18:00\n공고일 전부터 최종 시험일(면접전형)까지 계속하여 충주시에 주민등록상 주소지\n모두 합산하여 총 3년 이상\n만 19세 이상, 만 60세 미만(남자의 경우 병역을 필하거나 면제인 자)\n거주지 요건 외 별도 자격사항 없음\n근무형태(근무표)에 따라 교대 및 휴일 근무가 있음\n근무지 운영 특성상 주말(토·일) 및 공휴일, 국경일, 야간 근무 필요\n3개월간의 수습기간을 거쳐 정식임용 / 수습평가 결과 부적합 판정 시 근로계약 해지될 수 있음\n최종합격자는 최대 1년간 임용대기 할 수 있음\n복수지원 불가"
+            },
+            {
+              "url": "https://www.cjfmc.or.kr/www/selectBbsNttView.do?bbsNo=7&key=113&nttNo=15610",
+              "checked_at": "2026-11-08T15:56:38.399335+09:00",
+              "sha256": "210b393cae77c175cf17fcdcaba0416a1eb1fd13d99d0892497902ab4f9aa1e1",
+              "location": "기관 채용 게시판 공고 제2026-97호",
+              "excerpt": "2027년 제1회 충주시시설관리공단 직무중심 정규직 공개채용 공고 / 2026.11.2.부터 원서접수 가능"
+            }
+          ],
+          "checked_at": "2026-11-08T15:56:43.031262+09:00",
+          "missing_or_conflicting": [
+            "저장된 verified_open 수집본이 게시 슬롯 기준 24시간을 초과함.",
+            "일반행정 모집단위 근무지는 첨부에 명시되지 않음. 거주지 요건을 근무지로 사용하지 않음.",
+            "첨부의 18:00과 날짜만 있는 클린아이 구조화 원문의 정밀도 차이를 현 검증기가 허용하는지 확인 필요."
+          ],
+          "omitted_optional_facts": [
+            "구체적인 급여 액수는 공단 규정 참조",
+            "시험 배수와 세부 가점 기준"
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "body_characters": 416,
+          "pre_publish_checks": [],
+          "application_period": {
+            "start": "2026-11-02",
+            "end": "2026-11-23T18:00:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+            "evidence": "원서접수 2026. 11. 2. ~ 2026. 11. 23. / 접수마감 : 2026년 11월 23일 18:00"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-80711",
+            "notice_id": "cleaneye-80711",
+            "checked_at": "2026-11-08T15:58:27.365394+09:00",
+            "verified": true,
+            "profile_url": "https://www.threads.com/@hid_119",
+            "rel_me_html": "<link rel=\"me\" href=\"https://kllollain-max.github.io/careerpick/\" />",
+            "profile_response_sha256": "0d5310a541ef1957d885b23bcdb566d86a3aaff5f6d4e988f151a278ea54f720",
+            "evidence": "공개 프로필의 rel=me와 커리어픽의 실제 동적 상세 제목, 공식 원문 링크, 공고 첨부 표시를 확인."
+          },
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "행정 9급 (일반행정)",
+              "source_ref": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+              "excerpt": "일반직 행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무"
+            },
+            {
+              "field": "count",
+              "value": 3,
+              "source_ref": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+              "excerpt": "일반직 행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무"
+            }
+          ]
+        }
+      },
+      "image_job": {
+        "id": "cleaneye-80711",
+        "org": "충주시시설관리공단",
+        "title": "행정 9급 (일반행정)",
+        "count": 3,
+        "employment": "정규직",
+        "location": null,
+        "due": "2026-11-23",
+        "deadline_label": "2026-11-23 18:00"
+      },
+      "entry_sha256": "8527998826116fbcffc4c5e206f11b7c531e069bf975c87b87479d91822b0072",
+      "validation": {
+        "queue_written": false,
+        "official_review_complete_for_recorded_facts": true,
+        "actual_queue_check": "CLEANEYE_SOURCE_STALE"
+      },
+      "resume": "새 수집본과 실제 배치 근무지, 공식 마감 시각의 검증 가능 여부 확인 후 재검토. 주소나 비교용 시각으로 대체하지 않음."
     }
   },
   "writer_hold_resolutions": {
