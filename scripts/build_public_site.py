@@ -28,6 +28,8 @@ OLD_HOST = "jobinfo-hub.github.io"
 SOURCE_JSON = ("cleaneye.json", "gojobs.json", "alio.json", "alio-detail.json", "monitor.json", "posts.json", "qnet.json", "enterprise_jobs.json")
 BLOCKED_SCRIPT_MARKERS = ("googlesyndication.com", "wcs.pstatic.net", "wcs_add", "wcs_do(", "adsbygoogle")
 SCRIPT = re.compile(r"<script\b[^>]*>[\s\S]*?</script\s*>", re.I)
+NAVER_ANALYTICS_SCRIPT = '<script defer src="/careerpick/naver-analytics.js"></script>'
+NAVER_ANALYTICS_STYLE = '<link rel="stylesheet" href="/careerpick/naver-analytics.css">'
 
 
 def digest(path: Path) -> str:
@@ -121,6 +123,8 @@ def validate(output: Path) -> dict:
         for script in SCRIPT.findall(content):
             if any(marker in script for marker in BLOCKED_SCRIPT_MARKERS):
                 failures.append("Disabled external script in " + str(page.relative_to(output)))
+        if content.count(NAVER_ANALYTICS_SCRIPT) != 1 or content.count(NAVER_ANALYTICS_STYLE) != 1:
+            failures.append("Missing or duplicate consent-gated analytics in " + str(page.relative_to(output)))
         parser = LocalLinks()
         parser.feed(content)
         for link in parser.links:
@@ -153,6 +157,23 @@ def validate(output: Path) -> dict:
     if failures:
         raise ValueError("Public output checks failed:\n" + "\n".join(sorted(set(failures))[:50]))
     return {"html_files": html_count, "html_links_checked": checked_links, "sitemap_urls": len(urls), "missing_local_links": 0}
+
+
+def install_naver_analytics(output: Path) -> None:
+    """Include the first-party consent UI on generated and archived public pages.
+
+    The local loader requests NAVER only after an explicit visitor choice.
+    Direct tracking/advertising snippets remain blocked by validate().
+    """
+    for page in sorted(output.rglob("*.html")):
+        content = page.read_text(encoding="utf-8")
+        if not re.search(r"</head\s*>", content, re.I) or not re.search(r"</body\s*>", content, re.I):
+            raise ValueError("Analytics requires a complete HTML document: " + str(page.relative_to(output)))
+        if NAVER_ANALYTICS_STYLE not in content:
+            content = re.sub(r"</head\s*>", NAVER_ANALYTICS_STYLE + "\n</head>", content, count=1, flags=re.I)
+        if NAVER_ANALYTICS_SCRIPT not in content:
+            content = re.sub(r"</body\s*>", NAVER_ANALYTICS_SCRIPT + "\n</body>", content, count=1, flags=re.I)
+        write_text_atomic(page, content)
 
 
 def complete_public_navigation(output: Path, current_ids: set[str]) -> None:
@@ -256,6 +277,7 @@ def main() -> dict:
     search = load_module("careerpick_search", "scripts/search_readiness.py")
     archived_schema_removed = search.remove_unverified_archived_schema(output, {p['id'] for p in alio['posts']}, write_text_atomic)
     metadata_updates = search.normalize_duplicate_metadata(output, write_text_atomic)
+    install_naver_analytics(output)
     checks = validate(output)
     for name, original in inputs.items():
         if digest(ROOT / name) != original or digest(output / name) != original:
