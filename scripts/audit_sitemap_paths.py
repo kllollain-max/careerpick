@@ -1,36 +1,37 @@
 #!/usr/bin/env python3
-"""Read-only sitemap URL path audit. Does not deploy or rewrite files."""
+"""Read-only audit of final CareerPick public build sitemap; never mutates source."""
+import sys
 from pathlib import Path
 from urllib.parse import urlsplit
-import sys
 import xml.etree.ElementTree as ET
 
-EXPECTED_HOST = "kllollain-max.github.io"
-EXPECTED_PREFIX = "/careerpick/"
-NS = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+HOST = "kllollain-max.github.io"
+PREFIX = "/careerpick/"
+NS = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 
-def audit(path: Path):
-    root = ET.parse(path).getroot()
-    urls = [(node.text or "").strip() for node in root.findall(".//sm:loc", NS)]
+def audit(sitemap: Path):
+    urls = [(n.text or "").strip() for n in ET.parse(sitemap).findall(".//s:loc", NS)]
     if not urls:
-        raise ValueError("No sitemap URLs found")
+        raise ValueError("No sitemap URLs")
     bad = []
     for url in urls:
-        parsed = urlsplit(url)
-        if parsed.scheme != "https" or parsed.netloc != EXPECTED_HOST or not parsed.path.startswith(EXPECTED_PREFIX):
+        p = urlsplit(url)
+        if p.scheme != "https" or p.netloc != HOST or not p.path.startswith(PREFIX) or p.query or p.fragment:
             bad.append(url)
     return urls, bad
 
 if __name__ == "__main__":
-    source = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("sitemap.xml")
+    # Audit generated dist, not the legacy source sitemap; the public build normalizes URLs.
+    source = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("dist/sitemap.xml")
+    if source.resolve() == Path("sitemap.xml").resolve():
+        print("ERROR: audit generated dist/sitemap.xml, not source sitemap.xml", file=sys.stderr)
+        sys.exit(2)
     try:
         urls, bad = audit(source)
     except (OSError, ET.ParseError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(2)
-    print(f"Checked {len(urls)} URLs; invalid base paths: {len(bad)}")
-    for url in bad[:30]:
-        print(f"INVALID {url}")
-    if len(bad) > 30:
-        print(f"... and {len(bad) - 30} more")
+    print(f"Generated sitemap URLs: {len(urls)}; invalid URLs: {len(bad)}")
+    for url in bad[:20]:
+        print("INVALID", url)
     sys.exit(1 if bad else 0)
