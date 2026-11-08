@@ -86,3 +86,8 @@ Existing local choices can remain inert; no personal records need to be cleared.
 - Information received: https://help.naver.com/service/9864/contents/15398?osType=PC
 - Report retention: https://help.naver.com/service/9864/contents/15397?lang=ko&osType=PC
 - Cookie-based visitor measurement: https://help.naver.com/service/9864/contents/17624?lang=ko&osType=PC
+
+Concurrent main update `9c16268afbb9156dc2360bf27aba31781d15c077` was integrated
+while preserving its source-health reporting and tests. The supported runner pin
+is now inherited from main; this candidate adds only the analytics checks to that
+workflow.

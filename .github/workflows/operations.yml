@@ -144,6 +144,23 @@ jobs:
           r['storage']=os.environ['STORAGE_OUTCOME'] if os.environ['CHANGED']=='true' else 'unchanged'
           r['public_check']=os.environ['PUBLIC_OUTCOME']
           r['overall']='success' if os.environ['JOB_STATUS']=='success' and r['exam_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('status') in ('changed','unchanged') and r['gojobs_source'].get('official_page_failed',1)==0 and r['cleaneye_source'].get('status') in ('changed','unchanged') else 'partial_or_failed'
+          # Surface partial source failures even when the overall job exits successfully.
+          if r['overall'] != 'success':
+              failed_sources = [
+                  name for name, source in (
+                      ('ALIO', r),
+                      ('EXAM', r['exam_source']),
+                      ('GOJOBS', r['gojobs_source']),
+                      ('CLEANEYE', r['cleaneye_source']),
+                  )
+                  if source.get('status') not in ('changed', 'unchanged')
+              ]
+              if r['gojobs_source'].get('status') in ('changed', 'unchanged') and r['gojobs_source'].get('official_page_failed', 1) != 0:
+                  failed_sources.append('GOJOBS_OFFICIAL_PAGE')
+              message = 'Partial source failure: ' + ', '.join(failed_sources or ['unknown source'])
+              print('::warning title=CareerPick source health::' + message)
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+                  summary.write('### Source health warning\n\n' + message + '\n\n')
           p.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n')
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('```json\n'+json.dumps(r,ensure_ascii=False,indent=2)+'\n```\n')
           PY
