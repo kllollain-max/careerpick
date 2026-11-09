@@ -62,6 +62,43 @@ class DiagnosticsTests(unittest.TestCase):
         os.environ.update(CP_PUSH_MODE='resume_after_review', CP_EXPECTED_CONTROL_SHA=SHA,
                           CP_PUSH_REVIEW_REFERENCE='Reviewed incident fixture-run; no inflight delivery')
 
+    def test_audit_consent_checks_all_four_and_never_writes(self):
+        self.read_export.return_value = ['sub1', 'sub2', 'sub3', 'sub4']
+        self.lookup.side_effect = lambda sid: {'opted_in': True} if sid in ('sub1','sub2','sub3','sub4') else None
+        report = runner.audit_consent()
+        self.assertEqual(report['status'], 'audit_complete')
+        self.assertEqual(report['reviewed_count'], 4)
+        self.assertEqual(report['verified_opt_in_count'], 4)
+        self.assertTrue(report['all_verified'])
+        self.assertEqual(self.lookup.call_count, 4)
+        self.assertEqual(report['sent'], 0)
+        for sid in ('sub1', 'sub2', 'sub3', 'sub4'):
+            self.assertNotIn(sid, self.output.getvalue())
+        self.assert_no_state_change()
+
+    def test_audit_consent_partial_opt_in_cannot_claim_all_verified(self):
+        self.read_export.return_value = ['sub1', 'sub2', 'sub3', 'sub4']
+        self.lookup.side_effect = lambda sid: {'opted_in': True} if sid == 'sub1' else None
+        report = runner.audit_consent()
+        self.assertEqual(report['verified_opt_in_count'], 1)
+        self.assertFalse(report['all_verified'])
+        self.assert_no_state_change()
+
+    def test_audit_consent_refuses_oversized_export_without_lookup(self):
+        self.read_export.return_value = ['sub-%02d' % i for i in range(21)]
+        report = runner.audit_consent()
+        self.assertEqual(report['status'], 'audit_limit_exceeded')
+        self.lookup.assert_not_called()
+        self.assert_no_state_change()
+
+    def test_audit_consent_refuses_send_guards_before_network(self):
+        os.environ['CP_ENABLE_LIVE_PUSH'] = '1'
+        with self.assertRaisesRegex(RuntimeError, 'both send guards OFF'):
+            runner.audit_consent()
+        self.preflight.assert_not_called()
+        self.request_export.assert_not_called()
+        self.assert_no_state_change()
+
     def test_blocked_diagnosis_reports_only_safe_counts_and_keeps_circuit(self):
         before = copy.deepcopy((self.ledger, self.queue, self.control))
         report = runner.diagnose()
