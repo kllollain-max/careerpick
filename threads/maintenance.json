@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T09:27:49.000Z",
-  "last_observed_at": "2026-11-09T09:27:49.000Z",
+  "updated_at": "2026-11-09T09:39:14.000Z",
+  "last_observed_at": "2026-11-09T09:39:14.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -3140,13 +3140,13 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-09T09:27:49.000Z",
+    "checked_at": "2026-11-09T09:39:14.000Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-09T18:26:20.606514+09:00",
+    "input_reference_at": "2026-11-09T18:38:33.276237+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "Existing three future drafts passed whole delay-window validation. Rechecked unchanged Nov10 16:00 held draft with current official/PDF/profile evidence; scratch CLI passes at nominal slot. Full delay-window fails only stored ALIO freshness; no queue write.",
+    "queue_check": "No change. Existing three future entries pass full delay windows; existing November 10 16 draft passed scratch CLI but not full-window persisted source freshness (SOURCE_STALE). No queue write.",
     "queue_blob_sha": "d76e431f061311330cde59b32c54ffc7d7144ae5",
     "new_drafts": 0,
     "new_ready_saved": 0,
@@ -3335,7 +3335,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T09:27:49.000Z",
+    "checked_at": "2026-11-09T09:39:14.000Z",
     "main_sha": "2dc44ed67903ff71bac6713636a83a7cc7fc5306",
     "history_blob_sha": "10049b067594955d123701c447f6667acb366cba",
     "claim_blob_sha": "b5adbf0f45ac5d5c5597cc1d017be6b46e623174",
@@ -3350,18 +3350,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42585509666",
       "workflow_path": ".github/workflows/threads_auto.yml"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "42585509666",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T08:24:11Z",
-        "head_sha": "62f2561fbf1475c4374d86a3e2fcc4e89cefd041",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42585509666",
-        "workflow_path": ".github/workflows/threads_auto.yml"
-      }
-    ],
+    "new_publisher_runs": [],
     "status": "nov9_16_delayed_scheduled_run_verified_image_and_detail_reply",
     "slot": "2026-11-09T16:00:00+09:00",
     "publisher_in_progress": false,
@@ -3429,7 +3418,7 @@
       2
     ],
     "resume": "ALIO 저장 수집본과 직접 확인한 공식·프로필 근거가 2026-11-09T13:59:59+09:00 이후이고, 해당 슬롯이 계속 미착수이며 최신 원문 지문·중복·접수 상태를 모두 통과하면 기존 대기열 SHA 조건부 저장.",
-    "last_rechecked_at": "2026-11-09T09:27:49.000Z",
+    "last_rechecked_at": "2026-11-09T09:39:14.000Z",
     "next_image_preview": {
       "slot": "2026-11-09T08:00:00+09:00",
       "notice_id": "a306755",
@@ -3447,18 +3436,7 @@
     ],
     "next_action": "Verify Nov9 20:00 scheduled TEXT publication and detailed reply against actual receipt/history and Meta GET. Recheck held Nov10 16:00 entry after main receives a fresh verified ALIO snapshot. No replay or code change.",
     "last_existing_claim_blob_sha": "b5adbf0f45ac5d5c5597cc1d017be6b46e623174",
-    "observed_new_run_versions": [
-      {
-        "run_id": "42585509666",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T08:24:11Z",
-        "head_sha": "62f2561fbf1475c4374d86a3e2fcc4e89cefd041",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42585509666",
-        "workflow_path": ".github/workflows/threads_auto.yml"
-      }
-    ],
+    "observed_new_run_versions": [],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
@@ -3555,6 +3533,14 @@
       "main_chars": 98,
       "reply_chars": 321,
       "full_window_passed": true
+    },
+    "last_no_change_recheck": {
+      "claim_blob_sha": "b5adbf0f45ac5d5c5597cc1d017be6b46e623174",
+      "history_blob_sha": "10049b067594955d123701c447f6667acb366cba",
+      "meta_get_body_and_reply_log_rechecked": true,
+      "public_image_retained_bytes_rechecked": true,
+      "next_expected_media": "TEXT",
+      "checked_at": "2026-11-09T09:39:14.000Z"
     }
   },
   "writer_hold_alternatives": {
@@ -5167,7 +5153,7 @@
         "a306715: largest recruitment unit 4"
       ],
       "total_comparison_rows_including_gojobs": 1244,
-      "last_rechecked_at": "2026-11-09T09:27:49.000Z"
+      "last_rechecked_at": "2026-11-09T09:39:14.000Z"
     }
   }
 }
