@@ -349,9 +349,11 @@ class ScheduledQueueIntegrationTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         scheduled = (root / '.github/workflows/targeted-push.yml').read_text()
         self.assertIn('python -m scripts.run_targeted_push', scheduled)
-        self.assertIn('workflow_run:', scheduled)
-        self.assertNotIn('cron:', scheduled)
-        self.assertIn("vars.CP_ENABLE_ALL_OPTED_IN_ROLLOUT == '1'", scheduled)
+        # Owner-paused push has a manual-only trigger. No automatic sending.
+        self.assertIn('  workflow_dispatch:', scheduled)
+        self.assertNotIn('  workflow_run:', scheduled)
+        self.assertNotIn('  schedule:', scheduled)
+        self.assertIn("if: github.event_name == 'workflow_dispatch'", scheduled)
         ci = (root / '.github/workflows/targeted-push-check.yml').read_text()
         self.assertIn('python tests/run_alert_recovery.py', ci)
 

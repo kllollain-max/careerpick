@@ -1,9 +1,7 @@
 name: CareerPick targeted job push
+# Long-term owner hold: no workflow_run or scheduled launch.
+# Manual check/diagnose/review only; never fire on collection completion.
 on:
-  workflow_run:
-    workflows: ['CareerPick scheduled operation']
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
     inputs:
       mode:
@@ -26,12 +24,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   push:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (vars.CP_ENABLE_ALL_OPTED_IN_ROLLOUT == '1' &&
-       github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.event == 'schedule' &&
-       github.event.workflow_run.head_repository.full_name == github.repository)
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
