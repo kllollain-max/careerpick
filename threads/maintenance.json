@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T00:32:28.000Z",
-  "last_observed_at": "2026-11-09T00:32:28.000Z",
+  "updated_at": "2026-11-09T02:30:31.000Z",
+  "last_observed_at": "2026-11-09T02:30:04.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -138,6 +138,66 @@
     "last_update_commit_sha": "8e82be7be6ebda6c974181ea17f0519a3abe47bf"
   },
   "observed_runs": [
+    {
+      "run_id": "42548890550",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-09T02:05:02Z",
+      "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42548890550",
+      "workflow_path": ".github/workflows/targeted-push.yml"
+    },
+    {
+      "run_id": "42547827474",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T01:52:37Z",
+      "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42547827474",
+      "workflow_path": ".github/workflows/public-search-check.yml"
+    },
+    {
+      "run_id": "42547772019",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T01:52:24Z",
+      "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42547772019",
+      "workflow_path": ".github/workflows/deploy-pages.yml"
+    },
+    {
+      "run_id": "42545434151",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-09T01:25:14Z",
+      "head_sha": "162e1fc8bda0d41cd1f864cb68fe1449dac31aa1",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545434151",
+      "workflow_path": ".github/workflows/targeted-push.yml"
+    },
+    {
+      "run_id": "42545434099",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T01:24:56Z",
+      "head_sha": "162e1fc8bda0d41cd1f864cb68fe1449dac31aa1",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545434099",
+      "workflow_path": ".github/workflows/public-search-check.yml"
+    },
+    {
+      "run_id": "42545161355",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T01:24:43Z",
+      "head_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545161355",
+      "workflow_path": ".github/workflows/operations.yml"
+    },
     {
       "run_id": "42540341014",
       "run_attempt": 1,
@@ -2393,16 +2453,16 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-09T00:32:28.000Z",
+    "checked_at": "2026-11-09T02:30:31.000Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-09T09:32:02.121705+09:00",
+    "input_reference_at": "2026-11-09T11:28:17.417510+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "Three ready entries retained and verified through their delay window; existing Nov 10 draft remains blocked by unchanged persisted ALIO freshness.",
-    "queue_blob_sha": "acdadc7173ea23a8dd747a3a7e547f71bb43783f",
+    "queue_check": "CLI validated and read-back confirmed the three unchanged ready entries plus one promoted draft. Four entries passed full delay-window preflight.",
+    "queue_blob_sha": "0ed39b7926b898082956c3571c2371caf9e02a44",
     "new_drafts": 0,
-    "new_ready_saved": 0,
+    "new_ready_saved": 1,
     "ready_entries": [
       {
         "scheduled_at": "2026-11-09T12:00:00+09:00",
@@ -2433,13 +2493,23 @@
         "validated_through_delay_window": true,
         "compact_body_chars": 98,
         "detail_reply_chars": 321
+      },
+      {
+        "scheduled_at": "2026-11-10T08:00:00+09:00",
+        "notice_id": "a306784",
+        "format_id": "reader_story",
+        "entry_sha256": "e503c524dd119c5247f8c29cdf9da2899409e1ebe77950433a196d163b59e163",
+        "chars": 338,
+        "validated_through_delay_window": true,
+        "compact_body_chars": 106,
+        "detail_reply_chars": 312
       }
     ],
     "cleaneye_source": {
       "status": "verified",
-      "updated": "2026-11-09T00:48:09+09:00"
+      "updated": "2026-11-09T10:23:18+09:00"
     },
-    "source_last_success_at": "2026-11-09T00:47:35+09:00",
+    "source_last_success_at": "2026-11-09T10:22:17+09:00",
     "history_duplicate_ids_checked": true,
     "recent_records_compared": 10,
     "preserved_holds": [
@@ -2466,7 +2536,7 @@
         "reason": "Fresh feed resolves source age only. Official clock vs structured date and worksite still unresolved."
       }
     ],
-    "main_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
+    "main_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
     "new_alternatives": [],
     "profile_route_discovery": {
       "type": "dynamic_job_modal",
@@ -2553,23 +2623,26 @@
         }
       }
     },
-    "queue_commit_sha": "46407b17274c21abe97628e9dfc189f9f4275d52",
+    "queue_commit_sha": "eb018005c6b9f89ce9ce5cefb653189a2a2755fe",
     "priority_first_draft": "2026-11-10T08:00:00+09:00",
     "hold_recheck": {
-      "slot": "2026-11-10T08:00:00+09:00",
+      "status": "queued_ready",
       "notice_id": "a306784",
-      "draft_sha256": "390df843b1b2e20bbb8d4f7cfa52926f95513cde205bfc17db5c8c4c2e8be22a",
-      "error_code": "SOURCE_STALE",
-      "persisted_alio_last_success_at": "2026-11-09T00:47:35+09:00",
-      "operations_status_blob_sha": "02e92eced96bdea2ccd559eb90d1a17c35097291",
-      "minimum_persisted_verification_for_full_delay_window": "2026-11-09T09:59:59+09:00",
+      "scheduled_at": "2026-11-10T08:00:00+09:00",
+      "verified_at": "2026-11-09T02:30:31.000Z",
+      "old_error": "SOURCE_STALE",
+      "alio_last_success_at": "2026-11-09T10:22:17+09:00",
       "source_fingerprints_unchanged": true,
-      "checked_at": "2026-11-09T00:32:28.000Z"
+      "queue_blob_sha": "0ed39b7926b898082956c3571c2371caf9e02a44",
+      "queue_commit_sha": "eb018005c6b9f89ce9ce5cefb653189a2a2755fe",
+      "entry_sha256": "e503c524dd119c5247f8c29cdf9da2899409e1ebe77950433a196d163b59e163",
+      "preflight_through": "2026-11-10T09:59:59+09:00",
+      "published": false
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T00:32:28.000Z",
-    "main_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
+    "checked_at": "2026-11-09T02:30:31.000Z",
+    "main_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
     "history_blob_sha": "1941f41adbc720e9ee42c40b3c18b37281743242",
     "claim_blob_sha": "d8ce7c00576a1b4fb3b269d82a6e48dc17f018db",
     "last_confirmed_post_id": "18100758071102644",
@@ -2584,7 +2657,7 @@
       "workflow_path": ".github/workflows/threads_auto.yml"
     },
     "new_publisher_runs": [],
-    "status": "no_new_threads_run_or_incident_three_ready_next_draft_unchanged",
+    "status": "no_new_threads_incident_one_held_draft_promoted",
     "slot": "2026-11-09T08:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -2599,23 +2672,21 @@
     "publication_style": "compact_with_detail_v1",
     "first_compact_success": "verified_previously",
     "source_collection": {
-      "run_id": "42526937614",
+      "run_id": "42545161355",
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-08T21:50:00Z",
-      "head_sha": "866c08c387f93f6690d316de246ad412ab76555b",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42526937614",
+      "updated_at": "2026-11-09T01:24:43Z",
+      "head_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545161355",
       "workflow_path": ".github/workflows/operations.yml",
-      "job_id": "128872528761",
-      "collection_result": "successful_unchanged_alio_and_cleaneye",
-      "alio_verified_at": "2026-11-09T06:48:03+09:00",
-      "stored_alio_verified_at": "2026-11-09T00:47:35+09:00",
-      "cleaneye_checked_at": "2026-11-09T06:49:55+09:00",
-      "cleaneye_snapshot_at": "2026-11-09T00:48:09+09:00",
+      "job_id": "128928449928",
+      "collection_result": "changed_verified_alio_and_cleaneye",
+      "alio_verified_at": "2026-11-09T10:22:17+09:00",
+      "cleaneye_snapshot_at": "2026-11-09T10:23:18+09:00",
       "cleaneye_complete": true,
-      "confirmed_current": 504,
-      "operations_status_blob_sha": "02e92eced96bdea2ccd559eb90d1a17c35097291",
+      "confirmed_current": 508,
+      "operations_status_blob_sha": "26ebe526c3f0954b420a3b1a2870b9dc2cb7252c",
       "public_snapshot_hashes_verified": true
     },
     "pages_read": [
@@ -2639,28 +2710,68 @@
       1,
       2
     ],
-    "next_action": "Recheck persisted ALIO freshness before promoting the Nov 10 08 draft and verify the natural Nov 9 12 run. No replay.",
+    "next_action": "Verify natural Nov 9 12:00 run and Nov 10 08:00 entry upon its scheduled run; do not replay.",
     "last_existing_claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
     "observed_new_run_versions": [
       {
-        "run_id": "42540341014",
+        "run_id": "42548890550",
         "run_attempt": 1,
         "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T00:29:03Z",
-        "head_sha": "5fe5016e76e11fc64a2b5e8346e42862ab425f23",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42540341014",
-        "workflow_path": ".github/workflows/content-mobile-check.yml"
+        "conclusion": "failure",
+        "updated_at": "2026-11-09T02:05:02Z",
+        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42548890550",
+        "workflow_path": ".github/workflows/targeted-push.yml"
       },
       {
-        "run_id": "42540341013",
+        "run_id": "42547827474",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "success",
-        "updated_at": "2026-11-09T00:28:47Z",
-        "head_sha": "5fe5016e76e11fc64a2b5e8346e42862ab425f23",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42540341013",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml"
+        "updated_at": "2026-11-09T01:52:37Z",
+        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42547827474",
+        "workflow_path": ".github/workflows/public-search-check.yml"
+      },
+      {
+        "run_id": "42547772019",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-09T01:52:24Z",
+        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42547772019",
+        "workflow_path": ".github/workflows/deploy-pages.yml"
+      },
+      {
+        "run_id": "42545434151",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "failure",
+        "updated_at": "2026-11-09T01:25:14Z",
+        "head_sha": "162e1fc8bda0d41cd1f864cb68fe1449dac31aa1",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545434151",
+        "workflow_path": ".github/workflows/targeted-push.yml"
+      },
+      {
+        "run_id": "42545434099",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-09T01:24:56Z",
+        "head_sha": "162e1fc8bda0d41cd1f864cb68fe1449dac31aa1",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545434099",
+        "workflow_path": ".github/workflows/public-search-check.yml"
+      },
+      {
+        "run_id": "42545161355",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-09T01:24:43Z",
+        "head_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545161355",
+        "workflow_path": ".github/workflows/operations.yml"
       }
     ],
     "unrelated_pr_check": {
@@ -3680,6 +3791,20 @@
       "status": "queued_ready",
       "queue_blob_sha": "acdadc7173ea23a8dd747a3a7e547f71bb43783f",
       "queue_commit_sha": "46407b17274c21abe97628e9dfc189f9f4275d52"
+    },
+    "2026-11-10T08:00:00+09:00": {
+      "status": "queued_ready",
+      "notice_id": "a306784",
+      "scheduled_at": "2026-11-10T08:00:00+09:00",
+      "verified_at": "2026-11-09T02:30:31.000Z",
+      "old_error": "SOURCE_STALE",
+      "alio_last_success_at": "2026-11-09T10:22:17+09:00",
+      "source_fingerprints_unchanged": true,
+      "queue_blob_sha": "0ed39b7926b898082956c3571c2371caf9e02a44",
+      "queue_commit_sha": "eb018005c6b9f89ce9ce5cefb653189a2a2755fe",
+      "entry_sha256": "e503c524dd119c5247f8c29cdf9da2899409e1ebe77950433a196d163b59e163",
+      "preflight_through": "2026-11-10T09:59:59+09:00",
+      "published": false
     }
   },
   "editorial_restoration": {
@@ -3763,7 +3888,9 @@
       "unit_count": 6,
       "reason": "Largest fully identified regular ALIO unit in the compared available unassigned candidates. One role and worksite, and both ALIO and official attachment list 6; no popularity score used.",
       "deadline": "2026-11-16T17:30:00+09:00",
-      "validator": "SOURCE_STALE"
+      "validator": "passed",
+      "resolution": "queued_ready",
+      "queue_entry_sha256": "e503c524dd119c5247f8c29cdf9da2899409e1ebe77950433a196d163b59e163"
     },
     "comparisons": [
       {
