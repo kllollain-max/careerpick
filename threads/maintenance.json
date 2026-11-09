@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T15:38:55+00:00",
-  "last_observed_at": "2026-11-09T15:38:55+00:00",
+  "updated_at": "2026-11-09T16:21:25+00:00",
+  "last_observed_at": "2026-11-09T16:21:25+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1235,6 +1235,26 @@
       "updated_at": "2026-11-05T03:46:56Z",
       "head_sha": "568d6c934968b627c8ac430b7d27b1b814c44a77",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/41963510648"
+    },
+    {
+      "run_id": "42653498961",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T16:19:07Z",
+      "head_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42653498961",
+      "workflow_path": ".github/workflows/public-search-check.yml"
+    },
+    {
+      "run_id": "42652587846",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T16:18:48Z",
+      "head_sha": "0112e60e771e060a2a46a39043ec4644f5280af4",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42652587846",
+      "workflow_path": ".github/workflows/operations.yml"
     }
   ],
   "last_confirmed_publication": {
@@ -6792,8 +6812,8 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T15:38:55+00:00",
-    "main_sha": "0112e60e771e060a2a46a39043ec4644f5280af4",
+    "checked_at": "2026-11-09T16:21:25+00:00",
+    "main_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
     "history_blob_sha": "040e3ccef93201e6883f7b04af661c0a278b1196",
     "claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
     "last_confirmed_post_id": "18650936065022110",
@@ -6883,7 +6903,28 @@
     ],
     "next_action": "Verify the next scheduled main body and detail reply. Preserve all four queued drafts. No replay.",
     "last_existing_claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
-    "observed_new_run_versions": [],
+    "observed_new_run_versions": [
+      {
+        "run_id": "42653498961",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-09T16:19:07Z",
+        "head_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42653498961",
+        "workflow_path": ".github/workflows/public-search-check.yml"
+      },
+      {
+        "run_id": "42652587846",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-09T16:18:48Z",
+        "head_sha": "0112e60e771e060a2a46a39043ec4644f5280af4",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42652587846",
+        "workflow_path": ".github/workflows/operations.yml"
+      }
+    ],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
@@ -7056,14 +7097,14 @@
       "meta_logs_match": true
     },
     "current_source_collection": {
-      "operations_status_blob_sha": "8602ddeb152a5824fa375e6fdfc7bb0fe042b8bc",
+      "operations_status_blob_sha": "c516475156d368a508035e45ab2c46bb68504a1a",
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-09T22:27:03+09:00",
-        "source_checked_at": "2026-11-09T22:27:37+09:00",
-        "total_records": 814,
+        "snapshot_at": "2026-11-10T01:13:46+09:00",
+        "source_checked_at": "2026-11-10T01:14:17+09:00",
+        "total_records": 819,
         "eligible_count": 31,
-        "review_required_count": 680,
+        "review_required_count": 685,
         "excluded_count": 103,
         "returned_count": 1,
         "exclusion_reasons": {
@@ -7077,17 +7118,32 @@
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-09T22:28:23+09:00",
-        "source_checked_at": "2026-11-09T22:28:23+09:00",
+        "snapshot_at": "2026-11-10T01:14:54+09:00",
+        "source_checked_at": "2026-11-10T01:14:54+09:00",
         "total_records": 421,
         "eligible_count": 239,
         "review_required_count": 0,
         "excluded_count": 182,
         "returned_count": 23,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 154,
-          "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 26,
-          "CLEANEYE_NOT_RECRUITMENT": 2
+          "CLEANEYE_NOT_VERIFIED_OPEN": 160,
+          "CLEANEYE_NOT_RECRUITMENT": 2,
+          "CLEANEYE_APPLICATION_NOT_OPEN": 20
+        }
+      },
+      "gojobs": {
+        "updated": "2026-11-10T01:14:19+09:00",
+        "counts": {
+          "closed": 19,
+          "boundary_time_unverified": 6,
+          "open_by_date": 6
+        },
+        "source_health": {
+          "authentication_verified": true,
+          "official_page_verified": 8,
+          "official_page_failed": 0,
+          "collector_open_by_date": 8,
+          "collector_deadline_time_unconfirmed": 4
         }
       }
     }
@@ -8844,7 +8900,7 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-09T15:38:55+00:00",
+    "checked_at": "2026-11-09T16:21:25+00:00",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
@@ -8897,8 +8953,8 @@
     "artifact_digest": "sha256:5fcfe56f6e465fa0e7d7d535bcaf271eda8cbc9f5cca79bd116d69cacad21915"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-09T15:38:55+00:00",
-    "main_sha": "0112e60e771e060a2a46a39043ec4644f5280af4",
+    "checked_at": "2026-11-09T16:21:25+00:00",
+    "main_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
     "queue_blob_sha": "4bc1be4f0ccb67c73ff57f99f5255ce4d6b393fb",
     "prompt_and_editorial_bytes_verified": true,
     "mode": "preserve_existing_ready_no_unstarted_open_slot_in_24h",
@@ -8914,7 +8970,7 @@
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v2-20261109",
-      "evaluated_at": "2026-11-10T00:36:45.053399+09:00",
+      "evaluated_at": "2026-11-10T01:18:41.423266+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -8924,11 +8980,11 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-09T22:27:03+09:00",
-          "source_checked_at": "2026-11-09T22:27:37+09:00",
-          "total_records": 814,
+          "snapshot_at": "2026-11-10T01:13:46+09:00",
+          "source_checked_at": "2026-11-10T01:14:17+09:00",
+          "total_records": 819,
           "eligible_count": 31,
-          "review_required_count": 680,
+          "review_required_count": 685,
           "excluded_count": 103,
           "returned_count": 1,
           "exclusion_reasons": {
@@ -8942,21 +8998,21 @@
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-09T22:28:23+09:00",
-          "source_checked_at": "2026-11-09T22:28:23+09:00",
+          "snapshot_at": "2026-11-10T01:14:54+09:00",
+          "source_checked_at": "2026-11-10T01:14:54+09:00",
           "total_records": 421,
           "eligible_count": 239,
           "review_required_count": 0,
           "excluded_count": 182,
           "returned_count": 23,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 154,
-            "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 26,
-            "CLEANEYE_NOT_RECRUITMENT": 2
+            "CLEANEYE_NOT_VERIFIED_OPEN": 160,
+            "CLEANEYE_NOT_RECRUITMENT": 2,
+            "CLEANEYE_APPLICATION_NOT_OPEN": 20
           }
         }
       },
-      "total_scanned": 1235,
+      "total_scanned": 1240,
       "eligible_before_limit": 270,
       "writer_limit": 24,
       "returned_count": 24,
@@ -9033,27 +9089,246 @@
     "current_official_detail_recheck": {
       "notice_id": "a306784",
       "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306784",
-      "checked_at": "2026-11-09T15:38:55+00:00",
+      "checked_at": "2026-11-09T16:21:25+00:00",
       "status": "open",
-      "scope": "official detail rechecked; existing attachment verification timestamps not changed"
+      "scope": "Official listing rechecked; attachment and READY timestamps preserved."
     },
     "public_profile_path_recheck": {
-      "checked_at": "2026-11-09T15:38:55+00:00",
       "profile": {
         "status": 200,
-        "sha256": "9ba334198227a2341093123cf3a757a01e683875707bd3ea1da9c55f76a4619f",
+        "url": "https://www.threads.com/@hid_119",
+        "sha256": "9949bf507c1b478c112d74f949c1fd458234acab1ae5d94e601b59b4a2ab53a2",
+        "checked_at": "2026-11-09T16:19:39.423181+00:00",
         "rel_me_careerpick": true
       },
       "site": {
         "status": 200,
-        "sha256": "7e294cbf273e19ed26797909f66716d1ac802214b40121bc264b652be3ce2cd7"
+        "url": "https://kllollain-max.github.io/careerpick/",
+        "sha256": "89028379008a84c3b6676a461719a5093fccc1df2ad6c55fbd2e884df0f47f5b",
+        "checked_at": "2026-11-09T16:19:38.589083+00:00"
       },
       "feed": {
         "status": 200,
-        "sha256": "d35b4c7516e4a69a190b29f9a988112f112145880f65ab8a963f8cf460b65d37",
+        "url": "https://kllollain-max.github.io/careerpick/alio.json",
+        "sha256": "dee278c116364ff3b3fc56087c9b7bc799dd035818b0053883c9c2ba743a66eb",
+        "checked_at": "2026-11-09T16:19:38.554346+00:00",
         "notice_id_visible": true
       },
       "deep_link_rendered": false
+    },
+    "gojobs_supplemental_audit": {
+      "updated": "2026-11-10T01:14:19+09:00",
+      "scope": "지방공무원 g02/e01,e02 · 최근 14일 등록 목록 전체 조회 · 마감 임박 후보 최대8건 원문 검증; 전국 전체 채용 아님",
+      "api_received": 146,
+      "stored": 31,
+      "states": {
+        "closed": 19,
+        "boundary_time_unverified": 6,
+        "open_by_date": 6
+      },
+      "open_by_date": [
+        [
+          "gojobs-306692",
+          "2026년도 제4회 인천광역시부평구 지방임기제공무원 채용시험 재공고(예진의사)",
+          [
+            "임기제"
+          ],
+          "2026-11-06",
+          "2026-11-11"
+        ],
+        [
+          "gojobs-306828",
+          "2026년 제1회 진주시의회 임기제공무원 채용시험 공고(정책지원관)",
+          [
+            "임기제"
+          ],
+          "2026-11-09",
+          "2026-11-11"
+        ],
+        [
+          "gojobs-306834",
+          "서울특별시 광진구의회 임기제공무원(일반행정) 채용 공고",
+          [
+            "임기제"
+          ],
+          "2026-11-09",
+          "2026-11-11"
+        ],
+        [
+          "gojobs-306981",
+          "서울특별시 구로구 일반임기제공무원 국제교류 분야(영어) 채용 공고",
+          [
+            "임기제"
+          ],
+          "2026-11-09",
+          "2026-11-11"
+        ],
+        [
+          "gojobs-307361",
+          "서울특별시 금천구 시간선택제임기제 공무원 채용공고(다·라급, 영상 콘텐츠 기획 제작 분야)",
+          [
+            "임기제"
+          ],
+          "2026-11-06",
+          "2026-11-11"
+        ],
+        [
+          "gojobs-307383",
+          "서울특별시 금천구 일반임기제공무원(7급, 기록물관리분야) 채용 공고",
+          [
+            "임기제"
+          ],
+          "2026-11-05",
+          "2026-11-11"
+        ]
+      ],
+      "records": [
+        {
+          "notice_id": "gojobs-306185",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306282",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306284",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306287",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306327",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306342",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306355",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306409",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306435",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306452",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306511",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306639",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306691",
+          "status": "boundary_time_unverified"
+        },
+        {
+          "notice_id": "gojobs-306692",
+          "status": "open_by_date"
+        },
+        {
+          "notice_id": "gojobs-306715",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306726",
+          "status": "boundary_time_unverified"
+        },
+        {
+          "notice_id": "gojobs-306744",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306779",
+          "status": "boundary_time_unverified"
+        },
+        {
+          "notice_id": "gojobs-306780",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306821",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306828",
+          "status": "open_by_date"
+        },
+        {
+          "notice_id": "gojobs-306832",
+          "status": "boundary_time_unverified"
+        },
+        {
+          "notice_id": "gojobs-306834",
+          "status": "open_by_date"
+        },
+        {
+          "notice_id": "gojobs-306951",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306952",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-306981",
+          "status": "open_by_date"
+        },
+        {
+          "notice_id": "gojobs-306992",
+          "status": "boundary_time_unverified"
+        },
+        {
+          "notice_id": "gojobs-307010",
+          "status": "closed"
+        },
+        {
+          "notice_id": "gojobs-307283",
+          "status": "boundary_time_unverified"
+        },
+        {
+          "notice_id": "gojobs-307361",
+          "status": "open_by_date"
+        },
+        {
+          "notice_id": "gojobs-307383",
+          "status": "open_by_date"
+        }
+      ],
+      "official_details_fully_reviewed": false,
+      "source_health": {
+        "authentication_verified": true,
+        "official_page_verified": 8,
+        "official_page_failed": 0,
+        "collector_open_by_date": 8,
+        "collector_deadline_time_unconfirmed": 4
+      },
+      "exclusion_summary": {
+        "reason": "All 12 non-expired stored records are fixed-term civil-service roles; six are inside the date range and six have an unverified boundary time (two starts, four deadlines). No suitable vacancy displaces one of the four verified regular-employment entries.",
+        "added_to_ready": 0,
+        "scope_note": "Manual audit of the actual connected feed; not passed into the two-source production writer or verified for publication."
+      }
+    },
+    "higher_priority_hold_recheck": {
+      "notice_id": "cleaneye-80642",
+      "count": 16,
+      "source_freshness_resolved": true,
+      "source_sha256s_unchanged": true,
+      "remaining_blocker": "official workplace/assignment location unconfirmed; keep hold and existing READY alternative",
+      "new_official_review": false
     }
   }
 }
