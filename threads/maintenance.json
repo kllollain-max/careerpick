@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T02:54:46.000Z",
-  "last_observed_at": "2026-11-09T02:54:46.000Z",
+  "updated_at": "2026-11-09T04:02:39.000Z",
+  "last_observed_at": "2026-11-09T04:02:39.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -138,6 +138,16 @@
     "last_update_commit_sha": "8e82be7be6ebda6c974181ea17f0519a3abe47bf"
   },
   "observed_runs": [
+    {
+      "run_id": "42558101248",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T03:46:39Z",
+      "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42558101248",
+      "workflow_path": ".github/workflows/threads_auto.yml"
+    },
     {
       "run_id": "42548890550",
       "run_attempt": 1,
@@ -853,43 +863,33 @@
     }
   ],
   "last_confirmed_publication": {
-    "run_id": "42534886647",
+    "run_id": "42558101248",
     "run_attempt": 1,
     "status": "completed",
     "conclusion": "success",
-    "updated_at": "2026-11-08T23:24:15Z",
-    "head_sha": "866c08c387f93f6690d316de246ad412ab76555b",
-    "url": "https://github.com/kllollain-max/careerpick/actions/runs/42534886647",
+    "updated_at": "2026-11-09T03:46:39Z",
+    "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/42558101248",
     "workflow_path": ".github/workflows/threads_auto.yml",
-    "slot": "2026-11-09T08:00:00+09:00",
-    "actual_published_at": "2026-11-09T08:23:26.283818+09:00",
-    "reply_published_at": "2026-11-09T08:24:09.968075+09:00",
-    "notice_id": "a306755",
-    "post_id": "18100758071102644",
-    "post_url": "https://www.threads.com/@hid_119/post/Dff7WxzkVUg",
-    "reply_post_id": "18034303427911717",
-    "reply_url": "https://www.threads.com/@hid_119/post/Dff7cQrkTWb",
+    "slot": "2026-11-09T12:00:00+09:00",
+    "actual_published_at": "2026-11-09T12:45:49.694805+09:00",
+    "reply_published_at": "2026-11-09T12:46:31.822713+09:00",
+    "notice_id": "a306586",
+    "post_id": "18153842440557333",
+    "post_url": "https://www.threads.com/@hid_119/post/DfgZY_HgKUr",
+    "reply_post_id": "18014532992989522",
+    "reply_url": "https://www.threads.com/@hid_119/post/DfgZeFOALjU",
     "reply_count": 1,
-    "format_id": "reader_story",
+    "format_id": "key_facts",
     "publication_style": "compact_with_detail_v1",
-    "actual_media": "IMAGE",
-    "previous_success_media": "TEXT",
-    "github_job_id": "128896875731",
-    "verified_at": "2026-11-08T23:24:11.9515366Z",
+    "actual_media": "TEXT",
+    "previous_success_media": "IMAGE",
+    "github_job_id": "128968246717",
+    "verified_at": "2026-11-09T03:46:35.3432486Z",
     "meta_get": "verified_ids_text_and_reply_links",
-    "history_blob_sha": "1941f41adbc720e9ee42c40b3c18b37281743242",
-    "claim_blob_sha": "d8ce7c00576a1b4fb3b269d82a6e48dc17f018db",
-    "entry_sha256": "8dc318bd3d01e0043fbd3d96d2011956fdec24e1ff33aef4ae629b9686be914d",
-    "image_sha256": "6cc3201a7cad12be87fe34324b7dc92346e003871b108dcbc5c1602c0f17e643",
-    "image_quality": {
-      "valid": true,
-      "format": "JPEG",
-      "width": 1080,
-      "height": 1080,
-      "mode": "RGB",
-      "file_size_bytes": 155093
-    },
-    "public_image_sha256_matches": true
+    "history_blob_sha": "6d7209c0fa7f5769d43b67fafdeca2de7f8d7fe0",
+    "claim_blob_sha": "04224de1b8b02cea6c7a9833208b70381b801b41",
+    "entry_sha256": "68fe02c29a25b0f14e076d8df8394d50107b3535dd411153a173a749ff14244b"
   },
   "pending_records_at_activation": 0,
   "first_new_policy_publication": {
@@ -2450,30 +2450,156 @@
         "queue_ready_saved": false
       },
       "resume": "After a fresh persisted ALIO collection covers the target slot, recheck current inputs, source fingerprints, evidence age through the delay window, priority and concurrent claims, then run the normal queue validator and CAS."
+    },
+    "2026-11-10T12:00:00+09:00": {
+      "notice_id": "a306716",
+      "source_post_sha256": "00583ad7c172e0b526cf6655910b48750ad8568a2cfb4759da1011c19ecbb07a",
+      "source_detail_sha256": "0720d961ab6a5652ed363cc1d81a5cff55cfd8b5faa85711a6e0913b1788f3ea",
+      "scheduled_at": "2026-11-10T12:00:00+09:00",
+      "format_id": "key_facts",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "image_job": {
+        "id": "a306716",
+        "org": "서울대학교치과병원",
+        "title": "운영지원직(미화)",
+        "count": 5,
+        "employment": "정규직",
+        "location": "서울",
+        "due": "2026-11-18",
+        "deadline_label": "2026-11-18 12:00"
+      },
+      "writer": {
+        "status": "draft",
+        "post_text": null,
+        "draft_text": "서울대학교치과병원 정규직 미화 5명, 지원 전에 근무표부터 살펴보세요.\n\n모집: 서울 근무 운영지원직 미화 SA1이에요. 진료구역을 청소·소독하고 의료폐기물을 수거·분리해요.\n근무: 교대·야간근무가 있을 수 있어요. 관악 분원 등 다른 부서에 배치될 수 있어요.\n자격: 미화는 별도 자격증을 요구하지 않아요. 공고일 기준 만 60세 미만이어야 하고, 남성은 2027년 1월 1일 기준 병역필 또는 면제여야 해요.\n접수: 11월 18일 낮 12시까지 병원 채용 홈페이지에서 지원해요. 진행 중인 병원 내 다른 공고에 중복 지원할 수 없어요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a306716",
+          "target_reader": "서울에서 병원 미화 업무를 찾고 교대·야간 및 분원 배치 가능성을 확인하려는 지원자",
+          "central_message": "미화 모집단위 5명의 자격과 근무 형태를 확인하고 중복 지원을 피한다.",
+          "pattern_id": "P4",
+          "scheduled_at": "2026-11-10T12:00:00+09:00",
+          "reference_at": "2026-11-09T13:01:53.927025+09:00",
+          "verification_basis": "checked_official_source",
+          "checked_at": "2026-11-09T13:00:38.133853+09:00",
+          "source_refs": [
+            {
+              "url": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271414",
+              "checked_at": "2026-11-09T13:00:12.926108+09:00",
+              "html_sha256": "1c585f9e3bcd07330c399b54bf16aa6860b6590aab5a8a36225a7990f1dfe43c",
+              "excerpt": "접수기간 2026.11.04(수) 17:40 ~ 2026.11.18(수) 12:00 / 운영지원직 미화 5명 / 공고일 기준 정년퇴직 기준연령(만 60 세)에 도달한 자는 지원할 수 없음 / 남자는 임용일(‘27.1.1.) 기준 병역필 또는 면제자에 한함 / 동종 직무를 수행하는 다른 부서(관악 분원 등)에서도 근무할 수 있음 / 동시 진행 중인 본원 타 채용공고에 중복지원 불가"
+            },
+            {
+              "url": "https://job.alio.go.kr/recruitview.do?idx=306716",
+              "checked_at": "2026-11-09T13:00:21.054025+09:00",
+              "html_sha256": "43c692350ee8af13fb3fe74831e0ade7ea51ae480b255cdcee94e2c044574848",
+              "excerpt": "고용형태 정규직 / 근무지 서울 / (미화, 보안) 자격제한 없음"
+            },
+            {
+              "url": "https://snudh.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=11ac14e4-d72f-4996-abe3-e146da6cba93.pdf",
+              "checked_at": "2026-11-09T13:00:38.133853+09:00",
+              "sha256": "c608a1fd8ec420be09f4683c9793fb654cbe80eb2efaa5426c18b18731e8f4a4",
+              "section": "직무기술서 1쪽",
+              "excerpt": "운영지원직(미화) SA1 / 수술장 및 진료구역 등 청소 및 소독 / 의료폐기물, 일반폐기물, 음식물쓰레기 등 수거 및 분리, 운반 및 입고 / 교대, 야간근무 가능"
+            }
+          ],
+          "missing_or_conflicting": [
+            "ALIO 저장 검증본 시각 2026-11-09T10:22:17+09:00은 11월 10일 12시 슬롯 기준 24시간 초과(SOURCE_STALE). 신규 검증 수집본이 main에 반영된 뒤 다시 검사."
+          ],
+          "omitted_optional_facts": [
+            "다른 모집단위, 인적성·면접 세부 전형과 우대 증빙",
+            "공식 원문에 특정 편성표와 주말근무 여부가 명시되지 않아 추정하지 않음"
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "pre_publish_checks": [
+            "신선한 저장 검증본으로 공식 상태·원문 지문·중복·슬롯을 검증한 뒤 일반 대기열 검사",
+            "이미지 차례에만 생성 및 검증"
+          ],
+          "application_period": {
+            "start": "2026-11-04T17:40:00+09:00",
+            "end": "2026-11-18T12:00:00+09:00",
+            "start_date_only": false,
+            "date_only": false,
+            "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271414",
+            "evidence": "접수기간 2026.11.04(수) 17:40 ~ 2026.11.18(수) 12:00"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306716.html",
+            "notice_id": "a306716",
+            "checked_at": "2026-11-09T13:00:26.134224+09:00",
+            "verified": true,
+            "html_sha256": "5b673b8382c74fed956cf796738c6af70787e72efff14503aac230f92f25f89b",
+            "site_checked_at": "2026-11-09T13:01:00.793624+09:00",
+            "site_html_sha256": "7e294cbf273e19ed26797909f66716d1ac802214b40121bc264b652be3ce2cd7"
+          },
+          "profile_account_check": {
+            "url": "https://www.threads.com/@hid_119",
+            "rel_me": "https://kllollain-max.github.io/careerpick/",
+            "checked_at": "2026-11-09T13:00:31.733917+09:00",
+            "html_sha256": "7aae1d4f7f14bd816995bdb77eca3dbcbaf3e7d8cf7dc8b287a2b86da7a21b6f"
+          },
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "운영지원직(미화)",
+              "source_ref": "https://snudh.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=11ac14e4-d72f-4996-abe3-e146da6cba93.pdf",
+              "excerpt": "운영지원직(미화) SA1 / 수술장 및 진료구역 등 청소 및 소독 / 의료폐기물, 일반폐기물, 음식물쓰레기 등 수거 및 분리, 운반 및 입고 / 교대, 야간근무 가능"
+            },
+            {
+              "field": "count",
+              "value": 5,
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271414",
+              "excerpt": "운영지원직 미화 5명"
+            },
+            {
+              "field": "employment",
+              "value": "정규직",
+              "source_ref": "https://job.alio.go.kr/recruitview.do?idx=306716",
+              "excerpt": "고용형태 정규직"
+            },
+            {
+              "field": "location",
+              "value": "서울",
+              "source_ref": "https://job.alio.go.kr/recruitview.do?idx=306716",
+              "excerpt": "근무지 서울"
+            }
+          ],
+          "body_characters": 327
+        }
+      },
+      "entry_sha256": "d33c024bdbe2efb1665a7fa9ee0372d8385671801651a6b9b0896cb26977d70c",
+      "validation": {
+        "status": "draft_not_queueable",
+        "error_code": "SOURCE_STALE",
+        "stored_source_verified_at": "2026-11-09T10:22:17+09:00",
+        "checks_passed": [
+          "source fingerprints and actual application period",
+          "format and CTA",
+          "profile rel=me and notice path",
+          "job duties attachment and image facts",
+          "whole history duplication"
+        ],
+        "queue_ready_saved": false
+      },
+      "resume": "Recheck after persisted ALIO verification reaches 2026-11-09 13:59:59 KST or later for the full 2h window; official evidence still must be fresh and unchanged. Run ordinary validation and CAS only on pass."
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-09T02:54:46.000Z",
+    "checked_at": "2026-11-09T04:02:39.000Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-09T11:54:23.753654+09:00",
+    "input_reference_at": "2026-11-09T12:59:59.359106+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "Four unchanged ready entries revalidated through delay windows; no unfilled slot in the next 24 hours.",
+    "queue_check": "Three existing future entries unchanged; newly drafted Nov 10 12 slot remains unqueued because persisted source is stale for that slot.",
     "queue_blob_sha": "0ed39b7926b898082956c3571c2371caf9e02a44",
-    "new_drafts": 0,
+    "new_drafts": 1,
     "new_ready_saved": 0,
     "ready_entries": [
-      {
-        "scheduled_at": "2026-11-09T12:00:00+09:00",
-        "notice_id": "a306586",
-        "format_id": "key_facts",
-        "entry_sha256": "68fe02c29a25b0f14e076d8df8394d50107b3535dd411153a173a749ff14244b",
-        "chars": 411,
-        "validated_through_delay_window": true,
-        "compact_body_chars": 96,
-        "detail_reply_chars": 385
-      },
       {
         "scheduled_at": "2026-11-09T16:00:00+09:00",
         "notice_id": "a306731",
@@ -2517,7 +2643,9 @@
       "a306637",
       "a306802"
     ],
-    "new_holds": [],
+    "new_holds": [
+      "a306716"
+    ],
     "candidate_exclusions": [
       {
         "notice_id": "a306602",
@@ -2536,7 +2664,7 @@
         "reason": "Fresh feed resolves source age only. Official clock vs structured date and worksite still unresolved."
       }
     ],
-    "main_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+    "main_sha": "bf0f5fa51d0f30ef6f99d3a9a92dab1837384dce",
     "new_alternatives": [],
     "profile_route_discovery": {
       "type": "dynamic_job_modal",
@@ -2595,9 +2723,9 @@
       ]
     },
     "preserved_ready": [
-      "a306586",
       "a306731",
-      "a306802"
+      "a306802",
+      "a306784"
     ],
     "profile_rel_me": {
       "url": "https://www.threads.com/@hid_119",
@@ -2626,39 +2754,45 @@
     "queue_commit_sha": "eb018005c6b9f89ce9ce5cefb653189a2a2755fe",
     "priority_first_draft": "2026-11-10T08:00:00+09:00",
     "hold_recheck": {
-      "status": "queued_ready",
-      "notice_id": "a306784",
-      "scheduled_at": "2026-11-10T08:00:00+09:00",
-      "verified_at": "2026-11-09T02:30:31.000Z",
-      "old_error": "SOURCE_STALE",
-      "alio_last_success_at": "2026-11-09T10:22:17+09:00",
-      "source_fingerprints_unchanged": true,
-      "queue_blob_sha": "0ed39b7926b898082956c3571c2371caf9e02a44",
-      "queue_commit_sha": "eb018005c6b9f89ce9ce5cefb653189a2a2755fe",
-      "entry_sha256": "e503c524dd119c5247f8c29cdf9da2899409e1ebe77950433a196d163b59e163",
-      "preflight_through": "2026-11-10T09:59:59+09:00",
-      "published": false
+      "slot": "2026-11-10T12:00:00+09:00",
+      "notice_id": "a306716",
+      "draft_sha256": "d33c024bdbe2efb1665a7fa9ee0372d8385671801651a6b9b0896cb26977d70c",
+      "error_code": "SOURCE_STALE",
+      "persisted_alio_last_success_at": "2026-11-09T10:22:17+09:00",
+      "operations_status_blob_sha": "26ebe526c3f0954b420a3b1a2870b9dc2cb7252c",
+      "minimum_persisted_verification_for_full_delay_window": "2026-11-09T13:59:59+09:00"
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T02:54:46.000Z",
-    "main_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
-    "history_blob_sha": "1941f41adbc720e9ee42c40b3c18b37281743242",
-    "claim_blob_sha": "d8ce7c00576a1b4fb3b269d82a6e48dc17f018db",
-    "last_confirmed_post_id": "18100758071102644",
+    "checked_at": "2026-11-09T04:02:39.000Z",
+    "main_sha": "bf0f5fa51d0f30ef6f99d3a9a92dab1837384dce",
+    "history_blob_sha": "6d7209c0fa7f5769d43b67fafdeca2de7f8d7fe0",
+    "claim_blob_sha": "04224de1b8b02cea6c7a9833208b70381b801b41",
+    "last_confirmed_post_id": "18153842440557333",
     "latest_publisher_run": {
-      "run_id": "42534886647",
+      "run_id": "42558101248",
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-08T23:24:15Z",
-      "head_sha": "866c08c387f93f6690d316de246ad412ab76555b",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42534886647",
+      "updated_at": "2026-11-09T03:46:39Z",
+      "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42558101248",
       "workflow_path": ".github/workflows/threads_auto.yml"
     },
-    "new_publisher_runs": [],
-    "status": "no_new_threads_run_or_incident_four_ready_unchanged",
-    "slot": "2026-11-09T08:00:00+09:00",
+    "new_publisher_runs": [
+      {
+        "run_id": "42558101248",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-09T03:46:39Z",
+        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42558101248",
+        "workflow_path": ".github/workflows/threads_auto.yml"
+      }
+    ],
+    "status": "12_confirmed_text_main_and_detail_reply_next_slot_draft_held",
+    "slot": "2026-11-09T12:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
       "run_id": "42460392100",
@@ -2710,20 +2844,31 @@
       1,
       2
     ],
-    "next_action": "Verify natural Nov 9 12:00 run and Nov 10 08:00 entry upon its scheduled run; do not replay.",
-    "last_existing_claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
-    "observed_new_run_versions": [],
+    "next_action": "Recheck the held Nov 10 12 draft after persisted ALIO refresh, and verify the natural Nov 9 16 image run without replay.",
+    "last_existing_claim_blob_sha": "d8ce7c00576a1b4fb3b269d82a6e48dc17f018db",
+    "observed_new_run_versions": [
+      {
+        "run_id": "42558101248",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-09T03:46:39Z",
+        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42558101248",
+        "workflow_path": ".github/workflows/threads_auto.yml"
+      }
+    ],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
     },
-    "observation_slot": "2026-11-09T08:00:00+09:00",
+    "observation_slot": "2026-11-09T12:00:00+09:00",
     "latest_publication_recheck": {
-      "history_blob_sha": "1941f41adbc720e9ee42c40b3c18b37281743242",
-      "claim_blob_sha": "d8ce7c00576a1b4fb3b269d82a6e48dc17f018db",
-      "job_id": "128896875731",
-      "post_id": "18100758071102644",
-      "reply_post_id": "18034303427911717",
+      "history_blob_sha": "6d7209c0fa7f5769d43b67fafdeca2de7f8d7fe0",
+      "claim_blob_sha": "04224de1b8b02cea6c7a9833208b70381b801b41",
+      "job_id": "128968246717",
+      "post_id": "18153842440557333",
+      "reply_post_id": "18014532992989522",
       "meta_get_log_both_verified": true
     },
     "active_publisher_statuses_checked": [
@@ -2731,7 +2876,7 @@
       "queued"
     ],
     "observation_slot_claim_exists": true,
-    "next_expected_media": "TEXT"
+    "next_expected_media": "IMAGE"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -3878,6 +4023,23 @@
           "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271414"
         ]
       }
-    ]
+    ],
+    "last_evaluation": {
+      "slot": "2026-11-10T12:00:00+09:00",
+      "notice_id": "a306716",
+      "employment": "정규직",
+      "unit_count": 5,
+      "full_operating_support_count": 7,
+      "reason": "Highest confirmed individual ALIO unit among available compared candidates. No separate credential required; age/military rules retained. No popularity score inferred.",
+      "excluded": [
+        "cleaneye-80848: organization/clock evidence mismatch previously recorded",
+        "cleaneye-80951: 14 combined headcount with regular/fixed-term mixed and exact-clock gap",
+        "cleaneye-80711: highest unit 3, exact-clock gap",
+        "cleaneye-80805: institution worksite unverified and official exact-clock mismatch; total 6 not a confirmed single unit",
+        "a306784: already queued for Nov 10 08",
+        "a306715: largest recruitment unit 4"
+      ],
+      "official_source": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271414"
+    }
   }
 }
