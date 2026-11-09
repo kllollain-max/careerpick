@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T02:30:31.000Z",
-  "last_observed_at": "2026-11-09T02:30:04.000Z",
+  "updated_at": "2026-11-09T02:54:46.000Z",
+  "last_observed_at": "2026-11-09T02:54:46.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -2453,16 +2453,16 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-09T02:30:31.000Z",
+    "checked_at": "2026-11-09T02:54:46.000Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-09T11:28:17.417510+09:00",
+    "input_reference_at": "2026-11-09T11:54:23.753654+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
-    "queue_check": "CLI validated and read-back confirmed the three unchanged ready entries plus one promoted draft. Four entries passed full delay-window preflight.",
+    "queue_check": "Four unchanged ready entries revalidated through delay windows; no unfilled slot in the next 24 hours.",
     "queue_blob_sha": "0ed39b7926b898082956c3571c2371caf9e02a44",
     "new_drafts": 0,
-    "new_ready_saved": 1,
+    "new_ready_saved": 0,
     "ready_entries": [
       {
         "scheduled_at": "2026-11-09T12:00:00+09:00",
@@ -2641,7 +2641,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T02:30:31.000Z",
+    "checked_at": "2026-11-09T02:54:46.000Z",
     "main_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
     "history_blob_sha": "1941f41adbc720e9ee42c40b3c18b37281743242",
     "claim_blob_sha": "d8ce7c00576a1b4fb3b269d82a6e48dc17f018db",
@@ -2657,7 +2657,7 @@
       "workflow_path": ".github/workflows/threads_auto.yml"
     },
     "new_publisher_runs": [],
-    "status": "no_new_threads_incident_one_held_draft_promoted",
+    "status": "no_new_threads_run_or_incident_four_ready_unchanged",
     "slot": "2026-11-09T08:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -2712,68 +2712,7 @@
     ],
     "next_action": "Verify natural Nov 9 12:00 run and Nov 10 08:00 entry upon its scheduled run; do not replay.",
     "last_existing_claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
-    "observed_new_run_versions": [
-      {
-        "run_id": "42548890550",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-09T02:05:02Z",
-        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42548890550",
-        "workflow_path": ".github/workflows/targeted-push.yml"
-      },
-      {
-        "run_id": "42547827474",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T01:52:37Z",
-        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42547827474",
-        "workflow_path": ".github/workflows/public-search-check.yml"
-      },
-      {
-        "run_id": "42547772019",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T01:52:24Z",
-        "head_sha": "f4bfa2c8b549803e5637efe0788c2ed0e61084ea",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42547772019",
-        "workflow_path": ".github/workflows/deploy-pages.yml"
-      },
-      {
-        "run_id": "42545434151",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-09T01:25:14Z",
-        "head_sha": "162e1fc8bda0d41cd1f864cb68fe1449dac31aa1",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545434151",
-        "workflow_path": ".github/workflows/targeted-push.yml"
-      },
-      {
-        "run_id": "42545434099",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T01:24:56Z",
-        "head_sha": "162e1fc8bda0d41cd1f864cb68fe1449dac31aa1",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545434099",
-        "workflow_path": ".github/workflows/public-search-check.yml"
-      },
-      {
-        "run_id": "42545161355",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T01:24:43Z",
-        "head_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42545161355",
-        "workflow_path": ".github/workflows/operations.yml"
-      }
-    ],
+    "observed_new_run_versions": [],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
