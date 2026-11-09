@@ -347,10 +347,16 @@ def _cleaneye_application_period(period, detail):
     for name, flag, label in (("start", "start_date_only", "접수개시일 원문"),
                               ("end", "date_only", "접수마감일 원문")):
         official, has_time = source_date(detail[label])
-        if period.get(flag, False) is not (not has_time):
-            _fail("CLEANEYE_APPLICATION_PRECISION_CONFLICT")
-        reviewed = _date_or_time(period[name], not has_time, "CLEANEYE_APPLICATION_PERIOD_CONFLICT")
-        if reviewed != (official if has_time else official.date()):
+        date_only = period.get(flag, False)
+        if date_only is not (not has_time):
+            # A directly reviewed official notice may refine an API's date-only
+            # value. _application_period has already required evidence of the
+            # exact date AND clock; API dates may never be changed or downgraded.
+            if has_time or date_only is not False or period.get('official_precision_verified') is not True:
+                _fail("CLEANEYE_APPLICATION_PRECISION_CONFLICT")
+        reviewed = _date_or_time(period[name], date_only, "CLEANEYE_APPLICATION_PERIOD_CONFLICT")
+        comparable = reviewed if has_time or date_only else reviewed.date()
+        if comparable != (official if has_time else official.date()):
             _fail("CLEANEYE_APPLICATION_PERIOD_CONFLICT")
 
 
@@ -577,6 +583,8 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
         _cleaneye_application_period(period, detail)
     _profile(review, notice_id, now, scheduled, max_age)
     image_job = _image(entry, post, detail, review, refs, end_date, period, end_has_seconds)
+    from scripts.threads_reach_editorial import validate_reach
+    validate_reach(entry, policy, image_job, review, refs, detail)
     _history(history, notice_id, expected_format, scheduled, body, facts["org"])
     has_published = any(record.get("status") == "published" and record.get("text") for record in history["records"])
     allowed_repetition = ("checked", "partial") if has_published else ("checked", "no_history")

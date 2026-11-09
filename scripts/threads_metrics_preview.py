@@ -43,7 +43,8 @@ def collect_post_insights(post_id, access_token, opener=None):
     request = urllib.request.Request(
         'https://graph.threads.net/v1.0/' + post_id + '/insights?' + query,
         headers={'Authorization': 'Bearer ' + access_token, 'Accept': 'application/json'})
-    with (opener or urllib.request.urlopen)(request, timeout=15) as response:
+    from scripts.threads_http import read_response
+    with read_response(request, timeout=15, opener=opener) as response:
         payload = json.load(response)
     return parse_insights(payload, post_id)
 
