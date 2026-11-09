@@ -92,6 +92,32 @@ class CandidateSelectionTests(unittest.TestCase):
         self.assertNotEqual(employment_rank("비정규직"), 0)
         self.assertNotEqual(employment_rank("무기계약직"), 0)
 
+    def test_prepared_notice_and_exact_source_alias_cannot_consume_writer_limit(self):
+        duplicate = cleaneye_post("800", title=self.fixture.post["title"])
+        self.fixture.post["src"] = duplicate["url"]
+        alternative = cleaneye_post("801", title="별도 일반직 채용")
+        self.source["_cleaneye"] = feed(duplicate, alternative)
+        entry = deepcopy(self.fixture.entry)
+        # Stale evidence cannot grant eligibility, but it does not cancel a
+        # reservation or let the writer assign the same notice twice.
+        entry["source_post_sha256"] = "0" * 64
+        result = self.build(limit=1, queued_entries=[entry])
+        self.assertEqual([p["notice_id"] for p in result["candidates"]], ["cleaneye-801"])
+        self.assertIn("a700", result["all_blocked_notice_ids"])
+        reasons = {r["notice_id"]: r["reasons"] for r in result["selection_audit"]["rows"]}
+        self.assertEqual(reasons["a700"], ["NOTICE_ALREADY_QUEUED"])
+        self.assertEqual(reasons["cleaneye-800"], ["EXACT_CROSS_SOURCE_NOTICE_ALREADY_USED"])
+
+    def test_hold_and_expired_ready_are_not_active_queue_reservations(self):
+        for status, at in (("hold", self.now + timedelta(hours=1)),
+                           ("ready", self.now - timedelta(hours=2))):
+            with self.subTest(status=status, at=at):
+                entry = deepcopy(self.fixture.entry)
+                entry["writer"]["status"] = status
+                entry["scheduled_at"] = at.isoformat()
+                result = self.build(queued_entries=[entry])
+                self.assertEqual([p["notice_id"] for p in result["candidates"]], ["a700"])
+
     def test_fresh_review_supplies_unit_count_but_stale_or_changed_does_not(self):
         entry = deepcopy(self.fixture.entry)
         review = entry["writer"]["review"]

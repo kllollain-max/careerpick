@@ -3,7 +3,8 @@
 This is source triage, not a claim that every official attachment was read.
 ALIO publication dates and notice totals never stand in for application dates
 or a selected recruiting unit. Unresolved notices remain an uncapped review
-list. A caller may supply freshly validated queue entries to resolve them.
+list. Independent official reviews can resolve them. The live queue instead
+protects prepared notices from reassignment.
 """
 from collections import Counter
 from datetime import datetime, timedelta
@@ -188,13 +189,35 @@ def _reviewed(entries, history, source, details, policy, now):
     return accepted, errors
 
 
-def build_selection(source, details, history, policy, now, limit=24, reviewed_entries=None):
+def _queued_notice_ids(entries, now):
+    """Keep ready drafts out of selection through their publication window."""
+    ids = set()
+    for entry in entries or []:
+        if not isinstance(entry, dict) or not isinstance(entry.get("writer"), dict):
+            continue
+        jid = entry.get("notice_id")
+        if entry["writer"].get("status") != "ready" or not isinstance(jid, str) or not jid:
+            continue
+        try:
+            scheduled = _aware(entry.get("scheduled_at"))
+        except (TypeError, ValueError):
+            # A malformed ready reservation must not make the notice selectable.
+            ids.add(jid)
+            continue
+        if scheduled + timedelta(hours=2) > now:
+            ids.add(jid)
+    return ids
+
+
+def build_selection(source, details, history, policy, now, limit=24, reviewed_entries=None, *, queued_entries=None):
     if type(limit) is not int or not 1 <= limit <= 60:
         raise ValueError("limit must be 1 to 60")
     now = _aware(now)
     blocked = {str(x) for x in history.get("posted_ids", [])}
     for record in history.get("records", []):
         blocked.update(str(x) for x in [record.get("job_id"), *record.get("job_ids", [])] if x)
+    queued = _queued_notice_ids(queued_entries, now)
+    protected = blocked | queued
     reviews, review_errors = _reviewed(reviewed_entries, history, source, details, policy, now)
     cleaneye = source.get("_cleaneye", {})
     alio_status = _source_status(source, now, policy["max_source_age_hours"])
@@ -207,7 +230,7 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
     blocked_identities = set()
     for posts in pools.values():
         for post in posts:
-            if isinstance(post, dict) and post.get("id") in blocked:
+            if isinstance(post, dict) and post.get("id") in protected:
                 blocked_identities.update(_identities(post))
     sources = {
         "alio": {"status": alio_status, "snapshot_at": source.get("updated"), "source_checked_at": source.get("_operations", {}).get("last_success_at")},
@@ -233,6 +256,8 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
             row.update(org=post.get("org"), title=post.get("title"))
             if jid in blocked:
                 row["reasons"] = ["NOTICE_ALREADY_USED"]; continue
+            if jid in queued:
+                row["reasons"] = ["NOTICE_ALREADY_QUEUED"]; continue
             if _identities(post) & blocked_identities:
                 row["reasons"] = ["EXACT_CROSS_SOURCE_NOTICE_ALREADY_USED"]; continue
             context = None
@@ -327,4 +352,4 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
     review_rows = [{k: v for k, v in r.items() if k not in {"source_post_sha256", "source_detail_sha256"}}
                    for r in rows if r["decision"] == "review_required"]
     return {"candidates": items, "selection_audit": audit, "review_candidates": review_rows,
-            "all_blocked_notice_ids": sorted(blocked), "cleaneye_status": cleaneye_status}
+            "all_blocked_notice_ids": sorted(protected), "cleaneye_status": cleaneye_status}
