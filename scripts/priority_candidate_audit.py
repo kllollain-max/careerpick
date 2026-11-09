@@ -2,7 +2,8 @@
 import argparse
 import json
 import re
-from datetime import datetime, date, timezone
+from datetime import datetime, date
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -71,7 +72,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--source', default='alio.json')
     parser.add_argument('--output', default='review-only/job-priority-candidates.json')
-    parser.add_argument('--as-of', default=datetime.now(timezone.utc).date().isoformat())
+    parser.add_argument('--as-of', default=datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat())
     args = parser.parse_args()
     report = shortlist(json.loads(Path(args.source).read_text(encoding='utf-8')), date.fromisoformat(args.as_of))
     output = Path(args.output); output.parent.mkdir(parents=True, exist_ok=True)
