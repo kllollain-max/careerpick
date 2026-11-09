@@ -32,6 +32,8 @@ jobs:
           PY
       - name: Test source-health annotations with offline fixtures
         run: python -m unittest discover -s tests -p 'test_source_health_reporting.py' -v
+      - name: Test GOJOBS transport error classification without network calls
+        run: python -m unittest discover -s tests -p 'test_gojobs_transport_diagnostics.py' -v
       - run: python -m unittest discover -s tests -p test_naver_analytics_build.py
       - run: python scripts/build_public_site.py
       - run: npm install --no-save playwright@1.56.1
