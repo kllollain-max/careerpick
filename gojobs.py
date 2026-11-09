@@ -2,6 +2,8 @@
 from datetime import date
 import json
 import re
+import socket
+import ssl
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -183,6 +185,24 @@ class Client:
             finally:
                 error.close()
             raise APIError("http_" + str(error.code) if 100 <= error.code <= 599 else "http_error") from None
+        except urllib.error.URLError as error:
+            # Never include reason text: it may contain request URLs or credentials.
+            reason = error.reason
+            if isinstance(reason, (socket.timeout, TimeoutError)):
+                code = "transport_timeout"
+            elif isinstance(reason, socket.gaierror):
+                code = "transport_dns_error"
+            elif isinstance(reason, ssl.SSLError):
+                code = "transport_tls_error"
+            elif isinstance(reason, (ConnectionError, OSError)):
+                code = "transport_connection_error"
+            else:
+                code = "transport_error"
+            raise APIError(code) from None
+        except (socket.timeout, TimeoutError):
+            raise APIError("transport_timeout") from None
+        except ssl.SSLError:
+            raise APIError("transport_tls_error") from None
         except Exception:
             raise APIError("transport_error") from None
         if len(raw) > MAX_BYTES:
