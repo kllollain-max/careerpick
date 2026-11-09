@@ -19,6 +19,8 @@ from pathlib import Path
 from statistics import median
 import sys
 import urllib.error
+import urllib.parse
+import urllib.request
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -48,8 +50,48 @@ def _review(record):
     return review if isinstance(review, dict) else {}
 
 
-def hook_status(record):
-    """A/B membership uses the final main text, never the writer draft alone."""
+def _text_sha256(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def read_public_main(post_id, token, *, opener=None):
+    """Read the actual main object; never infer its text from a publish receipt."""
+    if not isinstance(post_id, str) or not post_id.isdigit() or not token:
+        raise ValueError("Valid main post ID and existing token required")
+    query = urllib.parse.urlencode({"fields": "id,text,is_reply"})
+    request = urllib.request.Request(
+        "https://graph.threads.net/v1.0/" + post_id + "?" + query, method="GET",
+        headers={"Authorization": "Bearer " + token, "Accept": "application/json"})
+    from scripts.threads_http import read_response
+    with read_response(request, timeout=15, opener=opener) as response:
+        return json.load(response)
+
+
+def public_main_evidence(record, payload, checked_at):
+    """Retain a read-only public-text check without changing the publish ledger."""
+    expected = record.get("text")
+    evidence = {"status": "unverified", "post_id": str(record["threads_post_id"]),
+                "checked_at": moment(checked_at).isoformat(), "reason": None,
+                "expected_text_sha256": _text_sha256(expected) if isinstance(expected, str) else None,
+                "actual_text_sha256": None, "actual_first_sentence": None}
+    if not isinstance(payload, dict) or str(payload.get("id", "")) != evidence["post_id"]:
+        evidence["reason"] = "public_main_id_mismatch"
+    elif payload.get("is_reply") is not False:
+        evidence["reason"] = "public_main_type_unverified"
+    elif not isinstance(payload.get("text"), str) or not payload["text"]:
+        evidence["reason"] = "public_main_text_unavailable"
+    else:
+        evidence["actual_text_sha256"] = _text_sha256(payload["text"])
+        evidence["actual_first_sentence"] = payload["text"].split("\n", 1)[0]
+        if payload["text"] != expected:
+            evidence.update(status="mismatch", reason="public_main_text_mismatch")
+        else:
+            evidence.update(status="verified", is_reply=False)
+    return evidence
+
+
+def hook_status(record, public_verification=None):
+    """A/B membership requires actual main GET evidence, not a saved draft/ID."""
     editorial = _review(record).get("reach_editorial", {})
     actual = str(record.get("text", "")).split("\n", 1)[0]
     reason = None
@@ -63,12 +105,27 @@ def hook_status(record):
         reason = "final_first_sentence_mismatch"
     elif record.get("request_status") != "confirmed":
         reason = "main_receipt_unconfirmed"
+    elif not isinstance(public_verification, dict) or public_verification.get("status") != "verified":
+        reason = (public_verification.get("reason") or "public_main_unverified"
+                  if isinstance(public_verification, dict) else "public_main_unverified")
+    elif (public_verification.get("post_id") != str(record.get("threads_post_id"))
+          or public_verification.get("is_reply") is not False
+          or public_verification.get("expected_text_sha256") != _text_sha256(record["text"])
+          or public_verification.get("actual_text_sha256") != _text_sha256(record["text"])
+          or public_verification.get("actual_first_sentence") != actual):
+        reason = "public_main_evidence_mismatch"
+    else:
+        try:
+            if moment(public_verification.get("checked_at")) < moment(record["published_at"]):
+                reason = "public_main_check_time_invalid"
+        except (TypeError, ValueError):
+            reason = "public_main_check_time_invalid"
     return {"eligible": reason is None, "reason": reason,
             "hook_type": editorial.get("hook_type") if isinstance(editorial, dict) else None,
             "final_first_sentence": actual}
 
 
-def publication_metadata(record):
+def publication_metadata(record, public_verification=None):
     """Keep confounders and their unknowns; do not infer popularity or breadth."""
     review = _review(record)
     editorial = review.get("reach_editorial", {})
@@ -101,7 +158,10 @@ def publication_metadata(record):
         "format_id": record.get("format_id"), "media": "IMAGE" if record.get("image_url") else "TEXT",
         "org": facts.get("org"), "job": facts.get("title"), "employment": facts.get("employment"),
         "recruitment_unit_count": count, "location": facts.get("location"),
-        "audience_scope": context.get("audience_scope"),
+        "audience_scope": context.get("audience_scope") if context.get("audience_scope") is not None else context.get("audience_breadth"),
+        "audience_breadth": context.get("audience_breadth"),
+        "notice_type": context.get("notice_type"),
+        "comparison_context": deepcopy(context),
         "institution_interest": context.get("institution_interest"),
         "interest_evidence": context.get("interest_evidence"),
         "comparison_group": context.get("comparison_group"),
@@ -111,7 +171,8 @@ def publication_metadata(record):
         "deadline_distance_seconds": deadline_seconds,
         "detail_reply_status": record.get("reply_status"),
         "detail_reply_id": record.get("reply_post_id"),
-        "hook": hook_status(record),
+        "public_verification": deepcopy(public_verification),
+        "hook": hook_status(record, public_verification),
     }
 
 
@@ -208,6 +269,7 @@ def observation(item, *, captured_at, metrics=None, status="captured", error_cod
         "reader_replies": None, "reader_replies_status": "author_separation_unverified",
         "automated_detail_reply_id": item["metadata"].get("detail_reply_id"),
         "site_visits": None, "profile_link_clicks": None, "applications": None,
+        "public_verification": deepcopy(item["metadata"].get("public_verification")),
         "metadata": deepcopy(item["metadata"]),
     }
     return result
@@ -234,7 +296,7 @@ def merge_observations(state, additions):
 
 
 def collect_due(history, state, now=None, *, token=None, include_history=False,
-                limit=8, account_guard=None, collector=None, clock=None):
+                limit=8, account_guard=None, collector=None, public_reader=None, clock=None):
     """Only GETs, with injectable seams for tests; failures become observations."""
     if type(limit) is not int or not 1 <= limit <= 16:
         raise ValueError("Collection limit must be 1 to 16 main posts")
@@ -261,11 +323,26 @@ def collect_due(history, state, now=None, *, token=None, include_history=False,
         except Exception:
             # Never surface a request/credential-bearing exception string.
             access_status = "account_unverified"
-    additions, calls = [], 0
+    additions, calls, public_calls = [], 0, 0
     collector = collector or collect_post_insights
+    public_reader = public_reader or read_public_main
+    records, _ = recent_publications(history, now, include_history=include_history)
+    by_id = {str(record["threads_post_id"]): record for record in records}
     for post_id in post_ids:
         status, metrics, error_code = access_status or "captured", None, None
+        verification = {"status": "unverified", "post_id": post_id,
+                        "checked_at": moment(clock()).isoformat(),
+                        "reason": access_status or "public_main_read_failed"}
         if not access_status:
+            public_calls += 1
+            try:
+                actual_main = public_reader(post_id, token)
+                verification = public_main_evidence(by_id[post_id], actual_main, clock())
+            except Exception:
+                # Public-text verification is independent of insight access.
+                # Preserve available measurements but never admit an unverified
+                # main to A/B comparisons or expose credential-bearing errors.
+                pass
             calls += 1
             try:
                 payload = collector(post_id, token)
@@ -279,11 +356,14 @@ def collect_due(history, state, now=None, *, token=None, include_history=False,
         captured = moment(clock())
         for item in selected:
             if item["post_id"] == post_id:
-                additions.append(observation(item, captured_at=captured, metrics=metrics,
+                checked_item = deepcopy(item)
+                checked_item["metadata"] = publication_metadata(by_id[post_id], verification)
+                additions.append(observation(checked_item, captured_at=captured, metrics=metrics,
                                              status=status, error_code=error_code))
     return merge_observations(state, additions), {
         "status": "measured" if any(o["status"] == "captured" for o in additions) else "unmeasured",
-        "api_calls": calls, "main_posts_attempted": len(post_ids),
+        "api_calls": calls + public_calls, "insight_api_calls": calls,
+        "public_verification_calls": public_calls, "main_posts_attempted": len(post_ids),
         "new_observations": len(additions), "statuses": dict(Counter(o["status"] for o in additions)),
         "next_condition": "Existing scheduled maintenance; restore authorized insight access if unavailable",
     }
@@ -293,24 +373,47 @@ def summarize(history, state, now):
     """Descriptive counts and medians; never choose a winning hook automatically."""
     now = moment(now)
     records, exclusions = recent_publications(history, now, include_history=True)
-    metadata = {str(r["threads_post_id"]): publication_metadata(r) for r in records}
-    experiment_records = [m for m in metadata.values() if m["hook"]["eligible"]]
+    all_records = {str(r.get("threads_post_id")): r for r in history.get("records", [])
+                   if isinstance(r, dict) and r.get("status") == "published"}
+    def verification_for(item):
+        proof = item.get("public_verification")
+        if proof is None:
+            proof = item.get("metadata", {}).get("public_verification")
+        try:
+            if not isinstance(proof, dict) or moment(proof.get("checked_at")) > moment(item["captured_at"]):
+                return None
+        except (KeyError, TypeError, ValueError):
+            return None
+        return proof
+    verified, latest_checks = {}, {}
+    observations = sorted(state.get("observations", []), key=lambda x: x["captured_at"])
+    for item in observations:
+        post_id = item.get("post_id")
+        record = all_records.get(post_id)
+        if not record or moment(item["captured_at"]) > now:
+            continue
+        proof = verification_for(item)
+        latest_checks[post_id] = proof
+        if hook_status(record, proof)["eligible"]:
+            verified.setdefault(post_id, proof)
+    metadata = {str(r["threads_post_id"]): publication_metadata(r, latest_checks.get(str(r["threads_post_id"])))
+                for r in records}
+    experiment_records = [publication_metadata(all_records[post_id], proof)
+                          for post_id, proof in verified.items() if post_id in metadata]
     # The 28-day reporting window must never restart the original experiment.
-    # Derive its anchor from preserved complete history (or a persisted anchor),
-    # while the published-count/metric tables remain scoped to the report window.
+    # Derive its anchor from preserved complete history with actual main-GET
+    # evidence. A bare saved timestamp or confirmed publish ID cannot prove that
+    # an experimental first sentence was the text actually made public.
     anchors = []
-    for record in history.get("records", []):
-        if isinstance(record, dict) and record.get("status") == "published" and hook_status(record)["eligible"]:
+    for post_id in verified:
+        record = all_records[post_id]
+        if hook_status(record, verified[post_id])["eligible"]:
             try:
                 stamp = moment(record["published_at"])
                 if stamp <= now:
                     anchors.append(stamp)
             except (KeyError, TypeError, ValueError):
                 pass
-    if state.get("experiment_start"):
-        saved_start = moment(state["experiment_start"])
-        if saved_start <= now:
-            anchors.append(saved_start)
     start = min(anchors, default=None)
     collisions = defaultdict(set)
     for m in experiment_records:
@@ -319,12 +422,19 @@ def summarize(history, state, now):
     groups = {label: {arm: [] for arm in ("A", "B")} for label in WINDOWS}
     reasons = Counter()
     seen = set()
-    for item in sorted(state.get("observations", []), key=lambda x: x["captured_at"]):
+    for item in observations:
         m = metadata.get(item.get("post_id"))
-        if not m or not m["hook"]["eligible"]:
+        if not m:
             reasons["legacy_or_invalid_final_hook"] += 1
             continue
-        if m["hook"]["final_first_sentence"] in invalid_hooks:
+        hook = hook_status(all_records[item["post_id"]], verification_for(item))
+        if not hook["eligible"]:
+            reasons[hook["reason"] or "public_main_unverified"] += 1
+            continue
+        if moment(item["captured_at"]) > now:
+            reasons["future_observation"] += 1
+            continue
+        if hook["final_first_sentence"] in invalid_hooks:
             reasons["identical_final_hook_across_arms"] += 1
             continue
         if item.get("window") not in WINDOWS or item.get("comparable_milestone") is not True:
@@ -337,7 +447,7 @@ def summarize(history, state, now):
         if unique in seen:
             continue
         seen.add(unique)
-        groups[item["window"]][m["hook"]["hook_type"]].append(item)
+        groups[item["window"]][hook["hook_type"]].append(item)
     def stats(items):
         views = [o["metrics"]["views"] for o in items]
         strata = Counter((o["metadata"].get("slot_hour_kst"), o["metadata"].get("media"),

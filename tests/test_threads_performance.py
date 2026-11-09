@@ -2,6 +2,7 @@
 from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 import io
+import json
 import unittest
 from unittest.mock import Mock, patch
 import urllib.error
@@ -30,10 +31,19 @@ class PerformanceTests(unittest.TestCase):
                 "count": 1, "employment": "정규직", "location": "서울"}},
         }
         self.history = {"records": [self.record], "posted_ids": ["a123"]}
+        self.public_reader = Mock(return_value={"id": "123", "text": self.record["text"], "is_reply": False})
+
+    def verified_item(self, item, record=None):
+        record = record or self.record
+        proof = perf.public_main_evidence(record, {"id": record["threads_post_id"],
+            "text": record["text"], "is_reply": False}, self.now)
+        item = deepcopy(item)
+        item["metadata"] = perf.publication_metadata(record, proof)
+        return item
 
     def item(self, now=None, window="24h", history=None):
         plan = perf.measurement_plan(history or self.history, self.state, now or self.now)
-        return next(i for i in plan["items"] if i["window"] == window)
+        return self.verified_item(next(i for i in plan["items"] if i["window"] == window))
 
     def test_plan_uses_actual_main_time_and_keeps_seven_day_pending(self):
         plan = perf.measurement_plan(self.history, self.state, self.now)
@@ -49,6 +59,18 @@ class PerformanceTests(unittest.TestCase):
         self.assertIsNone(metadata["recruitment_unit_count"])
         self.assertEqual(metadata["employment"], "정규직")
         self.assertEqual(metadata["media"], "TEXT")
+
+    def test_comparison_context_preserves_new_and_existing_audience_fields(self):
+        context = self.record["writer_review"]["reach_editorial"]["comparison_context"]
+        del context["audience_scope"]
+        context.update(audience_breadth="간호사 면허 소지자", notice_type="공개경쟁", eligibility_basis="공식 자격요건")
+        metadata = perf.publication_metadata(self.record)
+        self.assertEqual(metadata["audience_scope"], "간호사 면허 소지자")
+        self.assertEqual(metadata["audience_breadth"], "간호사 면허 소지자")
+        self.assertEqual(metadata["notice_type"], "공개경쟁")
+        self.assertEqual(metadata["comparison_context"], context)
+        context["audience_scope"] = "원래 기록한 대상 범위"
+        self.assertEqual(perf.publication_metadata(self.record)["audience_scope"], "원래 기록한 대상 범위")
 
     def test_zero_missing_and_reader_replies_are_distinct(self):
         result = perf.observation(self.item(), captured_at=self.now, metrics={"views": 0, "likes": 0, "replies": 1})
@@ -90,29 +112,31 @@ class PerformanceTests(unittest.TestCase):
         late = self.published + timedelta(days=8)
         guard, collect = Mock(), Mock(return_value={"metrics": {"views": 51}})
         state, result = perf.collect_due(self.history, self.state, late, token="test-not-real",
-            account_guard=guard, collector=collect, clock=lambda: late)
+            account_guard=guard, collector=collect, public_reader=self.public_reader, clock=lambda: late)
         guard.assert_called_once()
         collect.assert_called_once_with("123", "test-not-real")
-        self.assertEqual(result["api_calls"], 1)
+        self.public_reader.assert_called_once_with("123", "test-not-real")
+        self.assertEqual(result["api_calls"], 2)
+        self.assertEqual(result["insight_api_calls"], 1)
         self.assertEqual(len(state["observations"]), 2)
         self.assertTrue(all(not o["comparable_milestone"] for o in state["observations"]))
 
     def test_permission_denied_is_not_zero_or_retried_next_tick(self):
         collector = Mock(side_effect=urllib.error.HTTPError("redacted", 403, "denied", {}, io.BytesIO()))
         state, result = perf.collect_due(self.history, self.state, self.now, token="test-not-real",
-            account_guard=Mock(), collector=collector, clock=lambda: self.now)
+            account_guard=Mock(), collector=collector, public_reader=self.public_reader, clock=lambda: self.now)
         self.assertEqual(result["status"], "unmeasured")
         self.assertEqual(state["observations"][0]["status"], "permission_denied")
         self.assertIsNone(state["observations"][0]["metrics"]["views"])
         _, result2 = perf.collect_due(self.history, state, self.now + timedelta(minutes=1),
-            token="test-not-real", account_guard=Mock(), collector=collector)
+            token="test-not-real", account_guard=Mock(), collector=collector, public_reader=self.public_reader)
         self.assertEqual(result2["api_calls"], 0)
         self.assertEqual(collector.call_count, 1)
 
     def test_failed_measurement_does_not_raise_or_erase_success(self):
         collector = Mock(side_effect=RuntimeError("Never expose this string"))
         state, result = perf.collect_due(self.history, self.state, self.now, token="test-not-real",
-            account_guard=Mock(), collector=collector, clock=lambda: self.now)
+            account_guard=Mock(), collector=collector, public_reader=self.public_reader, clock=lambda: self.now)
         self.assertEqual(result["statuses"], {"collection_failed": 1})
         self.assertNotIn("Never expose", str(state))
         plan = perf.measurement_plan(self.history, state, self.now + timedelta(minutes=5))
@@ -152,7 +176,7 @@ class PerformanceTests(unittest.TestCase):
                 record["writer_review"]["reach_editorial"]["first_sentence"] = first
                 records.append(record)
                 item = perf.measurement_plan({"records": [record]}, self.state, self.now)["items"][0]
-                observations.append(perf.observation(item, captured_at=self.now,
+                observations.append(perf.observation(self.verified_item(item, record), captured_at=self.now,
                     metrics={"views": 10000 if i == 7 else 10 + i, "likes": 0}))
         state = perf.merge_observations(self.state, observations)
         report = perf.summarize({"records": records}, state, self.now)
@@ -168,24 +192,98 @@ class PerformanceTests(unittest.TestCase):
         other["writer_review"]["reach_editorial"]["hook_type"] = "B"
         history = {"records": [self.record, other]}
         items = [i for i in perf.measurement_plan(history, self.state, self.now)["items"] if i["window"] == "24h"]
-        observations = [perf.observation(i, captured_at=self.now, metrics={"views": 10}) for i in items]
+        records_by_id = {"123": self.record, "124": other}
+        observations = [perf.observation(self.verified_item(i, records_by_id[i["post_id"]]),
+                        captured_at=self.now, metrics={"views": 10}) for i in items]
         report = perf.summarize(history, perf.merge_observations(self.state, observations), self.now)
         self.assertEqual(report["groups"]["24h"]["A"]["count"], 0)
         self.assertEqual(report["excluded_observations"]["identical_final_hook_across_arms"], 2)
 
     def test_checkpoints_start_at_actual_new_policy_post_and_wait_for_7d(self):
-        report = perf.summarize(self.history, self.state, self.now)
+        state = perf.merge_observations(self.state, [perf.observation(self.item(), captured_at=self.now, metrics={"views": 10})])
+        report = perf.summarize(self.history, state, self.now)
         self.assertEqual(report["experiment_start"], self.published.isoformat())
         self.assertEqual(report["seven_day_pending_posts"], 1)
         self.assertEqual(report["checkpoints"][0]["status"], "pending")
-        report = perf.summarize(self.history, self.state, self.published + timedelta(days=14))
+        report = perf.summarize(self.history, state, self.published + timedelta(days=14))
         self.assertEqual([c["status"] for c in report["checkpoints"]], ["due", "due"])
 
     def test_reporting_window_does_not_restart_original_experiment(self):
-        report = perf.summarize(self.history, self.state, self.published + timedelta(days=35))
+        state = perf.merge_observations(self.state, [perf.observation(self.item(), captured_at=self.now, metrics={"views": 10})])
+        report = perf.summarize(self.history, state, self.published + timedelta(days=35))
         self.assertEqual(report["normal_main_publications"], 0)
         self.assertEqual(report["experiment_start"], self.published.isoformat())
         self.assertEqual(report["checkpoints"][1]["status"], "due")
+
+    def test_confirmed_ledger_without_public_get_cannot_enter_ab(self):
+        item = perf.measurement_plan(self.history, self.state, self.now)["items"][0]
+        observation = perf.observation(item, captured_at=self.now, metrics={"views": 5000})
+        state = perf.merge_observations(self.state, [observation])
+        # A previously written timestamp is not a substitute for public text evidence.
+        state["experiment_start"] = self.published.isoformat()
+        report = perf.summarize(self.history, state, self.now)
+        self.assertEqual(report["groups"]["24h"]["A"]["count"], 0)
+        self.assertIsNone(report["experiment_start"])
+        self.assertEqual(report["excluded_observations"]["public_main_unverified"], 1)
+
+    def test_actual_public_mismatch_keeps_metrics_but_excludes_ab(self):
+        before = deepcopy((self.history, self.state))
+        reader = Mock(return_value={"id": "123", "text": "다르게 공개된 첫 문장\n본문", "is_reply": False})
+        collector = Mock(return_value={"metrics": {"views": 5000}})
+        state, result = perf.collect_due(self.history, self.state, self.now, token="test-not-real",
+            account_guard=Mock(), collector=collector, public_reader=reader, clock=lambda: self.now)
+        record = state["observations"][0]
+        self.assertEqual(result["status"], "measured")
+        self.assertEqual(record["metrics"]["views"], 5000)
+        self.assertEqual(record["public_verification"]["status"], "mismatch")
+        self.assertEqual(record["public_verification"]["actual_first_sentence"], "다르게 공개된 첫 문장")
+        report = perf.summarize(self.history, state, self.now)
+        self.assertEqual(report["groups"]["24h"]["A"]["count"], 0)
+        self.assertEqual(report["excluded_observations"]["public_main_text_mismatch"], 1)
+        self.assertIsNone(report["experiment_start"])
+        self.assertEqual((self.history, self.state), before)
+
+    def test_public_read_failure_keeps_measurement_and_excludes_ab(self):
+        reader = Mock(side_effect=RuntimeError("secret-bearing error must not escape"))
+        state, result = perf.collect_due(self.history, self.state, self.now, token="test-not-real",
+            account_guard=Mock(), collector=Mock(return_value={"metrics": {"views": 0}}),
+            public_reader=reader, clock=lambda: self.now)
+        self.assertEqual(result["status"], "measured")
+        self.assertEqual(state["observations"][0]["metrics"]["views"], 0)
+        self.assertNotIn("secret-bearing", str(state))
+        report = perf.summarize(self.history, state, self.now)
+        self.assertEqual(report["groups"]["24h"]["A"]["count"], 0)
+        self.assertEqual(report["excluded_observations"]["public_main_read_failed"], 1)
+
+    def test_remote_id_and_main_type_are_required_even_when_text_matches(self):
+        for payload in ({"id": "999", "text": self.record["text"], "is_reply": False},
+                        {"id": "123", "text": self.record["text"], "is_reply": True},
+                        {"id": "123", "text": self.record["text"]}):
+            with self.subTest(payload=payload):
+                proof = perf.public_main_evidence(self.record, payload, self.now)
+                self.assertFalse(perf.hook_status(self.record, proof)["eligible"])
+
+    def test_public_reader_performs_only_main_get_with_header_credential(self):
+        opener = Mock(return_value=io.BytesIO(json.dumps({"id": "123", "text": "공개본문", "is_reply": False}).encode()))
+        result = perf.read_public_main("123", "test-not-real", opener=opener)
+        self.assertEqual(result["text"], "공개본문")
+        request = opener.call_args.args[0]
+        self.assertEqual(request.get_method(), "GET")
+        self.assertTrue(request.full_url.startswith("https://graph.threads.net/v1.0/123?"))
+        self.assertNotIn("test-not-real", request.full_url)
+        self.assertEqual(request.get_header("Authorization"), "Bearer test-not-real")
+        self.assertIsNone(request.data)
+
+    def test_later_public_verification_does_not_retroactively_validate_old_snapshot(self):
+        unverified = perf.measurement_plan(self.history, self.state, self.now)["items"][0]
+        old = perf.observation(unverified, captured_at=self.now, metrics={"views": 99})
+        late = self.now + timedelta(hours=2)
+        verified = self.verified_item(self.item(now=late))
+        new = perf.observation(verified, captured_at=late, metrics={"views": 101})
+        state = perf.merge_observations(self.state, [old, new])
+        report = perf.summarize(self.history, state, late)
+        self.assertEqual(report["groups"]["24h"]["A"]["count"], 0)
+        self.assertEqual(report["excluded_observations"]["public_main_unverified"], 1)
 
 
 if __name__ == "__main__":
