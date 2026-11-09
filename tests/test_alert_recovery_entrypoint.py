@@ -66,6 +66,30 @@ class RecoveryTests(unittest.TestCase):
             detect.assert_not_called()
             save.assert_not_called()
 
+    def test_armed_circuit_prevents_candidate_update(self):
+        with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
+                patch.object(runner.circuit, 'read', return_value=({'state':'armed'}, 'control-sha')), \
+                patch.object(runner, 'read_state') as baseline, \
+                patch.object(runner.detection, 'main') as detect, \
+                patch.object(runner, 'save_state') as save:
+            with self.assertRaises(runner.circuit.Blocked):
+                runner.run()
+            baseline.assert_not_called()
+            detect.assert_not_called()
+            save.assert_not_called()
+
+    def test_unavailable_circuit_fails_closed_before_candidate_update(self):
+        with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
+                patch.object(runner.circuit, 'read', side_effect=runner.circuit.Blocked('private control unavailable')), \
+                patch.object(runner, 'read_state') as baseline, \
+                patch.object(runner.detection, 'main') as detect, \
+                patch.object(runner, 'save_state') as save:
+            with self.assertRaises(runner.circuit.Blocked):
+                runner.run()
+            baseline.assert_not_called()
+            detect.assert_not_called()
+            save.assert_not_called()
+
     def test_baseline_advances_only_after_candidate_handoff(self):
         with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
                 tempfile.TemporaryDirectory() as directory, \
