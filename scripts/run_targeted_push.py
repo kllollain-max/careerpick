@@ -176,11 +176,12 @@ def audit_consent():
             return report
         stage = 'subscriber_lookup'
         verified = sum(bool(lookup(sid)) for sid in ids)
-        report.update(status='audit_complete', stage='complete',
-                      reviewed_count=len(ids), verified_opt_in_count=verified,
-                      all_verified=bool(ids) and verified == len(ids)
-                      and not ledger.get('pending')
-                      and counts['reserved'] == 0 and counts['uncertain'] == 0)
+        all_verified = (bool(ids) and verified == len(ids)
+                        and not ledger.get('pending') and counts['pending'] == 0
+                        and counts['reserved'] == 0 and counts['uncertain'] == 0)
+        report.update(status='audit_complete' if all_verified else 'audit_incomplete',
+                      stage='complete', reviewed_count=len(ids),
+                      verified_opt_in_count=verified, all_verified=all_verified)
     except Exception as exc:
         report.update(stage=stage, **_diagnostic_error(exc))
     print(json.dumps(report, sort_keys=True))
