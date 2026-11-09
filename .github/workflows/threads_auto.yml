@@ -319,6 +319,38 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
+  metrics:
+    name: Observe main-post performance without publishing
+    needs: publish
+    if: ${{ always() && github.event_name == 'schedule' && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    continue-on-error: true
+    permissions:
+      contents: write
+    env:
+      THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      THREADS_USER_ID: '28818095904512513'
+      THREADS_EXPECTED_USERNAME: hid_119
+      THREADS_CLAIM_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Collect due 24-hour and 7-day main-post observations
+        run: python scripts/threads_performance_store.py --history threads_posted.json --output threads-performance-result.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-performance-${{ github.run_id }}-${{ github.run_attempt }}
+          path: threads-performance-result.json
+          if-no-files-found: ignore
+          retention-days: 30
+
   alert:
     name: Alert on Threads publishing failure
     needs: publish

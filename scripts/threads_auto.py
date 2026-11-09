@@ -46,6 +46,8 @@ def writer_inputs(root=None):
     prompt = (base / policy['prompt_path']).read_bytes()
     if hashlib.sha256(prompt).hexdigest() != policy['prompt_sha256']:
         raise RuntimeError('Master prompt hash mismatch; do not publish')
+    from scripts.threads_reach_editorial import load_editorial_prompt
+    load_editorial_prompt(base, policy)
     source = load(DATA if root is None else base / 'alio.json', {})
     source['_operations'] = load(base / 'operations-status.json', {})
     try:
@@ -63,6 +65,11 @@ def master_public_copy(selected, style):
         return selected['text'], ''
     if style != COMPACT_STYLE:
         raise RuntimeError('Unsupported Threads publication style')
+
+    editorial = selected.get('writer_review', {}).get('reach_editorial')
+    if editorial is not None:
+        from scripts.threads_reach_editorial import public_pair
+        return public_pair(selected['text'], selected['image_job'], editorial)
 
     from scripts.threads_writer_queue import CTA, URL_RE
     job = selected['image_job']
