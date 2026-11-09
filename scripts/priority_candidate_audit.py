@@ -54,7 +54,7 @@ def shortlist(feed, today, limit=30):
             continue
         seen.add(identity)
         seats = seat_count(p.get('n'))
-        permanent = any(isinstance(x, str) and ('정규직' in x) for x in emp)
+        permanent = any(isinstance(x, str) and ('정규직' in x and '비정규직' not in x) for x in emp)
         # Score is editorial triage only, NOT search demand, application eligibility or popularity.
         score = (100 if permanent else 0) + (min(seats, 100) if seats is not None else 0)
         selected.append({'id': identity, 'title': title.strip(), 'organization': str(p.get('org', '')),
