@@ -19,14 +19,14 @@ def load(name):
     return json.loads((ROOT / name).read_text(encoding='utf-8'))
 
 
-def build_input(now, limit=24, reviewed_entries=None):
+def build_input(now, limit=24, reviewed_entries=None, *, queued_entries=None):
     if type(limit) is not int or not 1 <= limit <= 60:
         raise ValueError('limit must be 1 to 60')
     policy, source, details = writer_inputs(ROOT)
     prompt = (ROOT / policy['prompt_path']).read_bytes()
     editorial_prompt = load_editorial_prompt(ROOT, policy)
     history, operations = load('threads_posted.json'), source['_operations']
-    selection = build_selection(source, details, history, policy, now, limit, reviewed_entries)
+    selection = build_selection(source, details, history, policy, now, limit, reviewed_entries, queued_entries=queued_entries)
     cleaneye = source.get('_cleaneye', {})
     slots = []
     for offset in range(2):
@@ -90,16 +90,21 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--limit', type=int, default=24)
     parser.add_argument('--check-queue', help='Validate upcoming ready drafts without sending')
-    parser.add_argument('--queue-for-selection', help='Freshly read queue JSON; validate evidence before using unit facts for selection')
+    parser.add_argument('--queue-for-selection', help='Fresh remote queue JSON; exclude notices already prepared for an active or future slot')
+    parser.add_argument('--reviews-for-selection', help='Independent official review JSON (same schema); validate evidence without reserving notices')
     args = parser.parse_args()
     if not 1 <= args.limit <= 60:
         parser.error('limit must be 1 to 60')
     now = datetime.now(ZoneInfo('Asia/Seoul'))
-    reviewed = None
-    if args.queue_for_selection:
-        selection_queue = json.loads(Path(args.queue_for_selection).read_text(encoding='utf-8'))
-        if selection_queue.get('schema_version') != 1 or not isinstance(selection_queue.get('entries'), list):
-            raise ValueError('Invalid selection review queue schema')
-        reviewed = selection_queue['entries']
-    output = check_queue(args.check_queue, now) if args.check_queue else build_input(now, args.limit, reviewed)
+    def selection_entries(path):
+        if path is None:
+            return None
+        snapshot = json.loads(Path(path).read_text(encoding='utf-8'))
+        if snapshot.get('schema_version') != 1 or not isinstance(snapshot.get('entries'), list):
+            raise ValueError('Invalid selection input queue schema')
+        return snapshot['entries']
+
+    output = (check_queue(args.check_queue, now) if args.check_queue
+              else build_input(now, args.limit, selection_entries(args.reviews_for_selection),
+                               queued_entries=selection_entries(args.queue_for_selection)))
     print(json.dumps(output, ensure_ascii=False, indent=2))
