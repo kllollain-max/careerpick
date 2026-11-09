@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T00:20:45.000Z",
-  "last_observed_at": "2026-11-09T00:20:45.000Z",
+  "updated_at": "2026-11-09T00:32:28.000Z",
+  "last_observed_at": "2026-11-09T00:32:28.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -138,6 +138,26 @@
     "last_update_commit_sha": "8e82be7be6ebda6c974181ea17f0519a3abe47bf"
   },
   "observed_runs": [
+    {
+      "run_id": "42540341014",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T00:29:03Z",
+      "head_sha": "5fe5016e76e11fc64a2b5e8346e42862ab425f23",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42540341014",
+      "workflow_path": ".github/workflows/content-mobile-check.yml"
+    },
+    {
+      "run_id": "42540341013",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-09T00:28:47Z",
+      "head_sha": "5fe5016e76e11fc64a2b5e8346e42862ab425f23",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42540341013",
+      "workflow_path": ".github/workflows/adsense-readiness-check.yml"
+    },
     {
       "run_id": "42538906745",
       "run_attempt": 1,
@@ -2373,9 +2393,9 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-09T00:20:45.000Z",
+    "checked_at": "2026-11-09T00:32:28.000Z",
     "input_script": "scripts/threads_writer_input.py --limit 24",
-    "input_reference_at": "2026-11-09T09:20:15.988887+09:00",
+    "input_reference_at": "2026-11-09T09:32:02.121705+09:00",
     "candidates_read": 24,
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "prompt_exact_bytes_verified": true,
@@ -2543,11 +2563,12 @@
       "persisted_alio_last_success_at": "2026-11-09T00:47:35+09:00",
       "operations_status_blob_sha": "02e92eced96bdea2ccd559eb90d1a17c35097291",
       "minimum_persisted_verification_for_full_delay_window": "2026-11-09T09:59:59+09:00",
-      "source_fingerprints_unchanged": true
+      "source_fingerprints_unchanged": true,
+      "checked_at": "2026-11-09T00:32:28.000Z"
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T00:20:45.000Z",
+    "checked_at": "2026-11-09T00:32:28.000Z",
     "main_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
     "history_blob_sha": "1941f41adbc720e9ee42c40b3c18b37281743242",
     "claim_blob_sha": "d8ce7c00576a1b4fb3b269d82a6e48dc17f018db",
@@ -2622,34 +2643,24 @@
     "last_existing_claim_blob_sha": "6a813113a8f5e0cd4109f81cbebef695986d9a4a",
     "observed_new_run_versions": [
       {
-        "run_id": "42538906745",
+        "run_id": "42540341014",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "success",
-        "updated_at": "2026-11-09T00:13:21Z",
-        "head_sha": "cab4f1ecf5f8e1e8896e19757e0adfc73206415d",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42538906745",
+        "updated_at": "2026-11-09T00:29:03Z",
+        "head_sha": "5fe5016e76e11fc64a2b5e8346e42862ab425f23",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42540341014",
         "workflow_path": ".github/workflows/content-mobile-check.yml"
       },
       {
-        "run_id": "42538906633",
+        "run_id": "42540341013",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "success",
-        "updated_at": "2026-11-09T00:12:50Z",
-        "head_sha": "cab4f1ecf5f8e1e8896e19757e0adfc73206415d",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42538906633",
+        "updated_at": "2026-11-09T00:28:47Z",
+        "head_sha": "5fe5016e76e11fc64a2b5e8346e42862ab425f23",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42540341013",
         "workflow_path": ".github/workflows/adsense-readiness-check.yml"
-      },
-      {
-        "run_id": "42538117531",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T00:03:37Z",
-        "head_sha": "eba6ddd22cfdd084112baadb32b677667b9c7b5c",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42538117531",
-        "workflow_path": ".github/workflows/public-search-check.yml"
       }
     ],
     "unrelated_pr_check": {
