@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T16:21:25+00:00",
-  "last_observed_at": "2026-11-09T16:21:25+00:00",
+  "updated_at": "2026-11-09T17:23:00+00:00",
+  "last_observed_at": "2026-11-09T17:23:00+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -6812,7 +6812,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T16:21:25+00:00",
+    "checked_at": "2026-11-09T17:23:00+00:00",
     "main_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
     "history_blob_sha": "040e3ccef93201e6883f7b04af661c0a278b1196",
     "claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
@@ -6903,28 +6903,7 @@
     ],
     "next_action": "Verify the next scheduled main body and detail reply. Preserve all four queued drafts. No replay.",
     "last_existing_claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
-    "observed_new_run_versions": [
-      {
-        "run_id": "42653498961",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T16:19:07Z",
-        "head_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42653498961",
-        "workflow_path": ".github/workflows/public-search-check.yml"
-      },
-      {
-        "run_id": "42652587846",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T16:18:48Z",
-        "head_sha": "0112e60e771e060a2a46a39043ec4644f5280af4",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42652587846",
-        "workflow_path": ".github/workflows/operations.yml"
-      }
-    ],
+    "observed_new_run_versions": [],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
@@ -8900,7 +8879,7 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-09T16:21:25+00:00",
+    "checked_at": "2026-11-09T17:23:00+00:00",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
@@ -8953,7 +8932,7 @@
     "artifact_digest": "sha256:5fcfe56f6e465fa0e7d7d535bcaf271eda8cbc9f5cca79bd116d69cacad21915"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-09T16:21:25+00:00",
+    "checked_at": "2026-11-09T17:23:00+00:00",
     "main_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
     "queue_blob_sha": "4bc1be4f0ccb67c73ff57f99f5255ce4d6b393fb",
     "prompt_and_editorial_bytes_verified": true,
@@ -8970,7 +8949,7 @@
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v2-20261109",
-      "evaluated_at": "2026-11-10T01:18:41.423266+09:00",
+      "evaluated_at": "2026-11-10T02:21:36.332474+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -9089,30 +9068,68 @@
     "current_official_detail_recheck": {
       "notice_id": "a306784",
       "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306784",
-      "checked_at": "2026-11-09T16:21:25+00:00",
+      "checked_at": "2026-11-10T02:21:36.332474+09:00",
       "status": "open",
-      "scope": "Official listing rechecked; attachment and READY timestamps preserved."
+      "scope": "Official listing only; original attachment and READY verification timestamps preserved."
     },
     "public_profile_path_recheck": {
       "profile": {
         "status": 200,
         "url": "https://www.threads.com/@hid_119",
-        "sha256": "9949bf507c1b478c112d74f949c1fd458234acab1ae5d94e601b59b4a2ab53a2",
-        "checked_at": "2026-11-09T16:19:39.423181+00:00",
+        "final_url": "https://www.threads.com/@hid_119",
+        "sha256": "c72b37278d7d09b5a0d15b0cabead6ecb5e3a8769207724ad63706784901c348",
+        "checked_at": "2026-11-09T17:22:37.706273+00:00",
         "rel_me_careerpick": true
       },
       "site": {
         "status": 200,
         "url": "https://kllollain-max.github.io/careerpick/",
+        "final_url": "https://kllollain-max.github.io/careerpick/",
         "sha256": "89028379008a84c3b6676a461719a5093fccc1df2ad6c55fbd2e884df0f47f5b",
-        "checked_at": "2026-11-09T16:19:38.589083+00:00"
+        "checked_at": "2026-11-09T17:22:37.784877+00:00",
+        "detail_route_present": true
       },
       "feed": {
         "status": 200,
         "url": "https://kllollain-max.github.io/careerpick/alio.json",
+        "final_url": "https://kllollain-max.github.io/careerpick/alio.json",
         "sha256": "dee278c116364ff3b3fc56087c9b7bc799dd035818b0053883c9c2ba743a66eb",
-        "checked_at": "2026-11-09T16:19:38.554346+00:00",
-        "notice_id_visible": true
+        "checked_at": "2026-11-09T17:22:37.801101+00:00",
+        "ids_in_feed": [
+          "a306784",
+          "a306838",
+          "a306716",
+          "a306563"
+        ]
+      },
+      "a306784": {
+        "status": 200,
+        "url": "https://kllollain-max.github.io/careerpick/jobs/a306784.html",
+        "final_url": "https://kllollain-max.github.io/careerpick/jobs/a306784.html",
+        "sha256": "23418e6d2c7e685a19ca452465fb2e372a7452a6f9b6a70eaa281d6312a0ff59",
+        "checked_at": "2026-11-09T17:22:37.857111+00:00",
+        "notice_marker_present": true
+      },
+      "a306838": {
+        "status": 200,
+        "url": "https://kllollain-max.github.io/careerpick/jobs/a306838.html",
+        "final_url": "https://kllollain-max.github.io/careerpick/jobs/a306838.html",
+        "sha256": "fa4abcc80d0113ac65649ca6df2cb9b4c692fe1cdfa55d0a952efa4221f288ea",
+        "checked_at": "2026-11-09T17:22:37.761402+00:00",
+        "notice_marker_present": true
+      },
+      "a306716": {
+        "status": 200,
+        "url": "https://kllollain-max.github.io/careerpick/jobs/a306716.html",
+        "final_url": "https://kllollain-max.github.io/careerpick/jobs/a306716.html",
+        "sha256": "46306b95b64fbdcf39ca9c579057d87629fd832568cbf9e800f573dac6377c34",
+        "checked_at": "2026-11-09T17:22:37.761166+00:00",
+        "notice_marker_present": true
+      },
+      "a306563": {
+        "url": "https://kllollain-max.github.io/careerpick/#job=a306563",
+        "method": "live HTML route and public ALIO feed ID verified; browser rendering not checked",
+        "route_and_feed_match": true
       },
       "deep_link_rendered": false
     },
