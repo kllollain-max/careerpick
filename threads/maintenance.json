@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T23:33:36+00:00",
-  "last_observed_at": "2026-11-09T23:33:36+00:00",
+  "updated_at": "2026-11-09T23:48:51+00:00",
+  "last_observed_at": "2026-11-09T23:48:51+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -7122,7 +7122,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-09T23:33:36+00:00",
+    "checked_at": "2026-11-09T23:48:51+00:00",
     "main_sha": "205f6011336465b379dd323e4bf84387e4938520",
     "history_blob_sha": "5c73822666089e69c9313ef7182c6d52dd0cfcd8",
     "claim_blob_sha": "68d4a5c273f628c55ba51fcbf79c72a90ac61a72",
@@ -7137,19 +7137,8 @@
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42720550153"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "42720550153",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T23:28:55Z",
-        "head_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42720550153"
-      }
-    ],
-    "status": "scheduled_body_and_detail_reply_verified",
+    "new_publisher_runs": [],
+    "status": "no_new_runs_after_verified_publication",
     "slot": "2026-11-10T08:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -7224,28 +7213,7 @@
     ],
     "next_action": "Verify the next scheduled main body and detail reply. Preserve all four queued drafts. No replay.",
     "last_existing_claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
-    "observed_new_run_versions": [
-      {
-        "run_id": "42720550153",
-        "run_attempt": 1,
-        "status": "in_progress",
-        "conclusion": null,
-        "updated_at": "2026-11-09T23:27:11Z",
-        "head_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42720550153"
-      },
-      {
-        "run_id": "42720550153",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-09T23:28:55Z",
-        "head_sha": "c06bfb1ee23975db5736d03e0c23ba1bd69dcf64",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42720550153"
-      }
-    ],
+    "observed_new_run_versions": [],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
@@ -8486,6 +8454,38 @@
       ],
       "reason": "공식 모집표상 7명은 네 모집단위 합계. 가장 큰 건축 3명. 전체 슬롯 신선도 불충족 및 실제 접수시각·추가 첨부 확인 미완료.",
       "official_details_fully_reviewed": false
+    },
+    "2026-11-11T08:00:00+09:00:cleaneye-81095": {
+      "notice_id": "cleaneye-81095",
+      "source": "cleaneye",
+      "official_id": "81095",
+      "status": "reviewed_lower_rank",
+      "checked_at": "2026-11-10T08:47:43.349846+09:00",
+      "notice_total_count": 18,
+      "largest_verified_regular_unit": {
+        "title": "제주시노인보호전문기관 상담원(4급)",
+        "count": 2,
+        "employment": "정규직"
+      },
+      "other_employment": "계약직 포함, 혼합 공고",
+      "application_end": "2026-11-24T14:00:00+09:00",
+      "official_precision_verified": true,
+      "source_post_sha256": "693e780e551dd40ea0537d3afa12ad917001c1241617ba705801fb56952260a7",
+      "source_detail_sha256": "83ea3dbb67752826bca0d7f87df7b744c7f21e92f15a2bbe07d4e85cfad0106e",
+      "source_refs": [
+        {
+          "url": "https://jeju.pass.or.kr/notice-hire/view/id/3047",
+          "section": "기관 채용 공고 제2026-112호"
+        },
+        {
+          "url": "https://jeju.pass.or.kr/_files/board/20261109/dcb287c19e348ab4d0feb6c77187ad11.pdf",
+          "sha256": "8f24602f79b799bcc1eec63d967eacbc25201738380fe74bbccd39217e07fe14",
+          "excerpt": "총 채용인원 18명 / 제주특별자치도제주시 노인보호전문기관 정규직 상담원(4급) 2명 / 지원서접수 2026. 11. 9.(월) ~ 11. 24.(화) 14:00 까지"
+        }
+      ],
+      "scope": "공식 첨부의 모집표·접수일정 대조, 지원 양식 및 배치지 전수 검수 미실시",
+      "reason": "혼합 총원 18명은 단일 정규직 모집단위 인원이 아님. 확인된 최대 정규직 2명으로 치과위생사 4명 초안의 우선순위를 바꾸지 않음.",
+      "official_details_fully_reviewed": false
     }
   },
   "writer_hold_resolutions": {
@@ -9303,13 +9303,13 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-09T23:33:36+00:00",
+    "checked_at": "2026-11-09T23:48:51+00:00",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
     "run_id": "42720550153",
     "run_attempt": 1,
-    "github_job_id": null,
+    "github_job_id": 129513844323,
     "artifact_id": 13719532898,
     "artifact_name": "threads-performance-42720550153-1",
     "artifact_verified": true,
@@ -9356,7 +9356,7 @@
     "artifact_digest": "sha256:235f56dece3e29e0e5701a8585c05a2e3bfb89e65a9c1a1b8bc821b8ec6e6c37"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-09T23:33:36+00:00",
+    "checked_at": "2026-11-09T23:48:51+00:00",
     "main_sha": "205f6011336465b379dd323e4bf84387e4938520",
     "queue_blob_sha": "4bc1be4f0ccb67c73ff57f99f5255ce4d6b393fb",
     "prompt_and_editorial_bytes_verified": true,
@@ -9476,11 +9476,10 @@
       }
     ],
     "current_official_detail_recheck": {
-      "notice_id": "a306784",
-      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306784",
-      "checked_at": "2026-11-09T22:19:41+00:00",
+      "notice_id": "a306715",
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306715",
       "status": "open",
-      "scope": "Official listing only; original attachment and READY verification timestamps preserved."
+      "scope": "New official ALIO page read only; initial review timestamps untouched."
     },
     "public_profile_path_recheck": {
       "profile": {
@@ -9767,6 +9766,13 @@
       "changed_paths": [
         "threads_posted.json"
       ]
+    },
+    "official_comparison_additions": [
+      "cleaneye-81095"
+    ],
+    "draft_validation_recheck": {
+      "2026-11-11T08:00:00+09:00": "SOURCE_STALE",
+      "2026-11-11T09:59:59+09:00": "SOURCE_STALE"
     }
   }
 }
