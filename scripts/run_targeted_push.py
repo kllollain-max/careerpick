@@ -251,6 +251,11 @@ def run():
     if (os.environ.get('CP_ENABLE_ALL_OPTED_IN_ROLLOUT') != '1'
             or os.environ.get('CP_ENABLE_LIVE_PUSH') != '1'):
         raise RuntimeError('Automatic push is OFF')
+    # Fail closed BEFORE candidate detection, backlog changes or baseline writes.
+    # The sending worker also uses an atomic circuit session for delivery.
+    control, control_sha = circuit.read()
+    if not control_sha or control.get('state') != 'ready':
+        raise circuit.Blocked('Push circuit requires operator review; no candidate updates or sending')
     baseline, sha = read_state(BASELINE)
     if sha is None or not isinstance(baseline, dict) or not isinstance(baseline.get('ids'), list):
         raise RuntimeError('Private baseline not initialized; no historical broadcast')
