@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T19:53:20Z",
-  "last_observed_at": "2026-11-10T19:51:33Z",
+  "updated_at": "2026-11-10T21:09:12Z",
+  "last_observed_at": "2026-11-10T21:05:50Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -4808,7 +4808,7 @@
     "queue_commit_sha": "5f32bf558f9e34929320ce4dd65f53d3684059f6"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T19:53:20Z",
+    "checked_at": "2026-11-10T21:09:12Z",
     "main_sha": "b7d0dafe23d350b64f04a48ec9875c271f7a9828",
     "history_blob_sha": "a884963b908790eb63609875823e2a19af024b49",
     "claim_blob_sha": "c4db538bc156df38d6eb0dd0ea3c7c51e3acf382",
@@ -4889,7 +4889,7 @@
       1,
       2
     ],
-    "resume": "Keep unchanged 20:00 READY; last successful main IMAGE implies TEXT next. Preserve prior accepted publication and no replay.",
+    "resume": "Verify the normal 08:00 publisher and its public image, body and detail reply when it runs. Keep the 11/12 candidates on hold pending fresh collection and review.",
     "last_rechecked_at": "2026-11-09T12:16:34.000Z",
     "next_image_preview": {
       "slot": "2026-11-09T08:00:00+09:00",
@@ -5012,10 +5012,11 @@
       "verified_at": "2026-11-09T23:33:36+00:00"
     },
     "next_slot_preflight": {
-      "slot": "2026-11-10T16:00:00+09:00",
-      "notice_id": "a306716",
-      "status": "READY; local JPEG passed and visually checked at 360px; published bytes verification pending",
-      "derived_media": "IMAGE"
+      "slot": "2026-11-11T08:00:00+09:00",
+      "notice_id": "a306715",
+      "status": "READY; local 1080x1080 JPEG verified and 360px checked; public bytes checked by natural publisher",
+      "derived_media": "IMAGE",
+      "local_sha256": "bbdcb45c985efff76fff590bd6e8154bfbc9b184ebf42277e88bd63b8de75f8b"
     },
     "last_no_change_recheck": {
       "claim_blob_sha": "b5adbf0f45ac5d5c5597cc1d017be6b46e623174",
@@ -5257,10 +5258,10 @@
       "resume": "Next existing successful ALIO collector run must store fresh source verification; keep all guarded drafts and recheck source/official facts."
     },
     "latest_observed_publication_evidence": {
-      "post_id": "18139648828646274",
-      "reply_id": "18101233778412921",
-      "claim_blob_sha": "d8dbaf2f55cb0121ca66b45701943f73fe070a4b",
-      "history_blob_sha": "19e310160fe147a15e398cbf898ba7abaee1a47f",
+      "post_id": "18036438404894460",
+      "reply_id": "18113457911179743",
+      "claim_blob_sha": "c4db538bc156df38d6eb0dd0ea3c7c51e3acf382",
+      "history_blob_sha": "a884963b908790eb63609875823e2a19af024b49",
       "meta_logs_match": true
     },
     "source_recovery": {
@@ -5298,28 +5299,7 @@
     "performance_state_status": "not_initialized_no_observations_to_save",
     "new_failure": null,
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
-    "new_github_run_versions_since_previous_observation": [
-      {
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T19:09:13Z",
-        "head_sha": "b7d0dafe23d350b64f04a48ec9875c271f7a9828",
-        "run_id": "42882350375",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42882350375"
-      },
-      {
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T19:08:57Z",
-        "head_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
-        "run_id": "42881976643",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42881976643"
-      }
-    ],
+    "new_github_run_versions_since_previous_observation": [],
     "actions_pages": {
       "publisher": [
         30,
@@ -5331,10 +5311,10 @@
       ]
     },
     "next_slot_claim": "not_found_future_slot",
-    "latest_confirmed_evidence": "unchanged_accepted_ledger_and_previous_official_meta_get_agree",
+    "latest_confirmed_evidence": "accepted_claim_main_and_original_official_meta_get_log_rechecked",
     "performance_artifact_reverified": true,
-    "previous_observed_at": "2026-11-10T18:34:12Z",
-    "actions_observation_watermark": "2026-11-10T19:51:33Z",
+    "previous_observed_at": "2026-11-10T19:51:33Z",
+    "actions_observation_watermark": "2026-11-10T21:05:50Z",
     "collection_workflow": {
       "run_attempt": 1,
       "status": "completed",
@@ -9445,7 +9425,7 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-10T19:53:20Z",
+    "checked_at": "2026-11-10T21:09:12Z",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
@@ -9523,8 +9503,8 @@
     }
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T19:53:20Z",
-    "mode": "preserved_ready_and_holds_after_source_refresh",
+    "checked_at": "2026-11-10T21:09:12Z",
+    "mode": "all_in_horizon_ready_preserved_and_revalidated",
     "main_sha": "b7d0dafe23d350b64f04a48ec9875c271f7a9828",
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
     "prompt_and_editorial_bytes_verified": true,
@@ -9614,14 +9594,15 @@
       "format": "JPEG",
       "preview_resolution": "360x360",
       "all_four_visually_reviewed": true,
-      "remote_bytes_check": "publisher_preflight"
+      "remote_bytes_check": "publisher_preflight",
+      "next_slot_360px_visually_rechecked": true
     },
-    "selection_input_reference_at": "2026-11-11T04:52:05.082214+09:00",
-    "selection_input_sha256": "f83e247af0cb32ea162582068b4bd676078934c1a0d0f0393bc85421596f00e4",
+    "selection_input_reference_at": "2026-11-11T06:07:10.648605+09:00",
+    "selection_input_sha256": "39e3d9b665b8503b9314bf2ec1d7155cc71e36111e7b11495de6205e161b0db5",
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v3-20261110",
-      "evaluated_at": "2026-11-11T04:52:05.082214+09:00",
+      "evaluated_at": "2026-11-11T06:07:10.648605+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -9794,6 +9775,7 @@
         }
       ],
       "cleaneye_existing_rows_unchanged": true
-    }
+    },
+    "writer_horizon_filled": true
   }
 }
