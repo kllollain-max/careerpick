@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T16:00:46Z",
-  "last_observed_at": "2026-11-10T15:57:58Z",
+  "updated_at": "2026-11-10T16:57:08Z",
+  "last_observed_at": "2026-11-10T16:51:33Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1492,6 +1492,26 @@
       "status": "in_progress",
       "conclusion": null,
       "updated_at": "2026-11-10T15:58:29Z",
+      "head_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42849929175"
+    },
+    {
+      "run_id": "42850383299",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-10T16:01:28Z",
+      "head_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
+      "workflow_path": ".github/workflows/public-search-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42850383299"
+    },
+    {
+      "run_id": "42849929175",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-10T16:01:08Z",
       "head_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
       "workflow_path": ".github/workflows/operations.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42849929175"
@@ -4768,8 +4788,8 @@
     "queue_commit_sha": "5f32bf558f9e34929320ce4dd65f53d3684059f6"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T16:00:46Z",
-    "main_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
+    "checked_at": "2026-11-10T16:57:08Z",
+    "main_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
     "history_blob_sha": "a884963b908790eb63609875823e2a19af024b49",
     "claim_blob_sha": "c4db538bc156df38d6eb0dd0ea3c7c51e3acf382",
     "last_confirmed_post_id": "18036438404894460",
@@ -4784,7 +4804,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42809560618"
     },
     "new_publisher_runs": [],
-    "status": "no_new_publisher_run_existing_ready_revalidated",
+    "status": "source_refresh_existing_ready_passed_no_new_publisher_run",
     "slot": "2026-11-11T08:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -4801,17 +4821,17 @@
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-10T22:15:35+09:00",
-        "source_checked_at": "2026-11-10T22:16:06+09:00",
-        "total_records": 847,
+        "snapshot_at": "2026-11-11T00:58:34+09:00",
+        "source_checked_at": "2026-11-11T00:59:01+09:00",
+        "total_records": 854,
         "eligible_count": 30,
-        "review_required_count": 707,
-        "excluded_count": 110,
+        "review_required_count": 716,
+        "excluded_count": 108,
         "returned_count": 1,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 27,
           "NOTICE_ALREADY_USED": 67,
-          "SOURCE_NOTICE_UNCONFIRMED": 11,
+          "SOURCE_NOTICE_UNCONFIRMED": 9,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
           "NOTICE_ALREADY_QUEUED": 3,
           "APPLICATION_END_PRECISION_CONFLICT": 1
@@ -4819,148 +4839,30 @@
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-10T19:05:19+09:00",
-        "source_checked_at": "2026-11-10T19:05:19+09:00",
+        "snapshot_at": "2026-11-11T00:59:33+09:00",
+        "source_checked_at": "2026-11-11T00:59:33+09:00",
         "total_records": 463,
         "eligible_count": 271,
         "review_required_count": 0,
         "excluded_count": 192,
         "returned_count": 23,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 173,
-          "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 14,
+          "CLEANEYE_NOT_VERIFIED_OPEN": 153,
           "CLEANEYE_NOT_RECRUITMENT": 4,
-          "NOTICE_ALREADY_QUEUED": 1
+          "NOTICE_ALREADY_QUEUED": 1,
+          "CLEANEYE_APPLICATION_NOT_OPEN": 34
         }
       },
       "gojobs": {
-        "status": "unchanged",
-        "snapshot_at": "2026-11-10T01:14:19+09:00",
-        "verified_at": "2026-11-10T22:16:47+09:00",
-        "counts": {
-          "before": 31,
-          "new": 0,
-          "modified": 0,
-          "deleted": 0,
-          "after": 31,
-          "received_in_window": 163,
-          "verified_this_run": 8,
-          "open": 8,
-          "deadline_time_unconfirmed": 4,
-          "archived": 19
-        },
-        "official_page_verified": 8,
-        "official_page_failed": 0,
-        "complete_window": true,
-        "scanned_tracked": 31,
-        "cutoff_screen": "8 date-only potential rows at or after Nov 11, all 임기제; no unit outranks verified regular nursing. Stored snapshot 01:14:19; source reports 8 independently reverified at 22:16:47, not a new tracked snapshot; no GOJOBS entries admitted to Threads writer queue.",
-        "potential_rows": [
-          {
-            "id": "gojobs-306692",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-11T23:59:59+09:00",
-            "dueHasTime": false
-          },
-          {
-            "id": "gojobs-306828",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-11T23:59:59+09:00",
-            "dueHasTime": false
-          },
-          {
-            "id": "gojobs-306834",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-11T23:59:59+09:00",
-            "dueHasTime": false
-          },
-          {
-            "id": "gojobs-306981",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-11T23:59:59+09:00",
-            "dueHasTime": false
-          },
-          {
-            "id": "gojobs-306992",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-12T23:59:59+09:00",
-            "dueHasTime": false
-          },
-          {
-            "id": "gojobs-307283",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-12T23:59:59+09:00",
-            "dueHasTime": false
-          },
-          {
-            "id": "gojobs-307361",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-11T23:59:59+09:00",
-            "dueHasTime": false
-          },
-          {
-            "id": "gojobs-307383",
-            "emp": [
-              "임기제"
-            ],
-            "due": "2026-11-11T23:59:59+09:00",
-            "dueHasTime": false
-          }
-        ],
-        "not_treated_as_official_times": true
-      },
-      "latest_operations_run": {
-        "run_id": "42822857417",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T13:18:10Z",
-        "head_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42822857417"
-      },
-      "artifact_id": 13767218665,
-      "artifact_digest": "sha256:b9e4898d4d6b4e4ac8a46cc5128154a1b0e617f569e3ac149b259eadcd58f334",
-      "cleaneye_operations": {
-        "status": "unchanged",
-        "changed": false,
-        "complete_collection": true,
-        "snapshot_at": "2026-11-10T19:05:19+09:00",
-        "started_at": "2026-11-10T22:16:47+09:00",
-        "counts": {
-          "cleaneye": {
-            "active": 289,
-            "after": 463,
-            "before": 463,
-            "cancelled": 0,
-            "changed": 0,
-            "current_candidates": 397,
-            "deadline_time_uncertain": 463,
-            "deadline_unknown": 0,
-            "deleted": 0,
-            "expired": 66,
-            "far_future_source_date": 3,
-            "new": 0,
-            "received": 397,
-            "retained": 66,
-            "status_uncertain": 29,
-            "upcoming": 79
-          }
-        },
-        "candidate_sha256": "0cd061f56087ed9ae2036d4f4ba80dc908b04047ef2314b63455e9990256cc03"
+        "status": "collected_separately_not_in_Threads_candidate_pool",
+        "snapshot_at": "2026-11-11T00:59:03+09:00",
+        "total_records": 35,
+        "received_in_window": 149,
+        "scope": "local-government registered source window; not national coverage",
+        "future_comparison_date_screened_records": 12,
+        "employment": [
+          "임기제"
+        ]
       }
     },
     "pages_read": [
@@ -5378,11 +5280,21 @@
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
     "new_github_run_versions_since_previous_observation": [
       {
+        "run_id": "42850383299",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-10T16:01:28Z",
+        "head_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42850383299"
+      },
+      {
         "run_id": "42849929175",
         "run_attempt": 1,
-        "status": "in_progress",
-        "conclusion": null,
-        "updated_at": "2026-11-10T15:58:29Z",
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-10T16:01:08Z",
         "head_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
         "workflow_path": ".github/workflows/operations.yml",
         "url": "https://github.com/kllollain-max/careerpick/actions/runs/42849929175"
@@ -5394,21 +5306,21 @@
         0
       ],
       "repository_recent_window": [
-        41,
+        42,
         0
       ]
     },
     "next_slot_claim": "not_found_future_slot",
     "latest_confirmed_evidence": "unchanged_accepted_ledger_and_previous_official_meta_get_agree",
     "performance_artifact_reverified": true,
-    "previous_observed_at": "2026-11-10T15:25:24Z",
-    "actions_observation_watermark": "2026-11-10T15:57:58Z",
+    "previous_observed_at": "2026-11-10T15:57:58Z",
+    "actions_observation_watermark": "2026-11-10T16:51:33Z",
     "collection_workflow": {
       "run_id": "42849929175",
       "run_attempt": 1,
-      "status": "in_progress",
-      "conclusion": null,
-      "updated_at": "2026-11-10T15:58:29Z",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-10T16:01:08Z",
       "head_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
       "workflow_path": ".github/workflows/operations.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42849929175"
@@ -7560,6 +7472,216 @@
         "due": "2026-11-19",
         "deadline_label": "2026-11-19 18:00"
       }
+    },
+    "2026-11-12T08:00:00+09:00:a306403": {
+      "scheduled_at": "2026-11-12T08:00:00+09:00",
+      "format_id": "reader_story",
+      "notice_id": "a306403",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "editorial_policy_id": "careerpick-threads-reach-v1-20261109",
+      "editorial_policy_sha256": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+      "prepared_at": "2026-11-11T01:56:04.071865+09:00",
+      "source_post_sha256": "51138db9386b47a717c4158777d3e518a8c8261a164c6956ec1c5b4dda20fdf3",
+      "source_detail_sha256": "a7ec3613bc503ad6fc5733956848bdce83e94dfc48c39cea9d85e8406c7278ac",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "대외경제정책연구원이 세종에서 일할 정규직 부연구위원 이상 연구직 8명을 뽑아요.\n\n논문 주제를 실무 연구로 이어가고 싶다면, 국제금융·무역통상·경제안보처럼 지금까지 다뤄 온 분야가 이번 연구 범위와 맞는지 살펴보세요.\n\n박사학위를 마무리하는 중이라면 학위 취득과 근무 시작 시점을 함께 보세요. 2027년 취득 예정자는 같은 해에 근무할 수 있어야 해요.\n\n세종에서 주 5일 근무하고 수습은 3개월이에요. 이력서와 대학원 성적증명서, 연구논문 1편, 추천서 3부를 준비해요. 채용세미나의 논문 발표는 영어로 진행해요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a306403",
+          "target_reader": "경제학·관련 분야 박사 또는 동등 학위 보유자 중 대외경제 연구직을 검토하는 사람",
+          "central_message": "본인 연구 분야와 임용 시기, 제출 준비를 함께 판단하도록 돕기",
+          "pattern_id": "P1",
+          "scheduled_at": "2026-11-12T08:00:00+09:00",
+          "reference_at": "2026-11-11T01:56:04.071865+09:00",
+          "verification_basis": "checked_official_source",
+          "checked_at": "2026-11-11T01:54:24.491745+09:00",
+          "source_refs": [
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3083136",
+              "checked_at": "2026-11-11T01:54:24.491745+09:00",
+              "sha256": "302b5199ac984419e079458ed067b436d3944b05046168afb16f9c30513b9576",
+              "location": "공고문 1~3쪽: 모집표, 근무조건, 지원요건, 전형·제출서류",
+              "excerpt": "근무지: 세종특별자치시 (시청대로370 세종국책연구단지 경제정책동) | <우대 요건> - 한국어 및 영어 능통자 | ‣ 외국어(영어)로 실시 | 채용홈페이지 시간 기준",
+              "relevant_sections": [
+                "1. 모집분야 및 자격요건",
+                "2. 근무조건 및 복리후생",
+                "4. 전형 방법 및 일정",
+                "5. 제출서류"
+              ]
+            },
+            {
+              "url": "https://econjobmarket.org/positions/12906",
+              "checked_at": "2026-11-11T01:53:38.099106+09:00",
+              "sha256": "3a3f823fca75b8129210797c0be3d4cac0f90c3ba1444d8e364c12cae40f932f",
+              "location": "접수 상세 본문 및 JobPosting JSON-LD",
+              "excerpt": "Application deadline: 1 Dec 2026 midnight UTC / \"datePosted\": \"2026-10-27T00:00:00+00:00\" / \"validThrough\": \"2026-12-01T23:59:59+00:00\" / Fluency in both Korean and English is required."
+            }
+          ],
+          "missing_or_conflicting": [
+            "공고 PDF는 한국어·영어 능통자를 우대요건으로 표시하지만 같은 채용의 지정 EJM 접수 페이지는 두 언어 능통을 필수로 표시함. 실제 심사 요건을 확인하기 전 게시 보류.",
+            "11월 12일 08시가 현 시점 기준 다음 24시간 밖에 있으며, 현 ALIO 검증 시각이 지연 허용 구간 끝인 09:59:59까지 24시간 이내가 아님."
+          ],
+          "omitted_optional_facts": [
+            "내부규정에 따른 초임 금액은 기재하지 않음."
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "pre_publish_checks": [
+            "차기 24시간 구간 진입 후 최신 원문·접수·자격 정정과 전체 후보 우선순위 재검수."
+          ],
+          "application_period_evidence": {
+            "start": "2026-10-27",
+            "start_date_only": true,
+            "end": "2026-12-02T08:59:59+09:00",
+            "date_only": false,
+            "source_ref": "https://econjobmarket.org/positions/12906",
+            "evidence": "Application deadline: 1 Dec 2026 midnight UTC / \"datePosted\": \"2026-10-27T00:00:00+00:00\" / \"validThrough\": \"2026-12-01T23:59:59+00:00\" / Fluency in both Korean and English is required.",
+            "original_numeric_deadline": "2026-12-01T23:59:59+00:00",
+            "source_timezone": "UTC",
+            "conversion": "actual structured source timestamp converted to KST; not ALIO listing end"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306403.html",
+            "notice_id": "a306403",
+            "checked_at": "2026-11-11T01:54:48.494796+09:00",
+            "verified": true
+          },
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "연구직 부연구위원 이상",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3083136",
+              "excerpt": "연구직 (정규직) 부연구위원 이상 전분야 8명"
+            },
+            {
+              "field": "count",
+              "value": 8,
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3083136",
+              "excerpt": "연구직 (정규직) 부연구위원 이상 전분야 8명"
+            },
+            {
+              "field": "employment",
+              "value": "정규직",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3083136",
+              "excerpt": "연구직 (정규직) 부연구위원 이상 전분야 8명"
+            },
+            {
+              "field": "location",
+              "value": "세종특별자치시",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3083136",
+              "excerpt": "근무지: 세종특별자치시 (시청대로370 세종국책연구단지 경제정책동)"
+            }
+          ],
+          "reach_editorial": {
+            "policy_id": "careerpick-threads-reach-v1-20261109",
+            "candidate_first_sentences": [
+              {
+                "id": "A",
+                "type": "A",
+                "text": "대외경제정책연구원이 세종에서 일할 정규직 부연구위원 이상 연구직 8명을 뽑아요."
+              },
+              {
+                "id": "B",
+                "type": "B",
+                "text": "무역통상이나 경제안보를 연구해 온 박사라면, 대외경제정책연구원 정규직 부연구위원 이상 공고를 살펴보세요."
+              },
+              {
+                "id": "feature",
+                "type": "feature",
+                "text": "한 전공으로 범위를 좁히지 않은 대외경제 연구직, 대외경제정책연구원이 8명을 뽑아요."
+              }
+            ],
+            "selected_candidate_id": "A",
+            "hook_type": "A",
+            "first_sentence": "대외경제정책연구원이 세종에서 일할 정규직 부연구위원 이상 연구직 8명을 뽑아요.",
+            "experiment_eligible": false,
+            "selection_reason": "차기 빈 슬롯용 보류 초안. 해당 단위 정규직 8명 확인으로 우선 검토할 가치가 있으나 최종 선정은 새 수집본과 전체 비교 및 자격 충돌 해결 후.",
+            "recruitment_unit": {
+              "title": "연구직 부연구위원 이상",
+              "count": 8,
+              "employment": "정규직"
+            },
+            "restrictions_checked": true,
+            "key_restrictions": [
+              {
+                "text": "경제학·관련 분야 박사 또는 이에 준하는 학위가 필요해요. 2027년 박사 취득 예정자는 2027년에 근무할 수 있어야 해요.",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3083136",
+                "excerpt": "경제학 및 관련 분야 박사학위 소지자 또는 그에 준하는 학위 소지자 (※2027년 박사학위 취득 예정자 중 2027년 근무 가능자 지원 가능)"
+              }
+            ],
+            "fact_consistency_check": "hold_unresolved_language_requirement",
+            "public_preview": {
+              "main_text": "대외경제정책연구원이 세종에서 일할 정규직 부연구위원 이상 연구직 8명을 뽑아요.\n고용·인원: 정규직 · 8명\n근무: 세종특별자치시\n접수 마감: 2026-12-02 08:59:59\n경제학·관련 분야 박사 또는 이에 준하는 학위가 필요해요. 2027년 박사 취득 예정자는 2027년에 근무할 수 있어야 해요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+              "detail_reply": "논문 주제를 실무 연구로 이어가고 싶다면, 국제금융·무역통상·경제안보처럼 지금까지 다뤄 온 분야가 이번 연구 범위와 맞는지 살펴보세요.\n\n박사학위를 마무리하는 중이라면 학위 취득과 근무 시작 시점을 함께 보세요. 2027년 취득 예정자는 같은 해에 근무할 수 있어야 해요.\n\n세종에서 주 5일 근무하고 수습은 3개월이에요. 이력서와 대학원 성적증명서, 연구논문 1편, 추천서 3부를 준비해요. 채용세미나의 논문 발표는 영어로 진행해요."
+            }
+          }
+        }
+      },
+      "image_job": {
+        "id": "a306403",
+        "org": "대외경제정책연구원",
+        "title": "연구직 부연구위원 이상",
+        "count": 8,
+        "employment": "정규직",
+        "location": "세종특별자치시",
+        "due": "2026-12-02",
+        "deadline_label": "2026-12-02 08:59:59"
+      },
+      "hold_validation": {
+        "at_review": "SOURCE_STALE",
+        "delay_window_end": "SOURCE_STALE"
+      },
+      "hold_card_preview": {
+        "sha256": "c90b53d8dee8586885f63dc4e92ca9fc2fa0ef22c8fd10a2570fd7c306ed731b",
+        "bytes": 174583,
+        "dimensions": [
+          1080,
+          1080
+        ],
+        "preview_width": 360,
+        "scope": "local only",
+        "visually_reviewed_360px": true
+      },
+      "selection_audit": {
+        "source_gate": "SOURCE_STALE for target slot",
+        "scope": "future_unfilled_candidate_not_selected",
+        "candidate": {
+          "source": "alio",
+          "notice_id": "a306403",
+          "decision": "review_required",
+          "reasons": [
+            "APPLICATION_PERIOD_REVIEW_REQUIRED"
+          ],
+          "official_checked_at": null,
+          "unit_count": null,
+          "unit_scope": "unit_count_unconfirmed",
+          "interest": null,
+          "audience_breadth": null,
+          "application_period": null,
+          "org": "대외경제정책연구원",
+          "title": "대외경제정책연구원(KIEP) 정규직 박사급(해외) 채용 공고",
+          "sector_preference": "neutral",
+          "sector_group": "other",
+          "sector_priority": 1,
+          "sector_basis": {
+            "source": "official_labels",
+            "matched": null
+          },
+          "employment": "정규직",
+          "notice_total_count": 8,
+          "notice_total_count_raw": "8",
+          "application_status": "unconfirmed"
+        },
+        "verified_recruitment_unit_count": 8,
+        "sector_preference": "neutral",
+        "official_details_fully_reviewed": false
+      },
+      "resume": "Confirm Korean and English eligibility with authoritative aligned evidence, refresh ALIO and profile, re-rank including larger verified candidates inside the next 24h, and validate the entire 2h window before any queue append."
     }
   },
   "writer_hold_resolutions": {
@@ -8310,6 +8432,135 @@
       "applied_to_actual_input": true,
       "automation_prompt_readback_verified": true,
       "checked_at": "2026-11-10T10:10:13.852Z"
+    },
+    "latest_collection_hold_recheck": {
+      "checked_at": "2026-11-10T16:57:08Z",
+      "main_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
+      "new_snapshots": {
+        "alio": {
+          "status": "verified_snapshot",
+          "snapshot_at": "2026-11-11T00:58:34+09:00",
+          "source_checked_at": "2026-11-11T00:59:01+09:00",
+          "total_records": 854,
+          "eligible_count": 30,
+          "review_required_count": 716,
+          "excluded_count": 108,
+          "returned_count": 1,
+          "exclusion_reasons": {
+            "APPLICATION_CLOSED": 27,
+            "NOTICE_ALREADY_USED": 67,
+            "SOURCE_NOTICE_UNCONFIRMED": 9,
+            "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
+            "NOTICE_ALREADY_QUEUED": 3,
+            "APPLICATION_END_PRECISION_CONFLICT": 1
+          }
+        },
+        "cleaneye": {
+          "status": "verified",
+          "snapshot_at": "2026-11-11T00:59:33+09:00",
+          "source_checked_at": "2026-11-11T00:59:33+09:00",
+          "total_records": 463,
+          "eligible_count": 271,
+          "review_required_count": 0,
+          "excluded_count": 192,
+          "returned_count": 23,
+          "exclusion_reasons": {
+            "CLEANEYE_NOT_VERIFIED_OPEN": 153,
+            "CLEANEYE_NOT_RECRUITMENT": 4,
+            "NOTICE_ALREADY_QUEUED": 1,
+            "CLEANEYE_APPLICATION_NOT_OPEN": 34
+          }
+        }
+      },
+      "alternatives": [
+        {
+          "id": "a306403",
+          "slot": "2026-11-11T12:00:00+09:00",
+          "count": 8,
+          "source_post_unchanged": true,
+          "source_detail_unchanged": true,
+          "official_link": "https://www.kiep.go.kr/",
+          "org": "대외경제정책연구원",
+          "official_checked_at": null,
+          "source_gate": "passed",
+          "remaining": [
+            "EJM and official PDF disagree on whether Korean/English fluency is mandatory; exact platform deadline recovered from validThrough",
+            "Future slot requires new 24h source freshness and complete comparison"
+          ]
+        },
+        {
+          "id": "a306470",
+          "slot": "2026-11-11T12:00:00+09:00",
+          "count": 3,
+          "source_post_unchanged": true,
+          "source_detail_unchanged": true,
+          "official_link": "https://kli.recruiter.co.kr/appsite/company/index",
+          "org": "한국노동연구원",
+          "official_checked_at": "2026-11-10T14:33:21.389496+09:00",
+          "source_gate": "passed",
+          "remaining": [
+            "Existing READY version preserved; historical hold version superseded"
+          ]
+        },
+        {
+          "id": "cleaneye-80887",
+          "slot": "2026-11-11T16:00:00+09:00",
+          "count": 4,
+          "source_post_unchanged": true,
+          "source_detail_unchanged": true,
+          "official_link": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80887",
+          "org": "서울의료원",
+          "official_checked_at": "2026-11-10T16:28:53.870508+09:00",
+          "source_gate": "passed",
+          "remaining": [
+            "Explicit primary workplace not confirmed; earlier official review is too old to cover original delay window"
+          ]
+        },
+        {
+          "id": "cleaneye-80902",
+          "slot": "2026-11-11T16:00:00+09:00",
+          "count": 6,
+          "source_post_unchanged": true,
+          "source_detail_unchanged": true,
+          "official_link": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80902",
+          "org": "경기도의료원",
+          "official_checked_at": "2026-11-10T18:20:38.591458+09:00",
+          "source_gate": "passed",
+          "remaining": [
+            "Collected application link still points to 127602, employer's 2026-38 listing is 133112"
+          ]
+        },
+        {
+          "id": "cleaneye-80848",
+          "slot": "2026-11-11T16:00:00+09:00",
+          "count": 103,
+          "source_post_unchanged": true,
+          "source_detail_unchanged": true,
+          "official_link": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80848",
+          "org": "서울교통공사",
+          "official_checked_at": "2026-11-10T19:03:02+09:00",
+          "source_gate": "passed",
+          "remaining": [
+            "Collector labels employer 서울교통공사 while official employer is 서울메트로환경; further application attachments unresolved"
+          ]
+        },
+        {
+          "id": "cleaneye-81028",
+          "slot": "2026-11-11T20:00:00+09:00",
+          "count": 1,
+          "source_post_unchanged": true,
+          "source_detail_unchanged": true,
+          "official_link": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81028",
+          "org": "동대문구시설관리공단",
+          "official_checked_at": "2026-11-10T21:18:18.777150+09:00",
+          "source_gate": "passed",
+          "remaining": [
+            "Original source freshness cleared; existing valid 20:00 READY preserved; one confirmed position does not outrank three"
+          ]
+        }
+      ],
+      "next_unfilled_hold_draft_key": "2026-11-12T08:00:00+09:00:a306403",
+      "existing_ready_preserved": true
     }
   },
   "editorial_rollouts": {
@@ -8803,7 +9054,7 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-10T16:00:46Z",
+    "checked_at": "2026-11-10T16:57:08Z",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
@@ -8881,12 +9132,12 @@
     }
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T16:00:46Z",
-    "mode": "preserved_existing_ready_no_unstarted_unfilled_slot_in_24h",
-    "main_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
+    "checked_at": "2026-11-10T16:57:08Z",
+    "mode": "revalidated_existing_ready_new_source_and_preserved_next_unfilled_hold_draft",
+    "main_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
     "prompt_and_editorial_bytes_verified": true,
-    "prepared_entries_this_check": 0,
+    "prepared_entries_this_check": 1,
     "queue_entries_written_this_check": 0,
     "existing_ready_preserved": true,
     "full_delay_window_validated": true,
@@ -8974,12 +9225,12 @@
       "all_four_visually_reviewed": true,
       "remote_bytes_check": "publisher_preflight"
     },
-    "selection_input_reference_at": "2026-11-11T00:58:47.236418+09:00",
-    "selection_input_sha256": "b84151767d79e18101f7a2d099b0a457c11c25d235848eac31d7952b61a6f649",
+    "selection_input_reference_at": "2026-11-11T01:52:22.125494+09:00",
+    "selection_input_sha256": "93aed6cc8e5d2799371d2514085b03291efa843d0bbe63497e0d494b33e73ace",
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v3-20261110",
-      "evaluated_at": "2026-11-11T00:58:47.236418+09:00",
+      "evaluated_at": "2026-11-11T01:52:22.125494+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -8989,17 +9240,17 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-10T22:15:35+09:00",
-          "source_checked_at": "2026-11-10T22:16:06+09:00",
-          "total_records": 847,
+          "snapshot_at": "2026-11-11T00:58:34+09:00",
+          "source_checked_at": "2026-11-11T00:59:01+09:00",
+          "total_records": 854,
           "eligible_count": 30,
-          "review_required_count": 707,
-          "excluded_count": 110,
+          "review_required_count": 716,
+          "excluded_count": 108,
           "returned_count": 1,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 27,
             "NOTICE_ALREADY_USED": 67,
-            "SOURCE_NOTICE_UNCONFIRMED": 11,
+            "SOURCE_NOTICE_UNCONFIRMED": 9,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
             "NOTICE_ALREADY_QUEUED": 3,
             "APPLICATION_END_PRECISION_CONFLICT": 1
@@ -9007,22 +9258,22 @@
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-10T19:05:19+09:00",
-          "source_checked_at": "2026-11-10T19:05:19+09:00",
+          "snapshot_at": "2026-11-11T00:59:33+09:00",
+          "source_checked_at": "2026-11-11T00:59:33+09:00",
           "total_records": 463,
           "eligible_count": 271,
           "review_required_count": 0,
           "excluded_count": 192,
           "returned_count": 23,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 173,
-            "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 14,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 153,
             "CLEANEYE_NOT_RECRUITMENT": 4,
-            "NOTICE_ALREADY_QUEUED": 1
+            "NOTICE_ALREADY_QUEUED": 1,
+            "CLEANEYE_APPLICATION_NOT_OPEN": 34
           }
         }
       },
-      "total_scanned": 1310,
+      "total_scanned": 1317,
       "eligible_before_limit": 301,
       "writer_limit": 24,
       "returned_count": 24,
@@ -9056,7 +9307,7 @@
       "review_errors": []
     },
     "profile_readback": {
-      "checked_at": "2026-11-11T00:59:34.700195+09:00",
+      "verified": true,
       "url": "https://www.threads.com/@hid_119",
       "rel_me": [
         [
@@ -9064,13 +9315,21 @@
           "https://kllollain-max.github.io/careerpick/"
         ]
       ],
-      "response_sha256": "ec10c7f6990a5368881212b2e6939908db54cf86880ee1a9eff7b13ef74081c7",
-      "notice_paths": {
+      "profile_paths": {
         "a306715": true,
         "a306470": true,
         "cleaneye-80681": true,
         "a306786": true
-      }
-    }
+      },
+      "data_snapshot": {
+        "cleaneye": "2026-11-11T00:59:33+09:00",
+        "alio": "2026-11-11T00:58:34+09:00"
+      },
+      "checked_at": "2026-11-11T01:53:31.170568+09:00",
+      "response_sha256": "301a983609d24f6c6e20e678ffcd0953150ff0d6d17174458c3fce7c265df94f"
+    },
+    "ready_prepared_this_check": 0,
+    "hold_prepared_this_check": 1,
+    "hold_draft_key": "2026-11-12T08:00:00+09:00:a306403"
   }
 }
