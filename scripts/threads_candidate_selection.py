@@ -21,7 +21,20 @@ from scripts.threads_writer_queue import (
 )
 
 KST = ZoneInfo("Asia/Seoul")
-POLICY_ID = "careerpick-threads-selection-v2-20261109"
+POLICY_ID = "careerpick-threads-selection-v3-20261110"
+SECTOR_RULES = (
+    ("deprioritized", "hospital_health", re.compile(
+        r"병원|의료원|의학원|보건(?!설비)|간호|의료기사|의료기술직|의료기관|건강보험|"
+        r"임상병리|방사선사|치과위생|물리치료|작업치료|진료부")),
+    ("preferred", "energy_power", re.compile(
+        r"에너지|발전(?:소|공사|공단|기술)|전력|한국수력원자력|(?:^|\s)한전|"
+        r"가스공사|가스기술공사|석유공사|지역난방|한국(?:남부|중부|남동|동서|서부)발전")),
+    ("preferred", "rail_transport_logistics", re.compile(
+        r"철도|코레일|교통|공항|항만|물류|도로공사|도시철도|메트로")),
+    ("preferred", "finance_insurance_pension", re.compile(
+        r"금융|은행|신용보증|기술보증|예금보험|보험공사|보험개발원|보험연구원|공제회|공제조합|연기금|연금공단|연금기금")),
+)
+SECTOR_ORDER = {"preferred": 0, "neutral": 1, "deprioritized": 2}
 DATE_RE = re.compile(r"(?<!\d)(20\d{2})\s*(?:[./-]|년)\s*(\d{1,2})\s*(?:[./-]|월)\s*(\d{1,2})(?:일|\.)?(?!\d)")
 TIME_RE = re.compile(r"(?<!\d)(\d{1,2})\s*(?::\s*(\d{2})(?::\s*(\d{2}))?|시(?:\s*(\d{1,2})\s*분)?)(?!\d)")
 RECEPTION_RE = re.compile(r"(?:응시\s*원서|입사\s*지원서|지원서|서류|원서)?\s*접수\s*(?:기간|일정)?\s*[:：]?|지원\s*기간\s*[:：]?")
@@ -31,6 +44,35 @@ NON_RECRUITMENT_RE = re.compile(r"취\s*소|철\s*회|모집\s*종료|합격자|
 
 def _normal(value):
     return " ".join(str(value or "").split())
+
+
+def sector_preference(org, notice_title, unit_title=None):
+    """Classify from official labels, without inventing audience metrics.
+
+    A named hospital or a medical recruiting unit takes precedence over
+    a preferred parent organization. With a verified unit, a broad notice
+    title cannot classify a different unit as medical.
+    """
+    labels = (("official_organization", org), ("verified_unit_title", unit_title)) if unit_title else (
+        ("official_organization", org), ("official_notice_title", notice_title))
+    for bucket, group, pattern in SECTOR_RULES:
+        for source, value in labels:
+            if match := pattern.search(_normal(value)):
+                return {"sector_preference": bucket, "sector_group": group,
+                        "sector_priority": SECTOR_ORDER[bucket],
+                        "sector_basis": {"source": source, "matched": match[0]}}
+    return {"sector_preference": "neutral", "sector_group": "other",
+            "sector_priority": SECTOR_ORDER["neutral"],
+            "sector_basis": {"source": "official_labels", "matched": None}}
+
+
+def _ranking_key(row):
+    end = row["application_period"]["end"]
+    # Sector only breaks ties in employment and verified recruiting headcount.
+    # With no unit count, this is provisional source triage, not final selection.
+    return (row["employment_priority"], row["unit_count"] is None,
+            -(row["unit_count"] or 0), row["sector_priority"],
+            end[:10], end[10:], row["notice_id"])
 
 
 def exact_count(value):
@@ -254,6 +296,7 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
                 row["reasons"] = ["DUPLICATE_SOURCE_ID"]; continue
             seen.add(jid)
             row.update(org=post.get("org"), title=post.get("title"))
+            row.update(sector_preference(row["org"], row["title"]))
             if jid in blocked:
                 row["reasons"] = ["NOTICE_ALREADY_USED"]; continue
             if jid in queued:
@@ -304,18 +347,14 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
                 row["application_status"] = "source_narrative_open"
             if jid in reviews:
                 row.update(reviews[jid], application_status="reviewed_open")
+                row.update(sector_preference(row["org"], row["title"], row["unit_title"] if row["unit_scope"] == "reviewed_unit" else None))
             row.update(decision="eligible_for_official_review", employment_priority=employment_rank(row.get("employment")),
                        source_post_sha256=fingerprint(post), source_detail_sha256=fingerprint(detail))
             row["reasons"] = ["OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"] if row["unit_count"] is None else []
             eligible.append((row, post, detail, context))
     # Exact identity deduplication occurs before limiting. No fuzzy scores or
     # institution-level deduplication that could erase distinct recruiting units.
-    def key(item):
-        row = item[0]
-        end = row["application_period"]["end"]
-        return (row["employment_priority"], row["unit_count"] is None,
-                -(row["unit_count"] or 0), end[:10], end[10:], row["notice_id"])
-    eligible.sort(key=key)
+    eligible.sort(key=lambda item: _ranking_key(item[0]))
     unique, identities = [], set()
     for item in eligible:
         row, post, _, _ = item
@@ -347,7 +386,14 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
              "total_scanned": len(rows), "eligible_before_limit": len(unique), "writer_limit": limit,
              "returned_count": len(items), "unconfirmed_unit_counts": sum(r["unit_count"] is None for r, *_ in unique),
              "interest_ranking": "unavailable_not_used", "audience_breadth_ranking": "unavailable_not_used",
-             "ranking_order": ["current_application_open", "exact_employment_type", "verified_unit_count_desc", "actual_deadline", "notice_id_tiebreak"],
+             "sector_policy": {"basis": "user_editorial_preference_not_popularity_data",
+                               "priority_order": SECTOR_ORDER.copy(),
+                               "scope": "tie_break_after_employment_and_verified_unit_count",
+                               "unconfirmed_counts": "provisional_review_order_only",
+                               "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"},
+             "sector_counts_before_limit": dict(Counter(r["sector_preference"] for r, *_ in unique)),
+             "ranking_order": ["current_application_open", "exact_employment_type", "verified_unit_count_desc",
+                               "sector_priority", "actual_deadline", "notice_id_tiebreak"],
              "review_errors": review_errors, "rows": rows}
     review_rows = [{k: v for k, v in r.items() if k not in {"source_post_sha256", "source_detail_sha256"}}
                    for r in rows if r["decision"] == "review_required"]
