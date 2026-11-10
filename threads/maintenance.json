@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T12:47:57.409Z",
-  "last_observed_at": "2026-11-10T12:47:57.409Z",
+  "updated_at": "2026-11-10T14:11:08.072Z",
+  "last_observed_at": "2026-11-10T14:11:08.072Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1475,6 +1475,16 @@
       "head_sha": "f0b2b81a498a7157849e8f3066505097977abed5",
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42809560618"
+    },
+    {
+      "run_id": "42822857417",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-10T13:18:10Z",
+      "head_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42822857417"
     }
   ],
   "last_confirmed_publication": {
@@ -4062,7 +4072,7 @@
       "previous_candidate_still_on_hold": true
     },
     "2026-11-11T20:00:00+09:00": {
-      "status": "hold",
+      "status": "slot_resolved_via_alio_alternative",
       "notice_id": "cleaneye-81028",
       "prepared_at": "2026-11-10T21:47:17.305864+09:00",
       "reason": [
@@ -4071,6 +4081,7 @@
       ],
       "resume": "Recheck on fresh verified feed at or after 2026-11-10T21:59:59+09:00. Exact 728 application page and applicant guide verified. Compare larger units again and run the full slot plus delay window check before any CAS queue append.",
       "previous_candidate_still_on_hold": [
+        "cleaneye-81028",
         "cleaneye-80848",
         "cleaneye-80820",
         "cleaneye-80711",
@@ -4078,23 +4089,26 @@
         "cleaneye-80887",
         "a305734",
         "a306403"
-      ]
+      ],
+      "resolved_at": "2026-11-10T14:11:08.072Z",
+      "slot_selected_notice_id": "a306786",
+      "resolution": "Slot filled by validated ALIO alternative. Original held draft retained under writer_hold_alternatives; do not reuse this slot."
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-10T12:47:57.409Z",
-    "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+    "checked_at": "2026-11-10T14:11:08.072Z",
+    "main_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "editorial_policy_sha256": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
     "editorial_policy_id": "careerpick-threads-reach-v1-20261109",
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
     "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection <latest queue>",
-    "input_reference_at": "2026-11-10T21:42:15.894832+09:00",
+    "input_reference_at": "2026-11-10T23:09:56.355775+09:00",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v3-20261110",
-      "evaluated_at": "2026-11-10T21:42:15.894832+09:00",
+      "evaluated_at": "2026-11-10T23:09:56.355775+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -4104,13 +4118,13 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-10T19:04:21+09:00",
-          "source_checked_at": "2026-11-10T19:04:44+09:00",
-          "total_records": 846,
-          "eligible_count": 29,
+          "snapshot_at": "2026-11-10T22:15:35+09:00",
+          "source_checked_at": "2026-11-10T22:16:06+09:00",
+          "total_records": 847,
+          "eligible_count": 30,
           "review_required_count": 707,
           "excluded_count": 110,
-          "returned_count": 1,
+          "returned_count": 2,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 27,
             "NOTICE_ALREADY_USED": 67,
@@ -4129,7 +4143,7 @@
           "eligible_count": 244,
           "review_required_count": 0,
           "excluded_count": 219,
-          "returned_count": 23,
+          "returned_count": 22,
           "exclusion_reasons": {
             "CLEANEYE_NOT_VERIFIED_OPEN": 173,
             "CLEANEYE_NOT_RECRUITMENT": 4,
@@ -4138,8 +4152,8 @@
           }
         }
       },
-      "total_scanned": 1309,
-      "eligible_before_limit": 273,
+      "total_scanned": 1310,
+      "eligible_before_limit": 274,
       "writer_limit": 24,
       "returned_count": 24,
       "unconfirmed_unit_counts": 273,
@@ -4157,9 +4171,9 @@
         "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
       },
       "sector_counts_before_limit": {
+        "deprioritized": 71,
         "preferred": 22,
-        "neutral": 181,
-        "deprioritized": 70
+        "neutral": 181
       },
       "ranking_order": [
         "current_application_open",
@@ -4170,11 +4184,11 @@
         "notice_id_tiebreak"
       ],
       "review_errors": [],
-      "all_selection_rows_sha256": "ad8696a16f2abe527d1e9b2f682a01b4089a48f1abfb0a1091e78e99f67d4439",
+      "rows_sha256": "538dee59806c706cec9303a3bbcfa78190fc7c4dadef3f432ad0c4d23465665b",
       "ranked_24": [
         {
           "notice_id": "a306242",
-          "rank_before_limit": 4,
+          "rank_before_limit": 5,
           "employment": "정규직",
           "notice_total_count": 2,
           "unit_count": null,
@@ -4189,8 +4203,22 @@
           ]
         },
         {
-          "notice_id": "cleaneye-80642",
+          "notice_id": "a306786",
           "rank_before_limit": 1,
+          "employment": "정규직",
+          "notice_total_count": 3,
+          "unit_count": 3,
+          "sector_preference": "deprioritized",
+          "sector_priority": 2,
+          "sector_basis": {
+            "source": "verified_unit_title",
+            "matched": "간호"
+          },
+          "reasons": []
+        },
+        {
+          "notice_id": "cleaneye-80642",
+          "rank_before_limit": 2,
           "employment": "일반정규직",
           "notice_total_count": 30,
           "unit_count": null,
@@ -4206,7 +4234,7 @@
         },
         {
           "notice_id": "cleaneye-80711",
-          "rank_before_limit": 16,
+          "rank_before_limit": 17,
           "employment": "일반정규직",
           "notice_total_count": 13,
           "unit_count": null,
@@ -4222,7 +4250,7 @@
         },
         {
           "notice_id": "cleaneye-80773",
-          "rank_before_limit": 5,
+          "rank_before_limit": 6,
           "employment": "일반정규직",
           "notice_total_count": 4,
           "unit_count": null,
@@ -4238,7 +4266,7 @@
         },
         {
           "notice_id": "cleaneye-80805",
-          "rank_before_limit": 12,
+          "rank_before_limit": 13,
           "employment": "일반정규직",
           "notice_total_count": 6,
           "unit_count": null,
@@ -4254,7 +4282,7 @@
         },
         {
           "notice_id": "cleaneye-80807",
-          "rank_before_limit": 13,
+          "rank_before_limit": 14,
           "employment": "일반정규직",
           "notice_total_count": 2,
           "unit_count": null,
@@ -4270,7 +4298,7 @@
         },
         {
           "notice_id": "cleaneye-80812",
-          "rank_before_limit": 14,
+          "rank_before_limit": 15,
           "employment": "일반정규직",
           "notice_total_count": 19,
           "unit_count": null,
@@ -4286,7 +4314,7 @@
         },
         {
           "notice_id": "cleaneye-80820",
-          "rank_before_limit": 2,
+          "rank_before_limit": 3,
           "employment": "일반정규직",
           "notice_total_count": 136,
           "unit_count": null,
@@ -4302,7 +4330,7 @@
         },
         {
           "notice_id": "cleaneye-80848",
-          "rank_before_limit": 3,
+          "rank_before_limit": 4,
           "employment": "일반정규직",
           "notice_total_count": 153,
           "unit_count": null,
@@ -4318,7 +4346,7 @@
         },
         {
           "notice_id": "cleaneye-80887",
-          "rank_before_limit": 19,
+          "rank_before_limit": 20,
           "employment": "일반정규직",
           "notice_total_count": 4,
           "unit_count": null,
@@ -4334,7 +4362,7 @@
         },
         {
           "notice_id": "cleaneye-80888",
-          "rank_before_limit": 20,
+          "rank_before_limit": 21,
           "employment": "일반정규직",
           "notice_total_count": 1,
           "unit_count": null,
@@ -4350,7 +4378,7 @@
         },
         {
           "notice_id": "cleaneye-80889",
-          "rank_before_limit": 21,
+          "rank_before_limit": 22,
           "employment": "일반정규직",
           "notice_total_count": 2,
           "unit_count": null,
@@ -4366,7 +4394,7 @@
         },
         {
           "notice_id": "cleaneye-80897",
-          "rank_before_limit": 11,
+          "rank_before_limit": 12,
           "employment": "일반정규직",
           "notice_total_count": 2,
           "unit_count": null,
@@ -4382,7 +4410,7 @@
         },
         {
           "notice_id": "cleaneye-80902",
-          "rank_before_limit": 22,
+          "rank_before_limit": 23,
           "employment": "일반정규직",
           "notice_total_count": 6,
           "unit_count": null,
@@ -4398,7 +4426,7 @@
         },
         {
           "notice_id": "cleaneye-80903",
-          "rank_before_limit": 23,
+          "rank_before_limit": 24,
           "employment": "일반정규직",
           "notice_total_count": 1,
           "unit_count": null,
@@ -4413,24 +4441,8 @@
           ]
         },
         {
-          "notice_id": "cleaneye-80904",
-          "rank_before_limit": 24,
-          "employment": "일반정규직",
-          "notice_total_count": 3,
-          "unit_count": null,
-          "sector_preference": "deprioritized",
-          "sector_priority": 2,
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "의료원"
-          },
-          "reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ]
-        },
-        {
           "notice_id": "cleaneye-80907",
-          "rank_before_limit": 6,
+          "rank_before_limit": 7,
           "employment": "일반정규직",
           "notice_total_count": 1,
           "unit_count": null,
@@ -4446,7 +4458,7 @@
         },
         {
           "notice_id": "cleaneye-80951",
-          "rank_before_limit": 17,
+          "rank_before_limit": 18,
           "employment": "일반정규직",
           "notice_total_count": 14,
           "unit_count": null,
@@ -4462,22 +4474,6 @@
         },
         {
           "notice_id": "cleaneye-80952",
-          "rank_before_limit": 8,
-          "employment": "일반정규직",
-          "notice_total_count": 1,
-          "unit_count": null,
-          "sector_preference": "neutral",
-          "sector_priority": 1,
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ]
-        },
-        {
-          "notice_id": "cleaneye-80994",
           "rank_before_limit": 9,
           "employment": "일반정규직",
           "notice_total_count": 1,
@@ -4493,8 +4489,24 @@
           ]
         },
         {
+          "notice_id": "cleaneye-80994",
+          "rank_before_limit": 10,
+          "employment": "일반정규직",
+          "notice_total_count": 1,
+          "unit_count": null,
+          "sector_preference": "neutral",
+          "sector_priority": 1,
+          "sector_basis": {
+            "source": "official_labels",
+            "matched": null
+          },
+          "reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ]
+        },
+        {
           "notice_id": "cleaneye-81028",
-          "rank_before_limit": 15,
+          "rank_before_limit": 16,
           "employment": "일반정규직",
           "notice_total_count": 3,
           "unit_count": null,
@@ -4510,7 +4522,7 @@
         },
         {
           "notice_id": "cleaneye-81095",
-          "rank_before_limit": 18,
+          "rank_before_limit": 19,
           "employment": "일반정규직",
           "notice_total_count": 18,
           "unit_count": null,
@@ -4526,7 +4538,7 @@
         },
         {
           "notice_id": "cleaneye-81118",
-          "rank_before_limit": 10,
+          "rank_before_limit": 11,
           "employment": "일반정규직",
           "notice_total_count": null,
           "unit_count": null,
@@ -4542,7 +4554,7 @@
         },
         {
           "notice_id": "cleaneye-81127",
-          "rank_before_limit": 7,
+          "rank_before_limit": 8,
           "employment": "일반정규직",
           "notice_total_count": 1,
           "unit_count": null,
@@ -4556,95 +4568,145 @@
             "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
           ]
         }
-      ]
+      ],
+      "gojobs_supplement": {
+        "status": "unchanged",
+        "snapshot_at": "2026-11-10T01:14:19+09:00",
+        "verified_at": "2026-11-10T22:16:47+09:00",
+        "counts": {
+          "before": 31,
+          "new": 0,
+          "modified": 0,
+          "deleted": 0,
+          "after": 31,
+          "received_in_window": 163,
+          "verified_this_run": 8,
+          "open": 8,
+          "deadline_time_unconfirmed": 4,
+          "archived": 19
+        },
+        "official_page_verified": 8,
+        "official_page_failed": 0,
+        "complete_window": true,
+        "scanned_tracked": 31,
+        "cutoff_screen": "8 date-only potential rows at or after Nov 11, all 임기제; no unit outranks verified regular nursing. Stored snapshot 01:14:19; source reports 8 independently reverified at 22:16:47, not a new tracked snapshot; no GOJOBS entries admitted to Threads writer queue.",
+        "potential_rows": [
+          {
+            "id": "gojobs-306692",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306828",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306834",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306981",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306992",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-12T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-307283",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-12T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-307361",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-307383",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          }
+        ],
+        "not_treated_as_official_times": true
+      }
     },
     "official_review": {
-      "checked_at": "2026-11-10T12:47:57.409Z",
-      "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+      "notice_id": "a306786",
       "slot": "2026-11-11T20:00:00+09:00",
-      "notice_id": "cleaneye-81028",
-      "prior_entry_sha256": "6fbfb4c5108b76d654170dc400a66c5919a264354d6e7a736e07c7737efcc813",
-      "entry_sha256": "0d9133c505cb7adedab75c5732a630bc34f16a217b0de1bcbca92f0f66339069",
-      "application_path": {
-        "url": "https://dfmc.grabberhr.com/careers/job-posting/728",
-        "official_listing_id": 728,
-        "verified": true,
-        "internal_address_note": "Raw workplace and workplace1 fields contain the same institutional Seoul address for all three open listings. The application page does not display those fields. Its signed notice graphic and the official PDFs specifically identify Jecheon Cheongpung for this unit; retain this discrepancy in evidence and never use the internal address as the work location."
-      },
-      "verified_refs": [
+      "employment": "정규직",
+      "unit_count": 3,
+      "notice_total_count": 3,
+      "sector_preference": "deprioritized",
+      "sector_group": "hospital_health",
+      "sector_priority": 2,
+      "sector_basis": "공식 검수 단위 간호사; 사용자 분야 선호에 따른 후순위, 실측 인기 없음",
+      "priority_reason": "새 ALIO 공식 수집본에 있으며, 병원 분야는 후순위지만 비교한 공고 중 중복 없이 공식 모집단위 3명과 접수·근무·제한의 전체 게시 허용 구간을 검증한 원고. 더 큰 후보는 첨부상 혼합 고용/마감·수집 신선도·직무/중복 문제로 보류 또는 제외. 실제 인기 점수 없음.",
+      "application_end": "2026-11-16T17:30:00+09:00",
+      "official_refs": [
         {
-          "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
-          "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
-          "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
-          "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
-          "checked_at": "2026-11-10T21:44:03.585628+09:00"
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+          "checked_at": "2026-11-10T23:05:40.920192+09:00",
+          "sha256": "d9317c3d5120221cd2524c716d4c51ad1ef278a5c0bd2e0bea99662eb26748e9",
+          "excerpt": "간호사 의료직(6급) 순천병원 3 / 접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00 / ｢간호법｣상 간호사 면허를 취득한 자 / 연령제한 없음(단, 임용일 기준 60세 미만(정년)인 자) / 임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한) / 3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용 / ｢병역법｣ 제76조에서 정한 병역의무 불이행 사실이 없는 자 / 공단 ｢인사규정｣ 제14조에서 정한 결격사유가 없는 자 / 12. 8.(화) 예정 / 응시원서, 자기소개서, 개인정보수집·이용·제공동의서 각 1부 / 응시원서 하단에 서명(날인) 후 스캔 → 1개의 PDF 파일로 변환 / 포털메일 사용 / 채용담당자의 수신 완료 메일",
+          "location": "공단 이사장 명의 11월 6일 공고문 §§1~4. 모집표 셀 순서대로 공백을 정규화."
         },
         {
-          "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
-          "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
-          "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
-          "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
-          "checked_at": "2026-11-10T21:45:10.159898+09:00"
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085604",
+          "checked_at": "2026-11-10T23:05:41.308203+09:00",
+          "sha256": "d17940131931f1f1c9255446ac09fd0d78e96d61bb2367295d3672e9e3f46b75",
+          "excerpt": "응시원서 · 자기소개서 · 개인정보수집·이용·제공동의서",
+          "location": "공고에 연결된 입사지원 양식 열람"
         },
         {
-          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
-          "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
-          "location": "1쪽 지원서 작성 가이드라인 시각 확인",
-          "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
-          "checked_at": "2026-11-10T21:45:11.751944+09:00"
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085605",
+          "checked_at": "2026-11-10T23:05:41.168199+09:00",
+          "sha256": "001ff999bd21f6d322bee90337de0468d73c1afae433f55d8d09c289ae6c8e4a",
+          "excerpt": "환자관리 / 환자 교육 및 상담 / 간호행정 / 물품관리",
+          "location": "공고에 연결된 간호사 NCS 직무기술서"
+        },
+        {
+          "url": "https://job.alio.go.kr/recruitview.do?idx=306786",
+          "checked_at": "2026-11-10T23:05:24.915731+09:00",
+          "sha256": "c24013bd989ed1ddabd61752565f776b2401d753ebe8c70414c2be439960ff7e",
+          "excerpt": "[순천병원] 의료직(간호사) 6급 채용 공고 / 근로복지공단 / 정규직 / 3명",
+          "location": "공식 잡알리오 상세와 첨부 링크"
         }
       ],
-      "status": "hold",
-      "blocking": [
-        "CLEANEYE_SOURCE_STALE_AT_DELAY_WINDOW_END",
-        "LARGER_RECRUITMENT_UNITS_PENDING_REVIEW"
-      ],
-      "larger_units_rechecked": [
-        {
-          "notice_id": "cleaneye-80902",
-          "unit_count": 6,
-          "employment": "일반정규직",
-          "sector_preference": "deprioritized",
-          "decision": "hold",
-          "reason": "Official detail matches 2026-38 but current public feed points to 2026-34",
-          "evidence": [
-            {
-              "url": "https://medical.recruiter.co.kr/career/jobs/133112",
-              "excerpt": "[수원병원][2026-38호] 간호사(정규직) 신규채용 공고",
-              "location": "기관 공고 100965가 연결한 정확한 지원 상세",
-              "sha256": "044d65f1b1fec205305592d7e3936dbcbf700dbf155312f49717d5e1adeef196",
-              "checked_at": "2026-11-10T21:43:18.568685+09:00"
-            },
-            {
-              "url": "https://medical.recruiter.co.kr/career/jobs/127602",
-              "excerpt": "[수원병원][2026-34호] 간호사(정규직) 신규채용 공고",
-              "location": "현재 공개 클린아이 수집본이 가리키는 다른 공고",
-              "sha256": "3d0521ea9dce74549dce5a4d9b605dcd2bb76485472afbe0a624739bedfa707d",
-              "checked_at": "2026-11-10T21:43:37.017223+09:00"
-            }
-          ]
-        },
-        {
-          "notice_id": "cleaneye-80711",
-          "unit_count": 3,
-          "employment": "일반정규직",
-          "sector_preference": "neutral",
-          "decision": "hold",
-          "reason": "Official same PDF; exact recruitment-unit workplace remains unconfirmed",
-          "evidence": [
-            {
-              "url": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
-              "excerpt": "행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무",
-              "location": "동일 공고 PDF를 다시 읽음. 일반행정 근무 배치 미명시.",
-              "sha256": "da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb",
-              "checked_at": "2026-11-10T21:42:54.099974+09:00"
-            }
-          ]
-        }
-      ]
+      "queue_commit": "5f32bf558f9e34929320ce4dd65f53d3684059f6",
+      "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
+      "entry_sha256": "6fff7f81406440d232dbb65f745fa89b964848ff28f9024bdec10f144c086b7c"
     },
-    "queue_blob_sha": "f9b381134d979ebff209ef898847852dd7f187e8",
-    "entry_sha256": "0d9133c505cb7adedab75c5732a630bc34f16a217b0de1bcbca92f0f66339069",
+    "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
+    "entry_sha256": "6fff7f81406440d232dbb65f745fa89b964848ff28f9024bdec10f144c086b7c",
     "existing_ready_validated": 3,
     "ready_entries": [
       {
@@ -4661,17 +4723,23 @@
         "scheduled_at": "2026-11-11T16:00:00+09:00",
         "notice_id": "cleaneye-80681",
         "full_delay_window_validated": true
+      },
+      {
+        "scheduled_at": "2026-11-11T20:00:00+09:00",
+        "notice_id": "a306786",
+        "full_delay_window_validated": true
       }
     ],
     "new_drafts_prepared": 0,
-    "new_ready_saved": 0,
-    "notice_id": "cleaneye-81028",
-    "hold_status": "CLEANEYE_SOURCE_STALE",
-    "current_hold": "2026-11-11T20:00:00+09:00",
+    "new_ready_saved": 1,
+    "notice_id": "a306786",
+    "hold_status": "slot_resolved_previous_candidate_retained",
+    "current_hold": null,
     "preview": {
-      "main_text": "제천 청풍유스호스텔에서 근무할 수 있다면, 동대문구시설관리공단 정규직 청소 공고를 살펴보세요.\n고용·인원: 일반정규직 · 1명\n근무: 충북 제천시 청풍유스호스텔\n접수 마감: 2026-11-19 18:00\n12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요.\n대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n공고에 신체·정신 건강 요건이 있어요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
-      "detail_reply": "1. 12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요. 청소 직무에 별도 자격증 요건은 없어요. 공고에 신체·정신 건강 요건이 있어요.\n2. 대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n3. 교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n4. 응시원서와 자기소개서는 11월 19일 18시까지 온라인으로 내요. 자기소개서에는 학교명과 출신지역을 쓰지 말고, 우대 증빙은 해당자만 첨부해요.\n\n객실 청소와 침구 정리, 공용부 정비를 맡아요.",
-      "regenerated_by": "scripts.threads_auto.master_public_copy"
+      "main_text": "순천에서 5년간 근무할 수 있다면, 근로복지공단 순천병원 정규직 간호사 6급 공고를 살펴보세요.\n고용·인원: 정규직 · 3명\n근무: 순천병원\n접수 마감: 2026-11-16 17:30:00\n마감일 기준 간호사 면허가 필요하고, 임용일 기준 만 60세 미만이어야 해요.\n순천병원에서 임용 후 5년간 근무해야 해요. 3개월 시보 평가가 양호하면 정규직으로 임용돼요.\n12월 8일 임용 예정일에 바로 근무할 수 있어야 하고, 병역의무 불이행이나 공고상 결격사유가 없어야 해요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+      "detail_reply": "1. 마감일 기준 간호사 면허가 필요하고, 임용일 기준 만 60세 미만이어야 해요.\n2. 순천병원에서 임용 후 5년간 근무해야 해요. 3개월 시보 평가가 양호하면 정규직으로 임용돼요.\n3. 12월 8일 임용 예정일에 바로 근무할 수 있어야 하고, 병역의무 불이행이나 공고상 결격사유가 없어야 해요.\n4. 응시원서에 서명하고 자기소개서·개인정보동의서와 한 PDF로 묶어 11월 16일 17시 30분까지 포털메일로 보내요. 채용 담당자의 수신 완료 메일을 확인하세요.\n\n환자 간호와 교육·상담, 간호 물품 관리 등을 맡아요. 서류 뒤에는 직업성격검사와 면접을 봐요.",
+      "regenerated_by": "scripts.threads_auto.master_public_copy",
+      "readback_exact": true
     },
     "local_image_preview": {
       "valid": true,
@@ -4679,18 +4747,19 @@
       "width": 1080,
       "height": 1080,
       "mode": "RGB",
-      "file_size_bytes": 183049,
-      "sha256": "a7e0f19a0107c5fb47ea4ced59e3458a9d5550c86bce57a8c50ba13143b8cfb4",
+      "file_size_bytes": 146463,
+      "sha256": "55f5f375779bf87a48bbfc60298a1a91d7252712e5ce9c18ef71ea166130f9b7",
       "public_upload_verified": false,
       "mobile_360px_legible": true,
       "clipping_observed": false
     },
-    "prepared_at": "2026-11-10T21:47:17.305864+09:00",
-    "revised_held_drafts": 1
+    "prepared_at": "2026-11-10T23:08:40.853987+09:00",
+    "revised_held_drafts": 0,
+    "queue_commit_sha": "5f32bf558f9e34929320ce4dd65f53d3684059f6"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T12:47:57.409Z",
-    "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+    "checked_at": "2026-11-10T14:11:08.072Z",
+    "main_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
     "history_blob_sha": "a884963b908790eb63609875823e2a19af024b49",
     "claim_blob_sha": "c4db538bc156df38d6eb0dd0ea3c7c51e3acf382",
     "last_confirmed_post_id": "18036438404894460",
@@ -4705,7 +4774,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42809560618"
     },
     "new_publisher_runs": [],
-    "status": "no_new_publisher_run_checked_held_application_evidence",
+    "status": "new_future_slot_ready_no_new_publisher_run",
     "slot": "2026-11-10T20:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -4720,16 +4789,15 @@
     "publication_style": "compact_with_detail_v1",
     "first_compact_success": "verified_previously",
     "source_collection": {
-      "operations_status_blob_sha": "001b9c1961e472b1078b4dc726a4719615950935",
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-10T19:04:21+09:00",
-        "source_checked_at": "2026-11-10T19:04:44+09:00",
-        "total_records": 846,
-        "eligible_count": 29,
+        "snapshot_at": "2026-11-10T22:15:35+09:00",
+        "source_checked_at": "2026-11-10T22:16:06+09:00",
+        "total_records": 847,
+        "eligible_count": 30,
         "review_required_count": 707,
         "excluded_count": 110,
-        "returned_count": 1,
+        "returned_count": 2,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 27,
           "NOTICE_ALREADY_USED": 67,
@@ -4748,13 +4816,142 @@
         "eligible_count": 244,
         "review_required_count": 0,
         "excluded_count": 219,
-        "returned_count": 23,
+        "returned_count": 22,
         "exclusion_reasons": {
           "CLEANEYE_NOT_VERIFIED_OPEN": 173,
           "CLEANEYE_NOT_RECRUITMENT": 4,
           "NOTICE_ALREADY_QUEUED": 1,
           "CLEANEYE_APPLICATION_NOT_OPEN": 41
         }
+      },
+      "gojobs": {
+        "status": "unchanged",
+        "snapshot_at": "2026-11-10T01:14:19+09:00",
+        "verified_at": "2026-11-10T22:16:47+09:00",
+        "counts": {
+          "before": 31,
+          "new": 0,
+          "modified": 0,
+          "deleted": 0,
+          "after": 31,
+          "received_in_window": 163,
+          "verified_this_run": 8,
+          "open": 8,
+          "deadline_time_unconfirmed": 4,
+          "archived": 19
+        },
+        "official_page_verified": 8,
+        "official_page_failed": 0,
+        "complete_window": true,
+        "scanned_tracked": 31,
+        "cutoff_screen": "8 date-only potential rows at or after Nov 11, all 임기제; no unit outranks verified regular nursing. Stored snapshot 01:14:19; source reports 8 independently reverified at 22:16:47, not a new tracked snapshot; no GOJOBS entries admitted to Threads writer queue.",
+        "potential_rows": [
+          {
+            "id": "gojobs-306692",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306828",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306834",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306981",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-306992",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-12T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-307283",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-12T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-307361",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          },
+          {
+            "id": "gojobs-307383",
+            "emp": [
+              "임기제"
+            ],
+            "due": "2026-11-11T23:59:59+09:00",
+            "dueHasTime": false
+          }
+        ],
+        "not_treated_as_official_times": true
+      },
+      "latest_operations_run": {
+        "run_id": "42822857417",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-10T13:18:10Z",
+        "head_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42822857417"
+      },
+      "artifact_id": 13767218665,
+      "artifact_digest": "sha256:b9e4898d4d6b4e4ac8a46cc5128154a1b0e617f569e3ac149b259eadcd58f334",
+      "cleaneye_operations": {
+        "status": "unchanged",
+        "changed": false,
+        "complete_collection": true,
+        "snapshot_at": "2026-11-10T19:05:19+09:00",
+        "started_at": "2026-11-10T22:16:47+09:00",
+        "counts": {
+          "cleaneye": {
+            "active": 289,
+            "after": 463,
+            "before": 463,
+            "cancelled": 0,
+            "changed": 0,
+            "current_candidates": 397,
+            "deadline_time_uncertain": 463,
+            "deadline_unknown": 0,
+            "deleted": 0,
+            "expired": 66,
+            "far_future_source_date": 3,
+            "new": 0,
+            "received": 397,
+            "retained": 66,
+            "status_uncertain": 29,
+            "upcoming": 79
+          }
+        },
+        "candidate_sha256": "0cd061f56087ed9ae2036d4f4ba80dc908b04047ef2314b63455e9990256cc03"
       }
     },
     "pages_read": [
@@ -5169,7 +5366,7 @@
     "eligible_until": "2026-11-10T18:00:00+09:00",
     "performance_state_status": "not_initialized_no_observations_to_save",
     "new_failure": null,
-    "queue_blob_sha": "f9b381134d979ebff209ef898847852dd7f187e8"
+    "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -7525,15 +7722,50 @@
     "popularity": "No comparable audience measurement used. Verify breadth of access as a tiebreaker or label qualitative inference.",
     "first_evaluated_slot": "2026-11-10T08:00:00+09:00",
     "selected": {
-      "id": "a306784",
-      "employment": "정규직 (3개월 시보 후 근무성적에 따라 임용)",
-      "unit": "안산병원 의료직(간호사) 6급",
-      "unit_count": 6,
-      "reason": "Largest fully identified regular ALIO unit in the compared available unassigned candidates. One role and worksite, and both ALIO and official attachment list 6; no popularity score used.",
-      "deadline": "2026-11-16T17:30:00+09:00",
-      "validator": "passed",
-      "resolution": "queued_ready",
-      "queue_entry_sha256": "e503c524dd119c5247f8c29cdf9da2899409e1ebe77950433a196d163b59e163"
+      "notice_id": "a306786",
+      "slot": "2026-11-11T20:00:00+09:00",
+      "employment": "정규직",
+      "unit_count": 3,
+      "notice_total_count": 3,
+      "sector_preference": "deprioritized",
+      "sector_group": "hospital_health",
+      "sector_priority": 2,
+      "sector_basis": "공식 검수 단위 간호사; 사용자 분야 선호에 따른 후순위, 실측 인기 없음",
+      "priority_reason": "새 ALIO 공식 수집본에 있으며, 병원 분야는 후순위지만 비교한 공고 중 중복 없이 공식 모집단위 3명과 접수·근무·제한의 전체 게시 허용 구간을 검증한 원고. 더 큰 후보는 첨부상 혼합 고용/마감·수집 신선도·직무/중복 문제로 보류 또는 제외. 실제 인기 점수 없음.",
+      "application_end": "2026-11-16T17:30:00+09:00",
+      "official_refs": [
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+          "checked_at": "2026-11-10T23:05:40.920192+09:00",
+          "sha256": "d9317c3d5120221cd2524c716d4c51ad1ef278a5c0bd2e0bea99662eb26748e9",
+          "excerpt": "간호사 의료직(6급) 순천병원 3 / 접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00 / ｢간호법｣상 간호사 면허를 취득한 자 / 연령제한 없음(단, 임용일 기준 60세 미만(정년)인 자) / 임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한) / 3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용 / ｢병역법｣ 제76조에서 정한 병역의무 불이행 사실이 없는 자 / 공단 ｢인사규정｣ 제14조에서 정한 결격사유가 없는 자 / 12. 8.(화) 예정 / 응시원서, 자기소개서, 개인정보수집·이용·제공동의서 각 1부 / 응시원서 하단에 서명(날인) 후 스캔 → 1개의 PDF 파일로 변환 / 포털메일 사용 / 채용담당자의 수신 완료 메일",
+          "location": "공단 이사장 명의 11월 6일 공고문 §§1~4. 모집표 셀 순서대로 공백을 정규화."
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085604",
+          "checked_at": "2026-11-10T23:05:41.308203+09:00",
+          "sha256": "d17940131931f1f1c9255446ac09fd0d78e96d61bb2367295d3672e9e3f46b75",
+          "excerpt": "응시원서 · 자기소개서 · 개인정보수집·이용·제공동의서",
+          "location": "공고에 연결된 입사지원 양식 열람"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085605",
+          "checked_at": "2026-11-10T23:05:41.168199+09:00",
+          "sha256": "001ff999bd21f6d322bee90337de0468d73c1afae433f55d8d09c289ae6c8e4a",
+          "excerpt": "환자관리 / 환자 교육 및 상담 / 간호행정 / 물품관리",
+          "location": "공고에 연결된 간호사 NCS 직무기술서"
+        },
+        {
+          "url": "https://job.alio.go.kr/recruitview.do?idx=306786",
+          "checked_at": "2026-11-10T23:05:24.915731+09:00",
+          "sha256": "c24013bd989ed1ddabd61752565f776b2401d753ebe8c70414c2be439960ff7e",
+          "excerpt": "[순천병원] 의료직(간호사) 6급 채용 공고 / 근로복지공단 / 정규직 / 3명",
+          "location": "공식 잡알리오 상세와 첨부 링크"
+        }
+      ],
+      "queue_commit": "5f32bf558f9e34929320ce4dd65f53d3684059f6",
+      "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
+      "entry_sha256": "6fff7f81406440d232dbb65f745fa89b964848ff28f9024bdec10f144c086b7c"
     },
     "comparisons": [
       {
@@ -7728,9 +7960,9 @@
     },
     "latest_future_slot_review": {
       "target_slot": "2026-11-11T20:00:00+09:00",
-      "checked_at": "2026-11-10T12:47:57.409Z",
+      "checked_at": "2026-11-10T14:11:08.072Z",
       "notice_id": "cleaneye-81028",
-      "decision": "new_held_draft_not_final_selection",
+      "decision": "selected_verified_ready",
       "employment": "일반정규직",
       "unit_count": 1,
       "notice_total_count": 3,
@@ -7778,6 +8010,58 @@
           "id": "cleaneye-80812",
           "notice_total_count": 19,
           "reason": "Official register/Work24 supplies notice total only; direct local-government listing returned HTTP 400, original recruitment table not read"
+        },
+        {
+          "id": "a306275",
+          "notice_total_count": 24,
+          "unit_count": null,
+          "reason": "공식 모집표 24명 이내, 원서접수 충원시까지. 실제 확정 인원·마감 미확인.",
+          "source": "https://www.alio.go.kr/download/download.json?fileNo=3082265"
+        },
+        {
+          "id": "a306724",
+          "notice_total_count": 29,
+          "unit_count": null,
+          "reason": "공식 PDF의 진료과와 직급에 따라 정규직·계약직 혼합. 동일 정규직 모집단위의 3명 이상이 확인되지 않음.",
+          "source": "https://www.alio.go.kr/download/download.json?fileNo=3085265"
+        },
+        {
+          "id": "a306859",
+          "notice_total_count": 7,
+          "unit_count": null,
+          "reason": "공식 공고 임상강사·진료교수·진료의사 계약기간 명시. 모집단위 최대 2명. ALIO 정규직 표기를 그대로 쓰지 않음.",
+          "source": "https://www.alio.go.kr/download/download.json?fileNo=3086041"
+        },
+        {
+          "id": "a306819",
+          "notice_total_count": 6,
+          "unit_count": null,
+          "reason": "8개 전공 총 6명 이내, 전공별 인원 미기재; 공식 EST 마감 및 실제 지원 화면 확인 제약.",
+          "source": "https://www.kdischool.ac.kr/board.es?mid=a60502010000&bid=0037&act=view&list_no=20310"
+        },
+        {
+          "id": "a306012",
+          "notice_total_count": 8,
+          "unit_count": 8,
+          "reason": "EJM 화면 midnight UTC와 원문 표기·JSON-LD 유효시각 차이. 승인된 KST 마감 근거로 확정하지 않음.",
+          "source": "https://econjobmarket.org/positions/12824"
+        },
+        {
+          "id": "a306760",
+          "unit_count": 4,
+          "reason": "11월 7일 같은 기관·상황실·정규직 6급·근무와 마감이 거의 동일한 a306759가 실제 게시. 실질 중복 방지.",
+          "previous_post_id": "18131171185889612"
+        },
+        {
+          "id": "a306807",
+          "unit_count": 1,
+          "reason": "기관 공식 접수 시작 11/12로 11/11 슬롯에서 아직 미접수.",
+          "source": "https://keis.or.kr/keis/ko/bbs/236/detail.do?pageIndex=1&pageItm=10&pstSn=64797&searchGbn=0&searchOrderSort=0"
+        },
+        {
+          "id": "cleaneye-81028",
+          "unit_count": 1,
+          "reason": "기관 접수는 검증했으나 최신 수집 작업의 변경 없음 결과가 추적된 스냅샷 시각을 갱신하지 않아 CLEANEYE_SOURCE_STALE."
         }
       ],
       "excluded": [
@@ -7794,52 +8078,32 @@
       "minimum_source_checked_at": "2026-11-10T21:59:59+09:00",
       "official_review": [
         {
-          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
-          "checked_at": "2026-11-10T21:18:18.777150+09:00",
-          "sha256": "f4adf0f80e6d34c41ff10189ff99686bb7de69c2124196a3fea29e5403398128",
-          "excerpt": "업무직 9급 청소(청풍) / 청풍유스호스텔 객실 청소 및 침구류 정리 / 1명 / 일반채용 (모집표의 열과 행을 연결해 전사) / 고용형태 정규직 / 접수기간 : 2026. 11. 9.(월) ~ 2026. 11. 19.(목) 18:00 까지 / 업무직 청소: 임용예정일자 26. 12. 30.(수), 18세 이상 ~ 60세 이하 / 충북 제천시 소재 청풍유스호스텔 근무 가능자 / 결격사유 ① 대한민국 국민이 아닌 자 / 응시원서는 해당공고 내 1회만 제출할 수 있으며, 다른 직무에 중복으로 지원할 수 없습니다. / 사업장 근무편성에 따라 교대근무, 연장근무, 당직근무, 휴일(주말)근무가 발생할 수 있음 / 최초 근무일로부터 3개월간 시용기간 근무평가 후 임용 결정 / 응시원서 및 자기소개서 / 우대요건증명서 (취업지원대상자, 장애인 등 해당자 파일첨부)",
-          "location": "공고 제2026-55호 모집표·응시연령·근무조건·접수·유의사항"
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+          "checked_at": "2026-11-10T23:05:40.920192+09:00",
+          "sha256": "d9317c3d5120221cd2524c716d4c51ad1ef278a5c0bd2e0bea99662eb26748e9",
+          "excerpt": "간호사 의료직(6급) 순천병원 3 / 접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00 / ｢간호법｣상 간호사 면허를 취득한 자 / 연령제한 없음(단, 임용일 기준 60세 미만(정년)인 자) / 임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한) / 3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용 / ｢병역법｣ 제76조에서 정한 병역의무 불이행 사실이 없는 자 / 공단 ｢인사규정｣ 제14조에서 정한 결격사유가 없는 자 / 12. 8.(화) 예정 / 응시원서, 자기소개서, 개인정보수집·이용·제공동의서 각 1부 / 응시원서 하단에 서명(날인) 후 스캔 → 1개의 PDF 파일로 변환 / 포털메일 사용 / 채용담당자의 수신 완료 메일",
+          "location": "공단 이사장 명의 11월 6일 공고문 §§1~4. 모집표 셀 순서대로 공백을 정규화."
         },
         {
-          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C%28%EC%B2%AD%EC%86%8C-%EC%B2%AD%ED%92%8D%29.pdf",
-          "checked_at": "2026-11-10T21:18:19.145154+09:00",
-          "sha256": "0148bf0613c0db4cf549f2b879ab5cd6dc1ba02b01992f4617124ef895e099ed",
-          "excerpt": "해당사업장 공공사업부(청풍유스호스텔) / 필요 자격(인증기관) 필수 -",
-          "location": "청소 직무기술서"
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085604",
+          "checked_at": "2026-11-10T23:05:41.308203+09:00",
+          "sha256": "d17940131931f1f1c9255446ac09fd0d78e96d61bb2367295d3672e9e3f46b75",
+          "excerpt": "응시원서 · 자기소개서 · 개인정보수집·이용·제공동의서",
+          "location": "공고에 연결된 입사지원 양식 열람"
         },
         {
-          "url": "https://www.dfmc.kr/course/announce/recruit_vi.asp?board_id=RECRUIT&field=&id=1727&page=1&value=",
-          "checked_at": "2026-11-10T21:17:57.780582+09:00",
-          "sha256": "b163cbf7c5b1fdbf2deddae5a9e683285b18cd50738f84e57f4735d94974101c",
-          "excerpt": "채용분야 : 정규직(전기, 청소) / 채용인원 : 총 3 명 / 접수방법 : 온라인접수"
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085605",
+          "checked_at": "2026-11-10T23:05:41.168199+09:00",
+          "sha256": "001ff999bd21f6d322bee90337de0468d73c1afae433f55d8d09c289ae6c8e4a",
+          "excerpt": "환자관리 / 환자 교육 및 상담 / 간호행정 / 물품관리",
+          "location": "공고에 연결된 간호사 NCS 직무기술서"
         },
         {
-          "url": "https://dfmc.grabberhr.com/careers",
-          "checked_at": "2026-11-10T21:18:32.895058+09:00",
-          "sha256": "f2a573e6da0a966ac46337958a1faf85dc2facb47844a773d21ccc626e213a6c",
-          "excerpt": "동대문구시설관리공단 채용 홈페이지",
-          "location": "채용 사이트 진입 응답; SPA 공고 선택 상태 미검증"
-        },
-        {
-          "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
-          "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
-          "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
-          "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
-          "checked_at": "2026-11-10T21:44:03.585628+09:00"
-        },
-        {
-          "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
-          "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
-          "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
-          "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
-          "checked_at": "2026-11-10T21:45:10.159898+09:00"
-        },
-        {
-          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
-          "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
-          "location": "1쪽 지원서 작성 가이드라인 시각 확인",
-          "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
-          "checked_at": "2026-11-10T21:45:11.751944+09:00"
+          "url": "https://job.alio.go.kr/recruitview.do?idx=306786",
+          "checked_at": "2026-11-10T23:05:24.915731+09:00",
+          "sha256": "c24013bd989ed1ddabd61752565f776b2401d753ebe8c70414c2be439960ff7e",
+          "excerpt": "[순천병원] 의료직(간호사) 6급 채용 공고 / 근로복지공단 / 정규직 / 3명",
+          "location": "공식 잡알리오 상세와 첨부 링크"
         }
       ],
       "recheck": {
@@ -7927,7 +8191,53 @@
           }
         ]
       },
-      "official_details_fully_reviewed": false
+      "official_details_fully_reviewed": false,
+      "selected": {
+        "notice_id": "a306786",
+        "slot": "2026-11-11T20:00:00+09:00",
+        "employment": "정규직",
+        "unit_count": 3,
+        "notice_total_count": 3,
+        "sector_preference": "deprioritized",
+        "sector_group": "hospital_health",
+        "sector_priority": 2,
+        "sector_basis": "공식 검수 단위 간호사; 사용자 분야 선호에 따른 후순위, 실측 인기 없음",
+        "priority_reason": "새 ALIO 공식 수집본에 있으며, 병원 분야는 후순위지만 비교한 공고 중 중복 없이 공식 모집단위 3명과 접수·근무·제한의 전체 게시 허용 구간을 검증한 원고. 더 큰 후보는 첨부상 혼합 고용/마감·수집 신선도·직무/중복 문제로 보류 또는 제외. 실제 인기 점수 없음.",
+        "application_end": "2026-11-16T17:30:00+09:00",
+        "official_refs": [
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+            "checked_at": "2026-11-10T23:05:40.920192+09:00",
+            "sha256": "d9317c3d5120221cd2524c716d4c51ad1ef278a5c0bd2e0bea99662eb26748e9",
+            "excerpt": "간호사 의료직(6급) 순천병원 3 / 접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00 / ｢간호법｣상 간호사 면허를 취득한 자 / 연령제한 없음(단, 임용일 기준 60세 미만(정년)인 자) / 임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한) / 3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용 / ｢병역법｣ 제76조에서 정한 병역의무 불이행 사실이 없는 자 / 공단 ｢인사규정｣ 제14조에서 정한 결격사유가 없는 자 / 12. 8.(화) 예정 / 응시원서, 자기소개서, 개인정보수집·이용·제공동의서 각 1부 / 응시원서 하단에 서명(날인) 후 스캔 → 1개의 PDF 파일로 변환 / 포털메일 사용 / 채용담당자의 수신 완료 메일",
+            "location": "공단 이사장 명의 11월 6일 공고문 §§1~4. 모집표 셀 순서대로 공백을 정규화."
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085604",
+            "checked_at": "2026-11-10T23:05:41.308203+09:00",
+            "sha256": "d17940131931f1f1c9255446ac09fd0d78e96d61bb2367295d3672e9e3f46b75",
+            "excerpt": "응시원서 · 자기소개서 · 개인정보수집·이용·제공동의서",
+            "location": "공고에 연결된 입사지원 양식 열람"
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085605",
+            "checked_at": "2026-11-10T23:05:41.168199+09:00",
+            "sha256": "001ff999bd21f6d322bee90337de0468d73c1afae433f55d8d09c289ae6c8e4a",
+            "excerpt": "환자관리 / 환자 교육 및 상담 / 간호행정 / 물품관리",
+            "location": "공고에 연결된 간호사 NCS 직무기술서"
+          },
+          {
+            "url": "https://job.alio.go.kr/recruitview.do?idx=306786",
+            "checked_at": "2026-11-10T23:05:24.915731+09:00",
+            "sha256": "c24013bd989ed1ddabd61752565f776b2401d753ebe8c70414c2be439960ff7e",
+            "excerpt": "[순천병원] 의료직(간호사) 6급 채용 공고 / 근로복지공단 / 정규직 / 3명",
+            "location": "공식 잡알리오 상세와 첨부 링크"
+          }
+        ],
+        "queue_commit": "5f32bf558f9e34929320ce4dd65f53d3684059f6",
+        "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
+        "entry_sha256": "6fff7f81406440d232dbb65f745fa89b964848ff28f9024bdec10f144c086b7c"
+      }
     },
     "sector_rollout": {
       "policy_id": "careerpick-threads-selection-v3-20261110",
