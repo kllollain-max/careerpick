@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T18:26:20Z",
-  "last_observed_at": "2026-11-10T18:21:20Z",
+  "updated_at": "2026-11-10T18:35:13Z",
+  "last_observed_at": "2026-11-10T18:34:12Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -4788,7 +4788,7 @@
     "queue_commit_sha": "5f32bf558f9e34929320ce4dd65f53d3684059f6"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T18:26:20Z",
+    "checked_at": "2026-11-10T18:35:13Z",
     "main_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
     "history_blob_sha": "a884963b908790eb63609875823e2a19af024b49",
     "claim_blob_sha": "c4db538bc156df38d6eb0dd0ea3c7c51e3acf382",
@@ -5292,8 +5292,8 @@
     "next_slot_claim": "not_found_future_slot",
     "latest_confirmed_evidence": "unchanged_accepted_ledger_and_previous_official_meta_get_agree",
     "performance_artifact_reverified": true,
-    "previous_observed_at": "2026-11-10T16:51:33Z",
-    "actions_observation_watermark": "2026-11-10T18:21:20Z",
+    "previous_observed_at": "2026-11-10T18:21:20Z",
+    "actions_observation_watermark": "2026-11-10T18:34:12Z",
     "collection_workflow": {
       "run_id": "42849929175",
       "run_attempt": 1,
@@ -9404,7 +9404,7 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-10T18:26:20Z",
+    "checked_at": "2026-11-10T18:35:13Z",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
@@ -9482,12 +9482,12 @@
     }
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T18:26:20Z",
-    "mode": "existing_ready_preserved_new_prospective_hold_draft",
+    "checked_at": "2026-11-10T18:35:13Z",
+    "mode": "preserved_ready_and_prior_holds_no_new_source_or_open_slot",
     "main_sha": "40af10f57f8e8d271ad34455cb89a514472b469e",
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
     "prompt_and_editorial_bytes_verified": true,
-    "prepared_entries_this_check": 1,
+    "prepared_entries_this_check": 0,
     "queue_entries_written_this_check": 0,
     "existing_ready_preserved": true,
     "full_delay_window_validated": true,
@@ -9575,12 +9575,12 @@
       "all_four_visually_reviewed": true,
       "remote_bytes_check": "publisher_preflight"
     },
-    "selection_input_reference_at": "2026-11-11T03:21:41.251207+09:00",
-    "selection_input_sha256": "540549b000abe93e6d950be19850b4f13ae7deeb3c35d1b25353972df058b5c0",
+    "selection_input_reference_at": "2026-11-11T03:34:51.152041+09:00",
+    "selection_input_sha256": "162369859374a6c397ca6e82f85011edbed17ca072cdd7db54352f64e7508149",
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v3-20261110",
-      "evaluated_at": "2026-11-11T03:21:41.251207+09:00",
+      "evaluated_at": "2026-11-11T03:34:51.152041+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -9679,7 +9679,7 @@
       "response_sha256": "301a983609d24f6c6e20e678ffcd0953150ff0d6d17174458c3fce7c265df94f"
     },
     "ready_prepared_this_check": 0,
-    "hold_prepared_this_check": 1,
+    "hold_prepared_this_check": 0,
     "hold_draft_key": "2026-11-12T08:00:00+09:00:a305734",
     "profile_candidate_readback": {
       "verified": true,
@@ -9690,6 +9690,22 @@
       "checked_at": "2026-11-11T03:22:11.170217+09:00",
       "response_sha256": "56eabc47a1c540dbbc6af77963314425a402302dc52e3c58256f718a8a2feb04",
       "verified_notice_path": "https://kllollain-max.github.io/careerpick/jobs/a305734.html"
-    }
+    },
+    "upcoming_hold_recheck": [
+      {
+        "key": "2026-11-12T08:00:00+09:00:a305734",
+        "notice_id": "a305734",
+        "check": "SOURCE_STALE",
+        "original_checked_at": "2026-11-11T03:23:06.099415+09:00",
+        "count": 10
+      },
+      {
+        "key": "2026-11-12T08:00:00+09:00:a306403",
+        "notice_id": "a306403",
+        "check": "SOURCE_STALE",
+        "original_checked_at": "2026-11-11T01:54:24.491745+09:00",
+        "count": 8
+      }
+    ]
   }
 }
