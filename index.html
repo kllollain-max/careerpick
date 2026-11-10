@@ -863,10 +863,16 @@ async function loadAlio(){
     const list = await cpReadFeed("alio.json","alio");
     DATA_HEALTH.alio = "ok";
     const blogJobs = POSTS.filter(p => p.type === "j" && p.org && p.due);
+    // Index first matching blog notice once; avoid repeated full scans.
+    const blogByNoticeKey = new Map();
+    for(const b of blogJobs){
+      const key = CPHome.noticeKey(b);
+      if(key && !blogByNoticeKey.has(key)) blogByNoticeKey.set(key,b);
+    }
     const add = [];
     for(const a of list){
       const key=CPHome.noticeKey(a);
-      const twin = key && blogJobs.find(b=>CPHome.noticeKey(b)===key);
+      const twin = key && blogByNoticeKey.get(key);
       if(twin){ if(!twin.src) twin.src = a.src || a.url; twin.alioUrl = a.url; continue; }
       add.push(a);
     }
