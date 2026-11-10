@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T10:10:13.852Z",
-  "last_observed_at": "2026-11-10T10:10:13.852Z",
+  "updated_at": "2026-11-10T10:49:54.535Z",
+  "last_observed_at": "2026-11-10T10:49:54.535Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -4052,11 +4052,14 @@
       "remaining_primary_blocker": "KIEP UTC midnight exact local deadline remains unresolved; no change to original hold evidence."
     },
     "2026-11-11T16:00:00+09:00": {
-      "status": "hold",
+      "status": "slot_filled_by_verified_alternative",
       "notice_id": "cleaneye-80887",
       "prepared_at": "2026-11-10T16:28:53.870508+09:00",
       "reason": "verified feed is too old for full slot; explicit workplace verification remains unresolved",
-      "resume": "Require Cleaneye verified snapshot 2026-11-10 17:59:59 KST or newer plus an explicit official workplace field; otherwise review next candidate."
+      "resume": "Require Cleaneye verified snapshot 2026-11-10 17:59:59 KST or newer plus an explicit official workplace field; otherwise review next candidate.",
+      "resolved_at": "2026-11-10T10:49:54.535Z",
+      "slot_selected_notice_id": "cleaneye-80681",
+      "previous_candidate_still_on_hold": true
     }
   },
   "last_writer_check": {
@@ -7300,7 +7303,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T10:10:13.852Z",
+    "checked_at": "2026-11-10T10:49:54.535Z",
     "main_sha": "f0b2b81a498a7157849e8f3066505097977abed5",
     "history_blob_sha": "8fa0a9847c0e950828d0bf9c6a4318991f66841e",
     "claim_blob_sha": "508f25bca398a2d777abf8504ad084c0bda923c9",
@@ -7316,7 +7319,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42780330423"
     },
     "new_publisher_runs": [],
-    "status": "prior_publication_verified_next_slot_not_started",
+    "status": "next_slots_checked_new_unstarted_slot_queued",
     "slot": "2026-11-10T20:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -7766,7 +7769,7 @@
     "current_slot": "2026-11-10T16:00:00+09:00",
     "current_slot_claim_at_check": null,
     "current_slot_grace_until": "2026-11-10T18:00:00+09:00",
-    "previous_observation_at": "2026-11-10T09:24:14.351Z",
+    "previous_observation_at": "2026-11-10T10:10:13.852Z",
     "run_version_comparison_fields": [
       "run_id",
       "run_attempt",
@@ -10093,7 +10096,7 @@
     },
     "latest_future_slot_review": {
       "target_slot": "2026-11-11T16:00:00+09:00",
-      "checked_at": "2026-11-10T10:10:13.852Z",
+      "checked_at": "2026-11-10T10:49:54.535Z",
       "excluded": [
         {
           "notice_id": "cleaneye-80642",
@@ -10217,9 +10220,63 @@
           "evidence": "https://home.sch.ac.kr/_custom/sch/_common/board/download.jsp?attach_no=20261027131350467076"
         }
       ],
-      "queue_saved": 0,
+      "queue_saved": 1,
       "eligible_before_limit": 274,
-      "writer_limit": 24
+      "writer_limit": 24,
+      "selected": {
+        "notice_id": "cleaneye-80681",
+        "scheduled_at": "2026-11-11T16:00:00+09:00",
+        "status": "ready",
+        "unit_title": "기술6급 건축",
+        "unit_count": 3,
+        "notice_total_count": 7,
+        "employment": "일반정규직",
+        "sector_preference": "neutral",
+        "entry_sha256": "8dc1bfad5096f7773420a3a762df374c0384ec332be7a22fdd0445f4ad381697",
+        "queue_commit": "ab79d2c0686409b7141d926d53ed8fc37fc5e07f",
+        "queue_blob_sha": "f9b381134d979ebff209ef898847852dd7f187e8",
+        "queue_readback_verified": true,
+        "verified_through": "2026-11-11T17:59:59+09:00",
+        "official_receipt_end": "2026-11-12T18:00:00+09:00",
+        "preferred_higher_reviewed_but_blocked": [
+          "cleaneye-80848",
+          "cleaneye-80820",
+          "cleaneye-80642"
+        ],
+        "other_higher_holds": [
+          "a305734",
+          "a306403",
+          "cleaneye-80902",
+          "cleaneye-80887"
+        ],
+        "card_preview": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 165782,
+          "sha256": "9c974561a8f0aa739c41c06bba60307585da3285db9d54dbac71efbe3ad2a0e2",
+          "local_only": true,
+          "mobile_360px_legible": true,
+          "public_url_checked": false
+        }
+      },
+      "reason": "공식 모집표·직무자료·지원 화면이 일치하는 일반정규직 건축 3명. 더 큰 철도 103명 및 병원 6·4명과 연구직 10·8명은 고용주, 링크, 실제 근무지 또는 마감의 미해결 조건으로 HOLD. 검수 가능한 중립 직무를 선정. 실측 인기 점수 없음.",
+      "additional_official_reviews": [
+        {
+          "notice_id": "a306294",
+          "decision": "excluded_closed",
+          "evidence": "https://job.alio.go.kr/recruitview.do?idx=306294",
+          "reason": "공식 원서접수 11/10 15:00 종료"
+        },
+        {
+          "notice_id": "a306475",
+          "decision": "hold_unverified",
+          "evidence": "https://job.alio.go.kr/recruitview.do?idx=306475",
+          "reason": "행정·의료기술 혼합 전체 7명. 공식 첨부 접근 403, 개별 단위·현재 접수 미검증."
+        }
+      ]
     },
     "sector_rollout": {
       "policy_id": "careerpick-threads-selection-v3-20261110",
@@ -10811,17 +10868,16 @@
     ]
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T10:10:13.852Z",
+    "checked_at": "2026-11-10T10:49:54.535Z",
     "main_sha": "f0b2b81a498a7157849e8f3066505097977abed5",
-    "queue_blob_sha": "8913cd368df7d68c95903e59369cc5af19fe5105",
-    "mode": "sector_preference_merged_input_verified_new_rail_hold",
+    "mode": "new_cndc_ready_official_ncs_apply_profile_verified",
     "prompt_and_editorial_bytes_verified": true,
-    "selection_input_reference_at": "2026-11-10T19:08:01.517037+09:00",
-    "selection_input_sha256": "00ede1b2733fad77d2c92aeef3a5ba6e99dae0b53473c33b93562676a8e0a5de",
+    "selection_input_reference_at": "2026-11-10T19:49:27.541637+09:00",
+    "selection_input_sha256": "5edf9dff140dc9738522c4c08b6581be4b4af58374114f7498dabb5b1fea2353",
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v3-20261110",
-      "evaluated_at": "2026-11-10T19:08:01.517037+09:00",
+      "evaluated_at": "2026-11-10T19:49:27.541637+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -10868,7 +10924,7 @@
       "eligible_before_limit": 274,
       "writer_limit": 24,
       "returned_count": 24,
-      "unconfirmed_unit_counts": 274,
+      "unconfirmed_unit_counts": 273,
       "interest_ranking": "unavailable_not_used",
       "audience_breadth_ranking": "unavailable_not_used",
       "sector_policy": {
@@ -10883,8 +10939,8 @@
         "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
       },
       "sector_counts_before_limit": {
-        "preferred": 22,
         "neutral": 182,
+        "preferred": 22,
         "deprioritized": 70
       },
       "ranking_order": [
@@ -12224,7 +12280,6 @@
             "cleaneye-80641",
             "cleaneye-80661",
             "cleaneye-80672",
-            "cleaneye-80681",
             "cleaneye-80683",
             "cleaneye-80685",
             "cleaneye-80711",
@@ -12436,6 +12491,15 @@
         },
         {
           "source": "cleaneye",
+          "decision": "eligible_for_official_review",
+          "sector_preference": "neutral",
+          "reasons": [],
+          "notice_ids": [
+            "cleaneye-80681"
+          ]
+        },
+        {
+          "source": "cleaneye",
           "decision": "excluded",
           "sector_preference": "neutral",
           "reasons": [
@@ -12507,372 +12571,109 @@
           ]
         }
       ],
-      "returned_ranked": [
-        {
-          "notice_id": "a306242",
-          "org": "건축공간연구원",
-          "employment": "정규직",
-          "unit_count": null,
-          "notice_total_count": 2,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 4
+      "selected_review_row": {
+        "source": "cleaneye",
+        "notice_id": "cleaneye-80681",
+        "decision": "eligible_for_official_review",
+        "reasons": [],
+        "official_checked_at": "2026-11-10T19:45:54.925874+09:00",
+        "unit_count": 3,
+        "unit_scope": "reviewed_unit",
+        "interest": null,
+        "audience_breadth": null,
+        "application_period": {
+          "start": "2026-10-23",
+          "end": "2026-11-12T18:00:00+09:00",
+          "start_date_only": true,
+          "date_only": false,
+          "official_precision_verified": true,
+          "source_ref": "https://cndc.incruit.com/hire/viewhire.asp?projectid=103",
+          "evidence": "접수기간 : 2026. 10. 23.(금) ～ 2026. 11. 12.(목), 18:00까지"
         },
-        {
-          "notice_id": "cleaneye-80642",
-          "org": "인천교통공사",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 30,
-          "sector_preference": "preferred",
-          "sector_group": "rail_transport_logistics",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "교통"
-          },
-          "rank_before_limit": 1
+        "org": "충청남도개발공사",
+        "title": "2026년 하반기 충청남도개발공사 사원 모집 공고",
+        "sector_preference": "neutral",
+        "sector_group": "other",
+        "sector_priority": 1,
+        "sector_basis": {
+          "source": "official_labels",
+          "matched": null
         },
-        {
-          "notice_id": "cleaneye-80681",
-          "org": "충청남도개발공사",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 7,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 5
-        },
-        {
-          "notice_id": "cleaneye-80711",
-          "org": "충주시시설관리공단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 13,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 17
-        },
-        {
-          "notice_id": "cleaneye-80773",
-          "org": "시나브로복지관",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 4,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 6
-        },
-        {
-          "notice_id": "cleaneye-80805",
-          "org": "구미전자정보기술원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 6,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 13
-        },
-        {
-          "notice_id": "cleaneye-80807",
-          "org": "구미전자정보기술원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 2,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 14
-        },
-        {
-          "notice_id": "cleaneye-80812",
-          "org": "인천광역시부평구시설관리공단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 19,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 15
-        },
-        {
-          "notice_id": "cleaneye-80820",
-          "org": "서울교통공사",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 136,
-          "sector_preference": "preferred",
-          "sector_group": "rail_transport_logistics",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "교통"
-          },
-          "rank_before_limit": 2
-        },
-        {
-          "notice_id": "cleaneye-80848",
-          "org": "서울교통공사",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 153,
-          "sector_preference": "preferred",
-          "sector_group": "rail_transport_logistics",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "교통"
-          },
-          "rank_before_limit": 3
-        },
-        {
-          "notice_id": "cleaneye-80887",
-          "org": "서울의료원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 4,
-          "sector_preference": "deprioritized",
-          "sector_group": "hospital_health",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "의료원"
-          },
-          "rank_before_limit": 20
-        },
-        {
-          "notice_id": "cleaneye-80888",
-          "org": "서울의료원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 1,
-          "sector_preference": "deprioritized",
-          "sector_group": "hospital_health",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "의료원"
-          },
-          "rank_before_limit": 21
-        },
-        {
-          "notice_id": "cleaneye-80889",
-          "org": "서울의료원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 2,
-          "sector_preference": "deprioritized",
-          "sector_group": "hospital_health",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "의료원"
-          },
-          "rank_before_limit": 22
-        },
-        {
-          "notice_id": "cleaneye-80897",
-          "org": "재단법인 칠곡문화관광재단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 2,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 12
-        },
-        {
-          "notice_id": "cleaneye-80902",
-          "org": "경기도의료원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 6,
-          "sector_preference": "deprioritized",
-          "sector_group": "hospital_health",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "의료원"
-          },
-          "rank_before_limit": 23
-        },
-        {
-          "notice_id": "cleaneye-80903",
-          "org": "경기도의료원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 1,
-          "sector_preference": "deprioritized",
-          "sector_group": "hospital_health",
-          "sector_basis": {
-            "source": "official_organization",
-            "matched": "의료원"
-          },
-          "rank_before_limit": 24
-        },
-        {
-          "notice_id": "cleaneye-80907",
-          "org": "성남시청소년청년재단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 1,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 7
-        },
-        {
-          "notice_id": "cleaneye-80951",
-          "org": "울산정보산업진흥원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 14,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 18
-        },
-        {
-          "notice_id": "cleaneye-80952",
-          "org": "재단법인 군위문화관광재단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 1,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 9
-        },
-        {
-          "notice_id": "cleaneye-80994",
-          "org": "동작문화재단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 1,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 10
-        },
-        {
-          "notice_id": "cleaneye-81028",
-          "org": "동대문구시설관리공단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 3,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 16
-        },
-        {
-          "notice_id": "cleaneye-81095",
-          "org": "재단법인 제주특별자치도 사회서비스원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 18,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 19
-        },
-        {
-          "notice_id": "cleaneye-81118",
-          "org": "재단법인 화성시연구원",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": null,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 11
-        },
-        {
-          "notice_id": "cleaneye-81127",
-          "org": "재단법인 구리시청소년재단",
-          "employment": "일반정규직",
-          "unit_count": null,
-          "notice_total_count": 1,
-          "sector_preference": "neutral",
-          "sector_group": "other",
-          "sector_basis": {
-            "source": "official_labels",
-            "matched": null
-          },
-          "rank_before_limit": 8
-        }
-      ]
-    },
-    "latest_upcoming_validation": [
-      {
-        "slot": "2026-11-10T20:00:00+09:00",
-        "id": "a306563",
-        "entry_sha256": "a6feb3c5220ad3c1aa2063425f1d692cca8c04a9ec8dc7aaf41ab61904b14b59",
-        "preview_matches": true,
-        "whole_delay_window_validated": true
-      },
-      {
-        "slot": "2026-11-11T08:00:00+09:00",
-        "id": "a306715",
-        "entry_sha256": "1f41cb4be8e8b73f5b03a6c88a493034dc92468ea7cf5a9f141d503b062a3e49",
-        "preview_matches": true,
-        "whole_delay_window_validated": true
-      },
-      {
-        "slot": "2026-11-11T12:00:00+09:00",
-        "id": "a306470",
-        "entry_sha256": "730a270b510b7ff6b7c412be00b2ff8028ed5e8b37b1d1cd2ad6e607b4325cf4",
-        "preview_matches": true,
-        "whole_delay_window_validated": true
+        "employment": "일반정규직",
+        "notice_total_count": 7,
+        "notice_total_count_raw": "7",
+        "application_status": "reviewed_open",
+        "unit_title": "기술6급 건축",
+        "employment_priority": 0,
+        "source_post_sha256": "1cd062d856804d701ff45b4383e5d47f5c4ade4568f2af0dafced3bde89bb3fe",
+        "source_detail_sha256": "7761ee83fbb8d13bb91996131e8bb7d154ecb86f48d5530203835664920ff2cf",
+        "rank_before_limit": 1,
+        "included_in_writer_input": true
       }
-    ],
-    "new_hold_entry_sha256": "08f5d7401e1408244ac93d4ceca3e561568c47bd917f80a5035d9887de28373e",
+    },
+    "queue_blob_sha": "f9b381134d979ebff209ef898847852dd7f187e8",
     "prepared_entries_this_check": 1,
-    "queue_entries_written_this_check": 0,
+    "queue_entries_written_this_check": 1,
+    "existing_ready_preserved": true,
+    "latest_upcoming_validation": [
+      [
+        "2026-11-10T20:00:00+09:00",
+        "a306563"
+      ],
+      [
+        "2026-11-11T08:00:00+09:00",
+        "a306715"
+      ],
+      [
+        "2026-11-11T12:00:00+09:00",
+        "a306470"
+      ],
+      [
+        "2026-11-11T16:00:00+09:00",
+        "cleaneye-80681"
+      ]
+    ],
+    "full_delay_window_validated": true,
     "body_and_reply_preview_generated": true,
-    "existing_ready_validated": true
+    "public_previews_match": true,
+    "selected": {
+      "notice_id": "cleaneye-80681",
+      "scheduled_at": "2026-11-11T16:00:00+09:00",
+      "status": "ready",
+      "unit_title": "기술6급 건축",
+      "unit_count": 3,
+      "notice_total_count": 7,
+      "employment": "일반정규직",
+      "sector_preference": "neutral",
+      "entry_sha256": "8dc1bfad5096f7773420a3a762df374c0384ec332be7a22fdd0445f4ad381697",
+      "queue_commit": "ab79d2c0686409b7141d926d53ed8fc37fc5e07f",
+      "queue_blob_sha": "f9b381134d979ebff209ef898847852dd7f187e8",
+      "queue_readback_verified": true,
+      "verified_through": "2026-11-11T17:59:59+09:00",
+      "official_receipt_end": "2026-11-12T18:00:00+09:00",
+      "preferred_higher_reviewed_but_blocked": [
+        "cleaneye-80848",
+        "cleaneye-80820",
+        "cleaneye-80642"
+      ],
+      "other_higher_holds": [
+        "a305734",
+        "a306403",
+        "cleaneye-80902",
+        "cleaneye-80887"
+      ],
+      "card_preview": {
+        "valid": true,
+        "format": "JPEG",
+        "width": 1080,
+        "height": 1080,
+        "mode": "RGB",
+        "file_size_bytes": 165782,
+        "sha256": "9c974561a8f0aa739c41c06bba60307585da3285db9d54dbac71efbe3ad2a0e2",
+        "local_only": true,
+        "mobile_360px_legible": true,
+        "public_url_checked": false
+      }
+    }
   }
 }
