@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T07:30:49.424Z",
-  "last_observed_at": "2026-11-10T07:30:49.424Z",
+  "updated_at": "2026-11-10T07:59:20.038Z",
+  "last_observed_at": "2026-11-10T07:59:20.038Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -7216,7 +7216,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T07:30:49.424Z",
+    "checked_at": "2026-11-10T07:59:20.038Z",
     "main_sha": "64bb0d3b88527bde5d77de04a12fe6979ed73a92",
     "history_blob_sha": "19e310160fe147a15e398cbf898ba7abaee1a47f",
     "claim_blob_sha": "d8dbaf2f55cb0121ca66b45701943f73fe070a4b",
@@ -7232,8 +7232,8 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42750909426"
     },
     "new_publisher_runs": [],
-    "status": "upstream_source_recovered_and_next_noon_ready_current_image_slot_within_grace",
-    "slot": "2026-11-10T12:00:00+09:00",
+    "status": "scheduled_run_not_observed_within_grace",
+    "slot": "2026-11-10T16:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
       "run_id": "42460392100",
@@ -7247,40 +7247,39 @@
     "publication_style": "compact_with_detail_v1",
     "first_compact_success": "verified_previously",
     "source_collection": {
-      "operations_status_blob_sha": "8602ddeb152a5824fa375e6fdfc7bb0fe042b8bc",
+      "operations_status_blob_sha": "c54cd0894674da8f00cdc873925157b519c991c2",
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-09T22:27:03+09:00",
-        "source_checked_at": "2026-11-09T22:27:37+09:00",
-        "total_records": 814,
-        "eligible_count": 30,
-        "review_required_count": 680,
-        "excluded_count": 104,
-        "returned_count": 2,
+        "snapshot_at": "2026-11-10T16:23:49+09:00",
+        "source_checked_at": "2026-11-10T16:24:13+09:00",
+        "total_records": 840,
+        "eligible_count": 31,
+        "review_required_count": 701,
+        "excluded_count": 108,
+        "returned_count": 1,
         "exclusion_reasons": {
-          "APPLICATION_CLOSED": 24,
-          "NOTICE_ALREADY_USED": 63,
-          "APPLICATION_END_TIME_UNKNOWN": 1,
-          "SOURCE_NOTICE_UNCONFIRMED": 9,
-          "APPLICATION_START_TIME_UNKNOWN": 2,
+          "APPLICATION_CLOSED": 25,
+          "NOTICE_ALREADY_USED": 65,
+          "SOURCE_NOTICE_UNCONFIRMED": 11,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-          "NOTICE_ALREADY_QUEUED": 3,
-          "APPLICATION_END_PRECISION_CONFLICT": 1
+          "NOTICE_ALREADY_QUEUED": 4,
+          "APPLICATION_END_PRECISION_CONFLICT": 1,
+          "APPLICATION_START_TIME_UNKNOWN": 1
         }
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-09T22:28:23+09:00",
-        "source_checked_at": "2026-11-09T22:28:23+09:00",
-        "total_records": 421,
-        "eligible_count": 221,
+        "snapshot_at": "2026-11-10T16:24:45+09:00",
+        "source_checked_at": "2026-11-10T16:24:45+09:00",
+        "total_records": 456,
+        "eligible_count": 245,
         "review_required_count": 0,
-        "excluded_count": 200,
-        "returned_count": 22,
+        "excluded_count": 211,
+        "returned_count": 23,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 154,
-          "CLEANEYE_NOT_RECRUITMENT": 2,
-          "CLEANEYE_APPLICATION_NOT_OPEN": 44
+          "CLEANEYE_NOT_VERIFIED_OPEN": 169,
+          "CLEANEYE_NOT_RECRUITMENT": 3,
+          "CLEANEYE_APPLICATION_NOT_OPEN": 39
         }
       }
     },
@@ -7288,7 +7287,7 @@
       1,
       2
     ],
-    "resume": "새 수집본과 공식 검수 시각이 11월 9일 21:59:59 이후이고, 실제 배치·근무지 근거와 최신 공식 정정·취소 및 첨부 확인 후 공식 큐 검사와 미리보기 일치가 통과할 때만 등록. 우선순위 높은 후보의 미확인 사유는 유지.",
+    "resume": "현재 정규 실행을 다음 시간별 점검에서 확인. 내일 16시 원고는 오늘 17:59:59 KST 이후 검증한 수집본 및 공식 근무지 확인 후 검수. 과거 슬롯 재전송 금지.",
     "last_rechecked_at": "2026-11-09T12:16:34.000Z",
     "next_image_preview": {
       "slot": "2026-11-09T08:00:00+09:00",
@@ -7682,7 +7681,19 @@
     },
     "current_slot": "2026-11-10T16:00:00+09:00",
     "current_slot_claim_at_check": null,
-    "current_slot_grace_until": "2026-11-10T18:00:00+09:00"
+    "current_slot_grace_until": "2026-11-10T18:00:00+09:00",
+    "previous_observation_at": "2026-11-10T07:30:49.424Z",
+    "run_version_comparison_fields": [
+      "run_id",
+      "run_attempt",
+      "status",
+      "conclusion",
+      "updated_at",
+      "head_sha"
+    ],
+    "current_slot_claim_status": "not_found",
+    "eligible_until": "2026-11-10T18:00:00+09:00",
+    "performance_state_status": "not_initialized_no_observations_to_save"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -9556,6 +9567,51 @@
       "reason": "Superseded only this rollout's unused new draft after existing larger regular-unit hold became verifiably eligible",
       "prior_temporary_queue_commit": "00a841184613bd79ce37258db7e5c403647619ff",
       "actual_publication": false
+    },
+    "latest_future_slot_review": {
+      "target_slot": "2026-11-11T16:00:00+09:00",
+      "checked_at": "2026-11-10T07:59:20.038Z",
+      "excluded": [
+        {
+          "notice_id": "cleaneye-80642",
+          "decision": "excluded_for_next_unstarted_slot",
+          "target_slot": "2026-11-11T16:00:00+09:00",
+          "reason": "APPLICATION_CLOSED_BEFORE_SLOT",
+          "checked_at": "2026-11-10T16:57:07+09:00",
+          "org": "인천교통공사",
+          "employment": "일반정규직",
+          "notice_total_count": 30,
+          "unit_count": null,
+          "rank_in_provisional_24": 1,
+          "application_period": {
+            "start": "2026-11-03T09:00:00+09:00",
+            "end": "2026-11-11T10:00:00+09:00",
+            "start_date_only": false,
+            "date_only": false,
+            "source_ref": "https://www.kric.go.kr/jsp/board/portal/sub03/org/recruitDetail.jsp?board_seq=5594&q_name=ALL",
+            "evidence": "접수기간 : 2026. 11. 03.(화) 09:00 ∼ 11. 11.(수) 10:00",
+            "official_precision_verified": true
+          },
+          "source_refs": [
+            {
+              "url": "https://www.kric.go.kr/jsp/board/portal/sub03/org/recruitDetail.jsp?board_seq=5594&q_name=ALL",
+              "position": "인천교통공사 공고 제2026-378호 원문 전재, 접수기간"
+            },
+            {
+              "url": "https://www.ictr.or.kr/main/bbs/bbsMsgDetail.do?bcd=hire&listsz=10&msg_seq=737",
+              "position": "공사 공고 원문 페이지; 날짜만 표시"
+            }
+          ],
+          "official_details_fully_reviewed": false,
+          "attachment_read_status": "official attachment downloads blocked; date and time separately confirmed by the national railway information center",
+          "notes": "30 is the notice total; no verified unit count is recorded. No existing READY or expired slot was edited."
+        }
+      ],
+      "remaining_hold": "cleaneye-80887",
+      "larger_unresolved": [
+        "a306403"
+      ],
+      "min_source_verified_at": "2026-11-10T17:59:59+09:00"
     }
   },
   "editorial_rollouts": {
@@ -10037,24 +10093,24 @@
     "artifact_digest": "sha256:466f57a018a5789803dff896c3b6a2d5bdb4b56ed3add2e99966b2eb1aea8f73"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T07:30:49.424Z",
+    "checked_at": "2026-11-10T07:59:20.038Z",
     "main_sha": "64bb0d3b88527bde5d77de04a12fe6979ed73a92",
     "queue_blob_sha": "8913cd368df7d68c95903e59369cc5af19fe5105",
     "prompt_and_editorial_bytes_verified": true,
-    "mode": "new_noon_ready_queued_and_16_alternate_hold",
+    "mode": "rechecked_existing_ready_and_excluded_earlier_official_deadline",
     "existing_ready_validated": true,
     "full_delay_window_validated": true,
     "public_previews_match": true,
     "active_queued_candidates_excluded": [
-      "a306838",
       "a306716",
       "a306563",
-      "a306715"
+      "a306715",
+      "a306470"
     ],
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v2-20261109",
-      "evaluated_at": "2026-11-10T16:28:53.952821+09:00",
+      "evaluated_at": "2026-11-10T16:54:23.333172+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -10067,16 +10123,16 @@
           "snapshot_at": "2026-11-10T16:23:49+09:00",
           "source_checked_at": "2026-11-10T16:24:13+09:00",
           "total_records": 840,
-          "eligible_count": 32,
+          "eligible_count": 31,
           "review_required_count": 701,
-          "excluded_count": 107,
-          "returned_count": 2,
+          "excluded_count": 108,
+          "returned_count": 1,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 25,
             "NOTICE_ALREADY_USED": 65,
             "SOURCE_NOTICE_UNCONFIRMED": 11,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-            "NOTICE_ALREADY_QUEUED": 3,
+            "NOTICE_ALREADY_QUEUED": 4,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
             "APPLICATION_START_TIME_UNKNOWN": 1
           }
@@ -10089,7 +10145,7 @@
           "eligible_count": 245,
           "review_required_count": 0,
           "excluded_count": 211,
-          "returned_count": 22,
+          "returned_count": 23,
           "exclusion_reasons": {
             "CLEANEYE_NOT_VERIFIED_OPEN": 169,
             "CLEANEYE_NOT_RECRUITMENT": 3,
@@ -10098,7 +10154,7 @@
         }
       },
       "total_scanned": 1296,
-      "eligible_before_limit": 277,
+      "eligible_before_limit": 276,
       "writer_limit": 24,
       "returned_count": 24,
       "unconfirmed_unit_counts": 276,
@@ -10915,6 +10971,105 @@
         "notice_total_count": 6,
         "unit_count": 3,
         "decision": "verified_rank_1_and_saved"
+      }
+    ],
+    "prepared_entries_this_check": 0,
+    "queue_entries_written_this_check": 0,
+    "selection_input_reference_at": "2026-11-10T16:54:23.333172+09:00",
+    "selection_input_sha256": "5d5be88ecaec31b83b29bfdc79382c9e8b598b61e3d868f75810a44665ff8b90",
+    "latest_upcoming_validation": [
+      {
+        "slot": "2026-11-10T16:00:00+09:00",
+        "id": "a306716",
+        "entry_sha256": "7046515dd5eb605a4ebb44208a13d91c1048991ad967fd0fc6511f56ca2806d5",
+        "whole_delay_window_validated": true,
+        "preview_matches": true,
+        "main_chars": 318,
+        "reply_chars": 389,
+        "employment": "정규직",
+        "unit_count": 5
+      },
+      {
+        "slot": "2026-11-10T20:00:00+09:00",
+        "id": "a306563",
+        "entry_sha256": "a6feb3c5220ad3c1aa2063425f1d692cca8c04a9ec8dc7aaf41ab61904b14b59",
+        "whole_delay_window_validated": true,
+        "preview_matches": true,
+        "main_chars": 209,
+        "reply_chars": 253,
+        "employment": "정규직",
+        "unit_count": 4
+      },
+      {
+        "slot": "2026-11-11T08:00:00+09:00",
+        "id": "a306715",
+        "entry_sha256": "1f41cb4be8e8b73f5b03a6c88a493034dc92468ea7cf5a9f141d503b062a3e49",
+        "whole_delay_window_validated": true,
+        "preview_matches": true,
+        "main_chars": 340,
+        "reply_chars": 341,
+        "employment": "정규직",
+        "unit_count": 4
+      },
+      {
+        "slot": "2026-11-11T12:00:00+09:00",
+        "id": "a306470",
+        "entry_sha256": "730a270b510b7ff6b7c412be00b2ff8028ed5e8b37b1d1cd2ad6e607b4325cf4",
+        "whole_delay_window_validated": true,
+        "preview_matches": true,
+        "main_chars": 224,
+        "reply_chars": 257,
+        "employment": "정규직",
+        "unit_count": 3
+      }
+    ],
+    "local_regressions": {
+      "tests": 160,
+      "status": "passed",
+      "font": "Nanum Gothic from existing local preview assets"
+    },
+    "profile_rel_me_recheck": {
+      "profile_url": "https://www.threads.com/@hid_119",
+      "rel_me_url": "https://kllollain-max.github.io/careerpick/",
+      "html_sha256": "305b1377b3ed7d29a3f9d073fe2a4024a57b5abf7d4a2141c7c9c4ea21de1f4e",
+      "status": 200,
+      "checked_at": "2026-11-10T16:56:34+09:00",
+      "scope": "profile link; no new per-notice CTA verification asserted"
+    },
+    "official_review": [
+      {
+        "notice_id": "cleaneye-80642",
+        "decision": "excluded_for_next_unstarted_slot",
+        "target_slot": "2026-11-11T16:00:00+09:00",
+        "reason": "APPLICATION_CLOSED_BEFORE_SLOT",
+        "checked_at": "2026-11-10T16:57:07+09:00",
+        "org": "인천교통공사",
+        "employment": "일반정규직",
+        "notice_total_count": 30,
+        "unit_count": null,
+        "rank_in_provisional_24": 1,
+        "application_period": {
+          "start": "2026-11-03T09:00:00+09:00",
+          "end": "2026-11-11T10:00:00+09:00",
+          "start_date_only": false,
+          "date_only": false,
+          "source_ref": "https://www.kric.go.kr/jsp/board/portal/sub03/org/recruitDetail.jsp?board_seq=5594&q_name=ALL",
+          "evidence": "접수기간 : 2026. 11. 03.(화) 09:00 ∼ 11. 11.(수) 10:00",
+          "official_precision_verified": true
+        },
+        "source_refs": [
+          {
+            "url": "https://www.kric.go.kr/jsp/board/portal/sub03/org/recruitDetail.jsp?board_seq=5594&q_name=ALL",
+            "position": "인천교통공사 공고 제2026-378호 원문 전재, 접수기간"
+          },
+          {
+            "url": "https://www.ictr.or.kr/main/bbs/bbsMsgDetail.do?bcd=hire&listsz=10&msg_seq=737",
+            "position": "공사 공고 원문 페이지; 날짜만 표시"
+          }
+        ],
+        "official_details_fully_reviewed": false,
+        "attachment_read_status": "official attachment downloads blocked; date and time separately confirmed by the national railway information center",
+        "notes": "30 is the notice total; no verified unit count is recorded. No existing READY or expired slot was edited."
       }
     ]
   }
