@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T12:22:11.945Z",
-  "last_observed_at": "2026-11-10T12:22:11.945Z",
+  "updated_at": "2026-11-10T12:47:57.409Z",
+  "last_observed_at": "2026-11-10T12:47:57.409Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -4064,13 +4064,12 @@
     "2026-11-11T20:00:00+09:00": {
       "status": "hold",
       "notice_id": "cleaneye-81028",
-      "prepared_at": "2026-11-10T21:20:44.838823+09:00",
+      "prepared_at": "2026-11-10T21:47:17.305864+09:00",
       "reason": [
         "CLEANEYE_SOURCE_STALE_AT_DELAY_WINDOW_END",
-        "OFFICIAL_APPLY_SPA_NOTICE_NOT_VERIFIED",
         "LARGER_RECRUITMENT_UNITS_PENDING_REVIEW"
       ],
-      "resume": "Fresh verified source at or after 2026-11-10T21:59:59+09:00, recheck larger units, official exact apply listing, official applicant guide, latest queue and claims, and full delay window before any CAS queue append.",
+      "resume": "Recheck on fresh verified feed at or after 2026-11-10T21:59:59+09:00. Exact 728 application page and applicant guide verified. Compare larger units again and run the full slot plus delay window check before any CAS queue append.",
       "previous_candidate_still_on_hold": [
         "cleaneye-80848",
         "cleaneye-80820",
@@ -4083,19 +4082,19 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-10T12:22:11.945Z",
-    "main_sha": "4633eaed2253bb5a408ea77199f8760c6a9bd61e",
+    "checked_at": "2026-11-10T12:47:57.409Z",
+    "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
     "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
     "editorial_policy_sha256": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
     "editorial_policy_id": "careerpick-threads-reach-v1-20261109",
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
     "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection <latest queue>",
-    "input_reference_at": "2026-11-10T21:17:13.424902+09:00",
+    "input_reference_at": "2026-11-10T21:42:15.894832+09:00",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v3-20261110",
-      "evaluated_at": "2026-11-10T21:17:13.424902+09:00",
+      "evaluated_at": "2026-11-10T21:42:15.894832+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -4171,6 +4170,7 @@
         "notice_id_tiebreak"
       ],
       "review_errors": [],
+      "all_selection_rows_sha256": "ad8696a16f2abe527d1e9b2f682a01b4089a48f1abfb0a1091e78e99f67d4439",
       "ranked_24": [
         {
           "notice_id": "a306242",
@@ -4556,107 +4556,95 @@
             "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
           ]
         }
-      ],
-      "all_selection_rows_sha256": "ad8696a16f2abe527d1e9b2f682a01b4089a48f1abfb0a1091e78e99f67d4439"
+      ]
     },
     "official_review": {
-      "target_slot": "2026-11-11T20:00:00+09:00",
-      "checked_at": "2026-11-10T12:22:11.945Z",
+      "checked_at": "2026-11-10T12:47:57.409Z",
+      "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+      "slot": "2026-11-11T20:00:00+09:00",
       "notice_id": "cleaneye-81028",
-      "decision": "new_held_draft_not_final_selection",
-      "employment": "일반정규직",
-      "unit_count": 1,
-      "notice_total_count": 3,
-      "sector_preference": "neutral",
-      "sector_group": "other",
-      "interest_score": null,
-      "details_fully_reviewed": false,
-      "reason": "공식 모집표와 청소 직무기술서가 일치하는 일반정규직 1명 보류 대안. 전체 3명과 분리. 고용주·링크·마감 미해결인 상위 후보보다 최종 선정되었다는 뜻이 아님. 분야 중립, 실측 인기 점수 없음.",
-      "larger_unresolved": [
+      "prior_entry_sha256": "6fbfb4c5108b76d654170dc400a66c5919a264354d6e7a736e07c7737efcc813",
+      "entry_sha256": "0d9133c505cb7adedab75c5732a630bc34f16a217b0de1bcbca92f0f66339069",
+      "application_path": {
+        "url": "https://dfmc.grabberhr.com/careers/job-posting/728",
+        "official_listing_id": 728,
+        "verified": true,
+        "internal_address_note": "Raw workplace and workplace1 fields contain the same institutional Seoul address for all three open listings. The application page does not display those fields. Its signed notice graphic and the official PDFs specifically identify Jecheon Cheongpung for this unit; retain this discrepancy in evidence and never use the internal address as the work location."
+      },
+      "verified_refs": [
         {
-          "id": "cleaneye-80848",
-          "count": 103,
-          "reason": "IMAGE_ORGANIZATION_CONFLICT; official employer and source name disagree"
+          "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+          "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
+          "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
+          "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
+          "checked_at": "2026-11-10T21:44:03.585628+09:00"
         },
         {
-          "id": "cleaneye-80820",
-          "reason": "Different employer from source institution; not changed"
+          "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
+          "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
+          "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
+          "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
+          "checked_at": "2026-11-10T21:45:10.159898+09:00"
         },
         {
-          "id": "cleaneye-80711",
-          "count": 3,
-          "reason": "Earlier official review did not establish workplace; source fingerprint unchanged"
-        },
-        {
-          "id": "cleaneye-80902",
-          "count": 6,
-          "reason": "Unresolved exact application link"
-        },
-        {
-          "id": "cleaneye-80887",
-          "count": 4,
-          "reason": "Unresolved official workplace"
-        },
-        {
-          "id": "a305734",
-          "count": 10,
-          "reason": "Unresolved UTC midnight precision"
-        },
-        {
-          "id": "a306403",
-          "count": 8,
-          "reason": "Unresolved UTC midnight precision and source eligibility discrepancies"
-        },
-        {
-          "id": "cleaneye-80812",
-          "notice_total_count": 19,
-          "reason": "Official register/Work24 supplies notice total only; direct local-government listing returned HTTP 400, original recruitment table not read"
+          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
+          "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
+          "location": "1쪽 지원서 작성 가이드라인 시각 확인",
+          "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
+          "checked_at": "2026-11-10T21:45:11.751944+09:00"
         }
       ],
-      "excluded": [
-        {
-          "id": "cleaneye-80642",
-          "reason": "11/11 10:00 KST official application deadline precedes this slot",
-          "prior_evidence_preserved": true
-        },
-        {
-          "id": "a306242",
-          "reason": "Source narrative deadline 11/11 14:00 precedes this slot"
-        }
+      "status": "hold",
+      "blocking": [
+        "CLEANEYE_SOURCE_STALE_AT_DELAY_WINDOW_END",
+        "LARGER_RECRUITMENT_UNITS_PENDING_REVIEW"
       ],
-      "minimum_source_checked_at": "2026-11-10T21:59:59+09:00",
-      "official_review": [
+      "larger_units_rechecked": [
         {
-          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
-          "checked_at": "2026-11-10T21:18:18.777150+09:00",
-          "sha256": "f4adf0f80e6d34c41ff10189ff99686bb7de69c2124196a3fea29e5403398128",
-          "excerpt": "업무직 9급 청소(청풍) / 청풍유스호스텔 객실 청소 및 침구류 정리 / 1명 / 일반채용 (모집표의 열과 행을 연결해 전사) / 고용형태 정규직 / 접수기간 : 2026. 11. 9.(월) ~ 2026. 11. 19.(목) 18:00 까지 / 업무직 청소: 임용예정일자 26. 12. 30.(수), 18세 이상 ~ 60세 이하 / 충북 제천시 소재 청풍유스호스텔 근무 가능자 / 결격사유 ① 대한민국 국민이 아닌 자 / 응시원서는 해당공고 내 1회만 제출할 수 있으며, 다른 직무에 중복으로 지원할 수 없습니다. / 사업장 근무편성에 따라 교대근무, 연장근무, 당직근무, 휴일(주말)근무가 발생할 수 있음 / 최초 근무일로부터 3개월간 시용기간 근무평가 후 임용 결정 / 응시원서 및 자기소개서 / 우대요건증명서 (취업지원대상자, 장애인 등 해당자 파일첨부)",
-          "location": "공고 제2026-55호 모집표·응시연령·근무조건·접수·유의사항"
+          "notice_id": "cleaneye-80902",
+          "unit_count": 6,
+          "employment": "일반정규직",
+          "sector_preference": "deprioritized",
+          "decision": "hold",
+          "reason": "Official detail matches 2026-38 but current public feed points to 2026-34",
+          "evidence": [
+            {
+              "url": "https://medical.recruiter.co.kr/career/jobs/133112",
+              "excerpt": "[수원병원][2026-38호] 간호사(정규직) 신규채용 공고",
+              "location": "기관 공고 100965가 연결한 정확한 지원 상세",
+              "sha256": "044d65f1b1fec205305592d7e3936dbcbf700dbf155312f49717d5e1adeef196",
+              "checked_at": "2026-11-10T21:43:18.568685+09:00"
+            },
+            {
+              "url": "https://medical.recruiter.co.kr/career/jobs/127602",
+              "excerpt": "[수원병원][2026-34호] 간호사(정규직) 신규채용 공고",
+              "location": "현재 공개 클린아이 수집본이 가리키는 다른 공고",
+              "sha256": "3d0521ea9dce74549dce5a4d9b605dcd2bb76485472afbe0a624739bedfa707d",
+              "checked_at": "2026-11-10T21:43:37.017223+09:00"
+            }
+          ]
         },
         {
-          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C%28%EC%B2%AD%EC%86%8C-%EC%B2%AD%ED%92%8D%29.pdf",
-          "checked_at": "2026-11-10T21:18:19.145154+09:00",
-          "sha256": "0148bf0613c0db4cf549f2b879ab5cd6dc1ba02b01992f4617124ef895e099ed",
-          "excerpt": "해당사업장 공공사업부(청풍유스호스텔) / 필요 자격(인증기관) 필수 -",
-          "location": "청소 직무기술서"
-        },
-        {
-          "url": "https://www.dfmc.kr/course/announce/recruit_vi.asp?board_id=RECRUIT&field=&id=1727&page=1&value=",
-          "checked_at": "2026-11-10T21:17:57.780582+09:00",
-          "sha256": "b163cbf7c5b1fdbf2deddae5a9e683285b18cd50738f84e57f4735d94974101c",
-          "excerpt": "채용분야 : 정규직(전기, 청소) / 채용인원 : 총 3 명 / 접수방법 : 온라인접수"
-        },
-        {
-          "url": "https://dfmc.grabberhr.com/careers",
-          "checked_at": "2026-11-10T21:18:32.895058+09:00",
-          "sha256": "f2a573e6da0a966ac46337958a1faf85dc2facb47844a773d21ccc626e213a6c",
-          "excerpt": "동대문구시설관리공단 채용 홈페이지",
-          "location": "채용 사이트 진입 응답; SPA 공고 선택 상태 미검증"
+          "notice_id": "cleaneye-80711",
+          "unit_count": 3,
+          "employment": "일반정규직",
+          "sector_preference": "neutral",
+          "decision": "hold",
+          "reason": "Official same PDF; exact recruitment-unit workplace remains unconfirmed",
+          "evidence": [
+            {
+              "url": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+              "excerpt": "행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무",
+              "location": "동일 공고 PDF를 다시 읽음. 일반행정 근무 배치 미명시.",
+              "sha256": "da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb",
+              "checked_at": "2026-11-10T21:42:54.099974+09:00"
+            }
+          ]
         }
       ]
     },
     "queue_blob_sha": "f9b381134d979ebff209ef898847852dd7f187e8",
-    "entry_sha256": "6fbfb4c5108b76d654170dc400a66c5919a264354d6e7a736e07c7737efcc813",
+    "entry_sha256": "0d9133c505cb7adedab75c5732a630bc34f16a217b0de1bcbca92f0f66339069",
     "existing_ready_validated": 3,
     "ready_entries": [
       {
@@ -4675,14 +4663,14 @@
         "full_delay_window_validated": true
       }
     ],
-    "new_drafts_prepared": 1,
+    "new_drafts_prepared": 0,
     "new_ready_saved": 0,
     "notice_id": "cleaneye-81028",
     "hold_status": "CLEANEYE_SOURCE_STALE",
     "current_hold": "2026-11-11T20:00:00+09:00",
     "preview": {
       "main_text": "제천 청풍유스호스텔에서 근무할 수 있다면, 동대문구시설관리공단 정규직 청소 공고를 살펴보세요.\n고용·인원: 일반정규직 · 1명\n근무: 충북 제천시 청풍유스호스텔\n접수 마감: 2026-11-19 18:00\n12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요.\n대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n공고에 신체·정신 건강 요건이 있어요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
-      "detail_reply": "1. 12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요. 청소 직무에 별도 자격증 요건은 없어요. 공고에 신체·정신 건강 요건이 있어요.\n2. 대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n3. 교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n4. 응시원서와 자기소개서는 블라인드 기준에 맞춰 11월 19일 18시까지 온라인으로 내요. 우대 증빙은 해당자만 첨부해요.\n\n객실 청소와 침구 정리, 공용부 정비를 맡아요.",
+      "detail_reply": "1. 12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요. 청소 직무에 별도 자격증 요건은 없어요. 공고에 신체·정신 건강 요건이 있어요.\n2. 대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n3. 교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n4. 응시원서와 자기소개서는 11월 19일 18시까지 온라인으로 내요. 자기소개서에는 학교명과 출신지역을 쓰지 말고, 우대 증빙은 해당자만 첨부해요.\n\n객실 청소와 침구 정리, 공용부 정비를 맡아요.",
       "regenerated_by": "scripts.threads_auto.master_public_copy"
     },
     "local_image_preview": {
@@ -4696,11 +4684,13 @@
       "public_upload_verified": false,
       "mobile_360px_legible": true,
       "clipping_observed": false
-    }
+    },
+    "prepared_at": "2026-11-10T21:47:17.305864+09:00",
+    "revised_held_drafts": 1
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T12:22:11.945Z",
-    "main_sha": "4633eaed2253bb5a408ea77199f8760c6a9bd61e",
+    "checked_at": "2026-11-10T12:47:57.409Z",
+    "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
     "history_blob_sha": "a884963b908790eb63609875823e2a19af024b49",
     "claim_blob_sha": "c4db538bc156df38d6eb0dd0ea3c7c51e3acf382",
     "last_confirmed_post_id": "18036438404894460",
@@ -4714,19 +4704,8 @@
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42809560618"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "42809560618",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T11:43:23Z",
-        "head_sha": "f0b2b81a498a7157849e8f3066505097977abed5",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42809560618"
-      }
-    ],
-    "status": "scheduled_publication_verified_next_slot_draft_held",
+    "new_publisher_runs": [],
+    "status": "no_new_publisher_run_checked_held_application_evidence",
     "slot": "2026-11-10T20:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -7107,11 +7086,11 @@
       "source_detail_sha256": "19a6cc28c59a4a3fa842c1afe3a1349a0124d655403dbf7176c0f8f95e0f7ae0",
       "editorial_policy_id": "careerpick-threads-reach-v1-20261109",
       "editorial_policy_sha256": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
-      "prepared_at": "2026-11-10T21:20:44.838823+09:00",
+      "prepared_at": "2026-11-10T21:47:17.305864+09:00",
       "writer": {
         "status": "hold",
         "post_text": null,
-        "draft_text": "제천 청풍유스호스텔에서 근무할 수 있다면, 동대문구시설관리공단 정규직 청소 공고를 살펴보세요.\n\n1. 12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요. 청소 직무에 별도 자격증 요건은 없어요. 공고에 신체·정신 건강 요건이 있어요.\n2. 대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n3. 교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n4. 응시원서와 자기소개서는 블라인드 기준에 맞춰 11월 19일 18시까지 온라인으로 내요. 우대 증빙은 해당자만 첨부해요.\n\n객실 청소와 침구 정리, 공용부 정비를 맡아요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
+        "draft_text": "제천 청풍유스호스텔에서 근무할 수 있다면, 동대문구시설관리공단 정규직 청소 공고를 살펴보세요.\n\n1. 12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요. 청소 직무에 별도 자격증 요건은 없어요. 공고에 신체·정신 건강 요건이 있어요.\n2. 대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n3. 교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n4. 응시원서와 자기소개서는 11월 19일 18시까지 온라인으로 내요. 자기소개서에는 학교명과 출신지역을 쓰지 말고, 우대 증빙은 해당자만 첨부해요.\n\n객실 청소와 침구 정리, 공용부 정비를 맡아요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
         "reply_texts": [],
         "review": {
           "notice_id": "cleaneye-81028",
@@ -7119,7 +7098,7 @@
           "central_message": "제천 근무 가능 여부와 시용·접수 준비를 체크리스트로 연결",
           "pattern_id": "P5",
           "scheduled_at": "2026-11-11T20:00:00+09:00",
-          "reference_at": "2026-11-10T21:20:44.838823+09:00",
+          "reference_at": "2026-11-10T21:47:17.305864+09:00",
           "verification_basis": "checked_official_source",
           "source_refs": [
             {
@@ -7148,12 +7127,32 @@
               "sha256": "f2a573e6da0a966ac46337958a1faf85dc2facb47844a773d21ccc626e213a6c",
               "excerpt": "동대문구시설관리공단 채용 홈페이지",
               "location": "채용 사이트 진입 응답; SPA 공고 선택 상태 미검증"
+            },
+            {
+              "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+              "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
+              "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
+              "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
+              "checked_at": "2026-11-10T21:44:03.585628+09:00"
+            },
+            {
+              "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
+              "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
+              "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
+              "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
+              "checked_at": "2026-11-10T21:45:10.159898+09:00"
+            },
+            {
+              "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
+              "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
+              "location": "1쪽 지원서 작성 가이드라인 시각 확인",
+              "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
+              "checked_at": "2026-11-10T21:45:11.751944+09:00"
             }
           ],
           "checked_at": "2026-11-10T21:18:18.777150+09:00",
           "missing_or_conflicting": [
             "CLEANEYE_SOURCE_STALE_AT_DELAY_WINDOW_END",
-            "OFFICIAL_APPLY_SPA_NOTICE_NOT_VERIFIED",
             "LARGER_RECRUITMENT_UNITS_PENDING_REVIEW"
           ],
           "omitted_optional_facts": [
@@ -7166,13 +7165,13 @@
           "length_check": "measured_within_limit",
           "pre_publish_checks": [],
           "application_period": {
-            "start": "2026-11-09",
+            "start": "2026-11-09T09:00:00+09:00",
             "end": "2026-11-19T18:00:00+09:00",
-            "start_date_only": true,
+            "start_date_only": false,
             "date_only": false,
             "official_precision_verified": true,
-            "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
-            "evidence": "접수기간 : 2026. 11. 9.(월) ~ 2026. 11. 19.(목) 18:00 까지"
+            "source_ref": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+            "evidence": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00"
           },
           "profile_target": {
             "url": "https://kllollain-max.github.io/careerpick/",
@@ -7183,7 +7182,7 @@
             "rel_me_profile_sha256": "d3433233377ff4fdb1ebe8231a2fe88fe275716f0e43762da44348eef055e587",
             "site_sha256": "89028379008a84c3b6676a461719a5093fccc1df2ad6c55fbd2e884df0f47f5b",
             "feed_sha256": "0cd061f56087ed9ae2036d4f4ba80dc908b04047ef2314b63455e9990256cc03",
-            "method": "rel=me와 공개 사이트 #job 처리 및 동일 공고 지문 확인; 기관의 지원 SPA에서 해당 모집단위를 선택할 수 있는지는 미검증"
+            "method": "rel=me와 공개 사이트 #job 처리 및 동일 공고 지문 확인; 공식 지원 상세 728의 직무·일정까지 확인"
           },
           "fact_evidence": [
             {
@@ -7274,14 +7273,16 @@
               "audience_breadth": "제천 청풍유스호스텔에서 근무 가능하며 연령·결격 요건을 충족하는 지원자",
               "institution_interest": null,
               "observed_metrics": null,
-              "actual_media": null
+              "actual_media": null,
+              "application_deadline": "2026-11-19T18:00:00+09:00",
+              "hours_until_deadline_at_slot": 190
             },
             "public_preview": {
               "main_text": "제천 청풍유스호스텔에서 근무할 수 있다면, 동대문구시설관리공단 정규직 청소 공고를 살펴보세요.\n고용·인원: 일반정규직 · 1명\n근무: 충북 제천시 청풍유스호스텔\n접수 마감: 2026-11-19 18:00\n12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요.\n대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n공고에 신체·정신 건강 요건이 있어요.\n\n자세한 채용정보는 프로필 링크를 확인하세요.",
-              "detail_reply": "1. 12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요. 청소 직무에 별도 자격증 요건은 없어요. 공고에 신체·정신 건강 요건이 있어요.\n2. 대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n3. 교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n4. 응시원서와 자기소개서는 블라인드 기준에 맞춰 11월 19일 18시까지 온라인으로 내요. 우대 증빙은 해당자만 첨부해요.\n\n객실 청소와 침구 정리, 공용부 정비를 맡아요."
+              "detail_reply": "1. 12월 30일 임용 예정일 기준 만 18~60세로, 제천 청풍유스호스텔에서 근무할 수 있어야 해요. 청소 직무에 별도 자격증 요건은 없어요. 공고에 신체·정신 건강 요건이 있어요.\n2. 대한민국 국민으로 공고상 결격사유가 없어야 하고, 이 공고에서 한 직무만 지원할 수 있어요.\n3. 교대·연장·당직·주말 근무가 생길 수 있고, 3개월 시용 평가를 거쳐 임용을 결정해요.\n4. 응시원서와 자기소개서는 11월 19일 18시까지 온라인으로 내요. 자기소개서에는 학교명과 출신지역을 쓰지 말고, 우대 증빙은 해당자만 첨부해요.\n\n객실 청소와 침구 정리, 공용부 정비를 맡아요."
             }
           },
-          "body_characters": 388,
+          "body_characters": 402,
           "source_selection": {
             "policy_id": "careerpick-threads-selection-v3-20261110",
             "official_details_fully_reviewed": false,
@@ -7297,6 +7298,12 @@
             "records_checked": 70,
             "last_published_hooks_checked": 10,
             "same_notice_seen": false
+          },
+          "application_path": {
+            "url": "https://dfmc.grabberhr.com/careers/job-posting/728",
+            "official_listing_id": 728,
+            "verified": true,
+            "internal_address_note": "Raw workplace and workplace1 fields contain the same institutional Seoul address for all three open listings. The application page does not display those fields. Its signed notice graphic and the official PDFs specifically identify Jecheon Cheongpung for this unit; retain this discrepancy in evidence and never use the internal address as the work location."
           }
         }
       },
@@ -7721,7 +7728,7 @@
     },
     "latest_future_slot_review": {
       "target_slot": "2026-11-11T20:00:00+09:00",
-      "checked_at": "2026-11-10T12:22:11.945Z",
+      "checked_at": "2026-11-10T12:47:57.409Z",
       "notice_id": "cleaneye-81028",
       "decision": "new_held_draft_not_final_selection",
       "employment": "일반정규직",
@@ -7812,8 +7819,115 @@
           "sha256": "f2a573e6da0a966ac46337958a1faf85dc2facb47844a773d21ccc626e213a6c",
           "excerpt": "동대문구시설관리공단 채용 홈페이지",
           "location": "채용 사이트 진입 응답; SPA 공고 선택 상태 미검증"
+        },
+        {
+          "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+          "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
+          "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
+          "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
+          "checked_at": "2026-11-10T21:44:03.585628+09:00"
+        },
+        {
+          "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
+          "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
+          "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
+          "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
+          "checked_at": "2026-11-10T21:45:10.159898+09:00"
+        },
+        {
+          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
+          "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
+          "location": "1쪽 지원서 작성 가이드라인 시각 확인",
+          "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
+          "checked_at": "2026-11-10T21:45:11.751944+09:00"
         }
-      ]
+      ],
+      "recheck": {
+        "checked_at": "2026-11-10T12:47:57.409Z",
+        "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+        "slot": "2026-11-11T20:00:00+09:00",
+        "notice_id": "cleaneye-81028",
+        "prior_entry_sha256": "6fbfb4c5108b76d654170dc400a66c5919a264354d6e7a736e07c7737efcc813",
+        "entry_sha256": "0d9133c505cb7adedab75c5732a630bc34f16a217b0de1bcbca92f0f66339069",
+        "application_path": {
+          "url": "https://dfmc.grabberhr.com/careers/job-posting/728",
+          "official_listing_id": 728,
+          "verified": true,
+          "internal_address_note": "Raw workplace and workplace1 fields contain the same institutional Seoul address for all three open listings. The application page does not display those fields. Its signed notice graphic and the official PDFs specifically identify Jecheon Cheongpung for this unit; retain this discrepancy in evidence and never use the internal address as the work location."
+        },
+        "verified_refs": [
+          {
+            "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+            "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
+            "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
+            "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
+            "checked_at": "2026-11-10T21:44:03.585628+09:00"
+          },
+          {
+            "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
+            "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
+            "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
+            "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
+            "checked_at": "2026-11-10T21:45:10.159898+09:00"
+          },
+          {
+            "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
+            "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
+            "location": "1쪽 지원서 작성 가이드라인 시각 확인",
+            "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
+            "checked_at": "2026-11-10T21:45:11.751944+09:00"
+          }
+        ],
+        "status": "hold",
+        "blocking": [
+          "CLEANEYE_SOURCE_STALE_AT_DELAY_WINDOW_END",
+          "LARGER_RECRUITMENT_UNITS_PENDING_REVIEW"
+        ],
+        "larger_units_rechecked": [
+          {
+            "notice_id": "cleaneye-80902",
+            "unit_count": 6,
+            "employment": "일반정규직",
+            "sector_preference": "deprioritized",
+            "decision": "hold",
+            "reason": "Official detail matches 2026-38 but current public feed points to 2026-34",
+            "evidence": [
+              {
+                "url": "https://medical.recruiter.co.kr/career/jobs/133112",
+                "excerpt": "[수원병원][2026-38호] 간호사(정규직) 신규채용 공고",
+                "location": "기관 공고 100965가 연결한 정확한 지원 상세",
+                "sha256": "044d65f1b1fec205305592d7e3936dbcbf700dbf155312f49717d5e1adeef196",
+                "checked_at": "2026-11-10T21:43:18.568685+09:00"
+              },
+              {
+                "url": "https://medical.recruiter.co.kr/career/jobs/127602",
+                "excerpt": "[수원병원][2026-34호] 간호사(정규직) 신규채용 공고",
+                "location": "현재 공개 클린아이 수집본이 가리키는 다른 공고",
+                "sha256": "3d0521ea9dce74549dce5a4d9b605dcd2bb76485472afbe0a624739bedfa707d",
+                "checked_at": "2026-11-10T21:43:37.017223+09:00"
+              }
+            ]
+          },
+          {
+            "notice_id": "cleaneye-80711",
+            "unit_count": 3,
+            "employment": "일반정규직",
+            "sector_preference": "neutral",
+            "decision": "hold",
+            "reason": "Official same PDF; exact recruitment-unit workplace remains unconfirmed",
+            "evidence": [
+              {
+                "url": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+                "excerpt": "행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무",
+                "location": "동일 공고 PDF를 다시 읽음. 일반행정 근무 배치 미명시.",
+                "sha256": "da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb",
+                "checked_at": "2026-11-10T21:42:54.099974+09:00"
+              }
+            ]
+          }
+        ]
+      },
+      "official_details_fully_reviewed": false
     },
     "sector_rollout": {
       "policy_id": "careerpick-threads-selection-v3-20261110",
@@ -10217,6 +10331,91 @@
         "mobile_360px_legible": true,
         "public_url_checked": false
       }
+    },
+    "most_recent": {
+      "checked_at": "2026-11-10T12:47:57.409Z",
+      "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
+      "slot": "2026-11-11T20:00:00+09:00",
+      "notice_id": "cleaneye-81028",
+      "prior_entry_sha256": "6fbfb4c5108b76d654170dc400a66c5919a264354d6e7a736e07c7737efcc813",
+      "entry_sha256": "0d9133c505cb7adedab75c5732a630bc34f16a217b0de1bcbca92f0f66339069",
+      "application_path": {
+        "url": "https://dfmc.grabberhr.com/careers/job-posting/728",
+        "official_listing_id": 728,
+        "verified": true,
+        "internal_address_note": "Raw workplace and workplace1 fields contain the same institutional Seoul address for all three open listings. The application page does not display those fields. Its signed notice graphic and the official PDFs specifically identify Jecheon Cheongpung for this unit; retain this discrepancy in evidence and never use the internal address as the work location."
+      },
+      "verified_refs": [
+        {
+          "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+          "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
+          "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
+          "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
+          "checked_at": "2026-11-10T21:44:03.585628+09:00"
+        },
+        {
+          "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
+          "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
+          "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
+          "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
+          "checked_at": "2026-11-10T21:45:10.159898+09:00"
+        },
+        {
+          "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
+          "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
+          "location": "1쪽 지원서 작성 가이드라인 시각 확인",
+          "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
+          "checked_at": "2026-11-10T21:45:11.751944+09:00"
+        }
+      ],
+      "status": "hold",
+      "blocking": [
+        "CLEANEYE_SOURCE_STALE_AT_DELAY_WINDOW_END",
+        "LARGER_RECRUITMENT_UNITS_PENDING_REVIEW"
+      ],
+      "larger_units_rechecked": [
+        {
+          "notice_id": "cleaneye-80902",
+          "unit_count": 6,
+          "employment": "일반정규직",
+          "sector_preference": "deprioritized",
+          "decision": "hold",
+          "reason": "Official detail matches 2026-38 but current public feed points to 2026-34",
+          "evidence": [
+            {
+              "url": "https://medical.recruiter.co.kr/career/jobs/133112",
+              "excerpt": "[수원병원][2026-38호] 간호사(정규직) 신규채용 공고",
+              "location": "기관 공고 100965가 연결한 정확한 지원 상세",
+              "sha256": "044d65f1b1fec205305592d7e3936dbcbf700dbf155312f49717d5e1adeef196",
+              "checked_at": "2026-11-10T21:43:18.568685+09:00"
+            },
+            {
+              "url": "https://medical.recruiter.co.kr/career/jobs/127602",
+              "excerpt": "[수원병원][2026-34호] 간호사(정규직) 신규채용 공고",
+              "location": "현재 공개 클린아이 수집본이 가리키는 다른 공고",
+              "sha256": "3d0521ea9dce74549dce5a4d9b605dcd2bb76485472afbe0a624739bedfa707d",
+              "checked_at": "2026-11-10T21:43:37.017223+09:00"
+            }
+          ]
+        },
+        {
+          "notice_id": "cleaneye-80711",
+          "unit_count": 3,
+          "employment": "일반정규직",
+          "sector_preference": "neutral",
+          "decision": "hold",
+          "reason": "Official same PDF; exact recruitment-unit workplace remains unconfirmed",
+          "evidence": [
+            {
+              "url": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+              "excerpt": "행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무",
+              "location": "동일 공고 PDF를 다시 읽음. 일반행정 근무 배치 미명시.",
+              "sha256": "da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb",
+              "checked_at": "2026-11-10T21:42:54.099974+09:00"
+            }
+          ]
+        }
+      ]
     }
   }
 }
