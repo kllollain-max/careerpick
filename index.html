@@ -209,9 +209,6 @@ h1{white-space:nowrap}
 .guides{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:10px 0 0}
 .guides::-webkit-scrollbar{display:none}
 .guides a{flex:none;font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink);text-decoration:none}
-.exam-menu>summary{width:fit-content;min-height:44px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px;font-weight:700;cursor:pointer}
-.exam-menu>summary:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
-.exam-menu .guides{flex-wrap:wrap;overflow:visible}
 .flinks a{margin-right:12px}
 /* 지원 현황 관리 */
 .actions > *{min-width:0}
@@ -605,7 +602,7 @@ footer .src b{color:var(--ink)}
       <button class="addbtn" id="addbtn" hidden>＋ 홈 화면<span class="long">에 추가</span></button>
     </div>
   </header>
-<a class="cross-site-banner" href="https://kllollain-max.github.io/supportpick/?utm_source=careerpick&amp;utm_medium=referral&amp;utm_campaign=cross_site_banner" target="_blank" rel="noopener noreferrer" aria-label="지원금픽 새 탭에서 열기"><span><strong>정부지원금·생활혜택도 확인해 보세요</strong><small>지원금픽 바로가기</small></span><span class="cross-site-arrow" aria-hidden="true">↗</span></a>
+
 
 
   <nav class="cp-mobile-nav" aria-label="모바일 빠른 이동">
@@ -619,9 +616,10 @@ footer .src b{color:var(--ink)}
 
   <main id="jobsMain">
   
+  <div class="job-browse">
   <div class="data-health" id="dataHealth" role="alert" aria-live="polite" hidden></div>
 
-  <div class="cp-home-heading"><h2>다음 커리어를 찾아보세요</h2><p>관심 공고를 저장하고, 공식 공고에서 지원하세요.</p></div>
+  <div class="cp-home-heading"><h2>채용공고</h2><a class="exam-entry" href="?tab=cert">시험일정 <span aria-hidden="true">→</span></a></div>
   <nav id="cpSectors" class="cp-sectors" aria-label="채용 분야"></nav>
   <div class="searchbar">
     <label class="search">
@@ -655,14 +653,18 @@ footer .src b{color:var(--ink)}
   <p class="cp-applied" id="cpApplied" role="status"></p>
 
 
+  </div>
   <input id="cpBackupInput" type="file" accept=".json,application/json" hidden aria-label="커리어픽 백업 파일 선택">
-  <details class="exam-menu" id="exam-schedule">
-    <summary>시험일정</summary>
-    <nav class="guides" aria-label="시험일정 종류">
-      <a href="?tab=cert#exam-schedule">자격증 시험일정</a>
+  <section class="exam-hub" id="exam-schedule" aria-labelledby="exam-heading">
+    <div class="cp-home-heading">
+      <h2 id="exam-heading">시험일정</h2>
+      <a class="exam-entry" href="./"><span aria-hidden="true">←</span> 채용공고</a>
+    </div>
+    <nav class="exam-types" aria-label="시험일정 종류">
+      <span aria-current="page">자격증 시험일정</span>
       <a href="civil-service-exams.html">국가공무원 시험일정</a>
     </nav>
-  </details>
+  </section>
   <div class="sumrow"><p class="summary" id="summary" aria-live="polite"></p><label class="cp-order">정렬<select id="cpOrder" aria-label="공고 정렬"><option value="due">마감 임박순</option><option value="new">최신 등록순</option></select></label><button class="viewbtn" id="viewbtn" aria-pressed="false">☰ 간단히</button></div>
   <ul class="list" id="list"><!--STATIC-LIST-->
 <li class="card mini"><a class="main" href="https://m.blog.naver.com/hid4989-3/224454721567"><div class="kind"><span class="pill p">마감 11.2(월) 10:00</span></div><div class="t">한국나노기술원 정규직 4명, 연구·노무·보건 필수조건 비교</div></a></li>
@@ -708,6 +710,7 @@ footer .src b{color:var(--ink)}
 <li class="card mini"><a class="main" href="https://m.blog.naver.com/hid4989-3/224436992442"><div class="kind"><span class="pill p">취업준비</span></div><div class="t">2026 하반기 에너지 공기업 NCS 출제유형 비교표</div></a></li>
 <!--/STATIC-LIST--></ul>
   </main>
+  <a class="cross-site-banner" href="https://kllollain-max.github.io/supportpick/?utm_source=careerpick&amp;utm_medium=referral&amp;utm_campaign=cross_site_banner" target="_blank" rel="noopener noreferrer" aria-label="지원금픽 새 탭에서 열기"><span><strong>정부지원금·생활혜택도 확인해 보세요</strong><small>지원금픽 바로가기</small></span><span class="cross-site-arrow" aria-hidden="true">↗</span></a>
   <details class="cp-support"><summary>나의 대시보드 · 마감 임박 · 취업 준비</summary>
   <div class="cp-feed-status" id="cpFeedStatus" role="status" aria-live="polite">📡 채용정보 업데이트 상태 확인 중…</div>
   <div class="notice alert" id="savedAlert" hidden role="button" tabindex="0"></div>
@@ -925,10 +928,6 @@ async function load(){
   await cpLoadWork24();
   cpDedupePosts();
   cpRenderFeedStatus();
-  const qp = new URLSearchParams(location.search).get("q");
-  { const tp = new URLSearchParams(location.search).get("tab"); if(tp === "spec" || tp === "cert") state.tab = tp; }
-  if(qp){ state.q = qp; state.tab = "all"; $("q").value = qp; }
-  if(state.tab === "cert") $("exam-schedule").open = true;
   const jm = location.hash.match(/^#job=(.+)$/);
   if(jm) setTimeout(() => openJob(decodeURIComponent(jm[1]), false), 0);
   const updateDate = UPDATED ? new Date(UPDATED) : null;
@@ -939,13 +938,12 @@ async function load(){
   $("updated").textContent = "공공기관·공무직·기업 채용을 한눈에";
   updateDataHealth(validUpdate ? updateDate : null);
   refresh();
-  if(!POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
+  if(state.tab !== "cert" && !POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
   alioDetail().then(() => {
     for(const p of POSTS){const det=p.alio && ALIO_DETAIL?.[p.id];if(det)Object.assign(p,CPHome.detailFields(p,det));}
     renderTabs(); renderFilters(); render(); cpRenderFeedStatus();
-    if(!POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
+    if(state.tab !== "cert" && !POSTS.length && DATA_HEALTH.posts==="error") showStaticBlogFallback();
   });
-  loadQnet().then(q => { if(q){ renderTabs(); if(state.tab === "cert") render(); } });
   if(COUPANG) try{
     const a = await fetch("ads.json?t=" + Date.now(), {cache:"no-store"});
     if(a.ok){ ADS = ((await a.json()).products || []).sort(() => Math.random() - .5); render(); }
@@ -1689,12 +1687,12 @@ function specLive(){
   el.innerHTML = `마감 전·일정 확인 공식 공고 중 ✅ 조건 일치 참고 <b>${c.ok}건</b> · 🔍 확인 필요 <b>${c.check}건</b>`;
 }
 // ── 자격증 시험일정 (저장된 큐넷 일정) ──
-let QNET = null, QNET_TRIED = false;
+let QNET = null, QNET_LOADING = false, QNET_TRIED = false;
 async function loadQnet(){
-  if(QNET_TRIED) return QNET; QNET_TRIED = true;
+  QNET_LOADING = true;
   try { const r = await fetch("qnet.json?t=" + encodeURIComponent(UPDATED || Date.now())); QNET = r.ok ? await r.json() : null; } catch(e){ QNET = null; }
   if(QNET && !Array.isArray(QNET.rows)) QNET = null;
-  return QNET;
+  QNET_TRIED = true;
 }
 const CERTS = [
   ["정보처리기사", /정보처리기사/], ["정보처리산업기사", /정보처리산업기사/], ["전기기사", /(?<!산업)전기기사/], ["전기산업기사", /전기산업기사/], ["전기기능사", /전기기능사/],
@@ -1738,7 +1736,12 @@ function certCal(o){
 }
 const qspan = (a, b) => !a && !b ? "-" : a && b && a !== b ? `${ymdLabel(a)}~${ymdLabel(b)}` : ymdLabel(a || b);
 function renderCert(now){
-  if(!QNET_TRIED){ $("summary").innerHTML = "시험일정을 불러오는 중이에요…"; $("list").innerHTML = ""; loadQnet().then(() => { renderTabs(); render(); }); return; }
+  if(!QNET_TRIED){
+    $("summary").textContent = "시험일정을 불러오는 중이에요…";
+    $("list").textContent = "";
+    if(!QNET_LOADING) loadQnet().then(() => { if(state.tab === "cert") render(); });
+    return;
+  }
   const parts = [];
   if(state.certQ){
     if(!ALIO_DETAIL){ alioDetail().then(render); $("list").innerHTML = `<li class="empty">공고를 불러오는 중이에요…</li>`; return; }
@@ -1750,7 +1753,7 @@ function renderCert(now){
   const updated = QNET?.updated ? new Date(QNET.updated) : null;
   const updatedDay = updated && Number.isFinite(updated.getTime()) ? ymd(updated) : "";
   const updateLabel = updatedDay ? `<time datetime="${updatedDay}">${updatedDay}</time>` : "확인 불가";
-  $("summary").innerHTML = `📝 국가자격 시험일정 · 큐넷 공식 자료 기준 <a class="linkbtn" href="certs.html">전체 일정표 →</a><br>마지막 갱신일 ${updateLabel}`;
+  $("summary").innerHTML = `큐넷 공식 자료 · 마지막 갱신일 ${updateLabel} <a class="linkbtn" href="certs.html">전체 일정표 →</a>`;
   if(!QNET || !QNET.rows.length){
     parts.push(`<li class="empty">저장된 자격증 시험일정을 불러오지 못했어요.<br><a class="chip" href="https://www.q-net.or.kr" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;text-decoration:none;color:inherit">큐넷에서 보기 ↗</a></li>`);
   } else {
@@ -2362,7 +2365,8 @@ function render(){
   cpRenderDeadlineTools();
   renderCareerDashboard(new Date());
   const now = new Date();
-  $("viewbtn").hidden = state.tab === "track";
+  document.documentElement.classList.toggle("exam-view", state.tab === "cert");
+  $("viewbtn").hidden = state.tab === "track" || (state.tab === "cert" && !state.certQ);
   $("viewbtn").setAttribute("aria-pressed", COMPACT);
   $("viewbtn").textContent = COMPACT ? "▤ 자세히" : "☰ 간단히";
   if(state.tab === "track"){ renderTrack(now); return; }
@@ -2909,7 +2913,22 @@ function savedAlert(){
 // ── 맞춤 알림 설정 진입 ──
 $("cpAlwaysAlert").addEventListener("click", () => openPrefs());
 
+const initialParams = new URLSearchParams(location.search);
+const initialTab = initialParams.get("tab");
+const initialSearch = initialParams.get("q");
+if(initialSearch){
+  state.q = initialSearch;
+  $("q").value = initialSearch;
+} else if(initialTab === "spec" || initialTab === "cert"){
+  state.tab = initialTab;
+}
 cpSetupHome();
+if(state.tab === "cert"){
+  document.documentElement.classList.add("exam-view");
+  $("viewbtn").hidden = true;
+  $("summary").textContent = "시험일정을 불러오는 중이에요…";
+  $("list").textContent = "";
+}
 load();
 setInterval(() => POSTS.length && render(), 60000);
 </script>
