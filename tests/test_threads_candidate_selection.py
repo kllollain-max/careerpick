@@ -4,7 +4,8 @@ from datetime import datetime, timedelta
 import unittest
 
 from scripts.threads_candidate_selection import (
-    alio_application_period, build_selection, employment_rank, exact_count,
+    _ranking_key, alio_application_period, build_selection, employment_rank, exact_count,
+    sector_preference,
 )
 from scripts.threads_writer_queue import fingerprint
 from tests import test_threads_writer_queue as queue_fixtures
@@ -174,6 +175,46 @@ class CandidateSelectionTests(unittest.TestCase):
         self.fixture.post["title"] = "정보보안 신입 담당자 정규직 채용"
         self.fixture.detail["recrutPbancTtl"] = self.fixture.post["title"]
         self.assertEqual([p["notice_id"] for p in self.build()["candidates"]], ["a700"])
+
+    def test_sector_triage_is_audited_before_the_writer_cap(self):
+        health = cleaneye_post("800", title="의료원 간호사 일반정규직 채용")
+        neutral = cleaneye_post("801", title="시설관리 일반정규직 채용")
+        preferred = cleaneye_post("802", title="도시철도 차량정비 일반정규직 채용")
+        self.source["_cleaneye"] = feed(health, neutral, preferred)
+        result = self.build(limit=1)
+        audit = result["selection_audit"]
+        self.assertEqual(result["candidates"][0]["notice_id"], "cleaneye-802")
+        rows = {r["notice_id"]: r for r in audit["rows"]}
+        for jid, sector in (("800", "deprioritized"), ("801", "neutral"), ("802", "preferred")):
+            row = rows["cleaneye-" + jid]
+            self.assertEqual(row["sector_preference"], sector)
+            self.assertIsNone(row["interest"])
+            self.assertIsNone(row["unit_count"])
+        self.assertEqual(rows["cleaneye-802"]["sector_group"], "rail_transport_logistics")
+        self.assertEqual(audit["sector_policy"]["unconfirmed_counts"], "provisional_review_order_only")
+
+    def test_sector_does_not_override_employment_or_verified_headcount(self):
+        def row(jid, org, employment, count):
+            return {"notice_id": jid, "employment_priority": employment_rank(employment),
+                    "unit_count": count, "application_period": {"end": "2026-11-18"},
+                    **sector_preference(org, "")}
+        rows = [row("preferred_fixed_term", "한국남부발전", "기간제", 100),
+                row("health_large", "수원병원", "정규직", 50),
+                row("health_tie", "수원병원", "정규직", 6),
+                row("rail_tie", "인천교통공사", "정규직", 6),
+                row("finance_unknown", "신용보증기금", "정규직", None)]
+        self.assertEqual([r["notice_id"] for r in sorted(rows, key=_ranking_key)],
+                         ["health_large", "rail_tie", "health_tie", "finance_unknown", "preferred_fixed_term"])
+
+    def test_sector_uses_recruiting_unit_when_verified(self):
+        self.assertEqual(sector_preference("한국전력공사", "정규직 채용", "간호사")["sector_preference"],
+                         "deprioritized")
+        self.assertEqual(sector_preference("예금보험공사", "행정·간호직", "금융일반")["sector_preference"],
+                         "preferred")
+        self.assertEqual(sector_preference("국민건강보험공단 일산병원", "일반행정")["sector_preference"],
+                         "deprioritized")
+        self.assertEqual(sector_preference("산업진흥원", "지역 발전 정책 연구")["sector_preference"],
+                         "neutral")
 
     def test_source_failure_is_not_zero_eligible_success(self):
         self.source["_operations"]["last_success_at"] = (self.now - timedelta(hours=30)).isoformat()
