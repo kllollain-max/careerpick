@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T15:25:24Z",
-  "last_observed_at": "2026-11-10T15:25:24Z",
+  "updated_at": "2026-11-10T16:00:46Z",
+  "last_observed_at": "2026-11-10T15:57:58Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1485,6 +1485,16 @@
       "head_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
       "workflow_path": ".github/workflows/operations.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42822857417"
+    },
+    {
+      "run_id": "42849929175",
+      "run_attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "updated_at": "2026-11-10T15:58:29Z",
+      "head_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42849929175"
     }
   ],
   "last_confirmed_publication": {
@@ -4758,7 +4768,7 @@
     "queue_commit_sha": "5f32bf558f9e34929320ce4dd65f53d3684059f6"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T15:25:24Z",
+    "checked_at": "2026-11-10T16:00:46Z",
     "main_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
     "history_blob_sha": "a884963b908790eb63609875823e2a19af024b49",
     "claim_blob_sha": "c4db538bc156df38d6eb0dd0ea3c7c51e3acf382",
@@ -5366,20 +5376,43 @@
     "performance_state_status": "not_initialized_no_observations_to_save",
     "new_failure": null,
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
-    "new_github_run_versions_since_previous_observation": [],
+    "new_github_run_versions_since_previous_observation": [
+      {
+        "run_id": "42849929175",
+        "run_attempt": 1,
+        "status": "in_progress",
+        "conclusion": null,
+        "updated_at": "2026-11-10T15:58:29Z",
+        "head_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42849929175"
+      }
+    ],
     "actions_pages": {
       "publisher": [
         30,
         0
       ],
-      "repository": [
-        40,
+      "repository_recent_window": [
+        41,
         0
       ]
     },
     "next_slot_claim": "not_found_future_slot",
     "latest_confirmed_evidence": "unchanged_accepted_ledger_and_previous_official_meta_get_agree",
-    "performance_artifact_reverified": true
+    "performance_artifact_reverified": true,
+    "previous_observed_at": "2026-11-10T15:25:24Z",
+    "actions_observation_watermark": "2026-11-10T15:57:58Z",
+    "collection_workflow": {
+      "run_id": "42849929175",
+      "run_attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "updated_at": "2026-11-10T15:58:29Z",
+      "head_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/42849929175"
+    }
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -8770,7 +8803,7 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-10T15:25:24Z",
+    "checked_at": "2026-11-10T16:00:46Z",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
@@ -8848,7 +8881,7 @@
     }
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T15:25:24Z",
+    "checked_at": "2026-11-10T16:00:46Z",
     "mode": "preserved_existing_ready_no_unstarted_unfilled_slot_in_24h",
     "main_sha": "d100dc22bbea3a5eed04b62b62f4ad61b1deeb2e",
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
@@ -8941,12 +8974,12 @@
       "all_four_visually_reviewed": true,
       "remote_bytes_check": "publisher_preflight"
     },
-    "selection_input_reference_at": "2026-11-11T00:23:52.987208+09:00",
-    "selection_input_sha256": "3ac0bc88793014900dc831bdab11f8fda315d5322315bf39b0dd773e470f175c",
+    "selection_input_reference_at": "2026-11-11T00:58:47.236418+09:00",
+    "selection_input_sha256": "b84151767d79e18101f7a2d099b0a457c11c25d235848eac31d7952b61a6f649",
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v3-20261110",
-      "evaluated_at": "2026-11-11T00:23:52.987208+09:00",
+      "evaluated_at": "2026-11-11T00:58:47.236418+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -9021,6 +9054,23 @@
         "notice_id_tiebreak"
       ],
       "review_errors": []
+    },
+    "profile_readback": {
+      "checked_at": "2026-11-11T00:59:34.700195+09:00",
+      "url": "https://www.threads.com/@hid_119",
+      "rel_me": [
+        [
+          "link",
+          "https://kllollain-max.github.io/careerpick/"
+        ]
+      ],
+      "response_sha256": "ec10c7f6990a5368881212b2e6939908db54cf86880ee1a9eff7b13ef74081c7",
+      "notice_paths": {
+        "a306715": true,
+        "a306470": true,
+        "cleaneye-80681": true,
+        "a306786": true
+      }
     }
   }
 }
