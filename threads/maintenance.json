@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T01:29:20+00:00",
-  "last_observed_at": "2026-11-10T01:29:20+00:00",
+  "updated_at": "2026-11-10T02:11:20+00:00",
+  "last_observed_at": "2026-11-10T02:11:20+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -7152,7 +7152,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T01:29:20+00:00",
+    "checked_at": "2026-11-10T02:11:20+00:00",
     "main_sha": "5dad1e5e703d6ec352310d4562ac4e40b38b153d",
     "history_blob_sha": "5c73822666089e69c9313ef7182c6d52dd0cfcd8",
     "claim_blob_sha": "68d4a5c273f628c55ba51fcbf79c72a90ac61a72",
@@ -7168,7 +7168,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42720550153"
     },
     "new_publisher_runs": [],
-    "status": "no_new_publisher_failures_draft_released",
+    "status": "no_new_publisher_runs_four_ready_verified",
     "slot": "2026-11-10T08:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -7243,38 +7243,7 @@
     ],
     "next_action": "Verify the next scheduled main body and detail reply. Preserve all four queued drafts. No replay.",
     "last_existing_claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
-    "observed_new_run_versions": [
-      {
-        "run_id": "42725407733",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T00:04:16Z",
-        "head_sha": "205f6011336465b379dd323e4bf84387e4938520",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42725407733"
-      },
-      {
-        "run_id": "42734293764",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T01:18:17Z",
-        "head_sha": "205f6011336465b379dd323e4bf84387e4938520",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42734293764"
-      },
-      {
-        "run_id": "42734828769",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T01:18:32Z",
-        "head_sha": "5dad1e5e703d6ec352310d4562ac4e40b38b153d",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42734828769"
-      }
-    ],
+    "observed_new_run_versions": [],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
@@ -7364,7 +7333,7 @@
     "next_slot_preflight": {
       "slot": "2026-11-10T12:00:00+09:00",
       "notice_id": "a306838",
-      "status": "READY; validator passed through full delay window; expected media only",
+      "status": "READY; official attachment unchanged; normal delay window validated",
       "derived_media": "TEXT"
     },
     "last_no_change_recheck": {
@@ -9376,7 +9345,7 @@
     }
   },
   "performance_monitor": {
-    "checked_at": "2026-11-10T01:29:20+00:00",
+    "checked_at": "2026-11-10T02:11:20+00:00",
     "policy_id": "careerpick-threads-reach-v1-20261109",
     "state_path": "threads/performance.json",
     "state_status": "not_initialized_no_observations_to_save",
@@ -9429,11 +9398,11 @@
     "artifact_digest": "sha256:235f56dece3e29e0e5701a8585c05a2e3bfb89e65a9c1a1b8bc821b8ec6e6c37"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T01:29:20+00:00",
+    "checked_at": "2026-11-10T02:11:20+00:00",
     "main_sha": "5dad1e5e703d6ec352310d4562ac4e40b38b153d",
     "queue_blob_sha": "60044f11596316fa0f8ac19180252ea1d6856ec9",
     "prompt_and_editorial_bytes_verified": true,
-    "mode": "one_prior_draft_verified_queued_existing_ready_preserved",
+    "mode": "four_existing_ready_preserved",
     "existing_ready_validated": true,
     "full_delay_window_validated": true,
     "public_previews_match": true,
@@ -9446,7 +9415,7 @@
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v2-20261109",
-      "evaluated_at": "2026-11-10T10:26:56.603300+09:00",
+      "evaluated_at": "2026-11-10T11:10:34.656811+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -9459,16 +9428,16 @@
           "snapshot_at": "2026-11-10T10:14:10+09:00",
           "source_checked_at": "2026-11-10T10:14:42+09:00",
           "total_records": 821,
-          "eligible_count": 32,
+          "eligible_count": 31,
           "review_required_count": 684,
-          "excluded_count": 105,
-          "returned_count": 2,
+          "excluded_count": 106,
+          "returned_count": 1,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 25,
             "NOTICE_ALREADY_USED": 64,
             "SOURCE_NOTICE_UNCONFIRMED": 10,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-            "NOTICE_ALREADY_QUEUED": 3,
+            "NOTICE_ALREADY_QUEUED": 4,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
             "APPLICATION_START_TIME_UNKNOWN": 1
           }
@@ -9481,7 +9450,7 @@
           "eligible_count": 239,
           "review_required_count": 0,
           "excluded_count": 182,
-          "returned_count": 22,
+          "returned_count": 23,
           "exclusion_reasons": {
             "CLEANEYE_NOT_VERIFIED_OPEN": 160,
             "CLEANEYE_NOT_RECRUITMENT": 2,
@@ -9490,7 +9459,7 @@
         }
       },
       "total_scanned": 1242,
-      "eligible_before_limit": 271,
+      "eligible_before_limit": 270,
       "writer_limit": 24,
       "returned_count": 24,
       "unconfirmed_unit_counts": 270,
@@ -9562,10 +9531,18 @@
       }
     ],
     "current_official_detail_recheck": {
-      "notice_id": "a306715",
-      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306715",
-      "status": "open",
-      "scope": "New official ALIO page read only; initial review timestamps untouched."
+      "notice_id": "a306838",
+      "checked_at": "2026-11-10T02:11:20+00:00",
+      "listing_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306838",
+      "attachment_url": "https://www.alio.go.kr/download/download.json?fileNo=3085866",
+      "attachment_sha256": "c861e6c968817d956377a3fe99048c7abec1de23b2f11376411a556c6e2e8276",
+      "public_notice_url": "https://kllollain-max.github.io/careerpick/jobs/a306838.html",
+      "notice_total_count": 8,
+      "unit_count": 6,
+      "employment": "정규직",
+      "application_end": "2026-11-19T17:30:00+09:00",
+      "status": "open_unchanged",
+      "scope": "Official ALIO detail and primary notice PDF; existing reviewed entry and timestamps untouched."
     },
     "public_profile_path_recheck": {
       "profile": {
@@ -9845,7 +9822,7 @@
     "card_bytes_rechecked_at": "2026-11-09T21:21:57+00:00",
     "draft_slot": "2026-11-11T08:00:00+09:00",
     "draft_notice_id": "a306715",
-    "new_ready_saved": 1,
+    "new_ready_saved": 0,
     "main_snapshot_compare": {
       "inspected_sha": "f60ca6549b309773a24ed0a5c5dfd3bcd9a49e1a",
       "latest_sha": "205f6011336465b379dd323e4bf84387e4938520",
