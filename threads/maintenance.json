@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T05:34:19.810Z",
-  "last_observed_at": "2026-11-10T05:34:19.810Z",
+  "updated_at": "2026-11-10T05:43:16.682Z",
+  "last_observed_at": "2026-11-10T05:43:16.682Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -3940,7 +3940,7 @@
       "reason": "SOURCE_STALE across the full two-hour window; exact local deadline evidence remains unresolved.",
       "resume": "ALIO verification no earlier than 2026-11-10 13:59:59 KST, official numeric deadline with time zone, unchanged source identity, and successful queue/public preview validation.",
       "draft_storage": "writer_hold_alternatives",
-      "rechecked_at": "2026-11-10T05:34:19.810Z",
+      "rechecked_at": "2026-11-10T05:43:16.682Z",
       "alternate_notice_id": "a306470",
       "alternate_status": "hold",
       "latest_collection_failure": "alio:42753006656:1:collect:ValueError",
@@ -7188,7 +7188,7 @@
     }
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-10T05:34:19.810Z",
+    "checked_at": "2026-11-10T05:43:16.682Z",
     "main_sha": "64f93d015a40d77a96ef4fa6dd3e79e11f43d70a",
     "history_blob_sha": "19e310160fe147a15e398cbf898ba7abaee1a47f",
     "claim_blob_sha": "d8dbaf2f55cb0121ca66b45701943f73fe070a4b",
@@ -7204,7 +7204,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42750909426"
     },
     "new_publisher_runs": [],
-    "status": "no_new_publisher_runs_upstream_alio_failed_preserved",
+    "status": "no_new_publisher_or_collection_runs_since_previous_check",
     "slot": "2026-11-10T12:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -7279,28 +7279,7 @@
     ],
     "next_action": "Continue natural 16:00 image slot using verified existing READY; no backfill. Recheck the next saved ALIO collection and confirm 11/11 noon evidence before any promotion.",
     "last_existing_claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
-    "observed_new_run_versions": [
-      {
-        "run_id": "42753057646",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-10T04:00:45Z",
-        "head_sha": "64f93d015a40d77a96ef4fa6dd3e79e11f43d70a",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42753057646"
-      },
-      {
-        "run_id": "42753006656",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-10T04:00:32Z",
-        "head_sha": "64f93d015a40d77a96ef4fa6dd3e79e11f43d70a",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42753006656"
-      }
-    ],
+    "observed_new_run_versions": [],
     "unrelated_pr_check": {
       "run_id": "42460392123",
       "failure": "Playwright browser installation does not support the ubuntu26.04-x64 runner; no Threads tests ran in this check and no change was made to that check."
@@ -7626,6 +7605,13 @@
       "affected_future_slot": "2026-11-11T12:00:00+09:00",
       "publication_claimed": false,
       "resume": "Next existing successful ALIO collector run must store fresh source verification; keep all guarded drafts and recheck source/official facts."
+    },
+    "latest_observed_publication_evidence": {
+      "post_id": "18139648828646274",
+      "reply_id": "18101233778412921",
+      "claim_blob_sha": "d8dbaf2f55cb0121ca66b45701943f73fe070a4b",
+      "history_blob_sha": "19e310160fe147a15e398cbf898ba7abaee1a47f",
+      "meta_logs_match": true
     }
   },
   "writer_hold_alternatives": {
@@ -9792,11 +9778,11 @@
     "artifact_digest": "sha256:466f57a018a5789803dff896c3b6a2d5bdb4b56ed3add2e99966b2eb1aea8f73"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-10T05:34:19.810Z",
+    "checked_at": "2026-11-10T05:43:16.682Z",
     "main_sha": "64f93d015a40d77a96ef4fa6dd3e79e11f43d70a",
     "queue_blob_sha": "60044f11596316fa0f8ac19180252ea1d6856ec9",
     "prompt_and_editorial_bytes_verified": true,
-    "mode": "three_ready_preserved_new_alternate_hold_draft",
+    "mode": "three_existing_ready_and_two_existing_holds_revalidated_no_changes",
     "existing_ready_validated": true,
     "full_delay_window_validated": true,
     "public_previews_match": true,
@@ -9809,7 +9795,7 @@
     "selection_audit_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v2-20261109",
-      "evaluated_at": "2026-11-10T14:30:24.173733+09:00",
+      "evaluated_at": "2026-11-10T14:42:14.395307+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -10307,7 +10293,7 @@
       }
     ],
     "official_details_fully_reviewed": false,
-    "input_sha256": "78bf27e242528862a8c2f14f354e36a27bf0b4f60cb42567a6eb0b4f26442101",
+    "input_sha256": "8f0f7aa4162b2984805ad306aae29e3f8cf3e3838e06ea82dcfe96290e9d07e0",
     "queue_check_sha256": "7231888e7ad8d5344025d5986a6d7c4e2030e98a5c31647e45bbf1ebf60b3ce2",
     "latest_official_listing_recheck": {
       "notice_id": "a306838",
@@ -10607,6 +10593,30 @@
         "decision": "backup_comparison_shorter_window_and_attachments_not_fully_checked",
         "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3083367"
       }
-    ]
+    ],
+    "hold_checks": [
+      {
+        "notice_id": "a306403",
+        "validation": "SOURCE_STALE",
+        "preview_equal": true
+      },
+      {
+        "notice_id": "a306470",
+        "validation": "SOURCE_STALE",
+        "preview_equal": true
+      }
+    ],
+    "higher_priority_followup": {
+      "notice_id": "a306012",
+      "unit_title": "부연구위원",
+      "unit_count": 8,
+      "workplace": "세종",
+      "source_ref": "https://www.kdi.re.kr/share/recruitView?rec_no=307&pg=1&rec_type=",
+      "checked_at": "2026-11-10T05:43:16.682Z",
+      "official_employment_header": "정규직(무기계약직)",
+      "official_deadline_excerpt": "2026.12. 2.(수) 24:00 마감 (UTC 기준)",
+      "initial_appointment_contract_years": 3,
+      "decision": "keep_hold_exact_employment_classification_not_resolved"
+    }
   }
 }
