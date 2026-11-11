@@ -1,7 +1,7 @@
 // 홈 화면 앱용 서비스 워커: 페이지·공고 목록은 항상 최신(네트워크 우선), 이미지는 캐시 우선
-const VERSION = "careerpick-v3";
+const VERSION = "careerpick-v4-push-ui-removed";
 const STATIC = "careerpick-static-" + VERSION;
-const PAGES = "careerpick-pages-v3";
+const PAGES = "careerpick-pages-v4";
 self.addEventListener("install", e => self.skipWaiting());
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith("careerpick-") && k !== STATIC && k !== PAGES).map(k => caches.delete(k)))).then(() => self.clients.claim()));
