@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11T14:48:10Z",
-  "last_observed_at": "2026-11-11T14:48:10Z",
+  "updated_at": "2026-11-11T15:11:45Z",
+  "last_observed_at": "2026-11-11T15:11:45Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -4657,20 +4657,19 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-11T14:48:10Z",
-    "main_sha": "d238e76145141c363da8d6b0a67d53ef1f36c75e",
-    "main_input_sha": "6a7fe65df60dd33925a5ea16802f01b498b2f2dd",
+    "checked_at": "2026-11-11T15:11:45Z",
+    "main_sha": "88753a90ce41053d86fab1ef7f95e91100d285b8",
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "contract_version": 2,
     "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
-    "input_reference_at": "2026-11-11T23:22:39.299986+09:00",
+    "input_reference_at": "2026-11-12T00:09:00.963910+09:00",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-11T23:22:39.299986+09:00",
+      "evaluated_at": "2026-11-12T00:09:00.963910+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -4683,18 +4682,17 @@
           "snapshot_at": "2026-11-11T22:23:51+09:00",
           "source_checked_at": "2026-11-11T22:24:23+09:00",
           "total_records": 890,
-          "eligible_count": 28,
-          "review_required_count": 747,
-          "excluded_count": 115,
+          "eligible_count": 30,
+          "review_required_count": 746,
+          "excluded_count": 114,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 29,
             "NOTICE_ALREADY_USED": 70,
             "SOURCE_NOTICE_UNCONFIRMED": 11,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-            "APPLICATION_END_PRECISION_CONFLICT": 1,
-            "NOTICE_ALREADY_QUEUED": 1,
-            "APPLICATION_START_TIME_UNKNOWN": 2
+            "NOTICE_ALREADY_QUEUED": 2,
+            "APPLICATION_END_PRECISION_CONFLICT": 1
           }
         },
         "cleaneye": {
@@ -4702,24 +4700,24 @@
           "snapshot_at": "2026-11-11T19:11:44+09:00",
           "source_checked_at": "2026-11-11T19:11:44+09:00",
           "total_records": 498,
-          "eligible_count": 271,
+          "eligible_count": 286,
           "review_required_count": 0,
-          "excluded_count": 227,
+          "excluded_count": 212,
           "returned_count": 24,
           "exclusion_reasons": {
             "CLEANEYE_NOT_VERIFIED_OPEN": 163,
+            "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 40,
             "CLEANEYE_NOT_RECRUITMENT": 7,
             "NOTICE_ALREADY_USED": 1,
-            "CLEANEYE_APPLICATION_NOT_OPEN": 55,
             "NOTICE_ALREADY_QUEUED": 1
           }
         }
       },
       "total_scanned": 1388,
-      "eligible_before_limit": 299,
+      "eligible_before_limit": 316,
       "writer_limit": 24,
       "returned_count": 24,
-      "unconfirmed_unit_counts": 299,
+      "unconfirmed_unit_counts": 316,
       "interest_ranking": "unavailable_not_used",
       "audience_breadth_ranking": "unavailable_not_used",
       "sector_policy": {
@@ -4730,9 +4728,9 @@
         "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
       },
       "sector_counts_before_limit": {
-        "deprioritized": 73,
-        "neutral": 205,
-        "preferred": 21
+        "deprioritized": 77,
+        "neutral": 219,
+        "preferred": 20
       },
       "ranking_order": [
         "current_application_open",
@@ -4750,10 +4748,8 @@
     },
     "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
     "existing_ready_validated": true,
-    "existing_entries_preserved": 25,
-    "new_drafts_prepared": 2,
-    "new_ready_saved": 1,
-    "new_hold_saved": 1,
+    "new_drafts_prepared": 0,
+    "new_ready_saved": 0,
     "ready_entries": [
       {
         "scheduled_at": "2026-11-12T08:00:00+09:00",
@@ -4789,18 +4785,13 @@
         "editorial_policy_id": null
       }
     ],
-    "readback_entry_fingerprints": {
-      "cleaneye-81067": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
-      "a306877": "dd7d16159eb340768de3317329ea3cf3dc5bd1bbb34bcf3892566cd67d7c4e94",
-      "a306746": "ad3cbb21543870147b0a40c4e0691383da3c7b443dadd5871fe471130b870995"
-    },
-    "final_main_reply_regenerated": true,
-    "next_ready_entry_sha256": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
-    "audit_path": "threads/audits/writer-v2-20261111T2321.json"
+    "public_output_regeneration": "matched_single_main_empty_reply",
+    "card_bindings": "verified_existing08_and20_exact_assets",
+    "audit_path": "threads/audits/monitor-v2-20261112T0008.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-11T14:48:10Z",
-    "main_sha": "d238e76145141c363da8d6b0a67d53ef1f36c75e",
+    "checked_at": "2026-11-11T15:11:45Z",
+    "main_sha": "88753a90ce41053d86fab1ef7f95e91100d285b8",
     "history_blob_sha": "89bd325200f75111b2480748a56d5791900bcdf5",
     "claim_blob_sha": "9a76bbc5ae7f6a73e494f1fc5b7bc07e7e17fe75",
     "latest_publisher_run": {
@@ -4816,25 +4807,24 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17896425015438025",
     "publisher_in_progress": false,
-    "status": "no_new_publication_three_ready_and_UTC_candidate_CI_hold",
+    "status": "unchanged_three_ready_UTC_CI_hold_no_new_publication",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
         "snapshot_at": "2026-11-11T22:23:51+09:00",
         "source_checked_at": "2026-11-11T22:24:23+09:00",
         "total_records": 890,
-        "eligible_count": 28,
-        "review_required_count": 747,
-        "excluded_count": 115,
+        "eligible_count": 30,
+        "review_required_count": 746,
+        "excluded_count": 114,
         "returned_count": 0,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 29,
           "NOTICE_ALREADY_USED": 70,
           "SOURCE_NOTICE_UNCONFIRMED": 11,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-          "APPLICATION_END_PRECISION_CONFLICT": 1,
-          "NOTICE_ALREADY_QUEUED": 1,
-          "APPLICATION_START_TIME_UNKNOWN": 2
+          "NOTICE_ALREADY_QUEUED": 2,
+          "APPLICATION_END_PRECISION_CONFLICT": 1
         }
       },
       "cleaneye": {
@@ -4842,25 +4832,23 @@
         "snapshot_at": "2026-11-11T19:11:44+09:00",
         "source_checked_at": "2026-11-11T19:11:44+09:00",
         "total_records": 498,
-        "eligible_count": 271,
+        "eligible_count": 286,
         "review_required_count": 0,
-        "excluded_count": 227,
+        "excluded_count": 212,
         "returned_count": 24,
         "exclusion_reasons": {
           "CLEANEYE_NOT_VERIFIED_OPEN": 163,
+          "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 40,
           "CLEANEYE_NOT_RECRUITMENT": 7,
           "NOTICE_ALREADY_USED": 1,
-          "CLEANEYE_APPLICATION_NOT_OPEN": 55,
           "NOTICE_ALREADY_QUEUED": 1
         }
       }
     },
     "actions_pages_read": 7,
     "actions_runs_read": 681,
-    "audit_path": "threads/audits/writer-v2-20261111T2321.json",
-    "new_failure_fingerprints": [
-      "pr51:d95daa11e4f05e65f9dfba86d4023b44bc5837dd:43039199616:1:install-exact-card-deps:DNS:100"
-    ],
+    "audit_path": "threads/audits/monitor-v2-20261112T0008.json",
+    "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": []
   },
   "writer_hold_alternatives": {
@@ -7960,14 +7948,40 @@
     "2026-11-12:new-review:a306807": {
       "notice_id": "a306807",
       "status": "hold",
-      "reason": "official_application_not_open_at_this_review",
+      "reason": "application_start_clock_unknown_current_open_unconfirmed",
       "checked_at": "2026-11-11T21:45:08.393403+09:00",
       "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085726",
       "source_sha256": "68650d54995ab2192012c4f5c2d7f4d1aa24ccc619c8bc3c6caecec7fb735424",
       "application_start": "2026-11-12",
       "application_end": "2026-11-25T16:00:00+09:00",
-      "resume": "접수개시 후 공식현재접수상태와 원문·정정·전체자격을 확인하고재검수;당일시각미상은공식접수중근거없이추정하지않음.",
-      "audit_path": "threads/audits/writer-v2-20261111T2143.json"
+      "resume": "기관공고는11월12일개시일만명시. 실제접수중표시/시작시각확인후전체자격·근무지·원문·정정·중복·지연구간신선도를재검수.",
+      "audit_path": "threads/audits/monitor-v2-20261112T0008.json",
+      "latest_recheck": {
+        "checked_at": "2026-11-11T15:11:45Z",
+        "official_checks": {
+          "keis-notice-list": {
+            "url": "https://keis.or.kr/keis/ko/bbs/236/list.do",
+            "checked_at": "2026-11-12T00:09:46.540258+09:00",
+            "sha256": "e96cf6a4d9ad909bb15e14f8ad4248b290b4dcb296da7edf0ddb1255cfd1cf36",
+            "path": "keis-notice-list.html"
+          },
+          "keis-pdf": {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085726",
+            "checked_at": "2026-11-12T00:09:52.415584+09:00",
+            "sha256": "68650d54995ab2192012c4f5c2d7f4d1aa24ccc619c8bc3c6caecec7fb735424",
+            "path": "keis-pdf.pdf"
+          }
+        },
+        "ats_check": {
+          "url": "https://keis.recruiter.co.kr/app/jobnotice/list",
+          "checked_at": "2026-11-12T00:10:22.885492+09:00",
+          "sha256": "fc6948043f4df792d87ba7deed5257e60b4684721a0801ee32adfe39edc4790f",
+          "bytes": 6305,
+          "visible_excerpt": " 10개씩 보기 20개씩 보기 30개씩 보기 50개씩 보기 100개씩 보기 검색 "
+        },
+        "source_period_unchanged": true,
+        "assumed_midnight_open": false
+      }
     }
   },
   "writer_hold_resolutions": {
@@ -9765,7 +9779,7 @@
       "First v2 24h Nov12 20:45:18,72h Nov14 20:45:18; useactual capturetime.",
       "Keep approved target/condition/regular-interest styles and no assumed performance effects."
     ],
-    "audit_path": "threads/audits/writer-v2-20261111T2321.json",
+    "audit_path": "threads/audits/monitor-v2-20261112T0008.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
     "queue_commit": "a410012deb48f729d4d79906e0f1e4d9032bb109",
     "queue_readback_at": "2026-11-11T18:38:25.419515+09:00",
@@ -9785,20 +9799,21 @@
       "performance_improvement": "not_yet_observed"
     },
     "latest_independent_writer_check": {
-      "checked_at": "2026-11-11T14:48:10Z",
-      "full_queue": "passed_on_unchanged_current_main_code",
+      "checked_at": "2026-11-11T15:11:45Z",
+      "full_queue": "passed_current_main",
       "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
-      "new_ready_saved": 1,
+      "new_ready_saved": 0,
       "existing_ready_preserved": true,
       "next_ready_entry_sha256": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
       "next_media": "IMAGE",
-      "next_card": "existing08 exact reviewed asset preserved",
-      "additional20_card": "registered_and_remote_bytes_verified_for_conditional_IMAGE",
-      "slot16": "held_not_queued_PR51_CI_dependency_DNS",
-      "actual_text_publication": "verified_previous_observation",
+      "next_card": "exact original08 JPEG/360 PNG binding verified",
+      "additional20_card": "existing exact card binding verified",
+      "slot16": "hold_PR51_CI_dependency_DNS_unchanged",
+      "alternative16": "a306807_start_day_clock_unknown_current_open_not_verified",
+      "actual_text_publication": "verified_previous_observation_not_current_GET",
       "actual_image_publication": "pending_regular_image",
       "actual_metrics": "24h72h_not_due",
-      "audit_path": "threads/audits/writer-v2-20261111T2321.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T0008.json"
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -9941,12 +9956,12 @@
     ]
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-11T14:48:10Z",
+    "checked_at": "2026-11-11T15:11:45Z",
     "state_blob_sha": "56c0c6e2de2a8f5540d37975330fa56618b44184",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-11T14:22:40.065658+00:00",
+      "as_of": "2026-11-11T15:09:01.835848+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -10109,7 +10124,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-11T14:22:40.065658+00:00",
+            "requested_end": "2026-11-11T15:09:01.835848+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-11T11:45:32.854727+00:00",
             "start_followers": 415,
@@ -10130,7 +10145,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-11T14:22:40.065658+00:00",
+        "requested_end": "2026-11-11T15:09:01.835848+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-11T11:45:32.854727+00:00",
         "start_followers": 415,
@@ -10164,7 +10179,7 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/writer-v2-20261111T2321.json",
+    "audit_path": "threads/audits/monitor-v2-20261112T0008.json",
     "artifact_unchanged_since_previous_verified_checkpoint": true
   }
 }
