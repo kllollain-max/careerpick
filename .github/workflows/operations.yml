@@ -90,7 +90,6 @@ jobs:
           with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('changed='+str(changed).lower()+'\n')
           PY
       - name: Build allowlisted public site
-        if: steps.candidate.outputs.changed == 'true'
         run: python scripts/build_public_site.py
       - name: Store validated data with fast-forward protection
         id: storage
@@ -105,17 +104,13 @@ jobs:
           git commit -m 'Update validated public recruitment snapshots'
           git push origin HEAD:main
       - uses: actions/configure-pages@v5
-        if: steps.candidate.outputs.changed == 'true'
       - uses: actions/upload-pages-artifact@v3
-        if: steps.candidate.outputs.changed == 'true'
         with:
           path: dist
       - name: Preserve newer main content before publication
-        if: steps.candidate.outputs.changed == 'true'
         run: python scripts/check_approved_head.py --approved-sha "$(git rev-parse HEAD)"
       - uses: actions/deploy-pages@v4
         id: deployment
-        if: steps.candidate.outputs.changed == 'true'
       - name: Verify public snapshot hashes
         id: public_check
         if: success()
