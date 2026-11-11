@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11T20:49:51.765465+09:00",
-  "last_observed_at": "2026-11-11T11:49:51.765465+00:00",
+  "updated_at": "2026-11-11T12:55:30Z",
+  "last_observed_at": "2026-11-11T12:55:30Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "652248fd32e90a48f2d0cbb475097bdce7834f14",
+    "blob_sha": "d280b8811a5c2a0501e1bac9243fc5ff083d369f",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -66,10 +66,17 @@
         "format_id": "hiring_core",
         "characters": 275,
         "contract_version": 2
+      },
+      {
+        "scheduled_at": "2026-11-12T12:00:00+09:00",
+        "notice_id": "a306877",
+        "format_id": "eligibility",
+        "characters": 271,
+        "contract_version": 2
       }
     ],
-    "last_update_commit_sha": "ae8e93689e4760fc8d9cecc1d7dd221a08cbba1a",
-    "readback_verified_at": "2026-11-11T20:31:23.307107+09:00"
+    "last_update_commit_sha": "47ddab995f0183e26a5be6d96f2676f554837aee",
+    "readback_verified_at": "2026-11-11T12:55:30Z"
   },
   "observed_runs": [
     {
@@ -4287,7 +4294,7 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-11T20:49:51.765465+09:00",
+    "checked_at": "2026-11-11T12:55:30Z",
     "main_sha": "d5b91863c30dd14bb49f7765b5f6e8d271dd282e",
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
@@ -4295,11 +4302,11 @@
     "intro_style_hash_verified": true,
     "contract_version": 2,
     "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
-    "input_reference_at": "2026-11-11T20:47:24.490262+09:00",
+    "input_reference_at": "2026-11-11T21:43:48.020407+09:00",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-11T20:47:24.490262+09:00",
+      "evaluated_at": "2026-11-11T21:43:48.020407+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -4376,10 +4383,12 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "queue_blob_sha": "652248fd32e90a48f2d0cbb475097bdce7834f14",
+    "queue_blob_sha": "d280b8811a5c2a0501e1bac9243fc5ff083d369f",
     "existing_ready_validated": true,
-    "new_drafts_prepared": 0,
-    "new_ready_saved": 0,
+    "existing_entries_preserved": 24,
+    "new_drafts_prepared": 1,
+    "new_ready_saved": 1,
+    "new_entry_sha256": "dd7d16159eb340768de3317329ea3cf3dc5bd1bbb34bcf3892566cd67d7c4e94",
     "ready_entries": [
       {
         "scheduled_at": "2026-11-12T08:00:00+09:00",
@@ -4391,14 +4400,24 @@
           "detail_reply": ""
         },
         "editorial_policy_id": null
+      },
+      {
+        "scheduled_at": "2026-11-12T12:00:00+09:00",
+        "notice_id": "a306877",
+        "format_id": "eligibility",
+        "chars": 271,
+        "public_preview": {
+          "main_text": "법정 안전관리자 선임 자격이 있다면,\n오송첨단의료산업진흥재단 정규직 1명 공고예요.\n\n산업안전관리 직무로 충북에서 일해요.\n산업안전지도사 또는 산업안전기사 이상으로 법정 선임이 가능해야 해요.\n자격은 11월 24일 기준 유효해야 해요.\n\n전담 안전관리자 선임경력 3년은 우대예요.\n공고일 만 60세 미만·병역·결격 기준도 확인해요.\n\n12월 말 임용 예정이며, 3개월 수습 평가 후 계속고용을 정해요.\n마감: 11월 24일 14:00, 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+          "detail_reply": ""
+        },
+        "editorial_policy_id": null
       }
     ],
     "next_ready_entry_sha256": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
-    "reason_no_new_queue_write": "Existing next08 ready v2 unchanged and current source/expiry unchanged; preserve it. Repeated unresolved candidates remain holds; no unverified new entry is inserted tofill volume.",
-    "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
+    "audit_path": "threads/audits/writer-v2-20261111T2143.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-11T20:49:51.765465+09:00",
+    "checked_at": "2026-11-11T12:55:30Z",
     "main_sha": "d5b91863c30dd14bb49f7765b5f6e8d271dd282e",
     "history_blob_sha": "89bd325200f75111b2480748a56d5791900bcdf5",
     "claim_blob_sha": "9a76bbc5ae7f6a73e494f1fc5b7bc07e7e17fe75",
@@ -4412,21 +4431,10 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43014448588",
       "workflow_path": ".github/workflows/threads_auto.yml"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "43014448588",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-11T11:45:38Z",
-        "head_sha": "408a734b2743df463e84c4d9b3f39e73b7c8d34f",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43014448588",
-        "workflow_path": ".github/workflows/threads_auto.yml"
-      }
-    ],
+    "new_publisher_runs": [],
     "last_confirmed_post_id": "17896425015438025",
     "publisher_in_progress": false,
-    "status": "first_v2_regular_TEXT_verified_IMAGE_pending",
+    "status": "no_new_publication_or_failure_next_regular_IMAGE_pending",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -4466,7 +4474,7 @@
     },
     "actions_pages_read": 7,
     "actions_runs_read": 675,
-    "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json",
+    "audit_path": "threads/audits/writer-v2-20261111T2143.json",
     "new_failure_fingerprints": []
   },
   "writer_hold_alternatives": {
@@ -7562,6 +7570,18 @@
       "employment": "공무직",
       "scope": "공식채용페이지 본문·근무지·실제마감11월19일10시·공무직/50~65세/체력인증 확인. 수집기관이실제고용주와달라 기존IMAGE_ORGANIZATION_CONFLICT 보류 유지. 정규직136명으로 소개하지 않음.",
       "source_url": "https://smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155"
+    },
+    "2026-11-12:new-review:a306807": {
+      "notice_id": "a306807",
+      "status": "hold",
+      "reason": "official_application_not_open_at_this_review",
+      "checked_at": "2026-11-11T21:45:08.393403+09:00",
+      "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085726",
+      "source_sha256": "68650d54995ab2192012c4f5c2d7f4d1aa24ccc619c8bc3c6caecec7fb735424",
+      "application_start": "2026-11-12",
+      "application_end": "2026-11-25T16:00:00+09:00",
+      "resume": "접수개시 후 공식현재접수상태와 원문·정정·전체자격을 확인하고재검수;당일시각미상은공식접수중근거없이추정하지않음.",
+      "audit_path": "threads/audits/writer-v2-20261111T2143.json"
     }
   },
   "writer_hold_resolutions": {
@@ -7864,18 +7884,95 @@
       }
     ],
     "last_evaluation": {
-      "evaluated_at": "2026-11-09T19:47:39.101111+09:00",
-      "slot": "2026-11-10T16:00:00+09:00",
-      "notice_id": "a306716",
-      "unit": "운영지원직 미화",
-      "verified_unit_count": 5,
+      "checked_at": "2026-11-11T12:55:30Z",
+      "slot": "2026-11-12T12:00:00+09:00",
+      "notice_id": "a306877",
       "employment": "정규직",
-      "actual_deadline": "2026-11-18T12:00:00+09:00",
-      "reason": "Revalidated previous five-person regular-unit hold after actual source freshness recovery; ranks above verified two-person alternative. Unresolved sixteen/eight-person candidates remain held.",
-      "queue_blob_sha": "a95d65deab6e689183d05e71ae2e356931bc5ebd",
-      "queue_commit": "436a55dc20d1082f2de4bfe7b2be2378d9714d0c",
-      "entry_sha256": "7046515dd5eb605a4ebb44208a13d91c1048991ad967fd0fc6511f56ca2806d5",
-      "full_delay_window_passed": true
+      "unit_count": 1,
+      "classification": "neutral",
+      "basis": "직무산업안전관리;고정분야선호·임의인기점수없이검증된접수·단위인원·지원조건·직무다양성으로검토",
+      "reason": "전체저장소스1384건검토입력및기존보류근거를확인. 공고전체1명과산업안전관리1명이일치하는정규직이며공식실제접수중·마감·근무지역·필수대체경로·우대·수습이검증됨. 한국고용정보원기록물1명은11월12일접수개시전으로보류. 더큰50/10/8명기존미해결충돌은유지하고작은인원이기때문에그근거를무시하지않음. 신규안전관리직무로직전간호/사회복지직무와다양성확보. 실제인기/지역관심도수치는없어추정하지않음.",
+      "selection_audit": {
+        "schema_version": 1,
+        "policy_id": "careerpick-threads-selection-v5-20261111",
+        "evaluated_at": "2026-11-11T21:43:48.020407+09:00",
+        "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
+        "connected_sources": [
+          "alio",
+          "cleaneye"
+        ],
+        "official_details_fully_reviewed": false,
+        "sources": {
+          "alio": {
+            "status": "verified_snapshot",
+            "snapshot_at": "2026-11-11T19:10:42+09:00",
+            "source_checked_at": "2026-11-11T19:11:08+09:00",
+            "total_records": 886,
+            "eligible_count": 28,
+            "review_required_count": 744,
+            "excluded_count": 114,
+            "returned_count": 0,
+            "exclusion_reasons": {
+              "APPLICATION_CLOSED": 29,
+              "NOTICE_ALREADY_USED": 70,
+              "SOURCE_NOTICE_UNCONFIRMED": 11,
+              "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
+              "APPLICATION_END_PRECISION_CONFLICT": 1,
+              "APPLICATION_START_TIME_UNKNOWN": 2
+            }
+          },
+          "cleaneye": {
+            "status": "verified",
+            "snapshot_at": "2026-11-11T19:11:44+09:00",
+            "source_checked_at": "2026-11-11T19:11:44+09:00",
+            "total_records": 498,
+            "eligible_count": 271,
+            "review_required_count": 0,
+            "excluded_count": 227,
+            "returned_count": 24,
+            "exclusion_reasons": {
+              "CLEANEYE_NOT_VERIFIED_OPEN": 163,
+              "CLEANEYE_NOT_RECRUITMENT": 7,
+              "NOTICE_ALREADY_USED": 1,
+              "CLEANEYE_APPLICATION_NOT_OPEN": 55,
+              "NOTICE_ALREADY_QUEUED": 1
+            }
+          }
+        },
+        "total_scanned": 1384,
+        "eligible_before_limit": 299,
+        "writer_limit": 24,
+        "returned_count": 24,
+        "unconfirmed_unit_counts": 299,
+        "interest_ranking": "unavailable_not_used",
+        "audience_breadth_ranking": "unavailable_not_used",
+        "sector_policy": {
+          "basis": "user_editorial_preference_not_popularity_data",
+          "priority_order": null,
+          "scope": "descriptive_only_no_assumed_reader_interest",
+          "unconfirmed_counts": "provisional_review_order_only",
+          "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
+        },
+        "sector_counts_before_limit": {
+          "deprioritized": 73,
+          "neutral": 205,
+          "preferred": 21
+        },
+        "ranking_order": [
+          "current_application_open",
+          "verified_reader_relevance_if_available",
+          "exact_employment_type",
+          "verified_unit_count_desc",
+          "verified_advantage_if_available",
+          "preparation_time",
+          "recent_notice_diversity",
+          "actual_deadline",
+          "notice_id_tiebreak"
+        ],
+        "review_errors": [],
+        "preparation_time_heuristic_hours": 48
+      },
+      "audit_path": "threads/audits/writer-v2-20261111T2143.json"
     },
     "candidate_scope_audit": {
       "schema_version": 1,
@@ -9535,7 +9632,7 @@
       "First v2 24h Nov12 20:45:18,72h Nov14 20:45:18; useactual capturetime.",
       "Keep approved target/condition/regular-interest styles and no assumed performance effects."
     ],
-    "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json",
+    "audit_path": "threads/audits/writer-v2-20261111T2143.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
     "queue_commit": "a410012deb48f729d4d79906e0f1e4d9032bb109",
     "queue_readback_at": "2026-11-11T18:38:25.419515+09:00",
@@ -9550,23 +9647,23 @@
       "draft": "validated_and_saved",
       "code": "merged_active",
       "operation": "main_policy_workflow_queue_and_existing_task_prompt_readback_matched",
-      "actual_text_publication": "pending_next_regular_slot",
+      "actual_text_publication": "verified",
       "actual_image_publication": "pending_next_regular_image_slot",
       "performance_improvement": "not_yet_observed"
     },
     "latest_independent_writer_check": {
-      "checked_at": "2026-11-11T20:49:51.765465+09:00",
+      "checked_at": "2026-11-11T12:55:30Z",
       "full_queue": "passed",
-      "queue_blob_sha": "652248fd32e90a48f2d0cbb475097bdce7834f14",
-      "new_ready_saved": 0,
+      "queue_blob_sha": "d280b8811a5c2a0501e1bac9243fc5ff083d369f",
+      "new_ready_saved": 1,
       "existing_ready_preserved": true,
       "next_ready_entry_sha256": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
       "next_media": "IMAGE",
-      "next_card": "exact reviewed assets verified",
+      "next_card": "previous exact reviewed assets preserved",
       "actual_text_publication": "verified",
       "actual_image_publication": "pending_regular_image",
       "actual_metrics": "24h72h_not_due",
-      "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
+      "audit_path": "threads/audits/writer-v2-20261111T2143.json"
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -9594,7 +9691,15 @@
       "selected_style": "regular_interest",
       "next_style": "eligibility_info",
       "draft_count_written": 1,
-      "operational_publication_verified": false
+      "operational_publication_verified": false,
+      "new_drafts_this_check": {
+        "checked_at": "2026-11-11T12:55:30Z",
+        "slot": "2026-11-12T12:00:00+09:00",
+        "style": "eligibility_info",
+        "ready_saved": 1,
+        "sha256": "dd7d16159eb340768de3317329ea3cf3dc5bd1bbb34bcf3892566cd67d7c4e94",
+        "actual_post_id": null
+      }
     },
     "text_verification": {
       "run_id": "43014448588",
@@ -9673,15 +9778,31 @@
       "post_id": "17896425015438025",
       "post_url": "https://www.threads.com/@hid_119/post/DfmZ2O_kYTC",
       "evidence": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
-    }
+    },
+    "future_ready_slots": [
+      {
+        "scheduled_at": "2026-11-12T08:00:00+09:00",
+        "notice_id": "cleaneye-81067",
+        "format_id": "hiring_core",
+        "characters": 275,
+        "contract_version": 2
+      },
+      {
+        "scheduled_at": "2026-11-12T12:00:00+09:00",
+        "notice_id": "a306877",
+        "format_id": "eligibility",
+        "characters": 271,
+        "contract_version": 2
+      }
+    ]
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-11T20:49:51.765465+09:00",
+    "checked_at": "2026-11-11T12:55:30Z",
     "state_blob_sha": "56c0c6e2de2a8f5540d37975330fa56618b44184",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-11T11:47:25.402343+00:00",
+      "as_of": "2026-11-11T12:53:28.213990+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -9844,7 +9965,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-11T11:47:25.402343+00:00",
+            "requested_end": "2026-11-11T12:53:28.213990+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-11T11:45:32.854727+00:00",
             "start_followers": 415,
@@ -9865,7 +9986,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-11T11:47:25.402343+00:00",
+        "requested_end": "2026-11-11T12:53:28.213990+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-11T11:45:32.854727+00:00",
         "start_followers": 415,
@@ -9899,6 +10020,7 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
+    "audit_path": "threads/audits/writer-v2-20261111T2143.json",
+    "artifact_unchanged_since_previous_verified_checkpoint": true
   }
 }
