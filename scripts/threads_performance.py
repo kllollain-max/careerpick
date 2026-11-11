@@ -27,6 +27,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.threads_metrics_preview import METRICS, collect_post_insights
 
 POLICY_ID = "careerpick-threads-reach-v1-20261109"
+V5_POLICY_ID = "careerpick-threads-v5-20261111"
+ACCOUNT = "hid_119"
 KST = ZoneInfo("Asia/Seoul")
 WINDOWS = {"24h": timedelta(hours=24), "7d": timedelta(days=7)}
 V5_WINDOWS = {"24h": timedelta(hours=24), "72h": timedelta(hours=72)}
@@ -35,6 +37,7 @@ V5_WINDOWS = {"24h": timedelta(hours=24), "72h": timedelta(hours=72)}
 # milestone measurements. Report elapsed seconds for every observation.
 COMPARABLE_DELAY = timedelta(hours=1)
 TERMINAL = {"captured", "not_provided", "permission_denied", "unsupported_or_rejected"}
+OBSERVATION_STATUSES = TERMINAL | {"collection_failed", "access_unavailable", "account_unverified", "aggregation_delayed"}
 
 
 def moment(value):
@@ -130,6 +133,8 @@ def publication_metadata(record, public_verification=None):
     """Keep confounders and their unknowns; do not infer popularity or breadth."""
     review = _review(record)
     editorial = review.get("reach_editorial", {})
+    if isinstance(review.get("v5"), dict) and review["v5"].get("contract_version") == 2:
+        editorial = review["v5"]
     context = editorial.get("comparison_context", {}) if isinstance(editorial, dict) else {}
     if not isinstance(context, dict):
         context = {}
@@ -242,14 +247,21 @@ def measurement_plan(history, state, now, *, include_history=False):
             "main_posts": len(records), "excluded": exclusions, "items": items}
 
 
+def likes_rate_percent(metrics):
+    """Likes divided by views; unavailable values and a zero denominator stay null."""
+    views, likes = metrics.get("views"), metrics.get("likes")
+    if type(views) is int and views > 0 and type(likes) is int and likes >= 0:
+        return likes / views * 100
+    return None
+
+
 def observation(item, *, captured_at, metrics=None, status="captured", error_code=None):
     captured = moment(captured_at)
     published = moment(item["metadata"]["published_at"])
     due = moment(item["due_at"])
     if captured < due:
         raise ValueError("Observation precedes its milestone")
-    if status not in {"captured", "not_provided", "permission_denied", "unsupported_or_rejected",
-                      "collection_failed", "access_unavailable", "account_unverified"}:
+    if status not in OBSERVATION_STATUSES:
         raise ValueError("Unknown observation status")
     values = {key: None for key in METRICS}
     if status == "captured":
@@ -268,6 +280,7 @@ def observation(item, *, captured_at, metrics=None, status="captured", error_cod
         "timing": "within_one_hour" if captured <= due + COMPARABLE_DELAY else "late_cumulative",
         "comparable_milestone": status == "captured" and captured <= due + COMPARABLE_DELAY,
         "status": status, "error_code": error_code, "metrics": values,
+        "likes_rate_percent": likes_rate_percent(values),
         "metric_status": {key: "observed" if value is not None else
                           "not_provided" if status in {"captured", "not_provided"} else status
                           for key, value in values.items()},
@@ -302,8 +315,279 @@ def merge_observations(state, additions):
     return result
 
 
+def account_observation(*, captured_at, followers_count=None, status="captured", source=None, account=ACCOUNT):
+    """Record an actual existing-source account snapshot, never a post attribution.
+
+    This helper does not add an API request, permission or schedule. The caller
+    supplies an observed total and its evidence source from authorized insights.
+    Unknown/denied/delayed counts remain null instead of zero.
+    """
+    if account != ACCOUNT or status not in OBSERVATION_STATUSES:
+        raise ValueError("Unexpected account observation scope or status")
+    captured = moment(captured_at).isoformat()
+    if status == "captured":
+        if type(followers_count) is not int or followers_count < 0 or not isinstance(source, str) or not source.strip():
+            raise ValueError("Observed follower total and evidence source required")
+    else:
+        if followers_count is not None:
+            raise ValueError("Unavailable follower counts must remain null")
+    key = "account|" + account + "|" + captured
+    return {"observation_id": hashlib.sha256(key.encode()).hexdigest(), "account": account,
+            "captured_at": captured, "followers_count": followers_count, "status": status,
+            "source": source, "scope": "account_total", "post_attribution": None}
+
+
+def validate_account_observation(item):
+    if not isinstance(item, dict):
+        raise ValueError("Account observation must be an object")
+    expected = account_observation(captured_at=item.get("captured_at"),
+        followers_count=item.get("followers_count"), status=item.get("status"),
+        source=item.get("source"), account=item.get("account"))
+    if item != expected:
+        raise ValueError("Account observation identity or scope mismatch")
+    return item
+
+
+def merge_account_observations(state, additions):
+    result = deepcopy(state)
+    if not additions:
+        return result
+    existing = result.setdefault("account_observations", [])
+    by_id = {item["observation_id"]: validate_account_observation(item) for item in existing}
+    for item in additions:
+        validate_account_observation(item)
+        key = item["observation_id"]
+        if key in by_id:
+            if by_id[key] != item:
+                raise ValueError("Account observation identity collision; reread state")
+            continue
+        existing.append(deepcopy(item))
+        by_id[key] = item
+    return result
+
+
+def read_account_followers(token, *, opener=None):
+    """GET the documented own-account follower total using the existing token.
+
+    Primary reference: fbsamples/threads_api @854fc140a37e20f6a7086cf3ee0065f99d41f646,
+    postman/threads-api.postman_collection.json, Get Account Insights.
+    No time range is supplied and no new permission is requested.
+    """
+    if not isinstance(token, str) or not token:
+        raise ValueError("Existing account token required")
+    request = urllib.request.Request(
+        "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count", method="GET",
+        headers={"Authorization": "Bearer " + token, "Accept": "application/json"})
+    from scripts.threads_http import read_response
+    with read_response(request, timeout=15, opener=opener) as response:
+        payload = json.load(response)
+    if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
+        raise ValueError("Account insight response must contain data")
+    metrics = [item for item in payload["data"] if isinstance(item, dict) and item.get("name") == "followers_count"]
+    if len(metrics) > 1:
+        raise ValueError("Ambiguous account follower total")
+    value = metrics[0].get("total_value", {}).get("value") if metrics else None
+    return value if type(value) is int and value >= 0 else None
+
+
+def account_followers_summary(state, *, start=None, end):
+    """Expose the actual observed interval separately from a requested 14-day period."""
+    end = moment(end)
+    start = moment(start) if start is not None else None
+    rows, statuses = [], Counter()
+    for item in state.get("account_observations", []):
+        try:
+            validate_account_observation(item)
+            captured = moment(item["captured_at"])
+        except (ValueError, TypeError, KeyError):
+            statuses["invalid_observation"] += 1
+            continue
+        if captured > end or (start is not None and captured < start):
+            continue
+        statuses[item["status"]] += 1
+        if item["status"] == "captured":
+            rows.append(item)
+    rows.sort(key=lambda item: moment(item["captured_at"]))
+    first, last = (rows[0], rows[-1]) if rows else (None, None)
+    has_interval = len(rows) >= 2 and first["captured_at"] != last["captured_at"]
+    exact_boundaries = bool(has_interval and start is not None
+                            and moment(first["captured_at"]) == start
+                            and moment(last["captured_at"]) == end)
+    return {"account": ACCOUNT, "scope": "account_total",
+            "requested_start": start.isoformat() if start else None, "requested_end": end.isoformat(),
+            "observed_start": first["captured_at"] if first else None,
+            "observed_end": last["captured_at"] if last else None,
+            "start_followers": first["followers_count"] if first else None,
+            "end_followers": last["followers_count"] if last else None,
+            "net_change": last["followers_count"] - first["followers_count"] if has_interval else None,
+            "status": "observed_interval" if has_interval else "baseline_only" if first else "unavailable",
+            "exact_requested_boundaries": exact_boundaries, "observation_statuses": dict(statuses),
+            "post_attribution": None,
+            "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."}
+
+
+def v5_performance_summary(history, state, now):
+    """Verified post-age cohorts, full distributions and fixed 14-day periods.
+
+    No automatic winner is selected: different notices are observational data.
+    A target of eight comparable posts per arm is a review threshold only.
+    """
+    now = moment(now)
+    records = {str(r.get("threads_post_id")): r for r in history.get("records", [])
+               if isinstance(r, dict) and r.get("status") == "published"
+               and _review(r).get("v5", {}).get("policy_id") == V5_POLICY_ID}
+    windows = {label: [] for label in V5_WINDOWS}
+    excluded, seen, verified_publications = Counter(), set(), {}
+    anchor_sources = {}
+    # The 14-day observation period begins when the new format actually becomes
+    # public, even if insights access is missing or the first metric is delayed.
+    for post_id, record in records.items():
+        proof = record.get("public_output_verification")
+        if (_review(record).get("v5", {}).get("contract_version") != 2
+                or record.get("request_status") != "confirmed" or not isinstance(proof, dict)):
+            continue
+        try:
+            published, checked = moment(record["published_at"]), moment(proof["checked_at"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if (proof.get("status") in {"verified", "main_verified"}
+                and str(proof.get("post_id", "")) == post_id
+                and proof.get("actual_text_sha256") == _text_sha256(str(record.get("text", "")))
+                and published <= checked <= now):
+            verified_publications[post_id] = published
+            anchor_sources[post_id] = "public_output_verification"
+    late, invalid_times, observations = [], 0, []
+    for item in state.get("observations", []):
+        try:
+            observations.append((moment(item["captured_at"]), item))
+        except (KeyError, TypeError, ValueError):
+            invalid_times += 1
+    for captured, item in sorted(observations, key=lambda pair: pair[0]):
+        post_id, label = str(item.get("post_id", "")), item.get("window")
+        record = records.get(post_id)
+        if record is None or label not in windows:
+            continue
+        try:
+            published = moment(record["published_at"])
+            proof = item.get("public_verification") or item.get("metadata", {}).get("public_verification") or {}
+            checked = moment(proof["checked_at"])
+        except (KeyError, TypeError, ValueError):
+            excluded["invalid_time_or_public_evidence"] += 1
+            continue
+        expected = _text_sha256(str(record.get("text", "")))
+        if (record.get("request_status") != "confirmed" or proof.get("status") != "verified"
+                or proof.get("post_id") != post_id or proof.get("is_reply") is not False
+                or proof.get("actual_text_sha256") != expected or proof.get("expected_text_sha256") != expected
+                or not published <= checked <= captured <= now):
+            excluded["public_main_unverified_or_future"] += 1
+            continue
+        # This anchor is stable even when older posts leave the reporting window.
+        if _review(record).get("v5", {}).get("contract_version") == 2:
+            verified_publications[post_id] = published
+            anchor_sources.setdefault(post_id, "measurement_public_main_evidence")
+        elapsed = (captured - published).total_seconds()
+        due_age = V5_WINDOWS[label].total_seconds()
+        values = {key: value if type(value) is int and value >= 0 else None
+                  for key in METRICS for value in [item.get("metrics", {}).get(key)]}
+        m = publication_metadata(record, proof)
+        vm = _review(record).get("v5", {})
+        row = {"post_id": post_id, "notice_id": record.get("job_id"), "published_at": published.isoformat(),
+               "captured_at": captured.isoformat(), "elapsed_seconds": elapsed, "window": label,
+               "metrics": values, "metric_status": deepcopy(item.get("metric_status", {})),
+               "likes_rate_percent": likes_rate_percent(values), "status": item.get("status"),
+               "reader_replies": item.get("reader_replies") if item.get("reader_replies_status") == "author_separated_verified" else None,
+               "reader_replies_status": item.get("reader_replies_status", "author_separation_unverified"),
+               "first_sentence_type": vm.get("first_sentence_type"),
+               "experiment_eligible": vm.get("experiment_eligible") is not False,
+               "first_sentence": str(record.get("text", "")).split("\n", 1)[0],
+               "format_id": record.get("format_id"), "contract_version": vm.get("contract_version"),
+               "sector_group": vm.get("sector_group"), "body_chars": len(record.get("text", "")),
+               "media": m["media"], "slot": record.get("scheduled_at"), "slot_hour_kst": m["slot_hour_kst"],
+               "job": m["job"], "location": m["location"], "employment": m["employment"],
+               "recruitment_unit_count": m["recruitment_unit_count"], "deadline_distance_seconds": m["deadline_distance_seconds"]}
+        if not due_age <= elapsed <= due_age + COMPARABLE_DELAY.total_seconds() or item.get("status") != "captured":
+            excluded["late_or_unavailable"] += 1
+            if elapsed > due_age + COMPARABLE_DELAY.total_seconds():
+                late.append(row)
+            continue
+        if (post_id, label) in seen:
+            continue
+        seen.add((post_id, label))
+        windows[label].append(row)
+    if invalid_times:
+        excluded["invalid_observation_time"] += invalid_times
+    def stats(items):
+        distributions = {key: sorted(row["metrics"][key] for row in items if row["metrics"][key] is not None) for key in METRICS}
+        rates = [row["likes_rate_percent"] for row in items if row["likes_rate_percent"] is not None]
+        view_rows = [{"post_id": row["post_id"], "views": row["metrics"]["views"]}
+                     for row in items if row["metrics"]["views"] is not None]
+        view_rows.sort(key=lambda row: (row["views"], row["post_id"]))
+        return {"verified_main_count": len(items),
+                "metric_medians": {key: median(values) if values else None for key, values in distributions.items()},
+                "metric_observed_counts": {key: len(values) for key, values in distributions.items()},
+                "metric_totals": {key: sum(values) if values else None for key, values in distributions.items()},
+                "views_distribution": view_rows, "likes_rate_percent_median": median(rates) if rates else None,
+                "likes_rate_percent_observed_posts": len(rates),
+                "reader_replies": None, "reader_replies_status": "see_per_post_author_separation_status",
+                "profile_visits": None, "follow_increase": None, "link_clicks": None}
+    start = min(verified_publications.values(), default=None)
+    periods = []
+    if start:
+        period_count = (now - start).days // 14 + 1
+        for index in range(period_count):
+            begin, end = start + timedelta(days=14 * index), start + timedelta(days=14 * (index + 1))
+            rows = {label: [row for row in values if begin <= moment(row["published_at"]) < end]
+                    for label, values in windows.items()}
+            arms = defaultdict(list)
+            for row in rows["24h"]:
+                if (row["first_sentence_type"] in {"target", "condition"}
+                        and row["experiment_eligible"] and row["metrics"]["views"] is not None):
+                    arms[row["first_sentence_type"]].append(row)
+            # Same wording under conflicting labels cannot establish an experiment.
+            label_by_sentence = defaultdict(set)
+            for name, items in arms.items():
+                for row in items:
+                    label_by_sentence[row["first_sentence"]].add(name)
+            conflicting = {sentence for sentence, labels in label_by_sentence.items() if len(labels) > 1}
+            arms = {name: [row for row in items if row["first_sentence"] not in conflicting] for name, items in arms.items()}
+            strata = {name: Counter((row["slot_hour_kst"], row["media"]) for row in items) for name, items in arms.items()}
+            all_strata = set().union(*(set(items) for items in strata.values())) if strata else set()
+            missing = [{"slot_hour_kst": key[0], "media": key[1],
+                        "missing_types": [name for name, counts in strata.items() if not counts[key]]}
+                       for key in sorted(all_strata, key=str) if any(not counts[key] for counts in strata.values())]
+            enough = len(arms) == 2 and all(len(items) >= 8 for items in arms.values())
+            factors_present = all(key[0] in {8, 12, 16, 20} and key[1] in {"IMAGE", "TEXT"} for key in all_strata)
+            mature = now >= end + V5_WINDOWS["72h"] + COMPARABLE_DELAY
+            periods.append({"period": index + 1, "start": begin.isoformat(), "end": end.isoformat(),
+                "status": "complete_observation_period" if now >= end else "initial_observation" if index == 0 else "observing",
+                "all_72h_observations_can_be_due": mature,
+                "windows": {label: stats(items) for label, items in rows.items()},
+                "intro_groups_24h": {name: stats(items) for name, items in arms.items()},
+                "intro_slot_media_counts": {name: [{"slot_hour_kst": key[0], "media": key[1], "count": count}
+                    for key, count in sorted(counts.items(), key=lambda pair: str(pair[0]))] for name, counts in strata.items()},
+                "missing_intro_strata": missing, "conflicting_identical_intros": len(conflicting),
+                "eight_per_type_review_threshold_met": enough, "statistical_significance_claim": False,
+                "account_followers": account_followers_summary(state, start=begin, end=min(end, now)),
+                "decision": "review_observational_results" if enough and not missing and factors_present and now >= end
+                            else "extend_observation_or_balance_intro_types"})
+    return {"policy_id": V5_POLICY_ID, "as_of": now.isoformat(), "experiment_start": start.isoformat() if start else None,
+            "experiment_start_evidence": [{"post_id": post_id, "source": anchor_sources[post_id]}
+                for post_id, published in verified_publications.items() if published == start],
+            "windows": {label: stats(rows) for label, rows in windows.items()}, "observations": windows,
+            "late_cumulative_observations": late, "excluded": dict(excluded), "periods": periods,
+            "account_followers": account_followers_summary(state, start=start, end=now),
+            "likes_rate_definition": "likes / views * 100; views are not unique readers",
+            "automatic_weight_changes": 0, "statistical_significance_claim": False,
+            "decision": periods[-1]["decision"] if periods else "await_first_verified_publication",
+            "limitations": ["Different notices remain an observational comparison, not randomized causal evidence.",
+                            "Author-separated reader replies and post-attributed follows/profile clicks remain unavailable unless explicitly verified.",
+                            "Small counts can produce unstable percentages; read absolute likes and views together.",
+                            "Actual account observation boundaries and late cumulative counts are not backfilled to target times."]}
+
+
 def collect_due(history, state, now=None, *, token=None, include_history=False,
-                limit=8, account_guard=None, collector=None, public_reader=None, clock=None):
+                limit=8, account_guard=None, collector=None, public_reader=None, clock=None,
+                collect_account=False, account_collector=None):
     """Only GETs, with injectable seams for tests; failures become observations."""
     if type(limit) is not int or not 1 <= limit <= 16:
         raise ValueError("Collection limit must be 1 to 16 main posts")
@@ -315,7 +599,19 @@ def collect_due(history, state, now=None, *, token=None, include_history=False,
     # Multiple due windows for an old main share one actual API snapshot.
     post_ids = list(dict.fromkeys(item["post_id"] for item in due))[:limit]
     selected = [item for item in due if item["post_id"] in post_ids]
-    if not selected:
+    account_times = []
+    for saved in state.get("account_observations", []):
+        try:
+            validate_account_observation(saved)
+            account_times.append((moment(saved["captured_at"]), saved["status"]))
+        except (TypeError, ValueError, KeyError):
+            continue
+    previous_account = max(account_times, default=None)
+    # The existing maintenance run owns cadence; this adds no task/schedule.
+    # Repeated denied/unsupported reads are deferred for one day.
+    account_gap = timedelta(days=1) if previous_account and previous_account[1] in {"permission_denied", "unsupported_or_rejected"} else timedelta(hours=1)
+    account_due = collect_account and (previous_account is None or now - previous_account[0] >= account_gap)
+    if not selected and not account_due:
         return merge_observations(state, []), {"status": "no_due_observations", "api_calls": 0}
     access_status = None
     token = token or os.getenv("THREADS_ACCESS_TOKEN")
@@ -354,6 +650,8 @@ def collect_due(history, state, now=None, *, token=None, include_history=False,
             try:
                 payload = collector(post_id, token)
                 metrics = payload.get("metrics")
+                if payload.get("status") in OBSERVATION_STATUSES - {"captured"}:
+                    status = payload["status"]
             except urllib.error.HTTPError as error:
                 error_code = error.code
                 status = ("permission_denied" if error.code in {401, 403} else
@@ -367,9 +665,29 @@ def collect_due(history, state, now=None, *, token=None, include_history=False,
                 checked_item["metadata"] = publication_metadata(by_id[post_id], verification)
                 additions.append(observation(checked_item, captured_at=captured, metrics=metrics,
                                              status=status, error_code=error_code))
-    return merge_observations(state, additions), {
-        "status": "measured" if any(o["status"] == "captured" for o in additions) else "unmeasured",
-        "api_calls": calls + public_calls, "insight_api_calls": calls,
+    account_additions, account_calls = [], 0
+    if account_due:
+        account_status, followers = access_status or "captured", None
+        if not access_status:
+            account_calls = 1
+            try:
+                followers = (account_collector or read_account_followers)(token)
+                if type(followers) is not int or followers < 0:
+                    account_status, followers = "not_provided", None
+            except urllib.error.HTTPError as error:
+                account_status = ("permission_denied" if error.code in {401, 403} else
+                                  "unsupported_or_rejected" if error.code == 400 else "collection_failed")
+            except Exception:
+                account_status = "collection_failed"
+        account_additions.append(account_observation(captured_at=clock(), followers_count=followers,
+            status=account_status,
+            source="https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count"))
+    merged = merge_account_observations(merge_observations(state, additions), account_additions)
+    return merged, {
+        "status": "measured" if any(o["status"] == "captured" for o in additions + account_additions) else "unmeasured",
+        "api_calls": calls + public_calls + account_calls, "insight_api_calls": calls,
+        "account_insight_api_calls": account_calls,
+        "account_observation_status": account_additions[0]["status"] if account_additions else "not_due",
         "public_verification_calls": public_calls, "main_posts_attempted": len(post_ids),
         "new_observations": len(additions), "statuses": dict(Counter(o["status"] for o in additions)),
         "next_condition": "Existing scheduled maintenance; restore authorized insight access if unavailable",
@@ -378,7 +696,6 @@ def collect_due(history, state, now=None, *, token=None, include_history=False,
 
 def summarize(history, state, now):
     """Descriptive counts and medians; never choose a winning hook automatically."""
-    from scripts.threads_v5 import performance_summary
     now = moment(now)
     records, exclusions = recent_publications(history, now, include_history=True)
     all_records = {str(r.get("threads_post_id")): r for r in history.get("records", [])
@@ -488,7 +805,7 @@ def summarize(history, state, now):
                             "status": "due" if due and now >= due else "pending" if due else "not_started"})
     plan = measurement_plan(history, state, now, include_history=True)
     return {
-        "v5_performance": performance_summary(history, state, now),
+        "v5_performance": v5_performance_summary(history, state, now),
         "v5_observation_windows": ["24h", "72h"],
         "v5_comparison_status": "separate_cohort_not_legacy_AB; human_review_until_sufficient_verified_samples",
         "schema_version": 1, "policy_id": POLICY_ID, "as_of": now.isoformat(),
@@ -527,8 +844,9 @@ def main():
     state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {"schema_version": 1, "observations": []}
     now = datetime.now(timezone.utc)
     if args.mode == "collect":
-        state, result = collect_due(history, state, now, include_history=args.include_history, limit=args.limit)
-        output = {"state": state, "collection_result": result, "summary": summarize(history, state, now)}
+        state, result = collect_due(history, state, now, include_history=args.include_history, limit=args.limit, collect_account=True)
+        output = {"state": state, "collection_result": result,
+                  "summary": summarize(history, state, datetime.now(timezone.utc))}
     elif args.mode == "summarize":
         output = summarize(history, state, now)
     else:

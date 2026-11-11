@@ -22,7 +22,7 @@ class V5Tests(unittest.TestCase):
             with self.subTest(body=body[:20]),self.assertRaises(QueueValidationError):
                 copy_check(body,{'v5':{}},s['image_job'])
         with self.assertRaises(QueueValidationError):
-            copy_check(s['text'],{'v5':{}},s['image_job'],[{'text':s['text']}])
+            copy_check(s['text'],{'v5':{}},s['image_job'],[{'text':s['text'],'status':'published','threads_post_id':'123'}])
     def test_staged_activation_and_preservation(self):
         from scripts.threads_writer_queue import fingerprint
         entry={'publication_policy_id':ID,'publication_policy_sha256':'hash','prepared_at':'2026-11-11T10:00:00+09:00','writer':{'review':{'reference_at':'2026-11-11T10:00:00+09:00'}}}
@@ -50,16 +50,18 @@ class V5Tests(unittest.TestCase):
         from scripts.threads_writer_queue import validate_entry
         base=WriterQueueTests();base.setUp()
         e=copy.deepcopy(base.entry);policy=copy.deepcopy(base.policy)
+        policy['cta']=CTA
         policy['editorial_v5']={'enabled':True,'sha256':'v5hash','effective_at':'2026-11-06T10:09:00+09:00'}
         e.update(publication_policy_id=ID,publication_policy_sha256='v5hash',prepared_at=base.now.isoformat(),format_id='eligibility')
-        body='정보보안 자격을 갖추셨나요?\n예시연구원 정보보안 담당자 정규직 채용 3명이에요.\n\n근무: 서울\n정보보안 기사 자격증이 필요해요.\n\n마감: 2026-11-18 17:00\n\n'+CTA
+        body='정보보안 자격을 갖춘 분께,\n예시연구원 정보보안 담당자 정규직 채용 3명이에요.\n\n근무: 서울\n정보보안 기사 자격증이 필요해요.\n\n마감: 2026-11-18 17:00\n\n'+CTA
         e['writer']['post_text']=body
         job=e['image_job'];review=e['writer']['review']
         ref='alio-detail.json#a700'
         evidence='정보보안 담당자 정규직 채용 3명 정규직 서울'
         review['source_refs'][0]['excerpt']=evidence
         review['fact_evidence']=[{'field':key,'value':job[key],'source_ref':ref,'excerpt':evidence} for key in ['title','count','employment','location']]
-        review['v5']={'policy_id':ID,'restrictions_complete':True,'fact_consistency_check':'passed','key_restrictions':[],'selection_reason':'synthetic fixture source only','public_preview':{'main_text':body,'detail_reply':''}}
+        from test_threads_v5_editorial import contract_meta
+        review['v5']=contract_meta(body,review,'정보보안 기사 자격증이 필요해요.','정보보안 기사 자격증 소지자 3명 모집',ref,job,evidence)
         selected=validate_entry(e,base.slot,base.now,base.history,base.source,base.details,policy)
         self.assertEqual(master_public_copy(selected,STYLE),(body,''))
         stale=copy.deepcopy(base.source);stale['_operations']['last_success_at']='2026-11-01T10:02:00+09:00'
@@ -72,7 +74,7 @@ class V5Tests(unittest.TestCase):
     def test_performance_keeps_missing_zero_and_late_distinct(self):
         from scripts.threads_performance import public_main_evidence
         at=datetime(2026,11,11,tzinfo=timezone.utc);text=self.sample['text']
-        record={'status':'published','threads_post_id':'123','published_at':at.isoformat(),'text':text,'writer_review':{'v5':{'policy_id':ID}},'format_id':'eligibility'}
+        record={'status':'published','request_status':'confirmed','threads_post_id':'123','published_at':at.isoformat(),'text':text,'writer_review':{'v5':{'policy_id':ID}},'format_id':'eligibility'}
         proof=public_main_evidence(record,{'id':'123','text':text,'is_reply':False},at+timedelta(hours=24))
         valid={'post_id':'123','window':'24h','captured_at':(at+timedelta(hours=24)).isoformat(),'status':'captured','public_verification':proof,'metrics':{'views':0,'likes':0,'reposts':0}}
         missing=copy.deepcopy(valid);missing.pop('public_verification')
@@ -81,9 +83,10 @@ class V5Tests(unittest.TestCase):
         self.assertEqual(report['windows']['24h']['verified_main_count'],1)
         self.assertEqual(report['windows']['24h']['metric_medians']['views'],0)
         self.assertIsNone(report['windows']['24h']['metric_medians']['quotes'])
-        self.assertIsNone(report['windows']['24h']['median_response_rate_likes_reposts_quotes'])
+        self.assertIsNone(report['windows']['24h']['likes_rate_percent_median'])
         self.assertIsNone(report['windows']['72h']['metric_medians']['views'])
-        self.assertEqual(report['excluded'],{'public_main_unverified':1,'late_or_unavailable':1})
+        self.assertEqual(report['excluded'].get('invalid_time_or_public_evidence'),1)
+        self.assertEqual(report['excluded'].get('late_or_unavailable'),1)
         self.assertEqual(report['automatic_weight_changes'],0)
 
     def test_four_examples_are_not_live_queue_entries(self):

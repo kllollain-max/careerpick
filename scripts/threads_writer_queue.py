@@ -86,7 +86,9 @@ def _fresh(value, now, scheduled, reason, max_age):
 def _policy(policy):
     if not isinstance(policy, dict) or type(policy.get("schema_version")) is not int or policy["schema_version"] != 1:
         _fail("POLICY_SCHEMA")
-    if policy.get("cta") != CTA or policy.get("slots") != list(SLOTS):
+    from scripts.threads_v5 import CTA as V5_CTA
+    expected_cta = V5_CTA if policy.get('editorial_v5', {}).get('enabled') else CTA
+    if policy.get("cta") != expected_cta or policy.get("slots") != list(SLOTS):
         _fail("POLICY_CONTRACT")
     if not isinstance(policy.get("prompt_path"), str) or not policy["prompt_path"].strip():
         _fail("POLICY_PROMPT_PATH")
@@ -590,7 +592,12 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     from scripts.threads_reach_editorial import validate_reach
     if v5:
         from scripts.threads_v5 import validate_review
-        validate_review(entry, image_job, review, refs, detail, history)
+        validate_review(entry, image_job, review, refs, detail, history, now=now)
+        # The compact renderer accepts only the restriction text that passed
+        # the source-backed semantic review. Do not forward arbitrary card data.
+        restriction = review.get('v5', {}).get('card_restriction')
+        if restriction:
+            image_job['restriction'] = restriction
     else:
         validate_reach(entry, policy, image_job, review, refs, detail)
     _history(history, notice_id, expected_format, scheduled, body, facts["org"])

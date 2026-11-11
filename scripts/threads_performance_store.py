@@ -22,7 +22,8 @@ import urllib.request
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.threads_http import read_response
-from scripts.threads_performance import POLICY_ID, collect_due, merge_observations, summarize
+from scripts.threads_performance import (POLICY_ID, collect_due, merge_observations,
+    merge_account_observations, validate_account_observation, summarize)
 
 REPOSITORY = "kllollain-max/careerpick"
 BRANCH = "threads-publisher-state"
@@ -57,9 +58,21 @@ def validate_state(state):
         identifier = value["observation_id"]
         if identifier in by_id:
             raise StateError("Duplicate observation identity; preserve existing data")
-        if not str(value.get("post_id", "")).isdigit() or value.get("window") not in {"24h", "7d"}:
+        if not str(value.get("post_id", "")).isdigit() or value.get("window") not in {"24h", "72h", "7d"}:
             raise StateError("Observation key invalid; preserve existing data")
         by_id[identifier] = value
+    accounts = state.get("account_observations", [])
+    if not isinstance(accounts, list):
+        raise StateError("Account observations invalid; preserve existing data")
+    account_ids = set()
+    for item in accounts:
+        try:
+            validate_account_observation(item)
+        except (ValueError, TypeError, KeyError):
+            raise StateError("Account observation invalid; preserve existing data") from None
+        if item["observation_id"] in account_ids:
+            raise StateError("Duplicate account observation identity; preserve existing data")
+        account_ids.add(item["observation_id"])
     return state
 
 
@@ -69,6 +82,17 @@ def contains_observations(state, observations):
         current = existing.get(value["observation_id"])
         if current is not None and current != value:
             raise StateError("Immutable observation conflict; preserve existing data")
+        if current is None:
+            return False
+    return True
+
+
+def contains_account_observations(state, observations):
+    existing = {item["observation_id"]: item for item in validate_state(state).get("account_observations", [])}
+    for item in observations:
+        current = existing.get(item["observation_id"])
+        if current is not None and current != item:
+            raise StateError("Immutable account observation conflict; preserve existing data")
         if current is None:
             return False
     return True
@@ -145,17 +169,18 @@ class GitHubPerformanceState:
             raise RequestError(uncertain=True)
         return content["sha"]
 
-    def append(self, additions, *, max_attempts=3):
+    def append(self, additions, *, account_additions=(), max_attempts=3):
         if type(max_attempts) is not int or not 1 <= max_attempts <= 3:
             raise StateError("Measurement CAS attempt limit invalid")
         # Validate additions independently before any write.
-        validate_state({"schema_version": 1, "observations": additions})
+        validate_state({"schema_version": 1, "observations": additions, "account_observations": list(account_additions)})
         for attempt in range(max_attempts):
             sha, current = self.read()
-            if contains_observations(current, additions):
+            if contains_observations(current, additions) and contains_account_observations(current, account_additions):
                 return current, {"status": "already_saved", "blob_sha": sha, "writes": attempt}
             try:
                 merged = merge_observations(current, additions)
+                merged = merge_account_observations(merged, account_additions)
             except ValueError:
                 raise StateError("Immutable observation merge conflict") from None
             uncertain = False
@@ -171,7 +196,8 @@ class GitHubPerformanceState:
             # Always verify persisted observation bytes; changed unrelated fields
             # or a later writer's additions remain untouched and are retained.
             observed_sha, observed = self.read()
-            if contains_observations(observed, merged["observations"]):
+            if (contains_observations(observed, merged["observations"])
+                    and contains_account_observations(observed, merged.get("account_observations", []))):
                 return observed, {"status": "verified_after_uncertain_write" if uncertain else "saved_verified",
                                   "blob_sha": observed_sha, "writes": attempt + 1}
             if uncertain:
@@ -180,12 +206,20 @@ class GitHubPerformanceState:
         raise StateError("Measurement CAS remained conflicted; retry on the next run")
 
 
-def run(history, *, backend, include_history=False, now=None, collector=None):
+def run(history, *, backend, include_history=False, now=None, collector=None, account_observations=()):
     """Read current state, collect once, append only new immutable observations."""
+    use_live_report_time = now is None
     now = now or datetime.now(timezone.utc)
     initial_sha, initial = backend.read()
     collection = collector or collect_due
-    collected, result = collection(history, deepcopy(initial), now, include_history=include_history)
+    options = {"include_history": include_history}
+    if collector is None:
+        options["collect_account"] = True
+    collected, result = collection(history, deepcopy(initial), now, **options)
+    collected = merge_account_observations(collected, account_observations)
+    # Collection timestamps are necessarily later than the planning instant.
+    # A live report must not discard its own just-captured values as future data.
+    report_at = datetime.now(timezone.utc) if use_live_report_time else now
     validate_state(collected)
     old = {item["observation_id"]: item for item in initial["observations"]}
     for item in collected["observations"]:
@@ -193,21 +227,26 @@ def run(history, *, backend, include_history=False, now=None, collector=None):
             raise StateError("Collector attempted to change a preserved observation")
     if not contains_observations(collected, initial["observations"]):
         raise StateError("Collector omitted a preserved observation")
+    if not contains_account_observations(collected, initial.get("account_observations", [])):
+        raise StateError("Collector omitted a preserved account observation")
     additions = [item for item in collected["observations"] if item["observation_id"] not in old]
-    if not additions:
+    previous_accounts = {item["observation_id"] for item in initial.get("account_observations", [])}
+    account_additions = [item for item in collected.get("account_observations", []) if item["observation_id"] not in previous_accounts]
+    if not additions and not account_additions:
         final, persistence = initial, {"status": "no_new_observations", "blob_sha": initial_sha, "writes": 0}
     else:
         try:
-            final, persistence = backend.append(additions)
+            final, persistence = (backend.append(additions, account_additions=account_additions)
+                                  if account_additions else backend.append(additions))
         except StateError as error:
             # Keep the concrete observations available in the workflow artifact.
             # The scheduled successor must read the remote state before deciding
             # whether anything still needs persistence; do not repeat collection.
             return {"state": collected, "collection_result": result,
                     "persistence": {"status": "unconfirmed", "reason": str(error)},
-                    "summary": summarize(history, collected, now)}
+                    "summary": summarize(history, collected, report_at)}
     return {"state": final, "collection_result": result, "persistence": persistence,
-            "summary": summarize(history, final, now)}
+            "summary": summarize(history, final, report_at)}
 
 
 def main():
@@ -215,13 +254,18 @@ def main():
     parser.add_argument("--history", default="threads_posted.json")
     parser.add_argument("--output", required=True, help="Local audit artifact, even when state saving is unavailable")
     parser.add_argument("--include-history", action="store_true")
+    parser.add_argument("--account-observation", help="Existing authorized account insight snapshot JSON; no new API call")
     args = parser.parse_args()
     result = None
     try:
         history = json.loads(Path(args.history).read_text(encoding="utf-8"))
         credential = os.getenv("THREADS_CLAIM_TOKEN") or os.getenv("GITHUB_TOKEN")
         backend = GitHubPerformanceState(credential)
-        result = run(history, backend=backend, include_history=args.include_history)
+        account_rows = []
+        if args.account_observation:
+            supplied = json.loads(Path(args.account_observation).read_text(encoding="utf-8"))
+            account_rows = supplied if isinstance(supplied, list) else [supplied]
+        result = run(history, backend=backend, include_history=args.include_history, account_observations=account_rows)
     except StateError as error:
         result = {"collection_result": {"status": "blocked_before_persistence"},
                   "persistence": {"status": "unconfirmed", "reason": str(error)}}

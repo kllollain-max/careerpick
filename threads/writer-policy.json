@@ -2,8 +2,8 @@
   "schema_version": 1,
   "prompt_path": "threads/prompts/master-v1.1.txt",
   "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
-  "cta": "자세한 채용정보는 프로필 링크를 확인하세요.",
-  "max_chars": 450,
+  "cta": "자세한 사항은 프로필링크 확인",
+  "max_chars": 350,
   "max_source_age_hours": 24,
   "slots": [
     8,
@@ -23,7 +23,7 @@
   "image_policy": "alternate_last_confirmed",
   "daily_limit": 4,
   "replies_enabled": false,
-  "publication_style": "compact_with_detail_v1",
+  "publication_style": "single_main_v5",
   "source_attachment_sha256": "291d510a496049c9e6b581d1e8a1b29e13651baf52d6cdaac7c7b32e33b33fbb",
   "editorial_policy": {
     "id": "careerpick-threads-reach-v1-20261109",
@@ -56,11 +56,21 @@
   },
   "editorial_v5": {
     "id": "careerpick-threads-v5-20261111",
-    "enabled": false,
-    "effective_at": null,
+    "enabled": true,
+    "effective_at": "2026-11-11T18:20:07.131553+09:00",
     "path": "threads/prompts/reach-v5.txt",
-    "sha256": "ab73a33f8b3ac9168d3ccb5b51520459251f039f41f3ff1b286a984f98d583dd",
-    "activation": "Separate owner approval required; freeze exact current READY/reserved hashes at activation.",
-    "preserved_entry_sha256": []
+    "sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+    "activation": "User 2026-11-11 explicitly requested operating adoption after implementation, next unstarted regular slot only; recheck no in-flight publisher before merge.",
+    "preserved_entry_sha256": [],
+    "contract_version": 2,
+    "display_version": "2026-11-11 단독본문 v2",
+    "first_new_slot": "2026-11-11T20:00:00+09:00",
+    "recommended_chars": [
+      150,
+      250
+    ],
+    "max_chars": 300,
+    "exception_max_chars": 350,
+    "reply_count": 0
   }
 }
