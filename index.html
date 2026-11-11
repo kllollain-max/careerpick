@@ -2778,21 +2778,8 @@ async function cpRefreshPushPanel(){
     if(status)status.textContent="알림 상태 확인 실패: "+String(e.message||e).slice(0,120);
   }
 }
-function cpPushSetupPanel(){
-  const state=cpPushStatus();
-  const msg=state==="setup"
-    ? "웹푸시 서비스 연결을 준비 중입니다. 관심 조건을 먼저 저장할 수 있습니다."
-    : state==="unsupported"
-    ? "이 브라우저에서는 웹푸시를 지원하지 않습니다."
-    : "조건을 저장한 다음 아래 버튼으로 브라우저 알림 수신에 동의할 수 있습니다.";
-  return '<div class="grp" style="border:2px solid #2563eb;border-radius:14px;padding:14px;margin:16px 0;background:#eff6ff;color:#172554"><strong style="font-size:16px">🔔 내 채용공고 웹푸시 알림</strong><p style="font-size:13px;margin:8px 0">'+msg+'</p>'
-    +(state==="ready" ? '<button type="button" id="cpPushSubscribe" style="display:block;width:100%;padding:15px 12px;border:0;border-radius:10px;background:#1d4ed8;color:#fff;font-weight:800;font-size:16px;cursor:pointer">🔔 웹푸시 알림 허용하기</button>' : '')
-    +'<button type="button" id="cpPushUnsubscribe" hidden style="display:none;width:100%;margin-top:8px;padding:12px;border:1px solid #64748b;border-radius:10px;background:#fff;color:#334155;font-weight:700;cursor:pointer">알림 구독 해지</button>'
-    +'<button type="button" id="cpPushCopyId" style="width:100%;margin-top:8px;padding:10px;border:1px solid #64748b;border-radius:10px;background:#fff;color:#334155;cursor:pointer">테스트용 구독 ID 복사</button>'
-    +'<p id="cpPushMessage" role="status" aria-live="polite" style="font-size:13px;line-height:1.5;margin:9px 0"></p>'
-    +'<p style="font-size:12px;line-height:1.5;margin:6px 0">신규 공고 및 마감 D-1 자동 발송은 별도 서버 연동 후 제공됩니다.</p></div>';
-}
-
+// Web push UI disabled until end-to-end delivery is verified.
+function cpPushSetupPanel(){ return ''; }
 
 // ── 공유하기 ──
 const SHARE_URL = "https://kllollain-max.github.io/careerpick/?src=share";
