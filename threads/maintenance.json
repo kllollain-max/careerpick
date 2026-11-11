@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T23:48:09Z",
+  "updated_at": "2026-11-11T18:37:07.889540+09:00",
   "last_observed_at": "2026-11-10T23:44:54Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
@@ -10077,5 +10077,40 @@
         "artifact_bytes_parsed_this_check": false
       }
     }
+  },
+  "single_main_v2_rollout": {
+    "version": "2026-11-11 단독본문 v2",
+    "policy_id": "careerpick-threads-v5-20261111",
+    "contract_version": 2,
+    "configured_effective_at": "2026-11-11T18:20:07.131553+09:00",
+    "first_new_slot": "2026-11-11T20:00:00+09:00",
+    "code_applied": true,
+    "code_commit": "60720d06f1a816c195eb9cec59a408cb7935a778",
+    "code_applied_observed_at": "2026-11-11T18:35:08+09:00",
+    "pr_url": "https://github.com/kllollain-max/careerpick/pull/50",
+    "automation_prompt_updated_at": "2026-11-11T18:35:22.808158+09:00",
+    "automation_prompt_sha256": "7d9dff490b09ddc0ef3eee7b77d9ce3d9f154e7abbb0356858eaa6810de84b28",
+    "automation_prompt_readback": "matched",
+    "operational_applied": false,
+    "queue_readback": "pending_atomic_commit",
+    "prepared_at": "2026-11-11T18:37:07.889540+09:00",
+    "queue_entry_sha256": "d07cc23496f2896da184b9375e62b0e8e11bbfe68e3d8bc61953b7566dd7cba2",
+    "next_notice_id": "a306786",
+    "next_media": "TEXT",
+    "text_verified": false,
+    "image_verified": false,
+    "text_verification_status": "await_next_regular_publication",
+    "image_verification_status": "await_next_regular_image_publication",
+    "automatic_reply_count_expected": 0,
+    "actual_new_post_id": null,
+    "metrics_24h": "not_yet_measured",
+    "metrics_72h": "not_yet_measured",
+    "first_14_day_period": "starts_at_first_confirmed_new_contract_publication",
+    "next_actions": [
+      "Observe next regular TEXT; verify actual ID/body/media/own reply evidence without extra dispatch.",
+      "Prepare and visually inspect next regular IMAGE exact JPEG and 360PNG assets before queue registration.",
+      "Read existing metrics observations with actual time, missing-value reason and account follower interval."
+    ],
+    "audit_path": "threads/audits/single-main-v2-20261111.json"
   }
 }
