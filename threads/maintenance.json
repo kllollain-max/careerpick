@@ -4868,7 +4868,7 @@
     "queue_commit_sha": "5f32bf558f9e34929320ce4dd65f53d3684059f6"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-11T05:22:55Z",
+    "checked_at": "2026-11-11T06:21:48Z",
     "main_sha": "910780f626d3f0ddb8b9f00185cff9a19edc5143",
     "history_blob_sha": "21e5c1cade3d3989c58f895cb234701bcf32606a",
     "claim_blob_sha": "37ea8368c6191b6b7ec744be35c8a0a74b4cee2d",
@@ -4884,7 +4884,7 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42954675005"
     },
     "new_publisher_runs": [],
-    "status": "no_new_publisher_version_v5_draft_unchanged",
+    "status": "unchanged_v5_draft_awaiting_approval_next_regular_slot_not_started",
     "slot": "2026-11-11T16:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -4966,7 +4966,7 @@
       1,
       2
     ],
-    "next_action": "Preserve live READY and wait for natural 16:00 publisher; no replay. Keep v5 unmerged and inactive pending separate owner approval.",
+    "next_action": "Preserve live queue; next regular slot 2026-11-11T16:00:00+09:00. Keep v5 Draft unmerged/inactive until separate owner approval; no manual publish or rerun.",
     "last_existing_claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
     "observed_new_run_versions": [
       {
@@ -5366,28 +5366,7 @@
     "performance_state_status": "not_initialized_no_observations_to_save",
     "new_failure": null,
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
-    "new_github_run_versions_since_previous_observation": [
-      {
-        "run_id": "42957397083",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-11T04:09:54Z",
-        "head_sha": "910780f626d3f0ddb8b9f00185cff9a19edc5143",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42957397083"
-      },
-      {
-        "run_id": "42957078959",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-11T04:09:37Z",
-        "head_sha": "0980f087b20484d3b3bb76d86dcc211c4f869210",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42957078959"
-      }
-    ],
+    "new_github_run_versions_since_previous_observation": [],
     "actions_pages": {
       "repository": [
         100,
@@ -9924,7 +9903,7 @@
       "main_observed_sha": "27d2a53be6beee926af26e5f010fdcf77507fc97"
     },
     "last_unchanged_review": {
-      "checked_at": "2026-11-11T05:22:55Z",
+      "checked_at": "2026-11-11T06:21:48Z",
       "pr": 50,
       "draft": true,
       "merged": false,
@@ -9956,13 +9935,7 @@
       },
       "publisher_new_run_observed": false,
       "publisher_active_count": 0,
-      "source_only_main_changes": [
-        "alio-detail.json",
-        "alio.json",
-        "cleaneye.json",
-        "exam-status.json",
-        "operations-status.json"
-      ],
+      "source_only_main_changes": [],
       "legacy_queue_revalidated_this_check": false,
       "legacy_queue_note": "Preserved without modification; latest source facts/freshness were not revalidated in this check.",
       "new_code_changes": 0,
@@ -9986,7 +9959,17 @@
       "all_run_count": 669,
       "publisher_run_count": 32,
       "performance_state_file": "not_found_uninitialized; last metrics job reported no_new_observations",
-      "v5_performance": "unmeasured_no_v5_publication"
+      "v5_performance": "unmeasured_no_v5_publication",
+      "main_unchanged_since_previous_check": true,
+      "run_version_changes": 0,
+      "full_comparison_fields": [
+        "run_id",
+        "run_attempt",
+        "status",
+        "conclusion",
+        "updated_at",
+        "head_sha"
+      ]
     }
   }
 }
