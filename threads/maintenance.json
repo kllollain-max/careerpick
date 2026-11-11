@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11T15:11:45Z",
-  "last_observed_at": "2026-11-11T15:11:45Z",
+  "updated_at": "2026-11-11T16:20:36Z",
+  "last_observed_at": "2026-11-11T16:20:36Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -1951,7 +1951,21 @@
         "No dispatch/rerun, no bypass or false passing evidence; preserve existing three ready entries.",
         "Candidate16 remains HOLD; alternatively review a current-main-compatible official notice."
       ],
-      "notified_at": "2026-11-11T14:46:57Z"
+      "notified_at": "2026-11-11T14:46:57Z",
+      "bounded_dependency_recovery": {
+        "prepared_at": "2026-11-11T16:20:36Z",
+        "head_sha": "cfedd498e3f0d84e6ca34374e6857ad29d89bf6f",
+        "pr_url": "https://github.com/kllollain-max/careerpick/pull/51",
+        "scope": "existing_Threads_CI_only_no_publisher_change",
+        "max_attempts_per_stage": 3,
+        "timeout_seconds_per_attempt": 90,
+        "backoff_seconds": 2,
+        "nonzero_exhaustion_preserved": true,
+        "tests_passed": 278,
+        "ci_status": "new_head_in_progress",
+        "main_applied": false,
+        "audit_path": "threads/audits/monitor-v2-20261112T0115.json"
+      }
     }
   ],
   "prevention_rules": [
@@ -4653,23 +4667,31 @@
       "code_pr_url": "https://github.com/kllollain-max/careerpick/pull/51",
       "card_registered_commit_sha": "382e847727e0fd19ae09029c970eb8d93f146a9e",
       "audit_path": "threads/audits/writer-v2-20261111T2321.json",
-      "resume": "정상CI와정확한HEAD운영반영후현재공고·계정·청구·신선도재검사. 수동dispatch/rerun금지유지. 미해결시다른공식검수가능후보로전환;보류원고를구정책으로재전송하지않음."
+      "resume": "정상CI와정확한HEAD운영반영후현재공고·계정·청구·신선도재검사. 수동dispatch/rerun금지유지. 미해결시다른공식검수가능후보로전환;보류원고를구정책으로재전송하지않음.",
+      "recovery_update": {
+        "checked_at": "2026-11-11T16:20:36Z",
+        "head_sha": "cfedd498e3f0d84e6ca34374e6857ad29d89bf6f",
+        "status": "CI_pending",
+        "main_applied": false,
+        "entry_or_card_not_changed": true,
+        "audit_path": "threads/audits/monitor-v2-20261112T0115.json"
+      }
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-11T15:11:45Z",
-    "main_sha": "88753a90ce41053d86fab1ef7f95e91100d285b8",
+    "checked_at": "2026-11-11T16:20:36Z",
+    "main_sha": "cb543d97a54c1b71f2f16c6c950ab6582825dab7",
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "contract_version": 2,
     "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
-    "input_reference_at": "2026-11-12T00:09:00.963910+09:00",
+    "input_reference_at": "2026-11-12T01:16:29.651040+09:00",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-12T00:09:00.963910+09:00",
+      "evaluated_at": "2026-11-12T01:16:29.651040+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -4679,12 +4701,12 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-11T22:23:51+09:00",
-          "source_checked_at": "2026-11-11T22:24:23+09:00",
-          "total_records": 890,
+          "snapshot_at": "2026-11-12T00:10:12+09:00",
+          "source_checked_at": "2026-11-12T00:10:34+09:00",
+          "total_records": 892,
           "eligible_count": 30,
-          "review_required_count": 746,
-          "excluded_count": 114,
+          "review_required_count": 747,
+          "excluded_count": 115,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 29,
@@ -4692,28 +4714,29 @@
             "SOURCE_NOTICE_UNCONFIRMED": 11,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
             "NOTICE_ALREADY_QUEUED": 2,
-            "APPLICATION_END_PRECISION_CONFLICT": 1
+            "APPLICATION_END_PRECISION_CONFLICT": 1,
+            "APPLICATION_START_TIME_UNKNOWN": 1
           }
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-11T19:11:44+09:00",
-          "source_checked_at": "2026-11-11T19:11:44+09:00",
+          "snapshot_at": "2026-11-12T00:11:27+09:00",
+          "source_checked_at": "2026-11-12T00:11:27+09:00",
           "total_records": 498,
           "eligible_count": 286,
           "review_required_count": 0,
           "excluded_count": 212,
           "returned_count": 24,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 163,
-            "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 40,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 201,
             "CLEANEYE_NOT_RECRUITMENT": 7,
             "NOTICE_ALREADY_USED": 1,
-            "NOTICE_ALREADY_QUEUED": 1
+            "NOTICE_ALREADY_QUEUED": 1,
+            "CLEANEYE_APPLICATION_NOT_OPEN": 2
           }
         }
       },
-      "total_scanned": 1388,
+      "total_scanned": 1390,
       "eligible_before_limit": 316,
       "writer_limit": 24,
       "returned_count": 24,
@@ -4785,13 +4808,12 @@
         "editorial_policy_id": null
       }
     ],
-    "public_output_regeneration": "matched_single_main_empty_reply",
-    "card_bindings": "verified_existing08_and20_exact_assets",
-    "audit_path": "threads/audits/monitor-v2-20261112T0008.json"
+    "final_public_output_regeneration": "matched_single_main_empty_reply",
+    "audit_path": "threads/audits/monitor-v2-20261112T0115.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-11T15:11:45Z",
-    "main_sha": "88753a90ce41053d86fab1ef7f95e91100d285b8",
+    "checked_at": "2026-11-11T16:20:36Z",
+    "main_sha": "cb543d97a54c1b71f2f16c6c950ab6582825dab7",
     "history_blob_sha": "89bd325200f75111b2480748a56d5791900bcdf5",
     "claim_blob_sha": "9a76bbc5ae7f6a73e494f1fc5b7bc07e7e17fe75",
     "latest_publisher_run": {
@@ -4807,16 +4829,16 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17896425015438025",
     "publisher_in_progress": false,
-    "status": "unchanged_three_ready_UTC_CI_hold_no_new_publication",
+    "status": "three_ready_preserved_PR51_bounded_dependency_recovery_CI_pending",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-11T22:23:51+09:00",
-        "source_checked_at": "2026-11-11T22:24:23+09:00",
-        "total_records": 890,
+        "snapshot_at": "2026-11-12T00:10:12+09:00",
+        "source_checked_at": "2026-11-12T00:10:34+09:00",
+        "total_records": 892,
         "eligible_count": 30,
-        "review_required_count": 746,
-        "excluded_count": 114,
+        "review_required_count": 747,
+        "excluded_count": 115,
         "returned_count": 0,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 29,
@@ -4824,30 +4846,31 @@
           "SOURCE_NOTICE_UNCONFIRMED": 11,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
           "NOTICE_ALREADY_QUEUED": 2,
-          "APPLICATION_END_PRECISION_CONFLICT": 1
+          "APPLICATION_END_PRECISION_CONFLICT": 1,
+          "APPLICATION_START_TIME_UNKNOWN": 1
         }
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-11T19:11:44+09:00",
-        "source_checked_at": "2026-11-11T19:11:44+09:00",
+        "snapshot_at": "2026-11-12T00:11:27+09:00",
+        "source_checked_at": "2026-11-12T00:11:27+09:00",
         "total_records": 498,
         "eligible_count": 286,
         "review_required_count": 0,
         "excluded_count": 212,
         "returned_count": 24,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 163,
-          "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 40,
+          "CLEANEYE_NOT_VERIFIED_OPEN": 201,
           "CLEANEYE_NOT_RECRUITMENT": 7,
           "NOTICE_ALREADY_USED": 1,
-          "NOTICE_ALREADY_QUEUED": 1
+          "NOTICE_ALREADY_QUEUED": 1,
+          "CLEANEYE_APPLICATION_NOT_OPEN": 2
         }
       }
     },
     "actions_pages_read": 7,
-    "actions_runs_read": 681,
-    "audit_path": "threads/audits/monitor-v2-20261112T0008.json",
+    "actions_runs_read": 689,
+    "audit_path": "threads/audits/monitor-v2-20261112T0115.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": []
   },
@@ -9779,7 +9802,7 @@
       "First v2 24h Nov12 20:45:18,72h Nov14 20:45:18; useactual capturetime.",
       "Keep approved target/condition/regular-interest styles and no assumed performance effects."
     ],
-    "audit_path": "threads/audits/monitor-v2-20261112T0008.json",
+    "audit_path": "threads/audits/monitor-v2-20261112T0115.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
     "queue_commit": "a410012deb48f729d4d79906e0f1e4d9032bb109",
     "queue_readback_at": "2026-11-11T18:38:25.419515+09:00",
@@ -9799,21 +9822,18 @@
       "performance_improvement": "not_yet_observed"
     },
     "latest_independent_writer_check": {
-      "checked_at": "2026-11-11T15:11:45Z",
-      "full_queue": "passed_current_main",
+      "checked_at": "2026-11-11T16:20:36Z",
+      "full_queue": "passed_current_main_before_proposed_code_local_test",
       "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
       "new_ready_saved": 0,
       "existing_ready_preserved": true,
-      "next_ready_entry_sha256": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
       "next_media": "IMAGE",
-      "next_card": "exact original08 JPEG/360 PNG binding verified",
-      "additional20_card": "existing exact card binding verified",
-      "slot16": "hold_PR51_CI_dependency_DNS_unchanged",
-      "alternative16": "a306807_start_day_clock_unknown_current_open_not_verified",
-      "actual_text_publication": "verified_previous_observation_not_current_GET",
+      "next_card": "existing exact08 card verified",
+      "slot16": "held_until_UTC_fix_required_CI_passes_and_main_application_verified",
+      "actual_text_publication": "verified_previous_official_observation",
       "actual_image_publication": "pending_regular_image",
       "actual_metrics": "24h72h_not_due",
-      "audit_path": "threads/audits/monitor-v2-20261112T0008.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T0115.json"
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -9956,12 +9976,12 @@
     ]
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-11T15:11:45Z",
+    "checked_at": "2026-11-11T16:20:36Z",
     "state_blob_sha": "56c0c6e2de2a8f5540d37975330fa56618b44184",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-11T15:09:01.835848+00:00",
+      "as_of": "2026-11-11T16:16:30.787569+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -10124,7 +10144,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-11T15:09:01.835848+00:00",
+            "requested_end": "2026-11-11T16:16:30.787569+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-11T11:45:32.854727+00:00",
             "start_followers": 415,
@@ -10145,7 +10165,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-11T15:09:01.835848+00:00",
+        "requested_end": "2026-11-11T16:16:30.787569+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-11T11:45:32.854727+00:00",
         "start_followers": 415,
@@ -10179,7 +10199,7 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/monitor-v2-20261112T0008.json",
+    "audit_path": "threads/audits/monitor-v2-20261112T0115.json",
     "artifact_unchanged_since_previous_verified_checkpoint": true
   }
 }
