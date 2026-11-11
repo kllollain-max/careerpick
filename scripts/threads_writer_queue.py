@@ -201,6 +201,21 @@ def _period_matches_excerpt(period, start, end, detail):
         ("START", start, period.get("start_date_only", False)),
         ("END", end, period["date_only"]),
     ):
+        # Official JobPosting JSON-LD can state the actual application close
+        # as an offset-aware validThrough timestamp. Compare the instant in
+        # KST, including date rollover; never infer midnight from a date.
+        if side == "END" and not date_only:
+            stamps = list(re.finditer(
+                r'"validThrough"\s*:\s*"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}'
+                r'(?::\d{2})?(?:Z|[+-]\d{2}:\d{2}))"', text
+            ))
+            if stamps:
+                moments = [_aware(match[1], "APPLICATION_END_TIMESTAMP_INVALID") for match in stamps]
+                if any(moment != value for moment in moments):
+                    _fail("APPLICATION_END_TIMESTAMP_EVIDENCE_CONFLICT")
+                end_has_seconds = all(re.search(r'T\d{2}:\d{2}:\d{2}', match[1]) for match in stamps)
+                end_has_seconds = bool(end_has_seconds)
+                continue
         day = value if date_only else value.date()
         matches, dates = _date_spans(text, day, detail)
         if not matches:
