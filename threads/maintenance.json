@@ -4913,8 +4913,8 @@
     "queue_commit_sha": "5f32bf558f9e34929320ce4dd65f53d3684059f6"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-11T08:51:04Z",
-    "main_sha": "ad3fb62b6844bc81989ce7fd784dba579b89d944",
+    "checked_at": "2026-11-11T09:48:46Z",
+    "main_sha": "60720d06f1a816c195eb9cec59a408cb7935a778",
     "history_blob_sha": "2100ec8df7724f2957560b95ebd7caf7181d4f9a",
     "claim_blob_sha": "6fe20bee269d825ab10189d9d35275344040b6e8",
     "last_confirmed_post_id": "18111609056167129",
@@ -4928,19 +4928,8 @@
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42985494544"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "42985494544",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-11T08:16:41Z",
-        "head_sha": "6170b93ec15e319f400aa2af31064e723347d57f",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42985494544"
-      }
-    ],
-    "status": "natural_16_slot_verified_no_recovery_required",
+    "new_publisher_runs": [],
+    "status": "contract_v2_active_ready_20_verified_future_image_candidate_held",
     "slot": "2026-11-11T20:00:00+09:00",
     "publisher_in_progress": false,
     "threads_ci": {
@@ -4952,7 +4941,7 @@
       "head_sha": "7320adadaa748918e467500677fb4d4d65e0a9e4",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/42460392100"
     },
-    "publication_style": "compact_with_detail_v1",
+    "publication_style": "single_main_v5",
     "first_compact_success": "verified_previously",
     "source_collection": {
       "alio": {
@@ -5022,7 +5011,7 @@
       1,
       2
     ],
-    "next_action": "Preserve live queue and observe natural 20:00 TEXT slot. No replay. Keep v5 Draft inactive pending separate owner approval.",
+    "next_action": "Observe existing 20:00 TEXT only; no dispatch/rerun/replay. New future IMAGE candidate stays HOLD until explicit workplace evidence resolves. Inspect next candidate in a later safe writer pass.",
     "last_existing_claim_blob_sha": "0801dd0c98f2e3584ce164fee9d02a2a9fd38fd5",
     "observed_new_run_versions": [
       {
@@ -5225,91 +5214,40 @@
       "meta_logs_match": true
     },
     "current_source_collection": {
-      "operations_status_blob_sha": "795a2d92e310f1806e720e530c5497f3ce595df1",
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-10T10:14:10+09:00",
-        "source_checked_at": "2026-11-10T10:14:42+09:00",
-        "total_records": 821,
-        "eligible_count": 32,
-        "review_required_count": 684,
-        "excluded_count": 105,
-        "returned_count": 2,
+        "snapshot_at": "2026-11-11T16:28:08+09:00",
+        "source_checked_at": "2026-11-11T16:28:33+09:00",
+        "total_records": 864,
+        "eligible_count": 28,
+        "review_required_count": 724,
+        "excluded_count": 112,
+        "returned_count": 0,
         "exclusion_reasons": {
-          "APPLICATION_CLOSED": 25,
-          "NOTICE_ALREADY_USED": 64,
+          "APPLICATION_CLOSED": 29,
+          "NOTICE_ALREADY_USED": 69,
           "SOURCE_NOTICE_UNCONFIRMED": 10,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-          "NOTICE_ALREADY_QUEUED": 3,
+          "NOTICE_ALREADY_QUEUED": 1,
           "APPLICATION_END_PRECISION_CONFLICT": 1,
           "APPLICATION_START_TIME_UNKNOWN": 1
         }
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-10T01:14:54+09:00",
-        "source_checked_at": "2026-11-10T01:14:54+09:00",
-        "total_records": 421,
-        "eligible_count": 239,
+        "snapshot_at": "2026-11-11T16:29:05+09:00",
+        "source_checked_at": "2026-11-11T16:29:05+09:00",
+        "total_records": 496,
+        "eligible_count": 272,
         "review_required_count": 0,
-        "excluded_count": 182,
-        "returned_count": 22,
+        "excluded_count": 224,
+        "returned_count": 24,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 160,
-          "CLEANEYE_NOT_RECRUITMENT": 2,
-          "CLEANEYE_APPLICATION_NOT_OPEN": 20
+          "CLEANEYE_NOT_VERIFIED_OPEN": 163,
+          "CLEANEYE_NOT_RECRUITMENT": 6,
+          "NOTICE_ALREADY_USED": 1,
+          "CLEANEYE_APPLICATION_NOT_OPEN": 54
         }
-      },
-      "gojobs": {
-        "updated": "2026-11-10T01:14:19+09:00",
-        "counts": {
-          "closed": 19,
-          "boundary_time_unverified": 6,
-          "open_by_date": 6
-        },
-        "source_health": {
-          "authentication_verified": true,
-          "official_page_verified": 8,
-          "official_page_failed": 0,
-          "collector_open_by_date": 8,
-          "collector_deadline_time_unconfirmed": 4
-        }
-      },
-      "latest_source_observation": {
-        "run_id": "42707217257",
-        "job_id": 129467064187,
-        "repository_snapshot_unchanged": true,
-        "sources": [
-          {
-            "source": "alio",
-            "changed": false,
-            "verified_at": "2026-11-10T06:57:06+09:00",
-            "snapshot_at": "2026-11-10T01:13:46+09:00",
-            "status": "unchanged"
-          },
-          {
-            "source": "mpm_exam",
-            "status": "unchanged",
-            "changed": false,
-            "verified_at": "2026-11-10T06:57:07+09:00",
-            "snapshot_at": "2026-10-25T22:39:58.281891+00:00"
-          },
-          {
-            "source": "gojobs",
-            "status": "unchanged",
-            "changed": false,
-            "snapshot_at": "2026-11-10T01:14:19+09:00",
-            "official_page_verified": 8,
-            "official_page_failed": 0,
-            "verified_at": "2026-11-10T06:57:40+09:00"
-          },
-          {
-            "changed": false,
-            "snapshot_at": "2026-11-10T01:14:54+09:00",
-            "source": "cleaneye",
-            "status": "unchanged"
-          }
-        ]
       }
     },
     "latest_source_observation": {
@@ -5424,19 +5362,8 @@
     "eligible_until": "2026-11-10T18:00:00+09:00",
     "performance_state_status": "saved_verified",
     "new_failure": null,
-    "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
-    "new_github_run_versions_since_previous_observation": [
-      {
-        "run_id": "42985494544",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-11T08:16:41Z",
-        "head_sha": "6170b93ec15e319f400aa2af31064e723347d57f",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42985494544"
-      }
-    ],
+    "queue_blob_sha": "ee43049bc9d53c04ee3b813fdc35249fa427e18d",
+    "new_github_run_versions_since_previous_observation": [],
     "actions_pages": {
       "repository": [
         100,
@@ -8127,6 +8054,313 @@
         ]
       },
       "resume": "최초 빈 슬롯이 24시간 안으로 들어온 후 신선한 ALIO/클린아이 전체 집합과 더 큰 모집단위 공식 검토, UTC 원문 시간 증거 및 프로필 재검수, 게시기 2시간 전체 구간 검사를 통과한 경우에만 CAS 큐 등록."
+    },
+    "2026-11-12T08:00:00+09:00:cleaneye-81028:v2": {
+      "scheduled_at": "2026-11-12T08:00:00+09:00",
+      "format_id": "hiring_core",
+      "notice_id": "cleaneye-81028",
+      "source": "cleaneye",
+      "official_id": "81028",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "source_post_sha256": "4e5b4c8543d500fb5a269dd0610846704b48e46a8e95c97f8b485e698d9c2fec",
+      "source_detail_sha256": "19a6cc28c59a4a3fa842c1afe3a1349a0124d655403dbf7176c0f8f95e0f7ae0",
+      "prepared_at": "2026-11-11T18:45:49.454573+09:00",
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "청소 자격증 없이 지원할 수 있어요.\n동대문구시설관리공단 업무직 9급 청소(청풍) 일반정규직 1명이에요.\n\n충북 제천시 소재 청풍유스호스텔 근무 가능자 대상이에요.\n최종 근무지는 임용일에 결정돼요.\n\n12월 30일 임용일 만 18~60세로, 정신·신체 건강 요건과 대한민국 국적·결격 기준을 확인해요.\n한 직무만 지원하며 교대·연장·당직·주말 근무가 생길 수 있어요.\n3개월 시용 평가 후 임용을 결정해요.\n\n마감: 11월 19일 18:00\n\n자세한 사항은 프로필링크 확인",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "cleaneye-81028",
+          "target_reader": "임용일 만18~60세이며 청풍유스호스텔 근무 가능 조건과 배치·시용·변동 근무를 검토할 지원자",
+          "central_message": "별도 청소 자격증 제한 없음과 실제 제천 근무 가능 요건·최종 배치 조건을 함께 안내",
+          "pattern_id": "P5",
+          "scheduled_at": "2026-11-12T08:00:00+09:00",
+          "reference_at": "2026-11-11T18:45:49.454573+09:00",
+          "verification_basis": "checked_official_source",
+          "source_refs": [
+            {
+              "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+              "checked_at": "2026-11-11T18:43:42.811678+09:00",
+              "sha256": "f4adf0f80e6d34c41ff10189ff99686bb7de69c2124196a3fea29e5403398128",
+              "excerpt": "업무직 9급 청소(청풍) / 청풍유스호스텔 객실 청소 및 침구류 정리 / 1명 / 일반채용 (모집표의 열과 행을 연결해 전사) / 고용형태 정규직 / 접수기간 : 2026. 11. 9.(월) ~ 2026. 11. 19.(목) 18:00 까지 / 업무직 청소: 임용예정일자 26. 12. 30.(수), 18세 이상 ~ 60세 이하 / 충북 제천시 소재 청풍유스호스텔 근무 가능자 / 결격사유 ① 대한민국 국민이 아닌 자 / 응시원서는 해당공고 내 1회만 제출할 수 있으며, 다른 직무에 중복으로 지원할 수 없습니다. / 사업장 근무편성에 따라 교대근무, 연장근무, 당직근무, 휴일(주말)근무가 발생할 수 있음 / 최초 근무일로부터 3개월간 시용기간 근무평가 후 임용 결정 / 응시원서 및 자기소개서 / 우대요건증명서 (취업지원대상자, 장애인 등 해당자 파일첨부) / 최초 근무일로부터 3개월간 시용기간 근무평가 후 임용 결정 / 최종 근무지는 임용일에 결정 / 업무직 청소: 임용예정일자 26. 12. 30.(수), 18세 이상 ~ 60세 이하 / 정신 및 신체 건강한 자 / 대한민국 국민이 아닌 자 / 응시원서는 해당공고 내 1회만 제출할 수 있으며, 다른 직무에 중복으로 지원할 수 없습니다. / 사업장 근무편성에 따라 교대근무, 연장근무, 당직근무, 휴일(주말)근무가 발생할 수 있음",
+              "location": "공고 제2026-55호 모집표·응시연령·근무조건·접수·유의사항"
+            },
+            {
+              "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C%28%EC%B2%AD%EC%86%8C-%EC%B2%AD%ED%92%8D%29.pdf",
+              "checked_at": "2026-11-11T18:43:42.108420+09:00",
+              "sha256": "0148bf0613c0db4cf549f2b879ab5cd6dc1ba02b01992f4617124ef895e099ed",
+              "excerpt": "해당사업장 공공사업부(청풍유스호스텔) / 필요 자격(인증기관) 필수 -",
+              "location": "청소 직무기술서"
+            },
+            {
+              "url": "https://www.dfmc.kr/course/announce/recruit_vi.asp?board_id=RECRUIT&field=&id=1727&page=1&value=",
+              "checked_at": "2026-11-11T18:43:42.663017+09:00",
+              "sha256": "b04bf2ced92696c065679fbddb9baf35dbadde59f727566927c4635db0c158eb",
+              "excerpt": "채용분야 : 정규직(전기, 청소) / 채용인원 : 총 3 명 / 접수방법 : 온라인접수"
+            },
+            {
+              "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+              "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
+              "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
+              "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
+              "checked_at": "2026-11-11T18:43:41.939253+09:00"
+            },
+            {
+              "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
+              "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
+              "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
+              "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
+              "checked_at": "2026-11-11T18:43:41.960642+09:00"
+            },
+            {
+              "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
+              "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
+              "location": "1쪽 지원서 작성 가이드라인 시각 확인",
+              "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
+              "checked_at": "2026-11-11T18:43:42.336280+09:00"
+            },
+            {
+              "ref": "https://kllollain-max.github.io/careerpick/cleaneye.json#cleaneye-81028",
+              "checked_at": "2026-11-11T18:44:39.355767+09:00",
+              "sha256": "5e9a7c8a8ac4228f88b90187b5071db6b09510c6081caca54cafcc96d056dee4",
+              "excerpt": "공고 고유번호 81028 / 기관명 동대문구시설관리공단 / 고용형태 원문 일반정규직 / 채용인원 3 / 청소(청풍) 자격증 불필요"
+            }
+          ],
+          "checked_at": "2026-11-11T18:43:42.811678+09:00",
+          "missing_or_conflicting": [
+            "IMAGE_LOCATION_UNSUPPORTED: official sources establish workplace eligibility and appointment-day final assignment, not the explicit workplace-label evidence required by the unchanged validator"
+          ],
+          "omitted_optional_facts": [
+            "급여표는2025년 기준이라 해당 초임을 추정하지 않음.",
+            "우대증빙과 상세 시험일정은 원문 상세에서 확인.",
+            "API 내부 서울 주소는 공통 기관주소로 판단자료에서 제외하며 근무지로 소개하지 않음."
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "not_supplied",
+          "length_check": "measured_within_limit",
+          "pre_publish_checks": [
+            "실제 교대가 IMAGE일 때 검토한 동일 JPEG/360PNG 해시를 다시 검증.",
+            "마감·정정·현재 접수·청구·계정은 기존 정규 게시기가 재검사."
+          ],
+          "application_period": {
+            "start": "2026-11-09T09:00:00+09:00",
+            "end": "2026-11-19T18:00:00+09:00",
+            "start_date_only": false,
+            "date_only": false,
+            "official_precision_verified": true,
+            "source_ref": "https://api.grabberhr.com/api/v2/public/jobposts/728",
+            "evidence": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-81028",
+            "notice_id": "cleaneye-81028",
+            "checked_at": "2026-11-11T18:44:39.355767+09:00",
+            "verified": true,
+            "rel_me_profile_sha256": "d3433233377ff4fdb1ebe8231a2fe88fe275716f0e43762da44348eef055e587",
+            "site_sha256": "89028379008a84c3b6676a461719a5093fccc1df2ad6c55fbd2e884df0f47f5b",
+            "feed_sha256": "5e9a7c8a8ac4228f88b90187b5071db6b09510c6081caca54cafcc96d056dee4",
+            "method": "현재 프로필 rel=me, 공개 사이트 #job 처리, 현재 공개 cleaneye 피드의 동일ID 및 기관공고·공식 접수 단위728을 대조."
+          },
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "업무직 9급 청소(청풍)",
+              "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+              "excerpt": "업무직 9급 청소(청풍) / 청풍유스호스텔 객실 청소 및 침구류 정리 / 1명 / 일반채용 (모집표의 열과 행을 연결해 전사)"
+            },
+            {
+              "field": "count",
+              "value": 1,
+              "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+              "excerpt": "업무직 9급 청소(청풍) / 청풍유스호스텔 객실 청소 및 침구류 정리 / 1명 / 일반채용 (모집표의 열과 행을 연결해 전사)"
+            },
+            {
+              "field": "employment",
+              "value": "일반정규직",
+              "source_ref": "https://kllollain-max.github.io/careerpick/cleaneye.json#cleaneye-81028",
+              "excerpt": "고용형태 원문 일반정규직"
+            },
+            {
+              "field": "location",
+              "value": "충북 제천시 소재 청풍유스호스텔",
+              "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+              "excerpt": "충북 제천시 소재 청풍유스호스텔 근무 가능자"
+            }
+          ],
+          "body_characters": 264,
+          "source_selection": {
+            "policy_id": "careerpick-threads-selection-v3-20261110",
+            "official_details_fully_reviewed": false,
+            "sector_preference": "neutral",
+            "sector_group": "other",
+            "sector_basis": {
+              "source": "official_labels",
+              "matched": null
+            },
+            "rank_before_limit": 15
+          },
+          "recent_history": {
+            "records_checked": 70,
+            "last_published_hooks_checked": 10,
+            "same_notice_seen": false
+          },
+          "application_path": {
+            "url": "https://dfmc.grabberhr.com/careers/job-posting/728",
+            "official_listing_id": 728,
+            "verified": true,
+            "internal_address_note": "Raw workplace and workplace1 fields contain the same institutional Seoul address for all three open listings. The application page does not display those fields. Its signed notice graphic and the official PDFs specifically identify Jecheon Cheongpung for this unit; retain this discrepancy in evidence and never use the internal address as the work location."
+          },
+          "v5": {
+            "policy_id": "careerpick-threads-v5-20261111",
+            "contract_version": 2,
+            "restrictions_complete": false,
+            "fact_consistency_check": "hold_location_evidence",
+            "hook_candidates": [
+              {
+                "id": "condition",
+                "type": "condition",
+                "text": "청소 자격증 없이 지원할 수 있어요.\n동대문구시설관리공단 업무직 9급 청소(청풍) 일반정규직 1명이에요."
+              },
+              {
+                "id": "target",
+                "type": "target",
+                "text": "청풍유스호스텔에서 청소 일을 할 분께,\n동대문구시설관리공단 일반정규직 1명 채용이에요."
+              },
+              {
+                "id": "job",
+                "type": "job",
+                "text": "객실 청소와 침구 정리를 맡는 자리예요.\n동대문구시설관리공단 청소(청풍) 일반정규직 채용이에요."
+              }
+            ],
+            "selected_hook_id": "condition",
+            "first_sentence_type": "condition",
+            "hook_review": {
+              "factual": true,
+              "target_clear": true,
+              "natural": true
+            },
+            "key_restrictions": [
+              {
+                "text": "12월 30일 임용일 만 18~60세",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "업무직 청소: 임용예정일자 26. 12. 30.(수), 18세 이상 ~ 60세 이하",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "정신·신체 건강 요건",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "정신 및 신체 건강한 자",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "대한민국 국적·결격 기준",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "대한민국 국민이 아닌 자",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "한 직무만 지원",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "응시원서는 해당공고 내 1회만 제출할 수 있으며, 다른 직무에 중복으로 지원할 수 없습니다.",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "교대·연장·당직·주말 근무가 생길 수 있어요.",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "사업장 근무편성에 따라 교대근무, 연장근무, 당직근무, 휴일(주말)근무가 발생할 수 있음",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "3개월 시용 평가 후 임용을 결정해요.",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "최초 근무일로부터 3개월간 시용기간 근무평가 후 임용 결정",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "최종 근무지는 임용일에 결정돼요.",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "최종 근무지는 임용일에 결정",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "충북 제천시 소재 청풍유스호스텔 근무 가능자 대상이에요.",
+                "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+                "excerpt": "충북 제천시 소재 청풍유스호스텔 근무 가능자",
+                "classification": "required",
+                "logic": "single"
+              }
+            ],
+            "useful_point": {
+              "text": "청소 자격증 없이 지원할 수 있어요.",
+              "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C%28%EC%B2%AD%EC%86%8C-%EC%B2%AD%ED%92%8D%29.pdf",
+              "excerpt": "필요 자격(인증기관) 필수 -"
+            },
+            "recruitment_unit": {
+              "title": "업무직 9급 청소(청풍)",
+              "count": 1,
+              "employment": "일반정규직",
+              "scope": "single_recruitment_unit",
+              "source_ref": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8%282026-55%ED%98%B8%29.pdf",
+              "excerpt": "업무직 9급 청소(청풍) / 청풍유스호스텔 객실 청소 및 침구류 정리 / 1명 / 일반채용 (모집표의 열과 행을 연결해 전사)"
+            },
+            "correction_check": {
+              "checked_at": "2026-11-11T18:43:42.811678+09:00",
+              "result": "none_found",
+              "source_ref": "https://www.dfmc.kr/course/announce/recruit_vi.asp?board_id=RECRUIT&field=&id=1727&page=1&value=",
+              "scope": "현재 기관 공식공고1727, 모집단위728 모집중, 공고·직무·가이드 및 연결 이미지 재열람. 같은 공고 원문 범위에서 정정·취소표시 없음.",
+              "limitations": "별도 전체 정정게시판을 전수 열람한 것은 아님. 내부API 공통 서울주소는 버리고 공식 지원 공고의 제천 근무 가능 요건과 최종배치 조건을 함께 보존."
+            },
+            "style_rewrites": 0,
+            "selection_reason": "앞서 공식 검수된 청소 단위1명은 수집본 신선도 때문에 HOLD였으나 이번 실제 갱신된 cleaneye 16:29 스냅샷과 현재 공식자료로 재검증. 기관총원3명과 분리. 1360건 입력 비교, 신규상위24개는 단위인원 미확인 검토자료다. 기존 연구직10·8명 마감/언어충돌과 철도 고용주 충돌은 해소되지 않아 보류를 유지. 무자료 인기·분야 고정순위를 적용하지 않았으며 상세 근무 조건이 확인되는 미게시 모집단위를 미래08시에 선정.",
+            "public_preview": {
+              "main_text": "청소 자격증 없이 지원할 수 있어요.\n동대문구시설관리공단 업무직 9급 청소(청풍) 일반정규직 1명이에요.\n\n충북 제천시 소재 청풍유스호스텔 근무 가능자 대상이에요.\n최종 근무지는 임용일에 결정돼요.\n\n12월 30일 임용일 만 18~60세로, 정신·신체 건강 요건과 대한민국 국적·결격 기준을 확인해요.\n한 직무만 지원하며 교대·연장·당직·주말 근무가 생길 수 있어요.\n3개월 시용 평가 후 임용을 결정해요.\n\n마감: 11월 19일 18:00\n\n자세한 사항은 프로필링크 확인",
+              "detail_reply": ""
+            },
+            "card_restriction": "최종 근무지는 임용일에 결정돼요.",
+            "experiment_eligible": true,
+            "comparison_context": {
+              "planned_media": "IMAGE",
+              "occupation": "청소(청풍)",
+              "region": "충북 제천 근무가능; 최종근무지 임용일 결정",
+              "unit_count": 1,
+              "notice_total_count": 3,
+              "institution_interest": null,
+              "source_total_scanned": 1360,
+              "official_details_fully_reviewed": false
+            }
+          }
+        }
+      },
+      "image_job": {
+        "id": "cleaneye-81028",
+        "org": "동대문구시설관리공단",
+        "title": "업무직 9급 청소(청풍)",
+        "count": 1,
+        "employment": "일반정규직",
+        "location": "충북 제천시 소재 청풍유스호스텔",
+        "due": "2026-11-19",
+        "deadline_label": "2026-11-19 18:00"
+      },
+      "publication_policy_id": "careerpick-threads-v5-20261111",
+      "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "hold_validation": {
+        "status": "hold",
+        "checked_at": "2026-11-11T09:48:46Z",
+        "error": "IMAGE_LOCATION_UNSUPPORTED",
+        "scope": "No validator or safety policy relaxed",
+        "audit_path": "threads/audits/writer-v2-20261111T1848.json"
+      },
+      "resume": "Resolve explicit workplace-label evidence or review another candidate; no card/READY/asset registration."
     }
   },
   "writer_hold_resolutions": {
@@ -9922,16 +10156,16 @@
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
-    "status": "draft_pr_not_activated",
+    "status": "single_main_contract_v2_operational_applied_awaiting_natural_publication",
     "checked_at": "2026-11-11T02:20:26Z",
     "pr": 50,
     "url": "https://github.com/kllollain-max/careerpick/pull/50",
     "base_sha": "52b52413d776b472baa31d7dcd9f450ccc99fad8",
     "head_sha": "6ae0f1f37ebfaa4c973f6342686c142f1ae99bd6",
-    "enabled": false,
+    "enabled": true,
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
     "production_queue_written": false,
-    "main_changed": false,
+    "main_changed": true,
     "actual_v5_publications": 0,
     "local_validation": {
       "threads": 171,
@@ -9966,10 +10200,9 @@
       }
     ],
     "next_conditions": [
-      "Separate owner approval before merge or production activation",
-      "Freeze latest exact READY/reserved fingerprints; retain claims and ledger",
-      "Set actual activation timestamp and recheck new unstarted entry facts",
-      "Verify natural v5 publication; observe real 24h/72h metrics before optimization"
+      "Verify actual next regular TEXT main, account, media and own-reply evidence; no test dispatch.",
+      "Prepare a verified future IMAGE candidate and visually review exact assets before registering.",
+      "Start real 24h/72h and14-day observation only after confirmed new-contract publication."
     ],
     "performance": "unmeasured_no_effect_or_growth_claim",
     "followup_review": {
@@ -9985,98 +10218,28 @@
       "main_observed_sha": "27d2a53be6beee926af26e5f010fdcf77507fc97"
     },
     "last_unchanged_review": {
-      "checked_at": "2026-11-11T08:51:04Z",
-      "pr": 50,
-      "draft": true,
-      "merged": false,
-      "head_sha": "6ae0f1f37ebfaa4c973f6342686c142f1ae99bd6",
-      "main_sha": "ad3fb62b6844bc81989ce7fd784dba579b89d944",
-      "v5_enabled": false,
-      "main_has_v5_policy": false,
-      "validated_remote_code_blob_shas": {
-        "v5": "1db06046c808cee4edf533d8495e67975f58a953",
-        "performance": "7940a99cd603f64c3be7b98c40d869c82fc6cd54",
-        "tests": "4d243b2c371791c5348546944e7dbfa8190ca62f"
-      },
-      "local_test_result_reused_exact_unchanged_code": {
-        "total": 189,
-        "passed": true,
-        "rerun_this_check": false
-      },
-      "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
-      "history_blob_sha": "21e5c1cade3d3989c58f895cb234701bcf32606a",
-      "latest_publisher_run": {
-        "run_id": "42985494544",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-11T08:16:41Z",
-        "head_sha": "6170b93ec15e319f400aa2af31064e723347d57f",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/42985494544"
-      },
-      "publisher_new_run_observed": true,
-      "publisher_active_count": 0,
-      "source_only_main_changes": [],
-      "legacy_queue_revalidated_this_check": false,
-      "legacy_queue_note": "Preserved without modification; latest source facts/freshness were not revalidated in this check.",
-      "new_code_changes": 0,
-      "new_samples": 0,
-      "new_publications": 0,
-      "github_actions_requested": false,
-      "prompt_sha256_verified": {
-        "master": true,
-        "reach_v1": true,
-        "reach_v5": true
-      },
-      "actions_pages_counts": [
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        72
-      ],
-      "all_run_count": 672,
-      "publisher_run_count": 33,
-      "performance_state_file": "present_saved_verified",
-      "v5_performance": "unmeasured_no_v5_publication",
-      "main_unchanged_since_previous_check": false,
-      "run_version_changes": 1,
-      "full_comparison_fields": [
-        "run_id",
-        "run_attempt",
-        "status",
-        "conclusion",
-        "updated_at",
-        "head_sha"
-      ],
-      "slot_observation": {
-        "slot": "2026-11-11T16:00:00+09:00",
-        "status": "published_and_reply_confirmed",
-        "actual_published_at": "2026-11-11T17:15:42.249144+09:00",
-        "next_expected_media": "TEXT"
-      },
-      "latest_publication_policy": "legacy compact_with_detail_v1; v5 not activated",
-      "latest_publication_verification": "accepted/main/Meta GET body+reply and image SHA matched; no replay",
-      "current_metrics_observation": {
-        "run_id": "42985494544",
-        "job_id": 130406322624,
-        "collection": "measured",
-        "persistence": "saved_verified",
-        "performance_blob_sha": "6c5fde1df0a18a63798df27e9e3f831cf52d5453",
-        "observations": 1,
-        "observed_post_id": "18125175853936690",
-        "window": "24h",
-        "sample_scope": "legacy post; not v5 performance or trend",
-        "artifact_id": 13839850682,
-        "artifact_name": "threads-performance-42985494544-1",
-        "artifact_digest": "sha256:deae80ca9107175d44c27bd5acd8acd2506305d71a855f4f2b731734cb4eba0a",
-        "artifact_metadata_verified": true,
-        "artifact_bytes_parsed_this_check": false
-      }
-    }
+      "checked_at": "2026-11-11T09:48:46Z",
+      "main_sha": "60720d06f1a816c195eb9cec59a408cb7935a778",
+      "v5_enabled": true,
+      "contract_version": 2,
+      "first_new_slot": "2026-11-11T20:00:00+09:00",
+      "queue_blob_sha": "ee43049bc9d53c04ee3b813fdc35249fa427e18d",
+      "queue_entry_sha256": "d07cc23496f2896da184b9375e62b0e8e11bbfe68e3d8bc61953b7566dd7cba2",
+      "legacy_queue_revalidated_this_check": true,
+      "full_queue_validation": "passed_v2_ready",
+      "final_main_chars": 249,
+      "final_reply_count": 0,
+      "code_changes_this_check": 0,
+      "queue_writes_this_check": 0,
+      "concurrent_ready_preserved": true,
+      "actual_v2_publications": 0,
+      "new_future_hold": "cleaneye-81028",
+      "audit_path": "threads/audits/writer-v2-20261111T1848.json"
+    },
+    "contract_version": 2,
+    "active_code_commit": "60720d06f1a816c195eb9cec59a408cb7935a778",
+    "operational_applied": true,
+    "approval_scope": "Latest user explicitly authorized operating contract_version=2; former Draft-only restriction superseded for this release."
   },
   "single_main_v2_rollout": {
     "version": "2026-11-11 단독본문 v2",
@@ -10129,6 +10292,157 @@
       "actual_text_publication": "pending_next_regular_slot",
       "actual_image_publication": "pending_next_regular_image_slot",
       "performance_improvement": "not_yet_observed"
+    },
+    "latest_independent_writer_check": {
+      "checked_at": "2026-11-11T09:48:46Z",
+      "queue_blob_sha": "ee43049bc9d53c04ee3b813fdc35249fa427e18d",
+      "entry_sha256": "d07cc23496f2896da184b9375e62b0e8e11bbfe68e3d8bc61953b7566dd7cba2",
+      "full_queue": "passed",
+      "final_output": {
+        "main_count": 1,
+        "reply_count": 0,
+        "chars": 249,
+        "preview_matches": true
+      },
+      "source_rechecked_at": "2026-11-11T18:38:14.420024+09:00",
+      "source_checks": "threads/audits/writer-v2-20261111T1848.json",
+      "concurrent_ready_preserved": true,
+      "next_image_hold": "cleaneye-81028: IMAGE_LOCATION_UNSUPPORTED",
+      "new_card_assets_registered": 0,
+      "actual_text_publication": "pending",
+      "actual_image_publication": "pending",
+      "actual_metrics": "new_contract_unmeasured"
     }
+  },
+  "single_main_v2_writer_performance": {
+    "checked_at": "2026-11-11T09:48:46Z",
+    "state_blob_sha": "6c5fde1df0a18a63798df27e9e3f831cf52d5453",
+    "summary": {
+      "v5_performance": {
+        "policy_id": "careerpick-threads-v5-20261111",
+        "as_of": "2026-11-11T09:37:20.426142+00:00",
+        "experiment_start": null,
+        "experiment_start_evidence": [],
+        "windows": {
+          "24h": {
+            "verified_main_count": 0,
+            "metric_medians": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "metric_observed_counts": {
+              "views": 0,
+              "likes": 0,
+              "replies": 0,
+              "reposts": 0,
+              "quotes": 0
+            },
+            "metric_totals": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "views_distribution": [],
+            "likes_rate_percent_median": null,
+            "likes_rate_percent_observed_posts": 0,
+            "reader_replies": null,
+            "reader_replies_status": "see_per_post_author_separation_status",
+            "profile_visits": null,
+            "follow_increase": null,
+            "link_clicks": null
+          },
+          "72h": {
+            "verified_main_count": 0,
+            "metric_medians": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "metric_observed_counts": {
+              "views": 0,
+              "likes": 0,
+              "replies": 0,
+              "reposts": 0,
+              "quotes": 0
+            },
+            "metric_totals": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "views_distribution": [],
+            "likes_rate_percent_median": null,
+            "likes_rate_percent_observed_posts": 0,
+            "reader_replies": null,
+            "reader_replies_status": "see_per_post_author_separation_status",
+            "profile_visits": null,
+            "follow_increase": null,
+            "link_clicks": null
+          }
+        },
+        "observations": {
+          "24h": [],
+          "72h": []
+        },
+        "late_cumulative_observations": [],
+        "excluded": {},
+        "periods": [],
+        "account_followers": {
+          "account": "hid_119",
+          "scope": "account_total",
+          "requested_start": null,
+          "requested_end": "2026-11-11T09:37:20.426142+00:00",
+          "observed_start": null,
+          "observed_end": null,
+          "start_followers": null,
+          "end_followers": null,
+          "net_change": null,
+          "status": "unavailable",
+          "exact_requested_boundaries": false,
+          "observation_statuses": {},
+          "post_attribution": null,
+          "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+        },
+        "likes_rate_definition": "likes / views * 100; views are not unique readers",
+        "automatic_weight_changes": 0,
+        "statistical_significance_claim": false,
+        "decision": "await_first_verified_publication",
+        "limitations": [
+          "Different notices remain an observational comparison, not randomized causal evidence.",
+          "Author-separated reader replies and post-attributed follows/profile clicks remain unavailable unless explicitly verified.",
+          "Small counts can produce unstable percentages; read absolute likes and views together.",
+          "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
+        ]
+      },
+      "v5_comparison_status": "separate_cohort_not_legacy_AB; human_review_until_sufficient_verified_samples",
+      "checkpoints": [
+        {
+          "day": 7,
+          "due_at": "2026-11-17T08:10:36.083629+00:00",
+          "status": "pending"
+        },
+        {
+          "day": 14,
+          "due_at": "2026-11-24T08:10:36.083629+00:00",
+          "status": "pending"
+        }
+      ],
+      "matched_24h_counts": {
+        "A": 0,
+        "B": 0
+      },
+      "decision": "extend_until_comparable_samples_available"
+    },
+    "first_v2_publication": null,
+    "metric_interpretation": "Existing legacy 24h observation retained separately; no v2 performance or follower growth inferred."
   }
 }
