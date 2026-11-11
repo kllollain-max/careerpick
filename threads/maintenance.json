@@ -9839,20 +9839,20 @@
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
     "status": "draft_pr_not_activated",
-    "checked_at": "2026-11-11T01:12:02Z",
+    "checked_at": "2026-11-11T02:20:26Z",
     "pr": 50,
     "url": "https://github.com/kllollain-max/careerpick/pull/50",
     "base_sha": "52b52413d776b472baa31d7dcd9f450ccc99fad8",
-    "head_sha": "418db350ca3c7cbe75883c956c6db864fdc4a5c0",
+    "head_sha": "6ae0f1f37ebfaa4c973f6342686c142f1ae99bd6",
     "enabled": false,
     "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
     "production_queue_written": false,
     "main_changed": false,
     "actual_v5_publications": 0,
     "local_validation": {
-      "threads": 170,
+      "threads": 171,
       "recovered": 18,
-      "total": 188,
+      "total": 189,
       "passed": true,
       "ast_yaml_prompt_sha": true,
       "legacy_queue_check": true,
@@ -9887,6 +9887,18 @@
       "Set actual activation timestamp and recheck new unstarted entry facts",
       "Verify natural v5 publication; observe real 24h/72h metrics before optimization"
     ],
-    "performance": "unmeasured_no_effect_or_growth_claim"
+    "performance": "unmeasured_no_effect_or_growth_claim",
+    "followup_review": {
+      "files": [
+        "scripts/threads_v5.py",
+        "scripts/threads_performance.py",
+        "tests/test_threads_v5.py",
+        "docs/THREADS_V5_DRAFT_20261111.md"
+      ],
+      "change": "Verified matched-age 24h/72h v5 summaries separated from legacy AB; missing/zero/late kept distinct; no automatic weight mutation",
+      "legacy_queue_unchanged": true,
+      "draft_pr_still_unmerged": true,
+      "main_observed_sha": "27d2a53be6beee926af26e5f010fdcf77507fc97"
+    }
   }
 }
