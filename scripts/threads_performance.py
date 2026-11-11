@@ -378,6 +378,7 @@ def collect_due(history, state, now=None, *, token=None, include_history=False,
 
 def summarize(history, state, now):
     """Descriptive counts and medians; never choose a winning hook automatically."""
+    from scripts.threads_v5 import performance_summary
     now = moment(now)
     records, exclusions = recent_publications(history, now, include_history=True)
     all_records = {str(r.get("threads_post_id")): r for r in history.get("records", [])
@@ -487,6 +488,7 @@ def summarize(history, state, now):
                             "status": "due" if due and now >= due else "pending" if due else "not_started"})
     plan = measurement_plan(history, state, now, include_history=True)
     return {
+        "v5_performance": performance_summary(history, state, now),
         "v5_observation_windows": ["24h", "72h"],
         "v5_comparison_status": "separate_cohort_not_legacy_AB; human_review_until_sufficient_verified_samples",
         "schema_version": 1, "policy_id": POLICY_ID, "as_of": now.isoformat(),

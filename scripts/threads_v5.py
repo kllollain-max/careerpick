@@ -146,3 +146,64 @@ def generate_card(job, destination):
         return quality
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def performance_summary(history, state, now):
+    """Describe only verified v5 main posts at matched ages, never infer clicks."""
+    from collections import Counter, defaultdict
+    from statistics import median
+    from scripts.threads_performance import moment, _review
+    now=moment(now)
+    records={str(r.get('threads_post_id')):r for r in history.get('records',[])
+             if r.get('status')=='published' and _review(r).get('v5',{}).get('policy_id')==ID}
+    excluded=Counter();windows={label:[] for label in ('24h','72h')};seen=set()
+    for observation in state.get('observations',[]):
+        post_id=observation.get('post_id');record=records.get(post_id)
+        if record is None:continue
+        label=observation.get('window')
+        if label not in windows:continue
+        try:
+            published=moment(record['published_at']);captured=moment(observation['captured_at'])
+        except (KeyError,TypeError,ValueError):
+            excluded['invalid_time']+=1;continue
+        if not 0 <= (now-published).total_seconds() <= 28*86400 or captured>now:
+            excluded['outside_time_window']+=1;continue
+        age=86400 if label=='24h' else 72*3600
+        elapsed=(captured-published).total_seconds()
+        if not age<=elapsed<=age+3600 or observation.get('status')!='captured':
+            excluded['late_or_unavailable']+=1;continue
+        proof=observation.get('public_verification') or {}
+        expected=hashlib.sha256(str(record.get('text','')).encode()).hexdigest()
+        if (proof.get('status')!='verified' or proof.get('post_id')!=post_id
+                or proof.get('actual_text_sha256')!=expected
+                or proof.get('expected_text_sha256')!=expected or proof.get('is_reply') is not False):
+            excluded['public_main_unverified']+=1;continue
+        if (post_id,label) in seen:continue
+        seen.add((post_id,label))
+        values={k:v if type(v) is int and v>=0 else None
+                for k,v in observation.get('metrics',{}).items()}
+        views=values.get('views')
+        response=[values.get(k) for k in ('likes','reposts','quotes')]
+        rate=(sum(response)/views if views and all(x is not None for x in response) else None)
+        meta=_review(record)['v5']
+        windows[label].append({'post_id':post_id,'metrics':values,'elapsed_seconds':elapsed,
+            'response_rate_likes_reposts_quotes':rate,'reader_replies':observation.get('reader_replies'),
+            'format_id':record.get('format_id'),'first_sentence_type':meta.get('first_sentence_type'),
+            'sector_group':meta.get('sector_group'),'body_chars':len(record.get('text','')),
+            'media':'IMAGE' if record.get('image_url') else 'TEXT','slot':record.get('scheduled_at')})
+    def stats(items):
+        keys=('views','likes','replies','reposts','quotes')
+        medians={k:median(v) if (v:=[x['metrics'].get(k) for x in items
+                     if x['metrics'].get(k) is not None]) else None for k in keys}
+        rates=[x['response_rate_likes_reposts_quotes'] for x in items
+               if x['response_rate_likes_reposts_quotes'] is not None]
+        return {'verified_main_count':len(items),'metric_medians':medians,
+                'median_response_rate_likes_reposts_quotes':median(rates) if rates else None,
+                'reader_replies':None,'profile_visits':None,'follow_increase':None,'link_clicks':None}
+    return {'policy_id':ID,'windows':{label:stats(rows) for label,rows in windows.items()},
+        'observations':windows,'excluded':dict(excluded),'automatic_weight_changes':0,
+        'decision':'keep_current_weights_until_comparable_repeated_evidence',
+        'limitations':['No post-attributed follow/profile/click API values supplied',
+                       'Likes+reposts+quotes rate is not unique-reader engagement',
+                       'Sector, unit scope, slot, format and media remain confounded',
+                       'Do not combine this cohort with legacy A/B results']}

@@ -69,6 +69,23 @@ class V5Tests(unittest.TestCase):
         with self.assertRaises(QueueValidationError):
             validate_entry(e,base.slot,base.now,base.history,base.source,base.details,policy)
 
+    def test_performance_keeps_missing_zero_and_late_distinct(self):
+        from scripts.threads_performance import public_main_evidence
+        at=datetime(2026,11,11,tzinfo=timezone.utc);text=self.sample['text']
+        record={'status':'published','threads_post_id':'123','published_at':at.isoformat(),'text':text,'writer_review':{'v5':{'policy_id':ID}},'format_id':'eligibility'}
+        proof=public_main_evidence(record,{'id':'123','text':text,'is_reply':False},at+timedelta(hours=24))
+        valid={'post_id':'123','window':'24h','captured_at':(at+timedelta(hours=24)).isoformat(),'status':'captured','public_verification':proof,'metrics':{'views':0,'likes':0,'reposts':0}}
+        missing=copy.deepcopy(valid);missing.pop('public_verification')
+        late=copy.deepcopy(valid);late['captured_at']=(at+timedelta(hours=26)).isoformat()
+        report=performance_summary({'records':[record]},{'observations':[missing,late,valid]},at+timedelta(hours=26))
+        self.assertEqual(report['windows']['24h']['verified_main_count'],1)
+        self.assertEqual(report['windows']['24h']['metric_medians']['views'],0)
+        self.assertIsNone(report['windows']['24h']['metric_medians']['quotes'])
+        self.assertIsNone(report['windows']['24h']['median_response_rate_likes_reposts_quotes'])
+        self.assertIsNone(report['windows']['72h']['metric_medians']['views'])
+        self.assertEqual(report['excluded'],{'public_main_unverified':1,'late_or_unavailable':1})
+        self.assertEqual(report['automatic_weight_changes'],0)
+
     def test_four_examples_are_not_live_queue_entries(self):
         examples=json.loads((ROOT/'docs/evidence/threads-v5/samples.json').read_text())
         self.assertEqual(len({s['format_id'] for s in examples}),4)
