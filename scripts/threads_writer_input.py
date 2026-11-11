@@ -61,7 +61,12 @@ def build_input(now, limit=24, reviewed_entries=None, *, queued_entries=None):
                 'writer_review': {'v5': {'policy_id': policy['editorial_v5']['id'],
                     'contract_version': 2, 'first_sentence_type': slot['hook_type']}}})
             next_media = 'TEXT' if next_media == 'IMAGE' else 'IMAGE'
-    return {'v5_prompt': v5_prompt, 'v5_enabled': policy.get('editorial_v5', {}).get('enabled', False),
+    from scripts.threads_intro_styles import load_guidance, plan_styles
+    intro_style_guidance = load_guidance(ROOT, policy)
+    if intro_style_guidance:
+        plan_styles(slots, history.get('records', []), policy['intro_style_policy'])
+    return {'intro_style_guidance': intro_style_guidance,
+            'v5_prompt': v5_prompt, 'v5_enabled': policy.get('editorial_v5', {}).get('enabled', False),
             'reference_at': now.isoformat(), 'policy': policy,
             'source_updated': source.get('updated'), 'operations': operations,
             'cleaneye_source': {'status': selection['cleaneye_status'], 'updated': cleaneye.get('updated') if isinstance(cleaneye, dict) else None},
