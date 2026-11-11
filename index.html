@@ -1522,7 +1522,6 @@ function openPrefs(){
     + grp("cat", "분야", cats)
     + `<div class="grp"><span>키워드 (쉼표로 여러 개)</span><input type="text" id="prefKw" aria-label="관심 키워드" value="${esc(DRAFT.kw)}" placeholder="예: 간호, 전산, 사무"></div>`
     + `<p class="hint">선택한 조건은 이 기기에 저장됩니다. 아래 저장 버튼을 누르면 완료 안내가 나타납니다. 맞춤 웹푸시 자동 발송은 아직 준비 중입니다.</p>`
-    + cpPushSetupPanel()
     + `<p class="live" id="prefLive"></p>`
     + `<div class="row"><button id="prefClear">초기화</button><button type="button" class="primary" id="prefSave" onclick="cpSavePreferenceSettings();return false">저장</button></div>`;
   cpSheetReturnFocus=document.activeElement; $("sheet").classList.add("open"); cpSyncDialogState(); document.querySelector(".sheet-close").focus();
@@ -1532,7 +1531,6 @@ function openPrefs(){
   $("prefSave").addEventListener("click", e => { e.stopPropagation(); });
   $("prefKw").addEventListener("input", e => { DRAFT.kw = e.target.value; prefLive(); });
   prefLive();
-  cpRefreshPushPanel();
 }
 function cpSavePreferenceSettings(){
   const button=document.getElementById("prefSave");
