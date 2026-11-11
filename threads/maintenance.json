@@ -9835,5 +9835,58 @@
     "writer_horizon_filled": false,
     "next_unfilled_slot": "2026-11-12T08:00:00+09:00",
     "next_unfilled_slot_status": "Existing hold drafts remain held. Need updated official source and full 2h freshness window; larger confirmed regular unit 10 reviewed before unit 8; no invented popularity."
+  },
+  "v5_implementation": {
+    "policy_id": "careerpick-threads-v5-20261111",
+    "status": "draft_pr_not_activated",
+    "checked_at": "2026-11-11T01:12:02Z",
+    "pr": 50,
+    "url": "https://github.com/kllollain-max/careerpick/pull/50",
+    "base_sha": "52b52413d776b472baa31d7dcd9f450ccc99fad8",
+    "head_sha": "418db350ca3c7cbe75883c956c6db864fdc4a5c0",
+    "enabled": false,
+    "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
+    "production_queue_written": false,
+    "main_changed": false,
+    "actual_v5_publications": 0,
+    "local_validation": {
+      "threads": 170,
+      "recovered": 18,
+      "total": 188,
+      "passed": true,
+      "ast_yaml_prompt_sha": true,
+      "legacy_queue_check": true,
+      "github_actions_requested": false,
+      "paid_actions": false
+    },
+    "samples": [
+      {
+        "notice_id": "a306715",
+        "before_chars": 340,
+        "after_chars": 251
+      },
+      {
+        "notice_id": "a306470",
+        "before_chars": 224,
+        "after_chars": 198
+      },
+      {
+        "notice_id": "cleaneye-80681",
+        "before_chars": 317,
+        "after_chars": 271
+      },
+      {
+        "notice_id": "a306786",
+        "before_chars": 289,
+        "after_chars": 236
+      }
+    ],
+    "next_conditions": [
+      "Separate owner approval before merge or production activation",
+      "Freeze latest exact READY/reserved fingerprints; retain claims and ledger",
+      "Set actual activation timestamp and recheck new unstarted entry facts",
+      "Verify natural v5 publication; observe real 24h/72h metrics before optimization"
+    ],
+    "performance": "unmeasured_no_effect_or_growth_claim"
   }
 }
