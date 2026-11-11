@@ -166,6 +166,87 @@ class PerformanceStoreTests(unittest.TestCase):
             backend.read()
         self.assertNotIn("test-token", str(error.exception))
 
+    def test_72h_observation_is_valid_and_can_be_conditionally_saved(self):
+        fixture = performance_fixtures.V5PerformanceTests()
+        fixture.setUp()
+        observation = fixture.make_observation(hours=72)
+        final = perf.merge_observations(self.empty, [observation])
+        store.validate_state(final)
+        with patch.object(self.backend, "read", side_effect=[("a" * 40, self.empty), ("b" * 40, final)]), \
+             patch.object(self.backend, "put", return_value="b" * 40) as put:
+            saved, result = self.backend.append([observation])
+        self.assertEqual(result["status"], "saved_verified")
+        self.assertEqual(saved["observations"][0]["window"], "72h")
+        put.assert_called_once()
+
+    def test_account_snapshot_only_is_saved_without_inventing_post_metrics(self):
+        account = perf.account_observation(captured_at=self.now, followers_count=120,
+                                           source="existing_authorized_insights")
+        final = perf.merge_account_observations(self.empty, [account])
+        with patch.object(self.backend, "read", side_effect=[("a" * 40, self.empty), ("b" * 40, final)]), \
+             patch.object(self.backend, "put", return_value="b" * 40):
+            saved, result = self.backend.append([], account_additions=[account])
+        self.assertEqual(saved["observations"], [])
+        self.assertEqual(saved["account_observations"], [account])
+        self.assertEqual(result["status"], "saved_verified")
+
+    def test_uncertain_account_snapshot_write_is_verified_without_retransmission(self):
+        account = perf.account_observation(captured_at=self.now, followers_count=0,
+                                           source="existing_authorized_insights")
+        final = perf.merge_account_observations(self.empty, [account])
+        with patch.object(self.backend, "read", side_effect=[("a" * 40, self.empty), ("b" * 40, final)]), \
+             patch.object(self.backend, "put", side_effect=store.RequestError(uncertain=True)) as put:
+            saved, result = self.backend.append([], account_additions=[account])
+        put.assert_called_once()
+        self.assertEqual(result["status"], "verified_after_uncertain_write")
+        self.assertEqual(saved, final)
+
+    def test_run_preserves_existing_accounts_and_saves_actual_new_snapshot(self):
+        old_account = perf.account_observation(captured_at=self.now, followers_count=120,
+                                               source="existing_authorized_insights")
+        new_account = perf.account_observation(captured_at=self.now + timedelta(days=1), followers_count=123,
+                                               source="existing_authorized_insights")
+        initial = perf.merge_account_observations(self.empty, [old_account])
+        final = perf.merge_account_observations(initial, [new_account])
+        backend = Mock()
+        backend.read.return_value = ("a" * 40, initial)
+        backend.append.return_value = (final, {"status": "saved_verified"})
+        result = store.run(self.history, backend=backend, now=self.now + timedelta(days=1),
+            collector=Mock(return_value=(deepcopy(initial), {"status": "no_due_observations"})),
+            account_observations=[new_account])
+        backend.append.assert_called_once_with([], account_additions=[new_account])
+        self.assertEqual(result["state"]["account_observations"], [old_account, new_account])
+
+    def test_account_observation_identity_collision_and_wrong_scope_are_blocked(self):
+        account = perf.account_observation(captured_at=self.now, followers_count=120,
+                                           source="existing_authorized_insights")
+        initial = perf.merge_account_observations(self.empty, [account])
+        changed = deepcopy(account)
+        changed["followers_count"] = 999
+        with patch.object(self.backend, "read", return_value=("a" * 40, initial)), \
+             patch.object(self.backend, "put") as put:
+            with self.assertRaisesRegex(store.StateError, "account observation conflict"):
+                self.backend.append([], account_additions=[changed])
+        put.assert_not_called()
+        changed["account"] = "hid_1004"
+        with self.assertRaisesRegex(store.StateError, "Account observation invalid"):
+            store.validate_state({"schema_version": 1, "observations": [], "account_observations": [changed]})
+
+    def test_live_report_uses_post_collection_clock_for_just_captured_metrics(self):
+        captured = self.now + timedelta(milliseconds=500)
+        account = perf.account_observation(captured_at=captured, followers_count=12, source="actual_insight")
+        final = perf.merge_account_observations(self.empty, [account])
+        backend = Mock()
+        backend.read.return_value = ("a" * 40, self.empty)
+        backend.append.return_value = (final, {"status": "saved_verified"})
+        with patch.object(store, "datetime") as clock:
+            clock.now.side_effect = [self.now, self.now + timedelta(seconds=1)]
+            result = store.run(self.history, backend=backend,
+                collector=Mock(return_value=(final, {"status": "measured"})))
+        report = result["summary"]["v5_performance"]["account_followers"]
+        self.assertEqual(report["status"], "baseline_only")
+        self.assertEqual(report["observed_start"], captured.isoformat())
+
 
 if __name__ == "__main__":
     unittest.main()

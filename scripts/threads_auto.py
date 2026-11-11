@@ -48,6 +48,8 @@ def writer_inputs(root=None):
         raise RuntimeError('Master prompt hash mismatch; do not publish')
     from scripts.threads_reach_editorial import load_editorial_prompt
     load_editorial_prompt(base, policy)
+    from scripts.threads_v5 import load_prompt
+    load_prompt(base, policy)
     source = load(DATA if root is None else base / 'alio.json', {})
     source['_operations'] = load(base / 'operations-status.json', {})
     try:
@@ -59,8 +61,15 @@ def writer_inputs(root=None):
     return policy, source, load(base / 'alio-detail.json', {})
 
 
-def master_public_copy(selected, style):
+def master_public_copy(selected, style, *, now=None):
     """Build the public pair only after the writer's facts and text pass validation."""
+    from scripts.threads_v5 import STYLE as V5_STYLE, copy_check
+    if style == V5_STYLE:
+        if not selected.get('writer_review', {}).get('v5'):
+            raise RuntimeError('Missing v5 review')
+        copy_check(selected['text'], selected['writer_review'], selected['image_job'],
+                   now=now or datetime.now(KST))
+        return selected['text'], ''
     if style is None:
         return selected['text'], ''
     if style != COMPACT_STYLE:
@@ -116,9 +125,18 @@ def prepare_master(history, now, run_id):
                   and 'image_url' in r), None)
     image_turn = prior is not None and not bool(prior.get('image_url'))
     image_job = selected['image_job'] if image_turn else None
+    reviewed_card = None
+    if image_turn and selected.get('writer_review', {}).get('v5', {}).get('contract_version') == 2:
+        from scripts.threads_card_review import verify_reviewed_card
+        # The writer commits the exact visually inspected JPEG and 360px PNG.
+        # Check their immutable binding before a reservation is created; Pillow
+        # is installed later by the existing image-tools step.
+        reviewed_card = verify_reviewed_card(image_job, selected['writer_review'], ROOT, now,
+                                             verify_pixels=False)
     identifier = re.sub(r'[^A-Za-z0-9_-]', '_', selected['job_id'])[:70]
-    style = policy.get('publication_style')
-    main_text, reply_text = master_public_copy(selected, style)
+    style = ('single_main_v5' if selected.get('writer_review', {}).get('v5')
+             else policy.get('publication_style'))
+    main_text, reply_text = master_public_copy(selected, style, now=now)
     record = {**selected, 'text': main_text, 'reply_text': reply_text,
               'scheduled_at': scheduled.isoformat(),
               'manual_publish': False, 'reserved_date': today, 'status': 'pending',
@@ -127,6 +145,14 @@ def prepare_master(history, now, run_id):
               'image_url': ('https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/'
                             + identifier + '.jpg') if image_turn else '',
               'image_job': image_job}
+    if selected.get('writer_review', {}).get('v5'):
+        record['publication_policy_id'] = policy['editorial_v5']['id']
+        record['publication_policy_sha256'] = policy['editorial_v5']['sha256']
+        record['editorial_contract_version'] = 2
+        record['code_commit'] = os.getenv('GITHUB_SHA')
+    if reviewed_card:
+        record['image_quality'] = reviewed_card
+        record['image_sha256'] = reviewed_card['sha256']
     if style is not None:
         record['publication_style'] = style
     history['records'].append(record)
@@ -145,7 +171,7 @@ def validate_master_before_send(record, history, now):
     validated = select_ready({'schema_version': 1, 'entries': [entry]},
                              datetime.fromisoformat(record['scheduled_at']), now,
                              other_history, source, details, policy)
-    main_text, reply_text = master_public_copy(validated, record.get('publication_style'))
+    main_text, reply_text = master_public_copy(validated, record.get('publication_style'), now=now)
     if (record.get('text') != main_text or record.get('format_id') != validated['format_id']
             or (record.get('reply_text') or '') != reply_text or record.get('engagement_text')):
         raise RuntimeError('Reserved text, detail reply or format changed')
@@ -154,6 +180,11 @@ def validate_master_before_send(record, history, now):
             raise RuntimeError('Reserved image facts changed')
         if not re.fullmatch(r'[0-9a-f]{64}', str(record.get('image_sha256', ''))):
             raise RuntimeError('High-quality image has not been verified')
+        if record.get('writer_review', {}).get('v5', {}).get('contract_version') == 2:
+            from scripts.threads_card_review import verify_reviewed_card
+            reviewed = verify_reviewed_card(validated['image_job'], validated['writer_review'], ROOT, now)
+            if reviewed['sha256'] != record['image_sha256']:
+                raise RuntimeError('Reserved reviewed card bytes changed')
 
 
 def current_publication_slot(now):
@@ -611,15 +642,80 @@ def verify_published_record(record, token, *, include_replies=True):
         expected_id = str(record.get(id_key) or '')
         if not expected_id.isdigit():
             raise RuntimeError('Missing actual published object ID')
-        obj = api('GET', '/' + expected_id, token,
-                  {'fields':'id,text,permalink,is_reply,root_post,replied_to'})
+        strict = record.get('writer_review', {}).get('v5', {}).get('contract_version') == 2
+        fields = 'id,text,permalink,is_reply,root_post,replied_to'
+        if strict and id_key == 'threads_post_id':
+            fields += ',username,media_type,media_url'
+        obj = api('GET', '/' + expected_id, token, {'fields': fields})
         if str(obj.get('id')) != expected_id or obj.get('text') != record.get(text_key):
             raise RuntimeError('Published object content or ID mismatch')
+        if strict and id_key == 'threads_post_id':
+            if obj.get('is_reply') is not False or str(obj.get('username', '')).casefold() != 'hid_119':
+                raise RuntimeError('Actual main post/account mismatch')
+            media = 'IMAGE' if record.get('image_url') else 'TEXT_POST'
+            if obj.get('media_type') != media or (media == 'IMAGE' and not obj.get('media_url')):
+                raise RuntimeError('Actual published media mismatch')
         if id_key != 'threads_post_id':
             if obj.get('is_reply') is not True or str((obj.get('root_post') or {}).get('id')) != main_id or str((obj.get('replied_to') or {}).get('id')) != main_id:
                 raise RuntimeError('Actual reply parent/root mismatch')
         result.append(obj)
     return result
+
+
+def single_post_output_evidence(record, objects, token, *, now=None):
+    """Read actual own top-level replies; never send, delete or repair a post.
+
+    Missing permission or incomplete pagination remains unknown, not zero.
+    The main post has already been verified independently of this optional read.
+    """
+    checked = (now or datetime.now(KST)).isoformat()
+    main = objects[0]
+    evidence = {'checked_at': checked, 'post_id': str(main['id']),
+                'status': 'main_verified', 'permalink': main.get('permalink'),
+                'actual_text': main['text'], 'actual_text_sha256': hashlib.sha256(main['text'].encode()).hexdigest(),
+                'body_chars': len(main['text']), 'media_type': main.get('media_type'),
+                'media_url': main.get('media_url'), 'expected_image_sha256': record.get('image_sha256'),
+                'automatic_reply_count': 0 if not any(record.get(k) for k in
+                    ('reply_text', 'engagement_text', 'reply_post_id', 'engagement_post_id')) else None,
+                'own_replies': None, 'own_replies_status': 'unverified',
+                'contract_version': 2, 'code_commit': record.get('code_commit')}
+    own_ids, seen, after = [], set(), None
+    try:
+        for _ in range(10):
+            params = {'fields': 'id,username,is_reply', 'limit': 100}
+            if after:
+                params['after'] = after
+            payload = api('GET', '/' + str(main['id']) + '/replies', token, params)
+            rows = payload.get('data')
+            if not isinstance(rows, list):
+                raise ValueError
+            for row in rows:
+                if (not isinstance(row, dict) or not str(row.get('id', '')).isdigit()
+                        or not isinstance(row.get('username'), str) or not row['username'].strip()
+                        or row.get('is_reply') is not True):
+                    raise ValueError
+                reply_id = str(row['id'])
+                if reply_id in seen:
+                    raise ValueError
+                seen.add(reply_id)
+                if str(row['username']).casefold() == 'hid_119':
+                    own_ids.append(reply_id)
+            paging = payload.get('paging') or {}
+            if not paging.get('next'):
+                evidence.update(own_replies=len(own_ids), own_reply_ids=own_ids,
+                                own_replies_status='verified', reply_scan_scope='top_level_all_pages')
+                evidence['status'] = ('verified' if not own_ids and evidence['automatic_reply_count'] == 0
+                                      else 'unexpected_own_reply_requires_review')
+                break
+            next_after = (paging.get('cursors') or {}).get('after')
+            if not isinstance(next_after, str) or not next_after or next_after == after:
+                raise ValueError
+            after = next_after
+        else:
+            evidence['own_replies_status'] = 'pagination_incomplete'
+    except Exception:
+        evidence['own_replies_status'] = 'access_or_response_unavailable'
+    return evidence
 
 
 def restore_accepted_receipt(record, history, remote):

@@ -4,6 +4,7 @@
 Usage: python scripts/create_thumbnail.py '{"id":"123","org":"기관명","title":"채용","count":16,"due":"2026-11-05"}'
 """
 from functools import lru_cache
+from datetime import datetime
 import json
 import re
 import sys
@@ -15,6 +16,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "threads-images"
 IMAGE_SIZE = (1080, 1080)
+COMPACT_LAYOUT_VERSION = "careerpick-single-main-card-v2"
 # A conservative decimal MB limit also fits an 8 MiB upload limit.
 MAX_IMAGE_BYTES = 8_000_000
 CTA = "자세한 채용정보는 프로필 링크를 확인하세요."
@@ -181,6 +183,106 @@ def verify_thumbnail(path):
         "mode": "RGB",
         "file_size_bytes": file_size,
     }
+
+
+def _compact_card_fields(job):
+    """Keep the verified values; only reformat an unambiguous ISO deadline.
+
+    This renderer is deliberately not a fact summarizer. Long qualification
+    text must be summarized and reviewed by the writer before it reaches here.
+    A field that cannot fit remains a layout error, never a shortened fact.
+    """
+    if not isinstance(job, dict):
+        raise ThumbnailLayoutError("A job dictionary is required")
+    fields = {}
+    for key in ("org", "title", "employment", "deadline_label"):
+        value = clean(job.get(key), fallback="")
+        if not value:
+            raise ThumbnailLayoutError(f"{key}: a verified value is required")
+        fields[key] = value
+    count = job.get("count")
+    if count is not None and not (
+        (type(count) is int and count > 0)
+        or (isinstance(count, str) and re.fullmatch(r"(?:[1-9][0-9]*|0{2,})명?", count.strip()))
+    ):
+        raise ThumbnailLayoutError("count: expected a positive or explicitly unspecified count")
+    fields["count"] = _count_text(count) if count is not None else "인원 공고 확인"
+    fields["restriction"] = clean(job.get("restriction"), fallback="")
+    # No URL, domain, hashtag or obfuscated URL may be placed on this card.
+    # Numeric dates (11.18) are not mistaken for domain names.
+    links = re.compile(
+        r"(?i)(?:https?\s*[:：]|hxxps?|www\s*[.．]|"
+        r"[a-z0-9-]+\s*[.．]\s*(?:com|net|org|kr|io|co|me|app|ai|dev|info|ly)\b|"
+        r"[a-z0-9-]+\s*\[dot\]\s*[a-z]{2,}|[#＃])"
+    )
+    if any(links.search(value) for value in fields.values()):
+        raise ThumbnailLayoutError("Card fields must not contain links or hashtags")
+    label = fields["deadline_label"]
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}(?: \d{2}:\d{2}(?::\d{2})?)?", label):
+        try:
+            stamp = datetime.fromisoformat(label)
+        except ValueError as exc:
+            raise ThumbnailLayoutError("deadline_label: invalid ISO date/time") from exc
+        # Dates and clock precision are preserved. Date-only never means 23:59.
+        clock = label[11:]
+        fields["deadline_label"] = f"{stamp.month}월 {stamp.day}일" + (f" {clock}" if clock else "")
+    return fields
+
+
+def generate_compact_card(job, destination):
+    """Render one mobile-readable card for the single-main editorial policy.
+
+    The job, employment type and scoped count are larger than the institution.
+    This path has no CTA banner and cannot insert a QR image or remote asset.
+    Metadata is a layout check, not a claim that human visual review occurred.
+    """
+    fields = _compact_card_fields(job)
+    destination = Path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    im = Image.new("RGB", IMAGE_SIZE, "#F3F7FC")
+    draw = ImageDraw.Draw(im)
+    navy, blue, muted = "#102C50", "#0759B4", "#41556E"
+
+    _draw_fitted(draw, "커리어픽", (70, 58, 1010, 103),
+                 size=30, minimum=30, max_lines=1, fill=blue, field="brand")
+    draw.rounded_rectangle((70, 127, 1010, 133), radius=3, fill="#CEDFF3")
+    _draw_fitted(draw, fields["title"], (70, 174, 1010, 411),
+                 size=96, minimum=78, max_lines=2, fill=navy,
+                 vertical="top", field="title")
+    _draw_fitted(draw, fields["employment"] + " · " + fields["count"],
+                 (70, 420, 1010, 590), size=76, minimum=68, max_lines=2,
+                 fill=blue, vertical="top", field="employment_and_count")
+    _draw_fitted(draw, fields["org"], (70, 631, 1010, 761),
+                 size=56, minimum=48, max_lines=2, fill=navy,
+                 vertical="top", field="org")
+
+    draw.rounded_rectangle((48, 798, 1032, 1032), radius=26, fill="white")
+    _draw_fitted(draw, "접수 마감", (78, 820, 1002, 860),
+                 size=30, minimum=30, max_lines=1, fill=muted, field="deadline_heading")
+    _draw_fitted(draw, fields["deadline_label"], (78, 881, 1002, 951),
+                 size=56, minimum=54, max_lines=1, fill=navy, field="deadline")
+    if fields["restriction"]:
+        _draw_fitted(draw, fields["restriction"], (78, 975, 1002, 1021),
+                     size=40, minimum=38, max_lines=1, fill=muted, field="restriction")
+
+    with tempfile.NamedTemporaryFile(dir=destination.parent, prefix=".compact-", suffix=".jpg", delete=False) as handle:
+        temporary = Path(handle.name)
+    try:
+        im.save(temporary, "JPEG", quality=95, subsampling=0, optimize=True, progressive=False)
+        metadata = verify_thumbnail(temporary)
+        if metadata["file_size_bytes"] < 10_000:
+            raise ThumbnailValidationError("Generated image is unexpectedly small")
+        metadata.update({
+            "layout_version": COMPACT_LAYOUT_VERSION,
+            "rendered_fields": fields,
+            "preview_width": 360,
+            "minimum_core_font_at_preview_px": 54 / 3,
+            "human_visual_review": "required",
+        })
+        temporary.replace(destination)
+        return metadata
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def generate(job):

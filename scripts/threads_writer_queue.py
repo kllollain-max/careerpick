@@ -86,7 +86,9 @@ def _fresh(value, now, scheduled, reason, max_age):
 def _policy(policy):
     if not isinstance(policy, dict) or type(policy.get("schema_version")) is not int or policy["schema_version"] != 1:
         _fail("POLICY_SCHEMA")
-    if policy.get("cta") != CTA or policy.get("slots") != list(SLOTS):
+    from scripts.threads_v5 import CTA as V5_CTA
+    expected_cta = V5_CTA if policy.get('editorial_v5', {}).get('enabled') else CTA
+    if policy.get("cta") != expected_cta or policy.get("slots") != list(SLOTS):
         _fail("POLICY_CONTRACT")
     if not isinstance(policy.get("prompt_path"), str) or not policy["prompt_path"].strip():
         _fail("POLICY_PROMPT_PATH")
@@ -521,12 +523,15 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     its separately validated snapshot under _cleaneye, without relabelling it.
     Image assignment/creation and final API account checks occur in the publisher.
     """
+    from scripts.threads_v5 import entry_mode, CTA as V5_CTA, FORMATS as V5_FORMATS
+    v5 = entry_mode(entry, policy)
+    cta = V5_CTA if v5 else CTA
     limit, max_age = _policy(policy)
     scheduled = _slot(scheduled)
     now = _aware(now, "NOW_TIMEZONE")
     if not isinstance(entry, dict) or _slot(entry.get("scheduled_at")) != scheduled:
         _fail("ENTRY_SLOT_MISMATCH")
-    expected_format = policy["formats"][f"{scheduled.hour:02}"]
+    expected_format = (V5_FORMATS if v5 else policy["formats"])[f"{scheduled.hour:02}"]
     if entry.get("format_id") != expected_format:
         _fail("ENTRY_FORMAT_MISMATCH")
     if entry.get("prompt_sha256") != policy["prompt_sha256"]:
@@ -541,7 +546,7 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     body = writer.get("post_text")
     if not isinstance(body, str) or not body.strip() or body != body.strip() or len(body) > limit:
         _fail("BODY_LENGTH_OR_WHITESPACE")
-    if body.count(CTA) != 1 or not body.endswith("\n\n" + CTA):
+    if body.count(cta) != 1 or not body.endswith("\n\n" + cta):
         _fail("BODY_CTA_CONTRACT")
     if URL_RE.search(body) or "#" in body or "＃" in body:
         _fail("BODY_LINK_OR_HASHTAG")
@@ -549,7 +554,8 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
         _fail("BODY_OTHER_ACTION")
     if _normal(facts["org"]) not in _normal(body):
         _fail("BODY_ORGANIZATION_MISSING")
-    _structure(body, expected_format)
+    if not v5:
+        _structure(body, expected_format)
     review = writer.get("review")
     if not isinstance(review, dict) or review.get("notice_id") != notice_id:
         _fail("REVIEW_NOTICE_IDENTITY")
@@ -584,7 +590,16 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     _profile(review, notice_id, now, scheduled, max_age)
     image_job = _image(entry, post, detail, review, refs, end_date, period, end_has_seconds)
     from scripts.threads_reach_editorial import validate_reach
-    validate_reach(entry, policy, image_job, review, refs, detail)
+    if v5:
+        from scripts.threads_v5 import validate_review
+        validate_review(entry, image_job, review, refs, detail, history, now=now)
+        # The compact renderer accepts only the restriction text that passed
+        # the source-backed semantic review. Do not forward arbitrary card data.
+        restriction = review.get('v5', {}).get('card_restriction')
+        if restriction:
+            image_job['restriction'] = restriction
+    else:
+        validate_reach(entry, policy, image_job, review, refs, detail)
     _history(history, notice_id, expected_format, scheduled, body, facts["org"])
     has_published = any(record.get("status") == "published" and record.get("text") for record in history["records"])
     allowed_repetition = ("checked", "partial") if has_published else ("checked", "no_history")

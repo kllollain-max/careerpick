@@ -354,7 +354,11 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
             eligible.append((row, post, detail, context))
     # Exact identity deduplication occurs before limiting. No fuzzy scores or
     # institution-level deduplication that could erase distinct recruiting units.
-    eligible.sort(key=lambda item: _ranking_key(item[0]))
+    if policy.get('editorial_v5', {}).get('enabled'):
+        from scripts.threads_v5 import ranking_key
+        eligible.sort(key=lambda item: ranking_key(item[0], now=now, history=history.get('records', [])))
+    else:
+        eligible.sort(key=lambda item: _ranking_key(item[0]))
     unique, identities = [], set()
     for item in eligible:
         row, post, _, _ = item
@@ -395,6 +399,15 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
              "ranking_order": ["current_application_open", "exact_employment_type", "verified_unit_count_desc",
                                "sector_priority", "actual_deadline", "notice_id_tiebreak"],
              "review_errors": review_errors, "rows": rows}
+    if policy.get('editorial_v5', {}).get('enabled'):
+        audit['policy_id'] = 'careerpick-threads-selection-v5-20261111'
+        audit['sector_policy']['scope'] = 'descriptive_only_no_assumed_reader_interest'
+        audit['sector_policy']['priority_order'] = None
+        audit['ranking_order'] = ['current_application_open','verified_reader_relevance_if_available',
+                                  'exact_employment_type','verified_unit_count_desc',
+                                  'verified_advantage_if_available','preparation_time',
+                                  'recent_notice_diversity','actual_deadline','notice_id_tiebreak']
+        audit['preparation_time_heuristic_hours'] = 48
     review_rows = [{k: v for k, v in r.items() if k not in {"source_post_sha256", "source_detail_sha256"}}
                    for r in rows if r["decision"] == "review_required"]
     return {"candidates": items, "selection_audit": audit, "review_candidates": review_rows,

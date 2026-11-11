@@ -39,7 +39,30 @@ def build_input(now, limit=24, reviewed_entries=None, *, queued_entries=None):
                               **({'hook_type': balanced_hook_type(at, datetime.fromisoformat(
                                   policy['editorial_policy']['effective_at']).date())}
                                  if editorial_prompt else {})})
-    return {'reference_at': now.isoformat(), 'policy': policy,
+    from scripts.threads_v5 import load_prompt, FORMATS, balanced_intro_type
+    v5_prompt = load_prompt(ROOT, policy)
+    if policy.get('editorial_v5', {}).get('enabled'):
+        confirmed = [r for r in history.get('records', [])
+                     if r.get('status') == 'published' and r.get('threads_post_id')]
+        prior = next((r for r in reversed(confirmed) if 'image_url' in r), None)
+        next_media = 'IMAGE' if prior is not None and not prior.get('image_url') else 'TEXT'
+        planning_history = list(confirmed)
+        for slot in slots:
+            scheduled = datetime.fromisoformat(slot['scheduled_at'])
+            slot['format_id'] = FORMATS[f"{scheduled.hour:02}"]
+            slot['hook_type'] = balanced_intro_type(scheduled, planning_history, next_media)
+            slot['planned_media'] = next_media
+            slot['experiment_variable'] = 'intro_target_vs_condition_only'
+            slot['planning_only_recheck_actual_success_history'] = True
+            # Balance the planning batch too; this synthetic row is never saved
+            # to the publication history or counted as a published observation.
+            planning_history.append({'status': 'published', 'threads_post_id': 'planning-only',
+                'scheduled_at': slot['scheduled_at'], 'image_url': 'planned' if next_media == 'IMAGE' else '',
+                'writer_review': {'v5': {'policy_id': policy['editorial_v5']['id'],
+                    'contract_version': 2, 'first_sentence_type': slot['hook_type']}}})
+            next_media = 'TEXT' if next_media == 'IMAGE' else 'IMAGE'
+    return {'v5_prompt': v5_prompt, 'v5_enabled': policy.get('editorial_v5', {}).get('enabled', False),
+            'reference_at': now.isoformat(), 'policy': policy,
             'source_updated': source.get('updated'), 'operations': operations,
             'cleaneye_source': {'status': selection['cleaneye_status'], 'updated': cleaneye.get('updated') if isinstance(cleaneye, dict) else None},
             'slots': slots, 'candidates': selection['candidates'],
@@ -78,7 +101,7 @@ def check_queue(path, now):
             continue
         selected = validate_entry(entry, scheduled, now, history, source, details, policy)
         from scripts.threads_auto import master_public_copy
-        main, detail = master_public_copy(selected, policy.get('publication_style'))
+        main, detail = master_public_copy(selected, 'single_main_v5' if selected.get('writer_review', {}).get('v5') else policy.get('publication_style'), now=now)
         checked.append({'scheduled_at': entry['scheduled_at'], 'notice_id': entry['notice_id'],
                         'format_id': entry['format_id'], 'chars': len(entry['writer']['post_text']),
                         'public_preview': {'main_text': main, 'detail_reply': detail},

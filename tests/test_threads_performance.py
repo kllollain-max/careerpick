@@ -286,5 +286,269 @@ class PerformanceTests(unittest.TestCase):
         self.assertEqual(report["excluded_observations"]["public_main_unverified"], 1)
 
 
+class V5PerformanceTests(unittest.TestCase):
+    def setUp(self):
+        fixture = PerformanceTests()
+        fixture.setUp()
+        self.record = deepcopy(fixture.record)
+        self.record["reply_status"] = "not_requested"
+        self.record["reply_post_id"] = None
+        self.record["writer_review"]["v5"] = {"policy_id": perf.V5_POLICY_ID,
+            "contract_version": 2, "first_sentence_type": "target", "sector_group": "other"}
+        self.published = fixture.published
+        self.now = self.published + timedelta(hours=24, minutes=20)
+        self.empty = {"schema_version": 1, "observations": []}
+
+    def make_observation(self, record=None, *, hours=24, delay_minutes=20, metrics=None):
+        record = record or self.record
+        captured = perf.moment(record["published_at"]) + timedelta(hours=hours, minutes=delay_minutes)
+        plan = perf.measurement_plan({"records": [record]}, self.empty, captured)
+        item = next(row for row in plan["items"] if row["window"] == str(hours) + "h")
+        proof = perf.public_main_evidence(record,
+            {"id": record["threads_post_id"], "text": record["text"], "is_reply": False}, captured)
+        item["metadata"] = perf.publication_metadata(record, proof)
+        return perf.observation(item, captured_at=captured,
+            metrics=metrics if metrics is not None else {"views": 100, "likes": 3, "reposts": 1, "quotes": 0})
+
+    def test_likes_rate_is_percent_and_never_treats_missing_or_zero_views_as_a_rate(self):
+        self.assertEqual(perf.likes_rate_percent({"views": 40, "likes": 1}), 2.5)
+        self.assertEqual(perf.likes_rate_percent({"views": 40, "likes": 0}), 0)
+        for values in ({"views": 0, "likes": 0}, {"views": 10}, {"likes": 1}, {"views": True, "likes": 0}):
+            self.assertIsNone(perf.likes_rate_percent(values))
+
+    def test_contract2_metadata_uses_v5_context_without_overwriting_legacy_records(self):
+        self.record["writer_review"]["v5"]["comparison_context"] = {
+            "audience_scope": "충남 학력·주소·거주이력 인정 경로", "comparison_group": "verified-building"}
+        context = perf.publication_metadata(self.record)
+        self.assertEqual(context["audience_scope"], "충남 학력·주소·거주이력 인정 경로")
+        self.assertEqual(context["comparison_group"], "verified-building")
+        self.record["writer_review"]["v5"]["contract_version"] = 1
+        context = perf.publication_metadata(self.record)
+        self.assertEqual(context["audience_scope"], "정보보안기사 보유자")
+
+    def test_editorially_excluded_condition_post_keeps_metrics_but_not_experiment_membership(self):
+        self.record["writer_review"]["v5"].update(first_sentence_type="condition", experiment_eligible=False)
+        observation = self.make_observation()
+        result = perf.v5_performance_summary({"records": [self.record]}, {"observations": [observation]}, self.now)
+        self.assertEqual(result["windows"]["24h"]["verified_main_count"], 1)
+        self.assertEqual(result["windows"]["24h"]["metric_medians"]["views"], 100)
+        self.assertEqual(result["periods"][0]["intro_groups_24h"], {})
+        self.assertFalse(result["periods"][0]["eight_per_type_review_threshold_met"])
+
+    def test_deadline_and_job_types_do_not_become_a_second_experiment(self):
+        records, observations = [], []
+        for index, kind in enumerate(("deadline", "job")):
+            record = deepcopy(self.record)
+            record["threads_post_id"] = str(800 + index)
+            record["writer_review"]["v5"].update(first_sentence_type=kind, experiment_eligible=True)
+            records.append(record)
+            observations.append(self.make_observation(record))
+        result = perf.v5_performance_summary({"records": records}, {"observations": observations}, self.now)
+        self.assertEqual(result["windows"]["24h"]["verified_main_count"], 2)
+        self.assertEqual(result["periods"][0]["intro_groups_24h"], {})
+
+    def test_first_verified_publication_anchors_observation_period_without_insights(self):
+        proof = {"status": "main_verified", "post_id": self.record["threads_post_id"],
+                 "actual_text_sha256": perf._text_sha256(self.record["text"]),
+                 "checked_at": (self.published + timedelta(minutes=1)).isoformat()}
+        self.record["public_output_verification"] = proof
+        no_metrics = perf.v5_performance_summary({"records": [self.record]}, self.empty, self.now)
+        self.assertEqual(no_metrics["experiment_start"], self.published.isoformat())
+        self.assertEqual(no_metrics["windows"]["24h"]["verified_main_count"], 0)
+        self.assertEqual(no_metrics["experiment_start_evidence"], [{"post_id": "123", "source": "public_output_verification"}])
+        later = deepcopy(self.record)
+        later.pop("public_output_verification")
+        later["threads_post_id"] = "124"
+        later["published_at"] = (self.published + timedelta(days=15)).isoformat()
+        observation = self.make_observation(later)
+        result = perf.v5_performance_summary({"records": [self.record, later]}, {"observations": [observation]}, self.published + timedelta(days=17))
+        self.assertEqual(result["experiment_start"], self.published.isoformat())
+        self.assertEqual(result["periods"][0]["windows"]["24h"]["verified_main_count"], 0)
+        self.assertEqual(result["periods"][1]["windows"]["24h"]["verified_main_count"], 1)
+
+    def test_public_output_anchor_rejects_wrong_id_hash_time_receipt_or_old_contract(self):
+        original = {"status": "verified", "post_id": "123", "actual_text_sha256": perf._text_sha256(self.record["text"]),
+                    "checked_at": self.now.isoformat()}
+        cases = [("proof", "post_id", "999"), ("proof", "actual_text_sha256", "0" * 64),
+                 ("proof", "checked_at", (self.now + timedelta(hours=1)).isoformat()),
+                 ("proof", "status", "unverified"), ("record", "request_status", "sending"),
+                 ("meta", "contract_version", 1)]
+        for scope, key, value in cases:
+            with self.subTest(scope=scope, key=key):
+                record = deepcopy(self.record)
+                record["public_output_verification"] = deepcopy(original)
+                target = (record["public_output_verification"] if scope == "proof" else
+                          record["writer_review"]["v5"] if scope == "meta" else record)
+                target[key] = value
+                report = perf.v5_performance_summary({"records": [record]}, self.empty, self.now)
+                self.assertIsNone(report["experiment_start"])
+
+    def test_24h_and_72h_are_separate_and_show_actual_age(self):
+        observations = [self.make_observation(), self.make_observation(hours=72, metrics={"views": 200, "likes": 4})]
+        report = perf.summarize({"records": [self.record]}, {"observations": observations}, self.published + timedelta(hours=73))["v5_performance"]
+        self.assertEqual(set(report["windows"]), {"24h", "72h"})
+        self.assertEqual(report["windows"]["24h"]["metric_medians"]["views"], 100)
+        self.assertEqual(report["windows"]["72h"]["metric_medians"]["views"], 200)
+        self.assertEqual(report["observations"]["24h"][0]["likes_rate_percent"], 3)
+        self.assertEqual(report["observations"]["72h"][0]["elapsed_seconds"], 72 * 3600 + 1200)
+        self.assertIsNone(report["observations"]["24h"][0]["reader_replies"])
+
+    def test_late_cumulative_is_retained_but_excluded_from_milestone_distribution(self):
+        observation = self.make_observation(delay_minutes=120)
+        report = perf.v5_performance_summary({"records": [self.record]}, {"observations": [observation]}, self.published + timedelta(hours=27))
+        self.assertEqual(report["windows"]["24h"]["verified_main_count"], 0)
+        self.assertEqual(report["late_cumulative_observations"][0]["elapsed_seconds"], 26 * 3600)
+        self.assertEqual(report["late_cumulative_observations"][0]["metrics"]["views"], 100)
+
+    def test_future_public_read_cannot_validate_an_earlier_snapshot(self):
+        observation = self.make_observation()
+        observation["public_verification"]["checked_at"] = (self.now + timedelta(minutes=1)).isoformat()
+        report = perf.v5_performance_summary({"records": [self.record]}, {"observations": [observation]}, self.now + timedelta(minutes=2))
+        self.assertEqual(report["windows"]["24h"]["verified_main_count"], 0)
+        self.assertIsNone(report["experiment_start"])
+
+    def test_full_distribution_and_likes_totals_do_not_hide_outlier(self):
+        records, observations = [], []
+        for index, views in enumerate((10, 12, 1000)):
+            record = deepcopy(self.record)
+            record["threads_post_id"] = str(1000 + index)
+            records.append(record)
+            observations.append(self.make_observation(record, metrics={"views": views, "likes": index}))
+        report = perf.v5_performance_summary({"records": records}, {"observations": observations}, self.now)
+        stats = report["windows"]["24h"]
+        self.assertEqual(stats["metric_medians"]["views"], 12)
+        self.assertEqual([row["views"] for row in stats["views_distribution"]], [10, 12, 1000])
+        self.assertEqual(stats["metric_totals"]["likes"], 3)
+        self.assertIsNone(stats["metric_totals"]["quotes"])
+
+    def test_14day_cohorts_remain_anchored_after_first_month(self):
+        first = self.make_observation()
+        record2 = deepcopy(self.record)
+        record2["threads_post_id"] = "124"
+        record2["published_at"] = (self.published + timedelta(days=15)).isoformat()
+        second = self.make_observation(record2)
+        report = perf.v5_performance_summary({"records": [self.record, record2]}, {"observations": [first, second]}, self.published + timedelta(days=35))
+        self.assertEqual(report["experiment_start"], self.published.isoformat())
+        self.assertEqual(len(report["periods"]), 3)
+        self.assertEqual(report["periods"][0]["windows"]["24h"]["verified_main_count"], 1)
+        self.assertEqual(report["periods"][1]["windows"]["24h"]["verified_main_count"], 1)
+        self.assertEqual(report["periods"][2]["windows"]["24h"]["verified_main_count"], 0)
+
+    def test_slot_media_confounding_is_reported_even_when_each_type_has_eight(self):
+        records, observations = [], []
+        for arm, slot, image in (("target", 8, "image-url"), ("condition", 12, "")):
+            for index in range(8):
+                record = deepcopy(self.record)
+                record["threads_post_id"] = str(2000 + index + (100 if arm == "condition" else 0))
+                record["text"] = f"{arm} {index} 지원대상\n검증본문"
+                record["writer_review"]["v5"]["first_sentence_type"] = arm
+                record["scheduled_at"] = f"2026-11-10T{slot:02}:00:00+09:00"
+                record["image_url"] = image
+                records.append(record)
+                observations.append(self.make_observation(record))
+        report = perf.v5_performance_summary({"records": records}, {"observations": observations}, self.published + timedelta(days=14))
+        period = report["periods"][0]
+        self.assertTrue(period["eight_per_type_review_threshold_met"])
+        self.assertEqual(len(period["missing_intro_strata"]), 2)
+        self.assertEqual(period["decision"], "extend_observation_or_balance_intro_types")
+        self.assertFalse(period["statistical_significance_claim"])
+
+    def test_follower_net_is_account_level_and_uses_actual_observation_boundaries(self):
+        first = perf.account_observation(captured_at=self.now, followers_count=100, source="existing_insights_read")
+        last = perf.account_observation(captured_at=self.now + timedelta(days=2), followers_count=97, source="existing_insights_read")
+        state = perf.merge_account_observations(self.empty, [first, last])
+        result = perf.account_followers_summary(state, start=self.published, end=self.now + timedelta(days=3))
+        self.assertEqual(result["net_change"], -3)
+        self.assertEqual(result["observed_start"], self.now.isoformat())
+        self.assertFalse(result["exact_requested_boundaries"])
+        self.assertIsNone(result["post_attribution"])
+
+    def test_unknown_follower_count_and_real_zero_remain_distinct(self):
+        unknown = perf.account_observation(captured_at=self.now, status="permission_denied")
+        state = perf.merge_account_observations(self.empty, [unknown])
+        result = perf.account_followers_summary(state, end=self.now)
+        self.assertEqual(result["status"], "unavailable")
+        self.assertIsNone(result["net_change"])
+        zero = perf.account_observation(captured_at=self.now + timedelta(minutes=1), followers_count=0, source="existing_insights_read")
+        state = perf.merge_account_observations(state, [zero])
+        result = perf.account_followers_summary(state, end=self.now + timedelta(minutes=2))
+        self.assertEqual(result["status"], "baseline_only")
+        self.assertEqual(result["start_followers"], 0)
+        self.assertIsNone(result["net_change"])
+        with self.assertRaises(ValueError):
+            perf.account_observation(captured_at=self.now, followers_count=0, status="permission_denied")
+
+    def test_aggregation_delay_is_not_missing_or_zero_and_is_retryable(self):
+        item = perf.measurement_plan({"records": [self.record]}, self.empty, self.now)["items"][0]
+        obs = perf.observation(item, captured_at=self.now, status="aggregation_delayed")
+        self.assertEqual(obs["metric_status"]["views"], "aggregation_delayed")
+        self.assertIsNone(obs["metrics"]["views"])
+        state = perf.merge_observations(self.empty, [obs])
+        plan = perf.measurement_plan({"records": [self.record]}, state, self.now + timedelta(hours=2))
+        self.assertEqual(plan["items"][0]["status"], "due")
+
+    def test_documented_account_get_uses_total_value_and_keeps_credentials_out_of_url(self):
+        payload = {"data": [{"name": "followers_count", "total_value": {"value": 0}}]}
+        opener = Mock(return_value=io.BytesIO(json.dumps(payload).encode()))
+        self.assertEqual(perf.read_account_followers("not-a-real-token", opener=opener), 0)
+        request = opener.call_args.args[0]
+        self.assertEqual(request.get_method(), "GET")
+        self.assertEqual(request.full_url, "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count")
+        self.assertEqual(request.get_header("Authorization"), "Bearer not-a-real-token")
+        self.assertIsNone(request.data)
+        self.assertNotIn("since", request.full_url)
+        missing = Mock(return_value=io.BytesIO(b'{"data": []}'))
+        self.assertIsNone(perf.read_account_followers("not-a-real-token", opener=missing))
+
+    def test_account_baseline_collects_on_existing_run_even_when_no_post_is_due(self):
+        account_reader = Mock(return_value=123)
+        post_reader, insights = Mock(), Mock()
+        state, result = perf.collect_due({"records": []}, self.empty, self.now,
+            token="not-a-real-token", account_guard=Mock(), collector=insights,
+            public_reader=post_reader, clock=lambda: self.now, collect_account=True,
+            account_collector=account_reader)
+        account_reader.assert_called_once_with("not-a-real-token")
+        post_reader.assert_not_called()
+        insights.assert_not_called()
+        self.assertEqual(state["account_observations"][0]["followers_count"], 123)
+        self.assertEqual(result["account_insight_api_calls"], 1)
+        self.assertEqual(state["observations"], [])
+
+    def test_account_collection_failure_preserves_post_measurement_and_is_never_zero(self):
+        reader = Mock(return_value={"id": "123", "text": self.record["text"], "is_reply": False})
+        account_reader = Mock(side_effect=urllib.error.HTTPError("redacted", 403, "denied", {}, io.BytesIO()))
+        state, result = perf.collect_due({"records": [self.record]}, self.empty, self.now,
+            token="not-a-real-token", account_guard=Mock(), collector=Mock(return_value={"metrics": {"views": 12}}),
+            public_reader=reader, clock=lambda: self.now, collect_account=True, account_collector=account_reader)
+        self.assertEqual(result["status"], "measured")
+        self.assertEqual(state["observations"][0]["metrics"]["views"], 12)
+        self.assertIsNone(state["account_observations"][0]["followers_count"])
+        self.assertEqual(state["account_observations"][0]["status"], "permission_denied")
+        _, retry = perf.collect_due({"records": [self.record]}, state, self.now + timedelta(hours=1),
+            token="not-a-real-token", account_guard=Mock(), collect_account=True,
+            account_collector=account_reader)
+        account_reader.assert_called_once()
+        self.assertEqual(retry["api_calls"], 0)
+
+    def test_wrong_account_blocks_account_collection_and_retains_status(self):
+        account_reader = Mock(return_value=123)
+        state, _ = perf.collect_due({"records": []}, self.empty, self.now,
+            token="not-a-real-token", account_guard=Mock(side_effect=ValueError("wrong account")),
+            collect_account=True, account_collector=account_reader, clock=lambda: self.now)
+        account_reader.assert_not_called()
+        self.assertEqual(state["account_observations"][0]["status"], "account_unverified")
+
+    def test_hourly_account_observation_is_not_repeated_in_same_hour(self):
+        existing = perf.account_observation(captured_at=self.now, followers_count=123, source="actual_read")
+        state = perf.merge_account_observations(self.empty, [existing])
+        account_reader = Mock(return_value=124)
+        unchanged, result = perf.collect_due({"records": []}, state, self.now + timedelta(minutes=20),
+            token="not-a-real-token", account_guard=Mock(), collect_account=True,
+            account_collector=account_reader)
+        account_reader.assert_not_called()
+        self.assertEqual(unchanged, perf.merge_observations(state, []))
+        self.assertEqual(result["status"], "no_due_observations")
+
+
 if __name__ == "__main__":
     unittest.main()

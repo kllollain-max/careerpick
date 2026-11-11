@@ -128,7 +128,7 @@ jobs:
           sudo apt-get install -y fonts-nanum
           python -m pip install 'Pillow>=10,<13'
 
-      - name: Generate recruitment image
+      - name: Verify reviewed card or generate legacy image
         id: image_generate
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true' && steps.image_tools.outcome == 'success'
         run: |
@@ -139,8 +139,21 @@ jobs:
           history = json.loads(Path('threads_posted.json').read_text(encoding='utf-8'))
           matches = [r for r in history.get('records', []) if r.get('run_id') == __import__('os').environ['GITHUB_RUN_ID'] and r.get('status') == 'pending']
           if len(matches) == 1 and matches[0].get('image_job'):
-              path = Path(generate(matches[0]['image_job']))
-              quality = verify_thumbnail(path)
+              if matches[0].get('writer_review', {}).get('v5', {}).get('contract_version') == 2:
+                  from datetime import datetime
+                  from zoneinfo import ZoneInfo
+                  from scripts.threads_card_review import verify_reviewed_card
+                  quality = verify_reviewed_card(matches[0]['image_job'], matches[0]['writer_review'],
+                                                 Path('.'), datetime.now(ZoneInfo('Asia/Seoul')))
+                  path = Path(quality['asset_path'])
+              elif matches[0].get('writer_review', {}).get('v5'):
+                  from scripts.threads_v5 import generate_card
+                  path = Path('threads-images') / (matches[0]['job_id'] + '.jpg')
+                  quality = generate_card(matches[0]['image_job'], path)
+              else:
+                  path = Path(generate(matches[0]['image_job']))
+                  quality = {}
+              quality = {**quality, **verify_thumbnail(path)}
               matches[0]['image_quality'] = quality
               matches[0]['image_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
               Path('threads_posted.json').write_text(json.dumps(history, ensure_ascii=False, indent=2) + chr(10))
@@ -246,6 +259,47 @@ jobs:
         if: ${{ failure() && env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' }}
         run: python scripts/threads_reconcile.py --finalize-unsent
 
+      - name: Verify actual main, media and own replies
+        if: ${{ always() && env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          history = json.loads(Path('threads_posted.json').read_text(encoding='utf-8'))
+          records = history.get('records', [])
+          mine = [r for r in records if str(r.get('run_id')) == os.environ['GITHUB_RUN_ID']]
+          post_ok = len(mine) == 1 and mine[0].get('status') == 'published' and bool(mine[0].get('threads_post_id'))
+          optional_replies = post_ok and mine[0].get('content_type') in ('discussion', 'tip', 'master_job')
+          reply_ok = post_ok and (bool(mine[0].get('reply_post_id')) if not optional_replies or mine[0].get('reply_text') else True)
+          engagement_ok = post_ok and (bool(mine[0].get('engagement_text')) and bool(mine[0].get('engagement_post_id')) if not optional_replies else (not mine[0].get('engagement_text') or bool(mine[0].get('engagement_post_id'))))
+          lines = ['## Threads publication result', '', '- Main post recorded: **' + ('YES' if post_ok else 'NO') + '**', '- Required reply contract: **' + ('PASS' if reply_ok else 'FAIL') + '**']
+          lines.append('- Engagement reply recorded: **' + ('YES' if engagement_ok else 'NO') + '**')
+          if not reply_ok or not engagement_ok:
+              lines.append('- **ACTION REQUIRED:** inspect this run and remote Threads state; do not blindly repost.')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
+              out.write(chr(10).join(lines) + chr(10))
+          if not post_ok or not reply_ok or not engagement_ok:
+              raise SystemExit('Threads publication incomplete; investigate without duplicate repost')
+          from scripts.threads_auto import verify_published_record, single_post_output_evidence
+          objects = verify_published_record(mine[0], os.environ['THREADS_ACCESS_TOKEN'])
+          if mine[0].get('writer_review', {}).get('v5', {}).get('contract_version') == 2:
+              proof = single_post_output_evidence(mine[0], objects, os.environ['THREADS_ACCESS_TOKEN'])
+              mine[0]['public_output_verification'] = proof
+              Path('threads_posted.json').write_text(json.dumps(history, ensure_ascii=False, indent=2) + chr(10))
+              Path('.threads-output-evidence.json').write_text(json.dumps(proof, ensure_ascii=False, indent=2) + chr(10))
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
+                  out.write('- Actual main chars: ' + str(proof['body_chars']) + chr(10))
+                  out.write('- Actual media: ' + str(proof['media_type']) + chr(10))
+                  out.write('- Automatic replies: ' + str(proof['automatic_reply_count']) + chr(10))
+                  out.write('- Own replies verification: ' + proof['own_replies_status'] + chr(10))
+                  out.write('- Own replies observed: ' + str(proof['own_replies']) + chr(10))
+              if proof['status'] == 'unexpected_own_reply_requires_review':
+                  raise SystemExit('Unexpected own reply; review without deleting or reposting')
+          for obj in objects:
+              print('Meta GET verified:', obj['id'], obj.get('permalink', ''))
+          print('Verified actual publication IDs, text and any required reply links')
+          PY
+
       - name: Persist publishing outcome
         if: ${{ always() && env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' }}
         run: |
@@ -279,33 +333,6 @@ jobs:
             fi
           fi
 
-      - name: Verify published post and reply
-        if: ${{ always() && env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' }}
-        run: |
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          records = json.loads(Path('threads_posted.json').read_text(encoding='utf-8')).get('records', [])
-          mine = [r for r in records if str(r.get('run_id')) == os.environ['GITHUB_RUN_ID']]
-          post_ok = len(mine) == 1 and mine[0].get('status') == 'published' and bool(mine[0].get('threads_post_id'))
-          optional_replies = post_ok and mine[0].get('content_type') in ('discussion', 'tip', 'master_job')
-          reply_ok = post_ok and (bool(mine[0].get('reply_post_id')) if not optional_replies or mine[0].get('reply_text') else True)
-          engagement_ok = post_ok and (bool(mine[0].get('engagement_text')) and bool(mine[0].get('engagement_post_id')) if not optional_replies else (not mine[0].get('engagement_text') or bool(mine[0].get('engagement_post_id'))))
-          lines = ['## Threads publication result', '', '- Main post recorded: **' + ('YES' if post_ok else 'NO') + '**', '- Detail reply recorded: **' + ('YES' if reply_ok else 'NO') + '**']
-          lines.append('- Engagement reply recorded: **' + ('YES' if engagement_ok else 'NO') + '**')
-          if not reply_ok or not engagement_ok:
-              lines.append('- **ACTION REQUIRED:** inspect this run and remote Threads state; do not blindly repost.')
-          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
-              out.write(chr(10).join(lines) + chr(10))
-          if not post_ok or not reply_ok or not engagement_ok:
-              raise SystemExit('Threads publication incomplete; investigate without duplicate repost')
-          from scripts.threads_auto import verify_published_record
-          objects = verify_published_record(mine[0], os.environ['THREADS_ACCESS_TOKEN'])
-          for obj in objects:
-              print('Meta GET verified:', obj['id'], obj.get('permalink', ''))
-          print('Verified actual publication IDs, text and any required reply links')
-          PY
-
       - name: Preserve recovery evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -315,6 +342,7 @@ jobs:
             threads_posted.json
             .threads-writer-queue.json
             .threads-recovery-report.json
+            .threads-output-evidence.json
           include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 30
@@ -341,7 +369,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Collect due 24-hour and 7-day main-post observations
+      - name: Collect due 24-hour and 72-hour observations and preserve legacy measurements
         run: python scripts/threads_performance_store.py --history threads_posted.json --output threads-performance-result.json
       - uses: actions/upload-artifact@v4
         if: always()
