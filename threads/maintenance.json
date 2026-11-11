@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11T12:55:30Z",
-  "last_observed_at": "2026-11-11T12:55:30Z",
+  "updated_at": "2026-11-11T14:48:10Z",
+  "last_observed_at": "2026-11-11T14:48:10Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "d280b8811a5c2a0501e1bac9243fc5ff083d369f",
+    "blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -73,10 +73,17 @@
         "format_id": "eligibility",
         "characters": 271,
         "contract_version": 2
+      },
+      {
+        "scheduled_at": "2026-11-12T20:00:00+09:00",
+        "notice_id": "a306746",
+        "format_id": "deadline_opportunity",
+        "characters": 300,
+        "contract_version": 2
       }
     ],
-    "last_update_commit_sha": "47ddab995f0183e26a5be6d96f2676f554837aee",
-    "readback_verified_at": "2026-11-11T12:55:30Z"
+    "last_update_commit_sha": "acfd9a6d4259fc3384d8327eab3160cb36dfde6b",
+    "readback_verified_at": "2026-11-11T14:48:10Z"
   },
   "observed_runs": [
     {
@@ -1878,6 +1885,73 @@
       },
       "status": "merged_and_reproduced_input_verified",
       "next_verification": "Next natural writer input at main should still omit every active/future READY ID before cap; regular publisher unchanged; no rerun."
+    },
+    {
+      "id": "threads-utc-validThrough-20261111-pr51",
+      "observed_at": "2026-11-11T14:46:57Z",
+      "kind": "candidate_validation_and_ci_dependency",
+      "publisher_failure": false,
+      "confirmed_cause": "Current main compares KST date/clock to literal UTC source; correct official offset-aware validThrough close fails APPLICATION_END_EVIDENCE_MISMATCH. Proposed fix passes local tests, CI cannot reach Threads tests because Ubuntu mirror DNS resolution fails.",
+      "hypothesis": "Transient runner/Ubuntu DNS transport issue; not demonstrated application-test regression.",
+      "stage": "PR_CI_dependency_install",
+      "error_codes": [
+        "APPLICATION_END_EVIDENCE_MISMATCH",
+        "apt_exit_100",
+        "Temporary_failure_resolving_Ubuntu_mirrors"
+      ],
+      "fingerprint": "pr51:d95daa11e4f05e65f9dfba86d4023b44bc5837dd:43039199616:1:install-exact-card-deps:DNS:100",
+      "run_id": "43039199616",
+      "run_attempt": 1,
+      "head_sha": "d95daa11e4f05e65f9dfba86d4023b44bc5837dd",
+      "pr_url": "https://github.com/kllollain-max/careerpick/pull/51",
+      "local_tests": {
+        "threads": 257,
+        "recovered": 18,
+        "status": "passed",
+        "log_sha256": "8398d7ffbc7626ca60a05cc17e0562d0c49ef49a91d366c458182b993fe415d8"
+      },
+      "ci": [
+        {
+          "name": "content-mobile",
+          "status": "completed",
+          "conclusion": "failure",
+          "job_id": 130586129950,
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43039199412/job/130586129950"
+        },
+        {
+          "name": "verify",
+          "status": "completed",
+          "conclusion": "success",
+          "job_id": 130586129566,
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43039199638/job/130586129566"
+        },
+        {
+          "name": "check",
+          "status": "completed",
+          "conclusion": "failure",
+          "job_id": 130586129182,
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43039199616/job/130586129182"
+        },
+        {
+          "name": "review",
+          "status": "completed",
+          "conclusion": "success",
+          "job_id": 130586128664,
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43039199359/job/130586128664"
+        }
+      ],
+      "code_applied": false,
+      "pr_merged": false,
+      "automatic_post_recovery_attempts": 0,
+      "claim": null,
+      "post_id": null,
+      "send_state": "no_send_no_reservation",
+      "next_conditions": [
+        "Require passing required CI and exact-head merge before using UTC-specific new entry.",
+        "No dispatch/rerun, no bypass or false passing evidence; preserve existing three ready entries.",
+        "Candidate16 remains HOLD; alternatively review a current-main-compatible official notice."
+      ],
+      "notified_at": "2026-11-11T14:46:57Z"
     }
   ],
   "prevention_rules": [
@@ -1922,7 +1996,10 @@
   "next_actions": [
     "Check new scheduled runs against accepted claims, main history and official Meta verification; the first natural publication has already been reported.",
     "Preserve reserved entries; validate and replenish unstarted future drafts with current official evidence.",
-    "On a new incident, preserve cause, failing run/attempt/head, repair PR, regression check and observed recovery in this file using the latest blob SHA."
+    "On a new incident, preserve cause, failing run/attempt/head, repair PR, regression check and observed recovery in this file using the latest blob SHA.",
+    "Observe Nov12 08 existing IMAGE and 12 preserved TEXT; regular slots only.",
+    "PR51 UTC fix remains unmerged; required CI dependency DNS must clear before candidate16 can become ready. Do not rerun publisher or bypass checks.",
+    "Nov12 20 telecom ready has reviewed conditional-image assets; actual success history decides media."
   ],
   "writer_holds": {
     "2026-11-07T12:00:00+09:00": {
@@ -4291,22 +4368,309 @@
       "resolved_at": "2026-11-10T14:11:08.072Z",
       "slot_selected_notice_id": "a306786",
       "resolution": "Slot filled by validated ALIO alternative. Original held draft retained under writer_hold_alternatives; do not reuse this slot."
+    },
+    "2026-11-12T16:00:00+09:00": {
+      "scheduled_at": "2026-11-12T16:00:00+09:00",
+      "format_id": "interest",
+      "notice_id": "a305734",
+      "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "source_post_sha256": "d7781b08f787f197ddba8085678d6302af68e51c14bfcdabdbf9ece11a8dc845",
+      "source_detail_sha256": "179a25b94fa50ff7c17925f69889414a513896ccf36120feb80b8e03f4a0fb31",
+      "publication_policy_id": "careerpick-threads-v5-20261111",
+      "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "prepared_at": "2026-11-11T23:29:46.739405+09:00",
+      "image_job": {
+        "id": "a305734",
+        "org": "한국조세재정연구원",
+        "title": "연구직 (부)연구위원",
+        "count": 10,
+        "employment": "정규직",
+        "location": "세종특별자치시",
+        "due": "2026-12-01",
+        "deadline_label": "2026-12-01 08:59:59"
+      },
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "조세·재정 연구직을 찾는 분께,\n한국조세재정연구원 정규직 연구직 (부)연구위원 10명이에요.\n\n경제학 또는 관련 분야 박사학위가 입사 때 필요해요.\n취득 예정자도 지원하며, 독립 연구역량·원활한 한국어 소통을 요구해요.\n\n세종특별자치시에서 09:00~18:00 전일근무예요.\n정년 60세·병역·결격 기준을 확인해요.\n\n추천서 3부는 추천인 3명이 접수 시스템에 직접 제출해요.\n마감: 한국시간 12월 1일 08:59:59예요.\n\n자세한 사항은 프로필링크 확인",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "a305734",
+          "scheduled_at": "2026-11-12T16:00:00+09:00",
+          "reference_at": "2026-11-11T23:29:46.739405+09:00",
+          "checked_at": "2026-11-11T23:23:44.140515+09:00",
+          "verification_basis": "checked_official_source",
+          "target_reader": "경제학·관련분야박사또는입사전학위취득예정이며독립연구와한국어소통·세종전일근무를검토할지원자",
+          "central_message": "정규직동일모집단위10명과박사취득기준일,추천인직접제출,UTC마감의KST변환을정확하게안내",
+          "pattern_id": "P4",
+          "source_refs": [
+            {
+              "url": "https://job.alio.go.kr/recruitview.do?idx=305734",
+              "checked_at": "2026-11-11T23:23:44.140515+09:00",
+              "sha256": "90a6340fbe839047c5e95ac2b5904d3b06f46feafb466a69896211db7aa3fd29",
+              "excerpt": "공공기관 채용정보시스템 건너뛰기영역 본문바로가기 이 누리집은 대한민국 공식 전자정부 누리집입니다. 로그인 전체메뉴 홈페이지 주메뉴 공공기관 채용정보 공공기관이란 공공기관정보 공공기관비교 공공기관 채용정보박람회 전체일정표 오시는 길 --> JOB-ALIO 소개 공지사항 공공기관 채용정보 한국조세재정연구원 [한국조세재정연구원] 연구위원급(Research Fellow) 정기채용 공고 URL : https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451 표준직무(NCS) 연구 학력정보 박사 근무분야 연구직 채용구분 신입+경력 고용형태 정규직 대체인력여부 아니오 근무지 세종 급여정보 신입 / 평균 채용인원 10명 우대조건 취업지원대상자, 장애인, 이전지역인재 채용기간 26.10.06 ~ 26.11.30 등록일 2026.10.06 '한국조세재정연구원' 에서 진행중인 채용공고 (최근 1개월 이전 공고) 더보기 --> 더보기 상세요강 전체보기 전형단계별 채용정보 첨부파일 전체보기 응시자격 경제학 또는 관련 분야 박사학위 소지자(학위취득 예정자 포함) 결격사유 - 국가공무원법 제33조에 해당하는 자 - 병역법 제76조 제1항에 따른 병역의무 불이행자 - 부패방지권익위법 제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 - 채용비리에 연루되어 기소된 자 - 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 자 우대내용 - 취업지원대상자: 전형별 만점의 5~10% - 장애인: 전형별 만점의 5% - 이전지역인재: 전형별 만점의 3% 전형절차/방법 - 전형절차: (1차)서류전형 - (2차)면접전형 - (3차)세미나전형 - 접수방식: 온라인 접수(https://econjobmarket.org/positions/12745) - 접수마감: 2026.11.30.(월) (UTC 협정세계시 기준) 연구위원급(Research Fellow) 구분 선발인원 응시인원 결과 확정일 1차 - - - 2차 - - - 최종 - - - 공고문 공고문.pdf 입사지원서 직무기술서 직무기술서.pdf 기타 첨부파일 (서식) 채용 이의신청서_한국조세재정연구원.hwp (참고) 이전지역인재 기준 안내.pdf 미첨부사유 입사지원서 서식 미첨부: 이력서(CV), 자기소개서 및 연구계획서 등 자유양식 닫기 왼쪽으로 오른쪽으로 일시정지 움직이기 --> --> 하단 이용메뉴 저작권정책 이메일무단수집거부 개인정보처리방침 (우)30112 세종특별자치시 도움6로 42 정부세종청사 재정경제부 Copyright © 2011 Ministry of Finance and Economy. Republic of Korea. Some Right Reserved."
+            },
+            {
+              "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "checked_at": "2026-11-11T23:23:44.141315+09:00",
+              "sha256": "742c5be30b56e58fad6d138d344a60c43f406b24bbbdaaf9b6d63cf6e2c624c5",
+              "excerpt": "연구원소식 >\"> 연구원소식 >\"> 연구원소식 >\" /> 채용공고 > 연구원소식 > 본문 바로가기 레프트메뉴 바로가기 대메뉴 바로가기 한국조세재정연구원 KIPF 한국조세재정연구원 HOME LOGIN ENG 전체메뉴 전체메뉴 검색 열기버튼 통합검색 검색어를 입력하세요 닫기 연구발간자료 연구발간자료 국민을 생각합니다. 미래를 설계합니다. 전체 연구보고서 정기간행물 재정포럼 조세재정브리프 KIPF 재정성과평가 동향과 이슈 국가회계재정통계 공공기관 Brief 기타연구보고서 센터발간자료 보고서 정기간행물 기타자료 역대간행물 연구논문집 연구총서 정책연구 정책보고서 재정연구 Working paper 재정패널조사 기초분석보고서 학술대회발표집 관련연구논문집 테크니컬리포트 BEPS대응지원센터 OECD보고서 요약자료 연구자료 유관기관자료 자주찾는 보고서 도서회원 안내 연구현황 연구현황 국민을 생각합니다. 미래를 설계합니다. 조세ㆍ재정ㆍ공공기관 현안 조세제도란? 조세체계 세목별 조세제도 재정제도 재정 재정과정 재정체계 재정법령 재정성과관리 조세ㆍ재정ㆍ공공기관 동향 해외동향 국내동향 연구원소식 연구원소식 국민을 생각합니다. 미래를 설계합니다. 공지사항 채용공고 보도자료 언론에 비친 KIPF KIPF 갤러리 참여공간 참여공간 국민을 생각합니다. 미래를 설계합니다. 연구제안 인재채용 채용안내 인재DB 등록 연구원교육 성과관리교육 교육FAQ 교육Q&A FAQ 연구원 자료이용 홈페이지이용 뉴스레터 인재채용 Q&A 클린신고센터 부패방지신고 청탁금지법 위반신고 행동강령 위반신고 불공정거래(갑질) 위반신고 연구윤리신고 성희롱·성폭력 신고 규제애로신고센터 인권침해 신고 공익침해신고 채용비위 신고 홈페이지 오류신고 설문조사 연구원안내 연구원안내 국민을 생각합니다. 미래를 설계합니다. 원장인사말 인사말 약력 연구원은 연혁 역대원장 연구활동 조직/직원 조직도 직원검색 연구진 한눈에보는 조세ㆍ재정통계 KIPF 홍보관 홍보영상 연차보고서 CI 카드뉴스 개원 30주년 홈페이지 뉴스레터 찾아오시는길 KIPF센터 KIPF센터 국민을 생각합니다. 미래를 설계합니다. 재정성과평가센터 공공기관연구센터 국가회계재정통계센터 재정지출분석센터 조세재정전망센터 세법연구센터 재정패널조사 BEPS대응지원센터 세정연구센터 조세지출성과관리센터 아태재정협력센터 센터소개 PEMNA 소개 발간자료 국제행사 정부투자분석센터 조세교육포털 공공기관 교육포털 정보공개 정보공개 국민을 생각합니다. 미래를 설계합니다. 정보공개 업무처리절차 정보공개방법 비공개 대상정보 관련서식 수수료안내 관계법령 및 정관 정보공개규칙 사전정보공표 정보목록 정보공개청구 사업실명제 공공데이터개방 공공데이터제공 경영공시 해외연수출장보고서 HOME 사이트맵 로그인 ENGLISH 연구발간자료 전체 연구보고서 정기간행물 재정포럼 조세재정브리프 KIPF 재정성과평가 동향과 이슈 국가회계재정통계 공공기관 Brief 기타연구보고서 센터발간자료 보고서 정기간행물 기타자료 역대간행물 연구논문집 연구총서 정책연구 정책보고서 재정연구 Working paper 재정패널조사 기초분석보고서 학술대회발표집 관련연구논문집 테크니컬리포트 BEPS대응지원센터 OECD보고서 요약자료 연구자료 유관기관자료 자주찾는 보고서 도서회원 안내 연구현황 조세ㆍ재정ㆍ공공기관 현안 조세제도란? 조세체계 세목별 조세제도 재정제도 재정 재정과정 재정체계 재정법령 재정성과관리 조세ㆍ재정ㆍ공공기관 동향 해외동향 국내동향 연구원소식 공지사항 채용공고 보도자료 언론에 비친 KIPF KIPF 갤러리 참여공간 연구제안 인재채용 채용안내 인재DB 등록 연구원교육 성과관리교육 교육FAQ 교육Q&A FAQ 연구원 자료이용 홈페이지이용 뉴스레터 인재채용 Q&A 클린신고센터 부패방지신고 청탁금지법 위반신고 행동강령 위반신고 불공정거래(갑질) 위반신고 연구윤리신고 성희롱·성폭력 신고 규제애로신고센터 인권침해 신고 공익침해신고 채용비위 신고 홈페이지 오류신고 설문조사 연구원안내 원장인사말 인사말 약력 연구원은 연혁 역대원장 연구활동 조직/직원 조직도 직원검색 연구진 한눈에보는 조세ㆍ재정통계 KIPF 홍보관 홍보영상 연차보고서 CI 카드뉴스 개원 30주년 홈페이지 뉴스레터 찾아오시는길 KIPF센터 재정성과평가센터 공공기관연구센터 국가회계재정통계센터 재정지출분석센터 조세재정전망센터 세법연구센터 재정패널조사 BEPS대응지원센터 세정연구센터 조세지출성과관리센터 아태재정협력센터 센터소개 PEMNA 소개 발간자료 국제행사 정부투자분석센터 조세교육포털 공공기관 교육포털 정보공개 정보공개 업무처리절차 정보공개방법 비공개 대상정보 관련서식 수수료안내 관계법령 및 정관 정보공개규칙 사전정보공표 정보목록 정보공개청구 사업실명제 공공데이터개방 공공데이터제공 경영공시 해외연수출장보고서 홈페이지가이드 사이트맵 본인확인서비스 개인정보처리방침 저작권정책 이메일주소수집거부 이용약관 윤리경영 닫기 더밝은 내일을 열어갑니다 국가발전과 사회통합을 위한 증거기반 조세 및 재정 정책 연구의 산실이 될 수 있도록 노력하겠습니다. 연구원소식 공지사항 채용공고 보도자료 언론에 비친 KIPF KIPF 갤러리 채용공고 HOME 연구원소식 채용공고 프린트 SNS공유 --> SNS공유 닫기 --> 페이스북 트위터 블로그 카카오스토리 복사하기 닫기 복사하기 --> 채용공고 (상세) 한국조세재정연구원과 함께할 능력 있고 열정적인 인재를 모집합니다. 공개채용을 원칙으로 하며, 연구원 홈페이지 또는 취업사이트에 공고하며 1차 합격자 면접 일시 및 장소는 본원 홈페이지 (공지사항 게시판)에 공고합니다. 문의처 : 인사혁신팀 (044-414-2168 / jhbae@kipf.re.kr) 연구위원급(Research Fellow) 정기채용 작성일 2026-10-06 조회수 1,460 채용기간 2026-10-06 ~ 2026-11-30 진행중 한국조세재정연구원 연구위원급 정기채용 공고문 및 직무기술서.pdf [260.9 KB] 한국조세재정연구원 연구위원급 정기채용 공고문 및 직무기술서.pdf바로보기 (서식) 채용 이의신청서_한국조세재정연구원.hwp [48 KB] (서식) 채용 이의신청서_한국조세재정연구원.hwp(서식) 채용 이의신청서_한국조세재정연구원.hwp바로보기 (참고) 이전지역인재 기준 안내.pdf [66 KB] (참고) 이전지역인재 기준 안내.pdf바로보기 --> --> --> 채용기간 : --> --> 진행중 --> 마감 --> --> --> --> 첨부파일 : --> --> --> --> --> --> --> --> --> img104.jpg [355.5 KB] --> img101.png [1,462.7 KB] --> --> 1 모집분야 및 응시자격--> 한국조세재정 연구 원은 조세·재정·공공기관의 운영 관련 사항을 조사·연구·분석하여 국가의 정책 수립을 지원하고, 국민경제의 발전에 이바지함을 목적으로 설립된 국무조정실 산하 정부출연연구기관입니다. 본원에서는 아래와 같이 박사급 연구인력을 모집하오니 유능한 인재의 많은 응시 바랍니다. 2026년 10월 6일 한국조세재정연구원장 1. 모집개요 채용직군 채용직급 응시자격 ( 필수요건 ) 모집인원 연구직 (부)연구위원 경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함) 10명 * (주근무지) 세종특별자치시 시청대로 336(반곡동), 한국조세재정연구원 2. 채용절차 및 지원방법 가. 채용절차 1) 1차 서류전형 2) 2차 면접전형 3) 3차 세미나전형 및 인사위원회 심의 ※ 전형별 합격자는 본원 홈페이지를 통하여 공지하며, 전형일정은 추후 안내 예정 나. 접수기간 및 지원방법 1) 접수기간 : 2026. 10. 6.(화) ~ 2026. 11. 30.(월) ※ UTC(협정세계시) 기준 2) 지원방법 : 온라인 접수 ( https://econjobmarket.org/positions/12745 ) 3) 문 의 처 : job@kipf.re.kr로 개별 문의 다. 제출서류 ※ 자유양식 1) 자기소개서(Cover letter) 2) 이력서(CV) 3) 연구논문 1편(Job market paper) 4) 추천서 3부 ※추천인 3인이 Econ Job Market 시스템을 통하여 제출 라. 합격자 및 동점자 처리기준 구분 서류전형(1차) 면접전형(2차) 세미나전형(3차) 합격자 처리기 준 - 평가위원 평가점수 평균 80 점 이상 (100 점 만점 ) 취득자 중 평정 성적이 높은 순으로 모집분야별 채용예정인원의 5 배수 이내 합격 - 평가항목 (100): 적합 성 (40)+ 연구실적(45)+발전가능성(15) - 평가위원 평가점수 평균 40 점 이상 (50 점 만점 ) 취득자 중 평정 성적이 높은 순으로 모집분야별 채용예정인원의 3 배수 이내 합격 - 평가항목 (50): 적합성 (15) + 전문성 (20 ) + 발전가능성 (15) - 평가위원 평가점수 평균 80 점 이상 (100 점 만점 ) 취득자 중 평정 성 적이 높은 순으로 모집분야별 채용예정인원 이내 합격 - 평가항목 (100): 연구역량 (65)+ 발표기술 (20) + 인성 (15) 동점자 처리기준 - 동점자 전원 합격 - 면접전형에 동점자가 있는 경우 다음 각호의 순서에 따라 합격자를 결정 1. 국가유공자 2. 장애인 3. 면접전형 평가요소 중 전문성 , 적합성 순 고득점자 4. 이전 전형 고득점자 - 세미나전형에 동점자가 있는 경우 다음 각호의 순서에 따라 합격자를 결정 1. 국가유공자 2. 장애인 3. 세미나전형 평가요소 중 연구역량 , 발표기술 순 고득점자 4. 이전 전형 고득점자 3. 공통응시자격 및 우대사 항 구분 내용 공통 응시자격 · 국가공무원법 제33조에 해당하지 않는 자 · 병역법 제76조 제1항에 따른 병역의무 불이행자가 아닌 자 · 부패방지권익위법 제82조에 따른 비위면직자 등의 취업제한 적용을 받지 않는 자 · 채용비리에 연루되어 기소되지 아니한 자 · 타공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사실이 없는 자 · 전일근무(09:00∼18:00) 가능한 자 가점사항 · 아래 요건을 갖춘 지원자에 대하여 전형단계별 만점의 가점비율에 해당하는 점수 가산 취업지원대상자 1) 장애인 2) 이전지역인재 3) 5%∼10% 5% 3% 1) 「국가유공자 등 예우 및 지원에 관한 법률」 등 보훈관계 법령에 의하여 국가보훈처에서 발급한 취업지원대상자 증빙 제출 이 가능한 자 * 가점을 받아 합격하는 인원이 선발인원의 30%를 초과할 수 없음(단, 응시자 수가 선발예정인원 이하인 경우 제외) 2) 「장애인고용촉진 및 직업재활법 시행령」에서 정한 관련 증빙 제출이 가능한 자 3) 「혁신도시 조성 및 발전에 관한 특별법」에 의거한 이전지역인재인 자 (학사학위 기준) * 세부기준은 첨부파일(참고. 이전지역기준 안내문) 참조 ※ 취업지원대상자와 장애인 가점이 중복되는 경우만 중복 적용(그 외 가점은 높은 가점 1개만 적용) ※ 온라인 접수 시 별도 문항을 통해 가점 여부를 파악하고자 하며, 추후 증빙 제출 필요 4. 기타사항 가. 서류제출 시 착오, 누락 등으로 인한 불이익은 본인 책임이며, 주요 기재사항이 추후 증빙서류와 일치하지 않거나 허위임이 판명될 경우 합격을 무효로 함 나. 제출서류 내 채용과정에서 편견을 야기할 수 있는 정보(출신지역, 가족관계, 성별, 연령, 혼인여부, 신체조건 등) 또는 이를 암시하는 문구 등이 포함된 경우 채용과정에서 불이익이 있을 수 있음 ※ 다만, 본원은 연구인력 채용 시 「국무조정실 소관 연구개발목적기관 블라인드 채용 기준」에 의거하여 모집분야와 관련된 일부 정보(학위취득기관, 지도교수명, 논문의 교신·공동저자명, 추천서 및 추천인 정보)를 수집·활용하고자 함 다. 채용을 위하여 전자우편을 통해 제출한 전자적 형태의 서류 일체는 「채용절차의 공정화에 관한 법률」에 의거하여 최종합격자 발표일로부터 180일 이후 지체 없이 파기함 라. 채용비리 및 기타 부정행위 등이 판명될 경우 채용 이후라도 합격을 무효로 함 1) 채용비리에 연루되어 본인 또는 관련된 자가 기소된 사실이 있는 자 2) 최근 5년 이내에 타공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사실이 있는 자 마. 채용분야에 적격자가 없을 경우 채용하지 않을 수 있음 바. 최종합격자의 부적격, 임용 포기 또는 중도 퇴사 등에 대비하기 위하여 예비합격자를 선발할 수 있으며, 예비합격자 신분은 최종합격자 발표일로부터 3개월 간 유효함 1) 예비합격자는 합격 기준점수 이상인 자 중에서 성적순으로 순번 부여 2) 예비합격자의 선정 규모는 분야별 채용인원의 2배수 이내 사. 지원자는 아래 기간 내 채용서류 반환 신청 또는 채용 이의신청을 할 수 있음 1) 신청기간 : 최종합격자 발표일로부터 15일 이내 2) 신청방법 :「채용절차의 공정화에 관한 법률 시행규칙」 별지 제3호의 '채용서류 반환청구서' 또는 '채용이의 신청서(본원 소정 양식, 첨부 참고)'를 작성하여 이메일(job@kipf.re.kr)로 제출 글쓰기 수정 삭제 --> 목록 다음글 행정직(전문원) 신규인력채용_장애인제한경쟁 이전글 공무직(경비) 신규인력채용_보훈제한경쟁 --> --> --> --> --> --> --> --> --> --> --> --> 채용기간 : --> --> --> 진행중 --> 마감 --> --> --> --> --> --> --> 첨부파일 : --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> 1 모집분야 및 응시자격 --> --> --> --> --> --> --> --> --> --> --> 글쓰기 --> 수정 --> 삭제 --> --> 목록 --> --> --> --> --> 이전글 --> --> --> --> --> 다음글 --> --> --> --> --> --> --> --> 이전글 --> 2019년 3차 위촉직 직원모집(조세재정전망센터) --> --> --> --> --> --> 다음글 --> 2019년 3차 위촉직 직원모집(조세재정전망센터) --> --> --> --> --> 메뉴담당자 담당부서 : 인사팀 연락처 : 044-414-2168 최종수정일 : --> 만족도조사 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 만족도조사 내용을 입력하세요 배너 모음 배너모음 더보기 --> 배너모음 재생 배너모음 정지 배너모음 이전 배너모음 다음 기획예산처 재정경제부 관세청 재정정보 공개시스템 국세청 ALIO ALIOPLUS 상단으로 이동 --> TOP SNS 유튜브 블로그 페이스북 네이버 포스트 FAMILY SITE 열기버튼 재정성과평가센터 공공기관연구센터 국가회계재정통계센터 재정지출분석센터 세법연구센터 재정패널조사 조세재정전망센터 BEPS대응지원센터 전자도서관 조우회 FAMILY SITE 닫기버튼 개인정보처리방침 개원 30주년 홈페이지 이메일 무단수집거부 이용약관 우 )30147 세종특별자치시 시청대로 336 한국조세재정연구원 Tel : 044-414-2114 Fax : 044-414-2179 Copyright 2019 KOREA INSTITUTE OF PUBLIC FINANCE. ALL RIGHTS RESERVED. webmaster@kipf.re.kr"
+            },
+            {
+              "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/list.do",
+              "checked_at": "2026-11-11T23:23:44.141791+09:00",
+              "sha256": "6ba23fc7834a429faf5b851cc86c52d44dcc2895be43acba6536ad0bd2c95834",
+              "excerpt": "연구원소식 >\"> 연구원소식 >\"> 연구원소식 >\" /> 채용공고 > 연구원소식 > 본문 바로가기 레프트메뉴 바로가기 대메뉴 바로가기 한국조세재정연구원 KIPF 한국조세재정연구원 HOME LOGIN ENG 전체메뉴 전체메뉴 검색 열기버튼 통합검색 검색어를 입력하세요 닫기 연구발간자료 연구발간자료 국민을 생각합니다. 미래를 설계합니다. 전체 연구보고서 정기간행물 재정포럼 조세재정브리프 KIPF 재정성과평가 동향과 이슈 국가회계재정통계 공공기관 Brief 기타연구보고서 센터발간자료 보고서 정기간행물 기타자료 역대간행물 연구논문집 연구총서 정책연구 정책보고서 재정연구 Working paper 재정패널조사 기초분석보고서 학술대회발표집 관련연구논문집 테크니컬리포트 BEPS대응지원센터 OECD보고서 요약자료 연구자료 유관기관자료 자주찾는 보고서 도서회원 안내 연구현황 연구현황 국민을 생각합니다. 미래를 설계합니다. 조세ㆍ재정ㆍ공공기관 현안 조세제도란? 조세체계 세목별 조세제도 재정제도 재정 재정과정 재정체계 재정법령 재정성과관리 조세ㆍ재정ㆍ공공기관 동향 해외동향 국내동향 연구원소식 연구원소식 국민을 생각합니다. 미래를 설계합니다. 공지사항 채용공고 보도자료 언론에 비친 KIPF KIPF 갤러리 참여공간 참여공간 국민을 생각합니다. 미래를 설계합니다. 연구제안 인재채용 채용안내 인재DB 등록 연구원교육 성과관리교육 교육FAQ 교육Q&A FAQ 연구원 자료이용 홈페이지이용 뉴스레터 인재채용 Q&A 클린신고센터 부패방지신고 청탁금지법 위반신고 행동강령 위반신고 불공정거래(갑질) 위반신고 연구윤리신고 성희롱·성폭력 신고 규제애로신고센터 인권침해 신고 공익침해신고 채용비위 신고 홈페이지 오류신고 설문조사 연구원안내 연구원안내 국민을 생각합니다. 미래를 설계합니다. 원장인사말 인사말 약력 연구원은 연혁 역대원장 연구활동 조직/직원 조직도 직원검색 연구진 한눈에보는 조세ㆍ재정통계 KIPF 홍보관 홍보영상 연차보고서 CI 카드뉴스 개원 30주년 홈페이지 뉴스레터 찾아오시는길 KIPF센터 KIPF센터 국민을 생각합니다. 미래를 설계합니다. 재정성과평가센터 공공기관연구센터 국가회계재정통계센터 재정지출분석센터 조세재정전망센터 세법연구센터 재정패널조사 BEPS대응지원센터 세정연구센터 조세지출성과관리센터 아태재정협력센터 센터소개 PEMNA 소개 발간자료 국제행사 정부투자분석센터 조세교육포털 공공기관 교육포털 정보공개 정보공개 국민을 생각합니다. 미래를 설계합니다. 정보공개 업무처리절차 정보공개방법 비공개 대상정보 관련서식 수수료안내 관계법령 및 정관 정보공개규칙 사전정보공표 정보목록 정보공개청구 사업실명제 공공데이터개방 공공데이터제공 경영공시 해외연수출장보고서 HOME 사이트맵 로그인 ENGLISH 연구발간자료 전체 연구보고서 정기간행물 재정포럼 조세재정브리프 KIPF 재정성과평가 동향과 이슈 국가회계재정통계 공공기관 Brief 기타연구보고서 센터발간자료 보고서 정기간행물 기타자료 역대간행물 연구논문집 연구총서 정책연구 정책보고서 재정연구 Working paper 재정패널조사 기초분석보고서 학술대회발표집 관련연구논문집 테크니컬리포트 BEPS대응지원센터 OECD보고서 요약자료 연구자료 유관기관자료 자주찾는 보고서 도서회원 안내 연구현황 조세ㆍ재정ㆍ공공기관 현안 조세제도란? 조세체계 세목별 조세제도 재정제도 재정 재정과정 재정체계 재정법령 재정성과관리 조세ㆍ재정ㆍ공공기관 동향 해외동향 국내동향 연구원소식 공지사항 채용공고 보도자료 언론에 비친 KIPF KIPF 갤러리 참여공간 연구제안 인재채용 채용안내 인재DB 등록 연구원교육 성과관리교육 교육FAQ 교육Q&A FAQ 연구원 자료이용 홈페이지이용 뉴스레터 인재채용 Q&A 클린신고센터 부패방지신고 청탁금지법 위반신고 행동강령 위반신고 불공정거래(갑질) 위반신고 연구윤리신고 성희롱·성폭력 신고 규제애로신고센터 인권침해 신고 공익침해신고 채용비위 신고 홈페이지 오류신고 설문조사 연구원안내 원장인사말 인사말 약력 연구원은 연혁 역대원장 연구활동 조직/직원 조직도 직원검색 연구진 한눈에보는 조세ㆍ재정통계 KIPF 홍보관 홍보영상 연차보고서 CI 카드뉴스 개원 30주년 홈페이지 뉴스레터 찾아오시는길 KIPF센터 재정성과평가센터 공공기관연구센터 국가회계재정통계센터 재정지출분석센터 조세재정전망센터 세법연구센터 재정패널조사 BEPS대응지원센터 세정연구센터 조세지출성과관리센터 아태재정협력센터 센터소개 PEMNA 소개 발간자료 국제행사 정부투자분석센터 조세교육포털 공공기관 교육포털 정보공개 정보공개 업무처리절차 정보공개방법 비공개 대상정보 관련서식 수수료안내 관계법령 및 정관 정보공개규칙 사전정보공표 정보목록 정보공개청구 사업실명제 공공데이터개방 공공데이터제공 경영공시 해외연수출장보고서 홈페이지가이드 사이트맵 본인확인서비스 개인정보처리방침 저작권정책 이메일주소수집거부 이용약관 윤리경영 닫기 더밝은 내일을 열어갑니다 국가발전과 사회통합을 위한 증거기반 조세 및 재정 정책 연구의 산실이 될 수 있도록 노력하겠습니다. 연구원소식 공지사항 채용공고 보도자료 언론에 비친 KIPF KIPF 갤러리 채용공고 HOME 연구원소식 채용공고 프린트 SNS공유 --> SNS공유 닫기 --> 페이스북 트위터 블로그 카카오스토리 복사하기 닫기 복사하기 --> 채용공고 (목록) --> --> --> --> --> --> --> --> --> --> --> --> --> --> 한국조세재정연구원과 함께할 능력 있고 열정적인 인재를 모집합니다. 공개채용을 원칙으로 하며, 연구원 홈페이지 또는 취업사이트에 공고하며 1차 합격자 면접 일시 및 장소는 본원 홈페이지 (공지사항 게시판)에 공고합니다. 문의처 : 인사팀 (044-414-2161 / recruit@kipf.re.kr) --> 문의처 : 인사팀 (044-414-2168 / jhbae@kipf.re.kr) 게시물 검색 총 게시물 386 개 , 페이지 1 / 43 제목 채용공고 목록 - 번호, 채용공고, 채용기간, 접수상태, 조회수 제공 번호 채용공고 채용기간 접수상태 조회수 386 연구직(특수전문직) 신규인력채용 2026-11-11 ~ 2026-11-25 진행중 194 385 행정직(전문원) 신규인력채용_장애인제한경쟁 2026-10-14 ~ 2026-10-28 마감 702 384 연구위원급(Research Fellow) 정기채용 2026-10-06 ~ 2026-11-30 진행중 1,461 383 공무직(경비) 신규인력채용_보훈제한경쟁 2026-09-21 ~ 2026-10-05 마감 775 382 공공기관연구센터 소장 초빙 2026-09-21 ~ 2026-10-05 마감 467 381 연구위원급(Research Fellow) 채용 2026-08-31 ~ 2026-09-16 마감 1,976 380 2026년도 제3차 체험형 청년인턴 신규채용 2026-08-27 ~ 2026-09-10 마감 2,394 379 2026년도 제5차 위촉직 직원모집 2026-08-27 ~ 2026-09-10 마감 2,218 378 행정직(행정원) 신규인력채용 2026-07-31 ~ 2026-08-14 마감 4,439 << 첫번째페이지 < 이전페이지 1 2 3 4 5 6 7 8 9 10 > 다음페이지 >> 마지막페이지 메뉴담당자 담당부서 : 인사팀 연락처 : 044-414-2168 최종수정일 : --> 만족도조사 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 만족도조사 내용을 입력하세요 배너 모음 배너모음 더보기 --> 배너모음 재생 배너모음 정지 배너모음 이전 배너모음 다음 기획예산처 재정경제부 관세청 재정정보 공개시스템 국세청 ALIO ALIOPLUS 상단으로 이동 --> TOP SNS 유튜브 블로그 페이스북 네이버 포스트 FAMILY SITE 열기버튼 재정성과평가센터 공공기관연구센터 국가회계재정통계센터 재정지출분석센터 세법연구센터 재정패널조사 조세재정전망센터 BEPS대응지원센터 전자도서관 조우회 FAMILY SITE 닫기버튼 개인정보처리방침 개원 30주년 홈페이지 이메일 무단수집거부 이용약관 우 )30147 세종특별자치시 시청대로 336 한국조세재정연구원 Tel : 044-414-2114 Fax : 044-414-2179 Copyright 2019 KOREA INSTITUTE OF PUBLIC FINANCE. ALL RIGHTS RESERVED. webmaster@kipf.re.kr"
+            },
+            {
+              "url": "https://econjobmarket.org/positions/12745",
+              "checked_at": "2026-11-11T23:23:44.142263+09:00",
+              "sha256": "82b520e2425c99a1d6d442a7486562079db379bbfecc8e37f8f450ba944bb143",
+              "excerpt": "EJM - Econ Job Market E con J ob M arket ® Translate this website × Translate this website The automated language-translation service on econjobmarlet.org is provided free by Google Translate, a third party service. Google is wholly responsible for the translation service. Econ Job Market Inc. does not guarantee or warrant the reliability, accuracy, or completeness of any translated text. Before acting on any translated text, you should verify its fidelity in relation to the original text shown on econjobmarlet.org. Return to original language Close Toggle navigation Main menu Job postings Featured All regular postings RA market Search statuses Information Videos of informational discussions Market stats Job market conferences Placement officers Educational institutions Announcements Events Public events Log in to create events Login/Register Translate this website [KIPF] Research FeIIow Advertiser: Korea Institute of Public Finance (KIPF) Field(s) of specialization: Any field Position type(s): Other nonacademic Location of job: 336 Sicheong-Daero, Sejong, Korea, Republic of Degree required: Doctorate Job start date: Flexible Job duration: Continuing/permanent Letters of reference required: 3 Application deadline: 30 Nov 2026 midnight UTC ( accepting applications ) Posting end date: 30 Nov 2026 Interviews: Interviews will be conducted remotely by video starting January, 2027. Ad text: The Korea Institute of Public Finance (KIPF) invites applications for full-time research fellow positions in any field of economics. As a government-supported research institute, KIPF is conducting policy-oriented research on all aspects of the economy, especially on public finance and public sector management. Applicants must have Ph.D. Degree in Economics or related field at the time employment begins. The candidates selected for the position must demonstrate strong independent research abilities and fluent communication skills in Korean. □ APPLICATION PROCEDURE: All application materials must be submitted on Econ Job Market (EJM) by midnight UTC on November 30, 2026 for full consideration. Applicants should submit (upload) 1) a cover letter, 2) curriculum vitae, 3) job market paper and 4) three reference letters. Selected applicants will be interviewed via video conferencing platform in January 2027. □ CONTACT INFORMATION: All inquiries regarding this job posting should be addressed to the email address below. [E-mail] job@kipf.re.kr Application procedure To apply for this position, log in and choose your Applicant role (or, if you have no account, create one ). Submission materials required Cover letter Curriculum vitae Job market paper Additional paper (optional) Additional paper (optional) Recommenders: 3 Featured postings All postings Details About Candidates References Recruiters System overview and fees User support FAQ Contact/support Bug reports Feature requests Informational videos Information Statistics Institutions API Job market conferences Security/verification policies Legal User agreement Privacy policy Research data usage policy © 2005-2026, Econ Job Market Inc. All rights reserved."
+            },
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3079032",
+              "checked_at": "2026-11-11T23:23:44.142947+09:00",
+              "sha256": "c3220c7a475ebf698510f8069c27c2711f864906d98106ed082708946300c6f5",
+              "excerpt": "0 한국조세재정연구원 연구위원급 채용 공고 한국조세재정연구원은 조세 재정 공공기관의 운영 관련 사항을 조사 연구 분석 하여 국가의 정책 수립을 지원하고 국민경제의 발전에 이바지함을 목적으로 설립된 국무조정실 산하 정부출연연구기관입니다 본원에서는 아래와 같이 박사급 연구 인력을 모집하오니 유능한 인재의 많은 응시 바랍니다 년 월 일 한국조세재정연구원장 1. 모집개요 2. 채용절차 및 지원방법 가. 채용절차 차 서류전형 차 면접전형 차 세미나전형 및 인사위원회 심의 나. 접수기간 및 지원방법 접수기간 화 월 지원방법 온라인 접수 문 의 처 로 개별 문의 다. 제출서류 자기소개서 이력서 연구논문 편 추천서 부 라. 합격자 및 동점자 처리기준 3. 공통응시자격 및 우대사항 4. 기타사항 가 서류제출 시 착오 누락 등으로 인한 불이익은 본인 책임이며 주요 기재사항이 추후 증빙서류와 일치하지 않거나 허위임이 판명될 경우 합격을 무효로 함 나 제출서류 내 채용과정에서 편견을 야기할 수 있는 정보 출신지역 가족관계 성별 연령 혼인여부 신체조건 등 또는 이를 암시하는 문구 등이 포함된 경우 채용과정 에서 불이익이 있을 수 있음 다만 본원은 연구인력 채용 시 국무조정실 소관 연구개발목적기관 블라인드 채용 기준 에 의거하여 모집분야와 관련된 일부 정보 학위취득기관 지도교수명 논문의 교신 공동저자명 추천서 및 추천인 정보 를 수집 활용하고자 함 다 채용을 위하여 전자우편을 통해 제출한 전자적 형태의 서류 일체는 채용절차의 공정화에 관한 법률 에 의거하여 최종합격자 발표일로부터 일 이후 지체 없이 파기함 라 채용비리 및 기타 부정행위 등으로 판명될 경우 채용 이후라도 합격을 무효로 함 채용비리에 연루되어 본인 또는 관련자가 기소된 사실이 있는 자 최근 년 이내에 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사실이 있는 자 마 채용분야에 적격자가 없을 경우 채용하지 않을 수 있음 바 최종합격자의 부적격 임용 포기 또는 중도 퇴사 등에 대비하기 위하여 예비합격자를 선발할 수 있으며 예비합격자 신분은 최종합격자 발표일로부터 개월 간 유효함 예비합격자는 합격 기준점수 이상인 자 중에서 성적순으로 순번 부여 예비합격자의 선정 규모는 분야별 채용인원의 배수 이내 사 지원자는 아래 기간 내 채용서류 반환 신청 또는 채용 이의신청을 할 수 있음 신청기간 최종합격자 발표일로부터 일 이내 신청방법 채용절차의 공정화에 관한 법률 시행규칙 별지 제 호의 채용서류 반환청구서 또는 채용 이의신청서 본원 소정 양식 첨부 참고 를 작성하여 이메일 로 제출"
+            },
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3079033",
+              "checked_at": "2026-11-11T23:23:44.143874+09:00",
+              "sha256": "37dd16fa018543d5ca1cc108ed2c2757570bbb723fe2cd715e4c3d2320257654",
+              "excerpt": "【 한국조세재정연구원 연구위원급 채용 직무기술서 】 채용분야 직군 연구직 직급 (부)연구위원 전형절차 서류전형 - 면접전형 - 세미나전형 - 조세 및 재정분야의 제도·행정·정책에 관한 종합연구 - 정부회계 및 재정통계에 관한 연구 - 공공기관 운영에 관한 정책 연구 연구원 - 국내외 연구기관과의 공동연구 주요기능 - 정부, 국내외 공공기관 및 민간단체 등으로부터의 연구용역의 수탁 - 연구 분야와 관련된 조사·교육·연수·홍보 - 기타 부대사업 및 그 밖에 연구원의 목적 달성을 위해 필요한 사업 - 조세정책에 관한 연구, 조세지출에 관한 연구, 사회보험과 국민부담에 관한 연구, 조세법체계 연구, 세무회계 연구, 관세정책 및 관세행정 조사 분석에 관한 연구, 세무행정에 관한 연구, 납세행태에 관한 연구, 국제 조세·세정 동향 및 통계분석에 관한 연구, 조세 관련 개발협력에 관한 연구, 조세 지출 성과관리에 관한 연구, 조세재정 전망에 관한 연구, 재정 추계 및 재정수지 분석에 관한 연구, 재정정책의 거시경제적 효과 분석에 관한 연구, 거시경제 동향 분석에 관한 연구, 세수분석 및 모형개발에 관한 연구, 공공재정관리 제도의 연구, 재정제도 일반에 관한 연구, 예산사업 분석에 관한 연구, 재정지출 분석에 관한 연구, 국내외 재정동향에 관한 연구, 재정사업 심층평가제도 연구, 직무수행 기금평가제도 연구, 보조금사업평가제도 연구, 부담금평가제도 연구, 재정성과관리제도 운영에 관한 내용 연구, 재정사업 성과평가 및 연구, 예비타당성조사제도에 대한 분석 및 종합연구, 타당성조사 방법론 및 지침 개발을 위한 연구, 공공기관의 관리체계 연구, 공공기관의 예산 연구, 공공기관 경영공시 연구, 공공기관 임금현황 및 임금체계 연구, 공공기관의 기능조정 및 심층평가 연구, 공공기관의 인력관리 연구, 공공기관의 채용정책 연구, 공공기관의 지정 및 분류 연구, 공공기관의 기관·기관장· 감사 평가제도 연구, 공공기관 정책 및 경영 등에 관한 연구, 공공기관 경영평가 결과 검증에 관한 연구, 국내외 국가회계기준에 관한 조사·연구, 발생주의 회계제도 관련 연구, 발생주의 재무정보를 이용한 재정분석기법의 개발 및 활용방안 연구, 국가 재정통계기준에 관한 연구, 공기업·준정부기관 회계기준에 관한 조사·연구 전공 경제학 또는 관련 분야 학력 박사학위 소지자(학위취득 예정자 포함) 연령 기관 정년(60세) 기준에 준함 성별 무관 【응시 공통사항】 - 국가공무원법 제33조에 해당하지 않는 자 지원자격 - 병역법 제76조 제1항에 따른 병역의무 불이행자가 아닌 자 - 부패방지권익위법 제82조에 따른 비위면직자 등의 취업제한 적용을 받지 않는 자 - 채용비리에 연루되어 기소되지 아니한 자 - 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사실이 없는 자 - 전일근무(09:00~18:00) 가능한 자 【우대사항】 관계법령에 의거하여 취업지원대상자, 장애인, 이전지역인재에 해당할 경우 가점 부여 지식 - 사회현상 및 정부정책에 대한 이해, 경제학 전공 분야 관련 지식, 연구방법론에 대한 지식 - 연구 계획 능력(현안 파악, 제안서 및 계획서 작성, 연구프로세스 계획 및 추진 능력 등) 기술 - 연구 수행 능력(연구모형 설계, 자료 수집 및 통계분석, 연구결과 종합, 보고서 작성 능력 등) - 의사소통 능력(연구결과를 논리적으로 설명하는 능력, 조직 내외부 · 협업 및 문제해결능력 등) 직무수행 - 객관적인 판단 및 논리적인 분석 태도 능력 - 논리적 사고력, 종합적 사고력, 분석적 사고력 - 정책 및 연구논리 개발에 적극적인 태도 태도 - 수집된 자료에 대한 철저히 사후 관리하려는 태도 - 연구결과에 대한 타당성을 찾아내려는 자세 - 투명하고 공정한 업무수행의 청렴성"
+            },
+            {
+              "ref": "reviewed-original-period:a305734",
+              "checked_at": "2026-11-11T23:29:46.739405+09:00",
+              "excerpt": "접수기간 : 2026. 10. 6.(화) ~ 2026. 11. 30.(월) ※ UTC(협정세계시) 기준 / \"validThrough\": \"2026-11-30T23:59:59+00:00\"",
+              "sha256": "3f534911bcce64460ef1b026ec7c0a384873455cb3b72328b1816f22d8ef38cf",
+              "source_parts": [
+                {
+                  "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+                  "checked_at": "2026-11-11T23:23:44.141315+09:00",
+                  "sha256": "742c5be30b56e58fad6d138d344a60c43f406b24bbbdaaf9b6d63cf6e2c624c5",
+                  "excerpt": "접수기간 : 2026. 10. 6.(화) ~ 2026. 11. 30.(월) ※ UTC(협정세계시) 기준"
+                },
+                {
+                  "url": "https://econjobmarket.org/positions/12745",
+                  "checked_at": "2026-11-11T23:23:44.142263+09:00",
+                  "sha256": "82b520e2425c99a1d6d442a7486562079db379bbfecc8e37f8f450ba944bb143",
+                  "excerpt": "\"validThrough\": \"2026-11-30T23:59:59+00:00\""
+                }
+              ],
+              "method": "공식기관의실제접수시작일원문과지정접수처의validThrough원문을그대로인용해연결. 환산문구/시각을원문에추가하지않음."
+            }
+          ],
+          "missing_or_conflicting": [
+            "Current-main APPLICATION_END_EVIDENCE_MISMATCH for correctly converted official UTC validThrough. Fix PR51 is unmerged because required CI failed at Ubuntu dependency DNS installation."
+          ],
+          "repetition_check": "checked",
+          "cta_check": "passed",
+          "media_check": "passed",
+          "length_check": "measured_within_limit",
+          "body_characters": 256,
+          "application_period": {
+            "start": "2026-10-06",
+            "start_date_only": true,
+            "end": "2026-12-01T08:59:59+09:00",
+            "date_only": false,
+            "source_ref": "reviewed-original-period:a305734",
+            "evidence": "접수기간 : 2026. 10. 6.(화) ~ 2026. 11. 30.(월) ※ UTC(협정세계시) 기준 / \"validThrough\": \"2026-11-30T23:59:59+00:00\"",
+            "source_timezone": "UTC",
+            "original_numeric_deadline": "2026-11-30T23:59:59+00:00",
+            "conversion": "datetime.fromisoformat(validThrough).astimezone(Asia/Seoul),not_inferred_midnight"
+          },
+          "profile_target": {
+            "url": "https://kllollain-max.github.io/careerpick/",
+            "notice_url": "https://kllollain-max.github.io/careerpick/jobs/a305734.html",
+            "notice_id": "a305734",
+            "checked_at": "2026-11-11T23:23:51.321082+09:00",
+            "verified": true,
+            "html_sha256": "c5eaa6c40625d7323642e00280bd03bb32aba076bcde0b7e3c29a748fc0942bf",
+            "profile_checked_at": "2026-11-11T23:23:50.595201+09:00",
+            "rel_me_profile_sha256": "b5e4db9082dc2a168fe044840973765e35e14e1102796c90d1e022af9701bd52",
+            "evidence": "공개프로필link rel=me 동일사이트,동일ID정적상세및기관·ALIO공식링크실제열람. 상세ALIO게시종료11월30일은UTC실제접수마감을대신하지않음."
+          },
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "연구직 (부)연구위원",
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "excerpt": "연구직 (부)연구위원 경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함) 10명"
+            },
+            {
+              "field": "count",
+              "value": 10,
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "excerpt": "연구직 (부)연구위원 경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함) 10명"
+            },
+            {
+              "field": "employment",
+              "value": "정규직",
+              "source_ref": "https://job.alio.go.kr/recruitview.do?idx=305734",
+              "excerpt": "고용형태 정규직"
+            },
+            {
+              "field": "location",
+              "value": "세종특별자치시",
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "excerpt": "(주근무지) 세종특별자치시 시청대로 336(반곡동), 한국조세재정연구원"
+            }
+          ],
+          "omitted_optional_facts": [
+            "공고에확정초임없어금액생략.",
+            "상세가점은필수로바꾸지않고원문확인.",
+            "기관공지목록첫페이지와동일공고,공고PDF전체3쪽,NCS전체1쪽,EJM본문과JSONLD를확인. 모든기관과거게시판/별도참고첨부전수검토아님."
+          ],
+          "pre_publish_checks": [
+            "정규직전최신공고지문/정정/접수상태/계정/청구/중복/원장기준미디어대조.검토카드바이트만재사용."
+          ],
+          "v5": {
+            "policy_id": "careerpick-threads-v5-20261111",
+            "contract_version": 2,
+            "restrictions_complete": true,
+            "fact_consistency_check": "passed",
+            "hook_candidates": [
+              {
+                "id": "target",
+                "type": "target",
+                "text": "조세·재정 연구직을 찾는 분께,\n한국조세재정연구원 정규직 연구직 (부)연구위원 10명이에요."
+              },
+              {
+                "id": "condition",
+                "type": "condition",
+                "text": "입사 전 경제학·관련 박사학위를 취득한다면,\n한국조세재정연구원 정규직 연구직 (부)연구위원 10명 공고예요."
+              },
+              {
+                "id": "job",
+                "type": "job",
+                "text": "조세와 재정정책을 연구하는 자리예요.\n한국조세재정연구원 연구직 (부)연구위원 정규직 10명을 모집해요."
+              }
+            ],
+            "selected_hook_id": "target",
+            "first_sentence_type": "target",
+            "hook_review": {
+              "factual": true,
+              "target_clear": true,
+              "natural": true
+            },
+            "key_restrictions": [
+              {
+                "text": "경제학 또는 관련 분야 박사학위가 입사 때 필요해요.",
+                "source_ref": "https://econjobmarket.org/positions/12745",
+                "excerpt": "Applicants must have Ph.D. Degree in Economics or related field at the time employment begins.",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "취득 예정자도 지원하며, 독립 연구역량·원활한 한국어 소통을 요구해요.",
+                "source_ref": "https://econjobmarket.org/positions/12745",
+                "excerpt": "Applicants must have Ph.D. Degree in Economics or related field at the time employment begins. The candidates selected for the position must demonstrate strong independent research abilities and fluent communication skills in Korean.",
+                "classification": "required",
+                "logic": "single",
+                "additional_source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+                "additional_excerpt": "연구직 (부)연구위원 경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함) 10명"
+              },
+              {
+                "text": "세종특별자치시에서 09:00~18:00 전일근무예요.",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3079033",
+                "excerpt": "【 한국조세재정연구원 연구위원급 채용 직무기술서 】 채용분야 직군 연구직 직급 (부)연구위원 전형절차 서류전형 - 면접전형 - 세미나전형 - 조세 및 재정분야의 제도·행정·정책에 관한 종합연구 - 정부회계 및 재정통계에 관한 연구 - 공공기관 운영에 관한 정책 연구 연구원 - 국내외 연구기관과의 공동연구 주요기능 - 정부, 국내외 공공기관 및 민간단체 등으로부터의 연구용역의 수탁 - 연구 분야와 관련된 조사·교육·연수·홍보 - 기타 부대사업 및 그 밖에 연구원의 목적 달성을 위해 필요한 사업 - 조세정책에 관한 연구, 조세지출에 관한 연구, 사회보험과 국민부담에 관한 연구, 조세법체계 연구, 세무회계 연구, 관세정책 및 관세행정 조사 분석에 관한 연구, 세무행정에 관한 연구, 납세행태에 관한 연구, 국제 조세·세정 동향 및 통계분석에 관한 연구, 조세 관련 개발협력에 관한 연구, 조세 지출 성과관리에 관한 연구, 조세재정 전망에 관한 연구, 재정 추계 및 재정수지 분석에 관한 연구, 재정정책의 거시경제적 효과 분석에 관한 연구, 거시경제 동향 분석에 관한 연구, 세수분석 및 모형개발에 관한 연구, 공공재정관리 제도의 연구, 재정제도 일반에 관한 연구, 예산사업 분석에 관한 연구, 재정지출 분석에 관한 연구, 국내외 재정동향에 관한 연구, 재정사업 심층평가제도 연구, 직무수행 기금평가제도 연구, 보조금사업평가제도 연구, 부담금평가제도 연구, 재정성과관리제도 운영에 관한 내용 연구, 재정사업 성과평가 및 연구, 예비타당성조사제도에 대한 분석 및 종합연구, 타당성조사 방법론 및 지침 개발을 위한 연구, 공공기관의 관리체계 연구, 공공기관의 예산 연구, 공공기관 경영공시 연구, 공공기관 임금현황 및 임금체계 연구, 공공기관의 기능조정 및 심층평가 연구, 공공기관의 인력관리 연구, 공공기관의 채용정책 연구, 공공기관의 지정 및 분류 연구, 공공기관의 기관·기관장· 감사 평가제도 연구, 공공기관 정책 및 경영 등에 관한 연구, 공공기관 경영평가 결과 검증에 관한 연구, 국내외 국가회계기준에 관한 조사·연구, 발생주의 회계제도 관련 연구, 발생주의 재무정보를 이용한 재정분석기법의 개발 및 활용방안 연구, 국가 재정통계기준에 관한 연구, 공기업·준정부기관 회계기준에 관한 조사·연구 전공 경제학 또는 관련 분야 학력 박사학위 소지자(학위취득 예정자 포함) 연령 기관 정년(60세) 기준에 준함 성별 무관 【응시 공통사항】 - 국가공무원법 제33조에 해당하지 않는 자 지원자격 - 병역법 제76조 제1항에 따른 병역의무 불이행자가 아닌 자 - 부패방지권익위법 제82조에 따른 비위면직자 등의 취업제한 적용을 받지 않는 자 - 채용비리에 연루되어 기소되지 아니한 자 - 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사실이 없는 자 - 전일근무(09:00~18:00) 가능한 자 【우대사항】 관계법령에 의거하여 취업지원대상자, 장애인, 이전지역인재에 해당할 경우 가점 부여 지식 - 사회현상 및 정부정책에 대한 이해, 경제학 전공 분야 관련 지식, 연구방법론에 대한 지식 - 연구 계획 능력(현안 파악, 제안서 및 계획서 작성, 연구프로세스 계획 및 추진 능력 등) 기술 - 연구 수행 능력(연구모형 설계, 자료 수집 및 통계분석, 연구결과 종합, 보고서 작성 능력 등) - 의사소통 능력(연구결과를 논리적으로 설명하는 능력, 조직 내외부 · 협업 및 문제해결능력 등) 직무수행 - 객관적인 판단 및 논리적인 분석 태도 능력 - 논리적 사고력, 종합적 사고력, 분석적 사고력 - 정책 및 연구논리 개발에 적극적인 태도 태도 - 수집된 자료에 대한 철저히 사후 관리하려는 태도 - 연구결과에 대한 타당성을 찾아내려는 자세 - 투명하고 공정한 업무수행의 청렴성",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "정년 60세·병역·결격 기준을 확인해요.",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3079033",
+                "excerpt": "【 한국조세재정연구원 연구위원급 채용 직무기술서 】 채용분야 직군 연구직 직급 (부)연구위원 전형절차 서류전형 - 면접전형 - 세미나전형 - 조세 및 재정분야의 제도·행정·정책에 관한 종합연구 - 정부회계 및 재정통계에 관한 연구 - 공공기관 운영에 관한 정책 연구 연구원 - 국내외 연구기관과의 공동연구 주요기능 - 정부, 국내외 공공기관 및 민간단체 등으로부터의 연구용역의 수탁 - 연구 분야와 관련된 조사·교육·연수·홍보 - 기타 부대사업 및 그 밖에 연구원의 목적 달성을 위해 필요한 사업 - 조세정책에 관한 연구, 조세지출에 관한 연구, 사회보험과 국민부담에 관한 연구, 조세법체계 연구, 세무회계 연구, 관세정책 및 관세행정 조사 분석에 관한 연구, 세무행정에 관한 연구, 납세행태에 관한 연구, 국제 조세·세정 동향 및 통계분석에 관한 연구, 조세 관련 개발협력에 관한 연구, 조세 지출 성과관리에 관한 연구, 조세재정 전망에 관한 연구, 재정 추계 및 재정수지 분석에 관한 연구, 재정정책의 거시경제적 효과 분석에 관한 연구, 거시경제 동향 분석에 관한 연구, 세수분석 및 모형개발에 관한 연구, 공공재정관리 제도의 연구, 재정제도 일반에 관한 연구, 예산사업 분석에 관한 연구, 재정지출 분석에 관한 연구, 국내외 재정동향에 관한 연구, 재정사업 심층평가제도 연구, 직무수행 기금평가제도 연구, 보조금사업평가제도 연구, 부담금평가제도 연구, 재정성과관리제도 운영에 관한 내용 연구, 재정사업 성과평가 및 연구, 예비타당성조사제도에 대한 분석 및 종합연구, 타당성조사 방법론 및 지침 개발을 위한 연구, 공공기관의 관리체계 연구, 공공기관의 예산 연구, 공공기관 경영공시 연구, 공공기관 임금현황 및 임금체계 연구, 공공기관의 기능조정 및 심층평가 연구, 공공기관의 인력관리 연구, 공공기관의 채용정책 연구, 공공기관의 지정 및 분류 연구, 공공기관의 기관·기관장· 감사 평가제도 연구, 공공기관 정책 및 경영 등에 관한 연구, 공공기관 경영평가 결과 검증에 관한 연구, 국내외 국가회계기준에 관한 조사·연구, 발생주의 회계제도 관련 연구, 발생주의 재무정보를 이용한 재정분석기법의 개발 및 활용방안 연구, 국가 재정통계기준에 관한 연구, 공기업·준정부기관 회계기준에 관한 조사·연구 전공 경제학 또는 관련 분야 학력 박사학위 소지자(학위취득 예정자 포함) 연령 기관 정년(60세) 기준에 준함 성별 무관 【응시 공통사항】 - 국가공무원법 제33조에 해당하지 않는 자 지원자격 - 병역법 제76조 제1항에 따른 병역의무 불이행자가 아닌 자 - 부패방지권익위법 제82조에 따른 비위면직자 등의 취업제한 적용을 받지 않는 자 - 채용비리에 연루되어 기소되지 아니한 자 - 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사실이 없는 자 - 전일근무(09:00~18:00) 가능한 자 【우대사항】 관계법령에 의거하여 취업지원대상자, 장애인, 이전지역인재에 해당할 경우 가점 부여 지식 - 사회현상 및 정부정책에 대한 이해, 경제학 전공 분야 관련 지식, 연구방법론에 대한 지식 - 연구 계획 능력(현안 파악, 제안서 및 계획서 작성, 연구프로세스 계획 및 추진 능력 등) 기술 - 연구 수행 능력(연구모형 설계, 자료 수집 및 통계분석, 연구결과 종합, 보고서 작성 능력 등) - 의사소통 능력(연구결과를 논리적으로 설명하는 능력, 조직 내외부 · 협업 및 문제해결능력 등) 직무수행 - 객관적인 판단 및 논리적인 분석 태도 능력 - 논리적 사고력, 종합적 사고력, 분석적 사고력 - 정책 및 연구논리 개발에 적극적인 태도 태도 - 수집된 자료에 대한 철저히 사후 관리하려는 태도 - 연구결과에 대한 타당성을 찾아내려는 자세 - 투명하고 공정한 업무수행의 청렴성",
+                "classification": "required",
+                "logic": "single"
+              }
+            ],
+            "useful_point": {
+              "text": "추천서 3부는 추천인 3명이 접수 시스템에 직접 제출해요.",
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "excerpt": "추천서 3부 ※추천인 3인이 Econ Job Market 시스템을 통하여 제출"
+            },
+            "recruitment_unit": {
+              "title": "연구직 (부)연구위원",
+              "count": 10,
+              "employment": "정규직",
+              "scope": "single_recruitment_unit",
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "excerpt": "연구직 (부)연구위원 경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함) 10명"
+            },
+            "correction_check": {
+              "checked_at": "2026-11-11T23:23:44.142263+09:00",
+              "result": "none_found",
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "scope": "기관최신채용공고목록첫페이지/동일공고451/ALIO/기관공고PDF3쪽/NCS1쪽/공식접수EJM본문·JSONLD",
+              "limitations": "과거게시판전수검토아님. 별도이전지역인재안내·이의신청양식등부속참고첨부는미열람. 같은공고범위정정·철회표시없음."
+            },
+            "style_rewrites": 0,
+            "presentation_style": "regular_interest",
+            "presentation_style_reason": "기존12자격조건정보형뒤16회차에정규직관심유도형,실제10명단위와연구직무를도입에배치.",
+            "selection_reason": "전체1388건수집입력과기존50/10/8명보류를재검토. ALIO22:24갱신및공식원문23:23재검수로이전10명신선도보류해소. 동일모집행정규직10명,예정자허용·입사시점박사·한국어소통·전일근무를확인. KIEP8명언어요건필수/우대충돌지속. 분당병원50명공식접수처500과마감시각/졸업조건보류지속. 실제독자인기수치없이규모·준비시간·직무다양성에따라선정.",
+            "public_preview": {
+              "main_text": "조세·재정 연구직을 찾는 분께,\n한국조세재정연구원 정규직 연구직 (부)연구위원 10명이에요.\n\n경제학 또는 관련 분야 박사학위가 입사 때 필요해요.\n취득 예정자도 지원하며, 독립 연구역량·원활한 한국어 소통을 요구해요.\n\n세종특별자치시에서 09:00~18:00 전일근무예요.\n정년 60세·병역·결격 기준을 확인해요.\n\n추천서 3부는 추천인 3명이 접수 시스템에 직접 제출해요.\n마감: 한국시간 12월 1일 08:59:59예요.\n\n자세한 사항은 프로필링크 확인",
+              "detail_reply": ""
+            },
+            "card_restriction": "경제학 또는 관련 분야 박사학위가 입사 때 필요해요.",
+            "experiment_eligible": true,
+            "comparison_context": {
+              "occupation": "박사급조세재정연구",
+              "region": "세종특별자치시",
+              "unit_count": 10,
+              "notice_total_count": 10,
+              "employment": "정규직",
+              "planned_media": "IMAGE",
+              "media_planning_only": true,
+              "institution_interest": null,
+              "source_total_scanned": 1388,
+              "official_details_fully_reviewed": false
+            },
+            "card_visual_review": {
+              "status": "passed",
+              "reviewed_width": 360,
+              "reviewed_at": "2026-11-11T23:31:45.136315+09:00",
+              "sha256": "59de62c70210eb982647a35b9d1d570d7e1c19e5b82114f7216370ed341a4386",
+              "preview_sha256": "ab3811a32419912d8c14b5945bd488bb45032909f3ead78f95ccbfdbcd97fb4e",
+              "asset_path": "threads-images/a305734.jpg",
+              "preview_asset_path": "threads-images/a305734-360.png",
+              "facts_sha256": "13a19240ab4b76958c263d07edd90dc63afce305e6c6ae5fc5df54296ef8b61c",
+              "layout_version": "careerpick-single-main-card-v2",
+              "observations": "실제1080JPEG와동일JPEG의LANCZOS360PNG를열람. 기관/연구직(부)연구위원/정규직10명/12월1일08:59:59/입사시박사요건읽힘. 잘림·말줄임·한글깨짐없음. 한국시간표기본문대조. 렌더바이트유지."
+            },
+            "card_facts_reviewed": true
+          }
+        }
+      },
+      "checked_at": "2026-11-11T14:48:10Z",
+      "status": "held_not_reserved",
+      "hold_reason": "UTC_VALIDATOR_MAIN_NOT_APPLIED_CI_DEPENDENCY_DNS",
+      "original_locally_validated_entry_sha256": "144cd98464fce6d183982dd4f2f29043219d1953f699ef98981a79da85352818",
+      "queue_saved": false,
+      "code_pr_url": "https://github.com/kllollain-max/careerpick/pull/51",
+      "card_registered_commit_sha": "382e847727e0fd19ae09029c970eb8d93f146a9e",
+      "audit_path": "threads/audits/writer-v2-20261111T2321.json",
+      "resume": "정상CI와정확한HEAD운영반영후현재공고·계정·청구·신선도재검사. 수동dispatch/rerun금지유지. 미해결시다른공식검수가능후보로전환;보류원고를구정책으로재전송하지않음."
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-11T12:55:30Z",
-    "main_sha": "d5b91863c30dd14bb49f7765b5f6e8d271dd282e",
+    "checked_at": "2026-11-11T14:48:10Z",
+    "main_sha": "d238e76145141c363da8d6b0a67d53ef1f36c75e",
+    "main_input_sha": "6a7fe65df60dd33925a5ea16802f01b498b2f2dd",
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "contract_version": 2,
     "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
-    "input_reference_at": "2026-11-11T21:43:48.020407+09:00",
+    "input_reference_at": "2026-11-11T23:22:39.299986+09:00",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-11T21:43:48.020407+09:00",
+      "evaluated_at": "2026-11-11T23:22:39.299986+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -4316,12 +4680,12 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-11T19:10:42+09:00",
-          "source_checked_at": "2026-11-11T19:11:08+09:00",
-          "total_records": 886,
+          "snapshot_at": "2026-11-11T22:23:51+09:00",
+          "source_checked_at": "2026-11-11T22:24:23+09:00",
+          "total_records": 890,
           "eligible_count": 28,
-          "review_required_count": 744,
-          "excluded_count": 114,
+          "review_required_count": 747,
+          "excluded_count": 115,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 29,
@@ -4329,6 +4693,7 @@
             "SOURCE_NOTICE_UNCONFIRMED": 11,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
+            "NOTICE_ALREADY_QUEUED": 1,
             "APPLICATION_START_TIME_UNKNOWN": 2
           }
         },
@@ -4350,7 +4715,7 @@
           }
         }
       },
-      "total_scanned": 1384,
+      "total_scanned": 1388,
       "eligible_before_limit": 299,
       "writer_limit": 24,
       "returned_count": 24,
@@ -4383,12 +4748,12 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "queue_blob_sha": "d280b8811a5c2a0501e1bac9243fc5ff083d369f",
+    "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
     "existing_ready_validated": true,
-    "existing_entries_preserved": 24,
-    "new_drafts_prepared": 1,
+    "existing_entries_preserved": 25,
+    "new_drafts_prepared": 2,
     "new_ready_saved": 1,
-    "new_entry_sha256": "dd7d16159eb340768de3317329ea3cf3dc5bd1bbb34bcf3892566cd67d7c4e94",
+    "new_hold_saved": 1,
     "ready_entries": [
       {
         "scheduled_at": "2026-11-12T08:00:00+09:00",
@@ -4411,14 +4776,31 @@
           "detail_reply": ""
         },
         "editorial_policy_id": null
+      },
+      {
+        "scheduled_at": "2026-11-12T20:00:00+09:00",
+        "notice_id": "a306746",
+        "format_id": "deadline_opportunity",
+        "chars": 300,
+        "public_preview": {
+          "main_text": "통신 자격증이 있다면,\n국립중앙의료원 기술직 6급 통신기사(건축팀) 정규직 1명 공고예요.\n\n정보통신기사·통신설비기능장·정보통신기술사 중 하나가 필요해요.\n서울 근무이며, 자격은 마감일까지 취득해야 해요.\n\n최초 계약 1년, 재임용 심사 후 정년까지예요.\n3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.\n병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.\n\n다른 진행 공고와 중복지원은 안 돼요.\n면접 때 자격증은 KCA 직인 발급본으로 증빙해요.\n마감: 11월 20일 23:59\n\n자세한 사항은 프로필링크 확인",
+          "detail_reply": ""
+        },
+        "editorial_policy_id": null
       }
     ],
+    "readback_entry_fingerprints": {
+      "cleaneye-81067": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
+      "a306877": "dd7d16159eb340768de3317329ea3cf3dc5bd1bbb34bcf3892566cd67d7c4e94",
+      "a306746": "ad3cbb21543870147b0a40c4e0691383da3c7b443dadd5871fe471130b870995"
+    },
+    "final_main_reply_regenerated": true,
     "next_ready_entry_sha256": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
-    "audit_path": "threads/audits/writer-v2-20261111T2143.json"
+    "audit_path": "threads/audits/writer-v2-20261111T2321.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-11T12:55:30Z",
-    "main_sha": "d5b91863c30dd14bb49f7765b5f6e8d271dd282e",
+    "checked_at": "2026-11-11T14:48:10Z",
+    "main_sha": "d238e76145141c363da8d6b0a67d53ef1f36c75e",
     "history_blob_sha": "89bd325200f75111b2480748a56d5791900bcdf5",
     "claim_blob_sha": "9a76bbc5ae7f6a73e494f1fc5b7bc07e7e17fe75",
     "latest_publisher_run": {
@@ -4434,16 +4816,16 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17896425015438025",
     "publisher_in_progress": false,
-    "status": "no_new_publication_or_failure_next_regular_IMAGE_pending",
+    "status": "no_new_publication_three_ready_and_UTC_candidate_CI_hold",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-11T19:10:42+09:00",
-        "source_checked_at": "2026-11-11T19:11:08+09:00",
-        "total_records": 886,
+        "snapshot_at": "2026-11-11T22:23:51+09:00",
+        "source_checked_at": "2026-11-11T22:24:23+09:00",
+        "total_records": 890,
         "eligible_count": 28,
-        "review_required_count": 744,
-        "excluded_count": 114,
+        "review_required_count": 747,
+        "excluded_count": 115,
         "returned_count": 0,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 29,
@@ -4451,6 +4833,7 @@
           "SOURCE_NOTICE_UNCONFIRMED": 11,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
           "APPLICATION_END_PRECISION_CONFLICT": 1,
+          "NOTICE_ALREADY_QUEUED": 1,
           "APPLICATION_START_TIME_UNKNOWN": 2
         }
       },
@@ -4473,9 +4856,12 @@
       }
     },
     "actions_pages_read": 7,
-    "actions_runs_read": 675,
-    "audit_path": "threads/audits/writer-v2-20261111T2143.json",
-    "new_failure_fingerprints": []
+    "actions_runs_read": 681,
+    "audit_path": "threads/audits/writer-v2-20261111T2321.json",
+    "new_failure_fingerprints": [
+      "pr51:d95daa11e4f05e65f9dfba86d4023b44bc5837dd:43039199616:1:install-exact-card-deps:DNS:100"
+    ],
+    "publisher_failure_fingerprints": []
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -7713,6 +8099,17 @@
       "queue_blob_sha": "8913cd368df7d68c95903e59369cc5af19fe5105",
       "queue_commit_sha": "df0c76d780a9e3385c388f7c04c393358b8b4c81",
       "entry_sha256": "730a270b510b7ff6b7c412be00b2ff8028ed5e8b37b1d1cd2ad6e607b4325cf4"
+    },
+    "2026-11-12:a305734:source_freshness": {
+      "checked_at": "2026-11-11T14:48:10Z",
+      "source_refreshed": true,
+      "source_snapshot_at": "2026-11-11T22:23:51+09:00",
+      "official_rechecked_at": "2026-11-11T23:23:44.142947+09:00",
+      "unit_count": 10,
+      "employment": "정규직",
+      "remaining_hold": "UTC deadline validation not applied on main; PR51 CI dependency DNS",
+      "ready_saved": false,
+      "audit_path": "threads/audits/writer-v2-20261111T2321.json"
     }
   },
   "editorial_restoration": {
@@ -7884,18 +8281,18 @@
       }
     ],
     "last_evaluation": {
-      "checked_at": "2026-11-11T12:55:30Z",
-      "slot": "2026-11-12T12:00:00+09:00",
-      "notice_id": "a306877",
+      "checked_at": "2026-11-11T14:48:10Z",
+      "slot": "2026-11-12T20:00:00+09:00",
+      "notice_id": "a306746",
       "employment": "정규직",
       "unit_count": 1,
-      "classification": "neutral",
-      "basis": "직무산업안전관리;고정분야선호·임의인기점수없이검증된접수·단위인원·지원조건·직무다양성으로검토",
-      "reason": "전체저장소스1384건검토입력및기존보류근거를확인. 공고전체1명과산업안전관리1명이일치하는정규직이며공식실제접수중·마감·근무지역·필수대체경로·우대·수습이검증됨. 한국고용정보원기록물1명은11월12일접수개시전으로보류. 더큰50/10/8명기존미해결충돌은유지하고작은인원이기때문에그근거를무시하지않음. 신규안전관리직무로직전간호/사회복지직무와다양성확보. 실제인기/지역관심도수치는없어추정하지않음.",
+      "classification": "neutral_telecom_role_at_hospital",
+      "basis": "검증된접수/정규직/단위1명/3개대체자격/명시근무지역/업무다양성. 인기수치추정없음.",
+      "reason": "전체1388건검토입력과기존보류비교보존. 정규직단일직무1명공식접수중,3종대체자격/계약심사/병역예외/지역/마감시각이모두확인됨. 16시박사연구직과다른자격기반통신직무로다양성확보. 더큰미검수전체인원을특정단위수로차용하지않고공식미확인후보는보류. 병원기관이지만일반임상직이아닌통신설비직무. 임의인기점수없음.",
       "selection_audit": {
         "schema_version": 1,
         "policy_id": "careerpick-threads-selection-v5-20261111",
-        "evaluated_at": "2026-11-11T21:43:48.020407+09:00",
+        "evaluated_at": "2026-11-11T23:22:39.299986+09:00",
         "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
         "connected_sources": [
           "alio",
@@ -7905,12 +8302,12 @@
         "sources": {
           "alio": {
             "status": "verified_snapshot",
-            "snapshot_at": "2026-11-11T19:10:42+09:00",
-            "source_checked_at": "2026-11-11T19:11:08+09:00",
-            "total_records": 886,
+            "snapshot_at": "2026-11-11T22:23:51+09:00",
+            "source_checked_at": "2026-11-11T22:24:23+09:00",
+            "total_records": 890,
             "eligible_count": 28,
-            "review_required_count": 744,
-            "excluded_count": 114,
+            "review_required_count": 747,
+            "excluded_count": 115,
             "returned_count": 0,
             "exclusion_reasons": {
               "APPLICATION_CLOSED": 29,
@@ -7918,6 +8315,7 @@
               "SOURCE_NOTICE_UNCONFIRMED": 11,
               "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
               "APPLICATION_END_PRECISION_CONFLICT": 1,
+              "NOTICE_ALREADY_QUEUED": 1,
               "APPLICATION_START_TIME_UNKNOWN": 2
             }
           },
@@ -7939,7 +8337,7 @@
             }
           }
         },
-        "total_scanned": 1384,
+        "total_scanned": 1388,
         "eligible_before_limit": 299,
         "writer_limit": 24,
         "returned_count": 24,
@@ -7972,7 +8370,7 @@
         "review_errors": [],
         "preparation_time_heuristic_hours": 48
       },
-      "audit_path": "threads/audits/writer-v2-20261111T2143.json"
+      "audit_path": "threads/audits/writer-v2-20261111T2321.json"
     },
     "candidate_scope_audit": {
       "schema_version": 1,
@@ -8104,285 +8502,20 @@
       "actual_publication": false
     },
     "latest_future_slot_review": {
-      "target_slot": "2026-11-11T20:00:00+09:00",
-      "checked_at": "2026-11-10T14:11:08.072Z",
-      "notice_id": "cleaneye-81028",
-      "decision": "selected_verified_ready",
-      "employment": "일반정규직",
-      "unit_count": 1,
-      "notice_total_count": 3,
-      "sector_preference": "neutral",
-      "sector_group": "other",
-      "interest_score": null,
-      "details_fully_reviewed": false,
-      "reason": "공식 모집표와 청소 직무기술서가 일치하는 일반정규직 1명 보류 대안. 전체 3명과 분리. 고용주·링크·마감 미해결인 상위 후보보다 최종 선정되었다는 뜻이 아님. 분야 중립, 실측 인기 점수 없음.",
-      "larger_unresolved": [
-        {
-          "id": "cleaneye-80848",
-          "count": 103,
-          "reason": "IMAGE_ORGANIZATION_CONFLICT; official employer and source name disagree"
-        },
-        {
-          "id": "cleaneye-80820",
-          "reason": "Different employer from source institution; not changed"
-        },
-        {
-          "id": "cleaneye-80711",
-          "count": 3,
-          "reason": "Earlier official review did not establish workplace; source fingerprint unchanged"
-        },
-        {
-          "id": "cleaneye-80902",
-          "count": 6,
-          "reason": "Unresolved exact application link"
-        },
-        {
-          "id": "cleaneye-80887",
-          "count": 4,
-          "reason": "Unresolved official workplace"
-        },
-        {
-          "id": "a305734",
-          "count": 10,
-          "reason": "Unresolved UTC midnight precision"
-        },
-        {
-          "id": "a306403",
-          "count": 8,
-          "reason": "Unresolved UTC midnight precision and source eligibility discrepancies"
-        },
-        {
-          "id": "cleaneye-80812",
-          "notice_total_count": 19,
-          "reason": "Official register/Work24 supplies notice total only; direct local-government listing returned HTTP 400, original recruitment table not read"
-        },
-        {
-          "id": "a306275",
-          "notice_total_count": 24,
-          "unit_count": null,
-          "reason": "공식 모집표 24명 이내, 원서접수 충원시까지. 실제 확정 인원·마감 미확인.",
-          "source": "https://www.alio.go.kr/download/download.json?fileNo=3082265"
-        },
-        {
-          "id": "a306724",
-          "notice_total_count": 29,
-          "unit_count": null,
-          "reason": "공식 PDF의 진료과와 직급에 따라 정규직·계약직 혼합. 동일 정규직 모집단위의 3명 이상이 확인되지 않음.",
-          "source": "https://www.alio.go.kr/download/download.json?fileNo=3085265"
-        },
-        {
-          "id": "a306859",
-          "notice_total_count": 7,
-          "unit_count": null,
-          "reason": "공식 공고 임상강사·진료교수·진료의사 계약기간 명시. 모집단위 최대 2명. ALIO 정규직 표기를 그대로 쓰지 않음.",
-          "source": "https://www.alio.go.kr/download/download.json?fileNo=3086041"
-        },
-        {
-          "id": "a306819",
-          "notice_total_count": 6,
-          "unit_count": null,
-          "reason": "8개 전공 총 6명 이내, 전공별 인원 미기재; 공식 EST 마감 및 실제 지원 화면 확인 제약.",
-          "source": "https://www.kdischool.ac.kr/board.es?mid=a60502010000&bid=0037&act=view&list_no=20310"
-        },
-        {
-          "id": "a306012",
-          "notice_total_count": 8,
-          "unit_count": 8,
-          "reason": "EJM 화면 midnight UTC와 원문 표기·JSON-LD 유효시각 차이. 승인된 KST 마감 근거로 확정하지 않음.",
-          "source": "https://econjobmarket.org/positions/12824"
-        },
-        {
-          "id": "a306760",
-          "unit_count": 4,
-          "reason": "11월 7일 같은 기관·상황실·정규직 6급·근무와 마감이 거의 동일한 a306759가 실제 게시. 실질 중복 방지.",
-          "previous_post_id": "18131171185889612"
-        },
-        {
-          "id": "a306807",
-          "unit_count": 1,
-          "reason": "기관 공식 접수 시작 11/12로 11/11 슬롯에서 아직 미접수.",
-          "source": "https://keis.or.kr/keis/ko/bbs/236/detail.do?pageIndex=1&pageItm=10&pstSn=64797&searchGbn=0&searchOrderSort=0"
-        },
-        {
-          "id": "cleaneye-81028",
-          "unit_count": 1,
-          "reason": "기관 접수는 검증했으나 최신 수집 작업의 변경 없음 결과가 추적된 스냅샷 시각을 갱신하지 않아 CLEANEYE_SOURCE_STALE."
-        }
+      "checked_at": "2026-11-11T14:48:10Z",
+      "ready_slots": [
+        "2026-11-12T08:00:00+09:00",
+        "2026-11-12T12:00:00+09:00",
+        "2026-11-12T20:00:00+09:00"
       ],
-      "excluded": [
-        {
-          "id": "cleaneye-80642",
-          "reason": "11/11 10:00 KST official application deadline precedes this slot",
-          "prior_evidence_preserved": true
-        },
-        {
-          "id": "a306242",
-          "reason": "Source narrative deadline 11/11 14:00 precedes this slot"
-        }
+      "slot16": "hold_UTC_validator_PR51_required_CI_DNS",
+      "retained_larger_holds": [
+        "a306875:50_unit_official_reception_500_and_conditions_unresolved",
+        "a306403:8_unit_language_required_vs_preferred_conflict"
       ],
-      "minimum_source_checked_at": "2026-11-10T21:59:59+09:00",
-      "official_review": [
-        {
-          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
-          "checked_at": "2026-11-10T23:05:40.920192+09:00",
-          "sha256": "d9317c3d5120221cd2524c716d4c51ad1ef278a5c0bd2e0bea99662eb26748e9",
-          "excerpt": "간호사 의료직(6급) 순천병원 3 / 접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00 / ｢간호법｣상 간호사 면허를 취득한 자 / 연령제한 없음(단, 임용일 기준 60세 미만(정년)인 자) / 임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한) / 3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용 / ｢병역법｣ 제76조에서 정한 병역의무 불이행 사실이 없는 자 / 공단 ｢인사규정｣ 제14조에서 정한 결격사유가 없는 자 / 12. 8.(화) 예정 / 응시원서, 자기소개서, 개인정보수집·이용·제공동의서 각 1부 / 응시원서 하단에 서명(날인) 후 스캔 → 1개의 PDF 파일로 변환 / 포털메일 사용 / 채용담당자의 수신 완료 메일",
-          "location": "공단 이사장 명의 11월 6일 공고문 §§1~4. 모집표 셀 순서대로 공백을 정규화."
-        },
-        {
-          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085604",
-          "checked_at": "2026-11-10T23:05:41.308203+09:00",
-          "sha256": "d17940131931f1f1c9255446ac09fd0d78e96d61bb2367295d3672e9e3f46b75",
-          "excerpt": "응시원서 · 자기소개서 · 개인정보수집·이용·제공동의서",
-          "location": "공고에 연결된 입사지원 양식 열람"
-        },
-        {
-          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085605",
-          "checked_at": "2026-11-10T23:05:41.168199+09:00",
-          "sha256": "001ff999bd21f6d322bee90337de0468d73c1afae433f55d8d09c289ae6c8e4a",
-          "excerpt": "환자관리 / 환자 교육 및 상담 / 간호행정 / 물품관리",
-          "location": "공고에 연결된 간호사 NCS 직무기술서"
-        },
-        {
-          "url": "https://job.alio.go.kr/recruitview.do?idx=306786",
-          "checked_at": "2026-11-10T23:05:24.915731+09:00",
-          "sha256": "c24013bd989ed1ddabd61752565f776b2401d753ebe8c70414c2be439960ff7e",
-          "excerpt": "[순천병원] 의료직(간호사) 6급 채용 공고 / 근로복지공단 / 정규직 / 3명",
-          "location": "공식 잡알리오 상세와 첨부 링크"
-        }
-      ],
-      "recheck": {
-        "checked_at": "2026-11-10T12:47:57.409Z",
-        "main_sha": "f9afe75660f2a8ea4ab17c0617652d35d9abd0d5",
-        "slot": "2026-11-11T20:00:00+09:00",
-        "notice_id": "cleaneye-81028",
-        "prior_entry_sha256": "6fbfb4c5108b76d654170dc400a66c5919a264354d6e7a736e07c7737efcc813",
-        "entry_sha256": "0d9133c505cb7adedab75c5732a630bc34f16a217b0de1bcbca92f0f66339069",
-        "application_path": {
-          "url": "https://dfmc.grabberhr.com/careers/job-posting/728",
-          "official_listing_id": 728,
-          "verified": true,
-          "internal_address_note": "Raw workplace and workplace1 fields contain the same institutional Seoul address for all three open listings. The application page does not display those fields. Its signed notice graphic and the official PDFs specifically identify Jecheon Cheongpung for this unit; retain this discrepancy in evidence and never use the internal address as the work location."
-        },
-        "verified_refs": [
-          {
-            "url": "https://api.grabberhr.com/api/v2/public/jobposts/728",
-            "excerpt": "접수 기간 2026-11-09 09:00:00 ~ 2026-11-19 18:00:00 / 업무직 9급_청소(청풍) / 정규직 / 모집중",
-            "location": "공식 지원 사이트에 연결된 모집단위 728의 공개 GET. 입력·제출 없음.",
-            "sha256": "bdc23fa7e96ea02493e4af09044409ca22ef2deda4e05440468ce630cc6e0393",
-            "checked_at": "2026-11-10T21:44:03.585628+09:00"
-          },
-          {
-            "url": "https://develop-grabber.s3.amazonaws.com/hr/prod/dfmc/jobPosting/recruit//20261106172351/f4f60e6c-6517-4bbe-bf70-243ba17ae4a9.png",
-            "excerpt": "업무직 9급 청소(청풍) / 1명 / 일반채용 / 충북 제천시 소재 청풍유스호스텔 근무 가능자",
-            "location": "지원 상세 페이지에 표시되는 공고 제2026-55호 모집표와 응시자격 시각 확인",
-            "sha256": "237f648e1d997c4a64a6c619e4ecaffbe4e3f0b21ae9ee33c7badaba2f84b8d2",
-            "checked_at": "2026-11-10T21:45:10.159898+09:00"
-          },
-          {
-            "url": "https://www.dfmc.kr/UploadFiles/RECRUIT/%EC%A7%80%EC%9B%90%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%2813%29.pdf",
-            "excerpt": "블라인드 심사 기준: 출신학교, 나이, 출신지역, 가족사항, 성명 기재란 외 성명 기재 제한",
-            "location": "1쪽 지원서 작성 가이드라인 시각 확인",
-            "sha256": "0baf974cfc5bf42f8689e27e60ea5cbd35c1a952d60258dd51732fc99ab0cbd6",
-            "checked_at": "2026-11-10T21:45:11.751944+09:00"
-          }
-        ],
-        "status": "hold",
-        "blocking": [
-          "CLEANEYE_SOURCE_STALE_AT_DELAY_WINDOW_END",
-          "LARGER_RECRUITMENT_UNITS_PENDING_REVIEW"
-        ],
-        "larger_units_rechecked": [
-          {
-            "notice_id": "cleaneye-80902",
-            "unit_count": 6,
-            "employment": "일반정규직",
-            "sector_preference": "deprioritized",
-            "decision": "hold",
-            "reason": "Official detail matches 2026-38 but current public feed points to 2026-34",
-            "evidence": [
-              {
-                "url": "https://medical.recruiter.co.kr/career/jobs/133112",
-                "excerpt": "[수원병원][2026-38호] 간호사(정규직) 신규채용 공고",
-                "location": "기관 공고 100965가 연결한 정확한 지원 상세",
-                "sha256": "044d65f1b1fec205305592d7e3936dbcbf700dbf155312f49717d5e1adeef196",
-                "checked_at": "2026-11-10T21:43:18.568685+09:00"
-              },
-              {
-                "url": "https://medical.recruiter.co.kr/career/jobs/127602",
-                "excerpt": "[수원병원][2026-34호] 간호사(정규직) 신규채용 공고",
-                "location": "현재 공개 클린아이 수집본이 가리키는 다른 공고",
-                "sha256": "3d0521ea9dce74549dce5a4d9b605dcd2bb76485472afbe0a624739bedfa707d",
-                "checked_at": "2026-11-10T21:43:37.017223+09:00"
-              }
-            ]
-          },
-          {
-            "notice_id": "cleaneye-80711",
-            "unit_count": 3,
-            "employment": "일반정규직",
-            "sector_preference": "neutral",
-            "decision": "hold",
-            "reason": "Official same PDF; exact recruitment-unit workplace remains unconfirmed",
-            "evidence": [
-              {
-                "url": "https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
-                "excerpt": "행정 9급 (일반행정) 3명 / 공단 일반행정(회계, 사업 등) 업무",
-                "location": "동일 공고 PDF를 다시 읽음. 일반행정 근무 배치 미명시.",
-                "sha256": "da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb",
-                "checked_at": "2026-11-10T21:42:54.099974+09:00"
-              }
-            ]
-          }
-        ]
-      },
       "official_details_fully_reviewed": false,
-      "selected": {
-        "notice_id": "a306786",
-        "slot": "2026-11-11T20:00:00+09:00",
-        "employment": "정규직",
-        "unit_count": 3,
-        "notice_total_count": 3,
-        "sector_preference": "deprioritized",
-        "sector_group": "hospital_health",
-        "sector_priority": 2,
-        "sector_basis": "공식 검수 단위 간호사; 사용자 분야 선호에 따른 후순위, 실측 인기 없음",
-        "priority_reason": "새 ALIO 공식 수집본에 있으며, 병원 분야는 후순위지만 비교한 공고 중 중복 없이 공식 모집단위 3명과 접수·근무·제한의 전체 게시 허용 구간을 검증한 원고. 더 큰 후보는 첨부상 혼합 고용/마감·수집 신선도·직무/중복 문제로 보류 또는 제외. 실제 인기 점수 없음.",
-        "application_end": "2026-11-16T17:30:00+09:00",
-        "official_refs": [
-          {
-            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
-            "checked_at": "2026-11-10T23:05:40.920192+09:00",
-            "sha256": "d9317c3d5120221cd2524c716d4c51ad1ef278a5c0bd2e0bea99662eb26748e9",
-            "excerpt": "간호사 의료직(6급) 순천병원 3 / 접수기간: ’26. 11. 6.(금) ∼ 11. 16.(월) 17:30:00 / ｢간호법｣상 간호사 면허를 취득한 자 / 연령제한 없음(단, 임용일 기준 60세 미만(정년)인 자) / 임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한) / 3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용 / ｢병역법｣ 제76조에서 정한 병역의무 불이행 사실이 없는 자 / 공단 ｢인사규정｣ 제14조에서 정한 결격사유가 없는 자 / 12. 8.(화) 예정 / 응시원서, 자기소개서, 개인정보수집·이용·제공동의서 각 1부 / 응시원서 하단에 서명(날인) 후 스캔 → 1개의 PDF 파일로 변환 / 포털메일 사용 / 채용담당자의 수신 완료 메일",
-            "location": "공단 이사장 명의 11월 6일 공고문 §§1~4. 모집표 셀 순서대로 공백을 정규화."
-          },
-          {
-            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085604",
-            "checked_at": "2026-11-10T23:05:41.308203+09:00",
-            "sha256": "d17940131931f1f1c9255446ac09fd0d78e96d61bb2367295d3672e9e3f46b75",
-            "excerpt": "응시원서 · 자기소개서 · 개인정보수집·이용·제공동의서",
-            "location": "공고에 연결된 입사지원 양식 열람"
-          },
-          {
-            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085605",
-            "checked_at": "2026-11-10T23:05:41.168199+09:00",
-            "sha256": "001ff999bd21f6d322bee90337de0468d73c1afae433f55d8d09c289ae6c8e4a",
-            "excerpt": "환자관리 / 환자 교육 및 상담 / 간호행정 / 물품관리",
-            "location": "공고에 연결된 간호사 NCS 직무기술서"
-          },
-          {
-            "url": "https://job.alio.go.kr/recruitview.do?idx=306786",
-            "checked_at": "2026-11-10T23:05:24.915731+09:00",
-            "sha256": "c24013bd989ed1ddabd61752565f776b2401d753ebe8c70414c2be439960ff7e",
-            "excerpt": "[순천병원] 의료직(간호사) 6급 채용 공고 / 근로복지공단 / 정규직 / 3명",
-            "location": "공식 잡알리오 상세와 첨부 링크"
-          }
-        ],
-        "queue_commit": "5f32bf558f9e34929320ce4dd65f53d3684059f6",
-        "queue_blob_sha": "58eca8d391f7e0e214f4a3741b922930891f38ed",
-        "entry_sha256": "6fff7f81406440d232dbb65f745fa89b964848ff28f9024bdec10f144c086b7c"
-      }
+      "styles": "08regular_interest/12eligibility_info preserved;16regular_interest held;20eligibility_info. If16missing, qualification clarity justifies repeated information style; no media alternation override.",
+      "audit_path": "threads/audits/writer-v2-20261111T2321.json"
     },
     "sector_rollout": {
       "policy_id": "careerpick-threads-selection-v3-20261110",
@@ -9632,7 +9765,7 @@
       "First v2 24h Nov12 20:45:18,72h Nov14 20:45:18; useactual capturetime.",
       "Keep approved target/condition/regular-interest styles and no assumed performance effects."
     ],
-    "audit_path": "threads/audits/writer-v2-20261111T2143.json",
+    "audit_path": "threads/audits/writer-v2-20261111T2321.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
     "queue_commit": "a410012deb48f729d4d79906e0f1e4d9032bb109",
     "queue_readback_at": "2026-11-11T18:38:25.419515+09:00",
@@ -9652,18 +9785,20 @@
       "performance_improvement": "not_yet_observed"
     },
     "latest_independent_writer_check": {
-      "checked_at": "2026-11-11T12:55:30Z",
-      "full_queue": "passed",
-      "queue_blob_sha": "d280b8811a5c2a0501e1bac9243fc5ff083d369f",
+      "checked_at": "2026-11-11T14:48:10Z",
+      "full_queue": "passed_on_unchanged_current_main_code",
+      "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
       "new_ready_saved": 1,
       "existing_ready_preserved": true,
       "next_ready_entry_sha256": "c1b21f55468afccd7f01925778c02d51172ee51d4aabb461eea751047e5c36cf",
       "next_media": "IMAGE",
-      "next_card": "previous exact reviewed assets preserved",
-      "actual_text_publication": "verified",
+      "next_card": "existing08 exact reviewed asset preserved",
+      "additional20_card": "registered_and_remote_bytes_verified_for_conditional_IMAGE",
+      "slot16": "held_not_queued_PR51_CI_dependency_DNS",
+      "actual_text_publication": "verified_previous_observation",
       "actual_image_publication": "pending_regular_image",
       "actual_metrics": "24h72h_not_due",
-      "audit_path": "threads/audits/writer-v2-20261111T2143.json"
+      "audit_path": "threads/audits/writer-v2-20261111T2321.json"
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -9693,12 +9828,14 @@
       "draft_count_written": 1,
       "operational_publication_verified": false,
       "new_drafts_this_check": {
-        "checked_at": "2026-11-11T12:55:30Z",
-        "slot": "2026-11-12T12:00:00+09:00",
-        "style": "eligibility_info",
+        "checked_at": "2026-11-11T14:48:10Z",
         "ready_saved": 1,
-        "sha256": "dd7d16159eb340768de3317329ea3cf3dc5bd1bbb34bcf3892566cd67d7c4e94",
-        "actual_post_id": null
+        "held_not_queued": 1,
+        "ready_slot": "2026-11-12T20:00:00+09:00",
+        "ready_style": "eligibility_info",
+        "held_slot": "2026-11-12T16:00:00+09:00",
+        "held_style": "regular_interest",
+        "actual_new_posts": 0
       }
     },
     "text_verification": {
@@ -9793,16 +9930,23 @@
         "format_id": "eligibility",
         "characters": 271,
         "contract_version": 2
+      },
+      {
+        "scheduled_at": "2026-11-12T20:00:00+09:00",
+        "notice_id": "a306746",
+        "format_id": "deadline_opportunity",
+        "characters": 300,
+        "contract_version": 2
       }
     ]
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-11T12:55:30Z",
+    "checked_at": "2026-11-11T14:48:10Z",
     "state_blob_sha": "56c0c6e2de2a8f5540d37975330fa56618b44184",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-11T12:53:28.213990+00:00",
+      "as_of": "2026-11-11T14:22:40.065658+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -9965,7 +10109,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-11T12:53:28.213990+00:00",
+            "requested_end": "2026-11-11T14:22:40.065658+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-11T11:45:32.854727+00:00",
             "start_followers": 415,
@@ -9986,7 +10130,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-11T12:53:28.213990+00:00",
+        "requested_end": "2026-11-11T14:22:40.065658+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-11T11:45:32.854727+00:00",
         "start_followers": 415,
@@ -10020,7 +10164,7 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/writer-v2-20261111T2143.json",
+    "audit_path": "threads/audits/writer-v2-20261111T2321.json",
     "artifact_unchanged_since_previous_verified_checkpoint": true
   }
 }
