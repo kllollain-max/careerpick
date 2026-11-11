@@ -29,6 +29,7 @@ from scripts.threads_metrics_preview import METRICS, collect_post_insights
 POLICY_ID = "careerpick-threads-reach-v1-20261109"
 KST = ZoneInfo("Asia/Seoul")
 WINDOWS = {"24h": timedelta(hours=24), "7d": timedelta(days=7)}
+V5_WINDOWS = {"24h": timedelta(hours=24), "72h": timedelta(hours=72)}
 # An explicit observation tolerance, not a statistical significance threshold.
 # Later observations remain useful cumulative snapshots but are not comparable
 # milestone measurements. Report elapsed seconds for every observation.
@@ -155,6 +156,10 @@ def publication_metadata(record, public_verification=None):
         "post_id": str(record["threads_post_id"]), "notice_id": record.get("job_id"),
         "published_at": published.isoformat(), "scheduled_at": slot,
         "slot_hour_kst": slot_hour, "actual_hour_kst": published.astimezone(KST).hour,
+        "body_chars": len(str(record.get("text", ""))),
+        "first_sentence": str(record.get("text", "")).split("\n",1)[0],
+        "editorial_v5": deepcopy(review.get("v5")),
+        "post_attributed_profile_visits": None, "post_attributed_follow_increase": None, "post_attributed_link_clicks": None,
         "format_id": record.get("format_id"), "media": "IMAGE" if record.get("image_url") else "TEXT",
         "org": facts.get("org"), "job": facts.get("title"), "employment": facts.get("employment"),
         "recruitment_unit_count": count, "location": facts.get("location"),
@@ -197,7 +202,8 @@ def recent_publications(history, now, *, lookback_days=28, include_history=True)
         if not now - timedelta(days=lookback_days) <= published <= now:
             excluded["outside_window"] += 1
             continue
-        if not include_history and _review(record).get("reach_editorial", {}).get("policy_id") != POLICY_ID:
+        if (not include_history and _review(record).get("reach_editorial", {}).get("policy_id") != POLICY_ID
+                and _review(record).get("v5", {}).get("policy_id") != "careerpick-threads-v5-20261111"):
             excluded["legacy_policy"] += 1
             continue
         seen.add(post_id)
@@ -215,7 +221,8 @@ def measurement_plan(history, state, now, *, include_history=False):
     for record in records:
         metadata = publication_metadata(record)
         published = moment(record["published_at"])
-        for label, age in WINDOWS.items():
+        windows = V5_WINDOWS if _review(record).get("v5", {}).get("policy_id") == "careerpick-threads-v5-20261111" else WINDOWS
+        for label, age in windows.items():
             due = published + age
             previous = [o for o in observations if o.get("post_id") == metadata["post_id"]
                         and o.get("window") == label]
@@ -480,6 +487,8 @@ def summarize(history, state, now):
                             "status": "due" if due and now >= due else "pending" if due else "not_started"})
     plan = measurement_plan(history, state, now, include_history=True)
     return {
+        "v5_observation_windows": ["24h", "72h"],
+        "v5_comparison_status": "separate_cohort_not_legacy_AB; human_review_until_sufficient_verified_samples",
         "schema_version": 1, "policy_id": POLICY_ID, "as_of": now.isoformat(),
         "requested_window_start": (now - timedelta(days=28)).isoformat(),
         "observed_first_publication": min((m["published_at"] for m in metadata.values()), default=None),

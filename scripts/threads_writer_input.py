@@ -39,7 +39,13 @@ def build_input(now, limit=24, reviewed_entries=None, *, queued_entries=None):
                               **({'hook_type': balanced_hook_type(at, datetime.fromisoformat(
                                   policy['editorial_policy']['effective_at']).date())}
                                  if editorial_prompt else {})})
-    return {'reference_at': now.isoformat(), 'policy': policy,
+    from scripts.threads_v5 import load_prompt, FORMATS
+    v5_prompt = load_prompt(ROOT, policy)
+    if policy.get('editorial_v5', {}).get('enabled'):
+        for slot in slots:
+            slot['format_id'] = FORMATS[f"{datetime.fromisoformat(slot['scheduled_at']).hour:02}"]
+    return {'v5_prompt': v5_prompt, 'v5_enabled': policy.get('editorial_v5', {}).get('enabled', False),
+            'reference_at': now.isoformat(), 'policy': policy,
             'source_updated': source.get('updated'), 'operations': operations,
             'cleaneye_source': {'status': selection['cleaneye_status'], 'updated': cleaneye.get('updated') if isinstance(cleaneye, dict) else None},
             'slots': slots, 'candidates': selection['candidates'],
@@ -78,7 +84,7 @@ def check_queue(path, now):
             continue
         selected = validate_entry(entry, scheduled, now, history, source, details, policy)
         from scripts.threads_auto import master_public_copy
-        main, detail = master_public_copy(selected, policy.get('publication_style'))
+        main, detail = master_public_copy(selected, 'single_main_v5' if selected.get('writer_review', {}).get('v5') else policy.get('publication_style'))
         checked.append({'scheduled_at': entry['scheduled_at'], 'notice_id': entry['notice_id'],
                         'format_id': entry['format_id'], 'chars': len(entry['writer']['post_text']),
                         'public_preview': {'main_text': main, 'detail_reply': detail},

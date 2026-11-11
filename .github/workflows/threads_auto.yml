@@ -139,7 +139,12 @@ jobs:
           history = json.loads(Path('threads_posted.json').read_text(encoding='utf-8'))
           matches = [r for r in history.get('records', []) if r.get('run_id') == __import__('os').environ['GITHUB_RUN_ID'] and r.get('status') == 'pending']
           if len(matches) == 1 and matches[0].get('image_job'):
-              path = Path(generate(matches[0]['image_job']))
+              if matches[0].get('writer_review', {}).get('v5'):
+                  from scripts.threads_v5 import generate_card
+                  path = Path('threads-images') / (matches[0]['job_id'] + '.jpg')
+                  generate_card(matches[0]['image_job'], path)
+              else:
+                  path = Path(generate(matches[0]['image_job']))
               quality = verify_thumbnail(path)
               matches[0]['image_quality'] = quality
               matches[0]['image_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()

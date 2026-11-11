@@ -354,7 +354,11 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
             eligible.append((row, post, detail, context))
     # Exact identity deduplication occurs before limiting. No fuzzy scores or
     # institution-level deduplication that could erase distinct recruiting units.
-    eligible.sort(key=lambda item: _ranking_key(item[0]))
+    if policy.get('editorial_v5', {}).get('enabled'):
+        from scripts.threads_v5 import ranking_key
+        eligible.sort(key=lambda item: ranking_key(item[0]))
+    else:
+        eligible.sort(key=lambda item: _ranking_key(item[0]))
     unique, identities = [], set()
     for item in eligible:
         row, post, _, _ = item
@@ -395,6 +399,11 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
              "ranking_order": ["current_application_open", "exact_employment_type", "verified_unit_count_desc",
                                "sector_priority", "actual_deadline", "notice_id_tiebreak"],
              "review_errors": review_errors, "rows": rows}
+    if policy.get('editorial_v5', {}).get('enabled'):
+        audit['policy_id'] = 'careerpick-threads-selection-v5-20261111'
+        audit['sector_policy']['scope'] = 'user_v5_sector_order_before_employment_and_unit_count'
+        audit['sector_policy']['priority_order'] = {'energy_power':0,'rail_transport_logistics':1,'finance_insurance_pension':2,'other':3,'hospital_health':5}
+        audit['ranking_order'] = ['current_application_open','user_v5_sector_preference','exact_employment_type','verified_unit_count_desc','actual_deadline','notice_id_tiebreak']
     review_rows = [{k: v for k, v in r.items() if k not in {"source_post_sha256", "source_detail_sha256"}}
                    for r in rows if r["decision"] == "review_required"]
     return {"candidates": items, "selection_audit": audit, "review_candidates": review_rows,

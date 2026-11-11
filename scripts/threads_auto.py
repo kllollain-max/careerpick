@@ -48,6 +48,8 @@ def writer_inputs(root=None):
         raise RuntimeError('Master prompt hash mismatch; do not publish')
     from scripts.threads_reach_editorial import load_editorial_prompt
     load_editorial_prompt(base, policy)
+    from scripts.threads_v5 import load_prompt
+    load_prompt(base, policy)
     source = load(DATA if root is None else base / 'alio.json', {})
     source['_operations'] = load(base / 'operations-status.json', {})
     try:
@@ -61,6 +63,12 @@ def writer_inputs(root=None):
 
 def master_public_copy(selected, style):
     """Build the public pair only after the writer's facts and text pass validation."""
+    from scripts.threads_v5 import STYLE as V5_STYLE, copy_check
+    if style == V5_STYLE:
+        if not selected.get('writer_review', {}).get('v5'):
+            raise RuntimeError('Missing v5 review')
+        copy_check(selected['text'], selected['writer_review'], selected['image_job'])
+        return selected['text'], ''
     if style is None:
         return selected['text'], ''
     if style != COMPACT_STYLE:
@@ -117,7 +125,8 @@ def prepare_master(history, now, run_id):
     image_turn = prior is not None and not bool(prior.get('image_url'))
     image_job = selected['image_job'] if image_turn else None
     identifier = re.sub(r'[^A-Za-z0-9_-]', '_', selected['job_id'])[:70]
-    style = policy.get('publication_style')
+    style = ('single_main_v5' if selected.get('writer_review', {}).get('v5')
+             else policy.get('publication_style'))
     main_text, reply_text = master_public_copy(selected, style)
     record = {**selected, 'text': main_text, 'reply_text': reply_text,
               'scheduled_at': scheduled.isoformat(),
