@@ -24,7 +24,8 @@ const server = http.createServer((req,res) => {
     await page.goto(origin+'/',{waitUntil:'domcontentloaded',timeout:30000});
     assert.equal(await page.title(),'커리어픽 · 마감순 채용공고 모음');
     await page.locator('#q').waitFor({state:'visible',timeout:10000});
-    await page.locator('#tabs').waitFor({state:'visible',timeout:10000});
+    await page.locator('#tabs').waitFor({state:'attached',timeout:10000});
+    await page.waitForFunction(() => document.querySelectorAll('#tabs .tab').length > 0, null, {timeout:30000});
     await page.waitForFunction(() => {
       const summary = document.querySelector('#summary');
       return summary && /검색 결과|글 |새 글|조건|공고/.test(summary.textContent||'');
