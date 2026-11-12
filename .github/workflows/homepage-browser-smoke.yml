@@ -1,0 +1,26 @@
+name: Homepage browser smoke check
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'homepage-ui.js'
+      - 'homepage-ux.js'
+      - 'tests/browser-smoke.cjs'
+      - '.github/workflows/homepage-browser-smoke.yml'
+  workflow_dispatch:
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium test runner
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test homepage first paint and data loading
+        run: node tests/browser-smoke.cjs
