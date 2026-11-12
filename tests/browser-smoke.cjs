@@ -27,7 +27,7 @@ const server = http.createServer((req,res) => {
     page.on('console', msg => {if(msg.type()==='warning'||msg.type()==='error') feedDiagnostics.consoleWarnings.push(msg.text().slice(0,350));});
     page.on('requestfailed', req => feedDiagnostics.failed.push({url:req.url(),failure:req.failure()?.errorText}));
     page.on('pageerror', err => feedDiagnostics.pageErrors.push(String(err).slice(0,250)));
-    page.on('response', resp => {const item={url:resp.url(),status:resp.status()}; if(/\\.json(?:\\?|$)/.test(resp.url())) feedDiagnostics.feedResponses.push(item); if(/\\.(?:js|html)(?:\\?|$)/.test(resp.url())) feedDiagnostics.resources.push(item);});
+    page.on('response', resp => {const item={url:resp.url(),status:resp.status()}; if(resp.url().includes('.json')) feedDiagnostics.feedResponses.push(item); if(resp.url().includes('.js')||resp.url().includes('.html')) feedDiagnostics.resources.push(item);});
     const documentResponse = await page.goto(origin+'/careerpick/',{waitUntil:'domcontentloaded',timeout:30000});
     if(process.env.CP_REQUIRE_JOB_RESULTS === '1') {
       const served = await page.evaluate(() => ({
