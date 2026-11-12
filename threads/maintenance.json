@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T14:59:56Z",
-  "last_observed_at": "2026-11-12T14:59:56Z",
+  "updated_at": "2026-11-12T15:45:12Z",
+  "last_observed_at": "2026-11-12T15:45:12Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -12246,7 +12246,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T14:59:56Z",
+    "checked_at": "2026-11-12T15:45:12Z",
     "main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
     "history_blob_sha": "952791a10d3f7b91be2fb7de4b6d451ff89db997",
     "claim_blob_sha": "e853ea2871fb60507bddcbfe83a885663fdafaad",
@@ -12263,23 +12263,23 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18079233716458874",
     "publisher_in_progress": false,
-    "status": "no_new_publication_or_metrics_new_unassigned_research_draft",
+    "status": "no_new_publication_or_metrics_existing_ready_preserved",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
         "snapshot_at": "2026-11-12T19:14:52+09:00",
         "source_checked_at": "2026-11-12T19:15:25+09:00",
         "total_records": 919,
-        "eligible_count": 29,
+        "eligible_count": 30,
         "review_required_count": 768,
-        "excluded_count": 122,
+        "excluded_count": 121,
         "returned_count": 0,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 30,
           "NOTICE_ALREADY_USED": 72,
           "SOURCE_NOTICE_UNCONFIRMED": 12,
+          "APPLICATION_END_TIME_UNKNOWN": 3,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-          "APPLICATION_START_TIME_UNKNOWN": 4,
           "APPLICATION_END_PRECISION_CONFLICT": 1,
           "NOTICE_ALREADY_QUEUED": 2
         }
@@ -12289,21 +12289,21 @@
         "snapshot_at": "2026-11-12T19:16:01+09:00",
         "source_checked_at": "2026-11-12T19:16:01+09:00",
         "total_records": 528,
-        "eligible_count": 285,
+        "eligible_count": 260,
         "review_required_count": 0,
-        "excluded_count": 243,
+        "excluded_count": 268,
         "returned_count": 24,
         "exclusion_reasons": {
           "CLEANEYE_NOT_VERIFIED_OPEN": 213,
           "CLEANEYE_NOT_RECRUITMENT": 8,
           "NOTICE_ALREADY_USED": 2,
-          "CLEANEYE_APPLICATION_NOT_OPEN": 20
+          "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 45
         }
       }
     },
     "actions_pages_read": 9,
     "actions_runs_read": 862,
-    "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
+    "audit_path": "threads/audits/monitor-v2-20261113T0042.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": [],
     "out_of_scope_run_failures": "Site/banner/adsense changes observed only; no Threads failure inferred.",
@@ -12316,8 +12316,8 @@
     "slot_claim_or_reservation_observed": false,
     "error_code": null,
     "send_state": "next_regular_slot_pending_no_send_attempt",
-    "main_changes_since_archive": "none; fresh pinned current main archive used",
-    "latest_page_rechecked_at": "2026-11-12T14:59:56Z",
+    "main_changes_since_archive": "none; fresh current-main archive used",
+    "latest_page_rechecked_at": "2026-11-12T15:45:12Z",
     "main_changes_since_checkpoint": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -16472,13 +16472,34 @@
         }
       ],
       "remaining_checks": [
-        "ATS 홈페이지와 공개 공고선택 페이지는 HTTP200이나 현재 공고 데이터가 정적HTML에 없어 동일 공고의 실제 접수 화면 확인 미완료; 공식기관 안내상11/12~11/25 16시로 현재기간은 확인됨",
-        "@hid_119 프로필에서 해당상세로의 현재 안내경로 최종검수",
+        "현재 동일 공고의 실제 ATS 접수화면 확인: 공개 GET 데이터경로가 HTTP999 반환; 우회하지 않음",
         "미착수 슬롯 배정 및 완전한 실행기 스키마 검증",
         "실제성공 기준 이미지 차례이면 최종카드 생성·시각검수·동일자산 등록"
       ],
       "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
-      "queue_registered": false
+      "queue_registered": false,
+      "latest_recheck": {
+        "checked_at": "2026-11-12T15:45:12Z",
+        "ATS_read": {
+          "url": "https://keis.recruiter.co.kr/appsite/company/getMainView?appsiteSn=12404&settingType=C",
+          "checked_at": "2026-11-13T00:43:59.194707+09:00",
+          "status": "failed",
+          "error": "HTTP Error 999: Unknown"
+        },
+        "profile_target_verified": {
+          "rel_me": [
+            "<link rel=\"me\" href=\"https://kllollain-max.github.io/careerpick/\" />"
+          ],
+          "exact_profile_target_found": true,
+          "profile_checked_at": "2026-11-13T00:43:59.194199+09:00",
+          "detail_checked_at": "2026-11-13T00:43:59.195028+09:00",
+          "detail_same_bytes_as_prior": true
+        },
+        "body_unchanged": true,
+        "prepared_at_preserved": true,
+        "queue_registered": false,
+        "audit_path": "threads/audits/monitor-v2-20261113T0042.json"
+      }
     }
   },
   "writer_hold_resolutions": {
@@ -18145,17 +18166,17 @@
     "latest_v5_audit": "threads/audits/single-main-v2-image-verified-20261112T2048.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T14:59:56Z",
+    "checked_at": "2026-11-12T15:45:12Z",
     "main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
     "queue_blob_sha": "5c7ffa0b5b4042697fbf49db528e36d9915e835f",
     "policy_hashes_verified": true,
-    "input_reference_at": "2026-11-12T23:54:41.120615+09:00",
-    "input_sha256": "58dced2126a17108155f3c919de571429e86038a8776f4b8f0bd99f42c4a9253",
-    "selection_rows_sha256": "1e492d00648df60bcfd1990bb4d2c8eacc4966f67906329ff6c7cf5f5349576e",
+    "input_reference_at": "2026-11-13T00:44:08.037549+09:00",
+    "input_sha256": "a21d8c2cbafa67ddfdc3a048d8c2db256669fb85143a554c86ad0db841ef33d8",
+    "selection_rows_sha256": "834efa542b26d27592fe3d8647ed51e79c00b4c049e75636a1452fc482d7b195",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-12T23:54:41.120615+09:00",
+      "evaluated_at": "2026-11-13T00:44:08.037549+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18168,16 +18189,16 @@
           "snapshot_at": "2026-11-12T19:14:52+09:00",
           "source_checked_at": "2026-11-12T19:15:25+09:00",
           "total_records": 919,
-          "eligible_count": 29,
+          "eligible_count": 30,
           "review_required_count": 768,
-          "excluded_count": 122,
+          "excluded_count": 121,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 30,
             "NOTICE_ALREADY_USED": 72,
             "SOURCE_NOTICE_UNCONFIRMED": 12,
+            "APPLICATION_END_TIME_UNKNOWN": 3,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-            "APPLICATION_START_TIME_UNKNOWN": 4,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
             "NOTICE_ALREADY_QUEUED": 2
           }
@@ -18187,23 +18208,23 @@
           "snapshot_at": "2026-11-12T19:16:01+09:00",
           "source_checked_at": "2026-11-12T19:16:01+09:00",
           "total_records": 528,
-          "eligible_count": 285,
+          "eligible_count": 260,
           "review_required_count": 0,
-          "excluded_count": 243,
+          "excluded_count": 268,
           "returned_count": 24,
           "exclusion_reasons": {
             "CLEANEYE_NOT_VERIFIED_OPEN": 213,
             "CLEANEYE_NOT_RECRUITMENT": 8,
             "NOTICE_ALREADY_USED": 2,
-            "CLEANEYE_APPLICATION_NOT_OPEN": 20
+            "CLEANEYE_APPLICATION_CLOSED_OR_TIME_UNKNOWN": 45
           }
         }
       },
       "total_scanned": 1447,
-      "eligible_before_limit": 314,
+      "eligible_before_limit": 290,
       "writer_limit": 24,
       "returned_count": 24,
-      "unconfirmed_unit_counts": 314,
+      "unconfirmed_unit_counts": 290,
       "interest_ranking": "unavailable_not_used",
       "audience_breadth_ranking": "unavailable_not_used",
       "sector_policy": {
@@ -18214,9 +18235,9 @@
         "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
       },
       "sector_counts_before_limit": {
-        "neutral": 218,
+        "neutral": 192,
         "deprioritized": 77,
-        "preferred": 19
+        "preferred": 21
       },
       "ranking_order": [
         "current_application_open",
@@ -18240,7 +18261,7 @@
         "chars": 273,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_exact_reviewed_assets_full_pixels_verified"
+        "card_check": "existing_exact_reviewed_assets_and_full_pixels_verified"
       },
       {
         "scheduled_at": "2026-11-13T12:00:00+09:00",
@@ -18249,19 +18270,35 @@
         "chars": 284,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_exact_reviewed_assets_full_pixels_verified"
+        "card_check": "existing_exact_reviewed_assets_and_full_pixels_verified"
       }
     ],
     "queue_check": "validated",
-    "new_drafts_prepared": 1,
-    "new_held_drafts_saved": 1,
+    "new_drafts_prepared": 0,
+    "new_held_drafts_saved": 0,
     "new_ready_saved": 0,
     "queue_unchanged": true,
-    "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
+    "audit_path": "threads/audits/monitor-v2-20261113T0042.json",
     "executed_archive_main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
     "queue_readback_check": "validated_current_blob",
     "public_main_reply_check": "exact_single_main_empty_detail_reply_and_CTA_once",
-    "all_prior_queue_entries_unchanged": true
+    "all_prior_queue_entries_unchanged": true,
+    "alternative_official_checks": [
+      {
+        "notice_id": "cleaneye-80993",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80993",
+        "checked_at": "2026-11-13T00:44:59.514411+09:00",
+        "status": "failed",
+        "error": "HTTP Error 503: Service Unavailable"
+      },
+      {
+        "notice_id": "cleaneye-80820",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80820",
+        "checked_at": "2026-11-13T00:44:59.514701+09:00",
+        "status": "failed",
+        "error": "HTTP Error 503: Service Unavailable"
+      }
+    ]
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -18717,23 +18754,23 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T14:59:56Z",
-      "status": "no_new_publication_or_metrics_new_research_draft",
+      "checked_at": "2026-11-12T15:45:12Z",
+      "status": "no_new_publication_or_metrics_ready_preserved",
       "new_publications": 0,
       "last_post_id": "18079233716458874",
       "ready_entries": 2,
       "next_slot": "2026-11-13T08:00:00+09:00",
       "next_slot_status": "ready",
       "next_media": "TEXT",
-      "new_drafts": 1,
+      "new_drafts": 0,
       "new_ready_saved": 0,
-      "new_held_drafts": 1,
+      "new_held_drafts": 0,
       "queue_changed": false,
       "text_verified": true,
       "image_verified": true,
       "performance24h": "first_v2_observation_captured_prior_checkpoint",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/monitor-v2-20261112T2353.json"
+      "audit_path": "threads/audits/monitor-v2-20261113T0042.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -18969,12 +19006,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-12T14:59:56Z",
+    "checked_at": "2026-11-12T15:45:12Z",
     "state_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-12T14:54:41.936066+00:00",
+      "as_of": "2026-11-12T15:44:08.780264+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19189,7 +19226,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-12T14:54:41.936066+00:00",
+            "requested_end": "2026-11-12T15:44:08.780264+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-12T11:48:45.777061+00:00",
             "start_followers": 415,
@@ -19210,7 +19247,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T14:54:41.936066+00:00",
+        "requested_end": "2026-11-12T15:44:08.780264+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T11:48:45.777061+00:00",
         "start_followers": 415,
@@ -19244,13 +19281,13 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
+    "audit_path": "threads/audits/monitor-v2-20261113T0042.json",
     "artifact_unchanged_since_previous_verified_checkpoint": true,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T14:59:56Z",
+      "checked_at": "2026-11-12T15:45:12Z",
       "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
       "summary_mode": "executed_on_current_file",
-      "summary_as_of": "2026-11-12T14:54:41.936066+00:00",
+      "summary_as_of": "2026-11-12T15:44:08.780264+00:00",
       "new_post_metric_observations": 0,
       "new_legacy_post_metric_observations": 0,
       "new_v2_post_metric_observations": 0,
@@ -19323,7 +19360,7 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "continue14day_observation_no_weights_changed",
-      "audit_path": "threads/audits/monitor-v2-20261112T2353.json"
+      "audit_path": "threads/audits/monitor-v2-20261113T0042.json"
     },
     "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
     "new_metrics_observations_saved_by_independent_job": 0
