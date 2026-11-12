@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T00:43:35Z",
-  "last_observed_at": "2026-11-12T00:43:35Z",
+  "updated_at": "2026-11-12T00:52:55Z",
+  "last_observed_at": "2026-11-12T00:52:55Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -10112,6 +10112,14 @@
         "main_applied": false,
         "entry_or_card_not_changed": true,
         "audit_path": "threads/audits/monitor-v2-20261112T0212.json"
+      },
+      "latest_alternative_review": {
+        "notice_id": "cleaneye-80993",
+        "unit_count": 5,
+        "status": "hold",
+        "reason": "source_disqualification_conflict; no ready substitution",
+        "checked_at": "2026-11-12T00:52:55Z",
+        "audit_path": "threads/audits/monitor-v2-20261112T0946.json"
       }
     },
     "2026-11-13T08:00:00+09:00": {
@@ -10242,7 +10250,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T00:43:35Z",
+    "checked_at": "2026-11-12T00:52:55Z",
     "main_sha": "a093d607b4d95a0a9a90f14250eeefa7f5294fba",
     "history_blob_sha": "99b9551566b963085c149e551ff1c8169bcc9204",
     "claim_blob_sha": "8a53728e8c07aeff11857d0e7af6237935318569",
@@ -10259,7 +10267,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17938804020400505",
     "publisher_in_progress": false,
-    "status": "no_new_publication_or_metrics_or_blocker_resolution",
+    "status": "no_new_publication_or_metrics_existing_ready_preserved_new_alternative_held",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -10299,7 +10307,7 @@
     },
     "actions_pages_read": 7,
     "actions_runs_read": 695,
-    "audit_path": "threads/audits/monitor-v2-20261112T0939.json",
+    "audit_path": "threads/audits/monitor-v2-20261112T0946.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": []
   },
@@ -13505,6 +13513,361 @@
       "official_details_fully_reviewed": false,
       "scope": "Saved source gives operating staff total24 and date-only close; specific recruitment rows, residence rules, actual location and clock require official attachments. Never substitute organization address or comparison due23:59.",
       "audit_path": "threads/audits/monitor-v2-20261112T0404.json"
+    },
+    "2026-11-12:new-review:cleaneye-80993": {
+      "status": "hold",
+      "notice_id": "cleaneye-80993",
+      "official_id": "80993",
+      "reviewed_at": "2026-11-12T00:52:55Z",
+      "prepared_at": "2026-11-12T09:51:56.207390+09:00",
+      "unit_title": "시설관리(보일러)",
+      "unit_count": 5,
+      "notice_total_count": 26,
+      "employment": "일반정규직",
+      "reason": [
+        "OFFICIAL_DISQUALIFICATION_CONFLICT_MAIN_VS_ATTACHED_CHECKLIST",
+        "CORRECTION_BOARD_NOT_EXPOSED",
+        "FRESH_PROFILE_RESPONSE_NO_REL_ME_EVIDENCE"
+      ],
+      "scope": "ATS main and linked PDF consent/checklist text, official city integrated table and government work24 reviewed. No assumption from organization address, no 26-as-unit claim.",
+      "entry": {
+        "scheduled_at": "2026-11-12T16:00:00+09:00",
+        "format_id": "interest",
+        "notice_id": "cleaneye-80993",
+        "source": "cleaneye",
+        "official_id": "80993",
+        "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+        "source_post_sha256": "0c7b5b0417322c2bdf2545f99ed51c12ba1473ba0a04989f896062b9c9abb0e3",
+        "source_detail_sha256": "52768a7f95662c1627d7e566a38701e521aa9b7f49ac39be4cb42d3091dc892b",
+        "publication_policy_id": "careerpick-threads-v5-20261111",
+        "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+        "prepared_at": "2026-11-12T09:51:56.207390+09:00",
+        "writer": {
+          "status": "hold",
+          "post_text": null,
+          "draft_text": "보일러 설비를 관리할 분께,\n용인도시공사 시설관리(보일러) 일반정규직 5명 공고예요.\n\n공고일 전일까지 취득한 보일러 분야 기능사 이상이 필요해요.\n경기 용인시에서 24시간 교대근무해요. 근무지 변경·휴일근무도 가능해요.\n\n만 18세 이상·정년 60세이며 병역·결격 기준을 확인해요.\n2027년 1월 임용 예정, 6개월 수습평가 후 정규 임용돼요.\n\n통합채용은 한 기관·직렬만 지원해요.\n마감: 11월 16일 18:00, 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+          "reply_texts": [],
+          "review": {
+            "notice_id": "cleaneye-80993",
+            "target_reader": "보일러 기능사 이상 자격을 공고일 전일까지 취득하고 교대근무 가능한 지원자",
+            "central_message": "공식 시설관리(보일러)단위5명과 자격기준일·24시간 교대·6개월 수습 구분",
+            "pattern_id": "P6",
+            "scheduled_at": "2026-11-12T16:00:00+09:00",
+            "reference_at": "2026-11-12T09:51:56.207390+09:00",
+            "checked_at": "2026-11-12T09:48:27.623057+09:00",
+            "verification_basis": "checked_official_source",
+            "source_refs": [
+              {
+                "url": "https://yuc.incruit.com/",
+                "checked_at": "2026-11-12T09:48:05.600457+09:00",
+                "http_status": 200,
+                "bytes": 376,
+                "sha256": "40c3643a277350eeb350574e7a7c8541ee1ae4e6fd5e6237c85bd9cb7d4442a9",
+                "path": "yuc-0946.html"
+              },
+              {
+                "url": "https://yongin.incruit.com/main/main_all_2026_v2.asp",
+                "checked_at": "2026-11-12T09:48:05.600865+09:00",
+                "http_status": 200,
+                "bytes": 32769,
+                "sha256": "554638bc1d2156b07507bc8a35d887722a3481e246e46463e1b8b735347ec267",
+                "path": "yongin-integrated-0946.html"
+              },
+              {
+                "url": "https://www.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=OEW&infoTypeGroup=tb_workinfoopen&wantedAuthNo=183763",
+                "checked_at": "2026-11-12T09:48:05.601615+09:00",
+                "http_status": 200,
+                "bytes": 309159,
+                "sha256": "6956c7e54fcc8c83aaf046a67c2cb1aebfa321320da383633fe51ccb09c124ec",
+                "path": "work24-yuc-0946.html"
+              },
+              {
+                "url": "https://yuc.incruit.com/main/main.asp",
+                "checked_at": "2026-11-12T09:48:27.623057+09:00",
+                "sha256": "221efb40f52942ad9faf81390f3a32814d85812e16ee2bc55aadbd21e838974d",
+                "bytes": 65663
+              },
+              {
+                "url": "https://yuc.incruit.com/bbs/index_front.asp?boardid=notice&projectID=108",
+                "checked_at": "2026-11-12T09:49:37.575107+09:00",
+                "sha256": "40c3643a277350eeb350574e7a7c8541ee1ae4e6fd5e6237c85bd9cb7d4442a9",
+                "bytes": 376,
+                "path": "yuc-notices-0946.html"
+              },
+              {
+                "url": "https://www.threads.com/@hid_119",
+                "checked_at": "2026-11-12T09:49:37.575723+09:00",
+                "sha256": "47028c91eeb095c1d0ed88ad409959bbfdf5330da673703da12fe42fc1b4094d",
+                "bytes": 306548,
+                "path": "profile-0946.html"
+              },
+              {
+                "url": "https://kllollain-max.github.io/careerpick/",
+                "checked_at": "2026-11-12T09:49:37.576693+09:00",
+                "sha256": "f6785862c8f7826da007726e09ee642051a46611174ab3323d116ba417ff927e",
+                "bytes": 233553,
+                "path": "site-0946.html"
+              },
+              {
+                "url": "https://raspfiles2.incruit.com/yuc/data/108/SuccessData/addFile/개인정보 수집·이용 및 제3자 제공 동의서.pdf",
+                "checked_at": "2026-11-12T09:49:37.578625+09:00",
+                "sha256": "274c1f2669ad427ed32aff46a9e910eda870c06da4b038a8cd9cd6996f5753c3",
+                "bytes": 109304,
+                "path": "yuc-form0-0946.pdf"
+              },
+              {
+                "url": "https://raspfiles2.incruit.com/yuc/data/108/SuccessData/addFile/결격사유 등 확인을 위한 자기진단 체크리스트.pdf",
+                "checked_at": "2026-11-12T09:49:37.581248+09:00",
+                "sha256": "beed173e3ace66a11d2a36b758a4f43fd38f79b392107c36fc57e9f236377c77",
+                "bytes": 65297,
+                "path": "yuc-form1-0946.pdf"
+              },
+              {
+                "ref": "cleaneye.json#80993/cleaneyeDetail",
+                "checked_at": "2026-11-12T00:11:27+09:00",
+                "excerpt": "공고 고유번호 80993 / 기관명 용인도시공사 / 고용형태 원문 일반정규직 / 채용인원 26",
+                "verification_basis": "current main validated collector snapshot; 26 is notice total only",
+                "source_detail_fingerprint": "52768a7f95662c1627d7e566a38701e521aa9b7f49ac39be4cb42d3091dc892b",
+                "sha256": "772e5a06a8091bf77310827af4fe144200ed07363a24c66179db604c8c10b4de"
+              }
+            ],
+            "missing_or_conflicting": [
+              "본문 결격사유 금고이상 집행종료/집행면제 확정 후2년 vs 첨부표 금고이상 실형 집행종료/집행면제 후5년",
+              "공식 공지게시판 목록 미노출로 최신정정 전체확인 불가",
+              "프로필 응답에서 rel=me 재추출실패; 이전24h내검증과 새응답 구분 필요"
+            ],
+            "omitted_optional_facts": [
+              "과목별가산점세부",
+              "시험세부배점"
+            ],
+            "repetition_check": "checked",
+            "cta_check": "needs_confirmation",
+            "media_check": "not_supplied",
+            "length_check": "measured_within_limit",
+            "application_period": {
+              "start": "2026-11-10T09:00:00+09:00",
+              "end": "2026-11-16T18:00:00+09:00",
+              "start_date_only": false,
+              "date_only": false,
+              "official_precision_verified": true,
+              "source_ref": "https://yuc.incruit.com/main/main.asp",
+              "evidence": "접수기간 : 2026. 11. 10.(화) 09:00 ∼ 2026. 11. 16.(월) 18:00"
+            },
+            "fact_evidence": [
+              {
+                "field": "title",
+                "value": "시설관리(보일러)",
+                "source_ref": "https://yuc.incruit.com/main/main.asp",
+                "excerpt": "8급 (운영직) 시설관리(보일러) 5 방재실 업무 등"
+              },
+              {
+                "field": "count",
+                "value": 5,
+                "source_ref": "https://yuc.incruit.com/main/main.asp",
+                "excerpt": "8급 (운영직) 시설관리(보일러) 5 방재실 업무 등"
+              },
+              {
+                "field": "location",
+                "value": "경기 용인시",
+                "source_ref": "https://www.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=OEW&infoTypeGroup=tb_workinfoopen&wantedAuthNo=183763",
+                "excerpt": "근무지 경기 용인시",
+                "normalization": "고용24 모집요강 표의 근무지 헤더와 해당 셀을 연결한 발췌; 기관주소 아님"
+              },
+              {
+                "field": "employment",
+                "value": "일반정규직",
+                "source_ref": "cleaneye.json#80993/cleaneyeDetail",
+                "excerpt": "고용형태 원문 일반정규직"
+              }
+            ],
+            "v5": {
+              "policy_id": "careerpick-threads-v5-20261111",
+              "contract_version": 2,
+              "restrictions_complete": false,
+              "fact_consistency_check": "unresolved_official_disqualification_conflict",
+              "hook_candidates": [
+                {
+                  "id": "target",
+                  "type": "target",
+                  "text": "보일러 설비를 관리할 분께,\n용인도시공사 시설관리(보일러) 일반정규직 5명 공고예요."
+                },
+                {
+                  "id": "condition",
+                  "type": "condition",
+                  "text": "보일러 분야 기능사 이상 자격이 있다면,\n용인도시공사 시설관리(보일러) 5명 공고의 취득 기준일을 확인해요."
+                },
+                {
+                  "id": "job",
+                  "type": "job",
+                  "text": "24시간 교대로 보일러 설비를 관리해요.\n용인도시공사 시설관리(보일러) 일반정규직 5명 공고예요."
+                }
+              ],
+              "selected_hook_id": "target",
+              "first_sentence_type": "target",
+              "hook_review": {
+                "factual": true,
+                "target_clear": true,
+                "natural": true
+              },
+              "key_restrictions": [
+                {
+                  "text": "공고일 전일까지 취득한 보일러 분야 기능사 이상이 필요해요.",
+                  "source_ref": "https://yuc.incruit.com/main/main.asp",
+                  "excerpt": "시설관리 (보일러) 학력, 전공 제한없음 공고일 전일 보일러 분야 기능사 이상 자격 소지자",
+                  "classification": "required",
+                  "logic": "single"
+                },
+                {
+                  "text": "경기 용인시에서 24시간 교대근무해요. 근무지 변경·휴일근무도 가능해요.",
+                  "source_ref": "https://yuc.incruit.com/main/main.asp",
+                  "excerpt": "시설관리(보일러) 스포츠센터 등 방재실에서 보일러 관련 기계설비 유지관리 및 점검, 정비 및 고장 수리, 안전점검, 기타 설비 유지관리 등 시설관리를 수행하는 업무로 24시간 교대근무",
+                  "classification": "required",
+                  "logic": "single"
+                },
+                {
+                  "text": "만 18세 이상·정년 60세이며 병역·결격 기준을 확인해요.",
+                  "source_ref": "https://yuc.incruit.com/main/main.asp",
+                  "excerpt": "응시연령 : 만 18세 이상(2008. 10. 26. 이전 출생자) 정년 만 60세",
+                  "classification": "required",
+                  "logic": "single"
+                },
+                {
+                  "text": "2027년 1월 임용 예정, 6개월 수습평가 후 정규 임용돼요.",
+                  "source_ref": "https://yuc.incruit.com/main/main.asp",
+                  "excerpt": "임용 후 6개월간은 수습기간이며 수습평가 후 정규 임용합니다.",
+                  "classification": "required",
+                  "logic": "single"
+                }
+              ],
+              "useful_point": {
+                "text": "통합채용은 한 기관·직렬만 지원해요.",
+                "source_ref": "https://yongin.incruit.com/main/main_all_2026_v2.asp",
+                "excerpt": "온라인 접수만 가능하며, 하나의 기관·직렬만 지원 가능"
+              },
+              "recruitment_unit": {
+                "title": "시설관리(보일러)",
+                "count": 5,
+                "employment": "일반정규직",
+                "scope": "single_recruitment_unit",
+                "source_ref": "https://yuc.incruit.com/main/main.asp",
+                "excerpt": "8급 (운영직) 시설관리(보일러) 5 방재실 업무 등"
+              },
+              "correction_check": {
+                "checked_at": "2026-11-12T09:49:37.575107+09:00",
+                "result": "unresolved",
+                "source_ref": "https://yuc.incruit.com/main/main.asp",
+                "checked_scope": "직접 공개된 기관 채용본문·연결 첨부2개·시통합 공고와 고용24. 공지게시판 URL은 본문진입 메타리디렉션만 반환. 최신 정정 전체 조회완료가 아님.",
+                "limitations": [
+                  "notice board did not expose list",
+                  "main and attached mandatory checklist give different criminal-record exclusion periods"
+                ]
+              },
+              "style_rewrites": 0,
+              "selection_reason": "전체1390건 입력과 기존10명/8명보류를 보존하고, 신규대안26명전체 중 공식단일행5명을 확인. 의료직과다른기계설비직무·준비기간이확인되나중대한조건충돌로HOLD. 관심수치/지역인기추정없음.",
+              "presentation_style": "regular_interest",
+              "public_preview": {
+                "main_text": "보일러 설비를 관리할 분께,\n용인도시공사 시설관리(보일러) 일반정규직 5명 공고예요.\n\n공고일 전일까지 취득한 보일러 분야 기능사 이상이 필요해요.\n경기 용인시에서 24시간 교대근무해요. 근무지 변경·휴일근무도 가능해요.\n\n만 18세 이상·정년 60세이며 병역·결격 기준을 확인해요.\n2027년 1월 임용 예정, 6개월 수습평가 후 정규 임용돼요.\n\n통합채용은 한 기관·직렬만 지원해요.\n마감: 11월 16일 18:00, 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+                "detail_reply": ""
+              },
+              "card_restriction": "공고일 전일까지 취득한 보일러 분야 기능사 이상이 필요해요.",
+              "experiment_eligible": false,
+              "experiment_exclusion_reason": "not published; official facts unresolved"
+            },
+            "pre_publish_checks": [
+              "미해결사실충돌은이목록으로이동해통과시키지않음;HOLD상태유지"
+            ],
+            "body_characters": 263
+          }
+        },
+        "image_job": {
+          "id": "cleaneye-80993",
+          "org": "용인도시공사",
+          "title": "시설관리(보일러)",
+          "count": 5,
+          "employment": "일반정규직",
+          "location": "경기 용인시",
+          "due": "2026-11-16",
+          "deadline_label": "2026-11-16 18:00"
+        }
+      },
+      "entry_sha256": "6b6297bf87d99b35c40a50584391134e8a378279c41b548c9d91a28596d53eec",
+      "queue_saved": false,
+      "card_generated": false,
+      "source_checks": {
+        "yuc": {
+          "url": "https://yuc.incruit.com/",
+          "checked_at": "2026-11-12T09:48:05.600457+09:00",
+          "http_status": 200,
+          "bytes": 376,
+          "sha256": "40c3643a277350eeb350574e7a7c8541ee1ae4e6fd5e6237c85bd9cb7d4442a9",
+          "path": "yuc-0946.html"
+        },
+        "yongin-integrated": {
+          "url": "https://yongin.incruit.com/main/main_all_2026_v2.asp",
+          "checked_at": "2026-11-12T09:48:05.600865+09:00",
+          "http_status": 200,
+          "bytes": 32769,
+          "sha256": "554638bc1d2156b07507bc8a35d887722a3481e246e46463e1b8b735347ec267",
+          "path": "yongin-integrated-0946.html"
+        },
+        "work24-yuc": {
+          "url": "https://www.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=OEW&infoTypeGroup=tb_workinfoopen&wantedAuthNo=183763",
+          "checked_at": "2026-11-12T09:48:05.601615+09:00",
+          "http_status": 200,
+          "bytes": 309159,
+          "sha256": "6956c7e54fcc8c83aaf046a67c2cb1aebfa321320da383633fe51ccb09c124ec",
+          "path": "work24-yuc-0946.html"
+        },
+        "yuc-main": {
+          "url": "https://yuc.incruit.com/main/main.asp",
+          "checked_at": "2026-11-12T09:48:27.623057+09:00",
+          "sha256": "221efb40f52942ad9faf81390f3a32814d85812e16ee2bc55aadbd21e838974d",
+          "bytes": 65663
+        },
+        "yuc-notices": {
+          "url": "https://yuc.incruit.com/bbs/index_front.asp?boardid=notice&projectID=108",
+          "checked_at": "2026-11-12T09:49:37.575107+09:00",
+          "sha256": "40c3643a277350eeb350574e7a7c8541ee1ae4e6fd5e6237c85bd9cb7d4442a9",
+          "bytes": 376,
+          "path": "yuc-notices-0946.html"
+        },
+        "profile": {
+          "url": "https://www.threads.com/@hid_119",
+          "checked_at": "2026-11-12T09:49:37.575723+09:00",
+          "sha256": "47028c91eeb095c1d0ed88ad409959bbfdf5330da673703da12fe42fc1b4094d",
+          "bytes": 306548,
+          "path": "profile-0946.html"
+        },
+        "site": {
+          "url": "https://kllollain-max.github.io/careerpick/",
+          "checked_at": "2026-11-12T09:49:37.576693+09:00",
+          "sha256": "f6785862c8f7826da007726e09ee642051a46611174ab3323d116ba417ff927e",
+          "bytes": 233553,
+          "path": "site-0946.html"
+        },
+        "target80993": {
+          "url": "https://kllollain-max.github.io/careerpick/jobs/cleaneye-80993.html",
+          "observed_at": "2026-11-12T09:49:37.577624+09:00",
+          "error": "HTTP Error 404: Not Found"
+        },
+        "yuc-form0": {
+          "url": "https://raspfiles2.incruit.com/yuc/data/108/SuccessData/addFile/개인정보 수집·이용 및 제3자 제공 동의서.pdf",
+          "checked_at": "2026-11-12T09:49:37.578625+09:00",
+          "sha256": "274c1f2669ad427ed32aff46a9e910eda870c06da4b038a8cd9cd6996f5753c3",
+          "bytes": 109304,
+          "path": "yuc-form0-0946.pdf"
+        },
+        "yuc-form1": {
+          "url": "https://raspfiles2.incruit.com/yuc/data/108/SuccessData/addFile/결격사유 등 확인을 위한 자기진단 체크리스트.pdf",
+          "checked_at": "2026-11-12T09:49:37.581248+09:00",
+          "sha256": "beed173e3ace66a11d2a36b758a4f43fd38f79b392107c36fc57e9f236377c77",
+          "bytes": 65297,
+          "path": "yuc-form1-0946.pdf"
+        }
+      },
+      "official_details_fully_reviewed": false,
+      "resume": "Resolve main/checklist exclusion period conflict and actual correction scope; confirm profile-to-current-site route, full candidate gates and actual media before READY. Keep KIPF10 existing hold intact.",
+      "audit_path": "threads/audits/monitor-v2-20261112T0946.json"
     }
   },
   "writer_hold_resolutions": {
@@ -14918,17 +15281,17 @@
     }
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T00:43:35Z",
+    "checked_at": "2026-11-12T00:52:55Z",
     "main_sha": "a093d607b4d95a0a9a90f14250eeefa7f5294fba",
     "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
     "policy_hashes_verified": true,
-    "input_reference_at": "2026-11-12T09:40:24.205782+09:00",
-    "input_sha256": "280b208185fe3415969ebc78024b0f65eafab9a5de1779c7164a1910152d3e0f",
+    "input_reference_at": "2026-11-12T09:47:28.389712+09:00",
+    "input_sha256": "c1d97efe4025615535af653fbc37454f8c48d85db05414772dd517591f3f1572",
     "selection_rows_sha256": "2c5581bf8973529912f6635508acdcca96fbdd1e45b6a15fd9ff28e64a3f92c3",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-12T09:40:24.205782+09:00",
+      "evaluated_at": "2026-11-12T09:47:28.389712+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -15024,10 +15387,10 @@
       }
     ],
     "queue_check": "validated",
-    "new_drafts_prepared": 0,
+    "new_drafts_prepared": 1,
     "new_ready_saved": 0,
     "queue_unchanged": true,
-    "audit_path": "threads/audits/monitor-v2-20261112T0939.json"
+    "audit_path": "threads/audits/monitor-v2-20261112T0946.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -15492,19 +15855,20 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T00:43:35Z",
-      "status": "no_update",
+      "checked_at": "2026-11-12T00:52:55Z",
+      "status": "no_new_publication",
       "next_slot": "2026-11-12T12:00:00+09:00",
       "next_media": "TEXT",
       "ready_entries": 2,
       "new_publications": 0,
-      "new_drafts": 0,
+      "new_drafts": 1,
+      "new_ready_saved": 0,
       "queue_changed": false,
       "text_verified": true,
       "image_verified": true,
       "performance24h": "not_due",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/monitor-v2-20261112T0939.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T0946.json"
     }
   },
   "single_main_v2_writer_performance": {
@@ -15734,15 +16098,14 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "artifact_unchanged_since_previous_verified_checkpoint": false,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T00:43:35Z",
+      "checked_at": "2026-11-12T00:52:55Z",
       "performance_blob_sha": "29dd5d7bd18d45bd1b4f79bf9647acb37e187b8e",
       "summary_mode": "executed_on_current_file",
       "new_observations": 0,
-      "state_saved_by_metrics_previously_verified": true,
       "first_v2_24h_due": "2026-11-12T20:45:18.355131+09:00",
       "first_v2_72h_due": "2026-11-14T20:45:18.355131+09:00",
       "decision": "extend_until_comparable_samples_available",
-      "audit_path": "threads/audits/monitor-v2-20261112T0939.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T0946.json"
     }
   }
 }
