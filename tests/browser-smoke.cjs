@@ -53,7 +53,7 @@ const server = http.createServer((req,res) => {
       // Initial 0 is a legitimate loading state on main; wait for feeds to settle.
       await page.waitForFunction(() => {
         const summary = document.querySelector('#summary')?.textContent || '';
-        const match = summary.match(/검색 결과\\s*([\\d,]+)건/);
+        const match = summary.match(/검색 결과\s*([\d,]+)건/);
         return match && Number(match[1].replace(/,/g,'')) > 0;
       }, null, {timeout:30000}).catch(err => {
         console.error('Baseline feed diagnostics:',JSON.stringify({root,summary:'no nonzero jobs',...feedDiagnostics}));
@@ -64,7 +64,7 @@ const server = http.createServer((req,res) => {
     assert.ok(first > 0,'homepage should show cards or an empty-state message');
     // Verify real interactive search, not just initial markup.
     await page.locator('#q').fill('zzzz-careerpick-no-matches-9999');
-    await page.waitForFunction(() => /검색 결과\\s*0건|조건에 맞는 글이 없습니다/.test(document.querySelector('#summary')?.textContent || '') || document.querySelector('#list .empty'), null, {timeout:10000});
+    await page.waitForFunction(() => /검색 결과\s*0건|조건에 맞는 글이 없습니다/.test(document.querySelector('#summary')?.textContent || '') || document.querySelector('#list .empty'), null, {timeout:10000});
     assert.ok(await page.locator('#list .empty').count() > 0, 'search should show no-results state');
     await page.locator('#q').fill('');
     await page.waitForFunction(() => document.querySelectorAll('#list > li').length > 1, null, {timeout:10000});
