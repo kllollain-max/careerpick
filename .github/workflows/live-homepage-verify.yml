@@ -1,0 +1,55 @@
+name: Live homepage deployment verification
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/live-homepage-verify.yml'
+      - 'index.html'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify live GitHub Pages version
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://kllollain-max.github.io/careerpick/?verify=${GITHUB_SHA}"
+          for attempt in 1 2 3 4 5; do
+            curl --fail --location --silent --show-error --retry 2 --max-time 25 "$url" -o live-index.html
+            if grep -q 'cpFeedBatch' live-index.html; then
+              echo "Optimized feed loader verified on public site (attempt $attempt)"
+              echo "Optimized feed loader verified on public site" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "Waiting for Pages propagation (attempt $attempt)"
+            sleep 20
+          done
+          echo "Live page does not yet contain optimized feed loader" >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+      - name: Verify mobile page and report timing
+        if: success()
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+          node - <<'NODE'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            try{
+              const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2});
+              await page.goto('https://kllollain-max.github.io/careerpick/',{waitUntil:'domcontentloaded',timeout:45000});
+              await page.waitForFunction(()=>/검색 결과\\s*[1-9][\\d,]*건/.test(document.querySelector('#summary')?.textContent||''),null,{timeout:45000});
+              const result=await page.evaluate(()=>{
+                const n=performance.getEntriesByType('navigation')[0];
+                const p=performance.getEntriesByType('paint').find(x=>x.name==='first-contentful-paint');
+                return {summary:document.querySelector('#summary')?.textContent.slice(0,120),fcpMs:p?.startTime??null,domContentLoadedMs:n?.domContentLoadedEventEnd??null,loadEventMs:n?.loadEventEnd??null};
+              });
+              console.log(JSON.stringify(result));
+              require('fs').appendFileSync(process.env.GITHUB_STEP_SUMMARY,'\nMobile Chromium smoke: '+JSON.stringify(result)+'\n');
+            }finally{await browser.close();}
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
