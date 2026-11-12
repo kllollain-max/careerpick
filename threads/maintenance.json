@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T12:43:56Z",
-  "last_observed_at": "2026-11-12T12:43:56Z",
+  "updated_at": "2026-11-12T14:30:46Z",
+  "last_observed_at": "2026-11-12T14:30:46Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,21 +57,34 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "75b9ce1f671e168b487fcdf6896eb240c34999ea",
+    "blob_sha": "5c7ffa0b5b4042697fbf49db528e36d9915e835f",
     "readback_verified": true,
     "ready_entries": [
       {
         "scheduled_at": "2026-11-13T08:00:00+09:00",
         "notice_id": "a306949",
-        "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+        "format_id": "hiring_core",
         "chars": 273,
+        "editorial_policy_id": null,
+        "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_exact_reviewed_assets_and_full_pixels_verified"
+        "card_check": "existing_attestation_exact_assets_full_pixels_verified"
+      },
+      {
+        "scheduled_at": "2026-11-13T12:00:00+09:00",
+        "notice_id": "a306848",
+        "format_id": "eligibility",
+        "chars": 284,
+        "editorial_policy_id": null,
+        "entry_sha256": "ed8fd6130e317c1d7a58a0de5d4e3da762f12bcdf386332bd9400137c95f299a",
+        "reply_count": 0,
+        "card_status": "passed",
+        "card_check": "actual_JPEG_and_360PNG_visually_reviewed_exact_remote_assets_verified"
       }
     ],
-    "last_update_commit_sha": "0829894459b5176d98c16a5ec6324b58ea6e4e83",
-    "readback_verified_at": "2026-11-12T12:09:07Z"
+    "last_update_commit_sha": "187957663c4dfceb143f002d05155e697f3e38ff",
+    "readback_verified_at": "2026-11-12T14:30:46Z"
   },
   "observed_runs": [
     {
@@ -9116,6 +9129,7 @@
   ],
   "next_actions": [
     "Observe Nov13 08 preserved a306949 regular TEXT slot; do not change its body/assets/hash.",
+    "Observe Nov13 12 newly ready a306848 at the existing regular slot; IMAGE if08 succeeds asTEXT, otherwise determine from actual successful ledger. Never consume media alternation on preparation.",
     "Collect later v2 24h windows through existing independent metrics job; first72h due Nov14 20:45:18.",
     "Keep 14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights.",
     "PR51 and other unverified candidate holds remain; no bypass, backfill, tests or reruns.",
@@ -12231,8 +12245,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T12:43:56Z",
-    "main_sha": "39a27c5dd0b1001c7acbddcc84d3d7205c2afd26",
+    "checked_at": "2026-11-12T14:30:46Z",
+    "main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
     "history_blob_sha": "952791a10d3f7b91be2fb7de4b6d451ff89db997",
     "claim_blob_sha": "e853ea2871fb60507bddcbfe83a885663fdafaad",
     "latest_publisher_run": {
@@ -12248,7 +12262,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18079233716458874",
     "publisher_in_progress": false,
-    "status": "no_new_publication_or_metrics_new_research_draft_held",
+    "status": "new_ready_draft_saved_no_new_publication_or_metrics",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12287,31 +12301,30 @@
       }
     },
     "actions_pages_read": 9,
-    "actions_runs_read": 860,
-    "audit_path": "threads/audits/monitor-v2-20261112T2138.json",
+    "actions_runs_read": 862,
+    "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": [],
     "out_of_scope_run_failures": "Site/banner/adsense changes observed only; no Threads failure inferred.",
-    "actions_reported_total": 860,
+    "actions_reported_total": 862,
     "pagination_reconciled_by_run_id": true,
     "executed_archive_main_sha": "39a27c5dd0b1001c7acbddcc84d3d7205c2afd26",
     "current_threads_files_unchanged_verified": true,
-    "monitored_slot": "2026-11-12T20:00:00+09:00",
-    "monitored_slot_grace_ends": "2026-11-12T22:00:00+09:00",
-    "slot_claim_or_reservation_observed": true,
+    "monitored_slot": "2026-11-13T08:00:00+09:00",
+    "monitored_slot_grace_ends": "2026-11-13T10:00:00+09:00",
+    "slot_claim_or_reservation_observed": false,
     "error_code": null,
-    "send_state": "accepted_and_official_GET_verified",
-    "main_changes_since_archive": "exactly two reviewed a306949 card assets added; code/policy/history unchanged",
-    "latest_page_rechecked_at": "2026-11-12T09:58:32Z",
+    "send_state": "next_regular_slot_pending_no_send_attempt",
+    "main_changes_since_archive": "Exactly two reviewed a306848 card assets added; code/policy/source/history unchanged.",
+    "latest_page_rechecked_at": "2026-11-12T14:30:46Z",
     "main_changes_since_checkpoint": [
-      "alio-detail.json",
-      "alio.json",
-      "cleaneye.json",
-      "exam-status.json",
-      "operations-status.json"
+      "threads-images/a306848.jpg",
+      "threads-images/a306848-360.png"
     ],
     "new_metric_observations": 0,
-    "new_account_observations": 0
+    "new_account_observations": 0,
+    "new_ready_saved": 1,
+    "unstarted_new_slot": "2026-11-13T12:00:00+09:00"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -18046,17 +18059,17 @@
     "latest_v5_audit": "threads/audits/single-main-v2-image-verified-20261112T2048.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T12:43:56Z",
-    "main_sha": "39a27c5dd0b1001c7acbddcc84d3d7205c2afd26",
-    "queue_blob_sha": "75b9ce1f671e168b487fcdf6896eb240c34999ea",
+    "checked_at": "2026-11-12T14:30:46Z",
+    "main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
+    "queue_blob_sha": "5c7ffa0b5b4042697fbf49db528e36d9915e835f",
     "policy_hashes_verified": true,
-    "input_reference_at": "2026-11-12T21:39:29.906257+09:00",
-    "input_sha256": "308a928a488ba46ea630dcbb75c80ab8659d7bf7a8e2348266548c8feee74d82",
+    "input_reference_at": "2026-11-12T23:17:32.758983+09:00",
+    "input_sha256": "6e6668be91f66e08142b0b50893f1d35c46cdcfd58f962cc2b090245101273af",
     "selection_rows_sha256": "6becc326df57214a7ffd81da0bb51cbc9b231a488bd779d7575c0e246e057c00",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-12T21:39:29.906257+09:00",
+      "evaluated_at": "2026-11-12T23:17:32.758983+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18137,19 +18150,36 @@
       {
         "scheduled_at": "2026-11-13T08:00:00+09:00",
         "notice_id": "a306949",
-        "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+        "format_id": "hiring_core",
         "chars": 273,
+        "editorial_policy_id": null,
+        "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_visual_attestation_exact_assets_and_full_pixels_verified"
+        "card_check": "existing_attestation_exact_assets_full_pixels_verified"
+      },
+      {
+        "scheduled_at": "2026-11-13T12:00:00+09:00",
+        "notice_id": "a306848",
+        "format_id": "eligibility",
+        "chars": 284,
+        "editorial_policy_id": null,
+        "entry_sha256": "ed8fd6130e317c1d7a58a0de5d4e3da762f12bcdf386332bd9400137c95f299a",
+        "reply_count": 0,
+        "card_status": "passed",
+        "card_check": "actual_JPEG_and_360PNG_visually_reviewed_exact_remote_assets_verified"
       }
     ],
     "queue_check": "validated",
     "new_drafts_prepared": 1,
-    "new_held_drafts_saved": 1,
-    "new_ready_saved": 0,
-    "queue_unchanged": true,
-    "audit_path": "threads/audits/monitor-v2-20261112T2138.json"
+    "new_held_drafts_saved": 0,
+    "new_ready_saved": 1,
+    "queue_unchanged": false,
+    "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json",
+    "executed_archive_main_sha": "39a27c5dd0b1001c7acbddcc84d3d7205c2afd26",
+    "queue_readback_check": "validated",
+    "public_main_reply_check": "exact_single_main_empty_detail_reply_and_CTA_once",
+    "all_prior_queue_entries_unchanged": true
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -18273,8 +18303,9 @@
     },
     "next_actions": [
       "Observe Nov13 08 preserved a306949 regular TEXT slot; do not change its body/assets/hash.",
+      "Observe Nov13 12 newly ready a306848 at the existing regular slot; IMAGE if08 succeeds asTEXT, otherwise determine from actual successful ledger. Never consume media alternation on preparation.",
       "Collect later v2 24h windows through existing independent metrics job; first72h due Nov14 20:45:18.",
-      "Keep 14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights."
+      "Continue14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights."
     ],
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
@@ -18526,7 +18557,8 @@
       "evidence": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
     },
     "future_ready_slots": [
-      "2026-11-13T08:00:00+09:00"
+      "2026-11-13T08:00:00+09:00",
+      "2026-11-13T12:00:00+09:00"
     ],
     "image_verification": {
       "run_id": "43121375680",
@@ -18603,23 +18635,23 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T12:43:56Z",
-      "status": "no_new_publication_or_metrics_new_research_draft_held",
+      "checked_at": "2026-11-12T14:30:46Z",
+      "status": "new_ready_saved_no_new_publication_or_metrics",
       "new_publications": 0,
       "last_post_id": "18079233716458874",
-      "ready_entries": 1,
+      "ready_entries": 2,
       "next_slot": "2026-11-13T08:00:00+09:00",
       "next_slot_status": "ready",
       "next_media": "TEXT",
       "new_drafts": 1,
-      "new_ready_saved": 0,
-      "new_held_drafts": 1,
-      "queue_changed": false,
+      "new_ready_saved": 1,
+      "new_held_drafts": 0,
+      "queue_changed": true,
       "text_verified": true,
       "image_verified": true,
       "performance24h": "first_v2_observation_captured_prior_checkpoint",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/monitor-v2-20261112T2138.json"
+      "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -18855,12 +18887,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-12T12:43:56Z",
+    "checked_at": "2026-11-12T14:30:46Z",
     "state_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-12T12:39:29.801088+00:00",
+      "as_of": "2026-11-12T14:17:32.783613+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19075,7 +19107,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-12T12:39:29.801088+00:00",
+            "requested_end": "2026-11-12T14:17:32.783613+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-12T11:48:45.777061+00:00",
             "start_followers": 415,
@@ -19096,7 +19128,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T12:39:29.801088+00:00",
+        "requested_end": "2026-11-12T14:17:32.783613+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T11:48:45.777061+00:00",
         "start_followers": 415,
@@ -19130,13 +19162,13 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/monitor-v2-20261112T2138.json",
-    "artifact_unchanged_since_previous_verified_checkpoint": false,
+    "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json",
+    "artifact_unchanged_since_previous_verified_checkpoint": true,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T12:43:56Z",
+      "checked_at": "2026-11-12T14:30:46Z",
       "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
       "summary_mode": "executed_on_current_file",
-      "summary_as_of": "2026-11-12T12:39:29.801088+00:00",
+      "summary_as_of": "2026-11-12T14:17:32.783613+00:00",
       "new_post_metric_observations": 0,
       "new_legacy_post_metric_observations": 0,
       "new_v2_post_metric_observations": 0,
@@ -19194,7 +19226,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T12:39:29.801088+00:00",
+        "requested_end": "2026-11-12T14:17:32.783613+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T11:48:45.777061+00:00",
         "start_followers": 415,
@@ -19209,9 +19241,53 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "continue14day_observation_no_weights_changed",
-      "audit_path": "threads/audits/monitor-v2-20261112T2138.json"
+      "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json"
     },
     "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
-    "new_metrics_observations_saved_by_independent_job": 1
+    "new_metrics_observations_saved_by_independent_job": 0
+  },
+  "writer_ready_reviews": {
+    "2026-11-13T12:00:00+09:00:a306848": {
+      "checked_at": "2026-11-12T14:30:46Z",
+      "entry_sha256": "ed8fd6130e317c1d7a58a0de5d4e3da762f12bcdf386332bd9400137c95f299a",
+      "contract_version": 2,
+      "presentation_style": "regular_interest",
+      "body_chars": 284,
+      "automatic_reply_count_expected": 0,
+      "published": false,
+      "post_id": null,
+      "source_check_scope_and_limits": {
+        "checked_at": "2026-11-12T23:20:56.692253+09:00",
+        "result": "none_found",
+        "source_ref": "https://kangwon.cairos.co.kr/kangwon/1484/Sitemgr/NoticeList.aspx",
+        "scope": "현재동일공고1484 공지목록 등록된공지없음,기관HTML요강·ALIO·3PDF대조",
+        "limitations": [
+          "기관전체 과거공지전수검토 아님",
+          "접수양식 제출 또는 로그인 안 함"
+        ]
+      },
+      "card_visual_review": {
+        "status": "passed",
+        "reviewed_width": 360,
+        "reviewed_at": "2026-11-12T23:24:39.108296+09:00",
+        "sha256": "1fe474d71419e903738680b4669ab1cd79a538ae4b25003d9c67dbbb7d11c79d",
+        "preview_sha256": "dbec0052e21bbec20c3f14f5b39085cd866c9e57ff24bad3f2ab6f91d90f9aa0",
+        "asset_path": "threads-images/a306848.jpg",
+        "preview_asset_path": "threads-images/a306848-360.png",
+        "facts_sha256": "2f37b31a54318ed950221d97a45dd85eaa093088e7b38e8782deae5e4bbe06e0",
+        "layout_version": "careerpick-single-main-card-v2",
+        "observations": "실제 원본 JPEG와 같은 JPEG의 LANCZOS360PNG를 열어 여성 복지시설 매니저·정규직3명·기관·11월26일16:00·만60세미만여성의 한글/숫자/잘림/본문일치를 확인"
+      },
+      "assets_commit_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
+      "asset_only_paths": [
+        "threads-images/a306848.jpg",
+        "threads-images/a306848-360.png"
+      ],
+      "remote_exact_hashes_verified": true,
+      "queue_commit_sha": "187957663c4dfceb143f002d05155e697f3e38ff",
+      "queue_readback_verified": true,
+      "all_prior_queue_entries_preserved": true,
+      "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json"
+    }
   }
 }
