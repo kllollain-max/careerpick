@@ -39,7 +39,7 @@ test('existing capped card rendering and font fallback remain', () => {
 });
 
 test('all inline JavaScript blocks parse without syntax errors', () => {
-  const scripts = [...html.matchAll(new RegExp('<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>', 'gi'))];
+  const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
   let checked = 0;
   for (const match of scripts) {
     if (!match[1].trim()) continue;
