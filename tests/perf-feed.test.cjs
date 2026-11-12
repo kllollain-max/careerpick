@@ -34,6 +34,6 @@ test('settled feed helper preserves success and throws failures', async () => {
 });
 
 test('existing capped card rendering and font fallback remain', () => {
-  assert.match(html, /rows\\.slice\\(0,cpVisibleLimit\\)/);
-  assert.match(html, /<noscript><link href="https:\/\/fonts\\.googleapis\\.com/);
+  assert.ok(html.includes('rows.slice(0,cpVisibleLimit)'));
+  assert.ok(html.includes('<noscript><link href="https://fonts.googleapis.com'));
 });
