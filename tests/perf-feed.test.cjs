@@ -37,3 +37,19 @@ test('existing capped card rendering and font fallback remain', () => {
   assert.ok(html.includes('rows.slice(0,cpVisibleLimit)'));
   assert.ok(html.includes('<noscript><link href="https://fonts.googleapis.com'));
 });
+
+test('all inline JavaScript blocks parse without syntax errors', () => {
+  const scripts = [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)];
+  let checked = 0;
+  for (const match of scripts) {
+    if (!match[1].trim()) continue;
+    assert.doesNotThrow(() => new vm.Script(match[1]), 'inline script '+(++checked));
+  }
+  assert.ok(checked >= 2, 'expected inline scripts');
+});
+
+test('critical navigation and user data entry points remain present', () => {
+  for (const key of ['renderTabs()', 'renderFilters()', 'savedAlert()', 'function renderTrack(', 'function load(', 'function render(']) {
+    assert.ok(html.includes(key), 'missing '+key);
+  }
+});
