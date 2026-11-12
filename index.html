@@ -857,7 +857,7 @@ function toggleSave(id){
 const normOrg = s => String(s || "").replace(/\(주\)|주식회사|\s|[()·.,]/g, "");
 async function loadAlio(){
   try{
-    const list = await cpReadFeed("alio.json","alio");
+    const list = await cpReadyFeed("alio.json","alio");
     DATA_HEALTH.alio = "ok";
     const blogJobs = POSTS.filter(p => p.type === "j" && p.org && p.due);
     const add = [];
@@ -873,7 +873,7 @@ async function loadAlio(){
 
 async function loadGojobs(){
   try{
-    const list=await cpReadFeed("gojobs.json","gojobs");
+    const list=await cpReadyFeed("gojobs.json","gojobs");
     const ids=new Set(POSTS.map(p=>p.id));
     POSTS=POSTS.concat(list.filter(p=>p.gojobs && /^gojobs-[0-9]+$/.test(p.id) && !ids.has(p.id)));
     DATA_HEALTH.gojobs="ok";
@@ -882,7 +882,7 @@ async function loadGojobs(){
 
 async function loadCleaneye(){
   try{
-    const list=await cpReadFeed("cleaneye.json","cleaneye");
+    const list=await cpReadyFeed("cleaneye.json","cleaneye");
     const collection=CP_FEED_COLLECTION.cleaneye;
     if(collection==="not_collected" && !list.length && !CP_FEED_ISSUES.cleaneye.length){DATA_HEALTH.cleaneye="not_collected";return;}
     if(collection!=="verified" || list.some(p=>!p.cleaneye || !CPHome.cleaneye(p)))throw Error("cleaneye_feed");
@@ -894,7 +894,7 @@ async function loadCleaneye(){
 
 async function loadMonitoredJobs(){
   try{
-    const list = await cpReadFeed("monitor.json","monitor");
+    const list = await cpReadyFeed("monitor.json","monitor");
     const existing = new Set(POSTS.map(p => p.url || p.src).filter(Boolean));
     const add = list.filter(p => {
       const key = p.url || p.src;
@@ -908,9 +908,27 @@ async function loadMonitoredJobs(){
   }
 }
 
+// Start independent feed downloads together, but merge their rows in the
+// existing deterministic order. allSettled prevents unhandled rejections when
+// an earlier feed is slower or a later feed fails before its turn is consumed.
+let cpFeedBatch = null;
+function cpReadyFeed(path, key){
+  if(!cpFeedBatch) return cpReadFeed(path, key);
+  return cpFeedBatch[key].then(result => {
+    if(result.status === "rejected") throw result.reason;
+    return result.value;
+  });
+}
 async function load(){
+  cpFeedBatch = Object.fromEntries([
+    ["posts", Promise.allSettled([cpReadFeed("posts.json","posts")]).then(results => results[0])],
+    ["alio", Promise.allSettled([cpReadFeed("alio.json","alio")]).then(results => results[0])],
+    ["gojobs", Promise.allSettled([cpReadFeed("gojobs.json","gojobs")]).then(results => results[0])],
+    ["cleaneye", Promise.allSettled([cpReadFeed("cleaneye.json","cleaneye")]).then(results => results[0])],
+    ["monitor", Promise.allSettled([cpReadFeed("monitor.json","monitor")]).then(results => results[0])]
+  ]);
   try{
-    POSTS = await cpReadFeed("posts.json","posts");
+    POSTS = await cpReadyFeed("posts.json","posts");
     UPDATED = CP_FEED_STAMPS.posts;
     DATA_HEALTH.posts = "ok";
     CP_BLOG_SEARCH = POSTS.slice();
