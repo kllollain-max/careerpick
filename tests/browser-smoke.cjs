@@ -23,10 +23,11 @@ const server = http.createServer((req,res) => {
   try {
     const page = await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2});
     const origin = 'http://127.0.0.1:'+server.address().port;
-    const feedDiagnostics = {failed:[],pageErrors:[],feedResponses:[]};
+    const feedDiagnostics = {failed:[],pageErrors:[],feedResponses:[],resources:[],consoleWarnings:[]};
+    page.on('console', msg => {if(msg.type()==='warning'||msg.type()==='error') feedDiagnostics.consoleWarnings.push(msg.text().slice(0,350));});
     page.on('requestfailed', req => feedDiagnostics.failed.push({url:req.url(),failure:req.failure()?.errorText}));
     page.on('pageerror', err => feedDiagnostics.pageErrors.push(String(err).slice(0,250)));
-    page.on('response', resp => {if(/\\.json(?:\\?|$)/.test(resp.url())) feedDiagnostics.feedResponses.push({url:resp.url(),status:resp.status()});});
+    page.on('response', resp => {const item={url:resp.url(),status:resp.status()}; if(/\\.json(?:\\?|$)/.test(resp.url())) feedDiagnostics.feedResponses.push(item); if(/\\.(?:js|html)(?:\\?|$)/.test(resp.url())) feedDiagnostics.resources.push(item);});
     await page.goto(origin+'/',{waitUntil:'domcontentloaded',timeout:30000});
     assert.equal(await page.title(),'커리어픽 · 마감순 채용공고 모음');
     await page.locator('#q').waitFor({state:'visible',timeout:10000});
