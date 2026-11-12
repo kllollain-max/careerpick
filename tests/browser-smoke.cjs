@@ -28,7 +28,19 @@ const server = http.createServer((req,res) => {
     page.on('requestfailed', req => feedDiagnostics.failed.push({url:req.url(),failure:req.failure()?.errorText}));
     page.on('pageerror', err => feedDiagnostics.pageErrors.push(String(err).slice(0,250)));
     page.on('response', resp => {const item={url:resp.url(),status:resp.status()}; if(/\\.json(?:\\?|$)/.test(resp.url())) feedDiagnostics.feedResponses.push(item); if(/\\.(?:js|html)(?:\\?|$)/.test(resp.url())) feedDiagnostics.resources.push(item);});
-    await page.goto(origin+'/',{waitUntil:'domcontentloaded',timeout:30000});
+    const documentResponse = await page.goto(origin+'/',{waitUntil:'domcontentloaded',timeout:30000});
+    if(process.env.CP_REQUIRE_JOB_RESULTS === '1') {
+      const served = await page.evaluate(() => ({
+        url:location.href,
+        readyState:document.readyState,
+        scriptCount:document.scripts.length,
+        inlineScriptLength:[...document.scripts].filter(x=>!x.src).reduce((n,x)=>n+x.textContent.length,0),
+        hasLoadFunction:typeof load === 'function',
+        hasReadFeed:typeof cpReadFeed === 'function',
+        bodyLength:document.body?.innerHTML.length || 0
+      }));
+      console.log('Baseline document diagnostics:',JSON.stringify({status:documentResponse?.status(),served}));
+    }
     assert.equal(await page.title(),'커리어픽 · 마감순 채용공고 모음');
     await page.locator('#q').waitFor({state:'visible',timeout:10000});
     await page.locator('#tabs').waitFor({state:'attached',timeout:10000});
