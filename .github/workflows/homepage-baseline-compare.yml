@@ -33,10 +33,10 @@ jobs:
           echo '## Chromium baseline and candidate (CI only)' >> "$GITHUB_STEP_SUMMARY"
           echo 'Values are diagnostics, not field Lighthouse scores.' >> "$GITHUB_STEP_SUMMARY"
           echo '### main baseline' >> "$GITHUB_STEP_SUMMARY"
-          CP_SITE_ROOT="$GITHUB_WORKSPACE/baseline" node tests/browser-smoke.cjs | tee baseline-metrics.txt
+          CP_REQUIRE_JOB_RESULTS=1 CP_SITE_ROOT="$GITHUB_WORKSPACE/baseline" node tests/browser-smoke.cjs | tee baseline-metrics.txt
           cat baseline-metrics.txt >> "$GITHUB_STEP_SUMMARY"
           echo '### PR candidate' >> "$GITHUB_STEP_SUMMARY"
-          node tests/browser-smoke.cjs | tee candidate-metrics.txt
+          CP_REQUIRE_JOB_RESULTS=1 node tests/browser-smoke.cjs | tee candidate-metrics.txt
           cat candidate-metrics.txt >> "$GITHUB_STEP_SUMMARY"
       - name: Upload comparison logs
         if: always()
