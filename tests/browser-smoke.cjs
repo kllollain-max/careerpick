@@ -7,7 +7,9 @@ const root = path.resolve(process.env.CP_SITE_ROOT || process.cwd());
 const mime = {'.html':'text/html','.js':'application/javascript','.json':'application/json','.css':'text/css','.png':'image/png','.svg':'image/svg+xml','.webmanifest':'application/manifest+json'};
 const server = http.createServer((req,res) => {
   const pathname = decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-  const file = path.resolve(root,'.'+(pathname === '/' ? '/index.html' : pathname));
+  // GitHub Pages project URLs use /careerpick/; local server maps that prefix to the checkout root.
+  const localPath = pathname.replace(/^\/careerpick(?=\/|$)/, '') || '/';
+  const file = path.resolve(root,'.'+(localPath === '/' ? '/index.html' : localPath));
   if (!(file === root || file.startsWith(root+path.sep))) {res.writeHead(403);res.end();return;}
   fs.readFile(file,(err,data)=>{
     if(err){res.writeHead(404);res.end('not found');return;}
