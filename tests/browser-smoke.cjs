@@ -28,7 +28,7 @@ const server = http.createServer((req,res) => {
     page.on('requestfailed', req => feedDiagnostics.failed.push({url:req.url(),failure:req.failure()?.errorText}));
     page.on('pageerror', err => feedDiagnostics.pageErrors.push(String(err).slice(0,250)));
     page.on('response', resp => {const item={url:resp.url(),status:resp.status()}; if(/\\.json(?:\\?|$)/.test(resp.url())) feedDiagnostics.feedResponses.push(item); if(/\\.(?:js|html)(?:\\?|$)/.test(resp.url())) feedDiagnostics.resources.push(item);});
-    const documentResponse = await page.goto(origin+'/',{waitUntil:'domcontentloaded',timeout:30000});
+    const documentResponse = await page.goto(origin+'/careerpick/',{waitUntil:'domcontentloaded',timeout:30000});
     if(process.env.CP_REQUIRE_JOB_RESULTS === '1') {
       const served = await page.evaluate(() => ({
         url:location.href,
