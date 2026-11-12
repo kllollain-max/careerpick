@@ -38,6 +38,19 @@ const server = http.createServer((req,res) => {
     assert.ok(await page.locator('#list .empty').count() > 0, 'search should show no-results state');
     await page.locator('#q').fill('');
     await page.waitForFunction(() => document.querySelectorAll('#list > li').length > 1, null, {timeout:10000});
+    // Reload must not erase a user's saved job IDs or application records.
+    await page.evaluate(() => {
+      localStorage.setItem('saved', JSON.stringify(['cp-perf-sentinel-saved']));
+      localStorage.setItem('cp-perf-sentinel-unrelated', 'preserve-me');
+    });
+    await page.reload({waitUntil:'domcontentloaded',timeout:30000});
+    await page.waitForFunction(() => document.querySelectorAll('#tabs .tab').length > 0, null, {timeout:30000});
+    const persisted = await page.evaluate(() => ({
+      saved: JSON.parse(localStorage.getItem('saved') || '[]'),
+      unrelated: localStorage.getItem('cp-perf-sentinel-unrelated')
+    }));
+    assert.ok(persisted.saved.includes('cp-perf-sentinel-saved'), 'saved job ID must persist');
+    assert.equal(persisted.unrelated, 'preserve-me', 'unrelated local storage must persist');
     const perf = await page.evaluate(() => {
       const nav = performance.getEntriesByType('navigation')[0];
       const paint = performance.getEntriesByType('paint');
