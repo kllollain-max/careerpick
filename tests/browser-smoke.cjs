@@ -30,6 +30,12 @@ const server = http.createServer((req,res) => {
       const summary = document.querySelector('#summary');
       return summary && /검색 결과|글 |새 글|조건|공고/.test(summary.textContent||'');
     },null,{timeout:30000});
+    const initialSummary = await page.locator('#summary').innerText();
+    const matchCount = initialSummary.match(/검색 결과\\s*([\\d,]+)건/);
+    if (process.env.CP_REQUIRE_JOB_RESULTS === '1') {
+      assert.ok(matchCount && Number(matchCount[1].replace(/,/g,'')) > 0,
+        'comparison requires nonzero job results; got: '+initialSummary);
+    }
     const first = await page.locator('#list > li').count();
     assert.ok(first > 0,'homepage should show cards or an empty-state message');
     // Verify real interactive search, not just initial markup.
