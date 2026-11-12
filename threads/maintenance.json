@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T06:35:13Z",
-  "last_observed_at": "2026-11-12T06:35:13Z",
+  "updated_at": "2026-11-12T08:16:36Z",
+  "last_observed_at": "2026-11-12T08:16:36Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8625,6 +8625,26 @@
       "head_sha": "26b389034bcc4fcfeeac30a06f01418d273a8072",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43163893074",
       "workflow_path": ".github/workflows/live-homepage-verify.yml"
+    },
+    {
+      "run_id": "43176289507",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-12T07:34:58Z",
+      "head_sha": "f235647498ceb249b58638a630c9deea7a784400",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43176289507",
+      "workflow_path": ".github/workflows/public-search-check.yml"
+    },
+    {
+      "run_id": "43175932057",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-12T07:34:40Z",
+      "head_sha": "aad0970e3835126f73105d31ee2cd3a13fa5d6d4",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43175932057",
+      "workflow_path": ".github/workflows/operations.yml"
     }
   ],
   "last_confirmed_publication": {
@@ -12108,8 +12128,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T06:35:13Z",
-    "main_sha": "aad0970e3835126f73105d31ee2cd3a13fa5d6d4",
+    "checked_at": "2026-11-12T08:16:36Z",
+    "main_sha": "f235647498ceb249b58638a630c9deea7a784400",
     "history_blob_sha": "a7b9cb12f20b2aacbfb718534b24968f1cc4ea71",
     "claim_blob_sha": "fef90a489ba3dc42f6fe147f2a1f33291817cc73",
     "latest_publisher_run": {
@@ -12125,54 +12145,57 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17918731521553015",
     "publisher_in_progress": false,
-    "status": "no_new_publication_or_metric_observation",
+    "status": "slot16_execution_not_observed_within_grace",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-12T13:06:09+09:00",
-        "source_checked_at": "2026-11-12T13:06:36+09:00",
-        "total_records": 906,
+        "snapshot_at": "2026-11-12T16:32:01+09:00",
+        "source_checked_at": "2026-11-12T16:32:31+09:00",
+        "total_records": 917,
         "eligible_count": 30,
-        "review_required_count": 757,
-        "excluded_count": 119,
+        "review_required_count": 767,
+        "excluded_count": 120,
         "returned_count": 0,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 29,
           "NOTICE_ALREADY_USED": 71,
           "SOURCE_NOTICE_UNCONFIRMED": 12,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-          "APPLICATION_START_TIME_UNKNOWN": 4,
+          "APPLICATION_START_TIME_UNKNOWN": 5,
           "NOTICE_ALREADY_QUEUED": 1,
           "APPLICATION_END_PRECISION_CONFLICT": 1
         }
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-12T13:07:12+09:00",
-        "source_checked_at": "2026-11-12T13:07:12+09:00",
-        "total_records": 508,
-        "eligible_count": 286,
+        "snapshot_at": "2026-11-12T16:33:15+09:00",
+        "source_checked_at": "2026-11-12T16:33:15+09:00",
+        "total_records": 522,
+        "eligible_count": 285,
         "review_required_count": 0,
-        "excluded_count": 222,
+        "excluded_count": 237,
         "returned_count": 24,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 207,
+          "CLEANEYE_NOT_VERIFIED_OPEN": 210,
           "CLEANEYE_NOT_RECRUITMENT": 7,
           "NOTICE_ALREADY_USED": 2,
-          "CLEANEYE_APPLICATION_NOT_OPEN": 6
+          "CLEANEYE_APPLICATION_NOT_OPEN": 18
         }
       }
     },
     "actions_pages_read": 9,
-    "actions_runs_read": 854,
-    "audit_path": "threads/audits/monitor-v2-20261112T1532.json",
+    "actions_runs_read": 856,
+    "audit_path": "threads/audits/monitor-v2-20261112T1709.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": [],
     "out_of_scope_run_failures": "Site/banner/adsense changes observed only; no Threads failure inferred.",
-    "actions_reported_total": 854,
+    "actions_reported_total": 856,
     "pagination_reconciled_by_run_id": true,
-    "executed_archive_main_sha": "aad0970e3835126f73105d31ee2cd3a13fa5d6d4",
-    "current_threads_files_unchanged_verified": true
+    "executed_archive_main_sha": "f235647498ceb249b58638a630c9deea7a784400",
+    "current_threads_files_unchanged_verified": true,
+    "monitored_slot": "2026-11-12T16:00:00+09:00",
+    "monitored_slot_grace_ends": "2026-11-12T18:00:00+09:00",
+    "slot_claim_or_reservation_observed": false
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -15796,6 +15819,220 @@
       "hold_reason": "APPLICATION_START_TIME_UNKNOWN_CURRENT_OPEN_UNCONFIRMED_AND_FINAL_PROFILE_CARD_REVIEW_PENDING",
       "queue_saved": false,
       "audit_path": "threads/audits/monitor-v2-20261112T1044.json"
+    },
+    "unassigned:cleaneye-80805:industrial_policy": {
+      "notice_id": "cleaneye-80805",
+      "scheduled_at": null,
+      "prepared_at": "2026-11-12T17:14:25.232603+09:00",
+      "publication_policy_id": "careerpick-threads-v5-20261111",
+      "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "source_post_sha256": "0cc4fa59898bcce07f13a4d0d08e263fcc38f255f4f9710062db2b3a0bd9ecd8",
+      "source_detail_sha256": "6e955c650fa761472ebb2fa8374ed0b542a190cbdf07a2d604b6a20c635f7d1d",
+      "status": "hold",
+      "queue_saved": false,
+      "hold_reason": "WORKPLACE_PROFILE_AND_FINAL_VALIDATION_INCOMPLETE",
+      "missing_or_conflicting": [
+        "기관 소재지만 확인되며 모집단위 실제 근무지를 독립적으로 확인하지 못함",
+        "커리어픽 상세/프로필 연결·최종 카드 검토 미완료"
+      ],
+      "writer": {
+        "status": "hold",
+        "post_text": null,
+        "draft_text": "박사학위로 산업정책을 연구할 분께,\n구미전자정보기술원 정규직 선임 1명 공고예요.\n\n전공 제한 없이 박사학위가 필요해요.\n박사 취득자는 영어성적 제출이 면제돼요.\n3개월 수습 후 평가에 따라 정규직원으로 임용돼요.\n\n최종 합격 후 즉시 근무해야 해요.\n병역·해외출장·임용 결격 기준을 확인해요.\n증빙은 PDF 1개로 합쳐 제출해요.\n마감: 11월 19일 18:00, 홈페이지 접수예요.\n\n자세한 사항은 프로필링크 확인",
+        "reply_texts": [],
+        "review": {
+          "notice_id": "cleaneye-80805",
+          "source_refs": [
+            {
+              "url": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+              "checked_at": "2026-11-12T17:11:46.767265+09:00",
+              "sha256": "f77954924e1a6a510bf76486c52bb6c30359dfb9f72c9733f5a95f4d99b654b8",
+              "excerpt": "정규직 / 정책 기획 미래전략 본부 산업 정책기획 선임 1명 / 전공 : 무관 / 학위 : 박사학위 소지자 / 3개월 수습임용 후 평가에 의거 정규직원으로 임용 / 해외학위 취득자(학사학위 이상) 및 박사학위 취득자는 영어성적 제출 제외 / 증빙자료는 1개의 PDF 파일로 통합하여 첨부 / 2026년 11월 19일(목) 18:00까지 접수완료분에 한함"
+            },
+            {
+              "url": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=7475f36844bd5626bb0bafb90cc77003134b7ba8091039d362ec838fb5883ab1.pdf&file_org_name=2026-299%ED%98%B8%20%EB%B6%84%EC%95%BC%EB%B3%84%20%EC%A7%81%EB%AC%B4%EC%84%A4%EB%AA%85%EC%9E%90%EB%A3%8C.pdf",
+              "checked_at": "2026-11-12T17:11:46.767597+09:00",
+              "sha256": "b510ef14ed2ac1c4801b6dd9a30c111fcff9db60045122e86b12cfc6a6b46137"
+            },
+            {
+              "url": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=30313153e11ddaafa61b62f60d8c42a524efd39b8ab479f2e13219943c087cc6.pdf&file_org_name=%EB%B6%99%EC%9E%84%201.%20%EA%B3%B5%EA%B3%A0%EB%AC%B8%20%EB%B3%84%EC%B2%A8_%EC%B1%84%EC%9A%A9%20%EA%B0%80%EC%82%B0%EC%A0%90%EC%88%98%20%EA%B8%B0%EC%A4%80%20%EC%95%88%EB%82%B4.pdf",
+              "checked_at": "2026-11-12T17:11:46.768250+09:00",
+              "sha256": "3db8ff26ab29032300e80ac39df937a6b39d836f824d2cf91d9dfe1f8ffb7530"
+            },
+            {
+              "url": "https://geri.re.kr/html/board_content.asp?board_id=notice&board_idx=4435",
+              "checked_at": "2026-11-12T17:11:26.658637+09:00",
+              "sha256": "cdcdb79d6424ff21b7bddf0517f22bc23fd599397731987d0bce5f13dfe7bd90"
+            },
+            {
+              "url": "https://geri.re.kr/html/board_list.asp?board_id=notice",
+              "checked_at": "2026-11-12T17:12:51.337466+09:00",
+              "sha256": "a542b08eb26c37bcb69a4a91f8bf58d128e182037abb9e4d3bbeb3f263c8b623"
+            },
+            {
+              "url": "http://recru.geri.re.kr:7890/index.do?menu_id=00000313",
+              "checked_at": "2026-11-12T17:13:18.652604+09:00",
+              "sha256": "f93fdaeebbc34eaa95588d3fc6ad65c7698aa47a837e267397fc513efd0e59d0",
+              "excerpt": "채용공고현황 | 구미전자정보기술원 스크립트를 지원하지 않는 브라우저에서는 신청기능에 제약을 받습니다. 채용검색 채용공고명 채용공고기간 ~ 조회 Total : 57 채용리스트(번호, 접수시작일, 접수종료일, 채용공고일, 채용구분, 직종, 직급, 지원가능여부) 번호 채용공고일자 접수시작일 접수종료일 채용공고명 상태 57 2026/10/29 2026/10/29 17:15 2026/11/19 18:00 2026-300호 기술원 상반기 정규직 직원 채용공고(2026-97호 재공고) 진행중 56 2026/10/29 2026/10/29 17:15 2026/11/19 18:00 2026-299호 기술원 하반기 정규직 직원 채용공고 진행중 55 2026/09/03 2026/09/03 15:00 2026/09/14 18:00 2026-250호 구미과학관 직원 채용공고 종료 54 2026/09/03 2026/09/03 15:00 2026/09/14 18:00 2026-249호 기술원 장애인 직원 채용공고 종료 53 2026/09/03 2026/09/03 15:00 2026/09/14 18:00 2026-248호 기술원 3차 계약직 직원 채용공고 종료 52 2026/07/02 2026/07/02 11:20 2026/07/16 18:00 2026-161호 구미컨벤션센터(구미코) 관장 채용공고 종료 51 2026/05/12 2026/05/12 17:15 2026/06/01 18:00 2026-97호 기술원 상반기 정규직 직원 채용공고 종료 50 2026/05/07 2026/05/07 13:00 2026/05/20 18:00 2026-98호 기술원 2차 계약직 직원 채용공고 종료 49 2026/04/30 2026/04/30 11:00 2026/05/11 18:00 2026-99호 구미코 직원 채용공고 종료 48 2026/03/04 2026/03/04 13:30 2026/03/18 18:00 2026-14호 구미상생일자리협력센터 직원 채용공고 종료 1 2 3 4 5 6"
+            },
+            {
+              "url": "http://recru.geri.re.kr:7890/index.do?menu_id=00000313&menu_link=/use/aps/apsqNewRecruView.do&RECRU_ANN_IDX=1881",
+              "checked_at": "2026-11-12T17:14:57.218195+09:00",
+              "sha256": "de55fcbd7cdbbf1bc51aa18928dbe034bc3edd4d6485117012fd8f22398081b4",
+              "excerpt": "채용공고현황 | 구미전자정보기술원 스크립트를 지원하지 않는 브라우저에서는 신청기능에 제약을 받습니다. 채용공고명 2026-299호 기술원 하반기 정규직 직원 채용공고 채용공고일 2026/10/29 접수시작일 2026/10/29 17:15 접수종료일 2026/11/19 18:00 첨부파일 붙임 1. 공고문 별첨_채용 가산점수 기준 안내.pdf 2026-299호 분야별 직무설명자료.pdf 2026-299호 하반기 정규직 채용 공고문.pdf 목록 입사지원"
+            }
+          ],
+          "fact_evidence": [
+            {
+              "field": "title",
+              "value": "산업정책기획(선임)",
+              "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+              "excerpt": "정책 기획 미래전략 본부 산업 정책기획 선임 1명"
+            },
+            {
+              "field": "count",
+              "value": 1,
+              "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+              "excerpt": "정책 기획 미래전략 본부 산업 정책기획 선임 1명"
+            },
+            {
+              "field": "employment",
+              "value": "일반정규직",
+              "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+              "excerpt": "정규직 / 3개월 수습임용 후 평가에 의거 정규직원으로 임용"
+            }
+          ],
+          "unverified_fields": [
+            "location"
+          ],
+          "official_details_fully_reviewed": false,
+          "attachment_text_review": {
+            "notice_pages": 6,
+            "job_description_pages": 6,
+            "bonus_page": 1,
+            "notice_page1_and_bonus_visually_opened": true,
+            "all_pages_visual_review": false,
+            "bonus_fact": "취업보호대상자 5~10점·장애인 5점, 중복시 높은 가점 1개만 적용; 본문 미포함"
+          },
+          "v5": {
+            "policy_id": "careerpick-threads-v5-20261111",
+            "contract_version": 2,
+            "restrictions_complete": false,
+            "fact_consistency_check": "pending_workplace_and_profile_verification",
+            "hook_candidates": [
+              {
+                "id": "h1",
+                "type": "target",
+                "text": "박사학위로 산업정책을 연구할 분께,\n구미전자정보기술원 정규직 선임 1명 공고예요."
+              },
+              {
+                "id": "h2",
+                "type": "condition",
+                "text": "전공 제한 없이 박사학위를 갖췄다면,\n구미전자정보기술원 산업정책기획 선임 1명 공고를 확인해요."
+              },
+              {
+                "id": "h3",
+                "type": "job",
+                "text": "지역산업 정책과 신규사업을 기획해요.\n구미전자정보기술원이 산업정책기획 선임 1명을 뽑아요."
+              }
+            ],
+            "selected_hook_id": "h1",
+            "first_sentence_type": "target",
+            "hook_review": {
+              "factual": true,
+              "target_clear": true,
+              "natural": true
+            },
+            "key_restrictions": [
+              {
+                "text": "전공 제한 없이 박사학위가 필요해요.",
+                "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+                "excerpt": "전공 : 무관 / 학위 : 박사학위 소지자",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "3개월 수습 후 평가에 따라 정규직원으로 임용돼요.",
+                "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+                "excerpt": "3개월 수습임용 후 평가에 의거 정규직원으로 임용",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "최종 합격 후 즉시 근무해야 해요.",
+                "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+                "excerpt": "최종 합격 후 즉시 근무가 가능한 자",
+                "classification": "required",
+                "logic": "single"
+              },
+              {
+                "text": "병역·해외출장·임용 결격 기준을 확인해요.",
+                "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+                "excerpt": "해외출장에 결격사유가 없는 자 / 재단 인사규정에서 정한 임용 결격사유에 해당되지 아니한 자 / 병역의무를 기피한 사실이 있는 자",
+                "classification": "required",
+                "logic": "all_of",
+                "paths": [
+                  {
+                    "summary": "해외출장 결격사유 없음",
+                    "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+                    "excerpt": "해외출장에 결격사유가 없는 자"
+                  },
+                  {
+                    "summary": "임용 결격 및 병역기피 기준",
+                    "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+                    "excerpt": "재단 인사규정에서 정한 임용 결격사유에 해당되지 아니한 자 / 병역의무를 기피한 사실이 있는 자"
+                  }
+                ]
+              }
+            ],
+            "useful_point": {
+              "text": "박사 취득자는 영어성적 제출이 면제돼요.",
+              "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+              "excerpt": "해외학위 취득자(학사학위 이상) 및 박사학위 취득자는 영어성적 제출 제외"
+            },
+            "recruitment_unit": {
+              "title": "산업정책기획(선임)",
+              "count": 1,
+              "employment": "일반정규직",
+              "source_ref": "https://geri.re.kr/html/inc/file_down.asp?file_path=board/notice/2026/10/29&file_name=55c9d20daeaa589e75bd2209241f59eb6bd1ba794bbdef17238189a86a1809b0.pdf&file_org_name=2026-299%ED%98%B8%20%ED%95%98%EB%B0%98%EA%B8%B0%20%EC%A0%95%EA%B7%9C%EC%A7%81%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+              "excerpt": "정규직 / 정책 기획 미래전략 본부 산업 정책기획 선임 1명",
+              "scope": "single_recruitment_unit"
+            },
+            "correction_check": {
+              "checked_at": "2026-11-12T17:12:51.337466+09:00",
+              "result": "none_found",
+              "source_ref": "https://geri.re.kr/html/board_list.asp?board_id=notice",
+              "scope": "기관 공지사항 첫 페이지 10개만 확인",
+              "limitations": "기관 공지사항 첫 페이지와 별도 채용사이트 목록·대상 상세를 확인. 이전 페이지와 별도 정정 게시판 전체 부재로 단정하지 않음."
+            },
+            "style_rewrites": 0,
+            "selection_reason": "공식 모집행의 선임 1명과 전공 무관 박사 기준·영어성적 제출 면제를 확인. 공고 전체 6명과 단일직무 1명을 구분하며 직무 다양성을 검토. 독자 인기는 추정하지 않음.",
+            "public_preview": {
+              "main_text": "박사학위로 산업정책을 연구할 분께,\n구미전자정보기술원 정규직 선임 1명 공고예요.\n\n전공 제한 없이 박사학위가 필요해요.\n박사 취득자는 영어성적 제출이 면제돼요.\n3개월 수습 후 평가에 따라 정규직원으로 임용돼요.\n\n최종 합격 후 즉시 근무해야 해요.\n병역·해외출장·임용 결격 기준을 확인해요.\n증빙은 PDF 1개로 합쳐 제출해요.\n마감: 11월 19일 18:00, 홈페이지 접수예요.\n\n자세한 사항은 프로필링크 확인",
+              "detail_reply": ""
+            },
+            "presentation_style": "regular_interest",
+            "presentation_style_reason": "정규직 관심유도형을 선택했지만 슬롯 미배정 HOLD이며 미디어 순번은 소비하지 않음.",
+            "experiment_eligible": false,
+            "experiment_exclusion_reason": "Unassigned HOLD: workplace/profile/final review incomplete",
+            "card_restriction": "3개월 수습 후 평가에 따라 정규직원으로 임용돼요."
+          },
+          "application_period": {
+            "start": "2026-10-29T17:15:00+09:00",
+            "start_date_only": false,
+            "end": "2026-11-19T18:00:00+09:00",
+            "date_only": false,
+            "source_ref": "http://recru.geri.re.kr:7890/index.do?menu_id=00000313&menu_link=/use/aps/apsqNewRecruView.do&RECRU_ANN_IDX=1881",
+            "evidence": "접수시작일 2026/10/29 17:15 접수종료일 2026/11/19 18:00",
+            "current_open_verified": true,
+            "current_open_evidence": "2026-299호 기술원 하반기 정규직 직원 채용공고 진행중",
+            "current_open_source_ref": "http://recru.geri.re.kr:7890/index.do?menu_id=00000313"
+          }
+        }
+      },
+      "draft_sha256": "37d3f60af92ee8a6d68e46d16b0ac0a8a613e4c1d2c27887b866ba17102819d1",
+      "audit_path": "threads/audits/monitor-v2-20261112T1709.json",
+      "scope": "future unstarted regular slots only; not assigned to current or expired slot16"
     }
   },
   "writer_hold_resolutions": {
@@ -17158,17 +17395,17 @@
     }
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T06:35:13Z",
-    "main_sha": "aad0970e3835126f73105d31ee2cd3a13fa5d6d4",
+    "checked_at": "2026-11-12T08:16:36Z",
+    "main_sha": "f235647498ceb249b58638a630c9deea7a784400",
     "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
     "policy_hashes_verified": true,
-    "input_reference_at": "2026-11-12T15:32:59.195095+09:00",
-    "input_sha256": "fac237274d82d45991a214289b0b29894732c322a15fb2763bc45e849d51c5b8",
-    "selection_rows_sha256": "f23fa63bf65d11eb949af5c62102faeac02b68817f60ea4df938d8494c433172",
+    "input_reference_at": "2026-11-12T17:10:26.952687+09:00",
+    "input_sha256": "0ef87535dc73e1f358c5ce6b123644f38be7cee3f5d46ceb24b6647f7f685e78",
+    "selection_rows_sha256": "b7efa00f9b7676670140e4cab5fd56211fd131be42363eac77387bf6cbbeb468",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-12T15:32:59.195095+09:00",
+      "evaluated_at": "2026-11-12T17:10:26.952687+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -17178,45 +17415,45 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-12T13:06:09+09:00",
-          "source_checked_at": "2026-11-12T13:06:36+09:00",
-          "total_records": 906,
+          "snapshot_at": "2026-11-12T16:32:01+09:00",
+          "source_checked_at": "2026-11-12T16:32:31+09:00",
+          "total_records": 917,
           "eligible_count": 30,
-          "review_required_count": 757,
-          "excluded_count": 119,
+          "review_required_count": 767,
+          "excluded_count": 120,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 29,
             "NOTICE_ALREADY_USED": 71,
             "SOURCE_NOTICE_UNCONFIRMED": 12,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-            "APPLICATION_START_TIME_UNKNOWN": 4,
+            "APPLICATION_START_TIME_UNKNOWN": 5,
             "NOTICE_ALREADY_QUEUED": 1,
             "APPLICATION_END_PRECISION_CONFLICT": 1
           }
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-12T13:07:12+09:00",
-          "source_checked_at": "2026-11-12T13:07:12+09:00",
-          "total_records": 508,
-          "eligible_count": 286,
+          "snapshot_at": "2026-11-12T16:33:15+09:00",
+          "source_checked_at": "2026-11-12T16:33:15+09:00",
+          "total_records": 522,
+          "eligible_count": 285,
           "review_required_count": 0,
-          "excluded_count": 222,
+          "excluded_count": 237,
           "returned_count": 24,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 207,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 210,
             "CLEANEYE_NOT_RECRUITMENT": 7,
             "NOTICE_ALREADY_USED": 2,
-            "CLEANEYE_APPLICATION_NOT_OPEN": 6
+            "CLEANEYE_APPLICATION_NOT_OPEN": 18
           }
         }
       },
-      "total_scanned": 1414,
-      "eligible_before_limit": 316,
+      "total_scanned": 1439,
+      "eligible_before_limit": 315,
       "writer_limit": 24,
       "returned_count": 24,
-      "unconfirmed_unit_counts": 316,
+      "unconfirmed_unit_counts": 315,
       "interest_ranking": "unavailable_not_used",
       "audience_breadth_ranking": "unavailable_not_used",
       "sector_policy": {
@@ -17227,7 +17464,7 @@
         "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
       },
       "sector_counts_before_limit": {
-        "neutral": 219,
+        "neutral": 218,
         "deprioritized": 77,
         "preferred": 20
       },
@@ -17257,29 +17494,12 @@
       }
     ],
     "queue_check": "validated",
-    "new_drafts_prepared": 0,
+    "new_drafts_prepared": 1,
     "new_ready_saved": 0,
     "queue_unchanged": true,
-    "audit_path": "threads/audits/monitor-v2-20261112T1532.json",
-    "executed_archive_main_sha": "aad0970e3835126f73105d31ee2cd3a13fa5d6d4",
-    "official_preflight": {
-      "notice_id": "a306746",
-      "source_checks": [
-        {
-          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085399",
-          "checked_at": "2026-11-12T15:33:00.721017+09:00",
-          "sha256": "7e1ad6312f4f843e6d6cd80852614f38743d72a8532d9afb27460908e3def879"
-        },
-        {
-          "url": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271539",
-          "checked_at": "2026-11-12T15:33:00.720294+09:00",
-          "sha256": "7e48291d489c5053211e2045769ef3da3b31a69da86de68d328f150a168c04cf"
-        }
-      ],
-      "pdf_matches_previous": true,
-      "ats_visible_text_matches_previous_except_relative_day": true,
-      "original_writer_review_unchanged": true
-    }
+    "new_hold_notice_id": "cleaneye-80805",
+    "new_hold_draft_sha256": "37d3f60af92ee8a6d68e46d16b0ac0a8a613e4c1d2c27887b866ba17102819d1",
+    "audit_path": "threads/audits/monitor-v2-20261112T1709.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -17733,22 +17953,22 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T06:35:13Z",
-      "status": "no_new_publication_or_metrics",
+      "checked_at": "2026-11-12T08:16:36Z",
+      "status": "slot16_execution_not_observed_within_grace",
       "new_publications": 0,
       "last_post_id": "17918731521553015",
       "ready_entries": 1,
-      "next_slot": "2026-11-12T16:00:00+09:00",
-      "next_slot_status": "hold",
+      "next_slot": "2026-11-12T20:00:00+09:00",
+      "next_slot_status": "ready",
       "next_media": "IMAGE",
-      "new_drafts": 0,
+      "new_drafts": 1,
       "new_ready_saved": 0,
       "queue_changed": false,
       "text_verified": true,
       "image_verified": true,
       "performance24h": "not_due",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/monitor-v2-20261112T1532.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T1709.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -18123,7 +18343,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "artifact_unchanged_since_previous_verified_checkpoint": false,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T06:35:13Z",
+      "checked_at": "2026-11-12T08:16:36Z",
       "performance_blob_sha": "85e695071ad628e166db2e69dc982eb1b149aa82",
       "summary_mode": "executed_on_current_file",
       "new_post_metric_observations": 0,
@@ -18141,7 +18361,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T06:32:59.216730+00:00",
+        "requested_end": "2026-11-12T08:10:27.028542+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T03:43:35.737457+00:00",
         "start_followers": 415,
@@ -18156,7 +18376,7 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "extend_until_comparable_samples_available",
-      "audit_path": "threads/audits/monitor-v2-20261112T1532.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T1709.json"
     },
     "performance_blob_sha": "85e695071ad628e166db2e69dc982eb1b149aa82"
   }
