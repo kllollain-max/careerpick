@@ -21,6 +21,10 @@ const server = http.createServer((req,res) => {
   try {
     const page = await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2});
     const origin = 'http://127.0.0.1:'+server.address().port;
+    const feedDiagnostics = {failed:[],pageErrors:[],feedResponses:[]};
+    page.on('requestfailed', req => feedDiagnostics.failed.push({url:req.url(),failure:req.failure()?.errorText}));
+    page.on('pageerror', err => feedDiagnostics.pageErrors.push(String(err).slice(0,250)));
+    page.on('response', resp => {if(/\\.json(?:\\?|$)/.test(resp.url())) feedDiagnostics.feedResponses.push({url:resp.url(),status:resp.status()});});
     await page.goto(origin+'/',{waitUntil:'domcontentloaded',timeout:30000});
     assert.equal(await page.title(),'커리어픽 · 마감순 채용공고 모음');
     await page.locator('#q').waitFor({state:'visible',timeout:10000});
@@ -36,7 +40,10 @@ const server = http.createServer((req,res) => {
         const summary = document.querySelector('#summary')?.textContent || '';
         const match = summary.match(/검색 결과\\s*([\\d,]+)건/);
         return match && Number(match[1].replace(/,/g,'')) > 0;
-      }, null, {timeout:30000});
+      }, null, {timeout:30000}).catch(err => {
+        console.error('Baseline feed diagnostics:',JSON.stringify({root,summary:'no nonzero jobs',...feedDiagnostics}));
+        throw err;
+      });
     }
     const first = await page.locator('#list > li').count();
     assert.ok(first > 0,'homepage should show cards or an empty-state message');
