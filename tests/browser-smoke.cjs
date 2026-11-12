@@ -41,16 +41,19 @@ const server = http.createServer((req,res) => {
     // Reload must not erase a user's saved job IDs or application records.
     await page.evaluate(() => {
       localStorage.setItem('saved', JSON.stringify(['cp-perf-sentinel-saved']));
+      localStorage.setItem('apps', JSON.stringify({'cp-perf-sentinel-application':{st:'plan',org:'CI TEST'}}));
       localStorage.setItem('cp-perf-sentinel-unrelated', 'preserve-me');
     });
     await page.reload({waitUntil:'domcontentloaded',timeout:30000});
     await page.waitForFunction(() => document.querySelectorAll('#tabs .tab').length > 0, null, {timeout:30000});
     const persisted = await page.evaluate(() => ({
       saved: JSON.parse(localStorage.getItem('saved') || '[]'),
+      apps: JSON.parse(localStorage.getItem('apps') || '{}'),
       unrelated: localStorage.getItem('cp-perf-sentinel-unrelated')
     }));
     assert.ok(persisted.saved.includes('cp-perf-sentinel-saved'), 'saved job ID must persist');
     assert.equal(persisted.unrelated, 'preserve-me', 'unrelated local storage must persist');
+    assert.equal(persisted.apps['cp-perf-sentinel-application']?.st, 'plan', 'application record must persist');
     const perf = await page.evaluate(() => {
       const nav = performance.getEntriesByType('navigation')[0];
       const paint = performance.getEntriesByType('paint');
