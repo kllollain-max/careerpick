@@ -57,7 +57,7 @@ const server = http.createServer((req,res) => {
         return match && Number(match[1].replace(/,/g,'')) > 0;
       }, null, {timeout:30000}).catch(err => {
         console.error('Baseline feed diagnostics:',JSON.stringify({root,summary:'no nonzero jobs',...feedDiagnostics}));
-        throw err;
+        return page.evaluate(() => ({summary:document.querySelector('#summary')?.textContent,postCount:typeof POSTS!=='undefined'?POSTS.length:null,tab:typeof state!=='undefined'?state.tab:null,feedHealth:typeof DATA_HEALTH!=='undefined'?DATA_HEALTH:null})).then(x=>console.error('Baseline application state:',JSON.stringify(x))).then(()=>{throw err;});
       });
     }
     const first = await page.locator('#list > li').count();
