@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T08:44:34Z",
-  "last_observed_at": "2026-11-12T08:44:34Z",
+  "updated_at": "2026-11-12T09:58:32Z",
+  "last_observed_at": "2026-11-12T09:58:32Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,33 +57,30 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
+    "blob_sha": "75b9ce1f671e168b487fcdf6896eb240c34999ea",
     "readback_verified": true,
     "ready_entries": [
       {
-        "scheduled_at": "2026-11-12T08:00:00+09:00",
-        "notice_id": "cleaneye-81067",
-        "format_id": "hiring_core",
-        "characters": 275,
-        "contract_version": 2
-      },
-      {
-        "scheduled_at": "2026-11-12T12:00:00+09:00",
-        "notice_id": "a306877",
-        "format_id": "eligibility",
-        "characters": 271,
-        "contract_version": 2
-      },
-      {
         "scheduled_at": "2026-11-12T20:00:00+09:00",
         "notice_id": "a306746",
-        "format_id": "deadline_opportunity",
-        "characters": 300,
-        "contract_version": 2
+        "entry_sha256": "ad3cbb21543870147b0a40c4e0691383da3c7b443dadd5871fe471130b870995",
+        "chars": 300,
+        "reply_count": 0,
+        "card_status": "passed",
+        "card_check": "existing_exact_reviewed_assets_unchanged"
+      },
+      {
+        "scheduled_at": "2026-11-13T08:00:00+09:00",
+        "notice_id": "a306949",
+        "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+        "chars": 273,
+        "reply_count": 0,
+        "card_status": "passed",
+        "card_check": "actual_JPEG_and_360PNG_opened_remote_hashes_matched"
       }
     ],
-    "last_update_commit_sha": "acfd9a6d4259fc3384d8327eab3160cb36dfde6b",
-    "readback_verified_at": "2026-11-11T14:48:10Z"
+    "last_update_commit_sha": "0829894459b5176d98c16a5ec6324b58ea6e4e83",
+    "readback_verified_at": "2026-11-12T09:58:32Z"
   },
   "observed_runs": [
     {
@@ -9086,12 +9083,10 @@
     "Admit A/B metrics only with same-observation official main GET ID/text/is_reply evidence. Do not retroactively promote a previously unverified observation."
   ],
   "next_actions": [
-    "Check new scheduled runs against accepted claims, main history and official Meta verification; the first natural publication has already been reported.",
-    "Preserve reserved entries; validate and replenish unstarted future drafts with current official evidence.",
-    "On a new incident, preserve cause, failing run/attempt/head, repair PR, regression check and observed recovery in this file using the latest blob SHA.",
-    "Observe Nov12 08 existing IMAGE and 12 preserved TEXT; regular slots only.",
-    "PR51 UTC fix remains unmerged; required CI dependency DNS must clear before candidate16 can become ready. Do not rerun publisher or bypass checks.",
-    "Nov12 20 telecom ready has reviewed conditional-image assets; actual success history decides media."
+    "Observe Nov12 20 existing regular slot; no dispatch/rerun/test.",
+    "Nov13 08 a306949 reviewed ready; choose media from actual successful ledger, not the planned 20 result.",
+    "First v2 24h due Nov12 20:45:18; 72h due Nov14 20:45:18. Preserve actual capture times.",
+    "Existing unrelated candidate holds and PR51 required-check block remain unchanged."
   ],
   "writer_holds": {
     "2026-11-07T12:00:00+09:00": {
@@ -11765,7 +11760,7 @@
     },
     "2026-11-13T08:00:00+09:00": {
       "scheduled_at": "2026-11-13T08:00:00+09:00",
-      "status": "official_reviewed_draft_hold",
+      "status": "resolved_ready",
       "notice_id": "a306949",
       "checked_at": "2026-11-12T01:51:21Z",
       "hold_reason": "APPLICATION_START_TIME_UNKNOWN_CURRENT_OPEN_UNCONFIRMED_AND_FINAL_PROFILE_CARD_REVIEW_PENDING",
@@ -12040,12 +12035,53 @@
       },
       "entry_sha256": "38926804a224a5ccf1679ebb0bef0302bd3b9da558653e87f1e5018ffa938c64",
       "new_draft_prepared": true,
-      "queue_saved": false,
+      "queue_saved": true,
       "official_details_fully_reviewed": false,
       "attachment_texts_reviewed": 4,
-      "card_generated": false,
+      "card_generated": true,
       "resume": "Actual application-open proof or subsequent date with fresh official recheck; verify profile target and reviewed exact card, full queue validation, then CAS only. Do not invent start time or reuse same notice elsewhere.",
-      "audit_path": "threads/audits/monitor-v2-20261112T1044.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T1044.json",
+      "resolved_at": "2026-11-12T09:58:32Z",
+      "resolution": {
+        "checked_at": "2026-11-12T09:58:32Z",
+        "status": "resolved_ready",
+        "notice_id": "a306949",
+        "scheduled_at": "2026-11-13T08:00:00+09:00",
+        "old_entry_sha256": "38926804a224a5ccf1679ebb0bef0302bd3b9da558653e87f1e5018ffa938c64",
+        "new_entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+        "old_chars": 266,
+        "new_chars": 273,
+        "official_details_fully_reviewed": true,
+        "application_current_open_verified": true,
+        "profile_notice_path_verified": true,
+        "profile_rel_me_verified": true,
+        "card_visual_review": {
+          "status": "passed",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-12T18:50:23.624686+09:00",
+          "sha256": "5232c360f15afc93a4ab4e74f70cba22db9162f15c7f659310be1328b68aa5a4",
+          "preview_sha256": "d2121b3659aab989b707b3f2dfd4c60f37d0d981d8b2311f3ad328cbddda5f77",
+          "asset_path": "threads-images/a306949.jpg",
+          "preview_asset_path": "threads-images/a306949-360.png",
+          "facts_sha256": "c977c6f5fd49f3b674103dab118e411bb62c3a2a43a3d93c1e84b7d3ab5df48a",
+          "layout_version": "careerpick-single-main-card-v2",
+          "observations": "실제JPEG원본과동일JPEG의LANCZOS360PNG를열어 기술연구원/정규직1명/한국기술교육대학교/11월26일16:00/최초임용2027년1월~2028년12월 한글·숫자·잘림·본문일치를확인."
+        },
+        "asset_only_commit_sha": "96d04ff6aac8542d24edf4ab1f05c4c32d4356db",
+        "queue_blob_sha": "75b9ce1f671e168b487fcdf6896eb240c34999ea",
+        "queue_commit": "0829894459b5176d98c16a5ec6324b58ea6e4e83",
+        "queue_saved": true,
+        "queue_readback_exact": true,
+        "all_prior_entries_unchanged": true,
+        "whole_queue_check": "validated",
+        "actual_publication": "not_yet_published",
+        "automatic_reply_count_expected": 0,
+        "audit_path": "threads/audits/single-main-v2-ready-a306949-20261112T1850.json",
+        "limitations": [
+          "Specific institutional post, ALIO mobile, four matching original attachments checked; historical correction board not exhaustively reviewed.",
+          "HWP full extracted texts re-read and current bytes matched; all-page HWP visual layout review not performed."
+        ]
+      }
     }
   },
   "last_writer_check": {
@@ -12162,8 +12198,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T08:44:34Z",
-    "main_sha": "f235647498ceb249b58638a630c9deea7a784400",
+    "checked_at": "2026-11-12T09:58:32Z",
+    "main_sha": "96d04ff6aac8542d24edf4ab1f05c4c32d4356db",
     "history_blob_sha": "a7b9cb12f20b2aacbfb718534b24968f1cc4ea71",
     "claim_blob_sha": "fef90a489ba3dc42f6fe147f2a1f33291817cc73",
     "latest_publisher_run": {
@@ -12179,19 +12215,19 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17918731521553015",
     "publisher_in_progress": false,
-    "status": "no_new_event_after_slot16_fail_closed",
+    "status": "next08_hold_resolved_ready_no_new_publication_or_metrics",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
         "snapshot_at": "2026-11-12T16:32:01+09:00",
         "source_checked_at": "2026-11-12T16:32:31+09:00",
         "total_records": 917,
-        "eligible_count": 30,
+        "eligible_count": 29,
         "review_required_count": 767,
-        "excluded_count": 120,
+        "excluded_count": 121,
         "returned_count": 0,
         "exclusion_reasons": {
-          "APPLICATION_CLOSED": 29,
+          "APPLICATION_CLOSED": 30,
           "NOTICE_ALREADY_USED": 71,
           "SOURCE_NOTICE_UNCONFIRMED": 12,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
@@ -12219,7 +12255,7 @@
     },
     "actions_pages_read": 9,
     "actions_runs_read": 857,
-    "audit_path": "threads/audits/monitor-v2-20261112T1743.json",
+    "audit_path": "threads/audits/single-main-v2-ready-a306949-20261112T1850.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": [],
     "out_of_scope_run_failures": "Site/banner/adsense changes observed only; no Threads failure inferred.",
@@ -12231,7 +12267,9 @@
     "monitored_slot_grace_ends": "2026-11-12T18:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
     "error_code": "QUEUE_SLOT_MISSING",
-    "send_state": "no_reservation_no_send"
+    "send_state": "no_reservation_no_send",
+    "main_changes_since_archive": "exactly two reviewed a306949 card assets added; code/policy/history unchanged",
+    "latest_page_rechecked_at": "2026-11-12T09:58:32Z"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -16211,6 +16249,46 @@
       "remaining_hold": "UTC deadline validation not applied on main; PR51 CI dependency DNS",
       "ready_saved": false,
       "audit_path": "threads/audits/writer-v2-20261111T2321.json"
+    },
+    "2026-11-13T08:00:00+09:00:single_main_v2_ready_20261112T1850": {
+      "checked_at": "2026-11-12T09:58:32Z",
+      "status": "resolved_ready",
+      "notice_id": "a306949",
+      "scheduled_at": "2026-11-13T08:00:00+09:00",
+      "old_entry_sha256": "38926804a224a5ccf1679ebb0bef0302bd3b9da558653e87f1e5018ffa938c64",
+      "new_entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+      "old_chars": 266,
+      "new_chars": 273,
+      "official_details_fully_reviewed": true,
+      "application_current_open_verified": true,
+      "profile_notice_path_verified": true,
+      "profile_rel_me_verified": true,
+      "card_visual_review": {
+        "status": "passed",
+        "reviewed_width": 360,
+        "reviewed_at": "2026-11-12T18:50:23.624686+09:00",
+        "sha256": "5232c360f15afc93a4ab4e74f70cba22db9162f15c7f659310be1328b68aa5a4",
+        "preview_sha256": "d2121b3659aab989b707b3f2dfd4c60f37d0d981d8b2311f3ad328cbddda5f77",
+        "asset_path": "threads-images/a306949.jpg",
+        "preview_asset_path": "threads-images/a306949-360.png",
+        "facts_sha256": "c977c6f5fd49f3b674103dab118e411bb62c3a2a43a3d93c1e84b7d3ab5df48a",
+        "layout_version": "careerpick-single-main-card-v2",
+        "observations": "실제JPEG원본과동일JPEG의LANCZOS360PNG를열어 기술연구원/정규직1명/한국기술교육대학교/11월26일16:00/최초임용2027년1월~2028년12월 한글·숫자·잘림·본문일치를확인."
+      },
+      "asset_only_commit_sha": "96d04ff6aac8542d24edf4ab1f05c4c32d4356db",
+      "queue_blob_sha": "75b9ce1f671e168b487fcdf6896eb240c34999ea",
+      "queue_commit": "0829894459b5176d98c16a5ec6324b58ea6e4e83",
+      "queue_saved": true,
+      "queue_readback_exact": true,
+      "all_prior_entries_unchanged": true,
+      "whole_queue_check": "validated",
+      "actual_publication": "not_yet_published",
+      "automatic_reply_count_expected": 0,
+      "audit_path": "threads/audits/single-main-v2-ready-a306949-20261112T1850.json",
+      "limitations": [
+        "Specific institutional post, ALIO mobile, four matching original attachments checked; historical correction board not exhaustively reviewed.",
+        "HWP full extracted texts re-read and current bytes matched; all-page HWP visual layout review not performed."
+      ]
     }
   },
   "editorial_restoration": {
@@ -17431,17 +17509,17 @@
     }
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T08:44:34Z",
-    "main_sha": "f235647498ceb249b58638a630c9deea7a784400",
-    "queue_blob_sha": "6b8ecf3238b55cbce7a7ff2a4ac27912e606f5c4",
+    "checked_at": "2026-11-12T09:58:32Z",
+    "main_sha": "96d04ff6aac8542d24edf4ab1f05c4c32d4356db",
+    "queue_blob_sha": "75b9ce1f671e168b487fcdf6896eb240c34999ea",
     "policy_hashes_verified": true,
-    "input_reference_at": "2026-11-12T17:43:21.320086+09:00",
-    "input_sha256": "de4c209129b090124d6f1bad0527dd63f74c354d964ee971e207cfb13e944d57",
-    "selection_rows_sha256": "b7efa00f9b7676670140e4cab5fd56211fd131be42363eac77387bf6cbbeb468",
+    "input_reference_at": "2026-11-12T18:43:22.042283+09:00",
+    "input_sha256": "13686c5f4018d567788aba77c3a9a0323edf9fed581d9aa4c02c0da6bf8a0846",
+    "selection_rows_sha256": "b6f8482586d2d0e8e88a29cd54792a6c75036cf5fe4be2d5c6efe630e73802a8",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-12T17:43:21.320086+09:00",
+      "evaluated_at": "2026-11-12T18:43:22.042283+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -17454,12 +17532,12 @@
           "snapshot_at": "2026-11-12T16:32:01+09:00",
           "source_checked_at": "2026-11-12T16:32:31+09:00",
           "total_records": 917,
-          "eligible_count": 30,
+          "eligible_count": 29,
           "review_required_count": 767,
-          "excluded_count": 120,
+          "excluded_count": 121,
           "returned_count": 0,
           "exclusion_reasons": {
-            "APPLICATION_CLOSED": 29,
+            "APPLICATION_CLOSED": 30,
             "NOTICE_ALREADY_USED": 71,
             "SOURCE_NOTICE_UNCONFIRMED": 12,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
@@ -17486,10 +17564,10 @@
         }
       },
       "total_scanned": 1439,
-      "eligible_before_limit": 315,
+      "eligible_before_limit": 314,
       "writer_limit": 24,
       "returned_count": 24,
-      "unconfirmed_unit_counts": 315,
+      "unconfirmed_unit_counts": 314,
       "interest_ranking": "unavailable_not_used",
       "audience_breadth_ranking": "unavailable_not_used",
       "sector_policy": {
@@ -17502,7 +17580,7 @@
       "sector_counts_before_limit": {
         "neutral": 218,
         "deprioritized": 77,
-        "preferred": 20
+        "preferred": 19
       },
       "ranking_order": [
         "current_application_open",
@@ -17526,14 +17604,27 @@
         "chars": 300,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_visual_attestation_exact_assets_and_pixels_verified"
+        "card_check": "existing_exact_reviewed_assets_unchanged"
+      },
+      {
+        "scheduled_at": "2026-11-13T08:00:00+09:00",
+        "notice_id": "a306949",
+        "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+        "chars": 273,
+        "reply_count": 0,
+        "card_status": "passed",
+        "card_check": "actual_JPEG_and_360PNG_opened_remote_hashes_matched"
       }
     ],
-    "queue_check": "validated",
-    "new_drafts_prepared": 0,
-    "new_ready_saved": 0,
-    "queue_unchanged": true,
-    "audit_path": "threads/audits/monitor-v2-20261112T1743.json"
+    "queue_check": "validated_again_on_exact_remote_readback",
+    "new_drafts_prepared": 1,
+    "new_notice_drafts": 0,
+    "revalidated_hold_ready": 1,
+    "new_ready_saved": 1,
+    "queue_unchanged": false,
+    "queue_changed": true,
+    "all_prior_entries_unchanged": true,
+    "audit_path": "threads/audits/single-main-v2-ready-a306949-20261112T1850.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -17640,7 +17731,7 @@
     "queue_readback": "matched",
     "prepared_at": "2026-11-11T18:37:07.889540+09:00",
     "queue_entry_sha256": "d07cc23496f2896da184b9375e62b0e8e11bbfe68e3d8bc61953b7566dd7cba2",
-    "next_notice_id": "a306877",
+    "next_notice_id": "a306746",
     "next_media": "IMAGE",
     "text_verified": true,
     "image_verified": true,
@@ -17656,9 +17747,9 @@
       "status": "initial_observation"
     },
     "next_actions": [
-      "Observe Nov12 08 existing IMAGE slot; verify public image and exact original card binding withoutrepost.",
-      "First v2 24h Nov12 20:45:18,72h Nov14 20:45:18; useactual capturetime.",
-      "Keep approved target/condition/regular-interest styles and no assumed performance effects."
+      "Observe Nov12 20 existing regular slot; no dispatch/rerun/test.",
+      "Nov13 08 a306949 reviewed ready; choose media from actual successful ledger, not the planned 20 result.",
+      "First v2 24h due Nov12 20:45:18; 72h due Nov14 20:45:18. Preserve actual capture times."
     ],
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
@@ -17892,9 +17983,9 @@
       "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
     },
     "first_confirmed_new_publication_at": "2026-11-11T20:45:18.355131+09:00",
-    "next_slot": "2026-11-12T16:00:00+09:00",
-    "next_ready_entry_sha256": "dd7d16159eb340768de3317329ea3cf3dc5bd1bbb34bcf3892566cd67d7c4e94",
-    "next_card_status": "exact_reviewed_assets_reverified",
+    "next_slot": "2026-11-12T20:00:00+09:00",
+    "next_ready_entry_sha256": "ad3cbb21543870147b0a40c4e0691383da3c7b443dadd5871fe471130b870995",
+    "next_card_status": "exact_reviewed_assets_available",
     "completion_states": {
       "code": "applied",
       "operational_settings": "active_contract2",
@@ -17910,7 +18001,8 @@
       "evidence": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
     },
     "future_ready_slots": [
-      "2026-11-12T20:00:00+09:00"
+      "2026-11-12T20:00:00+09:00",
+      "2026-11-13T08:00:00+09:00"
     ],
     "image_verification": {
       "run_id": "43121375680",
@@ -17987,23 +18079,23 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T08:44:34Z",
-      "status": "no_new_publication_or_metrics",
+      "checked_at": "2026-11-12T09:58:32Z",
+      "status": "next08_hold_resolved_ready_no_new_publication_or_metrics",
       "new_publications": 0,
       "last_post_id": "17918731521553015",
-      "ready_entries": 1,
+      "ready_entries": 2,
       "next_slot": "2026-11-12T20:00:00+09:00",
       "next_slot_status": "ready",
       "next_media": "IMAGE",
-      "new_drafts": 0,
-      "new_ready_saved": 0,
-      "queue_changed": false,
+      "new_drafts": 1,
+      "new_notice_drafts": 0,
+      "new_ready_saved": 1,
+      "queue_changed": true,
       "text_verified": true,
       "image_verified": true,
       "performance24h": "not_due",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/monitor-v2-20261112T1743.json",
-      "error": "QUEUE_SLOT_MISSING"
+      "audit_path": "threads/audits/single-main-v2-ready-a306949-20261112T1850.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -18137,7 +18229,7 @@
       "contract_version": 2,
       "audit_path": "threads/audits/single-main-v2-text-verified-20261112T1243.json"
     },
-    "next_slot_status": "hold",
+    "next_slot_status": "ready",
     "publication_reports": {
       "17918731521553015": {
         "status": "prepared_for_current_report",
@@ -18378,7 +18470,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "artifact_unchanged_since_previous_verified_checkpoint": false,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T08:44:34Z",
+      "checked_at": "2026-11-12T09:58:32Z",
       "performance_blob_sha": "f40d82048e199c9f7e58a57b6c2a7471008bb2af",
       "summary_mode": "executed_on_current_file",
       "new_post_metric_observations": 0,
@@ -18398,7 +18490,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T08:43:21.334800+00:00",
+        "requested_end": "2026-11-12T09:43:22.084413+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T08:17:15.679112+00:00",
         "start_followers": 415,
@@ -18413,7 +18505,8 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "extend_until_comparable_samples_available",
-      "audit_path": "threads/audits/monitor-v2-20261112T1743.json"
+      "audit_path": "threads/audits/single-main-v2-ready-a306949-20261112T1850.json",
+      "summary_as_of": "2026-11-12T09:43:22.084413+00:00"
     },
     "performance_blob_sha": "85e695071ad628e166db2e69dc982eb1b149aa82"
   }
