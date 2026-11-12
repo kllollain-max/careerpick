@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T16:49:31Z",
-  "last_observed_at": "2026-11-12T16:49:31Z",
+  "updated_at": "2026-11-12T17:54:59Z",
+  "last_observed_at": "2026-11-12T17:54:59Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,34 +57,39 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "5c7ffa0b5b4042697fbf49db528e36d9915e835f",
+    "blob_sha": "e02b51a57b74f20a27a891a79a87c6f41fd064d7",
     "readback_verified": true,
     "ready_entries": [
       {
         "scheduled_at": "2026-11-13T08:00:00+09:00",
         "notice_id": "a306949",
-        "format_id": "hiring_core",
-        "chars": 273,
-        "editorial_policy_id": null,
         "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+        "chars": 273,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_attestation_exact_assets_full_pixels_verified"
+        "card_check": "exact_reviewed_assets_and_full_pixels_verified"
       },
       {
         "scheduled_at": "2026-11-13T12:00:00+09:00",
         "notice_id": "a306848",
-        "format_id": "eligibility",
-        "chars": 284,
-        "editorial_policy_id": null,
         "entry_sha256": "ed8fd6130e317c1d7a58a0de5d4e3da762f12bcdf386332bd9400137c95f299a",
+        "chars": 284,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "actual_JPEG_and_360PNG_visually_reviewed_exact_remote_assets_verified"
+        "card_check": "exact_reviewed_assets_and_full_pixels_verified"
+      },
+      {
+        "scheduled_at": "2026-11-13T16:00:00+09:00",
+        "notice_id": "a306908",
+        "entry_sha256": "95f72bdd63e472ce73d604a42e29024d181845c3e214d35f37c4dbfb81209d38",
+        "chars": 252,
+        "reply_count": 0,
+        "card_status": "passed",
+        "card_check": "exact_reviewed_assets_and_full_pixels_verified"
       }
     ],
-    "last_update_commit_sha": "187957663c4dfceb143f002d05155e697f3e38ff",
-    "readback_verified_at": "2026-11-12T14:30:46Z"
+    "last_update_commit_sha": "0046c40a928cdedc25903b2756b8fc007d3662b8",
+    "readback_verified_at": "2026-11-12T17:54:59Z"
   },
   "observed_runs": [
     {
@@ -9134,7 +9139,8 @@
     "Keep 14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights.",
     "PR51 and other unverified candidate holds remain; no bypass, backfill, tests or reruns.",
     "Resolve a306989 notice/JD qualification scope discrepancy and employer ATS999 block; keep243char draft unassigned, no unverified queue entry.",
-    "Resolve a306807 ATS same-notice actual reception view/profile path and complete final review before assigning unstarted slot; preserve291char unassigned draft."
+    "Resolve a306807 ATS same-notice actual reception view/profile path and complete final review before assigning unstarted slot; preserve291char unassigned draft.",
+    "Observe Nov13 16 newly ready a306908 at existing regular slot; TEXT only if08 TEXT and12 IMAGE succeed, otherwise derive media from actual successful ledger. Exact reviewed IMAGE card is available; no backfill or new run."
   ],
   "writer_holds": {
     "2026-11-07T12:00:00+09:00": {
@@ -12246,8 +12252,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T16:49:31Z",
-    "main_sha": "a71f7d4fae0bf2298befbb83ed5eeeadbf995f3f",
+    "checked_at": "2026-11-12T17:54:59Z",
+    "main_sha": "e2e75eb3449f05a9eb2c9dce48f08179016cc412",
     "history_blob_sha": "952791a10d3f7b91be2fb7de4b6d451ff89db997",
     "claim_blob_sha": "e853ea2871fb60507bddcbfe83a885663fdafaad",
     "latest_publisher_run": {
@@ -12263,7 +12269,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18079233716458874",
     "publisher_in_progress": false,
-    "status": "no_new_publication_or_metrics_refreshed_sources_ready_preserved",
+    "status": "new_ready_saved_no_new_publication_or_metrics",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12303,7 +12309,7 @@
     },
     "actions_pages_read": 9,
     "actions_runs_read": 864,
-    "audit_path": "threads/audits/monitor-v2-20261113T0146.json",
+    "audit_path": "threads/audits/single-main-v2-ready-a306908-20261113T0248.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": [],
     "out_of_scope_run_failures": "Site/banner/adsense changes observed only; no Threads failure inferred.",
@@ -12316,20 +12322,19 @@
     "slot_claim_or_reservation_observed": false,
     "error_code": null,
     "send_state": "next_regular_slot_pending_no_send_attempt",
-    "main_changes_since_archive": "none; fresh pinned current-main archive used",
-    "latest_page_rechecked_at": "2026-11-12T16:49:31Z",
+    "main_changes_since_archive": [
+      "threads-images/a306908.jpg",
+      "threads-images/a306908-360.png"
+    ],
+    "latest_page_rechecked_at": "2026-11-12T17:51:26Z",
     "main_changes_since_checkpoint": [
-      "alio-detail.json",
-      "alio.json",
-      "cleaneye.json",
-      "exam-status.json",
-      "gojobs.json",
-      "operations-status.json"
+      "threads-images/a306908.jpg",
+      "threads-images/a306908-360.png"
     ],
     "new_metric_observations": 0,
     "new_account_observations": 0,
-    "new_ready_saved": 0,
-    "unstarted_new_slot": "2026-11-13T12:00:00+09:00"
+    "new_ready_saved": 1,
+    "unstarted_new_slot": "2026-11-13T16:00:00+09:00"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -18173,17 +18178,17 @@
     "latest_v5_audit": "threads/audits/single-main-v2-image-verified-20261112T2048.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T16:49:31Z",
-    "main_sha": "a71f7d4fae0bf2298befbb83ed5eeeadbf995f3f",
-    "queue_blob_sha": "5c7ffa0b5b4042697fbf49db528e36d9915e835f",
+    "checked_at": "2026-11-12T17:54:59Z",
+    "main_sha": "e2e75eb3449f05a9eb2c9dce48f08179016cc412",
+    "queue_blob_sha": "e02b51a57b74f20a27a891a79a87c6f41fd064d7",
     "policy_hashes_verified": true,
-    "input_reference_at": "2026-11-13T01:47:45.985920+09:00",
-    "input_sha256": "7da792e93f6817d9a198fba182ddc566b700069f138e01abaa50d00d7a5f2f81",
+    "input_reference_at": "2026-11-13T02:43:00.013291+09:00",
+    "input_sha256": "37e76d71ba5bd438c4b848c844eaa951ae641df91e435017c3782be71c2a9160",
     "selection_rows_sha256": "9c3a17ff907c81bdd5003c224200fa4ad8e09894ca256ea15c1f8530ed1db14a",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-13T01:47:45.985920+09:00",
+      "evaluated_at": "2026-11-13T02:43:00.013291+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18268,7 +18273,7 @@
         "chars": 273,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_exact_reviewed_assets_and_full_pixels_verified"
+        "card_check": "exact_reviewed_assets_and_full_pixels_verified"
       },
       {
         "scheduled_at": "2026-11-13T12:00:00+09:00",
@@ -18277,17 +18282,26 @@
         "chars": 284,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_exact_reviewed_assets_and_full_pixels_verified"
+        "card_check": "exact_reviewed_assets_and_full_pixels_verified"
+      },
+      {
+        "scheduled_at": "2026-11-13T16:00:00+09:00",
+        "notice_id": "a306908",
+        "entry_sha256": "95f72bdd63e472ce73d604a42e29024d181845c3e214d35f37c4dbfb81209d38",
+        "chars": 252,
+        "reply_count": 0,
+        "card_status": "passed",
+        "card_check": "exact_reviewed_assets_and_full_pixels_verified"
       }
     ],
     "queue_check": "validated",
-    "new_drafts_prepared": 0,
+    "new_drafts_prepared": 1,
     "new_held_drafts_saved": 0,
-    "new_ready_saved": 0,
-    "queue_unchanged": true,
-    "audit_path": "threads/audits/monitor-v2-20261113T0146.json",
+    "new_ready_saved": 1,
+    "queue_unchanged": false,
+    "audit_path": "threads/audits/single-main-v2-ready-a306908-20261113T0248.json",
     "executed_archive_main_sha": "a71f7d4fae0bf2298befbb83ed5eeeadbf995f3f",
-    "queue_readback_check": "validated_current_blob",
+    "queue_readback_check": "validated_exact_readback_current_blob",
     "public_main_reply_check": "exact_single_main_empty_detail_reply_and_CTA_once",
     "all_prior_queue_entries_unchanged": true,
     "alternative_official_checks": [
@@ -18308,36 +18322,52 @@
     ],
     "official_rechecks": [
       {
-        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80688",
-        "checked_at": "2026-11-13T01:48:29.451778+09:00",
-        "status": "failed",
-        "error": "HTTP Error 503: Service Unavailable"
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306908",
+        "checked_at": "2026-11-13T02:43:00.738280+09:00",
+        "sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048",
+        "status": "read"
       },
       {
-        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80792",
-        "checked_at": "2026-11-13T01:48:29.452325+09:00",
-        "status": "failed",
-        "error": "HTTP Error 503: Service Unavailable"
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086502",
+        "checked_at": "2026-11-13T02:43:26.620368+09:00",
+        "sha256": "914d378883587a74062ad781c25e02f38d4b5cf8dc744535eb8d6068b6c45ca9",
+        "status": "read"
       },
       {
-        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306949",
-        "checked_at": "2026-11-13T01:48:29.453005+09:00",
-        "status": "read",
-        "bytes": 12298,
-        "sha256": "426a559dd1b9926199c764e040f6d52a5dc5beed5aa256065c2b56dd1b8dc0e2",
-        "path": "official-check-2.html",
-        "prior_sha256": "426a559dd1b9926199c764e040f6d52a5dc5beed5aa256065c2b56dd1b8dc0e2",
-        "same_bytes": true
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086503",
+        "checked_at": "2026-11-13T02:43:26.620616+09:00",
+        "sha256": "3e2719e14478511e7d05341f6c6157c96755d3a0e0684188d87b9b3c07b8a0cd",
+        "status": "read"
       },
       {
-        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306848",
-        "checked_at": "2026-11-13T01:48:29.453380+09:00",
-        "status": "read",
-        "bytes": 13957,
-        "sha256": "3d286f76bcb8aaef6ba8410eb8df5c6cbe7d398855385846fc474190b733f498",
-        "path": "official-check-3.html",
-        "prior_sha256": "3d286f76bcb8aaef6ba8410eb8df5c6cbe7d398855385846fc474190b733f498",
-        "same_bytes": true
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086504",
+        "checked_at": "2026-11-13T02:43:26.621064+09:00",
+        "sha256": "2f9504c96ed442829e0fa9889f75be84a1a783cd6b69800d7531656a60148f5a",
+        "status": "read"
+      },
+      {
+        "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=453",
+        "checked_at": "2026-11-13T02:43:26.621388+09:00",
+        "sha256": "b9dac6a86c508eeec015c015cd27333969cbdd319a9c04022f18c7448209e186",
+        "status": "read"
+      },
+      {
+        "url": "https://kipf.recruiter.co.kr",
+        "checked_at": "2026-11-13T02:43:26.621880+09:00",
+        "sha256": "c553b6dcd1b386c379ad3ae1db87b4624bb6517c7131ac10e9f3794304f27194",
+        "status": "read"
+      },
+      {
+        "url": "https://kllollain-max.github.io/careerpick/jobs/a306908.html",
+        "checked_at": "2026-11-13T02:43:26.622519+09:00",
+        "sha256": "cb7d3a9b0b2627652137fa6c1eab7f500f424c5bc7d4436edcf41e4df36f8d90",
+        "status": "read"
+      },
+      {
+        "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/list.do",
+        "checked_at": "2026-11-13T02:44:32.839511+09:00",
+        "sha256": "c689023e12c7b8bc09bff053a3e1e99ec5cb40160ecece111f80401e739d48aa",
+        "status": "read"
       }
     ]
   },
@@ -18465,7 +18495,8 @@
       "Observe Nov13 08 preserved a306949 regular TEXT slot; do not change its body/assets/hash.",
       "Observe Nov13 12 newly ready a306848 at the existing regular slot; IMAGE if08 succeeds asTEXT, otherwise determine from actual successful ledger. Never consume media alternation on preparation.",
       "Collect later v2 24h windows through existing independent metrics job; first72h due Nov14 20:45:18.",
-      "Continue14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights."
+      "Continue14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights.",
+      "Observe Nov13 16 newly ready a306908 at existing regular slot; TEXT only if08 TEXT and12 IMAGE succeed, otherwise derive media from actual successful ledger. Exact reviewed IMAGE card is available; no backfill or new run."
     ],
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
@@ -18718,7 +18749,8 @@
     },
     "future_ready_slots": [
       "2026-11-13T08:00:00+09:00",
-      "2026-11-13T12:00:00+09:00"
+      "2026-11-13T12:00:00+09:00",
+      "2026-11-13T16:00:00+09:00"
     ],
     "image_verification": {
       "run_id": "43121375680",
@@ -18795,23 +18827,23 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T16:49:31Z",
-      "status": "no_new_publication_or_metrics_ready_preserved",
+      "checked_at": "2026-11-12T17:54:59Z",
+      "status": "new_ready_saved_no_new_publication_or_metrics",
       "new_publications": 0,
       "last_post_id": "18079233716458874",
-      "ready_entries": 2,
+      "ready_entries": 3,
       "next_slot": "2026-11-13T08:00:00+09:00",
       "next_slot_status": "ready",
       "next_media": "TEXT",
-      "new_drafts": 0,
-      "new_ready_saved": 0,
+      "new_drafts": 1,
+      "new_ready_saved": 1,
       "new_held_drafts": 0,
-      "queue_changed": false,
+      "queue_changed": true,
       "text_verified": true,
       "image_verified": true,
       "performance24h": "first_v2_observation_captured_prior_checkpoint",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/monitor-v2-20261113T0146.json"
+      "audit_path": "threads/audits/single-main-v2-ready-a306908-20261113T0248.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -19047,12 +19079,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-12T16:49:31Z",
+    "checked_at": "2026-11-12T17:54:59Z",
     "state_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-12T16:47:46.749186+00:00",
+      "as_of": "2026-11-12T17:43:00.693420+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19267,7 +19299,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-12T16:47:46.749186+00:00",
+            "requested_end": "2026-11-12T17:43:00.693420+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-12T11:48:45.777061+00:00",
             "start_followers": 415,
@@ -19288,7 +19320,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T16:47:46.749186+00:00",
+        "requested_end": "2026-11-12T17:43:00.693420+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T11:48:45.777061+00:00",
         "start_followers": 415,
@@ -19322,13 +19354,13 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/monitor-v2-20261113T0146.json",
+    "audit_path": "threads/audits/single-main-v2-ready-a306908-20261113T0248.json",
     "artifact_unchanged_since_previous_verified_checkpoint": true,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T16:49:31Z",
+      "checked_at": "2026-11-12T17:54:59Z",
       "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
       "summary_mode": "executed_on_current_file",
-      "summary_as_of": "2026-11-12T16:47:46.749186+00:00",
+      "summary_as_of": "2026-11-12T17:43:00.693420+00:00",
       "new_post_metric_observations": 0,
       "new_legacy_post_metric_observations": 0,
       "new_v2_post_metric_observations": 0,
@@ -19386,7 +19418,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T14:17:32.783613+00:00",
+        "requested_end": "2026-11-12T17:43:00.693420+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T11:48:45.777061+00:00",
         "start_followers": 415,
@@ -19401,7 +19433,7 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "continue14day_observation_no_weights_changed",
-      "audit_path": "threads/audits/monitor-v2-20261113T0146.json"
+      "audit_path": "threads/audits/single-main-v2-ready-a306908-20261113T0248.json"
     },
     "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
     "new_metrics_observations_saved_by_independent_job": 0
@@ -19448,6 +19480,87 @@
       "queue_readback_verified": true,
       "all_prior_queue_entries_preserved": true,
       "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json"
+    },
+    "2026-11-13T16:00:00+09:00:a306908": {
+      "checked_at": "2026-11-12T17:54:59Z",
+      "entry_sha256": "95f72bdd63e472ce73d604a42e29024d181845c3e214d35f37c4dbfb81209d38",
+      "contract_version": 2,
+      "presentation_style": "eligibility_info",
+      "body_chars": 252,
+      "automatic_reply_count_expected": 0,
+      "published": false,
+      "post_id": null,
+      "source_check_scope_and_limits": {
+        "checked_at": "2026-11-13T02:44:32.839511+09:00",
+        "result": "none_found",
+        "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/list.do",
+        "scope": "현재 기관채용목록1쪽·동일공고453·ALIO·공고PDF4쪽·직무기술서1쪽·지역인재별첨1쪽",
+        "limitations": "전체 과거 정정공지 전수조사 아님. ATS홈페이지HTTP200이나 동적입력화면 미열람. 기관목록/상세는 실제진행중이며 공고PDF접수기간과일치."
+      },
+      "official_source_refs": [
+        {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306908",
+          "checked_at": "2026-11-13T02:43:00.738280+09:00",
+          "sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3086502",
+          "checked_at": "2026-11-13T02:43:26.620368+09:00",
+          "sha256": "914d378883587a74062ad781c25e02f38d4b5cf8dc744535eb8d6068b6c45ca9"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3086503",
+          "checked_at": "2026-11-13T02:43:26.620616+09:00",
+          "sha256": "3e2719e14478511e7d05341f6c6157c96755d3a0e0684188d87b9b3c07b8a0cd"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3086504",
+          "checked_at": "2026-11-13T02:43:26.621064+09:00",
+          "sha256": "2f9504c96ed442829e0fa9889f75be84a1a783cd6b69800d7531656a60148f5a"
+        },
+        {
+          "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=453",
+          "checked_at": "2026-11-13T02:43:26.621388+09:00",
+          "sha256": "b9dac6a86c508eeec015c015cd27333969cbdd319a9c04022f18c7448209e186"
+        },
+        {
+          "url": "https://kipf.recruiter.co.kr",
+          "checked_at": "2026-11-13T02:43:26.621880+09:00",
+          "sha256": "c553b6dcd1b386c379ad3ae1db87b4624bb6517c7131ac10e9f3794304f27194"
+        },
+        {
+          "url": "https://kllollain-max.github.io/careerpick/jobs/a306908.html",
+          "checked_at": "2026-11-13T02:43:26.622519+09:00",
+          "sha256": "cb7d3a9b0b2627652137fa6c1eab7f500f424c5bc7d4436edcf41e4df36f8d90"
+        },
+        {
+          "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/list.do",
+          "checked_at": "2026-11-13T02:44:32.839511+09:00",
+          "sha256": "c689023e12c7b8bc09bff053a3e1e99ec5cb40160ecece111f80401e739d48aa"
+        }
+      ],
+      "card_visual_review": {
+        "status": "passed",
+        "reviewed_width": 360,
+        "reviewed_at": "2026-11-13T02:48:09.732230+09:00",
+        "sha256": "c696668ccf17d0c058cf129c5d6035a619b4f83168239d0a39dc24d80b01c483",
+        "preview_sha256": "502ce37dca7f26fec99208cb4f8f36ead1a7d7e4e8484495279e86912993f298",
+        "asset_path": "threads-images/a306908.jpg",
+        "preview_asset_path": "threads-images/a306908-360.png",
+        "facts_sha256": "059e358768e70e29af0881bf27ba820fd3794527ae4599a0160e1cf84859429a",
+        "layout_version": "careerpick-single-main-card-v2",
+        "observations": "실제1080JPEG와동일JPEG의LANCZOS360PNG를열어 연구직(특수전문직)/정규직1명/기관/11월25일10시/최초계약1년의 한글·숫자·잘림·본문일치를검토. 첫 렌더는긴제한문구레이아웃오류로저장전중단되어검증한짧은제한문구만수정함. 본문252자는미변경."
+      },
+      "assets_commit_sha": "e2e75eb3449f05a9eb2c9dce48f08179016cc412",
+      "asset_only_paths": [
+        "threads-images/a306908.jpg",
+        "threads-images/a306908-360.png"
+      ],
+      "remote_exact_hashes_verified": true,
+      "queue_commit_sha": "0046c40a928cdedc25903b2756b8fc007d3662b8",
+      "queue_readback_verified": true,
+      "all_prior_queue_entries_preserved": true,
+      "audit_path": "threads/audits/single-main-v2-ready-a306908-20261113T0248.json"
     }
   }
 }
