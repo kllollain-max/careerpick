@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T08:16:36Z",
-  "last_observed_at": "2026-11-12T08:16:36Z",
+  "updated_at": "2026-11-12T08:19:53Z",
+  "last_observed_at": "2026-11-12T08:19:53Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8645,6 +8645,16 @@
       "head_sha": "aad0970e3835126f73105d31ee2cd3a13fa5d6d4",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43175932057",
       "workflow_path": ".github/workflows/operations.yml"
+    },
+    {
+      "run_id": "43181655139",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-12T08:17:20Z",
+      "head_sha": "f235647498ceb249b58638a630c9deea7a784400",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43181655139",
+      "workflow_path": ".github/workflows/threads_auto.yml"
     }
   ],
   "last_confirmed_publication": {
@@ -9010,6 +9020,30 @@
         "code_fix_not_applied": true,
         "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
       }
+    },
+    {
+      "id": "threads-slot16-20261112-43181655139",
+      "observed_at": "2026-11-12T08:19:53Z",
+      "kind": "missing_reviewed_slot_draft",
+      "publisher_failure": true,
+      "confirmed_cause": "Scheduled publisher select_ready rejected absent 16:00 queue entry with QUEUE_SLOT_MISSING; held UTC-deadline candidate was not promoted ready.",
+      "run_id": "43181655139",
+      "run_attempt": 1,
+      "head_sha": "f235647498ceb249b58638a630c9deea7a784400",
+      "stage": "Reserve one job",
+      "error_codes": [
+        "QUEUE_SLOT_MISSING"
+      ],
+      "post_id": null,
+      "claim": null,
+      "send_state": "no_reservation_no_send",
+      "automatic_post_recovery_attempts": 0,
+      "audit_path": "threads/audits/regular-slot16-held-20261112T1717.json",
+      "next_conditions": [
+        "Preserve original 16:00 HOLD and PR51 required checks; no manual rerun or late backfill.",
+        "20:00 reviewed draft and exact card remain ready; actual last successful TEXT means next IMAGE.",
+        "Continue independently collected 24h/72h/account metrics; do not count workflow failure as post or consume image turn."
+      ]
     }
   ],
   "prevention_rules": [
@@ -12128,24 +12162,35 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T08:16:36Z",
+    "checked_at": "2026-11-12T08:19:53Z",
     "main_sha": "f235647498ceb249b58638a630c9deea7a784400",
     "history_blob_sha": "a7b9cb12f20b2aacbfb718534b24968f1cc4ea71",
     "claim_blob_sha": "fef90a489ba3dc42f6fe147f2a1f33291817cc73",
     "latest_publisher_run": {
-      "run_id": "43150016261",
+      "run_id": "43181655139",
       "run_attempt": 1,
       "status": "completed",
-      "conclusion": "success",
-      "updated_at": "2026-11-12T03:43:40Z",
-      "head_sha": "1b149622f31c2b27dcf5e966f523880fa95896b6",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43150016261",
+      "conclusion": "failure",
+      "updated_at": "2026-11-12T08:17:20Z",
+      "head_sha": "f235647498ceb249b58638a630c9deea7a784400",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43181655139",
       "workflow_path": ".github/workflows/threads_auto.yml"
     },
-    "new_publisher_runs": [],
+    "new_publisher_runs": [
+      {
+        "run_id": "43181655139",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "failure",
+        "updated_at": "2026-11-12T08:17:20Z",
+        "head_sha": "f235647498ceb249b58638a630c9deea7a784400",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43181655139",
+        "workflow_path": ".github/workflows/threads_auto.yml"
+      }
+    ],
     "last_confirmed_post_id": "17918731521553015",
     "publisher_in_progress": false,
-    "status": "slot16_execution_not_observed_within_grace",
+    "status": "regular_slot16_failed_before_reservation_no_send",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12184,18 +12229,22 @@
       }
     },
     "actions_pages_read": 9,
-    "actions_runs_read": 856,
-    "audit_path": "threads/audits/monitor-v2-20261112T1709.json",
+    "actions_runs_read": 857,
+    "audit_path": "threads/audits/regular-slot16-held-20261112T1717.json",
     "new_failure_fingerprints": [],
-    "publisher_failure_fingerprints": [],
+    "publisher_failure_fingerprints": [
+      "43181655139:1:Reserve one job:QUEUE_SLOT_MISSING"
+    ],
     "out_of_scope_run_failures": "Site/banner/adsense changes observed only; no Threads failure inferred.",
-    "actions_reported_total": 856,
+    "actions_reported_total": 857,
     "pagination_reconciled_by_run_id": true,
     "executed_archive_main_sha": "f235647498ceb249b58638a630c9deea7a784400",
     "current_threads_files_unchanged_verified": true,
     "monitored_slot": "2026-11-12T16:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-12T18:00:00+09:00",
-    "slot_claim_or_reservation_observed": false
+    "slot_claim_or_reservation_observed": false,
+    "error_code": "QUEUE_SLOT_MISSING",
+    "send_state": "no_reservation_no_send"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -17499,7 +17548,9 @@
     "queue_unchanged": true,
     "new_hold_notice_id": "cleaneye-80805",
     "new_hold_draft_sha256": "37d3f60af92ee8a6d68e46d16b0ac0a8a613e4c1d2c27887b866ba17102819d1",
-    "audit_path": "threads/audits/monitor-v2-20261112T1709.json"
+    "audit_path": "threads/audits/regular-slot16-held-20261112T1717.json",
+    "performance_blob_sha": "f40d82048e199c9f7e58a57b6c2a7471008bb2af",
+    "original_draft_evidence_audit": "threads/audits/monitor-v2-20261112T1709.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -17953,8 +18004,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T08:16:36Z",
-      "status": "slot16_execution_not_observed_within_grace",
+      "checked_at": "2026-11-12T08:19:53Z",
+      "status": "slot16_failed_before_reservation_no_send",
       "new_publications": 0,
       "last_post_id": "17918731521553015",
       "ready_entries": 1,
@@ -17968,7 +18019,8 @@
       "image_verified": true,
       "performance24h": "not_due",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/monitor-v2-20261112T1709.json"
+      "audit_path": "threads/audits/regular-slot16-held-20261112T1717.json",
+      "error": "QUEUE_SLOT_MISSING"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -18343,40 +18395,40 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "artifact_unchanged_since_previous_verified_checkpoint": false,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T08:16:36Z",
-      "performance_blob_sha": "85e695071ad628e166db2e69dc982eb1b149aa82",
-      "summary_mode": "executed_on_current_file",
-      "new_post_metric_observations": 0,
-      "new_account_observations": 0,
-      "previous_artifact_verification": {
-        "artifact_id": 13913526087,
-        "artifact_sha256": "8aa26d60946f9b5cabe231f0af844e5e171a0ff76b8f4427539bdad6d32d70bc",
-        "digest_verified": true,
-        "previous_checked_at": "2026-11-12T04:22:57Z",
-        "current_performance_blob_unchanged": true
-      },
+      "checked_at": "2026-11-12T08:19:53Z",
+      "performance_blob_sha": "f40d82048e199c9f7e58a57b6c2a7471008bb2af",
+      "summary_mode": "executed_on_latest_file",
+      "new_post_metric_observations": 2,
+      "new_legacy_post_metric_observations": 2,
+      "new_v2_post_metric_observations": 0,
+      "new_account_observations": 1,
+      "artifact_id": 13925959715,
+      "artifact_sha256": "02812b33e51ac5278ab24ed40966d862827924d593241d783e53028f549bbfa3",
+      "artifact_digest_verified": true,
+      "artifact_state_matches_current": true,
+      "persistence_status": "saved_verified",
       "first_v2_24h_due": "2026-11-12T20:45:18.355131+09:00",
       "first_v2_72h_due": "2026-11-14T20:45:18.355131+09:00",
       "account_followers": {
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T08:10:27.028542+00:00",
+        "requested_end": "2026-11-12T08:17:58.426589+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-12T03:43:35.737457+00:00",
+        "observed_end": "2026-11-12T08:17:15.679112+00:00",
         "start_followers": 415,
-        "end_followers": 420,
-        "net_change": 5,
+        "end_followers": 425,
+        "net_change": 10,
         "status": "observed_interval",
         "exact_requested_boundaries": false,
         "observation_statuses": {
-          "captured": 3
+          "captured": 4
         },
         "post_attribution": null,
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "extend_until_comparable_samples_available",
-      "audit_path": "threads/audits/monitor-v2-20261112T1709.json"
+      "audit_path": "threads/audits/regular-slot16-held-20261112T1717.json"
     },
     "performance_blob_sha": "85e695071ad628e166db2e69dc982eb1b149aa82"
   }
