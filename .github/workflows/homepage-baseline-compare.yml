@@ -1,0 +1,47 @@
+name: Homepage baseline comparison
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'tests/browser-smoke.cjs'
+      - '.github/workflows/homepage-baseline-compare.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+      - name: Checkout main baseline
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: baseline
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Compare baseline and candidate browser smoke
+        shell: bash
+        run: |
+          set -o pipefail
+          echo '## Chromium baseline and candidate (CI only)' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Values are diagnostics, not field Lighthouse scores.' >> "$GITHUB_STEP_SUMMARY"
+          echo '### main baseline' >> "$GITHUB_STEP_SUMMARY"
+          CP_SITE_ROOT="$GITHUB_WORKSPACE/baseline" node tests/browser-smoke.cjs | tee baseline-metrics.txt
+          cat baseline-metrics.txt >> "$GITHUB_STEP_SUMMARY"
+          echo '### PR candidate' >> "$GITHUB_STEP_SUMMARY"
+          node tests/browser-smoke.cjs | tee candidate-metrics.txt
+          cat candidate-metrics.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload comparison logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-browser-comparison
+          path: '*-metrics.txt'
+          if-no-files-found: ignore
