@@ -32,6 +32,14 @@ const server = http.createServer((req,res) => {
     },null,{timeout:30000});
     const first = await page.locator('#list > li').count();
     assert.ok(first > 0,'homepage should show cards or an empty-state message');
-    console.log(JSON.stringify({title:await page.title(),initialListItems:first,summary:(await page.locator('#summary').innerText()).slice(0,140)}));
+    const perf = await page.evaluate(() => {
+      const nav = performance.getEntriesByType('navigation')[0];
+      const paint = performance.getEntriesByType('paint');
+      const fcp = paint.find(p => p.name === 'first-contentful-paint');
+      return {domContentLoadedMs:nav ? Math.round(nav.domContentLoadedEventEnd) : null,
+        loadEventMs:nav ? Math.round(nav.loadEventEnd) : null,
+        fcpMs:fcp ? Math.round(fcp.startTime) : null};
+    });
+    console.log(JSON.stringify({title:await page.title(),initialListItems:first,summary:(await page.locator('#summary').innerText()).slice(0,140),localBrowserMetrics:perf}));
   } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>server.close());
