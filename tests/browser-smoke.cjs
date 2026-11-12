@@ -32,6 +32,12 @@ const server = http.createServer((req,res) => {
     },null,{timeout:30000});
     const first = await page.locator('#list > li').count();
     assert.ok(first > 0,'homepage should show cards or an empty-state message');
+    // Verify real interactive search, not just initial markup.
+    await page.locator('#q').fill('zzzz-careerpick-no-matches-9999');
+    await page.waitForFunction(() => /검색 결과\\s*0건|조건에 맞는 글이 없습니다/.test(document.querySelector('#summary')?.textContent || '') || document.querySelector('#list .empty'), null, {timeout:10000});
+    assert.ok(await page.locator('#list .empty').count() > 0, 'search should show no-results state');
+    await page.locator('#q').fill('');
+    await page.waitForFunction(() => document.querySelectorAll('#list > li').length > 1, null, {timeout:10000});
     const perf = await page.evaluate(() => {
       const nav = performance.getEntriesByType('navigation')[0];
       const paint = performance.getEntriesByType('paint');
