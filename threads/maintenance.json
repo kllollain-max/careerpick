@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T14:30:46Z",
-  "last_observed_at": "2026-11-12T14:30:46Z",
+  "updated_at": "2026-11-12T14:59:56Z",
+  "last_observed_at": "2026-11-12T14:59:56Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -9133,7 +9133,8 @@
     "Collect later v2 24h windows through existing independent metrics job; first72h due Nov14 20:45:18.",
     "Keep 14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights.",
     "PR51 and other unverified candidate holds remain; no bypass, backfill, tests or reruns.",
-    "Resolve a306989 notice/JD qualification scope discrepancy and employer ATS999 block; keep243char draft unassigned, no unverified queue entry."
+    "Resolve a306989 notice/JD qualification scope discrepancy and employer ATS999 block; keep243char draft unassigned, no unverified queue entry.",
+    "Resolve a306807 ATS same-notice actual reception view/profile path and complete final review before assigning unstarted slot; preserve291char unassigned draft."
   ],
   "writer_holds": {
     "2026-11-07T12:00:00+09:00": {
@@ -12245,7 +12246,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T14:30:46Z",
+    "checked_at": "2026-11-12T14:59:56Z",
     "main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
     "history_blob_sha": "952791a10d3f7b91be2fb7de4b6d451ff89db997",
     "claim_blob_sha": "e853ea2871fb60507bddcbfe83a885663fdafaad",
@@ -12262,7 +12263,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18079233716458874",
     "publisher_in_progress": false,
-    "status": "new_ready_draft_saved_no_new_publication_or_metrics",
+    "status": "no_new_publication_or_metrics_new_unassigned_research_draft",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12270,8 +12271,8 @@
         "source_checked_at": "2026-11-12T19:15:25+09:00",
         "total_records": 919,
         "eligible_count": 29,
-        "review_required_count": 769,
-        "excluded_count": 121,
+        "review_required_count": 768,
+        "excluded_count": 122,
         "returned_count": 0,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 30,
@@ -12280,7 +12281,7 @@
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
           "APPLICATION_START_TIME_UNKNOWN": 4,
           "APPLICATION_END_PRECISION_CONFLICT": 1,
-          "NOTICE_ALREADY_QUEUED": 1
+          "NOTICE_ALREADY_QUEUED": 2
         }
       },
       "cleaneye": {
@@ -12302,28 +12303,25 @@
     },
     "actions_pages_read": 9,
     "actions_runs_read": 862,
-    "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json",
+    "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
     "new_failure_fingerprints": [],
     "publisher_failure_fingerprints": [],
     "out_of_scope_run_failures": "Site/banner/adsense changes observed only; no Threads failure inferred.",
     "actions_reported_total": 862,
     "pagination_reconciled_by_run_id": true,
-    "executed_archive_main_sha": "39a27c5dd0b1001c7acbddcc84d3d7205c2afd26",
+    "executed_archive_main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
     "current_threads_files_unchanged_verified": true,
     "monitored_slot": "2026-11-13T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-13T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
     "error_code": null,
     "send_state": "next_regular_slot_pending_no_send_attempt",
-    "main_changes_since_archive": "Exactly two reviewed a306848 card assets added; code/policy/source/history unchanged.",
-    "latest_page_rechecked_at": "2026-11-12T14:30:46Z",
-    "main_changes_since_checkpoint": [
-      "threads-images/a306848.jpg",
-      "threads-images/a306848-360.png"
-    ],
+    "main_changes_since_archive": "none; fresh pinned current main archive used",
+    "latest_page_rechecked_at": "2026-11-12T14:59:56Z",
+    "main_changes_since_checkpoint": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
-    "new_ready_saved": 1,
+    "new_ready_saved": 0,
     "unstarted_new_slot": "2026-11-13T12:00:00+09:00"
   },
   "writer_hold_alternatives": {
@@ -16393,6 +16391,94 @@
       "draft_sha256": "bc8d1db3cce8c9ac1b28c53d8f41608642d6d57790f31755c05e523dcfa7c65e",
       "audit_path": "threads/audits/monitor-v2-20261112T2138.json",
       "resume": "Official qualification scope/ATS reception and corrections/profile path/final card must be verified before assigning an unstarted future slot."
+    },
+    "unassigned:a306807:records_management": {
+      "notice_id": "a306807",
+      "status": "draft",
+      "scheduled_at": null,
+      "draft_text": "기록물관리 전문요원 자격이 있다면,\n한국고용정보원 기록물관리 정규직 1명 공고예요.\n\n자격 취득 후 관련 업무 경력 2년 이상이 필수예요.\n사서 업무는 경력에서 제외돼요.\n\n충북 음성에서 주 5일 일해요.\n3개월 시보 평가를 거쳐 정규직원으로 임용돼요.\n전보·순환근무가 있을 수 있어요.\n2027년 1월 18일 출근이 가능해야 해요.\n만 60세 미만·병역·결격 기준도 확인해요.\n\n접수 때 경력증명서와 건강보험자격득실확인서를 모두 내야 해요.\n11월 25일 16:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "chars": 291,
+      "prepared_at": "2026-11-12T23:59:41.670156+09:00",
+      "source_refs": [
+        {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306807",
+          "checked_at": "2026-11-12T23:56:14.648158+09:00",
+          "sha256": "edbcd48a1191304ac6503e3ba48d3f1bf7733e1bc882514c298a9ff270b65854",
+          "bytes": 11260,
+          "status": "read"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085726",
+          "checked_at": "2026-11-12T23:56:45.008403+09:00",
+          "sha256": "68650d54995ab2192012c4f5c2d7f4d1aa24ccc619c8bc3c6caecec7fb735424",
+          "bytes": 149490,
+          "path": "keis-0.pdf",
+          "status": "read"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085727",
+          "checked_at": "2026-11-12T23:56:45.008807+09:00",
+          "sha256": "0add537eb0be071949391e8c8240e0fa633a3b5caefbc80128216bed19c6349a",
+          "bytes": 60477,
+          "path": "keis-1.pdf",
+          "status": "read"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085728",
+          "checked_at": "2026-11-12T23:56:45.009213+09:00",
+          "sha256": "003afa45e3ed41247f0b8966d830055c6905402124cf23a230b8c22b53c1c69e",
+          "bytes": 47905,
+          "path": "keis-2.pdf",
+          "status": "read"
+        },
+        {
+          "url": "https://keis.or.kr/keis/ko/bbs/236/list.do",
+          "checked_at": "2026-11-12T23:56:45.009707+09:00",
+          "sha256": "54ad753078d0da02d13635d966364fceb57e4440a51683827a7ec386a10fb43f",
+          "bytes": 298661,
+          "path": "keis-3.html",
+          "status": "read"
+        },
+        {
+          "url": "https://keis.or.kr/keis/ko/bbs/236/detail.do?pstSn=64797&pageIndex=1&pageItm=10&searchOrderSort=0&searchGbn=0",
+          "checked_at": "2026-11-12T23:57:30.092950+09:00",
+          "sha256": "67882dd89bf4d624c87f18fbd4344609dbdb6f0a1f48f3c390804b5bf7617bcc",
+          "bytes": 313550,
+          "path": "keis-extra-0.html",
+          "status": "read"
+        },
+        {
+          "url": "https://keis.recruiter.co.kr",
+          "checked_at": "2026-11-12T23:57:30.092315+09:00",
+          "sha256": "92eaa618e787e49a223b0dc0816f7bfba09aaf10cff09eb2f3c589ff401a161b",
+          "bytes": 5506,
+          "path": "keis-extra-1.html",
+          "status": "read"
+        },
+        {
+          "url": "https://kllollain-max.github.io/careerpick/jobs/a306807.html",
+          "checked_at": "2026-11-12T23:57:30.092580+09:00",
+          "sha256": "9b682fa39bbfb17e4bc368f455b2b4e1826bc2106823c167d846473ec681c909",
+          "bytes": 14545,
+          "path": "keis-extra-2.html",
+          "status": "read"
+        },
+        {
+          "url": "https://keis.recruiter.co.kr/app/applicant/jobnotice/popupNoticeList?applicantActionCode=SHOW_NOTICE",
+          "checked_at": "2026-11-12T23:58:50.520709+09:00",
+          "sha256": "8822620c84589bbe12abee1d50e1058afd883fbc39921a51148acc9ec65067bf",
+          "bytes": 4573,
+          "status": "read"
+        }
+      ],
+      "remaining_checks": [
+        "ATS 홈페이지와 공개 공고선택 페이지는 HTTP200이나 현재 공고 데이터가 정적HTML에 없어 동일 공고의 실제 접수 화면 확인 미완료; 공식기관 안내상11/12~11/25 16시로 현재기간은 확인됨",
+        "@hid_119 프로필에서 해당상세로의 현재 안내경로 최종검수",
+        "미착수 슬롯 배정 및 완전한 실행기 스키마 검증",
+        "실제성공 기준 이미지 차례이면 최종카드 생성·시각검수·동일자산 등록"
+      ],
+      "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
+      "queue_registered": false
     }
   },
   "writer_hold_resolutions": {
@@ -18059,17 +18145,17 @@
     "latest_v5_audit": "threads/audits/single-main-v2-image-verified-20261112T2048.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T14:30:46Z",
+    "checked_at": "2026-11-12T14:59:56Z",
     "main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
     "queue_blob_sha": "5c7ffa0b5b4042697fbf49db528e36d9915e835f",
     "policy_hashes_verified": true,
-    "input_reference_at": "2026-11-12T23:17:32.758983+09:00",
-    "input_sha256": "6e6668be91f66e08142b0b50893f1d35c46cdcfd58f962cc2b090245101273af",
-    "selection_rows_sha256": "6becc326df57214a7ffd81da0bb51cbc9b231a488bd779d7575c0e246e057c00",
+    "input_reference_at": "2026-11-12T23:54:41.120615+09:00",
+    "input_sha256": "58dced2126a17108155f3c919de571429e86038a8776f4b8f0bd99f42c4a9253",
+    "selection_rows_sha256": "1e492d00648df60bcfd1990bb4d2c8eacc4966f67906329ff6c7cf5f5349576e",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-12T23:17:32.758983+09:00",
+      "evaluated_at": "2026-11-12T23:54:41.120615+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18083,8 +18169,8 @@
           "source_checked_at": "2026-11-12T19:15:25+09:00",
           "total_records": 919,
           "eligible_count": 29,
-          "review_required_count": 769,
-          "excluded_count": 121,
+          "review_required_count": 768,
+          "excluded_count": 122,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 30,
@@ -18093,7 +18179,7 @@
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
             "APPLICATION_START_TIME_UNKNOWN": 4,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
-            "NOTICE_ALREADY_QUEUED": 1
+            "NOTICE_ALREADY_QUEUED": 2
           }
         },
         "cleaneye": {
@@ -18150,34 +18236,30 @@
       {
         "scheduled_at": "2026-11-13T08:00:00+09:00",
         "notice_id": "a306949",
-        "format_id": "hiring_core",
-        "chars": 273,
-        "editorial_policy_id": null,
         "entry_sha256": "1a0a9740e0142b75ca6b8a8cc5b85f9b046b234b1f8a6353e90c8b91d7ab2903",
+        "chars": 273,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "existing_attestation_exact_assets_full_pixels_verified"
+        "card_check": "existing_exact_reviewed_assets_full_pixels_verified"
       },
       {
         "scheduled_at": "2026-11-13T12:00:00+09:00",
         "notice_id": "a306848",
-        "format_id": "eligibility",
-        "chars": 284,
-        "editorial_policy_id": null,
         "entry_sha256": "ed8fd6130e317c1d7a58a0de5d4e3da762f12bcdf386332bd9400137c95f299a",
+        "chars": 284,
         "reply_count": 0,
         "card_status": "passed",
-        "card_check": "actual_JPEG_and_360PNG_visually_reviewed_exact_remote_assets_verified"
+        "card_check": "existing_exact_reviewed_assets_full_pixels_verified"
       }
     ],
     "queue_check": "validated",
     "new_drafts_prepared": 1,
-    "new_held_drafts_saved": 0,
-    "new_ready_saved": 1,
-    "queue_unchanged": false,
-    "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json",
-    "executed_archive_main_sha": "39a27c5dd0b1001c7acbddcc84d3d7205c2afd26",
-    "queue_readback_check": "validated",
+    "new_held_drafts_saved": 1,
+    "new_ready_saved": 0,
+    "queue_unchanged": true,
+    "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
+    "executed_archive_main_sha": "0ceffc7d5f3485453050f0ff3365138de7629af5",
+    "queue_readback_check": "validated_current_blob",
     "public_main_reply_check": "exact_single_main_empty_detail_reply_and_CTA_once",
     "all_prior_queue_entries_unchanged": true
   },
@@ -18635,8 +18717,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T14:30:46Z",
-      "status": "new_ready_saved_no_new_publication_or_metrics",
+      "checked_at": "2026-11-12T14:59:56Z",
+      "status": "no_new_publication_or_metrics_new_research_draft",
       "new_publications": 0,
       "last_post_id": "18079233716458874",
       "ready_entries": 2,
@@ -18644,14 +18726,14 @@
       "next_slot_status": "ready",
       "next_media": "TEXT",
       "new_drafts": 1,
-      "new_ready_saved": 1,
-      "new_held_drafts": 0,
-      "queue_changed": true,
+      "new_ready_saved": 0,
+      "new_held_drafts": 1,
+      "queue_changed": false,
       "text_verified": true,
       "image_verified": true,
       "performance24h": "first_v2_observation_captured_prior_checkpoint",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T2353.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -18887,12 +18969,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-12T14:30:46Z",
+    "checked_at": "2026-11-12T14:59:56Z",
     "state_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-12T14:17:32.783613+00:00",
+      "as_of": "2026-11-12T14:54:41.936066+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19107,7 +19189,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-12T14:17:32.783613+00:00",
+            "requested_end": "2026-11-12T14:54:41.936066+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-12T11:48:45.777061+00:00",
             "start_followers": 415,
@@ -19128,7 +19210,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T14:17:32.783613+00:00",
+        "requested_end": "2026-11-12T14:54:41.936066+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T11:48:45.777061+00:00",
         "start_followers": 415,
@@ -19162,13 +19244,13 @@
       "writes": 1
     },
     "new_metrics_observations_saved_by_maintenance": 0,
-    "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json",
+    "audit_path": "threads/audits/monitor-v2-20261112T2353.json",
     "artifact_unchanged_since_previous_verified_checkpoint": true,
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T14:30:46Z",
+      "checked_at": "2026-11-12T14:59:56Z",
       "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
       "summary_mode": "executed_on_current_file",
-      "summary_as_of": "2026-11-12T14:17:32.783613+00:00",
+      "summary_as_of": "2026-11-12T14:54:41.936066+00:00",
       "new_post_metric_observations": 0,
       "new_legacy_post_metric_observations": 0,
       "new_v2_post_metric_observations": 0,
@@ -19241,7 +19323,7 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "continue14day_observation_no_weights_changed",
-      "audit_path": "threads/audits/single-main-v2-ready-a306848-20261112T2324.json"
+      "audit_path": "threads/audits/monitor-v2-20261112T2353.json"
     },
     "performance_blob_sha": "b19dcaa478a593a886941e703b32b4ce5e902331",
     "new_metrics_observations_saved_by_independent_job": 0
