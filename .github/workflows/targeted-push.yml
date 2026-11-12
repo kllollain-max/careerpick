@@ -7,7 +7,7 @@ on:
       mode:
         description: Check, diagnose, initialize, or explicitly resume reviewed private state without sending
         type: choice
-        options: [check, diagnose, initialize, resume_after_review]
+        options: [check, diagnose, audit-consent, initialize, resume_after_review]
         default: check
       expected_control_sha:
         description: Exact reviewed private control blob SHA; required only for resume_after_review

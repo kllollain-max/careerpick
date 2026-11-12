@@ -137,6 +137,57 @@ def diagnose():
     return report
 
 
+def audit_consent():
+    """Bounded, read-only opt-in audit; never print subscriber IDs or authorize sends."""
+    _require_send_guards_off('Consent audit')
+    from scripts.private_onesignal_export_request import request_export
+    from scripts.private_onesignal_export_download import read_export_ids
+    from scripts.onesignal_known_subscriber import lookup
+    report = {'mode': 'audit-consent', 'status': 'audit_failed', 'sent': 0,
+              'state_changed': False, 'operator_review_required': True}
+    stage = 'preflight'
+    try:
+        preflight()
+        stage = 'ledger_read'
+        ledger, ledger_sha = read_private_ledger()
+        stage = 'queue_read'
+        state, queue_sha = queue.read_queue()
+        stage = 'control_read'
+        control, control_sha = circuit.read()
+        if not ledger_sha or not queue_sha or not control_sha:
+            raise RuntimeError('Private delivery state not initialized')
+        counts = queue.counts(state)
+        report['ledger'] = {'pending_count': len(ledger.get('pending', []))}
+        report['queue'] = {'pending': counts['pending'], 'reserved': counts['reserved'],
+                           'uncertain': counts['uncertain']}
+        report['control'] = {'state': control['state']}
+        stage = 'export_request'
+        url = request_export(os.environ.get('CP_ONESIGNAL_APP_ID', ''),
+                             os.environ.get('CP_ONESIGNAL_REST_API_KEY', ''))
+        stage = 'export_download'
+        ids = read_export_ids(url)
+        report['export'] = {'parsed_subscription_count': len(ids)}
+        # Never process an unexpectedly large export in this safety-only mode.
+        if len(ids) > 20:
+            report.update(status='audit_limit_exceeded', stage='audit_limit',
+                          reviewed_count=0, verified_opt_in_count=0,
+                          all_verified=False)
+            print(json.dumps(report, sort_keys=True))
+            return report
+        stage = 'subscriber_lookup'
+        verified = sum(bool(lookup(sid)) for sid in ids)
+        all_verified = (bool(ids) and verified == len(ids)
+                        and not ledger.get('pending') and counts['pending'] == 0
+                        and counts['reserved'] == 0 and counts['uncertain'] == 0)
+        report.update(status='audit_complete' if all_verified else 'audit_incomplete',
+                      stage='complete', reviewed_count=len(ids),
+                      verified_opt_in_count=verified, all_verified=all_verified)
+    except Exception as exc:
+        report.update(stage=stage, **_diagnostic_error(exc))
+    print(json.dumps(report, sort_keys=True))
+    return report
+
+
 def resume_after_review():
     """Explicit operator CAS transition only; never called by scheduled run."""
     _require_send_guards_off('Resume')
@@ -251,6 +302,11 @@ def run():
     if (os.environ.get('CP_ENABLE_ALL_OPTED_IN_ROLLOUT') != '1'
             or os.environ.get('CP_ENABLE_LIVE_PUSH') != '1'):
         raise RuntimeError('Automatic push is OFF')
+    # Fail closed BEFORE candidate detection, backlog changes or baseline writes.
+    # The sending worker also uses an atomic circuit session for delivery.
+    control, control_sha = circuit.read()
+    if not control_sha or control.get('state') != 'ready':
+        raise circuit.Blocked('Push circuit requires operator review; no candidate updates or sending')
     baseline, sha = read_state(BASELINE)
     if sha is None or not isinstance(baseline, dict) or not isinstance(baseline.get('ids'), list):
         raise RuntimeError('Private baseline not initialized; no historical broadcast')
@@ -269,11 +325,15 @@ def run():
 
 def main():
     mode = os.environ.get('CP_PUSH_MODE', 'check')
-    if mode not in {'check', 'diagnose', 'initialize', 'resume_after_review', 'run'}:
+    if mode not in {'check', 'diagnose', 'audit-consent', 'initialize', 'resume_after_review', 'run'}:
         raise RuntimeError('Invalid push mode')
     if mode == 'diagnose':
         if diagnose()['status'] != 'diagnostic_complete':
             raise RuntimeError('Read-only diagnosis failed; no state change or sending')
+        return
+    if mode == 'audit-consent':
+        if audit_consent()['status'] != 'audit_complete':
+            raise RuntimeError('Read-only consent audit failed; no state change or sending')
         return
     if mode == 'resume_after_review':
         resume_after_review()

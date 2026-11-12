@@ -42,10 +42,59 @@ class RecoveryTests(unittest.TestCase):
             resume.assert_not_called()
             save.assert_not_called()
 
+    def test_blocked_circuit_stops_before_baseline_and_candidate_mutations(self):
+        with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
+                patch.object(runner.circuit, 'read', return_value=({'state':'blocked'}, 'control-sha')), \
+                patch.object(runner, 'read_state') as baseline, \
+                patch.object(runner.detection, 'main') as detect, \
+                patch.object(runner, 'save_state') as save:
+            with self.assertRaisesRegex(runner.circuit.Blocked, 'operator review'):
+                runner.run()
+            baseline.assert_not_called()
+            detect.assert_not_called()
+            save.assert_not_called()
+
+    def test_missing_circuit_prevents_baseline_read_or_sends(self):
+        with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
+                patch.object(runner.circuit, 'read', return_value=({'state':'ready'}, None)), \
+                patch.object(runner, 'read_state') as baseline, \
+                patch.object(runner.detection, 'main') as detect, \
+                patch.object(runner, 'save_state') as save:
+            with self.assertRaises(runner.circuit.Blocked):
+                runner.run()
+            baseline.assert_not_called()
+            detect.assert_not_called()
+            save.assert_not_called()
+
+    def test_armed_circuit_prevents_candidate_update(self):
+        with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
+                patch.object(runner.circuit, 'read', return_value=({'state':'armed'}, 'control-sha')), \
+                patch.object(runner, 'read_state') as baseline, \
+                patch.object(runner.detection, 'main') as detect, \
+                patch.object(runner, 'save_state') as save:
+            with self.assertRaises(runner.circuit.Blocked):
+                runner.run()
+            baseline.assert_not_called()
+            detect.assert_not_called()
+            save.assert_not_called()
+
+    def test_unavailable_circuit_fails_closed_before_candidate_update(self):
+        with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
+                patch.object(runner.circuit, 'read', side_effect=runner.circuit.Blocked('private control unavailable')), \
+                patch.object(runner, 'read_state') as baseline, \
+                patch.object(runner.detection, 'main') as detect, \
+                patch.object(runner, 'save_state') as save:
+            with self.assertRaises(runner.circuit.Blocked):
+                runner.run()
+            baseline.assert_not_called()
+            detect.assert_not_called()
+            save.assert_not_called()
+
     def test_baseline_advances_only_after_candidate_handoff(self):
         with patch.dict(os.environ, {'CP_ENABLE_LIVE_PUSH':'1','CP_ENABLE_ALL_OPTED_IN_ROLLOUT':'1'}), \
                 tempfile.TemporaryDirectory() as directory, \
                 patch.object(runner.detection, 'STATE', Path(directory)/'baseline.json'), \
+                patch.object(runner.circuit, 'read', return_value=({'state':'ready'}, 'control-sha')), \
                 patch.object(runner, 'read_state', return_value=({'ids':['a1']},'sha')), \
                 patch.object(runner.detection, 'main', side_effect=RuntimeError('storage failed')), \
                 patch.object(runner, 'save_state') as save:
