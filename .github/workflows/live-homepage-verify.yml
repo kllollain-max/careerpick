@@ -42,7 +42,7 @@ jobs:
             try{
               const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2});
               await page.goto('https://kllollain-max.github.io/careerpick/',{waitUntil:'domcontentloaded',timeout:45000});
-              await page.waitForFunction(()=>/검색 결과\\s*[1-9][\\d,]*건/.test(document.querySelector('#summary')?.textContent||''),null,{timeout:45000});
+              await page.waitForFunction(()=>/검색 결과\s*[1-9][\d,]*건/.test(document.querySelector('#summary')?.textContent||''),null,{timeout:45000});
               const result=await page.evaluate(()=>{
                 const n=performance.getEntriesByType('navigation')[0];
                 const p=performance.getEntriesByType('paint').find(x=>x.name==='first-contentful-paint');
