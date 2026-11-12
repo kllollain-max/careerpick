@@ -1,0 +1,20 @@
+name: Homepage performance regression smoke tests
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'tests/perf-feed.test.cjs'
+      - '.github/workflows/homepage-perf-smoke.yml'
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check feed concurrency and fallback contracts
+        run: node --test tests/perf-feed.test.cjs
