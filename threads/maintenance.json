@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T02:28:14Z",
-  "last_observed_at": "2026-11-13T02:28:14Z",
+  "updated_at": "2026-11-13T03:11:12Z",
+  "last_observed_at": "2026-11-13T03:11:12Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -12259,7 +12259,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-13T02:28:14Z",
+    "checked_at": "2026-11-13T03:11:12Z",
     "main_sha": "04b54b48fa6db913000d04455756b6fda313c87b",
     "history_blob_sha": "8c5f2a60a4370416d6b1718a4f732d54dff12af5",
     "claim_blob_sha": "99ecf8c4e16138d84cf00529a9c07c5bc6c0e334",
@@ -12276,24 +12276,24 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17986024908093257",
     "publisher_in_progress": false,
-    "status": "new_unstarted_regular_draft_ready_no_new_publication_or_metrics",
+    "status": "regular12_await_scheduled_publisher_ready_preserved",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
         "snapshot_at": "2026-11-13T10:22:31+09:00",
         "source_checked_at": "2026-11-13T10:23:02+09:00",
         "total_records": 931,
-        "eligible_count": 30,
-        "review_required_count": 778,
-        "excluded_count": 123,
+        "eligible_count": 28,
+        "review_required_count": 777,
+        "excluded_count": 126,
         "returned_count": 0,
         "exclusion_reasons": {
-          "APPLICATION_CLOSED": 30,
+          "APPLICATION_CLOSED": 32,
           "NOTICE_ALREADY_USED": 73,
           "APPLICATION_END_TIME_UNKNOWN": 3,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
           "SOURCE_NOTICE_UNCONFIRMED": 11,
-          "NOTICE_ALREADY_QUEUED": 3,
+          "NOTICE_ALREADY_QUEUED": 4,
           "APPLICATION_END_PRECISION_CONFLICT": 1,
           "APPLICATION_NOT_OPEN": 1
         }
@@ -12318,36 +12318,18 @@
     "actions_pages_read": 1,
     "actions_runs_read": 100,
     "actions_reported_total": 872,
-    "actions_scope": "checkpoint changes only; descending first page spans prior checkpoint",
-    "changed_runs_since_checkpoint": [
-      {
-        "run_id": "43344733949",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-13T01:25:03Z",
-        "head_sha": "434a554e33ca970060ad6378832e96567554601f",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43344733949",
-        "workflow_path": ".github/workflows/public-search-check.yml"
-      },
-      {
-        "run_id": "43344416921",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-13T01:24:48Z",
-        "head_sha": "496fd4782424023371da18a53302e5d49758d7c5",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43344416921",
-        "workflow_path": ".github/workflows/operations.yml"
-      }
-    ],
-    "audit_path": "threads/audits/single-main-v2-ready-a306760-20261113T1128.json",
+    "actions_scope": "checkpoint changes only",
+    "changed_runs_since_checkpoint": [],
+    "monitored_slot": "2026-11-13T12:00:00+09:00",
+    "monitored_slot_grace_ends": "2026-11-13T14:00:00+09:00",
+    "slot_claim_or_reservation_observed": false,
+    "audit_path": "threads/audits/monitor-v2-20261113T1211.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
-    "new_ready_saved": 1,
+    "new_ready_saved": 0,
     "new_held_drafts_saved": 0,
-    "queue_changed": true,
+    "queue_changed": false,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
       "on": true,
@@ -18411,13 +18393,10 @@
     "post_attribution": null
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-13T02:28:14Z",
+    "checked_at": "2026-11-13T03:11:12Z",
     "main_sha": "04b54b48fa6db913000d04455756b6fda313c87b",
-    "executed_archive_main_sha": "434a554e33ca970060ad6378832e96567554601f",
-    "archive_to_current_changes": [
-      "threads-images/a306760.jpg",
-      "threads-images/a306760-360.png"
-    ],
+    "executed_archive_main_sha": "04b54b48fa6db913000d04455756b6fda313c87b",
+    "archive_to_current_changes": [],
     "source_and_policy_files_unchanged_verified": true,
     "queue_blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
     "policy_hashes_verified": {
@@ -18426,13 +18405,13 @@
       "v5": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
       "intro": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
     },
-    "input_reference_at": "2026-11-13T11:23:04.050657+09:00",
-    "input_sha256": "9cd34290f65a2c8ef42016a273d76b8c671a2ebdc54de9eed3ebea7d63171680",
+    "input_reference_at": "2026-11-13T12:10:15.287431+09:00",
+    "input_sha256": "d42005d2fe185f327b8470ca2c04288a2e10c8ee010aee8916526f32c3a19eca",
     "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-13T11:23:04.050657+09:00",
+      "evaluated_at": "2026-11-13T12:10:15.287431+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18445,17 +18424,17 @@
           "snapshot_at": "2026-11-13T10:22:31+09:00",
           "source_checked_at": "2026-11-13T10:23:02+09:00",
           "total_records": 931,
-          "eligible_count": 30,
-          "review_required_count": 778,
-          "excluded_count": 123,
+          "eligible_count": 28,
+          "review_required_count": 777,
+          "excluded_count": 126,
           "returned_count": 0,
           "exclusion_reasons": {
-            "APPLICATION_CLOSED": 30,
+            "APPLICATION_CLOSED": 32,
             "NOTICE_ALREADY_USED": 73,
             "APPLICATION_END_TIME_UNKNOWN": 3,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
             "SOURCE_NOTICE_UNCONFIRMED": 11,
-            "NOTICE_ALREADY_QUEUED": 3,
+            "NOTICE_ALREADY_QUEUED": 4,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
             "APPLICATION_NOT_OPEN": 1
           }
@@ -18478,10 +18457,10 @@
         }
       },
       "total_scanned": 1466,
-      "eligible_before_limit": 290,
+      "eligible_before_limit": 288,
       "writer_limit": 24,
       "returned_count": 24,
-      "unconfirmed_unit_counts": 290,
+      "unconfirmed_unit_counts": 288,
       "interest_ranking": "unavailable_not_used",
       "audience_breadth_ranking": "unavailable_not_used",
       "sector_policy": {
@@ -18492,7 +18471,7 @@
         "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
       },
       "sector_counts_before_limit": {
-        "neutral": 192,
+        "neutral": 190,
         "deprioritized": 77,
         "preferred": 21
       },
@@ -18510,7 +18489,7 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_rows_sha256": "c0f2e27ad98506a18ab6c168d1d7d3774ff47ca5ebab765bc10658a7ad199dac",
+    "selection_rows_sha256": "66c0051995a2721665911117d5553e51c5cb0f8323a17e043fec697c8dbf9dc1",
     "queue_check_status": "validated",
     "ready_entries": [
       {
@@ -18550,14 +18529,14 @@
         "card_check": "exact_reviewed_assets_and_full_pixels_verified"
       }
     ],
-    "new_ready_saved": 1,
+    "new_ready_saved": 0,
     "new_held_drafts_saved": 0,
     "all_prior_queue_entries_preserved": true,
     "official_source_rechecks": [
       {
         "notice_id": "a306848",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306848",
-        "checked_at": "2026-11-13T11:27:23.260423+09:00",
+        "checked_at": "2026-11-13T12:10:16.171327+09:00",
         "status": 200,
         "sha256": "3d286f76bcb8aaef6ba8410eb8df5c6cbe7d398855385846fc474190b733f498",
         "same_bytes": true
@@ -18565,7 +18544,7 @@
       {
         "notice_id": "a306908",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306908",
-        "checked_at": "2026-11-13T11:27:23.260768+09:00",
+        "checked_at": "2026-11-13T12:10:16.171841+09:00",
         "status": 200,
         "sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048",
         "same_bytes": true
@@ -18573,13 +18552,21 @@
       {
         "notice_id": "a306717",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306717",
-        "checked_at": "2026-11-13T11:27:23.261175+09:00",
+        "checked_at": "2026-11-13T12:10:16.172385+09:00",
         "status": 200,
         "sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
         "same_bytes": true
+      },
+      {
+        "notice_id": "a306760",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
+        "checked_at": "2026-11-13T12:10:16.172701+09:00",
+        "status": 200,
+        "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
+        "same_bytes": true
       }
     ],
-    "audit_path": "threads/audits/single-main-v2-ready-a306760-20261113T1128.json"
+    "audit_path": "threads/audits/monitor-v2-20261113T1211.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19107,22 +19094,23 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-13T02:28:14Z",
-      "status": "new_unstarted_regular_draft_ready_no_new_publication_or_metrics",
+      "checked_at": "2026-11-13T03:11:12Z",
+      "status": "regular12_await_scheduled_publisher_ready_preserved",
       "new_publications": 0,
       "last_post_id": "17986024908093257",
       "ready_entries": 4,
       "next_slot": "2026-11-13T12:00:00+09:00",
+      "next_slot_status": "not_started_at_observation_within_existing_grace",
       "next_media": "IMAGE",
-      "new_drafts": 1,
-      "new_ready_saved": 1,
+      "new_drafts": 0,
+      "new_ready_saved": 0,
       "new_held_drafts": 0,
-      "queue_changed": true,
+      "queue_changed": false,
       "text_verified": true,
       "image_verified": true,
-      "performance24h": "prior_first_observation_unchanged",
+      "performance24h": "one_prior_v2_observation_no_new_measurement",
       "performance72h": "not_due",
-      "audit_path": "threads/audits/single-main-v2-ready-a306760-20261113T1128.json"
+      "audit_path": "threads/audits/monitor-v2-20261113T1211.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -19356,12 +19344,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-13T02:28:14Z",
+    "checked_at": "2026-11-13T03:11:12Z",
     "state_blob_sha": "a2a736b0040a165ee0be103c690071cf5248452b",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T02:23:04.739951+00:00",
+      "as_of": "2026-11-13T03:10:15.913677+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19576,7 +19564,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T02:23:04.739951+00:00",
+            "requested_end": "2026-11-13T03:10:15.913677+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-12T23:29:36.695126+00:00",
             "start_followers": 415,
@@ -19597,7 +19585,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T02:23:04.739951+00:00",
+        "requested_end": "2026-11-13T03:10:15.913677+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T23:29:36.695126+00:00",
         "start_followers": 415,
