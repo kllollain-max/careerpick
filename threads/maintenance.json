@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T04:35:32.010602+00:00",
-  "last_observed_at": "2026-11-13T04:35:32.010602+00:00",
+  "updated_at": "2026-11-13T06:32:41.092220+00:00",
+  "last_observed_at": "2026-11-13T06:32:41.092220+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -12356,7 +12356,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-13T04:35:32.010602+00:00",
+    "checked_at": "2026-11-13T06:32:41.092220+00:00",
     "main_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
     "history_blob_sha": "a59e87fcf6e1078b73ba82b133432e9996e76963",
     "claim_blob_sha": "e2afdc01b42c596d96c8e6bfdf1150f31a850e13",
@@ -12373,7 +12373,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18150019906492861",
     "publisher_in_progress": false,
-    "status": "no_new_publication_next16_ready_held_portal_integrity_block",
+    "status": "regular16_not_due_ready_preserved_no_new_results",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12421,7 +12421,7 @@
     "monitored_slot": "2026-11-13T16:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-13T18:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T1336.json",
+    "audit_path": "threads/audits/monitor-v2-20261113T1533.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -12432,9 +12432,8 @@
       "id": "6ae092084b988191a23a38300212ebdc",
       "on": true,
       "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261030T210000\nRRULE:FREQ=HOURLY\nEND:VEVENT",
-      "environment_selection": "inherited",
-      "environments": null,
-      "report_conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07"
+      "conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07",
+      "environment_selection": "inherited"
     },
     "new_comparable_24h_observations": 0,
     "new_late_cumulative_observations": 0
@@ -18897,7 +18896,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1323.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-13T04:35:32.010602+00:00",
+    "checked_at": "2026-11-13T06:32:41.092220+00:00",
     "main_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -18909,7 +18908,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-13T13:33:09.096670+09:00",
+      "evaluated_at": "2026-11-13T15:31:09.180965+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18988,7 +18987,7 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_audit_sha256": "da9a11dc95221a93eefb403274d4bea7e460f5f959f163ab0f280fb6cdbd1a9d",
+    "selection_audit_sha256": "34b5153552f5befb1ef2824e3424c1f65863fb88993d7822dc297d0aecce0588",
     "queue_check": {
       "status": "validated",
       "ready_entries": [
@@ -19060,28 +19059,48 @@
       {
         "notice_id": "a306908",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306908",
-        "checked_at": "2026-11-13T13:34:33.977502+09:00",
+        "checked_at": "2026-11-13T15:31:40.506818+09:00",
         "sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048",
+        "bytes": 10561,
+        "status": "opened",
         "same_as_reviewed": true
       },
       {
         "notice_id": "a306717",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306717",
-        "checked_at": "2026-11-13T13:34:33.978071+09:00",
+        "checked_at": "2026-11-13T15:31:40.507455+09:00",
         "sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
+        "bytes": 14473,
+        "status": "opened",
         "same_as_reviewed": true
       },
       {
         "notice_id": "a306760",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
-        "checked_at": "2026-11-13T13:34:33.978645+09:00",
+        "checked_at": "2026-11-13T15:31:40.508091+09:00",
         "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
+        "bytes": 11127,
+        "status": "opened",
         "same_as_reviewed": true
+      },
+      {
+        "notice_id": "cleaneye-80792",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80792",
+        "checked_at": "2026-11-13T15:31:40.508515+09:00",
+        "status": "failed",
+        "error": "HTTP Error 503: Service Unavailable"
+      },
+      {
+        "notice_id": "cleaneye-80812",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80812",
+        "checked_at": "2026-11-13T15:31:40.508978+09:00",
+        "status": "failed",
+        "error": "HTTP Error 503: Service Unavailable"
       }
     ],
     "new_held_draft_notice_id": "a306744",
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T1336.json"
+    "audit_path": "threads/audits/monitor-v2-20261113T1533.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19630,7 +19649,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-13T04:35:32.010602+00:00",
+      "checked_at": "2026-11-13T06:32:41.092220+00:00",
       "main_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
       "history_blob_sha": "a59e87fcf6e1078b73ba82b133432e9996e76963",
       "claim_blob_sha": "e2afdc01b42c596d96c8e6bfdf1150f31a850e13",
@@ -19647,7 +19666,7 @@
       "new_publisher_runs": [],
       "last_confirmed_post_id": "18150019906492861",
       "publisher_in_progress": false,
-      "status": "no_new_publication_next16_ready_held_portal_integrity_block",
+      "status": "regular16_not_due_ready_preserved_no_new_results",
       "source_collection": {
         "alio": {
           "status": "verified_snapshot",
@@ -19695,7 +19714,7 @@
       "monitored_slot": "2026-11-13T16:00:00+09:00",
       "monitored_slot_grace_ends": "2026-11-13T18:00:00+09:00",
       "slot_claim_or_reservation_observed": false,
-      "audit_path": "threads/audits/monitor-v2-20261113T1336.json",
+      "audit_path": "threads/audits/monitor-v2-20261113T1533.json",
       "new_failure_fingerprints": [],
       "new_metric_observations": 0,
       "new_account_observations": 0,
@@ -19706,9 +19725,8 @@
         "id": "6ae092084b988191a23a38300212ebdc",
         "on": true,
         "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261030T210000\nRRULE:FREQ=HOURLY\nEND:VEVENT",
-        "environment_selection": "inherited",
-        "environments": null,
-        "report_conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07"
+        "conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07",
+        "environment_selection": "inherited"
       },
       "new_comparable_24h_observations": 0,
       "new_late_cumulative_observations": 0
@@ -20018,12 +20036,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-13T04:35:32.010602+00:00",
+    "checked_at": "2026-11-13T06:32:41.092220+00:00",
     "state_blob_sha": "e2376edda48f1b4bbf1eeeedf90569b15e01dfce",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T04:33:10.708974+00:00",
+      "as_of": "2026-11-13T06:31:09.159132+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20147,7 +20165,9 @@
             "location": "순천병원",
             "employment": "정규직",
             "recruitment_unit_count": 3,
-            "deadline_distance_seconds": 420281.644869
+            "deadline_distance_seconds": 420281.644869,
+            "observed_at": "2026-11-12T11:48:45.499723+00:00",
+            "elapsed_hours": 24.057540164444443
           },
           {
             "post_id": "17918731521553015",
@@ -20188,7 +20208,9 @@
             "location": "충북",
             "employment": "정규직",
             "recruitment_unit_count": 1,
-            "deadline_distance_seconds": 1041399.2229
+            "deadline_distance_seconds": 1041399.2229,
+            "observed_at": "2026-11-13T03:44:34.481774+00:00",
+            "elapsed_hours": 24.020473520555555
           }
         ],
         "72h": []
@@ -20233,7 +20255,9 @@
           "location": "경기도의료원 안성병원",
           "employment": "정규직",
           "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 616838.216119
+          "deadline_distance_seconds": 616838.216119,
+          "observed_at": "2026-11-13T03:44:35.209864+00:00",
+          "elapsed_hours": 28.087062773055553
         }
       ],
       "excluded": {
@@ -20377,7 +20401,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T04:33:10.708974+00:00",
+            "requested_end": "2026-11-13T06:31:09.159132+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T03:44:35.539579+00:00",
             "start_followers": 415,
@@ -20398,7 +20422,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T04:33:10.708974+00:00",
+        "requested_end": "2026-11-13T06:31:09.159132+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T03:44:35.539579+00:00",
         "start_followers": 415,
@@ -20476,8 +20500,7 @@
         "recruitment_unit_count": 3,
         "deadline_distance_seconds": 420281.644869,
         "observed_at": "2026-11-12T11:48:45.499723+00:00",
-        "elapsed_hours": 24.057540164444443,
-        "timing": "within_one_hour"
+        "elapsed_hours": 24.057540164444443
       },
       {
         "post_id": "17918731521553015",
@@ -20520,8 +20543,7 @@
         "recruitment_unit_count": 1,
         "deadline_distance_seconds": 1041399.2229,
         "observed_at": "2026-11-13T03:44:34.481774+00:00",
-        "elapsed_hours": 24.020473520555555,
-        "timing": "within_one_hour"
+        "elapsed_hours": 24.020473520555555
       },
       {
         "post_id": "17938804020400505",
@@ -20564,8 +20586,7 @@
         "recruitment_unit_count": 1,
         "deadline_distance_seconds": 616838.216119,
         "observed_at": "2026-11-13T03:44:35.209864+00:00",
-        "elapsed_hours": 28.087062773055553,
-        "timing": "late_cumulative"
+        "elapsed_hours": 28.087062773055553
       }
     ],
     "new_comparable_24h_observations": 0,
