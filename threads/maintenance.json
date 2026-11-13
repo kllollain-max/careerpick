@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T18:35:33.261350+00:00",
-  "last_observed_at": "2026-11-13T18:35:33.261350+00:00",
+  "updated_at": "2026-11-13T20:28:06.205066+00:00",
+  "last_observed_at": "2026-11-13T20:28:06.205066+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8822,6 +8822,26 @@
       "head_sha": "28b231f4cc410397f8a041b0e11b4a03f799ee1b",
       "workflow_path": ".github/workflows/operations.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43458029650"
+    },
+    {
+      "run_id": "43489429859",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T19:09:12Z",
+      "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+      "workflow_path": ".github/workflows/public-search-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43489429859"
+    },
+    {
+      "run_id": "43489021069",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T19:08:56Z",
+      "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43489021069"
     }
   ],
   "last_confirmed_publication": {
@@ -12394,7 +12414,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-13T18:35:33.261350+00:00",
+    "checked_at": "2026-11-13T20:28:06.205066+00:00",
     "main_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
     "history_blob_sha": "08f8c9ffa003998872fdf1b319a04104f9e43a82",
     "claim_blob_sha": "7acf58a25f402c3cfab896b1a33b1808bd3d508b",
@@ -12411,7 +12431,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17922530685243848",
     "publisher_in_progress": false,
-    "status": "no_new_result_next08_text_ready_preserved",
+    "status": "next08_text_ready_new_unassigned_a306915_hold_saved",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12451,18 +12471,39 @@
     },
     "actions_pages_read": 1,
     "actions_runs_read": 100,
-    "actions_reported_total": 885,
+    "actions_reported_total": 887,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43489429859",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T19:09:12Z",
+        "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43489429859"
+      },
+      {
+        "run_id": "43489021069",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T19:08:56Z",
+        "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43489021069"
+      }
+    ],
     "monitored_slot": "2026-11-14T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T033533.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T052806.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
     "new_ready_saved": 0,
-    "new_held_drafts_saved": 0,
+    "new_held_drafts_saved": 1,
     "queue_changed": false,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
@@ -12473,7 +12514,7 @@
     },
     "new_comparable_24h_observations": 0,
     "new_late_cumulative_observations": 0,
-    "new_candidate_fact_reviews": 0
+    "new_candidate_fact_reviews": 1
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -18938,7 +18979,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-13T18:35:33.261350+00:00",
+    "checked_at": "2026-11-13T20:28:06.205066+00:00",
     "main_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -18950,7 +18991,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T03:34:26.972368+09:00",
+      "evaluated_at": "2026-11-14T05:25:45.212631+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19027,7 +19068,7 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_audit_sha256": "0f42a9be99d11ea50146cf1259208a7807d3e4837e205f2c5f09cc66a09f696d",
+    "selection_audit_sha256": "1c6fbebb2fa4e81c013604476408c859a7ed6bcf9572f3d37b97eb6fc3f25e04",
     "queue_check": {
       "status": "validated",
       "ready_entries": [
@@ -19062,7 +19103,7 @@
           "pixel_verification": "passed",
           "layout_version": "careerpick-single-main-card-v2",
           "asset_path": "threads-images/a306760.jpg",
-          "local_path": "/workspace/scratch/697589ed75d9/threads-0333.1_6s04lh/careerpick-7d022a95cf5dc6c2d6e48af418118e6468c596a0/threads-images/a306760.jpg",
+          "local_path": "/workspace/scratch/697589ed75d9/threads-0525.9udldzdz/careerpick-7d022a95cf5dc6c2d6e48af418118e6468c596a0/threads-images/a306760.jpg",
           "sha256": "c333196b2d4e769e2dcb5d58b11441ca4b248d1a65a0a2ca27915fcae5de3f59",
           "facts_sha256": "ed411d3e1eaac24ed7a76db9f5fb1242032e061a36392427656aaec2701069b9",
           "preview_asset_path": "threads-images/a306760-360.png",
@@ -19078,20 +19119,77 @@
       {
         "notice_id": "a306760",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
-        "checked_at": "2026-11-13T18:34:53.905586+00:00",
+        "checked_at": "2026-11-13T20:26:02.889488+00:00",
         "status": 200,
         "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
         "bytes": 11127
+      },
+      {
+        "notice_id": "a306915",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306915",
+        "checked_at": "2026-11-13T20:26:02.889992+00:00",
+        "status": 200,
+        "sha256": "2606b983d2a3886b1856a297d7901c350d97237fb460ed1bbaf66858dfe30073",
+        "bytes": 10728
+      },
+      {
+        "notice_id": "a306915-pdf",
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086606",
+        "checked_at": "2026-11-13T20:26:02.890523+00:00",
+        "status": 200,
+        "sha256": "494bd30b13e3353bde62fbee9d0b547c46b3e0d2e81fdfd40d5607d02bf3ccea",
+        "bytes": 401523
+      },
+      {
+        "notice_id": "a306915-ats",
+        "url": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=272137",
+        "checked_at": "2026-11-13T20:26:02.891463+00:00",
+        "status": 200,
+        "sha256": "5d83e8be4219a19f74ac1f1e8511fddc5ddef7d2194737569b02a93b8f91f157",
+        "bytes": 66274
       }
     ],
-    "new_held_draft_notice_id": null,
+    "new_held_draft_notice_id": "a306915",
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T033533.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T052806.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-13T18:35:33.261350+00:00",
-      "checks": [],
-      "action": "No unnecessary repeat of recently failing Cleaneye/KIOST endpoints or rejected CareerPick profile destination; no bypass, no new external failure claimed. No fresh authenticated Threads GET capability added.",
-      "audit_path": "threads/audits/monitor-v2-20261114T033533.json"
+      "checked_at": "2026-11-13T20:28:06.205066+00:00",
+      "checks": [
+        {
+          "notice_id": "a306760",
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
+          "checked_at": "2026-11-13T20:26:02.889488+00:00",
+          "status": 200,
+          "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
+          "bytes": 11127
+        },
+        {
+          "notice_id": "a306915",
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306915",
+          "checked_at": "2026-11-13T20:26:02.889992+00:00",
+          "status": 200,
+          "sha256": "2606b983d2a3886b1856a297d7901c350d97237fb460ed1bbaf66858dfe30073",
+          "bytes": 10728
+        },
+        {
+          "notice_id": "a306915-pdf",
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3086606",
+          "checked_at": "2026-11-13T20:26:02.890523+00:00",
+          "status": 200,
+          "sha256": "494bd30b13e3353bde62fbee9d0b547c46b3e0d2e81fdfd40d5607d02bf3ccea",
+          "bytes": 401523
+        },
+        {
+          "notice_id": "a306915-ats",
+          "url": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=272137",
+          "checked_at": "2026-11-13T20:26:02.891463+00:00",
+          "status": 200,
+          "sha256": "5d83e8be4219a19f74ac1f1e8511fddc5ddef7d2194737569b02a93b8f91f157",
+          "bytes": 66274
+        }
+      ],
+      "action": "Official ALIO/PDF/individualATS bounded reads; no failed provider or denied profile destination retried/bypassed. No artwork generated for unassigned draft.",
+      "audit_path": "threads/audits/monitor-v2-20261114T052806.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": []
@@ -19621,7 +19719,7 @@
       "post_id": "17938804020400505",
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
-    "latest_hourly_check": "2026-11-13T18:35:33.261350+00:00",
+    "latest_hourly_check": "2026-11-13T20:28:06.205066+00:00",
     "next_slot_official_preflight": {
       "checked_at": "2026-11-13T12:23:47.639571+00:00",
       "notice_id": "a306760",
@@ -19881,12 +19979,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-13T18:35:33.261350+00:00",
+    "checked_at": "2026-11-13T20:28:06.205066+00:00",
     "state_blob_sha": "4dc037c2d877f2fb7f6f2fef5e5a763ac5d8d201",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T18:34:27.017090+00:00",
+      "as_of": "2026-11-13T20:25:45.303482+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20240,7 +20338,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T18:34:27.017090+00:00",
+            "requested_end": "2026-11-13T20:25:45.303482+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T11:46:13.590462+00:00",
             "start_followers": 415,
@@ -20261,7 +20359,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T18:34:27.017090+00:00",
+        "requested_end": "2026-11-13T20:25:45.303482+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T11:46:13.590462+00:00",
         "start_followers": 415,
@@ -21119,6 +21217,18 @@
         "ready": false,
         "assigned_slot": null,
         "audit_path": "threads/audits/monitor-v2-20261114T024833.json"
+      },
+      "latest_held_draft": {
+        "checked_at": "2026-11-13T20:28:06.205066+00:00",
+        "body_sha256": "2200114e7d726ca2051394c98084c6b26507875b003d8808240c5a24b03ddce6",
+        "chars": 298,
+        "status": "held_unassigned",
+        "hold_reasons": [
+          "정년 기준연령의 숫자와 최신 정정 확인범위 미완료",
+          "최종 profile_target 확인 제한 보존; 접근 재시도/우회 안함",
+          "슬롯 미배정·카드 미제작·큐 미등록·최종검수 통과 미선언"
+        ],
+        "audit_path": "threads/audits/monitor-v2-20261114T052806.json"
       }
     }
   },
@@ -21812,6 +21922,210 @@
       },
       "audit_path": "threads/audits/monitor-v2-20261113T215134.json",
       "audit_blob_sha": "e17dd0e904d3ccc58f078addfb547c1c6160a06d"
+    },
+    "a306915": {
+      "notice_id": "a306915",
+      "status": "held_unassigned",
+      "prepared_at": "2026-11-13T20:28:06.205066+00:00",
+      "assigned_slot": null,
+      "post_text": "응급의료 정책·연구에 참여할 의사분께,\n국립중앙의료원 의사직 정규직 1명 공고예요.\n\n의사 면허와 응급의학과·내과·외과·소아청소년과 중 하나의 전문의 자격, 전문의 취득 후 1년 이상 경력이 모두 필요해요.\n\n서울 근무이며 최초 3년 계약이에요.\n이후 3년마다 재계약 심사 결과 계약이 끝날 수 있어요.\n마감일 정년·남자 병역(전역예정 인정 포함)·결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 미응시·기간 내 미완료 시 탈락해요.\n11월 23일 10:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "reply_texts": [],
+      "chars": 298,
+      "body_sha256": "2200114e7d726ca2051394c98084c6b26507875b003d8808240c5a24b03ddce6",
+      "publication_policy_id": "careerpick-threads-v5-20261111",
+      "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "source_refs": {
+        "official_alio": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306915",
+          "checked_at": "2026-11-13T20:26:02.889992+00:00",
+          "sha256": "2606b983d2a3886b1856a297d7901c350d97237fb460ed1bbaf66858dfe30073"
+        },
+        "official_pdf": {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3086606",
+          "checked_at": "2026-11-13T20:26:02.890523+00:00",
+          "sha256": "494bd30b13e3353bde62fbee9d0b547c46b3e0d2e81fdfd40d5607d02bf3ccea"
+        },
+        "official_ats": {
+          "url": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=272137",
+          "checked_at": "2026-11-13T20:26:02.891463+00:00",
+          "sha256": "5d83e8be4219a19f74ac1f1e8511fddc5ddef7d2194737569b02a93b8f91f157"
+        }
+      },
+      "fact_evidence": {
+        "title": {
+          "source_ref": "official_pdf",
+          "excerpt": "응급의료 정책기획팀 1명 [필수] 아래 사항을 모두 충족하는 자 (의사직 2~3급) 응시 - 의사 면허 및 응급의학과 또는 내과 또는 외과 또는 자격 소아청소년과 전문의 자격 소지자 - 전문의 자격 취득 후 1년 이상 경력자 2. 보수 및 근무조건 ○ 보수: 내규에 따름 ○ 근무형태: 내규에 따"
+        },
+        "count": {
+          "source_ref": "official_pdf",
+          "excerpt": "응급의료 정책기획팀 1명 [필수] 아래 사항을 모두 충족하는 자 (의사직 2~3급) 응시 - 의사 면허 및 응급의학과 또는 내과 또는 외과 또는 자격 소아청소년과 전문의 자격 소지자 - 전문의 자격 취득 후 1년 이상 경력자 2. 보수 및 근무조건 ○ 보수: 내규에 따름 ○ 근무형태: 내규에 따"
+        },
+        "employment": {
+          "source_ref": "official_pdf",
+          "excerpt": "의사직(정규직)의 경우 최초 임용계약은 3년이며, 매 3년마다 재계약 임용 심사 결과에 따라 계약이 종료될 수 있음 3. 접수방법 ○ 원서 접수 기간: ’26. 11. 11.(수) ~ ’2"
+        },
+        "location": {
+          "source_ref": "official_alio",
+          "excerpt": "근무지 서울"
+        }
+      },
+      "review": {
+        "v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": false,
+          "fact_consistency_check": "hold_pending_remaining_checks",
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "응급의료 정책·연구에 참여할 의사분께,\n국립중앙의료원 의사직 정규직 1명 공고예요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "해당 전문의 자격과 취득 후 경력 1년이 있다면,\n국립중앙의료원 응급의료 정책·연구 의사직 공고예요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "응급의료 정책과 연구를 맡는 자리예요.\n국립중앙의료원에서 의사직 정규직 1명을 모집해요."
+            }
+          ],
+          "selected_hook_id": "target",
+          "first_sentence_type": "target",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true,
+            "comparison": "대상형은 정책·연구 직무를 처음에 명시; 조건형은 면허·경력 전체를 도입에 담기 길어 본문에서 논리 보존; 직무형은 독자대상 약함"
+          },
+          "recruitment_unit": {
+            "title": "의사직(응급의료정책기획팀)",
+            "count": 1,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "official_pdf",
+            "excerpt": "응급의료 정책기획팀 1명 [필수] 아래 사항을 모두 충족하는 자 (의사직 2~3급) 응시 - 의사 면허 및 응급의학과 또는 내과 또는 외과 또는 자격 소아청소년과 전문의 자격 소지자 - 전문의 자격 취득 후 1년 이상 경력자 2. 보수 및 근무조건 ○ 보수: 내규에 따름 ○ 근무형태: 내규에 따"
+          },
+          "key_restrictions": [
+            {
+              "text": "의사 면허와 응급의학과·내과·외과·소아청소년과 중 하나의 전문의 자격, 전문의 취득 후 1년 이상 경력이 모두 필요해요.",
+              "source_ref": "official_pdf",
+              "excerpt": "[필수] 아래 사항을 모두 충족하는 자 (의사직 2~3급) 응시 - 의사 면허 및 응급의학과 또는 내과 또는 외과 또는 자격 소아청소년과 전문의 자격 소지자 - 전문의 자격 취득 후 1년 이상 경력자 2. 보수 및 근무조건 ○ 보수: 내규에 따름 ○ 근무형태: 내규에 따름 ○ 의사직(정규직)의 경우 최초 임용계약은 3년이",
+              "classification": "required",
+              "logic": "all_of",
+              "paths": [
+                {
+                  "summary": "의사 면허",
+                  "source_ref": "official_pdf",
+                  "excerpt": "[필수] 아래 사항을 모두 충족하는 자 (의사직 2~3급) 응시 - 의사 면허 및 응급의학과 또는 내과 또는 외과 또는 자격 소아청소년과 전문의 자격 소지자 - 전문의 자격 취득 후 1년 이상 경력자 2. 보수 및 근무조건 ○ 보수: 내규에 따름 ○ 근무형태: 내규에 따름 ○ 의사직(정규직)의 경우 최초 임용계약은 3년이"
+                },
+                {
+                  "summary": "전문의 자격은 응급의학과 또는 내과 또는 외과 또는 소아청소년과 중 하나",
+                  "source_ref": "official_pdf",
+                  "excerpt": "[필수] 아래 사항을 모두 충족하는 자 (의사직 2~3급) 응시 - 의사 면허 및 응급의학과 또는 내과 또는 외과 또는 자격 소아청소년과 전문의 자격 소지자 - 전문의 자격 취득 후 1년 이상 경력자 2. 보수 및 근무조건 ○ 보수: 내규에 따름 ○ 근무형태: 내규에 따름 ○ 의사직(정규직)의 경우 최초 임용계약은 3년이"
+                },
+                {
+                  "summary": "전문의 자격 취득 후 1년 이상 경력",
+                  "source_ref": "official_pdf",
+                  "excerpt": "[필수] 아래 사항을 모두 충족하는 자 (의사직 2~3급) 응시 - 의사 면허 및 응급의학과 또는 내과 또는 외과 또는 자격 소아청소년과 전문의 자격 소지자 - 전문의 자격 취득 후 1년 이상 경력자 2. 보수 및 근무조건 ○ 보수: 내규에 따름 ○ 근무형태: 내규에 따름 ○ 의사직(정규직)의 경우 최초 임용계약은 3년이"
+                }
+              ]
+            },
+            {
+              "text": "이후 3년마다 재계약 심사 결과 계약이 끝날 수 있어요.",
+              "source_ref": "official_pdf",
+              "excerpt": "의사직(정규직)의 경우 최초 임용계약은 3년이며, 매 3년마다 재계약 임용 심사 결과에 따라 계약이 종료될 수 있음 3. 접수방법 ○ 원서 접수 기간: ’26. 11. 11.(수) ~ ’2",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "마감일 정년·남자 병역(전역예정 인정 포함)·결격·지정일 입사 조건도 확인해요.",
+              "source_ref": "official_pdf",
+              "excerpt": "정규직, 무기계약직 등 정년이 정해져 있는 분야의 경우, 공고마감일 기준 정년퇴직 기준연령에 도달한 자는 지원할 수 없습니다. ○ 남자인 경우, 공고마감일 기준 병역필 또는 면제자만 지원할 수 있습니다. (단, 임용예정일에 근무 가능한 전역예정자는 응시 가능) ○ 논술 및 면접전형에 응시할 경우, 신분증(주민등록증, 유효기간 내 여권, 운전 면허증, 주민등록증발급확인서, 장애인복지카드, 국가유공자증, 정부 24 모바일 신분증, 모바일 운전면허증)을 소지하고 오시기 바랍니다. ▪ 상기 종류 외는 신분증으로 인정하지 않으며, 신분증 미소지 시 응시 불가 ▪ 사진으로 촬영한 신분증은 인정하지 않음 7. 기타 참고사항 ○ 본인",
+              "classification": "required",
+              "logic": "all_of",
+              "paths": [
+                {
+                  "summary": "공고마감일 정년퇴직 기준연령 미도달; 숫자 미확인",
+                  "source_ref": "official_pdf",
+                  "excerpt": "정규직, 무기계약직 등 정년이 정해져 있는 분야의 경우, 공고마감일 기준 정년퇴직 기준연령에 도달한 자는 지원할 수 없습니다. ○ 남자인 경우, 공고마감일 기준 병역필 또는 면제자만 지원할 수 있습니다. (단, 임용예정일에 "
+                },
+                {
+                  "summary": "남자는 마감일 병역필 또는 면제; 임용예정일 근무가능 전역예정 인정",
+                  "source_ref": "official_pdf",
+                  "excerpt": "남자인 경우, 공고마감일 기준 병역필 또는 면제자만 지원할 수 있습니다. (단, 임용예정일에 근무 가능한 전역예정자는 응시 가능) ○ 논술 및 면접전형에 응시할 경우, 신분증(주민등록증, 유효기간 내 여권, 운전 면허증, 주민등록증발급확인서, 장애인복지카드, 국가유공자증, 정부"
+                },
+                {
+                  "summary": "지정일 입사 및 결격 제한",
+                  "source_ref": "official_pdf",
+                  "excerpt": "최종합격자는 합격통보 시 지정된 일자까지 최종합격자 등록서류 제출을 완료해야 하며, 지정받은 임용예정일에 입사 불가능한 경우 합격이 취소될 수 있습니다. ▪ 채용 신체검사는 국민건강보험공단에서 발행하는 ‘채용 건강검진 대체 통보서’로 갈음하며, 채용 신체검사 비용은 의료원이 부담합니다. ○ 임용예정 직위에 대하여 지원자가"
+                }
+              ]
+            },
+            {
+              "text": "중복지원은 안 돼요.",
+              "source_ref": "official_pdf",
+              "excerpt": "현재 우리원에서 채용전형이 진행 중(공고 ~ 최종합격자 임용)인 모든 채용공고에 대한 중복지원은 불가합니다. ▪ 중복지원이 발생할 시 입사지원서 접수 마감일 또는 상기의 채용공고 게시 순서가 후순위(최신)인 공고 외의 응시사항은 응시",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "인성검사는 미응시·기간 내 미완료 시 탈락해요.",
+              "source_ref": "official_pdf",
+              "excerpt": "통합역량검사(인성검사) 미응시 또는 기간 내 미완료한 경우 면접참여 의사가 없는 것으로 간주하여 자동 불합격 처리합니다. 5. 제출 서류 (면접시 제출함) ○ 나열된 순서대로 봉투에 넣고,",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "인성검사는 미응시·기간 내 미완료 시 탈락해요.",
+            "source_ref": "official_pdf",
+            "excerpt": "통합역량검사(인성검사) 미응시 또는 기간 내 미완료한 경우 면접참여 의사가 없는 것으로 간주하여 자동 불합격 처리합니다. 5. 제출 서류 (면접시 제출함) ○ 나열된 순서대로 봉투에 넣고,"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-13T20:26:02.891463+00:00",
+            "result": "incomplete",
+            "source_ref": "official_ats",
+            "scope": "ALIO 현재 개별공고·공식PDF·개별ATS 확인; 전기관 정정 게시판 전체 미확인",
+            "limitation": "정정 없음으로 단정하지 않음; 정년 기준연령 숫자 추가 공식 확인 필요"
+          },
+          "style_rewrites": 1,
+          "selection_reason": "정규직 단일모집1명·정책연구 직무·11월23일까지 준비기간 확인; 독자직무/지역 인기도 추정 없음. 다음슬롯 배정은 보류",
+          "presentation_style": "regular_interest",
+          "public_preview": {
+            "main_text": "응급의료 정책·연구에 참여할 의사분께,\n국립중앙의료원 의사직 정규직 1명 공고예요.\n\n의사 면허와 응급의학과·내과·외과·소아청소년과 중 하나의 전문의 자격, 전문의 취득 후 1년 이상 경력이 모두 필요해요.\n\n서울 근무이며 최초 3년 계약이에요.\n이후 3년마다 재계약 심사 결과 계약이 끝날 수 있어요.\n마감일 정년·남자 병역(전역예정 인정 포함)·결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 미응시·기간 내 미완료 시 탈락해요.\n11월 23일 10:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "comparison_context": {
+            "job": "응급의료 정책·연구",
+            "location": "서울",
+            "recruitment_unit_count": 1,
+            "media": null,
+            "views": null,
+            "followers": null
+          },
+          "experiment_eligible": false,
+          "experiment_hold_reason": "unassigned held draft; no publication or experiment allocation",
+          "card_visual_review": null
+        }
+      },
+      "hold_reasons": [
+        "정년 기준연령의 숫자와 최신 정정 확인범위 미완료",
+        "최종 profile_target 확인 제한 보존; 접근 재시도/우회 안함",
+        "슬롯 미배정·카드 미제작·큐 미등록·최종검수 통과 미선언"
+      ],
+      "public_shape_check": {
+        "single_main": true,
+        "reply_count": 0,
+        "cta_count": 1,
+        "cta_final": true,
+        "chars": 298,
+        "url_or_tag": false,
+        "final_queue_validation": "not_applicable_held_unassigned"
+      },
+      "audit_path": "threads/audits/monitor-v2-20261114T052806.json"
     }
   }
 }
