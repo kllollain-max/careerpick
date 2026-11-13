@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T06:32:41.092220+00:00",
-  "last_observed_at": "2026-11-13T06:32:41.092220+00:00",
+  "updated_at": "2026-11-13T07:36:27.941512+00:00",
+  "last_observed_at": "2026-11-13T07:36:27.941512+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8731,6 +8731,26 @@
       "head_sha": "04b54b48fa6db913000d04455756b6fda313c87b",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43360836060",
       "workflow_path": ".github/workflows/threads_auto.yml"
+    },
+    {
+      "run_id": "43386458022",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T07:32:33Z",
+      "head_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43386458022",
+      "workflow_path": ".github/workflows/public-search-check.yml"
+    },
+    {
+      "run_id": "43386066908",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T07:32:16Z",
+      "head_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43386066908",
+      "workflow_path": ".github/workflows/operations.yml"
     }
   ],
   "last_confirmed_publication": {
@@ -12356,8 +12376,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-13T06:32:41.092220+00:00",
-    "main_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
+    "checked_at": "2026-11-13T07:36:27.941512+00:00",
+    "main_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
     "history_blob_sha": "a59e87fcf6e1078b73ba82b133432e9996e76963",
     "claim_blob_sha": "e2afdc01b42c596d96c8e6bfdf1150f31a850e13",
     "latest_publisher_run": {
@@ -12373,16 +12393,16 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18150019906492861",
     "publisher_in_progress": false,
-    "status": "regular16_not_due_ready_preserved_no_new_results",
+    "status": "regular16_await_scheduled_publisher_within_existing_grace_ready_preserved",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-13T13:04:30+09:00",
-        "source_checked_at": "2026-11-13T13:04:57+09:00",
-        "total_records": 940,
+        "snapshot_at": "2026-11-13T16:29:14+09:00",
+        "source_checked_at": "2026-11-13T16:29:48+09:00",
+        "total_records": 949,
         "eligible_count": 28,
-        "review_required_count": 785,
-        "excluded_count": 127,
+        "review_required_count": 793,
+        "excluded_count": 128,
         "returned_count": 0,
         "exclusion_reasons": {
           "APPLICATION_CLOSED": 32,
@@ -12393,35 +12413,56 @@
           "NOTICE_ALREADY_QUEUED": 3,
           "APPLICATION_END_PRECISION_CONFLICT": 1,
           "APPLICATION_NOT_OPEN": 1,
-          "APPLICATION_START_TIME_UNKNOWN": 1
+          "APPLICATION_START_TIME_UNKNOWN": 2
         }
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-13T13:05:47+09:00",
-        "source_checked_at": "2026-11-13T13:05:47+09:00",
-        "total_records": 540,
+        "snapshot_at": "2026-11-13T16:30:44+09:00",
+        "source_checked_at": "2026-11-13T16:30:44+09:00",
+        "total_records": 554,
         "eligible_count": 260,
         "review_required_count": 0,
-        "excluded_count": 280,
+        "excluded_count": 294,
         "returned_count": 24,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 258,
-          "CLEANEYE_NOT_RECRUITMENT": 9,
+          "CLEANEYE_NOT_VERIFIED_OPEN": 268,
+          "CLEANEYE_NOT_RECRUITMENT": 10,
           "NOTICE_ALREADY_USED": 2,
-          "CLEANEYE_APPLICATION_NOT_OPEN": 11
+          "CLEANEYE_APPLICATION_NOT_OPEN": 14
         }
       }
     },
     "actions_pages_read": 1,
     "actions_runs_read": 100,
-    "actions_reported_total": 875,
+    "actions_reported_total": 877,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43386458022",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T07:32:33Z",
+        "head_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43386458022",
+        "workflow_path": ".github/workflows/public-search-check.yml"
+      },
+      {
+        "run_id": "43386066908",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T07:32:16Z",
+        "head_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43386066908",
+        "workflow_path": ".github/workflows/operations.yml"
+      }
+    ],
     "monitored_slot": "2026-11-13T16:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-13T18:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T1533.json",
+    "audit_path": "threads/audits/monitor-v2-20261113T1636.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -18896,8 +18937,8 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1323.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-13T06:32:41.092220+00:00",
-    "main_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
+    "checked_at": "2026-11-13T07:36:27.941512+00:00",
+    "main_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
@@ -18908,7 +18949,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-13T15:31:09.180965+09:00",
+      "evaluated_at": "2026-11-13T16:33:41.628219+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18918,12 +18959,12 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-13T13:04:30+09:00",
-          "source_checked_at": "2026-11-13T13:04:57+09:00",
-          "total_records": 940,
+          "snapshot_at": "2026-11-13T16:29:14+09:00",
+          "source_checked_at": "2026-11-13T16:29:48+09:00",
+          "total_records": 949,
           "eligible_count": 28,
-          "review_required_count": 785,
-          "excluded_count": 127,
+          "review_required_count": 793,
+          "excluded_count": 128,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 32,
@@ -18934,27 +18975,27 @@
             "NOTICE_ALREADY_QUEUED": 3,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
             "APPLICATION_NOT_OPEN": 1,
-            "APPLICATION_START_TIME_UNKNOWN": 1
+            "APPLICATION_START_TIME_UNKNOWN": 2
           }
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-13T13:05:47+09:00",
-          "source_checked_at": "2026-11-13T13:05:47+09:00",
-          "total_records": 540,
+          "snapshot_at": "2026-11-13T16:30:44+09:00",
+          "source_checked_at": "2026-11-13T16:30:44+09:00",
+          "total_records": 554,
           "eligible_count": 260,
           "review_required_count": 0,
-          "excluded_count": 280,
+          "excluded_count": 294,
           "returned_count": 24,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 258,
-            "CLEANEYE_NOT_RECRUITMENT": 9,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 268,
+            "CLEANEYE_NOT_RECRUITMENT": 10,
             "NOTICE_ALREADY_USED": 2,
-            "CLEANEYE_APPLICATION_NOT_OPEN": 11
+            "CLEANEYE_APPLICATION_NOT_OPEN": 14
           }
         }
       },
-      "total_scanned": 1480,
+      "total_scanned": 1503,
       "eligible_before_limit": 288,
       "writer_limit": 24,
       "returned_count": 24,
@@ -18987,7 +19028,7 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_audit_sha256": "34b5153552f5befb1ef2824e3424c1f65863fb88993d7822dc297d0aecce0588",
+    "selection_audit_sha256": "f68f4a791af9c29f8bc8286e4e6f428edd66f8366c433de768d60cd547ed144e",
     "queue_check": {
       "status": "validated",
       "ready_entries": [
@@ -19059,7 +19100,7 @@
       {
         "notice_id": "a306908",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306908",
-        "checked_at": "2026-11-13T15:31:40.506818+09:00",
+        "checked_at": "2026-11-13T16:34:09.468973+09:00",
         "sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048",
         "bytes": 10561,
         "status": "opened",
@@ -19068,7 +19109,7 @@
       {
         "notice_id": "a306717",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306717",
-        "checked_at": "2026-11-13T15:31:40.507455+09:00",
+        "checked_at": "2026-11-13T16:34:09.469470+09:00",
         "sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
         "bytes": 14473,
         "status": "opened",
@@ -19077,30 +19118,30 @@
       {
         "notice_id": "a306760",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
-        "checked_at": "2026-11-13T15:31:40.508091+09:00",
+        "checked_at": "2026-11-13T16:34:09.469971+09:00",
         "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
         "bytes": 11127,
         "status": "opened",
         "same_as_reviewed": true
       },
       {
-        "notice_id": "cleaneye-80792",
-        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80792",
-        "checked_at": "2026-11-13T15:31:40.508515+09:00",
+        "notice_id": "cleaneye-80820",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80820",
+        "checked_at": "2026-11-13T16:34:09.470367+09:00",
         "status": "failed",
         "error": "HTTP Error 503: Service Unavailable"
       },
       {
-        "notice_id": "cleaneye-80812",
-        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80812",
-        "checked_at": "2026-11-13T15:31:40.508978+09:00",
+        "notice_id": "cleaneye-80941",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80941",
+        "checked_at": "2026-11-13T16:34:09.470978+09:00",
         "status": "failed",
         "error": "HTTP Error 503: Service Unavailable"
       }
     ],
     "new_held_draft_notice_id": "a306744",
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T1533.json"
+    "audit_path": "threads/audits/monitor-v2-20261113T1636.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19649,8 +19690,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-13T06:32:41.092220+00:00",
-      "main_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
+      "checked_at": "2026-11-13T07:36:27.941512+00:00",
+      "main_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
       "history_blob_sha": "a59e87fcf6e1078b73ba82b133432e9996e76963",
       "claim_blob_sha": "e2afdc01b42c596d96c8e6bfdf1150f31a850e13",
       "latest_publisher_run": {
@@ -19666,16 +19707,16 @@
       "new_publisher_runs": [],
       "last_confirmed_post_id": "18150019906492861",
       "publisher_in_progress": false,
-      "status": "regular16_not_due_ready_preserved_no_new_results",
+      "status": "regular16_await_scheduled_publisher_within_existing_grace_ready_preserved",
       "source_collection": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-13T13:04:30+09:00",
-          "source_checked_at": "2026-11-13T13:04:57+09:00",
-          "total_records": 940,
+          "snapshot_at": "2026-11-13T16:29:14+09:00",
+          "source_checked_at": "2026-11-13T16:29:48+09:00",
+          "total_records": 949,
           "eligible_count": 28,
-          "review_required_count": 785,
-          "excluded_count": 127,
+          "review_required_count": 793,
+          "excluded_count": 128,
           "returned_count": 0,
           "exclusion_reasons": {
             "APPLICATION_CLOSED": 32,
@@ -19686,35 +19727,56 @@
             "NOTICE_ALREADY_QUEUED": 3,
             "APPLICATION_END_PRECISION_CONFLICT": 1,
             "APPLICATION_NOT_OPEN": 1,
-            "APPLICATION_START_TIME_UNKNOWN": 1
+            "APPLICATION_START_TIME_UNKNOWN": 2
           }
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-13T13:05:47+09:00",
-          "source_checked_at": "2026-11-13T13:05:47+09:00",
-          "total_records": 540,
+          "snapshot_at": "2026-11-13T16:30:44+09:00",
+          "source_checked_at": "2026-11-13T16:30:44+09:00",
+          "total_records": 554,
           "eligible_count": 260,
           "review_required_count": 0,
-          "excluded_count": 280,
+          "excluded_count": 294,
           "returned_count": 24,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 258,
-            "CLEANEYE_NOT_RECRUITMENT": 9,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 268,
+            "CLEANEYE_NOT_RECRUITMENT": 10,
             "NOTICE_ALREADY_USED": 2,
-            "CLEANEYE_APPLICATION_NOT_OPEN": 11
+            "CLEANEYE_APPLICATION_NOT_OPEN": 14
           }
         }
       },
       "actions_pages_read": 1,
       "actions_runs_read": 100,
-      "actions_reported_total": 875,
+      "actions_reported_total": 877,
       "actions_scope": "checkpoint changes only",
-      "changed_runs_since_checkpoint": [],
+      "changed_runs_since_checkpoint": [
+        {
+          "run_id": "43386458022",
+          "run_attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-13T07:32:33Z",
+          "head_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43386458022",
+          "workflow_path": ".github/workflows/public-search-check.yml"
+        },
+        {
+          "run_id": "43386066908",
+          "run_attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-13T07:32:16Z",
+          "head_sha": "4b29a5566ec4a1182ae415e4c253443e1bb2057d",
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43386066908",
+          "workflow_path": ".github/workflows/operations.yml"
+        }
+      ],
       "monitored_slot": "2026-11-13T16:00:00+09:00",
       "monitored_slot_grace_ends": "2026-11-13T18:00:00+09:00",
       "slot_claim_or_reservation_observed": false,
-      "audit_path": "threads/audits/monitor-v2-20261113T1533.json",
+      "audit_path": "threads/audits/monitor-v2-20261113T1636.json",
       "new_failure_fingerprints": [],
       "new_metric_observations": 0,
       "new_account_observations": 0,
@@ -19861,7 +19923,7 @@
       "audit_path": "threads/audits/monitor-v2-20261113T0844.json",
       "evidence_source": "scheduled publish job official authenticated GET; read now from latest ledger and logs, not newly fetched by maintenance"
     },
-    "next_slot_status": "ready",
+    "next_slot_status": "ready_await_regular16_within_grace",
     "publication_reports": {
       "17918731521553015": {
         "status": "prepared_for_current_report",
@@ -20036,12 +20098,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-13T06:32:41.092220+00:00",
+    "checked_at": "2026-11-13T07:36:27.941512+00:00",
     "state_blob_sha": "e2376edda48f1b4bbf1eeeedf90569b15e01dfce",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T06:31:09.159132+00:00",
+      "as_of": "2026-11-13T07:33:41.673008+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20401,7 +20463,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T06:31:09.159132+00:00",
+            "requested_end": "2026-11-13T07:33:41.673008+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T03:44:35.539579+00:00",
             "start_followers": 415,
@@ -20422,7 +20484,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T06:31:09.159132+00:00",
+        "requested_end": "2026-11-13T07:33:41.673008+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T03:44:35.539579+00:00",
         "start_followers": 415,
@@ -20892,6 +20954,57 @@
       "source_sha256": "f474886668dfb1f78c08e74face05afc5caabd6c1b8433366de8d6a1d2934859",
       "checked_at": "2026-11-13T04:18:24.760131+00:00",
       "audit_path": "threads/audits/monitor-v2-20261113T1323.json"
+    },
+    "a307017": {
+      "notice_id": "a307017",
+      "status": "held_official_review_incomplete",
+      "queued": false,
+      "card_generated": false,
+      "draft_created": false,
+      "checked_at": "2026-11-13T07:34:25.615617+00:00",
+      "source_refs": [
+        {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307017",
+          "checked_at": "2026-11-13T07:34:25.615617+00:00",
+          "document_sha256": "e69002a3dbaac402a5b496c2181a4b60d8f971bef56f516cf235dabd633e35e2",
+          "excerpt": "잡알리오 채용정보 상세 보기 공유하기 분당서울대학교병원 경력(약무직), 신입(약무직) 직원 채용공고 2026.11.13 / 진행중 공공기관 채용정보 기관명 분당서울대학교병원 표준직무(NCS) 보건.의료 고용형태 정규직 학력정보 학력무관 채용구분 신입+경력 근무지 경기 근무분야 약무직 채용인원 17 우대조건 취업지원대상자, 장애인, 전공(레지던트)약사 수료(예정)자는 우대함 공고기간 26.11.13 ~ 26.11.23 응시자격 <경력직원 분야> 1. 모집분야 및 응시요건 등 - 모집분야 : 약무직 / 약제부 - 모집인원 : 7명 - 응시요건 : [필수] 약사 면허증 소지자로서 종합병원 근무경력 1년 이상인 자 또는 전공(레지던트)약사 1년 과정을 수료한자(2027년 2월 수료 예정자 포함) <신입직원 분야> 1. 모집분야 및 응시요건 등 - 모집분야 : 약무직 / 약제부 - 모집인원 : 10명 - 응시요건 : [필수] 약사 면허증 소지자(2027년 2월~3월 취득예정자 포함)로서 하단 공인영어성적 기준을 충족하는 자 *공인영어성적 기준(1개 이상 충족 필수) : TOEIC 750점 이상, TOEIC SPEAKING IM3 이상, NEW TEPS 285점 이상 ※자세한 사항은 우리 병원 채용홈페이지 참조(http://snubh.recruiter.co.kr) 결격사유 우리병원 인사규정 제13조의 채용결격사유가 확인될 경우 합격취소, 임용취소 또는 근로계약이 해지될 수 있음 (인사규정 제13조) 1. ?국가공무원법? 제33조 각 호의 어느 하나에 해당하는 자 2. 제출서류를 제출하지 아니하거나 제출서류가 허위로 판명된 자 3. ?병역법? 제76조 제1항 각 호의 병역의무 불이행자 4. ?부패방지 및 국민권익위원회의 설치와 운영에 관한 법률? 제82조에 따라 취업이 제한되는 자 5. 채용 관련 부정합격자로서 면직 처분을 받은 날로부터 5년을 경과하지 아니한 자 6. 다음 각 목의 어느 하나에 의하여 「의료법」 제3조의 의료기관에 취업이 제한된 자 가. 「아동복지법」 제29조의3(아동관련기관의 취업제한 등) 나. 「장애인복지법」 제59조의3(장애인관련기관에의 취업제한 등) 다. 「노인복지법」 제39조의17(노인관련기관에의 취업제한 등) 전형절차/방법 <전형단계별 선발예정 배수, 평가방법> 1명 채용 - 서류전형 : 배수 없음, 입사지원서(적/부) - 직무역량검사 : 5배수, 검사점수 - 면접전형 : 1배수, 면접관 면접점수 2명 채용 - 서류전형 : 배수 없음, 입사지원서(적/부) - 직무역량검사 : 4배수, 검사점수 - 면접전형 : 1배수, 면접관 면접점수 3~5명 채용 - 서류전형 : 배수 없음, 입사지원서(적/부) - 직무역량검사 : 3배수, 검사점수 - 면접전형 : 1배수, 면접관 면접점수 6~10명 채용 - 서류전형 : 배수 없음, 입사지원서(적/부) - 직무역량검사 : 2배수, 검사점수 - 면접전형 : 1배수, 면접관 면접점수 11명 이상 채용 - 서류전형 : 배수 없음, 입사지원서(적/부) - 직무역량검사 : 1.5배수, 검사점수 - 면접전형 : 1배수, 면접관 면접점수 ※ 배수를 적용해서 합격자 수를 산출한 결과 소수점이 있는 경우 올림하여 합격자 수를 산정함 ※ 기타 1) 이 공고에 명시되지 아니한 사항은 우리병원 관련 규정에 의함 2) 입사전후 수행업무,소속부서,교대근무,야간근무,휴일근무,국내외파견 등 근무형태는 병원사정에 따라 변경될 수 있음 3) 적격자가 없는 경우 모집예정 인원보다 적게 또는 선발하지 않을 수 있음 4) 면접전형 합격자는 임용후보자로 등록되며 등록유효기간은 1년, 병원 필요시 1년에 한하여 연장될 수 있음 (임용후보자 등록 후 등록유효기간 내 임용 대기할 수 있으며, 임용예정일은 별도 안내 예정임) 5) 최종합격자가 병원이 지정하거나 병원과 협의된 일자에 출근하지 못하는 경우 근로의 의사가 없는 것으로 간주하여 합격 또는 임용후보자 등록이 취소될 수 있음 6) 각 채용 단계별로 모집인원과 동일한 인원 이내로 예비합격자를 선정할 수 있음 면접전형 예비합격자는 최종합격자의 임용포기, 결격사유 등으로 인한 미충원 발생 시 예비합격 순위에 따라 임용후보자로 등록할 수 있음 면접전형을 제외한 전형의 예비합격자는 각 전형 합격자의 부정 행위 등 사유 발생 시 예비합격 순위에 따라 다음 단계 전형 대상자로 선정할 수 있음 7) 면접전형 합격자는 지원서 기재내용 중 응시요건에 해당하는 서류(경력/재직증명서, 자격 및 면허, 어학 성적, 취업지원대상자 및 장애인 가점 등)를 반드시 제출하여야 하며, 응시요건에 충족되지 않거나 사실과 다를 경우에는 합격취소, 임용취소 또는 근로계약이 해지될 수 있음 외국에서 발급한 각종 증명서 등은 아포스티유(Apostille)확인서 또는 영사확인서를 발급받아 제출하여야 하며, 한글 번역문(공증)을 첨부해야 함 8) 제출한 서류에 대해서는 면접전형 합격자 발표일 이후 반환을 요청할 수 있음(단, 전자 또는 사본으로 제출한 서류는 반환하지 아니함) 9) 채용과정에서 부정한 방법(청탁, 압력 및 뇌물 행사 등)이 적발될 경우, 해당 응시자는 합격취소, 임용취소 또는 근로계약이 해지될 수 있으며, 재응시 자격 제한 및 관련기관에) 해당사실이 통보될 수 있음 10) 최종합격자 발표일로부터 15일 이내에 이의신청을 할 수 있음(채용홈페이지 FAQ 참고) 11) 기타 자세한 사항은 우리병원 채용홈페이지(http://snubh.recruiter.co.kr)를 참고하거나 인재운용팀(☏ 031-787-1204)으로 문의 바람 우대내용 취업지원대상자, 장애인, 전공(레지던트)약사 수료(예정)자는 우대함 전형단계별 채용정보 약제부(경력) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 약제부(신입) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 채용공고.pdf 입사지원서 입사지원서 양식.zip 직무기술서 2.직무소개서.hwp 기타 첨부파일 미첨부 사유 원문 URL http://snubh.recruiter.co.kr 클립보드에 주소가 복사 되었습니다."
+        },
+        {
+          "path": "notice-a307017.pdf",
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3087242",
+          "checked_at": "2026-11-13T07:34:45.794945+00:00",
+          "status": "opened",
+          "sha256": "fb5fcef82499b31707567e13ad5b0086a94ba4ef1da2484f6d21cddd3e6c3176",
+          "bytes": 129063,
+          "document_sha256": "fb5fcef82499b31707567e13ad5b0086a94ba4ef1da2484f6d21cddd3e6c3176",
+          "excerpt": "   분당서울대학교병원 경력(약무직), 신입(약무직) 직원 채용공고\n\n\n1. 모집분야 및 응시요건\n 가. 경력직원 분야\n\n\n                       자격     모집\n        모집분야                                     응시요건\n                       등급     인원\n\n\n                                   [필수] 약사 면허증 소지자로서 종합병원 근무경력 1년\n  약무직         약제부     J1~J3   7    이상인 자 또는 전공(레지던트)약사 1년 과정을 수료한\n                                   자(2027년 2월 수료 예정자 포함)\n\n\n\n\n나. 신입직원 분야\n\n\n                      자격      모집\n        모집분야                                     응시요건\n                      등급      인원\n\n\n\n                                   [필수] 약사 면허증 소지자(2027년 2월~3월 취득예정\n   약무직         약제부     J1     10\n                                   자 포함)로서 하단 공인영어성적 기준을 충족하는 자\n\n\n\n\n                         <공인영어성적 응시요건 기준>\n\n      TOEIC          TOEIC SPEAKING       NEW TEPS           비고\n\n     750점 이상            IM3 이상            285점 이상       [필수] 1개 이상 충족\n\n\n※ 응시요건에 해당하는 공인영어성적(TOEIC, TOEIC SPEAKING, NEW TEPS) 인정(충족) 기준\n\n : 2025.02.01. 이후 국내에서 시행한 시험으로서, 공고마감일까지 점수(등급)가 발표된 시험 응시성적표\n\n * 추가 인정(충족) : 상기 기간 외 국가공무원 채용시스템에 등록한 어학성적(2021.01.01.~2025.01.31.\n  국내에서 시행한 시험 응시성적에 한하며 추후 어학성적 사전등록 확인서를 제출한 경우에만 응\n  시요건을 충족한 것으로 인정함)\n\n * 단, 장애의 정도가 심한 청각(청력)장애인(기존 청각장애 2·3급)은 듣기부분을 제외한 점수가\n  TOEIC 375점 또는 NEW TEPS 171점 이상인 경우 공인영어성적 응시요건을 충족한 것으로 인\n\f  정함\n\n※ 경력직원 분야의 경우 3개월 이내의 수습기간을 둘 수 있음\n\n※ 참고\n\n 1) 채용공고의 직무소개서를 반드시 확인하고 입사지원서 작성 바람\n\n 2) 본 채용은 블라인드 공개채용으로 입사지원서, 자기소개서 등에 본인의 출신학교, 출신지역,\n  가족관계 등을 직·간접적으로 표현하거나 이를 유추할 수 있는 내용을 기재하지 않도록\n  유의 바람\n\n 3) 필수 응시요건에 해당하는 면허 및 자격, 경력사항 등이 입사지원서에 반드시 기재되어야 함\n  (해당 내용이 명확하지 않을 경우 인정되지 않을 수 있음)\n\n 4) 필수 응시요건에 해당하는 면허 및 자격은 공고마감일 기준 소지자에 한하며, 경력사항 등\n  도 공고마감일 기준으로 충족되어야 함 (단, 수료 및 취득 예정자는 응시요건에 따라 예외로 함)\n\n 5) 기졸업자 또는 2027년 2월 졸업예정자에 한함\n\n 6) 경력직원 분야의 자격등급은 경력사항 등에 따라 변동될 수 있음\n\n 7) 군복무는 비대상, 복무완료, 면제자에 한함\n\n 8) 우리 병원 정년초과자(공고마감일 기준 만 60세)는 응시대상이 아니며 합격한 후에도 합격 또\n  는 임용이 취소될 수 있음\n\n 9) 입사지원서 상 오기재 및 허위기재, 증빙자료 미제출 등으로 인한 모든 사항의 책임은 지원자\n  본인에게 있으며 해당 사항이 사실과 다를 경우 합격취소, 임용취소 또는 근로계약이 해지될 수\n  있음\n\n 10) 합격자는 임용대기 중 병원에서 요청하는 경우 파트타임(또는 단기간)으로 근무할 수 있음\n\n 11) 우리병원 인사규정 제13조의 채용결격사유가 확인될 경우 합격취소, 임용취소 또는\n   근로계약이 해지될 수 있음\n\n(인사규정 제13조)\n1. ⌜국가공무원법⌟ 제33조 각 호의 어느 하나에 해당하는 자\n2. 제출서류를 제출하지 아니하거나 제출서류가 허위로 판명된 자\n3. ⌜병역법⌟ 제76조 제1항 각 호의 병역의무 불이행자\n4. ⌜부패방지 및 국민권익위원회의 설치와 운영에 관한 법률⌟ 제82조에 따라 취업이 제한되는 자\n5. 채용 관련 부정합격자로서 면직 처분을 받은 날로부터 5년을 경과하지 아니한 자\n6. 다음 각 목의 어느 하나에 의하여 「의료법」 제3조의 의료기관에 취업이 제한된 자\n   가. 「아동복지법」 제29조의3(아동관련기관의 취업제한 등)\n   나. 「장애인복지법」 제59조의3(장애인관련기관에의 취업제한 등)\n   다. 「노인복지법」 제39조의17(노인관련기관에의 취업제한 등)\n\n\n\n",
+          "review_scope": "full extracted notice text read; PDF not visually reviewed every page"
+        }
+      ],
+      "ats_check": {
+        "path": "ats-a307017.html",
+        "url": "https://snubh.recruiter.co.kr",
+        "checked_at": "2026-11-13T07:34:45.795496+00:00",
+        "status": "opened",
+        "sha256": "7beaaaa61fe4dc9229a850388468723b24da7ad73fe3145440128f95bee71fa5",
+        "bytes": 5732,
+        "specific_notice_verified": false,
+        "scope": "HTTP200 recruitment shell, title 분당서울대학교병원 채용 only; individual notice contents not loaded"
+      },
+      "verified_unit_counts": {
+        "career": 7,
+        "entry_level": 10,
+        "notice_total": 17,
+        "scope": "two separate rows; do not label entry-level17"
+      },
+      "key_qualification_logic": "entry-level: pharmacist license including2027Feb-Mar expected AND one eligible English route; 2027Feb graduation restriction; prior registered English scores and severe-hearing-disability paths retained in source",
+      "hold_reasons": [
+        "정확한 마감시각 미확인: ALIO와 PDF는11월23일 날짜만, ATS개별공고 내용미조회",
+        "전공약사 수료예정 우대와 신입면허취득예정·졸업예정·영어예외 경로를 최종작성전 모두 반영해야 함",
+        "프로필·정정·최종실행기검수·카드 미완료"
+      ],
+      "next_action": "현재준비3건보존. 공식개별ATS와마감시각 확인후 새원고준비; 미검증으로슬롯채우지않음",
+      "audit_path": "threads/audits/monitor-v2-20261113T1636.json"
     }
   },
   "writer_unassigned_drafts": {
