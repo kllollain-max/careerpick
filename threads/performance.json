@@ -727,6 +727,469 @@
           "final_first_sentence": "간호사 면허가 있다면,"
         }
       }
+    },
+    {
+      "observation_id": "73d232ce2a7d728e7eec96f9d3ae59024700172c3625050129f2257e1b24073d",
+      "post_id": "17918731521553015",
+      "window": "24h",
+      "captured_at": "2026-11-13T03:44:34.481774+00:00",
+      "published_at": "2026-11-12T03:43:20.777100+00:00",
+      "elapsed_seconds": 86473.704674,
+      "delay_seconds": 73.704674,
+      "timing": "within_one_hour",
+      "comparable_milestone": true,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 2231,
+        "likes": 6,
+        "replies": 0,
+        "reposts": 1,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.2689376961004034,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "17918731521553015",
+        "checked_at": "2026-11-13T03:44:34.168276+00:00",
+        "reason": null,
+        "expected_text_sha256": "eee7022ea6e6194250e9ff419fde5b5012adf31de55fdb0aa7de745eee3b9725",
+        "actual_text_sha256": "eee7022ea6e6194250e9ff419fde5b5012adf31de55fdb0aa7de745eee3b9725",
+        "actual_first_sentence": "법정 안전관리자 선임 자격이 있다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "17918731521553015",
+        "notice_id": "a306877",
+        "published_at": "2026-11-12T03:43:20.777100+00:00",
+        "scheduled_at": "2026-11-12T12:00:00+09:00",
+        "slot_hour_kst": 12,
+        "actual_hour_kst": 12,
+        "body_chars": 271,
+        "first_sentence": "법정 안전관리자 선임 자격이 있다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "법정 안전관리자 선임 자격이 있다면,\n오송첨단의료산업진흥재단 정규직 1명 공고예요."
+            },
+            {
+              "id": "target",
+              "type": "target",
+              "text": "산업안전관리 일을 찾는 분께,\n오송첨단의료산업진흥재단 정규직 1명 공고예요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "위험성평가와 수급업체 안전관리를 맡아요.\n오송첨단의료산업진흥재단 산업안전관리 채용이에요."
+            }
+          ],
+          "selected_hook_id": "condition",
+          "first_sentence_type": "condition",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "산업안전지도사 또는 산업안전기사 이상으로 법정 선임이 가능해야 해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+              "excerpt": "안전관리자로 선임 가능한 자 「 」 1) 산업안전보건법 시행령 제17조 및 별표4 제1호에 따른 산 업안전지도사 자격을 가진 자 일 주 임 「 」 필수요건 2) 산업안전보건법 시행령 제17조 및 별표4 제2호에 해당하는 자로서, 반 행정원 「국가기술자격법」에 따른 산업안전기사 이상의 자격을 취득 직 한 자 ※ 자격요건은 원서접수 마감일(2026.11.24.)기준 유효하게 취득(등록)된 상태여야함 1. 해당 직무를 수행할 수 있다고 인정되는 자 ",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "산업안전지도사",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+                  "excerpt": "산업안전지도사 자격을 가진 자"
+                },
+                {
+                  "summary": "산업안전기사 이상",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+                  "excerpt": "산업안전기사 이상의 자격을 취득한 자"
+                }
+              ]
+            },
+            {
+              "text": "자격은 11월 24일 기준 유효해야 해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+              "excerpt": "자격요건은 원서접수 마감일(2026.11.24.)기준 유효하게 취득(등록)된 상태여야함",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "전담 안전관리자 선임경력 3년은 우대예요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+              "excerpt": "우대사항 행정원 · ISO 45001 등 안전보건경영시스템 내부심사원 경력 3년 이상 · 연구실안전관리사, 산업위생관리기사, 화공기사, ISO 45001 ",
+              "classification": "preferred",
+              "logic": "single"
+            },
+            {
+              "text": "공고일 만 60세 미만·병역·결격 기준도 확인해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+              "excerpt": "2. 응시자격 □ 공통사항 「 」 ❍ 공공기관의 운영에 관한 법률 제34조 제1항의 결격사유가 없는 자 ❍ 법령 및 정관에 따라 해임된 날로부터 3년 이상 경과한 자 ❍ 병역법에 의한 병역을 기피한 사실이 없는 자 ❍ 신체검사 결과 직무를 감당하기에 부적격한 것으로 판정되지 않은 자 ❍ 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사실이 없는 자 「 ❍ 부패방지 및 국민권익위원회의 설치와 운영에 관한 법률 제82조에 따른 」 비위면직자 등의 취업제한 적용을 받지 않는 자 「 」 ❍ 재단 인사규정 제62조에 의거, 공고일 기준 만60세(정년) 미만인 자 - 1 - ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "12월 말 임용 예정이며, 3개월 수습 평가 후 계속고용을 정해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+              "excerpt": "4. 근무조건 □ 임용 예정일 : 2026년 12월 말(예정) □ 신분 및 보수 m 3개월 간 수습 임용하며, 근무실적 평가에 따라 정규 임용함 m 보수는 재단 보수규정 별표1(직급별 기본연봉 하한액 및 경력급 지급기준) 적용 □ 복리후생 구 분 내 용 휴가 연차유급휴가(15일 ~25일), 연차저축제 유연근무 선택근무제, 시차출퇴근제 육아시간(일 최대 2시간), 육아휴직(자녀당 최대 3년), 가족친화 및 모성보호 임신·육아기 근로시간 단축제 건강관리 연 1회 종합건강검진 실시, 북카페, 휴게실 구비 선택적 복지 출산축하금, 자녀수당, 복지포인트, 단체상해보험 가입 연금 과학기술인공제회, 퇴직연금(DC, DB) 기타 사내동호회 지원 5. 채용절차 서류전형 ⇒ 필기시험 ⇒ 면접전형 ⇒ 최종합격 (적부심사) (3배수) (1배수) ❍ 응시지원서 기입사항은 증빙이 가능한 내용을 작성해야 하며 면접전형 대상자 선정 시 증빙서류를 제출하여야 함 ❍ 면접전형은 개별면접으로 실시함 ❍ 해외거주 응시자의 면접전형은 화상으로 진행할 수 있음 ❍ 전형별 미응시자는 탈락함 - 3 - 6. 전형일정 구 분 일 정 비 고 n 재단 홈페이지 및 알리오 등 채용공고 및 원서접수 11월 2주차~3주차 n 입사지원 홈페이지 인터넷 접수만 가능 * 접수마감일 및 시간엄수 서류심사 11월 4주차 서류전형 결과발표 12월 1주차 n 대상자 개인별 별도 안내 n 시험내용 : 직업기초능력 평가 필기시험 12월 5일(토) (의사소통능력, 문제해결능력, 대인관계능력, 정보능력, 조직이해능력) 필기전형 n 시험장소 : 오송첨단의료산업진흥재단(예정) 결과발표 12월 2주차 n 대상자 개인별 별도 안내 면접전형 면접심사 12월 3주차 n 시험장소 : 오송첨단의료산업진흥재단 최종합격자 발표 12월 4주차 n 대상자 개인별 별도 안내 임용 12월 말(예정) n 대상자 개인별 별도 안내 ※ 전형별 일정은 재단 사정에 의해 변경될 수 있음. 7. 원서접수 : ’26. 11. 10.(화) ~ ’26. 11. 24.(화) 14:00까지 ❍ 재단 전용 채용 홈페이지(https://kbiohealth.ai-recruit.kr)에서 온라인 접수 ※ 지원서는 접수기간 내 온라인 접수만 인정하며, 그 외의 방법으로 제출된 사항은 불인정하오니 유의바랍니다. - 4 - 8. 제출서류 □ 서류전형(응시지원 시) 구분 제출서류 비고 채용 § 응시지원서 홈페이지를 공통 § 자기소개서 통한 온라인 제출 □ 면접전형 구분 제출서류 비고 공통 § 필수자격요건에 해당하는 자격증명서 § 경력 또는 재직증명서 ※ 근무부서, 직위, 담당업무, 발급기관 날인 등 기재 - 경력증명서(공고일 이후 발급) 대상자에 - 재직증명서(공고일 이후 발급) 한하여 해당자 - 4대보험가입확인서 등은 폐업 등에 한하여 인정 개별 안내 제출 § 자격증명서 - 지원자격 요건 및 우대사항에 해당하는 증빙 필요 - 접수 마감일 기준 유효하게 등록되어 있어야 함 § 교육사항 증빙서류(수료증명서 등) § 취업지원대상자 증명서 또는 장애인증명서 ※ 서류 합격자는 응시지원서에 기재한 일체 사항(경력, 자격증 등)에 대하여 증빙서류를 제출하여야 합 니다. 증빙서류 제출이 가능한 내용만 기재하시고, 추후 기재 내용과 증빙서류가 상이하거나 증빙서 류를 제출하지 못할 경우 합격(채용)이 취소될 수 있으며, 이로 발생하는 불이익은 모두 지원자 본인 에게 책임이 있습니다. - 5 - 9. 유의사항 ❍ 임용된 직원은 3개월간의 수습기간을 두며, 수습기간 종료 후 근무실적 평가에 의거 고용계약 계속 여부를 결정합니다. ❍ 전형결과 채용 적격자가 없을 시 선발하지 않을 수도 있습니다. ❍ 근로조건 및 보수 등 제반사항은 재단 관련 규정에 의합니다. · · · ❍ 응시지원서 상에 직무수행과 관련 없는 성별 연령 학교명 출신지 가족관· · · 계 재산 신체조건 등 편견이 개입될 수 있는 항목의 작성은 금지되어 있으며, 응시지원서에 블라인드 위배 항목을 작성한 경우 불이익은 응 시자의 책임으로 합니다. ❍ 응시자는 자격요건(관련분야) 등에 해당하는가를 면밀히 검토한 후 응 시하시길 바라며, 응시지원서 등에 허위 기재, 기재 착오, 누락, 소정 양식 미준수, 구비서류 미제출, 연락 불능 등으로 인한 불이익은 응시 자의 책임으로 합니다. ❍ 면접전형 시 증빙서류 미제출 또는 일부를 누락, 응시지원서에 기재한 내 용이 증빙서류와 상이하거나 허위로 판명될 경우(제출서류와 대조 및 관계기관 사실여부 조회) 최종 합격대상에서 제외될 수 있습니다. 합격자 발표 또는 임용된 후에도 제출한 서류가 사실과 다르거나 결 격사유가 발견되면 임용이 취소됩니다. ❍ 영어를 제외한 외국어로 작성된 서류는 반드시 공증하고 한국어 번역본을 함께 첨부하여 제출하여야 합니다. ❍ 장애인 및 취업보호(지원)대상자는 「국가유공자 등 예우 및 지원에 관한 법률」등 보훈관계법률,「장애인고용촉진 및 직업재활법」에 의거하여 우 대합니다. (장애인 증명서 또는 취업지원대상자 증명서 제출 가능자) ❍ 접수된 일체의 서류는 다른 용도로 사용하지 않습니다. ❍ 「공기업·준정부기관의 경영에 관한 지침」 제16조 5항에 의거, 부정합격자 (본인 또는 본인과 밀접한 관계가 있는 타인이 채용에 관한 부당한 청탁, - 6 - 압력 또는 재산상의 이익 제공 등의 부정행위를 한 경우, 해당 부정행위로 인해 채용에 합격한 본인)에 대해 합격을 취소할 수 있습니다. ❍ 졸업예정자의 경우 임용예정일부터 근무가 불가능할 경우 임용이 취소될 수 있습니다. ❍ 최종합격자를 제외한 응시자는 최종합격자 발표일로부터 14일 이내 「채 용절차의 공정화에 관한 법률」제 11조(채용서류의 반환 등)에 따라 채 용서류의 반환을 청구할 수 있으며, 반환 청구된 채용서류는 청구 사실 이 확인된 날로부터 14일 이내에 지정한 주소로 등기우편(수신자 부담) 을 통하여 발송됩니다. 단, 홈페이지 또는 전자우편으로 제출된 경우나 응시자가 재단의 요구 없이 자발적으로 제출한 경우는 제외합니다. 또한 천재지변 등 재단의 책임 없는 사유로 채용서류가 멸실된 경우 채용서류 반환을 이행한 것으로 봅니다. 또한 제출된 서류는 다른 용도로 사용하 지 않습니다. ❍ 접수된 일체의 서류는 다른 용도로 사용하지 않으며, 최종합격자 발표일 로부터 14일 후 반환이 청구되지 않은 채용서류는 「개인정보 보호법」에 따라 파기할 예정입니다. ※ 응시지원서 작성 등 관련 문의는 채용홈페이지 “1:1문의”를 이용하시길 바 랍니다. 기타 관련 문의는 오송첨단의료산업진흥재단 인사혁신팀으로 주 시길 바랍니다. ☎(043)200-9125 - 7 - / 동일 모집행 항목별 전사: 산업안전관리 / 채용인원 1명 / 직종 일반직 / 직급 주임급 행정원 / 경영안전본부",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "전담 안전관리자 선임경력 3년은 우대예요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+            "excerpt": "우대사항 행정원 · ISO 45001 등 안전보건경영시스템 내부심사원 경력 3년 이상 · 연구실안전관리사, 산업위생관리기사, 화공기사, ISO 45001 "
+          },
+          "recruitment_unit": {
+            "title": "산업안전관리",
+            "count": 1,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086126",
+            "excerpt": "동일 모집행 항목별 전사: 산업안전관리 / 채용인원 1명 / 직종 일반직 / 직급 주임급 행정원 / 경영안전본부"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-11T21:46:26.322955+09:00",
+            "result": "none_found",
+            "source_ref": "https://www.kbiohealth.kr/board.es?mid=a10304000000&bid=0005&act=view&list_no=12440&tag=&nPage=1",
+            "scope": "기관최신채용목록첫페이지와동일공고12440,ALIO현재상세,연결PDF공고·지원서·NCS전체를읽음. 같은공고범위정정·취소표시없음.",
+            "limitations": "기관전체과거게시판전수검토아님. ATS주소는Vendor쉘만표시되어실제접수양식열람/제출은하지않음. 날짜·시각은기관공식공고문원서접수7항기준."
+          },
+          "style_rewrites": 0,
+          "presentation_style": "eligibility_info",
+          "presentation_style_reason": "기존08정규직관심유도형다음미착수12회차는자격조건정보형. 필수또는경로와우대경력3년차이를먼저제시.",
+          "selection_reason": "전체저장소스1384건검토입력및기존보류근거를확인. 공고전체1명과산업안전관리1명이일치하는정규직이며공식실제접수중·마감·근무지역·필수대체경로·우대·수습이검증됨. 한국고용정보원기록물1명은11월12일접수개시전으로보류. 더큰50/10/8명기존미해결충돌은유지하고작은인원이기때문에그근거를무시하지않음. 신규안전관리직무로직전간호/사회복지직무와다양성확보. 실제인기/지역관심도수치는없어추정하지않음.",
+          "public_preview": {
+            "main_text": "법정 안전관리자 선임 자격이 있다면,\n오송첨단의료산업진흥재단 정규직 1명 공고예요.\n\n산업안전관리 직무로 충북에서 일해요.\n산업안전지도사 또는 산업안전기사 이상으로 법정 선임이 가능해야 해요.\n자격은 11월 24일 기준 유효해야 해요.\n\n전담 안전관리자 선임경력 3년은 우대예요.\n공고일 만 60세 미만·병역·결격 기준도 확인해요.\n\n12월 말 임용 예정이며, 3개월 수습 평가 후 계속고용을 정해요.\n마감: 11월 24일 14:00, 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "experiment_eligible": true,
+          "comparison_context": {
+            "occupation": "산업안전관리",
+            "region": "충북",
+            "employment": "정규직",
+            "unit_count": 1,
+            "notice_total_count": 1,
+            "planned_media": "TEXT",
+            "media_planning_only": true,
+            "hours_until_deadline_at_slot": 290,
+            "institution_interest": null,
+            "source_total_scanned": 1384,
+            "official_details_fully_reviewed": false
+          }
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "eligibility",
+        "media": "TEXT",
+        "org": "오송첨단의료산업진흥재단",
+        "job": "산업안전관리",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "location": "충북",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "occupation": "산업안전관리",
+          "region": "충북",
+          "employment": "정규직",
+          "unit_count": 1,
+          "notice_total_count": 1,
+          "planned_media": "TEXT",
+          "media_planning_only": true,
+          "hours_until_deadline_at_slot": 290,
+          "institution_interest": null,
+          "source_total_scanned": 1384,
+          "official_details_fully_reviewed": false
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-24T14:00:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 1041399.2229,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "17918731521553015",
+          "checked_at": "2026-11-13T03:44:34.168276+00:00",
+          "reason": null,
+          "expected_text_sha256": "eee7022ea6e6194250e9ff419fde5b5012adf31de55fdb0aa7de745eee3b9725",
+          "actual_text_sha256": "eee7022ea6e6194250e9ff419fde5b5012adf31de55fdb0aa7de745eee3b9725",
+          "actual_first_sentence": "법정 안전관리자 선임 자격이 있다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "법정 안전관리자 선임 자격이 있다면,"
+        }
+      }
+    },
+    {
+      "observation_id": "ef0a93dde7eab2e4f8c22372e1ea837def1bcdebf523abe3dfc8182a1af1d2eb",
+      "post_id": "17938804020400505",
+      "window": "24h",
+      "captured_at": "2026-11-13T03:44:35.209864+00:00",
+      "published_at": "2026-11-11T23:39:21.783881+00:00",
+      "elapsed_seconds": 101113.425983,
+      "delay_seconds": 14713.425983,
+      "timing": "late_cumulative",
+      "comparable_milestone": false,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 659,
+        "likes": 1,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.15174506828528073,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "17938804020400505",
+        "checked_at": "2026-11-13T03:44:34.771204+00:00",
+        "reason": null,
+        "expected_text_sha256": "e9c58176aacb25bc356c34db5e527e82a46d6f8b19408c6c31aa219d2f241eec",
+        "actual_text_sha256": "e9c58176aacb25bc356c34db5e527e82a46d6f8b19408c6c31aa219d2f241eec",
+        "actual_first_sentence": "의료사회복지사로 일할 분께,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "17938804020400505",
+        "notice_id": "cleaneye-81067",
+        "published_at": "2026-11-11T23:39:21.783881+00:00",
+        "scheduled_at": "2026-11-12T08:00:00+09:00",
+        "slot_hour_kst": 8,
+        "actual_hour_kst": 8,
+        "body_chars": 275,
+        "first_sentence": "의료사회복지사로 일할 분께,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "의료사회복지사로 일할 분께,\n경기도의료원 안성병원 정규직 1명 공고예요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "의료사회복지사 자격과 영어 점수를 갖췄다면,\n경기도의료원 안성병원 정규직 1명 조건을 확인해요."
+            },
+            {
+              "id": "deadline",
+              "type": "deadline",
+              "text": "11월 19일 정오에 접수가 끝나요.\n경기도의료원 안성병원 사회복지사 정규직 1명 공고예요."
+            }
+          ],
+          "selected_hook_id": "target",
+          "first_sentence_type": "target",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "공고일 전까지 취득한 유효한 의료영역 사회복지사 자격과 인정범위 내 영어 기준점수 이상이 모두 필요해요.",
+              "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+              "excerpt": "(필수)의료영역 사회복지사 자격증 소지자 / 공고일 전까지 해당 자격(면허)증을 취득(소지)한 자로 자격(면허) 사용이 가능(유효)한 자 / (필수)인정범위 內 어학(영어)능력검정시험 기준점수 이상인 자 / 어학점수 YBM인증 및 어학점수표 서류 필수 제출",
+              "classification": "required",
+              "logic": "all_of",
+              "paths": [
+                {
+                  "summary": "공고일 전까지 취득한 유효한 의료영역 사회복지사 자격",
+                  "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+                  "excerpt": "(필수)의료영역 사회복지사 자격증 소지자 / 공고일 전까지 해당 자격(면허)증을 취득(소지)한 자로 자격(면허) 사용이 가능(유효)한 자"
+                },
+                {
+                  "summary": "인정범위 내 영어 기준점수",
+                  "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+                  "excerpt": "(필수)인정범위 內 어학(영어)능력검정시험 기준점수 이상인 자 / 어학점수 YBM인증 및 어학점수표 서류 필수 제출"
+                }
+              ]
+            },
+            {
+              "text": "18~60세",
+              "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+              "excerpt": "18세 이상으로 60세 이하인 자",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "3개월 조건부 임용을 거쳐요.",
+              "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+              "excerpt": "3개월간의 조건부기간을 거쳐 정규직으로 임용",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "주5일 통상근무지만 당직·휴일근무가 생길 수 있어요.",
+              "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+              "excerpt": "병원 사정에 따라 당직근무, 휴일근무 등 근무할 수 있음.",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "어학 유효기간·사전등록, 병역·결격 기준도 확인해요.",
+              "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+              "excerpt": "Ⅶ 기타유의사항 ○ 응시자격 중 결격사유는 다음과 같음. 氠瑢 경기도의료원 인사규정 제19조(결격사유) 다음 각 호의 1에 해당하는 사람은 직원으로 채용될 수 없다. 1. 「지방공무원법」 제31조 각 호의 1에 해당하는 자 2. 「병역법」 제76조에서 정한 병역의무 불이행 사실이 있는 사람 3. 「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」 제82조에 따른 비위면직자 등의 취업제한 적용을 받는 사람 ○ 어학(영어)능력검정시험 인정범위는 다음과 같음. 氠瑢 ⚫ 어학(영어) 능력시험 응시(시행) 연도의 5년 후 12월 31일 內에 있을 경우에만 인정 함 氠瑢 [예] 2025년 채용 공고 기준 汤捯  2020. 1. 1. 이후 국내에서 실시된 시험으로서, 제1차 시험 시행예정일 전날까지 점수(등급)가 발표된 시험으로 한정하며 기준점수 이상으로 확인된 시험만 인정됨.  2020. 1. 1. 이후 외국에서 응시한 TOEFL, 일본에서 응시한 TOEIC은 제1차 시험 시행예정일 전날까지 점수(등급)가 발표된 시험으로 한정하며 기준점수 이상으로 확인된 시험만 인정됨 ⚫ 다만, 자체 유효기간이 2년인 일부 시험(TOEIC, TOEFL, TEPS)의 경우에는 유효기간이 경과되면 시행기관으로부터 성적을 조회할 수 없으므로 진위여부가 확인되지 않음. 이에 따라 해당 능력검정시험의 유효기간이 만료될 예정인 경우 반드시 유효기간 만료 전 별도 안내하는 기간에 사이버국가고시센터(www.gosi.kr)를 통해 사전등록을 해야 함(사전등록을 하지 않고 유효기간이 경과되어 진위여부 확인이 불가능한 성적은 인정되지 않음) ⚫ 해당 검정시험기관의 정규(정기)시험 성적만을 인정하고, 정부기관·민간회사·학교 등에서 승진·연수·입사·입학(졸업) 등의 특정 목적으로 실시하는 수시·특별시험 등은 인정하지 않음. ",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "접수 때 자격증·어학점수표 파일과 YBM인증이 필수예요.",
+            "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+            "excerpt": "※의료영역 사회복지사 자격증 및 어학점수표 (응시원서 접수시 파일 첨부 必) 필수 서류 제출( 어학점수 YBM인증 및 어학점수표 서류 필수 제출) "
+          },
+          "recruitment_unit": {
+            "title": "사회복지사",
+            "count": 1,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://infra1-static.recruiter.co.kr/builder/2026/11/09/cf6aec0c-1ffc-4ba2-87cd-c99461fbc62d.hwp",
+            "excerpt": "동일 모집행의 항목별 전사: 채용직위(직급) 사회복지사(7급) / 채용인원 1명 / 채용기관(근무부서) 경기도의료원 안성병원(간호과)"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-11T20:17:23.487313+09:00",
+            "result": "none_found",
+            "source_ref": "https://medical.or.kr/front/boardList.do?brd_mgrno=279&menu_no=976",
+            "scope": "기관 공식 현재 채용목록 첫 페이지, 동일 공고 본문과 공식 접수페이지의 첨부 2개 전체 읽음. 모집중 상태 확인.",
+            "limitations": "과거 전체 게시판을 전수 조사하지 않음. 공식 접수 API의12:00:59는 화면/HWP12:00과 같은 마감 분 내 초단위 구현값이며 공개본문에는 원문12:00만 보존. 별도 개인 통보는 접근불가."
+          },
+          "style_rewrites": 1,
+          "presentation_style": "regular_interest",
+          "presentation_style_reason": "새 승인에 따라 정규직 관심유도형으로 직무 대상과 고용형태를 첫2줄에 제시. 독자인기 추정 없음.",
+          "selection_reason": "현재 전체1384건 비교에서 접수중 공식검증 정규직의 해당 단위1명. 더 큰 정규직 병동50명은 공식 마감시각 미확인·졸업예정 문구충돌 및 접수사이트제공자999로 보류, 연구직10/8명 기존 미해결 충돌은 유지. 구리1명은마감시각/근무지미확인, 철도136명은실제고용주와수집기관충돌, 부평19명은공식원문접근실패로 통과시키지 않음. 본 단위는최종근무지·필수자격·영어·정오마감이명확. 전회간호와기관/직무는다르나의료분야연속이라는한계를기록하고다음후보는다양성확장.",
+          "public_preview": {
+            "main_text": "의료사회복지사로 일할 분께,\n경기도의료원 안성병원 정규직 1명 공고예요.\n\n간호과 완화병동 근무예요.\n공고일 전까지 취득한 유효한 의료영역 사회복지사 자격과 인정범위 내 영어 기준점수 이상이 모두 필요해요.\n\n18~60세, 3개월 조건부 임용을 거쳐요.\n주5일 통상근무지만 당직·휴일근무가 생길 수 있어요.\n\n접수 때 자격증·어학점수표 파일과 YBM인증이 필수예요.\n어학 유효기간·사전등록, 병역·결격 기준도 확인해요.\n\n마감: 11월 19일 12:00(정오)\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "card_restriction": "의료영역 사회복지사 자격과 인정범위 내 영어 기준점수",
+          "experiment_eligible": true,
+          "comparison_context": {
+            "occupation": "사회복지사(보건직7급)",
+            "region": "경기 안성",
+            "unit_count": 1,
+            "notice_total_count": 1,
+            "employment": "정규직",
+            "hours_until_deadline_at_slot": 172,
+            "planned_media": "TEXT",
+            "media_planning_only": true,
+            "institution_interest": null,
+            "official_details_fully_reviewed": false
+          },
+          "card_visual_review": {
+            "status": "passed",
+            "reviewed_width": 360,
+            "reviewed_at": "2026-11-11T20:26:51.433670+09:00",
+            "sha256": "a78c35e2f6fde1fe857e3b34365253f953013962ac2cf204e411ee055090d5e5",
+            "preview_sha256": "28117a361f9916ae3960ece07f7c3a2d5aac9c9de4c3753030fb66abb643fdd7",
+            "asset_path": "threads-images/cleaneye-81067.jpg",
+            "preview_asset_path": "threads-images/cleaneye-81067-360.png",
+            "facts_sha256": "d9c15f6a382cdc249d1ae37628160ae37d1d042b4576a1692ef3e025f96e7fe7",
+            "layout_version": "careerpick-single-main-card-v2",
+            "observations": "Opened original1080 JPEG and exact LANCZOS360PNG. Korean title, regular1, institution, Nov19 12:00 and restriction line visible without truncation. Text-only branded card; not a workplace photograph."
+          }
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "hiring_core",
+        "media": "IMAGE",
+        "org": "경기도의료원",
+        "job": "사회복지사",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "location": "경기도의료원 안성병원",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "occupation": "사회복지사(보건직7급)",
+          "region": "경기 안성",
+          "unit_count": 1,
+          "notice_total_count": 1,
+          "employment": "정규직",
+          "hours_until_deadline_at_slot": 172,
+          "planned_media": "TEXT",
+          "media_planning_only": true,
+          "institution_interest": null,
+          "official_details_fully_reviewed": false
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-19T12:00:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 616838.216119,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "17938804020400505",
+          "checked_at": "2026-11-13T03:44:34.771204+00:00",
+          "reason": null,
+          "expected_text_sha256": "e9c58176aacb25bc356c34db5e527e82a46d6f8b19408c6c31aa219d2f241eec",
+          "actual_text_sha256": "e9c58176aacb25bc356c34db5e527e82a46d6f8b19408c6c31aa219d2f241eec",
+          "actual_first_sentence": "의료사회복지사로 일할 분께,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "의료사회복지사로 일할 분께,"
+        }
+      }
     }
   ],
   "account_observations": [
@@ -784,6 +1247,16 @@
       "observation_id": "5b73ba8b190244aeefd0f36c1b8feb08c9057b507cec1b64127bbaa92885e8b5",
       "account": "hid_119",
       "captured_at": "2026-11-12T23:29:36.695126+00:00",
+      "followers_count": 428,
+      "status": "captured",
+      "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
+      "scope": "account_total",
+      "post_attribution": null
+    },
+    {
+      "observation_id": "9d62e317b893316b1d85bab3e24f1f6f005b4563da0c19217dd8487a97aafeec",
+      "account": "hid_119",
+      "captured_at": "2026-11-13T03:44:35.539579+00:00",
       "followers_count": 428,
       "status": "captured",
       "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
