@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T12:51:34.503202+00:00",
-  "last_observed_at": "2026-11-13T12:51:34.503202+00:00",
+  "updated_at": "2026-11-13T14:33:40.555769+00:00",
+  "last_observed_at": "2026-11-13T14:33:40.555769+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8782,6 +8782,26 @@
       "head_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43419567235"
+    },
+    {
+      "run_id": "43433512845",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T13:25:38Z",
+      "head_sha": "28b231f4cc410397f8a041b0e11b4a03f799ee1b",
+      "workflow_path": ".github/workflows/public-search-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43433512845"
+    },
+    {
+      "run_id": "43433143670",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T13:25:22Z",
+      "head_sha": "c4458b9daa9b72926843f21f4240ad7cf6299468",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43433143670"
     }
   ],
   "last_confirmed_publication": {
@@ -12354,8 +12374,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-13T12:51:34.503202+00:00",
-    "main_sha": "c4458b9daa9b72926843f21f4240ad7cf6299468",
+    "checked_at": "2026-11-13T14:33:40.555769+00:00",
+    "main_sha": "28b231f4cc410397f8a041b0e11b4a03f799ee1b",
     "history_blob_sha": "08f8c9ffa003998872fdf1b319a04104f9e43a82",
     "claim_blob_sha": "7acf58a25f402c3cfab896b1a33b1808bd3d508b",
     "latest_publisher_run": {
@@ -12371,12 +12391,12 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "17922530685243848",
     "publisher_in_progress": false,
-    "status": "no_new_publication_next08_text_ready_kiost_draft_held",
+    "status": "no_new_result_next08_text_ready_preserved",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-13T19:12:00+09:00",
-        "source_checked_at": "2026-11-13T19:12:33+09:00",
+        "snapshot_at": "2026-11-13T22:23:06+09:00",
+        "source_checked_at": "2026-11-13T22:23:38+09:00",
         "total_records": 955,
         "eligible_count": 27,
         "review_required_count": 799,
@@ -12413,18 +12433,39 @@
     },
     "actions_pages_read": 1,
     "actions_runs_read": 100,
-    "actions_reported_total": 881,
+    "actions_reported_total": 883,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43433512845",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T13:25:38Z",
+        "head_sha": "28b231f4cc410397f8a041b0e11b4a03f799ee1b",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43433512845"
+      },
+      {
+        "run_id": "43433143670",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T13:25:22Z",
+        "head_sha": "c4458b9daa9b72926843f21f4240ad7cf6299468",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43433143670"
+      }
+    ],
     "monitored_slot": "2026-11-14T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T215134.json",
+    "audit_path": "threads/audits/monitor-v2-20261113T233340.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
     "new_ready_saved": 0,
-    "new_held_drafts_saved": 1,
+    "new_held_drafts_saved": 0,
     "queue_changed": false,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
@@ -18899,8 +18940,8 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-13T12:51:34.503202+00:00",
-    "main_sha": "c4458b9daa9b72926843f21f4240ad7cf6299468",
+    "checked_at": "2026-11-13T14:33:40.555769+00:00",
+    "main_sha": "28b231f4cc410397f8a041b0e11b4a03f799ee1b",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
@@ -18911,7 +18952,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-13T21:44:39.425551+09:00",
+      "evaluated_at": "2026-11-13T23:31:15.664753+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18921,8 +18962,8 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-13T19:12:00+09:00",
-          "source_checked_at": "2026-11-13T19:12:33+09:00",
+          "snapshot_at": "2026-11-13T22:23:06+09:00",
+          "source_checked_at": "2026-11-13T22:23:38+09:00",
           "total_records": 955,
           "eligible_count": 27,
           "review_required_count": 799,
@@ -18990,7 +19031,7 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_audit_sha256": "7edd92fdc56c01abc3ef1d70af1ac07dc3abb65cfa1bdf40c53e7fc5dc7efbc6",
+    "selection_audit_sha256": "151b2e306efc5d5529965fe91b4b74fe314bc801e18dae47678ceedd7519bece",
     "queue_check": {
       "status": "validated",
       "ready_entries": [
@@ -19025,7 +19066,7 @@
           "pixel_verification": "passed",
           "layout_version": "careerpick-single-main-card-v2",
           "asset_path": "threads-images/a306760.jpg",
-          "local_path": "/workspace/scratch/697589ed75d9/threads-2144.wm8bfu7e/careerpick-c4458b9daa9b72926843f21f4240ad7cf6299468/threads-images/a306760.jpg",
+          "local_path": "/workspace/scratch/697589ed75d9/threads-2330.wr3xbr0i/careerpick-28b231f4cc410397f8a041b0e11b4a03f799ee1b/threads-images/a306760.jpg",
           "sha256": "c333196b2d4e769e2dcb5d58b11441ca4b248d1a65a0a2ca27915fcae5de3f59",
           "facts_sha256": "ed411d3e1eaac24ed7a76db9f5fb1242032e061a36392427656aaec2701069b9",
           "preview_asset_path": "threads-images/a306760-360.png",
@@ -19034,14 +19075,14 @@
           "reviewed_at": "2026-11-13T11:26:06.224184+09:00",
           "visual_review": "attestation_and_exact_assets_verified"
         },
-        "mobile_copy_review": "passed: first2lines reader/opportunity, OR/AND qualifications, readable paragraphs, deadline and one final CTA read"
+        "mobile_copy_review": "passed: reader/opportunity first2lines; qualifications OR/AND, paragraphs, exact deadline and final CTA checked"
       }
     ],
     "official_checks": [
       {
         "notice_id": "a306760",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
-        "checked_at": "2026-11-13T12:45:23.992094+00:00",
+        "checked_at": "2026-11-13T14:31:49.186763+00:00",
         "status": 200,
         "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
         "bytes": 11127
@@ -19049,15 +19090,15 @@
       {
         "notice_id": "a306913",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306913",
-        "checked_at": "2026-11-13T12:45:23.992709+00:00",
+        "checked_at": "2026-11-13T14:31:49.187290+00:00",
         "status": 200,
         "sha256": "5de2214628389faa39676e8987685f8233ac7c9a771f989da034c368a03a0aa0",
         "bytes": 11485
       }
     ],
-    "new_held_draft_notice_id": "a306913",
+    "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T215134.json"
+    "audit_path": "threads/audits/monitor-v2-20261113T233340.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19585,8 +19626,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-13T12:51:34.503202+00:00",
-      "main_sha": "c4458b9daa9b72926843f21f4240ad7cf6299468",
+      "checked_at": "2026-11-13T14:33:40.555769+00:00",
+      "main_sha": "28b231f4cc410397f8a041b0e11b4a03f799ee1b",
       "history_blob_sha": "08f8c9ffa003998872fdf1b319a04104f9e43a82",
       "claim_blob_sha": "7acf58a25f402c3cfab896b1a33b1808bd3d508b",
       "latest_publisher_run": {
@@ -19602,12 +19643,12 @@
       "new_publisher_runs": [],
       "last_confirmed_post_id": "17922530685243848",
       "publisher_in_progress": false,
-      "status": "no_new_publication_next08_text_ready_kiost_draft_held",
+      "status": "no_new_result_next08_text_ready_preserved",
       "source_collection": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-13T19:12:00+09:00",
-          "source_checked_at": "2026-11-13T19:12:33+09:00",
+          "snapshot_at": "2026-11-13T22:23:06+09:00",
+          "source_checked_at": "2026-11-13T22:23:38+09:00",
           "total_records": 955,
           "eligible_count": 27,
           "review_required_count": 799,
@@ -19644,18 +19685,39 @@
       },
       "actions_pages_read": 1,
       "actions_runs_read": 100,
-      "actions_reported_total": 881,
+      "actions_reported_total": 883,
       "actions_scope": "checkpoint changes only",
-      "changed_runs_since_checkpoint": [],
+      "changed_runs_since_checkpoint": [
+        {
+          "run_id": "43433512845",
+          "run_attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-13T13:25:38Z",
+          "head_sha": "28b231f4cc410397f8a041b0e11b4a03f799ee1b",
+          "workflow_path": ".github/workflows/public-search-check.yml",
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43433512845"
+        },
+        {
+          "run_id": "43433143670",
+          "run_attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-13T13:25:22Z",
+          "head_sha": "c4458b9daa9b72926843f21f4240ad7cf6299468",
+          "workflow_path": ".github/workflows/operations.yml",
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43433143670"
+        }
+      ],
       "monitored_slot": "2026-11-14T08:00:00+09:00",
       "monitored_slot_grace_ends": "2026-11-14T10:00:00+09:00",
       "slot_claim_or_reservation_observed": false,
-      "audit_path": "threads/audits/monitor-v2-20261113T215134.json",
+      "audit_path": "threads/audits/monitor-v2-20261113T233340.json",
       "new_failure_fingerprints": [],
       "new_metric_observations": 0,
       "new_account_observations": 0,
       "new_ready_saved": 0,
-      "new_held_drafts_saved": 1,
+      "new_held_drafts_saved": 0,
       "queue_changed": false,
       "existing_automation": {
         "id": "6ae092084b988191a23a38300212ebdc",
@@ -19926,12 +19988,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-13T12:51:34.503202+00:00",
+    "checked_at": "2026-11-13T14:33:40.555769+00:00",
     "state_blob_sha": "4dc037c2d877f2fb7f6f2fef5e5a763ac5d8d201",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T12:44:39.483184+00:00",
+      "as_of": "2026-11-13T14:31:15.701465+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20291,7 +20353,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T12:44:39.483184+00:00",
+            "requested_end": "2026-11-13T14:31:15.701465+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T11:46:13.590462+00:00",
             "start_followers": 415,
@@ -20312,7 +20374,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T12:44:39.483184+00:00",
+        "requested_end": "2026-11-13T14:31:15.701465+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T11:46:13.590462+00:00",
         "start_followers": 415,
@@ -21071,6 +21133,40 @@
           "limitation": "No final profile_target check or ready queue registration; existing publishing continues unchanged."
         },
         "audit_path": "threads/audits/monitor-v2-20261113T215134.json"
+      },
+      "latest_official_recheck": {
+        "checked_at": "2026-11-13T14:33:40.555769+00:00",
+        "alio": {
+          "notice_id": "a306913",
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306913",
+          "checked_at": "2026-11-13T14:31:49.187290+00:00",
+          "status": 200,
+          "sha256": "5de2214628389faa39676e8987685f8233ac7c9a771f989da034c368a03a0aa0",
+          "bytes": 11485
+        },
+        "recovery": [
+          {
+            "file": "kiost-list-current.html",
+            "url": "https://kiost.incruit.com/hire/hirelist.asp",
+            "checked_at": "2026-11-13T14:32:13.666201+00:00",
+            "scope": "one bounded GET of existing official public URL; no authentication or parameter guessing",
+            "status": "error",
+            "error": "HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nFound"
+          },
+          {
+            "file": "kiost-board-current.html",
+            "url": "https://www.kiost.ac.kr/cop/bbs/BBSMSTR_000000000073/selectBoardList.do",
+            "checked_at": "2026-11-13T14:32:13.666678+00:00",
+            "scope": "one bounded GET of existing official public URL; no authentication or parameter guessing",
+            "status": "error",
+            "error": "HTTP Error 503: Service Unavailable"
+          }
+        ],
+        "status": "same_redirect_loop_and_503_hold_preserved",
+        "draft_unchanged": true,
+        "source_ref_timestamps_preserved": true,
+        "profile_target_previous_approval_rejection_preserved": true,
+        "audit_path": "threads/audits/monitor-v2-20261113T233340.json"
       }
     }
   },
