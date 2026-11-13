@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T21:12:12.745681+00:00",
-  "last_observed_at": "2026-11-13T21:12:12.745681+00:00",
+  "updated_at": "2026-11-13T22:09:53.963751+00:00",
+  "last_observed_at": "2026-11-13T22:09:53.963751+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8842,6 +8842,26 @@
       "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
       "workflow_path": ".github/workflows/operations.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43489021069"
+    },
+    {
+      "run_id": "43515311440",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T21:58:39Z",
+      "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+      "workflow_path": ".github/workflows/public-search-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43515311440"
+    },
+    {
+      "run_id": "43514986513",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T21:58:12Z",
+      "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43514986513"
     }
   ],
   "last_confirmed_publication": {
@@ -12414,7 +12434,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-13T21:12:12.745681+00:00",
+    "checked_at": "2026-11-13T22:09:53.963751+00:00",
     "main_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
     "history_blob_sha": "08f8c9ffa003998872fdf1b319a04104f9e43a82",
     "claim_blob_sha": "7acf58a25f402c3cfab896b1a33b1808bd3d508b",
@@ -12471,13 +12491,34 @@
     },
     "actions_pages_read": 1,
     "actions_runs_read": 100,
-    "actions_reported_total": 887,
+    "actions_reported_total": 889,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43515311440",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T21:58:39Z",
+        "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43515311440"
+      },
+      {
+        "run_id": "43514986513",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T21:58:12Z",
+        "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43514986513"
+      }
+    ],
     "monitored_slot": "2026-11-14T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T061212.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T070953.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -18958,7 +18999,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-13T21:12:12.745681+00:00",
+    "checked_at": "2026-11-13T22:09:53.963751+00:00",
     "main_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -18970,7 +19011,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T06:11:22.229838+09:00",
+      "evaluated_at": "2026-11-14T07:09:01.760655+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19047,7 +19088,7 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_audit_sha256": "fd26901c6ff14e5dfa79d475f982f084ed36a438e953aa41090e651eb94991a0",
+    "selection_audit_sha256": "6720ff5070542ebb9f5a45cb080b7490fbb965bb913bd40a76416a08665481d3",
     "queue_check": {
       "status": "validated",
       "ready_entries": [
@@ -19082,7 +19123,7 @@
           "pixel_verification": "passed",
           "layout_version": "careerpick-single-main-card-v2",
           "asset_path": "threads-images/a306760.jpg",
-          "local_path": "/workspace/scratch/697589ed75d9/threads-0610.3fwx1buq/careerpick-7d022a95cf5dc6c2d6e48af418118e6468c596a0/threads-images/a306760.jpg",
+          "local_path": "/workspace/scratch/697589ed75d9/threads-0708.uldbkvt2/careerpick-7d022a95cf5dc6c2d6e48af418118e6468c596a0/threads-images/a306760.jpg",
           "sha256": "c333196b2d4e769e2dcb5d58b11441ca4b248d1a65a0a2ca27915fcae5de3f59",
           "facts_sha256": "ed411d3e1eaac24ed7a76db9f5fb1242032e061a36392427656aaec2701069b9",
           "preview_asset_path": "threads-images/a306760-360.png",
@@ -19098,7 +19139,7 @@
       {
         "notice_id": "a306760",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
-        "checked_at": "2026-11-13T21:12:06.378600+00:00",
+        "checked_at": "2026-11-13T22:09:47.581982+00:00",
         "status": 200,
         "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
         "bytes": 11127
@@ -19106,12 +19147,12 @@
     ],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T061212.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T070953.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-13T21:12:12.745681+00:00",
+      "checked_at": "2026-11-13T22:09:53.963751+00:00",
       "checks": [],
-      "action": "No unnecessary repeat of recently failing Cleaneye/KIOST endpoints or previously rejected CareerPick profile destination. No bypass/new provider/new failure observation. Current next08 official notice GET checked same bytes.",
-      "audit_path": "threads/audits/monitor-v2-20261114T061212.json"
+      "action": "No unnecessary repeat of recently failing Cleaneye/KIOST or denied CareerPick profile destinations; no bypass/new provider/failure observation. Current next08 official GET same bytes.",
+      "audit_path": "threads/audits/monitor-v2-20261114T070953.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": []
@@ -19641,7 +19682,7 @@
       "post_id": "17938804020400505",
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
-    "latest_hourly_check": "2026-11-13T21:12:12.745681+00:00",
+    "latest_hourly_check": "2026-11-13T22:09:53.963751+00:00",
     "next_slot_official_preflight": {
       "checked_at": "2026-11-13T12:23:47.639571+00:00",
       "notice_id": "a306760",
@@ -19901,12 +19942,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-13T21:12:12.745681+00:00",
+    "checked_at": "2026-11-13T22:09:53.963751+00:00",
     "state_blob_sha": "4dc037c2d877f2fb7f6f2fef5e5a763ac5d8d201",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T21:11:22.256473+00:00",
+      "as_of": "2026-11-13T22:09:01.769282+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20260,7 +20301,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T21:11:22.256473+00:00",
+            "requested_end": "2026-11-13T22:09:01.769282+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T11:46:13.590462+00:00",
             "start_followers": 415,
@@ -20281,7 +20322,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T21:11:22.256473+00:00",
+        "requested_end": "2026-11-13T22:09:01.769282+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T11:46:13.590462+00:00",
         "start_followers": 415,
