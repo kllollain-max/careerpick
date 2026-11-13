@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T23:43:47Z",
-  "last_observed_at": "2026-11-12T23:43:47Z",
+  "updated_at": "2026-11-13T00:24:05Z",
+  "last_observed_at": "2026-11-13T00:24:05Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -12250,7 +12250,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-12T23:43:47Z",
+    "checked_at": "2026-11-13T00:24:05Z",
     "main_sha": "496fd4782424023371da18a53302e5d49758d7c5",
     "history_blob_sha": "8c5f2a60a4370416d6b1718a4f732d54dff12af5",
     "claim_blob_sha": "99ecf8c4e16138d84cf00529a9c07c5bc6c0e334",
@@ -12264,21 +12264,10 @@
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43329184431",
       "workflow_path": ".github/workflows/threads_auto.yml"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "43329184431",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-12T23:29:43Z",
-        "head_sha": "e2e75eb3449f05a9eb2c9dce48f08179016cc412",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43329184431",
-        "workflow_path": ".github/workflows/threads_auto.yml"
-      }
-    ],
+    "new_publisher_runs": [],
     "last_confirmed_post_id": "17986024908093257",
     "publisher_in_progress": false,
-    "status": "regular_text_verified_and_new_20_ready",
+    "status": "no_new_publication_or_metrics_unassigned_source_review_saved",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12316,31 +12305,37 @@
         }
       }
     },
-    "actions_pages_read": 9,
-    "actions_runs_read": 869,
-    "actions_reported_total": 869,
-    "pagination_reconciled_by_run_id": true,
-    "audit_path": "threads/audits/monitor-v2-20261113T0844.json",
+    "actions_pages_read": 1,
+    "actions_runs_read": 100,
+    "actions_reported_total": 870,
+    "actions_scope": "checkpoint changes only; first page spans previous checkpoint",
+    "new_runs_since_checkpoint": [
+      {
+        "run_id": "43335259169",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T00:13:08Z",
+        "head_sha": "496fd4782424023371da18a53302e5d49758d7c5",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43335259169",
+        "workflow_path": ".github/workflows/public-search-check.yml"
+      }
+    ],
+    "audit_path": "threads/audits/monitor-v2-20261113T0924.json",
     "new_failure_fingerprints": [],
-    "publisher_failure_fingerprints": [],
     "new_metric_observations": 0,
-    "new_account_observations": 1,
-    "new_ready_saved": 1,
-    "unstarted_new_slot": "2026-11-13T20:00:00+09:00",
+    "new_account_observations": 0,
+    "new_ready_saved": 0,
+    "new_held_drafts_saved": 1,
+    "queue_changed": false,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
       "on": true,
       "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261030T210000\nRRULE:FREQ=HOURLY\nEND:VEVENT",
       "environment_selection": "inherited",
       "environments": null,
-      "report_conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07",
-      "configuration_changed": false
-    },
-    "source_read_limits": [
-      "별도 정정 게시판·FAQ의 과거 전체 이력은 조회하지 않음",
-      "입사지원 작성요령 PDF는 다운로드·해시 확인만 했고 전체 시각검토하지 않음",
-      "서류반환·이의신청 HWP 양식 및 성적계산 엑셀은 열지 않음; 실제 지원 입력·제출은 하지 않음"
-    ]
+      "report_conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07"
+    }
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -18385,14 +18380,10 @@
     "post_attribution": null
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-12T23:43:47Z",
+    "checked_at": "2026-11-13T00:24:05Z",
     "main_sha": "496fd4782424023371da18a53302e5d49758d7c5",
-    "executed_archive_main_sha": "e2e75eb3449f05a9eb2c9dce48f08179016cc412",
-    "archive_to_current_changes": [
-      "threads_posted.json",
-      "threads-images/a306717.jpg",
-      "threads-images/a306717-360.png"
-    ],
+    "executed_archive_main_sha": "496fd4782424023371da18a53302e5d49758d7c5",
+    "archive_to_current_changes": [],
     "source_and_policy_files_unchanged_verified": true,
     "queue_blob_sha": "319b3208590f6775053f5716d5436cb94e8578ed",
     "policy_hashes_verified": {
@@ -18401,13 +18392,13 @@
       "v5": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
       "intro": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
     },
-    "input_reference_at": "2026-11-13T08:41:22.796046+09:00",
-    "input_sha256": "b9706ad43692ff740bb92a192d47c0ae6762c2ce71fac481775d8948f4fa1e5b",
-    "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-proposed.json",
+    "input_reference_at": "2026-11-13T09:20:37.589874+09:00",
+    "input_sha256": "453fbe4f1802334ba90c57165394236f9c9995d0d1afddf83b12cda6abf79591",
+    "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
     "source_selection_summary": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-13T08:41:22.796046+09:00",
+      "evaluated_at": "2026-11-13T09:20:37.589874+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18481,9 +18472,10 @@
         "actual_deadline",
         "notice_id_tiebreak"
       ],
+      "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_rows_sha256": "bb0a4de38139213844962e87a22edf6fe93d670dee945f776d51bafcf9749f45",
+    "selection_rows_sha256": "b686852272390240bff9696226e5b726ff7bdf73d1d03f306a3d837863c39448",
     "queue_check_status": "validated",
     "ready_entries": [
       {
@@ -18514,10 +18506,56 @@
         "card_check": "exact_reviewed_assets_and_full_pixels_verified"
       }
     ],
-    "new_ready_saved": 1,
-    "new_held_drafts_saved": 0,
+    "new_ready_saved": 0,
+    "new_held_drafts_saved": 1,
     "all_prior_queue_entries_preserved": true,
-    "audit_path": "threads/audits/single-main-v2-ready-a306717-and-text-20261113T0841.json"
+    "audit_path": "threads/audits/monitor-v2-20261113T0924.json",
+    "official_source_rechecks": [
+      {
+        "notice_id": "a306848",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306848",
+        "checked_at": "2026-11-13T09:21:03.826523+09:00",
+        "status": 200,
+        "sha256": "3d286f76bcb8aaef6ba8410eb8df5c6cbe7d398855385846fc474190b733f498",
+        "expected_sha256": "3d286f76bcb8aaef6ba8410eb8df5c6cbe7d398855385846fc474190b733f498",
+        "same_bytes": true,
+        "bytes": 13957
+      },
+      {
+        "notice_id": "a306908",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306908",
+        "checked_at": "2026-11-13T09:21:03.827363+09:00",
+        "status": 200,
+        "sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048",
+        "expected_sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048",
+        "same_bytes": true,
+        "bytes": 10561
+      },
+      {
+        "notice_id": "a306717",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306717",
+        "checked_at": "2026-11-13T09:21:03.828144+09:00",
+        "status": 200,
+        "sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
+        "expected_sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
+        "same_bytes": true,
+        "bytes": 14473
+      },
+      {
+        "notice_id": "cleaneye-80688",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80688",
+        "checked_at": "2026-11-13T09:21:03.828847+09:00",
+        "status": "failed",
+        "error": "HTTP Error 503: Service Unavailable"
+      },
+      {
+        "notice_id": "cleaneye-80697",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80697",
+        "checked_at": "2026-11-13T09:21:03.829481+09:00",
+        "status": "failed",
+        "error": "HTTP Error 503: Service Unavailable"
+      }
+    ]
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19008,24 +19046,22 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-12T23:43:47Z",
-      "status": "regular_text_verified_new_20_draft_saved",
-      "new_publications": 1,
+      "checked_at": "2026-11-13T00:24:05Z",
+      "status": "no_new_publication_or_metrics_unassigned_source_review_saved",
+      "new_publications": 0,
       "last_post_id": "17986024908093257",
       "ready_entries": 3,
       "next_slot": "2026-11-13T12:00:00+09:00",
-      "next_slot_status": "ready",
       "next_media": "IMAGE",
       "new_drafts": 1,
-      "new_ready_saved": 1,
-      "new_held_drafts": 0,
-      "queue_changed": true,
+      "new_ready_saved": 0,
+      "new_held_drafts": 1,
+      "queue_changed": false,
       "text_verified": true,
       "image_verified": true,
-      "performance24h": "one_prior_v2_observation_new_text_not_due",
+      "performance24h": "prior_first_observation_unchanged",
       "performance72h": "not_due",
-      "new_account_observations": 1,
-      "audit_path": "threads/audits/monitor-v2-20261113T0844.json"
+      "audit_path": "threads/audits/monitor-v2-20261113T0924.json"
     },
     "next_slot_official_preflight": {
       "notice_id": "a306877",
@@ -19259,12 +19295,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-12T23:43:47Z",
+    "checked_at": "2026-11-13T00:24:05Z",
     "state_blob_sha": "a2a736b0040a165ee0be103c690071cf5248452b",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-12T23:41:23.480054+00:00",
+      "as_of": "2026-11-13T00:20:38.360235+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19479,7 +19515,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-12T23:41:23.480054+00:00",
+            "requested_end": "2026-11-13T00:20:38.360235+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-12T23:29:36.695126+00:00",
             "start_followers": 415,
@@ -19500,7 +19536,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-12T23:41:23.480054+00:00",
+        "requested_end": "2026-11-13T00:20:38.360235+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-12T23:29:36.695126+00:00",
         "start_followers": 415,
@@ -19526,7 +19562,7 @@
       ]
     },
     "new_24h_or_72h_observations": 0,
-    "new_account_observations": 1,
+    "new_account_observations": 0,
     "current_post_windows": "24h/72h_not_due",
     "weights_changed": false,
     "reader_replies": "author_separation_unverified",
@@ -19739,6 +19775,47 @@
       "status": "official_closed",
       "official_end": "2026-11-04",
       "body_or_queue_created": false
+    }
+  },
+  "writer_unassigned_drafts": {
+    "a306760": {
+      "notice_id": "a306760",
+      "status": "hold_unassigned",
+      "prepared_at": "2026-11-13T09:23:29.661773+09:00",
+      "scheduled_at": null,
+      "chars": 307,
+      "draft_text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,\n국립중앙의료원 중앙응급의료상황실 정규직 4명 공고예요.\n\n3교대와 전지역 근무가 모두 가능해야 해요.\n최초 근무지는 서울·경기·대전·광주·대구·부산 중 합격 후 정해요.\n\n최초 계약 1년, 재임용 심사 후 정년까지예요.\n3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.\n병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 점수와 별개로 미응시·미완료 시 탈락해요.\n11월 20일 23:59까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "source_refs": [
+        {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
+          "checked_at": "2026-11-13T09:21:32.964458+09:00",
+          "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+          "checked_at": "2026-11-13T09:22:08.641110+09:00",
+          "sha256": "8609662fb9eb029c7a86c447dc9cf954fa63ad94c4d577c5030bae2a781ba72a"
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085486",
+          "checked_at": "2026-11-13T09:22:08.641562+09:00",
+          "sha256": "8609662fb9eb029c7a86c447dc9cf954fa63ad94c4d577c5030bae2a781ba72a"
+        },
+        {
+          "url": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271564",
+          "checked_at": "2026-11-13T09:22:08.642233+09:00",
+          "sha256": "d3ff2e99d111253a707f7a85fc541fdc51fd53a770229f9c2a1a503609c2f597"
+        }
+      ],
+      "hold_reasons": [
+        "Next unstarted Nov14 08 is beyond24h of current ALIO last_success2026-11-13T01:14:56+09:00; await regular source collection refresh, never fabricate a timestamp",
+        "프로필 실제 상세경로·완전한 실행기review.v5 스키마 검수 미완료",
+        "미디어미배정; 이미지차례가 되면 검수카드 생성·시각검토·조건부등록 필요"
+      ],
+      "audit_path": "threads/audits/monitor-v2-20261113T0924.json",
+      "queued": false,
+      "card_created": false,
+      "published": false
     }
   }
 }
