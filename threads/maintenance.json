@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T08:56:45.035306+00:00",
-  "last_observed_at": "2026-11-13T08:56:45.035306+00:00",
+  "updated_at": "2026-11-13T10:26:52Z",
+  "last_observed_at": "2026-11-13T10:26:52Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8752,6 +8752,26 @@
       "head_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43391916611",
       "workflow_path": ".github/workflows/threads_auto.yml"
+    },
+    {
+      "run_id": "43407698668",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T10:14:57Z",
+      "head_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
+      "workflow_path": ".github/workflows/public-search-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43407698668"
+    },
+    {
+      "run_id": "43407298835",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-13T10:14:38Z",
+      "head_sha": "dccd8afa5da15f43a1c6e08802667ec7a7a98862",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43407298835"
     }
   ],
   "last_confirmed_publication": {
@@ -12307,8 +12327,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-13T08:56:45.035306+00:00",
-    "main_sha": "dccd8afa5da15f43a1c6e08802667ec7a7a98862",
+    "checked_at": "2026-11-13T10:26:52Z",
+    "main_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
     "history_blob_sha": "e02a9af4e6d81209cacaa76637c2dc20321d2c16",
     "claim_blob_sha": "f0c8f052b04c860d884924037e1e3b1df6ffb624",
     "latest_publisher_run": {
@@ -12318,25 +12338,25 @@
       "conclusion": "success",
       "updated_at": "2026-11-13T08:17:11Z",
       "head_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43391916611",
-      "workflow_path": ".github/workflows/threads_auto.yml"
+      "workflow_path": ".github/workflows/threads_auto.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43391916611"
     },
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18080747462409277",
     "publisher_in_progress": false,
-    "status": "no_new_result_next20_image_ready_preserved",
+    "status": "no_new_publication_next20_image_ready_new_candidate_held",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
-        "snapshot_at": "2026-11-13T16:29:14+09:00",
-        "source_checked_at": "2026-11-13T16:29:48+09:00",
-        "total_records": 949,
-        "eligible_count": 28,
-        "review_required_count": 793,
-        "excluded_count": 128,
+        "snapshot_at": "2026-11-13T19:12:00+09:00",
+        "source_checked_at": "2026-11-13T19:12:33+09:00",
+        "total_records": 955,
+        "eligible_count": 27,
+        "review_required_count": 799,
+        "excluded_count": 129,
         "returned_count": 0,
         "exclusion_reasons": {
-          "APPLICATION_CLOSED": 32,
+          "APPLICATION_CLOSED": 33,
           "NOTICE_ALREADY_USED": 75,
           "APPLICATION_END_TIME_UNKNOWN": 3,
           "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
@@ -12349,35 +12369,56 @@
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-13T16:30:44+09:00",
-        "source_checked_at": "2026-11-13T16:30:44+09:00",
-        "total_records": 554,
+        "snapshot_at": "2026-11-13T19:13:10+09:00",
+        "source_checked_at": "2026-11-13T19:13:10+09:00",
+        "total_records": 562,
         "eligible_count": 260,
         "review_required_count": 0,
-        "excluded_count": 294,
+        "excluded_count": 302,
         "returned_count": 24,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 268,
-          "CLEANEYE_NOT_RECRUITMENT": 10,
+          "CLEANEYE_NOT_VERIFIED_OPEN": 270,
+          "CLEANEYE_NOT_RECRUITMENT": 11,
           "NOTICE_ALREADY_USED": 2,
-          "CLEANEYE_APPLICATION_NOT_OPEN": 14
+          "CLEANEYE_APPLICATION_NOT_OPEN": 19
         }
       }
     },
     "actions_pages_read": 1,
     "actions_runs_read": 100,
-    "actions_reported_total": 878,
+    "actions_reported_total": 880,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43407698668",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T10:14:57Z",
+        "head_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43407698668"
+      },
+      {
+        "run_id": "43407298835",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-13T10:14:38Z",
+        "head_sha": "dccd8afa5da15f43a1c6e08802667ec7a7a98862",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43407298835"
+      }
+    ],
     "monitored_slot": "2026-11-13T20:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-13T22:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T1757.json",
+    "audit_path": "threads/audits/monitor-v2-20261113T1928.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
     "new_ready_saved": 0,
-    "new_held_drafts_saved": 0,
+    "new_held_drafts_saved": 1,
     "queue_changed": false,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
@@ -18852,19 +18893,19 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-13T08:56:45.035306+00:00",
-    "main_sha": "dccd8afa5da15f43a1c6e08802667ec7a7a98862",
+    "checked_at": "2026-11-13T10:26:52Z",
+    "main_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "full_active_prompt_read": true,
-    "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
+    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-13T17:54:58.012604+09:00",
+      "evaluated_at": "2026-11-13T19:19:56.249334+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18874,15 +18915,15 @@
       "sources": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-13T16:29:14+09:00",
-          "source_checked_at": "2026-11-13T16:29:48+09:00",
-          "total_records": 949,
-          "eligible_count": 28,
-          "review_required_count": 793,
-          "excluded_count": 128,
+          "snapshot_at": "2026-11-13T19:12:00+09:00",
+          "source_checked_at": "2026-11-13T19:12:33+09:00",
+          "total_records": 955,
+          "eligible_count": 27,
+          "review_required_count": 799,
+          "excluded_count": 129,
           "returned_count": 0,
           "exclusion_reasons": {
-            "APPLICATION_CLOSED": 32,
+            "APPLICATION_CLOSED": 33,
             "NOTICE_ALREADY_USED": 75,
             "APPLICATION_END_TIME_UNKNOWN": 3,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
@@ -18895,26 +18936,26 @@
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-13T16:30:44+09:00",
-          "source_checked_at": "2026-11-13T16:30:44+09:00",
-          "total_records": 554,
+          "snapshot_at": "2026-11-13T19:13:10+09:00",
+          "source_checked_at": "2026-11-13T19:13:10+09:00",
+          "total_records": 562,
           "eligible_count": 260,
           "review_required_count": 0,
-          "excluded_count": 294,
+          "excluded_count": 302,
           "returned_count": 24,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 268,
-            "CLEANEYE_NOT_RECRUITMENT": 10,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 270,
+            "CLEANEYE_NOT_RECRUITMENT": 11,
             "NOTICE_ALREADY_USED": 2,
-            "CLEANEYE_APPLICATION_NOT_OPEN": 14
+            "CLEANEYE_APPLICATION_NOT_OPEN": 19
           }
         }
       },
-      "total_scanned": 1503,
-      "eligible_before_limit": 288,
+      "total_scanned": 1517,
+      "eligible_before_limit": 287,
       "writer_limit": 24,
       "returned_count": 24,
-      "unconfirmed_unit_counts": 288,
+      "unconfirmed_unit_counts": 287,
       "interest_ranking": "unavailable_not_used",
       "audience_breadth_ranking": "unavailable_not_used",
       "sector_policy": {
@@ -18925,7 +18966,7 @@
         "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
       },
       "sector_counts_before_limit": {
-        "neutral": 190,
+        "neutral": 189,
         "deprioritized": 77,
         "preferred": 21
       },
@@ -18943,7 +18984,7 @@
       "review_errors": [],
       "preparation_time_heuristic_hours": 48
     },
-    "selection_audit_sha256": "9ff5e3aa320c84ed75e5b10e50941f4bb1fb9d002a7ca20ea2aea7596f0c6f7b",
+    "selection_audit_sha256": "523117a6e1372d87f2cbd6c9498fb2182903cf7cf37915bd2e6337b2d91d8309",
     "queue_check": {
       "status": "validated",
       "ready_entries": [
@@ -18973,52 +19014,107 @@
     },
     "ready_entries": [
       {
-        "scheduled_at": "2026-11-13T16:00:00+09:00",
-        "notice_id": "a306908",
-        "entry_sha256": "95f72bdd63e472ce73d604a42e29024d181845c3e214d35f37c4dbfb81209d38",
-        "chars": 252,
-        "reply_count": 0,
-        "card_status": "passed",
-        "card_check": "existing_attestation_exact_bytes_full_pixels_verified"
-      },
-      {
-        "scheduled_at": "2026-11-13T20:00:00+09:00",
         "notice_id": "a306717",
-        "entry_sha256": "e73cf4d63cbcc3d22375d8300dea6aa2b95deaee1f35dc6f33b6ed8a38c92e21",
+        "scheduled_at": "2026-11-13T20:00:00+09:00",
+        "fingerprint": "e73cf4d63cbcc3d22375d8300dea6aa2b95deaee1f35dc6f33b6ed8a38c92e21",
+        "main_text": "접수·진료 보조 일을 찾는다면,\n서울대학교치과병원 간호원무직 정규직 1명 공고예요.\n\n간호조무사 자격증은 우대예요.\n11월 4일 공고일 기준 만 60세 미만이어야 해요.\n남자는 2027년 1월 1일 임용일 기준 병역필 또는 면제여야 해요.\n\n3개월 조건부 평가가 양호해야 정식 임용돼요.\n서울 근무, 분원·수탁기관 배치와 다른 직무 수행도 가능해요.\n\n다른 진행 공고와 중복지원은 안 돼요.\n최종면접 전 인성검사를 완료해야 해요.\n결격 기준도 확인해요.\n\n11월 18일 12:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+        "reply_texts": [],
         "chars": 298,
-        "reply_count": 0,
-        "card_status": "passed",
-        "card_check": "existing_attestation_exact_bytes_full_pixels_verified"
+        "card_verification": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 110403,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a306717.jpg",
+          "local_path": "/workspace/scratch/697589ed75d9/threads-1920.nzuqefaf/careerpick-289d862ab3e797c064b5b519e09d5c35afc8c38a/threads-images/a306717.jpg",
+          "sha256": "8795970f5bb7b9a084685818c717ce0ee72c7a3ff1ea8f22dfd5f9aaf487a66b",
+          "facts_sha256": "f898b3fcad8ba73266d5c721f62791c1e0327c8c91cf5af36d1386ab85a236f6",
+          "preview_asset_path": "threads-images/a306717-360.png",
+          "preview_sha256": "44719accf039f2f3cbd9deb835e156c09645ac585a17e30cf5aed998a449ee10",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-13T08:38:07.267373+09:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        },
+        "facts_sha256": "f898b3fcad8ba73266d5c721f62791c1e0327c8c91cf5af36d1386ab85a236f6",
+        "mobile_copy_review": "passed: first two lines reader/opportunity, complete critical conditions, short paragraphs, absolute deadline, one exact final CTA read"
       },
       {
-        "scheduled_at": "2026-11-14T08:00:00+09:00",
         "notice_id": "a306760",
-        "entry_sha256": "f7bf612866ee4e4b72f98f8daf05cfe26f2cb55daee846eea0d6712559af04ae",
+        "scheduled_at": "2026-11-14T08:00:00+09:00",
+        "fingerprint": "f7bf612866ee4e4b72f98f8daf05cfe26f2cb55daee846eea0d6712559af04ae",
+        "main_text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,\n국립중앙의료원 중앙응급의료상황실 정규직 4명 공고예요.\n\n3교대와 전지역 근무가 모두 가능해야 해요.\n최초 근무지는 서울·경기·대전·광주·대구·부산 중 합격 후 정해요.\n\n최초 계약 1년, 재임용 심사 후 정년까지예요.\n3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.\n병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 미응시·미완료 시 탈락해요.\n11월 20일 23:59까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+        "reply_texts": [],
         "chars": 299,
-        "reply_count": 0,
-        "card_status": "passed",
-        "card_check": "existing_attestation_exact_bytes_full_pixels_verified"
+        "card_verification": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 132489,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a306760.jpg",
+          "local_path": "/workspace/scratch/697589ed75d9/threads-1920.nzuqefaf/careerpick-289d862ab3e797c064b5b519e09d5c35afc8c38a/threads-images/a306760.jpg",
+          "sha256": "c333196b2d4e769e2dcb5d58b11441ca4b248d1a65a0a2ca27915fcae5de3f59",
+          "facts_sha256": "ed411d3e1eaac24ed7a76db9f5fb1242032e061a36392427656aaec2701069b9",
+          "preview_asset_path": "threads-images/a306760-360.png",
+          "preview_sha256": "65301aec9ba464b3259e8c4e071d3df319a5a5bdc44b2260abec1a67ff6fd44c",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-13T11:26:06.224184+09:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        },
+        "facts_sha256": "ed411d3e1eaac24ed7a76db9f5fb1242032e061a36392427656aaec2701069b9",
+        "mobile_copy_review": "passed: first two lines reader/opportunity, complete critical conditions, short paragraphs, absolute deadline, one exact final CTA read"
       }
     ],
     "official_checks": [
       {
+        "notice_id": "a306752",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+        "checked_at": "2026-11-13T10:20:42.802078+00:00",
+        "status": 200,
+        "sha256": "2aaeaf5372db0e57b184b98a77e068fa96339c98897b7ac2b48cf71ecd54e221",
+        "bytes": 11178
+      },
+      {
         "notice_id": "a306717",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306717",
-        "checked_at": "2026-11-13T17:55:30.427298+09:00",
+        "checked_at": "2026-11-13T10:20:42.802571+00:00",
+        "status": 200,
         "sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
-        "same_as_reviewed": true
+        "bytes": 14473
       },
       {
         "notice_id": "a306760",
         "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
-        "checked_at": "2026-11-13T17:55:30.427913+09:00",
+        "checked_at": "2026-11-13T10:20:42.802958+00:00",
+        "status": 200,
         "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
-        "same_as_reviewed": true
+        "bytes": 11127
+      },
+      {
+        "notice_id": "cleaneye-80697",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80697",
+        "checked_at": "2026-11-13T10:20:42.803328+00:00",
+        "status": "error",
+        "error": "HTTP Error 503: Service Unavailable"
+      },
+      {
+        "notice_id": "cleaneye-80708",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80708",
+        "checked_at": "2026-11-13T10:20:42.803919+00:00",
+        "status": "error",
+        "error": "HTTP Error 503: Service Unavailable"
       }
     ],
-    "new_held_draft_notice_id": "a306744",
+    "new_held_draft_notice_id": "a306752",
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261113T1757.json"
+    "audit_path": "threads/audits/monitor-v2-20261113T1928.json"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19558,8 +19654,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-13T08:56:45.035306+00:00",
-      "main_sha": "dccd8afa5da15f43a1c6e08802667ec7a7a98862",
+      "checked_at": "2026-11-13T10:26:52Z",
+      "main_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
       "history_blob_sha": "e02a9af4e6d81209cacaa76637c2dc20321d2c16",
       "claim_blob_sha": "f0c8f052b04c860d884924037e1e3b1df6ffb624",
       "latest_publisher_run": {
@@ -19569,25 +19665,25 @@
         "conclusion": "success",
         "updated_at": "2026-11-13T08:17:11Z",
         "head_sha": "52e87288944ef588f1384ed9f12c053caa0866f4",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43391916611",
-        "workflow_path": ".github/workflows/threads_auto.yml"
+        "workflow_path": ".github/workflows/threads_auto.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43391916611"
       },
       "new_publisher_runs": [],
       "last_confirmed_post_id": "18080747462409277",
       "publisher_in_progress": false,
-      "status": "no_new_result_next20_image_ready_preserved",
+      "status": "no_new_publication_next20_image_ready_new_candidate_held",
       "source_collection": {
         "alio": {
           "status": "verified_snapshot",
-          "snapshot_at": "2026-11-13T16:29:14+09:00",
-          "source_checked_at": "2026-11-13T16:29:48+09:00",
-          "total_records": 949,
-          "eligible_count": 28,
-          "review_required_count": 793,
-          "excluded_count": 128,
+          "snapshot_at": "2026-11-13T19:12:00+09:00",
+          "source_checked_at": "2026-11-13T19:12:33+09:00",
+          "total_records": 955,
+          "eligible_count": 27,
+          "review_required_count": 799,
+          "excluded_count": 129,
           "returned_count": 0,
           "exclusion_reasons": {
-            "APPLICATION_CLOSED": 32,
+            "APPLICATION_CLOSED": 33,
             "NOTICE_ALREADY_USED": 75,
             "APPLICATION_END_TIME_UNKNOWN": 3,
             "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
@@ -19600,35 +19696,56 @@
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-13T16:30:44+09:00",
-          "source_checked_at": "2026-11-13T16:30:44+09:00",
-          "total_records": 554,
+          "snapshot_at": "2026-11-13T19:13:10+09:00",
+          "source_checked_at": "2026-11-13T19:13:10+09:00",
+          "total_records": 562,
           "eligible_count": 260,
           "review_required_count": 0,
-          "excluded_count": 294,
+          "excluded_count": 302,
           "returned_count": 24,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 268,
-            "CLEANEYE_NOT_RECRUITMENT": 10,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 270,
+            "CLEANEYE_NOT_RECRUITMENT": 11,
             "NOTICE_ALREADY_USED": 2,
-            "CLEANEYE_APPLICATION_NOT_OPEN": 14
+            "CLEANEYE_APPLICATION_NOT_OPEN": 19
           }
         }
       },
       "actions_pages_read": 1,
       "actions_runs_read": 100,
-      "actions_reported_total": 878,
+      "actions_reported_total": 880,
       "actions_scope": "checkpoint changes only",
-      "changed_runs_since_checkpoint": [],
+      "changed_runs_since_checkpoint": [
+        {
+          "run_id": "43407698668",
+          "run_attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-13T10:14:57Z",
+          "head_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
+          "workflow_path": ".github/workflows/public-search-check.yml",
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43407698668"
+        },
+        {
+          "run_id": "43407298835",
+          "run_attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-13T10:14:38Z",
+          "head_sha": "dccd8afa5da15f43a1c6e08802667ec7a7a98862",
+          "workflow_path": ".github/workflows/operations.yml",
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43407298835"
+        }
+      ],
       "monitored_slot": "2026-11-13T20:00:00+09:00",
       "monitored_slot_grace_ends": "2026-11-13T22:00:00+09:00",
       "slot_claim_or_reservation_observed": false,
-      "audit_path": "threads/audits/monitor-v2-20261113T1757.json",
+      "audit_path": "threads/audits/monitor-v2-20261113T1928.json",
       "new_failure_fingerprints": [],
       "new_metric_observations": 0,
       "new_account_observations": 0,
       "new_ready_saved": 0,
-      "new_held_drafts_saved": 0,
+      "new_held_drafts_saved": 1,
       "queue_changed": false,
       "existing_automation": {
         "id": "6ae092084b988191a23a38300212ebdc",
@@ -19961,106 +20078,197 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-13T08:56:45.035306+00:00",
+    "checked_at": "2026-11-13T10:26:52Z",
     "state_blob_sha": "5c0b7875ae02055aa45b85ae71359370093bcdfe",
     "summarize_executed": true,
     "summary": {
-      "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T08:54:58.063249+00:00",
-      "experiment_start": "2026-11-11T11:45:18.355131+00:00",
-      "experiment_start_evidence": [
-        {
-          "post_id": "17896425015438025",
-          "source": "public_output_verification"
-        }
-      ],
-      "windows": {
-        "24h": {
-          "verified_main_count": 2,
-          "metric_medians": {
-            "views": 2630,
-            "likes": 6,
-            "replies": 0,
-            "reposts": 0.5,
-            "quotes": 0
-          },
-          "metric_observed_counts": {
-            "views": 2,
-            "likes": 2,
-            "replies": 2,
-            "reposts": 2,
-            "quotes": 2
-          },
-          "metric_totals": {
-            "views": 5260,
-            "likes": 12,
-            "replies": 0,
-            "reposts": 1,
-            "quotes": 0
-          },
-          "views_distribution": [
-            {
-              "post_id": "17918731521553015",
-              "views": 2231
-            },
-            {
-              "post_id": "17896425015438025",
-              "views": 3029
-            }
-          ],
-          "likes_rate_percent_median": 0.23351143636317628,
-          "likes_rate_percent_observed_posts": 2,
-          "reader_replies": null,
-          "reader_replies_status": "see_per_post_author_separation_status",
-          "profile_visits": null,
-          "follow_increase": null,
-          "link_clicks": null
-        },
-        "72h": {
-          "verified_main_count": 0,
-          "metric_medians": {
-            "views": null,
-            "likes": null,
-            "replies": null,
-            "reposts": null,
-            "quotes": null
-          },
-          "metric_observed_counts": {
-            "views": 0,
-            "likes": 0,
-            "replies": 0,
-            "reposts": 0,
-            "quotes": 0
-          },
-          "metric_totals": {
-            "views": null,
-            "likes": null,
-            "replies": null,
-            "reposts": null,
-            "quotes": null
-          },
-          "views_distribution": [],
-          "likes_rate_percent_median": null,
-          "likes_rate_percent_observed_posts": 0,
-          "reader_replies": null,
-          "reader_replies_status": "see_per_post_author_separation_status",
-          "profile_visits": null,
-          "follow_increase": null,
-          "link_clicks": null
-        }
-      },
-      "observations": {
-        "24h": [
+      "v5_performance": {
+        "policy_id": "careerpick-threads-v5-20261111",
+        "as_of": "2026-11-13T10:19:56.304310+00:00",
+        "experiment_start": "2026-11-11T11:45:18.355131+00:00",
+        "experiment_start_evidence": [
           {
             "post_id": "17896425015438025",
-            "notice_id": "a306786",
-            "published_at": "2026-11-11T11:45:18.355131+00:00",
-            "captured_at": "2026-11-12T11:48:45.499723+00:00",
-            "elapsed_seconds": 86607.144592,
+            "source": "public_output_verification"
+          }
+        ],
+        "windows": {
+          "24h": {
+            "verified_main_count": 2,
+            "metric_medians": {
+              "views": 2630,
+              "likes": 6,
+              "replies": 0,
+              "reposts": 0.5,
+              "quotes": 0
+            },
+            "metric_observed_counts": {
+              "views": 2,
+              "likes": 2,
+              "replies": 2,
+              "reposts": 2,
+              "quotes": 2
+            },
+            "metric_totals": {
+              "views": 5260,
+              "likes": 12,
+              "replies": 0,
+              "reposts": 1,
+              "quotes": 0
+            },
+            "views_distribution": [
+              {
+                "post_id": "17918731521553015",
+                "views": 2231
+              },
+              {
+                "post_id": "17896425015438025",
+                "views": 3029
+              }
+            ],
+            "likes_rate_percent_median": 0.23351143636317628,
+            "likes_rate_percent_observed_posts": 2,
+            "reader_replies": null,
+            "reader_replies_status": "see_per_post_author_separation_status",
+            "profile_visits": null,
+            "follow_increase": null,
+            "link_clicks": null
+          },
+          "72h": {
+            "verified_main_count": 0,
+            "metric_medians": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "metric_observed_counts": {
+              "views": 0,
+              "likes": 0,
+              "replies": 0,
+              "reposts": 0,
+              "quotes": 0
+            },
+            "metric_totals": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "views_distribution": [],
+            "likes_rate_percent_median": null,
+            "likes_rate_percent_observed_posts": 0,
+            "reader_replies": null,
+            "reader_replies_status": "see_per_post_author_separation_status",
+            "profile_visits": null,
+            "follow_increase": null,
+            "link_clicks": null
+          }
+        },
+        "observations": {
+          "24h": [
+            {
+              "post_id": "17896425015438025",
+              "notice_id": "a306786",
+              "published_at": "2026-11-11T11:45:18.355131+00:00",
+              "captured_at": "2026-11-12T11:48:45.499723+00:00",
+              "elapsed_seconds": 86607.144592,
+              "window": "24h",
+              "metrics": {
+                "views": 3029,
+                "likes": 6,
+                "replies": 0,
+                "reposts": 0,
+                "quotes": 0
+              },
+              "metric_status": {
+                "views": "observed",
+                "likes": "observed",
+                "replies": "observed",
+                "reposts": "observed",
+                "quotes": "observed"
+              },
+              "likes_rate_percent": 0.19808517662594916,
+              "status": "captured",
+              "reader_replies": null,
+              "reader_replies_status": "author_separation_unverified",
+              "first_sentence_type": "condition",
+              "experiment_eligible": false,
+              "first_sentence": "간호사 면허가 있다면,",
+              "format_id": "deadline_opportunity",
+              "contract_version": 2,
+              "sector_group": null,
+              "body_chars": 249,
+              "media": "TEXT",
+              "slot": "2026-11-11T20:00:00+09:00",
+              "slot_hour_kst": 20,
+              "job": "간호사",
+              "location": "순천병원",
+              "employment": "정규직",
+              "recruitment_unit_count": 3,
+              "deadline_distance_seconds": 420281.644869,
+              "observed_at": "2026-11-12T11:48:45.499723+00:00",
+              "elapsed_hours": 24.057540164444443
+            },
+            {
+              "post_id": "17918731521553015",
+              "notice_id": "a306877",
+              "published_at": "2026-11-12T03:43:20.777100+00:00",
+              "captured_at": "2026-11-13T03:44:34.481774+00:00",
+              "elapsed_seconds": 86473.704674,
+              "window": "24h",
+              "metrics": {
+                "views": 2231,
+                "likes": 6,
+                "replies": 0,
+                "reposts": 1,
+                "quotes": 0
+              },
+              "metric_status": {
+                "views": "observed",
+                "likes": "observed",
+                "replies": "observed",
+                "reposts": "observed",
+                "quotes": "observed"
+              },
+              "likes_rate_percent": 0.2689376961004034,
+              "status": "captured",
+              "reader_replies": null,
+              "reader_replies_status": "author_separation_unverified",
+              "first_sentence_type": "condition",
+              "experiment_eligible": true,
+              "first_sentence": "법정 안전관리자 선임 자격이 있다면,",
+              "format_id": "eligibility",
+              "contract_version": 2,
+              "sector_group": null,
+              "body_chars": 271,
+              "media": "TEXT",
+              "slot": "2026-11-12T12:00:00+09:00",
+              "slot_hour_kst": 12,
+              "job": "산업안전관리",
+              "location": "충북",
+              "employment": "정규직",
+              "recruitment_unit_count": 1,
+              "deadline_distance_seconds": 1041399.2229,
+              "observed_at": "2026-11-13T03:44:34.481774+00:00",
+              "elapsed_hours": 24.020473520555555
+            }
+          ],
+          "72h": []
+        },
+        "late_cumulative_observations": [
+          {
+            "post_id": "17938804020400505",
+            "notice_id": "cleaneye-81067",
+            "published_at": "2026-11-11T23:39:21.783881+00:00",
+            "captured_at": "2026-11-13T03:44:35.209864+00:00",
+            "elapsed_seconds": 101113.425983,
             "window": "24h",
             "metrics": {
-              "views": 3029,
-              "likes": 6,
+              "views": 659,
+              "likes": 1,
               "replies": 0,
               "reposts": 0,
               "quotes": 0
@@ -20072,313 +20280,229 @@
               "reposts": "observed",
               "quotes": "observed"
             },
-            "likes_rate_percent": 0.19808517662594916,
+            "likes_rate_percent": 0.15174506828528073,
             "status": "captured",
             "reader_replies": null,
             "reader_replies_status": "author_separation_unverified",
-            "first_sentence_type": "condition",
-            "experiment_eligible": false,
-            "first_sentence": "간호사 면허가 있다면,",
-            "format_id": "deadline_opportunity",
-            "contract_version": 2,
-            "sector_group": null,
-            "body_chars": 249,
-            "media": "TEXT",
-            "slot": "2026-11-11T20:00:00+09:00",
-            "slot_hour_kst": 20,
-            "job": "간호사",
-            "location": "순천병원",
-            "employment": "정규직",
-            "recruitment_unit_count": 3,
-            "deadline_distance_seconds": 420281.644869,
-            "observed_at": "2026-11-12T11:48:45.499723+00:00",
-            "elapsed_hours": 24.057540164444443
-          },
-          {
-            "post_id": "17918731521553015",
-            "notice_id": "a306877",
-            "published_at": "2026-11-12T03:43:20.777100+00:00",
-            "captured_at": "2026-11-13T03:44:34.481774+00:00",
-            "elapsed_seconds": 86473.704674,
-            "window": "24h",
-            "metrics": {
-              "views": 2231,
-              "likes": 6,
-              "replies": 0,
-              "reposts": 1,
-              "quotes": 0
-            },
-            "metric_status": {
-              "views": "observed",
-              "likes": "observed",
-              "replies": "observed",
-              "reposts": "observed",
-              "quotes": "observed"
-            },
-            "likes_rate_percent": 0.2689376961004034,
-            "status": "captured",
-            "reader_replies": null,
-            "reader_replies_status": "author_separation_unverified",
-            "first_sentence_type": "condition",
+            "first_sentence_type": "target",
             "experiment_eligible": true,
-            "first_sentence": "법정 안전관리자 선임 자격이 있다면,",
-            "format_id": "eligibility",
+            "first_sentence": "의료사회복지사로 일할 분께,",
+            "format_id": "hiring_core",
             "contract_version": 2,
             "sector_group": null,
-            "body_chars": 271,
-            "media": "TEXT",
-            "slot": "2026-11-12T12:00:00+09:00",
-            "slot_hour_kst": 12,
-            "job": "산업안전관리",
-            "location": "충북",
+            "body_chars": 275,
+            "media": "IMAGE",
+            "slot": "2026-11-12T08:00:00+09:00",
+            "slot_hour_kst": 8,
+            "job": "사회복지사",
+            "location": "경기도의료원 안성병원",
             "employment": "정규직",
             "recruitment_unit_count": 1,
-            "deadline_distance_seconds": 1041399.2229,
-            "observed_at": "2026-11-13T03:44:34.481774+00:00",
-            "elapsed_hours": 24.020473520555555
+            "deadline_distance_seconds": 616838.216119,
+            "observed_at": "2026-11-13T03:44:35.209864+00:00",
+            "elapsed_hours": 28.087062773055553
           }
         ],
-        "72h": []
-      },
-      "late_cumulative_observations": [
-        {
-          "post_id": "17938804020400505",
-          "notice_id": "cleaneye-81067",
-          "published_at": "2026-11-11T23:39:21.783881+00:00",
-          "captured_at": "2026-11-13T03:44:35.209864+00:00",
-          "elapsed_seconds": 101113.425983,
-          "window": "24h",
-          "metrics": {
-            "views": 659,
-            "likes": 1,
-            "replies": 0,
-            "reposts": 0,
-            "quotes": 0
-          },
-          "metric_status": {
-            "views": "observed",
-            "likes": "observed",
-            "replies": "observed",
-            "reposts": "observed",
-            "quotes": "observed"
-          },
-          "likes_rate_percent": 0.15174506828528073,
-          "status": "captured",
-          "reader_replies": null,
-          "reader_replies_status": "author_separation_unverified",
-          "first_sentence_type": "target",
-          "experiment_eligible": true,
-          "first_sentence": "의료사회복지사로 일할 분께,",
-          "format_id": "hiring_core",
-          "contract_version": 2,
-          "sector_group": null,
-          "body_chars": 275,
-          "media": "IMAGE",
-          "slot": "2026-11-12T08:00:00+09:00",
-          "slot_hour_kst": 8,
-          "job": "사회복지사",
-          "location": "경기도의료원 안성병원",
-          "employment": "정규직",
-          "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 616838.216119,
-          "observed_at": "2026-11-13T03:44:35.209864+00:00",
-          "elapsed_hours": 28.087062773055553
-        }
-      ],
-      "excluded": {
-        "late_or_unavailable": 1
-      },
-      "periods": [
-        {
-          "period": 1,
-          "start": "2026-11-11T11:45:18.355131+00:00",
-          "end": "2026-11-25T11:45:18.355131+00:00",
-          "status": "initial_observation",
-          "all_72h_observations_can_be_due": false,
-          "windows": {
-            "24h": {
-              "verified_main_count": 2,
-              "metric_medians": {
-                "views": 2630,
-                "likes": 6,
-                "replies": 0,
-                "reposts": 0.5,
-                "quotes": 0
-              },
-              "metric_observed_counts": {
-                "views": 2,
-                "likes": 2,
-                "replies": 2,
-                "reposts": 2,
-                "quotes": 2
-              },
-              "metric_totals": {
-                "views": 5260,
-                "likes": 12,
-                "replies": 0,
-                "reposts": 1,
-                "quotes": 0
-              },
-              "views_distribution": [
-                {
-                  "post_id": "17918731521553015",
-                  "views": 2231
-                },
-                {
-                  "post_id": "17896425015438025",
-                  "views": 3029
-                }
-              ],
-              "likes_rate_percent_median": 0.23351143636317628,
-              "likes_rate_percent_observed_posts": 2,
-              "reader_replies": null,
-              "reader_replies_status": "see_per_post_author_separation_status",
-              "profile_visits": null,
-              "follow_increase": null,
-              "link_clicks": null
-            },
-            "72h": {
-              "verified_main_count": 0,
-              "metric_medians": {
-                "views": null,
-                "likes": null,
-                "replies": null,
-                "reposts": null,
-                "quotes": null
-              },
-              "metric_observed_counts": {
-                "views": 0,
-                "likes": 0,
-                "replies": 0,
-                "reposts": 0,
-                "quotes": 0
-              },
-              "metric_totals": {
-                "views": null,
-                "likes": null,
-                "replies": null,
-                "reposts": null,
-                "quotes": null
-              },
-              "views_distribution": [],
-              "likes_rate_percent_median": null,
-              "likes_rate_percent_observed_posts": 0,
-              "reader_replies": null,
-              "reader_replies_status": "see_per_post_author_separation_status",
-              "profile_visits": null,
-              "follow_increase": null,
-              "link_clicks": null
-            }
-          },
-          "intro_groups_24h": {
-            "condition": {
-              "verified_main_count": 1,
-              "metric_medians": {
-                "views": 2231,
-                "likes": 6,
-                "replies": 0,
-                "reposts": 1,
-                "quotes": 0
-              },
-              "metric_observed_counts": {
-                "views": 1,
-                "likes": 1,
-                "replies": 1,
-                "reposts": 1,
-                "quotes": 1
-              },
-              "metric_totals": {
-                "views": 2231,
-                "likes": 6,
-                "replies": 0,
-                "reposts": 1,
-                "quotes": 0
-              },
-              "views_distribution": [
-                {
-                  "post_id": "17918731521553015",
-                  "views": 2231
-                }
-              ],
-              "likes_rate_percent_median": 0.2689376961004034,
-              "likes_rate_percent_observed_posts": 1,
-              "reader_replies": null,
-              "reader_replies_status": "see_per_post_author_separation_status",
-              "profile_visits": null,
-              "follow_increase": null,
-              "link_clicks": null
-            }
-          },
-          "intro_slot_media_counts": {
-            "condition": [
-              {
-                "slot_hour_kst": 12,
-                "media": "TEXT",
-                "count": 1
-              }
-            ]
-          },
-          "missing_intro_strata": [],
-          "conflicting_identical_intros": 0,
-          "eight_per_type_review_threshold_met": false,
-          "statistical_significance_claim": false,
-          "account_followers": {
-            "account": "hid_119",
-            "scope": "account_total",
-            "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T08:54:58.063249+00:00",
-            "observed_start": "2026-11-11T11:45:32.854727+00:00",
-            "observed_end": "2026-11-13T08:17:06.100264+00:00",
-            "start_followers": 415,
-            "end_followers": 428,
-            "net_change": 13,
-            "status": "observed_interval",
-            "exact_requested_boundaries": false,
-            "observation_statuses": {
-              "captured": 8
-            },
-            "post_attribution": null,
-            "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
-          },
-          "decision": "extend_observation_or_balance_intro_types"
-        }
-      ],
-      "account_followers": {
-        "account": "hid_119",
-        "scope": "account_total",
-        "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T08:54:58.063249+00:00",
-        "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-13T08:17:06.100264+00:00",
-        "start_followers": 415,
-        "end_followers": 428,
-        "net_change": 13,
-        "status": "observed_interval",
-        "exact_requested_boundaries": false,
-        "observation_statuses": {
-          "captured": 8
+        "excluded": {
+          "late_or_unavailable": 1
         },
-        "post_attribution": null,
-        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+        "periods": [
+          {
+            "period": 1,
+            "start": "2026-11-11T11:45:18.355131+00:00",
+            "end": "2026-11-25T11:45:18.355131+00:00",
+            "status": "initial_observation",
+            "all_72h_observations_can_be_due": false,
+            "windows": {
+              "24h": {
+                "verified_main_count": 2,
+                "metric_medians": {
+                  "views": 2630,
+                  "likes": 6,
+                  "replies": 0,
+                  "reposts": 0.5,
+                  "quotes": 0
+                },
+                "metric_observed_counts": {
+                  "views": 2,
+                  "likes": 2,
+                  "replies": 2,
+                  "reposts": 2,
+                  "quotes": 2
+                },
+                "metric_totals": {
+                  "views": 5260,
+                  "likes": 12,
+                  "replies": 0,
+                  "reposts": 1,
+                  "quotes": 0
+                },
+                "views_distribution": [
+                  {
+                    "post_id": "17918731521553015",
+                    "views": 2231
+                  },
+                  {
+                    "post_id": "17896425015438025",
+                    "views": 3029
+                  }
+                ],
+                "likes_rate_percent_median": 0.23351143636317628,
+                "likes_rate_percent_observed_posts": 2,
+                "reader_replies": null,
+                "reader_replies_status": "see_per_post_author_separation_status",
+                "profile_visits": null,
+                "follow_increase": null,
+                "link_clicks": null
+              },
+              "72h": {
+                "verified_main_count": 0,
+                "metric_medians": {
+                  "views": null,
+                  "likes": null,
+                  "replies": null,
+                  "reposts": null,
+                  "quotes": null
+                },
+                "metric_observed_counts": {
+                  "views": 0,
+                  "likes": 0,
+                  "replies": 0,
+                  "reposts": 0,
+                  "quotes": 0
+                },
+                "metric_totals": {
+                  "views": null,
+                  "likes": null,
+                  "replies": null,
+                  "reposts": null,
+                  "quotes": null
+                },
+                "views_distribution": [],
+                "likes_rate_percent_median": null,
+                "likes_rate_percent_observed_posts": 0,
+                "reader_replies": null,
+                "reader_replies_status": "see_per_post_author_separation_status",
+                "profile_visits": null,
+                "follow_increase": null,
+                "link_clicks": null
+              }
+            },
+            "intro_groups_24h": {
+              "condition": {
+                "verified_main_count": 1,
+                "metric_medians": {
+                  "views": 2231,
+                  "likes": 6,
+                  "replies": 0,
+                  "reposts": 1,
+                  "quotes": 0
+                },
+                "metric_observed_counts": {
+                  "views": 1,
+                  "likes": 1,
+                  "replies": 1,
+                  "reposts": 1,
+                  "quotes": 1
+                },
+                "metric_totals": {
+                  "views": 2231,
+                  "likes": 6,
+                  "replies": 0,
+                  "reposts": 1,
+                  "quotes": 0
+                },
+                "views_distribution": [
+                  {
+                    "post_id": "17918731521553015",
+                    "views": 2231
+                  }
+                ],
+                "likes_rate_percent_median": 0.2689376961004034,
+                "likes_rate_percent_observed_posts": 1,
+                "reader_replies": null,
+                "reader_replies_status": "see_per_post_author_separation_status",
+                "profile_visits": null,
+                "follow_increase": null,
+                "link_clicks": null
+              }
+            },
+            "intro_slot_media_counts": {
+              "condition": [
+                {
+                  "slot_hour_kst": 12,
+                  "media": "TEXT",
+                  "count": 1
+                }
+              ]
+            },
+            "missing_intro_strata": [],
+            "conflicting_identical_intros": 0,
+            "eight_per_type_review_threshold_met": false,
+            "statistical_significance_claim": false,
+            "account_followers": {
+              "account": "hid_119",
+              "scope": "account_total",
+              "requested_start": "2026-11-11T11:45:18.355131+00:00",
+              "requested_end": "2026-11-13T10:19:56.304310+00:00",
+              "observed_start": "2026-11-11T11:45:32.854727+00:00",
+              "observed_end": "2026-11-13T08:17:06.100264+00:00",
+              "start_followers": 415,
+              "end_followers": 428,
+              "net_change": 13,
+              "status": "observed_interval",
+              "exact_requested_boundaries": false,
+              "observation_statuses": {
+                "captured": 8
+              },
+              "post_attribution": null,
+              "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+            },
+            "decision": "extend_observation_or_balance_intro_types"
+          }
+        ],
+        "account_followers": {
+          "account": "hid_119",
+          "scope": "account_total",
+          "requested_start": "2026-11-11T11:45:18.355131+00:00",
+          "requested_end": "2026-11-13T10:19:56.304310+00:00",
+          "observed_start": "2026-11-11T11:45:32.854727+00:00",
+          "observed_end": "2026-11-13T08:17:06.100264+00:00",
+          "start_followers": 415,
+          "end_followers": 428,
+          "net_change": 13,
+          "status": "observed_interval",
+          "exact_requested_boundaries": false,
+          "observation_statuses": {
+            "captured": 8
+          },
+          "post_attribution": null,
+          "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+        },
+        "likes_rate_definition": "likes / views * 100; views are not unique readers",
+        "automatic_weight_changes": 0,
+        "statistical_significance_claim": false,
+        "decision": "extend_observation_or_balance_intro_types",
+        "limitations": [
+          "Different notices remain an observational comparison, not randomized causal evidence.",
+          "Author-separated reader replies and post-attributed follows/profile clicks remain unavailable unless explicitly verified.",
+          "Small counts can produce unstable percentages; read absolute likes and views together.",
+          "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
+        ]
       },
-      "likes_rate_definition": "likes / views * 100; views are not unique readers",
-      "automatic_weight_changes": 0,
-      "statistical_significance_claim": false,
-      "decision": "extend_observation_or_balance_intro_types",
-      "limitations": [
-        "Different notices remain an observational comparison, not randomized causal evidence.",
-        "Author-separated reader replies and post-attributed follows/profile clicks remain unavailable unless explicitly verified.",
-        "Small counts can produce unstable percentages; read absolute likes and views together.",
-        "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
-      ]
+      "v5_observation_windows": [
+        "24h",
+        "72h"
+      ],
+      "v5_comparison_status": "separate_cohort_not_legacy_AB; human_review_until_sufficient_verified_samples"
     },
     "new_24h_or_72h_observations": 0,
     "new_account_observations": 0,
     "current_post_windows": {
       "post_id": "18080747462409277",
       "published_at": "2026-11-13T17:16:52.245246+09:00",
-      "24h": "not_due",
-      "72h": "not_due"
+      "status": "24h_72h_not_due",
+      "observations": []
     },
     "weights_changed": false,
     "reader_replies": "author separation unverified",
@@ -20926,6 +21050,59 @@
       "latest_checked_at": "2026-11-13T08:56:45.035306+00:00",
       "latest_status": "held_unit_upper_bound_and_timezone_review",
       "latest_audit_path": "threads/audits/monitor-v2-20261113T1757.json"
+    },
+    "a306752": {
+      "latest_status": "held_qualification_reference_date_not_queued",
+      "latest_official_review": {
+        "checked_at": "2026-11-13T10:26:52Z",
+        "checks": [
+          {
+            "notice_id": "a306752",
+            "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+            "checked_at": "2026-11-13T10:20:42.802078+00:00",
+            "status": 200,
+            "sha256": "2aaeaf5372db0e57b184b98a77e068fa96339c98897b7ac2b48cf71ecd54e221",
+            "bytes": 11178
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+            "checked_at": "2026-11-13T10:21:34.163126+00:00",
+            "status": 200,
+            "sha256": "8118032ee990dc4175e3611b489774c0b1143a41083c7d2aaae5eba8ce055168",
+            "bytes": 90971
+          },
+          {
+            "url": "https://kirams.recruiter.co.kr",
+            "checked_at": "2026-11-13T10:21:34.163562+00:00",
+            "status": 200,
+            "sha256": "8d2c1306bd085c689d15bf382837f804a7d7d4d6ec3d599cec14e6c27db1d7f6",
+            "bytes": 21668
+          },
+          {
+            "url": "https://kllollain-max.github.io/careerpick/jobs/a306752.html",
+            "checked_at": "2026-11-13T10:23:20.569269+00:00",
+            "status": 200,
+            "sha256": "5836a036eafa7ad3c86fc523fcd75a24df5b0ead7417e90f9e003f3396629341",
+            "bytes": 14632
+          },
+          {
+            "url": "https://www.threads.com/@hid_119",
+            "checked_at": "2026-11-13T10:23:20.569618+00:00",
+            "status": 200,
+            "sha256": "de3dcaee9bd8b305901bddc7888d401005af7ad3750e81a12d88f0921b87f4f8",
+            "bytes": 637374
+          }
+        ],
+        "hold_reasons": [
+          "ALIO 결격사유에는 공고일 현재 응시 자격을 갖춘 자, 첨부 원문 필수에는 분과 전문의 예정자 포함. 예정자 인정 기준일은 명시적으로 해소되지 않음.",
+          "기관 ATS는 HTTP200 동적 홈 셸만 확인했으며 개별 공고·최신정정 게시판·접수 버튼 상태는 미확인. ALIO는 현재 진행중이고 공식 PDF에는 접수기간이 명시됨.",
+          "보류 초안만 보존; 전체 실행기 원고 검수·카드 생성·360 시각검수 미수행. 슬롯 배정·큐 ready·실제 게시 없음."
+        ],
+        "draft_chars": 303,
+        "queue_changed": false,
+        "card_generated": false,
+        "audit_path": "threads/audits/monitor-v2-20261113T1928.json"
+      }
     }
   },
   "writer_unassigned_drafts": {
@@ -21167,6 +21344,212 @@
         "공식 개별 접수·최신정정 조회가 파라미터 정합성 오류로 미완료; 우회/무한재시도 금지",
         "완전한 실행기 메타데이터·최종 검수·카드 실제검토 미완료"
       ]
+    },
+    "a306752": {
+      "notice_id": "a306752",
+      "status": "hold_not_queued",
+      "prepared_at": "2026-11-13T10:24:57.411005+00:00",
+      "contract_version": 2,
+      "draft_text": "외과에서 간담췌 진료를 맡을 분께,\n한국원자력의학원 외과 의사 정규직 1명 공고예요.\n\n의사·외과 전문의 면허가 필요해요.\n간담췌외과 분과 전문의는 취득예정자도 포함하지만 자격 인정시점은 확인이 필요해요.\n연구실적은 최근 5년 3편 이상 또는 최근 3년 SCI·SCIE 주저자(제1·교신) 1편 이상이어야 해요.\n\n공고일 만 65세 미만, 병역·결격 기준도 확인해요.\n간담췌 진료 2년은 우대예요.\n증빙의 인적사항·파일명과 중복지원 제한도 확인해요.\n\n서울 근무, 11월 20일 17:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "chars": 303,
+      "reply_texts": [],
+      "slot": null,
+      "planned_next_unstarted_slot": "2026-11-14T12:00:00+09:00",
+      "planned_media_only": "IMAGE; recheck actual latest success, no turn consumed",
+      "verification_status": "not_passed",
+      "remaining_hold_reasons": [
+        "ALIO 결격사유에는 공고일 현재 응시 자격을 갖춘 자, 첨부 원문 필수에는 분과 전문의 예정자 포함. 예정자 인정 기준일은 명시적으로 해소되지 않음.",
+        "기관 ATS는 HTTP200 동적 홈 셸만 확인했으며 개별 공고·최신정정 게시판·접수 버튼 상태는 미확인. ALIO는 현재 진행중이고 공식 PDF에는 접수기간이 명시됨.",
+        "보류 초안만 보존; 전체 실행기 원고 검수·카드 생성·360 시각검수 미수행. 슬롯 배정·큐 ready·실제 게시 없음."
+      ],
+      "source_refs": [
+        {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+          "checked_at": "2026-11-13T10:20:42.802078+00:00",
+          "document_sha256": "2aaeaf5372db0e57b184b98a77e068fa96339c98897b7ac2b48cf71ecd54e221",
+          "excerpt": "잡알리오\n채용정보 상세 보기\n공유하기\n정규직(의무직) 직원채용 공고(외과)\n2026.11.05 /\n진행중\n공공기관 채용정보\n기관명\n한국원자력의학원\n표준직무(NCS)\n보건.의료\n고용형태\n정규직\n학력정보\n대졸(4년),석사\n채용구분\n신입+경력\n근무지\n서울\n근무분야\n의사직\n채용인원\n1\n우대조건\n공고기간\n26.11.05 ~\n\t\t\t\t\t\t\t\t\t\t26.11.20\n응시자격\n의학원 채용공고번호 제2026-42호\n1. 모집분야 및 인원\n○ 외과 의사 1명\n<수행업무>\n- 외과 외래진료 및 입원환자 진료 및 수술\n- 외과 응급환자 진료 및 수술\n- 최소침습 수술, 로봇 수술\n- 간, 담도, 췌장 양성 및 악성질환 수술\n- 수술 후 환자 관리 및 교육\n- 타과 협의 진료 및 수술\n- 전공의, 전임의 교육\n- 연구 활동 및 논문 작성\n<필수>\n- 의사 면허증 소지자\n- 외과 전문의 면허 소지자\n- 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n- 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\nSCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n<우대>\n- 간담췌분과 진료 경력 2년 이상(전임의 포함)\n결격사유\n<결격사유>\n- 국가공무원법 제33조의 결격사유가 없는 자\n- 병역의무를 기피한 사실이 없는 자\n- 공고일 현재 응시 자격을 갖춘 자\n-「부패방지 및 국민권익위원회 설치와 운영에 관한 법률」\n제82조에 따른 비위면직자 불가\n- 공고일 기준 정년퇴직 기준연령(만65세)에 도달하지 않은 자\n전형절차/방법\n방법\t3. 의학원 채용사이트 내 제출서류\n○ 입사지원서, 자기소개서, 개인정보 수집 및 이용에 관한 동의서 각 1부.\n- 블라인드 채용과 관련하여 편견이 개입되어 차별을 야기할 수 있는 인적사항\n(이름, 성별, 사진, 출신지, 출신학교, 나이, 가족관계) 내용이 포함되어 있는 경우 부적격 처리함\n- 필수 응시자격 (※ 면허 및 자격증) 미기입시 부적격 처리함.\n4. 전형방법 및 절차\n○ 전형방법: 서류전형 및 면접\n○ 면접일시 및 장소: 추후공지\n5. 전형절차별 주요내용\n○ 원서접수\n- 접수기간: 2026.11.05.(목) ~ 2026.11.20.(금) 17시까지\n- 접수방법: 의학원채용사이트(http://kirams.recruiter.co.kr)에서 지원서 제출\n○ 전형별 세부일정 및 내용\n1. 1차 전형 서류심사 (적격/실격) :\n- 고득점자 순으로 채용예정인원의 10배수 선발\n- 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간 SCI(SCIE 포함) 주저자(제1저자, 교신처자) 논문 1편\n2. 2차 전형 최종면접(100점)\n- 1,2차 전형 합산점수 고득점자 순으로 최종합격자를 선발\n- 최종합격자 동점시 직원채용요령? 별표9.동점자처리기준을 적용\n- 면접 점수가 60점 미만일 경우 과락 (불합격)\n1) 연구실적 인정범위 및 기준 「교육과학기술부 고시 제2011-34호 “박사학위 과정 설치를 위한 교원\n연구실적 인정범위 및 기준」적용\n※ 사정에 따라 일정은 변경될 수 있으며, 확정된 일정 및 장소는 메일 및 SMS로 공지예정\n우대내용\n○ 장애인 및 취업보호(원)대상자는 증빙서류 제출 시 전형단계별 가산점 부여\n○ 의학원 규정에 따라 본원에 재직 중인 별정직 및 무기계약직이 정규직 지원시 가산점 부여\n전형단계별 채용정보\n외과 의사\n1차 :\n선발인원 명 / 응시인원 명\n전형단계별 결과확정일 :\n최종 :\n선발인원 명 / 응시인원 명\n전형단계별 결과확정일 :\n공고문\n[공고문]정규직(의무직) 직원모집 공고(외과).pdf\n입사지원서\n직무기술서\n기타 첨부파일\n[공고문]정규직(의무직) 직원모집 공고(외과).pdf\n미첨부 사유\n○ 입사지원서: 채용사이트 내 직접 작성으로 인하여 미첨부\n○ 직무기술서: 별도의 직무기술서 없음(공고문 내 기재)\n원문 URL\nhttp://kirams.recruiter.co.kr\n클립보드에 주소가 복사 되었습니다."
+        },
+        {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+          "checked_at": "2026-11-13T10:21:34.163126+00:00",
+          "document_sha256": "8118032ee990dc4175e3611b489774c0b1143a41083c7d2aaae5eba8ce055168",
+          "excerpt": "의학원 채용공고번호 제2026-42호\n\n\n                     정규직 직원모집 공고(의무직)\n1. 모집분야 및 인원\n\n      채용부서     직종     인원                           내용\n                               <수행업무>\n                               - 외과 외래진료 및 입원환자 진료 및 수술\n                               - 외과 응급환자 진료 및 수술\n                               - 최소침습 수술, 로봇 수술\n       외과       의사        1명   - 간, 담도, 췌장 양성 및 악성질환 수술\n                               - 수술 후 환자 관리 및 교육\n                               - 타과 협의 진료 및 수술\n                               - 전공의, 전임의 교육\n                               - 연구 활동 및 논문 작성\n\n\n2. 지원자격 등\n\n      채용부서           직종                          응시자격\n                               <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               <우대>\n                               - 간담췌분과 진료 경력 2년 이상(전임의 포함)\n                               <결격사유>\n                               - 국가공무원법 제33조의 결격사유가 없는 자\n                               - 병역의무를 기피한 사실이 없는 자\n             기관 공통\n                               -「부패방지 및 국민권익위원회 설치와 운영에 관한 법률」\n                                제82조에 따른 비위면직자 불가\n                        - 공고일 기준 정년퇴직 기준연령(만65세)에 도달하지 않은 자\n 1)\n      연구실적 인정범위 및 기준 「교육과학기술부 고시 제2011-34호 “박사학위 과정 설치를 위한 교원\n      연구실적 인정범위 및 기준」적용\n\n3. 의학원 채용사이트 내 제출서류\n\n ○ 입사지원서, 자기소개서, 개인정보 수집 및 이용에 관한 동의서 각 1부.\n      - 블라인드 채용과 관련하여 편견이 개입되어 차별을 야기할 수 있는 인적사항 (이름, 성별,\n       사진, 출신지, 출신학교, 나이, 가족관계) 내용이 포함되어 있는 경우 부적격 처리함\n      - 필수 응시자격 (※ 면허 및 자격증) 미기입시 부적격 처리함.\n      ○ 논문 및 연구실적물 증빙자료\n      - 최종학위 논문 초록 1부\n\f      - 연구실적물 증빙자료 각 1부\n      ※ 논문 첫 장(논문 제목, 학술지명, 초록 등 확인가능 페이지)\n      ※ 지식재산권의 경우 특허등록증 사본\n      ※ 증빙자료 제출시 블라인드 채용을 위하여 학교명, 성명, 지도교수명, 이메일 주소 등 인적사항을\n        masking(가림작업) 후 제출해야 함\n      ※ 첨부파일 명칭에 이름 등의 개인정보를 포함하지 않도록 유의\n\n4. 전형방법 및 절차\n\n ○ 전형방법: 서류전형 및 면접\n ○ 면접일시 및 장소: 추후공지\n\n5. 전형절차별 주요내용\n\n ○ 원서접수\n      - 접수기간: 2026년 11월 5일(목) ~ 11월 20일(금) 17시까지\n      - 접수방법: 의학원 채용사이트(http://kirams.recruiter.co.kr)에서 입사지원서 제출\n                  (외부 채용 사이트 또는 이메일을 통한 입사지원 접수 불가)\n ○ 전형별 세부일정 및 내용\n\n      구분     전형 방법                          내용                    전형 예정일\n\n                           - 고득점자 순으로 채용예정인원의 10배수 선발\n             서류심사                                                 공고마감 후\n 1차 전형                     - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n             (적격/실격)                                              2~3주 이내\n                            SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편\n                           - 면접전형 고득점자 순으로 최종합격자를 선발              1차 전형\n             최종면접\n 2차 전형                     - 최종합격자 동점시 ｢직원채용요령｣ 별표9.동점자처리기준을 적용    종료 후\n              (100점)\n                           - 면접 점수가 60점 미만일 경우 과락 (불합격)           2~3주 이내\n                                                                  2차 전형\n                           - 채용절차 규정 준수 여부 확인\n           채용점검                                                    종료 후\n                           - 전형별 절차 준수 여부 확인\n                                                                  1~2주 이내\n 1)\n      연구실적 인정범위 및 기준 「교육과학기술부 고시 제2011-34호 “박사학위 과정 설치를 위한 교원\n      연구실적 인정범위 및 기준」적용\n※ 사정에 따라 일정은 변경될 수 있으며, 확정된 일정 및 장소는 메일 및 SMS로 공지예정\n\n\n○ 최종합격자 선발시 동점자 처리 기준\n\n      구 분         내    용                           상   세\n\n                               다음의 법률에 따른 취업지원 대상자\n                               - 국가유공자 등 예우 및 지원에 관한 법률\n                  취업보호         - 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률\n      1순위\n                  지원대상자        - 독립유공자예우에 관한 법률, 보훈보상대상자 지원에 관한 법률\n                               - 제대군인지원에 관한 법률\n                               - 특수임무유공자 예우 및 단체설립에 관한 법률\n\f                    - 5‧18 민주 유공자예우에 관한 법률\n  2순위       장애인     장애인고용촉진 및 직업재활법 제2조 제1호에 따른 장애인\n                    가. 1·2·3차전형 합산점수 동점시 → 3차전형 고득점자\n                    나. 3차전형 동점시 → 2차전형 고득점자\n                    다. 2차전형도 동점시 → 1차전형 고득점자\n          직전 전형의    라. 1차전형도 동점시 → 어학점수 고득점자\n  3순위\n            고득점자    마. 최종면접 중 내부위원 평균점수 고득점자\n                    바. 2차전형 중 내부위원 평균점수 고득점자\n                    사. 1차전형 중 내부위원 평균점수 고득점자\n                    ※‘가’호부터 순차적으로 적용함\n\n\n6. 기타\n  ○ 이 공고에 명시되지 않은 사항은 한국원자력의학원 인사 관련 규정에 의하며, 응시원서\n   등에 허위기재 또는 기재착오, 구비서류 미제출 등으로 인한 불이익은 응시자 본인의\n   책임으로 합니다.\n ○ 「부패방지 및 국민권익위원회 설치와 운영에 관한 법률」제82조에 따른 비위면직자\n   등은 취업을 제한함\n ○ 제출된 서류가 허위나 위조로 판명날 시에는 합격을 취소함\n ○ 선발자의 합격 포기 또는 취소 시 예비합격자(차순위자)를 선발할 수 있음\n ○ 신규직원 채용과정에서 해당분야에 적격자가 없을 경우 선발하지 않을 수 있음\n ○ 제출된 서류는「채용절차의 공정화에 관한법률」‘별지 제3호서식’의 채용서류 반환\n   청구서를 전자우편(담당자 메일주소: job@kirams.re.kr) 또는 팩스(02-978-2005) 등\n   으로 제출할 시 반환 청구가 가능하며, 수신자 부담으로 등기우편으로 발송해 드립니다.\n   (단, 이메일을 통한 제출자료 등은 제외)\n ○ 채용서류의 반환을 청구하지 아니한 경우에는 개인정보보호법에 따라 지체 없이 파기할 예정\n ○ 동일 공고 내에서 복수지원 불가함.\n ○ 장애인 및 취업보호지원대상자는 증빙서류 제출시 전형단계별 가산점부여\n ○ 의학원 규정에 따라 본원에 재직 중인 별정직 및 무기계약직이 정규직 채용 지원시\n   가산점 부여\n ○ 입사지원서 관련 문의처 : 한국원자력의학원 인사혁신팀 (02)970-2908\n\n\n                       위와 같이 공고함\n\n                     2026년   11월    5일\n\n\n                    한국원자력의학원장\n\f"
+        }
+      ],
+      "fact_evidence": [
+        {
+          "field": "title",
+          "value": "외과 의사",
+          "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+          "excerpt": "○ 외과 의사 1명"
+        },
+        {
+          "field": "count",
+          "value": 1,
+          "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+          "excerpt": "○ 외과 의사 1명"
+        },
+        {
+          "field": "employment",
+          "value": "정규직",
+          "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+          "excerpt": "고용형태\n정규직"
+        },
+        {
+          "field": "location",
+          "value": "서울",
+          "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+          "excerpt": "근무지\n서울"
+        }
+      ],
+      "v5": {
+        "policy_id": "careerpick-threads-v5-20261111",
+        "contract_version": 2,
+        "restrictions_complete": false,
+        "fact_consistency_check": "hold_qualification_reference_date",
+        "hook_candidates": [
+          {
+            "id": "target",
+            "type": "target",
+            "text": "외과에서 간담췌 진료를 맡을 분께,\n한국원자력의학원 외과 의사 정규직 1명 공고예요."
+          },
+          {
+            "id": "condition",
+            "type": "condition",
+            "text": "의사·외과 전문의 면허가 있다면,\n한국원자력의학원 외과 정규직 1명 공고를 확인해요."
+          },
+          {
+            "id": "job",
+            "type": "job",
+            "text": "간담췌 질환 진료와 수술을 맡아요.\n한국원자력의학원 외과 의사 정규직 1명 공고예요."
+          }
+        ],
+        "selected_hook_id": "target",
+        "first_sentence_type": "target",
+        "hook_review": {
+          "factual": true,
+          "target_clear": true,
+          "natural": true
+        },
+        "key_restrictions": [
+          {
+            "text": "의사·외과 전문의 면허가 필요해요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+            "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               ",
+            "classification": "required",
+            "logic": "all_of",
+            "paths": [
+              {
+                "summary": "의사 면허",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+                "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               "
+              },
+              {
+                "summary": "외과 전문의 면허",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+                "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               "
+              }
+            ]
+          },
+          {
+            "text": "간담췌외과 분과 전문의는 취득예정자도 포함하지만 자격 인정시점은 확인이 필요해요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+            "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               ",
+            "classification": "required",
+            "logic": "any_of",
+            "paths": [
+              {
+                "summary": "자격 취득자",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+                "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               "
+              },
+              {
+                "summary": "자격 취득예정자",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+                "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               "
+              }
+            ]
+          },
+          {
+            "text": "연구실적은 최근 5년 3편 이상 또는 최근 3년 SCI·SCIE 주저자(제1·교신) 1편 이상이어야 해요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+            "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               ",
+            "classification": "required",
+            "logic": "any_of",
+            "paths": [
+              {
+                "summary": "최근 5년 연구실적 3편 이상; 공고 각주 인정기준",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+                "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               "
+              },
+              {
+                "summary": "최근 3년 SCI(SCIE포함) 제1저자 또는 교신저자 논문 1편 이상",
+                "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+                "excerpt": "      <필수>\n                               - 의사 면허증 소지자\n                               - 외과 전문의 면허 소지자\n                               - 외과 간담췌외과 분과 전문의 자격 취득자(예정자 포함)\n        외과           의사\n                               - 최근 5년간 연구실적 3편 이상1) 충족 또는 최근 3년간\n                                SCI(SCIE 포함) 주저자(제1저자, 교신저자) 논문 1편 이상\n                               "
+              }
+            ]
+          },
+          {
+            "text": "공고일 만 65세 미만, 병역·결격 기준도 확인해요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+            "excerpt": "<결격사유>\n                               - 국가공무원법 제33조의 결격사유가 없는 자\n                               - 병역의무를 기피한 사실이 없는 자\n             기관 공통\n                               -「부패방지 및 국민권익위원회 설치와 운영에 관한 법률」\n                                제82조에 따른 비위면직자 불가\n                        - 공고일 기준 정년퇴직 기준연령(만65세)에 도달하지 않은 자\n 1)\n      연구실적 인정범위 및 기준 「교육과학기술부 고시 제2011-34호 “박사학위 과정 설치를 위한 교원\n      연구실적 인정범위 및 기준」적용\n\n",
+            "classification": "required",
+            "logic": "single"
+          },
+          {
+            "text": "간담췌 진료 2년은 우대예요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+            "excerpt": "<우대>\n                               - 간담췌분과 진료 경력 2년 이상(전임의 포함)\n                               ",
+            "classification": "preferred",
+            "logic": "single"
+          },
+          {
+            "text": "증빙의 인적사항·파일명과 중복지원 제한도 확인해요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+            "excerpt": "○ 논문 및 연구실적물 증빙자료\n      - 최종학위 논문 초록 1부\n\f      - 연구실적물 증빙자료 각 1부\n      ※ 논문 첫 장(논문 제목, 학술지명, 초록 등 확인가능 페이지)\n      ※ 지식재산권의 경우 특허등록증 사본\n      ※ 증빙자료 제출시 블라인드 채용을 위하여 학교명, 성명, 지도교수명, 이메일 주소 등 인적사항을\n        masking(가림작업) 후 제출해야 함\n      ※ 첨부파일 명칭에 이름 등의 개인정보를 포함하지 않도록 유의\n\n\n ○ 동일 공고 내에서 복수지원 불가함.",
+            "classification": "required",
+            "logic": "single"
+          }
+        ],
+        "useful_point": {
+          "text": "증빙의 인적사항·파일명과 중복지원 제한도 확인해요.",
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085426",
+          "excerpt": "○ 논문 및 연구실적물 증빙자료\n      - 최종학위 논문 초록 1부\n\f      - 연구실적물 증빙자료 각 1부\n      ※ 논문 첫 장(논문 제목, 학술지명, 초록 등 확인가능 페이지)\n      ※ 지식재산권의 경우 특허등록증 사본\n      ※ 증빙자료 제출시 블라인드 채용을 위하여 학교명, 성명, 지도교수명, 이메일 주소 등 인적사항을\n        masking(가림작업) 후 제출해야 함\n      ※ 첨부파일 명칭에 이름 등의 개인정보를 포함하지 않도록 유의\n\n\n ○ 동일 공고 내에서 복수지원 불가함."
+        },
+        "recruitment_unit": {
+          "title": "외과 의사",
+          "count": 1,
+          "employment": "정규직",
+          "scope": "single_recruitment_unit",
+          "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+          "excerpt": "○ 외과 의사 1명"
+        },
+        "correction_check": {
+          "checked_at": "2026-11-13T10:21:34.163562+00:00",
+          "result": "not_fully_verified_hold",
+          "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+          "checked_scope": "현재 ALIO 상세·연결 PDF 전3쪽 추출텍스트, 기관 ATS 홈 HTML, 실제 프로필 연결 및 CareerPick 상세를 읽음",
+          "limitations": [
+            "별도 정정게시판 및 개별 ATS 공고의 정정 이력 미확인",
+            "ALIO 공고일 자격 문구와 PDF 예정자 인정 기준일 충돌 미해소",
+            "실제 지원·로그인·제출 없음"
+          ]
+        },
+        "style_rewrites": 1,
+        "selection_reason": "유일한 미사용 ALIO 정규직 eligible 후보, 단일모집1명·서울·준비기간·직무 구체성 검증. 독자 인기 추정 없음. 자격인정시점 불명으로 보류.",
+        "presentation_style": "regular_interest",
+        "presentation_style_reason": "다음 계획 eligibility_info 이후 정규직 관심형을 검토하되 미확인 자격은 공개하지 않음. 미래 슬롯은 배정하지 않음.",
+        "public_preview": {
+          "main_text": "외과에서 간담췌 진료를 맡을 분께,\n한국원자력의학원 외과 의사 정규직 1명 공고예요.\n\n의사·외과 전문의 면허가 필요해요.\n간담췌외과 분과 전문의는 취득예정자도 포함하지만 자격 인정시점은 확인이 필요해요.\n연구실적은 최근 5년 3편 이상 또는 최근 3년 SCI·SCIE 주저자(제1·교신) 1편 이상이어야 해요.\n\n공고일 만 65세 미만, 병역·결격 기준도 확인해요.\n간담췌 진료 2년은 우대예요.\n증빙의 인적사항·파일명과 중복지원 제한도 확인해요.\n\n서울 근무, 11월 20일 17:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+          "detail_reply": ""
+        },
+        "length_exception_reason": "분과 전문의 예정자 기준일 미확인과 연구실적 OR, 나이·우대·증빙·중복지원 제한을 보존한 보류 초안. 공개 검수 통과 아님.",
+        "experiment_eligible": false,
+        "hold_reason": "qualification reference date unresolved; no publishable assignment"
+      },
+      "review_scope": "Held draft only. final ready schema not passed; no card or publication assignment.",
+      "audit_path": "threads/audits/monitor-v2-20261113T1928.json",
+      "audit_blob_sha": "096359f60999767b5328f853a6cc8406d73ea1d1"
     }
   }
 }
