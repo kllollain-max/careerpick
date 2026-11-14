@@ -7,3 +7,5 @@
 - Reject elapsed deadlines, preserve existing outputs, never auto-post.
 - The currently published CareerPick ALIO pages do not consistently contain confirmed application deadlines, so most cannot pass this gate without official notice verification.
 - Existing collector, site, Threads workflows, and production branch must remain unchanged.
+
+- Required `deadline_evidence`: `{kind: "official_application_deadline", quote: "...", application_deadline: "YYYY-MM-DD HH:MM", reviewed: true}`. Evidence timestamp must exactly match selected deadline. The `reviewed` flag is a workflow assertion, not independent proof of authenticity.
