@@ -14,6 +14,9 @@ class SelectJobsTests(unittest.TestCase):
  def test_mismatched_deadline_evidence_rejected(self):
   row=job("mismatch",100);row["deadline_evidence"]["application_deadline"]="2026-11-21 18:00"
   selected,_=choose([row],NOW);self.assertFalse(selected)
+ def test_quote_disagrees_with_deadline_rejected(self):
+  row=job("quote_mismatch",100);row["deadline_evidence"]["quote"]="접수마감 2026-11-21 18:00"
+  selected,_=choose([row],NOW);self.assertFalse(selected)
  def test_no_deadline_evidence_rejected(self):
   row=job("unsupported",100);row.pop("deadline_evidence")
   selected,_=choose([row],NOW);self.assertFalse(selected)
