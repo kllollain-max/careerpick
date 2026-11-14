@@ -3,6 +3,7 @@ Never modifies live CareerPick or publishes social posts.
 """
 import argparse,datetime,hashlib,json,os,shutil,tempfile,zipfile
 from pathlib import Path
+from PIL import Image
 from zoneinfo import ZoneInfo
 from select_jobs import choose
 from prepare_cards import cards_for
@@ -35,7 +36,7 @@ def run(snapshot,output,limit=5):
                 image=render(card,i,len(payload["cards"]),payload["brand"])
                 if image.size!=(1080,1350):raise ValueError("Unexpected card resolution")
                 image.save(folder/name)
-                with __import__("PIL").Image.open(folder/name) as saved:
+                with Image.open(folder/name) as saved:
                     saved.verify()
                 names.append(name)
             (folder/"source.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
