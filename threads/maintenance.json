@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T00:16:14Z",
-  "last_observed_at": "2026-11-14T00:16:14Z",
+  "updated_at": "2026-11-14T00:48:04Z",
+  "last_observed_at": "2026-11-14T00:48:04Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -12430,7 +12430,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T00:16:14Z",
+    "checked_at": "2026-11-14T00:48:04Z",
     "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -12447,7 +12447,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "no_new_result_next12_image_unprepared",
+    "status": "no_new_publication_next12_image_unprepared_new_official_fact_hold",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12492,7 +12492,7 @@
     "monitored_slot": "2026-11-14T12:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T14:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T091614.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T094804.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -12508,7 +12508,7 @@
     },
     "new_comparable_24h_observations": 0,
     "new_late_cumulative_observations": 0,
-    "new_candidate_fact_reviews": 0
+    "new_candidate_fact_reviews": 1
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -18973,7 +18973,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T00:16:14Z",
+    "checked_at": "2026-11-14T00:48:04Z",
     "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -18985,7 +18985,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T09:14:37.877263+09:00",
+      "evaluated_at": "2026-11-14T09:45:14.421885+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19069,51 +19069,189 @@
     "ready_entries": [],
     "official_checks": [
       {
-        "notice_id": "cleaneye-80976",
-        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80976",
-        "checked_at": "2026-11-14T00:14:59.755312+00:00",
-        "status": "unavailable",
-        "error": "HTTP Error 503: Service Unavailable",
-        "ready": false
+        "notice_id": "a306874",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+        "checked_at": "2026-11-14T00:46:13.074543+00:00",
+        "status": 200,
+        "sha256": "f0ba97c22b042f37fcf927e9b87b08f0bd80e93df9e5e4e3a5d3ef4d757121b4",
+        "bytes": 14173
       },
       {
-        "notice_id": "cleaneye-81111",
-        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81111",
-        "checked_at": "2026-11-14T00:14:59.755989+00:00",
-        "status": "unavailable",
-        "error": "HTTP Error 503: Service Unavailable",
-        "ready": false
+        "notice_id": "a306875",
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306875",
+        "checked_at": "2026-11-14T00:46:13.075337+00:00",
+        "status": 200,
+        "sha256": "242df227cf8bca8bafb89ea75722b34b15deeebc6b38782b049cae1077ad1dd7",
+        "bytes": 21212
       }
     ],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T091614.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T094804.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T00:16:14Z",
+      "checked_at": "2026-11-14T00:48:04Z",
       "checks": [
         {
-          "notice_id": "cleaneye-80976",
-          "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80976",
-          "checked_at": "2026-11-14T00:14:59.755312+00:00",
-          "status": "unavailable",
-          "error": "HTTP Error 503: Service Unavailable",
-          "ready": false
+          "notice_id": "a306874",
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+          "checked_at": "2026-11-14T00:46:13.074543+00:00",
+          "status": 200,
+          "sha256": "f0ba97c22b042f37fcf927e9b87b08f0bd80e93df9e5e4e3a5d3ef4d757121b4",
+          "bytes": 14173
         },
         {
-          "notice_id": "cleaneye-81111",
-          "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81111",
-          "checked_at": "2026-11-14T00:14:59.755989+00:00",
-          "status": "unavailable",
-          "error": "HTTP Error 503: Service Unavailable",
-          "ready": false
+          "notice_id": "a306875",
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306875",
+          "checked_at": "2026-11-14T00:46:13.075337+00:00",
+          "status": 200,
+          "sha256": "242df227cf8bca8bafb89ea75722b34b15deeebc6b38782b049cae1077ad1dd7",
+          "bytes": 21212
         }
       ],
-      "action": "One bounded GET each for official Cleaneye80976 and81111 returned503. No repeated loop, bypass, candidate promotion, manuscript/card generation, or source timestamp fabrication.",
-      "audit_path": "threads/audits/monitor-v2-20261114T091614.json"
+      "action": "Switched from Cleaneye503 sources to ALIO306874/306875. Official detail200,306874 complete notice/jobPDF200 reviewed; ATS homepage shell cannot verify individual deadline time/corrections. Hold unresolved graduation conflict and deadline, no queue promotion.",
+      "audit_path": "threads/audits/monitor-v2-20261114T094804.json"
     },
-    "additional_official_checks": [],
-    "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "f8861bb0ade308be010aa4200b3b6258c8f7c68b6cbaf4e513c4887ba74d29d9"
+    "additional_official_checks": [
+      {
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+        "name": "notice.pdf",
+        "checked_at": "2026-11-14T00:46:34.981318+00:00",
+        "status": 200,
+        "sha256": "366d76229cd5e8a203501bfc363e0419f3c161f4e5b04c2e77b607a1e23f85ff",
+        "bytes": 120835
+      },
+      {
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
+        "name": "job.pdf",
+        "checked_at": "2026-11-14T00:46:34.982069+00:00",
+        "status": 200,
+        "sha256": "83fbecf38b2725d031ed0541eca4bc3c511990e56459867be2e9cc09d784950c",
+        "bytes": 48036
+      },
+      {
+        "url": "https://snubh.recruiter.co.kr",
+        "name": "ats.html",
+        "checked_at": "2026-11-14T00:46:34.983014+00:00",
+        "status": 200,
+        "sha256": "129732209401771d313b9e744c0c22f03bbfe23eab1e85f65e797516ce1322a2",
+        "bytes": 5732
+      }
+    ],
+    "new_candidate_fact_reviews": [
+      {
+        "notice_id": "a306874",
+        "checked_at": "2026-11-14T00:48:04Z",
+        "status": "hold",
+        "title": "분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고",
+        "source_refs": [
+          {
+            "notice_id": "a306874",
+            "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "checked_at": "2026-11-14T00:46:13.074543+00:00",
+            "status": 200,
+            "sha256": "f0ba97c22b042f37fcf927e9b87b08f0bd80e93df9e5e4e3a5d3ef4d757121b4",
+            "bytes": 14173
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "name": "notice.pdf",
+            "checked_at": "2026-11-14T00:46:34.981318+00:00",
+            "status": 200,
+            "sha256": "366d76229cd5e8a203501bfc363e0419f3c161f4e5b04c2e77b607a1e23f85ff",
+            "bytes": 120835
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
+            "name": "job.pdf",
+            "checked_at": "2026-11-14T00:46:34.982069+00:00",
+            "status": 200,
+            "sha256": "83fbecf38b2725d031ed0541eca4bc3c511990e56459867be2e9cc09d784950c",
+            "bytes": 48036
+          }
+        ],
+        "official_review_scope": "Current ALIO detail and complete 4-page recruitment PDF plus one-page job description read. ATS home200 was only a shell and did not expose an individual notice or current correction board.",
+        "fact_evidence": {
+          "title": {
+            "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "excerpt": "분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고"
+          },
+          "count": {
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "업무지원직(신입) 미화 AA1 10 [필수] 미화 업무 가능자",
+            "scope": "single_recruitment_unit"
+          },
+          "employment": {
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "업무지원직은 정규직으로 3개월간의 수습기간을 두며"
+          },
+          "location": {
+            "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "excerpt": "근무지 경기"
+          }
+        },
+        "key_restrictions": [
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "시차출퇴근, 교대근무 가능자에 한하며"
+          },
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "기졸업자에 한함",
+            "conflict": "Same PDF submission section also lists 졸업예정자의 경우 졸업예정증명서(재학증명서); eligibility cannot be narrowed or expanded without clarification."
+          },
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "군복무는 비대상, 복무완료, 면제자에 한함",
+            "logic": "any_of"
+          },
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "우리 병원 정년초과자(공고마감일 기준 만 60세)는 응시대상이 아니며"
+          },
+          {
+            "classification": "preferred",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "취업지원대상자, 장애인은 우대함"
+          }
+        ],
+        "important_working_conditions": {
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+          "excerpt": "05:30~14:30, 13:00~22:00, 21:30~익일06:30; 최종합격자는 지원직무 외 타 직무에서 근무할 수 있음; 수습 3개월 1차60점 미달 시 추가2개월 후 2차60점 미만 임용취소 또는 근로계약해지 가능; 임용후보자 등록유효기간1년(1년 연장가능), 등록후 임용대기 가능; 지정/협의일 출근조건"
+        },
+        "useful_point": {
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
+          "excerpt": "일반, 의료폐기물(격리폐기물 포함) 처리업무; 오염된 구역의 청소 및 소독업무"
+        },
+        "application_period": {
+          "start_date": "2026-11-11",
+          "end_date": "2026-11-20",
+          "end_time": null,
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129"
+        },
+        "correction_check": {
+          "checked_at": "2026-11-14T00:48:04Z",
+          "result": "incomplete",
+          "reviewed_sources": [
+            "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "https://www.alio.go.kr/download/download.json?fileNo=3086117"
+          ],
+          "limitations": "ATS home only; individual application status/end time and full latest correction board not verified."
+        },
+        "restrictions_complete": false,
+        "fact_consistency_check": "hold_graduation_conflict_and_deadline_time_unconfirmed",
+        "ready": false,
+        "queue_assigned": false,
+        "body_created": false,
+        "card_created": false,
+        "profile_target_accessed": false
+      }
+    ],
+    "selection_input_sha256": "5c5cc6ddd47ed41309d56eac10c4da1378ad0189058679edaa81b297aaf2b45e"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19634,15 +19772,18 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T00:16:14Z",
+      "checked_at": "2026-11-14T00:48:04Z",
       "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
       "contract_version": 2,
       "policy_hashes": {
-        "threads/writer-policy.json": "41d1e6e61a70dd084946af2008b8555adc8d865efea2f129c83cde9156551b74",
         "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
         "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
         "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
-        "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+        "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
+        "threads/writer-queue.json": "10bffd82c989f23f4cc572babb5f00a250facb75",
+        "threads/maintenance.json": "2d5a2fd76e50c19ef1ebc1665c9b9d724ae096e5",
+        "threads/performance.json": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
+        "threads_posted.json": "854f5c0ad77580084a5aedd53bfb60011f8b147c"
       },
       "full_active_prompt_read": true,
       "queue_check_status": "validated",
@@ -19650,7 +19791,7 @@
       "new_regular_publications": 0,
       "next_media": "IMAGE",
       "next_slot": "2026-11-14T12:00:00+09:00",
-      "audit_path": "threads/audits/monitor-v2-20261114T091614.json"
+      "audit_path": "threads/audits/monitor-v2-20261114T094804.json"
     },
     "next_slot_official_preflight": {
       "checked_at": "2026-11-14T00:10:12Z",
@@ -19908,12 +20049,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T00:16:14Z",
+    "checked_at": "2026-11-14T00:48:04Z",
     "state_blob_sha": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T00:14:38.746577+00:00",
+      "as_of": "2026-11-14T00:45:15.499120+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20308,7 +20449,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T00:14:38.746577+00:00",
+            "requested_end": "2026-11-14T00:45:15.499120+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T23:29:00.886949+00:00",
             "start_followers": 415,
@@ -20329,7 +20470,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T00:14:38.746577+00:00",
+        "requested_end": "2026-11-14T00:45:15.499120+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T23:29:00.886949+00:00",
         "start_followers": 415,
@@ -21296,6 +21437,121 @@
         ],
         "audit_path": "threads/audits/monitor-v2-20261114T052806.json"
       }
+    },
+    "a306874": {
+      "latest_official_fact_review": {
+        "notice_id": "a306874",
+        "checked_at": "2026-11-14T00:48:04Z",
+        "status": "hold",
+        "title": "분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고",
+        "source_refs": [
+          {
+            "notice_id": "a306874",
+            "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "checked_at": "2026-11-14T00:46:13.074543+00:00",
+            "status": 200,
+            "sha256": "f0ba97c22b042f37fcf927e9b87b08f0bd80e93df9e5e4e3a5d3ef4d757121b4",
+            "bytes": 14173
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "name": "notice.pdf",
+            "checked_at": "2026-11-14T00:46:34.981318+00:00",
+            "status": 200,
+            "sha256": "366d76229cd5e8a203501bfc363e0419f3c161f4e5b04c2e77b607a1e23f85ff",
+            "bytes": 120835
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
+            "name": "job.pdf",
+            "checked_at": "2026-11-14T00:46:34.982069+00:00",
+            "status": 200,
+            "sha256": "83fbecf38b2725d031ed0541eca4bc3c511990e56459867be2e9cc09d784950c",
+            "bytes": 48036
+          }
+        ],
+        "official_review_scope": "Current ALIO detail and complete 4-page recruitment PDF plus one-page job description read. ATS home200 was only a shell and did not expose an individual notice or current correction board.",
+        "fact_evidence": {
+          "title": {
+            "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "excerpt": "분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고"
+          },
+          "count": {
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "업무지원직(신입) 미화 AA1 10 [필수] 미화 업무 가능자",
+            "scope": "single_recruitment_unit"
+          },
+          "employment": {
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "업무지원직은 정규직으로 3개월간의 수습기간을 두며"
+          },
+          "location": {
+            "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "excerpt": "근무지 경기"
+          }
+        },
+        "key_restrictions": [
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "시차출퇴근, 교대근무 가능자에 한하며"
+          },
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "기졸업자에 한함",
+            "conflict": "Same PDF submission section also lists 졸업예정자의 경우 졸업예정증명서(재학증명서); eligibility cannot be narrowed or expanded without clarification."
+          },
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "군복무는 비대상, 복무완료, 면제자에 한함",
+            "logic": "any_of"
+          },
+          {
+            "classification": "required",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "우리 병원 정년초과자(공고마감일 기준 만 60세)는 응시대상이 아니며"
+          },
+          {
+            "classification": "preferred",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "excerpt": "취업지원대상자, 장애인은 우대함"
+          }
+        ],
+        "important_working_conditions": {
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+          "excerpt": "05:30~14:30, 13:00~22:00, 21:30~익일06:30; 최종합격자는 지원직무 외 타 직무에서 근무할 수 있음; 수습 3개월 1차60점 미달 시 추가2개월 후 2차60점 미만 임용취소 또는 근로계약해지 가능; 임용후보자 등록유효기간1년(1년 연장가능), 등록후 임용대기 가능; 지정/협의일 출근조건"
+        },
+        "useful_point": {
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
+          "excerpt": "일반, 의료폐기물(격리폐기물 포함) 처리업무; 오염된 구역의 청소 및 소독업무"
+        },
+        "application_period": {
+          "start_date": "2026-11-11",
+          "end_date": "2026-11-20",
+          "end_time": null,
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129"
+        },
+        "correction_check": {
+          "checked_at": "2026-11-14T00:48:04Z",
+          "result": "incomplete",
+          "reviewed_sources": [
+            "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
+            "https://www.alio.go.kr/download/download.json?fileNo=3086129",
+            "https://www.alio.go.kr/download/download.json?fileNo=3086117"
+          ],
+          "limitations": "ATS home only; individual application status/end time and full latest correction board not verified."
+        },
+        "restrictions_complete": false,
+        "fact_consistency_check": "hold_graduation_conflict_and_deadline_time_unconfirmed",
+        "ready": false,
+        "queue_assigned": false,
+        "body_created": false,
+        "card_created": false,
+        "profile_target_accessed": false
+      },
+      "audit_path": "threads/audits/monitor-v2-20261114T094804.json"
     }
   },
   "writer_unassigned_drafts": {
