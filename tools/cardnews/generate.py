@@ -45,7 +45,9 @@ def main():
  src=Path(sys.argv[1]);subprocess.run([sys.executable,str(Path(__file__).with_name('validate.py')),str(src)],check=True);data=json.loads(src.read_text(encoding='utf-8'))
  errors=validate(data)
  if errors:raise ValueError('; '.join(errors))
- out=Path(sys.argv[2]);rendered=[]
+ out=Path(sys.argv[2]);
+ if out.exists():raise FileExistsError('Output directory already exists; preserve previous output')
+ rendered=[]
  for i,c in enumerate(data['cards'],1):
   name=f'card_{i:02}.png';rendered.append((name,render(c,i,len(data['cards']),data.get('brand','CAREERPICK | 커리어픽'))))
  out.mkdir(parents=True,exist_ok=True)
