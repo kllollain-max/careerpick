@@ -7,7 +7,7 @@ class OfflinePipelineTests(unittest.TestCase):
  def test_expired_and_uncertain_no_output(self):
   with tempfile.TemporaryDirectory() as t:
    p=Path(t);src=p/"jobs.json";dst=p/"out"
-   src.write_text(json.dumps([{"id":"a1","official_url":"https://example.org","official_verified":True,"headcount":10,"employment_type":"정규직","application_deadline":"2020-01-01 18:00"},{"id":"a2","official_url":"https://example.org","official_verified":True,"headcount":99,"employment_type":"정규직","application_deadline":"2099-12-31"}]),encoding="utf-8")
+   src.write_text(json.dumps([{"id":"a1","official_url":"https://job.alio.go.kr","official_verified":True,"headcount":10,"employment_type":"정규직","application_deadline":"2020-01-01 18:00"},{"id":"a2","official_url":"https://job.alio.go.kr","official_verified":True,"headcount":99,"employment_type":"정규직","application_deadline":"2099-12-31"}]),encoding="utf-8")
    result=run(src,dst)
    self.assertEqual(result["created"],0)
    self.assertFalse(dst.exists())
