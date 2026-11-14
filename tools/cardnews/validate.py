@@ -22,5 +22,5 @@ if __name__=='__main__':
  d=json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
  errors=validate(d)
  if errors:
-  print('\\n'.join(errors));sys.exit(1)
+  print('\n'.join(errors));sys.exit(1)
  print('Structure and caption checks passed; factual and visual review still required')
