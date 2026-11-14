@@ -4,7 +4,7 @@ from pathlib import Path
 def validate(d):
  errors=[]
  if d.get('verified') is not True: errors.append('verified must be true after manual official-source review')
- if not isinstance(d.get('source'),str) or not d['source'].strip(): errors.append('official source required')
+ if not isinstance(d.get('source'),str) or not d['source'].strip() or 'DEMO ONLY' in d['source'].upper(): errors.append('non-demo official source required')
  cards=d.get('cards',[])
  if not isinstance(cards,list) or not 3<=len(cards)<=8: errors.append('3-8 cards required')
  else:
