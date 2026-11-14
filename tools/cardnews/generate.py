@@ -1,4 +1,4 @@
-import json,sys,zipfile
+import json,sys,zipfile,subprocess
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
 W,H=1080,1350
@@ -42,13 +42,16 @@ def render(card,i,n,brand):
 def main():
  if len(sys.argv)!=3:raise SystemExit('Usage: python generate.py verified.json output_dir')
  from validate import validate
- src=Path(sys.argv[1]);data=json.loads(src.read_text(encoding='utf-8'))
+ src=Path(sys.argv[1]);subprocess.run([sys.executable,str(Path(__file__).with_name('validate.py')),str(src)],check=True);data=json.loads(src.read_text(encoding='utf-8'))
  errors=validate(data)
  if errors:raise ValueError('; '.join(errors))
- out=Path(sys.argv[2]);out.mkdir(parents=True,exist_ok=True)
- names=[]
+ out=Path(sys.argv[2]);rendered=[]
  for i,c in enumerate(data['cards'],1):
-  name=f'card_{i:02}.png';render(c,i,len(data['cards']),data.get('brand','CAREERPICK | 커리어픽')).save(out/name);names.append(name)
+  name=f'card_{i:02}.png';rendered.append((name,render(c,i,len(data['cards']),data.get('brand','CAREERPICK | 커리어픽'))))
+ out.mkdir(parents=True,exist_ok=True)
+ names=[]
+ for name,im in rendered:
+  im.save(out/name);names.append(name)
  (out/'source.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
  (out/'captions.txt').write_text(data.get('instagram_caption','')+'\n\n--- Threads ---\n'+data.get('threads_caption',''),encoding='utf-8')
  with zipfile.ZipFile(out/'cardnews.zip','w',zipfile.ZIP_DEFLATED) as z:
