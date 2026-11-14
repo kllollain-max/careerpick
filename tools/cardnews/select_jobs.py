@@ -2,6 +2,7 @@
 No external calls, publishing or modification of existing collection workflows.
 """
 import argparse,datetime,json,re,sys
+from urllib.parse import urlparse
 from pathlib import Path
 from zoneinfo import ZoneInfo
 KST=ZoneInfo("Asia/Seoul")
@@ -15,6 +16,7 @@ def parse_deadline(value):
     except ValueError:return None
 def choose(rows,now=None,limit=5):
     now=now or datetime.datetime.now(KST)
+    if not isinstance(limit,int) or isinstance(limit,bool) or not 1<=limit<=20:raise ValueError('limit must be 1..20')
     if now.tzinfo is None:raise ValueError("timezone-aware now required")
     accepted=[];held=[]
     for row in rows:
@@ -25,7 +27,9 @@ def choose(rows,now=None,limit=5):
         count=row.get("headcount")
         source=row.get("official_url")
         verified=row.get("official_verified") is True
-        if not identifier or not source or not verified or deadline is None or not isinstance(count,int) or isinstance(count,bool) or count<1:
+        url=urlparse(source) if isinstance(source,str) else None
+        official_url_ok=bool(url and url.scheme=='https' and url.hostname and not url.hostname.endswith(('.test','.example','.invalid')) and url.hostname not in {'example.com','example.org','localhost'})
+        if not identifier or not official_url_ok or not verified or deadline is None or not isinstance(count,int) or isinstance(count,bool) or count<1:
             held.append({"id":identifier,"reason":"missing verified official deadline, source, or count"});continue
         if deadline<=now:
             held.append({"id":identifier,"reason":"application deadline elapsed"});continue
