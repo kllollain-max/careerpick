@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T00:10:12Z",
-  "last_observed_at": "2026-11-14T00:10:12Z",
+  "updated_at": "2026-11-14T00:16:14Z",
+  "last_observed_at": "2026-11-14T00:16:14Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -12430,7 +12430,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T00:10:12Z",
+    "checked_at": "2026-11-14T00:16:14Z",
     "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -12444,21 +12444,10 @@
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43527351939"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "43527351939",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-13T23:29:07Z",
-        "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43527351939"
-      }
-    ],
+    "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "new_text_publication_verified_next12_image_unprepared",
+    "status": "no_new_result_next12_image_unprepared",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -12499,25 +12488,14 @@
     "actions_runs_read": 100,
     "actions_reported_total": 889,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [
-      {
-        "run_id": "43527351939",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-13T23:29:07Z",
-        "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43527351939"
-      }
-    ],
+    "changed_runs_since_checkpoint": [],
     "monitored_slot": "2026-11-14T12:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T14:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T091614.json",
     "new_failure_fingerprints": [],
-    "new_metric_observations": 1,
-    "new_account_observations": 1,
+    "new_metric_observations": 0,
+    "new_account_observations": 0,
     "new_ready_saved": 0,
     "new_held_drafts_saved": 0,
     "queue_changed": false,
@@ -12529,7 +12507,7 @@
       "environment_selection": "inherited"
     },
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 1,
+    "new_late_cumulative_observations": 0,
     "new_candidate_fact_reviews": 0
   },
   "writer_hold_alternatives": {
@@ -18995,7 +18973,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T00:10:12Z",
+    "checked_at": "2026-11-14T00:16:14Z",
     "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -19007,7 +18985,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T09:03:22.574196+09:00",
+      "evaluated_at": "2026-11-14T09:14:37.877263+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19091,26 +19069,51 @@
     "ready_entries": [],
     "official_checks": [
       {
-        "notice_id": "a306760",
-        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306760",
-        "checked_at": "2026-11-14T00:04:19.667727+00:00",
-        "status": 200,
-        "sha256": "f57d20ff1178632bb298f5e3c2f7dfdcce79afc2272921c6772f998adaece141",
-        "bytes": 11127
+        "notice_id": "cleaneye-80976",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80976",
+        "checked_at": "2026-11-14T00:14:59.755312+00:00",
+        "status": "unavailable",
+        "error": "HTTP Error 503: Service Unavailable",
+        "ready": false
+      },
+      {
+        "notice_id": "cleaneye-81111",
+        "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81111",
+        "checked_at": "2026-11-14T00:14:59.755989+00:00",
+        "status": "unavailable",
+        "error": "HTTP Error 503: Service Unavailable",
+        "ready": false
       }
     ],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T091614.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T00:10:12Z",
-      "checks": [],
-      "action": "No further retry this pass; retain prior bounded Cleaneye503 and disallowed final destination holds. New publication ALIO recheck200 does not refresh previous PDF/ATS review timestamps.",
-      "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json"
+      "checked_at": "2026-11-14T00:16:14Z",
+      "checks": [
+        {
+          "notice_id": "cleaneye-80976",
+          "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80976",
+          "checked_at": "2026-11-14T00:14:59.755312+00:00",
+          "status": "unavailable",
+          "error": "HTTP Error 503: Service Unavailable",
+          "ready": false
+        },
+        {
+          "notice_id": "cleaneye-81111",
+          "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81111",
+          "checked_at": "2026-11-14T00:14:59.755989+00:00",
+          "status": "unavailable",
+          "error": "HTTP Error 503: Service Unavailable",
+          "ready": false
+        }
+      ],
+      "action": "One bounded GET each for official Cleaneye80976 and81111 returned503. No repeated loop, bypass, candidate promotion, manuscript/card generation, or source timestamp fabrication.",
+      "audit_path": "threads/audits/monitor-v2-20261114T091614.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "d5b8ef61c8330de1522a4d149ceca2903189c108cd60dbfc69abe2e5ca81d2b6"
+    "selection_input_sha256": "f8861bb0ade308be010aa4200b3b6258c8f7c68b6cbaf4e513c4887ba74d29d9"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19631,10 +19634,11 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T00:10:12Z",
+      "checked_at": "2026-11-14T00:16:14Z",
       "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
       "contract_version": 2,
       "policy_hashes": {
+        "threads/writer-policy.json": "41d1e6e61a70dd084946af2008b8555adc8d865efea2f129c83cde9156551b74",
         "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
         "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
         "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
@@ -19643,11 +19647,10 @@
       "full_active_prompt_read": true,
       "queue_check_status": "validated",
       "ready_entries": [],
-      "new_regular_publications": 1,
-      "post_id": "18101198159539744",
+      "new_regular_publications": 0,
       "next_media": "IMAGE",
       "next_slot": "2026-11-14T12:00:00+09:00",
-      "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json"
+      "audit_path": "threads/audits/monitor-v2-20261114T091614.json"
     },
     "next_slot_official_preflight": {
       "checked_at": "2026-11-14T00:10:12Z",
@@ -19905,12 +19908,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T00:10:12Z",
+    "checked_at": "2026-11-14T00:16:14Z",
     "state_blob_sha": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T00:03:22.599433+00:00",
+      "as_of": "2026-11-14T00:14:38.746577+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20305,7 +20308,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T00:03:22.599433+00:00",
+            "requested_end": "2026-11-14T00:14:38.746577+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T23:29:00.886949+00:00",
             "start_followers": 415,
@@ -20326,7 +20329,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T00:03:22.599433+00:00",
+        "requested_end": "2026-11-14T00:14:38.746577+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T23:29:00.886949+00:00",
         "start_followers": 415,
@@ -20352,7 +20355,7 @@
       ]
     },
     "new_24h_or_72h_observations": 0,
-    "new_account_observations": 1,
+    "new_account_observations": 0,
     "current_post_windows": {
       "post_id": "18101198159539744",
       "published_at": "2026-11-14T08:28:48.427195+09:00",
@@ -20451,7 +20454,7 @@
       }
     ],
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 1,
+    "new_late_cumulative_observations": 0,
     "late_cumulative_observations_with_elapsed_hours": [
       {
         "post_id": "17938804020400505",
