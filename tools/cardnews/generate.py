@@ -34,6 +34,7 @@ def render(card,i,n,brand):
   for item in section['items']:y=wrap(d,'• '+str(item),82,y,905,31,4)+8
   y+=18
  if y>1220:raise ValueError(f'Card {i} content overlaps footer')
+ if y>1220:raise ValueError(f'Card {i} content overlaps footer')
  d.line((65,1240,1015,1240),fill='#CAD7E6',width=2)
  d.text((65,1260),'공식 공고 기준 · 세부사항은 원문 확인',font=font(23),fill=BLUE)
  return im
