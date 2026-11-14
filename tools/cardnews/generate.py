@@ -1,4 +1,4 @@
-import json,sys,zipfile,subprocess
+import json,sys,zipfile,subprocess,tempfile,os
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
 W,H=1080,1350
@@ -49,13 +49,19 @@ def main():
  rendered=[]
  for i,c in enumerate(data['cards'],1):
   name=f'card_{i:02}.png';rendered.append((name,render(c,i,len(data['cards']),data.get('brand','CAREERPICK | 커리어픽'))))
- out.mkdir(parents=True,exist_ok=True)
- names=[]
- for name,im in rendered:
-  im.save(out/name);names.append(name)
- (out/'source.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
- (out/'captions.txt').write_text(data.get('instagram_caption','')+'\n\n--- Threads ---\n'+data.get('threads_caption',''),encoding='utf-8')
- with zipfile.ZipFile(out/'cardnews.zip','w',zipfile.ZIP_DEFLATED) as z:
-  for name in names+['source.json','captions.txt']:z.write(out/name,name)
+ out.parent.mkdir(parents=True,exist_ok=True)
+ with tempfile.TemporaryDirectory(prefix='.cardnews-stage-',dir=out.parent) as stage:
+  staged=Path(stage)
+  names=[]
+  for name,im in rendered:
+   im.save(staged/name);names.append(name)
+  (staged/'source.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
+  (staged/'captions.txt').write_text(data.get('instagram_caption','')+'\\n\\n--- Threads ---\\n'+data.get('threads_caption',''),encoding='utf-8')
+  with zipfile.ZipFile(staged/'cardnews.zip','w',zipfile.ZIP_DEFLATED) as z:
+   for name in names+['source.json','captions.txt']:z.write(staged/name,name)
+  with zipfile.ZipFile(staged/'cardnews.zip') as z:
+   if z.testzip() is not None:raise RuntimeError('ZIP integrity failure')
+  if out.exists():raise FileExistsError('Output directory created concurrently')
+  os.rename(staged,out)
  print('Generated',len(names),'cards. Manual visual/factual review required.')
 if __name__=='__main__':main()
