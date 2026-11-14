@@ -31,6 +31,11 @@ def choose(rows,now=None,limit=5):
         evidence_ok=(isinstance(evidence,dict) and evidence.get("kind")=="official_application_deadline" and isinstance(evidence.get("quote"),str) and len(evidence["quote"].strip())>=8 and evidence.get("reviewed") is True)
         evidence_time=parse_deadline(evidence.get("application_deadline")) if isinstance(evidence,dict) else None
         evidence_ok=evidence_ok and evidence_time is not None and evidence_time==deadline
+        if evidence_ok:
+            # Evidence text must contain the same date and clock time, not just a separately supplied value.
+            quote=evidence["quote"].replace(".","-").replace("/","-")
+            stamp=deadline.strftime("%Y-%m-%d")
+            evidence_ok=stamp in quote and deadline.strftime("%H:%M") in quote
         # A bare verified flag or ALIO posting-end date is not sufficient.
         url=urlparse(source) if isinstance(source,str) else None
         official_url_ok=bool(url and url.scheme=='https' and url.hostname and not url.hostname.endswith(('.test','.example','.invalid')) and url.hostname not in {'example.com','example.org','localhost'})
