@@ -1441,6 +1441,217 @@
           "final_first_sentence": "통신 자격증이 있다면,"
         }
       }
+    },
+    {
+      "observation_id": "77b44fb1ddeaa1058839ecd896d7e91422f392d0c8965abc4effc1ae2e3ed07a",
+      "post_id": "17986024908093257",
+      "window": "24h",
+      "captured_at": "2026-11-14T03:40:34.836412+00:00",
+      "published_at": "2026-11-12T23:29:19.122441+00:00",
+      "elapsed_seconds": 101475.713971,
+      "delay_seconds": 15075.713971,
+      "timing": "late_cumulative",
+      "comparable_milestone": false,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 356,
+        "likes": 3,
+        "replies": 0,
+        "reposts": 1,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.8426966292134831,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "17986024908093257",
+        "checked_at": "2026-11-14T03:40:34.516648+00:00",
+        "reason": null,
+        "expected_text_sha256": "5e5d2a6b81ae72cf7f870b0fb263e69bd7f0a58c3a50f96304c3e8dbfff91e37",
+        "actual_text_sha256": "5e5d2a6b81ae72cf7f870b0fb263e69bd7f0a58c3a50f96304c3e8dbfff91e37",
+        "actual_first_sentence": "기계 분야 학사와 산업계 경력이 있다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "17986024908093257",
+        "notice_id": "a306949",
+        "published_at": "2026-11-12T23:29:19.122441+00:00",
+        "scheduled_at": "2026-11-13T08:00:00+09:00",
+        "slot_hour_kst": 8,
+        "actual_hour_kst": 8,
+        "body_chars": 273,
+        "first_sentence": "기계 분야 학사와 산업계 경력이 있다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "기계 분야 학사와 산업계 경력이 있다면,\n한국기술교육대학교 기술연구원 정규직 1명 공고예요."
+            },
+            {
+              "id": "target",
+              "type": "target",
+              "text": "대학 기계공학 실습을 지원할 분께,\n한국기술교육대학교 기술연구원 정규직 1명 공고예요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "실습실 운영과 학생지도를 함께 맡아요.\n한국기술교육대학교 기계공학부 기술연구원 채용이에요."
+            }
+          ],
+          "selected_hook_id": "condition",
+          "first_sentence_type": "condition",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "담당 분야 학사와 취득 후 관련 산업계 경력 3년 이상이 필요해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086793",
+              "excerpt": "담당직무분야 학사학위 취득 후 관련 산업계 경력 3년 이상",
+              "classification": "required",
+              "logic": "all_of",
+              "paths": [
+                {
+                  "summary": "담당 분야 학사",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086793",
+                  "excerpt": "담당직무분야 학사학위 취득 후 관련 산업계 경력 3년 이상"
+                },
+                {
+                  "summary": "취득 후 관련 산업계 경력 3년 이상",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086793",
+                  "excerpt": "담당직무분야 학사학위 취득 후 관련 산업계 경력 3년 이상"
+                }
+              ]
+            },
+            {
+              "text": "관련 석사 학위기간은 경력 2년으로 대체 인정돼요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086793",
+              "excerpt": "관련 분야 석사학위 소지자는 학위기간을 산업계 경력으로 2년 대체 인정",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "최초 임용은 2027년 1월~2028년 12월, 평가기준 충족 시 재임용돼요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086793",
+              "excerpt": "임용기간: 2027.01.01. ~ 2028.12.31.\n    ※ 실제 임용기간은 계약에 의하며, 임용기간 만료 전 근무평가를 거친 후 내규에서 정한 기준을 충족하는 경우 정년보장 재임용",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "병역·해외여행·교직원 임용 결격 기준을 확인해요.",
+              "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306949",
+              "excerpt": "ㅇ 해외여행에 결격사유가 없는 자 ㅇ 남성의 경우 병역의무를 필한 자 또는 면제된 자 ㅇ 사립학교 교직원 임용에 결격사유가 없는 자",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "관련 석사 학위기간은 경력 2년으로 대체 인정돼요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086793",
+            "excerpt": "관련 분야 석사학위 소지자는 학위기간을 산업계 경력으로 2년 대체 인정"
+          },
+          "recruitment_unit": {
+            "title": "기술연구원",
+            "count": 1,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086793",
+            "excerpt": "한국기술교육대학교 기술연구원 채용공고\n한국기술교육대학교 기술연구원을 다음과 같이 공개채용합니다.\n1. 채용인원 및 담당직무 ※근무부서 및 담당직무는 다소 조정될 수 있음\n 氠瑢     \n근무부서\n채용인원\n담당직무\n우대사항\n기계공학부\n1명",
+            "normalization": "same notice header and the only recruitment table row; no multiple units combined"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-12T18:46:32.275709+09:00",
+            "result": "none_found",
+            "source_ref": "https://www.koreatech.ac.kr/notice/view.es?mid=a10604040000&board_id=150&post_seq=863&prefix_id=",
+            "checked_scope": "specific official post863 current HTML, four byte-matched attachments, ALIO mobile current-open",
+            "limitations": [
+              "historical correction board not exhaustively read",
+              "HWP text previously read; exact current bytes confirmed; all-page visual HWP layout review not performed"
+            ]
+          },
+          "style_rewrites": 1,
+          "selection_reason": "담당직무 학사 이후 산업계3년과 관련 석사기간2년 대체 경로를 구분하고 실제1캠퍼스·최초2년 임용조건 보존. 공식진행중·공고별 상세경로·프로필연결 확인. 인기 추정 없음.",
+          "presentation_style": "eligibility_info",
+          "presentation_style_reason": "학사후3년과석사기간경력대체라는지원판단조건이핵심이므로정규직관심형계획보다자격정보형선택. 미디어교대와별개.",
+          "public_preview": {
+            "main_text": "기계 분야 학사와 산업계 경력이 있다면,\n한국기술교육대학교 기술연구원 정규직 1명 공고예요.\n\n담당 분야 학사와 취득 후 관련 산업계 경력 3년 이상이 필요해요.\n관련 석사 학위기간은 경력 2년으로 대체 인정돼요.\n\n충남 천안 1캠퍼스에서 기계공학실습을 지원해요.\n최초 임용은 2027년 1월~2028년 12월, 평가기준 충족 시 재임용돼요.\n\n병역·해외여행·교직원 임용 결격 기준을 확인해요.\n11월 26일 16:00까지 방문 또는 우편 도착분 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "experiment_eligible": true,
+          "card_restriction": "최초 임용은 2027년 1월~2028년 12월",
+          "card_visual_review": {
+            "status": "passed",
+            "reviewed_width": 360,
+            "reviewed_at": "2026-11-12T18:50:23.624686+09:00",
+            "sha256": "5232c360f15afc93a4ab4e74f70cba22db9162f15c7f659310be1328b68aa5a4",
+            "preview_sha256": "d2121b3659aab989b707b3f2dfd4c60f37d0d981d8b2311f3ad328cbddda5f77",
+            "asset_path": "threads-images/a306949.jpg",
+            "preview_asset_path": "threads-images/a306949-360.png",
+            "facts_sha256": "c977c6f5fd49f3b674103dab118e411bb62c3a2a43a3d93c1e84b7d3ab5df48a",
+            "layout_version": "careerpick-single-main-card-v2",
+            "observations": "실제JPEG원본과동일JPEG의LANCZOS360PNG를열어 기술연구원/정규직1명/한국기술교육대학교/11월26일16:00/최초임용2027년1월~2028년12월 한글·숫자·잘림·본문일치를확인."
+          }
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "hiring_core",
+        "media": "TEXT",
+        "org": "한국기술교육대학교",
+        "job": "기술연구원",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "location": "충남",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {},
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-26T16:00:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 1150240.877559,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "17986024908093257",
+          "checked_at": "2026-11-14T03:40:34.516648+00:00",
+          "reason": null,
+          "expected_text_sha256": "5e5d2a6b81ae72cf7f870b0fb263e69bd7f0a58c3a50f96304c3e8dbfff91e37",
+          "actual_text_sha256": "5e5d2a6b81ae72cf7f870b0fb263e69bd7f0a58c3a50f96304c3e8dbfff91e37",
+          "actual_first_sentence": "기계 분야 학사와 산업계 경력이 있다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "기계 분야 학사와 산업계 경력이 있다면,"
+        }
+      }
     }
   ],
   "account_observations": [
@@ -1539,6 +1750,16 @@
       "account": "hid_119",
       "captured_at": "2026-11-13T23:29:00.886949+00:00",
       "followers_count": 445,
+      "status": "captured",
+      "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
+      "scope": "account_total",
+      "post_attribution": null
+    },
+    {
+      "observation_id": "33c1d5e58d26d450d87e77fde52d5c2a76ee05c07c108b7fd00169cd7796be4c",
+      "account": "hid_119",
+      "captured_at": "2026-11-14T03:40:35.021239+00:00",
+      "followers_count": 450,
       "status": "captured",
       "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
       "scope": "account_total",
