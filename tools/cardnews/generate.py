@@ -9,7 +9,7 @@ def font(size):
  raise RuntimeError('Install NanumSquare or Noto CJK font locally')
 def wrap(draw,value,x,y,width,size=34,limit=10):
  f=font(size);lines=[]
- for paragraph in str(value).split('\\n'):
+ for paragraph in str(value).split('\n'):
   line=''
   for char in paragraph:
    if line and draw.textbbox((0,0),line+char,font=f)[2]>width:
@@ -49,7 +49,7 @@ def main():
  for i,c in enumerate(data['cards'],1):
   name=f'card_{i:02}.png';render(c,i,len(data['cards']),data.get('brand','CAREERPICK | 커리어픽')).save(out/name);names.append(name)
  (out/'source.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
- (out/'captions.txt').write_text(data.get('instagram_caption','')+'\\n\\n--- Threads ---\\n'+data.get('threads_caption',''),encoding='utf-8')
+ (out/'captions.txt').write_text(data.get('instagram_caption','')+'\n\n--- Threads ---\n'+data.get('threads_caption',''),encoding='utf-8')
  with zipfile.ZipFile(out/'cardnews.zip','w',zipfile.ZIP_DEFLATED) as z:
   for name in names+['source.json','captions.txt']:z.write(out/name,name)
  print('Generated',len(names),'cards. Manual visual/factual review required.')
