@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T14:29:20Z",
-  "last_observed_at": "2026-11-14T14:29:20Z",
+  "updated_at": "2026-11-14T14:50:06Z",
+  "last_observed_at": "2026-11-14T14:50:06Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13232,7 +13232,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T14:29:20Z",
+    "checked_at": "2026-11-14T14:50:06Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -13290,32 +13290,11 @@
     "actions_runs_read": 100,
     "actions_reported_total": 889,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [
-      {
-        "run_id": "43598037261",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T13:06:07Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43598037261"
-      },
-      {
-        "run_id": "43597840381",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T13:05:54Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43597840381"
-      }
-    ],
+    "changed_runs_since_checkpoint": [],
     "monitored_slot": "2026-11-14T20:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T22:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T232920.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T145006.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -19352,7 +19331,7 @@
       },
       "latest_v5_audit": "threads/audits/single-main-v2-image-verified-20261112T2048.json"
     },
-    "checked_at": "2026-11-13T08:23:25.617803+00:00",
+    "checked_at": "2026-11-14T14:50:06Z",
     "policy_id": "careerpick-threads-v5-20261111",
     "state_path": "threads/performance.json",
     "state_status": "saved_verified",
@@ -19396,7 +19375,7 @@
     "post_attribution": null,
     "latest_v5_summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-13T08:22:13.526135+00:00",
+      "as_of": "2026-11-14T14:49:31.306084+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19520,9 +19499,7 @@
             "location": "순천병원",
             "employment": "정규직",
             "recruitment_unit_count": 3,
-            "deadline_distance_seconds": 420281.644869,
-            "observed_at": "2026-11-12T11:48:45.499723+00:00",
-            "elapsed_hours": 24.057540164444443
+            "deadline_distance_seconds": 420281.644869
           },
           {
             "post_id": "17918731521553015",
@@ -19563,9 +19540,7 @@
             "location": "충북",
             "employment": "정규직",
             "recruitment_unit_count": 1,
-            "deadline_distance_seconds": 1041399.2229,
-            "observed_at": "2026-11-13T03:44:34.481774+00:00",
-            "elapsed_hours": 24.020473520555555
+            "deadline_distance_seconds": 1041399.2229
           }
         ],
         "72h": []
@@ -19610,13 +19585,175 @@
           "location": "경기도의료원 안성병원",
           "employment": "정규직",
           "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 616838.216119,
-          "observed_at": "2026-11-13T03:44:35.209864+00:00",
-          "elapsed_hours": 28.087062773055553
+          "deadline_distance_seconds": 616838.216119
+        },
+        {
+          "post_id": "18079233716458874",
+          "notice_id": "a306746",
+          "published_at": "2026-11-12T11:48:31.552931+00:00",
+          "captured_at": "2026-11-13T23:29:00.707762+00:00",
+          "elapsed_seconds": 128429.154831,
+          "window": "24h",
+          "metrics": {
+            "views": 803,
+            "likes": 1,
+            "replies": 0,
+            "reposts": 0,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.12453300124533001,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": true,
+          "first_sentence": "통신 자격증이 있다면,",
+          "format_id": "deadline_opportunity",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 300,
+          "media": "IMAGE",
+          "slot": "2026-11-12T20:00:00+09:00",
+          "slot_hour_kst": 20,
+          "job": "통신기사",
+          "location": "서울",
+          "employment": "정규직",
+          "recruitment_unit_count": 1,
+          "deadline_distance_seconds": 702628.447069
+        },
+        {
+          "post_id": "17986024908093257",
+          "notice_id": "a306949",
+          "published_at": "2026-11-12T23:29:19.122441+00:00",
+          "captured_at": "2026-11-14T03:40:34.836412+00:00",
+          "elapsed_seconds": 101475.713971,
+          "window": "24h",
+          "metrics": {
+            "views": 356,
+            "likes": 3,
+            "replies": 0,
+            "reposts": 1,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.8426966292134831,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": true,
+          "first_sentence": "기계 분야 학사와 산업계 경력이 있다면,",
+          "format_id": "hiring_core",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 273,
+          "media": "TEXT",
+          "slot": "2026-11-13T08:00:00+09:00",
+          "slot_hour_kst": 8,
+          "job": "기술연구원",
+          "location": "충남",
+          "employment": "정규직",
+          "recruitment_unit_count": 1,
+          "deadline_distance_seconds": 1150240.877559
+        },
+        {
+          "post_id": "18150019906492861",
+          "notice_id": "a306848",
+          "published_at": "2026-11-13T03:44:21.510923+00:00",
+          "captured_at": "2026-11-14T07:55:38.339967+00:00",
+          "elapsed_seconds": 101476.829044,
+          "window": "24h",
+          "metrics": {
+            "views": 3898,
+            "likes": 7,
+            "replies": 0,
+            "reposts": 2,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.17957927142124167,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "target",
+          "experiment_eligible": true,
+          "first_sentence": "여성 전용 복지시설을 관리할 분께,",
+          "format_id": "eligibility",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 284,
+          "media": "IMAGE",
+          "slot": "2026-11-13T12:00:00+09:00",
+          "slot_hour_kst": 12,
+          "job": "여성 복지시설 매니저",
+          "location": "강원",
+          "employment": "정규직",
+          "recruitment_unit_count": 3,
+          "deadline_distance_seconds": 1134938.489077
+        },
+        {
+          "post_id": "18080747462409277",
+          "notice_id": "a306908",
+          "published_at": "2026-11-13T08:16:52.245246+00:00",
+          "captured_at": "2026-11-14T11:26:07.581289+00:00",
+          "elapsed_seconds": 97755.336043,
+          "window": "24h",
+          "metrics": {
+            "views": 931,
+            "likes": 3,
+            "replies": 0,
+            "reposts": 1,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.322234156820623,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": true,
+          "first_sentence": "한국 공인회계사 자격이 있다면,",
+          "format_id": "interest",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 252,
+          "media": "TEXT",
+          "slot": "2026-11-13T16:00:00+09:00",
+          "slot_hour_kst": 16,
+          "job": "연구직(특수전문직)",
+          "location": "세종",
+          "employment": "정규직",
+          "recruitment_unit_count": 1,
+          "deadline_distance_seconds": 1010587.754754
         }
       ],
       "excluded": {
-        "late_or_unavailable": 1
+        "late_or_unavailable": 5
       },
       "periods": [
         {
@@ -19756,16 +19893,16 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-13T08:22:13.526135+00:00",
+            "requested_end": "2026-11-14T14:49:31.306084+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
-            "observed_end": "2026-11-13T08:17:06.100264+00:00",
+            "observed_end": "2026-11-14T11:26:07.752876+00:00",
             "start_followers": 415,
-            "end_followers": 428,
-            "net_change": 13,
+            "end_followers": 463,
+            "net_change": 48,
             "status": "observed_interval",
             "exact_requested_boundaries": false,
             "observation_statuses": {
-              "captured": 8
+              "captured": 13
             },
             "post_attribution": null,
             "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -19777,16 +19914,16 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-13T08:22:13.526135+00:00",
+        "requested_end": "2026-11-14T14:49:31.306084+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-13T08:17:06.100264+00:00",
+        "observed_end": "2026-11-14T11:26:07.752876+00:00",
         "start_followers": 415,
-        "end_followers": 428,
-        "net_change": 13,
+        "end_followers": 463,
+        "net_change": 48,
         "status": "observed_interval",
         "exact_requested_boundaries": false,
         "observation_statuses": {
-          "captured": 8
+          "captured": 13
         },
         "post_attribution": null,
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -19802,10 +19939,10 @@
         "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
       ]
     },
-    "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
+    "latest_v5_audit": "threads/audits/monitor-v2-20261114T145006.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T14:29:20Z",
+    "checked_at": "2026-11-14T14:50:06Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -19813,11 +19950,11 @@
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "full_active_prompt_read": true,
-    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-1234.pgv5yoyo/careerpick-bcad95c187d51a78dfee672949d181f497153226/monitor-2329/queue.json",
+    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-1234.pgv5yoyo/careerpick-bcad95c187d51a78dfee672949d181f497153226/monitor-2348/queue.json",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T23:28:44.736955+09:00",
+      "evaluated_at": "2026-11-14T23:49:30.242141+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19902,16 +20039,16 @@
     "official_checks": [],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T232920.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T145006.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T14:29:20Z",
+      "checked_at": "2026-11-14T14:50:06Z",
       "checks": [],
-      "action": "No source timestamps or manuscript/assets regenerated. Exact reviewed card/facts/preview binding reverified. 20h grace expired with no new receipt; no rerun, backfill, started-slot insertion or final-gate relaxation.",
-      "audit_path": "threads/audits/monitor-v2-20261114T232920.json"
+      "action": "Preserved source timestamps and held manuscript/card bytes. Reverified existing reviewed assets; profile-target final gate remains blocked. No new ready entry or publishing action.",
+      "audit_path": "threads/audits/monitor-v2-20261114T145006.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "2cf7b87ff7b19ab6c4e6b0764cadc9e2f3d825ce320288eaee3a0c42d78fd070",
+    "selection_input_sha256": "35e5c0feb6dc908974e0454e9dddd75ee997335c2e8974640099e3cae8c898ad",
     "card_assets_registered": {
       "notice_id": "cleaneye-80976",
       "commit": "bcad95c187d51a78dfee672949d181f497153226",
@@ -20460,7 +20597,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T14:29:20Z",
+      "checked_at": "2026-11-14T14:50:06Z",
       "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
       "contract_version": 2,
       "policy_hashes": {
@@ -20469,8 +20606,8 @@
         "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
         "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
         "threads/writer-queue.json": "10bffd82c989f23f4cc572babb5f00a250facb75",
-        "threads/maintenance.json": "0cbf93b563f6fd9e4f46c6392bc91efd38fc0ec8",
-        "threads/performance.json": "b13553f34bd85d9073a0787b36db9e247de79d73",
+        "threads/maintenance.json": "52af5fb7851f91c80fd0ade76ad276441fa48808",
+        "threads/performance.json": "9f9d53c1cd7e085a978bafa87fc5a1dd563a586f",
         "threads_posted.json": "854f5c0ad77580084a5aedd53bfb60011f8b147c"
       },
       "full_active_prompt_read": true,
@@ -20479,17 +20616,17 @@
       "new_regular_publications": 0,
       "scheduled12_status": "confirmed_presend_failure_grace_expired_no_backfill",
       "failed_run": {
-        "run_id": "43552820163",
+        "run_id": "43589976938",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "failure",
-        "updated_at": "2026-11-14T03:40:41Z",
+        "updated_at": "2026-11-14T11:26:14Z",
         "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
         "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43589976938"
       },
       "next_media": "IMAGE",
-      "next_future_slot": "2026-11-14T16:00:00+09:00",
+      "next_future_slot": "2026-11-15T08:00:00+09:00",
       "card_reverification": {
         "valid": true,
         "format": "JPEG",
@@ -20509,7 +20646,7 @@
         "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/monitor-v2-20261114T232920.json",
+      "audit_path": "threads/audits/monitor-v2-20261114T145006.json",
       "latest_publisher_run": {
         "run_id": "43589976938",
         "run_attempt": 1,
@@ -20853,12 +20990,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T14:29:20Z",
+    "checked_at": "2026-11-14T14:50:06Z",
     "state_blob_sha": "9f9d53c1cd7e085a978bafa87fc5a1dd563a586f",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T14:28:45.712456+00:00",
+      "as_of": "2026-11-14T14:49:31.306084+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -21376,7 +21513,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T14:28:45.712456+00:00",
+            "requested_end": "2026-11-14T14:49:31.306084+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-14T11:26:07.752876+00:00",
             "start_followers": 415,
@@ -21397,7 +21534,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T14:28:45.712456+00:00",
+        "requested_end": "2026-11-14T14:49:31.306084+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T11:26:07.752876+00:00",
         "start_followers": 415,
@@ -21763,7 +21900,7 @@
       },
       "post_attribution": null
     },
-    "summary_report_sha256": "52866844fc83116720944c85dac7db14def740dc62eedcb64e4a5b3a003e2c36",
+    "summary_report_sha256": "07cb17274265f2c2bcb32179e12729d2cda3330a8e4f0012b4719fb69b2232eb",
     "first_72h_measurement_status": {
       "post_id": "17896425015438025",
       "due_at": "2026-11-14T20:45:18.355131+09:00",
