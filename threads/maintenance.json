@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T04:56:34Z",
-  "last_observed_at": "2026-11-14T04:56:34Z",
+  "updated_at": "2026-11-14T06:16:43Z",
+  "last_observed_at": "2026-11-14T06:16:43Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13144,7 +13144,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T04:56:34Z",
+    "checked_at": "2026-11-14T06:16:43Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -13158,21 +13158,10 @@
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "43552820163",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-14T03:40:41Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
-      }
-    ],
+    "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "regular12_failed_queue_slot_missing_before_reservation",
+    "status": "unchanged_profile_target_hold_await_next_regular_slot",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13213,47 +13202,14 @@
     "actions_runs_read": 100,
     "actions_reported_total": 889,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [
-      {
-        "run_id": "43554814011",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T04:04:59Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43554814011"
-      },
-      {
-        "run_id": "43554595892",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T04:04:36Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43554595892"
-      },
-      {
-        "run_id": "43552820163",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-14T03:40:41Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
-      }
-    ],
+    "changed_runs_since_checkpoint": [],
     "monitored_slot": "2026-11-14T12:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T14:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T135634.json",
-    "new_failure_fingerprints": [
-      "43552820163:1:QUEUE_SLOT_MISSING"
-    ],
-    "new_metric_observations": 1,
-    "new_account_observations": 1,
+    "audit_path": "threads/audits/monitor-v2-20261114T151643.json",
+    "new_failure_fingerprints": [],
+    "new_metric_observations": 0,
+    "new_account_observations": 0,
     "new_ready_saved": 0,
     "new_held_drafts_saved": 0,
     "queue_changed": false,
@@ -13265,13 +13221,15 @@
       "environment_selection": "inherited"
     },
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 1,
+    "new_late_cumulative_observations": 0,
     "new_candidate_fact_reviews": 0,
     "held_draft_card_completed": 0,
-    "scheduled12_status": "confirmed_presend_failure_no_claim_no_post_no_rerun",
+    "scheduled12_status": "confirmed_presend_failure_grace_expired_no_backfill",
     "retrieval_limitations": [
       "Connector rejected workflow-definition and workflow-specific-run URLs as unsupported endpoints. Successful full repository run collection used; no workflow disablement inferred."
-    ]
+    ],
+    "next_regular_slot": "2026-11-14T16:00:00+09:00",
+    "next_actual_media": "IMAGE"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -19736,7 +19694,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T04:56:34Z",
+    "checked_at": "2026-11-14T06:16:43Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -19744,11 +19702,11 @@
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "full_active_prompt_read": true,
-    "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
+    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-1234.pgv5yoyo/careerpick-bcad95c187d51a78dfee672949d181f497153226/monitor-1514/queue.json",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T13:54:44.674896+09:00",
+      "evaluated_at": "2026-11-14T15:14:19.226585+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19833,16 +19791,16 @@
     "official_checks": [],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T135634.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T151643.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T04:56:34Z",
+      "checked_at": "2026-11-14T06:16:43Z",
       "checks": [],
-      "action": "No source timestamps refreshed or source/card generation repeated. Existing draft/card exact-byte verification passed.12slot queue missing is confirmed by job log; final profile-target hold remains, no relaxation, manual run or catch-up entry.",
-      "audit_path": "threads/audits/monitor-v2-20261114T135634.json"
+      "action": "No source timestamps, manuscript, assets or original visual-review time changed. Existing exact card/preview/fact binding reverified. Profile-target final gate remains held; 12h expired without backfill.",
+      "audit_path": "threads/audits/monitor-v2-20261114T151643.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "3b04f60df1ec5a30a24e89335d53192da492683eda7dedc7167cc65e121886e5",
+    "selection_input_sha256": "f25c0e0c7919ce91e1ea5783b4777c07b396f7c4d2ceba7a2d86a64309ea3e34",
     "card_assets_registered": {
       "notice_id": "cleaneye-80976",
       "commit": "bcad95c187d51a78dfee672949d181f497153226",
@@ -20391,7 +20349,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T04:56:34Z",
+      "checked_at": "2026-11-14T06:16:43Z",
       "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
       "contract_version": 2,
       "policy_hashes": {
@@ -20408,7 +20366,7 @@
       "queue_check_status": "validated",
       "ready_entries": [],
       "new_regular_publications": 0,
-      "scheduled12_status": "confirmed_presend_failure_QUEUE_SLOT_MISSING",
+      "scheduled12_status": "confirmed_presend_failure_grace_expired_no_backfill",
       "failed_run": {
         "run_id": "43552820163",
         "run_attempt": 1,
@@ -20440,7 +20398,20 @@
         "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/monitor-v2-20261114T135634.json"
+      "audit_path": "threads/audits/monitor-v2-20261114T151643.json",
+      "latest_publisher_run": {
+        "run_id": "43552820163",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "failure",
+        "updated_at": "2026-11-14T03:40:41Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/threads_auto.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
+      },
+      "new_publisher_runs": [],
+      "status": "no_new_publication_or_metrics",
+      "next_slot": "2026-11-14T16:00:00+09:00"
     },
     "next_slot_official_preflight": {
       "checked_at": "2026-11-14T03:37:12Z",
@@ -20759,12 +20730,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T04:56:34Z",
+    "checked_at": "2026-11-14T06:16:43Z",
     "state_blob_sha": "b13553f34bd85d9073a0787b36db9e247de79d73",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T04:54:45.619818+00:00",
+      "as_of": "2026-11-14T06:14:20.173841+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20974,9 +20945,7 @@
           "location": "경기도의료원 안성병원",
           "employment": "정규직",
           "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 616838.216119,
-          "observed_at": "2026-11-13T03:44:35.209864+00:00",
-          "elapsed_hours": 28.087062773055553
+          "deadline_distance_seconds": 616838.216119
         },
         {
           "post_id": "18079233716458874",
@@ -21017,9 +20986,7 @@
           "location": "서울",
           "employment": "정규직",
           "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 702628.447069,
-          "observed_at": "2026-11-13T23:29:00.707762+00:00",
-          "elapsed_hours": 35.67476523083334
+          "deadline_distance_seconds": 702628.447069
         },
         {
           "post_id": "17986024908093257",
@@ -21060,9 +21027,7 @@
           "location": "충남",
           "employment": "정규직",
           "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 1150240.877559,
-          "observed_at": "2026-11-14T03:40:34.836412+00:00",
-          "elapsed_hours": 28.18769832527778
+          "deadline_distance_seconds": 1150240.877559
         }
       ],
       "excluded": {
@@ -21206,7 +21171,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T04:54:45.619818+00:00",
+            "requested_end": "2026-11-14T06:14:20.173841+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-14T03:40:35.021239+00:00",
             "start_followers": 415,
@@ -21227,7 +21192,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T04:54:45.619818+00:00",
+        "requested_end": "2026-11-14T06:14:20.173841+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T03:40:35.021239+00:00",
         "start_followers": 415,
@@ -21253,7 +21218,7 @@
       ]
     },
     "new_24h_or_72h_observations": 0,
-    "new_account_observations": 1,
+    "new_account_observations": 0,
     "current_post_windows": {
       "post_id": "18101198159539744",
       "published_at": "2026-11-14T08:28:48.427195+09:00",
@@ -21352,7 +21317,7 @@
       }
     ],
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 1,
+    "new_late_cumulative_observations": 0,
     "late_cumulative_observations_with_elapsed_hours": [
       {
         "post_id": "17938804020400505",
@@ -21485,13 +21450,29 @@
       }
     ],
     "account_observation_delta": {
-      "observed_start": "2026-11-13T23:29:00.886949+00:00",
-      "observed_end": "2026-11-14T03:40:35.021239+00:00",
-      "start_followers": 445,
-      "end_followers": 450,
-      "net_change": 5,
+      "new_observations": 0,
+      "latest_existing_observed_at": "2026-11-14T03:40:35.021239+00:00",
+      "existing_interval": {
+        "account": "hid_119",
+        "scope": "account_total",
+        "requested_start": "2026-11-11T11:45:18.355131+00:00",
+        "requested_end": "2026-11-14T06:14:20.173841+00:00",
+        "observed_start": "2026-11-11T11:45:32.854727+00:00",
+        "observed_end": "2026-11-14T03:40:35.021239+00:00",
+        "start_followers": 415,
+        "end_followers": 450,
+        "net_change": 35,
+        "status": "observed_interval",
+        "exact_requested_boundaries": false,
+        "observation_statuses": {
+          "captured": 11
+        },
+        "post_attribution": null,
+        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+      },
       "post_attribution": null
-    }
+    },
+    "summary_report_sha256": "fa51d998b1e817382b8f3e8cdb79659255e9abe925abe2b10707eabcc9652d96"
   },
   "writer_ready_reviews": {
     "2026-11-13T12:00:00+09:00:a306848": {
