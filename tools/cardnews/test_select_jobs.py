@@ -3,7 +3,7 @@ from zoneinfo import ZoneInfo
 from select_jobs import choose
 NOW=datetime.datetime(2026,11,14,12,0,tzinfo=ZoneInfo("Asia/Seoul"))
 def job(id,count,deadline="2026-11-20 18:00",kind="정규직",verified=True):
- return {"id":id,"headcount":count,"application_deadline":deadline,"employment_type":kind,"official_url":"https://job.alio.go.kr/notice","official_verified":verified,"deadline_evidence":{"kind":"official_application_deadline","quote":"접수마감 "+deadline,"application_deadline":deadline,"reviewed":True}}
+ return {"id":id,"organization":"검증기관","title":"정규직 채용","headcount":count,"application_deadline":deadline,"employment_type":kind,"official_url":"https://job.alio.go.kr/notice","official_verified":verified,"deadline_evidence":{"kind":"official_application_deadline","quote":"접수마감 "+deadline,"application_deadline":deadline,"reviewed":True}}
 class SelectJobsTests(unittest.TestCase):
  def test_only_verified_active_regular(self):
   selected,held=choose([job("good",10),job("past",99,"2026-11-12 18:00"),job("dateonly",88,"2026-11-25"),job("mixed",90,kind="정규직, 계약직"),job("unverified",80,verified=False)],NOW)
@@ -19,6 +19,9 @@ class SelectJobsTests(unittest.TestCase):
   selected,_=choose([row],NOW);self.assertFalse(selected)
  def test_no_deadline_evidence_rejected(self):
   row=job("unsupported",100);row.pop("deadline_evidence")
+  selected,_=choose([row],NOW);self.assertFalse(selected)
+ def test_missing_identity_rejected(self):
+  row=job("missing",5);row.pop("organization")
   selected,_=choose([row],NOW);self.assertFalse(selected)
  def test_invalid_count_rejected(self):
   selected,_=choose([job("bad",True),job("zero",0)],NOW);self.assertFalse(selected)
