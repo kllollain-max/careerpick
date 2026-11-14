@@ -1,0 +1,1504 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-14T02:58:46Z",
+  "main_sha_before_assets": "e4e4b73464b78d6cd0f5948e3beae3a7c2533679",
+  "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
+  "previous_checkpoint": "2026-11-14T02:16:44Z",
+  "contract_version": 2,
+  "hashes": {
+    "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+    "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+    "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+    "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
+    "threads/writer-queue.json": "10bffd82c989f23f4cc572babb5f00a250facb75",
+    "threads/maintenance.json": "4b69760dd6d8c19aada334a371f7d2cecdc3b30d",
+    "threads/performance.json": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
+    "threads_posted.json": "854f5c0ad77580084a5aedd53bfb60011f8b147c"
+  },
+  "commands": [
+    {
+      "command": [
+        "python",
+        "scripts/threads_writer_input.py",
+        "--limit",
+        "24",
+        "--queue-for-selection",
+        "/workspace/scratch/697589ed75d9/threads-1111.t87mi3tr/careerpick-e4e4b73464b78d6cd0f5948e3beae3a7c2533679/monitor-1153/writer-queue.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "scripts/threads_writer_input.py",
+        "--check-queue",
+        "/workspace/scratch/697589ed75d9/threads-1111.t87mi3tr/careerpick-e4e4b73464b78d6cd0f5948e3beae3a7c2533679/monitor-1153/writer-queue.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "scripts/threads_performance.py",
+        "--mode",
+        "summarize",
+        "--state",
+        "/workspace/scratch/697589ed75d9/threads-1111.t87mi3tr/careerpick-e4e4b73464b78d6cd0f5948e3beae3a7c2533679/monitor-1153/performance.json",
+        "--history",
+        "threads_posted.json",
+        "--output",
+        "/workspace/scratch/697589ed75d9/threads-1111.t87mi3tr/careerpick-e4e4b73464b78d6cd0f5948e3beae3a7c2533679/monitor-1153/performance-summary.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    }
+  ],
+  "queue_check": {
+    "status": "validated",
+    "ready_entries": []
+  },
+  "selection_audit": {
+    "schema_version": 1,
+    "policy_id": "careerpick-threads-selection-v5-20261111",
+    "evaluated_at": "2026-11-14T11:54:17.308545+09:00",
+    "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
+    "connected_sources": [
+      "alio",
+      "cleaneye"
+    ],
+    "official_details_fully_reviewed": false,
+    "sources": {
+      "alio": {
+        "status": "verified_snapshot",
+        "snapshot_at": "2026-11-14T00:59:08+09:00",
+        "source_checked_at": "2026-11-14T10:15:42+09:00",
+        "total_records": 956,
+        "eligible_count": 29,
+        "review_required_count": 800,
+        "excluded_count": 127,
+        "returned_count": 1,
+        "exclusion_reasons": {
+          "APPLICATION_CLOSED": 36,
+          "NOTICE_ALREADY_USED": 77,
+          "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
+          "SOURCE_NOTICE_UNCONFIRMED": 11,
+          "APPLICATION_END_PRECISION_CONFLICT": 1,
+          "APPLICATION_NOT_OPEN": 1
+        }
+      },
+      "cleaneye": {
+        "status": "verified",
+        "snapshot_at": "2026-11-14T10:16:09+09:00",
+        "source_checked_at": "2026-11-14T10:16:09+09:00",
+        "total_records": 563,
+        "eligible_count": 278,
+        "review_required_count": 0,
+        "excluded_count": 285,
+        "returned_count": 23,
+        "exclusion_reasons": {
+          "CLEANEYE_NOT_VERIFIED_OPEN": 270,
+          "CLEANEYE_NOT_RECRUITMENT": 11,
+          "NOTICE_ALREADY_USED": 2,
+          "CLEANEYE_APPLICATION_NOT_OPEN": 2
+        }
+      }
+    },
+    "total_scanned": 1519,
+    "eligible_before_limit": 307,
+    "writer_limit": 24,
+    "returned_count": 24,
+    "unconfirmed_unit_counts": 307,
+    "interest_ranking": "unavailable_not_used",
+    "audience_breadth_ranking": "unavailable_not_used",
+    "sector_policy": {
+      "basis": "user_editorial_preference_not_popularity_data",
+      "priority_order": null,
+      "scope": "descriptive_only_no_assumed_reader_interest",
+      "unconfirmed_counts": "provisional_review_order_only",
+      "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
+    },
+    "sector_counts_before_limit": {
+      "neutral": 203,
+      "deprioritized": 83,
+      "preferred": 21
+    },
+    "ranking_order": [
+      "current_application_open",
+      "verified_reader_relevance_if_available",
+      "exact_employment_type",
+      "verified_unit_count_desc",
+      "verified_advantage_if_available",
+      "preparation_time",
+      "recent_notice_diversity",
+      "actual_deadline",
+      "notice_id_tiebreak"
+    ],
+    "review_errors": [],
+    "preparation_time_heuristic_hours": 48
+  },
+  "candidate_ids": [
+    "cleaneye-80774",
+    "cleaneye-80875",
+    "cleaneye-80897",
+    "cleaneye-80941",
+    "cleaneye-80976",
+    "cleaneye-80792",
+    "cleaneye-81111",
+    "cleaneye-80788",
+    "cleaneye-80805",
+    "cleaneye-80807",
+    "cleaneye-80812",
+    "cleaneye-80820",
+    "cleaneye-80838",
+    "cleaneye-81028",
+    "cleaneye-81074",
+    "cleaneye-80848",
+    "cleaneye-81115",
+    "a306752",
+    "cleaneye-81146",
+    "cleaneye-80956",
+    "cleaneye-81192",
+    "cleaneye-81193",
+    "cleaneye-81194",
+    "cleaneye-81195"
+  ],
+  "unconfirmed_ids": [
+    "a303089",
+    "a305089",
+    "a305090",
+    "a305091",
+    "a305959",
+    "a306357",
+    "a306564",
+    "a306708",
+    "a306779",
+    "a306858",
+    "a306929"
+  ],
+  "all_blocked_notice_ids": [
+    "a305973",
+    "a305975",
+    "a306006",
+    "a306032",
+    "a306041",
+    "a306106",
+    "a306144",
+    "a306146",
+    "a306179",
+    "a306188",
+    "a306192",
+    "a306193",
+    "a306200",
+    "a306231",
+    "a306232",
+    "a306233",
+    "a306234",
+    "a306237",
+    "a306244",
+    "a306271",
+    "a306285",
+    "a306296",
+    "a306304",
+    "a306306",
+    "a306327",
+    "a306334",
+    "a306336",
+    "a306339",
+    "a306342",
+    "a306346",
+    "a306356",
+    "a306362",
+    "a306365",
+    "a306408",
+    "a306425",
+    "a306441",
+    "a306443",
+    "a306453",
+    "a306458",
+    "a306468",
+    "a306470",
+    "a306473",
+    "a306486",
+    "a306487",
+    "a306508",
+    "a306515",
+    "a306538",
+    "a306556",
+    "a306563",
+    "a306586",
+    "a306597",
+    "a306612",
+    "a306621",
+    "a306627",
+    "a306653",
+    "a306660",
+    "a306662",
+    "a306665",
+    "a306715",
+    "a306716",
+    "a306717",
+    "a306718",
+    "a306731",
+    "a306732",
+    "a306733",
+    "a306735",
+    "a306737",
+    "a306746",
+    "a306750",
+    "a306755",
+    "a306759",
+    "a306760",
+    "a306784",
+    "a306786",
+    "a306799",
+    "a306802",
+    "a306838",
+    "a306848",
+    "a306877",
+    "a306908",
+    "a306949",
+    "cleaneye-80681",
+    "cleaneye-81067"
+  ],
+  "recent8": [
+    {
+      "notice_id": "cleaneye-81067",
+      "published_at": "2026-11-12T08:39:21.783881+09:00"
+    },
+    {
+      "notice_id": "a306877",
+      "published_at": "2026-11-12T12:43:20.777100+09:00"
+    },
+    {
+      "notice_id": "a306746",
+      "published_at": "2026-11-12T20:48:31.552931+09:00"
+    },
+    {
+      "notice_id": "a306949",
+      "published_at": "2026-11-13T08:29:19.122441+09:00"
+    },
+    {
+      "notice_id": "a306848",
+      "published_at": "2026-11-13T12:44:21.510923+09:00"
+    },
+    {
+      "notice_id": "a306908",
+      "published_at": "2026-11-13T17:16:52.245246+09:00"
+    },
+    {
+      "notice_id": "a306717",
+      "published_at": "2026-11-13T20:46:01.646497+09:00"
+    },
+    {
+      "notice_id": "a306760",
+      "published_at": "2026-11-14T08:28:48.427195+09:00"
+    }
+  ],
+  "slots": [
+    {
+      "scheduled_at": "2026-11-14T12:00:00+09:00",
+      "format_id": "eligibility",
+      "hook_type": "condition",
+      "planned_media": "IMAGE",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "regular_interest",
+      "presentation_style_planning_only": true
+    },
+    {
+      "scheduled_at": "2026-11-14T16:00:00+09:00",
+      "format_id": "interest",
+      "hook_type": "target",
+      "planned_media": "TEXT",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "eligibility_info",
+      "presentation_style_planning_only": true
+    },
+    {
+      "scheduled_at": "2026-11-14T20:00:00+09:00",
+      "format_id": "deadline_opportunity",
+      "hook_type": "target",
+      "planned_media": "IMAGE",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "regular_interest",
+      "presentation_style_planning_only": true
+    },
+    {
+      "scheduled_at": "2026-11-15T08:00:00+09:00",
+      "format_id": "hiring_core",
+      "hook_type": "target",
+      "planned_media": "TEXT",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "eligibility_info",
+      "presentation_style_planning_only": true
+    }
+  ],
+  "pending_records": [],
+  "performance": {
+    "policy_id": "careerpick-threads-v5-20261111",
+    "as_of": "2026-11-14T02:54:18.410360+00:00",
+    "experiment_start": "2026-11-11T11:45:18.355131+00:00",
+    "experiment_start_evidence": [
+      {
+        "post_id": "17896425015438025",
+        "source": "public_output_verification"
+      }
+    ],
+    "windows": {
+      "24h": {
+        "verified_main_count": 2,
+        "metric_medians": {
+          "views": 2630,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 0.5,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 2,
+          "likes": 2,
+          "replies": 2,
+          "reposts": 2,
+          "quotes": 2
+        },
+        "metric_totals": {
+          "views": 5260,
+          "likes": 12,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        },
+        "views_distribution": [
+          {
+            "post_id": "17918731521553015",
+            "views": 2231
+          },
+          {
+            "post_id": "17896425015438025",
+            "views": 3029
+          }
+        ],
+        "likes_rate_percent_median": 0.23351143636317628,
+        "likes_rate_percent_observed_posts": 2,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      },
+      "72h": {
+        "verified_main_count": 0,
+        "metric_medians": {
+          "views": null,
+          "likes": null,
+          "replies": null,
+          "reposts": null,
+          "quotes": null
+        },
+        "metric_observed_counts": {
+          "views": 0,
+          "likes": 0,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        },
+        "metric_totals": {
+          "views": null,
+          "likes": null,
+          "replies": null,
+          "reposts": null,
+          "quotes": null
+        },
+        "views_distribution": [],
+        "likes_rate_percent_median": null,
+        "likes_rate_percent_observed_posts": 0,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      }
+    },
+    "observations": {
+      "24h": [
+        {
+          "post_id": "17896425015438025",
+          "notice_id": "a306786",
+          "published_at": "2026-11-11T11:45:18.355131+00:00",
+          "captured_at": "2026-11-12T11:48:45.499723+00:00",
+          "elapsed_seconds": 86607.144592,
+          "window": "24h",
+          "metrics": {
+            "views": 3029,
+            "likes": 6,
+            "replies": 0,
+            "reposts": 0,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.19808517662594916,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": false,
+          "first_sentence": "간호사 면허가 있다면,",
+          "format_id": "deadline_opportunity",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 249,
+          "media": "TEXT",
+          "slot": "2026-11-11T20:00:00+09:00",
+          "slot_hour_kst": 20,
+          "job": "간호사",
+          "location": "순천병원",
+          "employment": "정규직",
+          "recruitment_unit_count": 3,
+          "deadline_distance_seconds": 420281.644869
+        },
+        {
+          "post_id": "17918731521553015",
+          "notice_id": "a306877",
+          "published_at": "2026-11-12T03:43:20.777100+00:00",
+          "captured_at": "2026-11-13T03:44:34.481774+00:00",
+          "elapsed_seconds": 86473.704674,
+          "window": "24h",
+          "metrics": {
+            "views": 2231,
+            "likes": 6,
+            "replies": 0,
+            "reposts": 1,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.2689376961004034,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": true,
+          "first_sentence": "법정 안전관리자 선임 자격이 있다면,",
+          "format_id": "eligibility",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 271,
+          "media": "TEXT",
+          "slot": "2026-11-12T12:00:00+09:00",
+          "slot_hour_kst": 12,
+          "job": "산업안전관리",
+          "location": "충북",
+          "employment": "정규직",
+          "recruitment_unit_count": 1,
+          "deadline_distance_seconds": 1041399.2229
+        }
+      ],
+      "72h": []
+    },
+    "late_cumulative_observations": [
+      {
+        "post_id": "17938804020400505",
+        "notice_id": "cleaneye-81067",
+        "published_at": "2026-11-11T23:39:21.783881+00:00",
+        "captured_at": "2026-11-13T03:44:35.209864+00:00",
+        "elapsed_seconds": 101113.425983,
+        "window": "24h",
+        "metrics": {
+          "views": 659,
+          "likes": 1,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        },
+        "metric_status": {
+          "views": "observed",
+          "likes": "observed",
+          "replies": "observed",
+          "reposts": "observed",
+          "quotes": "observed"
+        },
+        "likes_rate_percent": 0.15174506828528073,
+        "status": "captured",
+        "reader_replies": null,
+        "reader_replies_status": "author_separation_unverified",
+        "first_sentence_type": "target",
+        "experiment_eligible": true,
+        "first_sentence": "의료사회복지사로 일할 분께,",
+        "format_id": "hiring_core",
+        "contract_version": 2,
+        "sector_group": null,
+        "body_chars": 275,
+        "media": "IMAGE",
+        "slot": "2026-11-12T08:00:00+09:00",
+        "slot_hour_kst": 8,
+        "job": "사회복지사",
+        "location": "경기도의료원 안성병원",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "deadline_distance_seconds": 616838.216119
+      },
+      {
+        "post_id": "18079233716458874",
+        "notice_id": "a306746",
+        "published_at": "2026-11-12T11:48:31.552931+00:00",
+        "captured_at": "2026-11-13T23:29:00.707762+00:00",
+        "elapsed_seconds": 128429.154831,
+        "window": "24h",
+        "metrics": {
+          "views": 803,
+          "likes": 1,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        },
+        "metric_status": {
+          "views": "observed",
+          "likes": "observed",
+          "replies": "observed",
+          "reposts": "observed",
+          "quotes": "observed"
+        },
+        "likes_rate_percent": 0.12453300124533001,
+        "status": "captured",
+        "reader_replies": null,
+        "reader_replies_status": "author_separation_unverified",
+        "first_sentence_type": "condition",
+        "experiment_eligible": true,
+        "first_sentence": "통신 자격증이 있다면,",
+        "format_id": "deadline_opportunity",
+        "contract_version": 2,
+        "sector_group": null,
+        "body_chars": 300,
+        "media": "IMAGE",
+        "slot": "2026-11-12T20:00:00+09:00",
+        "slot_hour_kst": 20,
+        "job": "통신기사",
+        "location": "서울",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "deadline_distance_seconds": 702628.447069
+      }
+    ],
+    "excluded": {
+      "late_or_unavailable": 2
+    },
+    "periods": [
+      {
+        "period": 1,
+        "start": "2026-11-11T11:45:18.355131+00:00",
+        "end": "2026-11-25T11:45:18.355131+00:00",
+        "status": "initial_observation",
+        "all_72h_observations_can_be_due": false,
+        "windows": {
+          "24h": {
+            "verified_main_count": 2,
+            "metric_medians": {
+              "views": 2630,
+              "likes": 6,
+              "replies": 0,
+              "reposts": 0.5,
+              "quotes": 0
+            },
+            "metric_observed_counts": {
+              "views": 2,
+              "likes": 2,
+              "replies": 2,
+              "reposts": 2,
+              "quotes": 2
+            },
+            "metric_totals": {
+              "views": 5260,
+              "likes": 12,
+              "replies": 0,
+              "reposts": 1,
+              "quotes": 0
+            },
+            "views_distribution": [
+              {
+                "post_id": "17918731521553015",
+                "views": 2231
+              },
+              {
+                "post_id": "17896425015438025",
+                "views": 3029
+              }
+            ],
+            "likes_rate_percent_median": 0.23351143636317628,
+            "likes_rate_percent_observed_posts": 2,
+            "reader_replies": null,
+            "reader_replies_status": "see_per_post_author_separation_status",
+            "profile_visits": null,
+            "follow_increase": null,
+            "link_clicks": null
+          },
+          "72h": {
+            "verified_main_count": 0,
+            "metric_medians": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "metric_observed_counts": {
+              "views": 0,
+              "likes": 0,
+              "replies": 0,
+              "reposts": 0,
+              "quotes": 0
+            },
+            "metric_totals": {
+              "views": null,
+              "likes": null,
+              "replies": null,
+              "reposts": null,
+              "quotes": null
+            },
+            "views_distribution": [],
+            "likes_rate_percent_median": null,
+            "likes_rate_percent_observed_posts": 0,
+            "reader_replies": null,
+            "reader_replies_status": "see_per_post_author_separation_status",
+            "profile_visits": null,
+            "follow_increase": null,
+            "link_clicks": null
+          }
+        },
+        "intro_groups_24h": {
+          "condition": {
+            "verified_main_count": 1,
+            "metric_medians": {
+              "views": 2231,
+              "likes": 6,
+              "replies": 0,
+              "reposts": 1,
+              "quotes": 0
+            },
+            "metric_observed_counts": {
+              "views": 1,
+              "likes": 1,
+              "replies": 1,
+              "reposts": 1,
+              "quotes": 1
+            },
+            "metric_totals": {
+              "views": 2231,
+              "likes": 6,
+              "replies": 0,
+              "reposts": 1,
+              "quotes": 0
+            },
+            "views_distribution": [
+              {
+                "post_id": "17918731521553015",
+                "views": 2231
+              }
+            ],
+            "likes_rate_percent_median": 0.2689376961004034,
+            "likes_rate_percent_observed_posts": 1,
+            "reader_replies": null,
+            "reader_replies_status": "see_per_post_author_separation_status",
+            "profile_visits": null,
+            "follow_increase": null,
+            "link_clicks": null
+          }
+        },
+        "intro_slot_media_counts": {
+          "condition": [
+            {
+              "slot_hour_kst": 12,
+              "media": "TEXT",
+              "count": 1
+            }
+          ]
+        },
+        "missing_intro_strata": [],
+        "conflicting_identical_intros": 0,
+        "eight_per_type_review_threshold_met": false,
+        "statistical_significance_claim": false,
+        "account_followers": {
+          "account": "hid_119",
+          "scope": "account_total",
+          "requested_start": "2026-11-11T11:45:18.355131+00:00",
+          "requested_end": "2026-11-14T02:54:18.410360+00:00",
+          "observed_start": "2026-11-11T11:45:32.854727+00:00",
+          "observed_end": "2026-11-13T23:29:00.886949+00:00",
+          "start_followers": 415,
+          "end_followers": 445,
+          "net_change": 30,
+          "status": "observed_interval",
+          "exact_requested_boundaries": false,
+          "observation_statuses": {
+            "captured": 10
+          },
+          "post_attribution": null,
+          "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+        },
+        "decision": "extend_observation_or_balance_intro_types"
+      }
+    ],
+    "account_followers": {
+      "account": "hid_119",
+      "scope": "account_total",
+      "requested_start": "2026-11-11T11:45:18.355131+00:00",
+      "requested_end": "2026-11-14T02:54:18.410360+00:00",
+      "observed_start": "2026-11-11T11:45:32.854727+00:00",
+      "observed_end": "2026-11-13T23:29:00.886949+00:00",
+      "start_followers": 415,
+      "end_followers": 445,
+      "net_change": 30,
+      "status": "observed_interval",
+      "exact_requested_boundaries": false,
+      "observation_statuses": {
+        "captured": 10
+      },
+      "post_attribution": null,
+      "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+    },
+    "likes_rate_definition": "likes / views * 100; views are not unique readers",
+    "automatic_weight_changes": 0,
+    "statistical_significance_claim": false,
+    "decision": "extend_observation_or_balance_intro_types",
+    "limitations": [
+      "Different notices remain an observational comparison, not randomized causal evidence.",
+      "Author-separated reader replies and post-attributed follows/profile clicks remain unavailable unless explicitly verified.",
+      "Small counts can produce unstable percentages; read absolute likes and views together.",
+      "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
+    ]
+  },
+  "publication_readback": {
+    "post_id": "18101198159539744",
+    "public_output_verification": {
+      "checked_at": "2026-11-14T08:28:48.669388+09:00",
+      "post_id": "18101198159539744",
+      "status": "verified",
+      "permalink": "https://www.threads.com/@hid_119/post/Dfsz9dilsPn",
+      "actual_text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,\n국립중앙의료원 중앙응급의료상황실 정규직 4명 공고예요.\n\n3교대와 전지역 근무가 모두 가능해야 해요.\n최초 근무지는 서울·경기·대전·광주·대구·부산 중 합격 후 정해요.\n\n최초 계약 1년, 재임용 심사 후 정년까지예요.\n3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.\n병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 미응시·미완료 시 탈락해요.\n11월 20일 23:59까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "actual_text_sha256": "b271ee20640132ec8191a67d8425deccce2afbefab323ba58192ac42443f424c",
+      "body_chars": 299,
+      "media_type": "TEXT_POST",
+      "media_url": null,
+      "expected_image_sha256": null,
+      "automatic_reply_count": 0,
+      "own_replies": 0,
+      "own_replies_status": "verified",
+      "contract_version": 2,
+      "code_commit": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+      "own_reply_ids": [],
+      "reply_scan_scope": "top_level_all_pages"
+    },
+    "body_matches_queue_and_ledger": true
+  },
+  "source_recheck": {
+    "sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5",
+    "completed_at": "2026-11-14T02:54:24.079907+00:00",
+    "same_original_bytes": true,
+    "original_source_refs_preserved": true
+  },
+  "asset_readback": [
+    {
+      "path": "threads-images/cleaneye-80976.jpg",
+      "sha256": "a625bbda46fb89c0b925d9f72fab00b1207992f13d612a03da875e80c988d053",
+      "readback": "matched"
+    },
+    {
+      "path": "threads-images/cleaneye-80976-360.png",
+      "sha256": "659a54feca9b038b4d5ce1ed04ef4afe0637579d81597071ba2339c599507863",
+      "readback": "matched"
+    }
+  ],
+  "file_sha256": {
+    "writer-input.json": "eaf26b12e6e3683f16e1e16c5fba905257feb6dca62ae683e7bde6e4af0efeb7",
+    "queue-check.json": "8695be68d333f1e3ee914c19d6be878a6e1a343e84c3f40449c87f8c36292193",
+    "performance-summary.json": "d7d2971117e752abd76ff21d76013697b6e022f77faae0c73cc256c62d87aa8a",
+    "card-review.json": "9f750f08576de93ee775d3d1eb2f4d558e8dadb074e2a736327a62850020ac87"
+  },
+  "full_active_prompt_read": true,
+  "policy_hashes_verified": true,
+  "latest_publisher_run": {
+    "run_id": "43527351939",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-11-13T23:29:07Z",
+    "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+    "workflow_path": ".github/workflows/threads_auto.yml",
+    "url": "https://github.com/kllollain-max/careerpick/actions/runs/43527351939"
+  },
+  "changed_runs_since_checkpoint": [
+    {
+      "run_id": "43548648339",
+      "run_attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "updated_at": "2026-11-14T02:52:29Z",
+      "head_sha": "8b54af9412ad6b0f4cbf738e0052dacd988051fd",
+      "workflow_path": ".github/workflows/adsense-readiness-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43548648339"
+    },
+    {
+      "run_id": "43548648337",
+      "run_attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "updated_at": "2026-11-14T02:52:29Z",
+      "head_sha": "8b54af9412ad6b0f4cbf738e0052dacd988051fd",
+      "workflow_path": ".github/workflows/content-mobile-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43548648337"
+    }
+  ],
+  "new_publisher_runs": [],
+  "accepted_claim": {
+    "path": "threads-claims/20261113T2300Z.json",
+    "blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
+    "slot": "2026-11-14T08:00:00+09:00",
+    "run_id": "43527351939",
+    "state": "accepted",
+    "post_id": "18101198159539744"
+  },
+  "official_GET_freshness": "Fresh ledger contains stored authenticated publisher GET checked_at08:28:48; no new monitor Meta GET.",
+  "open_prs": [
+    {
+      "number": 55,
+      "state": "open",
+      "head_sha": "8b54af9412ad6b0f4cbf738e0052dacd988051fd"
+    },
+    {
+      "number": 51,
+      "state": "open",
+      "head_sha": "cfedd498e3f0d84e6ca34374e6857ad29d89bf6f"
+    },
+    {
+      "number": 49,
+      "state": "open",
+      "head_sha": "583f712092ec2c048c2bef804abdc6cda64dbc1e"
+    },
+    {
+      "number": 45,
+      "state": "open",
+      "head_sha": "ec18f6cd51562b9ca8eebeba22afc89f7f7dac22"
+    },
+    {
+      "number": 40,
+      "state": "open",
+      "head_sha": "96de32d4c477486feaecb6473387bb7264bfaa10"
+    },
+    {
+      "number": 36,
+      "state": "open",
+      "head_sha": "a358b373afb37fb055aa0443306cf0999196f861"
+    },
+    {
+      "number": 35,
+      "state": "open",
+      "head_sha": "534c6f36414df91d763084c5e4ecfd87db48f915"
+    },
+    {
+      "number": 16,
+      "state": "open",
+      "head_sha": "031c168d5bcb0838a512f1c3124f1d24f3588a40"
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "head_sha": "073b07c678053e4cf5d525c6b146491a7eda1376"
+    },
+    {
+      "number": 14,
+      "state": "open",
+      "head_sha": "5ef4b29336575723d80ff98c0ea6142201dd6a4e"
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "head_sha": "78b1d2b0d222461cd623141475e77785b53c0cd1"
+    },
+    {
+      "number": 12,
+      "state": "open",
+      "head_sha": "cc37b934988b60fa4ca630d007a8d03810f217e2"
+    },
+    {
+      "number": 11,
+      "state": "open",
+      "head_sha": "bf9054677d3f83a14da7d26f9f7fe6263d00c291"
+    }
+  ],
+  "previous_held_draft": {
+    "notice_id": "cleaneye-80976",
+    "status": "held_unassigned",
+    "prepared_at": "2026-11-14T02:15:36.873900+00:00",
+    "assigned_slot": null,
+    "post_text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요.\n\n3개월 수습 후 정규직 임용이에요.\n재단본부 주5일·40시간, 2027년 1월 1일 임용 예정이에요.\n부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.\n\n11월 17일 17:00까지 방문·우편·이메일로 접수해요.\n토·일은 접수하지 않고, 우편은 도착 기준이에요.\n이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.\n\n자세한 사항은 프로필링크 확인",
+    "reply_texts": [],
+    "chars": 250,
+    "body_sha256": "e7e70ff4d62d60d6335ff2277a5c5526cee178eea5b0b354a8f580710f038417",
+    "publication_policy_id": "careerpick-threads-v5-20261111",
+    "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+    "source_refs": [
+      {
+        "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
+        "checked_at": "2026-11-14T02:12:35.523919+00:00",
+        "document_sha256": "7fb4db953fdce59f7a516f1d8a7eea795f9832de0d31562362f60cfa34566f3d"
+      },
+      {
+        "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
+        "checked_at": "2026-11-14T02:13:00.999743+00:00",
+        "document_sha256": "03d2b76933d893b9740993b70c1d6f2cc2b052481b62179aeef933ff286fea0a"
+      },
+      {
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "checked_at": "2026-11-14T02:13:47.740012+00:00",
+        "document_sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5"
+      },
+      {
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000018.hwp&_file_l=%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C_%EC%A0%84%EA%B8%B0.hwp",
+        "checked_at": "2026-11-14T02:13:47.740596+00:00",
+        "document_sha256": "cc5d99b98f21257ff1a6ece648afbf7ac7680003f23074e10d4937e40dcff446"
+      }
+    ],
+    "fact_evidence": {
+      "title": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "일반직 전기 5급(1명)"
+      },
+      "count": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "채용인원 : 1명(일반직 전기 5급 1명)"
+      },
+      "employment": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "일반직(전기5급) 3개월 수습 후 정규직 임용"
+      },
+      "location": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "근무장소 : 재단본부"
+      }
+    },
+    "review": {
+      "v5": {
+        "policy_id": "careerpick-threads-v5-20261111",
+        "contract_version": 2,
+        "restrictions_complete": true,
+        "fact_consistency_check": "passed",
+        "hook_candidates": [
+          {
+            "id": "condition",
+            "type": "condition",
+            "text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요."
+          },
+          {
+            "id": "target",
+            "type": "target",
+            "text": "복지시설 전기·시설관리로 일할 분께,\n양산시복지재단 전기5급 1명을 채용해요."
+          },
+          {
+            "id": "job",
+            "type": "job",
+            "text": "전기·시설관리와 행정업무를 맡는 자리예요.\n양산시복지재단 전기5급 1명 공고예요."
+          }
+        ],
+        "selected_hook_id": "condition",
+        "first_sentence_type": "condition",
+        "hook_review": {
+          "factual": true,
+          "target_clear": true,
+          "natural": true,
+          "basis": "조건 두 가지를 AND로 보존하며 최근8개와 첫문장 중복없음"
+        },
+        "key_restrictions": [
+          {
+            "text": "전기기사 자격과 시설관리 업무능력이 있다면,",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "전기기사 자격증 소지자로 시설관리 업무 능력자",
+            "classification": "required",
+            "logic": "all_of",
+            "paths": [
+              {
+                "summary": "전기기사 자격",
+                "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+                "excerpt": "전기기사 자격증 소지자"
+              },
+              {
+                "summary": "시설관리 업무능력",
+                "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+                "excerpt": "시설관리 업무 능력자"
+              }
+            ]
+          },
+          {
+            "text": "3개월 수습 후 정규직 임용이에요.",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "3개월 수습 후 정규직 임용",
+            "classification": "required",
+            "logic": "single"
+          },
+          {
+            "text": "부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "부서 간 파견, 전보 등의 인사발령; 정년 만60세; 인사규정 제11조 결격사유(병역기피 포함), 관련 복지법상 범죄경력 제한",
+            "classification": "required",
+            "logic": "single"
+          }
+        ],
+        "useful_point": {
+          "text": "이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "작성한 서류를 출력하여 본인 서명 또는 인; 제출서류 일체를 컬러 스캔하여 1개의 파일로 저장; 파일형식 PDF"
+        },
+        "recruitment_unit": {
+          "title": "전기5급",
+          "count": 1,
+          "employment": "3개월 수습 후 정규직 임용",
+          "scope": "single_recruitment_unit",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "채용인원 : 1명(일반직 전기 5급 1명); 3개월 수습 후 정규직 임용"
+        },
+        "correction_check": {
+          "checked_at": "2026-11-14T02:12:35.523919+00:00",
+          "result": "none_found",
+          "source_ref": "https://yscwf.or.kr/bbs/bbs16/list.do",
+          "scope": "공식 최신 채용게시판 1페이지 1216~1207과 공고1366·첨부원문 검토",
+          "limitations": "이 범위에 전기5급 정정 공고 없음. 모든 과거 페이지·다른 게시판 전체 부재는 확인하지 않음."
+        },
+        "style_rewrites": 1,
+        "presentation_style": "regular_interest",
+        "selection_reason": "검증된 단일단위1명·정규직 임용방식·기술직 다양성·11월17일 접수까지 준비기간. 직무/지역인기도 추정없음. Cleaneye503 후 독립적인 기관 공식 게시판과 전체 HWP 원문 확인.",
+        "public_preview": {
+          "main_text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요.\n\n3개월 수습 후 정규직 임용이에요.\n재단본부 주5일·40시간, 2027년 1월 1일 임용 예정이에요.\n부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.\n\n11월 17일 17:00까지 방문·우편·이메일로 접수해요.\n토·일은 접수하지 않고, 우편은 도착 기준이에요.\n이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.\n\n자세한 사항은 프로필링크 확인",
+          "detail_reply": ""
+        },
+        "experiment_eligible": true,
+        "length_exception_reason": null
+      },
+      "application_period": {
+        "start": "2026-11-11T09:00:00+09:00",
+        "end": "2026-11-17T17:00:00+09:00",
+        "weekends_excluded": true,
+        "lunch_break": "12:00~13:00",
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "접수기간 2026.11.11~11.17 17:00까지(토,일 제외); 근무시간09:00~18:00(중식12:00~13:00제외)"
+      },
+      "profile_target": {
+        "status": "hold_not_accessed",
+        "reason": "Prior automatic approval denial of CareerPick profile destination persists; no bypass or final profile-target pass recorded."
+      }
+    },
+    "hold_reasons": [
+      "profile_target final verification remains blocked by prior approval denial; not accessed",
+      "No final queue-entry validation or reviewed image card; unassigned draft only"
+    ],
+    "public_shape_check": {
+      "main_count": 1,
+      "reply_count": 0,
+      "cta_count": 1,
+      "chars": 250,
+      "mobile_review": "First2lines reader and unit; short paragraphs; eligibility AND, probation, assignment, absolute deadline and source-based practical point reviewed",
+      "final_queue_validation": "not_run_not_ready"
+    },
+    "audit_path": "threads/audits/monitor-v2-20261114T111644.json"
+  },
+  "updated_held_draft": {
+    "notice_id": "cleaneye-80976",
+    "status": "held_unassigned",
+    "prepared_at": "2026-11-14T02:15:36.873900+00:00",
+    "assigned_slot": null,
+    "post_text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요.\n\n3개월 수습 후 정규직 임용이에요.\n재단본부 주5일·40시간, 2027년 1월 1일 임용 예정이에요.\n부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.\n\n11월 17일 17:00까지 방문·우편·이메일로 접수해요.\n토·일은 접수하지 않고, 우편은 도착 기준이에요.\n이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.\n\n자세한 사항은 프로필링크 확인",
+    "reply_texts": [],
+    "chars": 250,
+    "body_sha256": "e7e70ff4d62d60d6335ff2277a5c5526cee178eea5b0b354a8f580710f038417",
+    "publication_policy_id": "careerpick-threads-v5-20261111",
+    "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+    "source_refs": [
+      {
+        "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
+        "checked_at": "2026-11-14T02:12:35.523919+00:00",
+        "document_sha256": "7fb4db953fdce59f7a516f1d8a7eea795f9832de0d31562362f60cfa34566f3d"
+      },
+      {
+        "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
+        "checked_at": "2026-11-14T02:13:00.999743+00:00",
+        "document_sha256": "03d2b76933d893b9740993b70c1d6f2cc2b052481b62179aeef933ff286fea0a"
+      },
+      {
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "checked_at": "2026-11-14T02:13:47.740012+00:00",
+        "document_sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5",
+        "excerpt": "\u0002捤獥\u0000\u0000\u0000\u0000\u0002\u0002汤捯\u0000\u0000\u0000\u0000\u0002\u0015湰灧\u0000\u0000\u0000\u0000\u0015(재)양산시복지재단 공고 제2026-16호\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n2027년 상반기 (재)양산시복지재단 직원 추가채용 공고\n 양산시 출연기관인 (재)양산시복지재단에서는 시민의 복지증진과 복지재단 발전에 사명을 가지고 함께 일할 일반직 직원 채용 계획을 다음과 같이 공고하오니 전문성과 역량을 지닌 분들의 많은 응모 바랍니다.\n \n2026년  11월  5일\n(재)양산시복지재단 대표이사\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n채용인원 및 응시자격\n❍ \u0015湯湷\u0000\u0000\u0000\u0000\u0015채용인원 : 1명(일반직 전기 5급 1명)\n❍ \u0015湯湷\u0000\u0000\u0000\u0000\u0015응시자격\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n응시분야\n응 시 자 격\n공통사항\n·양산시복지재단 인사관리규정 제11조(결격사유)에 \n  해당되지 아니한 자\n·기타 법령에 의하여 응시자격을 정지당하지 아니한 자* \n일반직\n전기 5급(1명)\n※ 다음 요건에 해당 되는 자\n·전기기사 자격증 소지자로 시설관리 업무 능력자\n ※ 직종별 동시 응시 불가함.\n*양산시복지재단은 부서(재단본부, 양산시장애인복지관, 웅상종합사회복지관, 양산시노인복지관, 웅상노인복지관) 간 파견, 전보 등의 인사발령이 이루어지는 곳으로 사회복지사업법, 장애인복지법, 아동복지법, 노인복지법에 근거한 범죄경력이 없는 자\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n결 격 사 유\n   \n(재)양산시복지재단 인사규정 제11조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원이 될 수 없다.\n1. 피성년후견인 또는 피한정후견인\n2. 파산자로서 복권되지 아니한 사람\n3. 금고이상의 형을 받고 그 집행이 종료되거나, 집행을 받지 아니하기로 확정된 후 5년이 경과되지 아니한 사람\n4. 금고이상의 형을 받고 그 집행 유예기간이 종료된 날로부터 2년이 경과되지 아니한 사람\n5. 금고이상의 형의 선고유예를 받은 경우에 그 선고 유예기간 중에 있는 사람\n6. 징계에 의하여 해임의 처분을 받은 날로부터 3년, 파면의 처분을 받은 날로부터 5년이 경과하지 아니한 사람\n7. 법원의 판결 또는 다른 법률에 의하여 자격이 상실 또는 정지된 사람\n8. 병역의무자로서 병역기피의 사실이 있는 사람\n9.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조의 비위면직자등 취업제한 대상자\n10. 지방공무원법 제31조 제6호의3, 제6호의4 어느 하나에 해당하는 사람\n (재)양산시복지재단은 부정청탁 금지법을 적용 받는 기관입니다. 정부시책에 따라 블라인드 공개채용을 하오니 인사 청탁시 서류전형에서 탈락됨을 유의 바랍니다.\n \u000b漠杳\u0000\u0000\u0000\u0000\u000b 가점사항\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n해당직종\n(응시분야)\n내     용\n가산\n비율\n일반직\n(전기 5급)\n◌ 다음 법률에 의한 취업지원 대상자\n- 독립유공자예우에 관한 법률\n- 국가유공자 등 예우 및 지원에 관한 법률\n- 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률\n- 5.18민주유공자 예우 및 단체설립에 관한 법률\n- 특수임무유공자 예우 및 단체설립에 관한 법률\n- 보훈보상 대상자 지원에 관한 법률\n전형별ㆍ과목별\n만점의 5%,\u001f10%\n ※ 취업지원대상자 등록 여부는 응시자 본인이 사전에 국가보훈청(☎1577-0606), 정부24(https://www.gov.kr) 등에 확인하여 “취업지원 대상자 증명서”를 발급받아 제출하여야만 가점 적용\n ※ ①취업지원대상자의 원점수가 만점의 40% 미만인 전형(과목)이 있거나, ②점수로 환산할 수 없는 시험인 경우에는 가점하지 않음\n ※「국가유공자 등 예우 및 지원에 관한 법률」등에 따라 가점을 받아 합격하는 자의 수는 그 채용시험 선발예정인원의 30%를 초과할 수 없음\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직무내용\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n(응시분야)\n직 무 내 용\n일반직\n(전기 5급)\n·시설관리\n·기타 행정업무 및 시설관리에 필요한 사항\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n3. 보수 및 근무조건\n ❍ 보수 및 채용방식\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n(응시분야)\n채용방식\n보 수\n일반직\n(전기 5급)\n3개월 수습 후 정규직 임용\n\u0002汤捯\u0000\u0000\u0000\u0000\u0002사회복지시설 종사자 인건비 가이드라인 적용\n[사회복지 이용시설(장애인) 종사자 기본급(일반직) 5급]\n※(재)양산시복지재단 보수 및 수당 규정에 의함\n ❍ 근무시간 : 주5일 40시간 근무(근로기준법 적용)\n ❍ 근무장소 : 재단본부\n ❍ 임 용 일 : 2027. 1. 1.(금) (예정)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n4. 시험일정\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n구 분\n일 정\n비 고\n공고기간\n2026. 11. 5.(목) ~ 11. 17.(화)\n12일간 공고\n응시원서 및 증빙서류제출\n2026. 11. 11.(수) ~ 11. 17.(화)\n5일간 접수(토,일 제외)\n서류전형 합격자발표\n및 이의신청접수\n2026. 11. 23.(월) ~ 11. 24.(화)\n홈페이지 공고\n필기시험\n2026. 11. 28.(토)\n필기시험 일시 및 장소는\n서류전형 합격자 발표시 공지예정\n필기시험 합격자 발표\n및 이의신청접수\n2026. 12. 4.(금) ~ 12. 7.(월)\n홈페이지 공고\n면접시험\n2026. 12. 9.(수)\n면접시험 일시 및 장소는\n필기시험 합격자 발표시 공지예정\n최종합격자 발표\n및 이의신청접수\n2026. 12. 10.(목) ~ 12. 11.(금)\n개별 및 홈페이지 공고\n임용후보자 등록\n2026. 12. 14.(월) ~ 12. 16.(수)\n재단본부 사무실\n결격사유 조회\n~ 2026. 12. 24.(목)\n※ 상기 일정은 사정에 따라 변경될 수 있음\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n5. 채용절차\n▢ 일반직\n 가. 1차 서류전형\n   ­ 응시자격요건 적합여부 심사\n   ­ 서류심사 결과 자격요건 적격인 합격자 모두 필기시험 실시\n 나. 2차 필기시험\n   - 일반직(전기 5급) : 필기시험 고득점자 순 채용인원의 5배수까지 면접대상자로 결정\n   ­ 동점자 발생 시 동점자 모두 합격자로 결정\n   ­ 필기시험 과목별 비중(100점 만점 기준)\n   \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n응시분야\n채용\n인원\n배점비율\n전공시험 과목\n합격자\n결정\n일반직\n(전기 5급)\n1명\n- 인성‧직무능력 검사 40점\n  ※ 인성의 경우 면접시험에 참고함.\n- 전공과목 60점\n전기이론, 전기기기\n5배수\n   ­ 합격 및 과락기준\n   \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n응시분야\n합격기준\n과락기준\n일반직\n(전기 5급)\n총점 60점이상, 과목별 획득점수 40점이상 득점자 중에서 총점 순위\n총점 60점미만, 과목별 획득점수 40점미만 불합격처리\n 다. 3차 면접시험 100% \n   - 심사방법 : 개인면접 또는 그룹면접\n   - 평가항목 : 전문성과 응용능력(30), 상호협력능력(30), 고객지향(20), 윤리관(20)\n   - 동점자 발생 시 취업지원대상자, 전문성과 응용능력, 상호협력능력, 고객지향, \n     윤리관 순으로 점수가 높은 자를 합격자로 선정함\n 라. 최종합격자 발표 : 2026. 12. 10.(목) 예정\n  - 최종합격자가 임용포기 및 결격사유 등의 사정으로 결원을 보충할 필요가 있는 경우에는 예비합격자 중 추가 합격자를 결정할 수 있음.\n    ※ 채용인원의 0.5배수로 예비합격자 순번을 부여하며, 예비합격자 유효기간은 합격자의 최초 임용일 기준 3개월 이내로 하고, 각 전형별 60점 미만자에 대하여는 예비합격자 순번 부여를 제외함\n    ※ 공고방법 : 개별연락, 홈페이지\u0003汫╨\u0000\u0000\u0000\u0000\u0003(www.yscwf.or.kr)\u0004汫h\u0000\u0000\u0000\u0000\u0004\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n6. 응시원서 접수\n  가. 접수기간 : 2026. 11. 11.(수) ~ 11. 17.(화) 17:00까지(토, 일 제외)\n    ※ 근무시간(09:00 ~ 18:00, 중식시간 12:00 ~ 13:00 제외) 내에서 접수가능\n  나. 접 수 처 : (재)양산시복지재단 사무실\n                (양산시 물금읍 물금로 225, 양산시 복지허브타운 4층 416호) \n                ☎055-781-2015 / hj0918@yscwf.or.kr\n  다. 접수방법\n   1) 방문 접수\n   2) 우편 접수: 2026. 11. 17.(화) 17:00 도착분에 한함. \n    \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n가) 접수완료 안내 문자 확인 : 응시번호 부여\n나) 응시표 : 필기시험 당일 교부\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b   3) 이메일 접수\n가) 응시원서, 입사지원서 등 작성\n: 공고문 첨부파일에 있는 응시원서 및 입사지원서 등 관련 서류를 내려받아 작성\n나) 작성한 서류를 출력하여 본인 서명 또는 인\n다) 응시원서, 입사지원서 등 제출서류 일체를 컬러 스캔하여 1개의 파일로 저장\n * 제출 시 파일형식은 PDF (1면에 1장씩 출력되도록 제출)\n * 파일명: 응시분야_제출일_지원자 이름 (예: 조리사_20260507-홍길동)\n라) 인사담당자 메일 주소(hj0918@yscwf.or.kr)로 제출\n마) 접수완료 안내 회신 메일 확인\n : 접수완료 시 회신 메일(응시번호 부여) 확인\n바) 응시표 : 필기시험 당일 교부\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n7. 제출서류\n❍ 입사지원 제출 서류\n 가. 제출서류 목록표(본인 작성 제출)\n 나. 응시원서[별지 제1호 서식] 및 입사지원서[별지 제2호 서식]\n 다. 자기소개서[별지 제3호 서식]\n 라. 개인정보 수집 및 이용 동의서\n 마. 응시자격 관련 자격증 사본 각 1부.\n 바. 건강보험자격득실확인서 1부.(해당자_입사지원서 내 경력사항 확인용)\n 사. 취업지원대상자 증빙서류(해당자)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n [블라인드 채용]과 관련하여 자격증 및 건강보험자격득실확인서 등 관련 서류 제출 시\n 개인정보(주민번호, 생년, 사진 등)는 삭제 또는 마스킹 후 제출하여 주시기 바랍니다.\n 입사지원서에는 반드시 증빙이 가능한 사항만 기재하시고, 제출서류 중 불명확한 부분에 대해서는 인정하지 않으며, 추가서류 제출을 요구할 수 있습니다.\n ※ 자기소개서에 인적사항(출신지역, 가족관계, 학력 등)을 암시하는 내용 기재 금지\n ※ 입사지원서에 기재된 경력사항과 건강보험자격득실확인서 경력사항이 동일해야 함. 경력사항이 상이할 경우 건강보험자격득실확인서 경력사항으로 인정\n❍ 최종합격자 발표 후 제출 서류\n 가. 임용후보자 등록원서 1부.\n 나. 신원진술서 1부. ※서식별첨\n 다. 최종학교 졸업증명서 1부.\n 라. 경력증명서(근무처별) 각 1부.(해당자)\n ※ 경력증명서에는 근무기간, 직책(직급), 담당업무를 명시하고 발행기관의 관인\n    날인이 명확해야 함.(단, 서류미비로 경력판정이 불분명할 경우 불인정)\n 마. 주민등록 등본, 초본 각 1부.\n   - 채용공고일 이후 발급분, 남자의 경우 병역사항 기재\n 바. 가족관계증명서 1부.\n   - 주민등록번호 전체표시(가족포함)\n 사. 입사지원서 기재내용 관련 증빙 자격증 1부.(해당자에 한함)\n 아. 증명사진 1매.(상반신 탈모 3×4cm)\n 자. 건강검진 대체통보서 1통.\n   - 국민건강보험공단에서 발행.(유효기간 최근 2년)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n8. 응시자 유의사항\n 가. 응시희망자는 자격요건이 적합한지 철저히 검토한 후 응시하시기 바랍니다.\n  ※ 양산시복지재단 인사관리 규정 제28조(정년)에 따라 직원의 정년은 만60세 임.\n 나. 응시분야별 중복지원은 불가능하며, 중복 지원시 모두 무효 처리됩니다.\n 다. 접수된 응시원서나 구비서류는 일체 변경, 추가보완 등이 불가합니다. \n 라. 적격자가 없을 경우 선발하지 않을 수 있고, 불합격자에 대해서는 별도          통지사항은 없으며, 제출된 서류에 허위사실이나 신원조사 등을 통하여         부적합한 결격사유가 있을 경우에는 합격 결정 후에도 합격을 취소할         수 있습니다.\n 마. 최종합격자 임용포기 및 결격사유 발생 시 예비합격자 순으로 합격을 결정하며, 임용 후라도 결격사유가 발견된 경우 임용을 취소합니다.\n 바. 응시원서 상의 기재착오 또는 누락이나 연락불능 등으로 인한 불이익은 일체 \n     응시자의 책임입니다.\n 사. 응시자 제출서류는 채용 여부가 확정된 이후 응시자(확정된 채용대상자는 제외)가 반환을 청구하는 경우 본인임을 확인한 후 ⌜채용절차의 공정화에 관한 법률⌟제11조(채용서류의 반환 등)에 따라 반환하며, 반환 청구기간은 응시자의 채용여부가 확정된 날 이후 14일부터 60일까지이며, 반환 청구기간이 경과하거나 미반환된 채용서류는 이후 ⌜개인정보보호법⌟에 따라 파기됩니다.\n 아. 최종합격자는 국민건강보험공단 발행 건강검진 대체통보서(최근 2년 이내) 1통을 임용등록 시 제출하여야 하며, 이상이 있을시 합격을 취소할 수 있습니다.\n 자. 본 채용공고는 불가피한 사정에 따라 변경될 수 있으며, 변경된 사항은 해당 시험일 7일전까지 양산시복지재단 홈페이지에 공고합니다.\n 차. 응시자를 대상으로 채용 전형별 이의제기 절차를 운영하오니 공고문 내‘채용전형 이의 신청서 안내’를 참고하여 주시기 바랍니다.\n 카. 입사지원 제출서류서식은 (재)양산시복지재단 홈페이지(\u0003汫╨\u0000\u0000\u0000\u0000\u0003www.yscwf.or.kr)\u0004汫h\u0000\u0000\u0000\u0000\u0004 \n     양산시 홈페이지(\u0003汫╨\u0000\u0000\u0000\u0000\u0003www.yangsan.go.kr\u0004汫h\u0000\u0000\u0000\u0000\u0004) 채용공고란에서 다운로드 후 사용\n     하시기\u000b氠瑢\u0000\u0000\u0000\u0000\u000b 바라며 기타 자세한 사항은 아래 연락처로 문의하시기 바랍니다.\n(재)양산시복지재단 채용담당 (☎ 055-781-2015) \n"
+      },
+      {
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000018.hwp&_file_l=%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C_%EC%A0%84%EA%B8%B0.hwp",
+        "checked_at": "2026-11-14T02:13:47.740596+00:00",
+        "document_sha256": "cc5d99b98f21257ff1a6ece648afbf7ac7680003f23074e10d4937e40dcff446"
+      }
+    ],
+    "fact_evidence": {
+      "title": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "일반직 전기 5급(1명)"
+      },
+      "count": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "채용인원 : 1명(일반직 전기 5급 1명)"
+      },
+      "employment": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "일반직(전기5급) 3개월 수습 후 정규직 임용"
+      },
+      "location": {
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "근무장소 : 재단본부"
+      }
+    },
+    "review": {
+      "v5": {
+        "policy_id": "careerpick-threads-v5-20261111",
+        "contract_version": 2,
+        "restrictions_complete": true,
+        "fact_consistency_check": "passed",
+        "hook_candidates": [
+          {
+            "id": "condition",
+            "type": "condition",
+            "text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요."
+          },
+          {
+            "id": "target",
+            "type": "target",
+            "text": "복지시설 전기·시설관리로 일할 분께,\n양산시복지재단 전기5급 1명을 채용해요."
+          },
+          {
+            "id": "job",
+            "type": "job",
+            "text": "전기·시설관리와 행정업무를 맡는 자리예요.\n양산시복지재단 전기5급 1명 공고예요."
+          }
+        ],
+        "selected_hook_id": "condition",
+        "first_sentence_type": "condition",
+        "hook_review": {
+          "factual": true,
+          "target_clear": true,
+          "natural": true,
+          "basis": "조건 두 가지를 AND로 보존하며 최근8개와 첫문장 중복없음"
+        },
+        "key_restrictions": [
+          {
+            "text": "전기기사 자격과 시설관리 업무능력이 있다면,",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "전기기사 자격증 소지자로 시설관리 업무 능력자",
+            "classification": "required",
+            "logic": "all_of",
+            "paths": [
+              {
+                "summary": "전기기사 자격",
+                "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+                "excerpt": "전기기사 자격증 소지자"
+              },
+              {
+                "summary": "시설관리 업무능력",
+                "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+                "excerpt": "시설관리 업무 능력자"
+              }
+            ]
+          },
+          {
+            "text": "3개월 수습 후 정규직 임용이에요.",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "3개월 수습 후 정규직 임용",
+            "classification": "required",
+            "logic": "single"
+          },
+          {
+            "text": "부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "부서 간 파견, 전보 등의 인사발령; 정년 만60세; 인사규정 제11조 결격사유(병역기피 포함), 관련 복지법상 범죄경력 제한",
+            "classification": "required",
+            "logic": "single"
+          }
+        ],
+        "useful_point": {
+          "text": "이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "작성한 서류를 출력하여 본인 서명 또는 인; 제출서류 일체를 컬러 스캔하여 1개의 파일로 저장; 파일형식 PDF"
+        },
+        "recruitment_unit": {
+          "title": "전기 5급",
+          "count": 1,
+          "employment": "3개월 수습 후 정규직 임용",
+          "scope": "single_recruitment_unit",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "채용인원 : 1명(일반직 전기 5급 1명); 3개월 수습 후 정규직 임용"
+        },
+        "correction_check": {
+          "checked_at": "2026-11-14T02:12:35.523919+00:00",
+          "result": "none_found",
+          "source_ref": "https://yscwf.or.kr/bbs/bbs16/list.do",
+          "scope": "공식 최신 채용게시판 1페이지 1216~1207과 공고1366·첨부원문 검토",
+          "limitations": "이 범위에 전기5급 정정 공고 없음. 모든 과거 페이지·다른 게시판 전체 부재는 확인하지 않음."
+        },
+        "style_rewrites": 1,
+        "presentation_style": "regular_interest",
+        "selection_reason": "검증된 단일단위1명·정규직 임용방식·기술직 다양성·11월17일 접수까지 준비기간. 직무/지역인기도 추정없음. Cleaneye503 후 독립적인 기관 공식 게시판과 전체 HWP 원문 확인.",
+        "public_preview": {
+          "main_text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요.\n\n3개월 수습 후 정규직 임용이에요.\n재단본부 주5일·40시간, 2027년 1월 1일 임용 예정이에요.\n부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.\n\n11월 17일 17:00까지 방문·우편·이메일로 접수해요.\n토·일은 접수하지 않고, 우편은 도착 기준이에요.\n이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.\n\n자세한 사항은 프로필링크 확인",
+          "detail_reply": ""
+        },
+        "experiment_eligible": false,
+        "length_exception_reason": null,
+        "card_visual_review": {
+          "status": "passed",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
+          "sha256": "a625bbda46fb89c0b925d9f72fab00b1207992f13d612a03da875e80c988d053",
+          "preview_sha256": "659a54feca9b038b4d5ce1ed04ef4afe0637579d81597071ba2339c599507863",
+          "asset_path": "threads-images/cleaneye-80976.jpg",
+          "preview_asset_path": "threads-images/cleaneye-80976-360.png",
+          "facts_sha256": "643ba526d5aaf61c9f604e014b45515a6f0f616a3b6ded7346ee92977c7a8c50",
+          "layout_version": "careerpick-single-main-card-v2",
+          "visual_findings": "Final original JPEG and360PNG opened after official title spacing correction; all Korean/numbers,probation,1position,deadline and required conditions readable and matched; no clipping."
+        },
+        "card_restriction": "전기기사 자격과 시설관리 업무능력",
+        "experiment_exclusion_reason": "Unassigned unpublished held draft; no experiment observation"
+      },
+      "application_period": {
+        "start": "2026-11-11T09:00:00+09:00",
+        "end": "2026-11-17T17:00:00+09:00",
+        "weekends_excluded": true,
+        "lunch_break": "12:00~13:00",
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "접수기간 2026.11.11~11.17 17:00까지(토,일 제외); 근무시간09:00~18:00(중식12:00~13:00제외)"
+      },
+      "profile_target": {
+        "status": "hold_not_accessed",
+        "reason": "Prior automatic approval denial of CareerPick profile destination persists; no bypass or final profile-target pass recorded."
+      },
+      "fact_evidence": [
+        {
+          "field": "title",
+          "value": "전기 5급",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "전기 5급(1명)"
+        },
+        {
+          "field": "count",
+          "value": 1,
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "채용인원 : 1명(일반직 전기 5급 1명)"
+        },
+        {
+          "field": "employment",
+          "value": "3개월 수습 후 정규직 임용",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "3개월 수습 후 정규직 임용"
+        },
+        {
+          "field": "location",
+          "value": "재단본부",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "근무장소 : 재단본부"
+        }
+      ],
+      "source_refs": [
+        {
+          "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
+          "checked_at": "2026-11-14T02:12:35.523919+00:00",
+          "document_sha256": "7fb4db953fdce59f7a516f1d8a7eea795f9832de0d31562362f60cfa34566f3d"
+        },
+        {
+          "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
+          "checked_at": "2026-11-14T02:13:00.999743+00:00",
+          "document_sha256": "03d2b76933d893b9740993b70c1d6f2cc2b052481b62179aeef933ff286fea0a"
+        },
+        {
+          "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "checked_at": "2026-11-14T02:13:47.740012+00:00",
+          "document_sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5",
+          "excerpt": "\u0002捤獥\u0000\u0000\u0000\u0000\u0002\u0002汤捯\u0000\u0000\u0000\u0000\u0002\u0015湰灧\u0000\u0000\u0000\u0000\u0015(재)양산시복지재단 공고 제2026-16호\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n2027년 상반기 (재)양산시복지재단 직원 추가채용 공고\n 양산시 출연기관인 (재)양산시복지재단에서는 시민의 복지증진과 복지재단 발전에 사명을 가지고 함께 일할 일반직 직원 채용 계획을 다음과 같이 공고하오니 전문성과 역량을 지닌 분들의 많은 응모 바랍니다.\n \n2026년  11월  5일\n(재)양산시복지재단 대표이사\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n채용인원 및 응시자격\n❍ \u0015湯湷\u0000\u0000\u0000\u0000\u0015채용인원 : 1명(일반직 전기 5급 1명)\n❍ \u0015湯湷\u0000\u0000\u0000\u0000\u0015응시자격\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n응시분야\n응 시 자 격\n공통사항\n·양산시복지재단 인사관리규정 제11조(결격사유)에 \n  해당되지 아니한 자\n·기타 법령에 의하여 응시자격을 정지당하지 아니한 자* \n일반직\n전기 5급(1명)\n※ 다음 요건에 해당 되는 자\n·전기기사 자격증 소지자로 시설관리 업무 능력자\n ※ 직종별 동시 응시 불가함.\n*양산시복지재단은 부서(재단본부, 양산시장애인복지관, 웅상종합사회복지관, 양산시노인복지관, 웅상노인복지관) 간 파견, 전보 등의 인사발령이 이루어지는 곳으로 사회복지사업법, 장애인복지법, 아동복지법, 노인복지법에 근거한 범죄경력이 없는 자\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n결 격 사 유\n   \n(재)양산시복지재단 인사규정 제11조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원이 될 수 없다.\n1. 피성년후견인 또는 피한정후견인\n2. 파산자로서 복권되지 아니한 사람\n3. 금고이상의 형을 받고 그 집행이 종료되거나, 집행을 받지 아니하기로 확정된 후 5년이 경과되지 아니한 사람\n4. 금고이상의 형을 받고 그 집행 유예기간이 종료된 날로부터 2년이 경과되지 아니한 사람\n5. 금고이상의 형의 선고유예를 받은 경우에 그 선고 유예기간 중에 있는 사람\n6. 징계에 의하여 해임의 처분을 받은 날로부터 3년, 파면의 처분을 받은 날로부터 5년이 경과하지 아니한 사람\n7. 법원의 판결 또는 다른 법률에 의하여 자격이 상실 또는 정지된 사람\n8. 병역의무자로서 병역기피의 사실이 있는 사람\n9.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조의 비위면직자등 취업제한 대상자\n10. 지방공무원법 제31조 제6호의3, 제6호의4 어느 하나에 해당하는 사람\n (재)양산시복지재단은 부정청탁 금지법을 적용 받는 기관입니다. 정부시책에 따라 블라인드 공개채용을 하오니 인사 청탁시 서류전형에서 탈락됨을 유의 바랍니다.\n \u000b漠杳\u0000\u0000\u0000\u0000\u000b 가점사항\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n해당직종\n(응시분야)\n내     용\n가산\n비율\n일반직\n(전기 5급)\n◌ 다음 법률에 의한 취업지원 대상자\n- 독립유공자예우에 관한 법률\n- 국가유공자 등 예우 및 지원에 관한 법률\n- 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률\n- 5.18민주유공자 예우 및 단체설립에 관한 법률\n- 특수임무유공자 예우 및 단체설립에 관한 법률\n- 보훈보상 대상자 지원에 관한 법률\n전형별ㆍ과목별\n만점의 5%,\u001f10%\n ※ 취업지원대상자 등록 여부는 응시자 본인이 사전에 국가보훈청(☎1577-0606), 정부24(https://www.gov.kr) 등에 확인하여 “취업지원 대상자 증명서”를 발급받아 제출하여야만 가점 적용\n ※ ①취업지원대상자의 원점수가 만점의 40% 미만인 전형(과목)이 있거나, ②점수로 환산할 수 없는 시험인 경우에는 가점하지 않음\n ※「국가유공자 등 예우 및 지원에 관한 법률」등에 따라 가점을 받아 합격하는 자의 수는 그 채용시험 선발예정인원의 30%를 초과할 수 없음\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직무내용\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n(응시분야)\n직 무 내 용\n일반직\n(전기 5급)\n·시설관리\n·기타 행정업무 및 시설관리에 필요한 사항\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n3. 보수 및 근무조건\n ❍ 보수 및 채용방식\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n(응시분야)\n채용방식\n보 수\n일반직\n(전기 5급)\n3개월 수습 후 정규직 임용\n\u0002汤捯\u0000\u0000\u0000\u0000\u0002사회복지시설 종사자 인건비 가이드라인 적용\n[사회복지 이용시설(장애인) 종사자 기본급(일반직) 5급]\n※(재)양산시복지재단 보수 및 수당 규정에 의함\n ❍ 근무시간 : 주5일 40시간 근무(근로기준법 적용)\n ❍ 근무장소 : 재단본부\n ❍ 임 용 일 : 2027. 1. 1.(금) (예정)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n4. 시험일정\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n구 분\n일 정\n비 고\n공고기간\n2026. 11. 5.(목) ~ 11. 17.(화)\n12일간 공고\n응시원서 및 증빙서류제출\n2026. 11. 11.(수) ~ 11. 17.(화)\n5일간 접수(토,일 제외)\n서류전형 합격자발표\n및 이의신청접수\n2026. 11. 23.(월) ~ 11. 24.(화)\n홈페이지 공고\n필기시험\n2026. 11. 28.(토)\n필기시험 일시 및 장소는\n서류전형 합격자 발표시 공지예정\n필기시험 합격자 발표\n및 이의신청접수\n2026. 12. 4.(금) ~ 12. 7.(월)\n홈페이지 공고\n면접시험\n2026. 12. 9.(수)\n면접시험 일시 및 장소는\n필기시험 합격자 발표시 공지예정\n최종합격자 발표\n및 이의신청접수\n2026. 12. 10.(목) ~ 12. 11.(금)\n개별 및 홈페이지 공고\n임용후보자 등록\n2026. 12. 14.(월) ~ 12. 16.(수)\n재단본부 사무실\n결격사유 조회\n~ 2026. 12. 24.(목)\n※ 상기 일정은 사정에 따라 변경될 수 있음\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n5. 채용절차\n▢ 일반직\n 가. 1차 서류전형\n   ­ 응시자격요건 적합여부 심사\n   ­ 서류심사 결과 자격요건 적격인 합격자 모두 필기시험 실시\n 나. 2차 필기시험\n   - 일반직(전기 5급) : 필기시험 고득점자 순 채용인원의 5배수까지 면접대상자로 결정\n   ­ 동점자 발생 시 동점자 모두 합격자로 결정\n   ­ 필기시험 과목별 비중(100점 만점 기준)\n   \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n응시분야\n채용\n인원\n배점비율\n전공시험 과목\n합격자\n결정\n일반직\n(전기 5급)\n1명\n- 인성‧직무능력 검사 40점\n  ※ 인성의 경우 면접시험에 참고함.\n- 전공과목 60점\n전기이론, 전기기기\n5배수\n   ­ 합격 및 과락기준\n   \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n응시분야\n합격기준\n과락기준\n일반직\n(전기 5급)\n총점 60점이상, 과목별 획득점수 40점이상 득점자 중에서 총점 순위\n총점 60점미만, 과목별 획득점수 40점미만 불합격처리\n 다. 3차 면접시험 100% \n   - 심사방법 : 개인면접 또는 그룹면접\n   - 평가항목 : 전문성과 응용능력(30), 상호협력능력(30), 고객지향(20), 윤리관(20)\n   - 동점자 발생 시 취업지원대상자, 전문성과 응용능력, 상호협력능력, 고객지향, \n     윤리관 순으로 점수가 높은 자를 합격자로 선정함\n 라. 최종합격자 발표 : 2026. 12. 10.(목) 예정\n  - 최종합격자가 임용포기 및 결격사유 등의 사정으로 결원을 보충할 필요가 있는 경우에는 예비합격자 중 추가 합격자를 결정할 수 있음.\n    ※ 채용인원의 0.5배수로 예비합격자 순번을 부여하며, 예비합격자 유효기간은 합격자의 최초 임용일 기준 3개월 이내로 하고, 각 전형별 60점 미만자에 대하여는 예비합격자 순번 부여를 제외함\n    ※ 공고방법 : 개별연락, 홈페이지\u0003汫╨\u0000\u0000\u0000\u0000\u0003(www.yscwf.or.kr)\u0004汫h\u0000\u0000\u0000\u0000\u0004\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n6. 응시원서 접수\n  가. 접수기간 : 2026. 11. 11.(수) ~ 11. 17.(화) 17:00까지(토, 일 제외)\n    ※ 근무시간(09:00 ~ 18:00, 중식시간 12:00 ~ 13:00 제외) 내에서 접수가능\n  나. 접 수 처 : (재)양산시복지재단 사무실\n                (양산시 물금읍 물금로 225, 양산시 복지허브타운 4층 416호) \n                ☎055-781-2015 / hj0918@yscwf.or.kr\n  다. 접수방법\n   1) 방문 접수\n   2) 우편 접수: 2026. 11. 17.(화) 17:00 도착분에 한함. \n    \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n가) 접수완료 안내 문자 확인 : 응시번호 부여\n나) 응시표 : 필기시험 당일 교부\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b   3) 이메일 접수\n가) 응시원서, 입사지원서 등 작성\n: 공고문 첨부파일에 있는 응시원서 및 입사지원서 등 관련 서류를 내려받아 작성\n나) 작성한 서류를 출력하여 본인 서명 또는 인\n다) 응시원서, 입사지원서 등 제출서류 일체를 컬러 스캔하여 1개의 파일로 저장\n * 제출 시 파일형식은 PDF (1면에 1장씩 출력되도록 제출)\n * 파일명: 응시분야_제출일_지원자 이름 (예: 조리사_20260507-홍길동)\n라) 인사담당자 메일 주소(hj0918@yscwf.or.kr)로 제출\n마) 접수완료 안내 회신 메일 확인\n : 접수완료 시 회신 메일(응시번호 부여) 확인\n바) 응시표 : 필기시험 당일 교부\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n7. 제출서류\n❍ 입사지원 제출 서류\n 가. 제출서류 목록표(본인 작성 제출)\n 나. 응시원서[별지 제1호 서식] 및 입사지원서[별지 제2호 서식]\n 다. 자기소개서[별지 제3호 서식]\n 라. 개인정보 수집 및 이용 동의서\n 마. 응시자격 관련 자격증 사본 각 1부.\n 바. 건강보험자격득실확인서 1부.(해당자_입사지원서 내 경력사항 확인용)\n 사. 취업지원대상자 증빙서류(해당자)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n [블라인드 채용]과 관련하여 자격증 및 건강보험자격득실확인서 등 관련 서류 제출 시\n 개인정보(주민번호, 생년, 사진 등)는 삭제 또는 마스킹 후 제출하여 주시기 바랍니다.\n 입사지원서에는 반드시 증빙이 가능한 사항만 기재하시고, 제출서류 중 불명확한 부분에 대해서는 인정하지 않으며, 추가서류 제출을 요구할 수 있습니다.\n ※ 자기소개서에 인적사항(출신지역, 가족관계, 학력 등)을 암시하는 내용 기재 금지\n ※ 입사지원서에 기재된 경력사항과 건강보험자격득실확인서 경력사항이 동일해야 함. 경력사항이 상이할 경우 건강보험자격득실확인서 경력사항으로 인정\n❍ 최종합격자 발표 후 제출 서류\n 가. 임용후보자 등록원서 1부.\n 나. 신원진술서 1부. ※서식별첨\n 다. 최종학교 졸업증명서 1부.\n 라. 경력증명서(근무처별) 각 1부.(해당자)\n ※ 경력증명서에는 근무기간, 직책(직급), 담당업무를 명시하고 발행기관의 관인\n    날인이 명확해야 함.(단, 서류미비로 경력판정이 불분명할 경우 불인정)\n 마. 주민등록 등본, 초본 각 1부.\n   - 채용공고일 이후 발급분, 남자의 경우 병역사항 기재\n 바. 가족관계증명서 1부.\n   - 주민등록번호 전체표시(가족포함)\n 사. 입사지원서 기재내용 관련 증빙 자격증 1부.(해당자에 한함)\n 아. 증명사진 1매.(상반신 탈모 3×4cm)\n 자. 건강검진 대체통보서 1통.\n   - 국민건강보험공단에서 발행.(유효기간 최근 2년)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n8. 응시자 유의사항\n 가. 응시희망자는 자격요건이 적합한지 철저히 검토한 후 응시하시기 바랍니다.\n  ※ 양산시복지재단 인사관리 규정 제28조(정년)에 따라 직원의 정년은 만60세 임.\n 나. 응시분야별 중복지원은 불가능하며, 중복 지원시 모두 무효 처리됩니다.\n 다. 접수된 응시원서나 구비서류는 일체 변경, 추가보완 등이 불가합니다. \n 라. 적격자가 없을 경우 선발하지 않을 수 있고, 불합격자에 대해서는 별도          통지사항은 없으며, 제출된 서류에 허위사실이나 신원조사 등을 통하여         부적합한 결격사유가 있을 경우에는 합격 결정 후에도 합격을 취소할         수 있습니다.\n 마. 최종합격자 임용포기 및 결격사유 발생 시 예비합격자 순으로 합격을 결정하며, 임용 후라도 결격사유가 발견된 경우 임용을 취소합니다.\n 바. 응시원서 상의 기재착오 또는 누락이나 연락불능 등으로 인한 불이익은 일체 \n     응시자의 책임입니다.\n 사. 응시자 제출서류는 채용 여부가 확정된 이후 응시자(확정된 채용대상자는 제외)가 반환을 청구하는 경우 본인임을 확인한 후 ⌜채용절차의 공정화에 관한 법률⌟제11조(채용서류의 반환 등)에 따라 반환하며, 반환 청구기간은 응시자의 채용여부가 확정된 날 이후 14일부터 60일까지이며, 반환 청구기간이 경과하거나 미반환된 채용서류는 이후 ⌜개인정보보호법⌟에 따라 파기됩니다.\n 아. 최종합격자는 국민건강보험공단 발행 건강검진 대체통보서(최근 2년 이내) 1통을 임용등록 시 제출하여야 하며, 이상이 있을시 합격을 취소할 수 있습니다.\n 자. 본 채용공고는 불가피한 사정에 따라 변경될 수 있으며, 변경된 사항은 해당 시험일 7일전까지 양산시복지재단 홈페이지에 공고합니다.\n 차. 응시자를 대상으로 채용 전형별 이의제기 절차를 운영하오니 공고문 내‘채용전형 이의 신청서 안내’를 참고하여 주시기 바랍니다.\n 카. 입사지원 제출서류서식은 (재)양산시복지재단 홈페이지(\u0003汫╨\u0000\u0000\u0000\u0000\u0003www.yscwf.or.kr)\u0004汫h\u0000\u0000\u0000\u0000\u0004 \n     양산시 홈페이지(\u0003汫╨\u0000\u0000\u0000\u0000\u0003www.yangsan.go.kr\u0004汫h\u0000\u0000\u0000\u0000\u0004) 채용공고란에서 다운로드 후 사용\n     하시기\u000b氠瑢\u0000\u0000\u0000\u0000\u000b 바라며 기타 자세한 사항은 아래 연락처로 문의하시기 바랍니다.\n(재)양산시복지재단 채용담당 (☎ 055-781-2015) \n"
+        },
+        {
+          "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000018.hwp&_file_l=%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C_%EC%A0%84%EA%B8%B0.hwp",
+          "checked_at": "2026-11-14T02:13:47.740596+00:00",
+          "document_sha256": "cc5d99b98f21257ff1a6ece648afbf7ac7680003f23074e10d4937e40dcff446"
+        }
+      ]
+    },
+    "hold_reasons": [
+      "profile_target final verification remains blocked by prior approval denial; not accessed",
+      "Final queue-entry validation not completed; reviewed assets are registered but draft remains unassigned"
+    ],
+    "public_shape_check": {
+      "main_count": 1,
+      "reply_count": 0,
+      "cta_count": 1,
+      "chars": 250,
+      "mobile_review": "First2lines reader and unit; short paragraphs; eligibility AND, probation, assignment, absolute deadline and source-based practical point reviewed",
+      "final_queue_validation": "not_run_not_ready"
+    },
+    "audit_path": "threads/audits/monitor-v2-20261114T115846.json",
+    "image_job": {
+      "id": "cleaneye-80976",
+      "org": "양산시복지재단",
+      "title": "전기 5급",
+      "count": 1,
+      "employment": "3개월 수습 후 정규직 임용",
+      "location": "재단본부",
+      "due": "2026-11-17",
+      "deadline_label": "2026-11-17 17:00",
+      "restriction": "전기기사 자격과 시설관리 업무능력"
+    },
+    "card_prepared_at": "2026-11-14T02:56:43.635543+00:00",
+    "card_registered_main_commit": "bcad95c187d51a78dfee672949d181f497153226",
+    "card_verification": {
+      "valid": true,
+      "format": "JPEG",
+      "width": 1080,
+      "height": 1080,
+      "mode": "RGB",
+      "file_size_bytes": 135780,
+      "pixel_verification": "passed",
+      "layout_version": "careerpick-single-main-card-v2",
+      "asset_path": "threads-images/cleaneye-80976.jpg",
+      "local_path": "/workspace/scratch/697589ed75d9/threads-1111.t87mi3tr/careerpick-e4e4b73464b78d6cd0f5948e3beae3a7c2533679/threads-images/cleaneye-80976.jpg",
+      "sha256": "a625bbda46fb89c0b925d9f72fab00b1207992f13d612a03da875e80c988d053",
+      "facts_sha256": "643ba526d5aaf61c9f604e014b45515a6f0f616a3b6ded7346ee92977c7a8c50",
+      "preview_asset_path": "threads-images/cleaneye-80976-360.png",
+      "preview_sha256": "659a54feca9b038b4d5ce1ed04ef4afe0637579d81597071ba2339c599507863",
+      "reviewed_width": 360,
+      "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
+      "visual_review": "attestation_and_exact_assets_verified"
+    }
+  },
+  "card": {
+    "image_job": {
+      "id": "cleaneye-80976",
+      "org": "양산시복지재단",
+      "title": "전기 5급",
+      "count": 1,
+      "employment": "3개월 수습 후 정규직 임용",
+      "location": "재단본부",
+      "due": "2026-11-17",
+      "deadline_label": "2026-11-17 17:00",
+      "restriction": "전기기사 자격과 시설관리 업무능력"
+    },
+    "card_visual_review": {
+      "status": "passed",
+      "reviewed_width": 360,
+      "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
+      "sha256": "a625bbda46fb89c0b925d9f72fab00b1207992f13d612a03da875e80c988d053",
+      "preview_sha256": "659a54feca9b038b4d5ce1ed04ef4afe0637579d81597071ba2339c599507863",
+      "asset_path": "threads-images/cleaneye-80976.jpg",
+      "preview_asset_path": "threads-images/cleaneye-80976-360.png",
+      "facts_sha256": "643ba526d5aaf61c9f604e014b45515a6f0f616a3b6ded7346ee92977c7a8c50",
+      "layout_version": "careerpick-single-main-card-v2",
+      "visual_findings": "Final original JPEG and360PNG opened after official title spacing correction; all Korean/numbers,probation,1position,deadline and required conditions readable and matched; no clipping."
+    },
+    "verify_reviewed_card": {
+      "valid": true,
+      "format": "JPEG",
+      "width": 1080,
+      "height": 1080,
+      "mode": "RGB",
+      "file_size_bytes": 135780,
+      "pixel_verification": "passed",
+      "layout_version": "careerpick-single-main-card-v2",
+      "asset_path": "threads-images/cleaneye-80976.jpg",
+      "local_path": "/workspace/scratch/697589ed75d9/threads-1111.t87mi3tr/careerpick-e4e4b73464b78d6cd0f5948e3beae3a7c2533679/threads-images/cleaneye-80976.jpg",
+      "sha256": "a625bbda46fb89c0b925d9f72fab00b1207992f13d612a03da875e80c988d053",
+      "facts_sha256": "643ba526d5aaf61c9f604e014b45515a6f0f616a3b6ded7346ee92977c7a8c50",
+      "preview_asset_path": "threads-images/cleaneye-80976-360.png",
+      "preview_sha256": "659a54feca9b038b4d5ce1ed04ef4afe0637579d81597071ba2339c599507863",
+      "reviewed_width": 360,
+      "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
+      "visual_review": "attestation_and_exact_assets_verified"
+    },
+    "image_fields_validation": "passed",
+    "fact_evidence": [
+      {
+        "field": "title",
+        "value": "전기 5급",
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "전기 5급(1명)"
+      },
+      {
+        "field": "count",
+        "value": 1,
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "채용인원 : 1명(일반직 전기 5급 1명)"
+      },
+      {
+        "field": "employment",
+        "value": "3개월 수습 후 정규직 임용",
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "3개월 수습 후 정규직 임용"
+      },
+      {
+        "field": "location",
+        "value": "재단본부",
+        "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "excerpt": "근무장소 : 재단본부"
+      }
+    ],
+    "source_refs": [
+      {
+        "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
+        "checked_at": "2026-11-14T02:12:35.523919+00:00",
+        "document_sha256": "7fb4db953fdce59f7a516f1d8a7eea795f9832de0d31562362f60cfa34566f3d"
+      },
+      {
+        "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
+        "checked_at": "2026-11-14T02:13:00.999743+00:00",
+        "document_sha256": "03d2b76933d893b9740993b70c1d6f2cc2b052481b62179aeef933ff286fea0a"
+      },
+      {
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "checked_at": "2026-11-14T02:13:47.740012+00:00",
+        "document_sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5",
+        "excerpt": "\u0002捤獥\u0000\u0000\u0000\u0000\u0002\u0002汤捯\u0000\u0000\u0000\u0000\u0002\u0015湰灧\u0000\u0000\u0000\u0000\u0015(재)양산시복지재단 공고 제2026-16호\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n2027년 상반기 (재)양산시복지재단 직원 추가채용 공고\n 양산시 출연기관인 (재)양산시복지재단에서는 시민의 복지증진과 복지재단 발전에 사명을 가지고 함께 일할 일반직 직원 채용 계획을 다음과 같이 공고하오니 전문성과 역량을 지닌 분들의 많은 응모 바랍니다.\n \n2026년  11월  5일\n(재)양산시복지재단 대표이사\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n채용인원 및 응시자격\n❍ \u0015湯湷\u0000\u0000\u0000\u0000\u0015채용인원 : 1명(일반직 전기 5급 1명)\n❍ \u0015湯湷\u0000\u0000\u0000\u0000\u0015응시자격\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n응시분야\n응 시 자 격\n공통사항\n·양산시복지재단 인사관리규정 제11조(결격사유)에 \n  해당되지 아니한 자\n·기타 법령에 의하여 응시자격을 정지당하지 아니한 자* \n일반직\n전기 5급(1명)\n※ 다음 요건에 해당 되는 자\n·전기기사 자격증 소지자로 시설관리 업무 능력자\n ※ 직종별 동시 응시 불가함.\n*양산시복지재단은 부서(재단본부, 양산시장애인복지관, 웅상종합사회복지관, 양산시노인복지관, 웅상노인복지관) 간 파견, 전보 등의 인사발령이 이루어지는 곳으로 사회복지사업법, 장애인복지법, 아동복지법, 노인복지법에 근거한 범죄경력이 없는 자\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n결 격 사 유\n   \n(재)양산시복지재단 인사규정 제11조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원이 될 수 없다.\n1. 피성년후견인 또는 피한정후견인\n2. 파산자로서 복권되지 아니한 사람\n3. 금고이상의 형을 받고 그 집행이 종료되거나, 집행을 받지 아니하기로 확정된 후 5년이 경과되지 아니한 사람\n4. 금고이상의 형을 받고 그 집행 유예기간이 종료된 날로부터 2년이 경과되지 아니한 사람\n5. 금고이상의 형의 선고유예를 받은 경우에 그 선고 유예기간 중에 있는 사람\n6. 징계에 의하여 해임의 처분을 받은 날로부터 3년, 파면의 처분을 받은 날로부터 5년이 경과하지 아니한 사람\n7. 법원의 판결 또는 다른 법률에 의하여 자격이 상실 또는 정지된 사람\n8. 병역의무자로서 병역기피의 사실이 있는 사람\n9.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조의 비위면직자등 취업제한 대상자\n10. 지방공무원법 제31조 제6호의3, 제6호의4 어느 하나에 해당하는 사람\n (재)양산시복지재단은 부정청탁 금지법을 적용 받는 기관입니다. 정부시책에 따라 블라인드 공개채용을 하오니 인사 청탁시 서류전형에서 탈락됨을 유의 바랍니다.\n \u000b漠杳\u0000\u0000\u0000\u0000\u000b 가점사항\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n해당직종\n(응시분야)\n내     용\n가산\n비율\n일반직\n(전기 5급)\n◌ 다음 법률에 의한 취업지원 대상자\n- 독립유공자예우에 관한 법률\n- 국가유공자 등 예우 및 지원에 관한 법률\n- 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률\n- 5.18민주유공자 예우 및 단체설립에 관한 법률\n- 특수임무유공자 예우 및 단체설립에 관한 법률\n- 보훈보상 대상자 지원에 관한 법률\n전형별ㆍ과목별\n만점의 5%,\u001f10%\n ※ 취업지원대상자 등록 여부는 응시자 본인이 사전에 국가보훈청(☎1577-0606), 정부24(https://www.gov.kr) 등에 확인하여 “취업지원 대상자 증명서”를 발급받아 제출하여야만 가점 적용\n ※ ①취업지원대상자의 원점수가 만점의 40% 미만인 전형(과목)이 있거나, ②점수로 환산할 수 없는 시험인 경우에는 가점하지 않음\n ※「국가유공자 등 예우 및 지원에 관한 법률」등에 따라 가점을 받아 합격하는 자의 수는 그 채용시험 선발예정인원의 30%를 초과할 수 없음\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직무내용\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n(응시분야)\n직 무 내 용\n일반직\n(전기 5급)\n·시설관리\n·기타 행정업무 및 시설관리에 필요한 사항\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n3. 보수 및 근무조건\n ❍ 보수 및 채용방식\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n직종\n(응시분야)\n채용방식\n보 수\n일반직\n(전기 5급)\n3개월 수습 후 정규직 임용\n\u0002汤捯\u0000\u0000\u0000\u0000\u0002사회복지시설 종사자 인건비 가이드라인 적용\n[사회복지 이용시설(장애인) 종사자 기본급(일반직) 5급]\n※(재)양산시복지재단 보수 및 수당 규정에 의함\n ❍ 근무시간 : 주5일 40시간 근무(근로기준법 적용)\n ❍ 근무장소 : 재단본부\n ❍ 임 용 일 : 2027. 1. 1.(금) (예정)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n4. 시험일정\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n구 분\n일 정\n비 고\n공고기간\n2026. 11. 5.(목) ~ 11. 17.(화)\n12일간 공고\n응시원서 및 증빙서류제출\n2026. 11. 11.(수) ~ 11. 17.(화)\n5일간 접수(토,일 제외)\n서류전형 합격자발표\n및 이의신청접수\n2026. 11. 23.(월) ~ 11. 24.(화)\n홈페이지 공고\n필기시험\n2026. 11. 28.(토)\n필기시험 일시 및 장소는\n서류전형 합격자 발표시 공지예정\n필기시험 합격자 발표\n및 이의신청접수\n2026. 12. 4.(금) ~ 12. 7.(월)\n홈페이지 공고\n면접시험\n2026. 12. 9.(수)\n면접시험 일시 및 장소는\n필기시험 합격자 발표시 공지예정\n최종합격자 발표\n및 이의신청접수\n2026. 12. 10.(목) ~ 12. 11.(금)\n개별 및 홈페이지 공고\n임용후보자 등록\n2026. 12. 14.(월) ~ 12. 16.(수)\n재단본부 사무실\n결격사유 조회\n~ 2026. 12. 24.(목)\n※ 상기 일정은 사정에 따라 변경될 수 있음\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n5. 채용절차\n▢ 일반직\n 가. 1차 서류전형\n   ­ 응시자격요건 적합여부 심사\n   ­ 서류심사 결과 자격요건 적격인 합격자 모두 필기시험 실시\n 나. 2차 필기시험\n   - 일반직(전기 5급) : 필기시험 고득점자 순 채용인원의 5배수까지 면접대상자로 결정\n   ­ 동점자 발생 시 동점자 모두 합격자로 결정\n   ­ 필기시험 과목별 비중(100점 만점 기준)\n   \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n응시분야\n채용\n인원\n배점비율\n전공시험 과목\n합격자\n결정\n일반직\n(전기 5급)\n1명\n- 인성‧직무능력 검사 40점\n  ※ 인성의 경우 면접시험에 참고함.\n- 전공과목 60점\n전기이론, 전기기기\n5배수\n   ­ 합격 및 과락기준\n   \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n응시분야\n합격기준\n과락기준\n일반직\n(전기 5급)\n총점 60점이상, 과목별 획득점수 40점이상 득점자 중에서 총점 순위\n총점 60점미만, 과목별 획득점수 40점미만 불합격처리\n 다. 3차 면접시험 100% \n   - 심사방법 : 개인면접 또는 그룹면접\n   - 평가항목 : 전문성과 응용능력(30), 상호협력능력(30), 고객지향(20), 윤리관(20)\n   - 동점자 발생 시 취업지원대상자, 전문성과 응용능력, 상호협력능력, 고객지향, \n     윤리관 순으로 점수가 높은 자를 합격자로 선정함\n 라. 최종합격자 발표 : 2026. 12. 10.(목) 예정\n  - 최종합격자가 임용포기 및 결격사유 등의 사정으로 결원을 보충할 필요가 있는 경우에는 예비합격자 중 추가 합격자를 결정할 수 있음.\n    ※ 채용인원의 0.5배수로 예비합격자 순번을 부여하며, 예비합격자 유효기간은 합격자의 최초 임용일 기준 3개월 이내로 하고, 각 전형별 60점 미만자에 대하여는 예비합격자 순번 부여를 제외함\n    ※ 공고방법 : 개별연락, 홈페이지\u0003汫╨\u0000\u0000\u0000\u0000\u0003(www.yscwf.or.kr)\u0004汫h\u0000\u0000\u0000\u0000\u0004\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n6. 응시원서 접수\n  가. 접수기간 : 2026. 11. 11.(수) ~ 11. 17.(화) 17:00까지(토, 일 제외)\n    ※ 근무시간(09:00 ~ 18:00, 중식시간 12:00 ~ 13:00 제외) 내에서 접수가능\n  나. 접 수 처 : (재)양산시복지재단 사무실\n                (양산시 물금읍 물금로 225, 양산시 복지허브타운 4층 416호) \n                ☎055-781-2015 / hj0918@yscwf.or.kr\n  다. 접수방법\n   1) 방문 접수\n   2) 우편 접수: 2026. 11. 17.(화) 17:00 도착분에 한함. \n    \u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n가) 접수완료 안내 문자 확인 : 응시번호 부여\n나) 응시표 : 필기시험 당일 교부\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b   3) 이메일 접수\n가) 응시원서, 입사지원서 등 작성\n: 공고문 첨부파일에 있는 응시원서 및 입사지원서 등 관련 서류를 내려받아 작성\n나) 작성한 서류를 출력하여 본인 서명 또는 인\n다) 응시원서, 입사지원서 등 제출서류 일체를 컬러 스캔하여 1개의 파일로 저장\n * 제출 시 파일형식은 PDF (1면에 1장씩 출력되도록 제출)\n * 파일명: 응시분야_제출일_지원자 이름 (예: 조리사_20260507-홍길동)\n라) 인사담당자 메일 주소(hj0918@yscwf.or.kr)로 제출\n마) 접수완료 안내 회신 메일 확인\n : 접수완료 시 회신 메일(응시번호 부여) 확인\n바) 응시표 : 필기시험 당일 교부\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n7. 제출서류\n❍ 입사지원 제출 서류\n 가. 제출서류 목록표(본인 작성 제출)\n 나. 응시원서[별지 제1호 서식] 및 입사지원서[별지 제2호 서식]\n 다. 자기소개서[별지 제3호 서식]\n 라. 개인정보 수집 및 이용 동의서\n 마. 응시자격 관련 자격증 사본 각 1부.\n 바. 건강보험자격득실확인서 1부.(해당자_입사지원서 내 경력사항 확인용)\n 사. 취업지원대상자 증빙서류(해당자)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n [블라인드 채용]과 관련하여 자격증 및 건강보험자격득실확인서 등 관련 서류 제출 시\n 개인정보(주민번호, 생년, 사진 등)는 삭제 또는 마스킹 후 제출하여 주시기 바랍니다.\n 입사지원서에는 반드시 증빙이 가능한 사항만 기재하시고, 제출서류 중 불명확한 부분에 대해서는 인정하지 않으며, 추가서류 제출을 요구할 수 있습니다.\n ※ 자기소개서에 인적사항(출신지역, 가족관계, 학력 등)을 암시하는 내용 기재 금지\n ※ 입사지원서에 기재된 경력사항과 건강보험자격득실확인서 경력사항이 동일해야 함. 경력사항이 상이할 경우 건강보험자격득실확인서 경력사항으로 인정\n❍ 최종합격자 발표 후 제출 서류\n 가. 임용후보자 등록원서 1부.\n 나. 신원진술서 1부. ※서식별첨\n 다. 최종학교 졸업증명서 1부.\n 라. 경력증명서(근무처별) 각 1부.(해당자)\n ※ 경력증명서에는 근무기간, 직책(직급), 담당업무를 명시하고 발행기관의 관인\n    날인이 명확해야 함.(단, 서류미비로 경력판정이 불분명할 경우 불인정)\n 마. 주민등록 등본, 초본 각 1부.\n   - 채용공고일 이후 발급분, 남자의 경우 병역사항 기재\n 바. 가족관계증명서 1부.\n   - 주민등록번호 전체표시(가족포함)\n 사. 입사지원서 기재내용 관련 증빙 자격증 1부.(해당자에 한함)\n 아. 증명사진 1매.(상반신 탈모 3×4cm)\n 자. 건강검진 대체통보서 1통.\n   - 국민건강보험공단에서 발행.(유효기간 최근 2년)\n\u000b氠瑢\u0000\u0000\u0000\u0000\u000b\n8. 응시자 유의사항\n 가. 응시희망자는 자격요건이 적합한지 철저히 검토한 후 응시하시기 바랍니다.\n  ※ 양산시복지재단 인사관리 규정 제28조(정년)에 따라 직원의 정년은 만60세 임.\n 나. 응시분야별 중복지원은 불가능하며, 중복 지원시 모두 무효 처리됩니다.\n 다. 접수된 응시원서나 구비서류는 일체 변경, 추가보완 등이 불가합니다. \n 라. 적격자가 없을 경우 선발하지 않을 수 있고, 불합격자에 대해서는 별도          통지사항은 없으며, 제출된 서류에 허위사실이나 신원조사 등을 통하여         부적합한 결격사유가 있을 경우에는 합격 결정 후에도 합격을 취소할         수 있습니다.\n 마. 최종합격자 임용포기 및 결격사유 발생 시 예비합격자 순으로 합격을 결정하며, 임용 후라도 결격사유가 발견된 경우 임용을 취소합니다.\n 바. 응시원서 상의 기재착오 또는 누락이나 연락불능 등으로 인한 불이익은 일체 \n     응시자의 책임입니다.\n 사. 응시자 제출서류는 채용 여부가 확정된 이후 응시자(확정된 채용대상자는 제외)가 반환을 청구하는 경우 본인임을 확인한 후 ⌜채용절차의 공정화에 관한 법률⌟제11조(채용서류의 반환 등)에 따라 반환하며, 반환 청구기간은 응시자의 채용여부가 확정된 날 이후 14일부터 60일까지이며, 반환 청구기간이 경과하거나 미반환된 채용서류는 이후 ⌜개인정보보호법⌟에 따라 파기됩니다.\n 아. 최종합격자는 국민건강보험공단 발행 건강검진 대체통보서(최근 2년 이내) 1통을 임용등록 시 제출하여야 하며, 이상이 있을시 합격을 취소할 수 있습니다.\n 자. 본 채용공고는 불가피한 사정에 따라 변경될 수 있으며, 변경된 사항은 해당 시험일 7일전까지 양산시복지재단 홈페이지에 공고합니다.\n 차. 응시자를 대상으로 채용 전형별 이의제기 절차를 운영하오니 공고문 내‘채용전형 이의 신청서 안내’를 참고하여 주시기 바랍니다.\n 카. 입사지원 제출서류서식은 (재)양산시복지재단 홈페이지(\u0003汫╨\u0000\u0000\u0000\u0000\u0003www.yscwf.or.kr)\u0004汫h\u0000\u0000\u0000\u0000\u0004 \n     양산시 홈페이지(\u0003汫╨\u0000\u0000\u0000\u0000\u0003www.yangsan.go.kr\u0004汫h\u0000\u0000\u0000\u0000\u0004) 채용공고란에서 다운로드 후 사용\n     하시기\u000b氠瑢\u0000\u0000\u0000\u0000\u000b 바라며 기타 자세한 사항은 아래 연락처로 문의하시기 바랍니다.\n(재)양산시복지재단 채용담당 (☎ 055-781-2015) \n"
+      },
+      {
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000018.hwp&_file_l=%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C_%EC%A0%84%EA%B8%B0.hwp",
+        "checked_at": "2026-11-14T02:13:47.740596+00:00",
+        "document_sha256": "cc5d99b98f21257ff1a6ece648afbf7ac7680003f23074e10d4937e40dcff446"
+      }
+    ]
+  },
+  "asset_commit": "bcad95c187d51a78dfee672949d181f497153226",
+  "asset_only_files": [
+    "threads-images/cleaneye-80976.jpg",
+    "threads-images/cleaneye-80976-360.png"
+  ],
+  "next_slot": "2026-11-14T12:00:00+09:00",
+  "next_media": "IMAGE",
+  "next_slot_claim_present": false,
+  "new_ready_saved": 0,
+  "new_held_drafts_saved": 0,
+  "held_draft_card_completed": 1,
+  "new_metric_observations": 0,
+  "new_account_observations": 0,
+  "queue_changed": false,
+  "published_material_changed": false,
+  "existing_automation": {
+    "id": "6ae092084b988191a23a38300212ebdc",
+    "on": true,
+    "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261030T210000\nRRULE:FREQ=HOURLY\nEND:VEVENT",
+    "conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07",
+    "environment_selection": "inherited"
+  },
+  "audit_path": "threads/audits/monitor-v2-20261114T115846.json"
+}
