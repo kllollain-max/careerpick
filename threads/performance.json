@@ -2119,6 +2119,478 @@
           "final_first_sentence": "한국 공인회계사 자격이 있다면,"
         }
       }
+    },
+    {
+      "observation_id": "cf5f3c1a0c9efd24c06391f5c3f24d93e5f5bdfc9226921927c57491109ae969",
+      "post_id": "17896425015438025",
+      "window": "72h",
+      "captured_at": "2026-11-14T23:23:31.076826+00:00",
+      "published_at": "2026-11-11T11:45:18.355131+00:00",
+      "elapsed_seconds": 301092.721695,
+      "delay_seconds": 41892.721695,
+      "timing": "late_cumulative",
+      "comparable_milestone": false,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 3750,
+        "likes": 6,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.16,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "17896425015438025",
+        "checked_at": "2026-11-14T23:23:30.191392+00:00",
+        "reason": null,
+        "expected_text_sha256": "ae0949f4598f599ddd943e040c6127ff344f5c16ebedeb54fd17aa6a3b90b26c",
+        "actual_text_sha256": "ae0949f4598f599ddd943e040c6127ff344f5c16ebedeb54fd17aa6a3b90b26c",
+        "actual_first_sentence": "간호사 면허가 있다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "17896425015438025",
+        "notice_id": "a306786",
+        "published_at": "2026-11-11T11:45:18.355131+00:00",
+        "scheduled_at": "2026-11-11T20:00:00+09:00",
+        "slot_hour_kst": 20,
+        "actual_hour_kst": 20,
+        "body_chars": 249,
+        "first_sentence": "간호사 면허가 있다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "recruitment_unit": {
+            "title": "간호사",
+            "count": 3,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+            "excerpt": "간호사 의료직(6급) 순천병원 3"
+          },
+          "key_restrictions": [
+            {
+              "text": "면허는 마감일",
+              "excerpt": "응시자격은 응시원서 마감일 기준 / ｢간호법｣상 간호사 면허를 취득한 자",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "만 60세 미만은 임용일 기준이에요.",
+              "excerpt": "연령제한 없음(단, 임용일 기준 60세 미만(정년)인 자)",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "임용 후 5년 전보 제한이 있고",
+              "excerpt": "임용일로부터 5년 동안 해당 근무기관에서 계속 근무(전보제한)",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "3개월 시보 평가가 양호해야 정식 임용돼요.",
+              "excerpt": "3개월간 시보로 임용하고, 그 기간 중 근무성적이 양호한 경우 정규직으로 임용",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "12월 8일 임용 예정일에 바로 근무할 수 있어야 해요.",
+              "excerpt": "임용예정일 즉시 근무가 가능한 자 / ’26. 12. 8.(화) 예정",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "병역·결격사유 등 세부 조건도 확인하세요.",
+              "excerpt": "｢병역법｣ 제76조에서 정한 병역의무 불이행 사실이 없는 자 / 공단 ｢인사규정｣ 제14조에서 정한 결격사유가 없는 자",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "순천병원에서 간호사로 일할 분께,\n근로복지공단 정규직 3명 공고예요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "간호사 면허가 있다면,\n근로복지공단 순천병원 정규직 3명 공고예요."
+            },
+            {
+              "id": "deadline",
+              "type": "deadline",
+              "text": "근로복지공단 순천병원 간호사 3명,\n정규직 접수는 11월 16일 17:30:00까지예요."
+            }
+          ],
+          "selected_hook_id": "condition",
+          "first_sentence_type": "condition",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "useful_point": {
+            "text": "보낸 뒤 담당자의 수신 완료 메일을 확인하세요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085603",
+            "excerpt": "반드시 채용담당자의 수신 완료 메일을 확인하시기 바랍니다."
+          },
+          "style_rewrites": 0,
+          "correction_check": {
+            "checked_at": "2026-11-11T18:15:55.022217+09:00",
+            "result": "none_found",
+            "source_ref": "https://job.alio.go.kr/recruitview.do?idx=306786",
+            "scope": "Retained official ALIO desktop/mobile notice and linked HWP documents; no changed/replaced source observed.",
+            "limitation": "Employer recruitment page returned HTTP400. Separate employer-board corrections could not be inspected. No access bypass attempted."
+          },
+          "selection_reason": "기존 20시 미착수 후보를 최신 원문으로 재검수함. 순천병원 간호사 단일 모집 3명 정규직, 마감까지 117.5시간, 지원자격·전보제한·시보·수신확인 검증. 실제 독자 관심도/기관인기는 자료가 없어 주장하지 않음.",
+          "public_preview": {
+            "main_text": "간호사 면허가 있다면,\n근로복지공단 순천병원 정규직 3명 공고예요.\n\n면허는 마감일, 만 60세 미만은 임용일 기준이에요.\n임용 후 5년 전보 제한이 있고, 3개월 시보 평가가 양호해야 정식 임용돼요.\n\n12월 8일 임용 예정일에 바로 근무할 수 있어야 해요.\n병역·결격사유 등 세부 조건도 확인하세요.\n\n11월 16일 17:30:00까지 이메일 수신분만 접수돼요.\n보낸 뒤 담당자의 수신 완료 메일을 확인하세요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "comparison_context": {
+            "occupation": "의료직 6급 간호사",
+            "region": "전남 순천",
+            "workplace": "순천병원",
+            "unit_count": 3,
+            "employment": "정규직",
+            "application_deadline": "2026-11-16T17:30:00+09:00",
+            "hours_until_deadline_at_slot": 117.5,
+            "scheduled_slot_kst": "20",
+            "actual_media": null,
+            "institution_interest": null
+          },
+          "experiment_eligible": false,
+          "suggested_intro_arm": "target",
+          "experiment_exclusion_reason": "이번 전환 검수본은 필수 면허 조건을 첫줄에 보존한 조건형을 선택; 균형 비교에서 제외",
+          "initial_draft_created_before_cutover": true,
+          "source_review_finished_at": "2026-11-11T18:17:27.652743+09:00"
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "deadline_opportunity",
+        "media": "TEXT",
+        "org": "근로복지공단",
+        "job": "간호사",
+        "employment": "정규직",
+        "recruitment_unit_count": 3,
+        "location": "순천병원",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "occupation": "의료직 6급 간호사",
+          "region": "전남 순천",
+          "workplace": "순천병원",
+          "unit_count": 3,
+          "employment": "정규직",
+          "application_deadline": "2026-11-16T17:30:00+09:00",
+          "hours_until_deadline_at_slot": 117.5,
+          "scheduled_slot_kst": "20",
+          "actual_media": null,
+          "institution_interest": null
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-16T17:30:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 420281.644869,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "17896425015438025",
+          "checked_at": "2026-11-14T23:23:30.191392+00:00",
+          "reason": null,
+          "expected_text_sha256": "ae0949f4598f599ddd943e040c6127ff344f5c16ebedeb54fd17aa6a3b90b26c",
+          "actual_text_sha256": "ae0949f4598f599ddd943e040c6127ff344f5c16ebedeb54fd17aa6a3b90b26c",
+          "actual_first_sentence": "간호사 면허가 있다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "간호사 면허가 있다면,"
+        }
+      }
+    },
+    {
+      "observation_id": "a95b3caaa61b7bba2855c87fbc31ed9de62256ed480d161dd5b83b10b0d2c09e",
+      "post_id": "17922530685243848",
+      "window": "24h",
+      "captured_at": "2026-11-14T23:23:31.825643+00:00",
+      "published_at": "2026-11-13T11:46:01.646497+00:00",
+      "elapsed_seconds": 128250.179146,
+      "delay_seconds": 41850.179146,
+      "timing": "late_cumulative",
+      "comparable_milestone": false,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 9125,
+        "likes": 27,
+        "replies": 0,
+        "reposts": 4,
+        "quotes": 1
+      },
+      "likes_rate_percent": 0.2958904109589041,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "17922530685243848",
+        "checked_at": "2026-11-14T23:23:31.543382+00:00",
+        "reason": null,
+        "expected_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+        "actual_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+        "actual_first_sentence": "접수·진료 보조 일을 찾는다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "17922530685243848",
+        "notice_id": "a306717",
+        "published_at": "2026-11-13T11:46:01.646497+00:00",
+        "scheduled_at": "2026-11-13T20:00:00+09:00",
+        "slot_hour_kst": 20,
+        "actual_hour_kst": 20,
+        "body_chars": 298,
+        "first_sentence": "접수·진료 보조 일을 찾는다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "접수·진료 보조 일을 찾는다면,\n서울대학교치과병원 간호원무직 정규직 1명 공고예요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "간호조무사 자격증은 우대인 공고예요.\n서울대학교치과병원 간호원무직 정규직 1명을 뽑아요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "환자 접수와 진료보조를 맡아요.\n서울대학교치과병원 간호원무직 정규직 1명 공고예요."
+            }
+          ],
+          "selected_hook_id": "target",
+          "first_sentence_type": "target",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "간호조무사 자격증은 우대예요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "원무직 간호원무직 A1 1 - 간호조무사 자격증 소지자 및 장애인 , 국가보훈대상자",
+              "classification": "preferred",
+              "logic": "single"
+            },
+            {
+              "text": "11월 4일 공고일 기준 만 60세 미만이어야 해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "공고일 기준 정년퇴직 기준연령 ( 만 60 세 ) 에 도달한 자는 지원할 수 없음",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "남자는 2027년 1월 1일 임용일 기준 병역필 또는 면제여야 해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "남자는 임용일 (‘27.1.1.) 기준 병역필 또는 면제자에 한함",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "병역필",
+                  "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+                  "excerpt": "남자는 임용일 (‘27.1.1.) 기준 병역필 또는 면제자에 한함"
+                },
+                {
+                  "summary": "면제",
+                  "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+                  "excerpt": "남자는 임용일 (‘27.1.1.) 기준 병역필 또는 면제자에 한함"
+                }
+              ]
+            },
+            {
+              "text": "3개월 조건부 평가가 양호해야 정식 임용돼요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "다 . 인사규정 제 21 조에 의거하여 최종합격자는 채용될 직위에 3 개월간의 조건부 기간을 거쳐 근무성적이 양호한 때 정규직원으로 임용함 . 다만 , 인력수급상 특히 필요하다고 인정되는 경우에는 적용하지 않을 수 있음 ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "서울 근무, 분원·수탁기관 배치와 다른 직무 수행도 가능해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "마 . 동종 직무를 수행하는 다른 부서 ( 분원 , 수탁기관 포함 ) 에서도 근무할 수 있음 바 . 입사 후 인사관리 상 지원직무 외 타 직무를 수행할 수 있음 ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "다른 진행 공고와 중복지원은 안 돼요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "동시 진행 중인 본원 타 채용공고에 중복지원 불가",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "최종면접 전 인성검사를 완료해야 해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "2) 실무면접 합격자는 최종면접 이전 인성검사에 응시해야 하며 , 인성검사는 면접 참고자료로 활용 ( 인성검사 미응시 · 미완료시 최종면접 응시 불가 ) ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "결격 기준도 확인해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "나 . 국가공무원법 제 33 조 , 인사규정 제 19 조 ( 결격사유 ), 직원 채용 세칙 제 15 조 ( 채용 취소 ) 에 해당하는 경우 합격 또는 임용이 취소됨 ",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "최종면접 전 인성검사를 완료해야 해요.",
+            "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+            "excerpt": "2) 실무면접 합격자는 최종면접 이전 인성검사에 응시해야 하며 , 인성검사는 면접 참고자료로 활용 ( 인성검사 미응시 · 미완료시 최종면접 응시 불가 ) "
+          },
+          "recruitment_unit": {
+            "title": "간호원무직",
+            "count": 1,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+            "excerpt": "원무직 간호원무직 A1 1 - 간호조무사 자격증 소지자 및 장애인 , 국가보훈대상자",
+            "normalization": "A1 is the grade; the following integer 1 is this row count. Notice-wide 15 is not used."
+          },
+          "correction_check": {
+            "checked_at": "2026-11-13T08:29:10.046790+09:00",
+            "result": "none_found",
+            "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+            "checked_scope": "현재 ALIO 상세, 동일 ATS 원무직 지원 공고 전체 본문 및 첨부 공고 3쪽 시각검토, 직무기술서·블라인드 기준·서류전형 기준 본문 대조",
+            "limitations": [
+              "별도 정정 게시판·FAQ의 과거 전체 이력은 조회하지 않음",
+              "입사지원 작성요령 PDF는 다운로드·해시 확인만 했고 전체 시각검토하지 않음",
+              "서류반환·이의신청 HWP 양식 및 성적계산 엑셀은 열지 않음; 실제 지원 입력·제출은 하지 않음"
+            ]
+          },
+          "style_rewrites": 2,
+          "selection_reason": "공식 진행 중인 정규직 단일 모집단위 1명. 필수 자격증이 없고 우대와 공통 제한을 구분할 수 있으며 11월18일 정오까지 준비시간을 확보한다. 최근 기계·광해·회계 공고 이후 업무 다양성을 고려하며 직무·지역 인기도를 추정하지 않는다.",
+          "presentation_style": "regular_interest",
+          "presentation_style_reason": "앞선16시 자격조건 정보형 뒤에 직무 대상형 도입을 사용한다. 실제 미디어 교대와 독립적으로 운용하고 성과 승자·비중 조정은 유보한다.",
+          "public_preview": {
+            "main_text": "접수·진료 보조 일을 찾는다면,\n서울대학교치과병원 간호원무직 정규직 1명 공고예요.\n\n간호조무사 자격증은 우대예요.\n11월 4일 공고일 기준 만 60세 미만이어야 해요.\n남자는 2027년 1월 1일 임용일 기준 병역필 또는 면제여야 해요.\n\n3개월 조건부 평가가 양호해야 정식 임용돼요.\n서울 근무, 분원·수탁기관 배치와 다른 직무 수행도 가능해요.\n\n다른 진행 공고와 중복지원은 안 돼요.\n최종면접 전 인성검사를 완료해야 해요.\n결격 기준도 확인해요.\n\n11월 18일 12:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "card_restriction": "공고일 기준 만 60세 미만",
+          "experiment_eligible": true,
+          "comparison_context": {
+            "comparison": "different notices observational only",
+            "media_assignment": "actual successful ledger at reservation; image asset prepared without consuming alternation",
+            "weights_changed": false,
+            "length_target_note": "298자; 연령 기준일·병역 OR·조건부 임용·배치 범위를 보존하여 목표250자를 초과하나 정상상한300자 이내"
+          },
+          "card_visual_review": {
+            "status": "passed",
+            "reviewed_width": 360,
+            "reviewed_at": "2026-11-13T08:38:07.267373+09:00",
+            "sha256": "8795970f5bb7b9a084685818c717ce0ee72c7a3ff1ea8f22dfd5f9aaf487a66b",
+            "preview_sha256": "44719accf039f2f3cbd9deb835e156c09645ac585a17e30cf5aed998a449ee10",
+            "asset_path": "threads-images/a306717.jpg",
+            "preview_asset_path": "threads-images/a306717-360.png",
+            "facts_sha256": "f898b3fcad8ba73266d5c721f62791c1e0327c8c91cf5af36d1386ab85a236f6",
+            "layout_version": "careerpick-single-main-card-v2",
+            "observations": "실제1080JPEG와 동일JPEG에서 LANCZOS 생성한360PNG를 열어 간호원무직/정규직1명/서울대학교치과병원/11월18일12:00/공고일기준만60세미만 한글·숫자·잘림·본문 일치를 확인함. 둘 다 모든 핵심문구 가독성 양호."
+          }
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "deadline_opportunity",
+        "media": "IMAGE",
+        "org": "서울대학교치과병원",
+        "job": "간호원무직",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "location": "서울",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "comparison": "different notices observational only",
+          "media_assignment": "actual successful ledger at reservation; image asset prepared without consuming alternation",
+          "weights_changed": false,
+          "length_target_note": "298자; 연령 기준일·병역 OR·조건부 임용·배치 범위를 보존하여 목표250자를 초과하나 정상상한300자 이내"
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-18T12:00:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 400438.353503,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "17922530685243848",
+          "checked_at": "2026-11-14T23:23:31.543382+00:00",
+          "reason": null,
+          "expected_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+          "actual_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+          "actual_first_sentence": "접수·진료 보조 일을 찾는다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "접수·진료 보조 일을 찾는다면,"
+        }
+      }
     }
   ],
   "account_observations": [
@@ -2247,6 +2719,16 @@
       "account": "hid_119",
       "captured_at": "2026-11-14T11:26:07.752876+00:00",
       "followers_count": 463,
+      "status": "captured",
+      "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
+      "scope": "account_total",
+      "post_attribution": null
+    },
+    {
+      "observation_id": "93fb91565b39ac2c293cd4f03902999063154ffb353e563bf2b1d968dc760413",
+      "account": "hid_119",
+      "captured_at": "2026-11-14T23:23:32.036155+00:00",
+      "followers_count": 475,
       "status": "captured",
       "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
       "scope": "account_total",
