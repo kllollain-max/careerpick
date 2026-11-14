@@ -25,6 +25,8 @@ def choose(rows,now=None,limit=5):
         deadline=parse_deadline(row.get("application_deadline"))
         kind=str(row.get("employment_type","")).strip()
         count=row.get("headcount")
+        org=row.get("organization")
+        title=row.get("title")
         source=row.get("official_url")
         verified=row.get("official_verified") is True
         evidence=row.get("deadline_evidence")
@@ -39,7 +41,7 @@ def choose(rows,now=None,limit=5):
         # A bare verified flag or ALIO posting-end date is not sufficient.
         url=urlparse(source) if isinstance(source,str) else None
         official_url_ok=bool(url and url.scheme=='https' and url.hostname and not url.hostname.endswith(('.test','.example','.invalid')) and url.hostname not in {'example.com','example.org','localhost'})
-        if not identifier or not official_url_ok or not verified or not evidence_ok or deadline is None or not isinstance(count,int) or isinstance(count,bool) or count<1:
+        if not identifier or not isinstance(org,str) or not org.strip() or not isinstance(title,str) or not title.strip() or not official_url_ok or not verified or not evidence_ok or deadline is None or not isinstance(count,int) or isinstance(count,bool) or count<1:
             held.append({"id":identifier,"reason":"missing verified official deadline, source, or count"});continue
         if deadline<=now:
             held.append({"id":identifier,"reason":"application deadline elapsed"});continue
