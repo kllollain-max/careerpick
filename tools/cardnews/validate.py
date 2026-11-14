@@ -14,7 +14,7 @@ def validate(d):
     if not s.get('heading') or not s.get('items'): errors.append(f'card {i}: section heading/items required')
  caption=d.get('threads_caption','')
  if caption:
-  if re.search(r'https?://|www\\.|[a-zA-Z0-9-]+\\.(?:com|kr|net|org|io)(?:/|\\b)',caption): errors.append('Threads caption URL forbidden')
+  if re.search(r'https?://|www\.|[a-zA-Z0-9-]+\.(?:com|kr|net|org|io)(?:/|\b)',caption): errors.append('Threads caption URL forbidden')
   if caption.strip().splitlines()[-1]!='자세한 사항은 프로필링크 확인': errors.append('Threads CTA must be exact last line')
  return errors
 
