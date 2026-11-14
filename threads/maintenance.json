@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T00:48:04Z",
-  "last_observed_at": "2026-11-14T00:48:04Z",
+  "updated_at": "2026-11-14T02:16:44Z",
+  "last_observed_at": "2026-11-14T02:16:44Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -8872,6 +8872,26 @@
       "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43527351939"
+    },
+    {
+      "run_id": "43539656181",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-14T01:17:33Z",
+      "head_sha": "e4e4b73464b78d6cd0f5948e3beae3a7c2533679",
+      "workflow_path": ".github/workflows/public-search-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43539656181"
+    },
+    {
+      "run_id": "43539435063",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-14T01:17:09Z",
+      "head_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43539435063"
     }
   ],
   "last_confirmed_publication": {
@@ -12430,8 +12450,8 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T00:48:04Z",
-    "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
+    "checked_at": "2026-11-14T02:16:44Z",
+    "main_sha": "e4e4b73464b78d6cd0f5948e3beae3a7c2533679",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
     "latest_publisher_run": {
@@ -12447,12 +12467,12 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "no_new_publication_next12_image_unprepared_new_official_fact_hold",
+    "status": "no_new_publication_new_verified_source_draft_held_profile_target",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
         "snapshot_at": "2026-11-14T00:59:08+09:00",
-        "source_checked_at": "2026-11-14T00:59:31+09:00",
+        "source_checked_at": "2026-11-14T10:15:42+09:00",
         "total_records": 956,
         "eligible_count": 29,
         "review_required_count": 800,
@@ -12469,15 +12489,15 @@
       },
       "cleaneye": {
         "status": "verified",
-        "snapshot_at": "2026-11-14T01:00:05+09:00",
-        "source_checked_at": "2026-11-14T01:00:05+09:00",
-        "total_records": 562,
+        "snapshot_at": "2026-11-14T10:16:09+09:00",
+        "source_checked_at": "2026-11-14T10:16:09+09:00",
+        "total_records": 563,
         "eligible_count": 278,
         "review_required_count": 0,
-        "excluded_count": 284,
+        "excluded_count": 285,
         "returned_count": 23,
         "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 269,
+          "CLEANEYE_NOT_VERIFIED_OPEN": 270,
           "CLEANEYE_NOT_RECRUITMENT": 11,
           "NOTICE_ALREADY_USED": 2,
           "CLEANEYE_APPLICATION_NOT_OPEN": 2
@@ -12488,16 +12508,37 @@
     "actions_runs_read": 100,
     "actions_reported_total": 889,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43539656181",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-14T01:17:33Z",
+        "head_sha": "e4e4b73464b78d6cd0f5948e3beae3a7c2533679",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43539656181"
+      },
+      {
+        "run_id": "43539435063",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-14T01:17:09Z",
+        "head_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43539435063"
+      }
+    ],
     "monitored_slot": "2026-11-14T12:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T14:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T094804.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T111644.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
     "new_ready_saved": 0,
-    "new_held_drafts_saved": 0,
+    "new_held_drafts_saved": 1,
     "queue_changed": false,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
@@ -18973,8 +19014,8 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T00:48:04Z",
-    "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
+    "checked_at": "2026-11-14T02:16:44Z",
+    "main_sha": "e4e4b73464b78d6cd0f5948e3beae3a7c2533679",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
     "editorial_policy_exact_bytes_verified": true,
@@ -18985,7 +19026,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T09:45:14.421885+09:00",
+      "evaluated_at": "2026-11-14T11:12:03.678650+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -18996,7 +19037,7 @@
         "alio": {
           "status": "verified_snapshot",
           "snapshot_at": "2026-11-14T00:59:08+09:00",
-          "source_checked_at": "2026-11-14T00:59:31+09:00",
+          "source_checked_at": "2026-11-14T10:15:42+09:00",
           "total_records": 956,
           "eligible_count": 29,
           "review_required_count": 800,
@@ -19013,22 +19054,22 @@
         },
         "cleaneye": {
           "status": "verified",
-          "snapshot_at": "2026-11-14T01:00:05+09:00",
-          "source_checked_at": "2026-11-14T01:00:05+09:00",
-          "total_records": 562,
+          "snapshot_at": "2026-11-14T10:16:09+09:00",
+          "source_checked_at": "2026-11-14T10:16:09+09:00",
+          "total_records": 563,
           "eligible_count": 278,
           "review_required_count": 0,
-          "excluded_count": 284,
+          "excluded_count": 285,
           "returned_count": 23,
           "exclusion_reasons": {
-            "CLEANEYE_NOT_VERIFIED_OPEN": 269,
+            "CLEANEYE_NOT_VERIFIED_OPEN": 270,
             "CLEANEYE_NOT_RECRUITMENT": 11,
             "NOTICE_ALREADY_USED": 2,
             "CLEANEYE_APPLICATION_NOT_OPEN": 2
           }
         }
       },
-      "total_scanned": 1518,
+      "total_scanned": 1519,
       "eligible_before_limit": 307,
       "writer_limit": 24,
       "returned_count": 24,
@@ -19069,189 +19110,64 @@
     "ready_entries": [],
     "official_checks": [
       {
-        "notice_id": "a306874",
-        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
-        "checked_at": "2026-11-14T00:46:13.074543+00:00",
+        "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
+        "checked_at": "2026-11-14T02:12:35.523919+00:00",
         "status": 200,
-        "sha256": "f0ba97c22b042f37fcf927e9b87b08f0bd80e93df9e5e4e3a5d3ef4d757121b4",
-        "bytes": 14173
+        "sha256": "7fb4db953fdce59f7a516f1d8a7eea795f9832de0d31562362f60cfa34566f3d"
       },
       {
-        "notice_id": "a306875",
-        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306875",
-        "checked_at": "2026-11-14T00:46:13.075337+00:00",
+        "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
+        "checked_at": "2026-11-14T02:13:00.999743+00:00",
         "status": 200,
-        "sha256": "242df227cf8bca8bafb89ea75722b34b15deeebc6b38782b049cae1077ad1dd7",
-        "bytes": 21212
+        "sha256": "03d2b76933d893b9740993b70c1d6f2cc2b052481b62179aeef933ff286fea0a"
       }
     ],
-    "new_held_draft_notice_id": null,
+    "new_held_draft_notice_id": "cleaneye-80976",
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T094804.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T111644.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T00:48:04Z",
+      "checked_at": "2026-11-14T02:16:44Z",
       "checks": [
         {
-          "notice_id": "a306874",
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
-          "checked_at": "2026-11-14T00:46:13.074543+00:00",
+          "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
+          "checked_at": "2026-11-14T02:12:35.523919+00:00",
           "status": 200,
-          "sha256": "f0ba97c22b042f37fcf927e9b87b08f0bd80e93df9e5e4e3a5d3ef4d757121b4",
-          "bytes": 14173
+          "sha256": "7fb4db953fdce59f7a516f1d8a7eea795f9832de0d31562362f60cfa34566f3d"
         },
         {
-          "notice_id": "a306875",
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306875",
-          "checked_at": "2026-11-14T00:46:13.075337+00:00",
+          "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
+          "checked_at": "2026-11-14T02:13:00.999743+00:00",
           "status": 200,
-          "sha256": "242df227cf8bca8bafb89ea75722b34b15deeebc6b38782b049cae1077ad1dd7",
-          "bytes": 21212
+          "sha256": "03d2b76933d893b9740993b70c1d6f2cc2b052481b62179aeef933ff286fea0a"
         }
       ],
-      "action": "Switched from Cleaneye503 sources to ALIO306874/306875. Official detail200,306874 complete notice/jobPDF200 reviewed; ATS homepage shell cannot verify individual deadline time/corrections. Hold unresolved graduation conflict and deadline, no queue promotion.",
-      "audit_path": "threads/audits/monitor-v2-20261114T094804.json"
+      "action": "Institution official board list and original notice1366 + complete original HWP recruitment/job description read and hashed; recovered source facts despite Cleaneye503. Existing final profile-target denial preserved, no access or bypass. New draft not queued and no card generated.",
+      "audit_path": "threads/audits/monitor-v2-20261114T111644.json"
     },
     "additional_official_checks": [
       {
-        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-        "name": "notice.pdf",
-        "checked_at": "2026-11-14T00:46:34.981318+00:00",
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+        "name": "2027년 상반기 직원 추가채용 공고문.hwp",
+        "checked_at": "2026-11-14T02:13:47.740012+00:00",
         "status": 200,
-        "sha256": "366d76229cd5e8a203501bfc363e0419f3c161f4e5b04c2e77b607a1e23f85ff",
-        "bytes": 120835
+        "sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5",
+        "bytes": 163840,
+        "local_file": "20261105094733000016.hwp"
       },
       {
-        "url": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
-        "name": "job.pdf",
-        "checked_at": "2026-11-14T00:46:34.982069+00:00",
+        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000018.hwp&_file_l=%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C_%EC%A0%84%EA%B8%B0.hwp",
+        "name": "직무기술서_전기.hwp",
+        "checked_at": "2026-11-14T02:13:47.740596+00:00",
         "status": 200,
-        "sha256": "83fbecf38b2725d031ed0541eca4bc3c511990e56459867be2e9cc09d784950c",
-        "bytes": 48036
-      },
-      {
-        "url": "https://snubh.recruiter.co.kr",
-        "name": "ats.html",
-        "checked_at": "2026-11-14T00:46:34.983014+00:00",
-        "status": 200,
-        "sha256": "129732209401771d313b9e744c0c22f03bbfe23eab1e85f65e797516ce1322a2",
-        "bytes": 5732
+        "sha256": "cc5d99b98f21257ff1a6ece648afbf7ac7680003f23074e10d4937e40dcff446",
+        "bytes": 131072,
+        "local_file": "20261105094733000018.hwp"
       }
     ],
     "new_candidate_fact_reviews": [
-      {
-        "notice_id": "a306874",
-        "checked_at": "2026-11-14T00:48:04Z",
-        "status": "hold",
-        "title": "분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고",
-        "source_refs": [
-          {
-            "notice_id": "a306874",
-            "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
-            "checked_at": "2026-11-14T00:46:13.074543+00:00",
-            "status": 200,
-            "sha256": "f0ba97c22b042f37fcf927e9b87b08f0bd80e93df9e5e4e3a5d3ef4d757121b4",
-            "bytes": 14173
-          },
-          {
-            "url": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "name": "notice.pdf",
-            "checked_at": "2026-11-14T00:46:34.981318+00:00",
-            "status": 200,
-            "sha256": "366d76229cd5e8a203501bfc363e0419f3c161f4e5b04c2e77b607a1e23f85ff",
-            "bytes": 120835
-          },
-          {
-            "url": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
-            "name": "job.pdf",
-            "checked_at": "2026-11-14T00:46:34.982069+00:00",
-            "status": 200,
-            "sha256": "83fbecf38b2725d031ed0541eca4bc3c511990e56459867be2e9cc09d784950c",
-            "bytes": 48036
-          }
-        ],
-        "official_review_scope": "Current ALIO detail and complete 4-page recruitment PDF plus one-page job description read. ATS home200 was only a shell and did not expose an individual notice or current correction board.",
-        "fact_evidence": {
-          "title": {
-            "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
-            "excerpt": "분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고"
-          },
-          "count": {
-            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "excerpt": "업무지원직(신입) 미화 AA1 10 [필수] 미화 업무 가능자",
-            "scope": "single_recruitment_unit"
-          },
-          "employment": {
-            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "excerpt": "업무지원직은 정규직으로 3개월간의 수습기간을 두며"
-          },
-          "location": {
-            "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
-            "excerpt": "근무지 경기"
-          }
-        },
-        "key_restrictions": [
-          {
-            "classification": "required",
-            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "excerpt": "시차출퇴근, 교대근무 가능자에 한하며"
-          },
-          {
-            "classification": "required",
-            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "excerpt": "기졸업자에 한함",
-            "conflict": "Same PDF submission section also lists 졸업예정자의 경우 졸업예정증명서(재학증명서); eligibility cannot be narrowed or expanded without clarification."
-          },
-          {
-            "classification": "required",
-            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "excerpt": "군복무는 비대상, 복무완료, 면제자에 한함",
-            "logic": "any_of"
-          },
-          {
-            "classification": "required",
-            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "excerpt": "우리 병원 정년초과자(공고마감일 기준 만 60세)는 응시대상이 아니며"
-          },
-          {
-            "classification": "preferred",
-            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "excerpt": "취업지원대상자, 장애인은 우대함"
-          }
-        ],
-        "important_working_conditions": {
-          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-          "excerpt": "05:30~14:30, 13:00~22:00, 21:30~익일06:30; 최종합격자는 지원직무 외 타 직무에서 근무할 수 있음; 수습 3개월 1차60점 미달 시 추가2개월 후 2차60점 미만 임용취소 또는 근로계약해지 가능; 임용후보자 등록유효기간1년(1년 연장가능), 등록후 임용대기 가능; 지정/협의일 출근조건"
-        },
-        "useful_point": {
-          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086117",
-          "excerpt": "일반, 의료폐기물(격리폐기물 포함) 처리업무; 오염된 구역의 청소 및 소독업무"
-        },
-        "application_period": {
-          "start_date": "2026-11-11",
-          "end_date": "2026-11-20",
-          "end_time": null,
-          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3086129"
-        },
-        "correction_check": {
-          "checked_at": "2026-11-14T00:48:04Z",
-          "result": "incomplete",
-          "reviewed_sources": [
-            "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306874",
-            "https://www.alio.go.kr/download/download.json?fileNo=3086129",
-            "https://www.alio.go.kr/download/download.json?fileNo=3086117"
-          ],
-          "limitations": "ATS home only; individual application status/end time and full latest correction board not verified."
-        },
-        "restrictions_complete": false,
-        "fact_consistency_check": "hold_graduation_conflict_and_deadline_time_unconfirmed",
-        "ready": false,
-        "queue_assigned": false,
-        "body_created": false,
-        "card_created": false,
-        "profile_target_accessed": false
-      }
+      "cleaneye-80976"
     ],
-    "selection_input_sha256": "5c5cc6ddd47ed41309d56eac10c4da1378ad0189058679edaa81b297aaf2b45e"
+    "selection_input_sha256": "291c60e90500258fec26a889404e507da01492cac370114d6c1218849c0be75b"
   },
   "v5_implementation": {
     "policy_id": "careerpick-threads-v5-20261111",
@@ -19772,8 +19688,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T00:48:04Z",
-      "main_sha": "2aa901b903aaf406b9264bf662ec6c662bb07703",
+      "checked_at": "2026-11-14T02:16:44Z",
+      "main_sha": "e4e4b73464b78d6cd0f5948e3beae3a7c2533679",
       "contract_version": 2,
       "policy_hashes": {
         "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
@@ -19781,7 +19697,7 @@
         "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
         "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
         "threads/writer-queue.json": "10bffd82c989f23f4cc572babb5f00a250facb75",
-        "threads/maintenance.json": "2d5a2fd76e50c19ef1ebc1665c9b9d724ae096e5",
+        "threads/maintenance.json": "acd78c412c2fd300b3fee46d82961770a4fe3fc0",
         "threads/performance.json": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
         "threads_posted.json": "854f5c0ad77580084a5aedd53bfb60011f8b147c"
       },
@@ -19791,7 +19707,8 @@
       "new_regular_publications": 0,
       "next_media": "IMAGE",
       "next_slot": "2026-11-14T12:00:00+09:00",
-      "audit_path": "threads/audits/monitor-v2-20261114T094804.json"
+      "new_held_draft_notice_id": "cleaneye-80976",
+      "audit_path": "threads/audits/monitor-v2-20261114T111644.json"
     },
     "next_slot_official_preflight": {
       "checked_at": "2026-11-14T00:10:12Z",
@@ -20049,12 +19966,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T00:48:04Z",
+    "checked_at": "2026-11-14T02:16:44Z",
     "state_blob_sha": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T00:45:15.499120+00:00",
+      "as_of": "2026-11-14T02:12:04.746442+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20449,7 +20366,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T00:45:15.499120+00:00",
+            "requested_end": "2026-11-14T02:12:04.746442+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-13T23:29:00.886949+00:00",
             "start_followers": 415,
@@ -20470,7 +20387,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T00:45:15.499120+00:00",
+        "requested_end": "2026-11-14T02:12:04.746442+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-13T23:29:00.886949+00:00",
         "start_followers": 415,
@@ -22448,6 +22365,180 @@
         "final_queue_validation": "not_applicable_held_unassigned"
       },
       "audit_path": "threads/audits/monitor-v2-20261114T052806.json"
+    },
+    "cleaneye-80976": {
+      "notice_id": "cleaneye-80976",
+      "status": "held_unassigned",
+      "prepared_at": "2026-11-14T02:15:36.873900+00:00",
+      "assigned_slot": null,
+      "post_text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요.\n\n3개월 수습 후 정규직 임용이에요.\n재단본부 주5일·40시간, 2027년 1월 1일 임용 예정이에요.\n부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.\n\n11월 17일 17:00까지 방문·우편·이메일로 접수해요.\n토·일은 접수하지 않고, 우편은 도착 기준이에요.\n이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.\n\n자세한 사항은 프로필링크 확인",
+      "reply_texts": [],
+      "chars": 250,
+      "body_sha256": "e7e70ff4d62d60d6335ff2277a5c5526cee178eea5b0b354a8f580710f038417",
+      "publication_policy_id": "careerpick-threads-v5-20261111",
+      "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "source_refs": [
+        {
+          "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
+          "checked_at": "2026-11-14T02:12:35.523919+00:00",
+          "document_sha256": "7fb4db953fdce59f7a516f1d8a7eea795f9832de0d31562362f60cfa34566f3d"
+        },
+        {
+          "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
+          "checked_at": "2026-11-14T02:13:00.999743+00:00",
+          "document_sha256": "03d2b76933d893b9740993b70c1d6f2cc2b052481b62179aeef933ff286fea0a"
+        },
+        {
+          "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "checked_at": "2026-11-14T02:13:47.740012+00:00",
+          "document_sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5"
+        },
+        {
+          "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000018.hwp&_file_l=%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C_%EC%A0%84%EA%B8%B0.hwp",
+          "checked_at": "2026-11-14T02:13:47.740596+00:00",
+          "document_sha256": "cc5d99b98f21257ff1a6ece648afbf7ac7680003f23074e10d4937e40dcff446"
+        }
+      ],
+      "fact_evidence": {
+        "title": {
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "일반직 전기 5급(1명)"
+        },
+        "count": {
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "채용인원 : 1명(일반직 전기 5급 1명)"
+        },
+        "employment": {
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "일반직(전기5급) 3개월 수습 후 정규직 임용"
+        },
+        "location": {
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "근무장소 : 재단본부"
+        }
+      },
+      "review": {
+        "v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요."
+            },
+            {
+              "id": "target",
+              "type": "target",
+              "text": "복지시설 전기·시설관리로 일할 분께,\n양산시복지재단 전기5급 1명을 채용해요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "전기·시설관리와 행정업무를 맡는 자리예요.\n양산시복지재단 전기5급 1명 공고예요."
+            }
+          ],
+          "selected_hook_id": "condition",
+          "first_sentence_type": "condition",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true,
+            "basis": "조건 두 가지를 AND로 보존하며 최근8개와 첫문장 중복없음"
+          },
+          "key_restrictions": [
+            {
+              "text": "전기기사 자격과 시설관리 업무능력이 있다면,",
+              "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+              "excerpt": "전기기사 자격증 소지자로 시설관리 업무 능력자",
+              "classification": "required",
+              "logic": "all_of",
+              "paths": [
+                {
+                  "summary": "전기기사 자격",
+                  "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+                  "excerpt": "전기기사 자격증 소지자"
+                },
+                {
+                  "summary": "시설관리 업무능력",
+                  "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+                  "excerpt": "시설관리 업무 능력자"
+                }
+              ]
+            },
+            {
+              "text": "3개월 수습 후 정규직 임용이에요.",
+              "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+              "excerpt": "3개월 수습 후 정규직 임용",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.",
+              "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+              "excerpt": "부서 간 파견, 전보 등의 인사발령; 정년 만60세; 인사규정 제11조 결격사유(병역기피 포함), 관련 복지법상 범죄경력 제한",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "작성한 서류를 출력하여 본인 서명 또는 인; 제출서류 일체를 컬러 스캔하여 1개의 파일로 저장; 파일형식 PDF"
+          },
+          "recruitment_unit": {
+            "title": "전기5급",
+            "count": 1,
+            "employment": "3개월 수습 후 정규직 임용",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+            "excerpt": "채용인원 : 1명(일반직 전기 5급 1명); 3개월 수습 후 정규직 임용"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-14T02:12:35.523919+00:00",
+            "result": "none_found",
+            "source_ref": "https://yscwf.or.kr/bbs/bbs16/list.do",
+            "scope": "공식 최신 채용게시판 1페이지 1216~1207과 공고1366·첨부원문 검토",
+            "limitations": "이 범위에 전기5급 정정 공고 없음. 모든 과거 페이지·다른 게시판 전체 부재는 확인하지 않음."
+          },
+          "style_rewrites": 1,
+          "presentation_style": "regular_interest",
+          "selection_reason": "검증된 단일단위1명·정규직 임용방식·기술직 다양성·11월17일 접수까지 준비기간. 직무/지역인기도 추정없음. Cleaneye503 후 독립적인 기관 공식 게시판과 전체 HWP 원문 확인.",
+          "public_preview": {
+            "main_text": "전기기사 자격과 시설관리 업무능력이 있다면,\n양산시복지재단 전기5급 1명 공고예요.\n\n3개월 수습 후 정규직 임용이에요.\n재단본부 주5일·40시간, 2027년 1월 1일 임용 예정이에요.\n부서 간 파견·전보·정년 만60세·병역·결격 조건도 확인해요.\n\n11월 17일 17:00까지 방문·우편·이메일로 접수해요.\n토·일은 접수하지 않고, 우편은 도착 기준이에요.\n이메일은 서명한 서류를 컬러스캔한 PDF 1개로 내요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "experiment_eligible": true,
+          "length_exception_reason": null
+        },
+        "application_period": {
+          "start": "2026-11-11T09:00:00+09:00",
+          "end": "2026-11-17T17:00:00+09:00",
+          "weekends_excluded": true,
+          "lunch_break": "12:00~13:00",
+          "source_ref": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+          "excerpt": "접수기간 2026.11.11~11.17 17:00까지(토,일 제외); 근무시간09:00~18:00(중식12:00~13:00제외)"
+        },
+        "profile_target": {
+          "status": "hold_not_accessed",
+          "reason": "Prior automatic approval denial of CareerPick profile destination persists; no bypass or final profile-target pass recorded."
+        }
+      },
+      "hold_reasons": [
+        "profile_target final verification remains blocked by prior approval denial; not accessed",
+        "No final queue-entry validation or reviewed image card; unassigned draft only"
+      ],
+      "public_shape_check": {
+        "main_count": 1,
+        "reply_count": 0,
+        "cta_count": 1,
+        "chars": 250,
+        "mobile_review": "First2lines reader and unit; short paragraphs; eligibility AND, probation, assignment, absolute deadline and source-based practical point reviewed",
+        "final_queue_validation": "not_run_not_ready"
+      },
+      "audit_path": "threads/audits/monitor-v2-20261114T111644.json"
     }
   }
 }
