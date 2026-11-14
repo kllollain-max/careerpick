@@ -22,4 +22,15 @@ class CardnewsSafetyTests(unittest.TestCase):
    p=subprocess.run([sys.executable,str(ROOT/'generate.py'),str(src),str(out)],capture_output=True,text=True)
    self.assertNotEqual(p.returncode,0);self.assertFalse(out.exists())
 
+ def test_existing_output_preserved(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   src=Path(tmp)/'input.json';out=Path(tmp)/'out';out.mkdir()
+   sentinel=out/'keep.txt';sentinel.write_text('unchanged',encoding='utf-8')
+   d=self.data();d['source']='https://example.org/official';d['verified']=True
+   src.write_text(json.dumps(d,ensure_ascii=False),encoding='utf-8')
+   p=subprocess.run([sys.executable,str(ROOT/'generate.py'),str(src),str(out)],capture_output=True,text=True)
+   self.assertNotEqual(p.returncode,0)
+   self.assertEqual(sentinel.read_text(encoding='utf-8'),'unchanged')
+   self.assertEqual(sorted(x.name for x in out.iterdir()),['keep.txt'])
+
 if __name__=='__main__':unittest.main()
