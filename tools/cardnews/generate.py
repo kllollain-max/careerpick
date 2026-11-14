@@ -56,7 +56,7 @@ def main():
   for name,im in rendered:
    im.save(staged/name);names.append(name)
   (staged/'source.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
-  (staged/'captions.txt').write_text(data.get('instagram_caption','')+'\\n\\n--- Threads ---\\n'+data.get('threads_caption',''),encoding='utf-8')
+  (staged/'captions.txt').write_text(data.get('instagram_caption','')+'\n\n--- Threads ---\n'+data.get('threads_caption',''),encoding='utf-8')
   with zipfile.ZipFile(staged/'cardnews.zip','w',zipfile.ZIP_DEFLATED) as z:
    for name in names+['source.json','captions.txt']:z.write(staged/name,name)
   with zipfile.ZipFile(staged/'cardnews.zip') as z:
