@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T03:37:12Z",
-  "last_observed_at": "2026-11-14T03:37:12Z",
+  "updated_at": "2026-11-14T04:56:34Z",
+  "last_observed_at": "2026-11-14T04:56:34Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -9532,6 +9532,36 @@
       "head_sha": "29eed1011f65c911d30fa4f72e3cfbe0451cb43d",
       "workflow_path": ".github/workflows/content-mobile-check.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549094299"
+    },
+    {
+      "run_id": "43554814011",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-14T04:04:59Z",
+      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+      "workflow_path": ".github/workflows/public-search-check.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43554814011"
+    },
+    {
+      "run_id": "43554595892",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-14T04:04:36Z",
+      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+      "workflow_path": ".github/workflows/operations.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43554595892"
+    },
+    {
+      "run_id": "43552820163",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-14T03:40:41Z",
+      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+      "workflow_path": ".github/workflows/threads_auto.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
     }
   ],
   "last_confirmed_publication": {
@@ -9927,6 +9957,30 @@
         "Preserve original 16:00 HOLD and PR51 required checks; no manual rerun or late backfill.",
         "20:00 reviewed draft and exact card remain ready; actual last successful TEXT means next IMAGE.",
         "Continue independently collected 24h/72h/account metrics; do not count workflow failure as post or consume image turn."
+      ]
+    },
+    {
+      "id": "43552820163:1:QUEUE_SLOT_MISSING",
+      "observed_at": "2026-11-14T04:56:34Z",
+      "kind": "ready_queue_missing_before_reservation",
+      "publisher_failure": true,
+      "confirmed_cause": "No entry for2026-11-14T12:00:00+09:00; reserve selected exact current slot and rejected QUEUE_SLOT_MISSING. Existing verified-source electrical draft remains unassigned under final profile-target hold.",
+      "run_id": "43552820163",
+      "run_attempt": 1,
+      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+      "stage": "Reserve one job",
+      "error_codes": [
+        "QUEUE_SLOT_MISSING"
+      ],
+      "post_id": null,
+      "claim": null,
+      "send_state": "not_attempted_publish_step_skipped",
+      "automatic_post_recovery_attempts": 0,
+      "audit_path": "threads/audits/monitor-v2-20261114T135634.json",
+      "next_conditions": [
+        "Preserve all historical claims/locks/ledger/draft/card bytes.",
+        "No dispatch/rerun/direct POST or missed-slot backfill.",
+        "Only a fully validated unstarted future regular entry may be queued; final profile-target hold unresolved."
       ]
     }
   ],
@@ -13090,24 +13144,35 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T03:37:12Z",
+    "checked_at": "2026-11-14T04:56:34Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
     "latest_publisher_run": {
-      "run_id": "43527351939",
+      "run_id": "43552820163",
       "run_attempt": 1,
       "status": "completed",
-      "conclusion": "success",
-      "updated_at": "2026-11-13T23:29:07Z",
-      "head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
+      "conclusion": "failure",
+      "updated_at": "2026-11-14T03:40:41Z",
+      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
       "workflow_path": ".github/workflows/threads_auto.yml",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43527351939"
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
     },
-    "new_publisher_runs": [],
+    "new_publisher_runs": [
+      {
+        "run_id": "43552820163",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "failure",
+        "updated_at": "2026-11-14T03:40:41Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/threads_auto.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
+      }
+    ],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "regular12_pending_within_grace_no_ready_manuscript",
+    "status": "regular12_failed_queue_slot_missing_before_reservation",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13150,633 +13215,45 @@
     "actions_scope": "checkpoint changes only",
     "changed_runs_since_checkpoint": [
       {
-        "run_id": "43551863101",
+        "run_id": "43554814011",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "success",
-        "updated_at": "2026-11-14T03:30:24Z",
-        "head_sha": "770ebf657fd4274192f586e3dc5a19f161908325",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551863101"
+        "updated_at": "2026-11-14T04:04:59Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43554814011"
       },
       {
-        "run_id": "43551863089",
+        "run_id": "43554595892",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "success",
-        "updated_at": "2026-11-14T03:30:00Z",
-        "head_sha": "770ebf657fd4274192f586e3dc5a19f161908325",
-        "workflow_path": ".github/workflows/cardnews-isolated-tests.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551863089"
+        "updated_at": "2026-11-14T04:04:36Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43554595892"
       },
       {
-        "run_id": "43551863023",
+        "run_id": "43552820163",
         "run_attempt": 1,
         "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:29:47Z",
-        "head_sha": "770ebf657fd4274192f586e3dc5a19f161908325",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551863023"
-      },
-      {
-        "run_id": "43551617692",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:27:05Z",
-        "head_sha": "d5ee029ba9461b93288c78aa192297087d197a4e",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551617692"
-      },
-      {
-        "run_id": "43551617689",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:26:43Z",
-        "head_sha": "d5ee029ba9461b93288c78aa192297087d197a4e",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551617689"
-      },
-      {
-        "run_id": "43551606548",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:26:44Z",
-        "head_sha": "784d4523748478a617f31c2317caa30575b95913",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551606548"
-      },
-      {
-        "run_id": "43551606547",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:27:06Z",
-        "head_sha": "784d4523748478a617f31c2317caa30575b95913",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551606547"
-      },
-      {
-        "run_id": "43551569820",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:25:59Z",
-        "head_sha": "fb076cfd5607a5c56f6ad5867f04c514cdabf325",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551569820"
-      },
-      {
-        "run_id": "43551569813",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:26:49Z",
-        "head_sha": "fb076cfd5607a5c56f6ad5867f04c514cdabf325",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551569813"
-      },
-      {
-        "run_id": "43551527239",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:26:06Z",
-        "head_sha": "cf303d8d7793660ade73b05d9f2cb0da90f6751f",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551527239"
-      },
-      {
-        "run_id": "43551527184",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:25:31Z",
-        "head_sha": "cf303d8d7793660ade73b05d9f2cb0da90f6751f",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551527184"
-      },
-      {
-        "run_id": "43551486996",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:25:48Z",
-        "head_sha": "fd6f47e4ffa181ad11df83d463bd84b1a18666f4",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551486996"
-      },
-      {
-        "run_id": "43551486970",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:25:15Z",
-        "head_sha": "fd6f47e4ffa181ad11df83d463bd84b1a18666f4",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551486970"
-      },
-      {
-        "run_id": "43551479665",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:25:36Z",
-        "head_sha": "1187f1309fc8b9bb8860dceb421caf04b40b09f7",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551479665"
-      },
-      {
-        "run_id": "43551479646",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:25:01Z",
-        "head_sha": "1187f1309fc8b9bb8860dceb421caf04b40b09f7",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551479646"
-      },
-      {
-        "run_id": "43551441840",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:25:03Z",
-        "head_sha": "13894359892dfaa0731c5a487fddccad4f433987",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551441840"
-      },
-      {
-        "run_id": "43551441838",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:24:40Z",
-        "head_sha": "13894359892dfaa0731c5a487fddccad4f433987",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551441838"
-      },
-      {
-        "run_id": "43551435458",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:24:29Z",
-        "head_sha": "194e9f3eaf04ebe2649932a6412bdae9c4f05f12",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551435458"
-      },
-      {
-        "run_id": "43551435454",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:24:57Z",
-        "head_sha": "194e9f3eaf04ebe2649932a6412bdae9c4f05f12",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551435454"
-      },
-      {
-        "run_id": "43551392483",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:24:16Z",
-        "head_sha": "72604867043081e31dea8d2ad62e1832d36d3ae0",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551392483"
-      },
-      {
-        "run_id": "43551392414",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:24:56Z",
-        "head_sha": "72604867043081e31dea8d2ad62e1832d36d3ae0",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551392414"
-      },
-      {
-        "run_id": "43551379935",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:24:13Z",
-        "head_sha": "90624f260756c388fd585e242b57fc46909f84e3",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551379935"
-      },
-      {
-        "run_id": "43551379927",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:23:57Z",
-        "head_sha": "90624f260756c388fd585e242b57fc46909f84e3",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551379927"
-      },
-      {
-        "run_id": "43551372963",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:23:51Z",
-        "head_sha": "81673e73a38a25ea0887b718d6cfe40df4c2bd5c",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551372963"
-      },
-      {
-        "run_id": "43551372896",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:24:15Z",
-        "head_sha": "81673e73a38a25ea0887b718d6cfe40df4c2bd5c",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551372896"
-      },
-      {
-        "run_id": "43551332732",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:23:34Z",
-        "head_sha": "004dd64fbc425c1d295d3934c08bdbe2fa1db630",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551332732"
-      },
-      {
-        "run_id": "43551332715",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:23:56Z",
-        "head_sha": "004dd64fbc425c1d295d3934c08bdbe2fa1db630",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551332715"
-      },
-      {
-        "run_id": "43551321603",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:23:43Z",
-        "head_sha": "944d98ec9446a1812296a23985d69bac8f504bd7",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551321603"
-      },
-      {
-        "run_id": "43551321550",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:23:20Z",
-        "head_sha": "944d98ec9446a1812296a23985d69bac8f504bd7",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551321550"
-      },
-      {
-        "run_id": "43551268329",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:23:35Z",
-        "head_sha": "5e91cfee2704ff4e12355c981f68685177f451a4",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551268329"
-      },
-      {
-        "run_id": "43551268328",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:22:50Z",
-        "head_sha": "5e91cfee2704ff4e12355c981f68685177f451a4",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551268328"
-      },
-      {
-        "run_id": "43551260134",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:22:56Z",
-        "head_sha": "703634385df56a0239a3aec01012985ca714fbe4",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551260134"
-      },
-      {
-        "run_id": "43551260123",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:22:43Z",
-        "head_sha": "703634385df56a0239a3aec01012985ca714fbe4",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551260123"
-      },
-      {
-        "run_id": "43551212798",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:22:44Z",
-        "head_sha": "61ff0ea2cb512b29f96ee0e3ea506e856130002b",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551212798"
-      },
-      {
-        "run_id": "43551212773",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:22:00Z",
-        "head_sha": "61ff0ea2cb512b29f96ee0e3ea506e856130002b",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551212773"
-      },
-      {
-        "run_id": "43551203467",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:22:02Z",
-        "head_sha": "37912365987f68d0246d84509ca4a9d2db0e8a6a",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551203467"
-      },
-      {
-        "run_id": "43551203403",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:22:47Z",
-        "head_sha": "37912365987f68d0246d84509ca4a9d2db0e8a6a",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551203403"
-      },
-      {
-        "run_id": "43551017778",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:19:45Z",
-        "head_sha": "dd17a0b045f93a7f696224144ec9fa7d06495a86",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551017778"
-      },
-      {
-        "run_id": "43551017769",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:20:27Z",
-        "head_sha": "dd17a0b045f93a7f696224144ec9fa7d06495a86",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43551017769"
-      },
-      {
-        "run_id": "43550971565",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:19:26Z",
-        "head_sha": "20a29387fca07dad19328aa3d321c5c362c31dd8",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550971565"
-      },
-      {
-        "run_id": "43550971553",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:19:31Z",
-        "head_sha": "20a29387fca07dad19328aa3d321c5c362c31dd8",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550971553"
-      },
-      {
-        "run_id": "43550966244",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:19:23Z",
-        "head_sha": "c0e4a37d810f2803523310016701ada8db005a66",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550966244"
-      },
-      {
-        "run_id": "43550965960",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:19:39Z",
-        "head_sha": "c0e4a37d810f2803523310016701ada8db005a66",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550965960"
-      },
-      {
-        "run_id": "43550049853",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:09:22Z",
-        "head_sha": "685e2f590cd7978ae22cdd30eb241a28c98afbff",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550049853"
-      },
-      {
-        "run_id": "43550049789",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:09:07Z",
-        "head_sha": "685e2f590cd7978ae22cdd30eb241a28c98afbff",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550049789"
-      },
-      {
-        "run_id": "43550035793",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:09:22Z",
-        "head_sha": "9923140bfb86c82f8b00d3e188a6a258c5dfe306",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550035793"
-      },
-      {
-        "run_id": "43550035659",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:08:59Z",
-        "head_sha": "9923140bfb86c82f8b00d3e188a6a258c5dfe306",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43550035659"
-      },
-      {
-        "run_id": "43549975630",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:08:39Z",
-        "head_sha": "18ea1c4fa549c504867d89e0176bbaf4e8630efb",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549975630"
-      },
-      {
-        "run_id": "43549975477",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:08:10Z",
-        "head_sha": "18ea1c4fa549c504867d89e0176bbaf4e8630efb",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549975477"
-      },
-      {
-        "run_id": "43549849114",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:07:19Z",
-        "head_sha": "1866d273c6f18a646f2a7cbc55e8b5088e0ef808",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549849114"
-      },
-      {
-        "run_id": "43549849097",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:06:59Z",
-        "head_sha": "1866d273c6f18a646f2a7cbc55e8b5088e0ef808",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549849097"
-      },
-      {
-        "run_id": "43549838438",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:06:45Z",
-        "head_sha": "2749f501a4e9ce0e06e477b7aeacaa765f3b8572",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549838438"
-      },
-      {
-        "run_id": "43549838426",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:06:59Z",
-        "head_sha": "2749f501a4e9ce0e06e477b7aeacaa765f3b8572",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549838426"
-      },
-      {
-        "run_id": "43549691992",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:05:05Z",
-        "head_sha": "8e4f45b02c480fc7be9868e0e04a34caae8a6c8b",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549691992"
-      },
-      {
-        "run_id": "43549691905",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:05:26Z",
-        "head_sha": "8e4f45b02c480fc7be9868e0e04a34caae8a6c8b",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549691905"
-      },
-      {
-        "run_id": "43549594606",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:04:01Z",
-        "head_sha": "b023ea0f52b4010c207e83ea8a7a12863d6f42ca",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549594606"
-      },
-      {
-        "run_id": "43549594600",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:04:20Z",
-        "head_sha": "b023ea0f52b4010c207e83ea8a7a12863d6f42ca",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549594600"
-      },
-      {
-        "run_id": "43549507843",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:03:04Z",
-        "head_sha": "d69209f0798c5104f787be42f239b5a12b9f10a0",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549507843"
-      },
-      {
-        "run_id": "43549507785",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:03:55Z",
-        "head_sha": "d69209f0798c5104f787be42f239b5a12b9f10a0",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549507785"
-      },
-      {
-        "run_id": "43549500241",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:02:58Z",
-        "head_sha": "56ee960e4b0cab696ab19ff8313527ad7e6a66c4",
-        "workflow_path": ".github/workflows/adsense-readiness-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549500241"
-      },
-      {
-        "run_id": "43549500237",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T03:03:38Z",
-        "head_sha": "56ee960e4b0cab696ab19ff8313527ad7e6a66c4",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549500237"
-      },
-      {
-        "run_id": "43549094299",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T02:59:05Z",
-        "head_sha": "29eed1011f65c911d30fa4f72e3cfbe0451cb43d",
-        "workflow_path": ".github/workflows/content-mobile-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43549094299"
+        "conclusion": "failure",
+        "updated_at": "2026-11-14T03:40:41Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/threads_auto.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
       }
     ],
     "monitored_slot": "2026-11-14T12:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T14:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T123712.json",
-    "new_failure_fingerprints": [],
-    "new_metric_observations": 0,
-    "new_account_observations": 0,
+    "audit_path": "threads/audits/monitor-v2-20261114T135634.json",
+    "new_failure_fingerprints": [
+      "43552820163:1:QUEUE_SLOT_MISSING"
+    ],
+    "new_metric_observations": 1,
+    "new_account_observations": 1,
     "new_ready_saved": 0,
     "new_held_drafts_saved": 0,
     "queue_changed": false,
@@ -13788,10 +13265,10 @@
       "environment_selection": "inherited"
     },
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 0,
+    "new_late_cumulative_observations": 1,
     "new_candidate_fact_reviews": 0,
     "held_draft_card_completed": 0,
-    "scheduled12_status": "pending_no_run_or_claim_observed_within_grace_not_a_publication_failure_conclusion",
+    "scheduled12_status": "confirmed_presend_failure_no_claim_no_post_no_rerun",
     "retrieval_limitations": [
       "Connector rejected workflow-definition and workflow-specific-run URLs as unsupported endpoints. Successful full repository run collection used; no workflow disablement inferred."
     ]
@@ -20259,7 +19736,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T03:37:12Z",
+    "checked_at": "2026-11-14T04:56:34Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -20271,7 +19748,7 @@
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T12:35:15.681456+09:00",
+      "evaluated_at": "2026-11-14T13:54:44.674896+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -20356,16 +19833,16 @@
     "official_checks": [],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T123712.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T135634.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T03:37:12Z",
+      "checked_at": "2026-11-14T04:56:34Z",
       "checks": [],
-      "action": "No new official-source verification or source checked_at refresh. Existing held manuscript and exact registered card bytes preserved; full verify_reviewed_card passed against current immutable main archive; no rendering or profile access.",
-      "audit_path": "threads/audits/monitor-v2-20261114T123712.json"
+      "action": "No source timestamps refreshed or source/card generation repeated. Existing draft/card exact-byte verification passed.12slot queue missing is confirmed by job log; final profile-target hold remains, no relaxation, manual run or catch-up entry.",
+      "audit_path": "threads/audits/monitor-v2-20261114T135634.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "32ec42f5b07295f124e6d79a4e807cad4158b64f8452af2b39854595a6f9355b",
+    "selection_input_sha256": "3b04f60df1ec5a30a24e89335d53192da492683eda7dedc7167cc65e121886e5",
     "card_assets_registered": {
       "notice_id": "cleaneye-80976",
       "commit": "bcad95c187d51a78dfee672949d181f497153226",
@@ -20829,7 +20306,7 @@
       "operational_settings": "active_contract2",
       "actual_text_publication": "verified",
       "actual_image_publication": "verified",
-      "metrics_24h_72h": "two_comparable24h_two_late_cumulative_72h_not_due",
+      "metrics_24h_72h": "two_comparable24h_three_late_cumulative_72h_not_due",
       "performance_improvement": "not_established_insufficient_sample"
     },
     "first_text_success_report": {
@@ -20914,7 +20391,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T03:37:12Z",
+      "checked_at": "2026-11-14T04:56:34Z",
       "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
       "contract_version": 2,
       "policy_hashes": {
@@ -20923,16 +20400,25 @@
         "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
         "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
         "threads/writer-queue.json": "10bffd82c989f23f4cc572babb5f00a250facb75",
-        "threads/maintenance.json": "e9db8018a69db1b465a19e81d8318ef0f2363ca4",
-        "threads/performance.json": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
+        "threads/maintenance.json": "0cbf93b563f6fd9e4f46c6392bc91efd38fc0ec8",
+        "threads/performance.json": "b13553f34bd85d9073a0787b36db9e247de79d73",
         "threads_posted.json": "854f5c0ad77580084a5aedd53bfb60011f8b147c"
       },
       "full_active_prompt_read": true,
       "queue_check_status": "validated",
       "ready_entries": [],
       "new_regular_publications": 0,
-      "monitored_slot": "2026-11-14T12:00:00+09:00",
-      "scheduled12_status": "pending_no_run_or_claim_observed_within_grace_not_a_publication_failure_conclusion",
+      "scheduled12_status": "confirmed_presend_failure_QUEUE_SLOT_MISSING",
+      "failed_run": {
+        "run_id": "43552820163",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "failure",
+        "updated_at": "2026-11-14T03:40:41Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/threads_auto.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43552820163"
+      },
       "next_media": "IMAGE",
       "next_future_slot": "2026-11-14T16:00:00+09:00",
       "card_reverification": {
@@ -20954,7 +20440,7 @@
         "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/monitor-v2-20261114T123712.json"
+      "audit_path": "threads/audits/monitor-v2-20261114T135634.json"
     },
     "next_slot_official_preflight": {
       "checked_at": "2026-11-14T03:37:12Z",
@@ -21246,15 +20732,39 @@
         "visual_review": "attestation_and_exact_assets_verified"
       },
       "audit_path": "threads/audits/monitor-v2-20261114T115846.json"
+    },
+    "latest_regular_slot_failure": {
+      "id": "43552820163:1:QUEUE_SLOT_MISSING",
+      "observed_at": "2026-11-14T04:56:34Z",
+      "kind": "ready_queue_missing_before_reservation",
+      "publisher_failure": true,
+      "confirmed_cause": "No entry for2026-11-14T12:00:00+09:00; reserve selected exact current slot and rejected QUEUE_SLOT_MISSING. Existing verified-source electrical draft remains unassigned under final profile-target hold.",
+      "run_id": "43552820163",
+      "run_attempt": 1,
+      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+      "stage": "Reserve one job",
+      "error_codes": [
+        "QUEUE_SLOT_MISSING"
+      ],
+      "post_id": null,
+      "claim": null,
+      "send_state": "not_attempted_publish_step_skipped",
+      "automatic_post_recovery_attempts": 0,
+      "audit_path": "threads/audits/monitor-v2-20261114T135634.json",
+      "next_conditions": [
+        "Preserve all historical claims/locks/ledger/draft/card bytes.",
+        "No dispatch/rerun/direct POST or missed-slot backfill.",
+        "Only a fully validated unstarted future regular entry may be queued; final profile-target hold unresolved."
+      ]
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T03:37:12Z",
-    "state_blob_sha": "3f7ac1dd2abe5deea5ed2bb9b3ccb9447a1e316a",
+    "checked_at": "2026-11-14T04:56:34Z",
+    "state_blob_sha": "b13553f34bd85d9073a0787b36db9e247de79d73",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T03:35:16.612725+00:00",
+      "as_of": "2026-11-14T04:54:45.619818+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -21464,7 +20974,9 @@
           "location": "경기도의료원 안성병원",
           "employment": "정규직",
           "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 616838.216119
+          "deadline_distance_seconds": 616838.216119,
+          "observed_at": "2026-11-13T03:44:35.209864+00:00",
+          "elapsed_hours": 28.087062773055553
         },
         {
           "post_id": "18079233716458874",
@@ -21505,11 +21017,56 @@
           "location": "서울",
           "employment": "정규직",
           "recruitment_unit_count": 1,
-          "deadline_distance_seconds": 702628.447069
+          "deadline_distance_seconds": 702628.447069,
+          "observed_at": "2026-11-13T23:29:00.707762+00:00",
+          "elapsed_hours": 35.67476523083334
+        },
+        {
+          "post_id": "17986024908093257",
+          "notice_id": "a306949",
+          "published_at": "2026-11-12T23:29:19.122441+00:00",
+          "captured_at": "2026-11-14T03:40:34.836412+00:00",
+          "elapsed_seconds": 101475.713971,
+          "window": "24h",
+          "metrics": {
+            "views": 356,
+            "likes": 3,
+            "replies": 0,
+            "reposts": 1,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.8426966292134831,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": true,
+          "first_sentence": "기계 분야 학사와 산업계 경력이 있다면,",
+          "format_id": "hiring_core",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 273,
+          "media": "TEXT",
+          "slot": "2026-11-13T08:00:00+09:00",
+          "slot_hour_kst": 8,
+          "job": "기술연구원",
+          "location": "충남",
+          "employment": "정규직",
+          "recruitment_unit_count": 1,
+          "deadline_distance_seconds": 1150240.877559,
+          "observed_at": "2026-11-14T03:40:34.836412+00:00",
+          "elapsed_hours": 28.18769832527778
         }
       ],
       "excluded": {
-        "late_or_unavailable": 2
+        "late_or_unavailable": 3
       },
       "periods": [
         {
@@ -21649,16 +21206,16 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T03:35:16.612725+00:00",
+            "requested_end": "2026-11-14T04:54:45.619818+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
-            "observed_end": "2026-11-13T23:29:00.886949+00:00",
+            "observed_end": "2026-11-14T03:40:35.021239+00:00",
             "start_followers": 415,
-            "end_followers": 445,
-            "net_change": 30,
+            "end_followers": 450,
+            "net_change": 35,
             "status": "observed_interval",
             "exact_requested_boundaries": false,
             "observation_statuses": {
-              "captured": 10
+              "captured": 11
             },
             "post_attribution": null,
             "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -21670,16 +21227,16 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T03:35:16.612725+00:00",
+        "requested_end": "2026-11-14T04:54:45.619818+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-13T23:29:00.886949+00:00",
+        "observed_end": "2026-11-14T03:40:35.021239+00:00",
         "start_followers": 415,
-        "end_followers": 445,
-        "net_change": 30,
+        "end_followers": 450,
+        "net_change": 35,
         "status": "observed_interval",
         "exact_requested_boundaries": false,
         "observation_statuses": {
-          "captured": 10
+          "captured": 11
         },
         "post_attribution": null,
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -21696,7 +21253,7 @@
       ]
     },
     "new_24h_or_72h_observations": 0,
-    "new_account_observations": 0,
+    "new_account_observations": 1,
     "current_post_windows": {
       "post_id": "18101198159539744",
       "published_at": "2026-11-14T08:28:48.427195+09:00",
@@ -21795,7 +21352,7 @@
       }
     ],
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 0,
+    "new_late_cumulative_observations": 1,
     "late_cumulative_observations_with_elapsed_hours": [
       {
         "post_id": "17938804020400505",
@@ -21882,14 +21439,57 @@
         "deadline_distance_seconds": 702628.447069,
         "observed_at": "2026-11-13T23:29:00.707762+00:00",
         "elapsed_hours": 35.67476523083334
+      },
+      {
+        "post_id": "17986024908093257",
+        "notice_id": "a306949",
+        "published_at": "2026-11-12T23:29:19.122441+00:00",
+        "captured_at": "2026-11-14T03:40:34.836412+00:00",
+        "elapsed_seconds": 101475.713971,
+        "window": "24h",
+        "metrics": {
+          "views": 356,
+          "likes": 3,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        },
+        "metric_status": {
+          "views": "observed",
+          "likes": "observed",
+          "replies": "observed",
+          "reposts": "observed",
+          "quotes": "observed"
+        },
+        "likes_rate_percent": 0.8426966292134831,
+        "status": "captured",
+        "reader_replies": null,
+        "reader_replies_status": "author_separation_unverified",
+        "first_sentence_type": "condition",
+        "experiment_eligible": true,
+        "first_sentence": "기계 분야 학사와 산업계 경력이 있다면,",
+        "format_id": "hiring_core",
+        "contract_version": 2,
+        "sector_group": null,
+        "body_chars": 273,
+        "media": "TEXT",
+        "slot": "2026-11-13T08:00:00+09:00",
+        "slot_hour_kst": 8,
+        "job": "기술연구원",
+        "location": "충남",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "deadline_distance_seconds": 1150240.877559,
+        "observed_at": "2026-11-14T03:40:34.836412+00:00",
+        "elapsed_hours": 28.18769832527778
       }
     ],
     "account_observation_delta": {
-      "previous_followers": 429,
-      "previous_observed_at": "2026-11-13T11:46:13.590462+00:00",
-      "latest_followers": 445,
-      "latest_observed_at": "2026-11-13T23:29:00.886949+00:00",
-      "net_change": 16,
+      "observed_start": "2026-11-13T23:29:00.886949+00:00",
+      "observed_end": "2026-11-14T03:40:35.021239+00:00",
+      "start_followers": 445,
+      "end_followers": 450,
+      "net_change": 5,
       "post_attribution": null
     }
   },
