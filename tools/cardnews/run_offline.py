@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 from select_jobs import choose
 from prepare_cards import cards_for
 from generate import render
+from validate import validate
 KST=ZoneInfo("Asia/Seoul")
 def run(snapshot,output,limit=5):
     snapshot=Path(snapshot);output=Path(output)
@@ -25,11 +26,17 @@ def run(snapshot,output,limit=5):
             identifier=str(job["id"])
             if not identifier.replace("-","").replace("_","").isalnum():raise ValueError("Unsafe job ID")
             payload=cards_for(job)
+            errors=validate(payload)
+            if errors:raise ValueError(f"{identifier}: invalid card input: {errors}")
             folder=stage/identifier;folder.mkdir()
             names=[]
             for i,card in enumerate(payload["cards"],1):
                 name=f"card_{i:02}.png"
-                render(card,i,len(payload["cards"]),payload["brand"]).save(folder/name)
+                image=render(card,i,len(payload["cards"]),payload["brand"])
+                if image.size!=(1080,1350):raise ValueError("Unexpected card resolution")
+                image.save(folder/name)
+                with __import__("PIL").Image.open(folder/name) as saved:
+                    saved.verify()
                 names.append(name)
             (folder/"source.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
             with zipfile.ZipFile(folder/"cardnews.zip","w",zipfile.ZIP_DEFLATED) as z:
