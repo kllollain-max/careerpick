@@ -29,6 +29,8 @@ def choose(rows,now=None,limit=5):
         verified=row.get("official_verified") is True
         evidence=row.get("deadline_evidence")
         evidence_ok=(isinstance(evidence,dict) and evidence.get("kind")=="official_application_deadline" and isinstance(evidence.get("quote"),str) and len(evidence["quote"].strip())>=8 and evidence.get("reviewed") is True)
+        evidence_time=parse_deadline(evidence.get("application_deadline")) if isinstance(evidence,dict) else None
+        evidence_ok=evidence_ok and evidence_time is not None and evidence_time==deadline
         # A bare verified flag or ALIO posting-end date is not sufficient.
         url=urlparse(source) if isinstance(source,str) else None
         official_url_ok=bool(url and url.scheme=='https' and url.hostname and not url.hostname.endswith(('.test','.example','.invalid')) and url.hostname not in {'example.com','example.org','localhost'})
