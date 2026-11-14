@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T08:02:06Z",
-  "last_observed_at": "2026-11-14T08:02:06Z",
+  "updated_at": "2026-11-14T08:56:02Z",
+  "last_observed_at": "2026-11-14T08:56:02Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13198,7 +13198,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T08:02:06Z",
+    "checked_at": "2026-11-14T08:56:02Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -13212,21 +13212,10 @@
       "workflow_path": ".github/workflows/threads_auto.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43573336554"
     },
-    "new_publisher_runs": [
-      {
-        "run_id": "43573336554",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-14T07:55:42Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43573336554"
-      }
-    ],
+    "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "regular16_failed_queue_slot_missing_before_reservation",
+    "status": "unchanged_profile_target_hold_await_next_regular_slot",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13267,47 +13256,14 @@
     "actions_runs_read": 100,
     "actions_reported_total": 889,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [
-      {
-        "run_id": "43573336554",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "failure",
-        "updated_at": "2026-11-14T07:55:42Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43573336554"
-      },
-      {
-        "run_id": "43570426516",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T07:18:02Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43570426516"
-      },
-      {
-        "run_id": "43570207986",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T07:17:47Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43570207986"
-      }
-    ],
+    "changed_runs_since_checkpoint": [],
     "monitored_slot": "2026-11-14T16:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T18:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T170206.json",
-    "new_failure_fingerprints": [
-      "43573336554:1:QUEUE_SLOT_MISSING"
-    ],
-    "new_metric_observations": 1,
-    "new_account_observations": 1,
+    "audit_path": "threads/audits/monitor-v2-20261114T175602.json",
+    "new_failure_fingerprints": [],
+    "new_metric_observations": 0,
+    "new_account_observations": 0,
     "new_ready_saved": 0,
     "new_held_drafts_saved": 0,
     "queue_changed": false,
@@ -13319,7 +13275,7 @@
       "environment_selection": "inherited"
     },
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 1,
+    "new_late_cumulative_observations": 0,
     "new_candidate_fact_reviews": 0,
     "held_draft_card_completed": 0,
     "scheduled12_status": "confirmed_presend_failure_grace_expired_no_backfill",
@@ -19793,7 +19749,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T08:02:06Z",
+    "checked_at": "2026-11-14T08:56:02Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -19801,11 +19757,11 @@
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "full_active_prompt_read": true,
-    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-1234.pgv5yoyo/careerpick-bcad95c187d51a78dfee672949d181f497153226/monitor-1700/queue.json",
+    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-1234.pgv5yoyo/careerpick-bcad95c187d51a78dfee672949d181f497153226/monitor-1755/queue.json",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T17:01:13.180555+09:00",
+      "evaluated_at": "2026-11-14T17:55:26.956626+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19890,16 +19846,16 @@
     "official_checks": [],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T170206.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T175602.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T08:02:06Z",
+      "checked_at": "2026-11-14T08:56:02Z",
       "checks": [],
-      "action": "No source timestamps or manuscript/assets regenerated. Exact reviewed card binding reverified. Scheduled16 failed before send; no rerun, backfill, new started-slot entry or final-gate relaxation. Profile-target hold unchanged.",
-      "audit_path": "threads/audits/monitor-v2-20261114T170206.json"
+      "action": "No source timestamps or manuscript/assets regenerated. Exact reviewed card/facts/preview binding reverified. No new publication or observations; profile-target hold unchanged and final gate preserved.",
+      "audit_path": "threads/audits/monitor-v2-20261114T175602.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "1e1a9707179739eeb45375071d7e275d9260e4e82b61af49a5c4aae14420c2f7",
+    "selection_input_sha256": "0aee7f0e59b30d0ed2457638e2a09cffbe7fe10a4ac902cd4c7e7a5ffbf57d4c",
     "card_assets_registered": {
       "notice_id": "cleaneye-80976",
       "commit": "bcad95c187d51a78dfee672949d181f497153226",
@@ -20448,7 +20404,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T08:02:06Z",
+      "checked_at": "2026-11-14T08:56:02Z",
       "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
       "contract_version": 2,
       "policy_hashes": {
@@ -20497,7 +20453,7 @@
         "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/monitor-v2-20261114T170206.json",
+      "audit_path": "threads/audits/monitor-v2-20261114T175602.json",
       "latest_publisher_run": {
         "run_id": "43573336554",
         "run_attempt": 1,
@@ -20508,19 +20464,8 @@
         "workflow_path": ".github/workflows/threads_auto.yml",
         "url": "https://github.com/kllollain-max/careerpick/actions/runs/43573336554"
       },
-      "new_publisher_runs": [
-        {
-          "run_id": "43573336554",
-          "run_attempt": 1,
-          "status": "completed",
-          "conclusion": "failure",
-          "updated_at": "2026-11-14T07:55:42Z",
-          "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
-          "workflow_path": ".github/workflows/threads_auto.yml",
-          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43573336554"
-        }
-      ],
-      "status": "scheduled16_presend_failure_new_late_metrics",
+      "new_publisher_runs": [],
+      "status": "no_new_publication_or_metrics",
       "next_slot": "2026-11-14T20:00:00+09:00"
     },
     "next_slot_official_preflight": {
@@ -20840,12 +20785,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T08:02:06Z",
+    "checked_at": "2026-11-14T08:56:02Z",
     "state_blob_sha": "8025b1fa726ffe06cde059881861f0790fa0bb78",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T08:01:14.226535+00:00",
+      "as_of": "2026-11-14T08:55:27.972531+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -21322,7 +21267,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T08:01:14.226535+00:00",
+            "requested_end": "2026-11-14T08:55:27.972531+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-14T07:55:38.470346+00:00",
             "start_followers": 415,
@@ -21343,7 +21288,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T08:01:14.226535+00:00",
+        "requested_end": "2026-11-14T08:55:27.972531+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T07:55:38.470346+00:00",
         "start_followers": 415,
@@ -21368,8 +21313,8 @@
         "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
       ]
     },
-    "new_24h_or_72h_observations": 1,
-    "new_account_observations": 1,
+    "new_24h_or_72h_observations": 0,
+    "new_account_observations": 0,
     "current_post_windows": {
       "post_id": "18101198159539744",
       "published_at": "2026-11-14T08:28:48.427195+09:00",
@@ -21468,7 +21413,7 @@
       }
     ],
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 1,
+    "new_late_cumulative_observations": 0,
     "late_cumulative_observations_with_elapsed_hours": [
       {
         "post_id": "17938804020400505",
@@ -21644,30 +21589,29 @@
       }
     ],
     "account_observation_delta": {
-      "start": {
-        "observation_id": "33c1d5e58d26d450d87e77fde52d5c2a76ee05c07c108b7fd00169cd7796be4c",
+      "new_observations": 0,
+      "latest_existing_observed_at": "2026-11-14T07:55:38.470346+00:00",
+      "existing_interval": {
         "account": "hid_119",
-        "captured_at": "2026-11-14T03:40:35.021239+00:00",
-        "followers_count": 450,
-        "status": "captured",
-        "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
         "scope": "account_total",
-        "post_attribution": null
+        "requested_start": "2026-11-11T11:45:18.355131+00:00",
+        "requested_end": "2026-11-14T08:55:27.972531+00:00",
+        "observed_start": "2026-11-11T11:45:32.854727+00:00",
+        "observed_end": "2026-11-14T07:55:38.470346+00:00",
+        "start_followers": 415,
+        "end_followers": 456,
+        "net_change": 41,
+        "status": "observed_interval",
+        "exact_requested_boundaries": false,
+        "observation_statuses": {
+          "captured": 12
+        },
+        "post_attribution": null,
+        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
-      "end": {
-        "observation_id": "c308608e161dd54b74b127bb30f18730ccba628c187a1ea344f8838bf832b8b0",
-        "account": "hid_119",
-        "captured_at": "2026-11-14T07:55:38.470346+00:00",
-        "followers_count": 456,
-        "status": "captured",
-        "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
-        "scope": "account_total",
-        "post_attribution": null
-      },
-      "net_change": 6,
       "post_attribution": null
     },
-    "summary_report_sha256": "f7d8de72aabc68d87fd057e9a97c4759a49b5e829b9690ae4f4a184186fc4220"
+    "summary_report_sha256": "f41baeaa6071476944f6f402bc89669d0f8b00ce2b2d14757856c481826d7afa"
   },
   "writer_ready_reviews": {
     "2026-11-13T12:00:00+09:00:a306848": {
