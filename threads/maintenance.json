@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T09:48:00Z",
-  "last_observed_at": "2026-11-14T09:48:00Z",
+  "updated_at": "2026-11-14T10:45:05Z",
+  "last_observed_at": "2026-11-14T10:45:05Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13198,7 +13198,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T09:48:00Z",
+    "checked_at": "2026-11-14T10:45:05Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -13215,7 +13215,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "unchanged_profile_target_hold_16h_grace_expired",
+    "status": "unchanged_profile_target_hold_await20",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13256,11 +13256,32 @@
     "actions_runs_read": 100,
     "actions_reported_total": 889,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43583037861",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-14T09:58:52Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43583037861"
+      },
+      {
+        "run_id": "43582851636",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-14T09:58:30Z",
+        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43582851636"
+      }
+    ],
     "monitored_slot": "2026-11-14T16:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-14T18:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T184800.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T194505.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -19749,7 +19770,7 @@
     "latest_v5_audit": "threads/audits/monitor-v2-20261113T1724.json"
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T09:48:00Z",
+    "checked_at": "2026-11-14T10:45:05Z",
     "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -19757,11 +19778,11 @@
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "full_active_prompt_read": true,
-    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-1234.pgv5yoyo/careerpick-bcad95c187d51a78dfee672949d181f497153226/monitor-1848/queue.json",
+    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-1234.pgv5yoyo/careerpick-bcad95c187d51a78dfee672949d181f497153226/monitor-1945/queue.json",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-14T18:47:27.361001+09:00",
+      "evaluated_at": "2026-11-14T19:44:29.693083+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -19846,16 +19867,16 @@
     "official_checks": [],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T184800.json",
+    "audit_path": "threads/audits/monitor-v2-20261114T194505.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T09:48:00Z",
+      "checked_at": "2026-11-14T10:45:05Z",
       "checks": [],
-      "action": "No source timestamps or manuscript/assets regenerated. Exact reviewed card/facts/preview binding reverified. 16h grace expired with no new receipt; no rerun, backfill, started-slot insertion or final-gate relaxation.",
-      "audit_path": "threads/audits/monitor-v2-20261114T184800.json"
+      "action": "No source timestamps or manuscript/assets regenerated. Existing reviewed card/facts/preview binding reverified; final profile-target hold preserved. No new ready entry or manual publishing action.",
+      "audit_path": "threads/audits/monitor-v2-20261114T194505.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "631925ab31801362919c3dbb3977789ff984dbb2452ad8beed62fb1b44607337",
+    "selection_input_sha256": "fe30ba34663f781c4a50bb5d35464d72a78316f574b7ea9371c40031da99772c",
     "card_assets_registered": {
       "notice_id": "cleaneye-80976",
       "commit": "bcad95c187d51a78dfee672949d181f497153226",
@@ -20404,7 +20425,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T09:48:00Z",
+      "checked_at": "2026-11-14T10:45:05Z",
       "main_sha": "bcad95c187d51a78dfee672949d181f497153226",
       "contract_version": 2,
       "policy_hashes": {
@@ -20453,7 +20474,7 @@
         "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/monitor-v2-20261114T184800.json",
+      "audit_path": "threads/audits/monitor-v2-20261114T194505.json",
       "latest_publisher_run": {
         "run_id": "43573336554",
         "run_attempt": 1,
@@ -20786,12 +20807,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T09:48:00Z",
+    "checked_at": "2026-11-14T10:45:05Z",
     "state_blob_sha": "8025b1fa726ffe06cde059881861f0790fa0bb78",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T09:47:28.337870+00:00",
+      "as_of": "2026-11-14T10:44:30.834894+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -21268,7 +21289,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T09:47:28.337870+00:00",
+            "requested_end": "2026-11-14T10:44:30.834894+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-14T07:55:38.470346+00:00",
             "start_followers": 415,
@@ -21289,7 +21310,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T09:47:28.337870+00:00",
+        "requested_end": "2026-11-14T10:44:30.834894+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T07:55:38.470346+00:00",
         "start_followers": 415,
@@ -21596,7 +21617,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T09:47:28.337870+00:00",
+        "requested_end": "2026-11-14T10:44:30.834894+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T07:55:38.470346+00:00",
         "start_followers": 415,
@@ -21612,7 +21633,7 @@
       },
       "post_attribution": null
     },
-    "summary_report_sha256": "ab0c9fde2d1adc3ec07f7e9906ce1f61cf8d19d28251afe4e60081475350b03b"
+    "summary_report_sha256": "87940365d6cec5b2c5999e319153b273cca0162faa06834a399c0e69b90b4f2e"
   },
   "writer_ready_reviews": {
     "2026-11-13T12:00:00+09:00:a306848": {
