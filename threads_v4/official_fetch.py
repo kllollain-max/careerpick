@@ -3,6 +3,8 @@ import hashlib
 import json
 import urllib.error
 import urllib.request
+import ipaddress
+import socket
 from datetime import datetime
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
@@ -11,6 +13,14 @@ def check_url(url, *, timeout=12, opener=None):
     parsed=urlsplit(url)
     if parsed.scheme!="https" or not parsed.hostname or parsed.username or parsed.password:
         return {"url":url,"status":"HOLD","reason":"URL_INVALID"}
+    if parsed.hostname.lower() in {"localhost", "localhost.localdomain"}:
+        return {"url":url,"status":"HOLD","reason":"PRIVATE_HOST_BLOCKED"}
+    try:
+        resolved=socket.getaddrinfo(parsed.hostname,443,type=socket.SOCK_STREAM)
+        if not resolved or any(not ipaddress.ip_address(item[4][0]).is_global for item in resolved):
+            return {"url":url,"status":"HOLD","reason":"PRIVATE_ADDRESS_BLOCKED"}
+    except (OSError,ValueError):
+        return {"url":url,"status":"HOLD","reason":"DNS_UNVERIFIED"}
     request=urllib.request.Request(url,headers={"User-Agent":"CareerPick-SourceAudit/1.0","Accept":"text/html,application/pdf"})
     opener=opener or urllib.request.urlopen
     try:
