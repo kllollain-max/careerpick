@@ -15,7 +15,7 @@ def preview(audit):
     required=("organization","title","employment","headcount","qualification","application_window_as_published")
     if any(not facts.get(k) for k in required):
         raise ValueError("MISSING_SOURCE_FACTS")
-    text=(f'{facts["organization"]}에서 연구위원급 채용을 진행합니다.\n'
+    text=(f'{facts["organization"]}에서 {facts["title"]} 채용을 진행합니다.\n'
           f'고용형태: {facts["employment"]} · 모집인원: {facts["headcount"]}명\n'
           f'지원자격: {facts["qualification"]}\n'
           f'접수기간: {facts["application_window_as_published"]} (UTC 기준)\n'
