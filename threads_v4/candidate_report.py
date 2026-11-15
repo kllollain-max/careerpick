@@ -21,9 +21,12 @@ def summarize(data):
         if not nid or nid in seen:
             continue
         seen.add(nid)
-        selected.append({"notice_id": nid, "organization": row.get("org"),
-                         "title": row.get("title"), "decision": "REVIEW_REQUIRED",
-                         "official_verified": False})
+        selected.append({"notice_id": nid, "organization": row.get("org") or row.get("organization"),
+                         "title": row.get("title") or row.get("notice_title"),
+                         "official_url": row.get("official_url") or row.get("url") or row.get("src"),
+                         "application_period": row.get("application_period"),
+                         "employment": row.get("employment") or row.get("employment_type"),
+                         "decision": "REVIEW_REQUIRED", "official_verified": False})
     review_rows = data.get("review_candidates", [])
     if not isinstance(review_rows, list):
         raise ValueError("REVIEW_SCHEMA")
