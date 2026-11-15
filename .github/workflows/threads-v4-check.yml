@@ -67,8 +67,12 @@ jobs:
           triage=json.loads((root/"official-triage.json").read_text(encoding="utf-8"))
           queue=json.loads((root/"queue.json").read_text(encoding="utf-8"))
           stage={"schema_version":1,"entries":[]}
-          history=json.loads(Path("threads_posted.json").read_text(encoding="utf-8"))
-          result=supply_decision(queue,stage,history,triage,datetime.now(ZoneInfo("Asia/Seoul")))
+          try:
+            history=json.loads(Path("threads_posted.json").read_text(encoding="utf-8"))
+          except (ValueError, OSError) as exc:
+            result={"status":"HISTORY_UNREADABLE","action":"HOLD_AND_REPAIR_HISTORY_READ", "error_type":type(exc).__name__,"meta_posted":False,"missing_slots":[]}
+          else:
+            result=supply_decision(queue,stage,history,triage,datetime.now(ZoneInfo("Asia/Seoul")))
           (root/"supply-diagnostics.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
           print(json.dumps({"status":result["status"],"action":result["action"],"missing":len(result["missing_slots"])},ensure_ascii=False))
           PY
