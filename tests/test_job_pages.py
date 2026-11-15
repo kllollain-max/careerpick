@@ -37,6 +37,17 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('<dt>ALIO 게시 종료일 · 접수마감 원문 확인</dt><dd>2099-12-31</dd>', html)
         self.assertNotIn('2099-12-31 23:59', html)
 
+    def test_employer_confirmed_cutoff_only_on_matching_notice(self):
+        confirmed = dict(self.post, id='a306750', due='2026-11-19T23:59:00+09:00')
+        confirmed.pop('dueHasTime')
+        html = render(confirmed, {})
+        self.assertIn('<dt>기관 공식 확인 접수마감</dt><dd>2026-11-19 10:00 (KST)</dd>', html)
+        self.assertIn('<dt>ALIO 게시 종료일 · 접수마감 원문 확인</dt><dd>2026-11-19</dd>', html)
+        self.assertNotIn('<script type="application/ld+json">', html)
+        other = render(dict(confirmed, id='a306355'), {})
+        self.assertNotIn('기관 공식 확인 접수마감', other)
+        self.assertNotIn('2026-11-19 10:00', other)
+
     def test_full_detail_regions_reach_summary_checks_metadata_and_schema(self):
         post = dict(self.post, region='인천')
         detail = {'recrutPblntSn': '123456', 'workRgnNmLst': '인천,충남,전북'}
