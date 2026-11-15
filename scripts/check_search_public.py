@@ -220,9 +220,30 @@ def run(all_urls=False, workers=4, loader=fetch):
     if fi['status'] == 200 and fd:
         try:
             feed = json.loads(fd)
-            feed_ids = {str(p.get('id')) for p in feed.get('posts', []) if re.fullmatch(r'a[0-9]+', str(p.get('id', '')))}
-            missing = sorted(pid for pid in feed_ids if BASE + 'jobs/' + pid + '.html' not in urls)
-            report['public_feed'].update(notice_count=len(feed_ids), missing_sitemap_ids=missing)
+            feed_posts = [p for p in feed.get('posts', []) if isinstance(p, dict) and re.fullmatch(r'a[0-9]+', str(p.get('id', '')))]
+            feed_ids = {str(p['id']) for p in feed_posts}
+            # The page generator explicitly noindexes expired notices; those
+            # must not be required in the sitemap. Unknown dates stay eligible.
+            def expired_by_source_date(post):
+                raw = post.get('due')
+                if not raw:
+                    return False
+                try:
+                    deadline = datetime.fromisoformat(str(raw).replace('Z', '+00:00'))
+                    if deadline.tzinfo is None:
+                        # ALIO date-only means the end of that KST calendar day.
+                        from datetime import timedelta, timezone as tz
+                        deadline = deadline.replace(tzinfo=tz(timedelta(hours=9)))
+                        deadline = deadline.replace(hour=23, minute=59, second=59)
+                    return deadline.astimezone(timezone.utc) < datetime.now(timezone.utc)
+                except (ValueError, TypeError):
+                    return False
+            active_ids = {str(p['id']) for p in feed_posts if not expired_by_source_date(p)}
+            missing = sorted(pid for pid in active_ids if BASE + 'jobs/' + pid + '.html' not in urls)
+            excluded_expired = sorted(feed_ids - active_ids)
+            report['public_feed'].update(notice_count=len(feed_ids), current_notice_count=len(active_ids),
+                                         expired_notice_count=len(excluded_expired),
+                                         missing_sitemap_ids=missing)
             if missing: report['errors'].append('current_notices_missing_from_sitemap')
         except (ValueError, TypeError, AttributeError): report['errors'].append('public_feed_invalid_json_or_shape')
     else: report['warnings'].append('public_feed_unverified')
