@@ -43,7 +43,13 @@ class MigrationTests(unittest.TestCase):
         self.assertIn('THREADS_NEW_CONTENT: "false"', workflow)
         self.assertIn('THREADS_CLAIM_BRANCH: threads-publisher-state', workflow)
         self.assertNotIn('deploy.yml/dispatches', workflow)
-        self.assertEqual(workflow.count('    - cron:'),4)
+        self.assertEqual(workflow.count('    - cron:'), 8)
+        for hour in ('0 23 * * *', '0 3 * * *', '0 7 * * *', '0 11 * * *'):
+            self.assertIn("github.event.schedule == '" + hour + "'", workflow)
+        for hour in ('45 22 * * *', '45 2 * * *', '45 6 * * *', '45 10 * * *'):
+            self.assertIn("- cron: '" + hour + "'", workflow)
+        self.assertIn('queue_preflight:', workflow)
+        self.assertIn('threads_queue_bridge.py --apply', workflow)
         self.assertIn('raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/',Path('scripts/threads_auto.py').read_text())
 
 
