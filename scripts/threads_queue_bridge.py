@@ -49,12 +49,30 @@ def next_media(history):
     return 'IMAGE' if recent is not None and not recent.get('image_url') else 'TEXT'
 
 
+def eligible_staged_slot(entry, now):
+    """Keep the publisher's existing 2h grace only for pre-slot reviewed entries."""
+    supplied = entry.get('scheduled_at')
+    if supplied in future_slots(now):
+        return True
+    try:
+        slot = datetime.fromisoformat(supplied)
+        prepared = datetime.fromisoformat(entry['prepared_at'])
+        if slot.utcoffset() is None or prepared.utcoffset() is None:
+            return False
+        local = slot.astimezone(KST)
+        return (local.hour in HOURS and local.minute == local.second == local.microsecond == 0
+                and timedelta(0) <= now-slot < timedelta(hours=2)
+                and prepared < slot)
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
 def verify_entry(entry, now, history, policy, source, details):
     if not isinstance(entry, dict) or not isinstance(entry.get('writer'), dict):
         raise ValueError('STAGED_ENTRY_SCHEMA')
     if entry['writer'].get('status') != 'ready':
         raise ValueError('STAGED_NOT_READY')
-    if entry.get('scheduled_at') not in future_slots(now):
+    if not eligible_staged_slot(entry, now):
         raise ValueError('STAGED_SLOT_EXPIRED_OR_FUTURE')
     selected = validate_entry(entry, datetime.fromisoformat(entry['scheduled_at']),
                               now, history, source, details, policy)
@@ -70,7 +88,7 @@ def verify_entry(entry, now, history, policy, source, details):
     return selected
 
 
-def merge(queue, staged, history, policy, source, details, now):
+def merge(queue, staged, history, policy, source, details, now, claimed_slots=()):
     if queue.get('schema_version') != 1 or not isinstance(queue.get('entries'), list):
         raise ValueError('QUEUE_SCHEMA')
     if staged.get('schema_version') != 1 or not isinstance(staged.get('entries'), list):
@@ -91,6 +109,10 @@ def merge(queue, staged, history, policy, source, details, now):
                 raise ValueError('DUPLICATE_POST')
             if entry.get('scheduled_at') in occupied:
                 raise ValueError('SLOT_ALREADY_OCCUPIED')
+            if entry.get('scheduled_at') in claimed_slots:
+                raise ValueError('SLOT_ALREADY_CLAIMED')
+            if any(r.get('scheduled_at') == entry.get('scheduled_at') for r in history.get('records', [])):
+                raise ValueError('SLOT_ALREADY_STARTED')
             if nid in used:
                 raise ValueError('DUPLICATE_QUEUE_NOTICE')
             verify_entry(entry, now, history, policy, source, details)
@@ -141,7 +163,20 @@ def run(apply=False):
             if exc.code != 404:
                 raise
             staged, stage_sha = {'schema_version': 1, 'entries': []}, None
-        merged, approved, refused = merge(queue, staged, history, policy, source, details, now)
+        claimed_slots = set()
+        for entry in staged.get('entries', []):
+            if not isinstance(entry, dict) or not eligible_staged_slot(entry, now):
+                continue
+            slot = datetime.fromisoformat(entry['scheduled_at'])
+            if slot <= now:
+                name = slot.astimezone(ZoneInfo('UTC')).strftime('%Y%m%dT%H%MZ.json')
+                try:
+                    request('GET', 'threads-claims/' + name, token)
+                    claimed_slots.add(entry['scheduled_at'])
+                except urllib.error.HTTPError as exc:
+                    if exc.code != 404:
+                        raise
+        merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
         selection = build_selection(source, details, history, policy, now, 24,
                                     queued_entries=queue['entries'])
         report.update(queue_sha=sha, staged_sha=stage_sha,

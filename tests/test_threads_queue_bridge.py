@@ -79,5 +79,50 @@ class ReviewedBridgeTests(unittest.TestCase):
             self.check()
 
 
+class DelayedReviewedBridgeTests(unittest.TestCase):
+    def setUp(self):
+        self.now = datetime(2026, 11, 15, 16, 49, tzinfo=ZoneInfo('Asia/Seoul'))
+        self.entry = {'notice_id': 'a306965', 'scheduled_at': '2026-11-15T16:00:00+09:00',
+                      'prepared_at': '2026-11-15T14:02:00+09:00',
+                      'writer': {'status': 'ready', 'post_text': 'verified'}}
+        self.history = {'posted_ids': [], 'records': []}
+
+    def test_delayed_preflight_preserves_existing_grace(self):
+        self.assertTrue(bridge.eligible_staged_slot(self.entry, self.now))
+
+    def test_newly_prepared_after_slot_is_rejected(self):
+        self.entry['prepared_at'] = '2026-11-15T16:01:00+09:00'
+        self.assertFalse(bridge.eligible_staged_slot(self.entry, self.now))
+
+    def test_two_hour_boundary_is_closed(self):
+        self.assertFalse(bridge.eligible_staged_slot(self.entry, self.now.replace(hour=18, minute=0)))
+
+    def test_missing_or_naive_prepared_time_rejected(self):
+        del self.entry['prepared_at']
+        self.assertFalse(bridge.eligible_staged_slot(self.entry, self.now))
+        self.entry['prepared_at'] = '2026-11-15T14:02:00'
+        self.assertFalse(bridge.eligible_staged_slot(self.entry, self.now))
+
+    def test_delayed_entry_still_runs_full_validator(self):
+        with patch.object(bridge, 'validate_entry', side_effect=ValueError('SOURCE_CHANGED')) as validator:
+            with self.assertRaisesRegex(ValueError, 'SOURCE_CHANGED'):
+                bridge.verify_entry(self.entry, self.now, self.history, {}, {}, {})
+            validator.assert_called_once()
+
+    def test_other_notice_reservation_blocks_slot(self):
+        self.history['records'] = [{'job_id': 'a111', 'scheduled_at': self.entry['scheduled_at'], 'status': 'pending'}]
+        _, approved, refused = bridge.merge({'schema_version': 1, 'entries': []},
+            {'schema_version': 1, 'entries': [self.entry]}, self.history, {}, {}, {}, self.now)
+        self.assertFalse(approved)
+        self.assertEqual(refused[0]['reason'], 'SLOT_ALREADY_STARTED')
+
+    def test_remote_claim_blocks_even_without_history(self):
+        _, approved, refused = bridge.merge({'schema_version': 1, 'entries': []},
+            {'schema_version': 1, 'entries': [self.entry]}, self.history, {}, {}, {}, self.now,
+            claimed_slots={self.entry['scheduled_at']})
+        self.assertFalse(approved)
+        self.assertEqual(refused[0]['reason'], 'SLOT_ALREADY_CLAIMED')
+
+
 if __name__ == '__main__':
     unittest.main()
