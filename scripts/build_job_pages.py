@@ -920,6 +920,20 @@ def main():
         'review_queue_count': len(report['review_queue']),
     }
     print('접수 종료일 기준 콘텐츠 검토 우선순위:', json.dumps(report['review_summary'], ensure_ascii=False))
+    # A short, actionable sample in CI logs; full queue remains in the artifact.
+    # These are source-provided candidates, not independently verified openings.
+    report['review_top_10'] = report['review_queue'][:10]
+    print('채용인원 우선 공식 원문 검토 후보 10건:',
+          json.dumps([{
+              'id': row['id'],
+              'organization': row['organization'],
+              'title': row['title'],
+              'recruitment_count_raw': row['recruitment_count_raw'],
+              'source_end_date': row['source_end_date'],
+              'official_source_url': row['official_source_url'],
+              'review_reasons': row['review_reasons'],
+          } for row in report['review_top_10']], ensure_ascii=False))
+
 
     report_path = ROOT / 'job-quality-report.json'
     report_path.write_text(
