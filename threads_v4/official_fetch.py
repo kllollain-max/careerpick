@@ -9,6 +9,7 @@ from datetime import datetime
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 from threads_v4.official_text import extract
+from threads_v4.cross_source import compare
 
 def check_url(url, *, timeout=12, opener=None):
     parsed=urlsplit(url)
@@ -42,9 +43,10 @@ def check_url(url, *, timeout=12, opener=None):
         return {"url":url,"status":"HOLD","reason":"NETWORK_ERROR","error_type":type(exc).__name__}
 
 def audit(urls):
+    checks=[check_url(u) for u in urls]
     return {"schema_version":1,"checked_at":datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),
-            "checks":[check_url(u) for u in urls],"official_approved_count":0,
-            "meta_posted":False}
+            "checks":checks,"cross_source_review":compare(checks),
+            "official_approved_count":0,"meta_posted":False}
 
 if __name__=="__main__":
     import argparse
