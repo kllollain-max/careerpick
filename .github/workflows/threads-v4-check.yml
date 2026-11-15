@@ -21,6 +21,18 @@ jobs:
           python-version: '3.11'
       - name: Run isolated queue checks
         run: python -m unittest discover -s threads_v4 -p 'test_*.py' -v
+      - name: Generate candidate review report from existing recruitment data
+        run: |
+          mkdir -p /tmp/threads-v4
+          printf '{"schema_version":1,"entries":[]}' > /tmp/threads-v4/queue.json
+          python -m threads_v4.candidate_report --queue /tmp/threads-v4/queue.json --output /tmp/threads-v4/candidates.json
+          python -c 'import json; d=json.load(open("/tmp/threads-v4/candidates.json")); assert d["approved_count"] == 0; assert d["meta_posted"] is False'
+      - name: Upload candidate review report
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-v4-candidate-review
+          path: /tmp/threads-v4/candidates.json
+          retention-days: 7
       - name: Verify production publisher untouched
         run: |
           test -f .github/workflows/threads_auto.yml
