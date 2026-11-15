@@ -5,7 +5,7 @@ from threads_v4.manuscript_gate import validate_copy, ReviewBlocked, CTA
 
 NOW = datetime(2026, 11, 15, 13, tzinfo=ZoneInfo("Asia/Seoul"))
 def good():
-    return dict(post_text="기관 채용 공고를 확인하세요.\\n"+CTA, reply_texts=[],
+    return dict(post_text="기관 채용 공고를 확인하세요.\n"+CTA, reply_texts=[],
                 official_verified=True, correction_checked=True, profile_verified=True,
                 notice_id="a123", organization="기관", headcount=2, employment="정규직",
                 eligibility="공식 요건", official_url="https://example.org", source_sha256="a"*64,
@@ -23,10 +23,10 @@ class GateTests(unittest.TestCase):
         x=good();x["media"]="IMAGE"
         with self.assertRaises(ReviewBlocked):validate_copy(x,NOW)
     def test_url_forbidden(self):
-        x=good();x["post_text"]="https://example.org\\n"+CTA
+        x=good();x["post_text"]="https://example.org\n"+CTA
         with self.assertRaises(ReviewBlocked):validate_copy(x,NOW)
     def test_duplicate_cta(self):
-        x=good();x["post_text"]=CTA+"\\n"+CTA
+        x=good();x["post_text"]=CTA+"\n"+CTA
         with self.assertRaises(ReviewBlocked):validate_copy(x,NOW)
     def test_no_replies(self):
         x=good();x["reply_texts"]=["reply"]
