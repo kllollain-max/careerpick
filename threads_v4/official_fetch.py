@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 from threads_v4.official_text import extract
 from threads_v4.cross_source import compare
+from threads_v4.correction_scan import scan
 
 def check_url(url, *, timeout=12, opener=None):
     parsed=urlsplit(url)
@@ -36,6 +37,7 @@ def check_url(url, *, timeout=12, opener=None):
                 "content_type":kind,"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest()}
         if "text/html" in kind.lower():
             result["text_evidence"]=extract(data)
+            result["correction_scan"]=scan(" ".join(parser_part["snippet"] or "" for parser_part in result["text_evidence"]["evidence"].values()))
         return result
     except urllib.error.HTTPError as exc:
         return {"url":url,"status":"HOLD","reason":"HTTP_ERROR","http_status":exc.code}
