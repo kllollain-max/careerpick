@@ -56,6 +56,23 @@ jobs:
           python-version: '3.11'
       - name: Review official sources and promote validated staged entries by CAS
         run: python scripts/threads_queue_bridge.py --apply --output threads-queue-preflight.json
+      - name: Flag missing approved supply with actionable diagnostics
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path('threads-queue-preflight.json')
+          report = json.loads(p.read_text(encoding='utf-8'))
+          missing = report.get('missing_slots', [])
+          promoted = report.get('promoted', [])
+          summary = Path(os.environ['GITHUB_STEP_SUMMARY'])
+          with summary.open('a', encoding='utf-8') as out:
+              out.write(f'## Threads reviewed supply preflight\\nMissing future slots: {len(missing)}\\nPromoted: {len(promoted)}\\nCandidate shortlist: {len(report.get("shortlisted", []))}\\n')
+              if missing and not promoted:
+                  out.write('ACTION REQUIRED: verified staging has not supplied the next slots. No unverified notice will be posted.\\n')
+          if missing and not promoted:
+              print('::warning title=THREADS_SUPPLY_EMPTY::No verified staged manuscripts promoted; review shortlist in preflight artifact')
+          PY
       - name: Preserve source and queue readiness audit
         if: always()
         uses: actions/upload-artifact@v4
