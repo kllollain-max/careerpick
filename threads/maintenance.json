@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T00:37:19Z",
-  "last_observed_at": "2026-11-15T00:37:19Z",
+  "updated_at": "2026-11-15T01:45:10Z",
+  "last_observed_at": "2026-11-15T01:45:10Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13331,7 +13331,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-15T00:37:19Z",
+    "checked_at": "2026-11-15T01:45:10Z",
     "main_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -13348,7 +13348,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "unchanged_profile_target_hold_08h_presend_failure_within_grace",
+    "status": "unchanged_profile_target_hold_08h_grace_expired",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13386,13 +13386,34 @@
     },
     "actions_pages_read": 1,
     "actions_runs_read": 100,
-    "actions_reported_total": 993,
+    "actions_reported_total": 995,
     "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
+    "changed_runs_since_checkpoint": [
+      {
+        "run_id": "43662810816",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T01:22:59Z",
+        "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
+        "workflow_path": ".github/workflows/public-search-check.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43662810816"
+      },
+      {
+        "run_id": "43662609844",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T01:22:39Z",
+        "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
+        "workflow_path": ".github/workflows/operations.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43662609844"
+      }
+    ],
     "monitored_slot": "2026-11-15T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-15T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261115T003719.json",
+    "audit_path": "threads/audits/monitor-v2-20261115T014510.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -13419,9 +13440,9 @@
     "scheduled16_status": "confirmed_presend_failure_grace_expired_no_backfill",
     "scheduled20_status": "confirmed_presend_failure_grace_expired_no_backfill",
     "queue_blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
-    "maintenance_input_blob_sha": "b98d4b82e3adcf46d22a30e1d38156954f740aae",
+    "maintenance_input_blob_sha": "e83c094b6759a19e000d59391301f7d4162f772a",
     "performance_blob_sha": "e4983806f8cf79260a8465acb8fd5d7214522ddd",
-    "scheduled08_status": "confirmed_presend_failure_within_grace_no_backfill"
+    "scheduled08_status": "confirmed_presend_failure_grace_expired_no_backfill"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -19433,7 +19454,7 @@
       },
       "latest_v5_audit": "threads/audits/single-main-v2-image-verified-20261112T2048.json"
     },
-    "checked_at": "2026-11-15T00:37:19Z",
+    "checked_at": "2026-11-15T01:45:10Z",
     "policy_id": "careerpick-threads-v5-20261111",
     "state_path": "threads/performance.json",
     "state_status": "saved_verified",
@@ -19456,7 +19477,7 @@
       "account": "hid_119",
       "scope": "account_total",
       "requested_start": "2026-11-11T11:45:18.355131+00:00",
-      "requested_end": "2026-11-15T00:36:55.484546+00:00",
+      "requested_end": "2026-11-15T01:44:36.596040+00:00",
       "observed_start": "2026-11-11T11:45:32.854727+00:00",
       "observed_end": "2026-11-14T23:23:32.036155+00:00",
       "start_followers": 415,
@@ -19473,7 +19494,7 @@
     "post_attribution": null,
     "latest_v5_summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-15T00:36:55.484546+00:00",
+      "as_of": "2026-11-15T01:44:36.596040+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -20073,7 +20094,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-15T00:36:55.484546+00:00",
+            "requested_end": "2026-11-15T01:44:36.596040+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-14T23:23:32.036155+00:00",
             "start_followers": 415,
@@ -20094,7 +20115,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-15T00:36:55.484546+00:00",
+        "requested_end": "2026-11-15T01:44:36.596040+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T23:23:32.036155+00:00",
         "start_followers": 415,
@@ -20119,7 +20140,7 @@
         "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
       ]
     },
-    "latest_v5_audit": "threads/audits/monitor-v2-20261115T003719.json",
+    "latest_v5_audit": "threads/audits/monitor-v2-20261115T014510.json",
     "previous_artifact_id": 14021052237,
     "previous_artifact_name": "threads-performance-43391916611-1",
     "previous_artifact_digest": "sha256:97e16c803df9f6ff1ee4a19bd926869e53f4c4420ee5fd6369c5cd39e3a39906",
@@ -20127,7 +20148,7 @@
     "artifact_metadata_verified_this_check": false
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-15T00:37:19Z",
+    "checked_at": "2026-11-15T01:45:10Z",
     "main_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -20135,11 +20156,11 @@
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "full_active_prompt_read": true,
-    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-0123.n52nuiip/careerpick-1be591a2532543da0e0dd610b3accaaa45e8c3b2/monitor-0936/queue.json",
+    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-0123.n52nuiip/careerpick-1be591a2532543da0e0dd610b3accaaa45e8c3b2/monitor-1044/queue.json",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-15T09:36:54.520049+09:00",
+      "evaluated_at": "2026-11-15T10:44:35.555034+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -20223,16 +20244,16 @@
     "official_checks": [],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261115T003719.json",
+    "audit_path": "threads/audits/monitor-v2-20261115T014510.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-15T00:37:19Z",
+      "checked_at": "2026-11-15T01:45:10Z",
       "checks": [],
       "action": "Preserved official-source timestamps and held manuscript/card bytes. Exact reviewed card/preview/facts binding reverified. Final profile-target gate remains blocked; no new ready entry or publishing action.",
-      "audit_path": "threads/audits/monitor-v2-20261115T003719.json"
+      "audit_path": "threads/audits/monitor-v2-20261115T014510.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "1b2f66ae60a9f8dc99b80843c694c89c696c4e82a74ee27bf6dedcc8ad8c6a95",
+    "selection_input_sha256": "26b67abfc1332df79af5481be14fa2946796541208056482279b6e8c436f11d0",
     "card_assets_registered": {
       "notice_id": "cleaneye-80976",
       "commit": "bcad95c187d51a78dfee672949d181f497153226",
@@ -20781,7 +20802,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-15T00:37:19Z",
+      "checked_at": "2026-11-15T01:45:10Z",
       "main_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
       "contract_version": 2,
       "policy_hashes": {
@@ -20798,8 +20819,8 @@
           "sha256": "d83b79742a9407bd8704240b30fc37e310b7e787b76632237fe9857d4c145983"
         },
         "maintenance": {
-          "git_blob_sha": "b98d4b82e3adcf46d22a30e1d38156954f740aae",
-          "sha256": "23bb9634aaa3c1f6e762093689dcd95f7aa0731b9c556d36091609eba05249af"
+          "git_blob_sha": "e83c094b6759a19e000d59391301f7d4162f772a",
+          "sha256": "5ad8c54556ee365af19c2cbf4cae135bfbb3b6db4110cc64dc9c5c65926f9699"
         },
         "performance": {
           "git_blob_sha": "e4983806f8cf79260a8465acb8fd5d7214522ddd",
@@ -20858,7 +20879,7 @@
         "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/monitor-v2-20261115T003719.json",
+      "audit_path": "threads/audits/monitor-v2-20261115T014510.json",
       "latest_publisher_run": {
         "run_id": "43652971854",
         "run_attempt": 1,
@@ -20870,14 +20891,14 @@
         "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
       },
       "new_publisher_runs": [],
-      "status": "unchanged_profile_target_hold_08h_presend_failure_within_grace",
+      "status": "unchanged_profile_target_hold_08h_grace_expired",
       "next_slot": "2026-11-15T12:00:00+09:00",
       "scheduled16_status": "confirmed_presend_failure_grace_expired_no_backfill",
       "scheduled20_status": "confirmed_presend_failure_grace_expired_no_backfill",
-      "scheduled08_status": "confirmed_presend_failure_within_grace_no_backfill"
+      "scheduled08_status": "confirmed_presend_failure_grace_expired_no_backfill"
     },
     "next_slot_official_preflight": {
-      "checked_at": "2026-11-15T00:37:19Z",
+      "checked_at": "2026-11-15T01:45:10Z",
       "scheduled_at": "2026-11-15T12:00:00+09:00",
       "status": "hold_not_ready",
       "notice_id": null,
@@ -21131,7 +21152,7 @@
       "performance_improvement_confirmed": false,
       "verification_source": "main ledger public_output_verification",
       "fresh_official_get_this_monitor": false,
-      "checked_at": "2026-11-15T00:37:19Z",
+      "checked_at": "2026-11-15T01:45:10Z",
       "last_independent_collection_at": "2026-11-14T23:23:32.036155+00:00",
       "collection_before_24h_due": true,
       "metrics_24h_due_at": "2026-11-15T08:28:48.427195+09:00"
@@ -21221,12 +21242,12 @@
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-15T00:37:19Z",
+    "checked_at": "2026-11-15T01:45:10Z",
     "state_blob_sha": "e4983806f8cf79260a8465acb8fd5d7214522ddd",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-15T00:36:55.484546+00:00",
+      "as_of": "2026-11-15T01:44:36.596040+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -21826,7 +21847,7 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-15T00:36:55.484546+00:00",
+            "requested_end": "2026-11-15T01:44:36.596040+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
             "observed_end": "2026-11-14T23:23:32.036155+00:00",
             "start_followers": 415,
@@ -21847,7 +21868,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-15T00:36:55.484546+00:00",
+        "requested_end": "2026-11-15T01:44:36.596040+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T23:23:32.036155+00:00",
         "start_followers": 415,
@@ -22286,7 +22307,7 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-15T00:36:55.484546+00:00",
+        "requested_end": "2026-11-15T01:44:36.596040+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
         "observed_end": "2026-11-14T23:23:32.036155+00:00",
         "start_followers": 415,
@@ -22302,7 +22323,7 @@
       },
       "post_attribution": null
     },
-    "summary_report_sha256": "813bb36bc8e621967d4cb3d88b78bfb5c019358a946115c8842b2dfbd970fe6e",
+    "summary_report_sha256": "9c889fecafcee37f44388478ad626ec0738b02feecc7c91eaf717ae842259e43",
     "first_72h_measurement_status": {
       "post_id": "17896425015438025",
       "due_at": "2026-11-14T20:45:18.355131+09:00",
