@@ -750,7 +750,27 @@ def main():
         candidate_key = duplicate_key(post)
         if candidate_key:
             duplicate_groups.setdefault(candidate_key, set()).add(pid)
+        # Editorial review queue only: never suppress, invent, or rewrite notice data.
+        # Prioritize open notices with missing official sources and essential details.
+        is_current = bool(post.get('due')) and not is_closed(post.get('due'))
+        review_reasons = []
+        if not has_official:
+            review_reasons.append('official_source_missing')
+        if not has_qualification:
+            review_reasons.append('qualification_missing')
+        if not has_process:
+            review_reasons.append('selection_process_missing')
+        if not has_description:
+            review_reasons.append('substantive_duties_missing')
+        review_priority = (
+            'high' if is_current and (not has_official or (not has_qualification and not has_process))
+            else 'medium' if is_current and review_reasons
+            else 'low'
+        )
         quality_rows.append({
+            'is_current_by_source_end_date': is_current,
+            'review_priority': review_priority,
+            'review_reasons': review_reasons,
             'id': pid,
             'title': clean(post.get('title')),
             'organization': clean(post.get('org')),
@@ -855,6 +875,13 @@ def main():
             detail_field_counts.items(),
             key=lambda item: (-item[1], item[0]),
         )),
+        'review_queue': sorted(
+            [row for row in quality_rows if row['review_priority'] != 'low'],
+            key=lambda row: (
+                {'high': 0, 'medium': 1}[row['review_priority']],
+                row['organization'], row['id'],
+            ),
+        ),
         'posts': quality_rows,
         'suspected_duplicates': suspected_duplicates,
     }
