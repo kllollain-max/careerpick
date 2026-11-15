@@ -790,6 +790,8 @@ def main():
             'id': pid,
             'title': clean(post.get('title')),
             'organization': clean(post.get('org')),
+            'source_end_date': clean(post.get('due')),
+            'official_source_url': official_url,
             'official_link_host': (urlparse(official_url).hostname or '') if official_url else '',
             'official_link_status': 'url_format_ok_not_live_checked' if official_url else 'missing_or_invalid',
             'missing': missing,
