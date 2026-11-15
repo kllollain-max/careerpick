@@ -172,7 +172,7 @@ def render(post, detail, related_posts=()):
 
     canonical = f'{BASE}/jobs/{quote(pid, safe="")}.html'
     due = clean(post.get('due'))
-    due_display = date_label(due, post.get('dueHasTime') is not False)
+    due_display = date_label(due, post.get('dueHasTime') is True)
     deadline = parse_date(due, end_of_day=True)
     closed = is_closed(due)
 
@@ -297,7 +297,7 @@ def render(post, detail, related_posts=()):
         related_items.append(
             f'<li><a href="/careerpick/jobs/{escape(other_id, quote=True)}.html">'
             f'{escape(other_title)}</a>'
-            f' <span class="muted">· ALIO 게시 종료일 {escape(date_label(other.get("due"), other.get("dueHasTime") is not False))}</span></li>'
+            f' <span class="muted">· ALIO 게시 종료일 {escape(date_label(other.get("due"), other.get("dueHasTime") is True))}</span></li>'
         )
         if len(related_items) >= 4:
             break
@@ -456,7 +456,7 @@ def render(post, detail, related_posts=()):
         # application end date is known. Do not publish the synthetic 23:59
         # sorting timestamp as a verified closing time.
         schema['validThrough'] = (
-            deadline[:10] if post.get('dueHasTime') is False else deadline
+            deadline[:10] if post.get('dueHasTime') is not True else deadline
         )
 
     regions = list(dict.fromkeys(
@@ -497,7 +497,7 @@ def render(post, detail, related_posts=()):
     # 안내용 HTML 페이지는 그대로 유지합니다.
     # Publication end dates are not verified application deadlines. Keep the
     # useful HTML, but do not emit a JobPosting with an invented validThrough.
-    schema_json = '' if closed or post.get('dueHasTime') is False else (
+    schema_json = '' if closed or post.get('dueHasTime') is not True else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
@@ -956,7 +956,7 @@ def self_test():
     """Offline regression checks; never reads production data or publishes posts."""
     sample = {
         'id': 'a12345', 'title': '<script>test</script>', 'org': '테스트기관',
-        'due': '2099-10-28', 'n': 3, 'alio': True,
+        'due': '2099-10-28', 'dueHasTime': True, 'n': 3, 'alio': True,
         'src': 'https://job.alio.go.kr/example',
     }
     html = render(sample, {'aplyQlfcCn': '지원 자격 확인'})
