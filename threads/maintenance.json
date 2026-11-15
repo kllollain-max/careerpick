@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T22:48:47Z",
-  "last_observed_at": "2026-11-14T22:48:47Z",
+  "updated_at": "2026-11-15T00:02:52Z",
+  "last_observed_at": "2026-11-15T00:02:52Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -9662,6 +9662,16 @@
       "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
       "workflow_path": ".github/workflows/operations.yml",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/43644658873"
+    },
+    {
+      "run_id": "43652971854",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-14T23:23:37Z",
+      "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
+      "workflow_path": ".github/workflows/threads_auto.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
     }
   ],
   "last_confirmed_publication": {
@@ -10125,6 +10135,35 @@
       "send_state": "not_attempted_publish_step_skipped",
       "automatic_post_recovery_attempts": 0,
       "audit_path": "threads/audits/monitor-v2-20261114T211641.json",
+      "next_conditions": [
+        "Preserve ledger/claims/locks/draft/card bytes.",
+        "No dispatch/rerun/direct POST, missed-slot backfill or started-slot insertion.",
+        "Only fully validated future unstarted regular entries may be queued; final profile-target gate must not be fabricated or bypassed."
+      ]
+    },
+    {
+      "id": "43652971854:1:QUEUE_SLOT_MISSING",
+      "observed_at": "2026-11-15T00:02:52Z",
+      "kind": "ready_queue_missing_before_reservation",
+      "publisher_failure": true,
+      "confirmed_cause": "No queue entry for 2026-11-15T08:00:00+09:00. Reserve one job failed QUEUE_SLOT_MISSING before persisted reservation/send. Existing source-reviewed electrical manuscript remains unassigned under final profile-target hold.",
+      "run_id": "43652971854",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-14T23:23:37Z",
+      "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
+      "workflow_path": ".github/workflows/threads_auto.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854",
+      "stage": "Reserve one job",
+      "error_codes": [
+        "QUEUE_SLOT_MISSING"
+      ],
+      "post_id": null,
+      "claim": null,
+      "send_state": "not_attempted_publish_step_skipped",
+      "automatic_post_recovery_attempts": 0,
+      "audit_path": "threads/audits/monitor-v2-20261115T000252.json",
       "next_conditions": [
         "Preserve ledger/claims/locks/draft/card bytes.",
         "No dispatch/rerun/direct POST, missed-slot backfill or started-slot insertion.",
@@ -13292,24 +13331,35 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-14T22:48:47Z",
+    "checked_at": "2026-11-15T00:02:52Z",
     "main_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
     "latest_publisher_run": {
-      "run_id": "43589976938",
+      "run_id": "43652971854",
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "failure",
-      "updated_at": "2026-11-14T11:26:14Z",
-      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+      "updated_at": "2026-11-14T23:23:37Z",
+      "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
       "workflow_path": ".github/workflows/threads_auto.yml",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43589976938"
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
     },
-    "new_publisher_runs": [],
+    "new_publisher_runs": [
+      {
+        "run_id": "43652971854",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "failure",
+        "updated_at": "2026-11-14T23:23:37Z",
+        "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
+        "workflow_path": ".github/workflows/threads_auto.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
+      }
+    ],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "unchanged_profile_target_hold_20h_grace_expired",
+    "status": "new_08h_presend_failure_profile_target_hold",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13347,37 +13397,29 @@
     },
     "actions_pages_read": 1,
     "actions_runs_read": 100,
-    "actions_reported_total": 889,
+    "actions_reported_total": 992,
     "actions_scope": "checkpoint changes only",
     "changed_runs_since_checkpoint": [
       {
-        "run_id": "43644963432",
+        "run_id": "43652971854",
         "run_attempt": 1,
         "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T21:51:07Z",
+        "conclusion": "failure",
+        "updated_at": "2026-11-14T23:23:37Z",
         "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
-        "workflow_path": ".github/workflows/public-search-check.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43644963432"
-      },
-      {
-        "run_id": "43644658873",
-        "run_attempt": 1,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-14T21:50:54Z",
-        "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
-        "workflow_path": ".github/workflows/operations.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43644658873"
+        "workflow_path": ".github/workflows/threads_auto.yml",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
       }
     ],
-    "monitored_slot": "2026-11-14T20:00:00+09:00",
-    "monitored_slot_grace_ends": "2026-11-14T22:00:00+09:00",
+    "monitored_slot": "2026-11-15T08:00:00+09:00",
+    "monitored_slot_grace_ends": "2026-11-15T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T224847.json",
-    "new_failure_fingerprints": [],
-    "new_metric_observations": 0,
-    "new_account_observations": 0,
+    "audit_path": "threads/audits/monitor-v2-20261115T000252.json",
+    "new_failure_fingerprints": [
+      "43652971854:1:QUEUE_SLOT_MISSING"
+    ],
+    "new_metric_observations": 2,
+    "new_account_observations": 1,
     "new_ready_saved": 0,
     "new_held_drafts_saved": 0,
     "queue_changed": false,
@@ -13389,17 +13431,21 @@
       "environment_selection": "inherited"
     },
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 0,
+    "new_late_cumulative_observations": 2,
     "new_candidate_fact_reviews": 0,
     "held_draft_card_completed": 0,
     "scheduled12_status": "confirmed_presend_failure_grace_expired_no_backfill",
     "retrieval_limitations": [
       "Connector rejected workflow-definition and workflow-specific-run URLs as unsupported endpoints. Successful full repository run collection used; no workflow disablement inferred."
     ],
-    "next_regular_slot": "2026-11-15T08:00:00+09:00",
+    "next_regular_slot": "2026-11-15T12:00:00+09:00",
     "next_actual_media": "IMAGE",
     "scheduled16_status": "confirmed_presend_failure_grace_expired_no_backfill",
-    "scheduled20_status": "confirmed_presend_failure_grace_expired_no_backfill"
+    "scheduled20_status": "confirmed_presend_failure_grace_expired_no_backfill",
+    "queue_blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
+    "maintenance_input_blob_sha": "d622b8e290542a04ed9baebe6732da284a679721",
+    "performance_blob_sha": "e4983806f8cf79260a8465acb8fd5d7214522ddd",
+    "scheduled08_status": "confirmed_presend_failure_within_grace_no_backfill"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -19411,43 +19457,39 @@
       },
       "latest_v5_audit": "threads/audits/single-main-v2-image-verified-20261112T2048.json"
     },
-    "checked_at": "2026-11-14T22:48:47Z",
+    "checked_at": "2026-11-15T00:02:52Z",
     "policy_id": "careerpick-threads-v5-20261111",
     "state_path": "threads/performance.json",
     "state_status": "saved_verified",
-    "run_id": "43391916611",
+    "run_id": "43652971854",
     "run_attempt": 1,
-    "github_job_id": 131773911013,
-    "artifact_id": 14021052237,
-    "artifact_name": "threads-performance-43391916611-1",
-    "artifact_digest": "sha256:97e16c803df9f6ff1ee4a19bd926869e53f4c4420ee5fd6369c5cd39e3a39906",
-    "artifact_metadata_verified": true,
+    "github_job_id": 132625315421,
     "artifact_contents_downloaded_this_check": false,
     "persistence": {
       "status": "saved_verified",
-      "blob_sha": "5c0b7875ae02055aa45b85ae71359370093bcdfe",
-      "basis": "independent metrics saved_verified log and exact current remote bytes"
+      "blob_sha": "e4983806f8cf79260a8465acb8fd5d7214522ddd",
+      "basis": "Independent metrics job log saved_verified; fresh exact remote blob downloaded and hash verified."
     },
     "collection": {
-      "status": "new_account_observation_no_new_timed_post_observation",
+      "status": "two_late_cumulative_post_observations_and_account_observation",
       "new_account_observations": 1,
-      "new_v2_24h_or_72h_observations": 0
+      "new_v2_24h_or_72h_observations": 2
     },
     "permission_status": "existing_authenticated_GET_succeeded",
     "last_account_observation": {
       "account": "hid_119",
       "scope": "account_total",
       "requested_start": "2026-11-11T11:45:18.355131+00:00",
-      "requested_end": "2026-11-13T08:22:13.526135+00:00",
+      "requested_end": "2026-11-15T00:02:06.291877+00:00",
       "observed_start": "2026-11-11T11:45:32.854727+00:00",
-      "observed_end": "2026-11-13T08:17:06.100264+00:00",
+      "observed_end": "2026-11-14T23:23:32.036155+00:00",
       "start_followers": 415,
-      "end_followers": 428,
-      "net_change": 13,
+      "end_followers": 475,
+      "net_change": 60,
       "status": "observed_interval",
       "exact_requested_boundaries": false,
       "observation_statuses": {
-        "captured": 8
+        "captured": 14
       },
       "post_attribution": null,
       "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -19455,7 +19497,7 @@
     "post_attribution": null,
     "latest_v5_summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T22:48:11.278547+00:00",
+      "as_of": "2026-11-15T00:02:06.291877+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -19830,10 +19872,92 @@
           "employment": "정규직",
           "recruitment_unit_count": 1,
           "deadline_distance_seconds": 1010587.754754
+        },
+        {
+          "post_id": "17896425015438025",
+          "notice_id": "a306786",
+          "published_at": "2026-11-11T11:45:18.355131+00:00",
+          "captured_at": "2026-11-14T23:23:31.076826+00:00",
+          "elapsed_seconds": 301092.721695,
+          "window": "72h",
+          "metrics": {
+            "views": 3750,
+            "likes": 6,
+            "replies": 0,
+            "reposts": 0,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.16,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": false,
+          "first_sentence": "간호사 면허가 있다면,",
+          "format_id": "deadline_opportunity",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 249,
+          "media": "TEXT",
+          "slot": "2026-11-11T20:00:00+09:00",
+          "slot_hour_kst": 20,
+          "job": "간호사",
+          "location": "순천병원",
+          "employment": "정규직",
+          "recruitment_unit_count": 3,
+          "deadline_distance_seconds": 420281.644869
+        },
+        {
+          "post_id": "17922530685243848",
+          "notice_id": "a306717",
+          "published_at": "2026-11-13T11:46:01.646497+00:00",
+          "captured_at": "2026-11-14T23:23:31.825643+00:00",
+          "elapsed_seconds": 128250.179146,
+          "window": "24h",
+          "metrics": {
+            "views": 9125,
+            "likes": 27,
+            "replies": 0,
+            "reposts": 4,
+            "quotes": 1
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.2958904109589041,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "target",
+          "experiment_eligible": true,
+          "first_sentence": "접수·진료 보조 일을 찾는다면,",
+          "format_id": "deadline_opportunity",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 298,
+          "media": "IMAGE",
+          "slot": "2026-11-13T20:00:00+09:00",
+          "slot_hour_kst": 20,
+          "job": "간호원무직",
+          "location": "서울",
+          "employment": "정규직",
+          "recruitment_unit_count": 1,
+          "deadline_distance_seconds": 400438.353503
         }
       ],
       "excluded": {
-        "late_or_unavailable": 5
+        "late_or_unavailable": 7
       },
       "periods": [
         {
@@ -19973,16 +20097,16 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T22:48:11.278547+00:00",
+            "requested_end": "2026-11-15T00:02:06.291877+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
-            "observed_end": "2026-11-14T11:26:07.752876+00:00",
+            "observed_end": "2026-11-14T23:23:32.036155+00:00",
             "start_followers": 415,
-            "end_followers": 463,
-            "net_change": 48,
+            "end_followers": 475,
+            "net_change": 60,
             "status": "observed_interval",
             "exact_requested_boundaries": false,
             "observation_statuses": {
-              "captured": 13
+              "captured": 14
             },
             "post_attribution": null,
             "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -19994,16 +20118,16 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T22:48:11.278547+00:00",
+        "requested_end": "2026-11-15T00:02:06.291877+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-14T11:26:07.752876+00:00",
+        "observed_end": "2026-11-14T23:23:32.036155+00:00",
         "start_followers": 415,
-        "end_followers": 463,
-        "net_change": 48,
+        "end_followers": 475,
+        "net_change": 60,
         "status": "observed_interval",
         "exact_requested_boundaries": false,
         "observation_statuses": {
-          "captured": 13
+          "captured": 14
         },
         "post_attribution": null,
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -20019,10 +20143,15 @@
         "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
       ]
     },
-    "latest_v5_audit": "threads/audits/monitor-v2-20261114T224847.json"
+    "latest_v5_audit": "threads/audits/monitor-v2-20261115T000252.json",
+    "previous_artifact_id": 14021052237,
+    "previous_artifact_name": "threads-performance-43391916611-1",
+    "previous_artifact_digest": "sha256:97e16c803df9f6ff1ee4a19bd926869e53f4c4420ee5fd6369c5cd39e3a39906",
+    "previous_artifact_metadata_verified": true,
+    "artifact_metadata_verified_this_check": false
   },
   "last_writer_recheck": {
-    "checked_at": "2026-11-14T22:48:47Z",
+    "checked_at": "2026-11-15T00:02:52Z",
     "main_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
     "contract_version": 2,
     "prompt_exact_bytes_verified": true,
@@ -20030,11 +20159,11 @@
     "editorial_v5_exact_bytes_verified": true,
     "intro_style_hash_verified": true,
     "full_active_prompt_read": true,
-    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-0123.n52nuiip/careerpick-1be591a2532543da0e0dd610b3accaaa45e8c3b2/monitor-0747/queue.json",
+    "input_script": "python scripts/threads_writer_input.py --limit 24 --queue-for-selection /workspace/scratch/697589ed75d9/threads-0123.n52nuiip/careerpick-1be591a2532543da0e0dd610b3accaaa45e8c3b2/monitor-0901/queue.json",
     "selection_audit": {
       "schema_version": 1,
       "policy_id": "careerpick-threads-selection-v5-20261111",
-      "evaluated_at": "2026-11-15T07:48:10.195448+09:00",
+      "evaluated_at": "2026-11-15T09:02:05.316626+09:00",
       "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
       "connected_sources": [
         "alio",
@@ -20118,16 +20247,16 @@
     "official_checks": [],
     "new_held_draft_notice_id": null,
     "queue_changed": false,
-    "audit_path": "threads/audits/monitor-v2-20261114T224847.json",
+    "audit_path": "threads/audits/monitor-v2-20261115T000252.json",
     "official_source_recovery": {
-      "checked_at": "2026-11-14T22:48:47Z",
+      "checked_at": "2026-11-15T00:02:52Z",
       "checks": [],
-      "action": "Preserved source timestamps and held manuscript/card bytes. Reverified exact reviewed card/preview/facts binding. Profile-target final gate remains blocked. No new ready entry or publishing action.",
-      "audit_path": "threads/audits/monitor-v2-20261114T224847.json"
+      "action": "Preserved official-source timestamps and held manuscript/card bytes. Exact reviewed card/preview/facts binding reverified. Final profile-target gate remains blocked; no new ready entry or publishing action.",
+      "audit_path": "threads/audits/monitor-v2-20261115T000252.json"
     },
     "additional_official_checks": [],
     "new_candidate_fact_reviews": [],
-    "selection_input_sha256": "34f01474467a47a82fd8d1d4e3166ca38c84e9bf0c44c59e64433ab229ee5567",
+    "selection_input_sha256": "0997f66cf2b54c07dff8a780f6397a815cd0c74cb93444a29c5043007ecb7f05",
     "card_assets_registered": {
       "notice_id": "cleaneye-80976",
       "commit": "bcad95c187d51a78dfee672949d181f497153226",
@@ -20271,16 +20400,16 @@
     "automatic_reply_count_expected": 0,
     "actual_new_post_id": "18101198159539744",
     "metrics_24h": "two_comparable_observations_captured",
-    "metrics_72h": "due_unobserved",
+    "metrics_72h": "first_72h_window_captured_late_not_comparable",
     "first_14_day_period": {
       "start": "2026-11-11T20:45:18.355131+09:00",
       "end": "2026-11-25T20:45:18.355131+09:00",
       "status": "initial_observation"
     },
     "next_actions": [
-      "12시 기존 정규 IMAGE 회차는 검증 완료 신규미착수 원고·동일바이트 카드 확보 후에만 진행; 새dispatch/rerun/시험·누락몰아게시 금지",
-      "미배정 초안의 공식 자격·정정·최종검수 보류를 유지하며 미검증 상태로 큐에 올리지 않음",
-      "첫 새기준 게시부터 14일 관찰; 24h2표본과 늦은누적2건 구분, 72h 측정전으로 비중변경 없음"
+      "12시 기존 정규 IMAGE 회차는 모든 최종검수 조건을 충족한 신규미착수 원고 확보 후에만 진행; 수동dispatch/rerun/시험·누락몰아게시 금지",
+      "기존 미배정 원고·이미지와 원장·청구·잠금 보존; 최종 profile-target 검증을 우회하거나 통과시각을 임의생성하지 않음",
+      "11월25일까지 14일 관찰. 정시24h 2건·늦은누적7건·정시72h 0건 구분; 표본과 조건 불균형으로 편집비중 유지"
     ],
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
@@ -20299,7 +20428,7 @@
       "operation": "main_policy_workflow_queue_and_existing_task_prompt_readback_matched",
       "actual_text_publication": "verified",
       "actual_image_publication": "verified",
-      "performance_improvement": "not_established_24h2_samples_72h_due_unobserved"
+      "performance_improvement": "not_established_insufficient_unbalanced_sample"
     },
     "latest_independent_writer_check": {
       "checked_at": "2026-11-13T02:28:14Z",
@@ -20583,7 +20712,7 @@
       "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
     },
     "first_confirmed_new_publication_at": "2026-11-11T20:45:18.355131+09:00",
-    "next_slot": "2026-11-15T08:00:00+09:00",
+    "next_slot": "2026-11-15T12:00:00+09:00",
     "next_ready_entry_sha256": null,
     "next_card_status": "reviewed_registered_unassigned_candidate_slot_not_ready",
     "completion_states": {
@@ -20591,7 +20720,7 @@
       "operational_settings": "active_contract2",
       "actual_text_publication": "verified",
       "actual_image_publication": "verified",
-      "metrics_24h_72h": "two_comparable24h_five_late_cumulative_72h_due_unobserved",
+      "metrics_24h_72h": "two_comparable24h_seven_late_cumulative_zero_comparable72h",
       "performance_improvement": "not_established_insufficient_sample"
     },
     "first_text_success_report": {
@@ -20676,18 +20805,46 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-14T22:48:47Z",
+      "checked_at": "2026-11-15T00:02:52Z",
       "main_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
       "contract_version": 2,
       "policy_hashes": {
-        "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
-        "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
-        "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
-        "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
-        "threads/writer-queue.json": "10bffd82c989f23f4cc572babb5f00a250facb75",
-        "threads/maintenance.json": "e910ede7d11b127a24daab1467313a1aafae5c5a",
-        "threads/performance.json": "9f9d53c1cd7e085a978bafa87fc5a1dd563a586f",
-        "threads_posted.json": "854f5c0ad77580084a5aedd53bfb60011f8b147c"
+        "policy": {
+          "git_blob_sha": "66c6b48f914fc07ba6b286c807c99fbca8823916",
+          "sha256": "41d1e6e61a70dd084946af2008b8555adc8d865efea2f129c83cde9156551b74"
+        },
+        "history": {
+          "git_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
+          "sha256": "23d260e8e9c050de6d1972acf74cd63e80a63290e7db10471bd593d8c21a7fb0"
+        },
+        "queue": {
+          "git_blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
+          "sha256": "d83b79742a9407bd8704240b30fc37e310b7e787b76632237fe9857d4c145983"
+        },
+        "maintenance": {
+          "git_blob_sha": "d622b8e290542a04ed9baebe6732da284a679721",
+          "sha256": "7dfa59cc26d5c555793a3994989273369f04da12d0e81077af80590e5b3ea869"
+        },
+        "performance": {
+          "git_blob_sha": "e4983806f8cf79260a8465acb8fd5d7214522ddd",
+          "sha256": "404e659c90749f625c31be3b349bd5aa726ea6e4715212113581ff656bf3e66e"
+        },
+        "master": {
+          "sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+          "verified": true
+        },
+        "reach": {
+          "sha256": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+          "verified": true
+        },
+        "v5": {
+          "sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+          "verified": true
+        },
+        "intro": {
+          "sha256": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
+          "verified": true
+        }
       },
       "full_active_prompt_read": true,
       "queue_check_status": "validated",
@@ -20695,17 +20852,17 @@
       "new_regular_publications": 0,
       "scheduled12_status": "confirmed_presend_failure_grace_expired_no_backfill",
       "failed_run": {
-        "run_id": "43589976938",
+        "run_id": "43652971854",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "failure",
-        "updated_at": "2026-11-14T11:26:14Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "updated_at": "2026-11-14T23:23:37Z",
+        "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
         "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43589976938"
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
       },
       "next_media": "IMAGE",
-      "next_future_slot": "2026-11-15T08:00:00+09:00",
+      "next_future_slot": "2026-11-15T12:00:00+09:00",
       "card_reverification": {
         "valid": true,
         "format": "JPEG",
@@ -20725,30 +20882,42 @@
         "reviewed_at": "2026-11-14T02:56:43.635543+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/monitor-v2-20261114T224847.json",
+      "audit_path": "threads/audits/monitor-v2-20261115T000252.json",
       "latest_publisher_run": {
-        "run_id": "43589976938",
+        "run_id": "43652971854",
         "run_attempt": 1,
         "status": "completed",
         "conclusion": "failure",
-        "updated_at": "2026-11-14T11:26:14Z",
-        "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+        "updated_at": "2026-11-14T23:23:37Z",
+        "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
         "workflow_path": ".github/workflows/threads_auto.yml",
-        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43589976938"
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
       },
-      "new_publisher_runs": [],
-      "status": "no_new_publication_or_metrics_72h_due_unobserved",
-      "next_slot": "2026-11-15T08:00:00+09:00",
+      "new_publisher_runs": [
+        {
+          "run_id": "43652971854",
+          "run_attempt": 1,
+          "status": "completed",
+          "conclusion": "failure",
+          "updated_at": "2026-11-14T23:23:37Z",
+          "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
+          "workflow_path": ".github/workflows/threads_auto.yml",
+          "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
+        }
+      ],
+      "status": "new_08h_presend_failure_profile_target_hold",
+      "next_slot": "2026-11-15T12:00:00+09:00",
       "scheduled16_status": "confirmed_presend_failure_grace_expired_no_backfill",
-      "scheduled20_status": "confirmed_presend_failure_grace_expired_no_backfill"
+      "scheduled20_status": "confirmed_presend_failure_grace_expired_no_backfill",
+      "scheduled08_status": "confirmed_presend_failure_within_grace_no_backfill"
     },
     "next_slot_official_preflight": {
-      "checked_at": "2026-11-14T03:37:12Z",
-      "scheduled_at": "2026-11-14T16:00:00+09:00",
-      "status": "hold_no_verified_unstarted_manuscript",
+      "checked_at": "2026-11-15T00:02:52Z",
+      "scheduled_at": "2026-11-15T12:00:00+09:00",
+      "status": "hold_not_ready",
       "notice_id": null,
-      "card_status": "reviewed_registered_unassigned_candidate",
-      "reason": "Existing unassigned draft retains final profile-target hold; current12 monitored separately within grace."
+      "card_status": "reviewed_registered_unassigned_candidate_slot_not_ready",
+      "reason": "Final profile-target gate remains blocked. Existing source checks preserved, not refreshed; no slot assigned."
     },
     "latest_text_verification": {
       "notice_id": "a306760",
@@ -20991,12 +21160,16 @@
     "current_measurement_status": {
       "post_id": "18101198159539744",
       "verified_at": "2026-11-14T08:28:48.669388+09:00",
-      "metrics_24h": "not_due",
+      "metrics_24h": "due_unobserved",
       "metrics_72h": "not_due",
       "shape_verified": true,
       "performance_improvement_confirmed": false,
       "verification_source": "main ledger public_output_verification",
-      "fresh_official_get_this_monitor": false
+      "fresh_official_get_this_monitor": false,
+      "checked_at": "2026-11-15T00:02:52Z",
+      "last_independent_collection_at": "2026-11-14T23:23:32.036155+00:00",
+      "collection_before_24h_due": true,
+      "metrics_24h_due_at": "2026-11-15T08:28:48.427195+09:00"
     },
     "latest_unassigned_card_review": {
       "notice_id": "cleaneye-80976",
@@ -21036,14 +21209,19 @@
       "audit_path": "threads/audits/monitor-v2-20261114T115846.json"
     },
     "latest_regular_slot_failure": {
-      "id": "43589976938:1:QUEUE_SLOT_MISSING",
-      "observed_at": "2026-11-14T12:16:41Z",
+      "id": "43652971854:1:QUEUE_SLOT_MISSING",
+      "observed_at": "2026-11-15T00:02:52Z",
       "kind": "ready_queue_missing_before_reservation",
       "publisher_failure": true,
-      "confirmed_cause": "No queue entry for2026-11-14T20:00:00+09:00. Reserve one job failed QUEUE_SLOT_MISSING before persisted reservation/send. Existing verified-source electrical manuscript remains unassigned under final profile-target hold.",
-      "run_id": "43589976938",
+      "confirmed_cause": "No queue entry for 2026-11-15T08:00:00+09:00. Reserve one job failed QUEUE_SLOT_MISSING before persisted reservation/send. Existing source-reviewed electrical manuscript remains unassigned under final profile-target hold.",
+      "run_id": "43652971854",
       "run_attempt": 1,
-      "head_sha": "bcad95c187d51a78dfee672949d181f497153226",
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-11-14T23:23:37Z",
+      "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
+      "workflow_path": ".github/workflows/threads_auto.yml",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854",
       "stage": "Reserve one job",
       "error_codes": [
         "QUEUE_SLOT_MISSING"
@@ -21052,7 +21230,7 @@
       "claim": null,
       "send_state": "not_attempted_publish_step_skipped",
       "automatic_post_recovery_attempts": 0,
-      "audit_path": "threads/audits/monitor-v2-20261114T211641.json",
+      "audit_path": "threads/audits/monitor-v2-20261115T000252.json",
       "next_conditions": [
         "Preserve ledger/claims/locks/draft/card bytes.",
         "No dispatch/rerun/direct POST, missed-slot backfill or started-slot insertion.",
@@ -21062,19 +21240,28 @@
     "first_72h_measurement_status": {
       "post_id": "17896425015438025",
       "due_at": "2026-11-14T20:45:18.355131+09:00",
-      "status": "due_unobserved",
-      "metrics": null,
-      "last_independent_collection_before_due": "2026-11-14T11:26:07.752876+00:00",
+      "status": "captured_late_cumulative",
+      "observed_at": "2026-11-14T23:23:31.076826+00:00",
+      "elapsed_hours": 83.6368671375,
+      "metrics": {
+        "views": 3750,
+        "likes": 6,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.16,
+      "comparable_milestone": false,
       "late_future_collection_must_not_be_backdated": true
     }
   },
   "single_main_v2_writer_performance": {
-    "checked_at": "2026-11-14T22:48:47Z",
-    "state_blob_sha": "9f9d53c1cd7e085a978bafa87fc5a1dd563a586f",
+    "checked_at": "2026-11-15T00:02:52Z",
+    "state_blob_sha": "e4983806f8cf79260a8465acb8fd5d7214522ddd",
     "summarize_executed": true,
     "summary": {
       "policy_id": "careerpick-threads-v5-20261111",
-      "as_of": "2026-11-14T22:48:11.278547+00:00",
+      "as_of": "2026-11-15T00:02:06.291877+00:00",
       "experiment_start": "2026-11-11T11:45:18.355131+00:00",
       "experiment_start_evidence": [
         {
@@ -21449,10 +21636,92 @@
           "employment": "정규직",
           "recruitment_unit_count": 1,
           "deadline_distance_seconds": 1010587.754754
+        },
+        {
+          "post_id": "17896425015438025",
+          "notice_id": "a306786",
+          "published_at": "2026-11-11T11:45:18.355131+00:00",
+          "captured_at": "2026-11-14T23:23:31.076826+00:00",
+          "elapsed_seconds": 301092.721695,
+          "window": "72h",
+          "metrics": {
+            "views": 3750,
+            "likes": 6,
+            "replies": 0,
+            "reposts": 0,
+            "quotes": 0
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.16,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "condition",
+          "experiment_eligible": false,
+          "first_sentence": "간호사 면허가 있다면,",
+          "format_id": "deadline_opportunity",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 249,
+          "media": "TEXT",
+          "slot": "2026-11-11T20:00:00+09:00",
+          "slot_hour_kst": 20,
+          "job": "간호사",
+          "location": "순천병원",
+          "employment": "정규직",
+          "recruitment_unit_count": 3,
+          "deadline_distance_seconds": 420281.644869
+        },
+        {
+          "post_id": "17922530685243848",
+          "notice_id": "a306717",
+          "published_at": "2026-11-13T11:46:01.646497+00:00",
+          "captured_at": "2026-11-14T23:23:31.825643+00:00",
+          "elapsed_seconds": 128250.179146,
+          "window": "24h",
+          "metrics": {
+            "views": 9125,
+            "likes": 27,
+            "replies": 0,
+            "reposts": 4,
+            "quotes": 1
+          },
+          "metric_status": {
+            "views": "observed",
+            "likes": "observed",
+            "replies": "observed",
+            "reposts": "observed",
+            "quotes": "observed"
+          },
+          "likes_rate_percent": 0.2958904109589041,
+          "status": "captured",
+          "reader_replies": null,
+          "reader_replies_status": "author_separation_unverified",
+          "first_sentence_type": "target",
+          "experiment_eligible": true,
+          "first_sentence": "접수·진료 보조 일을 찾는다면,",
+          "format_id": "deadline_opportunity",
+          "contract_version": 2,
+          "sector_group": null,
+          "body_chars": 298,
+          "media": "IMAGE",
+          "slot": "2026-11-13T20:00:00+09:00",
+          "slot_hour_kst": 20,
+          "job": "간호원무직",
+          "location": "서울",
+          "employment": "정규직",
+          "recruitment_unit_count": 1,
+          "deadline_distance_seconds": 400438.353503
         }
       ],
       "excluded": {
-        "late_or_unavailable": 5
+        "late_or_unavailable": 7
       },
       "periods": [
         {
@@ -21592,16 +21861,16 @@
             "account": "hid_119",
             "scope": "account_total",
             "requested_start": "2026-11-11T11:45:18.355131+00:00",
-            "requested_end": "2026-11-14T22:48:11.278547+00:00",
+            "requested_end": "2026-11-15T00:02:06.291877+00:00",
             "observed_start": "2026-11-11T11:45:32.854727+00:00",
-            "observed_end": "2026-11-14T11:26:07.752876+00:00",
+            "observed_end": "2026-11-14T23:23:32.036155+00:00",
             "start_followers": 415,
-            "end_followers": 463,
-            "net_change": 48,
+            "end_followers": 475,
+            "net_change": 60,
             "status": "observed_interval",
             "exact_requested_boundaries": false,
             "observation_statuses": {
-              "captured": 13
+              "captured": 14
             },
             "post_attribution": null,
             "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -21613,16 +21882,16 @@
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T22:48:11.278547+00:00",
+        "requested_end": "2026-11-15T00:02:06.291877+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-14T11:26:07.752876+00:00",
+        "observed_end": "2026-11-14T23:23:32.036155+00:00",
         "start_followers": 415,
-        "end_followers": 463,
-        "net_change": 48,
+        "end_followers": 475,
+        "net_change": 60,
         "status": "observed_interval",
         "exact_requested_boundaries": false,
         "observation_statuses": {
-          "captured": 13
+          "captured": 14
         },
         "post_attribution": null,
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -21638,12 +21907,15 @@
         "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
       ]
     },
-    "new_24h_or_72h_observations": 0,
-    "new_account_observations": 0,
+    "new_24h_or_72h_observations": 2,
+    "new_account_observations": 1,
     "current_post_windows": {
       "post_id": "18101198159539744",
       "published_at": "2026-11-14T08:28:48.427195+09:00",
-      "status": "24h_72h_not_due",
+      "status": {
+        "metrics_24h": "due_unobserved",
+        "metrics_72h": "not_due"
+      },
       "observations": []
     },
     "weights_changed": false,
@@ -21738,7 +22010,7 @@
       }
     ],
     "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 0,
+    "new_late_cumulative_observations": 2,
     "late_cumulative_observations_with_elapsed_hours": [
       {
         "post_id": "17938804020400505",
@@ -21954,38 +22226,134 @@
         "deadline_distance_seconds": 1010587.754754,
         "observed_at": "2026-11-14T11:26:07.581289+00:00",
         "elapsed_hours": 27.154260011944444
+      },
+      {
+        "post_id": "17896425015438025",
+        "notice_id": "a306786",
+        "published_at": "2026-11-11T11:45:18.355131+00:00",
+        "captured_at": "2026-11-14T23:23:31.076826+00:00",
+        "elapsed_seconds": 301092.721695,
+        "window": "72h",
+        "metrics": {
+          "views": 3750,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        },
+        "metric_status": {
+          "views": "observed",
+          "likes": "observed",
+          "replies": "observed",
+          "reposts": "observed",
+          "quotes": "observed"
+        },
+        "likes_rate_percent": 0.16,
+        "status": "captured",
+        "reader_replies": null,
+        "reader_replies_status": "author_separation_unverified",
+        "first_sentence_type": "condition",
+        "experiment_eligible": false,
+        "first_sentence": "간호사 면허가 있다면,",
+        "format_id": "deadline_opportunity",
+        "contract_version": 2,
+        "sector_group": null,
+        "body_chars": 249,
+        "media": "TEXT",
+        "slot": "2026-11-11T20:00:00+09:00",
+        "slot_hour_kst": 20,
+        "job": "간호사",
+        "location": "순천병원",
+        "employment": "정규직",
+        "recruitment_unit_count": 3,
+        "deadline_distance_seconds": 420281.644869,
+        "observed_at": "2026-11-14T23:23:31.076826+00:00",
+        "elapsed_hours": 83.6368671375
+      },
+      {
+        "post_id": "17922530685243848",
+        "notice_id": "a306717",
+        "published_at": "2026-11-13T11:46:01.646497+00:00",
+        "captured_at": "2026-11-14T23:23:31.825643+00:00",
+        "elapsed_seconds": 128250.179146,
+        "window": "24h",
+        "metrics": {
+          "views": 9125,
+          "likes": 27,
+          "replies": 0,
+          "reposts": 4,
+          "quotes": 1
+        },
+        "metric_status": {
+          "views": "observed",
+          "likes": "observed",
+          "replies": "observed",
+          "reposts": "observed",
+          "quotes": "observed"
+        },
+        "likes_rate_percent": 0.2958904109589041,
+        "status": "captured",
+        "reader_replies": null,
+        "reader_replies_status": "author_separation_unverified",
+        "first_sentence_type": "target",
+        "experiment_eligible": true,
+        "first_sentence": "접수·진료 보조 일을 찾는다면,",
+        "format_id": "deadline_opportunity",
+        "contract_version": 2,
+        "sector_group": null,
+        "body_chars": 298,
+        "media": "IMAGE",
+        "slot": "2026-11-13T20:00:00+09:00",
+        "slot_hour_kst": 20,
+        "job": "간호원무직",
+        "location": "서울",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "deadline_distance_seconds": 400438.353503,
+        "observed_at": "2026-11-14T23:23:31.825643+00:00",
+        "elapsed_hours": 35.62504976277778
       }
     ],
     "account_observation_delta": {
-      "new_observations": 0,
-      "latest_existing_observed_at": "2026-11-14T11:26:07.752876+00:00",
-      "existing_interval": {
+      "from": {
+        "observation_id": "7252736bf9b0b8be9ea3e0eb7c207bbae5fa4597cf8d4d9744dc09f824ac6b76",
         "account": "hid_119",
+        "captured_at": "2026-11-14T11:26:07.752876+00:00",
+        "followers_count": 463,
+        "status": "captured",
+        "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
         "scope": "account_total",
-        "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-14T14:28:45.712456+00:00",
-        "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-14T11:26:07.752876+00:00",
-        "start_followers": 415,
-        "end_followers": 463,
-        "net_change": 48,
-        "status": "observed_interval",
-        "exact_requested_boundaries": false,
-        "observation_statuses": {
-          "captured": 13
-        },
-        "post_attribution": null,
-        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+        "post_attribution": null
       },
+      "to": {
+        "observation_id": "93fb91565b39ac2c293cd4f03902999063154ffb353e563bf2b1d968dc760413",
+        "account": "hid_119",
+        "captured_at": "2026-11-14T23:23:32.036155+00:00",
+        "followers_count": 475,
+        "status": "captured",
+        "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
+        "scope": "account_total",
+        "post_attribution": null
+      },
+      "delta": 12,
       "post_attribution": null
     },
-    "summary_report_sha256": "22eee500554a8d1bb5e6639cf9dcb13624d5b7c1c1bba53cc530790ed2580c2d",
+    "summary_report_sha256": "edf56bb417ea1deb51f6a5df55867ebf64ac284a39582474ba5366b712fce22c",
     "first_72h_measurement_status": {
       "post_id": "17896425015438025",
       "due_at": "2026-11-14T20:45:18.355131+09:00",
-      "status": "due_unobserved",
-      "metrics": null,
-      "last_independent_collection_before_due": "2026-11-14T11:26:07.752876+00:00",
+      "status": "captured_late_cumulative",
+      "observed_at": "2026-11-14T23:23:31.076826+00:00",
+      "elapsed_hours": 83.6368671375,
+      "metrics": {
+        "views": 3750,
+        "likes": 6,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.16,
+      "comparable_milestone": false,
       "late_future_collection_must_not_be_backdated": true
     }
   },
