@@ -15,10 +15,17 @@ for(const candidate of candidates.slice(0,30)){
 }
 assert(selected,'No visible currently-open permanent-contract ALIO candidate in public feed; investigate feed/render sync');
 const id=selected.id;
-await page.locator('#cpEmployment').selectOption('무기계약직');
-assert.equal(await page.locator('#cpEmployment').inputValue(),'무기계약직');
-// Mobile primary filters are visible independently of the advanced drawer.
-// Do not click an inert advanced-drawer control as a prerequisite for saving.
+if(width<=700){
+  await page.locator('#toggle').click();
+  await page.locator('#panel.open').waitFor({state:'visible'});
+  await page.locator('#cpEmployment').selectOption('무기계약직');
+  assert.equal(await page.locator('#cpEmployment').inputValue(),'무기계약직');
+  await page.locator('#cpFilterDone').click();
+  await page.locator('#panel.open').waitFor({state:'hidden'});
+}else{
+  await page.locator('#cpEmployment').selectOption('무기계약직');
+  assert.equal(await page.locator('#cpEmployment').inputValue(),'무기계약직');
+}
 await page.locator('[data-save="'+id+'"]').first().click();
 await page.reload({waitUntil:'networkidle'});
 await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));
