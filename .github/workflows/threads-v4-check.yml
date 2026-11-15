@@ -76,6 +76,10 @@ jobs:
           (root/"supply-diagnostics.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           print(json.dumps({"status":result["status"],"action":result["action"],"missing":len(result["missing_slots"])},ensure_ascii=False))
           PY
+      - name: Fetch official institution and ALIO pages
+        continue-on-error: true
+        run: |
+          python -m threads_v4.official_fetch --audit threads_v4/audits/a305734-official-evidence.json --output /tmp/threads-v4/official-fetch.json
       - name: Upload candidate review report
         uses: actions/upload-artifact@v4
         with:
@@ -85,6 +89,7 @@ jobs:
             /tmp/threads-v4/official-triage.json
             /tmp/threads-v4/evidence-gate.json
             /tmp/threads-v4/supply-diagnostics.json
+            /tmp/threads-v4/official-fetch.json
           retention-days: 7
       - name: Verify production publisher untouched
         run: |
