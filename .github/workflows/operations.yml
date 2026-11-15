@@ -102,7 +102,22 @@ jobs:
           if test -f gojobs.json; then git add gojobs.json; fi
           if test -f cleaneye.json; then git add cleaneye.json; fi
           git commit -m 'Update validated public recruitment snapshots'
+          # Concurrent editorial commits must not block safe data publication.
+          # Never overwrite a newer collection snapshot from another run.
+          git fetch origin main
+          if ! git merge-base --is-ancestor HEAD origin/main; then
+            changed_remote="$(git diff --name-only HEAD^ origin/main -- alio.json alio-detail.json operations-status.json data/civil-service/2026.json exam-status.json gojobs.json cleaneye.json)"
+            if test -n "$changed_remote"; then
+              echo "::error title=Newer data snapshot::Remote data changed while collecting; discard this candidate and rerun collection against latest main."
+              printf '%s\\n' "$changed_remote"
+              exit 1
+            fi
+            git rebase origin/main || { git rebase --abort; exit 1; }
+          fi
           git push origin HEAD:main
+          # A rebase changes the publication SHA; regenerate output from the
+          # exact source commit that was successfully pushed.
+          python scripts/build_public_site.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
