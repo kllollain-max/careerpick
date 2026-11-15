@@ -2,6 +2,20 @@
 name: CareerPick Threads Auto
 
 on:
+  workflow_dispatch:
+    inputs:
+      confirm_publish:
+        description: 'Type PUBLISH to authorize ONE reviewed current-slot post'
+        required: true
+        type: string
+      notice_id:
+        description: 'Exact reviewed notice ID already in the queue'
+        required: true
+        type: string
+      slot_kst:
+        description: 'Current KST minute e.g. 2026-11-15T12:35:00+09:00; must be within 10m and active regular slot'
+        required: true
+        type: string
   schedule:
     # UTC -> KST 08:00, 12:00, 16:00, 20:00 (4-hour spacing)
     - cron: '0 23 * * *'
@@ -19,14 +33,16 @@ concurrency:
 
 jobs:
   publish:
-    if: github.event_name == 'schedule' && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'PUBLISH')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
 
     env:
       TZ: Asia/Seoul
       PYTHONUNBUFFERED: "1"
-      THREADS_MANUAL_PUBLISH: "false"
+      THREADS_MANUAL_PUBLISH: ${{ github.event_name == 'workflow_dispatch' }}
+      THREADS_MANUAL_SLOT: ${{ inputs.slot_kst }}
+      THREADS_DISPATCH_NOTICE_ID: ${{ inputs.notice_id }}
       THREADS_SCHEDULE_CRON: ${{ github.event.schedule }}
       THREADS_CLAIM_REPO: ${{ github.repository }}
       THREADS_CLAIM_BRANCH: threads-publisher-state

@@ -101,7 +101,18 @@ def prepare_master(history, now, run_id):
     from scripts.threads_writer_queue import select_ready, fingerprint
     if os.getenv('GITHUB_RUN_ATTEMPT', '1') != '1':
         raise RuntimeError('Reruns require remote reconciliation')
-    scheduled = current_publication_slot(now)
+    requested = current_publication_slot(now)
+    scheduled = requested
+    if os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true':
+        # Preserve the existing minute-level dispatch nonce, but bind it to
+        # exactly one currently eligible regular reviewed slot. No catch-up.
+        from datetime import timedelta
+        choices = [now.replace(hour=hour, minute=0, second=0, microsecond=0)
+                   for hour in (8, 12, 16, 20)]
+        eligible = [slot for slot in choices if slot <= now < slot + timedelta(hours=2)]
+        if len(eligible) != 1:
+            raise RuntimeError('No current reviewed regular slot for manual dispatch')
+        scheduled = eligible[0]
     today = scheduled.date().isoformat()
     if any(r.get('status') == 'pending' and not r.get('threads_post_id')
            for r in history['records']):
@@ -114,7 +125,26 @@ def prepare_master(history, now, run_id):
         raise RuntimeError('Slot already reserved')
     policy, source, details = writer_inputs()
     queue = load(ROOT / '.threads-writer-queue.json', {})
-    selected = select_ready(queue, scheduled, now, history, source, details, policy)
+    from scripts.threads_writer_queue import QueueValidationError
+    try:
+        selected = select_ready(queue, scheduled, now, history, source, details, policy)
+    except QueueValidationError as exc:
+        if str(exc) != 'QUEUE_SLOT_MISSING':
+            raise
+        # Never invent a reviewed draft or send an unapproved notice.
+        # An empty slot is operationally degraded, not a published success.
+        print('::warning::QUEUE_SLOT_MISSING - no approved manuscript; publication skipped')
+        if os.getenv('GITHUB_STEP_SUMMARY'):
+            with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+                summary.write('## Threads publication blocked\\n\\n'
+                              '- Reason: **QUEUE_SLOT_MISSING**\\n'
+                              '- No approved manuscript for this slot; **no Meta POST**.\\n'
+                              '- Prepare and validate a fresh official notice before the next regular slot.\\n')
+        return
+    if os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true':
+        expected_notice = os.getenv('THREADS_DISPATCH_NOTICE_ID', '').strip()
+        if not expected_notice or selected['job_id'] != expected_notice:
+            raise RuntimeError('Manual dispatch notice does not match reviewed current-slot draft')
     entries = [e for e in queue['entries'] if e['scheduled_at'] == scheduled.isoformat()]
     if len(entries) != 1:
         raise RuntimeError('Unique writer entry required')
@@ -139,7 +169,8 @@ def prepare_master(history, now, run_id):
     main_text, reply_text = master_public_copy(selected, style, now=now)
     record = {**selected, 'text': main_text, 'reply_text': reply_text,
               'scheduled_at': scheduled.isoformat(),
-              'manual_publish': False, 'reserved_date': today, 'status': 'pending',
+              'manual_publish': os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true',
+              'reserved_date': today, 'status': 'pending',
               'run_id': run_id, 'created_at': now.isoformat(),
               'writer_entry': entry, 'queue_entry_sha256': fingerprint(entry),
               'image_url': ('https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/'
