@@ -64,6 +64,24 @@ class EmergencyDispatchTests(unittest.TestCase):
         self.assertEqual(history["records"], [])
         save_mock.assert_not_called()
 
+    def test_missing_queue_sets_explicit_alert_output(self):
+        history = {"posted_ids": [], "records": []}
+        now = datetime(2026, 11, 15, 12, 10, tzinfo=KST)
+        slot = now.replace(minute=0, second=0, microsecond=0)
+        with tempfile.TemporaryDirectory() as directory:
+            output_path = Path(directory) / "github-output.txt"
+            with patch.dict(os.environ, {
+                "GITHUB_RUN_ATTEMPT": "1",
+                "GITHUB_OUTPUT": str(output_path),
+            }), patch.object(publisher, "current_publication_slot", return_value=slot), \
+                 patch.object(publisher, "writer_inputs", return_value=({}, {}, {})), \
+                 patch.object(publisher, "load", return_value={"schema_version": 1, "entries": []}), \
+                 patch("scripts.threads_writer_queue.select_ready", side_effect=QueueValidationError("QUEUE_SLOT_MISSING")), \
+                 patch.object(publisher, "save") as save_mock:
+                publisher.prepare_master(history, now, "12345")
+            self.assertEqual(output_path.read_text(encoding="utf-8"), "queue_missing=true\\n")
+            save_mock.assert_not_called()
+
     def test_other_queue_validation_errors_are_not_suppressed(self):
         history = {"posted_ids": [], "records": []}
         now = datetime(2026, 11, 15, 12, 10, tzinfo=KST)
