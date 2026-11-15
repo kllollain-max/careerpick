@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-15T14:47:25+00:00",
+  "main_sha": "c7b818531e7f25f94cb53590258d6084964397c2",
+  "state_input": {
+    "maintenance_sha": "acc1589321184a73048d351cd23533c92e16f4e9",
+    "queue_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
+    "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+    "performance_sha": "aec6aeaa35d7ab21637e7b33c824046f0ce83cd8",
+    "history_sha": "d6a93fb86b02eb7df904e3493490c8f34eaf1764"
+  },
+  "latest_regular_runs": [
+    {
+      "id": 43709072093,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T11:29:05Z",
+      "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+      "run_attempt": 1
+    },
+    {
+      "id": 43708516229,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T11:21:31Z",
+      "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+      "run_attempt": 1
+    },
+    {
+      "id": 43692396153,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T08:00:37Z",
+      "head_sha": "924054e6a435ea7215157770745d544987298257",
+      "run_attempt": 1
+    },
+    {
+      "id": 43691683586,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T07:50:07Z",
+      "head_sha": "924054e6a435ea7215157770745d544987298257",
+      "run_attempt": 1
+    }
+  ],
+  "claim_checks": {
+    "count": 45,
+    "accepted": 44,
+    "historical_verified": 1,
+    "unresolved": 0,
+    "all_accepted_posts_matched_ledger": true
+  },
+  "whole_queue_validator": {
+    "status": "validated",
+    "ready_entries": []
+  },
+  "source_freshness_validator": {
+    "status": "HOLD",
+    "reason": "CLEANEYE_SOURCE_STALE",
+    "scheduled_at": "2026-11-16T08:00:00+09:00"
+  },
+  "candidate_full_validator": {
+    "status": "NOT_RUN",
+    "reason": "required metadata and actual card are incomplete; candidate is not READY"
+  },
+  "new_candidate": {
+    "notice_id": "cleaneye-80792",
+    "official_id": "80792",
+    "status": "held_unassigned",
+    "queued": false,
+    "assigned_slot": null,
+    "intended_slot_only": "2026-11-16T08:00:00+09:00",
+    "prepared_at": "2026-11-15T14:47:25+00:00",
+    "contract_version": 2,
+    "post_text": "행정 신입으로 공공기관 일을 시작할 분께,\n서울물재생시설공단 일반직 9급 행정 정규직 4명 공고예요.\n\n2027년 1월 1일 기준 만18세 이상·60세 미만이며 결격사유가 없어야 해요.\n학력·성별 제한은 없고, 수습 3개월은 1호봉이 적용돼요.\n\n지원 직종·전형 중복지원은 불가해요.\n증빙서류는 접수마감일 기준 3개월 이내 발급분만 유효해요.\n11월 18일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+    "chars": 235,
+    "reply_texts": [],
+    "style_rewrites": 0,
+    "card_generated": false,
+    "card_visual_review": {
+      "status": "not_performed",
+      "reason": "No image_job.location claimed without workplace evidence; no card generated or uploaded"
+    },
+    "source_refs": [
+      {
+        "url": "https://swr.plusrecruit.co.kr/#/recruitment/detail/39",
+        "checked_at": "2026-11-15T14:47:25+00:00",
+        "method": "actual_browser_render",
+        "excerpt": "2026년 하반기 정규직 채용공고; 접수일2026.11.11(수)10:00~2026.11.18(수)18:00; list status접수중"
+      },
+      {
+        "url": "https://jpsp-swr.s3.ap-northeast-2.amazonaws.com/upload/editor/1793752184_65e2c1fbf9dddec75887.png",
+        "checked_at": "2026-11-15T14:47:25+00:00",
+        "download_completed_at": "2026-11-15T14:42:45.314194+00:00",
+        "document_sha256": "b10514e1f577fe8f1d7bd314b683063627b83b3ba92237bd205ef42b04f21732",
+        "method": "actual_image_opened_in_two_sections_and_qualification_crop",
+        "excerpts": [
+          "신입 일반직9급 행정4; 환경2; 관리운영직 업무지원1·시설관리2·시설운영(기능인재)6; 경력 일반직8급 행정1; 합계16",
+          "임용예정일27.1.1기준 만18세이상60세미만; 인사규정14조결격사유에 해당하지 않는 자",
+          "일반직9급,관리운영직(업무지원): 공통요건 외 별도 자격요건 없음",
+          "수습기간(임용일로부터3개월)1호봉 적용, 수습종료후경력반영호봉; 경력직은 수습미적용",
+          "채용 직종 및 전형 간 중복지원 불가; 모든 제출서류 접수마감일 기준3개월이내발급분만 유효"
+        ]
+      },
+      {
+        "url": "https://jpsp-swr.s3.ap-northeast-2.amazonaws.com/upload/recruit/1793233828_a9b2dd779465ca842ef4.pdf",
+        "checked_at": "2026-11-15T14:43:28.607785+00:00",
+        "document_sha256": "5c34ba07355070a0875cf5162982ba66e32a1665f633223fa0d7027885d99fb2",
+        "excerpt": "NCS기반 채용 직무기술서 일반직9급 행정: 경영기획·경영평가·총무·인사·노무관리·사무행정·예산·회계감사"
+      }
+    ],
+    "verified_facts": {
+      "unit_title": "일반직 9급 행정",
+      "unit_count": 4,
+      "notice_total": 16,
+      "employment": "정규직",
+      "workplace": null,
+      "application_start": "2026-11-11T10:00:00+09:00",
+      "application_end": "2026-11-18T18:00:00+09:00",
+      "age_reference_date": "2027-01-01",
+      "age_min_inclusive": 18,
+      "age_max_exclusive": 60,
+      "probation": "3개월;1호봉",
+      "unit_specific_license_required": false,
+      "school_recommendation_rule_applies_to": "시설운영(기능인재), not general9administration"
+    },
+    "profile_target": {
+      "verified": true,
+      "notice_id": "cleaneye-80792",
+      "url": "https://kllollain-max.github.io/careerpick/",
+      "notice_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-80792",
+      "checked_at": "2026-11-15T14:47:25+00:00",
+      "method": "actual_browser_AX_and_screenshot",
+      "scope": "matching notice80792 title,16aggregate,sourceURL and sourceMissing false feed; no claim that UI16 is the selected role count4"
+    },
+    "hook_candidates": [
+      {
+        "id": "target",
+        "type": "target",
+        "text": "행정 신입으로 공공기관 일을 시작할 분께,\n서울물재생시설공단 일반직 9급 행정 정규직 4명 공고예요."
+      },
+      {
+        "id": "condition",
+        "type": "condition",
+        "text": "학력·성별 제한 없는 행정 신입을 찾는다면,\n서울물재생시설공단 일반직 9급 행정 4명 공고예요."
+      },
+      {
+        "id": "job",
+        "type": "job",
+        "text": "경영·인사·예산을 맡는 행정 신입 자리예요.\n서울물재생시설공단 일반직 9급 행정 4명을 채용해요."
+      }
+    ],
+    "selected_hook_id": "target",
+    "public_preview": {
+      "main_text": "행정 신입으로 공공기관 일을 시작할 분께,\n서울물재생시설공단 일반직 9급 행정 정규직 4명 공고예요.\n\n2027년 1월 1일 기준 만18세 이상·60세 미만이며 결격사유가 없어야 해요.\n학력·성별 제한은 없고, 수습 3개월은 1호봉이 적용돼요.\n\n지원 직종·전형 중복지원은 불가해요.\n증빙서류는 접수마감일 기준 3개월 이내 발급분만 유효해요.\n11월 18일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "detail_reply": ""
+    },
+    "review": {
+      "v5": {
+        "policy_id": "careerpick-threads-v5-20261111",
+        "contract_version": 2,
+        "restrictions_complete": false,
+        "fact_consistency_check": "incomplete",
+        "reason": "Full personnel regulation14 disqualifications, workplace and correction check not completed; no complete semantic PASS attested"
+      },
+      "correction_check": {
+        "status": "incomplete",
+        "checked_at": "2026-11-15T14:47:25+00:00",
+        "url": "https://swr.plusrecruit.co.kr/#/board/notice/list",
+        "scope": "Actual notice board rendered heading only, with no rows; no global absence of corrections asserted"
+      }
+    },
+    "hold_reasons": [
+      "CLEANEYE_SOURCE_STALE at next08: feed.updated remains2026-11-15T00:51:06+09:00 despite successful unchanged collection22:07",
+      "WORKPLACE_UNVERIFIED: institution address is not sufficient workplace evidence",
+      "CORRECTION_CHECK_INCOMPLETE: ATS notice board heading without rows cannot prove no correction",
+      "PERSONNEL_RULE14_FULL_CHECK_PENDING",
+      "CARD_NOT_GENERATED_AND_FULL_ENTRY_VALIDATOR_NOT_RUN"
+    ],
+    "next_actions": [
+      "Resolve actual unchanged collection verification evidence consumption without restamping source data or weakening24h rule",
+      "Confirm explicit workplace and personnel14 restrictions from official source",
+      "Complete scoped corrections and fullreview.v5 then exact originalJPEG360PNG review; no READY before wholevalidatorPASS"
+    ],
+    "audit_path": "threads/audits/supply-recheck-20261115-2348.json"
+  },
+  "source_freshness_root_cause": {
+    "run_id": 43717162751,
+    "job_id": 132821064648,
+    "collection_step": "success",
+    "storage_step": "skipped",
+    "reason": "unchanged content preserves original source timestamps and skips committing current verification time",
+    "logs": [
+      "2026-11-15T13:06:05.0527464Z {\"started_at\": \"2026-11-15T22:05:33+09:00\", \"source\": \"alio\", \"collection\": \"success\", \"validation\": \"success\", \"storage\": \"candidate_validated\", \"deployment\": \"not_requested\", \"changed\": false, \"source_snapshot_at\": \"2026-11-15T00:50:19+09:00\", \"source_hashes\": {\"alio.json\": \"75b487d67a64e3b9d898d695ec5bb3fccb0164c304456216e3ca275a62f3a2dd\", \"alio-detail.json\": \"d7817b638e1df9af8e86632f601a0c2759c03b9b8a2996b90126a9737aad7299\"}, \"live_details_verified\": 3, \"counts\": {\"before\": 956, \"new\": 0, \"modified\": 0, \"ended\": 0, \"archive_transitions\": 0, \"deleted\": 0, \"after\": 956, \"open\": 504, \"upcoming\": 4, \"archived\": 448, \"unknown\": 0, \"confirmed_current\": 493, \"unconfirmed\": 11}, \"verified_at\": \"2026-11-15T22:06:05+09:00\", \"snapshot_at\": \"2026-11-15T00:50:19+09:00\", \"status\": \"unchanged\", \"originals_preserved\": true, \"finished_at\": \"2026-11-15T22:06:05+09:00\"}",
+      "2026-11-15T13:06:06.1880762Z {\"source\": \"mpm_exam\", \"started_at\": \"2026-11-15T22:06:05+09:00\", \"status\": \"unchanged\", \"changed\": false, \"dataset_year\": 2026, \"before\": 28, \"after\": 28, \"verified_at\": \"2026-11-15T22:06:06+09:00\", \"snapshot_at\": \"2026-10-25T22:39:58.281891+00:00\", \"requests\": null, \"authentication_verified\": true, \"original_preserved\": true}",
+      "2026-11-15T13:06:42.6490047Z {\"source\": \"gojobs\", \"started_at\": \"2026-11-15T22:06:06+09:00\", \"status\": \"unchanged\", \"changed\": false, \"counts\": {\"before\": 42, \"new\": 0, \"modified\": 0, \"deleted\": 0, \"after\": 42, \"received_in_window\": 159, \"verified_this_run\": 8, \"open\": 5, \"deadline_time_unconfirmed\": 0, \"archived\": 37}, \"authentication_verified\": true, \"complete_window\": true, \"window\": {\"start\": \"2026-11-01\", \"end\": \"2026-11-15\", \"field\": \"registered_date\"}, \"requests\": {\"list\": 3, \"detail\": 8}, \"snapshot_at\": \"2026-11-14T00:59:32+09:00\", \"official_page_verified\": 7, \"official_page_failed\": 1, \"verified_at\": \"2026-11-15T22:06:42+09:00\", \"original_preserved\": true}",
+      "2026-11-15T13:07:40.5808225Z {\"authentication_verified\": true, \"candidate_sha256\": \"dd5898b4978e6ea7d0650391dd6dcc460908d33515982daa1bf203d802bb627b\", \"changed\": false, \"complete_collection\": true, \"counts\": {\"cleaneye\": {\"active\": 267, \"after\": 563, \"before\": 563, \"cancelled\": 0, \"changed\": 0, \"current_candidates\": 360, \"deadline_time_uncertain\": 563, \"deadline_unknown\": 0, \"deleted\": 0, \"expired\": 203, \"far_future_source_date\": 3, \"new\": 0, \"received\": 360, \"retained\": 203, \"status_uncertain\": 18, \"upcoming\": 75}}, \"key_present\": true, \"observed_source_values\": {\"JOB_TYPE\": [\"기간제\", \"무기계약직\", \"비상임\", \"인턴\", \"일반계약직\", \"일반정규직\", \"전문계약직\"], \"STATUS\": [\"모집예정\", \"모집중\"]}, \"originals_preserved\": true, \"region_code_lookup_verified\": true, \"region_code_lookup_year\": 2026, \"region_code_metadata\": {\"complete\": true, \"pages\": 1, \"reference_year\": 2026, \"total_count\": 17}, \"region_code_source\": \"official_api\", \"region_code_source_url\": \"https://www.data.go.kr/data/15061217/openapi.do\", \"region_codes\": [\"007001\", \"007002\", \"007003\", \"007004\", \"007005\", \"007006\", \"007007\", \"007008\", \"007009\", \"007010\", \"007011\", \"007012\", \"007013\", \"007014\", \"007015\", \"007016\", \"007017\"], \"region_counts\": {\"007001\": 42, \"007002\": 12, \"007003\": 9, \"007004\": 16, \"007005\": 0, \"007006\": 10, \"007007\": 6, \"007008\": 102, \"007009\": 35, \"007010\": 7, \"007011\": 19, \"007012\": 19, \"007013\": 11, \"007014\": 35, \"007015\": 17, \"007016\": 15, \"007017\": 5}, \"requests\": {\"list\": 18, \"region_codes\": 1}, \"service\": \"data_go_kr_15159757\", \"snapshot_at\": \"2026-11-15T00:51:06+09:00\", \"source\": \"cleaneye\", \"source_sha256\": {\"alio-detail.json\": \"d7817b638e1df9af8e86632f601a0c2759c03b9b8a2996b90126a9737aad7299\", \"alio.json\": \"75b487d67a64e3b9d898d695ec5bb3fccb0164c304456216e3ca275a62f3a2dd\", \"cleaneye.json\": \"dd5898b4978e6ea7d0650391dd6dcc460908d33515982daa1bf203d802bb627b\", \"data/civil-service/2026.json\": \"2832d3ef3bd96be09088288a010e9b5e82f023c308b18640ac22916b36fd58e7\", \"data/civil-service/years.json\": \"7e9a09bd2f89eca1a313b4f1af60dfe9f959a7720363225ffe0a3b4ab382d382\", \"enterprise_jobs.json\": \"8ecb07e05ab5812f0e1aeeb51768b5979357f0ea5c5392ffc7b99a5aab2bf3c8\", \"exam-status.json\": \"f87b925a08cc92294bff60ceab904dd7b50a478dbced028cc8f3e23602a176f6\", \"gojobs.json\": \"d9a58e71794bbbc08b22424ec70cf4fb3dc04d0f534656ee65f08a30db8c96a4\", \"monitor.json\": \"bf764228de3a7fbe847900189cd6581b133314eea22cb4c6c6628da123360c36\", \"operations-status.json\": \"38a827003d108d3f8ca93d453415b3b22ae8b456d6ae1c363a5ba90b92f9d3cc\", \"posts.json\": \"23e29ea515007e00d564f5ccc71a18d40287d02d03a4c2ce22f37f78fcebab1d\", \"public-files.json\": \"31c8455416c116a0157fe7b09f2e7c3c6bfa6d06a98abf600b4f84c1000ce82a\", \"qnet.json\": \"74b9903db7a78008bafd0d6e66ee676d87d48ca13f4160a5b6f46887bd273e49\", \"threads_posted.json\": \"5d1ad5309c7b70d3e5e11bf6301b4ca5a8824a183e95c0010d795ee66f4c481d\", \"work24-policy.json\": \"9c43e020ee9534cceb597dcf9c3beca9eb42c7e7c2e66f7411a3ca03e290c62d\"}, \"started_at\": \"2026-11-15T22:06:42+09:00\", \"status\": \"unchanged\", \"successful_responses\": {\"list\": 17, \"region_codes\": 1}}"
+    ],
+    "impact": "Fresh successful collection is not represented by the byte-preserved main timestamps used by Threads24h gate. Waiting for another unchanged collection does not itself resolve this.",
+    "source_or_site_changes_made": false
+  },
+  "next_actual_media": "IMAGE",
+  "new_meta_post_id": null,
+  "new_meta_url": null,
+  "actual_new_publications": 0,
+  "new_24h_or_72h_observations": 0,
+  "performance_summary_as_of": "2026-11-15T14:42:52.184180+00:00",
+  "schedule_and_automation_unchanged": true,
+  "automation_enabled": true,
+  "stage_changed": false,
+  "queue_changed": false
+}
