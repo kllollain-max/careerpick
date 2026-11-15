@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "type": "current_regular_slot_waiting_for_scheduled_execution",
+  "observed_at": "2026-11-15T11:18:33+00:00",
+  "account": "hid_119",
+  "main_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+  "history_sha": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+  "queue_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
+  "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+  "performance_sha": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
+  "notice_id": "a305734",
+  "scheduled_at": "2026-11-15T20:00:00+09:00",
+  "current_slot_grace_end": "2026-11-15T22:00:00+09:00",
+  "workflow_state": {
+    "id": 405415327,
+    "name": "CareerPick Threads Auto",
+    "path": ".github/workflows/threads_auto.yml",
+    "state": "active",
+    "evidence": "Actual unauthenticated public GitHub REST GET after connector rejected unsupported workflow metadata URL; no credential guessed or supplied."
+  },
+  "latest_scheduled_runs": [
+    {
+      "run_id": 43692396153,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T08:00:37Z",
+      "head_sha": "924054e6a435ea7215157770745d544987298257"
+    },
+    {
+      "run_id": 43691683586,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T07:50:07Z",
+      "head_sha": "924054e6a435ea7215157770745d544987298257"
+    },
+    {
+      "run_id": 43673562322,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T03:52:51Z",
+      "head_sha": "fb028ceb25858e8b9170916d8691d44cd4c2a84f"
+    }
+  ],
+  "new_scheduled_run_since_previous_checkpoint": false,
+  "preflight_1945_run": "not_observed",
+  "publisher_20_run": "not_observed",
+  "claimed_slots_read": 44,
+  "accepted_claims_matched": 43,
+  "current_slot_claim": false,
+  "current_slot_history_record": false,
+  "pending_records": 0,
+  "entry_sha256": "76e1e22ad6ff013fc9831edbb1349f0b4435c9afae90a62249c05fcd01a4ac25",
+  "approved_stage_and_queue_entry_exact_match": true,
+  "current_queue_validation": {
+    "status": "validated",
+    "ready_entries": [
+      {
+        "scheduled_at": "2026-11-15T20:00:00+09:00",
+        "notice_id": "a305734",
+        "format_id": "deadline_opportunity",
+        "chars": 230,
+        "public_preview": {
+          "main_text": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,\n세종 한국조세재정연구원 (부)연구위원 정규직 10명 모집을 확인해요.\n\n임용 시 박사학위와 한국어 소통·독립연구 역량이 필요해요. 전일근무(09~18시)가 가능해야 해요.\n추천서 3부는 추천인 3명이 접수 시스템으로 제출해요.\n\n마감은 11월 30일 23:59:59 UTC예요. 한국시간으로 12월 1일 08:59:59예요.\n\n자세한 사항은 프로필링크 확인",
+          "detail_reply": ""
+        },
+        "editorial_policy_id": null
+      }
+    ]
+  },
+  "planned_media": "TEXT",
+  "last_success_media": "IMAGE",
+  "body_chars": 230,
+  "automatic_reply_count_planned": 0,
+  "original_ready_entry_changed": false,
+  "queue_changed": false,
+  "stage_changed": false,
+  "main_changed": false,
+  "performance_summary_executed": true,
+  "performance_summary_as_of": "2026-11-15T11:16:58.465101+00:00",
+  "matched_performance_window_counts": {
+    "24h": 2,
+    "72h": 1
+  },
+  "new_24h72h_observations": false,
+  "new_actual_post_id": null,
+  "new_actual_permalink": null,
+  "official_GET_status": "No new post/claim exists in current ledger; no new Meta GET or publication success asserted. Previous confirmed publication evidence is preserved at its actual original observation time.",
+  "manual_dispatch": false,
+  "rerun": false,
+  "meta_post": false,
+  "new_schedule": false,
+  "automation_enabled": true,
+  "report_conversation": "6af97bff-d36c-83ee-9171-bd8e1267804c",
+  "diagnosis": "Approved manuscript is available and passes current main validators. The scheduled executions are not yet observed in current GitHub run collection; provider root cause is unconfirmed. Within existing 2h grace, preserve immutable entry and observe original publisher, without unsupported dispatch/rerun.",
+  "next_actions": [
+    "Observe original 20h publisher and reconcile official receipt/GET/accepted claim if a run or post appears.",
+    "If no execution by existing22h grace end, record an expired unposted slot without catching up or resetting claims; prepare next future regular slot under fresh-source checks."
+  ]
+}
