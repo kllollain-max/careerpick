@@ -20,12 +20,22 @@ class JobPageTests(unittest.TestCase):
             'title': '채용 공고 테스트',
             'org': '테스트 기관',
             'due': '2026-12-31',
+            # Synthetic fixture explicitly verifies its cutoff for JSON-LD tests.
+            'dueHasTime': True,
             'pub': '2026-10-23',
             'emp': '정규직',
             'region': '강원',
             'desc': '실제 담당 업무와 필요한 역량을 안내하는 테스트용 채용공고입니다.',
             'src': 'https://example.org/jobs/123',
         }
+
+    def test_unverified_cutoff_omits_jobposting_and_clock_time(self):
+        post = dict(self.post, due='2099-12-31T23:59:00+09:00')
+        post.pop('dueHasTime')
+        html = render(post, {})
+        self.assertNotIn('<script type="application/ld+json">', html)
+        self.assertIn('<dt>ALIO 게시 종료일 · 접수마감 원문 확인</dt><dd>2099-12-31</dd>', html)
+        self.assertNotIn('2099-12-31 23:59', html)
 
     def test_full_detail_regions_reach_summary_checks_metadata_and_schema(self):
         post = dict(self.post, region='인천')
