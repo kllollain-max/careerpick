@@ -720,7 +720,9 @@ def main():
         has_process = bool(clean(job_detail.get('scrnprcdrMthdExpln')))
         # ALIO desc는 NCS 분류이므로 직무설명 충실도로 집계하지 않습니다.
         category_only = bool(clean(post.get('desc')))
-        has_description = False
+        # Only an explicit, nonempty source field counts as substantive duties.
+        # NCS/category labels in the list feed must never be counted as duties.
+        has_description = bool(clean(job_detail.get('jobDscrptn')))
         quality['with_category_only_description'] += int(category_only)
         official_url = safe_url(post.get('src')) or safe_url(post.get('url'))
         has_official = bool(official_url)
