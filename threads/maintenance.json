@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T09:35:33+00:00",
-  "last_observed_at": "2026-11-15T09:35:33+00:00",
+  "updated_at": "2026-11-15T10:52:40+00:00",
+  "last_observed_at": "2026-11-15T10:52:40+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -20759,9 +20759,8 @@
       "status": "initial_observation"
     },
     "next_actions": [
-      "Existing 19:45 KST preflight must promote this exact reviewed entry with latest source/history/claim checks.",
-      "Existing 20:00 KST publisher must verify account and publish once; actual post ID, permalink, official GET and accepted claim remain pending.",
-      "Observe 24h/72h only at actual measured times; no winner or improvement declared."
+      "Observe original 20h scheduled publisher: require actual Meta ID, permalink, official GET body/account/media and accepted claim before publication success.",
+      "If late/ambiguous, read receipt/remote result first; never duplicate POST or reset claims."
     ],
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json",
     "operational_applied_observed_at": "2026-11-11T18:38:25.419515+09:00",
@@ -21157,32 +21156,26 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "observed_at": "2026-11-15T09:35:33+00:00",
-      "status": "reviewed20h_stage_still_valid_awaiting_regular_preflight",
-      "main_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
-      "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
-      "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
-      "history_sha": "65d57eb0a06e6036bfe6c543636d66e15391beca",
-      "performance_sha": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
-      "source_rechecked_at": [
-        "2026-11-15T09:34:25.642511+00:00",
-        "2026-11-15T09:34:27.511332+00:00"
-      ],
+      "observed_at": "2026-11-15T10:52:40+00:00",
+      "notice_id": "a305734",
+      "scheduled_at": "2026-11-15T20:00:00+09:00",
+      "status": "identical_approved20h_entry_supplied_to_queue_waiting_scheduled_publish",
       "entry_sha256": "76e1e22ad6ff013fc9831edbb1349f0b4435c9afae90a62249c05fcd01a4ac25",
-      "ready_notice_id": "a305734",
-      "ready_slot": "2026-11-15T20:00:00+09:00",
+      "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+      "queue_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
+      "queue_commit": "9167196fd445eca1d0684cb49ad9df600b9caa1d",
+      "queue_promoted": true,
+      "promotion_method": "validated_latest_SHA_CAS_supply; not an Actions preflight success claim",
+      "published": false,
+      "actual_meta_post_id": null,
       "planned_media": "TEXT",
-      "full_entry_and_prospective_queue_validation": "passed",
-      "queue_publishable_future_count": 0,
-      "stage_publishable_future_count": 1,
-      "accepted_claims_match": 43,
-      "new_publisher_run": false,
-      "new_publication": false,
-      "original_approved_entry_changed": false,
-      "no_manual_publish_or_dispatch": true,
-      "metrics_summary_executed": true,
-      "new_24h72h_observations": false,
-      "audit_path": "threads/audits/recheck-20261115-1830.json"
+      "body_chars": 230,
+      "automatic_reply_count_planned": 0,
+      "full_validator_passed": true,
+      "remote_readback_verified": true,
+      "prior32_entries_preserved": true,
+      "preflight_run_observed": false,
+      "audit_path": "threads/audits/queue-supply-a305734-20261115-1952.json"
     },
     "next_slot_official_preflight": {
       "checked_at": "2026-11-15T02:48:58Z",
@@ -21267,7 +21260,7 @@
       "evidence_source": "Scheduled publisher authenticated official GET persisted in fresh main ledger; fresh Actions job logs corroborate account/post/GET. This monitor did not issue a new Meta GET.",
       "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json"
     },
-    "next_slot_status": "reviewed_stage_ready_waiting_existing_preflight",
+    "next_slot_status": "20h_queue_ready_awaiting_original_scheduled_publisher",
     "publication_reports": {
       "17918731521553015": {
         "status": "prepared_for_current_report",
@@ -21592,8 +21585,8 @@
       "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
       "stage_commit": "35beeffd8134bb65b8b4299b8845b53a54116a77",
       "entry_sha256": "76e1e22ad6ff013fc9831edbb1349f0b4435c9afae90a62249c05fcd01a4ac25",
-      "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
-      "queue_promoted": false,
+      "queue_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
+      "queue_promoted": true,
       "published": false,
       "profile_verified": true,
       "full_validator_passed": true,
@@ -21603,7 +21596,10 @@
       "automatic_reply_count_planned": 0,
       "audit_path": "threads/audits/staging-ready-a305734-20261115-20.json",
       "prevention_pr": 61,
-      "prevention_merge_commit": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623"
+      "prevention_merge_commit": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+      "queue_commit": "9167196fd445eca1d0684cb49ad9df600b9caa1d",
+      "queue_readback_verified": true,
+      "queue_supply_audit": "threads/audits/queue-supply-a305734-20261115-1952.json"
     },
     "latest_delayed_preflight_recovery": {
       "notice_id": "a306965",
@@ -25617,43 +25613,37 @@
     }
   },
   "writer_recovery_latest": {
-    "checked_at": "2026-11-15T08:56:04+00:00",
+    "observed_at": "2026-11-15T10:52:40+00:00",
     "notice_id": "a305734",
     "scheduled_at": "2026-11-15T20:00:00+09:00",
-    "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
-    "stage_commit": "35beeffd8134bb65b8b4299b8845b53a54116a77",
+    "status": "identical_approved20h_entry_supplied_to_queue_waiting_scheduled_publish",
     "entry_sha256": "76e1e22ad6ff013fc9831edbb1349f0b4435c9afae90a62249c05fcd01a4ac25",
-    "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
-    "queue_promoted": false,
+    "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+    "queue_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
+    "queue_commit": "9167196fd445eca1d0684cb49ad9df600b9caa1d",
+    "queue_promoted": true,
+    "promotion_method": "validated_latest_SHA_CAS_supply; not an Actions preflight success claim",
     "published": false,
-    "profile_verified": true,
-    "full_validator_passed": true,
-    "readback_verified": true,
+    "actual_meta_post_id": null,
     "planned_media": "TEXT",
     "body_chars": 230,
     "automatic_reply_count_planned": 0,
-    "audit_path": "threads/audits/staging-ready-a305734-20261115-20.json",
-    "prevention_pr": 61,
-    "prevention_merge_commit": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
-    "status": "new_unique_20h_manuscript_staged_awaiting_regular_preflight",
+    "full_validator_passed": true,
+    "remote_readback_verified": true,
+    "prior32_entries_preserved": true,
+    "preflight_run_observed": false,
+    "audit_path": "threads/audits/queue-supply-a305734-20261115-1952.json",
     "source_notice_id": "a305734",
-    "current_queue_entries": 32,
-    "current_publishable_queue_ready_count": 0,
-    "staging_total_entries": 2,
+    "current_queue_entries": 33,
+    "current_publishable_queue_ready_count": 1,
     "current_publishable_stage_ready_count": 1,
-    "accepted_claims_matched": 43,
+    "staging_total_entries": 2,
     "field_holds": [],
-    "new_draft_created": true,
-    "actual_meta_post_id": null,
-    "actual_meta_post_url": null,
-    "previous_success_notice_id": "a306965",
-    "previous_success_meta_post_id": "18137768440737022",
-    "manual_publish_or_dispatch": false,
     "remaining_actions": [
-      "Existing 19:45 KST preflight must promote this exact reviewed entry with latest source/history/claim checks.",
-      "Existing 20:00 KST publisher must verify account and publish once; actual post ID, permalink, official GET and accepted claim remain pending.",
-      "Observe 24h/72h only at actual measured times; no winner or improvement declared."
-    ]
+      "Observe original 20h scheduled publisher: require actual Meta ID, permalink, official GET body/account/media and accepted claim before publication success.",
+      "If late/ambiguous, read receipt/remote result first; never duplicate POST or reset claims."
+    ],
+    "manual_publish_or_dispatch": false
   },
   "writer_recovery_duplicate_checks": {
     "a306760": {
@@ -25807,6 +25797,45 @@
       "remaining_actions": [
         "Prepare another unique fully verified20h manuscript; current future ready0.",
         "Observe24h/72h at actual capture times; no performance improvement claim from this publication alone."
+      ]
+    },
+    "2026-11-15-before20h-queue-supply": {
+      "checked_at": "2026-11-15T08:56:04+00:00",
+      "notice_id": "a305734",
+      "scheduled_at": "2026-11-15T20:00:00+09:00",
+      "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+      "stage_commit": "35beeffd8134bb65b8b4299b8845b53a54116a77",
+      "entry_sha256": "76e1e22ad6ff013fc9831edbb1349f0b4435c9afae90a62249c05fcd01a4ac25",
+      "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+      "queue_promoted": false,
+      "published": false,
+      "profile_verified": true,
+      "full_validator_passed": true,
+      "readback_verified": true,
+      "planned_media": "TEXT",
+      "body_chars": 230,
+      "automatic_reply_count_planned": 0,
+      "audit_path": "threads/audits/staging-ready-a305734-20261115-20.json",
+      "prevention_pr": 61,
+      "prevention_merge_commit": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+      "status": "new_unique_20h_manuscript_staged_awaiting_regular_preflight",
+      "source_notice_id": "a305734",
+      "current_queue_entries": 32,
+      "current_publishable_queue_ready_count": 0,
+      "staging_total_entries": 2,
+      "current_publishable_stage_ready_count": 1,
+      "accepted_claims_matched": 43,
+      "field_holds": [],
+      "new_draft_created": true,
+      "actual_meta_post_id": null,
+      "actual_meta_post_url": null,
+      "previous_success_notice_id": "a306965",
+      "previous_success_meta_post_id": "18137768440737022",
+      "manual_publish_or_dispatch": false,
+      "remaining_actions": [
+        "Existing 19:45 KST preflight must promote this exact reviewed entry with latest source/history/claim checks.",
+        "Existing 20:00 KST publisher must verify account and publish once; actual post ID, permalink, official GET and accepted claim remain pending.",
+        "Observe 24h/72h only at actual measured times; no winner or improvement declared."
       ]
     }
   }
