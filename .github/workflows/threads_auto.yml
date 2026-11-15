@@ -33,6 +33,8 @@ concurrency:
 
 jobs:
   publish:
+    outputs:
+      queue_missing: ${{ steps.reserve.outputs.queue_missing }}
     if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'PUBLISH')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
@@ -398,7 +400,7 @@ jobs:
   alert:
     name: Alert on Threads publishing failure
     needs: publish
-    if: ${{ always() && needs.publish.result == 'failure' }}
+    if: ${{ always() && (needs.publish.result == 'failure' || needs.publish.outputs.queue_missing == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -426,7 +428,7 @@ jobs:
                   return json.load(response)
           issues = request('GET', url + '?state=open&per_page=100')
           existing = next((i for i in issues if not i.get('pull_request') and i.get('title') == title), None)
-          body = ('Scheduled Threads publishing failed. Inspect the run and reconcile remote posts before retrying.\n\n' + os.environ['RUN_URL'])
+          body = ('Threads publishing failed or the reviewed queue is empty. Inspect the run, verify queue readiness and remote state; never blindly retry.\n\n' + os.environ['RUN_URL'])
           if existing:
               result = request('POST', existing['comments_url'], {'body': body})
               print('Updated existing failure issue with run URL')

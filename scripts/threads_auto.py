@@ -134,6 +134,10 @@ def prepare_master(history, now, run_id):
         # Never invent a reviewed draft or send an unapproved notice.
         # An empty slot is operationally degraded, not a published success.
         print('::warning::QUEUE_SLOT_MISSING - no approved manuscript; publication skipped')
+        # Distinguish an empty reviewed queue from a successful publication.
+        if os.getenv('GITHUB_OUTPUT'):
+            with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+                output.write('queue_missing=true\\n'.replace('\\n', '\n'))
         if os.getenv('GITHUB_STEP_SUMMARY'):
             with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
                 summary.write('## Threads publication blocked\\n\\n'
