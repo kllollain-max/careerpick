@@ -27,11 +27,27 @@ jobs:
           printf '{"schema_version":1,"entries":[]}' > /tmp/threads-v4/queue.json
           python -m threads_v4.candidate_report --queue /tmp/threads-v4/queue.json --output /tmp/threads-v4/candidates.json
           python -c 'import json; d=json.load(open("/tmp/threads-v4/candidates.json")); assert d["approved_count"] == 0; assert d["meta_posted"] is False'
+      - name: Triage candidates without unverified approval
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          from threads_v4.official_triage import triage_report
+          src=json.loads(Path("/tmp/threads-v4/candidates.json").read_text(encoding="utf-8"))
+          result=triage_report(src, datetime.now(ZoneInfo("Asia/Seoul")))
+          Path("/tmp/threads-v4/official-triage.json").write_text(json.dumps(result, ensure_ascii=False, indent=2)+"\\n",encoding="utf-8")
+          print(json.dumps({"hold":result["hold_count"],"reject":result["reject_count"],"pass":result["pass_count"]},ensure_ascii=False))
+          assert result["pass_count"] == 0
+          PY
       - name: Upload candidate review report
         uses: actions/upload-artifact@v4
         with:
           name: threads-v4-candidate-review
-          path: /tmp/threads-v4/candidates.json
+          path: |
+            /tmp/threads-v4/candidates.json
+            /tmp/threads-v4/official-triage.json
           retention-days: 7
       - name: Verify production publisher untouched
         run: |
