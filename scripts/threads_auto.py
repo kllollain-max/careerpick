@@ -101,7 +101,18 @@ def prepare_master(history, now, run_id):
     from scripts.threads_writer_queue import select_ready, fingerprint
     if os.getenv('GITHUB_RUN_ATTEMPT', '1') != '1':
         raise RuntimeError('Reruns require remote reconciliation')
-    scheduled = current_publication_slot(now)
+    requested = current_publication_slot(now)
+    scheduled = requested
+    if os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true':
+        # Preserve the existing minute-level dispatch nonce, but bind it to
+        # exactly one currently eligible regular reviewed slot. No catch-up.
+        from datetime import timedelta
+        choices = [now.replace(hour=hour, minute=0, second=0, microsecond=0)
+                   for hour in (8, 12, 16, 20)]
+        eligible = [slot for slot in choices if slot <= now < slot + timedelta(hours=2)]
+        if len(eligible) != 1:
+            raise RuntimeError('No current reviewed regular slot for manual dispatch')
+        scheduled = eligible[0]
     today = scheduled.date().isoformat()
     if any(r.get('status') == 'pending' and not r.get('threads_post_id')
            for r in history['records']):
@@ -217,12 +228,10 @@ def current_publication_slot(now):
         if os.getenv('GITHUB_RUN_ATTEMPT', '1') != '1':
             raise RuntimeError('Manual publication rerun blocked')
         slot = datetime.fromisoformat(os.environ.get('THREADS_MANUAL_SLOT', ''))
-        if (slot.tzinfo is None or slot.utcoffset() != timedelta(hours=9)
-                or slot.hour not in (8, 12, 16, 20)
-                or slot.minute or slot.second or slot.microsecond):
-            raise RuntimeError('Manual dispatch requires a regular KST slot (08/12/16/20)')
-        if not slot <= now < slot + timedelta(hours=2):
-            raise RuntimeError('Manual dispatch must be within the current regular slot grace window')
+        if slot.tzinfo is None or slot.utcoffset() != timedelta(hours=9) or slot.second or slot.microsecond:
+            raise RuntimeError('Aware KST minute-aligned manual slot required')
+        if not slot <= now < slot + timedelta(minutes=10):
+            raise RuntimeError('Manual slot expired or in the future')
         return slot
     hour = slot_from_cron(os.getenv('THREADS_SCHEDULE_CRON', ''))
     slot = now.replace(hour=hour, minute=0, second=0, microsecond=0)
