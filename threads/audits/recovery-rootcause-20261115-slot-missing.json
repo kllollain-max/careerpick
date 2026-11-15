@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "type": "threads_recovery_root_cause",
+  "account": "hid_119",
+  "captured_at_kst": "2026-11-15T11:52:44+09:00",
+  "incident": {
+    "workflow_run_id": 43652971854,
+    "job_id": 132625259668,
+    "workflow": "CareerPick Threads Auto",
+    "scheduled_slot_kst": "2026-11-15T08:00:00+09:00",
+    "workflow_outcome": "failure",
+    "failed_step": "Reserve one job",
+    "error": "scripts.threads_writer_queue.QueueValidationError: QUEUE_SLOT_MISSING",
+    "credentials_presence": "PASS",
+    "reconcile": "PASS",
+    "queue_read": "PASS",
+    "meta_publish_invoked": false,
+    "proof_url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
+  },
+  "queue": {
+    "branch": "threads-publisher-state",
+    "path": "threads/writer-queue.json",
+    "observed_blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
+    "total_entries": 31,
+    "last_scheduled_at": "2026-11-14T08:00:00+09:00",
+    "ready_entries_for_2026_11_15": 0
+  },
+  "history": {
+    "observed_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
+    "last_confirmed_publish": "2026-11-14T08:28:48.427195+09:00",
+    "last_media": "TEXT",
+    "next_media": "IMAGE",
+    "a306760_already_posted": true,
+    "a306965_posted_ids_match": false
+  },
+  "changes": {
+    "chatgpt_writer_automation_id": "6ae092084b988191a23a38300212ebdc",
+    "new_writer_schedule": "hourly KST :30 starting 2026-11-15 12:30",
+    "github_publisher_schedule": "unchanged 08:00,12:00,16:00,20:00",
+    "purpose": "avoid exact-hour producer/publisher race and let writer prepare next unstarted regular slots"
+  },
+  "remaining_before_success": [
+    "fresh official notice verification and correction check",
+    "verify profile target and full accepted claims, no duplicate",
+    "complete one v5 reviewed single main text and necessary IMAGE card",
+    "remote CAS queue ready registration and readback",
+    "full queue validation PASS",
+    "GitHub next scheduled publisher step reaches Meta",
+    "official verified Threads post id and content"
+  ],
+  "actual_queue_ready_created": false,
+  "actual_post_success": false,
+  "other_projects_modified": false
+}
