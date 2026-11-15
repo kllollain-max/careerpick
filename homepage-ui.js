@@ -16,7 +16,18 @@ function cpSyncDialogState(){
   const sheet=$('sheet')?.classList.contains('open'),job=$('jobview') && !$('jobview').hidden,filter=$('panel')?.classList.contains('open') && matchMedia('(max-width:700px)').matches;
   const wrap=document.querySelector('.wrap');if(wrap)wrap.inert=!!(sheet||job);
   if($('jobview'))$('jobview').inert=!!sheet;
-  for(const el of document.querySelectorAll('.wrap>header,.wrap>.cp-mobile-nav,.wrap>.cp-support,.wrap>footer,#jobsMain>*:not(#panel)'))el.inert=!!filter;
+  // The filter panel is nested inside .job-browse. Never inert an ancestor
+  // of the active dialog: doing so disables every control inside the dialog.
+  const panel=$('panel');
+  for(const el of document.querySelectorAll('.wrap>header,.wrap>.cp-mobile-nav,.wrap>.cp-support,.wrap>footer,#jobsMain>*')){
+    if(panel && (el===panel || el.contains(panel))) { el.inert=false; continue; }
+    el.inert=!!filter;
+  }
+  if(panel?.parentElement){
+    for(const el of panel.parentElement.children){
+      if(el!==panel)el.inert=!!filter;
+    }
+  }
 }
 let cpEnterpriseState = 'pending';
 async function cpLoadEnterprise(){
