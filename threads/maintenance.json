@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T07:59:47+00:00",
-  "last_observed_at": "2026-11-15T07:59:47+00:00",
+  "updated_at": "2026-11-15T08:03:29+00:00",
+  "last_observed_at": "2026-11-15T08:03:29+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -82,13 +82,14 @@
     "last_update_commit_sha": "8968aeadf4e10f76e17dc035cde59ccc9c579c4d",
     "readback_verified_at": "2026-11-15T07:59:47+00:00",
     "current_eligibility_check": {
-      "checked_at": "2026-11-15T07:59:47+00:00",
+      "checked_at": "2026-11-15T08:03:29+00:00",
       "total_entries": 32,
-      "historical_ready": 31,
-      "current_publishable_ready": 1,
-      "notice_id": "a306965",
-      "slot": "2026-11-15T16:00:00+09:00",
-      "within_existing_grace": true
+      "past_entries_preserved": true,
+      "current_publishable_ready": 0,
+      "notice16_status": "published",
+      "stage_total_entries": 1,
+      "stage_current_eligible_ready": 0,
+      "queue_blob_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33"
     }
   },
   "observed_runs": [
@@ -9684,77 +9685,55 @@
     }
   ],
   "last_confirmed_publication": {
-    "notice_id": "a306760",
-    "post_id": "18101198159539744",
-    "scheduled_at": "2026-11-14T08:00:00+09:00",
-    "published_at": "2026-11-14T08:28:48.427195+09:00",
-    "public_output_verification": {
-      "checked_at": "2026-11-14T08:28:48.669388+09:00",
-      "post_id": "18101198159539744",
-      "status": "verified",
-      "permalink": "https://www.threads.com/@hid_119/post/Dfsz9dilsPn",
-      "actual_text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,\n국립중앙의료원 중앙응급의료상황실 정규직 4명 공고예요.\n\n3교대와 전지역 근무가 모두 가능해야 해요.\n최초 근무지는 서울·경기·대전·광주·대구·부산 중 합격 후 정해요.\n\n최초 계약 1년, 재임용 심사 후 정년까지예요.\n3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.\n병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 미응시·미완료 시 탈락해요.\n11월 20일 23:59까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
-      "actual_text_sha256": "b271ee20640132ec8191a67d8425deccce2afbefab323ba58192ac42443f424c",
-      "body_chars": 299,
-      "media_type": "TEXT_POST",
-      "media_url": null,
-      "expected_image_sha256": null,
-      "automatic_reply_count": 0,
-      "own_replies": 0,
-      "own_replies_status": "verified",
-      "contract_version": 2,
-      "code_commit": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
-      "own_reply_ids": [],
-      "reply_scan_scope": "top_level_all_pages"
-    },
-    "queue_entry_sha256": "f7bf612866ee4e4b72f98f8daf05cfe26f2cb55daee846eea0d6712559af04ae",
-    "writer_source_checked_at": "2026-11-13T11:23:42.151189+09:00",
-    "selection_reason": "미배정초안의공식단일분야4명·정규직·자격OR와준비기간을검증하고10:23정규수집갱신으로새슬롯신선도조건해결. 직무/지역인기도추정없음. 최근NMC통신직과직무·대상다르며같은공고재사용아님.",
-    "source_checked_at": "2026-11-13T11:23:42.151189+09:00",
-    "observed_at": "2026-11-14T00:10:12Z",
-    "account": "hid_119",
-    "configured_api_account_id": "28818095904512513",
-    "api_username_verified": true,
-    "api_username_verified_at": "2026-11-13T23:28:31.0419412Z",
-    "api_returned_post_id": "18101198159539744",
-    "permalink": "https://www.threads.com/@hid_119/post/Dfsz9dilsPn",
-    "run_id": "43527351939",
+    "verified_at": "2026-11-15T08:03:29+00:00",
+    "published_at": "2026-11-15T17:00:20.519410+09:00",
+    "notice_id": "a306965",
+    "run_id": "43692396153",
     "run_attempt": 1,
-    "run_status": "completed",
-    "run_conclusion": "success",
-    "run_updated_at": "2026-11-13T23:29:07Z",
-    "run_head_sha": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
-    "workflow_path": ".github/workflows/threads_auto.yml",
-    "url": "https://github.com/kllollain-max/careerpick/actions/runs/43527351939",
-    "code_commit": "7d022a95cf5dc6c2d6e48af418118e6468c596a0",
-    "media_type": "TEXT",
-    "official_media_type": "TEXT_POST",
-    "image_url": null,
-    "media_url": null,
-    "body_chars": 299,
-    "main_count": 1,
+    "post_id": "18137768440737022",
+    "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+    "account": "hid_119",
+    "body_chars": 331,
+    "contract_version": 2,
+    "media_type": "IMAGE",
     "automatic_reply_count": 0,
     "own_replies": 0,
     "own_replies_status": "verified",
     "reply_scan_scope": "top_level_all_pages",
-    "own_reply_limit": "Top-level all pages scanned; absence of nested descendant replies is not established.",
-    "official_GET_checked_at": "2026-11-14T08:28:48.669388+09:00",
-    "actual_text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,\n국립중앙의료원 중앙응급의료상황실 정규직 4명 공고예요.\n\n3교대와 전지역 근무가 모두 가능해야 해요.\n최초 근무지는 서울·경기·대전·광주·대구·부산 중 합격 후 정해요.\n\n최초 계약 1년, 재임용 심사 후 정년까지예요.\n3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.\n병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 미응시·미완료 시 탈락해요.\n11월 20일 23:59까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
-    "actual_text_sha256": "b271ee20640132ec8191a67d8425deccce2afbefab323ba58192ac42443f424c",
-    "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
-    "accepted_claim_path": "threads-claims/20261113T2300Z.json",
-    "accepted_claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
-    "accepted_claim": {
-      "slot": "2026-11-14T08:00:00+09:00",
-      "run_id": "43527351939",
-      "state": "accepted",
-      "post_id": "18101198159539744"
+    "official_GET_checked_at": "2026-11-15T17:00:20.726457+09:00",
+    "accepted_claim_blob": "c9a00308846100f6409fd032671e4885a416d79b",
+    "history_blob": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+    "proof": {
+      "checked_at": "2026-11-15T17:00:20.726457+09:00",
+      "post_id": "18137768440737022",
+      "status": "verified",
+      "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+      "actual_text": "IT 정보화·시스템 운영을 맡을 분께,\n(재)한국보건의료정보원 전산 초급기술자 기간제근로자 5명 공고예요.\n\n기사 자격 또는 (IT 관련 경력과 채용 관련 업무경력)이 필요해요.\n서울 근무·근무지 변경 가능, 계약은 2027년 12월 31일까지예요.\n\n자격·졸업은 접수마감일까지 충족해야 해요. 졸업예정자는 지원 불가해요.\n임용일 만18~59세, 남성 병역필·면제 및 결격 기준도 확인해요.\n12월 28일 임용 예정이며, 1개월 범위 내 조정될 수 있어요.\n\n중복지원은 탈락, 최종제출 후 수정·재지원은 안 돼요.\n11월 26일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "actual_text_sha256": "bc607c4b458e3cc10470fee8ea05afb461f3eb415917c81fd1312fceef291d61",
+      "body_chars": 331,
+      "media_type": "IMAGE",
+      "media_url": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/902954773_17888679135690627_3139642805943634530_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=3S_I8OgKykYQ7kNvwFRYdo8&_nc_oc=AdrOmC_lHQgntr-VH62PF1fPVC9AoV5GiaZBOFChl3FTm8em1Rw2rk-CyzMjTb9BZzk&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ACifo9UEAAAA&_nc_gid=yfvf4L7a7kYyw1ShZG6sKA&_nc_tpa=Q5bMBQIOMeAFCNA6AjQt-0CNrVFKTj1pGYUxR50LSWULy0jJm3LB9dWBUPGmQwdJowxjplG24mjVIEmPtw&_nc_ct=RQosPBUKFQIAAAA&oh=00_AQTKhLpNrCX0Eu6Li3uFcnw6kFkGWkE6erBezcKuuDIQDg&oe=6AFF2495",
+      "expected_image_sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
+      "automatic_reply_count": 0,
+      "own_replies": 0,
+      "own_replies_status": "verified",
+      "contract_version": 2,
+      "code_commit": "924054e6a435ea7215157770745d544987298257",
+      "own_reply_ids": [],
+      "reply_scan_scope": "top_level_all_pages"
     },
-    "github_job_id": 132236296331,
-    "contract_version": 2,
-    "next_media": "IMAGE",
-    "evidence_source": "Scheduled publisher authenticated official GET persisted in fresh main ledger; fresh Actions job logs corroborate account/post/GET. This monitor did not issue a new Meta GET.",
-    "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json"
+    "actual_media_visual_review": {
+      "status": "passed",
+      "reviewed_at": "2026-11-15T08:03:29+00:00",
+      "post_id": "18137768440737022",
+      "checked_at": "2026-11-15T08:01:24.009103+00:00",
+      "http_status": 200,
+      "sha256": "a5200aa9b3b1f3e1e61d8540db359f472e800999854d86927422fd403c5efb89",
+      "bytes": 129135,
+      "note": "Meta-transformed image hash is not claimed equal to uploaded JPEG hash."
+    },
+    "audit_path": "threads/audits/published-a306965-20261115-1700.json",
+    "status": "published"
   },
   "pending_records_at_activation": 0,
   "first_new_policy_publication": {
@@ -13340,18 +13319,17 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-15T07:59:47+00:00",
-    "main_sha": "924054e6a435ea7215157770745d544987298257",
-    "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
+    "checked_at": "2026-11-15T08:03:29+00:00",
+    "main_sha": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
+    "history_blob_sha": "65d57eb0a06e6036bfe6c543636d66e15391beca",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
     "latest_publisher_run": {
-      "run_id": 43673562322,
+      "run_id": 43692396153,
       "run_attempt": 1,
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-15T03:52:51Z",
-      "head_sha": "fb028ceb25858e8b9170916d8691d44cd4c2a84f",
-      "publish_step": "skipped"
+      "updated_at": "2026-11-15T08:00:37Z",
+      "head_sha": "924054e6a435ea7215157770745d544987298257"
     },
     "new_publisher_runs": [
       {
@@ -13363,9 +13341,9 @@
         "error": "STAGED_SLOT_EXPIRED_OR_FUTURE"
       }
     ],
-    "last_confirmed_post_id": "18101198159539744",
+    "last_confirmed_post_id": "18137768440737022",
     "publisher_in_progress": false,
-    "status": "new_delay_failure_recovered_queue_ready_waiting_regular_publisher",
+    "status": "actual_regular_image_publication_verified",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13409,11 +13387,11 @@
     "monitored_slot": "2026-11-15T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-15T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/delayed-preflight-recovery-20261115-1655.json",
+    "audit_path": "threads/audits/published-a306965-20261115-1700.json",
     "new_failure_fingerprints": [
       "43691683586:1:STAGED_SLOT_EXPIRED_OR_FUTURE:a306965"
     ],
-    "new_metric_observations": null,
+    "new_metric_observations": 0,
     "new_account_observations": 0,
     "new_ready_saved": 1,
     "new_held_drafts_saved": 0,
@@ -13431,17 +13409,18 @@
     "held_draft_card_completed": "a306965",
     "scheduled12_status": "workflow_success_publish_skipped",
     "retrieval_limitations": [
-      "No fresh Meta officialGET this maintenance; upcoming regular publisher must verify account and actual post."
+      "Official GET was executed in the observed publisher run at17:00:20; receipt, accepted claim, account logs and actual media bytes were read and checked in this maintenance.",
+      "Own reply scan covers top-level all pages; not all nested replies."
     ],
-    "next_regular_slot": "2026-11-15T16:00:00+09:00",
-    "next_actual_media": "IMAGE",
-    "scheduled16_status": "staged_ready_pending_preflight_promotion",
-    "scheduled20_status": "unstarted_no_ready; media recheck actual successful history before preparation",
+    "next_regular_slot": "2026-11-15T20:00:00+09:00",
+    "next_actual_media": "TEXT",
+    "scheduled16_status": "published_and_official_GET_verified_at17:00_within_existing2h_grace",
+    "scheduled20_status": "unstarted_no_new_ready",
     "queue_blob_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
     "maintenance_input_blob_sha": "4eb2a67e86aad1e947a2cd1fbd0362cc06789100",
     "performance_blob_sha": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
     "scheduled08_status": "confirmed_presend_failure_grace_expired_no_backfill",
-    "executed_archive_main_sha": "924054e6a435ea7215157770745d544987298257",
+    "executed_archive_main_sha": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
     "archive_to_current_changes": [],
     "new_duplicate_exclusions": 1,
     "accepted_claims_read": 43,
@@ -13670,7 +13649,8 @@
       "preflight_not_yet_due": true,
       "next_regular_publisher": "2026-11-15T16:00:00+09:00"
     },
-    "latest_regular_publisher_16h": "not_observed"
+    "latest_regular_publisher_16h": "verified",
+    "new_regular_publications": 1
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20733,13 +20713,13 @@
     "prepared_at": "2026-11-11T18:37:07.889540+09:00",
     "queue_entry_sha256": "d07cc23496f2896da184b9375e62b0e8e11bbfe68e3d8bc61953b7566dd7cba2",
     "next_notice_id": null,
-    "next_media": "IMAGE",
+    "next_media": "TEXT",
     "text_verified": true,
     "image_verified": true,
     "text_verification_status": "actual_regular_text_publication_verified",
-    "image_verification_status": "verified_regular_publication_and_actual_media_review",
+    "image_verification_status": "verified",
     "automatic_reply_count_expected": 0,
-    "actual_new_post_id": "18101198159539744",
+    "actual_new_post_id": "18137768440737022",
     "metrics_24h": "two_comparable_observations_captured",
     "metrics_72h": "first_72h_window_captured_late_not_comparable",
     "first_14_day_period": {
@@ -21053,9 +21033,9 @@
       "audit_path": "threads/audits/single-main-v2-text-verified-20261111T2045.json"
     },
     "first_confirmed_new_publication_at": "2026-11-11T20:45:18.355131+09:00",
-    "next_slot": "2026-11-15T16:00:00+09:00",
-    "next_ready_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
-    "next_card_status": "reviewed_exact_assets_verified",
+    "next_slot": "2026-11-15T20:00:00+09:00",
+    "next_ready_entry_sha256": null,
+    "next_card_status": "next_actual_media_TEXT_recheck_history",
     "completion_states": {
       "code": "applied",
       "operational_settings": "active_contract2",
@@ -21146,8 +21126,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-15T07:59:47+00:00",
-      "main_sha": "924054e6a435ea7215157770745d544987298257",
+      "checked_at": "2026-11-15T08:03:29+00:00",
+      "main_sha": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
       "contract_version": 2,
       "policy_hashes": {
         "policy": {
@@ -21190,7 +21170,7 @@
       "full_active_prompt_read": true,
       "queue_check_status": "passed_current_main_full_validator",
       "ready_entries": [],
-      "new_regular_publications": 0,
+      "new_regular_publications": 1,
       "scheduled12_status": "workflow_success_publish_skipped",
       "failed_run": {
         "run_id": "43652971854",
@@ -21202,7 +21182,7 @@
         "workflow_path": ".github/workflows/threads_auto.yml",
         "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854"
       },
-      "next_media": "IMAGE",
+      "next_media": "TEXT",
       "next_future_slot": "2026-11-15T16:00:00+09:00",
       "card_reverification": {
         "valid": true,
@@ -21223,7 +21203,7 @@
         "reviewed_at": "2026-11-15T02:02:29.499279+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/delayed-preflight-recovery-20261115-1655.json",
+      "audit_path": "threads/audits/published-a306965-20261115-1700.json",
       "latest_publisher_run": {
         "run_id": 43652971854,
         "run_attempt": 1,
@@ -21234,12 +21214,12 @@
         "event": "schedule"
       },
       "new_publisher_runs": [],
-      "status": "delayed_preflight_recovered",
-      "next_slot": "2026-11-15T16:00:00+09:00",
+      "status": "actual_regular_publication_verified",
+      "next_slot": "2026-11-15T20:00:00+09:00",
       "scheduled16_status": "staged_ready_pending_preflight",
       "scheduled20_status": "unstarted_no_ready; media recheck actual successful history before preparation",
       "scheduled08_status": "confirmed_presend_failure_grace_expired_no_backfill",
-      "executed_archive_main_sha": "924054e6a435ea7215157770745d544987298257",
+      "executed_archive_main_sha": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
       "archive_to_current_changes": [],
       "new_duplicate_exclusions": 1,
       "staging_ready_entries": [
@@ -21555,7 +21535,7 @@
       "evidence_source": "Scheduled publisher authenticated official GET persisted in fresh main ledger; fresh Actions job logs corroborate account/post/GET. This monitor did not issue a new Meta GET.",
       "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json"
     },
-    "next_slot_status": "queued_identical_preapproved_entry_within_existing_grace",
+    "next_slot_status": "unstarted_new_unique_manuscript_required",
     "publication_reports": {
       "17918731521553015": {
         "status": "prepared_for_current_report",
@@ -21596,133 +21576,111 @@
         "reply_count": 0,
         "official_GET_checked_at": "2026-11-13T17:16:52.785818+09:00",
         "audit_path": "threads/audits/monitor-v2-20261113T1724.json"
-      }
-    },
-    "latest_image_verification": {
-      "notice_id": "a306717",
-      "scheduled_at": "2026-11-13T20:00:00+09:00",
-      "published_at": "2026-11-13T20:46:01.646497+09:00",
-      "post_id": "17922530685243848",
-      "queue_entry_sha256": "e73cf4d63cbcc3d22375d8300dea6aa2b95deaee1f35dc6f33b6ed8a38c92e21",
-      "public_output_verification": {
-        "checked_at": "2026-11-13T20:46:02.045836+09:00",
-        "post_id": "17922530685243848",
-        "status": "verified",
-        "permalink": "https://www.threads.com/@hid_119/post/DfrjhVcFRs8",
-        "actual_text": "접수·진료 보조 일을 찾는다면,\n서울대학교치과병원 간호원무직 정규직 1명 공고예요.\n\n간호조무사 자격증은 우대예요.\n11월 4일 공고일 기준 만 60세 미만이어야 해요.\n남자는 2027년 1월 1일 임용일 기준 병역필 또는 면제여야 해요.\n\n3개월 조건부 평가가 양호해야 정식 임용돼요.\n서울 근무, 분원·수탁기관 배치와 다른 직무 수행도 가능해요.\n\n다른 진행 공고와 중복지원은 안 돼요.\n최종면접 전 인성검사를 완료해야 해요.\n결격 기준도 확인해요.\n\n11월 18일 12:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
-        "actual_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
-        "body_chars": 298,
+      },
+      "18137768440737022": {
+        "verified_at": "2026-11-15T08:03:29+00:00",
+        "published_at": "2026-11-15T17:00:20.519410+09:00",
+        "notice_id": "a306965",
+        "run_id": "43692396153",
+        "run_attempt": 1,
+        "post_id": "18137768440737022",
+        "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+        "account": "hid_119",
+        "body_chars": 331,
+        "contract_version": 2,
         "media_type": "IMAGE",
-        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/902825743_17888405763690627_9197771045990158155_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=Flcw6KIJzSsQ7kNvwH4uxOs&_nc_oc=Adp-5HF6phPqmtD1bUymjvKWqK99LrUCxqBBFzdszwg9xl83wn5kxtWCKwcXL7CjEVk&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ACifo9UEAAAA&_nc_gid=IZSjYnjzIS-acqmOeQOXtw&_nc_tpa=Q5bMBQK5t0iZQLi86N_uL077R-ihfsmMpMpMLI-u3qyWs4o-G13IaJ8eXFOGNeLgGHj7OSn1K3o2OdUfsQ&_nc_ct=RQosPBUKFQIAAAA&oh=00_AQQfxVg3VL_TJS8nWTyo24E_8lKseBQQZSP64tuFPMOHlw&oe=6AFCC804",
-        "expected_image_sha256": "8795970f5bb7b9a084685818c717ce0ee72c7a3ff1ea8f22dfd5f9aaf487a66b",
         "automatic_reply_count": 0,
         "own_replies": 0,
         "own_replies_status": "verified",
-        "contract_version": 2,
-        "code_commit": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
-        "own_reply_ids": [],
-        "reply_scan_scope": "top_level_all_pages"
-      },
-      "source_checked_at": "2026-11-13T08:28:45.192948+09:00",
-      "original_source_checked_at": "2026-11-13T08:28:45.192948+09:00",
-      "selection_reason": "공식 진행 중인 정규직 단일 모집단위 1명. 필수 자격증이 없고 우대와 공통 제한을 구분할 수 있으며 11월18일 정오까지 준비시간을 확보한다. 최근 기계·광해·회계 공고 이후 업무 다양성을 고려하며 직무·지역 인기도를 추정하지 않는다.",
-      "observed_at": "2026-11-13T12:23:47.639571+00:00",
-      "account": "hid_119",
-      "configured_api_account_id": "28818095904512513",
-      "api_username_verified": true,
-      "api_username_verified_at": "2026-11-13T11:45:37.2318323Z",
-      "api_returned_post_id": "17922530685243848",
-      "permalink": "https://www.threads.com/@hid_119/post/DfrjhVcFRs8",
-      "run_id": "43419567235",
+        "reply_scan_scope": "top_level_all_pages",
+        "official_GET_checked_at": "2026-11-15T17:00:20.726457+09:00",
+        "accepted_claim_blob": "c9a00308846100f6409fd032671e4885a416d79b",
+        "history_blob": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+        "proof": {
+          "checked_at": "2026-11-15T17:00:20.726457+09:00",
+          "post_id": "18137768440737022",
+          "status": "verified",
+          "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+          "actual_text": "IT 정보화·시스템 운영을 맡을 분께,\n(재)한국보건의료정보원 전산 초급기술자 기간제근로자 5명 공고예요.\n\n기사 자격 또는 (IT 관련 경력과 채용 관련 업무경력)이 필요해요.\n서울 근무·근무지 변경 가능, 계약은 2027년 12월 31일까지예요.\n\n자격·졸업은 접수마감일까지 충족해야 해요. 졸업예정자는 지원 불가해요.\n임용일 만18~59세, 남성 병역필·면제 및 결격 기준도 확인해요.\n12월 28일 임용 예정이며, 1개월 범위 내 조정될 수 있어요.\n\n중복지원은 탈락, 최종제출 후 수정·재지원은 안 돼요.\n11월 26일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+          "actual_text_sha256": "bc607c4b458e3cc10470fee8ea05afb461f3eb415917c81fd1312fceef291d61",
+          "body_chars": 331,
+          "media_type": "IMAGE",
+          "media_url": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/902954773_17888679135690627_3139642805943634530_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=3S_I8OgKykYQ7kNvwFRYdo8&_nc_oc=AdrOmC_lHQgntr-VH62PF1fPVC9AoV5GiaZBOFChl3FTm8em1Rw2rk-CyzMjTb9BZzk&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ACifo9UEAAAA&_nc_gid=yfvf4L7a7kYyw1ShZG6sKA&_nc_tpa=Q5bMBQIOMeAFCNA6AjQt-0CNrVFKTj1pGYUxR50LSWULy0jJm3LB9dWBUPGmQwdJowxjplG24mjVIEmPtw&_nc_ct=RQosPBUKFQIAAAA&oh=00_AQTKhLpNrCX0Eu6Li3uFcnw6kFkGWkE6erBezcKuuDIQDg&oe=6AFF2495",
+          "expected_image_sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
+          "automatic_reply_count": 0,
+          "own_replies": 0,
+          "own_replies_status": "verified",
+          "contract_version": 2,
+          "code_commit": "924054e6a435ea7215157770745d544987298257",
+          "own_reply_ids": [],
+          "reply_scan_scope": "top_level_all_pages"
+        },
+        "actual_media_visual_review": {
+          "status": "passed",
+          "reviewed_at": "2026-11-15T08:03:29+00:00",
+          "post_id": "18137768440737022",
+          "checked_at": "2026-11-15T08:01:24.009103+00:00",
+          "http_status": 200,
+          "sha256": "a5200aa9b3b1f3e1e61d8540db359f472e800999854d86927422fd403c5efb89",
+          "bytes": 129135,
+          "note": "Meta-transformed image hash is not claimed equal to uploaded JPEG hash."
+        },
+        "audit_path": "threads/audits/published-a306965-20261115-1700.json"
+      }
+    },
+    "latest_image_verification": {
+      "verified_at": "2026-11-15T08:03:29+00:00",
+      "published_at": "2026-11-15T17:00:20.519410+09:00",
+      "notice_id": "a306965",
+      "run_id": "43692396153",
       "run_attempt": 1,
-      "run_status": "completed",
-      "run_conclusion": "success",
-      "run_updated_at": "2026-11-13T11:46:19Z",
-      "run_head_sha": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
-      "code_commit": "289d862ab3e797c064b5b519e09d5c35afc8c38a",
+      "post_id": "18137768440737022",
+      "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+      "account": "hid_119",
+      "body_chars": 331,
+      "contract_version": 2,
       "media_type": "IMAGE",
-      "official_media_type": "IMAGE",
-      "image_url": "https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/a306717.jpg",
-      "image_sha256": "8795970f5bb7b9a084685818c717ce0ee72c7a3ff1ea8f22dfd5f9aaf487a66b",
-      "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/902825743_17888405763690627_9197771045990158155_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=Flcw6KIJzSsQ7kNvwH4uxOs&_nc_oc=Adp-5HF6phPqmtD1bUymjvKWqK99LrUCxqBBFzdszwg9xl83wn5kxtWCKwcXL7CjEVk&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ACifo9UEAAAA&_nc_gid=IZSjYnjzIS-acqmOeQOXtw&_nc_tpa=Q5bMBQK5t0iZQLi86N_uL077R-ihfsmMpMpMLI-u3qyWs4o-G13IaJ8eXFOGNeLgGHj7OSn1K3o2OdUfsQ&_nc_ct=RQosPBUKFQIAAAA&oh=00_AQQfxVg3VL_TJS8nWTyo24E_8lKseBQQZSP64tuFPMOHlw&oe=6AFCC804",
-      "body_chars": 298,
-      "main_count": 1,
       "automatic_reply_count": 0,
       "own_replies": 0,
       "own_replies_status": "verified",
       "reply_scan_scope": "top_level_all_pages",
-      "own_reply_limit": "top-level all pages; nested descendant absence not established",
-      "official_GET_checked_at": "2026-11-13T20:46:02.045836+09:00",
-      "actual_text": "접수·진료 보조 일을 찾는다면,\n서울대학교치과병원 간호원무직 정규직 1명 공고예요.\n\n간호조무사 자격증은 우대예요.\n11월 4일 공고일 기준 만 60세 미만이어야 해요.\n남자는 2027년 1월 1일 임용일 기준 병역필 또는 면제여야 해요.\n\n3개월 조건부 평가가 양호해야 정식 임용돼요.\n서울 근무, 분원·수탁기관 배치와 다른 직무 수행도 가능해요.\n\n다른 진행 공고와 중복지원은 안 돼요.\n최종면접 전 인성검사를 완료해야 해요.\n결격 기준도 확인해요.\n\n11월 18일 12:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
-      "actual_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
-      "history_blob_sha": "08f8c9ffa003998872fdf1b319a04104f9e43a82",
-      "accepted_claim_path": "threads-claims/20261113T1100Z.json",
-      "accepted_claim_blob_sha": "7acf58a25f402c3cfab896b1a33b1808bd3d508b",
-      "accepted_claim": {
-        "slot": "2026-11-13T20:00:00+09:00",
-        "run_id": "43419567235",
-        "state": "accepted",
-        "post_id": "17922530685243848"
+      "official_GET_checked_at": "2026-11-15T17:00:20.726457+09:00",
+      "accepted_claim_blob": "c9a00308846100f6409fd032671e4885a416d79b",
+      "history_blob": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+      "proof": {
+        "checked_at": "2026-11-15T17:00:20.726457+09:00",
+        "post_id": "18137768440737022",
+        "status": "verified",
+        "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+        "actual_text": "IT 정보화·시스템 운영을 맡을 분께,\n(재)한국보건의료정보원 전산 초급기술자 기간제근로자 5명 공고예요.\n\n기사 자격 또는 (IT 관련 경력과 채용 관련 업무경력)이 필요해요.\n서울 근무·근무지 변경 가능, 계약은 2027년 12월 31일까지예요.\n\n자격·졸업은 접수마감일까지 충족해야 해요. 졸업예정자는 지원 불가해요.\n임용일 만18~59세, 남성 병역필·면제 및 결격 기준도 확인해요.\n12월 28일 임용 예정이며, 1개월 범위 내 조정될 수 있어요.\n\n중복지원은 탈락, 최종제출 후 수정·재지원은 안 돼요.\n11월 26일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+        "actual_text_sha256": "bc607c4b458e3cc10470fee8ea05afb461f3eb415917c81fd1312fceef291d61",
+        "body_chars": 331,
+        "media_type": "IMAGE",
+        "media_url": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/902954773_17888679135690627_3139642805943634530_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=3S_I8OgKykYQ7kNvwFRYdo8&_nc_oc=AdrOmC_lHQgntr-VH62PF1fPVC9AoV5GiaZBOFChl3FTm8em1Rw2rk-CyzMjTb9BZzk&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ACifo9UEAAAA&_nc_gid=yfvf4L7a7kYyw1ShZG6sKA&_nc_tpa=Q5bMBQIOMeAFCNA6AjQt-0CNrVFKTj1pGYUxR50LSWULy0jJm3LB9dWBUPGmQwdJowxjplG24mjVIEmPtw&_nc_ct=RQosPBUKFQIAAAA&oh=00_AQTKhLpNrCX0Eu6Li3uFcnw6kFkGWkE6erBezcKuuDIQDg&oe=6AFF2495",
+        "expected_image_sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
+        "automatic_reply_count": 0,
+        "own_replies": 0,
+        "own_replies_status": "verified",
+        "contract_version": 2,
+        "code_commit": "924054e6a435ea7215157770745d544987298257",
+        "own_reply_ids": [],
+        "reply_scan_scope": "top_level_all_pages"
       },
       "actual_media_visual_review": {
-        "checked_at": "2026-11-13T12:21:56.360030+00:00",
-        "source": "official_GET_media_url",
-        "bytes": 97800,
-        "sha256": "735e801666add81737b56b890097de5aeb5a25d89b3af0091e019f9ecc065f47",
-        "size": [
-          1080,
-          1080
-        ],
-        "uploaded_original_sha_claim": false,
         "status": "passed",
-        "reviewed_at": "2026-11-13T12:23:47.639548+00:00",
-        "reviewed_width": 360,
-        "observations": "Opened actual Meta media_url JPEG1080 and exact360 LANCZOS preview. 간호원무직, 정규직1명, 서울대학교치과병원,11월18일12:00,공고일기준만60세미만 readable without clipping and match final body. Meta transformed bytes hash is distinct from reviewed upload original."
+        "reviewed_at": "2026-11-15T08:03:29+00:00",
+        "post_id": "18137768440737022",
+        "checked_at": "2026-11-15T08:01:24.009103+00:00",
+        "http_status": 200,
+        "sha256": "a5200aa9b3b1f3e1e61d8540db359f472e800999854d86927422fd403c5efb89",
+        "bytes": 129135,
+        "note": "Meta-transformed image hash is not claimed equal to uploaded JPEG hash."
       },
-      "github_job_id": 131865863850,
-      "contract_version": 2,
-      "next_media": "TEXT",
-      "evidence_source": "scheduled publisher authenticated official GET persisted in fresh ledger and job logs; actual media_url JPEG opened in current maintenance",
-      "audit_path": "threads/audits/monitor-v2-20261113T2125.json",
-      "source_refs": [
-        {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306717",
-          "checked_at": "2026-11-13T08:28:45.192948+09:00",
-          "document_sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
-          "excerpt": "잡알리오 채용정보 상세 보기 공유하기 서울대학교치과병원 2027년 상반기 정규직(원무직) 채용 공고 2026.11.04 / 진행중 공공기관 채용정보 기관명 서울대학교치과병원 표준직무(NCS) 보건.의료 고용형태 정규직 학력정보 학력무관 채용구분 신입+경력 근무지 서울 근무분야 기타(간호원무직) 채용인원 1 우대조건 간호조무사 자격증 소지자 및 장애인, 국가보훈대상자 공고기간 26.11.04 ~ 26.11.18 응시자격 별도 자격제한 없음 결격사유 인사규정 제19조 (결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원으로서 채용될 수 없다. 1. 피성년후견인, 피한정후견인 또는 피특정후견인 2. 파산선고를 받은 자로서 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 또는 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 만료된 날로부터 2년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예기간 중에 있는 자 6. 법원의 판결 또는 다른 법률에 따라 자격이 상실되거나 정지된 자 6의2. 직무와 관련하여 「형법」 제355조 및 제356조에 규정된 죄를 범한 자로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 자(신설 20.9.17.) 6의3.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 규정된 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람(신설 20.9.17.) 6의4. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다)(신설 20.9.17.) 가.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄(신설 20.9.17.) 나.「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄(신설 20.9.17.) 7. 병역의무자로서 병역기피를 한 자 8. 징계처분에 의하여 해임된 자로서 5년이 경과하지 아니한 자 9. (삭제 19.12.18.) 10.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」 제82조 및 제83조에 따라 부패행위로 당연퇴직, 파면, 해임 또는 벌금형으로 취업이 제한된 자(신설 16.12.29., 개정 18.12.10.) 11. 채용 관련 부정합격자로서 면직 처분을 받은 날로부터 5년을 경과하지 아니한 자(신설 18.5.29.) 직원 채용 세칙 제15조(채용 취소) ① 다음 각 호에 해당하는 자는 전형결과를 무효로 하거나 합격을 취소한다. 1.「인사규정」제19조에 해당하는 자 2. 입사지원서의 작성 내용 또는 제출서류를 허위·위조하거나 고의로 누락·추가한 사항이 확인된 자 3. 본인 또는 본인과 밀접한 관계가 있는 타인이 채용에 관한 부당한 청탁, 압력 또는 재산상의 이익 제공 등의 부정행위로 인해 채용에 합격한 자 4. 타 기관에서 부정채용으로 채용이 취소된 이력이 있는 자 5. 채용에 따른 소정의 서류를 특별한 사유 없이 기일 내에 제출하지 아니한 자 6. 기타 합격을 취소할 상당한 사유가 있다고 판단되는 자 ② 전형과정 중 다음 각 호의 부정행위를 한 자는 그 시험을 무효로 하거나 합격을 취소한다. 1. 시험 시작 전에 시험문제를 열람하는 행위 2. 시험 시작 전 또는 종료 후에 답안을 작성하는 행위 3. 다른 수험생의 답안지를 보거나 본인의 답안지를 보여주는 행위 4. 대리 시험을 의뢰하거나 대리로 시험에 응시하는 행위 5. 허용되지 아니한 통신기기 또는 전자계산기기를 가지고 있는 행위 6. 통신기기, 그 밖의 신호 등을 이용하여 해당 시험 내용에 관하여 다른 사람과 의사소통 하는 행위 7. 부정한 자료를 가지고 있거나 이용하는 행위 8. 그 밖에 시험의 공정한 관리에 영향을 미치는 행위로서 시험의 정지 또는 무효 처리기준으로 정하여 공고한 행위 ③ 제1항, 제2항의 행위가 확인되는 경우 합격이 즉시 취소되며 채용된 이후라도 인사위원회 심의·의결을 거쳐 해임할 수 있다. ④ 제1항, 제2항에 따라 시험을 무효로 하거나 합격이 취소된 자는 그 처분이 있는 날로부터 향후 5년간 치과병원 채용에 응시할 수 없다. 전형절차/방법 1. 전형절차 : 서류전형, 1차 면접전형, 2차 면접전형 2. 전형단계별 선발예정 배수 : 서류전형(7배수), 1차면접전형(5배수), 2차면접전형(1배수) 3. 평가방법 : 서류전형, 면접전형(블라인드 평가) 우대내용 우대사항 해당자 가점 부여 전형단계별 채용정보 원무직(간호원무직) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 채용공고(2027년 상반기 정규직_원무직).pdf 입사지원서 입사지원서 작성가이드 원무직.pdf 직무기술서 직무기술서(원무직_간호원무직).pdf 기타 첨부파일 블라인드 채용 서류전형 배점기준(2026).pdf 블라인드 채용 위반사항 검토기준.pdf 서울대학교치과병원 채용서류 반환청구서.hwp 서울대학교치과병원 채용 이의신청서.hwp 미첨부 사유 원문 URL https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419 클립보드에 주소가 복사 되었습니다."
-        },
-        {
-          "url": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
-          "checked_at": "2026-11-13T08:29:10.046790+09:00",
-          "document_sha256": "289d45c583b51cf5f562d86307fe1ae9b1b43a6256e3df6167604f105a9a8f73",
-          "excerpt": "채용공고 내용 공고명 서울대학교치과병원 2027년 상반기 정규직(원무직) 채용 공고 접수기간 2026.11.04(수) 17:40 ~ 2026.11.18(수) 12:00 D-5 ※ 본 지원화면은 원무직(간호원무직) 지원서 접수 화면입니다. ※ 일반직(간호직, 보건직) 및 운영지원직(미화, 시설, 보안)지원의 경우 별도 지원 링크를 확인해주시기 바랍니다. ※ 일반직(간호직, 보건직) 지원 링크: 이곳을 클릭해주세요. ※ 운영지원직(미화, 시설, 보안) 지원 링크: 이곳을 클릭해주세요. 서울대학교치과병원 2027 년 상반기 정규직(원무직) 채용 공고 1. 채용분야 및 응시자격 직종 및 분야 직 급 인 원 자격요건 우대조건 임용일자 일반직 간호직 ( 간호사 ) 수술장 J1 2 간호사 면허 소지자 장애인 , 국가보훈대상자 2027. 1. 1. 자 병 동 J1 1 보건직 ( 치과위생사 ) J1 4 치과위생사 면허 소지자 장애인 , 국가보훈대상자 원무직 간호원무직 A1 1 - 간호조무사 자격증 소지자 및 장애인 , 국가보훈대상자 운영 지원직 미 화 SA1 5 - 장애인 , 국가보훈대상자 시 설 SA1 1 소방설비산업기사 자격증 보유자 ( 기계 또는 전기분야 ) 보 안 SA1 1 - 합 계 15 ○ 동종 직무를 수행하는 다른 부서 ( 관악 분원 등 ) 에서도 근무할 수 있음 ○ 공고일 기준 정년퇴직 기준연령 ( 만 60 세 ) 에 도달한 자는 지원할 수 없음 ○ 남자는 임용일 (‘27.1.1.) 기준 병역필 또는 면제자에 한함 ○ 면허 ‧ 자격을 요하는 분야는 공고일 기준 해당 면허 ‧ 자격증 소지자에 한함 ○ 첨부파일의 채용분야 직무기술서 , 블라인드 채용 서류전형 기준 , 입사지원서 작성요령 및 주의사항을 반드시 확인한 후 입사지원서 작성 ○ 동시 진행 중인 본원 타 채용공고에 중복지원 불가 ○ 상세 업무 내용 직무기술서 참고 ○ 본 채용은 블라인드 공개채용으로 입사지원서 등에 학교명 , 출신지역 , 가족 ( 신분 ) 관계 , 성별 등을 직 · 간접적으로 표현하거나 이를 유추할 수 있는 내용을 기재하는 경우에는 불합격 처리 등 불이익을 받을 수 있음 2. 지원방법 ◌ 서울대학교치과병원 채용 홈페이지 ( https://snudh.recruiter.co.kr ) 접속 ⇨ 채용공고 선택 ⇨ 지원서 작성 ‧ 수정 3. 전형방법 가 . 1 차 전형 : 서류전형 나 . 2 차 전형 : 실무면접전형 다 . 3 차 전형 : 최종면접전형 ※ 최종면접전형 전 인적성검사 시행 라 . 신체검사 ※ 각 전형 합격자에 한해 차기 차수 전형 기회 부여 4. 전형단계별 합격자 선발 기준 가 . 1 차 전형 ( 서류전형 ) 1) 일반직 ( 간호직 , 보건직 ) 2) 원무직 ( 간호원무직 ) 3) 운영지원직 ( 미화 , 시설 , 보안 ) 가 ) 운영지원직은 지원자 전원 차기 전형 응시 기회 부여 ( 단 , 지원자격 충족 , 블라인드 채용 위배 등 서류전형 불합격 사유가 없는 자에 한함 ) 나 ) 서류전형 점수 100% 를 기준으로 합격자 결정 다 ) 아래 어느 하나에 해당하는 지원자는 불합격 처리 ( 1) 응시자격 ( 자격 ‧ 면허 또는 학위 소지 여부 등 ) 을 기재하지 않은 지원자 (2) 입사지원서에 블라인드채용 취지에 반하는 내용 ( 출신지역 , 가족관계 , 출신학교 등 ) 을 직 · 간접적으로 표현하거나 이를 유추할 수 있는 내용을 기재한 지원자 (3) 자기소개서를 불성실하게 작성한 지원자 ( 의미 없는 글자 반복 , 타 지원자와 내용 동일 , 문항별 동일내용 기재 등 ) 나 . 실무면접전형 1) 채용예정 직무수행능력 및 적격성 심사 2) 실무면접전형 점수 100% 를 기준으로 합격자 결정 3) 실무면접전형 점수가 만점의 60% 미만인 지원자는 합격자 배수와 관계없이 불합격 처리 다 . 최종면접전형 1) 채용예정 직무수행능력 및 적격성 심사 2) 실무면접 합격자는 최종면접 이전 인성검사에 응시해야 하며 , 인성검사는 면접 참고자료로 활용 ( 인성검사 미응시 · 미완료시 최종면접 응시 불가 ) 3) 실무면접전형 점수 40%, 최종면접전형 점수 60% 를 기준으로 합격자 결정 4) 최종면접전형 점수가 만점의 60% 미만인 지원자는 합격자 배수와 관계없이 불합격 처리 라 . 신체검사 1) 판정기준은 「 공무원 채용 신체검사 규정 」 준용 2) 「 장애인복지법 」 제 2 조에 따른 장애인의 경우 해당 직무수행에 지장이 없다고 인정되는 자에 한하여 직원으로 채용 마 . 예비합격자 1) 직종별 채용예정인원 2 배수 이내로 예비합격자를 선발하여 최종합격자의 임용포기 , 결격사유 등으로 인한 결원 발생 시 추가 합격자로 결정할 수 있음 바 . 합격자 배수 및 인원 직종 및 분야 채용예정 인원 ( 명 ) 전형단계별 합격인원 ( 명 ) 및 배수 예비 합격인원 서류전형 1 차 면접 2 차 면접 간호직 ( 간호사 ) 수술장 2 명 14 명 (7 배수 ) 6 명 (3 배수 ) 2 명 (1 배수 ) 2 명 (1 배수 ) 병 동 1 명 7 명 (7 배수 ) 3 명 (3 배수 ) 1 명 (1 배수 ) 2 명 (2 배수 ) 보건직 ( 치과위생사 ) 4 명 28 명 (7 배수 ) 12 명 (3 배수 ) 4 명 (1 배수 ) 4 명 (1 배수 ) 원무직 ( 간호원무직 ) 1 명 7 명 (7 배수 ) 5 명 (5 배수 ) 1 명 (1 배수 ) 2 명 (2 배수 ) 운영지원직 미 화 5 명 제한없음 15 명 (3 배수 ) 5 명 (1 배수 ) 5 명 (1 배수 ) 시 설 1 명 제한없음 5 명 (5 배수 ) 1 명 (1 배수 ) 2 명 (2 배수 ) 보 안 1 명 제한없음 5 명 (5 배수 ) 1 명 (1 배수 ) 2 명 (2 배수 ) ※ 「 직원 채용 세칙 」 [ 별표 4] 전형단계별 합격자 배수 기준을 따름 사 . 동점자 사정 기준 1) 동점자는 합격자 배수와 관계없이 전원 합격처리함 2) 단 , 최종합격자를 결정하는 전형에서 동점자가 발생하는 경우 아래 순서에 따라 합격자를 결정함 ① 「 장애인복지법 」 에 의한 장애인 및 「 국가유공자 등 예우에 관한 법률 」 에 의한 취업보호대상자 ② 직전 전형의 고득점자 ③ 우대사항 또는 직종별 가점 사항 해당자 ④ 직제규정상 상위 면접위원의 면접평점이 높은 자 5. 전형일정 구 분 일 정 비 고 응시원서 접수 2026.11.4.( 수 ) ~ 2026.11.18.( 수 ) 12:00 서류전형 결과발표 2026.11.30.( 월 ) 실무면접 전형 간호직 2026.12.2.( 수 ) 보건직 ( 치과위생사 ), 원무직 ( 간호원무직 ) 2026.12.3.( 목 ) 운영지원직 ( 미화 , 시설 , 보안 ) 2026.12.4.( 금 ) 실무면접전형 결과발표 2026.12.10.( 목 ) 온라인 인적성검사 2026.12.10.( 목 ) ~ 2026.12.13.( 일 ) 최종면접 전형 간호직 2026.12.15.( 화 ) 예정 보건직 ( 치과위생사 ), 원무직 ( 간호원무직 ) 운영지원직 ( 미화 , 시설 , 보안 ) 최종면접전형 결과 발표 2026.12.22.( 화 ) 신체검사 2026.12.23.( 수 ) 임용 전 인수인계 2026.12.28.( 월 ) ~ 2026.12.31.( 목 ) 4 일 임 용 2027.1.1. 자 ※ 상기 일정은 진행 과정에 따라 변경될 수 있음 ※ 임용 전 인수인계 일정은 상황에 따라 변경될 수 있음 6. 제출서류 가 . 제출서류 목록 ◌ 학부 및 최종학교 졸업증명서 또는 졸업예정증명서 ( 재학증명서 ) 1 부 ◌ 학부 및 최종학교 전학년 성적증명서 1 부 ( 편입자는 편입 전 학교 포함 ) ◌ 병적사항이 기재된 주민등록초본 ( 남자에 한함 ) 1 부 ◌ 면허증 및 자격증 사본 ( 해당자에 한함 ) 1 부 ◌ 유효기간 내 공인 어학성적표 사본 ( 해당자에 한함 ) 1 부 ◌ 경력증명서 ( 해당자에 한함 ) 1 부 ※ 근무기관 폐업 등 사유로 인해 경력증명서 발급이 어려운 경우 , 건강보험자격득실확인서 등 제출 가능 ◌ 직업교육 , 대외활동 수료증 등 경험사항 증빙서류 ( 해당자에 한함 ) 1 부 ◌ 취업보호대상자 및 장애인 증명서 ( 해당자에 한함 ) 1 부 나 . 관련 안내사항 ◌ 제출서류는 1 차 전형 ( 서류전형 ) 합격자에 한해 제출 하며 ( 제출방법 등 전형 합격자 발표 시 안내 ), 지원서 입력사항이 제출서류와 다를 시에는 합격이 취소됨 ◌ 채용절차의 공정화에 관한 법률에 의거 제출한 서류는 채용여부 확정일로부터 14 일간 반환 청구할 수 있음 ◌ 최종학교 졸업증명서 및 성적증명서 등 제출서류는 입사지원서에 입력한 학교교육사항의 이수 여부 확인 등을 위한 자료로만 활용되며 , 학교명 등의 정보는 면접전형 및 기타 심사과정에 일체 반영되지 않음 7. 가산점 가 . 장애인복지법에 의한 장애인 , 국가유공자예우등에 관한 법률 등 취업지원 적용대상자는 법령이 정하는 바에 따라 우대함 나 . 법률상 가점 외 직종별 가점사항은 블라인드 채용전형 기준에 따름 다 . 가산점은 전형단계별 만점의 40% 이상 득점자에게만 부여함 8. 채용서류의 반환 가 . 신청방법 : 청구서 ( 첨부파일 참고 ) 작성 후 이메일 (apply@snudh.org) 로 스캔본 송부 나 . 신청기간 : 최종합격자 발표일로부터 14 일 이내 다 . 반환대상 : 면접당일 제출한 증빙서류 9. 채용 이의신청 가 . 신청대상 : 채용전형 불합격과 관련하여 이의가 있는 응시자 나 . 신청방법 : 신청서 ( 첨부파일 참고 ) 작성 후 이메일 (apply@snudh.org) 로 스캔본 송부 다 . 신청기간 : 최종합격자 발표일로부터 15 일 이내 라 . 이의신청 예외대상 ◌ 이의신청사유 및 내용 등이 불분명하거나 흠결이 있는 경우 ◌ 채용전형 결과와 무관한 문의 및 질의사항 등 ◌ 평가와 관련한 개인정보 및 지적재산권 등 타 법령에 저촉되는 경우 ◌ 기타 상기 사유에 준하는 사항 10. 기타사항 가 . 입사지원서 기재사항이 사실과 다를 경우 ( 허위기재 , 누락 , 증명서 미제출 , 오기재 등 ) 에는 합격 또는 임용이 취소되며 , 이로 인한 불이익은 일체 응시자의 책임임 나 . 국가공무원법 제 33 조 , 인사규정 제 19 조 ( 결격사유 ), 직원 채용 세칙 제 15 조 ( 채용 취소 ) 에 해당하는 경우 합격 또는 임용이 취소됨 인사규정 제 19 조 ( 결격사유 ) 다음 각 호의 어느 하나에 해당하는 자는 직원으로서 채용될 수 없다 . 1. 피성년후견인 , 피한정후견인 또는 피특정후견인 2. 파산선고를 받은 자로서 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 또는 집행을 받지 아니하기로 확정된 후 5 년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 만료된 날로부터 2 년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예기간 중에 있는 자 6. 법원의 판결 또는 다른 법률에 따라 자격이 상실되거나 정지된 자 6 의 2. 직무와 관련하여 「 형법 」 제 355 조 및 제 356 조에 규정된 죄를 범한 자로서 300 만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2 년이 지나지 아니한 자 ( 신설 20.9.17.) 6 의 3. 「 성폭력범죄의 처벌 등에 관한 특례법 」 제 2 조에 규정된 죄를 범한 사람으로서 100 만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3 년이 지나지 아니한 사람 ( 신설 20.9.17.) 6 의 4. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람 ( 집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다 )( 신설 20.9.17.) 가 . 「 성폭력범죄의 처벌 등에 관한 특례법 」 제 2 조에 따른 성폭력범죄 ( 신설 20.9.17.) 나 . 「 아동ㆍ청소년의 성보호에 관한 법률 」 제 2 조제 2 호에 따른 아동ㆍ청소년대상 성범죄 ( 신설 20.9.17.) 7. 병역의무자로서 병역기피를 한 자 8. 징계처분에 의하여 해임된 자로서 5 년이 경과하지 아니한 자 9. ( 삭제 19.12.18.) 10. 「 부패방지 및 국민권익위원회의 설치와 운영에 관한 법률 」 제 82 조 및 제 83 조에 따라 부패행위로 당연퇴직 , 파면 , 해임 또는 벌금형으로 취업이 제한된 자 ( 신설 16.12.29., 개정 18.12.10.) 11. 채용 관련 부정합격자로서 면직 처분을 받은 날로부터 5 년을 경과하지 아니한 자 ( 신설 18.5.29.) 직원 채용 세칙 제 15 조 ( 채용 취소 ) ① 다음 각 호에 해당하는 자는 전형결과를 무효로 하거나 합격을 취소한다 . 1. 「 인사규정 」 제 19 조에 해당하는 자 2. 입사지원서의 작성 내용 또는 제출서류를 허위 · 위조하거나 고의로 누락 · 추가한 사항이 확인된 자 3. 본인 또는 본인과 밀접한 관계가 있는 타인이 채용에 관한 부당한 청탁 , 압력 또는 재산상의 이익 제공 등의 부정행위로 인해 채용에 합격한 자 4. 타 기관에서 부정채용으로 채용이 취소된 이력이 있는 자 5. 채용에 따른 소정의 서류를 특별한 사유 없이 기일 내에 제출하지 아니한 자 6. 기타 합격을 취소할 상당한 사유가 있다고 판단되는 자 ② 전형과정 중 다음 각 호의 부정행위를 한 자는 그 시험을 무효로 하거나 합격을 취소한다 . 1. 시험 시작 전에 시험문제를 열람하는 행위 2. 시험 시작 전 또는 종료 후에 답안을 작성하는 행위 3. 다른 수험생의 답안지를 보거나 본인의 답안지를 보여주는 행위 4. 대리 시험을 의뢰하거나 대리로 시험에 응시하는 행위 5. 허용되지 아니한 통신기기 또는 전자계산기기를 가지고 있는 행위 6. 통신기기 , 그 밖의 신호 등을 이용하여 해당 시험 내용에 관하여 다른 사람과 의사소통 하는 행위 7. 부정한 자료를 가지고 있거나 이용하는 행위 8. 그 밖에 시험의 공정한 관리에 영향을 미치는 행위로서 시험의 정지 또는 무효 처리기준으로 정하여 공고한 행위 ③ 제 1 항 , 제 2 항의 행위가 확인되는 경우 합격이 즉시 취소되며 채용된 이후라도 인사위원회 심의 · 의결을 거쳐 해임할 수 있다 . ④ 제 1 항 , 제 2 항에 따라 시험을 무효로 하거나 합격이 취소된 자는 그 처분이 있는 날로부터 향후 5 년간 치과병원 채용에 응시할 수 없다 . 다 . 인사규정 제 21 조에 의거하여 최종합격자는 채용될 직위에 3 개월간의 조건부 기간을 거쳐 근무성적이 양호한 때 정규직원으로 임용함 . 다만 , 인력수급상 특히 필요하다고 인정되는 경우에는 적용하지 않을 수 있음 라 . 최종합격 이후라도 임용 결격사유 확인 , 신원조사 등 추가적으로 부적격사유가 발견되는 경우 합격이 취소될 수 있음 마 . 동종 직무를 수행하는 다른 부서 ( 분원 , 수탁기관 포함 ) 에서도 근무할 수 있음 바 . 입사 후 인사관리 상 지원직무 외 타 직무를 수행할 수 있음 사 . 응시인원이 모집인원과 같거나 미달하더라도 적격자가 없는 경우 채용하지 않을 수 있음 아 . 기타 자세한 사항은 인사복지팀 (02-6256-3491) 으로 문의 2026. 11. 4. 서울대학교치과병원장"
-        },
-        {
-          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085205",
-          "checked_at": "2026-11-13T08:29:10.045348+09:00",
-          "document_sha256": "eb98ffa0e9a2f4ce6f03f3c066d43874c63403a57d84d12f9843aeedb0b9767b",
-          "excerpt": "               직 무 기 술 서\n\n              직종              직급          부서\n채용분야\n         원무직(간호원무직)           A1급    치위생행정교육팀\n\n\n         ❍ 데스크 업무\n          - 내원환자 접수 및 안내, 환자 진료내용 파악 및 설명\n          - 진료예약 관리, 대기환자 관리\n          - 간호행정관리(행정, 물품, 시설 및 환경 관리 제반 업무)\n업무내용\n         ❍ 임상관련 업무\n          - 진료보조 업무(간호 수행 보조 업무)\n\n         ❍ 공급실 업무\n          - 감염 및 물품관리(기구세척·멸균 등), 진료실청소 및 환경관리\n\n우대조건     ❍ 간호조무사 자격증 보유자\n         ❍ 데스크 업무\n          - 접수 및 진료과 진료 프로세스 관련 지식\n          - 환자 응대 및 의료 서비스 관련 지식\n\n필요지식     ❍ 임상관련 업무\n          - 치의학 용어, 치과기구·재료 관련 지식\n\n         ❍ 공급실 업무\n          - 감염관리 전반에 관한 지식\n         ❍ 데스크 업무\n          - 환자응대요령, 진료대기시간 관리 기술\n          - 업무용 소프트웨어 활용 능력, 의료장비 활용 능력\n\n         ❍ 임상관련 업무\n필요기술\n          - 진료보조 업무 시 의료기술\n          - 의료장비 작동법 등\n\n         ❍ 공급실 업무\n          - 멸균기 작동법, 관리방법 등\n         의사소통능력, 문제해결능력, 대인관계능력, 정보능력, 문서작성능\n직업기초능력\n         력, 직업윤리\n\n  비고     동종 직종 타 부서(업무)에 전보 배치될 수 있음\n\f",
-          "review_scope": "extracted full PDF text read"
-        },
-        {
-          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085206",
-          "checked_at": "2026-11-13T08:29:10.045667+09:00",
-          "document_sha256": "2359442edb2e6f2212c017f2d98cacaa906deec83f5764208f17c4e2a74d5a40",
-          "excerpt": "                   블라인드 채용 서류전형 기준\n\n\n■ 항목별 배점 기준\n\n\n○ 교육사항 (50점)\n1) 일반직\n\n                                        취득평점\n   구분                                                                                 비고\n           A+      A, A-     B+      B, B-      C+     C, C-         D+      D, D-\n\n   대학교\n           10점      9점       8점       7점       6점       5점           4점       3점\n  교육사항\n                   90점 이상   85점 이상   80점 이상   75점 이상   70점 이상       65점 이상   60점 이상\n 학점은행제\n          95점 이상      ~        ~        ~        ~        ~            ~        ~\n 취득점수              95점 미만   90점 미만   85점 미만   80점 미만   75점 미만       70점 미만   65점 미만\n\n※ 직무관련 전공과목 취득점수(10점 만점) × 5과목\n※ 이수학점 2학점 이상 전공과목 기준(P/F과목, 기초과목, 교양과목, 현장실습과목 제외)\n\n※ 자기소개서 작성 시 주의사항\n  - 알파벳 평점을 아래와 같이 숫자 평점으로 일괄 환산하여 작성해주시기 바랍니다.\n   ① A+ → 4.5 /     ② A0, A- → 4.0      /     ③ B+ → 3.5        /    ④ B0, B- → 3.0\n   ⑤ C+ → 2.5 /     ⑥ C0, C- → 2.0       /    ⑦ D+ → 1.5        /    ⑧ D0, D- → 1.0\n\n\n  - 예시 : 이수한 과목이 4.3 만점 중 3.7점(A-) 취득하였을 때\n    ① 환산점수를 확인하여 A- → 4.0점 확인\n    ② 평점만점: 4.5, 취득평점: 4.0 기입\n\n\n\n\n  - 학점은행제 취득점수의 경우, 100점 만점에 취득점수를 입력해주시면 됩니다.\n\f2) 원무직/간호원무직\n\n                                      부여점수\n 구분                                                                              비고\n         50점      45점      40점      35점      30점      25점      20점      15점\n\n고등학교\n         1~11%   12~23%   24~40%   41~60%   61~77%   78~89%   90~96%   97~100%   백분율\n 성적\n                 90점 이상   85점 이상   80점 이상   75점 이상   70점 이상   65점 이상   60점 이상    고졸\n검정고시\n        95점 이상      ~        ~        ~        ~        ~        ~        ~\n취득점수             95점 미만   90점 미만   85점 미만   80점 미만   75점 미만   70점 미만   65점 미만    검정고시\n\n\n\n\n※ 원무직/간호원무직 학교성적 백분위 입력 방법\n - 고등학교 성적표 발급\n  ① 2003년 이전 고등학교 졸업자 : 주민센터, 인근 학교, 졸업학교 등 방문하여 성적표 발급\n  ② 2003년 이후 고등학교 졸업자 : 나이스(https://www.neis.go.kr) - 홈에듀민원서비스\n    - 온라인발급민원 – 성적증명서(고등학교) 발급\n\n\n - 발급한 성적표의 성적 표기방법 확인\n   ① 성적표에 내신등급이 표기된 경우 (예시 : 1~9등급, A~E등급 등)\n      - 엑셀 파일 1번 시트를 활용하여 백분위 환산\n   ② 성적표에 교과목별 석차가 표기된 경우 (예시 : 국어 17등/384명)\n      - 엑셀 파일 2번 시트를 활용하여 백분위 환산\n   ③ 성적표에 교과목별 수우미양가 표기된 경우 (예시 : 국어(수), 영어(미) 등)\n      - 엑셀 파일 3번 시트를 활용하여 백분위 환산\n\n\n\n\n - 각 엑셀 파일별 안내문에 따라 성적 입력 후, 전체 백분위 산출\n      내신등급으로 산출              교과목별 석차로 산출                      수우미양가로 산출\n\n\n\n\n ※ 성적증명서 상 등급이 ‘우수’, ‘보통’, ‘미흡’, ‘이수’, ‘미이수’ 등으로 표시되는 과목 제외\n\n\n - 고등학교 3학년 2학기까지 입력 후 나온 백분율을 지원서 작성하면에 입력\n\n\n※ 고졸 검정고시 취득점수의 경우 아래와 같이 입력\n - 계열 : 기타\n - 학업성적 : 검정고시 전체 과목 취득 평균점수를 올림하여 정수로 입력\n\f○ 어학사항 (20점)\n                    구분                        배점   비고\n                                900점 이상       20\n                                800점 이상       15\n                 TOEIC\n                                700점 이상       10\n                                600점 이상       5\n                                370점 이상       20\n                                309점 이상       15\n                New TEPS\n                                264점 이상       10\n                                227점 이상       5\n    영어\n                                IH, AL 이상     20\n                  OPIc             IM3        15\n                TOEIC-S            IM2        10\n                                   IM1        5\n                                66점 이상        20\n                                57점 이상        15\n                 TEPS-S\n                                50점 이상        10\n                                42점 이상        5\n                                900점 이상       20\n                                800점 이상       15\n   일본어            J.P.T\n                                700점 이상       10\n                                600점 이상       5\n                              6급(180점 이상)     20\n                              5급(210점~300점)   15\n   중국어           新H.S.K\n                              5급(180점~209점)   10\n                            4급(210점~300점)     5\n※ 채용공고 마감일 기준 최근 24개월 이내 성적에 한하여 인정함\n※ 동일 분야 내 복수 자격사항 보유시 등급이 높은 자격사항을 인정함\n\f○ 자격사항 (30점)\n\n                    구분                       배점      유효기간\n                                    1급       10\n 한국사(10)        한국사능력검정시험\n                                  2급, 3급     5\n                                    1급       10\n                 컴퓨터활용능력\n                                    2급       5\n IT분야(10)\n                                    기사       10\n               정보처리, 사무자동화산업\n                                   기능사       5\n                                  1급, 2+급    10   채용 공고 마감일\n                KBS 한국어능력시험\n                                  2-급, 3+급   5    기준 최근 2년 이내\n 국어능력(10)         한자능력시험            1급       10\n            - 한자능력검정시험(한국어문회)\n            - 한자실력급수(한국한자실력평가원)   2급, 3급     5\n\n※ 동일 분야 내 복수 자격사항 보유시 등급이 높은 자격사항 인정\n※ 직무분야 특성에 따라 인정자격을 선택·추가하거나 생략할 수 있으며 인사위원회의 심의·의결로 결정\n\f■ 가산점\n\n\n○ 법률상 가점 사항\n\n\n       구분             서류전형            필기전형         면접전형\n\n\n\n       장애인         만점 기준 5%            좌동              좌동\n\n\n\n                 만점 기준 5% 또는\n  취업지원대상자(보훈)                          좌동              좌동\n                      10%\n\n\n※ 장애인 : 장애인복지법, 장애인고용촉진 및 직업재활법에 의한 장애인증명서 소지자\n※ 취업지원대상자(보훈) : 국가유공자등예우및지원에관한법률에 의한 취업지원대상자 관련 증빙 제출\n                가능자\n※ 취업지원대상자 가점과 장애인 가점이 중복되는 경우 응시자에게 유리한 가점 적용, 전문자격증 소\n  지자 가산점과는 중복 적용 가능\n※ 모든 가점은 100점 만점의 40점 이상 득점자에 한해 적용\n\n\n\n○ 직종별 가점 사항\n\n       구분                      가점사항                배점       비고\n\n                               전문자격\n                                                   20\n                (변호사, 공인회계사, 노무사, 세무사, 변리사, 법무사)\n       공통\n  (일반직, 원무직)            본원 우수인턴증명서 보유자             5\n\n                        본원 체험형 인턴 수료자              2\n\n 보건직    치과위생사           치과보험청구사 2급 이상              5\n\n    간호원무직                     간호조무사                5\n\n※ 직종별 가점 사항은 1차 전형(서류전형)에 한해 적용\n※ 직무분야 특성에 따라 인정자격을 선택·추가하거나 생략할 수 있으며 인사위원회의 심의·의결로 결정\n\f",
-          "review_scope": "extracted full PDF text read"
-        },
-        {
-          "url": "https://www.alio.go.kr/download/download.json?fileNo=3085207",
-          "checked_at": "2026-11-13T08:29:10.046075+09:00",
-          "document_sha256": "0609d0dfa8a358ee24d518b3062bb8ae103c48fc33724f9ecde7400e192f1c3a",
-          "excerpt": "           블라인드채용 위반사항 검토 기준\n○ 입사지원서(자기소개서 포함) 내 인적 사항 입력란을 제외하고 블라인드 요인\n (출신학교·성명·출생/출신지·가족관계·성별·연령 등)과 관련하여 직·간접적으로 기\n 재하거나 유추할 수 있는 경우 불합격 처리함\n\n○ 부득이하게 기재가 필요한 경우 다음과 같이 기재한 부분에 대해서는 인정\n 예시) ○○에서 태어나, ○○대학교에서 기계공학을 전공하여~\n\n\n○ ‘경험·경력사항’과 관련된 직장명 등은 기재 가능. 단, 학교 근무경력 기술\n 시 블라인드 사항의 직접적인 유추 여부를 고려하여 작성할 것\n\n○ 블라인드 처리 위반사항 안내\n\n   구 분                       기준 및 위반 예시\n\n           (기 준) 자기소개서 전 항목에 출신학교명 기재 또는 직·간접적으로\n                 유추할 수 있는 내용 기재 시 불합격 처리(고등학교명,\n  출신학교           대학교명, 동아리명 등)\n           (예 시) 서울대학교 회장으로서 ~, 서울고등학교 총동창회 회장으로서 ~ ,\n                 대학교 치어리더 동아리 ‘비상’에서 ~\n\n           (기 준) 자기소개서 전 항목에 성명 기재 시 불합격 처리\n   성 명\n           (예 시) 지원자 홍길동입니다(성, 이름), 홍씨 집안의(성) 등\n\n           (기 준) 자기소개서 전 항목에 출생/출신지역을 직·간접적으로\n  출생/출신지         기재할 경우 불합격 처리\n           (예 시) 부산에서 태어나 평생을 자라 왔으며~ , △△ 지역 기질 등\n\n           (기 준) 자기소개서 전 항목에 가족관계를 직·간접적으로 유추할\n  가족관계           수 있는 내용을 직·간접적으로 기재할 경우 불합격 처리\n           (예 시) 아버지께서 서울대학교에서 교수로 재직하시고 ~\n\n           (기 준) 자기소개서 전 항목에 성별을 직접적으로 유추할 수 있는 내용을\n                 직·간접적으로 기재할 경우 불합격 처리\n           (예 시) 결혼 후 아내(남편)과 함께 생활하며 ~\n                 자식들에게 부끄럽지 않은 아버지(어머니)가 되고자\n                 형(누나,언니,오빠)인 제가 ~\n                 간호사인 어머니와 언니를 보며 ~\n   성 별\n                 판매여왕 호칭을 얻었습니다~\n                 여대를 졸업하고, 여성동아리(여학생회) ~, 여자축구대회~\n                 군복무를 현역(운전병, 군수병, 전경, 의경 등)으로 입대하여~\n                 의무복무를 하게 되었습니다~\n                ※ 의무복무(병)는 남성만 가능하므로 성별 직접적 유추 가능\n                ※ 장교 복무는 언급 가능(성별 미노출)\n\n           (기 준) 자기소개서 전 항목에 생년월일 또는 연령을 직접적으로 유추할 수 있는\n   연 령           내용을 직·간접적으로 기재할 경우 불합격 처리\n           (예 시) 올림픽(월드컵)이 개최되던 해에 태어나, 30년간 살아오면서 ~\n\f",
-          "review_scope": "extracted full PDF text read"
-        }
-      ]
+      "audit_path": "threads/audits/published-a306965-20261115-1700.json"
     },
     "current_measurement_status": {
-      "checked_at": "2026-11-15T05:06:17+00:00",
-      "performance_blob": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
+      "checked_at": "2026-11-15T08:03:29+00:00",
+      "performance_blob": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
       "comparable24h": {
         "verified_main_count": 2,
         "metric_medians": {
@@ -21820,7 +21778,11 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "decision": "extend_observation_or_balance_intro_types",
-      "no_post_attribution": true
+      "no_post_attribution": true,
+      "new_post_id": "18137768440737022",
+      "new_post_24h": "not_yet_due",
+      "new_post_72h": "not_yet_due",
+      "performance_improvement_claim": false
     },
     "latest_unassigned_card_review": {
       "notice_id": "a306965",
@@ -21925,7 +21887,12 @@
       "stage_unchanged": true,
       "Meta_POST": false,
       "manual_dispatch": false,
-      "rerun": false
+      "rerun": false,
+      "resolved": true,
+      "resolved_at": "2026-11-15T08:03:29+00:00",
+      "actual_post_id": "18137768440737022",
+      "preventive_PR60_merged": true,
+      "preventive_merge_commit": "cdec1785469cd32091e5731bc02551881bb9b016"
     }
   },
   "single_main_v2_writer_performance": {
@@ -25300,7 +25267,7 @@
     },
     "a306965": {
       "notice_id": "a306965",
-      "status": "queued_ready",
+      "status": "published",
       "assigned_slot": "2026-11-15T16:00:00+09:00",
       "candidate_slot_only": "2026-11-15T16:00:00+09:00",
       "prepared_at": "2026-11-15T05:02:38.700075+00:00",
@@ -25718,7 +25685,7 @@
       "hold_reasons": [],
       "full_queue_validation_passed": false,
       "NOT_READY": false,
-      "NOT_PUBLISHED": true,
+      "NOT_PUBLISHED": false,
       "card_visual_review": {
         "status": "passed",
         "reviewed_width": 360,
@@ -25852,18 +25819,71 @@
           "excerpt": "□ 근무장소 : 서울특별시 중구 칠패로 36"
         }
       ],
-      "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33"
+      "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+      "actual_meta_post_id": "18137768440737022",
+      "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+      "published_at": "2026-11-15T17:00:20.519410+09:00",
+      "publication_verification": {
+        "verified_at": "2026-11-15T08:03:29+00:00",
+        "published_at": "2026-11-15T17:00:20.519410+09:00",
+        "notice_id": "a306965",
+        "run_id": "43692396153",
+        "run_attempt": 1,
+        "post_id": "18137768440737022",
+        "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+        "account": "hid_119",
+        "body_chars": 331,
+        "contract_version": 2,
+        "media_type": "IMAGE",
+        "automatic_reply_count": 0,
+        "own_replies": 0,
+        "own_replies_status": "verified",
+        "reply_scan_scope": "top_level_all_pages",
+        "official_GET_checked_at": "2026-11-15T17:00:20.726457+09:00",
+        "accepted_claim_blob": "c9a00308846100f6409fd032671e4885a416d79b",
+        "history_blob": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+        "proof": {
+          "checked_at": "2026-11-15T17:00:20.726457+09:00",
+          "post_id": "18137768440737022",
+          "status": "verified",
+          "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+          "actual_text": "IT 정보화·시스템 운영을 맡을 분께,\n(재)한국보건의료정보원 전산 초급기술자 기간제근로자 5명 공고예요.\n\n기사 자격 또는 (IT 관련 경력과 채용 관련 업무경력)이 필요해요.\n서울 근무·근무지 변경 가능, 계약은 2027년 12월 31일까지예요.\n\n자격·졸업은 접수마감일까지 충족해야 해요. 졸업예정자는 지원 불가해요.\n임용일 만18~59세, 남성 병역필·면제 및 결격 기준도 확인해요.\n12월 28일 임용 예정이며, 1개월 범위 내 조정될 수 있어요.\n\n중복지원은 탈락, 최종제출 후 수정·재지원은 안 돼요.\n11월 26일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+          "actual_text_sha256": "bc607c4b458e3cc10470fee8ea05afb461f3eb415917c81fd1312fceef291d61",
+          "body_chars": 331,
+          "media_type": "IMAGE",
+          "media_url": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/902954773_17888679135690627_3139642805943634530_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=3S_I8OgKykYQ7kNvwFRYdo8&_nc_oc=AdrOmC_lHQgntr-VH62PF1fPVC9AoV5GiaZBOFChl3FTm8em1Rw2rk-CyzMjTb9BZzk&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ACifo9UEAAAA&_nc_gid=yfvf4L7a7kYyw1ShZG6sKA&_nc_tpa=Q5bMBQIOMeAFCNA6AjQt-0CNrVFKTj1pGYUxR50LSWULy0jJm3LB9dWBUPGmQwdJowxjplG24mjVIEmPtw&_nc_ct=RQosPBUKFQIAAAA&oh=00_AQTKhLpNrCX0Eu6Li3uFcnw6kFkGWkE6erBezcKuuDIQDg&oe=6AFF2495",
+          "expected_image_sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
+          "automatic_reply_count": 0,
+          "own_replies": 0,
+          "own_replies_status": "verified",
+          "contract_version": 2,
+          "code_commit": "924054e6a435ea7215157770745d544987298257",
+          "own_reply_ids": [],
+          "reply_scan_scope": "top_level_all_pages"
+        },
+        "actual_media_visual_review": {
+          "status": "passed",
+          "reviewed_at": "2026-11-15T08:03:29+00:00",
+          "post_id": "18137768440737022",
+          "checked_at": "2026-11-15T08:01:24.009103+00:00",
+          "http_status": 200,
+          "sha256": "a5200aa9b3b1f3e1e61d8540db359f472e800999854d86927422fd403c5efb89",
+          "bytes": 129135,
+          "note": "Meta-transformed image hash is not claimed equal to uploaded JPEG hash."
+        },
+        "audit_path": "threads/audits/published-a306965-20261115-1700.json"
+      }
     }
   },
   "writer_recovery_latest": {
-    "checked_at": "2026-11-15T07:59:47+00:00",
-    "status": "delayed_preflight_recovered_identical_preapproved_entry_to_queue",
+    "checked_at": "2026-11-15T08:03:29+00:00",
+    "status": "actual_regular_image_publication_verified",
     "notice_id": "a306965",
     "actual_queue_slot": "2026-11-15T16:00:00+09:00",
-    "next_actual_media": "IMAGE",
+    "next_actual_media": "TEXT",
     "historical_ready_records": 31,
     "current_queue_entries": 32,
-    "current_publishable_queue_ready_count": 1,
+    "current_publishable_queue_ready_count": 0,
     "staging_ready_count": 1,
     "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
     "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
@@ -25875,14 +25895,76 @@
     "primary_cause": "15:45 preflight actually ran16:49 and rejected current slot despite original pre-slot approval and existing2h publisher grace",
     "whole_queue_validation": "passed_current_main",
     "field_holds": [],
-    "actual_meta_post_id": null,
-    "actual_meta_post_url": null,
+    "actual_meta_post_id": "18137768440737022",
+    "actual_meta_post_url": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
     "manual_publish_or_dispatch": false,
     "prevention_PR": 60,
-    "prevention_main_applied": false,
+    "prevention_main_applied": true,
     "prevention_local_tests": 273,
     "next_new_unstarted_slot": "2026-11-15T20:00:00+09:00",
-    "audit_path": "threads/audits/delayed-preflight-recovery-20261115-1655.json"
+    "audit_path": "threads/audits/published-a306965-20261115-1700.json",
+    "published_at": "2026-11-15T17:00:20.519410+09:00",
+    "current_publishable_stage_ready_count": 0,
+    "queue_entries": 32,
+    "source_notice_id": "a306965",
+    "prevention_merge_commit": "cdec1785469cd32091e5731bc02551881bb9b016",
+    "prevention_current_main": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
+    "prevention_remote_checks": "4_success",
+    "new_regular_publications": 1,
+    "publication_verification": {
+      "verified_at": "2026-11-15T08:03:29+00:00",
+      "published_at": "2026-11-15T17:00:20.519410+09:00",
+      "notice_id": "a306965",
+      "run_id": "43692396153",
+      "run_attempt": 1,
+      "post_id": "18137768440737022",
+      "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+      "account": "hid_119",
+      "body_chars": 331,
+      "contract_version": 2,
+      "media_type": "IMAGE",
+      "automatic_reply_count": 0,
+      "own_replies": 0,
+      "own_replies_status": "verified",
+      "reply_scan_scope": "top_level_all_pages",
+      "official_GET_checked_at": "2026-11-15T17:00:20.726457+09:00",
+      "accepted_claim_blob": "c9a00308846100f6409fd032671e4885a416d79b",
+      "history_blob": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+      "proof": {
+        "checked_at": "2026-11-15T17:00:20.726457+09:00",
+        "post_id": "18137768440737022",
+        "status": "verified",
+        "permalink": "https://www.threads.com/@hid_119/post/DfwTSSdFmap",
+        "actual_text": "IT 정보화·시스템 운영을 맡을 분께,\n(재)한국보건의료정보원 전산 초급기술자 기간제근로자 5명 공고예요.\n\n기사 자격 또는 (IT 관련 경력과 채용 관련 업무경력)이 필요해요.\n서울 근무·근무지 변경 가능, 계약은 2027년 12월 31일까지예요.\n\n자격·졸업은 접수마감일까지 충족해야 해요. 졸업예정자는 지원 불가해요.\n임용일 만18~59세, 남성 병역필·면제 및 결격 기준도 확인해요.\n12월 28일 임용 예정이며, 1개월 범위 내 조정될 수 있어요.\n\n중복지원은 탈락, 최종제출 후 수정·재지원은 안 돼요.\n11월 26일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+        "actual_text_sha256": "bc607c4b458e3cc10470fee8ea05afb461f3eb415917c81fd1312fceef291d61",
+        "body_chars": 331,
+        "media_type": "IMAGE",
+        "media_url": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/902954773_17888679135690627_3139642805943634530_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=3S_I8OgKykYQ7kNvwFRYdo8&_nc_oc=AdrOmC_lHQgntr-VH62PF1fPVC9AoV5GiaZBOFChl3FTm8em1Rw2rk-CyzMjTb9BZzk&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ACifo9UEAAAA&_nc_gid=yfvf4L7a7kYyw1ShZG6sKA&_nc_tpa=Q5bMBQIOMeAFCNA6AjQt-0CNrVFKTj1pGYUxR50LSWULy0jJm3LB9dWBUPGmQwdJowxjplG24mjVIEmPtw&_nc_ct=RQosPBUKFQIAAAA&oh=00_AQTKhLpNrCX0Eu6Li3uFcnw6kFkGWkE6erBezcKuuDIQDg&oe=6AFF2495",
+        "expected_image_sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
+        "automatic_reply_count": 0,
+        "own_replies": 0,
+        "own_replies_status": "verified",
+        "contract_version": 2,
+        "code_commit": "924054e6a435ea7215157770745d544987298257",
+        "own_reply_ids": [],
+        "reply_scan_scope": "top_level_all_pages"
+      },
+      "actual_media_visual_review": {
+        "status": "passed",
+        "reviewed_at": "2026-11-15T08:03:29+00:00",
+        "post_id": "18137768440737022",
+        "checked_at": "2026-11-15T08:01:24.009103+00:00",
+        "http_status": 200,
+        "sha256": "a5200aa9b3b1f3e1e61d8540db359f472e800999854d86927422fd403c5efb89",
+        "bytes": 129135,
+        "note": "Meta-transformed image hash is not claimed equal to uploaded JPEG hash."
+      },
+      "audit_path": "threads/audits/published-a306965-20261115-1700.json"
+    },
+    "remaining_actions": [
+      "Prepare another unique fully verified20h manuscript; current future ready0.",
+      "Observe24h/72h at actual capture times; no performance improvement claim from this publication alone."
+    ]
   },
   "writer_recovery_duplicate_checks": {
     "a306760": {
