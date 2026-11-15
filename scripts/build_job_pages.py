@@ -882,21 +882,6 @@ def main():
     quality['suspected_same_link_duplicate_groups'] = sum(
         item['distinct_official_link_count'] == 1 for item in suspected_duplicates
     )
-    # Make the editorial workload measurable without changing public indexing.
-    report['review_summary'] = {
-        'current_by_source_end_date': sum(row['is_current_by_source_end_date'] for row in quality_rows),
-        'high_priority': sum(row['review_priority'] == 'high' for row in quality_rows),
-        'medium_priority': sum(row['review_priority'] == 'medium' for row in quality_rows),
-        'low_priority': sum(row['review_priority'] == 'low' for row in quality_rows),
-        'current_missing_duties': sum(
-            row['is_current_by_source_end_date'] and
-            'substantive_duties_missing' in row['review_reasons']
-            for row in quality_rows
-        ),
-        'review_queue_count': len(report['review_queue']),
-    }
-    print('접수 종료일 기준 콘텐츠 검토 우선순위:', json.dumps(report['review_summary'], ensure_ascii=False))
-
     # JSON 보고서는 배포 중 자동 생성되며 공개 페이지에서는 링크하지 않습니다.
     report = {
         'updated_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
@@ -916,6 +901,21 @@ def main():
         'posts': quality_rows,
         'suspected_duplicates': suspected_duplicates,
     }
+    # Make the editorial workload measurable without changing public indexing.
+    report['review_summary'] = {
+        'current_by_source_end_date': sum(row['is_current_by_source_end_date'] for row in quality_rows),
+        'high_priority': sum(row['review_priority'] == 'high' for row in quality_rows),
+        'medium_priority': sum(row['review_priority'] == 'medium' for row in quality_rows),
+        'low_priority': sum(row['review_priority'] == 'low' for row in quality_rows),
+        'current_missing_duties': sum(
+            row['is_current_by_source_end_date'] and
+            'substantive_duties_missing' in row['review_reasons']
+            for row in quality_rows
+        ),
+        'review_queue_count': len(report['review_queue']),
+    }
+    print('접수 종료일 기준 콘텐츠 검토 우선순위:', json.dumps(report['review_summary'], ensure_ascii=False))
+
     report_path = ROOT / 'job-quality-report.json'
     report_path.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + '\n',
