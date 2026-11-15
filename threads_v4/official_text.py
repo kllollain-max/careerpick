@@ -25,6 +25,8 @@ def extract(html, *, terms=None, window=100):
     text=re.sub(r"\s+"," "," ".join(parser.parts)).strip()
     terms=terms or ["한국조세재정연구원","연구위원","10명","정규직","11월 30일","11.30","정정","취소","접수"]
     evidence={}
+    if window < 0 or window > 500:
+        raise ValueError("INVALID_WINDOW")
     for term in terms:
         m=re.search(re.escape(term),text,re.I)
         evidence[term]={"found":bool(m),"snippet":text[max(0,m.start()-window):m.end()+window] if m else None}
