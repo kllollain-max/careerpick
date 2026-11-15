@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "type": "identical_preapproved_entry_safe_queue_supply_not_publication",
+  "observed_at": "2026-11-15T10:52:40+00:00",
+  "account": "hid_119",
+  "notice_id": "a305734",
+  "scheduled_at": "2026-11-15T20:00:00+09:00",
+  "contract_version": 2,
+  "entry_sha256": "76e1e22ad6ff013fc9831edbb1349f0b4435c9afae90a62249c05fcd01a4ac25",
+  "entry_unchanged": true,
+  "prepared_at_unchanged": true,
+  "source_refs_unchanged": true,
+  "main_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+  "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+  "queue_sha_before": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+  "queue_sha_after": "972489ba92126286e40014c2d48bf2aa5ff72298",
+  "queue_commit": "9167196fd445eca1d0684cb49ad9df600b9caa1d",
+  "queue_entries_before": 32,
+  "queue_entries_after": 33,
+  "prior_queue_entries_exactly_preserved": true,
+  "remote_readback_exact": true,
+  "remote_queue_full_validator": {
+    "status": "validated",
+    "ready_entries": [
+      {
+        "scheduled_at": "2026-11-15T20:00:00+09:00",
+        "notice_id": "a305734",
+        "format_id": "deadline_opportunity",
+        "chars": 230,
+        "public_preview": {
+          "main_text": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,\n세종 한국조세재정연구원 (부)연구위원 정규직 10명 모집을 확인해요.\n\n임용 시 박사학위와 한국어 소통·독립연구 역량이 필요해요. 전일근무(09~18시)가 가능해야 해요.\n추천서 3부는 추천인 3명이 접수 시스템으로 제출해요.\n\n마감은 11월 30일 23:59:59 UTC예요. 한국시간으로 12월 1일 08:59:59예요.\n\n자세한 사항은 프로필링크 확인",
+          "detail_reply": ""
+        },
+        "editorial_policy_id": null
+      }
+    ]
+  },
+  "source_rechecks": [
+    {
+      "url": "https://econjobmarket.org/positions/12745",
+      "http_status": 200,
+      "checked_at": "2026-11-15T10:50:58.135109+00:00",
+      "sha256": "a7670d10cb541251bc691f99edd9edf92f564799492ace333ec73462e65410a0",
+      "accepting_applications": true,
+      "validThrough": "2026-11-30T23:59:59+00:00"
+    },
+    {
+      "url": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/list.do",
+      "http_status": 200,
+      "checked_at": "2026-11-15T10:50:56.727956+00:00",
+      "sha256": "aacf0e8e509ded5f4c0c97baffc592b573cd6a4884af41a46ec3fffa555bc5d7",
+      "board_row": "연구위원급(Research Fellow) 정기채용 2026-10-06 ~ 2026-11-30 진행중 1,705 383 공무직(경비) 신규인력채용_보훈제한경쟁 2026-09-21 ~ 2026-10-05 마감 796 382 공공기관연구센터 소장 초빙 2026-09-21 ~ 2026-10-05 마감 492 381 연구위원급(Research Fellow) 채용 2026-08-",
+      "scope": "Latest official recruitment board page 1 only; no exhaustive older-board claim."
+    }
+  ],
+  "source_recheck_limits": "Institution latest recruitment board page 1 and current institution-linked EJM reviewed; no claim of exhaustive all-board absence of corrections. Original 17h full review and actual profile/mobile review retained unchanged.",
+  "claimed_slots_read": 44,
+  "accepted_claims_read": 43,
+  "accepted_claims_match_current_ledger": true,
+  "no_20h_claim_at_mutation": true,
+  "no_pending_or_started_20h_record": true,
+  "history_sha": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+  "latest_actual_success": {
+    "notice_id": "a306965",
+    "post_id": "18137768440737022",
+    "media": "IMAGE",
+    "original_official_GET_checked_at": "2026-11-15T17:00:20.726457+09:00",
+    "note": "Existing verified ledger evidence, not a newly issued Meta GET."
+  },
+  "planned_media": "TEXT",
+  "body_chars": 230,
+  "automatic_reply_count_planned": 0,
+  "public_replies": [],
+  "preflight_due": "2026-11-15T19:45:00+09:00",
+  "regular_preflight_run_status": "not_observed_in_latest_Actions_schedule_run_collection_at_check_time; scheduler delay not declared definitive failure",
+  "supply_method": "Full current-main bridge pure merge/verify_entry plus full --check-queue; latest SHA CAS queue supply, without workflow dispatch or API publish.",
+  "regular_publisher_slot": "2026-11-15T20:00:00+09:00",
+  "current_runs": [
+    {
+      "run_id": 43692396153,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T08:00:37Z",
+      "head_sha": "924054e6a435ea7215157770745d544987298257"
+    },
+    {
+      "run_id": 43691683586,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T07:50:07Z",
+      "head_sha": "924054e6a435ea7215157770745d544987298257"
+    },
+    {
+      "run_id": 43673562322,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T03:52:51Z",
+      "head_sha": "fb028ceb25858e8b9170916d8691d44cd4c2a84f"
+    }
+  ],
+  "performance_sha": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
+  "performance_summary_as_of": "2026-11-15T10:50:32.296360+00:00",
+  "performance_windows": {
+    "24h": {
+      "verified_main_count": 2,
+      "metric_medians": {
+        "views": 2630,
+        "likes": 6,
+        "replies": 0,
+        "reposts": 0.5,
+        "quotes": 0
+      },
+      "metric_observed_counts": {
+        "views": 2,
+        "likes": 2,
+        "replies": 2,
+        "reposts": 2,
+        "quotes": 2
+      },
+      "metric_totals": {
+        "views": 5260,
+        "likes": 12,
+        "replies": 0,
+        "reposts": 1,
+        "quotes": 0
+      },
+      "views_distribution": [
+        {
+          "post_id": "17918731521553015",
+          "views": 2231
+        },
+        {
+          "post_id": "17896425015438025",
+          "views": 3029
+        }
+      ],
+      "likes_rate_percent_median": 0.23351143636317628,
+      "likes_rate_percent_observed_posts": 2,
+      "reader_replies": null,
+      "reader_replies_status": "see_per_post_author_separation_status",
+      "profile_visits": null,
+      "follow_increase": null,
+      "link_clicks": null
+    },
+    "72h": {
+      "verified_main_count": 1,
+      "metric_medians": {
+        "views": 2484,
+        "likes": 7,
+        "replies": 0,
+        "reposts": 2,
+        "quotes": 0
+      },
+      "metric_observed_counts": {
+        "views": 1,
+        "likes": 1,
+        "replies": 1,
+        "reposts": 1,
+        "quotes": 1
+      },
+      "metric_totals": {
+        "views": 2484,
+        "likes": 7,
+        "replies": 0,
+        "reposts": 2,
+        "quotes": 0
+      },
+      "views_distribution": [
+        {
+          "post_id": "17918731521553015",
+          "views": 2484
+        }
+      ],
+      "likes_rate_percent_median": 0.28180354267310787,
+      "likes_rate_percent_observed_posts": 1,
+      "reader_replies": null,
+      "reader_replies_status": "see_per_post_author_separation_status",
+      "profile_visits": null,
+      "follow_increase": null,
+      "link_clicks": null
+    }
+  },
+  "new_24h72h_observations": false,
+  "performance_interpretation": "Measurements unchanged; no improvement/winner claim. 20h draft has not published and has no post metrics.",
+  "actual_meta_post_id": null,
+  "actual_meta_permalink": null,
+  "published": false,
+  "manual_dispatch": false,
+  "rerun": false,
+  "meta_post": false,
+  "new_schedule": false,
+  "remaining_actions": [
+    "Observe original 20h scheduled publisher: require actual Meta ID, permalink, official GET body/account/media and accepted claim before publication success.",
+    "If late/ambiguous, read receipt/remote result first; never duplicate POST or reset claims."
+  ]
+}
