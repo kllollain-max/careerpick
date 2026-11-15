@@ -30,6 +30,12 @@ def summarize(data):
     review_rows = data.get("review_candidates", [])
     if not isinstance(review_rows, list):
         raise ValueError("REVIEW_SCHEMA")
+    review_index = {r.get("notice_id"): r for r in review_rows if isinstance(r, dict) and r.get("notice_id")}
+    for item in selected:
+        details = review_index.get(item["notice_id"], {})
+        for key in ("official_url", "application_period", "employment", "organization", "title"):
+            if not item.get(key):
+                item[key] = details.get(key) or details.get({"official_url":"url", "organization":"org", "title":"notice_title"}.get(key, key))
     return {"schema_version": 1, "status": "REVIEW_REQUIRED" if selected else "NO_CANDIDATE",
             "candidate_count": len(selected), "candidates": selected,
             "review_candidates": review_rows, "selection_audit": data.get("selection_audit", {}),
