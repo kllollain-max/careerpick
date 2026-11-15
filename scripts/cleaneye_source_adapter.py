@@ -152,8 +152,14 @@ def validate_cleaneye_feed(feed, now, *, scheduled=None, max_age_hours=24):
     if not feed["posts"]:
         _fail("CLEANEYE_SOURCE_EMPTY")
     snapshot = _aware(feed.get("updated"), "CLEANEYE_SOURCE_TIME_INVALID")
-    if snapshot > now or max(now, scheduled) - snapshot > timedelta(hours=max_age_hours):
+    if snapshot > now:
         _fail("CLEANEYE_SOURCE_STALE")
+    if max(now, scheduled) - snapshot > timedelta(hours=max_age_hours):
+        try:
+            from scripts.threads_source_verification import verified_time
+            verified_time(feed, now, scheduled, max_age_hours)
+        except (ValueError, KeyError, TypeError):
+            _fail("CLEANEYE_SOURCE_STALE")
     seen = set()
     for post in feed["posts"]:
         if (not isinstance(post, dict) or post.get("cleaneye") is not True or post.get("type") != "j"
