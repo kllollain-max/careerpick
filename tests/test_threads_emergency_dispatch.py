@@ -79,7 +79,7 @@ class EmergencyDispatchTests(unittest.TestCase):
                  patch("scripts.threads_writer_queue.select_ready", side_effect=QueueValidationError("QUEUE_SLOT_MISSING")), \
                  patch.object(publisher, "save") as save_mock:
                 publisher.prepare_master(history, now, "12345")
-            self.assertEqual(output_path.read_text(encoding="utf-8"), "queue_missing=true\\n")
+            self.assertEqual(output_path.read_text(encoding="utf-8"), "queue_missing=true\n")
             save_mock.assert_not_called()
 
     def test_other_queue_validation_errors_are_not_suppressed(self):
