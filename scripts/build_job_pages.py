@@ -543,6 +543,7 @@ def render(post, detail, related_posts=()):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)} | {escape(org)} | 커리어픽</title>
 <meta name="description" content="{escape(meta_description, quote=True)}">
+{'<meta name="robots" content="noindex,follow">' if closed else ''}
 <link rel="canonical" href="{escape(canonical, quote=True)}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{escape(title, quote=True)}">
