@@ -24,7 +24,9 @@ jobs:
       - name: Generate candidate review report from existing recruitment data
         run: |
           mkdir -p /tmp/threads-v4
-          printf '{"schema_version":1,"entries":[]}' > /tmp/threads-v4/queue.json
+          git fetch --no-tags --depth=1 origin refs/heads/threads-publisher-state:refs/remotes/origin/threads-publisher-state
+          git show origin/threads-publisher-state:threads/writer-queue.json > /tmp/threads-v4/queue.json
+          git show origin/threads-publisher-state:threads/reviewed-staging.json > /tmp/threads-v4/staging.json
           python -m threads_v4.candidate_report --queue /tmp/threads-v4/queue.json --output /tmp/threads-v4/candidates.json
           python -c 'import json; d=json.load(open("/tmp/threads-v4/candidates.json")); assert d["approved_count"] == 0; assert d["meta_posted"] is False'
       - name: Triage candidates without unverified approval
@@ -66,7 +68,7 @@ jobs:
           root=Path("/tmp/threads-v4")
           triage=json.loads((root/"official-triage.json").read_text(encoding="utf-8"))
           queue=json.loads((root/"queue.json").read_text(encoding="utf-8"))
-          stage={"schema_version":1,"entries":[]}
+          stage=json.loads((root/"staging.json").read_text(encoding="utf-8"))
           try:
             history=json.loads(Path("threads_posted.json").read_text(encoding="utf-8"))
           except (ValueError, OSError) as exc:
@@ -97,6 +99,8 @@ jobs:
           name: threads-v4-candidate-review
           path: |
             /tmp/threads-v4/candidates.json
+            /tmp/threads-v4/staging.json
+            /tmp/threads-v4/queue.json
             /tmp/threads-v4/official-triage.json
             /tmp/threads-v4/evidence-gate.json
             /tmp/threads-v4/supply-diagnostics.json
