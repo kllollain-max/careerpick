@@ -80,6 +80,17 @@ jobs:
         continue-on-error: true
         run: |
           python -m threads_v4.official_fetch --audit threads_v4/audits/a305734-official-evidence.json --output /tmp/threads-v4/official-fetch.json
+      - name: Generate unapproved factual preview
+        run: |
+          python -m threads_v4.hold_preview --audit threads_v4/audits/a305734-official-evidence.json --output /tmp/threads-v4/hold-preview.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("/tmp/threads-v4/hold-preview.json").read_text(encoding="utf-8"))
+          assert x["status"]=="HOLD_PREVIEW_ONLY"
+          assert x["queue_eligible"] is False
+          assert x["approved"] is False
+          PY
       - name: Upload candidate review report
         uses: actions/upload-artifact@v4
         with:
@@ -90,6 +101,7 @@ jobs:
             /tmp/threads-v4/evidence-gate.json
             /tmp/threads-v4/supply-diagnostics.json
             /tmp/threads-v4/official-fetch.json
+            /tmp/threads-v4/hold-preview.json
           retention-days: 7
       - name: Verify production publisher untouched
         run: |
