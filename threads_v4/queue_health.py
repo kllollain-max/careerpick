@@ -41,7 +41,7 @@ def inspect(queue, staging, history, now):
         if not nid or nid in posted or nid in occupied or slot in {r["slot"] for r in ready}:
             duplicate.append({"notice_id": nid, "slot": slot})
             continue
-        if entry.get("writer", {}).get("status") != "ready":
+        if not isinstance(entry.get("writer"), dict) or entry["writer"].get("status") != "ready":
             invalid.append({"notice_id": nid, "reason": "NOT_REVIEWED"})
             continue
         occupied.add(nid)
