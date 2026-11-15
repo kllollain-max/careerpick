@@ -14,6 +14,21 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(decision({"notice_id":"a305734","decision":"HOLD"},NOW)["decision"],"HOLD")
     def test_pass_complete(self):
         self.assertEqual(decision(good(),NOW)["decision"],"PASS")
+    def test_verified_date_only_future_pass(self):
+        e=good();e.pop("application_deadline_at")
+        e["application_deadline_date_only"]=True
+        e["application_deadline_date"]="2026-11-30"
+        self.assertEqual(decision(e,NOW)["decision"],"PASS")
+    def test_date_only_same_day_rejected(self):
+        e=good();e.pop("application_deadline_at")
+        e["application_deadline_date_only"]=True
+        e["application_deadline_date"]="2026-11-15"
+        self.assertEqual(decision(e,NOW)["reason"],"APPLICATION_CLOSED")
+    def test_date_only_invalid_hold(self):
+        e=good();e.pop("application_deadline_at")
+        e["application_deadline_date_only"]=True
+        e["application_deadline_date"]="2026-11-31"
+        self.assertEqual(decision(e,NOW)["decision"],"HOLD")
     def test_uncertain_history_hold(self):
         e=good();e["already_posted"]=None
         self.assertEqual(decision(e,NOW)["decision"],"HOLD")
