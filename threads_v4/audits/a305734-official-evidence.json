@@ -135,5 +135,14 @@
       "image_card"
     ],
     "meta_posted": false
+  },
+  "production_validator_finding": {
+    "source": "main:scripts/threads_writer_queue.py",
+    "date_only_supported": true,
+    "rule": "application_period.date_only=true permits a source-supported deadline date; posting on the deadline itself requires verified closing time, otherwise APPLICATION_END_TIME_UNKNOWN",
+    "candidate_deadline": "2026-11-30",
+    "exact_clock_required_for_2026_11_15_post": false,
+    "official_document_review_still_required": true,
+    "decision": "HOLD"
   }
 }
