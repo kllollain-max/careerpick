@@ -98,5 +98,15 @@
   "next_actions": [
     "Observe original 20h publisher and reconcile official receipt/GET/accepted claim if a run or post appears.",
     "If no execution by existing22h grace end, record an expired unposted slot without catching up or resetting claims; prepare next future regular slot under fresh-source checks."
-  ]
+  ],
+  "report_connection": {
+    "expected_conversation": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07",
+    "observed_conversation": "6af97bff-d36c-83ee-9171-bd8e1267804c",
+    "observed_task_updated_at": "2026-11-15T10:54:02.153534+00:00",
+    "matches_user_target": false,
+    "changed_by_this_run": false,
+    "actual_delivery_route_verified": false,
+    "repair_status": "unresolved_tool_capability_missing",
+    "required_external_action": "Verify the existing automation connection in the original reporting conversation; no conversation transfer field exists in available update API."
+  }
 }
