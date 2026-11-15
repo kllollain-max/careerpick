@@ -13,13 +13,13 @@ for(const candidate of candidates){
   if(await page.locator('[data-open="'+candidate.id+'"]').first().isVisible().catch(()=>false)){selected=candidate;break;}
 }
 if(!selected){
-  const diag=await page.evaluate(()=>({
+  const diag=await page.evaluate((candidateIds)=>({
     search:document.querySelector('#q')?.value,
     status:document.querySelector('#cpFeedStatus')?.innerText,
     list:document.querySelector('#list')?.innerText?.slice(0,1200),
     gojobsInPosts:typeof POSTS!=='undefined'?POSTS.filter(p=>p.gojobs).map(p=>({id:p.id,title:p.title,due:p.due instanceof Date?p.due.toISOString():p.due})).slice(0,15):null,
-    matchingCandidates:typeof POSTS!=='undefined'?POSTS.filter(p=>p.gojobs&&p.title&&candidates.some(c=>c.id===p.id)).map(p=>p.id):null
-  }));
+    matchingCandidates:typeof POSTS!=='undefined'?POSTS.filter(p=>p.gojobs&&p.title&&candidateIds.includes(p.id)).map(p=>p.id):null
+  }),candidates.map(c=>c.id));
   fs.writeFileSync('gojobs-browser-output/missing-'+width+'.json',JSON.stringify({width,feedUpdated:feed.updated,candidates:candidates.map(p=>({id:p.id,title:p.title,due:p.due})),diag},null,2));
   await page.screenshot({path:'gojobs-browser-output/missing-'+width+'.png',fullPage:true});
 }
