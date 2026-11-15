@@ -150,6 +150,9 @@ jobs:
           echo '::error::Unconfirmed prior receipt remains on hold; no new publication'
           exit 1
 
+      - name: Recover already reviewed staged supply within the existing slot grace
+        run: python scripts/threads_queue_bridge.py --apply --output threads-queue-publish-preflight.json
+
       - name: Read reviewed AI writer queue
         run: |
           git fetch origin threads-publisher-state
