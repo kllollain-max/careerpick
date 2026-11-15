@@ -116,5 +116,24 @@
     "approval": "HOLD_PREVIEW_ONLY",
     "queue_eligible": false,
     "reason": "Official corrections and attachment, post history and image verification pending"
+  },
+  "latest_cross_source_gate": {
+    "actions_run": 43679132594,
+    "decision": "HOLD",
+    "reason": "CORRECTIONS_ATTACHMENTS_AND_DEADLINE_CLOCK_UNVERIFIED",
+    "matched": {
+      "organization": true,
+      "position": true,
+      "headcount": true,
+      "employment_from_alio": true
+    },
+    "remaining": [
+      "corrected_or_cancelled_notice_status",
+      "official_attachment_review",
+      "exact_deadline_clock",
+      "published_ledger_and_profile",
+      "image_card"
+    ],
+    "meta_posted": false
   }
 }
