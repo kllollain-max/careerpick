@@ -8,6 +8,7 @@ import socket
 from datetime import datetime
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
+from threads_v4.official_text import extract
 
 def check_url(url, *, timeout=12, opener=None):
     parsed=urlsplit(url)
@@ -30,8 +31,11 @@ def check_url(url, *, timeout=12, opener=None):
             kind=response.headers.get("Content-Type","")
         if status!=200 or not data or len(data)>2_000_000:
             return {"url":url,"status":"HOLD","reason":"HTTP_OR_SIZE_INVALID","http_status":status}
-        return {"url":url,"status":"FETCHED_NOT_VERIFIED","http_status":status,
+        result={"url":url,"status":"FETCHED_NOT_VERIFIED","http_status":status,
                 "content_type":kind,"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest()}
+        if "text/html" in kind.lower():
+            result["text_evidence"]=extract(data)
+        return result
     except urllib.error.HTTPError as exc:
         return {"url":url,"status":"HOLD","reason":"HTTP_ERROR","http_status":exc.code}
     except (urllib.error.URLError,TimeoutError,OSError) as exc:
