@@ -992,6 +992,11 @@ def self_test():
     closed_html = render(sample, {})
     assert '표시된 종료일이 지난 보관 공고입니다' in closed_html
     assert 'type="application/ld+json"' not in closed_html
+    assert '<meta name="robots" content="noindex,follow">' in closed_html
+    sample['due'] = '2099-01-01'
+    open_html = render(sample, {})
+    assert '<meta name="robots" content="noindex,follow">' not in open_html
+    sample['due'] = '2020-01-01'
     # 동일한 입력은 동일한 HTML을 생성해야 합니다.
     assert render(sample, {}) == closed_html
     print('CareerPick job-page regression checks: PASS')
