@@ -1,5 +1,5 @@
 """Turn a reviewed evidence record into a HOLD/PASS decision without guessing."""
-from datetime import datetime
+from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
 KST = ZoneInfo("Asia/Seoul")
@@ -29,14 +29,23 @@ def decision(evidence, now):
             result["reason"] = "MISSING_" + field.upper()
             return result
     try:
-        deadline = datetime.fromisoformat(evidence["application_deadline_at"])
+        date_only = evidence.get("application_deadline_date_only") is True
+        if date_only:
+            raw = evidence["application_deadline_date"]
+            if not isinstance(raw,str) or len(raw)!=10 or date.fromisoformat(raw).isoformat()!=raw:
+                raise ValueError("invalid date-only deadline")
+            deadline_day = date.fromisoformat(raw)
+        else:
+            deadline = datetime.fromisoformat(evidence["application_deadline_at"])
+            if deadline.tzinfo is None:
+                raise ValueError("timezone missing")
         checked = datetime.fromisoformat(evidence["official_checked_at"])
-        if deadline.tzinfo is None or checked.tzinfo is None:
+        if checked.tzinfo is None:
             raise ValueError("timezone missing")
     except (ValueError, TypeError, KeyError):
         result["reason"] = "OFFICIAL_DATES_INVALID"
         return result
-    if deadline.astimezone(KST) <= now.astimezone(KST):
+    if (deadline_day <= now.astimezone(KST).date()) if date_only else (deadline.astimezone(KST) <= now.astimezone(KST)):
         result.update(decision="REJECT", reason="APPLICATION_CLOSED")
         return result
     if checked > now or (now - checked).total_seconds() > 86400:
