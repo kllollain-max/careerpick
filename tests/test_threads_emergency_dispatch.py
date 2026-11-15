@@ -24,11 +24,11 @@ class EmergencyDispatchTests(unittest.TestCase):
             "THREADS_MANUAL_PUBLISH": "true",
             "GITHUB_EVENT_NAME": "workflow_dispatch",
             "GITHUB_RUN_ATTEMPT": "1",
-            "THREADS_MANUAL_SLOT": "2026-11-15T12:00:00+09:00",
+            "THREADS_MANUAL_SLOT": "2026-11-15T12:35:00+09:00",
         }):
-            self.assertEqual(publisher.current_publication_slot(now).hour, 12)
+            self.assertEqual(publisher.current_publication_slot(now).minute, 35)
 
-    def test_manual_dispatch_rejects_arbitrary_minute(self):
+    def test_manual_dispatch_rejects_old_minute_nonce(self):
         now = datetime(2026, 11, 15, 12, 35, tzinfo=KST)
         with patch.dict(os.environ, {
             "THREADS_MANUAL_PUBLISH": "true",
@@ -36,7 +36,7 @@ class EmergencyDispatchTests(unittest.TestCase):
             "GITHUB_RUN_ATTEMPT": "1",
             "THREADS_MANUAL_SLOT": "2026-11-15T12:35:00+09:00",
         }):
-            with self.assertRaisesRegex(RuntimeError, "regular KST slot"):
+            with self.assertRaisesRegex(RuntimeError, "expired or in the future"):
                 publisher.current_publication_slot(now)
 
     def test_manual_dispatch_rejects_expired_window(self):
@@ -47,7 +47,7 @@ class EmergencyDispatchTests(unittest.TestCase):
             "GITHUB_RUN_ATTEMPT": "1",
             "THREADS_MANUAL_SLOT": "2026-11-15T12:00:00+09:00",
         }):
-            with self.assertRaisesRegex(RuntimeError, "within the current"):
+            with self.assertRaisesRegex(RuntimeError, "expired or in the future"):
                 publisher.current_publication_slot(now)
 
     def test_empty_approved_queue_does_not_reserve_or_publish(self):
