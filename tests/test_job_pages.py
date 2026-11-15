@@ -44,7 +44,7 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('<dt>기관 공식 확인 접수마감</dt><dd>2026-11-19 10:00 (KST)</dd>', html)
         self.assertIn('<dt>ALIO 게시 종료일 · 접수마감 원문 확인</dt><dd>2026-11-19</dd>', html)
         self.assertNotIn('<script type="application/ld+json">', html)
-        other = render(dict(confirmed, id='a306355'), {})
+        other = render(dict(confirmed, id='a306436'), {})
         self.assertNotIn('기관 공식 확인 접수마감', other)
         self.assertNotIn('2026-11-19 10:00', other)
 
