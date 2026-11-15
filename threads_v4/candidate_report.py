@@ -24,8 +24,12 @@ def summarize(data):
         selected.append({"notice_id": nid, "organization": row.get("org"),
                          "title": row.get("title"), "decision": "REVIEW_REQUIRED",
                          "official_verified": False})
+    review_rows = data.get("review_candidates", [])
+    if not isinstance(review_rows, list):
+        raise ValueError("REVIEW_SCHEMA")
     return {"schema_version": 1, "status": "REVIEW_REQUIRED" if selected else "NO_CANDIDATE",
             "candidate_count": len(selected), "candidates": selected,
+            "review_candidates": review_rows, "selection_audit": data.get("selection_audit", {}),
             "approved_count": 0, "meta_posted": False}
 
 def main():
