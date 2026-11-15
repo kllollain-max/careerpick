@@ -114,7 +114,26 @@ def prepare_master(history, now, run_id):
         raise RuntimeError('Slot already reserved')
     policy, source, details = writer_inputs()
     queue = load(ROOT / '.threads-writer-queue.json', {})
-    selected = select_ready(queue, scheduled, now, history, source, details, policy)
+    from scripts.threads_writer_queue import QueueValidationError
+    try:
+        selected = select_ready(queue, scheduled, now, history, source, details, policy)
+    except QueueValidationError as exc:
+        if str(exc) != 'QUEUE_SLOT_MISSING':
+            raise
+        # Never invent a reviewed draft or send an unapproved notice.
+        # An empty slot is operationally degraded, not a published success.
+        print('::warning::QUEUE_SLOT_MISSING - no approved manuscript; publication skipped')
+        if os.getenv('GITHUB_STEP_SUMMARY'):
+            with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+                summary.write('## Threads publication blocked\\n\\n'
+                              '- Reason: **QUEUE_SLOT_MISSING**\\n'
+                              '- No approved manuscript for this slot; **no Meta POST**.\\n'
+                              '- Prepare and validate a fresh official notice before the next regular slot.\\n')
+        return
+    if os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true':
+        expected_notice = os.getenv('THREADS_DISPATCH_NOTICE_ID', '').strip()
+        if not expected_notice or selected['job_id'] != expected_notice:
+            raise RuntimeError('Manual dispatch notice does not match reviewed current-slot draft')
     entries = [e for e in queue['entries'] if e['scheduled_at'] == scheduled.isoformat()]
     if len(entries) != 1:
         raise RuntimeError('Unique writer entry required')
@@ -139,7 +158,8 @@ def prepare_master(history, now, run_id):
     main_text, reply_text = master_public_copy(selected, style, now=now)
     record = {**selected, 'text': main_text, 'reply_text': reply_text,
               'scheduled_at': scheduled.isoformat(),
-              'manual_publish': False, 'reserved_date': today, 'status': 'pending',
+              'manual_publish': os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true',
+              'reserved_date': today, 'status': 'pending',
               'run_id': run_id, 'created_at': now.isoformat(),
               'writer_entry': entry, 'queue_entry_sha256': fingerprint(entry),
               'image_url': ('https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/'
@@ -197,10 +217,12 @@ def current_publication_slot(now):
         if os.getenv('GITHUB_RUN_ATTEMPT', '1') != '1':
             raise RuntimeError('Manual publication rerun blocked')
         slot = datetime.fromisoformat(os.environ.get('THREADS_MANUAL_SLOT', ''))
-        if slot.tzinfo is None or slot.utcoffset() != timedelta(hours=9) or slot.second or slot.microsecond:
-            raise RuntimeError('Aware KST minute-aligned manual slot required')
-        if not slot <= now < slot + timedelta(minutes=10):
-            raise RuntimeError('Manual slot expired or in the future')
+        if (slot.tzinfo is None or slot.utcoffset() != timedelta(hours=9)
+                or slot.hour not in (8, 12, 16, 20)
+                or slot.minute or slot.second or slot.microsecond):
+            raise RuntimeError('Manual dispatch requires a regular KST slot (08/12/16/20)')
+        if not slot <= now < slot + timedelta(hours=2):
+            raise RuntimeError('Manual dispatch must be within the current regular slot grace window')
         return slot
     hour = slot_from_cron(os.getenv('THREADS_SCHEDULE_CRON', ''))
     slot = now.replace(hour=hour, minute=0, second=0, microsecond=0)
