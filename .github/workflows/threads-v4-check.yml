@@ -37,7 +37,7 @@ jobs:
           from threads_v4.official_triage import triage_report
           src=json.loads(Path("/tmp/threads-v4/candidates.json").read_text(encoding="utf-8"))
           result=triage_report(src, datetime.now(ZoneInfo("Asia/Seoul")))
-          Path("/tmp/threads-v4/official-triage.json").write_text(json.dumps(result, ensure_ascii=False, indent=2)+"\\n",encoding="utf-8")
+          Path("/tmp/threads-v4/official-triage.json").write_text(json.dumps(result, ensure_ascii=False, indent=2)+"\n",encoding="utf-8")
           print(json.dumps({"hold":result["hold_count"],"reject":result["reject_count"],"pass":result["pass_count"]},ensure_ascii=False))
           assert result["pass_count"] == 0
           PY
@@ -52,7 +52,7 @@ jobs:
           evidence=json.loads(Path("threads_v4/audits/a305734-official-evidence.json").read_text(encoding="utf-8"))
           result=decision(evidence,datetime.now(ZoneInfo("Asia/Seoul")))
           assert result["decision"]=="HOLD", result
-          Path("/tmp/threads-v4/evidence-gate.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+          Path("/tmp/threads-v4/evidence-gate.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           print(json.dumps(result,ensure_ascii=False))
           PY
       - name: Classify current supply outage without posting
@@ -73,7 +73,7 @@ jobs:
             result={"status":"HISTORY_UNREADABLE","action":"HOLD_AND_REPAIR_HISTORY_READ", "error_type":type(exc).__name__,"meta_posted":False,"missing_slots":[]}
           else:
             result=supply_decision(queue,stage,history,triage,datetime.now(ZoneInfo("Asia/Seoul")))
-          (root/"supply-diagnostics.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+          (root/"supply-diagnostics.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           print(json.dumps({"status":result["status"],"action":result["action"],"missing":len(result["missing_slots"])},ensure_ascii=False))
           PY
       - name: Upload candidate review report
