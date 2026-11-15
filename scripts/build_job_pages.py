@@ -174,7 +174,11 @@ def render(post, detail, related_posts=()):
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
-    confirmed_cutoff = '2026-11-19 10:00 (KST)' if pid == 'a306750' else ''
+    confirmed_cutoffs = {
+        'a306750': '2026-11-19 10:00 (KST)',  # Korail Retail employer notice
+        'a306355': '2026-11-16 10:00 (KST)',  # IBK ALIO application instructions
+    }
+    confirmed_cutoff = confirmed_cutoffs.get(pid, '')
     deadline = parse_date(due, end_of_day=True)
     closed = is_closed(due)
 
