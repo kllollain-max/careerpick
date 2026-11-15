@@ -4,8 +4,8 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 CTA = "자세한 사항은 프로필링크 확인"
-URL = re.compile(r"https?\\s*[:：]|www\\s*[.．]|(?:[a-z0-9-]+\\.)+(?:com|net|org|kr|io|co|gov|edu)(?:\\b|/)", re.I)
-TAG = re.compile(r"(?<!\\w)#[\\w가-힣]+")
+URL = re.compile(r"https?\s*[:：]|www\s*[.．]|(?:[a-z0-9-]+\.)+(?:com|net|org|kr|io|co|gov|edu)(?:\b|/)", re.I)
+TAG = re.compile(r"(?<!\w)#[\w가-힣]+")
 SLOTS = (8, 12, 16, 20)
 
 class ReviewBlocked(ValueError):
