@@ -12,7 +12,7 @@ def preflight(audit, queue, staging, *, account):
         blockers.append("CROSS_SOURCE_REVIEW_NOT_PASS")
     if not isinstance(queue.get("entries"),list) or not isinstance(staging.get("entries"),list):
         blockers.append("QUEUE_SCHEMA_INVALID")
-    if not any(x.get("notice_id")==audit.get("notice_id") and x.get("writer",{}).get("status")=="ready" for x in staging.get("entries",[]) if isinstance(x,dict)):
+    if not any(x.get("notice_id")==audit.get("notice_id") and isinstance(x.get("writer"),dict) and x["writer"].get("status")=="ready" and isinstance(x.get("writer_review"),dict) and x["writer_review"].get("status")=="approved" for x in staging.get("entries",[]) if isinstance(x,dict)):
         blockers.append("APPROVED_STAGING_ENTRY_MISSING")
     return {"status":"BLOCKED" if blockers else "REQUIRES_META_ACCOUNT_CHECK",
             "blockers":blockers,"meta_posted":False,"notice_id":audit.get("notice_id")}
