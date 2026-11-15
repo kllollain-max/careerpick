@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T15:17:58.708496+09:00",
-  "last_observed_at": "2026-11-15T15:17:58.708496+09:00",
+  "updated_at": "2026-11-15T07:59:47+00:00",
+  "last_observed_at": "2026-11-15T07:59:47+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
+    "blob_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -79,17 +79,16 @@
         "card_check": "existing_attestation_exact_bytes_full_pixels_verified"
       }
     ],
-    "last_update_commit_sha": "bd0eef7bec8dadb783b27d6884a13aebfe9f126d",
-    "readback_verified_at": "2026-11-13T08:23:25.617803+00:00",
+    "last_update_commit_sha": "8968aeadf4e10f76e17dc035cde59ccc9c579c4d",
+    "readback_verified_at": "2026-11-15T07:59:47+00:00",
     "current_eligibility_check": {
-      "checked_at": "2026-11-15T05:06:17+00:00",
-      "blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
-      "total_entries": 31,
+      "checked_at": "2026-11-15T07:59:47+00:00",
+      "total_entries": 32,
       "historical_ready": 31,
-      "current_publishable_ready": 0,
-      "staging_ready": 1,
-      "stage_blob_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
-      "queue_changed": false
+      "current_publishable_ready": 1,
+      "notice_id": "a306965",
+      "slot": "2026-11-15T16:00:00+09:00",
+      "within_existing_grace": true
     }
   },
   "observed_runs": [
@@ -13341,7 +13340,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-15T15:17:58.708496+09:00",
+    "checked_at": "2026-11-15T07:59:47+00:00",
     "main_sha": "924054e6a435ea7215157770745d544987298257",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -13354,10 +13353,19 @@
       "head_sha": "fb028ceb25858e8b9170916d8691d44cd4c2a84f",
       "publish_step": "skipped"
     },
-    "new_publisher_runs": [],
+    "new_publisher_runs": [
+      {
+        "run_id": 43691683586,
+        "kind": "delayed_preflight",
+        "status": "completed",
+        "conclusion": "success",
+        "actual_promoted": 0,
+        "error": "STAGED_SLOT_EXPIRED_OR_FUTURE"
+      }
+    ],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "a306965_ready_before_due_regular_preflight_no_material_change",
+    "status": "new_delay_failure_recovered_queue_ready_waiting_regular_publisher",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13401,13 +13409,15 @@
     "monitored_slot": "2026-11-15T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-15T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
-    "new_failure_fingerprints": [],
-    "new_metric_observations": 0,
+    "audit_path": "threads/audits/delayed-preflight-recovery-20261115-1655.json",
+    "new_failure_fingerprints": [
+      "43691683586:1:STAGED_SLOT_EXPIRED_OR_FUTURE:a306965"
+    ],
+    "new_metric_observations": null,
     "new_account_observations": 0,
-    "new_ready_saved": 0,
+    "new_ready_saved": 1,
     "new_held_drafts_saved": 0,
-    "queue_changed": false,
+    "queue_changed": true,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
       "is_enabled": true,
@@ -13427,9 +13437,9 @@
     "next_actual_media": "IMAGE",
     "scheduled16_status": "staged_ready_pending_preflight_promotion",
     "scheduled20_status": "unstarted_no_ready; media recheck actual successful history before preparation",
-    "queue_blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
+    "queue_blob_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
     "maintenance_input_blob_sha": "4eb2a67e86aad1e947a2cd1fbd0362cc06789100",
-    "performance_blob_sha": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
+    "performance_blob_sha": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
     "scheduled08_status": "confirmed_presend_failure_grace_expired_no_backfill",
     "executed_archive_main_sha": "924054e6a435ea7215157770745d544987298257",
     "archive_to_current_changes": [],
@@ -13659,7 +13669,8 @@
       "next_regular_preflight": "2026-11-15T15:45:00+09:00",
       "preflight_not_yet_due": true,
       "next_regular_publisher": "2026-11-15T16:00:00+09:00"
-    }
+    },
+    "latest_regular_publisher_16h": "not_observed"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -21135,7 +21146,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-15T15:17:58.708496+09:00",
+      "checked_at": "2026-11-15T07:59:47+00:00",
       "main_sha": "924054e6a435ea7215157770745d544987298257",
       "contract_version": 2,
       "policy_hashes": {
@@ -21177,7 +21188,7 @@
         }
       },
       "full_active_prompt_read": true,
-      "queue_check_status": "current_stage_and_prospective_whole_queue_passed",
+      "queue_check_status": "passed_current_main_full_validator",
       "ready_entries": [],
       "new_regular_publications": 0,
       "scheduled12_status": "workflow_success_publish_skipped",
@@ -21212,7 +21223,7 @@
         "reviewed_at": "2026-11-15T02:02:29.499279+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
+      "audit_path": "threads/audits/delayed-preflight-recovery-20261115-1655.json",
       "latest_publisher_run": {
         "run_id": 43652971854,
         "run_attempt": 1,
@@ -21223,7 +21234,7 @@
         "event": "schedule"
       },
       "new_publisher_runs": [],
-      "status": "staged_ready_regular_preflight_not_yet_due",
+      "status": "delayed_preflight_recovered",
       "next_slot": "2026-11-15T16:00:00+09:00",
       "scheduled16_status": "staged_ready_pending_preflight",
       "scheduled20_status": "unstarted_no_ready; media recheck actual successful history before preparation",
@@ -21544,7 +21555,7 @@
       "evidence_source": "Scheduled publisher authenticated official GET persisted in fresh main ledger; fresh Actions job logs corroborate account/post/GET. This monitor did not issue a new Meta GET.",
       "audit_path": "threads/audits/monitor-v2-20261114T001012-KST0900.json"
     },
-    "next_slot_status": "staged_ready_awaiting_preflight",
+    "next_slot_status": "queued_identical_preapproved_entry_within_existing_grace",
     "publication_reports": {
       "17918731521553015": {
         "status": "prepared_for_current_report",
@@ -21846,33 +21857,22 @@
       "not_publication_verification": true
     },
     "latest_regular_slot_failure": {
-      "id": "43652971854:1:QUEUE_SLOT_MISSING",
-      "observed_at": "2026-11-15T00:02:52Z",
-      "kind": "ready_queue_missing_before_reservation",
-      "publisher_failure": true,
-      "confirmed_cause": "No queue entry for 2026-11-15T08:00:00+09:00. Reserve one job failed QUEUE_SLOT_MISSING before persisted reservation/send. Existing source-reviewed electrical manuscript remains unassigned under final profile-target hold.",
-      "run_id": "43652971854",
+      "run_id": 43691683586,
       "run_attempt": 1,
+      "head_sha": "924054e6a435ea7215157770745d544987298257",
+      "created_at": "2026-11-15T07:49:51Z",
+      "run_started_at": "2026-11-15T07:49:51Z",
+      "updated_at": "2026-11-15T07:50:07Z",
+      "job_id": 132743483182,
       "status": "completed",
-      "conclusion": "failure",
-      "updated_at": "2026-11-14T23:23:37Z",
-      "head_sha": "1be591a2532543da0e0dd610b3accaaa45e8c3b2",
-      "workflow_path": ".github/workflows/threads_auto.yml",
-      "url": "https://github.com/kllollain-max/careerpick/actions/runs/43652971854",
-      "stage": "Reserve one job",
-      "error_codes": [
-        "QUEUE_SLOT_MISSING"
-      ],
-      "post_id": null,
-      "claim": null,
-      "send_state": "not_attempted_publish_step_skipped",
-      "automatic_post_recovery_attempts": 0,
-      "audit_path": "threads/audits/monitor-v2-20261115T000252.json",
-      "next_conditions": [
-        "Preserve ledger/claims/locks/draft/card bytes.",
-        "No dispatch/rerun/direct POST, missed-slot backfill or started-slot insertion.",
-        "Only fully validated future unstarted regular entries may be queued; final profile-target gate must not be fabricated or bypassed."
-      ]
+      "conclusion": "success",
+      "intended_preflight": "2026-11-15T15:45:00+09:00",
+      "actual_bridge_time": "2026-11-15T16:49:59.634900+09:00",
+      "error": "STAGED_SLOT_EXPIRED_OR_FUTURE",
+      "notice_id": "a306965",
+      "promoted": 0,
+      "meta_posted": false,
+      "important_distinction": "This was delayed preflight cron, not the16h publishing cron. publish job was skipped by design on preflight. No16h regular publisher run observed yet."
     },
     "first_72h_measurement_status": {
       "post_id": "17896425015438025",
@@ -21901,6 +21901,31 @@
       "profile_verified": true,
       "full_validator_passed": true,
       "audit_path": "threads/audits/staging-ready-a306965-20261115-1400.json"
+    },
+    "latest_delayed_preflight_recovery": {
+      "notice_id": "a306965",
+      "slot": "2026-11-15T16:00:00+09:00",
+      "original_prepared_at": "2026-11-15T05:02:38.700075+00:00",
+      "entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
+      "source_main_full_publisher_validation": "passed",
+      "whole_queue_check": "passed",
+      "card_exact_bytes_full_pixels": "passed",
+      "all43_claims_read": true,
+      "slot16_claims": 0,
+      "pending_records": 0,
+      "history_unchanged": true,
+      "old31_queue_entries_preserved": true,
+      "identical_existing_preapproved_entry": true,
+      "body_assets_hashes_prepared_at_unchanged": true,
+      "within_existing_two_hour_grace": true,
+      "queue_commit": "8968aeadf4e10f76e17dc035cde59ccc9c579c4d",
+      "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+      "queue_readback_exact": true,
+      "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
+      "stage_unchanged": true,
+      "Meta_POST": false,
+      "manual_dispatch": false,
+      "rerun": false
     }
   },
   "single_main_v2_writer_performance": {
@@ -25275,7 +25300,7 @@
     },
     "a306965": {
       "notice_id": "a306965",
-      "status": "staged_ready",
+      "status": "queued_ready",
       "assigned_slot": "2026-11-15T16:00:00+09:00",
       "candidate_slot_only": "2026-11-15T16:00:00+09:00",
       "prepared_at": "2026-11-15T05:02:38.700075+00:00",
@@ -25763,7 +25788,7 @@
       "stage_commit": "6ee4ceb7659ca66806f5a9835fd6149235cadb45",
       "entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
       "full_entry_and_prospective_queue_validation_passed": true,
-      "actual_queue_promoted": false,
+      "actual_queue_promoted": true,
       "source_refs": [
         {
           "url": "https://www.khis.kr/board.es?act=view&bid=0002&list_no=2796&mid=a10303000000",
@@ -25826,295 +25851,38 @@
           "source_ref": "https://www.khis.kr/boardDownload.es?bid=0002&list_no=2796&seq=1",
           "excerpt": "□ 근무장소 : 서울특별시 중구 칠패로 36"
         }
-      ]
+      ],
+      "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33"
     }
   },
   "writer_recovery_latest": {
-    "checked_at": "2026-11-15T05:06:17+00:00",
-    "status": "stage_ready_awaiting_regular_preflight",
+    "checked_at": "2026-11-15T07:59:47+00:00",
+    "status": "delayed_preflight_recovered_identical_preapproved_entry_to_queue",
     "notice_id": "a306965",
-    "source_main_sha": "924054e6a435ea7215157770745d544987298257",
-    "requested_candidate_slot": "2026-11-15T16:00:00+09:00",
-    "actual_staging_slot": "2026-11-15T16:00:00+09:00",
-    "actual_queue_slot": null,
+    "actual_queue_slot": "2026-11-15T16:00:00+09:00",
     "next_actual_media": "IMAGE",
     "historical_ready_records": 31,
-    "current_publishable_queue_ready_count": 0,
+    "current_queue_entries": 32,
+    "current_publishable_queue_ready_count": 1,
     "staging_ready_count": 1,
     "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
-    "stage_commit": "6ee4ceb7659ca66806f5a9835fd6149235cadb45",
-    "stage_readback_verified": true,
+    "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+    "queue_commit": "8968aeadf4e10f76e17dc035cde59ccc9c579c4d",
+    "queue_readback_verified": true,
     "entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
-    "full_entry_validation": "passed",
-    "whole_prospective_queue_validation": "passed",
-    "bridge_merge": "passed",
-    "profile_target": {
-      "verified": true,
-      "notice_id": "a306965",
-      "url": "https://kllollain-max.github.io/careerpick/",
-      "notice_url": "https://kllollain-max.github.io/careerpick/#job=a306965",
-      "checked_at": "2026-11-15T05:02:38.700075+00:00",
-      "verification_method": "Actual live cloud-browser navigation, AX detail content and screenshot reviewed; independent HTTP200 root GET plus code routing/feed identity. Hash route renders after asynchronous feed load.",
-      "http_status": 200,
-      "root_document_sha256": "1f20f093fa2a0e7db4d84c9ab914762df15f680b06681ddbd7fbd6ec5b8438a8",
-      "displayed_notice_title": "2026년 제6차 직원채용 공고",
-      "displayed_org": "(재)한국보건의료정보원",
-      "displayed_qualification": "전산전문요원 초급기술자; 기사 자격 또는 IT관련 경력자로서 채용 관련 업무 경력자",
-      "limitations": "Detail header gives notice-wide35 and source date-only; selected unit5 and14:00 verified from official PDF, not inferred from header. Static /jobs/a306965.html not required by verified hash fallback."
-    },
-    "card_verification": {
-      "valid": true,
-      "format": "JPEG",
-      "width": 1080,
-      "height": 1080,
-      "mode": "RGB",
-      "file_size_bytes": 143628,
-      "pixel_verification": "passed",
-      "layout_version": "careerpick-single-main-card-v2",
-      "asset_path": "threads-images/a306965.jpg",
-      "local_path": "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/threads-images/a306965.jpg",
-      "sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
-      "facts_sha256": "b16473f69832a74a15e0669b33fbe8befcc8e8c4c7d3b2f063b351d80898ad76",
-      "preview_asset_path": "threads-images/a306965-360.png",
-      "preview_sha256": "1259ffd15ddca6609c4046ae2f658dce5f98d9acdeb10e4b110ee3815e7bff4b",
-      "reviewed_width": 360,
-      "reviewed_at": "2026-11-15T03:30:54.872465+00:00",
-      "visual_review": "attestation_and_exact_assets_verified"
-    },
+    "new_draft_created": false,
+    "existing_preapproved_entry_restored": true,
+    "primary_cause": "15:45 preflight actually ran16:49 and rejected current slot despite original pre-slot approval and existing2h publisher grace",
+    "whole_queue_validation": "passed_current_main",
     "field_holds": [],
-    "new_ready_saved_to_staging": 1,
-    "new_ready_saved_to_queue": 0,
-    "queue_changed": false,
-    "manual_publish_or_dispatch": false,
     "actual_meta_post_id": null,
     "actual_meta_post_url": null,
-    "audit_path": "threads/audits/staging-ready-a306965-20261115-1400.json",
-    "limitations": [
-      "Raw branch URL briefly served cached empty staging; GitHub immutable blob and commit readback matched and validated.",
-      "Actual publisher credential/account API check and publication proof remain at next regular publisher."
-    ],
-    "latest_recheck": {
-      "checked_at": "2026-11-15T15:17:58.708496+09:00",
-      "main_sha": "924054e6a435ea7215157770745d544987298257",
-      "notice_id": "a306965",
-      "slot": "2026-11-15T16:00:00+09:00",
-      "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
-      "source_sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
-      "official_source_GET": 200,
-      "official_bytes_unchanged": true,
-      "policy_hashes": {
-        "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
-        "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
-        "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
-        "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
-      },
-      "full_entry_validation": "passed",
-      "bridge_merge": "passed",
-      "whole_prospective_queue_validation": "passed",
-      "card_exact_byte_check": {
-        "valid": true,
-        "format": "JPEG",
-        "width": 1080,
-        "height": 1080,
-        "mode": "RGB",
-        "file_size_bytes": 143628,
-        "pixel_verification": "passed",
-        "layout_version": "careerpick-single-main-card-v2",
-        "asset_path": "threads-images/a306965.jpg",
-        "local_path": "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/threads-images/a306965.jpg",
-        "sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
-        "facts_sha256": "b16473f69832a74a15e0669b33fbe8befcc8e8c4c7d3b2f063b351d80898ad76",
-        "preview_asset_path": "threads-images/a306965-360.png",
-        "preview_sha256": "1259ffd15ddca6609c4046ae2f658dce5f98d9acdeb10e4b110ee3815e7bff4b",
-        "reviewed_width": 360,
-        "reviewed_at": "2026-11-15T03:30:54.872465+00:00",
-        "visual_review": "attestation_and_exact_assets_verified"
-      },
-      "current_queue_ready": 0,
-      "staging_ready": 1,
-      "preserved_historical_entries": 31,
-      "pending_history": 0,
-      "next_media": "IMAGE",
-      "candidate_count": 24,
-      "unconfirmed_count": 800,
-      "recent_successes": 8,
-      "future_slots": [
-        {
-          "scheduled_at": "2026-11-15T16:00:00+09:00",
-          "format_id": "interest",
-          "hook_type": "target",
-          "planned_media": "IMAGE",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "regular_interest",
-          "presentation_style_planning_only": true
-        },
-        {
-          "scheduled_at": "2026-11-15T20:00:00+09:00",
-          "format_id": "deadline_opportunity",
-          "hook_type": "target",
-          "planned_media": "TEXT",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "eligibility_info",
-          "presentation_style_planning_only": true
-        },
-        {
-          "scheduled_at": "2026-11-16T08:00:00+09:00",
-          "format_id": "hiring_core",
-          "hook_type": "condition",
-          "planned_media": "IMAGE",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "regular_interest",
-          "presentation_style_planning_only": true
-        },
-        {
-          "scheduled_at": "2026-11-16T12:00:00+09:00",
-          "format_id": "eligibility",
-          "hook_type": "target",
-          "planned_media": "TEXT",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "eligibility_info",
-          "presentation_style_planning_only": true
-        }
-      ],
-      "commands": [
-        {
-          "command": [
-            "python",
-            "scripts/threads_writer_input.py",
-            "--limit",
-            "24",
-            "--queue-for-selection",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
-          ],
-          "exit_code": 0
-        },
-        {
-          "command": [
-            "python",
-            "scripts/threads_writer_input.py",
-            "--check-queue",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
-          ],
-          "exit_code": 0
-        },
-        {
-          "command": [
-            "python",
-            "scripts/threads_performance.py",
-            "--mode",
-            "summarize",
-            "--state",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/performance.json",
-            "--history",
-            "threads_posted.json",
-            "--output",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/monitor-1517/performance-summary.json"
-          ],
-          "exit_code": 0
-        }
-      ],
-      "performance_24h": {
-        "verified_main_count": 2,
-        "metric_medians": {
-          "views": 2630,
-          "likes": 6,
-          "replies": 0,
-          "reposts": 0.5,
-          "quotes": 0
-        },
-        "metric_observed_counts": {
-          "views": 2,
-          "likes": 2,
-          "replies": 2,
-          "reposts": 2,
-          "quotes": 2
-        },
-        "metric_totals": {
-          "views": 5260,
-          "likes": 12,
-          "replies": 0,
-          "reposts": 1,
-          "quotes": 0
-        },
-        "views_distribution": [
-          {
-            "post_id": "17918731521553015",
-            "views": 2231
-          },
-          {
-            "post_id": "17896425015438025",
-            "views": 3029
-          }
-        ],
-        "likes_rate_percent_median": 0.23351143636317628,
-        "likes_rate_percent_observed_posts": 2,
-        "reader_replies": null,
-        "reader_replies_status": "see_per_post_author_separation_status",
-        "profile_visits": null,
-        "follow_increase": null,
-        "link_clicks": null
-      },
-      "performance_72h": {
-        "verified_main_count": 1,
-        "metric_medians": {
-          "views": 2484,
-          "likes": 7,
-          "replies": 0,
-          "reposts": 2,
-          "quotes": 0
-        },
-        "metric_observed_counts": {
-          "views": 1,
-          "likes": 1,
-          "replies": 1,
-          "reposts": 1,
-          "quotes": 1
-        },
-        "metric_totals": {
-          "views": 2484,
-          "likes": 7,
-          "replies": 0,
-          "reposts": 2,
-          "quotes": 0
-        },
-        "views_distribution": [
-          {
-            "post_id": "17918731521553015",
-            "views": 2484
-          }
-        ],
-        "likes_rate_percent_median": 0.28180354267310787,
-        "likes_rate_percent_observed_posts": 1,
-        "reader_replies": null,
-        "reader_replies_status": "see_per_post_author_separation_status",
-        "profile_visits": null,
-        "follow_increase": null,
-        "link_clicks": null
-      },
-      "performance_file_observations_unchanged": true,
-      "new_posts": 0,
-      "new_post_id": null,
-      "queue_changed": false,
-      "stage_changed": false,
-      "manual_dispatch": false,
-      "Meta_POST": false,
-      "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
-      "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
-      "queue_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
-      "history_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
-      "performance_sha": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
-      "claims_read": 43,
-      "accepted_claims_without_history": 0,
-      "new_publisher_runs": [],
-      "new_metric_observations": 0,
-      "next_regular_preflight": "2026-11-15T15:45:00+09:00",
-      "preflight_not_yet_due": true,
-      "next_regular_publisher": "2026-11-15T16:00:00+09:00"
-    }
+    "manual_publish_or_dispatch": false,
+    "prevention_PR": 60,
+    "prevention_main_applied": false,
+    "prevention_local_tests": 273,
+    "next_new_unstarted_slot": "2026-11-15T20:00:00+09:00",
+    "audit_path": "threads/audits/delayed-preflight-recovery-20261115-1655.json"
   },
   "writer_recovery_duplicate_checks": {
     "a306760": {
