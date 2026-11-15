@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-15T07:59:47+00:00",
+  "account": "hid_119",
+  "repository": "kllollain-max/careerpick",
+  "main_sha_at_recovery": "924054e6a435ea7215157770745d544987298257",
+  "incident": {
+    "run_id": 43691683586,
+    "run_attempt": 1,
+    "head_sha": "924054e6a435ea7215157770745d544987298257",
+    "created_at": "2026-11-15T07:49:51Z",
+    "run_started_at": "2026-11-15T07:49:51Z",
+    "updated_at": "2026-11-15T07:50:07Z",
+    "job_id": 132743483182,
+    "status": "completed",
+    "conclusion": "success",
+    "intended_preflight": "2026-11-15T15:45:00+09:00",
+    "actual_bridge_time": "2026-11-15T16:49:59.634900+09:00",
+    "error": "STAGED_SLOT_EXPIRED_OR_FUTURE",
+    "notice_id": "a306965",
+    "promoted": 0,
+    "meta_posted": false,
+    "important_distinction": "This was delayed preflight cron, not the16h publishing cron. publish job was skipped by design on preflight. No16h regular publisher run observed yet."
+  },
+  "recovery": {
+    "notice_id": "a306965",
+    "slot": "2026-11-15T16:00:00+09:00",
+    "original_prepared_at": "2026-11-15T05:02:38.700075+00:00",
+    "entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
+    "source_main_full_publisher_validation": "passed",
+    "whole_queue_check": "passed",
+    "card_exact_bytes_full_pixels": "passed",
+    "all43_claims_read": true,
+    "slot16_claims": 0,
+    "pending_records": 0,
+    "history_unchanged": true,
+    "old31_queue_entries_preserved": true,
+    "identical_existing_preapproved_entry": true,
+    "body_assets_hashes_prepared_at_unchanged": true,
+    "within_existing_two_hour_grace": true,
+    "queue_commit": "8968aeadf4e10f76e17dc035cde59ccc9c579c4d",
+    "queue_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+    "queue_readback_exact": true,
+    "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
+    "stage_unchanged": true,
+    "Meta_POST": false,
+    "manual_dispatch": false,
+    "rerun": false
+  },
+  "prevention": {
+    "PR": 60,
+    "url": "https://github.com/kllollain-max/careerpick/pull/60",
+    "head_sha": "b6ba9a9c2a8448e8dd046c306d864a54ce1a3ef0",
+    "main_applied": false,
+    "full_local_threads_tests": 273,
+    "test_result": "passed",
+    "new_regressions": 7,
+    "changes": [
+      "Existing2h grace only for entries prepared before their regular slot",
+      "Reject started slot and remote claim barriers; full validation unchanged",
+      "Same bridge before scheduled publisher queue read, no new schedule or publisher"
+    ],
+    "remote_checks": [
+      {
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "review",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "content-mobile",
+        "status": "in_progress",
+        "conclusion": null
+      }
+    ]
+  },
+  "publication": {
+    "actual_post_id": null,
+    "permalink": null,
+    "fresh_official_Meta_GET": false,
+    "next_action": "Observe existing16h scheduled publisher within current2h allowance. Never send Meta POST or rerun blindly."
+  },
+  "performance": {
+    "current_blob_sha": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
+    "current_summary_executed": true
+  }
+}
