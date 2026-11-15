@@ -37,7 +37,7 @@ def check_url(url, *, timeout=12, opener=None):
                 "content_type":kind,"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest()}
         if "text/html" in kind.lower():
             result["text_evidence"]=extract(data)
-            result["correction_scan"]=scan(" ".join(parser_part["snippet"] or "" for parser_part in result["text_evidence"]["evidence"].values()))
+            result["correction_scan"]=scan(result["text_evidence"]["plain_text"])
         return result
     except urllib.error.HTTPError as exc:
         return {"url":url,"status":"HOLD","reason":"HTTP_ERROR","http_status":exc.code}
