@@ -362,20 +362,8 @@ def render(post, detail, related_posts=()):
         f'<p class="source-note">{escape(coverage_note)}</p></section>'
     )
 
-    # Missing duties must not be silently replaced by an NCS category.
-    # Show a practical source-verification checklist instead of invented duties.
-    duties_missing = not (isinstance(detail, dict) and clean(detail.get('jobDscrptn')))
+    # A single source-check checklist is rendered above; avoid duplicate boilerplate.
     extra = ''
-    if duties_missing:
-        extra += (
-            '<section id="official-duties-check"><h2>담당 업무 확인 방법</h2>'
-            '<p>현재 수집된 공식 상세 데이터에는 구체적인 담당 업무 설명이 없습니다. '
-            '직무분류명만으로 실제 수행 업무를 판단하지 마세요.</p>'
-            '<ol><li>공식 채용공고의 직무기술서·첨부파일에서 담당 업무를 확인하세요.</li>'
-            '<li>자격요건과 우대사항이 해당 직무에 적용되는지 확인하세요.</li>'
-            '<li>근무지·근무형태·전형 일정 및 접수 마감시각을 공식 원문과 대조하세요.</li></ol>'
-            '<p class="source-note">위 내용은 지원 전 확인 항목이며, 해당 기관의 직무 내용이 아닙니다.</p></section>'
-        )
     detail_anchors = []
     if isinstance(detail, dict):
         for key, label in DETAIL_LABELS.items():
