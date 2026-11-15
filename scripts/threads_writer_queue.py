@@ -183,6 +183,9 @@ def _stated_times(text):
     )
     for pattern in patterns:
         for match in re.finditer(pattern, text):
+            # An ISO-8601 timezone suffix is not another stated wall clock.
+            if re.search(r"T\d{1,2}:\d{2}(?::\d{2})?[+-]$", text[:match.start()]):
+                continue
             hour, minute, second = (int(value or 0) for value in match.groups())
             prefix = text[max(0, match.start() - 8):match.start()]
             if re.search(r"오후\s*$", prefix) and hour < 12:
@@ -201,6 +204,20 @@ def _period_matches_excerpt(period, start, end, detail):
         ("START", start, period.get("start_date_only", False)),
         ("END", end, period["date_only"]),
     ):
+        if not date_only:
+            # _date_or_time normalizes instants to KST for the open/closed
+            # checks and card label. Match evidence in its stated timezone:
+            # 11/30 23:59:59 UTC is 12/1 08:59:59 KST, not a date conflict.
+            original = datetime.fromisoformat(period[side.lower()])
+            if original.utcoffset() != value.utcoffset():
+                offset = original.strftime("%z")
+                colon_offset = offset[:3] + ":" + offset[3:]
+                explicit_zone = (colon_offset in text or offset in text
+                                 or (original.utcoffset() == timedelta(0)
+                                     and re.search(r"\b(?:UTC|GMT)\b|Z\b", text)))
+                if not explicit_zone:
+                    _fail("APPLICATION_" + side + "_TIMEZONE_EVIDENCE_REQUIRED")
+                value = original
         day = value if date_only else value.date()
         matches, dates = _date_spans(text, day, detail)
         if not matches:
