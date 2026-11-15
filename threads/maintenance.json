@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T14:18:48.503800+09:00",
-  "last_observed_at": "2026-11-15T14:18:48.503800+09:00",
+  "updated_at": "2026-11-15T15:17:58.708496+09:00",
+  "last_observed_at": "2026-11-15T15:17:58.708496+09:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13341,7 +13341,7 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-15T14:18:48.503800+09:00",
+    "checked_at": "2026-11-15T15:17:58.708496+09:00",
     "main_sha": "924054e6a435ea7215157770745d544987298257",
     "history_blob_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
@@ -13357,7 +13357,7 @@
     "new_publisher_runs": [],
     "last_confirmed_post_id": "18101198159539744",
     "publisher_in_progress": false,
-    "status": "no_material_change_a306965_staged_ready",
+    "status": "a306965_ready_before_due_regular_preflight_no_material_change",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13401,7 +13401,7 @@
     "monitored_slot": "2026-11-15T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-15T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/staging-recheck-a306965-20261115-1417.json",
+    "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
     "new_failure_fingerprints": [],
     "new_metric_observations": 0,
     "new_account_observations": 0,
@@ -13439,19 +13439,24 @@
     "new_ready_saved_to_staging": 0,
     "staging_changed": false,
     "latest_stage_recheck": {
-      "checked_at": "2026-11-15T14:18:48.503800+09:00",
+      "checked_at": "2026-11-15T15:17:58.708496+09:00",
       "main_sha": "924054e6a435ea7215157770745d544987298257",
-      "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
-      "slot": "2026-11-15T16:00:00+09:00",
       "notice_id": "a306965",
+      "slot": "2026-11-15T16:00:00+09:00",
+      "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
+      "source_sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
+      "official_source_GET": 200,
+      "official_bytes_unchanged": true,
+      "policy_hashes": {
+        "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+        "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+        "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+        "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+      },
       "full_entry_validation": "passed",
       "bridge_merge": "passed",
       "whole_prospective_queue_validation": "passed",
-      "staging_entries": 1,
-      "current_queue_eligible_ready": 0,
-      "historical_queue_entries_preserved": 31,
-      "planned_media": "IMAGE",
-      "card": {
+      "card_exact_byte_check": {
         "valid": true,
         "format": "JPEG",
         "width": 1080,
@@ -13470,16 +13475,14 @@
         "reviewed_at": "2026-11-15T03:30:54.872465+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "public_body_chars": 331,
-      "planned_replies": 0,
-      "CTA_count": 1,
-      "source_recheck": {
-        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306965",
-        "checked_at": "2026-11-15T14:18:48.504588+09:00",
-        "http_status": 200,
-        "sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
-        "same_bytes": true
-      },
+      "current_queue_ready": 0,
+      "staging_ready": 1,
+      "preserved_historical_entries": 31,
+      "pending_history": 0,
+      "next_media": "IMAGE",
+      "candidate_count": 24,
+      "unconfirmed_count": 800,
+      "recent_successes": 8,
       "future_slots": [
         {
           "scheduled_at": "2026-11-15T16:00:00+09:00",
@@ -13522,29 +13525,140 @@
           "presentation_style_planning_only": true
         }
       ],
-      "candidate_count": 24,
-      "unconfirmed_count": 800,
-      "recent8_count": 8,
-      "performance_summarize": "executed",
-      "comparable24h": 2,
-      "comparable72h": 1,
-      "actual_new_post_id": null,
+      "commands": [
+        {
+          "command": [
+            "python",
+            "scripts/threads_writer_input.py",
+            "--limit",
+            "24",
+            "--queue-for-selection",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python",
+            "scripts/threads_writer_input.py",
+            "--check-queue",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python",
+            "scripts/threads_performance.py",
+            "--mode",
+            "summarize",
+            "--state",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/performance.json",
+            "--history",
+            "threads_posted.json",
+            "--output",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/monitor-1517/performance-summary.json"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "performance_24h": {
+        "verified_main_count": 2,
+        "metric_medians": {
+          "views": 2630,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 0.5,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 2,
+          "likes": 2,
+          "replies": 2,
+          "reposts": 2,
+          "quotes": 2
+        },
+        "metric_totals": {
+          "views": 5260,
+          "likes": 12,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        },
+        "views_distribution": [
+          {
+            "post_id": "17918731521553015",
+            "views": 2231
+          },
+          {
+            "post_id": "17896425015438025",
+            "views": 3029
+          }
+        ],
+        "likes_rate_percent_median": 0.23351143636317628,
+        "likes_rate_percent_observed_posts": 2,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      },
+      "performance_72h": {
+        "verified_main_count": 1,
+        "metric_medians": {
+          "views": 2484,
+          "likes": 7,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 1,
+          "likes": 1,
+          "replies": 1,
+          "reposts": 1,
+          "quotes": 1
+        },
+        "metric_totals": {
+          "views": 2484,
+          "likes": 7,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "views_distribution": [
+          {
+            "post_id": "17918731521553015",
+            "views": 2484
+          }
+        ],
+        "likes_rate_percent_median": 0.28180354267310787,
+        "likes_rate_percent_observed_posts": 1,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      },
+      "performance_file_observations_unchanged": true,
+      "new_posts": 0,
+      "new_post_id": null,
+      "queue_changed": false,
+      "stage_changed": false,
       "manual_dispatch": false,
       "Meta_POST": false,
-      "staging_changed": false,
-      "queue_changed": false,
-      "audit_path": "threads/audits/staging-recheck-a306965-20261115-1417.json",
+      "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
       "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
       "queue_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
       "history_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
       "performance_sha": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
+      "claims_read": 43,
+      "accepted_claims_without_history": 0,
       "new_publisher_runs": [],
-      "new_ready_saved_to_staging": 0,
-      "new_ready_saved_to_queue": 0,
-      "new_post_id": null,
       "new_metric_observations": 0,
-      "accepted_claims_read": 43,
-      "accepted_claims_without_history": 0
+      "next_regular_preflight": "2026-11-15T15:45:00+09:00",
+      "preflight_not_yet_due": true,
+      "next_regular_publisher": "2026-11-15T16:00:00+09:00"
     }
   },
   "writer_hold_alternatives": {
@@ -21021,7 +21135,7 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "checked_at": "2026-11-15T14:18:48.503800+09:00",
+      "checked_at": "2026-11-15T15:17:58.708496+09:00",
       "main_sha": "924054e6a435ea7215157770745d544987298257",
       "contract_version": 2,
       "policy_hashes": {
@@ -21063,7 +21177,7 @@
         }
       },
       "full_active_prompt_read": true,
-      "queue_check_status": "preserved_remote_stage_plus_latest_queue_revalidated",
+      "queue_check_status": "current_stage_and_prospective_whole_queue_passed",
       "ready_entries": [],
       "new_regular_publications": 0,
       "scheduled12_status": "workflow_success_publish_skipped",
@@ -21098,7 +21212,7 @@
         "reviewed_at": "2026-11-15T02:02:29.499279+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "audit_path": "threads/audits/staging-recheck-a306965-20261115-1417.json",
+      "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
       "latest_publisher_run": {
         "run_id": 43652971854,
         "run_attempt": 1,
@@ -21109,7 +21223,7 @@
         "event": "schedule"
       },
       "new_publisher_runs": [],
-      "status": "no_material_change_staged_ready_awaiting_preflight",
+      "status": "staged_ready_regular_preflight_not_yet_due",
       "next_slot": "2026-11-15T16:00:00+09:00",
       "scheduled16_status": "staged_ready_pending_preflight",
       "scheduled20_status": "unstarted_no_ready; media recheck actual successful history before preparation",
@@ -21125,19 +21239,24 @@
         }
       ],
       "latest_stage_recheck": {
-        "checked_at": "2026-11-15T14:18:48.503800+09:00",
+        "checked_at": "2026-11-15T15:17:58.708496+09:00",
         "main_sha": "924054e6a435ea7215157770745d544987298257",
-        "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
-        "slot": "2026-11-15T16:00:00+09:00",
         "notice_id": "a306965",
+        "slot": "2026-11-15T16:00:00+09:00",
+        "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
+        "source_sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
+        "official_source_GET": 200,
+        "official_bytes_unchanged": true,
+        "policy_hashes": {
+          "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+          "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+          "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+          "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+        },
         "full_entry_validation": "passed",
         "bridge_merge": "passed",
         "whole_prospective_queue_validation": "passed",
-        "staging_entries": 1,
-        "current_queue_eligible_ready": 0,
-        "historical_queue_entries_preserved": 31,
-        "planned_media": "IMAGE",
-        "card": {
+        "card_exact_byte_check": {
           "valid": true,
           "format": "JPEG",
           "width": 1080,
@@ -21156,16 +21275,14 @@
           "reviewed_at": "2026-11-15T03:30:54.872465+00:00",
           "visual_review": "attestation_and_exact_assets_verified"
         },
-        "public_body_chars": 331,
-        "planned_replies": 0,
-        "CTA_count": 1,
-        "source_recheck": {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306965",
-          "checked_at": "2026-11-15T14:18:48.504588+09:00",
-          "http_status": 200,
-          "sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
-          "same_bytes": true
-        },
+        "current_queue_ready": 0,
+        "staging_ready": 1,
+        "preserved_historical_entries": 31,
+        "pending_history": 0,
+        "next_media": "IMAGE",
+        "candidate_count": 24,
+        "unconfirmed_count": 800,
+        "recent_successes": 8,
         "future_slots": [
           {
             "scheduled_at": "2026-11-15T16:00:00+09:00",
@@ -21208,29 +21325,140 @@
             "presentation_style_planning_only": true
           }
         ],
-        "candidate_count": 24,
-        "unconfirmed_count": 800,
-        "recent8_count": 8,
-        "performance_summarize": "executed",
-        "comparable24h": 2,
-        "comparable72h": 1,
-        "actual_new_post_id": null,
+        "commands": [
+          {
+            "command": [
+              "python",
+              "scripts/threads_writer_input.py",
+              "--limit",
+              "24",
+              "--queue-for-selection",
+              "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+            ],
+            "exit_code": 0
+          },
+          {
+            "command": [
+              "python",
+              "scripts/threads_writer_input.py",
+              "--check-queue",
+              "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+            ],
+            "exit_code": 0
+          },
+          {
+            "command": [
+              "python",
+              "scripts/threads_performance.py",
+              "--mode",
+              "summarize",
+              "--state",
+              "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/performance.json",
+              "--history",
+              "threads_posted.json",
+              "--output",
+              "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/monitor-1517/performance-summary.json"
+            ],
+            "exit_code": 0
+          }
+        ],
+        "performance_24h": {
+          "verified_main_count": 2,
+          "metric_medians": {
+            "views": 2630,
+            "likes": 6,
+            "replies": 0,
+            "reposts": 0.5,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 2,
+            "likes": 2,
+            "replies": 2,
+            "reposts": 2,
+            "quotes": 2
+          },
+          "metric_totals": {
+            "views": 5260,
+            "likes": 12,
+            "replies": 0,
+            "reposts": 1,
+            "quotes": 0
+          },
+          "views_distribution": [
+            {
+              "post_id": "17918731521553015",
+              "views": 2231
+            },
+            {
+              "post_id": "17896425015438025",
+              "views": 3029
+            }
+          ],
+          "likes_rate_percent_median": 0.23351143636317628,
+          "likes_rate_percent_observed_posts": 2,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        },
+        "performance_72h": {
+          "verified_main_count": 1,
+          "metric_medians": {
+            "views": 2484,
+            "likes": 7,
+            "replies": 0,
+            "reposts": 2,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 1,
+            "likes": 1,
+            "replies": 1,
+            "reposts": 1,
+            "quotes": 1
+          },
+          "metric_totals": {
+            "views": 2484,
+            "likes": 7,
+            "replies": 0,
+            "reposts": 2,
+            "quotes": 0
+          },
+          "views_distribution": [
+            {
+              "post_id": "17918731521553015",
+              "views": 2484
+            }
+          ],
+          "likes_rate_percent_median": 0.28180354267310787,
+          "likes_rate_percent_observed_posts": 1,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        },
+        "performance_file_observations_unchanged": true,
+        "new_posts": 0,
+        "new_post_id": null,
+        "queue_changed": false,
+        "stage_changed": false,
         "manual_dispatch": false,
         "Meta_POST": false,
-        "staging_changed": false,
-        "queue_changed": false,
-        "audit_path": "threads/audits/staging-recheck-a306965-20261115-1417.json",
+        "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
         "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
         "queue_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
         "history_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
         "performance_sha": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
+        "claims_read": 43,
+        "accepted_claims_without_history": 0,
         "new_publisher_runs": [],
-        "new_ready_saved_to_staging": 0,
-        "new_ready_saved_to_queue": 0,
-        "new_post_id": null,
         "new_metric_observations": 0,
-        "accepted_claims_read": 43,
-        "accepted_claims_without_history": 0
+        "next_regular_preflight": "2026-11-15T15:45:00+09:00",
+        "preflight_not_yet_due": true,
+        "next_regular_publisher": "2026-11-15T16:00:00+09:00"
       }
     },
     "next_slot_official_preflight": {
@@ -25666,19 +25894,24 @@
       "Actual publisher credential/account API check and publication proof remain at next regular publisher."
     ],
     "latest_recheck": {
-      "checked_at": "2026-11-15T14:18:48.503800+09:00",
+      "checked_at": "2026-11-15T15:17:58.708496+09:00",
       "main_sha": "924054e6a435ea7215157770745d544987298257",
-      "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
-      "slot": "2026-11-15T16:00:00+09:00",
       "notice_id": "a306965",
+      "slot": "2026-11-15T16:00:00+09:00",
+      "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
+      "source_sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
+      "official_source_GET": 200,
+      "official_bytes_unchanged": true,
+      "policy_hashes": {
+        "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+        "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+        "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+        "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+      },
       "full_entry_validation": "passed",
       "bridge_merge": "passed",
       "whole_prospective_queue_validation": "passed",
-      "staging_entries": 1,
-      "current_queue_eligible_ready": 0,
-      "historical_queue_entries_preserved": 31,
-      "planned_media": "IMAGE",
-      "card": {
+      "card_exact_byte_check": {
         "valid": true,
         "format": "JPEG",
         "width": 1080,
@@ -25697,16 +25930,14 @@
         "reviewed_at": "2026-11-15T03:30:54.872465+00:00",
         "visual_review": "attestation_and_exact_assets_verified"
       },
-      "public_body_chars": 331,
-      "planned_replies": 0,
-      "CTA_count": 1,
-      "source_recheck": {
-        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306965",
-        "checked_at": "2026-11-15T14:18:48.504588+09:00",
-        "http_status": 200,
-        "sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
-        "same_bytes": true
-      },
+      "current_queue_ready": 0,
+      "staging_ready": 1,
+      "preserved_historical_entries": 31,
+      "pending_history": 0,
+      "next_media": "IMAGE",
+      "candidate_count": 24,
+      "unconfirmed_count": 800,
+      "recent_successes": 8,
       "future_slots": [
         {
           "scheduled_at": "2026-11-15T16:00:00+09:00",
@@ -25749,29 +25980,140 @@
           "presentation_style_planning_only": true
         }
       ],
-      "candidate_count": 24,
-      "unconfirmed_count": 800,
-      "recent8_count": 8,
-      "performance_summarize": "executed",
-      "comparable24h": 2,
-      "comparable72h": 1,
-      "actual_new_post_id": null,
+      "commands": [
+        {
+          "command": [
+            "python",
+            "scripts/threads_writer_input.py",
+            "--limit",
+            "24",
+            "--queue-for-selection",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python",
+            "scripts/threads_writer_input.py",
+            "--check-queue",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python",
+            "scripts/threads_performance.py",
+            "--mode",
+            "summarize",
+            "--state",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/performance.json",
+            "--history",
+            "threads_posted.json",
+            "--output",
+            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/monitor-1517/performance-summary.json"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "performance_24h": {
+        "verified_main_count": 2,
+        "metric_medians": {
+          "views": 2630,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 0.5,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 2,
+          "likes": 2,
+          "replies": 2,
+          "reposts": 2,
+          "quotes": 2
+        },
+        "metric_totals": {
+          "views": 5260,
+          "likes": 12,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        },
+        "views_distribution": [
+          {
+            "post_id": "17918731521553015",
+            "views": 2231
+          },
+          {
+            "post_id": "17896425015438025",
+            "views": 3029
+          }
+        ],
+        "likes_rate_percent_median": 0.23351143636317628,
+        "likes_rate_percent_observed_posts": 2,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      },
+      "performance_72h": {
+        "verified_main_count": 1,
+        "metric_medians": {
+          "views": 2484,
+          "likes": 7,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 1,
+          "likes": 1,
+          "replies": 1,
+          "reposts": 1,
+          "quotes": 1
+        },
+        "metric_totals": {
+          "views": 2484,
+          "likes": 7,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "views_distribution": [
+          {
+            "post_id": "17918731521553015",
+            "views": 2484
+          }
+        ],
+        "likes_rate_percent_median": 0.28180354267310787,
+        "likes_rate_percent_observed_posts": 1,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      },
+      "performance_file_observations_unchanged": true,
+      "new_posts": 0,
+      "new_post_id": null,
+      "queue_changed": false,
+      "stage_changed": false,
       "manual_dispatch": false,
       "Meta_POST": false,
-      "staging_changed": false,
-      "queue_changed": false,
-      "audit_path": "threads/audits/staging-recheck-a306965-20261115-1417.json",
+      "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
       "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
       "queue_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
       "history_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
       "performance_sha": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
+      "claims_read": 43,
+      "accepted_claims_without_history": 0,
       "new_publisher_runs": [],
-      "new_ready_saved_to_staging": 0,
-      "new_ready_saved_to_queue": 0,
-      "new_post_id": null,
       "new_metric_observations": 0,
-      "accepted_claims_read": 43,
-      "accepted_claims_without_history": 0
+      "next_regular_preflight": "2026-11-15T15:45:00+09:00",
+      "preflight_not_yet_due": true,
+      "next_regular_publisher": "2026-11-15T16:00:00+09:00"
     }
   },
   "writer_recovery_duplicate_checks": {
