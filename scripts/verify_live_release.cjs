@@ -4,14 +4,32 @@ const BASE='https://kllollain-max.github.io/careerpick/';
 const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});const checks=[];fs.mkdirSync('live-release-output',{recursive:true});
 try{for(const width of [390,1440]){const context=await browser.newContext({viewport:{width,height:900},locale:'ko-KR',timezoneId:'Asia/Seoul'});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
 await page.goto(BASE,{waitUntil:'networkidle'});await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));
-await page.getByRole('searchbox',{name:'검색',exact:true}).fill('우체국시설관리단');await page.locator('a[href="/careerpick/jobs/a306653.html"]').first().waitFor();
-if(width===1440){await page.locator('#cpEmployment').selectOption('무기계약직');}else{await page.locator('#toggle').click();await page.locator('#status [data-status="open"]').click();await page.locator('#cpFilterDone').click();}await page.locator('[data-save="a306653"]').click();await page.reload({waitUntil:'networkidle'});
-await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));await page.getByRole('button',{name:'저장 공고',exact:true}).click();await page.locator('[data-save="a306653"][aria-pressed="true"]').waitFor();
-assert((await page.locator('#list').innerText()).includes('우체국시설관리단'));await page.locator('[data-save="a306653"]').click();
-await page.getByRole('button',{name:'내 지원',exact:true}).click();assert((await page.locator('#summary').innerText()).includes('지원'));
+// Select an actually visible open ALIO job; never pin a past deadline or a stale ID.
+const now=Date.now();
+const candidates=feed.posts.filter(p=>/^a[0-9]+$/.test(p.id||'')&&p.org&&p.due&&Date.parse(p.due)>now&&Array.isArray(p.emp)&&p.emp.includes('무기계약직')).sort((a,b)=>Date.parse(b.due)-Date.parse(a.due));
+let selected=null;
+for(const candidate of candidates.slice(0,30)){
+  await page.getByRole('searchbox',{name:'검색',exact:true}).fill(candidate.org);
+  const link=page.locator('a[href="/careerpick/jobs/'+candidate.id+'.html"]').first();
+  if(await link.isVisible().catch(()=>false)){selected=candidate;break;}
+}
+assert(selected,'No visible currently-open permanent-contract ALIO candidate in public feed; investigate feed/render sync');
+const id=selected.id;
+if(width===1440){await page.locator('#cpEmployment').selectOption('무기계약직');}else{await page.locator('#toggle').click();await page.locator('#status [data-status="open"]').click();await page.locator('#cpFilterDone').click();}
+await page.locator('[data-save="'+id+'"]').first().click();
+await page.reload({waitUntil:'networkidle'});
+await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));
+await page.getByRole('button',{name:'저장 공고',exact:true}).click();
+await page.locator('[data-save="'+id+'"][aria-pressed="true"]').first().waitFor();
+assert((await page.locator('#list').innerText()).includes(selected.org));
+await page.locator('[data-save="'+id+'"]').first().click();
+await page.getByRole('button',{name:'내 지원',exact:true}).click();
+assert((await page.locator('#summary').innerText()).includes('지원'));
 assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
-await page.goto(BASE+'jobs/a306653.html',{waitUntil:'networkidle'});await page.reload({waitUntil:'networkidle'});assert((await page.locator('h1').innerText()).includes('우체국시설관리단'));
-assert(await page.getByRole('link',{name:'ALIO 원본에서 공고 확인 ↗'}).getAttribute('href'));
+await page.goto(BASE+'jobs/'+id+'.html',{waitUntil:'networkidle'});
+await page.reload({waitUntil:'networkidle'});
+assert((await page.locator('h1').innerText()).includes(selected.title));
+assert(await page.locator('#job-official a[href^="https://"]').first().getAttribute('href'));
 assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
 assert(!(await page.locator('img').evaluateAll(xs=>xs.some(x=>!x.complete||x.naturalWidth===0))));
 await page.screenshot({path:'live-release-output/detail-'+width+'.png',fullPage:true});
