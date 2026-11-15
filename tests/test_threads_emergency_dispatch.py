@@ -34,7 +34,7 @@ class EmergencyDispatchTests(unittest.TestCase):
             "THREADS_MANUAL_PUBLISH": "true",
             "GITHUB_EVENT_NAME": "workflow_dispatch",
             "GITHUB_RUN_ATTEMPT": "1",
-            "THREADS_MANUAL_SLOT": "2026-11-15T12:35:00+09:00",
+            "THREADS_MANUAL_SLOT": "2026-11-15T12:00:00+09:00",
         }):
             with self.assertRaisesRegex(RuntimeError, "expired or in the future"):
                 publisher.current_publication_slot(now)
