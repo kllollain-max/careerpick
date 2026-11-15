@@ -55,6 +55,23 @@ jobs:
           Path("/tmp/threads-v4/evidence-gate.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
           print(json.dumps(result,ensure_ascii=False))
           PY
+      - name: Classify current supply outage without posting
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          from threads_v4.supply_diagnostics import supply_decision
+          root=Path("/tmp/threads-v4")
+          triage=json.loads((root/"official-triage.json").read_text(encoding="utf-8"))
+          queue=json.loads((root/"queue.json").read_text(encoding="utf-8"))
+          stage={"schema_version":1,"entries":[]}
+          history=json.loads(Path("threads_posted.json").read_text(encoding="utf-8"))
+          result=supply_decision(queue,stage,history,triage,datetime.now(ZoneInfo("Asia/Seoul")))
+          (root/"supply-diagnostics.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+          print(json.dumps({"status":result["status"],"action":result["action"],"missing":len(result["missing_slots"])},ensure_ascii=False))
+          PY
       - name: Upload candidate review report
         uses: actions/upload-artifact@v4
         with:
@@ -63,6 +80,7 @@ jobs:
             /tmp/threads-v4/candidates.json
             /tmp/threads-v4/official-triage.json
             /tmp/threads-v4/evidence-gate.json
+            /tmp/threads-v4/supply-diagnostics.json
           retention-days: 7
       - name: Verify production publisher untouched
         run: |
