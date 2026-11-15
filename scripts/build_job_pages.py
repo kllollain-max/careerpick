@@ -790,6 +790,8 @@ def main():
             'id': pid,
             'title': clean(post.get('title')),
             'organization': clean(post.get('org')),
+            'recruitment_count_raw': clean(post.get('n')),
+            'recruitment_count_verified_numeric': int(clean(post.get('n'))) if re.fullmatch(r'[0-9]+', clean(post.get('n'))) else None,
             'source_end_date': clean(post.get('due')),
             'official_source_url': official_url,
             'official_link_host': (urlparse(official_url).hostname or '') if official_url else '',
@@ -897,6 +899,7 @@ def main():
             [row for row in quality_rows if row['review_priority'] != 'low'],
             key=lambda row: (
                 {'high': 0, 'medium': 1}[row['review_priority']],
+                -(row['recruitment_count_verified_numeric'] if row['recruitment_count_verified_numeric'] is not None else -1),
                 row['organization'], row['id'],
             ),
         ),
