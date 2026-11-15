@@ -58,6 +58,8 @@ def writer_inputs(root=None):
         # An unavailable optional source cannot replace ALIO or validate a
         # reserved Cleaneye notice. Source-specific validation still fails closed.
         source['_cleaneye'] = {}
+    from scripts.threads_source_verification import attach
+    source = attach(base, source, datetime.now(KST))
     return policy, source, load(base / 'alio-detail.json', {})
 
 

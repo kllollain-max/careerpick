@@ -342,7 +342,16 @@ def _source(entry, source_doc, details, now, scheduled, max_age):
         _fail("SOURCE_NOTICE_UNCONFIRMED")
     source_time = _aware(source_doc.get("updated"), "SOURCE_TIME_INVALID")
     snapshot_time = _aware(ops.get("snapshot_at"), "SOURCE_SNAPSHOT_INVALID")
-    verified_time = _fresh(ops.get("last_success_at"), now, scheduled, "SOURCE_STALE", max_age)
+    try:
+        verified_time = _fresh(ops.get("last_success_at"), now, scheduled, "SOURCE_STALE", max_age)
+    except QueueValidationError:
+        if _aware(ops.get("last_success_at"), "SOURCE_STALE") > now:
+            _fail("SOURCE_STALE")
+        try:
+            from scripts.threads_source_verification import verified_time as proof_time
+            verified_time = proof_time(source_doc, now, scheduled, max_age.total_seconds() / 3600)
+        except (ValueError, KeyError, TypeError):
+            _fail("SOURCE_STALE")
     if source_time != snapshot_time or source_time > verified_time:
         _fail("SOURCE_SNAPSHOT_MISMATCH")
     return notice_id, post, detail

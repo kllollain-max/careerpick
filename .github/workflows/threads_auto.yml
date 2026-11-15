@@ -29,6 +29,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
   issues: write
 
 concurrency:
@@ -43,6 +44,7 @@ jobs:
     timeout-minutes: 6
     permissions:
       contents: write
+      actions: read
     env:
       TZ: Asia/Seoul
       THREADS_CLAIM_TOKEN: ${{ github.token }}
@@ -54,6 +56,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Read digest-bound verification of unchanged collection snapshots
+        run: python scripts/threads_source_verification.py
       - name: Review official sources and promote validated staged entries by CAS
         run: python scripts/threads_queue_bridge.py --apply --output threads-queue-preflight.json
       - name: Flag missing approved supply with actionable diagnostics
@@ -149,6 +153,9 @@ jobs:
         run: |
           echo '::error::Unconfirmed prior receipt remains on hold; no new publication'
           exit 1
+
+      - name: Read digest-bound verification of unchanged collection snapshots
+        run: python scripts/threads_source_verification.py
 
       - name: Recover already reviewed staged supply within the existing slot grace
         run: python scripts/threads_queue_bridge.py --apply --output threads-queue-publish-preflight.json
