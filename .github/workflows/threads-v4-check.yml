@@ -1,0 +1,28 @@
+name: Threads v4 isolated checks
+on:
+  push:
+    branches:
+      - rebuild/threads-v4-20261115
+  pull_request:
+    paths:
+      - 'threads_v4/**'
+      - '.github/workflows/threads-v4-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run isolated queue checks
+        run: python -m unittest discover -s threads_v4 -p 'test_*.py' -v
+      - name: Verify production publisher untouched
+        run: |
+          test -f .github/workflows/threads_auto.yml
+          test -f threads_posted.json
+          test -f alio.json
