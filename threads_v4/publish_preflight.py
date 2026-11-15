@@ -14,7 +14,7 @@ def preflight(audit, queue, staging, *, account):
         blockers.append("QUEUE_SCHEMA_INVALID")
     if any(isinstance(x,dict) and x.get("notice_id")==audit.get("notice_id") for x in queue.get("entries",[])):
         blockers.append("NOTICE_ALREADY_IN_QUEUE")
-    if not any(x.get("notice_id")==audit.get("notice_id") and isinstance(x.get("writer"),dict) and x["writer"].get("status")=="ready" and isinstance(x.get("writer_review"),dict) and x["writer_review"].get("status")=="approved" for x in staging.get("entries",[]) if isinstance(x,dict)):
+    if not any(x.get("notice_id")==audit.get("notice_id") and isinstance(x.get("writer"),dict) and x["writer"].get("status")=="ready" and isinstance(x["writer"].get("review"),dict) and x["writer"]["review"].get("verification_basis")=="checked_official_source" and x["writer"]["review"].get("card_visual_review",{}).get("status")=="passed" for x in staging.get("entries",[]) if isinstance(x,dict)):
         blockers.append("APPROVED_STAGING_ENTRY_MISSING")
     return {"status":"BLOCKED" if blockers else "REQUIRES_META_ACCOUNT_CHECK",
             "blockers":blockers,"meta_posted":False,"notice_id":audit.get("notice_id")}
