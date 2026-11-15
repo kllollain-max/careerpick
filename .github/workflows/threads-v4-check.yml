@@ -41,6 +41,20 @@ jobs:
           print(json.dumps({"hold":result["hold_count"],"reject":result["reject_count"],"pass":result["pass_count"]},ensure_ascii=False))
           assert result["pass_count"] == 0
           PY
+      - name: Check saved official evidence is not auto-approved
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          from threads_v4.evidence_gate import decision
+          evidence=json.loads(Path("threads_v4/audits/a305734-official-evidence.json").read_text(encoding="utf-8"))
+          result=decision(evidence,datetime.now(ZoneInfo("Asia/Seoul")))
+          assert result["decision"]=="HOLD", result
+          Path("/tmp/threads-v4/evidence-gate.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+          print(json.dumps(result,ensure_ascii=False))
+          PY
       - name: Upload candidate review report
         uses: actions/upload-artifact@v4
         with:
@@ -48,6 +62,7 @@ jobs:
           path: |
             /tmp/threads-v4/candidates.json
             /tmp/threads-v4/official-triage.json
+            /tmp/threads-v4/evidence-gate.json
           retention-days: 7
       - name: Verify production publisher untouched
         run: |
