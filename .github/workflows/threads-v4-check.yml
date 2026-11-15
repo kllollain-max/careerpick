@@ -102,6 +102,20 @@ jobs:
           d=json.loads(Path("/tmp/threads-v4/publish-preflight.json").read_text(encoding="utf-8"))
           assert d["status"]=="BLOCKED" and d["meta_posted"] is False
           PY
+      - name: Verify v4 cutover remains disabled without a real Meta receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from threads_v4.cutover_gate import evaluate
+          p=json.loads(Path("/tmp/threads-v4/publish-preflight.json").read_text(encoding="utf-8"))
+          result=evaluate(verified_post=False,receipt=None,backup=False,old_disabled=False,
+                          v4_enabled=False,queue_ready=p["status"]=="REQUIRES_META_ACCOUNT_CHECK",
+                          image_reviewed=False)
+          assert result["cutover_allowed"] is False
+          Path("/tmp/threads-v4/cutover-gate.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(result,ensure_ascii=False))
+          PY
       - name: Upload candidate review report
         uses: actions/upload-artifact@v4
         with:
@@ -116,6 +130,7 @@ jobs:
             /tmp/threads-v4/official-fetch.json
             /tmp/threads-v4/hold-preview.json
             /tmp/threads-v4/publish-preflight.json
+            /tmp/threads-v4/cutover-gate.json
           retention-days: 7
       - name: Verify production publisher untouched
         run: |
