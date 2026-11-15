@@ -173,6 +173,8 @@ def render(post, detail, related_posts=()):
     canonical = f'{BASE}/jobs/{quote(pid, safe="")}.html'
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
+    # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
+    confirmed_cutoff = '2026-11-19 10:00 (KST)' if pid == 'a306750' else ''
     deadline = parse_date(due, end_of_day=True)
     closed = is_closed(due)
 
@@ -197,6 +199,7 @@ def render(post, detail, related_posts=()):
         ('근무지역', clean(post.get('region')) or '공고 확인'),
         ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
         ('원서 접수기간', '시작일·마감일·마감시각은 공식 첨부 공고에서 확인'),
+        *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
 
     conflicts = []
