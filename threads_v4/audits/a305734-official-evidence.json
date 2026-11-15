@@ -20,7 +20,10 @@
     "정정·취소 여부",
     "기존 게시 이력 및 계정 프로필 확인",
     "이미지 실물 검수",
-    "정확한 게시 슬롯과 UTC 마감 시각"
+    "정확한 게시 슬롯과 UTC 마감 시각",
+    "기관 원문 HTTP 502 복구 후 확인",
+    "공고문 첨부 HTTP 403 접근 확보",
+    "UTC 마감 정확한 시각 확인"
   ],
   "meta_posted": false,
   "last_verified_gate": {
@@ -28,5 +31,24 @@
     "reason": "MISSING_INSTITUTION_DOCUMENT_CHECKED",
     "actions_run": 43678301824,
     "unit_tests_passed": 25
+  },
+  "external_check": {
+    "official_alio_url": "https://job.alio.go.kr/recruitview.do?idx=305734",
+    "official_alio_access": "PASS",
+    "institution_page_access": "HTTP_502",
+    "alio_attachment_access": "HTTP_403",
+    "verified_alio_fields": [
+      "organization",
+      "title",
+      "employment",
+      "headcount",
+      "qualification",
+      "date_range",
+      "online_submission",
+      "disqualifications"
+    ],
+    "deadline_note": "Official ALIO lists 2026-11-30 UTC without exact clock; do not infer 08:59:59 KST",
+    "decision": "HOLD",
+    "reason": "INSTITUTION_DOCUMENT_AND_ATTACHMENT_UNAVAILABLE"
   }
 }
