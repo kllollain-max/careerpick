@@ -310,6 +310,8 @@ def gen_sitemap(now):
     # The public restoration enumerates actual files instead of publishing an internal inventory.
     import urllib.parse
     pages += [urllib.parse.quote(p.name) for p in sorted(ROOT.glob("org-*.html"))]
+    # Include original editorial guides; avoid indexing utility or internal workflow pages.
+    pages += [urllib.parse.quote(p.relative_to(ROOT).as_posix(), safe="/") for p in sorted((ROOT / "guides").glob("*.html")) if p.is_file()]
     # A build timestamp is not a verified content modification timestamp.
     # lastmod is optional; omit it until a persistent, trustworthy source exists.
     urls = "".join(f"<url><loc>{SITE}{p}</loc></url>\n" for p in pages)
