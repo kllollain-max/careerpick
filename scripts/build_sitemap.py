@@ -57,10 +57,21 @@ def main():
     if not pages:
         raise SystemExit("생성된 채용공고 페이지가 없습니다.")
 
+    # Never advertise pages explicitly excluded from search indexing.
+    # Check the generated HTML, not inferred expiration dates.
+    def indexable(page):
+        import re
+        source = page.read_text(encoding="utf-8")
+        return not re.search(
+            r'<meta\s+[^>]*name=["\']robots["\'][^>]*content=["\'][^"\']*\bnoindex\b',
+            source, re.IGNORECASE,
+        )
+
     current_jobs = {
         f"{BASE}/jobs/{page.name}"
         for page in pages
-        if page.stem[1:].isdigit() or (page.stem.startswith("w") and len(page.stem)==25 and all(c in "0123456789abcdef" for c in page.stem[1:]))
+        if (page.stem[1:].isdigit() or (page.stem.startswith("w") and len(page.stem)==25 and all(c in "0123456789abcdef" for c in page.stem[1:])))
+        and indexable(page)
     }
 
     # 이전에 등록된 채용공고 주소 중 더 이상
