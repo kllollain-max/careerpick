@@ -13,7 +13,7 @@ on:
         required: true
         type: string
       slot_kst:
-        description: 'Current KST regular slot e.g. 2026-11-15T12:00:00+09:00 (within 2h)'
+        description: 'Current KST minute e.g. 2026-11-15T12:35:00+09:00; must be within 10m and active regular slot'
         required: true
         type: string
   schedule:
