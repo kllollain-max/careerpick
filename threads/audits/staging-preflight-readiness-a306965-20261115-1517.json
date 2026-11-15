@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-15T15:17:58.708496+09:00",
+  "main_sha": "924054e6a435ea7215157770745d544987298257",
+  "notice_id": "a306965",
+  "slot": "2026-11-15T16:00:00+09:00",
+  "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
+  "source_sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
+  "official_source_GET": 200,
+  "official_bytes_unchanged": true,
+  "policy_hashes": {
+    "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+    "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+    "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+    "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+  },
+  "full_entry_validation": "passed",
+  "bridge_merge": "passed",
+  "whole_prospective_queue_validation": "passed",
+  "card_exact_byte_check": {
+    "valid": true,
+    "format": "JPEG",
+    "width": 1080,
+    "height": 1080,
+    "mode": "RGB",
+    "file_size_bytes": 143628,
+    "pixel_verification": "passed",
+    "layout_version": "careerpick-single-main-card-v2",
+    "asset_path": "threads-images/a306965.jpg",
+    "local_path": "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/threads-images/a306965.jpg",
+    "sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
+    "facts_sha256": "b16473f69832a74a15e0669b33fbe8befcc8e8c4c7d3b2f063b351d80898ad76",
+    "preview_asset_path": "threads-images/a306965-360.png",
+    "preview_sha256": "1259ffd15ddca6609c4046ae2f658dce5f98d9acdeb10e4b110ee3815e7bff4b",
+    "reviewed_width": 360,
+    "reviewed_at": "2026-11-15T03:30:54.872465+00:00",
+    "visual_review": "attestation_and_exact_assets_verified"
+  },
+  "current_queue_ready": 0,
+  "staging_ready": 1,
+  "preserved_historical_entries": 31,
+  "pending_history": 0,
+  "next_media": "IMAGE",
+  "candidate_count": 24,
+  "unconfirmed_count": 800,
+  "recent_successes": 8,
+  "future_slots": [
+    {
+      "scheduled_at": "2026-11-15T16:00:00+09:00",
+      "format_id": "interest",
+      "hook_type": "target",
+      "planned_media": "IMAGE",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "regular_interest",
+      "presentation_style_planning_only": true
+    },
+    {
+      "scheduled_at": "2026-11-15T20:00:00+09:00",
+      "format_id": "deadline_opportunity",
+      "hook_type": "target",
+      "planned_media": "TEXT",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "eligibility_info",
+      "presentation_style_planning_only": true
+    },
+    {
+      "scheduled_at": "2026-11-16T08:00:00+09:00",
+      "format_id": "hiring_core",
+      "hook_type": "condition",
+      "planned_media": "IMAGE",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "regular_interest",
+      "presentation_style_planning_only": true
+    },
+    {
+      "scheduled_at": "2026-11-16T12:00:00+09:00",
+      "format_id": "eligibility",
+      "hook_type": "target",
+      "planned_media": "TEXT",
+      "experiment_variable": "intro_target_vs_condition_only",
+      "planning_only_recheck_actual_success_history": true,
+      "presentation_style": "eligibility_info",
+      "presentation_style_planning_only": true
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "python",
+        "scripts/threads_writer_input.py",
+        "--limit",
+        "24",
+        "--queue-for-selection",
+        "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "scripts/threads_writer_input.py",
+        "--check-queue",
+        "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "scripts/threads_performance.py",
+        "--mode",
+        "summarize",
+        "--state",
+        "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/performance.json",
+        "--history",
+        "threads_posted.json",
+        "--output",
+        "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/monitor-1517/performance-summary.json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "performance_24h": {
+    "verified_main_count": 2,
+    "metric_medians": {
+      "views": 2630,
+      "likes": 6,
+      "replies": 0,
+      "reposts": 0.5,
+      "quotes": 0
+    },
+    "metric_observed_counts": {
+      "views": 2,
+      "likes": 2,
+      "replies": 2,
+      "reposts": 2,
+      "quotes": 2
+    },
+    "metric_totals": {
+      "views": 5260,
+      "likes": 12,
+      "replies": 0,
+      "reposts": 1,
+      "quotes": 0
+    },
+    "views_distribution": [
+      {
+        "post_id": "17918731521553015",
+        "views": 2231
+      },
+      {
+        "post_id": "17896425015438025",
+        "views": 3029
+      }
+    ],
+    "likes_rate_percent_median": 0.23351143636317628,
+    "likes_rate_percent_observed_posts": 2,
+    "reader_replies": null,
+    "reader_replies_status": "see_per_post_author_separation_status",
+    "profile_visits": null,
+    "follow_increase": null,
+    "link_clicks": null
+  },
+  "performance_72h": {
+    "verified_main_count": 1,
+    "metric_medians": {
+      "views": 2484,
+      "likes": 7,
+      "replies": 0,
+      "reposts": 2,
+      "quotes": 0
+    },
+    "metric_observed_counts": {
+      "views": 1,
+      "likes": 1,
+      "replies": 1,
+      "reposts": 1,
+      "quotes": 1
+    },
+    "metric_totals": {
+      "views": 2484,
+      "likes": 7,
+      "replies": 0,
+      "reposts": 2,
+      "quotes": 0
+    },
+    "views_distribution": [
+      {
+        "post_id": "17918731521553015",
+        "views": 2484
+      }
+    ],
+    "likes_rate_percent_median": 0.28180354267310787,
+    "likes_rate_percent_observed_posts": 1,
+    "reader_replies": null,
+    "reader_replies_status": "see_per_post_author_separation_status",
+    "profile_visits": null,
+    "follow_increase": null,
+    "link_clicks": null
+  },
+  "performance_file_observations_unchanged": true,
+  "new_posts": 0,
+  "new_post_id": null,
+  "queue_changed": false,
+  "stage_changed": false,
+  "manual_dispatch": false,
+  "Meta_POST": false,
+  "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
+  "queue_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
+  "history_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
+  "performance_sha": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
+  "claims_read": 43,
+  "accepted_claims_without_history": 0,
+  "last_accepted_claim": {
+    "sha": "9663dadce00f46de529e712eff6f073d5831a03d",
+    "slot": "2026-11-14T08:00:00+09:00",
+    "run_id": "43527351939",
+    "state": "accepted",
+    "post_id": "18101198159539744"
+  },
+  "latest_regular_publisher": [
+    {
+      "run_id": 43673562322,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-15T03:52:51Z",
+      "head_sha": "fb028ceb25858e8b9170916d8691d44cd4c2a84f"
+    }
+  ],
+  "new_publisher_runs_since_checkpoint": [],
+  "next_preflight_due": "2026-11-15T15:45:00+09:00",
+  "preflight_not_yet_due": true,
+  "next_publisher_due": "2026-11-15T16:00:00+09:00",
+  "no_failure_in_current_preflight_readiness": true,
+  "code_modified": false,
+  "safety_guards_relaxed": false,
+  "new_Meta_GET": false,
+  "scope": "Current immutable main and fresh GitHub blob SHA matched complete local bytes. No existing body, card, queue entry, claim or ledger mutated."
+}
