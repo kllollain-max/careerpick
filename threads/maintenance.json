@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T22:28:51+09:00",
-  "last_observed_at": "2026-11-15T22:28:51+09:00",
+  "updated_at": "2026-11-15T14:48:01+00:00",
+  "last_observed_at": "2026-11-15T14:48:01+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13315,9 +13315,9 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-15T08:03:29+00:00",
-    "main_sha": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
-    "history_blob_sha": "65d57eb0a06e6036bfe6c543636d66e15391beca",
+    "checked_at": "2026-11-15T14:48:01+00:00",
+    "main_sha": "c7b818531e7f25f94cb53590258d6084964397c2",
+    "history_blob_sha": "d6a93fb86b02eb7df904e3493490c8f34eaf1764",
     "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
     "latest_publisher_run": {
       "run_id": 43692396153,
@@ -13339,7 +13339,7 @@
     ],
     "last_confirmed_post_id": "18137768440737022",
     "publisher_in_progress": false,
-    "status": "actual_regular_image_publication_verified",
+    "status": "HOLD_NOT_READY_NOT_PUBLISHED",
     "source_collection": {
       "alio": {
         "status": "verified_snapshot",
@@ -13383,15 +13383,15 @@
     "monitored_slot": "2026-11-15T08:00:00+09:00",
     "monitored_slot_grace_ends": "2026-11-15T10:00:00+09:00",
     "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/published-a306965-20261115-1700.json",
+    "audit_path": "threads/audits/supply-recheck-20261115-2348.json",
     "new_failure_fingerprints": [
       "43691683586:1:STAGED_SLOT_EXPIRED_OR_FUTURE:a306965"
     ],
     "new_metric_observations": 0,
     "new_account_observations": 0,
-    "new_ready_saved": 1,
-    "new_held_drafts_saved": 0,
-    "queue_changed": true,
+    "new_ready_saved": 0,
+    "new_held_drafts_saved": 1,
+    "queue_changed": false,
     "existing_automation": {
       "id": "6ae092084b988191a23a38300212ebdc",
       "is_enabled": true,
@@ -13408,18 +13408,18 @@
       "Official GET was executed in the observed publisher run at17:00:20; receipt, accepted claim, account logs and actual media bytes were read and checked in this maintenance.",
       "Own reply scan covers top-level all pages; not all nested replies."
     ],
-    "next_regular_slot": "2026-11-15T20:00:00+09:00",
-    "next_actual_media": "TEXT",
+    "next_regular_slot": "2026-11-16T08:00:00+09:00",
+    "next_actual_media": "IMAGE",
     "scheduled16_status": "published_and_official_GET_verified_at17:00_within_existing2h_grace",
     "scheduled20_status": "unstarted_no_new_ready",
-    "queue_blob_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+    "queue_blob_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
     "maintenance_input_blob_sha": "4eb2a67e86aad1e947a2cd1fbd0362cc06789100",
-    "performance_blob_sha": "c6ff7ae484cc8920f358a7de87d4d2b663ffd829",
+    "performance_blob_sha": "aec6aeaa35d7ab21637e7b33c824046f0ce83cd8",
     "scheduled08_status": "confirmed_presend_failure_grace_expired_no_backfill",
     "executed_archive_main_sha": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
     "archive_to_current_changes": [],
     "new_duplicate_exclusions": 1,
-    "accepted_claims_read": 43,
+    "accepted_claims_read": 44,
     "accepted_claims_without_history": 0,
     "new_ready_saved_to_staging": 0,
     "staging_changed": false,
@@ -13646,7 +13646,76 @@
       "next_regular_publisher": "2026-11-15T16:00:00+09:00"
     },
     "latest_regular_publisher_16h": "verified",
-    "new_regular_publications": 1
+    "new_regular_publications": 0,
+    "notice_id": "cleaneye-80792",
+    "staging_blob_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+    "claim_count": 45,
+    "latest_regular_runs": [
+      {
+        "id": 43709072093,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T11:29:05Z",
+        "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+        "run_attempt": 1
+      },
+      {
+        "id": 43708516229,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T11:21:31Z",
+        "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+        "run_attempt": 1
+      },
+      {
+        "id": 43692396153,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T08:00:37Z",
+        "head_sha": "924054e6a435ea7215157770745d544987298257",
+        "run_attempt": 1
+      },
+      {
+        "id": 43691683586,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T07:50:07Z",
+        "head_sha": "924054e6a435ea7215157770745d544987298257",
+        "run_attempt": 1
+      }
+    ],
+    "next_slot_source_gate": "CLEANEYE_SOURCE_STALE",
+    "source_collection_evidence": {
+      "run_id": 43717162751,
+      "job_id": 132821064648,
+      "alio_verified_at": "2026-11-15T22:06:05+09:00",
+      "cleaneye_complete_report_logged_at": "2026-11-15T13:07:40.5808225Z",
+      "unchanged": true,
+      "storage_skipped": true,
+      "live_verification_not_persisted_to_main": true
+    },
+    "whole_queue_validation": {
+      "status": "validated",
+      "ready_entries": []
+    },
+    "candidate_full_validation": {
+      "status": "NOT_RUN",
+      "reason": "required metadata and actual card are incomplete; candidate is not READY"
+    },
+    "hold_reasons": [
+      "CLEANEYE_SOURCE_STALE at next08: feed.updated remains2026-11-15T00:51:06+09:00 despite successful unchanged collection22:07",
+      "WORKPLACE_UNVERIFIED: institution address is not sufficient workplace evidence",
+      "CORRECTION_CHECK_INCOMPLETE: ATS notice board heading without rows cannot prove no correction",
+      "PERSONNEL_RULE14_FULL_CHECK_PENDING",
+      "CARD_NOT_GENERATED_AND_FULL_ENTRY_VALIDATOR_NOT_RUN"
+    ],
+    "automation_enabled": true,
+    "schedule_unchanged": true,
+    "new_live_meta_get": false,
+    "new_actual_meta_post_id": null,
+    "new_72h_observations": 0,
+    "audit_blob_sha": "70a9c30055d8a35897b1f57fa44d8e4d1f93bd7a",
+    "scope_limited_resolution": "No source collector/site writes. Existing Threads gate has no trusted unchanged-run freshness evidence input; source/time gate was not weakened. Operational resolution remains incomplete."
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -25987,6 +26056,127 @@
         },
         "audit_path": "threads/audits/published-a306965-20261115-1700.json"
       }
+    },
+    "cleaneye-80792": {
+      "notice_id": "cleaneye-80792",
+      "official_id": "80792",
+      "status": "held_unassigned",
+      "queued": false,
+      "assigned_slot": null,
+      "intended_slot_only": "2026-11-16T08:00:00+09:00",
+      "prepared_at": "2026-11-15T14:47:25+00:00",
+      "contract_version": 2,
+      "post_text": "행정 신입으로 공공기관 일을 시작할 분께,\n서울물재생시설공단 일반직 9급 행정 정규직 4명 공고예요.\n\n2027년 1월 1일 기준 만18세 이상·60세 미만이며 결격사유가 없어야 해요.\n학력·성별 제한은 없고, 수습 3개월은 1호봉이 적용돼요.\n\n지원 직종·전형 중복지원은 불가해요.\n증빙서류는 접수마감일 기준 3개월 이내 발급분만 유효해요.\n11월 18일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "chars": 235,
+      "reply_texts": [],
+      "style_rewrites": 0,
+      "card_generated": false,
+      "card_visual_review": {
+        "status": "not_performed",
+        "reason": "No image_job.location claimed without workplace evidence; no card generated or uploaded"
+      },
+      "source_refs": [
+        {
+          "url": "https://swr.plusrecruit.co.kr/#/recruitment/detail/39",
+          "checked_at": "2026-11-15T14:47:25+00:00",
+          "method": "actual_browser_render",
+          "excerpt": "2026년 하반기 정규직 채용공고; 접수일2026.11.11(수)10:00~2026.11.18(수)18:00; list status접수중"
+        },
+        {
+          "url": "https://jpsp-swr.s3.ap-northeast-2.amazonaws.com/upload/editor/1793752184_65e2c1fbf9dddec75887.png",
+          "checked_at": "2026-11-15T14:47:25+00:00",
+          "download_completed_at": "2026-11-15T14:42:45.314194+00:00",
+          "document_sha256": "b10514e1f577fe8f1d7bd314b683063627b83b3ba92237bd205ef42b04f21732",
+          "method": "actual_image_opened_in_two_sections_and_qualification_crop",
+          "excerpts": [
+            "신입 일반직9급 행정4; 환경2; 관리운영직 업무지원1·시설관리2·시설운영(기능인재)6; 경력 일반직8급 행정1; 합계16",
+            "임용예정일27.1.1기준 만18세이상60세미만; 인사규정14조결격사유에 해당하지 않는 자",
+            "일반직9급,관리운영직(업무지원): 공통요건 외 별도 자격요건 없음",
+            "수습기간(임용일로부터3개월)1호봉 적용, 수습종료후경력반영호봉; 경력직은 수습미적용",
+            "채용 직종 및 전형 간 중복지원 불가; 모든 제출서류 접수마감일 기준3개월이내발급분만 유효"
+          ]
+        },
+        {
+          "url": "https://jpsp-swr.s3.ap-northeast-2.amazonaws.com/upload/recruit/1793233828_a9b2dd779465ca842ef4.pdf",
+          "checked_at": "2026-11-15T14:43:28.607785+00:00",
+          "document_sha256": "5c34ba07355070a0875cf5162982ba66e32a1665f633223fa0d7027885d99fb2",
+          "excerpt": "NCS기반 채용 직무기술서 일반직9급 행정: 경영기획·경영평가·총무·인사·노무관리·사무행정·예산·회계감사"
+        }
+      ],
+      "verified_facts": {
+        "unit_title": "일반직 9급 행정",
+        "unit_count": 4,
+        "notice_total": 16,
+        "employment": "정규직",
+        "workplace": null,
+        "application_start": "2026-11-11T10:00:00+09:00",
+        "application_end": "2026-11-18T18:00:00+09:00",
+        "age_reference_date": "2027-01-01",
+        "age_min_inclusive": 18,
+        "age_max_exclusive": 60,
+        "probation": "3개월;1호봉",
+        "unit_specific_license_required": false,
+        "school_recommendation_rule_applies_to": "시설운영(기능인재), not general9administration"
+      },
+      "profile_target": {
+        "verified": true,
+        "notice_id": "cleaneye-80792",
+        "url": "https://kllollain-max.github.io/careerpick/",
+        "notice_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-80792",
+        "checked_at": "2026-11-15T14:47:25+00:00",
+        "method": "actual_browser_AX_and_screenshot",
+        "scope": "matching notice80792 title,16aggregate,sourceURL and sourceMissing false feed; no claim that UI16 is the selected role count4"
+      },
+      "hook_candidates": [
+        {
+          "id": "target",
+          "type": "target",
+          "text": "행정 신입으로 공공기관 일을 시작할 분께,\n서울물재생시설공단 일반직 9급 행정 정규직 4명 공고예요."
+        },
+        {
+          "id": "condition",
+          "type": "condition",
+          "text": "학력·성별 제한 없는 행정 신입을 찾는다면,\n서울물재생시설공단 일반직 9급 행정 4명 공고예요."
+        },
+        {
+          "id": "job",
+          "type": "job",
+          "text": "경영·인사·예산을 맡는 행정 신입 자리예요.\n서울물재생시설공단 일반직 9급 행정 4명을 채용해요."
+        }
+      ],
+      "selected_hook_id": "target",
+      "public_preview": {
+        "main_text": "행정 신입으로 공공기관 일을 시작할 분께,\n서울물재생시설공단 일반직 9급 행정 정규직 4명 공고예요.\n\n2027년 1월 1일 기준 만18세 이상·60세 미만이며 결격사유가 없어야 해요.\n학력·성별 제한은 없고, 수습 3개월은 1호봉이 적용돼요.\n\n지원 직종·전형 중복지원은 불가해요.\n증빙서류는 접수마감일 기준 3개월 이내 발급분만 유효해요.\n11월 18일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+        "detail_reply": ""
+      },
+      "review": {
+        "v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": false,
+          "fact_consistency_check": "incomplete",
+          "reason": "Full personnel regulation14 disqualifications, workplace and correction check not completed; no complete semantic PASS attested"
+        },
+        "correction_check": {
+          "status": "incomplete",
+          "checked_at": "2026-11-15T14:47:25+00:00",
+          "url": "https://swr.plusrecruit.co.kr/#/board/notice/list",
+          "scope": "Actual notice board rendered heading only, with no rows; no global absence of corrections asserted"
+        }
+      },
+      "hold_reasons": [
+        "CLEANEYE_SOURCE_STALE at next08: feed.updated remains2026-11-15T00:51:06+09:00 despite successful unchanged collection22:07",
+        "WORKPLACE_UNVERIFIED: institution address is not sufficient workplace evidence",
+        "CORRECTION_CHECK_INCOMPLETE: ATS notice board heading without rows cannot prove no correction",
+        "PERSONNEL_RULE14_FULL_CHECK_PENDING",
+        "CARD_NOT_GENERATED_AND_FULL_ENTRY_VALIDATOR_NOT_RUN"
+      ],
+      "next_actions": [
+        "Resolve actual unchanged collection verification evidence consumption without restamping source data or weakening24h rule",
+        "Confirm explicit workplace and personnel14 restrictions from official source",
+        "Complete scoped corrections and fullreview.v5 then exact originalJPEG360PNG review; no READY before wholevalidatorPASS"
+      ],
+      "audit_path": "threads/audits/supply-recheck-20261115-2348.json"
     }
   },
   "writer_recovery_latest": {
@@ -26403,115 +26593,182 @@
         "At eligible16 revalidate official correction/application/source and actual media before any stage CAS",
         "Observe existing next scheduled preflight and publisher; no manual dispatch/rerun or Meta POST"
       ]
+    },
+    "2026-11-15T14:48:01+00:00": {
+      "checked_at": "2026-11-15T14:48:01+00:00",
+      "notice_id": "cleaneye-80792",
+      "status": "HOLD_NOT_READY_NOT_PUBLISHED",
+      "main_sha": "c7b818531e7f25f94cb53590258d6084964397c2",
+      "queue_blob_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
+      "staging_blob_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+      "history_blob_sha": "d6a93fb86b02eb7df904e3493490c8f34eaf1764",
+      "performance_blob_sha": "aec6aeaa35d7ab21637e7b33c824046f0ce83cd8",
+      "accepted_claims_read": 44,
+      "claim_count": 45,
+      "accepted_claims_without_history": 0,
+      "latest_regular_runs": [
+        {
+          "id": 43709072093,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-15T11:29:05Z",
+          "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+          "run_attempt": 1
+        },
+        {
+          "id": 43708516229,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-15T11:21:31Z",
+          "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+          "run_attempt": 1
+        },
+        {
+          "id": 43692396153,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-15T08:00:37Z",
+          "head_sha": "924054e6a435ea7215157770745d544987298257",
+          "run_attempt": 1
+        },
+        {
+          "id": 43691683586,
+          "status": "completed",
+          "conclusion": "success",
+          "updated_at": "2026-11-15T07:50:07Z",
+          "head_sha": "924054e6a435ea7215157770745d544987298257",
+          "run_attempt": 1
+        }
+      ],
+      "new_regular_publications": 0,
+      "new_ready_saved": 0,
+      "new_held_drafts_saved": 1,
+      "queue_changed": false,
+      "staging_changed": false,
+      "next_regular_slot": "2026-11-16T08:00:00+09:00",
+      "next_actual_media": "IMAGE",
+      "next_slot_source_gate": "CLEANEYE_SOURCE_STALE",
+      "source_collection_evidence": {
+        "run_id": 43717162751,
+        "job_id": 132821064648,
+        "alio_verified_at": "2026-11-15T22:06:05+09:00",
+        "cleaneye_complete_report_logged_at": "2026-11-15T13:07:40.5808225Z",
+        "unchanged": true,
+        "storage_skipped": true,
+        "live_verification_not_persisted_to_main": true
+      },
+      "whole_queue_validation": {
+        "status": "validated",
+        "ready_entries": []
+      },
+      "candidate_full_validation": {
+        "status": "NOT_RUN",
+        "reason": "required metadata and actual card are incomplete; candidate is not READY"
+      },
+      "hold_reasons": [
+        "CLEANEYE_SOURCE_STALE at next08: feed.updated remains2026-11-15T00:51:06+09:00 despite successful unchanged collection22:07",
+        "WORKPLACE_UNVERIFIED: institution address is not sufficient workplace evidence",
+        "CORRECTION_CHECK_INCOMPLETE: ATS notice board heading without rows cannot prove no correction",
+        "PERSONNEL_RULE14_FULL_CHECK_PENDING",
+        "CARD_NOT_GENERATED_AND_FULL_ENTRY_VALIDATOR_NOT_RUN"
+      ],
+      "automation_enabled": true,
+      "schedule_unchanged": true,
+      "new_live_meta_get": false,
+      "new_actual_meta_post_id": null,
+      "new_comparable_24h_observations": 0,
+      "new_72h_observations": 0,
+      "audit_path": "threads/audits/supply-recheck-20261115-2348.json",
+      "audit_blob_sha": "70a9c30055d8a35897b1f57fa44d8e4d1f93bd7a",
+      "scope_limited_resolution": "No source collector/site writes. Existing Threads gate has no trusted unchanged-run freshness evidence input; source/time gate was not weakened. Operational resolution remains incomplete."
     }
   },
   "writer_supply_preparation_latest": {
-    "checked_at": "2026-11-15T22:28:51+09:00",
-    "status": "held_unassigned_not_ready_not_published",
-    "notice_id": "cleaneye-80976",
-    "body_chars": 261,
-    "body_sha256": "bbd48e7a0e7deb8cfa5ca9cf337a281ee7335baab8df734f8470f48a760944c0",
-    "official_source_checked_at": [
+    "checked_at": "2026-11-15T14:48:01+00:00",
+    "notice_id": "cleaneye-80792",
+    "status": "HOLD_NOT_READY_NOT_PUBLISHED",
+    "main_sha": "c7b818531e7f25f94cb53590258d6084964397c2",
+    "queue_blob_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
+    "staging_blob_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
+    "history_blob_sha": "d6a93fb86b02eb7df904e3493490c8f34eaf1764",
+    "performance_blob_sha": "aec6aeaa35d7ab21637e7b33c824046f0ce83cd8",
+    "accepted_claims_read": 44,
+    "claim_count": 45,
+    "accepted_claims_without_history": 0,
+    "latest_regular_runs": [
       {
-        "url": "https://yscwf.or.kr/bbs/bbs16/list.do",
-        "checked_at": "2026-11-15T13:21:43.401159+00:00",
-        "document_sha256": "9aa14ac0132da3800dd6782a5dbdeee11e0e17e2cb38feb1459bbdc2f6659af7"
+        "id": 43709072093,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T11:29:05Z",
+        "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+        "run_attempt": 1
       },
       {
-        "url": "https://yscwf.or.kr/bbs/bbs16/view.do?board_no=1366&board_id=bbs16&fix_yn=N",
-        "checked_at": "2026-11-15T13:21:47.291271+00:00",
-        "document_sha256": "dd4a0592197ef17e8d62752f9fae50f640aad34d94956c9e84bca496d82d4009"
+        "id": 43708516229,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T11:21:31Z",
+        "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
+        "run_attempt": 1
       },
       {
-        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000016.hwp&_file_l=2027%EB%85%84+%EC%83%81%EB%B0%98%EA%B8%B0+%EC%A7%81%EC%9B%90+%EC%B6%94%EA%B0%80%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
-        "checked_at": "2026-11-15T13:21:51.415523+00:00",
-        "document_sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5"
+        "id": 43692396153,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T08:00:37Z",
+        "head_sha": "924054e6a435ea7215157770745d544987298257",
+        "run_attempt": 1
       },
       {
-        "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_folder=%2Fbbs16%2F&_file_p=20261105094733000018.hwp&_file_l=%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C_%EC%A0%84%EA%B8%B0.hwp",
-        "checked_at": "2026-11-15T13:21:55.539486+00:00",
-        "document_sha256": "cc5d99b98f21257ff1a6ece648afbf7ac7680003f23074e10d4937e40dcff446"
+        "id": 43691683586,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-15T07:50:07Z",
+        "head_sha": "924054e6a435ea7215157770745d544987298257",
+        "run_attempt": 1
       }
     ],
-    "resolved": [
-      "PROFILE_TARGET_UNVERIFIED: actual GET200 plus browser rendered matching notice",
-      "v5 hook schema and public title spacing corrected",
-      "exact card original1080JPEG and360PNG re-opened; hash and pixel verification passed"
-    ],
-    "hold_reasons": [
-      "CLEANEYE_SOURCE_STALE: current2026-11-15T00:51:06+09:00 snapshot exceeds24h at every next-day regular slot",
-      "APPLICATION_WINDOW_NOT_OPEN_NOW: Sunday excluded;08 precedes09;12 is lunch exclusion;16 only potentially usable after actual fresh review"
-    ],
-    "component_validation": {
-      "entry_policy_binding": {
-        "status": "passed"
-      },
-      "v5_semantic_and_public_copy": {
-        "status": "passed"
-      },
-      "card_exact_bytes_and_pixels": {
-        "status": "passed"
-      },
-      "application_dates_and_precision": {
-        "status": "passed"
-      },
-      "cleaneye_date_refinement": {
-        "status": "passed"
-      },
-      "profile_target_binding": {
-        "status": "passed"
-      },
-      "history_deduplication": {
-        "status": "passed"
-      },
-      "full_entry_validator": {
-        "status": "hold",
-        "reason": "CLEANEYE_SOURCE_STALE"
-      }
-    },
-    "full_validator": {
-      "status": "HOLD",
-      "reason": "CLEANEYE_SOURCE_STALE"
+    "new_regular_publications": 0,
+    "new_ready_saved": 0,
+    "new_held_drafts_saved": 1,
+    "queue_changed": false,
+    "staging_changed": false,
+    "next_regular_slot": "2026-11-16T08:00:00+09:00",
+    "next_actual_media": "IMAGE",
+    "next_slot_source_gate": "CLEANEYE_SOURCE_STALE",
+    "source_collection_evidence": {
+      "run_id": 43717162751,
+      "job_id": 132821064648,
+      "alio_verified_at": "2026-11-15T22:06:05+09:00",
+      "cleaneye_complete_report_logged_at": "2026-11-15T13:07:40.5808225Z",
+      "unchanged": true,
+      "storage_skipped": true,
+      "live_verification_not_persisted_to_main": true
     },
     "whole_queue_validation": {
       "status": "validated",
       "ready_entries": []
     },
-    "main_sha": "c7b818531e7f25f94cb53590258d6084964397c2",
-    "history_blob_sha": "d6a93fb86b02eb7df904e3493490c8f34eaf1764",
-    "stage_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
-    "queue_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
-    "stage_changed": false,
-    "queue_changed": false,
-    "new_ready_saved": 0,
-    "new_unassigned_drafts_updated": 1,
-    "current_publishable_stage_ready_count": 0,
-    "current_publishable_queue_ready_count": 0,
-    "next_regular_slot": "2026-11-16T08:00:00+09:00",
-    "next_actual_media": "IMAGE",
-    "candidate_next_potential_slot": "2026-11-16T16:00:00+09:00",
-    "candidate_slot_assigned": false,
-    "media_recheck_required": true,
-    "claims_read": 45,
-    "accepted_claims": 44,
-    "unresolved_claims": 0,
-    "accepted_claims_without_history": 0,
-    "automation_on": true,
+    "candidate_full_validation": {
+      "status": "NOT_RUN",
+      "reason": "required metadata and actual card are incomplete; candidate is not READY"
+    },
+    "hold_reasons": [
+      "CLEANEYE_SOURCE_STALE at next08: feed.updated remains2026-11-15T00:51:06+09:00 despite successful unchanged collection22:07",
+      "WORKPLACE_UNVERIFIED: institution address is not sufficient workplace evidence",
+      "CORRECTION_CHECK_INCOMPLETE: ATS notice board heading without rows cannot prove no correction",
+      "PERSONNEL_RULE14_FULL_CHECK_PENDING",
+      "CARD_NOT_GENERATED_AND_FULL_ENTRY_VALIDATOR_NOT_RUN"
+    ],
+    "automation_enabled": true,
     "schedule_unchanged": true,
-    "actual_new_meta_post_id": null,
-    "actual_new_meta_permalink": null,
-    "no_new_live_meta_get": true,
-    "performance_summary_run_at": "2026-11-15T13:23:10.825195+00:00",
-    "new_24h_observations": 0,
+    "new_live_meta_get": false,
+    "new_actual_meta_post_id": null,
+    "new_comparable_24h_observations": 0,
     "new_72h_observations": 0,
-    "audit_path": "threads/audits/cleaneye-80976-recheck-20261115-2225.json",
-    "audit_blob_sha": "7619b629d580374a63c823c1de75ca12d63ab8ce",
-    "audit_commit_sha": "d4927e7571c53d685529e8cbde86a5982338165d",
-    "remaining_actions": [
-      "Wait for actual regular collector refresh, then re-read immutable latest main and source hashes; never restamp feed",
-      "Select another officially open candidate for08IMAGE; 80976's09opening and12~13 exclusion prohibit08/12",
-      "At eligible16 revalidate official correction/application/source and actual media before any stage CAS",
-      "Observe existing next scheduled preflight and publisher; no manual dispatch/rerun or Meta POST"
-    ]
+    "audit_path": "threads/audits/supply-recheck-20261115-2348.json",
+    "audit_blob_sha": "70a9c30055d8a35897b1f57fa44d8e4d1f93bd7a",
+    "scope_limited_resolution": "No source collector/site writes. Existing Threads gate has no trusted unchanged-run freshness evidence input; source/time gate was not weakened. Operational resolution remains incomplete."
   }
 }
