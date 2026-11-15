@@ -30,4 +30,4 @@ def extract(html, *, terms=None, window=100):
     for term in terms:
         m=re.search(re.escape(term),text,re.I)
         evidence[term]={"found":bool(m),"snippet":text[max(0,m.start()-window):m.end()+window] if m else None}
-    return {"length":len(text),"evidence":evidence,"status":"SNIPPETS_ONLY_NOT_VERIFIED","plain_text":text[:30000]}
+    return {"length":len(text),"evidence":evidence,"status":"SNIPPETS_ONLY_NOT_VERIFIED","plain_text":text}
