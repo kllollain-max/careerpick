@@ -41,8 +41,11 @@ def inspect(queue, staging, history, now):
         if not nid or nid in posted or nid in occupied or slot in {r["slot"] for r in ready}:
             duplicate.append({"notice_id": nid, "slot": slot})
             continue
-        if not isinstance(entry.get("writer"), dict) or entry["writer"].get("status") != "ready":
+        if not isinstance(entry.get("writer"), dict) or entry["writer"].get("status") != "ready" or not isinstance(entry["writer"].get("post_text"), str) or not entry["writer"]["post_text"].strip():
             invalid.append({"notice_id": nid, "reason": "NOT_REVIEWED"})
+            continue
+        if not isinstance(entry.get("writer_review"), dict) or entry["writer_review"].get("status") != "approved":
+            invalid.append({"notice_id": nid, "reason": "INDEPENDENT_REVIEW_MISSING"})
             continue
         occupied.add(nid)
         ready.append({"notice_id": nid, "slot": slot})
