@@ -15,7 +15,10 @@ for(const candidate of candidates.slice(0,30)){
 }
 assert(selected,'No visible currently-open permanent-contract ALIO candidate in public feed; investigate feed/render sync');
 const id=selected.id;
-if(width===1440){await page.locator('#cpEmployment').selectOption('무기계약직');}else{await page.locator('#toggle').click();await page.locator('#status [data-status="open"]').click();await page.locator('#cpFilterDone').click();}
+await page.locator('#cpEmployment').selectOption('무기계약직');
+assert.equal(await page.locator('#cpEmployment').inputValue(),'무기계약직');
+// Mobile primary filters are visible independently of the advanced drawer.
+// Do not click an inert advanced-drawer control as a prerequisite for saving.
 await page.locator('[data-save="'+id+'"]').first().click();
 await page.reload({waitUntil:'networkidle'});
 await page.waitForFunction(()=>/전체공고[1-9]/.test(document.querySelector('#cpSectors')?.textContent||''));
