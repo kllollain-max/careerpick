@@ -7,6 +7,8 @@ No network access, GitHub writes, or Meta requests.
 import argparse
 import json
 from pathlib import Path
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 
 
 def build_drafts(handoff):
@@ -31,12 +33,17 @@ def build_drafts(handoff):
         if not isinstance(end, str):
             continue
         try:
-            from datetime import date, datetime
+            slot_at = datetime.fromisoformat(slot)
+            if slot_at.utcoffset() is None:
+                continue
             if period.get('date_only') is True:
-                deadline = date.fromisoformat(end).isoformat() + ' (마감 시각 원문 확인)'
+                end_date = date.fromisoformat(end)
+                if slot_at.astimezone(ZoneInfo('Asia/Seoul')).date() >= end_date:
+                    continue  # Exact cutoff unknown on deadline day
+                deadline = end_date.isoformat() + ' (마감 시각 원문 확인)'
             elif period.get('date_only') is False:
                 parsed = datetime.fromisoformat(end)
-                if parsed.utcoffset() is None:
+                if parsed.utcoffset() is None or slot_at >= parsed:
                     continue
                 deadline = parsed.strftime('%Y-%m-%d %H:%M %z')
             else:
