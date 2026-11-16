@@ -4,7 +4,7 @@ from datetime import datetime
 from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
-from scripts.threads_queue_bridge import merge, future_slots, ready_future_slots, supply_status
+from scripts.threads_queue_bridge import merge, future_slots, ready_future_slots, supply_status, verified_supply_status
 
 
 class ThreadsQueueBridgeTests(unittest.TestCase):
@@ -45,6 +45,21 @@ class ThreadsQueueBridgeTests(unittest.TestCase):
         self.assertTrue(supply_status([], self.now)['next_slot_missing'])
         self.assertFalse(supply_status([self.entry], self.now)['next_slot_missing'])
         self.assertTrue(supply_status([self.entry], self.now)['missing_slots'])
+
+    @patch("scripts.threads_queue_bridge.verify_entry", side_effect=ValueError("SOURCE_STALE"))
+    def test_ready_but_stale_entry_is_reported_missing(self, _verify):
+        status = verified_supply_status([self.entry], self.now, self.history, {}, {}, {})
+        self.assertIn(self.slot, status["missing_slots"])
+        self.assertNotIn(self.slot, status["approved_future_slots"])
+        self.assertEqual(status["invalid_ready_entries"][0]["reason"], "SOURCE_STALE")
+        self.assertTrue(status["next_slot_missing"])
+
+    @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
+    def test_validated_entry_is_reported_ready(self, _verify):
+        status = verified_supply_status([self.entry], self.now, self.history, {}, {}, {})
+        self.assertIn(self.slot, status["approved_future_slots"])
+        self.assertNotIn(self.slot, status["missing_slots"])
+        self.assertFalse(status["invalid_ready_entries"])
 
     @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
     def test_duplicate_slot_not_promoted(self, _verify):
