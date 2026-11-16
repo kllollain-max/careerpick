@@ -76,7 +76,7 @@ def read_official(url, opener=None):
     if "html" in content_type:
         # The excerpt is deliberately non-authoritative. Korean institutional
         # sites may use EUC-KR/CP949 or client-rendered notice content.
-        match = re.search(r"charset\\s*=\\s*['\\\"]?([A-Za-z0-9_-]+)", content_type)
+        match = re.search(r"charset\s*=\s*['\"]?([A-Za-z0-9_-]+)", content_type)
         encodings = [match.group(1)] if match else []
         encodings.extend(("utf-8", "cp949"))
         html = None
