@@ -86,10 +86,20 @@ def verify_official_receipt(entry, fetch_digest=fetch_official_digest):
     refs = review.get("source_refs", [])
     if not isinstance(refs, list):
         raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
-    eligible = [r for r in refs if isinstance(r, dict) and
-                official_url_allowed(r.get("url")) and
-                isinstance(r.get("sha256"), str) and
-                re.fullmatch(r"[0-9a-f]{64}", r["sha256"])]
+    # Existing independently reviewed source_refs use document_sha256.
+    # Accept the same digest key as the publisher's evidence contract without
+    # weakening the source check: malformed or conflicting digests hard-block.
+    eligible = []
+    for ref in refs:
+        if not isinstance(ref, dict) or not official_url_allowed(ref.get("url")):
+            continue
+        legacy, reviewed = ref.get("sha256"), ref.get("document_sha256")
+        if legacy is not None and reviewed is not None and legacy != reviewed:
+            raise ValueError("OFFICIAL_SOURCE_DIGEST_CONFLICT")
+        expected = reviewed if reviewed is not None else legacy
+        if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-f]{64}", expected):
+            raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
+        eligible.append({"url": ref["url"], "sha256": expected})
     if not eligible:
         raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
     errors = []
