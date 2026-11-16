@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm_publish:
-        description: 'CHECK verifies supply without posting; PUBLISH sends one reviewed current-slot post'
+        description: 'CHECK verifies supply; PUBLISH sends current slot; RECOVER_SLOT sends a separately reviewed missing slot'
         required: false
         type: string
       notice_id:
@@ -14,6 +14,10 @@ on:
         type: string
       slot_kst:
         description: 'Current KST minute e.g. 2026-11-15T12:35:00+09:00; must be within 10m and active regular slot'
+        required: false
+        type: string
+      recovery_slot_kst:
+        description: 'RECOVER_SLOT only: exact missing same-day regular KST slot; never substitutes current time'
         required: false
         type: string
   schedule:
@@ -159,7 +163,7 @@ jobs:
   publish:
     outputs:
       queue_missing: ${{ steps.reserve.outputs.queue_missing }}
-    if: ((github.event_name == 'schedule' && (github.event.schedule == '0 23 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 7 * * *' || github.event.schedule == '0 11 * * *')) || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'PUBLISH')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: ((github.event_name == 'schedule' && (github.event.schedule == '0 23 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 7 * * *' || github.event.schedule == '0 11 * * *')) || (github.event_name == 'workflow_dispatch' && (inputs.confirm_publish == 'PUBLISH' || inputs.confirm_publish == 'RECOVER_SLOT'))) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
 
@@ -168,6 +172,8 @@ jobs:
       PYTHONUNBUFFERED: "1"
       THREADS_MANUAL_PUBLISH: ${{ github.event_name == 'workflow_dispatch' }}
       THREADS_MANUAL_SLOT: ${{ inputs.slot_kst }}
+      THREADS_RECOVERY_SLOT: ${{ inputs.recovery_slot_kst }}
+      THREADS_RECOVERY_CONFIRMATION: ${{ inputs.confirm_publish }}
       THREADS_DISPATCH_NOTICE_ID: ${{ inputs.notice_id }}
       THREADS_SCHEDULE_CRON: ${{ github.event.schedule }}
       THREADS_CLAIM_REPO: ${{ github.repository }}
@@ -234,7 +240,11 @@ jobs:
       - name: Read reviewed AI writer queue
         run: |
           git fetch origin threads-publisher-state
-          git show FETCH_HEAD:threads/writer-queue.json > .threads-writer-queue.json
+          if [ "$THREADS_RECOVERY_CONFIRMATION" = 'RECOVER_SLOT' ]; then
+            git show FETCH_HEAD:threads/recovery-staging.json > .threads-writer-queue.json
+          else
+            git show FETCH_HEAD:threads/writer-queue.json > .threads-writer-queue.json
+          fi
 
       - name: Reserve one job
         id: reserve
@@ -498,6 +508,7 @@ jobs:
             .threads-writer-queue.json
             .threads-recovery-report.json
             .threads-output-evidence.json
+            threads-live-inventory.json
           include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 30
