@@ -1,0 +1,63 @@
+name: Threads 80848 primary original PDF independent approval dryrun
+on:
+  push:
+    branches:
+      - work/threads-80848-primary-pdf-20261117
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      THREADS_CLAIM_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/threads-80848-primary-pdf-20261117
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow for independent card pixel validation
+        run: python -m pip install Pillow
+      - name: Require pdftotext for exact official primary PDF semantic extraction
+        run: command -v pdftotext || (sudo apt-get update -qq && sudo apt-get install -y poppler-utils)
+      - name: Get existing actual collection verification receipt without rewriting sources
+        run: python scripts/threads_source_verification.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium for real employer application status verification
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install chromium
+      - name: Read JS-rendered exact active employer application and deadline
+        run: |
+          node <<'JS'
+          const fs=require('fs'),{chromium}=require('playwright');
+          (async()=>{
+            const app='https://recruit.incruit.com/cleanmetro/job/2610280002';
+            const b=await chromium.launch({headless:true});
+            const p=await b.newPage({viewport:{width:400,height:800}});
+            try {
+              await p.goto(app,{waitUntil:'domcontentloaded',timeout:45000});
+              await p.waitForTimeout(9000);
+              const body=await p.locator('body').innerText({timeout:15000});
+              const expected=['모집중','공무직 사원','2026. 11. 01. 09:00','2026. 11. 20. 12:00'];
+              if(!expected.every(t=>body.includes(t))) throw Error('LIVE_APPLICATION_NOT_OPEN_OR_TIME_CHANGED');
+              const result={url:app,status:'모집중',unit:'공무직 사원',deadline:'2026-11-20T12:00:00+09:00',checked_at:new Date().toISOString(),excerpt:body.slice(0,1500)};
+              fs.writeFileSync('threads-80848-app-browser.json',JSON.stringify(result));
+              console.log('OFFICIAL_APP_BROWSER',JSON.stringify(result));
+            }finally{await b.close()}
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+      - name: Official semantics source and card actual validator (no queue writes)
+        run: python -m scripts.threads_80848_primary_pdf_once
+      - name: Preserve independently validated reviewed candidate evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80848-reviewed-input
+          path: threads-reviewed-80848-input.json
+          if-no-files-found: ignore
