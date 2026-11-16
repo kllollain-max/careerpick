@@ -83,6 +83,47 @@ jobs:
           pathlib.Path('live-profile-evidence/card-digests.json').write_text(json.dumps(out,indent=2)+'\\n')
           print('THREADS_80848_CARD_DIGESTS='+json.dumps(out))
           PY
+      - name: Independently run full v5 validator, real-card pixels and original official bytes (no writes)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          import json, pathlib, traceback
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from scripts.threads_auto import writer_inputs, load
+          from scripts.threads_writer_queue import validate_entry
+          from scripts.threads_card_review import verify_reviewed_card
+          from scripts.threads_reviewed_ingest import verify_official_receipt
+          root=pathlib.Path.cwd()
+          entry=json.loads((root/'threads/independent-review/cleaneye-80848-20261117-submission.json').read_text())['entries'][0]
+          policy,source,details=writer_inputs(root)
+          history=load(root/'threads_posted.json',{'records':[],'posted_ids':[]})
+          now=datetime.now(ZoneInfo('Asia/Seoul'))
+          report={'now':now.isoformat(),'notice_id':entry['notice_id'],'slot':entry['scheduled_at'],
+                  'v5_validated':False,'card_pixels_verified':False,'official_receipt_verified':False,
+                  'meta_posted':False,'queue_updated':False}
+          try:
+              selected=validate_entry(entry,datetime.fromisoformat(entry['scheduled_at']),now,history,source,details,policy)
+              report['v5_validated']=True
+              report['validated_image_job']=selected['image_job']
+              pix=verify_reviewed_card(selected['image_job'],selected['writer_review'],root,now,verify_pixels=True)
+              report['card_pixels_verified']=pix['pixel_verification']=='passed'
+              report['card_verified_sha']=pix['sha256']
+              rec=verify_official_receipt(entry)
+              report['official_receipt_verified']=True
+              report['source_count']=len(rec['verified_fact_sources'])
+          except Exception as e:
+              report['error']=str(e);report['error_type']=type(e).__name__
+              traceback.print_exc()
+          finally:
+              (root/'live-profile-evidence').mkdir(exist_ok=True)
+              (root/'live-profile-evidence/strict-v5-validator.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\\n')
+              print('STRICT_V5_REVIEW='+json.dumps(report,ensure_ascii=False))
+          if not all(report[k] for k in ('v5_validated','card_pixels_verified','official_receipt_verified')):
+              raise SystemExit('Hold unapproved: fail-closed strict publisher validation')
+          PY
       - name: Preserve exact read-only browser evidence
         if: always()
         uses: actions/upload-artifact@v4
