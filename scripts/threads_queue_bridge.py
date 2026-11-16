@@ -197,9 +197,27 @@ def run(apply=False):
         selection = build_selection(source, details, history, policy, now, 24,
                                     queued_entries=merged['entries'])
         readiness = supply_status(merged['entries'], now)
-        approved_slots = readiness['approved_future_slots']
+        # A queued 'ready' flag alone does not prove a publishable entry.
+        # Revalidate future reservations against current official snapshots.
+        valid_slots, invalid_ready = [], []
+        for entry in merged['entries']:
+            if not isinstance(entry, dict) or entry.get('scheduled_at') not in readiness['future_slots']:
+                continue
+            if not isinstance(entry.get('writer'), dict) or entry['writer'].get('status') != 'ready':
+                continue
+            try:
+                verify_entry(entry, now, history, policy, source, details)
+                valid_slots.append(entry['scheduled_at'])
+            except (ValueError, KeyError, TypeError, RuntimeError) as exc:
+                invalid_ready.append({'notice_id': entry.get('notice_id'),
+                                      'slot': entry.get('scheduled_at'), 'reason': str(exc)[:140]})
+        approved_slots = [slot for slot in readiness['future_slots'] if slot in valid_slots]
+        readiness['approved_future_slots'] = approved_slots
+        readiness['missing_slots'] = [slot for slot in readiness['future_slots'] if slot not in approved_slots]
+        readiness['next_slot_missing'] = bool(readiness['future_slots'] and readiness['future_slots'][0] not in approved_slots)
         report.update(queue_sha=sha, staged_sha=stage_sha,
                       approved_supply_count=len(approved),
+                      invalid_ready_entries=invalid_ready,
                       approved_future_slots=approved_slots,
                       missing_slots=readiness['missing_slots'],
                       next_slot_missing=readiness['next_slot_missing'],
