@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "notice_id": "a306875",
-  "review_status": "OFFICIAL_ALIO_DETAIL_AND_THREE_ORIGINAL_PDFS_READ__EXACT_APPLICATION_DEADLINE_AND_AMENDMENT_PENDING",
+  "review_status": "ORIGINAL_PDFS_AND_EXACT_EMPLOYER_APPLICATION_VERIFIED__CORRECTIONS_CARD_VALIDATORS_PENDING",
   "approved_for_queue": false,
   "meta_posted": false,
   "slot_reserved": false,
@@ -15,9 +15,11 @@
     "employment": "정규직",
     "recruitment_total": 66,
     "official_closing_date_only": "2026-11-20",
-    "exact_closing_time_verified": false,
+    "exact_closing_time_verified": true,
     "current_raw_sha256_verified": true,
-    "original_pdf_sha256": "673c2e9f3ba930f5c4d69b9bcf1a7410f44818ae26228059f4ef84f81f9f2e82"
+    "original_pdf_sha256": "673c2e9f3ba930f5c4d69b9bcf1a7410f44818ae26228059f4ef84f81f9f2e82",
+    "exact_official_closing_time": "2026-11-20T23:59:00+09:00",
+    "employer_official_exact_notice_url": "https://snubh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271977"
   },
   "independent_job_unit": {
     "name": "병동 업무지원직",
@@ -29,7 +31,13 @@
     "future_assignment_caveat": "최종 합격 후 지원 직무 외 업무를 맡을 수 있음",
     "selection": "서류(적부)→직무적성검사(50명 범위는 1.5배수 기준)→면접",
     "probation": "3개월 수습 뒤 평가; 기준 미달시 2개월 연장·평가 후 임용취소 가능",
-    "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306875"
+    "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306875",
+    "additional_common_required": [
+      "공고마감일 기준 기졸업자",
+      "공고마감일 기준 만 60세 미만",
+      "군복무 비대상·완료·면제",
+      "채용 결격 사유 없음"
+    ]
   },
   "verified_other_units": [
     {
@@ -94,14 +102,18 @@
   ],
   "application_source": {
     "official_recruitment_site": "https://snubh.recruiter.co.kr",
-    "exact_unit_application_page": "NOT_YET_IDENTIFIED",
-    "deadline_clock_precision": "UNVERIFIED",
-    "correction_or_cancellation": "NOT_INDEPENDENTLY_VERIFIED",
-    "note": "Official ALIO currently says 진행중, but this is not a same-time reading of employer-specific corrections"
+    "exact_unit_application_page": "https://snubh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271977",
+    "deadline_clock_precision": "2026-11-20T23:59:00+09:00",
+    "status_in_official_listing": "접수중",
+    "checked_at_kst": "2026-11-17T04:36:05+09:00",
+    "verification_method": "Actual Playwright Chromium employer live list and exact detail text independently read; original PDF 3086118 separately read and hashed",
+    "official_source_detail": "26년 11월 신입(업무지원직) 직원 채용 공고",
+    "evidence_run": "https://github.com/kllollain-max/careerpick/actions/runs/43940934920",
+    "correction_or_cancellation": "Exact notice is still open; standalone employer amendments/cancellation beyond first listed page not comprehensively inspected"
   },
   "draft_only": {
-    "post_text": "병원 업무지원직 정규직을 찾는 분께,\n분당서울대학교병원이 신입 업무지원직 총 66명을 채용해요.\n그중 병동 분야가 50명, 외래는 3명이에요.\n\n병동 지원은 의료기관 또는 기업체·기관·단체 근무경험 6개월 이상이 필수예요.\n시차·교대근무가 가능해야 하고, 합격 후 다른 직무에 배치될 수도 있어요.\n\n서류전형·직무적성검사·면접을 거치며, 정규직 3개월 수습과 평가가 있어요.\n11월 20일 접수 마감이며 정확한 시각은 공식 채용페이지에서 확인하세요.\n\n자세한 사항은 프로필링크 확인",
-    "characters": 269,
+    "post_text": "병원 업무지원직 정규직을 찾는 분께,\n분당서울대학교병원이 신입 업무지원직 66명을 채용해요.\n그중 병동 분야는 50명, 외래는 3명이에요.\n\n병동 지원은 의료기관·기업체·기관·단체에서 6개월 이상 근무한 경력이 필수예요.\n기졸업자만 지원 가능하며, 마감일 기준 만 60세 미만이어야 해요.\n시차·교대근무 가능 여부와 병역·결격 기준도 확인하세요.\n\n서류·직무적성검사·면접으로 선발하고 3개월 수습·평가가 있어요.\n11월 20일 23:59까지 공식 채용사이트에서 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "characters": 285,
     "reply_texts": [],
     "cta": "자세한 사항은 프로필링크 확인",
     "proposed_slot_kst": "2026-11-17T16:00:00+09:00",
@@ -110,13 +122,13 @@
     "card_verified": false
   },
   "approval_blockers": [
-    "Original complete 3086118 PDF and 3086120 job description were independently downloaded and text-reviewed, but the exact application closing time and employer's live recruiting platform must be verified before approving.",
-    "Exact recruitment site notice and 2026-11-20 clock deadline not verified.",
+    "The exact employer job listing and deadline are independently verified, and all three ALIO official PDFs have current SHA-256 and full extracted text; do not equate this with publisher approval.",
     "Independent checking of employer correction and cancellation notices not completed.",
     "Live CareerPick #job=a306875 page and clickthrough were not verified.",
     "Must produce actual appropriate image card if assigned media IMAGE, conduct 360px pixel inspection.",
     "Actual validate_entry + verify_official_receipt + reviewed ingestion & CAS queue_bridge have not run; do not approve.",
-    "Official employer-side latest correction/cancellation must be checked immediately before approval, not inferred from ALIO 진행중."
+    "Official employer-side latest correction/cancellation must be checked immediately before approval, not inferred from ALIO 진행중.",
+    "Read latest employer corrections/cancellation across relevant notice boards just before approval and verify current job detail via CareerPick profile link, then apply card, validate_entry and CAS."
   ],
   "queue_safety": {
     "never_auto_promote": true,
