@@ -99,6 +99,10 @@ def merge(queue, staged, history, policy, source, details, now, claimed_slots=()
         raise ValueError('QUEUE_SCHEMA')
     if staged.get('schema_version') != 1 or not isinstance(staged.get('entries'), list):
         raise ValueError('STAGING_SCHEMA')
+    if any(not isinstance(entry, dict) for entry in queue['entries']):
+        raise ValueError('QUEUE_ENTRY_SCHEMA')
+    if not isinstance(history, dict) or not isinstance(history.get('records'), list) or not isinstance(history.get('posted_ids'), list):
+        raise ValueError('HISTORY_SCHEMA')
     blocked = set(map(str, history.get('posted_ids', [])))
     for r in history.get('records', []):
         if r.get('job_id'):
