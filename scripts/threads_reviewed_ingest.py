@@ -20,6 +20,10 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
+# Support the exact direct-script entry point used by GitHub Actions.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from scripts.threads_auto import load, writer_inputs
 from scripts.threads_queue_bridge import (ROOT, BRANCH, QUEUE, STAGING, future_slots,
     verify_entry, read, request)

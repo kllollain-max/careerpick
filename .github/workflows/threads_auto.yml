@@ -5,16 +5,16 @@ on:
   workflow_dispatch:
     inputs:
       confirm_publish:
-        description: 'Type PUBLISH to authorize ONE reviewed current-slot post'
+        description: 'PUBLISH for one reviewed current-slot post; CHECK for supply preflight only'
         required: true
         type: string
       notice_id:
-        description: 'Exact reviewed notice ID already in the queue'
-        required: true
+        description: 'Exact reviewed notice ID already in the queue (PUBLISH only)'
+        required: false
         type: string
       slot_kst:
-        description: 'Current KST minute e.g. 2026-11-15T12:35:00+09:00; must be within 10m and active regular slot'
-        required: true
+        description: 'Current KST minute; within 10m and active regular slot (PUBLISH only)'
+        required: false
         type: string
   schedule:
     # UTC -> KST 08:00, 12:00, 16:00, 20:00 (4-hour spacing)
@@ -39,7 +39,7 @@ concurrency:
 jobs:
   queue_preflight:
     name: Preflight reviewed Threads drafts without posting
-    if: github.event_name == 'schedule' && (github.event.schedule == '45 22 * * *' || github.event.schedule == '45 2 * * *' || github.event.schedule == '45 6 * * *' || github.event.schedule == '45 10 * * *') && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: ((github.event_name == 'schedule' && (github.event.schedule == '45 22 * * *' || github.event.schedule == '45 2 * * *' || github.event.schedule == '45 6 * * *' || github.event.schedule == '45 10 * * *')) || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'CHECK')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 6
     permissions:

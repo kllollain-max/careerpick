@@ -15,6 +15,10 @@ from html.parser import HTMLParser
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+# Support the exact direct-script entry point used by GitHub Actions.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from scripts.threads_reviewed_ingest import (
     OfficialRedirect, official_url_allowed, MAX_OFFICIAL_BYTES,
 )

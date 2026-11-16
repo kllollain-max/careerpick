@@ -231,7 +231,7 @@ def run(apply=False):
                     if exc.code != 404:
                         raise
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
-        selection = build_selection(source, details, history, policy, now, 100,
+        selection = build_selection(source, details, history, policy, now, 60,
                                     queued_entries=[*merged['entries'], *staged['entries']])
         readiness = verified_supply_status(merged['entries'], now, history, policy, source, details)
         approved_slots = readiness['approved_future_slots']
