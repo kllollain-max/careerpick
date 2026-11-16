@@ -93,6 +93,16 @@ class DraftWriterTests(unittest.TestCase):
         self.assertTrue(all(value in {"not_verified", "not_run"} for value in blockers.values()))
         self.assertFalse(draft["approved_for_queue"])
 
+    def test_slot_coverage_reports_missing_draft_and_no_approvals(self):
+        slots = ["2026-11-17T08:00:00+09:00", "2026-11-17T12:00:00+09:00"]
+        result = build_drafts({**self.handoff, "missing_slots": slots})
+        coverage = result["slot_coverage"]
+        self.assertEqual(coverage["requested_slots"], slots)
+        self.assertEqual(coverage["draft_slots"], slots[:1])
+        self.assertEqual(coverage["no_draft_slots"], slots[1:])
+        self.assertEqual(coverage["approved_slots"], [])
+        self.assertFalse(result["approved_for_queue"])
+
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
             handoff = {**self.handoff, flag: True}
