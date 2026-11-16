@@ -142,6 +142,28 @@ def supply_status(entries, now):
             'missing_slots': missing, 'next_slot_missing': bool(slots and slots[0] in missing)}
 
 
+def verified_supply_status(entries, now, history, policy, source, details):
+    """Only currently validated ready entries count as supplied; no writes."""
+    readiness = supply_status(entries, now)
+    valid_slots, invalid_ready = set(), []
+    for entry in entries:
+        if not isinstance(entry, dict) or entry.get('scheduled_at') not in readiness['future_slots']:
+            continue
+        if not isinstance(entry.get('writer'), dict) or entry['writer'].get('status') != 'ready':
+            continue
+        try:
+            verify_entry(entry, now, history, policy, source, details)
+            valid_slots.add(entry['scheduled_at'])
+        except (ValueError, KeyError, TypeError, RuntimeError) as exc:
+            invalid_ready.append({'notice_id': entry.get('notice_id'),
+                                  'slot': entry.get('scheduled_at'), 'reason': str(exc)[:140]})
+    approved = [slot for slot in readiness['future_slots'] if slot in valid_slots]
+    missing = [slot for slot in readiness['future_slots'] if slot not in valid_slots]
+    return {**readiness, 'approved_future_slots': approved, 'missing_slots': missing,
+            'next_slot_missing': bool(missing and missing[0] == readiness['future_slots'][0]),
+            'invalid_ready_entries': invalid_ready}
+
+
 def request(method, path, token, payload=None):
     repo = os.environ['GITHUB_REPOSITORY']
     url = 'https://api.github.com/repos/' + repo + '/contents/' + path
@@ -196,25 +218,9 @@ def run(apply=False):
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
         selection = build_selection(source, details, history, policy, now, 24,
                                     queued_entries=merged['entries'])
-        readiness = supply_status(merged['entries'], now)
-        # A queued 'ready' flag alone does not prove a publishable entry.
-        # Revalidate future reservations against current official snapshots.
-        valid_slots, invalid_ready = [], []
-        for entry in merged['entries']:
-            if not isinstance(entry, dict) or entry.get('scheduled_at') not in readiness['future_slots']:
-                continue
-            if not isinstance(entry.get('writer'), dict) or entry['writer'].get('status') != 'ready':
-                continue
-            try:
-                verify_entry(entry, now, history, policy, source, details)
-                valid_slots.append(entry['scheduled_at'])
-            except (ValueError, KeyError, TypeError, RuntimeError) as exc:
-                invalid_ready.append({'notice_id': entry.get('notice_id'),
-                                      'slot': entry.get('scheduled_at'), 'reason': str(exc)[:140]})
-        approved_slots = [slot for slot in readiness['future_slots'] if slot in valid_slots]
-        readiness['approved_future_slots'] = approved_slots
-        readiness['missing_slots'] = [slot for slot in readiness['future_slots'] if slot not in approved_slots]
-        readiness['next_slot_missing'] = bool(readiness['future_slots'] and readiness['future_slots'][0] not in approved_slots)
+        readiness = verified_supply_status(merged['entries'], now, history, policy, source, details)
+        approved_slots = readiness['approved_future_slots']
+        invalid_ready = readiness['invalid_ready_entries']
         report.update(queue_sha=sha, staged_sha=stage_sha,
                       approved_supply_count=len(approved),
                       invalid_ready_entries=invalid_ready,
