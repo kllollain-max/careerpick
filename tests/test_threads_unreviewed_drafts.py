@@ -44,6 +44,20 @@ class DraftWriterTests(unittest.TestCase):
                      'application_period': {'end': '2026-11-17', 'date_only': True}}
         self.assertEqual(build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'], [])
 
+    def test_skips_expired_candidate_and_uses_next(self):
+        expired = {**self.handoff["candidates"][0],
+                   "notice_id": "expired",
+                   "application_period": {"end": "2026-11-16T10:00:00+09:00", "date_only": False}}
+        handoff = {**self.handoff, "candidates": [expired, self.handoff["candidates"][0]]}
+        result = build_drafts(handoff)
+        self.assertEqual(len(result["drafts"]), 1)
+        self.assertEqual(result["drafts"][0]["notice_id"], "a123")
+
+    def test_never_reuses_notice_for_multiple_slots(self):
+        handoff = {**self.handoff, "missing_slots": [
+            "2026-11-17T08:00:00+09:00", "2026-11-17T12:00:00+09:00"]}
+        self.assertEqual(len(build_drafts(handoff)["drafts"]), 1)
+
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
             handoff = {**self.handoff, flag: True}
