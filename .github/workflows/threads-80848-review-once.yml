@@ -1,0 +1,34 @@
+name: Threads 80848 one-shot independent publisher validation
+on:
+  push:
+    branches:
+      - work/threads-80848-approved-supply-20261117
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      THREADS_CLAIM_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/threads-80848-approved-supply-20261117
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow for independent card pixel validation
+        run: python -m pip install Pillow
+      - name: Get existing actual collection verification receipt without rewriting sources
+        run: python scripts/threads_source_verification.py
+      - name: Official semantics source and card actual validator (no queue writes)
+        run: python -m scripts.threads_80848_live_supply_once
+      - name: Preserve independently validated reviewed candidate evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80848-reviewed-input
+          path: threads-reviewed-80848-input.json
+          if-no-files-found: ignore
