@@ -103,18 +103,10 @@ jobs:
         run: python scripts/threads_unreviewed_drafts.py --input threads-writer-handoff.json --output threads-unreviewed-drafts.json
       - name: Capture independent live official-source evidence for review (no approval)
         run: python -m scripts.threads_official_review_pack --input threads-unreviewed-drafts.json --output threads-official-evidence.json
+      - name: Read actual recent Threads receipts without publishing
+        run: python -m scripts.threads_live_inventory
       - name: Persist replenishment handoff for the independent writer
         run: python -m scripts.threads_supply_audit --persist
-      - name: Verify account authentication without posting
-        run: |
-          python - <<'PY'
-          import os
-          from scripts.threads_auto import api
-          account = api('GET', '/me', os.environ['THREADS_ACCESS_TOKEN'], {'fields': 'id,username'})
-          if str(account.get('id')) != os.environ['THREADS_USER_ID'] or account.get('username') != 'hid_119':
-              raise SystemExit('THREADS_ACCOUNT_MISMATCH')
-          print('Threads account authentication verified: hid_119')
-          PY
       - name: Flag missing approved supply with actionable diagnostics
         run: |
           python - <<'PY'
@@ -160,6 +152,7 @@ jobs:
             threads-unreviewed-drafts.json
             threads-official-evidence.json
             threads-supply-audit.json
+            threads-live-inventory.json
           if-no-files-found: ignore
           retention-days: 14
 

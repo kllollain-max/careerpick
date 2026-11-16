@@ -14,10 +14,13 @@ from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from concurrent.futures import ThreadPoolExecutor
+
 
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.threads_http import read_response
 from scripts.threads_reviewed_ingest import (
     OfficialRedirect, official_url_allowed, MAX_OFFICIAL_BYTES,
 )
@@ -63,7 +66,7 @@ def read_official(url, opener=None):
     opener = opener or urllib.request.build_opener(OfficialRedirect())
     req = urllib.request.Request(url, headers={
         "User-Agent": "CareerPickIndependentOfficialReview/1.0", "Accept": "*/*"})
-    with opener.open(req, timeout=12) as response:
+    with read_response(req, timeout=12, opener=opener.open) as response:
         final = response.geturl()
         if not official_url_allowed(final):
             raise ValueError("OFFICIAL_FINAL_URL_NOT_ALLOWED")
@@ -99,15 +102,20 @@ def read_official(url, opener=None):
     return info
 
 
-def build_packet(bundle, fetch=read_official, limit=8):
+def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
     if (not isinstance(bundle, dict) or bundle.get("status") != "review_required"
             or bundle.get("approved_for_queue") is not False
             or not isinstance(bundle.get("drafts"), list)):
         raise ValueError("UNREVIEWED_DRAFT_BUNDLE_REQUIRED")
+    if type(limit) is not int or not 1 <= limit <= 8:
+        raise ValueError("EVIDENCE_LIMIT_INVALID")
+    if type(max_attempts) is not int or not limit <= max_attempts <= 24:
+        raise ValueError("EVIDENCE_ATTEMPT_LIMIT_INVALID")
     records = []
     seen = set()
+    candidates = []
     for draft in bundle["drafts"]:
-        if len(records) >= limit:
+        if len(candidates) >= max_attempts:
             break
         if not isinstance(draft, dict) or draft.get("status") != "unreviewed":
             continue
@@ -115,6 +123,10 @@ def build_packet(bundle, fetch=read_official, limit=8):
         if not isinstance(nid, str) or not nid or nid in seen:
             continue
         seen.add(nid)
+        candidates.append(draft)
+
+    def capture(draft):
+        nid = draft["notice_id"]
         url = draft.get("official_url_for_private_review")
         item = {"notice_id": nid, "suggested_slot": draft.get("suggested_slot"),
                 "official_url": url, "evidence_status": "not_verified",
@@ -136,10 +148,20 @@ def build_packet(bundle, fetch=read_official, limit=8):
         except (ValueError, OSError, urllib.error.URLError) as error:
             item["block_reason"] = (str(error) if isinstance(error, ValueError)
                                     else "OFFICIAL_SOURCE_UNAVAILABLE")[:120]
-        records.append(item)
+        return item
+
+    # A provider outage must not starve all later official sources. Preserve
+    # ranking within each bounded batch, try alternatives until eight receipts
+    # exist, and cap concurrency and total attempts (no recursive work).
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        for offset in range(0, len(candidates), 4):
+            if sum(r["evidence_status"] == "bytes_fetched_for_review" for r in records) >= limit:
+                break
+            records.extend(executor.map(capture, candidates[offset:offset + 4]))
     return {"schema_version": 1, "status": "official_review_required",
             "automatic_approval": False, "approved_for_queue": False,
             "meta_posted": False, "records": records,
+            "attempted": len(records), "max_attempts": max_attempts,
             "checked": sum(r["evidence_status"] == "bytes_fetched_for_review" for r in records),
             "required_next_step": "Independently read notice and attachments, cite each fact, run validate_entry and v5 checks before submission"}
 
