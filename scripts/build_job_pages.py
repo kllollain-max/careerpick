@@ -17,6 +17,12 @@ DATA = ROOT / 'alio.json'
 DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
+CONFIRMED_APPLICATION_CUTOFFS = {
+    'a306750': '2026-11-19T10:00:00+09:00',
+    'a306355': '2026-11-16T10:00:00+09:00',
+    'a306799': '2026-11-23T10:00:00+09:00',
+    'a306662': '2026-11-18T17:00:00+09:00',
+}
 VERIFIED_DUTIES = json.loads(
     (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
 ) if Path(__file__).with_name('verified_job_duties.json').exists() else {}
@@ -177,18 +183,11 @@ def render(post, detail, related_posts=()):
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
-    confirmed_cutoffs = {
-        'a306750': '2026-11-19 10:00 (KST)',  # Korail Retail employer notice
-        'a306355': '2026-11-16 10:00 (KST)',  # IBK ALIO application instructions
-    }
-    confirmed_cutoff = confirmed_cutoffs.get(pid, '')
+    application_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
+    confirmed_cutoff = application_cutoff[:16].replace('T', ' ') + ' (KST)' if application_cutoff else ''
     deadline = parse_date(due, end_of_day=True)
     # A verified application cutoff takes precedence over the publication end
     # date. Keep the feed intact and preserve the archived URL/bookmarks.
-    application_cutoff = (
-        confirmed_cutoff.replace(' (KST)', '').replace(' ', 'T') + '+09:00'
-        if confirmed_cutoff else ''
-    )
     closed = is_closed(application_cutoff or due)
 
     official = (
@@ -785,6 +784,7 @@ def main():
     created = 0
     quality = {
         'total': 0,
+        'verified_editorial_duty_reviews': 0,
         'with_category_only_description': 0,
         'with_qualification': 0,
         'with_process': 0,
@@ -835,6 +835,12 @@ def main():
         # Only an explicit, nonempty source field counts as substantive duties.
         # NCS/category labels in the list feed must never be counted as duties.
         has_description = bool(clean(job_detail.get('jobDscrptn')))
+        editorial = VERIFIED_DUTIES.get(pid, {})
+        editorial_reviewed = (
+            editorial.get('organization') == clean(post.get('org'))
+            and editorial.get('title') == clean(post.get('title'))
+        )
+        quality['verified_editorial_duty_reviews'] += int(editorial_reviewed)
         quality['with_category_only_description'] += int(category_only)
         official_url = safe_url(post.get('src')) or safe_url(post.get('url'))
         has_official = bool(official_url)
@@ -899,6 +905,8 @@ def main():
                 'qualification': has_qualification,
                 'process': has_process,
                 'substantive_description': has_description,
+                'verified_editorial_duties': editorial_reviewed,
+                'editorial_review_scope': editorial.get('scope', '') if editorial_reviewed else '',
             },
         })
 

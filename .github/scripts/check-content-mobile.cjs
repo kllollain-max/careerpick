@@ -32,7 +32,8 @@ const { chromium } = require('playwright');
       'guides/after-application-checklist.html', 'privacy.html',
       'guides/career-certificate-checklist.html',
       'guides/interview-institution-research.html',
-      'jobs/a306355.html', 'jobs/a306750.html', 'jobs/a306436.html',
+      ...Object.keys(JSON.parse(await fs.readFile('scripts/verified_job_duties.json', 'utf8')))
+        .map(id => 'jobs/' + id + '.html'),
     ] : ['benefits/149200000026/', 'privacy.html'];
     await fs.mkdir('mobile-evidence', {recursive:true});
     for (const width of [320,390,1440]) {
