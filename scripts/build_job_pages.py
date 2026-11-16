@@ -180,7 +180,13 @@ def render(post, detail, related_posts=()):
     }
     confirmed_cutoff = confirmed_cutoffs.get(pid, '')
     deadline = parse_date(due, end_of_day=True)
-    closed = is_closed(due)
+    # A verified application cutoff takes precedence over the publication end
+    # date. Keep the feed intact and preserve the archived URL/bookmarks.
+    application_cutoff = (
+        confirmed_cutoff.replace(' (KST)', '').replace(' ', 'T') + '+09:00'
+        if confirmed_cutoff else ''
+    )
+    closed = is_closed(application_cutoff or due)
 
     official = (
         safe_url(post.get('src'))
@@ -572,7 +578,9 @@ def render(post, detail, related_posts=()):
 
     notice = (
         '<p class="closed">'
-        '표시된 종료일이 지난 보관 공고입니다. '
+        + ('공식 확인된 원서접수 마감시각이 지난 보관 공고입니다. '
+           if application_cutoff else '표시된 종료일이 지난 보관 공고입니다. ')
+        +
         '실제 접수 종료·연장 여부는 공식 공고를 확인하세요.'
         '</p>'
         if closed
