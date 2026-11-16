@@ -29,9 +29,9 @@ const { chromium } = require('playwright');
   const results = [];
   try {
     const pages = project === 'careerpick' ? [
-      'guides/after-application-checklist.html', 'privacy.html',
-      'guides/career-certificate-checklist.html',
-      'guides/interview-institution-research.html',
+      'privacy.html',
+      ...(await fs.readdir('guides')).filter(name => name.endsWith('.html'))
+        .sort().map(name => 'guides/' + name),
       ...Object.keys(JSON.parse(await fs.readFile('scripts/verified_job_duties.json', 'utf8')))
         .map(id => 'jobs/' + id + '.html'),
     ] : ['benefits/149200000026/', 'privacy.html'];
