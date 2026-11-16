@@ -1069,7 +1069,7 @@ def main():
     suspected_duplicates.sort(key=lambda item: (item['organization'], item['title'], item['deadline']))
     quality['original_review_page_ids'] = len(notice_reviews)
     quality['confirmed_duplicate_alias_pages'] = sum(v.get('representative_id') != pid for pid, v in notice_reviews.items() if v['decision'] == 'same_notice')
-    quality['verified_editorial_unique_notices'] = len({notice_reviews.get(pid, {}).get('representative_id') or pid for pid in VERIFIED_DUTIES})
+    quality['verified_editorial_unique_notices'] = len({notice_reviews.get(pid, {}).get('representative_id') or pid for row in quality_rows if row['detail_fields']['verified_editorial_duties'] for pid in [row['id']]})
     quality['suspected_duplicate_groups'] = len(suspected_duplicates)
     quality['duplicate_groups_with_distinct_official_links'] = sum(
         item['distinct_official_link_count'] > 1 for item in suspected_duplicates

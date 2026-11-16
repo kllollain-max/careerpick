@@ -151,3 +151,23 @@ class PublicSearchAuditTests(unittest.TestCase):
 
 
 if __name__ == '__main__': unittest.main()
+
+
+class PublicAliasEvidenceTests(unittest.TestCase):
+    def test_public_terms_and_actual_canonical_are_both_required(self):
+        from pathlib import Path
+        posts=json.loads(Path('alio.json').read_text())['posts']
+        details=json.loads(Path('alio-detail.json').read_text())
+        target=audit.BASE+'jobs/a306724.html'
+        def load(url):
+            row={'url':url,'status':200}
+            if url.endswith('alio-detail.json'):return row,json.dumps(details).encode()
+            return row,page(target)
+        self.assertEqual(audit.verified_alias_exclusions(posts,['a305959'],[target],load),['a305959'])
+        self.assertEqual(audit.verified_alias_exclusions(posts,['a305959'],[],load),[])
+        def wrong_canonical(url):
+            if url.endswith('alio-detail.json'):return load(url)
+            return {'status':200},page(url)
+        self.assertEqual(audit.verified_alias_exclusions(posts,['a305959'],[target],wrong_canonical),[])
+        details['a306724']['aplyQlfcCn']='changed terms'
+        self.assertEqual(audit.verified_alias_exclusions(posts,['a305959'],[target],load),[])

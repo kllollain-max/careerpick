@@ -23,9 +23,11 @@ import xml.etree.ElementTree as ET
 try:
     from .search_readiness import BASE, Page, same_url, schema_nodes
     from .build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+    from .notice_review import resolve as resolve_notice_reviews
 except ImportError:
     from search_readiness import BASE, Page, same_url, schema_nodes
     from build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+    from notice_review import resolve as resolve_notice_reviews
 
 ROBOTS = 'https://kllollain-max.github.io/robots.txt'
 AGENTS = ('Googlebot', 'Yeti', 'Mediapartners-Google', 'Google-Display-Ads-Bot')
@@ -79,13 +81,14 @@ def fetch(url):
     try:
         request = Request(url, headers={'User-Agent': 'CareerPick-Search-Readiness/1.0 (read-only)'})
         with build_opener(ProjectRedirect()).open(request, timeout=15) as response:
-            data = response.read(LIMIT + 1)
+            limit = 8 * 1024 * 1024 if url == BASE + "alio-detail.json" else LIMIT
+            data = response.read(limit + 1)
             item.update(status=response.status, final_url=response.url,
                         content_type=response.headers.get('Content-Type', ''),
                         x_robots_tag=response.headers.get('X-Robots-Tag', ''),
                         last_modified=response.headers.get('Last-Modified'),
                         bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
-            if len(data) > LIMIT:
+            if len(data) > limit:
                 item.update(status='unverified', error='response_exceeds_audit_limit')
                 return item, None
             return item, data
@@ -191,6 +194,34 @@ def retry_observations(rows, loader):
     return observations
 
 
+def verified_alias_exclusions(posts, missing, urls, loader):
+    """Require current public source identity AND the actual public canonical."""
+    if not missing:
+        return []
+    item, data = loader(BASE + 'alio-detail.json')
+    if item['status'] != 200 or data is None:
+        return []
+    try:
+        reviews = resolve_notice_reviews(posts, json.loads(data))
+    except (ValueError, TypeError, AttributeError):
+        return []
+    aliases = []
+    for pid in missing:
+        review = reviews.get(pid, {})
+        representative = review.get('representative_id')
+        if review.get('decision') != 'same_notice' or representative == pid:
+            continue
+        target = BASE + 'jobs/' + representative + '.html'
+        if target not in urls:
+            continue
+        row, body = loader(BASE + 'jobs/' + pid + '.html')
+        if row['status'] == 200 and body is not None:
+            doc = Page(body.decode('utf-8', 'replace'))
+            if doc.canonicals == [target] and doc.h1 and doc.title.strip():
+                aliases.append(pid)
+    return sorted(aliases)
+
+
 def run(all_urls=False, workers=4, loader=fetch):
     started = time.monotonic()
     sm, data = loader(BASE + 'sitemap.xml')
@@ -244,11 +275,14 @@ def run(all_urls=False, workers=4, loader=fetch):
                     return False
             active_ids = {str(p['id']) for p in feed_posts if not expired_by_source_date(p)}
             missing = sorted(pid for pid in active_ids if BASE + 'jobs/' + pid + '.html' not in urls)
+            aliases = verified_alias_exclusions(feed_posts, missing, urls, loader)
+            missing = sorted(set(missing) - set(aliases))
             excluded_expired = sorted(feed_ids - active_ids)
             report['public_feed'].update(notice_count=len(feed_ids), current_notice_count=len(active_ids),
                                          expired_notice_count=len(excluded_expired),
                                          verified_application_cutoff_exclusions=sorted(
                                              pid for pid in excluded_expired if pid in CONFIRMED_APPLICATION_CUTOFFS),
+                                         verified_duplicate_alias_exclusions=aliases,
                                          missing_sitemap_ids=missing)
             if missing: report['errors'].append('current_notices_missing_from_sitemap')
         except (ValueError, TypeError, AttributeError): report['errors'].append('public_feed_invalid_json_or_shape')
