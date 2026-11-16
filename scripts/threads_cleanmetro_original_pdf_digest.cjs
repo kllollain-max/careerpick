@@ -13,7 +13,7 @@ const fs=require('fs'),crypto=require('crypto');
     await page.goto(notice,{waitUntil:'domcontentloaded',timeout:50000});
     await page.waitForFunction(()=>document.body.innerText.includes('2026-17'),null,{timeout:25000});
     const actual=new URL(page.url());
-    if(actual.hostname!=='cleanmetro.co.kr'||actual.pathname!=='/bbs/board.php'||actual.searchParams.get('bo_table')!=='recruit'||actual.searchParams.get('wr_id')!=='430'||[...actual.searchParams.keys()].some(k=>!['bo_table','wr_id','page'].includes(k)))throw Error('EMPLOYER_NOTICE_REDIRECT '+JSON.stringify({host:actual.hostname,path:actual.pathname,board:actual.searchParams.get('bo_table'),id:actual.searchParams.get('wr_id'),keys:[...actual.searchParams.keys()]}));
+    if(actual.hostname!=='cleanmetro.co.kr'||actual.pathname!=='/bbs/board.php'||actual.searchParams.get('bo_table')!=='recruit'||actual.searchParams.get('wr_id')!=='430'||[...actual.searchParams.keys()].some(k=>!['bo_table','wr_id','page','ckattempt'].includes(k))||(actual.searchParams.has('ckattempt')&&!/^[1-3]$/.test(actual.searchParams.get('ckattempt'))))throw Error('EMPLOYER_NOTICE_REDIRECT '+JSON.stringify({host:actual.hostname,path:actual.pathname,board:actual.searchParams.get('bo_table'),id:actual.searchParams.get('wr_id'),keys:[...actual.searchParams.keys()]}));
     const found=await page.locator('a[href]').evaluateAll(els=>els.map(a=>({url:a.href,label:a.innerText})).filter(x=>{
       try{const u=new URL(x.url);return u.protocol==='https:'&&u.hostname==='cleanmetro.co.kr'&&u.pathname==='/bbs/download.php'&&u.searchParams.get('bo_table')==='recruit'&&u.searchParams.get('wr_id')==='430'&&u.searchParams.get('no')==='11'}catch{return false}
     }));
