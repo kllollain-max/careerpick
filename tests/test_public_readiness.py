@@ -2,6 +2,7 @@ import hashlib
 import importlib.util
 import json
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parents[1] / 'scripts' / 'check_public_readiness.py'
@@ -10,6 +11,42 @@ audit = importlib.util.module_from_spec(spec); spec.loader.exec_module(audit)
 
 
 class HostAuditTests(unittest.TestCase):
+    def test_transient_transport_recovers_with_bounded_attempts(self):
+        sequence = [({'status': 503}, b''),
+                    ({'status': 'unverified', 'error': 'URLError'}, b''),
+                    ({'status': 200}, b'valid')]
+        with patch.object(audit, '_fetch_once', side_effect=sequence) as request, patch.object(audit.time, 'sleep'):
+            item, body = audit.fetch(audit.HOST + 'ads.txt')
+        self.assertEqual((item['status'], item['attempts'], body), (200, 3, b'valid'))
+        self.assertEqual(request.call_count, 3)
+
+    def test_permanent_http_failure_is_not_retried(self):
+        with patch.object(audit, '_fetch_once', return_value=({'status': 404}, b'')) as request, patch.object(audit.time, 'sleep'):
+            item, _ = audit.fetch(audit.HOST + 'ads.txt')
+        self.assertEqual(item['status'], 404)
+        self.assertEqual(request.call_count, 1)
+
+    def test_persistent_transport_failure_stops_and_remains_unverified(self):
+        with patch.object(audit, '_fetch_once', return_value=({'status': 503}, b'')) as request, patch.object(audit.time, 'sleep'):
+            item, _ = audit.fetch(audit.HOST + 'ads.txt')
+        self.assertEqual((item['status'], request.call_count), (503, 3))
+        load, _, _ = self.fixture('careerpick')
+        def unavailable(url):
+            return (item, b'') if url.endswith('ads.txt') else load(url)
+        result = audit.run('careerpick', unavailable)
+        self.assertEqual(result['errors'], [])
+        self.assertTrue(result['unverified'])
+        self.assertNotIn('host_ads_txt_publisher_mismatch', result['errors'])
+
+    def test_unavailable_root_or_sitemap_does_not_invent_content_findings(self):
+        for failed in [audit.HOST, audit.HOST + 'careerpick/sitemap.xml']:
+            load, _, _ = self.fixture('careerpick')
+            def unavailable(url):
+                return ({'status': 503}, b'') if url == failed else load(url)
+            result = audit.run('careerpick', unavailable)
+            self.assertTrue(result['unverified'])
+            self.assertEqual(result['errors'], [])
+
     def fixture(self, project='supportpick', mismatch=False, changing=False, robots=b'User-agent: *\nAllow: /'):
         base = audit.HOST + project + '/'
         paths = ['', 'about.html', 'privacy.html', 'contact.html']
