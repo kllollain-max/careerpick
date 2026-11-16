@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-81249",
+  "employer": "세종신용보증재단",
+  "review_status": "OFFICIAL_SUMMARY_REVIEWED_ATTACHMENT_SEMANTICS_PENDING_NOT_APPROVED",
+  "approved_for_queue": false,
+  "slot_reserved": false,
+  "meta_posted": false,
+  "recorded_on_kst_date": "2026-11-17",
+  "independent_review_scope": "Official employer HTML announcement and current employer recruiting index checked; attachment PDF original/eligibility and amendment verification remain incomplete",
+  "priority_reason": "정규직 신입, 금융·공제 선호 분야의 신규 공고",
+  "official_sources": [
+    {
+      "url": "https://sjsinbo.or.kr/sub050502/view/id/1189",
+      "source_kind": "employer_current_recruitment_post",
+      "status": "진행중",
+      "published_date": "2026-11-16",
+      "directly_read": true,
+      "sha256": null,
+      "excerpt": "세종신용보증재단 신입직원(6급) 총 1명; 2026.11.16.(월)10:00~11.30.(월)14:00; 채용 홈페이지 온라인 접수; 개인정보 수집·이용 동의서 업로드"
+    },
+    {
+      "url": "https://sjsinbo.or.kr/sub050502/index",
+      "source_kind": "employer_recruiting_index",
+      "directly_read": true,
+      "sha256": null,
+      "excerpt": "2026년 세종신용보증재단 신입직원 채용공고: 진행중; 최신 첫 페이지에 대상공고 표시"
+    }
+  ],
+  "official_application_url": "https://sejong.incruit.com",
+  "canonical_cleaneye_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81249",
+  "source_attachment": [
+    {
+      "title": "1-1. 일반직원 채용 공고.pdf",
+      "url": "https://sjsinbo.or.kr/_files/board/20261116/8e0b64bcbd31525eee13d62ba9f53bdf.pdf",
+      "read_status": "PDF viewer discovered but original PDF download returned 403; semantics not independently verified",
+      "sha256": null
+    },
+    {
+      "title": "1-2. 세종신용보증재단 직무기술서.hwp",
+      "url": null,
+      "read_status": "linked on official announcement; HWP body not read",
+      "sha256": null
+    }
+  ],
+  "independent_facts": [
+    {
+      "field": "recruiting_unit",
+      "value": "일반직 6급 신입직원",
+      "source": "기관 공식 공고 HTML"
+    },
+    {
+      "field": "confirmed_hires",
+      "value": 1,
+      "source": "기관 공식 공고 HTML"
+    },
+    {
+      "field": "employment_type",
+      "value": "일반정규직",
+      "source": "Cleaneye candidate original classification; separate official attachment confirmation outstanding"
+    },
+    {
+      "field": "application_open",
+      "value": "2026-11-16T10:00:00+09:00",
+      "source": "기관 공식 공고 HTML"
+    },
+    {
+      "field": "application_deadline",
+      "value": "2026-11-30T14:00:00+09:00",
+      "source": "기관 공식 공고 HTML"
+    },
+    {
+      "field": "application_method",
+      "value": "세종신용보증재단 지정 채용 홈페이지 온라인 접수",
+      "source": "기관 공식 공고 HTML"
+    },
+    {
+      "field": "required_upload",
+      "value": "개인정보 수집·이용 동의서",
+      "source": "기관 공식 공고 HTML"
+    }
+  ],
+  "correction_check": {
+    "employer_recruitment_index_latest_first_page_reviewed": true,
+    "latest_post_currently_active": true,
+    "exhaustive_amendment_cancel_audit": false
+  },
+  "v5_draft": {
+    "post_text": "세종 지역 공공금융기관 신입 채용을 찾는 분께,\n세종신용보증재단이 일반직 6급 신입직원 1명을 모집해요.\n\n기관 공식 채용공고는 11월 16일부터 접수 중이며, 11월 30일 14시 마감이에요.\n지원은 지정 채용 홈페이지에서 온라인으로 접수하고, 개인정보 수집·이용 동의서를 제출해야 해요.\n\n세부 지원자격·가점·전형기준은 첨부 공고문 확인이 필요해요.\n\n자세한 사항은 프로필링크 확인",
+    "characters": 215,
+    "replies": [],
+    "cta": "자세한 사항은 프로필링크 확인",
+    "has_urls": false,
+    "has_hashtags": false,
+    "media": "UNASSIGNED",
+    "proposed_slot": "UNRESERVED_DO_NOT_INFER"
+  },
+  "blockers": [
+    "Official PDF original bytes + text semantic review and independently calculated SHA-256 missing (viewer/download rejected).",
+    "Applicant mandatory/optional qualifications and role-specific work not independently reviewed in official attachment; must not approve a v5 entry with generic eligibility placeholder.",
+    "Amendment/cancellation across employer announcements and official applicant portal to recheck immediately before any approval.",
+    "CareerPick actual rendered #job=cleaneye-81249 and exact profile clickthrough not verified.",
+    "Resolve correct IMAGE/TEXT turn; make and visually verify card when image needed.",
+    "Run full validate_entry, verify_official_receipt, reviewed-submissions ingest, CAS bridge and readback before approval."
+  ]
+}
