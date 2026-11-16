@@ -24,6 +24,26 @@ from scripts.threads_reviewed_ingest import (
 
 KST = ZoneInfo("Asia/Seoul")
 
+# A single independently identified employer notice, tied to the precise
+# Cleaneye source snapshot. Never treat a similarly named future notice as
+# the same source. No semantics, publication, or approval is implied here.
+CANONICAL_REVIEW_URLS = {
+    "cleaneye-80820": {
+        "source_post_sha256": "8d3752df0454401d33229336de56bbfebe204a1337ee98ca1ac6a87f458528f1",
+        "source_detail_sha256": "c67be70000794ee30457361c24cb0ba633e4efc2d2b145790074b1dde8b0834e",
+        "url": "https://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155",
+    },
+}
+
+
+def independently_located_notice(draft):
+    reviewed = CANONICAL_REVIEW_URLS.get(draft.get("notice_id"))
+    if (reviewed and
+        draft.get("source_post_sha256") == reviewed["source_post_sha256"] and
+        draft.get("source_detail_sha256") == reviewed["source_detail_sha256"]):
+        return reviewed["url"]
+    return draft.get("official_url_for_private_review")
+
 
 class VisibleText(HTMLParser):
     def __init__(self):
@@ -115,7 +135,7 @@ def build_packet(bundle, fetch=read_official, limit=8):
         if not isinstance(nid, str) or not nid or nid in seen:
             continue
         seen.add(nid)
-        url = draft.get("official_url_for_private_review")
+        url = independently_located_notice(draft)
         item = {"notice_id": nid, "suggested_slot": draft.get("suggested_slot"),
                 "official_url": url, "evidence_status": "not_verified",
                 "semantic_review": "required", "publisher_validate_entry": "not_run"}
