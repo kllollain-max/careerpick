@@ -42,7 +42,11 @@ def run():
     a_bytes,a_sha=official(AD); b_bytes,b_sha=official(APP)
     ad=normalized(a_bytes); app=normalized(b_bytes)
     must(ad,["서울메트로환경","공무직","103","153","정규직","서울교통공사","줄넘기","앉았다 일어서기","18세 이상","65세"])
-    must(app,["모집중","2026","11.","20.","12:00","공무직 사원"])
+    # The application page is JS-rendered: independently validate its displayed text in Chromium.
+    receipt=json.loads(Path("threads-80848-app-browser.json").read_text(encoding="utf-8"))
+    if receipt.get("url")!=APP or receipt.get("status")!="모집중" or receipt.get("unit")!="공무직 사원" or receipt.get("deadline")!="2026-11-20T12:00:00+09:00":
+        raise ValueError("LIVE_APPLICATION_STATUS_NOT_PROVEN")
+    must(app,["2026"])
     for u,d in PDFS:
         v,actual=official(u)
         if not v.startswith(b"%PDF-") or actual!=d: raise ValueError("ATTACHMENT_NOT_VERIFIED")
