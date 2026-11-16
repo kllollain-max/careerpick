@@ -25950,6 +25950,40 @@
         "Complete scoped corrections and fullreview.v5 then exact originalJPEG360PNG review; no READY before wholevalidatorPASS"
       ],
       "audit_path": "threads/audits/supply-recheck-20261115-2348.json"
+    },
+    "cleaneye-81115": {
+      "notice_id": "cleaneye-81115",
+      "status": "held_unassigned",
+      "assigned_slot": null,
+      "prepared_at": "2026-11-16T01:36:39.903427+09:00",
+      "post_text": "전기 자격과 취득 후 경력이 있다면,\n원주시시설관리공단 전기(청년) 정규직 1명 공고예요.\n\n11월 9일 기준 만18~34세이고, 공고상 1991.11.11 이후 출생자예요.\n전기기사 또는 전기기능장 취득 후 1년, 전기산업기사 취득 후 2년 이상 실무경력 중 하나가 필요해요.\n거주지 제한은 없어요.\n\n원주시시설관리공단 사업장 내 근무, 3개월 수습·평가 후 정규 임용이에요.\n전보·야간·주말·교대·초과근무와 병역·국적·결격 조건도 확인해요.\n\n2027년 1월 1일 임용 예정이며 최종발표 후 1년 내 순차 임용 가능해요.\n\n중복지원 불가, 11월 20일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "chars": 347,
+      "reply_texts": [],
+      "audit_path": "threads/audits/held-cleaneye-81115-upload-interrupted-20261117-0331.json",
+      "audit_blob_sha": "521c520a5e49bcb5cbe8afd11bce2c6ae6ec61ac",
+      "full_queue_validation_passed": false,
+      "hold_reasons": [
+        "GitHub connector UTF8 file APIs do not expose binary encoding; gh has no login",
+        "Browser setFiles tool twice failed to finish and was aborted; commit control never activated; repeat-upload stopped",
+        "Fresh remote main asset directory does not contain81115; future08a306913 alreadyqueued by existing automation; do not duplicate/mutate",
+        "Review source/correction/profile data are now stale and require fresh official reads before assigning new future slot"
+      ],
+      "card_visual_review": {
+        "status": "passed",
+        "reviewed_width": 360,
+        "reviewed_at": "2026-11-15T16:37:25.525201+00:00",
+        "sha256": "39731d77bb47adfe44b71e41db31fdfc38d6fdbe540ce2e88076fd1740998407",
+        "preview_sha256": "cc6f57cfd79f75894e629a94e2c0d5d51a307f718ffa4b2d6c3ea1c71a576300",
+        "asset_path": "threads-images/cleaneye-81115.jpg",
+        "preview_asset_path": "threads-images/cleaneye-81115-360.png",
+        "facts_sha256": "0bf7a8ea4e3c11d80177092601d0b62360a2f177f7d3a6a722766e20aba52646",
+        "layout_version": "careerpick-single-main-card-v2",
+        "visual_findings": "Actual1080JPEG and sameJPEG360PNG opened: 전기(청년), 정규직1명, 원주시시설관리공단,11월20일18:00,만18~34세 legible without clipping; matches reviewed original and final347char body. OriginalPDF page10 workplace/sup training table also visually mapped."
+      },
+      "remote_card_registered": false,
+      "original_validation_at": "2026-11-15T16:37:25.525201+00:00",
+      "latest_remote_recheck_at": "2026-11-16T18:27:00+00:00",
+      "latest_recheck_note": "Nov16 08 proposedslot elapsed. Old evidence may not be used as current approval; staged/queued a306913 Nov17 08 untouched."
     }
   },
   "writer_recovery_latest": {
@@ -26521,5 +26555,37 @@
       "08/12 still require other eligible manuscripts; do not move this notice into its closed application hours",
       "Recheck actual successful media before execution; retain exact card bytes and all existing gates"
     ]
-  }
+  },
+  "writer_recovery_checks": [
+    {
+      "observed_at": "2026-11-16 18:31:16 UTC",
+      "status": "PARTIAL_HOLD_NOT_PUBLISHED",
+      "candidate": "cleaneye-81115",
+      "audit_path": "threads/audits/held-cleaneye-81115-upload-interrupted-20261117-0331.json",
+      "staging_sha": "a6f0081e4bf3f0c50996a8f74b817613a8cf8109",
+      "queue_sha": "3cfaca455e1897a984889cf38e9f1de2ea0819e2",
+      "asset_paths_present": false,
+      "existing_next_notice": "a306913",
+      "existing_next_slot": "2026-11-17T08:00:00+09:00",
+      "last_publication": {
+        "notice_id": "a306752",
+        "post_id": "18134891626705962",
+        "permalink": "https://www.threads.com/@hid_119/post/DfzQXwBGxOw",
+        "official_get_at": "2026-11-16T20:32:37.194876+09:00",
+        "accepted_claim_sha": "a62320c8e983151a6db61bb53d995581dfdf3dd2",
+        "run_id": 43858550129
+      },
+      "limitation": "Only stored official GET proof was read; no new Meta POST or GET from this execution.",
+      "additional_unresolved_observation": {
+        "notice_id": "cleaneye-80820",
+        "scheduled_at": "2026-11-16T12:00:00+09:00",
+        "published_at": "2026-11-16T17:20:10.511125+09:00",
+        "post_id": "17918956251546576",
+        "run_id": "43830300590",
+        "status": "OUTSIDE_REQUESTED_2H_WINDOW_OBSERVED_NOT_RESOLVED",
+        "current_main_recovery_path": "Explicit THREADS_RECOVERY_SLOT/RECOVER_SLOT exists; no dispatch/rerun or alteration by this execution. Requires policy/code reconciliation before reusing catchup.",
+        "history_preserved": true
+      }
+    }
+  ]
 }
