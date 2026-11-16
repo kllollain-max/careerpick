@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T15:53:15+00:00",
-  "last_observed_at": "2026-11-15T15:53:15+00:00",
+  "updated_at": "2026-11-16T19:55:37+00:00",
+  "last_observed_at": "2026-11-16T19:55:37+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,7 +57,7 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33",
+    "blob_sha": "34351b4c033eb191fd20abf34380be20ffbe6623",
     "readback_verified": true,
     "ready_entries": [
       {
@@ -79,17 +79,25 @@
         "card_check": "existing_attestation_exact_bytes_full_pixels_verified"
       }
     ],
-    "last_update_commit_sha": "8968aeadf4e10f76e17dc035cde59ccc9c579c4d",
-    "readback_verified_at": "2026-11-15T07:59:47+00:00",
+    "last_update_commit_sha": "ae174f29284d204b6fd16a0e4a3be7377ab0976a",
+    "readback_verified_at": "2026-11-16T19:55:37+00:00",
     "current_eligibility_check": {
-      "checked_at": "2026-11-15T08:03:29+00:00",
-      "total_entries": 32,
+      "checked_at": "2026-11-16T19:55:37+00:00",
+      "total_entries": 37,
       "past_entries_preserved": true,
-      "current_publishable_ready": 0,
-      "notice16_status": "published",
-      "stage_total_entries": 1,
-      "stage_current_eligible_ready": 0,
-      "queue_blob_sha": "b9a2188e0e749ce394cf6f34e87de82b87947c33"
+      "current_publishable_ready": 2,
+      "queue_blob_sha": "34351b4c033eb191fd20abf34380be20ffbe6623",
+      "stage_blob_sha": "5b276d1e124817991e030f84ce4574b6296d31aa",
+      "ready_slots": [
+        {
+          "notice_id": "a306913",
+          "scheduled_at": "2026-11-17T08:00:00+09:00"
+        },
+        {
+          "notice_id": "cleaneye-81115",
+          "scheduled_at": "2026-11-17T12:00:00+09:00"
+        }
+      ]
     }
   },
   "observed_runs": [
@@ -20629,175 +20637,21 @@
       "performance_improvement": "not_established_insufficient_unbalanced_sample"
     },
     "latest_independent_writer_check": {
-      "checked_at": "2026-11-13T02:28:14Z",
-      "main_sha": "04b54b48fa6db913000d04455756b6fda313c87b",
-      "executed_archive_main_sha": "434a554e33ca970060ad6378832e96567554601f",
-      "archive_to_current_changes": [
-        "threads-images/a306760.jpg",
-        "threads-images/a306760-360.png"
-      ],
-      "source_and_policy_files_unchanged_verified": true,
-      "queue_blob_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
-      "policy_hashes_verified": {
-        "master": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
-        "reach": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
-        "v5": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
-        "intro": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
-      },
-      "input_reference_at": "2026-11-13T11:23:04.050657+09:00",
-      "input_sha256": "9cd34290f65a2c8ef42016a273d76b8c671a2ebdc54de9eed3ebea7d63171680",
-      "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection queue-current.json",
-      "source_selection_summary": {
-        "schema_version": 1,
-        "policy_id": "careerpick-threads-selection-v5-20261111",
-        "evaluated_at": "2026-11-13T11:23:04.050657+09:00",
-        "scan_scope": "complete_saved_alio_and_cleaneye_feeds",
-        "connected_sources": [
-          "alio",
-          "cleaneye"
-        ],
-        "official_details_fully_reviewed": false,
-        "sources": {
-          "alio": {
-            "status": "verified_snapshot",
-            "snapshot_at": "2026-11-13T10:22:31+09:00",
-            "source_checked_at": "2026-11-13T10:23:02+09:00",
-            "total_records": 931,
-            "eligible_count": 30,
-            "review_required_count": 778,
-            "excluded_count": 123,
-            "returned_count": 0,
-            "exclusion_reasons": {
-              "APPLICATION_CLOSED": 30,
-              "NOTICE_ALREADY_USED": 73,
-              "APPLICATION_END_TIME_UNKNOWN": 3,
-              "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-              "SOURCE_NOTICE_UNCONFIRMED": 11,
-              "NOTICE_ALREADY_QUEUED": 3,
-              "APPLICATION_END_PRECISION_CONFLICT": 1,
-              "APPLICATION_NOT_OPEN": 1
-            }
-          },
-          "cleaneye": {
-            "status": "verified",
-            "snapshot_at": "2026-11-13T10:23:45+09:00",
-            "source_checked_at": "2026-11-13T10:23:45+09:00",
-            "total_records": 535,
-            "eligible_count": 260,
-            "review_required_count": 0,
-            "excluded_count": 275,
-            "returned_count": 24,
-            "exclusion_reasons": {
-              "CLEANEYE_NOT_VERIFIED_OPEN": 258,
-              "CLEANEYE_NOT_RECRUITMENT": 8,
-              "NOTICE_ALREADY_USED": 2,
-              "CLEANEYE_APPLICATION_NOT_OPEN": 7
-            }
-          }
-        },
-        "total_scanned": 1466,
-        "eligible_before_limit": 290,
-        "writer_limit": 24,
-        "returned_count": 24,
-        "unconfirmed_unit_counts": 290,
-        "interest_ranking": "unavailable_not_used",
-        "audience_breadth_ranking": "unavailable_not_used",
-        "sector_policy": {
-          "basis": "user_editorial_preference_not_popularity_data",
-          "priority_order": null,
-          "scope": "descriptive_only_no_assumed_reader_interest",
-          "unconfirmed_counts": "provisional_review_order_only",
-          "diversity": "consider_sector_group_when_reviewing_comparable_unstarted_slots"
-        },
-        "sector_counts_before_limit": {
-          "neutral": 192,
-          "deprioritized": 77,
-          "preferred": 21
-        },
-        "ranking_order": [
-          "current_application_open",
-          "verified_reader_relevance_if_available",
-          "exact_employment_type",
-          "verified_unit_count_desc",
-          "verified_advantage_if_available",
-          "preparation_time",
-          "recent_notice_diversity",
-          "actual_deadline",
-          "notice_id_tiebreak"
-        ],
-        "review_errors": [],
-        "preparation_time_heuristic_hours": 48
-      },
-      "selection_rows_sha256": "c0f2e27ad98506a18ab6c168d1d7d3774ff47ca5ebab765bc10658a7ad199dac",
-      "queue_check_status": "validated",
-      "ready_entries": [
-        {
-          "scheduled_at": "2026-11-13T12:00:00+09:00",
-          "notice_id": "a306848",
-          "entry_sha256": "ed8fd6130e317c1d7a58a0de5d4e3da762f12bcdf386332bd9400137c95f299a",
-          "chars": 284,
-          "reply_count": 0,
-          "card_status": "passed",
-          "card_check": "exact_reviewed_assets_and_full_pixels_verified"
-        },
-        {
-          "scheduled_at": "2026-11-13T16:00:00+09:00",
-          "notice_id": "a306908",
-          "entry_sha256": "95f72bdd63e472ce73d604a42e29024d181845c3e214d35f37c4dbfb81209d38",
-          "chars": 252,
-          "reply_count": 0,
-          "card_status": "passed",
-          "card_check": "exact_reviewed_assets_and_full_pixels_verified"
-        },
-        {
-          "scheduled_at": "2026-11-13T20:00:00+09:00",
-          "notice_id": "a306717",
-          "entry_sha256": "e73cf4d63cbcc3d22375d8300dea6aa2b95deaee1f35dc6f33b6ed8a38c92e21",
-          "chars": 298,
-          "reply_count": 0,
-          "card_status": "passed",
-          "card_check": "exact_reviewed_assets_and_full_pixels_verified"
-        },
-        {
-          "scheduled_at": "2026-11-14T08:00:00+09:00",
-          "notice_id": "a306760",
-          "entry_sha256": "f7bf612866ee4e4b72f98f8daf05cfe26f2cb55daee846eea0d6712559af04ae",
-          "chars": 299,
-          "reply_count": 0,
-          "card_status": "passed",
-          "card_check": "exact_reviewed_assets_and_full_pixels_verified"
-        }
-      ],
-      "new_ready_saved": 1,
-      "new_held_drafts_saved": 0,
-      "all_prior_queue_entries_preserved": true,
-      "official_source_rechecks": [
-        {
-          "notice_id": "a306848",
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306848",
-          "checked_at": "2026-11-13T11:27:23.260423+09:00",
-          "status": 200,
-          "sha256": "3d286f76bcb8aaef6ba8410eb8df5c6cbe7d398855385846fc474190b733f498",
-          "same_bytes": true
-        },
-        {
-          "notice_id": "a306908",
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306908",
-          "checked_at": "2026-11-13T11:27:23.260768+09:00",
-          "status": 200,
-          "sha256": "9a30ba3920a11ac145f4ba8e19cec8341057869c6dc44c96a9e2d9253cec5048",
-          "same_bytes": true
-        },
-        {
-          "notice_id": "a306717",
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306717",
-          "checked_at": "2026-11-13T11:27:23.261175+09:00",
-          "status": 200,
-          "sha256": "b9ea0bb25e484e2e59c212cf423aaee9de6ad3ef23f45758755a89ed72cea500",
-          "same_bytes": true
-        }
-      ],
-      "audit_path": "threads/audits/single-main-v2-ready-a306760-20261113T1128.json"
+      "observed_at": "2026-11-16T19:55:37+00:00",
+      "status": "READY_STAGED_AND_QUEUED_NOT_PUBLISHED",
+      "notice_id": "cleaneye-81115",
+      "scheduled_at": "2026-11-17T12:00:00+09:00",
+      "entry_fingerprint": "aec049c9fa11e9211e39a5f8df879188fd7fe992fdf378503a4b5afa451f4a1a",
+      "stage_sha": "5b276d1e124817991e030f84ce4574b6296d31aa",
+      "queue_sha": "34351b4c033eb191fd20abf34380be20ffbe6623",
+      "asset_commit": "3b466b9449658967820e4434ef16372495feeb39",
+      "full_queue_validation": "validated",
+      "card_pixel_verification": "passed",
+      "remote_readback_exact": true,
+      "actual_meta_post_id": null,
+      "actual_meta_permalink": null,
+      "meta_posted": false,
+      "audit_path": "threads/audits/recovered-cleaneye-81115-ready-20261117-0455.json"
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -25953,37 +25807,36 @@
     },
     "cleaneye-81115": {
       "notice_id": "cleaneye-81115",
-      "status": "held_unassigned",
-      "assigned_slot": null,
+      "status": "resolved_ready_queued",
+      "assigned_slot": "2026-11-17T12:00:00+09:00",
       "prepared_at": "2026-11-16T01:36:39.903427+09:00",
       "post_text": "전기 자격과 취득 후 경력이 있다면,\n원주시시설관리공단 전기(청년) 정규직 1명 공고예요.\n\n11월 9일 기준 만18~34세이고, 공고상 1991.11.11 이후 출생자예요.\n전기기사 또는 전기기능장 취득 후 1년, 전기산업기사 취득 후 2년 이상 실무경력 중 하나가 필요해요.\n거주지 제한은 없어요.\n\n원주시시설관리공단 사업장 내 근무, 3개월 수습·평가 후 정규 임용이에요.\n전보·야간·주말·교대·초과근무와 병역·국적·결격 조건도 확인해요.\n\n2027년 1월 1일 임용 예정이며 최종발표 후 1년 내 순차 임용 가능해요.\n\n중복지원 불가, 11월 20일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
       "chars": 347,
       "reply_texts": [],
       "audit_path": "threads/audits/held-cleaneye-81115-upload-interrupted-20261117-0331.json",
       "audit_blob_sha": "521c520a5e49bcb5cbe8afd11bce2c6ae6ec61ac",
-      "full_queue_validation_passed": false,
-      "hold_reasons": [
-        "GitHub connector UTF8 file APIs do not expose binary encoding; gh has no login",
-        "Browser setFiles tool twice failed to finish and was aborted; commit control never activated; repeat-upload stopped",
-        "Fresh remote main asset directory does not contain81115; future08a306913 alreadyqueued by existing automation; do not duplicate/mutate",
-        "Review source/correction/profile data are now stale and require fresh official reads before assigning new future slot"
-      ],
+      "full_queue_validation_passed": true,
+      "hold_reasons": [],
       "card_visual_review": {
         "status": "passed",
         "reviewed_width": 360,
-        "reviewed_at": "2026-11-15T16:37:25.525201+00:00",
+        "reviewed_at": "2026-11-17T04:51:43.140789+09:00",
         "sha256": "39731d77bb47adfe44b71e41db31fdfc38d6fdbe540ce2e88076fd1740998407",
         "preview_sha256": "cc6f57cfd79f75894e629a94e2c0d5d51a307f718ffa4b2d6c3ea1c71a576300",
         "asset_path": "threads-images/cleaneye-81115.jpg",
         "preview_asset_path": "threads-images/cleaneye-81115-360.png",
         "facts_sha256": "0bf7a8ea4e3c11d80177092601d0b62360a2f177f7d3a6a722766e20aba52646",
         "layout_version": "careerpick-single-main-card-v2",
-        "visual_findings": "Actual1080JPEG and sameJPEG360PNG opened: 전기(청년), 정규직1명, 원주시시설관리공단,11월20일18:00,만18~34세 legible without clipping; matches reviewed original and final347char body. OriginalPDF page10 workplace/sup training table also visually mapped."
+        "visual_findings": "Actual1080JPEG and360PNG reopened Nov17: 전기(청년), 정규직1명, 원주시시설관리공단,11월20일18:00,만18~34세 all readable without clipping. Same exact bytes reused; full original age reference/DOB and qualification OR are retained in body."
       },
-      "remote_card_registered": false,
+      "remote_card_registered": true,
       "original_validation_at": "2026-11-15T16:37:25.525201+00:00",
-      "latest_remote_recheck_at": "2026-11-16T18:27:00+00:00",
-      "latest_recheck_note": "Nov16 08 proposedslot elapsed. Old evidence may not be used as current approval; staged/queued a306913 Nov17 08 untouched."
+      "latest_remote_recheck_at": "2026-11-16T19:55:37+00:00",
+      "latest_recheck_note": "Previous upload/stale-review holds resolved by fresh official reads, exact binary asset CAS/readback, full card and queue validation; preserved earlier HOLD audit. Not yet published.",
+      "scheduled_at": "2026-11-17T12:00:00+09:00",
+      "resolution_audit_path": "threads/audits/recovered-cleaneye-81115-ready-20261117-0455.json",
+      "stage_sha": "5b276d1e124817991e030f84ce4574b6296d31aa",
+      "queue_sha": "34351b4c033eb191fd20abf34380be20ffbe6623"
     }
   },
   "writer_recovery_latest": {
@@ -26586,6 +26439,40 @@
         "current_main_recovery_path": "Explicit THREADS_RECOVERY_SLOT/RECOVER_SLOT exists; no dispatch/rerun or alteration by this execution. Requires policy/code reconciliation before reusing catchup.",
         "history_preserved": true
       }
+    },
+    {
+      "observed_at": "2026-11-16T19:55:37+00:00",
+      "status": "READY_STAGED_AND_QUEUED_NOT_PUBLISHED",
+      "notice_id": "cleaneye-81115",
+      "scheduled_at": "2026-11-17T12:00:00+09:00",
+      "entry_fingerprint": "aec049c9fa11e9211e39a5f8df879188fd7fe992fdf378503a4b5afa451f4a1a",
+      "stage_sha": "5b276d1e124817991e030f84ce4574b6296d31aa",
+      "queue_sha": "34351b4c033eb191fd20abf34380be20ffbe6623",
+      "asset_commit": "3b466b9449658967820e4434ef16372495feeb39",
+      "full_queue_validation": "validated",
+      "card_pixel_verification": "passed",
+      "remote_readback_exact": true,
+      "actual_meta_post_id": null,
+      "actual_meta_permalink": null,
+      "meta_posted": false,
+      "audit_path": "threads/audits/recovered-cleaneye-81115-ready-20261117-0455.json"
     }
-  ]
+  ],
+  "writer_supply_recovery_20261117_0455": {
+    "observed_at": "2026-11-16T19:55:37+00:00",
+    "status": "READY_STAGED_AND_QUEUED_NOT_PUBLISHED",
+    "notice_id": "cleaneye-81115",
+    "scheduled_at": "2026-11-17T12:00:00+09:00",
+    "entry_fingerprint": "aec049c9fa11e9211e39a5f8df879188fd7fe992fdf378503a4b5afa451f4a1a",
+    "stage_sha": "5b276d1e124817991e030f84ce4574b6296d31aa",
+    "queue_sha": "34351b4c033eb191fd20abf34380be20ffbe6623",
+    "asset_commit": "3b466b9449658967820e4434ef16372495feeb39",
+    "full_queue_validation": "validated",
+    "card_pixel_verification": "passed",
+    "remote_readback_exact": true,
+    "actual_meta_post_id": null,
+    "actual_meta_permalink": null,
+    "meta_posted": false,
+    "audit_path": "threads/audits/recovered-cleaneye-81115-ready-20261117-0455.json"
+  }
 }
