@@ -30,6 +30,10 @@ def build_drafts(handoff):
           period = candidate.get("application_period")
           if not isinstance(period, dict) or not period.get("end"):
               continue
+          # Reject future application openings, not only expired deadlines.
+          start = period.get('start')
+          if not isinstance(start, str) or type(period.get('start_date_only')) is not bool:
+              continue
           # A date-only end has no verified cutoff clock; a timestamp does.
           end = period['end']
           if not isinstance(end, str):
@@ -38,6 +42,14 @@ def build_drafts(handoff):
               slot_at = datetime.fromisoformat(slot)
               if slot_at.utcoffset() is None:
                   continue
+              if period['start_date_only']:
+                  opening = date.fromisoformat(start)
+                  if slot_at.astimezone(ZoneInfo('Asia/Seoul')).date() <= opening:
+                      continue  # Opening-day clock not verified
+              else:
+                  opening = datetime.fromisoformat(start)
+                  if opening.utcoffset() is None or slot_at < opening:
+                      continue
               if period.get('date_only') is True:
                   end_date = date.fromisoformat(end)
                   if slot_at.astimezone(ZoneInfo('Asia/Seoul')).date() >= end_date:
