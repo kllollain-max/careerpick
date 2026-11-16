@@ -60,6 +60,17 @@ jobs:
         run: python scripts/threads_source_verification.py
       - name: Review official sources and promote validated staged entries by CAS
         run: python scripts/threads_queue_bridge.py --apply --output threads-queue-preflight.json
+      - name: Export missing-slot writer handoff (no automatic approval)
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('threads-queue-preflight.json').read_text(encoding='utf-8'))
+          handoff = report.get('writer_handoff', {})
+          if handoff.get('automatic_approval') is not False or handoff.get('meta_posted') is not False:
+              raise SystemExit('Unsafe writer handoff flags')
+          Path('threads-writer-handoff.json').write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + '\\n', encoding='utf-8')
+          PY
       - name: Flag missing approved supply with actionable diagnostics
         run: |
           python - <<'PY'
@@ -87,7 +98,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: threads-preflight-${{ github.run_id }}
-          path: threads-queue-preflight.json
+          path: |
+            threads-queue-preflight.json
+            threads-writer-handoff.json
           if-no-files-found: ignore
           retention-days: 14
 
