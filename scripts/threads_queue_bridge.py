@@ -229,7 +229,7 @@ def run(apply=False):
                     if exc.code != 404:
                         raise
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
-        selection = build_selection(source, details, history, policy, now, 24,
+        selection = build_selection(source, details, history, policy, now, 100,
                                     queued_entries=merged['entries'])
         readiness = verified_supply_status(merged['entries'], now, history, policy, source, details)
         approved_slots = readiness['approved_future_slots']
@@ -245,7 +245,7 @@ def run(apply=False):
                                       'missing_slots': [slot for slot in future_slots(now)
                                                         if slot not in approved_slots],
                                       'candidate_notice_ids': [item.get('notice_id')
-                                                               for item in selection.get('candidates', [])[:24]],
+                                                               for item in selection.get('candidates', [])[:100]],
                                       'candidates': [{'notice_id': item.get('notice_id'),
                                                       'org': item.get('source_post', {}).get('org'),
                                                       'title': item.get('source_post', {}).get('title'),
@@ -258,7 +258,7 @@ def run(apply=False):
                                                       'application_evidence': item.get('selection_context', {}).get('application_period', {}).get('evidence') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
                                                       'application_source_ref': item.get('selection_context', {}).get('application_period', {}).get('source_ref') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
                                                       'source_snapshot_checked_at': source.get('_operations', {}).get('last_success_at') if isinstance(source.get('_operations'), dict) else None}
-                                                     for item in selection.get('candidates', [])[:24]],
+                                                     for item in selection.get('candidates', [])[:100]],
                                       'automatic_approval': False,
                                       'meta_posted': False},
                       shortlisted=[{'notice_id': e.get('notice_id'),
