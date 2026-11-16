@@ -1,0 +1,60 @@
+"""Regression tests for reviewed supply promotion. No GitHub or Meta writes."""
+import unittest
+from datetime import datetime
+from unittest.mock import patch
+from zoneinfo import ZoneInfo
+
+from scripts.threads_queue_bridge import merge, future_slots
+
+
+class ThreadsQueueBridgeTests(unittest.TestCase):
+    def setUp(self):
+        self.now = datetime(2026, 11, 16, 9, 0, tzinfo=ZoneInfo("Asia/Seoul"))
+        self.slot = "2026-11-16T12:00:00+09:00"
+        self.entry = {
+            "notice_id": "verified-unique-1",
+            "scheduled_at": self.slot,
+            "writer": {"status": "ready"},
+        }
+        self.queue = {"schema_version": 1, "entries": []}
+        self.stage = {"schema_version": 1, "entries": [self.entry]}
+        self.history = {"records": [], "posted_ids": []}
+
+    def test_future_slot_is_eligible_for_preflight(self):
+        self.assertIn(self.slot, future_slots(self.now))
+
+    @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
+    def test_promoted_entry_fills_missing_slot(self, _verify):
+        merged, approved, refused = merge(
+            self.queue, self.stage, self.history, {}, {}, {}, self.now
+        )
+        self.assertEqual(len(approved), 1)
+        self.assertFalse(refused)
+        self.assertNotIn(
+            self.slot,
+            [slot for slot in future_slots(self.now)
+             if slot not in {e.get("scheduled_at") for e in merged["entries"]}],
+        )
+
+    @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
+    def test_duplicate_slot_not_promoted(self, _verify):
+        queue = {"schema_version": 1, "entries": [self.entry]}
+        merged, approved, refused = merge(
+            queue, self.stage, self.history, {}, {}, {}, self.now
+        )
+        self.assertEqual(len(merged["entries"]), 1)
+        self.assertFalse(approved)
+        self.assertEqual(refused[0]["reason"], "SLOT_ALREADY_OCCUPIED")
+
+    @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
+    def test_claimed_slot_not_promoted(self, _verify):
+        _, approved, refused = merge(
+            self.queue, self.stage, self.history, {}, {}, {}, self.now,
+            claimed_slots={self.slot},
+        )
+        self.assertFalse(approved)
+        self.assertEqual(refused[0]["reason"], "SLOT_ALREADY_CLAIMED")
+
+
+if __name__ == "__main__":
+    unittest.main()
