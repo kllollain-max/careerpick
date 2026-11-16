@@ -1,0 +1,56 @@
+name: Threads 80848 exact raw annex evidence (read-only)
+on:
+  push:
+    branches:
+      - verification/threads-80848-raw-annex-20261116
+permissions:
+  contents: read
+jobs:
+  raw-pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download only pinned official source and PDFs, never approve or publish
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          import json
+          from scripts.threads_official_review_pack import (
+              read_official, CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES,
+          )
+          root = CANONICAL_REVIEW_URLS["cleaneye-80848"]["url"]
+          targets = [root, *CANONICAL_REVIEW_ANNEXES["cleaneye-80848"]]
+          records = []
+          for url in targets:
+              try:
+                  evidence = read_official(url)
+                  pdf = url != root
+                  if pdf and evidence.get("pdf_magic_valid") is not True:
+                      raise ValueError("NOT_GENUINE_PDF_BYTES")
+                  records.append({"url": url, "status": "raw_pdf_verified" if pdf else "html_bytes_verified",
+                                  "sha256": evidence["sha256"], "size_bytes": evidence["size_bytes"],
+                                  "checked_at": evidence["checked_at"], "pdf_magic_valid": evidence["pdf_magic_valid"]})
+              except Exception as exc:
+                  records.append({"url": url, "status": "unverified", "block_reason": type(exc).__name__ + ": " + str(exc)[:120]})
+          out = {"schema_version": 1, "notice_id": "cleaneye-80848",
+                 "captured_at": datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),
+                 "meta_posted": False, "independent_semantic_approval": False,
+                 "queue_mutated": False, "records": records}
+          Path("threads-80848-live-raw-evidence.json").write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps(out, ensure_ascii=False))
+          if any(x["status"] == "unverified" for x in records):
+              raise SystemExit(1)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-80848-raw-evidence
+          path: threads-80848-live-raw-evidence.json
+          if-no-files-found: warn
