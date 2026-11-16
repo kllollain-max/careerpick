@@ -27,3 +27,21 @@ class PublisherReadinessTests(unittest.TestCase):
   self.assertTrue(placement_candidate('guide','article','ready',True)['candidate'])
 
 if __name__=='__main__':unittest.main()
+
+
+class PublisherAliasTests(unittest.TestCase):
+ def test_only_current_original_review_permits_canonical_and_social_alias(self):
+  import json
+  from pathlib import Path
+  from tempfile import TemporaryDirectory
+  from scripts.publisher_readiness import inspect, BASE
+  with TemporaryDirectory() as tmp:
+   root=Path(tmp);(root/'jobs').mkdir()
+   for name in ['alio.json','alio-detail.json']:(root/name).write_bytes(Path(name).read_bytes())
+   p=root/'jobs/a305959.html'
+   p.write_text('<title>공고</title><link rel="canonical" href="'+BASE+'jobs/a306724.html"><meta property="og:url" content="'+BASE+'jobs/a306724.html"><a href="/about.html">소개</a><a href="/privacy.html">개인정보</a><a href="/contact.html">문의</a>')
+   self.assertFalse(inspect(root)['failures'])
+   details=json.loads((root/'alio-detail.json').read_text());details['a306724']['recrutNope']='changed'
+   (root/'alio-detail.json').write_text(json.dumps(details))
+   self.assertIn('jobs/a305959.html: canonical mismatch',inspect(root)['failures'])
+   self.assertIn('jobs/a305959.html: og:url mismatch',inspect(root)['failures'])
