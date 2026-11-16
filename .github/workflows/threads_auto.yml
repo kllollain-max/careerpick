@@ -72,6 +72,7 @@ jobs:
           summary = Path(os.environ['GITHUB_STEP_SUMMARY'])
           with summary.open('a', encoding='utf-8') as out:
               out.write(f'## Threads reviewed supply preflight\\nMissing future slots: {len(missing)}\\nPromoted: {len(promoted)}\\nCandidate shortlist: {len(report.get("shortlisted", []))}\\n')
+              out.write(f'Next slot missing: {report.get("next_slot_missing", False)}\\nApproved future slots: {len(report.get("approved_future_slots", []))}\\n')
               if missing:
                   out.write('ACTION REQUIRED: verified staging has not supplied the next slots. No unverified notice will be posted.\\n')
           next_slot = report.get('future_slots', [None])[0]
