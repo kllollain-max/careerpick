@@ -38,6 +38,10 @@ jobs:
               text=' '.join(p.stdout.decode('utf-8','replace').split())
               receipt={'fileNo':no,'url':u,'http_status':status,'size':len(content),'sha256':hashlib.sha256(content).hexdigest(),'text_chars':len(text),'first_text':text[:950],'deadline_candidates':re.findall(r'(?:(?:11[.]?\s*20)|(?:11월\s*20일))[^\n]{0,75}',text)[:8]}
               print('ALIO_OFFICIAL_ORIGINAL_READ',json.dumps(receipt,ensure_ascii=False),flush=True)
+              if no==3086118:
+                  for word in ['11.20','11. 20','23:59','18:00','마감','접수','지원서','응시자격']:
+                      contexts=[text[max(0,m.start()-85):min(len(text),m.end()+140)] for m in list(re.finditer(re.escape(word),text))[:4]]
+                      if contexts: print('ALIO_PRIMARY_DOC_CONTEXT',json.dumps({'token':word,'contexts':contexts},ensure_ascii=False),flush=True)
               receipts.append(receipt)
           print('ALIO_OFFICIAL_RECEIPT_COUNT',len(receipts),flush=True)
           if not any(item['fileNo']==3086118 for item in receipts):
