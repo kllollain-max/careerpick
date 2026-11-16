@@ -20,7 +20,10 @@ def build_drafts(handoff):
         raise ValueError("INVALID_HANDOFF")
     drafts = []
     used_notice_ids = set()
+    # Keep independent alternatives when the first official review fails.
+    # These remain unapproved and cannot reach the publisher.
     for slot in slots:
+      slot_drafts = 0
       for candidate in candidates:
           if not isinstance(candidate, dict):
               continue
@@ -119,7 +122,9 @@ def build_drafts(handoff):
               "approved_for_queue": False, "meta_posted": False,
           })
           used_notice_ids.add(nid)
-          break
+          slot_drafts += 1
+          if slot_drafts >= 3:
+              break
     covered = {draft["suggested_slot"] for draft in drafts}
     return {"schema_version": 1, "status": "review_required",
             "approved_for_queue": False, "drafts": drafts,
