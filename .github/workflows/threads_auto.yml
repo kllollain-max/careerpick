@@ -265,9 +265,18 @@ jobs:
           records = json.loads(Path('threads_posted.json').read_text(encoding='utf-8')).get('records', [])
           mine = [r for r in records if str(r.get('run_id')) == os.environ['GITHUB_RUN_ID'] and r.get('status') == 'pending']
           ready = len(mine) == 1
+          from datetime import datetime
+          from scripts.threads_auto import KST, current_publication_slot, verified_published_slot
+          # A delayed scheduled cron may arrive after a manually verified post.
+          # Fail closed on unverified, ambiguous or manually requested slots.
+          already_published = (not ready
+              and os.environ.get('THREADS_MANUAL_PUBLISH', 'false').lower() != 'true'
+              and verified_published_slot({'records': records},
+                  current_publication_slot(datetime.now(KST))))
           with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
               output.write(f"ready={'true' if ready else 'false'}\\n".replace('\\n', '\n'))
-              output.write('queue_missing=' + ('false' if ready else 'true') + chr(10))
+              output.write('queue_missing=' + ('false' if ready or already_published else 'true') + chr(10))
+              output.write('already_published=' + ('true' if already_published else 'false') + chr(10))
               output.write('needs_image=' + ('true' if ready and mine[0].get('image_job') else 'false') + chr(10))
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
               if ready:
@@ -278,6 +287,11 @@ jobs:
           unresolved = [r for r in records if r.get('status') == 'pending' and not r.get('threads_post_id')]
           if not ready and unresolved:
               raise SystemExit('Unresolved Threads reservation; reconcile remote state before further posting')
+          if not ready and already_published:
+              print('::notice title=ALREADY_PUBLISHED_VERIFIED::Previous Meta GET verified this slot; no new POST')
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+                  summary.write('Delayed cron safely SKIPPED. The exact slot was already Meta-GET-verified in history; this run published nothing.\\n'.replace('\\n', '\n'))
+              raise SystemExit(0)
           if not ready:
               print('::error title=QUEUE_SLOT_MISSING::No approved manuscript reserved for this slot; Meta POST skipped')
               raise SystemExit('QUEUE_SLOT_MISSING: no approved manuscript; publication skipped')
