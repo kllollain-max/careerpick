@@ -79,7 +79,10 @@ def verify_official_receipt(entry, fetch_digest=fetch_official_digest):
     Raw-byte identity is necessary, NOT sufficient for semantic review: the
     existing validate_entry/v5 review must independently accept every fact.
     """
-    review = entry.get("writer", {}).get("review", {})
+    writer = entry.get("writer")
+    review = writer.get("review", {}) if isinstance(writer, dict) else {}
+    if not isinstance(review, dict):
+        raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
     refs = review.get("source_refs", [])
     if not isinstance(refs, list):
         raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
@@ -137,7 +140,7 @@ def plan(queue, staged, submitted, history, policy, source, details, now,
             if any(r.get("scheduled_at") == slot for r in history["records"]):
                 raise ValueError("SLOT_ALREADY_STARTED")
             # Never admit an unreviewed candidate, even if its body looks ready.
-            if entry.get("writer", {}).get("status") != "ready":
+            if not isinstance(entry.get("writer"), dict) or entry["writer"].get("status") != "ready":
                 raise ValueError("NOT_A_REVIEWED_ENTRY")
             receipt = verify_official_receipt(entry, fetch_digest=fetch_digest)
             verify_entry(entry, now, history, policy, source, details)
