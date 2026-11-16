@@ -199,8 +199,6 @@ class ReviewedIngestTests(unittest.TestCase):
     def test_only_exact_cleanmetro_full_ad_source_is_allowed(self):
         exact = "https://lab.incruit.com/jobs/2610300002976"
         self.assertTrue(official_url_allowed(exact))
-        self.assertTrue(official_url_allowed(exact + "&ckattempt=1"))
-        self.assertTrue(official_url_allowed(exact + "&ckattempt=3"))
         for bad in (
             "https://lab.incruit.com/jobs/2610300002972",
             "https://lab.incruit.com/jobs/2610300002976?foo=bar",
@@ -232,6 +230,8 @@ class ReviewedIngestTests(unittest.TestCase):
     def test_only_exact_cleanmetro_recruitment_board_is_allowed(self):
         exact = "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1"
         self.assertTrue(official_url_allowed(exact))
+        self.assertTrue(official_url_allowed(exact + "&ckattempt=1"))
+        self.assertTrue(official_url_allowed(exact + "&ckattempt=3"))
         for bad in (
             "https://cleanmetro.co.kr/bbs/board.php?bo_table=notice&page=1",
             "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=2",
