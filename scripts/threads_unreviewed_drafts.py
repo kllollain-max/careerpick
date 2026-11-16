@@ -93,6 +93,16 @@ def build_drafts(handoff):
               "application_evidence_for_review": candidate.get("application_evidence"),
               "application_source_ref": candidate.get("application_source_ref"),
               "source_snapshot_checked_at": candidate.get("source_snapshot_checked_at"),
+              "required_review": {
+                  "official_notice_and_attachments": "not_verified",
+                  "recruiting_unit_and_headcount": "not_verified",
+                  "employment_type": "not_verified",
+                  "eligibility_and_restrictions": "not_verified",
+                  "application_window": "not_verified",
+                  "profile_target": "not_verified",
+                  "v5_copy_and_image": "not_verified",
+                  "publisher_validate_entry": "not_run",
+              },
               "status": "unreviewed", "requires_official_source_review": True,
               "approved_for_queue": False, "meta_posted": False,
           })
