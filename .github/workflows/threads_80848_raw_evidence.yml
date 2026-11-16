@@ -26,12 +26,13 @@ jobs:
               read_official, CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES,
           )
           root = CANONICAL_REVIEW_URLS["cleaneye-80848"]["url"]
-          targets = [root, *CANONICAL_REVIEW_ANNEXES["cleaneye-80848"]]
+          detail = "https://lab.incruit.com/jobs/2610300002976"
+          targets = [root, detail, *CANONICAL_REVIEW_ANNEXES["cleaneye-80848"]]
           records = []
           for url in targets:
               try:
                   evidence = read_official(url)
-                  pdf = url != root
+                  pdf = url in CANONICAL_REVIEW_ANNEXES["cleaneye-80848"]
                   if pdf and evidence.get("pdf_magic_valid") is not True:
                       raise ValueError("NOT_GENUINE_PDF_BYTES")
                   records.append({"url": url, "status": "raw_pdf_verified" if pdf else "html_bytes_verified",
