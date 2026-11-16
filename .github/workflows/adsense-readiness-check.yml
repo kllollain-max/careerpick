@@ -1,5 +1,11 @@
 name: Offline AdSense preparation checks
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_job_pages.py'
+      - 'tests/test_job_pages.py'
+      - '.github/workflows/adsense-readiness-check.yml'
   pull_request:
     branches: [main]
   workflow_dispatch:
