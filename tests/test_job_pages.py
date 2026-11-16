@@ -7,12 +7,79 @@ import copy
 import json
 import re
 import tempfile
+from datetime import datetime, timezone
+from unittest.mock import patch
 from pathlib import Path
 
 from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_yangju_notice_reconciles_attachment_without_overriding_feed(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        evidence = VERIFIED_DUTIES['a307034']
+        post = dict(self.post, id='a307034', org=evidence['organization'],
+                    title=evidence['title'], due='2026-11-20T23:59:00+09:00',
+                    dueHasTime=False)
+        original = copy.deepcopy(post)
+        html = render(post, {})
+        self.assertIn('2026-11-20 16:00 (KST)', html)
+        self.assertNotIn('2026-11-20 23:59', html)
+        self.assertNotIn('application/ld+json', html)
+        self.assertIn('모집 3명 이하의 보훈 가점 미적용 원칙', html)
+        self.assertIn('면접전형 가점으로 설명합니다', html)
+        self.assertIn('우대 증빙 제출 시점도 ALIO 요약과 첨부', html)
+        self.assertIn('근무 장소와 면접 장소가 다릅니다', html)
+        self.assertIn('fileNo=3087622', html)
+        self.assertEqual(post, original)
+        for changed in ({'org': '다른 기관'}, {'title': '다른 공고'}, {'id': 'a307035'}):
+            self.assertNotIn('id="verified-notice"', render(dict(post, **changed), {}))
+
+    def test_yangju_archives_at_verified_16h_cutoff(self):
+        post = dict(self.post, id='a307034', due='2026-11-20T23:59:00+09:00',
+                    dueHasTime=False)
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 20, 7, 0, 1, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertIn('공식 확인된 원서접수 마감시각이 지난 보관 공고', html)
+        self.assertIn('noindex,follow', html)
+        self.assertNotIn('application/ld+json', html)
+
+    def test_verified_pdf_summary_is_bound_to_notice_identity(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        for identity, evidence in VERIFIED_DUTIES.items():
+            post = dict(self.post, id=identity, org=evidence['organization'], title=evidence['title'])
+            html = render(post, {})
+            self.assertIn(evidence['summary'], html)
+            self.assertIn('공식 직무기술서에서 확인한 담당업무', html)
+            self.assertIn(evidence['source_url'], html)
+            self.assertIn(evidence['checked_on'], html)
+            unrelated = render(dict(post, title='다른 모집분야'), {})
+            self.assertNotIn(evidence['summary'], unrelated)
+            wrong_org = render(dict(post, org='다른 기관'), {})
+            self.assertNotIn(evidence['summary'], wrong_org)
+
+    def test_verified_application_cutoff_expires_before_publication_end(self):
+        post = {'id': 'a306355', 'alio': True, 'due': '2026-11-16T23:59:00+09:00'}
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 16, 1, 0, 1, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertIn('공식 확인된 원서접수 마감시각이 지난 보관 공고', html)
+        self.assertIn('noindex,follow', html)
+        self.assertNotIn('application/ld+json', html)
+        self.assertEqual(post['due'], '2026-11-16T23:59:00+09:00')
+
+    def test_verified_application_cutoff_remains_open_before_cutoff(self):
+        post = {'id': 'a306355', 'alio': True, 'due': '2026-11-16T23:59:00+09:00'}
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 16, 0, 59, 59, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertNotIn('class="closed"', html)
+        self.assertNotIn('noindex,follow', html)
+
     def setUp(self):
         self.post = {
             'id': 'a123456',
@@ -98,26 +165,6 @@ class JobPageTests(unittest.TestCase):
         self.assertNotIn('2026-11-19 23:59', html)
         self.assertNotIn('코레일유통 물류사업 채용 분야별 지원자격',
                          render(dict(korail, id='a306355'), {}))
-
-    def test_kps_yangju_official_guidance_keeps_application_deadline_unverified(self):
-        yangju = dict(self.post, id='a307034', due='2026-11-20T23:59:00+09:00')
-        yangju.pop('dueHasTime')
-        html = render(yangju, {})
-        self.assertIn('한전KPS 양주지점 부지정리 단기노무원 지원 안내', html)
-        self.assertIn('서류접수 → 면접전형 → 신체검사', html)
-        self.assertIn('각 전형단계에서 5~10%', html)
-        self.assertIn('건설업 기초안전보건교육 수료자에게는 5% 가점', html)
-        self.assertIn('채용 후에는 본인 명의 통장사본과 신분증 사본', html)
-        self.assertIn('신체검사 결과 부적격 판정', html)
-        self.assertIn('채용 구비서류에 허위사실', html)
-        self.assertIn('예정 근무기간은 2026년 12월 1일~12월 31일', html)
-        self.assertIn('공고 게시기간은 2026년 11월 16일~20일', html)
-        self.assertIn('이 날짜를 접수마감 시각으로 간주하지 마세요', html)
-        self.assertNotIn('2026-11-20 23:59', html)
-        self.assertNotIn('<script type="application/ld+json">', html)
-        self.assertNotIn('기관 공식 확인 접수마감', html)
-        unrelated = render(dict(yangju, id='a307043'), {})
-        self.assertNotIn('한전KPS 양주지점 부지정리 단기노무원 지원 안내', unrelated)
 
     def test_full_detail_regions_reach_summary_checks_metadata_and_schema(self):
         post = dict(self.post, region='인천')
