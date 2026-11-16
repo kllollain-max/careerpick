@@ -61,6 +61,18 @@ class JobPageTests(unittest.TestCase):
         other = render(dict(post, id='a306436'), {})
         self.assertNotIn('기관 공식 확인 접수마감', other)
 
+    def test_postal_notice_verified_guidance_only_on_matching_notice(self):
+        postal = dict(self.post, id='a306436', due='2026-11-30T23:59:00+09:00')
+        postal.pop('dueHasTime')
+        html = render(postal, {})
+        self.assertIn('안양·부평 우편물구분 채용 확인사항', html)
+        self.assertIn('적격자가 있으면 즉시 채용될 수 있습니다', html)
+        self.assertIn('세부 담당업무는 공식 직무기술서 HWP 본문을 확인해야 합니다', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('2026-11-30 23:59', html)
+        other = render(dict(postal, id='a306355'), {})
+        self.assertNotIn('안양·부평 우편물구분 채용 확인사항', other)
+
     def test_full_detail_regions_reach_summary_checks_metadata_and_schema(self):
         post = dict(self.post, region='인천')
         detail = {'recrutPblntSn': '123456', 'workRgnNmLst': '인천,충남,전북'}
