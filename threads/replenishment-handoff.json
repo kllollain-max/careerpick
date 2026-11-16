@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-17T07:59:38.448004+09:00",
-  "run_id": "43975085617",
-  "source_commit": "dc8c60b67b63a168569282bb0679ded693e508f3",
+  "captured_at": "2026-11-17T08:26:22.532353+09:00",
+  "run_id": "43979147797",
+  "source_commit": "eafefa652be010400e2b24ed5a8e2eb01406aba4",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-17T07:58:49.788393+09:00",
+    "time": "2026-11-17T08:25:34.280763+09:00",
     "future_slots": [
-      "2026-11-17T08:00:00+09:00",
       "2026-11-17T12:00:00+09:00",
       "2026-11-17T16:00:00+09:00",
       "2026-11-17T20:00:00+09:00",
       "2026-11-18T08:00:00+09:00",
       "2026-11-18T12:00:00+09:00",
       "2026-11-18T16:00:00+09:00",
-      "2026-11-18T20:00:00+09:00"
+      "2026-11-18T20:00:00+09:00",
+      "2026-11-19T08:00:00+09:00"
     ],
     "next_media": "TEXT",
     "promoted": [],
@@ -59,13 +59,12 @@
     "queue_sha": "5d58aed330bcd8cd425a6bb6fc92161a67086e5c",
     "staged_sha": "240e4eff816ace737059e4d0f52a846abf884cfd",
     "promoted_count": 0,
-    "approved_supply_count": 4,
+    "approved_supply_count": 3,
     "inventory_target": 8,
-    "inventory_shortfall": 4,
+    "inventory_shortfall": 5,
     "replenishment_required": true,
     "invalid_ready_entries": [],
     "approved_future_slots": [
-      "2026-11-17T08:00:00+09:00",
       "2026-11-17T12:00:00+09:00",
       "2026-11-17T16:00:00+09:00",
       "2026-11-17T20:00:00+09:00"
@@ -74,7 +73,8 @@
       "2026-11-18T08:00:00+09:00",
       "2026-11-18T12:00:00+09:00",
       "2026-11-18T16:00:00+09:00",
-      "2026-11-18T20:00:00+09:00"
+      "2026-11-18T20:00:00+09:00",
+      "2026-11-19T08:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 60,
@@ -84,7 +84,8 @@
         "2026-11-18T08:00:00+09:00",
         "2026-11-18T12:00:00+09:00",
         "2026-11-18T16:00:00+09:00",
-        "2026-11-18T20:00:00+09:00"
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "cleaneye-80977",
@@ -2316,7 +2317,8 @@
       "2026-11-18T08:00:00+09:00",
       "2026-11-18T12:00:00+09:00",
       "2026-11-18T16:00:00+09:00",
-      "2026-11-18T20:00:00+09:00"
+      "2026-11-18T20:00:00+09:00",
+      "2026-11-19T08:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "cleaneye-80977",
@@ -4855,27 +4857,129 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "cleaneye-81201",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-19T08:00:00+09:00",
+        "draft_text": "강릉과학산업진흥원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 강릉과학산업진흥원 3차 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81201",
-        "suggested_slot": null
+        "source_post_sha256": "63a557296ec76791cec349c9d8ec8e0722951d8af957b8dbd67147199451e4fb",
+        "source_detail_sha256": "a2cf5776c509e5d0a1243312076a39b4f0f65b7ab9b2bc9a0b9c2296b9ebc584",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
+        "application_source_ref": "cleaneye.json#cleaneye-81201/application_period",
+        "source_snapshot_checked_at": "2026-11-17T00:18:39+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-12",
+          "접수마감일 원문": "2026-11-24",
+          "채용인원": "4"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-80989",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-19T08:00:00+09:00",
+        "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직 5급/청소년사업)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80989",
-        "suggested_slot": null
+        "source_post_sha256": "7c377fa297c6f7bb6564a5789efdf3c1ebadfdbda70f058570c54f6fabe5ccc5",
+        "source_detail_sha256": "cf93fab7140fa249478bdc2d39494c85f83e5f2297538b3463ab1ee45be07735",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-80989/application_period",
+        "source_snapshot_checked_at": "2026-11-17T00:18:39+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-11",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-80990",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-19T08:00:00+09:00",
+        "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직6급/청소년사업)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80990",
-        "suggested_slot": null
-      },
+        "source_post_sha256": "83ed5a79323bd3dc0532f4a5e078e7eda9c246982c3bcbf65c1ddc2572982897",
+        "source_detail_sha256": "0a2e7e262f69afbd32ecbd1c4cc1925df77e615e4ba20908dfb1bbbf183beaa4",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-80990/application_period",
+        "source_snapshot_checked_at": "2026-11-17T00:18:39+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-11",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "cleaneye-80991",
         "status": "unreviewed",
@@ -5152,13 +5256,15 @@
         "2026-11-18T08:00:00+09:00",
         "2026-11-18T12:00:00+09:00",
         "2026-11-18T16:00:00+09:00",
-        "2026-11-18T20:00:00+09:00"
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-18T08:00:00+09:00",
         "2026-11-18T12:00:00+09:00",
         "2026-11-18T16:00:00+09:00",
-        "2026-11-18T20:00:00+09:00"
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -5221,7 +5327,7 @@
           "sha256": "f8167dd9d74890db2d7b387d690dec497897ea92c61e9ec334c3ed562463be3b",
           "size_bytes": 14360,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-17T07:59:37.140114+09:00",
+          "checked_at": "2026-11-17T08:26:21.764806+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5244,7 +5350,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-17T07:59:37.016031+09:00",
+          "checked_at": "2026-11-17T08:26:21.708924+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5322,11 +5428,6 @@
   "publication_audit": {
     "slots": [
       {
-        "scheduled_at": "2026-11-15T08:00:00+09:00",
-        "post_ids": [],
-        "status": "missing_receipt"
-      },
-      {
         "scheduled_at": "2026-11-15T12:00:00+09:00",
         "post_ids": [],
         "status": "missing_receipt"
@@ -5372,16 +5473,11 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
+    "expected_slots": 7,
     "recorded_publications": 5,
-    "receipt_success_rate": 0.625,
+    "receipt_success_rate": 0.7142857142857143,
     "live_meta_verification_performed": false,
     "needs_attention": [
-      {
-        "scheduled_at": "2026-11-15T08:00:00+09:00",
-        "post_ids": [],
-        "status": "missing_receipt"
-      },
       {
         "scheduled_at": "2026-11-15T12:00:00+09:00",
         "post_ids": [],
@@ -5396,8 +5492,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-17T07:59:37.215215+09:00",
-    "window_start": "2026-11-14T22:59:37.215215+00:00",
+    "checked_at": "2026-11-17T08:26:21.833797+09:00",
+    "window_start": "2026-11-14T23:26:21.833797+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
