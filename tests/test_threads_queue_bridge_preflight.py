@@ -4,7 +4,7 @@ from datetime import datetime
 from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
-from scripts.threads_queue_bridge import merge, future_slots
+from scripts.threads_queue_bridge import merge, future_slots, ready_future_slots
 
 
 class ThreadsQueueBridgeTests(unittest.TestCase):
@@ -35,6 +35,11 @@ class ThreadsQueueBridgeTests(unittest.TestCase):
             [slot for slot in future_slots(self.now)
              if slot not in {e.get("scheduled_at") for e in merged["entries"]}],
         )
+
+    def test_unapproved_entry_does_not_fill_slot(self):
+        unapproved = {**self.entry, "writer": {"status": "draft"}}
+        self.assertNotIn(self.slot, ready_future_slots([unapproved], self.now))
+        self.assertIn(self.slot, ready_future_slots([self.entry], self.now))
 
     @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
     def test_duplicate_slot_not_promoted(self, _verify):
