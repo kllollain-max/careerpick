@@ -180,6 +180,7 @@ def run(apply=False):
         selection = build_selection(source, details, history, policy, now, 24,
                                     queued_entries=queue['entries'])
         report.update(queue_sha=sha, staged_sha=stage_sha,
+                      approved_supply_count=len(approved),
                       missing_slots=[s for s in future_slots(now)
                                      if s not in {e.get('scheduled_at') for e in merged['entries']}],
                       source_candidate_count=len(selection.get('candidates', [])),
