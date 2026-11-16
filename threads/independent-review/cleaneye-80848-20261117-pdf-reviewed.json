@@ -5,8 +5,8 @@
   "entries": [
     {
       "notice_id": "cleaneye-80848",
-      "scheduled_at": "2026-11-17T16:00:00+09:00",
-      "format_id": "interest",
+      "scheduled_at": "2026-11-17T20:00:00+09:00",
+      "format_id": "deadline_opportunity",
       "prepared_at": "2026-11-16T20:04:18.906Z",
       "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
       "publication_policy_id": "careerpick-threads-v5-20261111",
@@ -33,7 +33,7 @@
         "reply_texts": [],
         "review": {
           "notice_id": "cleaneye-80848",
-          "scheduled_at": "2026-11-17T16:00:00+09:00",
+          "scheduled_at": "2026-11-17T20:00:00+09:00",
           "verification_basis": "checked_official_source",
           "missing_or_conflicting": [],
           "cta_check": "passed",
@@ -245,9 +245,9 @@
       }
     }
   ],
-  "note": "v5 validate_entry + card exact pixels previously passed for 12:00 before slot conflict; strict original source receipt FAILED and was held. 12:00 is now occupied by independently approved cleaneye-81115. This isolated draft was moved to unoccupied 16:00 candidate only; 16:00 has NOT been revalidated and neither CAS nor Meta posted.",
+  "note": "Real 16:00 conflict with existing approved cleaneye-81249 discovered by remote staging read. Preserve the independently reviewed 103-person original PDF facts and previously measured card; propose only an unreserved 20:00 KST slot with the required v5 format. This is a candidate, not approved, queued or posted. No evidence timestamps changed.",
   "approved_for_queue": false,
-  "review_status": "PENDING_REAL_STRICT_VALIDATOR",
+  "review_status": "PENDING_STRICT_20_SLOT_VALIDATION",
   "official_pdf_evidence": {
     "source_notice_url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&wr_id=430",
     "filename": "[공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고.pdf",
@@ -259,8 +259,8 @@
     "not_yet_bound_to_current_official_receipt": false
   },
   "blockers": [
-    "Independent validate_entry/card/raw employer PDF check must all pass before CAS. Original source browser resolver and strict pin support are unmerged until CI green.",
-    "Another notice cleaneye-81115 occupies 11/17 12:00; this candidate is only for 16:00 if still empty.",
-    "Official corrections and source remain subject to pre-publish freshness/digest verification."
+    "20:00 candidate must pass live strict validate_entry, original employer PDF raw-byte recheck, actual card pixels and applicant page digest against current source; no automatic approval.",
+    "16:00 is already occupied by independently approved cleaneye-81249; never overwrite or swap that slot.",
+    "Employer official notice/corrections and eligibility must remain within existing 24-hour freshness for 20:00; no timestamps have been altered."
   ]
 }
