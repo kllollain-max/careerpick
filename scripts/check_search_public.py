@@ -22,8 +22,10 @@ import xml.etree.ElementTree as ET
 
 try:
     from .search_readiness import BASE, Page, same_url, schema_nodes
+    from .build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
 except ImportError:
     from search_readiness import BASE, Page, same_url, schema_nodes
+    from build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
 
 ROBOTS = 'https://kllollain-max.github.io/robots.txt'
 AGENTS = ('Googlebot', 'Yeti', 'Mediapartners-Google', 'Google-Display-Ads-Bot')
@@ -225,7 +227,9 @@ def run(all_urls=False, workers=4, loader=fetch):
             # The page generator explicitly noindexes expired notices; those
             # must not be required in the sitemap. Unknown dates stay eligible.
             def expired_by_source_date(post):
-                raw = post.get('due')
+                # Share the generator's source-verified application cutoff.
+                # ALIO publication end cannot make an ended application active.
+                raw = CONFIRMED_APPLICATION_CUTOFFS.get(str(post.get('id'))) or post.get('due')
                 if not raw:
                     return False
                 try:
@@ -243,6 +247,8 @@ def run(all_urls=False, workers=4, loader=fetch):
             excluded_expired = sorted(feed_ids - active_ids)
             report['public_feed'].update(notice_count=len(feed_ids), current_notice_count=len(active_ids),
                                          expired_notice_count=len(excluded_expired),
+                                         verified_application_cutoff_exclusions=sorted(
+                                             pid for pid in excluded_expired if pid in CONFIRMED_APPLICATION_CUTOFFS),
                                          missing_sitemap_ids=missing)
             if missing: report['errors'].append('current_notices_missing_from_sitemap')
         except (ValueError, TypeError, AttributeError): report['errors'].append('public_feed_invalid_json_or_shape')

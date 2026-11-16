@@ -17,6 +17,10 @@ DATA = ROOT / 'alio.json'
 DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
+CONFIRMED_APPLICATION_CUTOFFS = {
+    'a306750': '2026-11-19T10:00:00+09:00',
+    'a306355': '2026-11-16T10:00:00+09:00',
+}
 VERIFIED_DUTIES = json.loads(
     (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
 ) if Path(__file__).with_name('verified_job_duties.json').exists() else {}
@@ -177,18 +181,11 @@ def render(post, detail, related_posts=()):
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
-    confirmed_cutoffs = {
-        'a306750': '2026-11-19 10:00 (KST)',  # Korail Retail employer notice
-        'a306355': '2026-11-16 10:00 (KST)',  # IBK ALIO application instructions
-    }
-    confirmed_cutoff = confirmed_cutoffs.get(pid, '')
+    application_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
+    confirmed_cutoff = application_cutoff[:16].replace('T', ' ') + ' (KST)' if application_cutoff else ''
     deadline = parse_date(due, end_of_day=True)
     # A verified application cutoff takes precedence over the publication end
     # date. Keep the feed intact and preserve the archived URL/bookmarks.
-    application_cutoff = (
-        confirmed_cutoff.replace(' (KST)', '').replace(' ', 'T') + '+09:00'
-        if confirmed_cutoff else ''
-    )
     closed = is_closed(application_cutoff or due)
 
     official = (
