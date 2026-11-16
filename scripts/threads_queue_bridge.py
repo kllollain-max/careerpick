@@ -217,7 +217,10 @@ def run(apply=False):
                                                       'application_period': item.get('selection_context', {}).get('application_period'),
                                                       'source_post_sha256': item.get('source_post_sha256'),
                                                       'source_detail_sha256': item.get('source_detail_sha256'),
-                                                      'review_status': 'official_review_required'}
+                                                      'review_status': 'official_review_required',
+                                                      'application_evidence': item.get('selection_context', {}).get('application_period', {}).get('evidence') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
+                                                      'application_source_ref': item.get('selection_context', {}).get('application_period', {}).get('source_ref') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
+                                                      'source_snapshot_checked_at': source.get('_operations', {}).get('last_success_at') if isinstance(source.get('_operations'), dict) else None}
                                                      for item in selection.get('candidates', [])[:24]],
                                       'automatic_approval': False,
                                       'meta_posted': False},
