@@ -104,6 +104,7 @@ def build_drafts(handoff):
                   "verification_status": "not_verified",
               },
               "selection_review_reasons": candidate.get("selection_review_reasons", []),
+              "official_detail_fields_for_review": candidate.get("official_detail_fields_for_review", {}),
               "required_review": {
                   "official_notice_and_attachments": "not_verified",
                   "recruiting_unit_and_headcount": "not_verified",
