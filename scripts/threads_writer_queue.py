@@ -431,13 +431,40 @@ def _cleaneye_workplace_evidence(value, review, refs, detail):
     return False
 
 
-def _image(entry, post, detail, review, refs, end_date, period, end_has_seconds):
+def verified_employer(entry, post, detail, review, refs, policy):
+    """Resolve a reviewed subsidiary only through a pinned policy/source pair.
+
+    Cleaneye can label a subsidiary vacancy with its parent institution. The
+    feed identity is retained; an independently reviewed employer must never
+    be inferred from a title or accepted from an arbitrary writer override.
+    """
+    parent = _publication_facts(post, detail)['org']
+    supplied = entry.get('image_job', {}).get('org')
+    if _normal(supplied) == _normal(parent):
+        return parent
+    mapping = policy.get('official_employer_mappings', {}).get(entry.get('notice_id'))
+    if (post.get('cleaneye') is not True or not isinstance(mapping, dict)
+            or mapping.get('parent') != parent or mapping.get('employer') != supplied):
+        _fail('IMAGE_ORGANIZATION_CONFLICT')
+    url = mapping.get('source_ref')
+    if not isinstance(url, str) or not url.startswith('https://'):
+        _fail('IMAGE_ORGANIZATION_CONFLICT')
+    pinned_refs = [ref for ref in refs if isinstance(ref, dict) and ref.get('url') == url
+                   and re.fullmatch(r'[0-9a-f]{64}', str(ref.get('document_sha256', '')))]
+    facts = [fact for fact in review.get('fact_evidence', [])
+             if isinstance(fact, dict) and fact.get('source_ref') == url]
+    if not pinned_refs or not _fact_supported('employer', supplied,
+                                             {'fact_evidence': facts}, pinned_refs, {}):
+        _fail('IMAGE_EMPLOYER_SOURCE_UNVERIFIED')
+    return supplied
+
+
+def _image(entry, post, detail, review, refs, end_date, period, end_has_seconds, policy):
     facts = _publication_facts(post, detail)
     image = entry.get("image_job")
     if not isinstance(image, dict) or image.get("id") != entry["notice_id"]:
         _fail("IMAGE_NOTICE_IDENTITY")
-    if _normal(image.get("org")) != _normal(facts["org"]):
-        _fail("IMAGE_ORGANIZATION_CONFLICT")
+    verified_employer(entry, post, detail, review, refs, policy)
     title = image.get("title")
     official_title = _normal(facts["title"])
     if not isinstance(title, str) or len(_normal(title)) < 3:
@@ -614,7 +641,7 @@ def validate_entry(entry, scheduled, now, history, source_doc, details, policy):
     if post.get("cleaneye") is True:
         _cleaneye_application_period(period, detail)
     _profile(review, notice_id, now, scheduled, max_age)
-    image_job = _image(entry, post, detail, review, refs, end_date, period, end_has_seconds)
+    image_job = _image(entry, post, detail, review, refs, end_date, period, end_has_seconds, policy)
     from scripts.threads_reach_editorial import validate_reach
     if v5:
         from scripts.threads_v5 import validate_review
