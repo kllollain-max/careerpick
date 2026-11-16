@@ -118,6 +118,21 @@ jobs:
           except Exception as e:
               report['error']=str(e);report['error_type']=type(e).__name__
               traceback.print_exc()
+              if str(e)=='OFFICIAL_SOURCE_BYTES_CHANGED':
+                  from scripts.threads_reviewed_ingest import fetch_official_digest
+                  checks=[]
+                  for ref in entry['writer']['review']['source_refs']:
+                      url=ref['url']
+                      actual=[]
+                      for repeat in (1,2):
+                          try: actual.append(fetch_official_digest(url))
+                          except Exception as err: actual.append(type(err).__name__+':'+str(err))
+                      checks.append({'url':url,'original_sha256':ref.get('document_sha256'),
+                                     'current_sha256_first':actual[0],
+                                     'current_sha256_second':actual[1],
+                                     'stable_two_reads':actual[0]==actual[1]})
+                  report['source_drift_diagnostics']=checks
+                  print('OFFICIAL_DRIFT_DIAGNOSTIC='+json.dumps(checks,ensure_ascii=False))
           finally:
               (root/'live-profile-evidence').mkdir(exist_ok=True)
               (root/'live-profile-evidence/strict-v5-validator.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\\n')
