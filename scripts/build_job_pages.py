@@ -27,6 +27,10 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     # Official notice originals: HWP 3085542 section 6; PDF 3087571 page 2.
     'a306774': '2026-11-17T13:00:00+09:00',
     'a307061': '2026-11-30T18:00:00+09:00',
+    # Official 2026 notices: PNG 3087597; PDFs 3086097 and 3087307.
+    'a307067': '2026-12-01T15:00:00+09:00',
+    'a306816': '2026-11-25T18:00:00+09:00',
+    'a307024': '2026-11-30T10:00:00+09:00',
 }
 VERIFIED_DUTIES = json.loads(
     (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
@@ -184,6 +188,13 @@ def render(post, detail, related_posts=()):
     org = clean(post.get('org'))
     pid = clean(post.get('id'))
 
+    verified_duties = VERIFIED_DUTIES.get(pid, {})
+    # Bind editorial evidence to the exact notice, organization and title.
+    # A reused ID or changed notice must be reviewed again before reuse.
+    if (verified_duties.get('organization') != org
+            or verified_duties.get('title') != title):
+        verified_duties = {}
+
     canonical = f'{BASE}/jobs/{quote(pid, safe="")}.html'
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
@@ -205,6 +216,12 @@ def render(post, detail, related_posts=()):
         alio_reference = ''
     # 허용 가능한 HTTPS 링크라는 뜻이지, 링크 응답이나 접수 가능성을 실시간 검증한 것은 아닙니다.
 
+    verified_start = verified_duties.get('application_start', '')
+    parsed_start = parse_date(verified_start)
+    if not parsed_start or not application_cutoff or parsed_start > parse_date(application_cutoff):
+        verified_start = ''
+    confirmed_period = (date_label(verified_start, 'T' in verified_start) + ' ~ ' + confirmed_cutoff) if verified_start else ''
+
     fields = [
         ('기관명', org),
         (
@@ -215,7 +232,7 @@ def render(post, detail, related_posts=()):
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
         ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
-        ('원서 접수기간', '접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인'),
+        ('원서 접수기간', confirmed_period or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
         *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
 
@@ -331,12 +348,6 @@ def render(post, detail, related_posts=()):
     # 자료가 없는 공고에 사실처럼 보이는 직무 설명을 생성하지 않습니다.
     # ALIO desc는 alio.py에서 ncsCdNmLst로 생성된 직무 분류입니다.
     # 글자 수나 구분자에 관계없이 실제 담당업무 설명으로 판단하지 않습니다.
-    verified_duties = VERIFIED_DUTIES.get(pid, {})
-    # Bind editorial evidence to the exact notice, organization and title.
-    # A reused ID or changed notice must be reviewed again before reuse.
-    if (verified_duties.get('organization') != org
-            or verified_duties.get('title') != title):
-        verified_duties = {}
     has_substantive_desc = bool(verified_duties)
     if qualification and process:
         coverage_note = '지원 자격과 채용 절차 정보가 제공된 공고입니다.'
