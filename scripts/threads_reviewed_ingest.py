@@ -59,6 +59,14 @@ def official_url_allowed(url):
         if host == "recruit.incruit.com":
             return (parts.path == "/cleanmetro/job/2610280002"
                     and not parts.query and not parts.fragment)
+        # Published advertisement for the same independently identified
+        # Cleanmetro 2026-17 notice. One exact job document only: the employer
+        # application portal above does not itself contain the 103-person
+        # recruiting-unit table needed to substantiate the v5 post.
+        # Byte digests and semantic facts are still mandatory at intake.
+        if host == "lab.incruit.com":
+            return (parts.path == "/jobs/2610300002976"
+                    and not parts.query and not parts.fragment)
         # Only these three publicly linked PDF attachments belong to this
         # 2026-17 notice. Their exact bytes must still be downloaded, digested,
         # semantically checked, and bound to evidence before approval.
