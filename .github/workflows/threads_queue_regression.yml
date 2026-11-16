@@ -6,6 +6,8 @@ on:
       - 'scripts/threads_queue_bridge.py'
       - 'scripts/threads_reviewed_ingest.py'
       - 'tests/test_threads_reviewed_ingest.py'
+      - 'scripts/threads_official_review_pack.py'
+      - 'tests/test_threads_official_review_pack.py'
       - 'tests/test_threads_queue_bridge_preflight.py'
       - 'scripts/threads_unreviewed_drafts.py'
       - 'tests/test_threads_unreviewed_drafts.py'
@@ -27,10 +29,12 @@ jobs:
         with:
           python-version: '3.11'
       - name: Check Python syntax
-        run: python -m py_compile scripts/threads_queue_bridge.py tests/test_threads_queue_bridge_preflight.py scripts/threads_unreviewed_drafts.py tests/test_threads_unreviewed_drafts.py scripts/threads_reviewed_ingest.py tests/test_threads_reviewed_ingest.py
+        run: python -m py_compile scripts/threads_queue_bridge.py tests/test_threads_queue_bridge_preflight.py scripts/threads_unreviewed_drafts.py tests/test_threads_unreviewed_drafts.py scripts/threads_reviewed_ingest.py tests/test_threads_reviewed_ingest.py scripts/threads_official_review_pack.py tests/test_threads_official_review_pack.py
       - name: Test promotion and duplicate protections
         run: python -m unittest discover -s tests -p 'test_threads_queue_bridge_preflight.py' -v
       - name: Test official-reviewed staging intake without publishing
         run: python -m unittest discover -s tests -p 'test_threads_reviewed_ingest.py' -v
+      - name: Test independent official-source evidence packets
+        run: python -m unittest discover -s tests -p 'test_threads_official_review_pack.py' -v
       - name: Test unreviewed draft safety
         run: python -m unittest discover -s tests -p 'test_threads_unreviewed_drafts.py' -v
