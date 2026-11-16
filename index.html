@@ -812,6 +812,10 @@ function cpDueLabel(p, {short=false, now=new Date(), hasTime=p.dueHasTime}={}){
   const label=prefix+(short ? md(p.due) : dueLong(p.due,hasTime));
   return label+(!short && p.cleaneye && p.deadlineReviewReason==='far_future_source_date' ? ' · 원문 마감일 확인 필요' : '');
 }
+function cpConfirmedCutoffLabel(p){
+  const cutoff=CPHome.confirmedApplicationCutoff?.(p);
+  return cutoff ? `${kst(cutoff).getUTCFullYear()}.${dueLong(cutoff,true)} (KST)` : '';
+}
 
 // Keep source health in the feed status; omit the homepage alert banner.
 function updateDataHealth(){
@@ -1289,7 +1293,7 @@ const SORTS = [["due","마감 가까운 순"],["new","최신순"]];
 const state = {specV:"all", tab: "all", q:"", sector:"", employment:"", career:"", cat:null, region:"", status:"all", sort:"due", onlyNew:false, deadline:"all"};
 
 function kstDay(d){ const k = kst(d); return Date.UTC(k.getUTCFullYear(), k.getUTCMonth(), k.getUTCDate()); }
-function dday(p, now){ if(CP_UNCONFIRMED_IDS.has(p.id) && (!p.due || p.due>now))return {cls:'verify',big:'상태 확인',n:0};return CPHome.deadline(p, now); }
+function dday(p, now){ const due=CPHome.deadline(p,now);if(due?.cls==='closed')return due;if(CP_UNCONFIRMED_IDS.has(p.id) && (!p.due || p.due>now))return {cls:'verify',big:'상태 확인',n:0};return due; }
 const statusOf = (p, now) => { const d = dday(p, now); return !d ? "none" : d.cls === "closed" ? "closed" : d.cls; };
 function cpSavedId(p){return [p.id,...(p.sourceIds||[])].find(id=>SAVED.has(id)) || p.id;}
 function cpApplicationId(p){return [p.id,...(p.sourceIds||[])].find(id=>APPS[id]) || p.id;}
@@ -1437,6 +1441,7 @@ function jobCard(p, now){
         ${CPHome.career(p).length ? `<div class="cp-card-career">${esc(CPHome.career(p).join(" · "))}</div>` : ""}
         ${p.start || p.startDate ? `<div class="cp-card-footer">${p.alio ? "ALIO 게시 시작" : "접수 시작"} ${esc(p.start || p.startDate)}</div>` : ""}
         ${p.due ? `<div class="due ${d.cls==="hot" ? "hot" : d.cls==="closed" ? "closed" : ""}">${p.alio ? "ALIO 게시 종료 · 접수마감 원문 확인" : "접수 마감"} ${cpDueLabel(p,{now})}</div>` : `<div class="due closed">${p.always ? "상시 모집 (채용 시 마감)" : "마감일은 원문에서 확인"}</div>`}
+        ${cpConfirmedCutoffLabel(p) ? `<div class="cp-card-footer">공식 확인 접수마감 ${esc(cpConfirmedCutoffLabel(p))}</div>` : ''}
       </div>
     </a>
     <div class="actions">
@@ -1456,6 +1461,7 @@ function rowCard(p, now){
   if(p.n) meta.push(p.cleaneye ? cpRecruitCount(p.n) : p.n + "명");
   if((p.emp||[])[0]) meta.push(p.emp[0]);
   if(p.due) meta.push("마감 " + cpDueLabel(p,{now}));
+  if(cpConfirmedCutoffLabel(p))meta.push('공식 확인 접수마감 '+cpConfirmedCutoffLabel(p));
   const href = esc(jobHref(p));
   const attr = jobAnchorAttrs(p);
   return `<li class="card row ${d && d.cls === "closed" ? "is-closed" : ""}">
@@ -2166,6 +2172,7 @@ function jobViewHTML(p, det){
   const endTxt = p.due ? cpDueLabel(p,{now}) + (p.dueHasTime ? "" : " · 시각 미확인") : p.always ? "상시 모집 (원문 확인)" : "접수 일정 미확인";
   const period = (p.officialNoticeNumber || p.gojobs || p.cleaneye) && p.start ? `${p.start} ~ ${endTxt}` : p.alio ? '실제 접수 시작일·마감일·마감시각은 공식 첨부 공고 확인' : `시작일 미확인 ~ ${endTxt}`;
   rows.push(["접수 기간", period]);
+  if(cpConfirmedCutoffLabel(p))rows.push(['공식 확인 접수마감',cpConfirmedCutoffLabel(p)]);
   if(det?.pbancBgngYmd || det?.pbancEndYmd)rows.push(["ALIO 게시기간 · 접수기간과 다를 수 있음",`${String(det.pbancBgngYmd || '미기재')} ~ ${String(det.pbancEndYmd || '미기재')}`]);
   for(const [k, label] of JV_SUMMARY){
     let v = det ? det[k] : "";
