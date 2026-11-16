@@ -125,6 +125,9 @@ def verify_official_receipt(entry, fetch_digest=fetch_official_digest):
     if not isinstance(facts, list) or any(not isinstance(x, dict) for x in facts):
         raise ValueError("OFFICIAL_FACT_SOURCE_REQUIRED")
     required = {"title", "count", "employment"}
+    # Subsidiary identity evidence is as material as the job/unit facts.
+    if any(fact.get('field') == 'employer' for fact in facts):
+        required.add('employer')
     cited = {}
     for fact in facts:
         field = fact.get("field")
