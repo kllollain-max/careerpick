@@ -133,6 +133,15 @@ def ready_future_slots(entries, now):
     return [slot for slot in future_slots(now) if slot in ready]
 
 
+def supply_status(entries, now):
+    """Classify immediate versus later missing slots without approving drafts."""
+    slots = future_slots(now)
+    approved = set(ready_future_slots(entries, now))
+    missing = [slot for slot in slots if slot not in approved]
+    return {'future_slots': slots, 'approved_future_slots': [slot for slot in slots if slot in approved],
+            'missing_slots': missing, 'next_slot_missing': bool(slots and slots[0] in missing)}
+
+
 def request(method, path, token, payload=None):
     repo = os.environ['GITHUB_REPOSITORY']
     url = 'https://api.github.com/repos/' + repo + '/contents/' + path
@@ -187,11 +196,13 @@ def run(apply=False):
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
         selection = build_selection(source, details, history, policy, now, 24,
                                     queued_entries=merged['entries'])
-        approved_slots = ready_future_slots(merged['entries'], now)
+        readiness = supply_status(merged['entries'], now)
+        approved_slots = readiness['approved_future_slots']
         report.update(queue_sha=sha, staged_sha=stage_sha,
                       approved_supply_count=len(approved),
                       approved_future_slots=approved_slots,
-                      missing_slots=[slot for slot in future_slots(now) if slot not in approved_slots],
+                      missing_slots=readiness['missing_slots'],
+                      next_slot_missing=readiness['next_slot_missing'],
                       source_candidate_count=len(selection.get('candidates', [])),
                       writer_handoff={'status': 'review_required',
                                       'missing_slots': [slot for slot in future_slots(now)
