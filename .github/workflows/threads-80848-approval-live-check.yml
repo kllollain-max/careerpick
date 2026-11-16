@@ -66,6 +66,23 @@ jobs:
             }finally{await browser.close();}
           })().catch(e=>{console.error(e);process.exitCode=1});
           NODE
+      - name: Capture exact existing reviewed card assets and byte digests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p live-profile-evidence
+          cp threads-images/cleaneye-80848.jpg live-profile-evidence/cleaneye-80848.jpg
+          cp threads-images/cleaneye-80848-360.png live-profile-evidence/cleaneye-80848-360.png
+          python - <<'PY'
+          import hashlib, json, pathlib
+          files=['cleaneye-80848.jpg','cleaneye-80848-360.png']
+          out={}
+          for name in files:
+              b=(pathlib.Path('live-profile-evidence')/name).read_bytes()
+              out[name]={'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+          pathlib.Path('live-profile-evidence/card-digests.json').write_text(json.dumps(out,indent=2)+'\\n')
+          print('THREADS_80848_CARD_DIGESTS='+json.dumps(out))
+          PY
       - name: Preserve exact read-only browser evidence
         if: always()
         uses: actions/upload-artifact@v4
