@@ -107,6 +107,7 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('서류접수 → 면접전형 → 신체검사', html)
         self.assertIn('각 전형단계에서 5~10%', html)
         self.assertIn('건설업 기초안전보건교육 수료자에게는 5% 가점', html)
+        self.assertIn('채용 후에는 본인 명의 통장사본과 신분증 사본', html)
         self.assertIn('신체검사 결과 부적격 판정', html)
         self.assertIn('채용 구비서류에 허위사실', html)
         self.assertIn('예정 근무기간은 2026년 12월 1일~12월 31일', html)
