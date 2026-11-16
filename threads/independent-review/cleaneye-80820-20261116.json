@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-80820",
+  "review_date_kst": "2026-11-16",
+  "status": "partial_independent_official_review",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "source_identity": {
+    "cleaneye_notice_id": "80820",
+    "source_post_sha256": "8d3752df0454401d33229336de56bbfebe204a1337ee98ca1ac6a87f458528f1",
+    "source_detail_sha256": "c67be70000794ee30457361c24cb0ba633e4efc2d2b145790074b1dde8b0834e",
+    "api_organization": "서울교통공사",
+    "api_employment": "일반정규직",
+    "api_total_count": 136
+  },
+  "official_notice": {
+    "url": "https://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155",
+    "issuer": "서울도시철도그린환경주식회사",
+    "published_on": "2026-10-30",
+    "title": "서울도시철도그린환경 2026년 하반기 공무직 공개채용",
+    "recruitment_total": 136,
+    "unit_title": "사원-일반",
+    "unit_count": 90,
+    "unit_work": "역사, 차량기지, 청사 청소 및 방역소독",
+    "unit_employment": "공무직",
+    "unit_age": "50세 이상 ~ 65세 이하 (임용예정일 2027-01-01 기준)",
+    "common_conditions": "직무수행 가능, 병역의무 불이행 사실이 없음, 채용결격사유 없음",
+    "certification": "국민체력100 1~3등급 인증서 제출 필수 (장애인분야는 별도 인정)",
+    "application_open": "2026-11-09T10:00:00+09:00",
+    "application_deadline": "2026-11-19T10:00:00+09:00",
+    "application_method": "회사 공식 채용공고 페이지 내 온라인 지원; 분야별 중복지원 불가",
+    "other_positions": "일반경쟁 114명, 제한경쟁 22명; 사원-일반 90명과 전체 136명을 혼동하지 말 것"
+  },
+  "evidence_assertions": [
+    {
+      "field": "count",
+      "value": 90,
+      "location": "채용인원 및 담당업무 > 일반경쟁 채용 > 사원-일반",
+      "excerpt": "공무직 | 사원-일반 | 90"
+    },
+    {
+      "field": "employment",
+      "value": "공무직",
+      "location": "채용인원 및 담당업무 직군",
+      "excerpt": "공무직"
+    },
+    {
+      "field": "eligibility",
+      "value": "50세 이상 ~ 65세 이하",
+      "location": "응시자격 > 일반경쟁-사원 > 일반",
+      "excerpt": "일반 | 50세 이상 ~ 65세 이하"
+    },
+    {
+      "field": "deadline",
+      "value": "2026-11-19T10:00:00+09:00",
+      "location": "채용절차 및 일정 > 접수기간",
+      "excerpt": "2026. 11. 09.(월) 10:00 ~ 2026. 11. 19.(목) 10:00"
+    }
+  ],
+  "draft_text": "서울교통공사 출자회사인 서울도시철도그린환경(주)이 공무직 사원-일반 90명을 모집해요.\n\n역사·차량기지·청사 청소 및 방역소독 업무예요. 지원 연령은 50~65세이고, 국민체력100 1~3등급 체력인증서 제출이 필요해요.\n\n11월 19일 10:00까지 회사 채용공고에서 온라인으로 접수해요. 분야별 중복지원은 불가해요.\n\n자세한 사항은 프로필링크 확인",
+  "outstanding_blockers": [
+    "Official issuer HTML raw-byte SHA-256 is not yet captured through GitHub-run source evidence; do not invent a digest.",
+    "HWP annexes and 2026-11-10 physical fitness PDF guidance announcement not independently parsed for corrections.",
+    "Cleaneye category 일반정규직 versus issuer 공무직 requires explicit classification reconciliation under validate_entry, not a validator bypass.",
+    "Canonical issuer employer is not the feed organization label 서울교통공사; ensure public text and card do not misidentify employer.",
+    "Confirm profile link targets this exact official notice; card preview and validator v5 not yet passed.",
+    "Review time has only calendar-date granularity here; do not synthesize a 24h checked_at value."
+  ],
+  "retries_and_publication": {
+    "submit_to_reviewed_submissions": false,
+    "validate_entry_passed": false,
+    "meta_post_attempted": false
+  }
+}
