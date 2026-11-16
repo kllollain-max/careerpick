@@ -11,59 +11,63 @@ permissions:
 jobs:
   original_pdf:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: '3.11'
-      - run: python -m pip install --quiet requests beautifulsoup4 pypdf
-      - name: Get exactly pinned employer notice and its first attachment
-        env:
-          PYTHONUNBUFFERED: '1'
+          node-version: '22'
+      - name: Install isolated real Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Follow exact employer-issued original PDF from live notice, no writes
         shell: bash
         run: |
-          set -euo pipefail
           mkdir -p official-evidence-80848
+          node - <<'NODE'
+          const {chromium}=require('playwright');
+          const fs=require('fs'),crypto=require('crypto');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            try{
+              const context=await browser.newContext({acceptDownloads:true,locale:'ko-KR'});
+              const page=await context.newPage();
+              const url='https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&wr_id=430';
+              await page.goto(url,{waitUntil:'domcontentloaded',timeout:50000});
+              try{await page.waitForFunction(()=>document.body.innerText.includes('2026-17'),null,{timeout:22000})}
+              catch(e){console.log('EMPLOYER_BOARD_CHALLENGE='+JSON.stringify({url:page.url(),html:(await page.content()).slice(0,750)}));throw e}
+              const found=await page.locator('a[href]').evaluateAll(els=>els.map(a=>({url:a.href,text:a.innerText})).filter(x=>x.url.includes('download.php')&&x.url.includes('wr_id=430')&&x.url.includes('no=11')));
+              if(found.length!==1||!found[0].text.includes('2026-17'))throw new Error('EXACT_ORIGINAL_LINK_NOT_UNIQUE');
+              await page.screenshot({path:'official-evidence-80848/official-board.png'});
+              const [download]=await Promise.all([page.waitForEvent('download',{timeout:40000}),page.locator('a[href*="download.php"][href*="no=11"]').first().click()]);
+              const target='official-evidence-80848/2026-17-original.pdf';
+              await download.saveAs(target);
+              const data=fs.readFileSync(target);
+              if(!data.subarray(0,5).equals(Buffer.from('%PDF-'))||data.length<10000)throw new Error('DOWNLOADED_NOT_ORIGINAL_PDF');
+              const receipt={notice_url:url,original_pdf_title:found[0].text,bytes:data.length,sha256:crypto.createHash('sha256').update(data).digest('hex'),checked_at:new Date().toISOString(),download_filename:download.suggestedFilename(),meta_posted:false,queue_updated:false};
+              fs.writeFileSync('official-evidence-80848/receipt.json',JSON.stringify(receipt,null,2));
+              console.log('ORIGINAL_PDF_EMPLOYER_RECEIPT='+JSON.stringify(receipt));
+            }finally{await browser.close()}
+          })().catch(e=>{console.error(String(e));process.exitCode=1});
+          NODE
+      - name: Independently extract original PDF text and enforce real unit 103 / whole 153
+        shell: bash
+        run: |
+          python -m pip install --quiet pypdf
           python - <<'PY'
-          import requests,bs4,urllib.parse,hashlib,json,re,pathlib,datetime
+          import pathlib,json
           from pypdf import PdfReader
-          source='https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&wr_id=430'
-          session=requests.Session()
-          session.headers.update({'User-Agent':'Mozilla/5.0 (compatible; CareerPickIndependentReview/1.0)','Accept-Language':'ko-KR,ko;q=0.9'})
-          html=session.get(source,timeout=25)
-          html.raise_for_status()
-          page=html.content.decode(html.apparent_encoding or 'utf-8',errors='replace')
-          print('EMPLOYER_PAGE_DIAG='+json.dumps({'http_status':html.status_code,'final_url':html.url,'bytes':len(html.content),'ascii_notice_id_present':'2026-17' in page,'text_sample':page[:550]},ensure_ascii=False))
-          if '2026-17' not in page or '공무·경비직' not in page:
-              raise SystemExit('EXACT_EMPLOYER_NOTICE_NOT_VERIFIED')
-          soup=bs4.BeautifulSoup(html.content,'html.parser')
-          links=[]
-          for a in soup.select('a[href]'):
-              href=urllib.parse.urljoin(source,a['href'])
-              u=urllib.parse.urlsplit(href)
-              q=urllib.parse.parse_qs(u.query)
-              if u.hostname=='cleanmetro.co.kr' and u.path=='/bbs/download.php' and q.get('bo_table')==['recruit'] and q.get('wr_id')==['430'] and q.get('no')==['11']:
-                  links.append((href,a.get_text(' ',strip=True)))
-          if len(links)!=1: raise SystemExit('EXACT_ATTACHMENT_LINK_NOT_UNIQUE_'+str(len(links)))
-          url,title=links[0]
-          if '2026-17' not in title: raise SystemExit('ATTACHMENT_TITLE_MISMATCH_'+title)
-          response=session.get(url,headers={'Referer':source},timeout=30)
-          response.raise_for_status()
-          data=response.content
-          if not data.startswith(b'%PDF-') or not 10000<=len(data)<=10000000:
-              raise SystemExit('EMPLOYER_ATTACHMENT_NOT_PDF')
-          path=pathlib.Path('official-evidence-80848/2026-17-original.pdf')
-          path.write_bytes(data)
-          pdf=PdfReader(path)
-          page_text='\\n'.join(p.extract_text() or '' for p in pdf.pages)
-          if not ('103' in page_text and ('공무직' in page_text or '공무 직' in page_text) and ('153' in page_text)):
-              raise SystemExit('UNIT_TABLE_NOT_READABLE_IN_ORIGINAL_PDF')
-          report={'source_notice_url':source,'attachment_title':title,'original_sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data),'pages':len(pdf.pages),'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'unit_103_found':True,'whole_153_found':True,'text_excerpt':page_text[:4500], 'meta_posted':False, 'queue_updated':False}
-          pathlib.Path('official-evidence-80848/receipt.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\\n')
-          print('EMPLOYER_ORIGINAL_PDF_RECEIPT='+json.dumps(report,ensure_ascii=False)[:1600])
+          p=pathlib.Path('official-evidence-80848/2026-17-original.pdf')
+          reader=PdfReader(p)
+          text='\\n'.join(page.extract_text() or '' for page in reader.pages)
+          if not ('103' in text and '153' in text and '공무직' in text):
+              raise SystemExit('UNIT_103_AND_TOTAL_153_NOT_SUPPORTED_BY_ORIGINAL')
+          path=pathlib.Path('official-evidence-80848')
+          (path/'original-text.txt').write_text(text)
+          print('ORIGINAL_PDF_SEMANTIC_READ='+json.dumps({'pages':len(reader.pages),'chars':len(text),'103_present':True,'153_present':True}))
           PY
       - if: always()
         uses: actions/upload-artifact@v4
