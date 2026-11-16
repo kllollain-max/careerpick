@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-17T05:19:39+09:00",
+  "status": "STAGED_QUEUED_NOT_PUBLISHED",
+  "notice_id": "cleaneye-81249",
+  "official_employer_notice_id": "1189",
+  "official_ATS_project_id": "101",
+  "main_sha": "3b466b9449658967820e4434ef16372495feeb39",
+  "scheduled_at": "2026-11-17T16:00:00+09:00",
+  "source_post_sha256": "088e1a3e09f565bb488d00c583632959d5b1067ad997b13e9c8d95b53ea449ce",
+  "source_detail_sha256": "51787e3f044ae2447329fe7551acebfdf2e5b307e6b8e711f11cbdb5b82adc05",
+  "stage": {
+    "commit_sha": "09e12fba57acaf3ff719f81b01984ed1b3cc236d",
+    "content_sha": "14d5e893009241062ba60a940c419891d667f36f"
+  },
+  "queue": {
+    "commit_sha": "d245933c5a49aeef9bbc75495dbca2b96d86fee9",
+    "content_sha": "8009fefc60eb35058328105963f5d41b96f92851"
+  },
+  "stage_readback_exact": true,
+  "queue_readback_exact": true,
+  "queue_previous_entries_preserved": 37,
+  "queue_total_entries": 38,
+  "full_queue_validator": "validated",
+  "body_chars": 281,
+  "contract_version": 2,
+  "main_text": "금융기관 신입 사무직을 찾는다면,\n세종신용보증재단 일반직원(6급) 정규직 1명, 세종시 근무예요.\n\n학력·출신지역 제한은 없지만 미성년자·만60세 초과자는 제외돼요.\n재단 인재상에 부합하고 즉시 근무 가능하며 국적·병역 등 채용제한에 해당하지 않아야 해요.\n\n2027년 2월 1일 임용 예정이며, 3개월 이내 수습평가 후 채용해요. 부서·직무는 바뀔 수 있어요.\n경력·교육·자격증 인정 기준은 공고일인 11월 16일이에요.\n\n11월 30일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+  "reply_texts": [],
+  "expected_media": "TEXT only if prior actual successes preserve planned alternation; no unreviewed image fallback allowed",
+  "actual_post_id": null,
+  "actual_permalink": null,
+  "meta_posted": false,
+  "manual_dispatch": false,
+  "official_reads": [
+    {
+      "url": "https://sjsinbo.or.kr/sub050502/view/id/1189",
+      "checked_at": "2026-11-16T20:13:35.134621+00:00",
+      "document_sha256": "767217b13a0f7b9129c101b706dc2220df5e672f864d3c36b41fe69d1b89ae5b",
+      "http_status": 200
+    },
+    {
+      "url": "https://sjsinbo.or.kr/sub050502/index",
+      "checked_at": "2026-11-16T20:18:38.494253+00:00",
+      "document_sha256": "57192b9d45444cbd661df9847f3659aa764b99143ffea94583e772fd251746e6",
+      "http_status": 200
+    },
+    {
+      "url": "https://sejong.incruit.com/hire/viewhire.asp?projectid=101",
+      "checked_at": "2026-11-16T20:15:43.042339+00:00",
+      "document_sha256": "876523fc8aa3bd20bbb75d34b1887a97ed5c0e6205fb020f6174a9d6c21094a0",
+      "http_status": 200
+    }
+  ],
+  "profile": {
+    "verified": true,
+    "notice_id": "cleaneye-81249",
+    "url": "https://kllollain-max.github.io/careerpick/",
+    "notice_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-81249",
+    "checked_at": "2026-11-16T20:15:41.489787+00:00",
+    "http_status": 200,
+    "document_sha256": "a4a13bf12615de766a37c4da1d97e0996f93115c3ff68700d6bed2f99e9ea296",
+    "verification_method": "Actual HTTP GET200, browser AX and screenshot showed81249, institution/title, regular1 and official link. Site time unknown; exact14:00 independently confirmed official employer and ATS."
+  },
+  "source_limitations": [
+    "Cleaneye page direct GET503; latest official API snapshot digest bound and independently verified designated employer/ATS source used.",
+    "Employer attached PDF direct GET403. Full designated ATS HTML actual GET200 and browser complete article verified, no PDF success claim.",
+    "ATS notices actual browser rendered no registered posts and password FAQ only. Standalone HTTP without browser session returned redirect shell; its hash is not used as proof of notice content."
+  ],
+  "preflight": {
+    "run_id": 43946693740,
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-11-16T20:11:35Z",
+    "head_sha": "3b466b9449658967820e4434ef16372495feeb39",
+    "approved_supply_at_run": 2,
+    "invalid_ready_entries": [],
+    "publisher": "skipped outside regular slot; not published"
+  },
+  "claims_checked": 48,
+  "claim_match": false,
+  "automation_on": true,
+  "remaining": [
+    "20시 신규 미착수 이미지 원고 공급",
+    "08/12/16 정규게시 후 acceptedclaim + Meta actualGET account/text/media/post_id/permalink verification"
+  ],
+  "new_24h72h_observations": false,
+  "performance_summary_executed": true
+}
