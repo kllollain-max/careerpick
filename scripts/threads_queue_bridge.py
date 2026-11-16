@@ -209,6 +209,16 @@ def run(apply=False):
                                                         if slot not in approved_slots],
                                       'candidate_notice_ids': [item.get('notice_id')
                                                                for item in selection.get('candidates', [])[:24]],
+                                      'candidates': [{'notice_id': item.get('notice_id'),
+                                                      'org': item.get('source_post', {}).get('org'),
+                                                      'title': item.get('source_post', {}).get('title'),
+                                                      'official_url': item.get('source_post', {}).get('src') or item.get('source_post', {}).get('url'),
+                                                      'employment': item.get('selection_context', {}).get('employment'),
+                                                      'application_period': item.get('selection_context', {}).get('application_period'),
+                                                      'source_post_sha256': item.get('source_post_sha256'),
+                                                      'source_detail_sha256': item.get('source_detail_sha256'),
+                                                      'review_status': 'official_review_required'}
+                                                     for item in selection.get('candidates', [])[:24]],
                                       'automatic_approval': False,
                                       'meta_posted': False},
                       shortlisted=[{'notice_id': e.get('notice_id'),
