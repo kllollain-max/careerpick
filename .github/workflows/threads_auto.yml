@@ -88,6 +88,16 @@ jobs:
               out.write(f'Next slot missing: {report.get("next_slot_missing", False)}\\nApproved future slots: {len(report.get("approved_future_slots", []))}\\n')
               if missing:
                   out.write('ACTION REQUIRED: verified staging has not supplied the next slots. No unverified notice will be posted.\\n')
+          draft_file = Path('threads-unreviewed-drafts.json')
+          if draft_file.exists():
+              draft_report = json.loads(draft_file.read_text(encoding='utf-8'))
+              coverage = draft_report.get('slot_coverage', {})
+              with summary.open('a', encoding='utf-8') as out:
+                  out.write(f'Draft-only slots: {len(coverage.get("draft_slots", []))}\\n')
+                  out.write(f'No draft slots: {len(coverage.get("no_draft_slots", []))}\\n')
+                  for slot in coverage.get('no_draft_slots', []):
+                      out.write(f'- NO_DRAFT: {slot}\\n')
+                  out.write('Drafts are NOT approved for publishing.\\n')
           next_slot = report.get('future_slots', [None])[0]
           if next_slot in missing:
               print('::error title=THREADS_SUPPLY_EMPTY::Next publishing slot lacks an approved manuscript')
