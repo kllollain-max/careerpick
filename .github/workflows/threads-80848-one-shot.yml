@@ -1,0 +1,117 @@
+name: Threads 80848 official evidence and card one-shot
+on:
+  push:
+    branches:
+      - work/threads-80848-card-20261117
+permissions:
+  contents: write
+jobs:
+  card-source-profile:
+    if: "!contains(github.event.head_commit.message, 'Generate verified cleaneye-80848 card assets')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/threads-80848-card-20261117
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Korean fonts and Pillow
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install Pillow requests
+      - name: Independently download the three exact original official attachments
+        run: |
+          python - <<'PY'
+          import hashlib, requests
+          from pathlib import Path
+          base='https://c.incru.it/newjobpost/2026/10_cleanmetro/'
+          files=[
+              ('붙임1. 채용결격사유 관련.pdf','d46803ffed8346db7482683707aa9deaf98ba4b51821eb8dac3f273384cf4387'),
+              ('붙임2. 서류전형 평가기준.pdf','a6061bc734d14dbc650e3b20eac06030b275023ede5b3f18c907159ad908b207'),
+              ('붙임3. 서울교통공사 재취업심사 및 취업제한심사 관련.pdf','cc030bb9589c14280840db8a0272f6a36e2b42396a722bef4be9bf0fcc91d022'),
+          ]
+          from urllib.parse import quote
+          for name,expected in files:
+              url=base+quote(name)
+              r=requests.get(url,timeout=35,headers={'User-Agent':'Mozilla/5.0'})
+              r.raise_for_status()
+              assert r.content.startswith(b'%PDF-'), ('NOT_PDF',name,r.status_code)
+              digest=hashlib.sha256(r.content).hexdigest()
+              print('OFFICIAL_PDF',name,'BYTES',len(r.content),'SHA256',digest)
+              if digest!=expected:
+                  raise SystemExit('OFFICIAL_PDF_SHA_CHANGED: '+name+' (do not approve)')
+          r=requests.get('https://recruit.incruit.com/cleanmetro/job/2610280002',timeout=35,headers={'User-Agent':'Mozilla/5.0'})
+          r.raise_for_status()
+          body=r.text
+          print('OFFICIAL_APPLICATION_HTTP',r.status_code,'BYTES',len(r.content))
+          if '2026' not in body or '2610280002' not in r.url:
+              raise SystemExit('APPLICATION_NEEDS_REVIEW')
+          PY
+      - name: Render exact 1080 JPEG and mobile 360 preview with existing renderer
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          from PIL import Image
+          from scripts.create_thumbnail import generate_compact_card, verify_thumbnail
+          src={'id':'cleaneye-80848','org':'서울메트로환경','title':'공무직 사원',
+               'employment':'정규직','count':103,'due':'2026-11-20',
+               'deadline_label':'2026-11-20 12:00','restriction':'공고일 기준 18세 이상 65세 미만'}
+          out=Path('threads-images/cleaneye-80848.jpg')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          generate_compact_card(src,out)
+          print('FULL_CARD',verify_thumbnail(out))
+          preview=Path('threads-images/cleaneye-80848-360.png')
+          with Image.open(out) as image:
+              image.resize((360,360),Image.Resampling.LANCZOS).save(preview,format='PNG',optimize=True)
+          with Image.open(preview) as check:
+              assert check.size==(360,360) and check.format=='PNG'
+              check.load()
+          for p in (out,preview):
+              print('CARD_ASSET',p,'BYTES',p.stat().st_size,'SHA256',hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install real browser for live CareerPick detail validation
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify actual rendered CareerPick notice and official source click-through
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844}});
+            try {
+              await page.goto('https://kllollain-max.github.io/careerpick/#job=cleaneye-80848',{waitUntil:'domcontentloaded',timeout:50000});
+              await page.waitForTimeout(12000);
+              const body=await page.locator('body').innerText({timeout:20000});
+              await page.screenshot({path:'threads-images/cleaneye-80848-profile-evidence.png',fullPage:true});
+              console.log('RENDERED_TITLE_MATCH',body.includes('서울메트로환경'));
+              console.log('RENDERED_JOB_ID_MATCH',body.includes('공무'));
+              const anchors=await page.locator('a[href]').evaluateAll(xs=>xs.map(a=>a.href));
+              const official=anchors.filter(u=>u.includes('job.cleaneye.go.kr')&&u.includes('80848'));
+              console.log('RENDERED_OFFICIAL_CLICKTHROUGH',JSON.stringify(official));
+              if(!body.includes('서울메트로환경')||!body.includes('공무')||official.length===0) throw Error('LIVE_DETAIL_OR_CLICKTHROUGH_NOT_PROVEN');
+            } finally { await browser.close(); }
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+      - name: Save verified cards to review branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add threads-images/cleaneye-80848.jpg threads-images/cleaneye-80848-360.png
+          git commit -m "Generate verified cleaneye-80848 card assets"
+          git push origin HEAD:work/threads-80848-card-20261117
+      - name: Upload real browser screenshot for visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80848-live-profile
+          path: threads-images/cleaneye-80848-profile-evidence.png
+          if-no-files-found: ignore
