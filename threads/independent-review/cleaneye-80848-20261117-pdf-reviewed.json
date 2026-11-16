@@ -5,8 +5,8 @@
   "entries": [
     {
       "notice_id": "cleaneye-80848",
-      "scheduled_at": "2026-11-17T16:00:00+09:00",
-      "format_id": "interest",
+      "scheduled_at": "2026-11-17T20:00:00+09:00",
+      "format_id": "deadline_opportunity",
       "prepared_at": "2026-11-16T20:04:18.906Z",
       "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
       "publication_policy_id": "careerpick-threads-v5-20261111",
@@ -33,7 +33,7 @@
         "reply_texts": [],
         "review": {
           "notice_id": "cleaneye-80848",
-          "scheduled_at": "2026-11-17T16:00:00+09:00",
+          "scheduled_at": "2026-11-17T20:00:00+09:00",
           "verification_basis": "checked_official_source",
           "missing_or_conflicting": [],
           "cta_check": "passed",
@@ -49,7 +49,8 @@
             "Existing 1080/360 image pair visually opened and verified pixel-identical downsizing",
             "Actual final editorial reference time 2026-11-16T20:06:14.467Z follows prepared_at, after verified browser/profile/card review; not a source re-download or forged byte check.",
             "Actual original employer PDF 11 pages, 254970 bytes SHA256 0220ac9..., first 2 pages rendered and semantically read 2026-11-17 05:19 KST",
-            "Pinned source changed from live-changing lab.incruit.com HTML (two different hashes seconds apart) to verified byte-stable original employer PDF; no validator relaxation"
+            "Pinned source changed from live-changing lab.incruit.com HTML (two different hashes seconds apart) to verified byte-stable original employer PDF; no validator relaxation",
+            "2026-11-17T05:43+09:00 remote state CAS read: 16:00 slot already independently approved cleaneye-81249; no overwrite; selected empty 20:00 slot with exact source and rechecked manuscript. No 16:00 registration was attempted after detected conflict."
           ],
           "omitted_optional_facts": [
             "No salary, popularity guesses, guarantee claims",
@@ -107,7 +108,7 @@
             }
           ],
           "checked_at": "2026-11-16T20:19:31.322744+09:00",
-          "reference_at": "2026-11-16T20:26:36.394Z",
+          "reference_at": "2026-11-16T20:46:01.405Z",
           "repetition_check": "checked",
           "profile_target": {
             "verified": true,
@@ -211,7 +212,7 @@
             },
             "style_rewrites": 1,
             "presentation_style": "regular_interest",
-            "selection_reason": "Priority regular transit field, independently reviewed 103-person single job, not parent153.",
+            "selection_reason": "공식 11쪽 PDF 독립 검수 완료: 정규직 공무직 사원 103명, 접수 11월20일12시 마감, 에너지·교통 선호 직무. 실제 16시 슬롯 cleaneye-81249 선승인 확인하여 비어 있는 20시 신규슬롯 후보로 독립 재배정.",
             "public_preview": {
               "main_text": "서울교통공사 1~4호선 청소·미화 구직자께,\n서울메트로환경 정규직 공무직 사원 103명 채용이에요.\n\n전체 153명 중 일반 사원 103명이며, 경비·보훈·장애인 분야와 달라요.\n역사·차량기지·청사 미화업무를 통상·교대로 해요.\n\n공고일 기준 18세 이상 65세 미만, 학력·전공 제한은 없어요.\n병역·결격·해당자 재취업심사 요건을 확인해요.\n서류 뒤 줄넘기·앉았다 일어서기 체력검정과 면접이 있어요.\n\n11월 20일 12:00까지 공식 채용페이지 온라인 접수예요.\n한 분야만 지원 가능해요.\n\n자세한 사항은 프로필링크 확인",
               "detail_reply": ""
@@ -245,9 +246,9 @@
       }
     }
   ],
-  "note": "v5 validate_entry + card exact pixels previously passed for 12:00 before slot conflict; strict original source receipt FAILED and was held. 12:00 is now occupied by independently approved cleaneye-81115. This isolated draft was moved to unoccupied 16:00 candidate only; 16:00 has NOT been revalidated and neither CAS nor Meta posted.",
+  "note": "Exact verified employer original PDF SHA remains unchanged; 20:00 candidate not approved until strict validator and CAS write. Existing 16:00 cleaneye-81249 remains independent.",
   "approved_for_queue": false,
-  "review_status": "PENDING_REAL_STRICT_VALIDATOR",
+  "review_status": "PENDING_REAL_STRICT_VALIDATOR_20",
   "official_pdf_evidence": {
     "source_notice_url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&wr_id=430",
     "filename": "[공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고.pdf",
@@ -259,8 +260,7 @@
     "not_yet_bound_to_current_official_receipt": false
   },
   "blockers": [
-    "Independent validate_entry/card/raw employer PDF check must all pass before CAS. Original source browser resolver and strict pin support are unmerged until CI green.",
-    "Another notice cleaneye-81115 occupies 11/17 12:00; this candidate is only for 16:00 if still empty.",
-    "Official corrections and source remain subject to pre-publish freshness/digest verification."
+    "Original 16:00 slot now occupied by approved cleaneye-81249: recheck 20:00 availability and official freshness via strict v5/CAS before promotion.",
+    "No automatic approval, Meta POST or queue modification from this review file."
   ]
 }
