@@ -31,6 +31,31 @@ QUEUE = 'threads/writer-queue.json'
 STAGING = 'threads/reviewed-staging.json'
 
 
+def official_review_url(item):
+    """Use the saved official notice before a vendor's application portal.
+
+    ALIO's src is often an HTTP recruitment vendor, while url identifies the
+    exact HTTPS ALIO notice. Never downgrade an otherwise reviewable notice to
+    an unsupported application URL, or invent a URL from its identifier.
+    """
+    post = item.get('source_post', {})
+    for key in ('url', 'src'):
+        value = post.get(key)
+        if not isinstance(value, str):
+            continue
+        try:
+            parsed = urllib.parse.urlsplit(value)
+            host = parsed.hostname or ''
+            if (parsed.scheme == 'https' and not parsed.username and not parsed.password
+                    and parsed.port in (None, 443)
+                    and any(host == suffix or host.endswith('.' + suffix)
+                            for suffix in ('alio.go.kr', 'go.kr', 'or.kr', 'ac.kr'))):
+                return value
+        except ValueError:
+            continue
+    return None
+
+
 def future_slots(now):
     result = []
     for day in range(3):
@@ -251,7 +276,7 @@ def run(apply=False):
                                       'candidates': [{'notice_id': item.get('notice_id'),
                                                       'org': item.get('source_post', {}).get('org'),
                                                       'title': item.get('source_post', {}).get('title'),
-                                                      'official_url': item.get('source_post', {}).get('src') or item.get('source_post', {}).get('url'),
+                                                      'official_url': official_review_url(item),
                                                       'employment': item.get('selection_context', {}).get('employment'),
                                                       'recruiting_unit_title': item.get('selection_context', {}).get('unit_title'),
                                                       'recruiting_unit_count': item.get('selection_context', {}).get('unit_count'),

@@ -12,6 +12,23 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class WorkflowEntrypoints(unittest.TestCase):
+    def test_alio_official_notice_precedes_http_application_vendor(self):
+        item = {'source_post': {
+            'url': 'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752',
+            'src': 'http://kirams.recruiter.co.kr'}}
+        self.assertEqual(bridge.official_review_url(item), item['source_post']['url'])
+
+    def test_official_url_fallback_preserves_exact_notice(self):
+        url = 'https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80848'
+        self.assertEqual(bridge.official_review_url({'source_post': {'src': url}}), url)
+
+    def test_untrusted_urls_are_never_promoted_to_official_source(self):
+        for url in ('http://job.alio.go.kr/x', 'https://alio.go.kr.evil.test/x',
+                    'https://user@job.alio.go.kr/x', 'https://localhost/x',
+                    'https://job.alio.go.kr:444/x'):
+            with self.subTest(url=url):
+                self.assertIsNone(bridge.official_review_url({'source_post': {'url': url}}))
+
     def test_direct_cli_imports_without_pythonpath(self):
         env = dict(os.environ)
         env.pop('PYTHONPATH', None)
