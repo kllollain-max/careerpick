@@ -98,6 +98,11 @@ class ThreadsQueueBridgeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "QUEUE_ENTRY_SCHEMA"):
             merge(queue, self.stage, self.history, {}, {}, {}, self.now)
 
+    def test_malformed_staging_entry_fails_closed(self):
+        stage = {"schema_version": 1, "entries": [None]}
+        with self.assertRaisesRegex(ValueError, "STAGING_ENTRY_SCHEMA"):
+            merge(self.queue, stage, self.history, {}, {}, {}, self.now)
+
     def test_malformed_history_fails_closed(self):
         history = {"records": "invalid", "posted_ids": []}
         with self.assertRaisesRegex(ValueError, "HISTORY_SCHEMA"):
