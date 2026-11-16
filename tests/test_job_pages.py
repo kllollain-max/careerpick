@@ -83,6 +83,17 @@ class JobPageTests(unittest.TestCase):
         self.assertNotIn('분야별 구체적 담당업무는 직무기술서 PDF 본문 검증 전까지 추정하지 않습니다.', render(dict(ibk, id='a306750'), {}))
         self.assertNotIn('IBK 체험형 청년인턴 지원 전 핵심 확인', render(dict(ibk, id='a306436'), {}))
 
+    def test_korail_eligibility_comparison_is_scoped_to_one_notice(self):
+        korail = dict(self.post, id='a306750', due='2026-11-19T23:59:00+09:00')
+        korail.pop('dueHasTime')
+        html = render(korail, {})
+        self.assertIn('코레일유통 물류사업 채용 분야별 지원자격', html)
+        self.assertIn('컨테이너크레인운전기능사', html)
+        self.assertIn('실제 담당업무를 설명하는 직무기술서가 아닙니다', html)
+        self.assertNotIn('2026-11-19 23:59', html)
+        self.assertNotIn('코레일유통 물류사업 채용 분야별 지원자격',
+                         render(dict(korail, id='a306355'), {}))
+
     def test_full_detail_regions_reach_summary_checks_metadata_and_schema(self):
         post = dict(self.post, region='인천')
         detail = {'recrutPblntSn': '123456', 'workRgnNmLst': '인천,충남,전북'}
