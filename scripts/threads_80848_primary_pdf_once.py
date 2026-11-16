@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Single-use evidence-bound independent review of Cleaneye 80848. FAIL CLOSED."""
-import hashlib, html, json, re, sys, urllib.request, subprocess
+import hashlib, html, json, re, sys, urllib.request, subprocess, time
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -18,9 +18,9 @@ PDFS=[
 ("https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%841.%20%EC%B1%84%EC%9A%A9%EA%B2%B0%EA%B2%A9%EC%82%AC%EC%9C%A0%20%EA%B4%80%EB%A0%A8.pdf","d46803ffed8346db7482683707aa9deaf98ba4b51821eb8dac3f273384cf4387"),
 ("https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%842.%20%EC%84%9C%EB%A5%98%EC%A0%84%ED%98%95%20%ED%8F%89%EA%B0%80%EA%B8%B0%EC%A4%80.pdf","a6061bc734d14dbc650e3b20eac06030b275023ede5b3f18c907159ad908b207"),
 ("https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%843.%20%EC%84%9C%EC%9A%B8%EA%B5%90%ED%86%B5%EA%B3%B5%EC%82%AC%20%EC%9E%AC%EC%B7%A8%EC%97%85%EC%8B%AC%EC%82%AC%20%EB%B0%8F%20%EC%B7%A8%EC%97%85%EC%A0%9C%ED%95%9C%EC%8B%AC%EC%82%AC%20%EA%B4%80%EB%A0%A8.pdf","cc030bb9589c14280840db8a0272f6a36e2b42396a722bef4be9bf0fcc91d022")]
-def official(url):
+def official(url, timeout=25):
     req=urllib.request.Request(url,headers={"User-Agent":"CareerPickOfficialReview/1.0","Accept":"*/*"})
-    with urllib.request.urlopen(req,timeout=25) as resp:
+    with urllib.request.urlopen(req,timeout=timeout) as resp:
         data=resp.read(20000001)
     assert data and len(data)<20000000, "OFFICIAL_SIZE"
     return data,hashlib.sha256(data).hexdigest()
@@ -49,7 +49,16 @@ def run():
         raise ValueError("LIVE_APPLICATION_STATUS_NOT_PROVEN")
     must(app,["2026"])
     # Independently read exact official primary PDF, not dynamic ad markup.
-    primary_bytes, primary_sha = official(PRIMARY_PDF)
+    # A transient origin timeout never implies permission to reuse an old digest.
+    # Keep attempts finite; each try performs a full fresh official GET.
+    for attempt in range(3):
+        try:
+            primary_bytes, primary_sha = official(PRIMARY_PDF,timeout=65)
+            break
+        except (TimeoutError, urllib.error.URLError):
+            if attempt == 2:
+                raise
+            time.sleep([2,4][attempt])
     if not primary_bytes.startswith(b"%PDF-"):
         raise ValueError("PRIMARY_OFFICIAL_PDF_NOT_PDF")
     pdf_result = subprocess.run(["pdftotext","-layout","-","-"], input=primary_bytes,
