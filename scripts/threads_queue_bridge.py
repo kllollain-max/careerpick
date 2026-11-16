@@ -181,7 +181,7 @@ def run(apply=False):
                                     queued_entries=queue['entries'])
         report.update(queue_sha=sha, staged_sha=stage_sha,
                       missing_slots=[s for s in future_slots(now)
-                                     if s not in {e.get('scheduled_at') for e in queue['entries']}],
+                                     if s not in {e.get('scheduled_at') for e in merged['entries']}],
                       source_candidate_count=len(selection.get('candidates', [])),
                       shortlisted=[{'notice_id': e.get('notice_id'), 'org': e.get('org'),
                                     'title': e.get('title')}
