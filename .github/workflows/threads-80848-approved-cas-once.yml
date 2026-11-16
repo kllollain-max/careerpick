@@ -1,0 +1,98 @@
+name: One-shot approved 80848 publisher CAS supply (no Meta POST)
+on:
+  push:
+    branches:
+      - work/threads-80848-approved-cas-once-20261117
+    paths:
+      - .github/workflows/threads-80848-approved-cas-once.yml
+permissions:
+  contents: write
+concurrency:
+  group: careerpick-threads-publisher
+  cancel-in-progress: false
+jobs:
+  supply:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    env:
+      THREADS_CLAIM_TOKEN: ${{ github.token }}
+      TZ: Asia/Seoul
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify exact reviewed PR #101 is deployed
+        shell: bash
+        run: |
+          git merge-base --is-ancestor e52cc0188310f8dd96e108f588ad3b2f43ccbf45 HEAD
+          test -f threads/independent-review/cleaneye-80848-20261117-pdf-reviewed.json
+          test -f scripts/threads_cleanmetro_original_pdf_digest.cjs
+      - name: Install strict independent PDF and card verification dependencies
+        run: |
+          python -m pip install --quiet Pillow
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Assemble only one already independently reviewed original employer PDF entry
+        shell: bash
+        run: |
+          mkdir -p verified-cas-report
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path.cwd()
+          data=json.loads((root/'threads/independent-review/cleaneye-80848-20261117-pdf-reviewed.json').read_text())
+          e=data['entries'][0]
+          if data.get('approved_for_queue') is not False or e.get('notice_id')!='cleaneye-80848' or e.get('scheduled_at')!='2026-11-17T16:00:00+09:00' or e['writer']['status']!='ready':
+              raise SystemExit('REVIEWED_SINGLE_ENTRY_ID_SLOT_OR_STATUS_MISMATCH')
+          if e['writer']['post_text'].count('자세한 사항은 프로필링크 확인')!=1 or e['writer']['reply_texts']:
+              raise SystemExit('V5_COPY_OR_REPLY_MISMATCH')
+          source=e['writer']['review']['source_refs']
+          if source[0]['url']!='https://cleanmetro.co.kr/bbs/download.php?bo_table=recruit&wr_id=430&no=11' or source[0]['document_sha256']!='0220ac9a77a4ec8d3bfcec3cb2af4d1afcd685e5155e99e7f44c56aaba4e8470':
+              raise SystemExit('PINNED_PDF_MISMATCH')
+          bundle={'schema_version':1,'automatic_approval':False,'meta_posted':False,'entries':[e]}
+          (root/'verified-cas-report/reviewed-submissions.json').write_text(json.dumps(bundle,ensure_ascii=False,indent=2)+'\n')
+          print('REVIEWED_ONE_ENTRY_PREPARED 80848 2026-11-17T16:00:00+09:00, NOT YET STAGED')
+          PY
+      - name: Verify live original employer bytes and stage only after v5 and CAS checks
+        shell: bash
+        run: |
+          python -m scripts.threads_reviewed_ingest --input verified-cas-report/reviewed-submissions.json --apply --output verified-cas-report/staging.json
+          python - <<'PY'
+          import json
+          r=json.load(open('verified-cas-report/staging.json'))
+          if r.get('accepted_count')!=1 or r.get('staging_updated') is not True or r.get('meta_posted') is not False:
+              raise SystemExit('STRICT_CAS_STAGE_NOT_ACCEPTED '+json.dumps(r.get('refused',[]),ensure_ascii=False)[:1600])
+          if r['accepted'][0]['notice_id']!='cleaneye-80848':
+              raise SystemExit('ACCEPTED_NOTICE_MISMATCH')
+          print('STRICT_CAS_STAGE_ACCEPTED 80848; Meta POST zero')
+          PY
+      - name: Run existing production CAS queue bridge and verify live writer queue
+        shell: bash
+        run: |
+          python scripts/threads_queue_bridge.py --apply --output verified-cas-report/queue-bridge.json
+          python - <<'PY'
+          import json,os
+          from scripts.threads_queue_bridge import read, QUEUE, STAGING
+          q,qs=read(QUEUE,os.environ['THREADS_CLAIM_TOKEN'])
+          s,ss=read(STAGING,os.environ['THREADS_CLAIM_TOKEN'])
+          rows=[e for e in q['entries'] if e.get('notice_id')=='cleaneye-80848' and e.get('scheduled_at')=='2026-11-17T16:00:00+09:00' and e.get('writer',{}).get('status')=='ready']
+          if len(rows)!=1:raise SystemExit('NO_SINGLE_READY_80848_IN_LIVE_QUEUE')
+          if len([e for e in q['entries'] if e.get('scheduled_at')=='2026-11-17T16:00:00+09:00'])!=1:raise SystemExit('LIVE_SLOT_COLLISION')
+          report={'notice_id':'cleaneye-80848','slot':'2026-11-17T16:00:00+09:00','live_approved':True,
+              'queue_sha':qs,'staging_sha':ss,'writer_queue_entries':len(q['entries']),
+              'meta_posted':False,'post_id':None}
+          with open('verified-cas-report/live-queue-readback.json','w') as f:json.dump(report,f,ensure_ascii=False,indent=2)
+          print('LIVE_CAS_APPROVAL_CONFIRMED='+json.dumps(report,ensure_ascii=False))
+          PY
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80848-one-shot-cas-receipt
+          path: verified-cas-report/
+          retention-days: 14
