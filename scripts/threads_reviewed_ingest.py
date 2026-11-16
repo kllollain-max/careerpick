@@ -24,6 +24,7 @@ from zoneinfo import ZoneInfo
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.threads_http import read_response
 from scripts.threads_auto import load, writer_inputs
 from scripts.threads_queue_bridge import (ROOT, BRANCH, QUEUE, STAGING, future_slots,
     verify_entry, read, request)
@@ -68,7 +69,7 @@ def fetch_official_digest(url):
     opener = urllib.request.build_opener(OfficialRedirect())
     req = urllib.request.Request(url, headers={"User-Agent": "CareerPickOfficialReview/1.0",
                                                 "Accept": "*/*"})
-    with opener.open(req, timeout=25) as response:
+    with read_response(req, timeout=25, opener=opener.open) as response:
         data = response.read(MAX_OFFICIAL_BYTES + 1)
         if len(data) > MAX_OFFICIAL_BYTES:
             raise ValueError("OFFICIAL_DOCUMENT_TOO_LARGE")

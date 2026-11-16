@@ -85,7 +85,7 @@ class EvidencePacketTests(unittest.TestCase):
     def test_first_eight_unavailable_do_not_starve_later_official_source(self):
         import urllib.error
         self.bundle['drafts'] = [dict(self.bundle['drafts'][0], notice_id=str(i),
-             official_url_for_private_review=f'https://www.alio.go.kr/{i}') for i in range(24)]
+             official_url_for_private_review=f'https://source{i//4}.go.kr/{i}') for i in range(24)]
         called = []
         def fetch(url):
             called.append(url)
@@ -99,9 +99,27 @@ class EvidencePacketTests(unittest.TestCase):
         self.assertFalse(result['meta_posted'])
         self.assertEqual([r['notice_id'] for r in result['records']], list(map(str, range(16))))
 
+    def test_outage_defers_same_host_but_checks_later_alternative(self):
+        import urllib.error
+        self.bundle['drafts'] = [dict(self.bundle['drafts'][0], notice_id=str(i),
+             official_url_for_private_review=f'https://job.cleaneye.go.kr/{i}') for i in range(21)]
+        self.bundle['official_source_alternatives'] = [{
+             'notice_id': 'alio-alternative', 'status': 'unreviewed',
+             'official_url_for_private_review': 'https://job.alio.go.kr/notice'}]
+        def fetch(url):
+            if 'cleaneye' in url:
+                raise urllib.error.URLError('unavailable')
+            return {'url': url, 'sha256': 'a' * 64}
+        result = build_packet(self.bundle, fetch=fetch)
+        self.assertEqual(result['attempted'], 5)
+        self.assertEqual(result['checked'], 1)
+        self.assertEqual(len(result['deferred_notice_ids']), 17)
+        self.assertEqual(result['unavailable_hosts'], ['job.cleaneye.go.kr'])
+        self.assertFalse(result['approved_for_queue'])
+
     def test_total_failed_source_attempts_are_bounded(self):
         import urllib.error
-        self.bundle['drafts'] = [dict(self.bundle['drafts'][0], notice_id=str(i)) for i in range(30)]
+        self.bundle['drafts'] = [dict(self.bundle['drafts'][0], notice_id=str(i), official_url_for_private_review=f'https://source{i}.go.kr/{i}') for i in range(30)]
         def fetch(url):
             raise urllib.error.URLError('temporary outage')
         result = build_packet(self.bundle, fetch=fetch)

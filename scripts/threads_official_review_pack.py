@@ -15,6 +15,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor
+from urllib.parse import urlsplit
 
 
 import sys
@@ -114,9 +115,10 @@ def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
     records = []
     seen = set()
     candidates = []
-    for draft in bundle["drafts"]:
-        if len(candidates) >= max_attempts:
-            break
+    alternatives = bundle.get("official_source_alternatives", [])
+    if not isinstance(alternatives, list):
+        raise ValueError("OFFICIAL_ALTERNATIVES_INVALID")
+    for draft in (bundle["drafts"] + alternatives)[:100]:
         if not isinstance(draft, dict) or draft.get("status") != "unreviewed":
             continue
         nid = draft.get("notice_id")
@@ -153,15 +155,32 @@ def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
     # A provider outage must not starve all later official sources. Preserve
     # ranking within each bounded batch, try alternatives until eight receipts
     # exist, and cap concurrency and total attempts (no recursive work).
+    unavailable_hosts = set()
+    deferred = []
     with ThreadPoolExecutor(max_workers=4) as executor:
-        for offset in range(0, len(candidates), 4):
+        while candidates and len(records) < max_attempts:
             if sum(r["evidence_status"] == "bytes_fetched_for_review" for r in records) >= limit:
                 break
-            records.extend(executor.map(capture, candidates[offset:offset + 4]))
+            batch = []
+            while candidates and len(batch) < min(4, max_attempts - len(records)):
+                draft = candidates.pop(0)
+                host = urlsplit(str(draft.get("official_url_for_private_review") or "")).hostname
+                if host in unavailable_hosts:
+                    deferred.append(draft["notice_id"])
+                else:
+                    batch.append(draft)
+            results = list(executor.map(capture, batch))
+            records.extend(results)
+            for result in results:
+                host = urlsplit(str(result.get("official_url") or "")).hostname
+                failures = [r for r in records if urlsplit(str(r.get("official_url") or "")).hostname == host]
+                if host and len(failures) >= 4 and all(r.get("block_reason") == "OFFICIAL_SOURCE_UNAVAILABLE" for r in failures):
+                    unavailable_hosts.add(host)
     return {"schema_version": 1, "status": "official_review_required",
             "automatic_approval": False, "approved_for_queue": False,
             "meta_posted": False, "records": records,
             "attempted": len(records), "max_attempts": max_attempts,
+            "unavailable_hosts": sorted(unavailable_hosts), "deferred_notice_ids": deferred,
             "checked": sum(r["evidence_status"] == "bytes_fetched_for_review" for r in records),
             "required_next_step": "Independently read notice and attachments, cite each fact, run validate_entry and v5 checks before submission"}
 

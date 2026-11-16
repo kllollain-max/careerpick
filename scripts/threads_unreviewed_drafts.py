@@ -131,6 +131,13 @@ def build_drafts(handoff):
     covered = {draft["suggested_slot"] for draft in drafts}
     return {"schema_version": 1, "status": "review_required",
             "approved_for_queue": False, "drafts": drafts,
+            "official_source_alternatives": [
+                {"notice_id": candidate["notice_id"], "status": "unreviewed",
+                 "official_url_for_private_review": candidate.get("official_url"),
+                 "suggested_slot": None}
+                for candidate in candidates if isinstance(candidate, dict)
+                and isinstance(candidate.get("notice_id"), str)
+                and candidate["notice_id"] not in used_notice_ids],
             "slot_coverage": {
                 "requested_slots": slots,
                 "draft_slots": [slot for slot in slots if slot in covered],
