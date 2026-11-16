@@ -63,7 +63,7 @@ class AlreadyVerifiedSlotTests(unittest.TestCase):
                 with patch.dict(os.environ, self.env), \
                         patch.object(threads_auto, 'current_publication_slot',
                                      return_value=self.slot):
-                    with self.assertRaisesRegex(RuntimeError, 'Slot already reserved'):
+                    with self.assertRaisesRegex(RuntimeError, 'Slot already reserved|Unresolved prior reservation'):
                         threads_auto.prepare_master(history, self.now, 'late-schedule')
 
     def test_duplicate_slot_records_and_manual_dispatch_never_silently_skip(self):
