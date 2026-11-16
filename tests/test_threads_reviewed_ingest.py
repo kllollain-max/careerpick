@@ -17,6 +17,9 @@ class ReviewedIngestTests(unittest.TestCase):
             "notice_id": "a123", "scheduled_at": self.slot,
             "writer": {"status": "ready", "review": {"source_refs": [
                 {"url": "https://www.alio.go.kr/download/example.hwp", "sha256": "a" * 64}
+            ], "fact_evidence": [
+                {"field": field, "source_ref": "https://www.alio.go.kr/download/example.hwp"}
+                for field in ("title", "count", "employment")
             ]}},
         }
         self.queue = {"schema_version": 1, "entries": []}
@@ -47,11 +50,51 @@ class ReviewedIngestTests(unittest.TestCase):
             "document_sha256": "a" * 64,
             "excerpt": "official notice",
         }]
+        for fact in self.entry["writer"]["review"]["fact_evidence"]:
+            fact["source_ref"] = "https://yscwf.or.kr/nc_client/file/download.jsp?_file_l=notice.hwp"
         staged, accepted, refused = self.call()
         self.assertFalse(refused)
         self.assertEqual(len(staged["entries"]), 1)
         self.assertEqual(accepted[0]["official_receipt"]["sha256"], "a" * 64)
         self.verify.assert_called_once()
+
+    def test_every_cited_fact_document_must_match_current_bytes(self):
+        second = "https://www.alio.go.kr/download/attachment2.hwp"
+        review = self.entry["writer"]["review"]
+        review["source_refs"].append({"url": second, "sha256": "b" * 64})
+        review["fact_evidence"][1]["source_ref"] = second
+        seen = []
+        def fetch(url):
+            seen.append(url)
+            return "b" * 64 if url == second else "a" * 64
+        _, accepted, refused = self.call(fetch_digest=fetch)
+        self.assertEqual(len(accepted), 1)
+        self.assertFalse(refused)
+        self.assertEqual(len(seen), 2)
+
+        # A changed headcount attachment cannot be masked by an unchanged
+        # official homepage or another still-valid recruiting document.
+        self.verify.reset_mock()
+        _, accepted, refused = self.call(fetch_digest=lambda _: "a" * 64)
+        self.assertFalse(accepted)
+        self.assertEqual(refused[0]["reason"], "OFFICIAL_SOURCE_BYTES_CHANGED")
+        self.verify.assert_not_called()
+
+    def test_uncited_landing_page_cannot_replace_fact_document(self):
+        review = self.entry["writer"]["review"]
+        review["source_refs"].append({"url": "https://www.alio.go.kr/", "sha256": "a" * 64})
+        review["fact_evidence"][0]["source_ref"] = "https://www.alio.go.kr/unlisted.pdf"
+        _, accepted, refused = self.call()
+        self.assertFalse(accepted)
+        self.assertEqual(refused[0]["reason"], "OFFICIAL_FACT_SOURCE_REQUIRED")
+        self.verify.assert_not_called()
+
+    def test_missing_fact_citations_are_not_official_review(self):
+        self.entry["writer"]["review"].pop("fact_evidence")
+        _, accepted, refused = self.call()
+        self.assertFalse(accepted)
+        self.assertEqual(refused[0]["reason"], "OFFICIAL_FACT_SOURCE_REQUIRED")
+        self.verify.assert_not_called()
 
     def test_conflicting_review_digests_fail_closed(self):
         self.entry["writer"]["review"]["source_refs"][0]["document_sha256"] = "b" * 64
