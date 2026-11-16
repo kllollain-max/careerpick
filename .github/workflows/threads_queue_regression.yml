@@ -5,6 +5,8 @@ on:
     paths:
       - 'scripts/threads_queue_bridge.py'
       - 'tests/test_threads_queue_bridge_preflight.py'
+      - 'scripts/threads_unreviewed_drafts.py'
+      - 'tests/test_threads_unreviewed_drafts.py'
       - '.github/workflows/threads_auto.yml'
       - '.github/workflows/threads_queue_regression.yml'
   workflow_dispatch:
@@ -23,6 +25,8 @@ jobs:
         with:
           python-version: '3.11'
       - name: Check Python syntax
-        run: python -m py_compile scripts/threads_queue_bridge.py tests/test_threads_queue_bridge_preflight.py
+        run: python -m py_compile scripts/threads_queue_bridge.py tests/test_threads_queue_bridge_preflight.py scripts/threads_unreviewed_drafts.py tests/test_threads_unreviewed_drafts.py
       - name: Test promotion and duplicate protections
         run: python -m unittest discover -s tests -p 'test_threads_queue_bridge_preflight.py' -v
+      - name: Test unreviewed draft safety
+        run: python -m unittest discover -s tests -p 'test_threads_unreviewed_drafts.py' -v
