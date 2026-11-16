@@ -165,5 +165,62 @@ class EvidencePacketTests(unittest.TestCase):
 
 
 
+    def test_pdf_magic_from_downloaded_bytes_not_content_type_alone(self):
+        url = "https://www.alio.go.kr/notice"
+        self.assertTrue(read_official(url, opener=Opener(
+            Response(body=b"%PDF-1.7\\nbody", mime="application/pdf")))["pdf_magic_valid"])
+        self.assertFalse(read_official(url, opener=Opener(
+            Response(body=b"<html>error</html>", mime="application/pdf")))["pdf_magic_valid"])
+
+    def test_cleaneye_80848_annex_digest_collection_is_pinned_and_unapproved(self):
+        from scripts.threads_official_review_pack import (
+            CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES, independently_located_notice)
+        pinned = CANONICAL_REVIEW_URLS["cleaneye-80848"]
+        draft = {
+            "notice_id": "cleaneye-80848", "status": "unreviewed",
+            "source_post_sha256": pinned["source_post_sha256"],
+            "source_detail_sha256": pinned["source_detail_sha256"],
+            "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80848",
+        }
+        urls = CANONICAL_REVIEW_ANNEXES["cleaneye-80848"]
+        self.assertEqual(len(urls), 3)
+        self.assertEqual(independently_located_notice(draft), pinned["url"])
+        called = []
+        def fetched(url):
+            called.append(url)
+            return {"url": url, "sha256": "b" * 64, "size_bytes": 100,
+                    "pdf_magic_valid": url in urls, "checked_at": "2026-11-16T19:00:00+09:00"}
+        packet = build_packet({"status": "review_required", "approved_for_queue": False,
+                               "drafts": [draft]}, fetch=fetched)
+        record = packet["records"][0]
+        self.assertEqual(called, [pinned["url"], *urls])
+        self.assertEqual(record["attachment_status"], "all_raw_pdf_sha256_captured")
+        self.assertEqual(len(record["attachment_receipts"]), 3)
+        self.assertFalse(packet["approved_for_queue"])
+        self.assertFalse(packet["automatic_approval"])
+        self.assertEqual(record["publisher_validate_entry"], "not_run")
+        self.assertTrue(record["attachment_review_required"])
+
+    def test_cleaneye_80848_non_pdf_or_different_snapshot_cannot_claim_annex_receipts(self):
+        from scripts.threads_official_review_pack import CANONICAL_REVIEW_URLS
+        pinned = CANONICAL_REVIEW_URLS["cleaneye-80848"]
+        draft = {"notice_id": "cleaneye-80848", "status": "unreviewed",
+                 "source_post_sha256": pinned["source_post_sha256"],
+                 "source_detail_sha256": pinned["source_detail_sha256"]}
+        def fetched(url):
+            return {"url": url, "sha256": "c" * 64, "pdf_magic_valid": False}
+        packet = build_packet({"status": "review_required", "approved_for_queue": False,
+                               "drafts": [draft]}, fetch=fetched)
+        self.assertEqual(packet["records"][0]["attachment_status"],
+                         "raw_pdf_receipts_incomplete")
+        self.assertTrue(all(x["status"] == "unverified" for x in
+                            packet["records"][0]["attachment_receipts"]))
+        self.assertFalse(packet["approved_for_queue"])
+        draft["source_detail_sha256"] = "d" * 64
+        packet = build_packet({"status": "review_required", "approved_for_queue": False,
+                               "drafts": [draft]}, fetch=fetched)
+        self.assertNotIn("attachment_receipts", packet["records"][0])
+
+
 if __name__ == "__main__":
     unittest.main()
