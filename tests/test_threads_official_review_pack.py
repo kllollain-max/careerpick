@@ -144,5 +144,26 @@ class EvidencePacketTests(unittest.TestCase):
             build_packet(self.bundle)
 
 
+    def test_exact_cleaneye_fingerprint_uses_employer_notice_not_unreachable_feed_page(self):
+        from scripts.threads_official_review_pack import independently_located_notice
+        draft = {"notice_id": "cleaneye-80820",
+                 "source_post_sha256": "8d3752df0454401d33229336de56bbfebe204a1337ee98ca1ac6a87f458528f1",
+                 "source_detail_sha256": "c67be70000794ee30457361c24cb0ba633e4efc2d2b145790074b1dde8b0834e",
+                 "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80820"}
+        found = independently_located_notice(draft)
+        self.assertEqual(found, "https://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155")
+        recorded = []
+        packet = build_packet({"status": "review_required", "approved_for_queue": False,
+                               "drafts": [{**draft, "status": "unreviewed"}]},
+                              fetch=lambda url: (recorded.append(url) or
+                                  {"url": url, "sha256": "b" * 64, "size_bytes": 100}))
+        self.assertEqual(recorded, [found])
+        self.assertEqual(packet["checked"], 1)
+        self.assertFalse(packet["approved_for_queue"])
+        draft["source_detail_sha256"] = "c" * 64
+        self.assertEqual(independently_located_notice(draft), draft["official_url_for_private_review"])
+
+
+
 if __name__ == "__main__":
     unittest.main()

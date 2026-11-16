@@ -47,6 +47,13 @@ def official_url_allowed(url):
             return False
         except ValueError:
             pass
+        # One manually checked employer notice, not a wildcard allowlist for
+        # commercial (.co.kr) recruitment sites. Keep this exact path/query:
+        # other pages or attachments need their own independent review.
+        if host in ("smrtg.co.kr", "www.smrtg.co.kr"):
+            return (parts.path == "/employment/stffPbanInfo.do"
+                    and parts.query == "stffPbanNo=2026-0155"
+                    and not parts.fragment)
         # A conservative institutional-source allowlist, not a domain trust
         # assertion. Other domains need independently reviewed support first.
         return any(host == suffix or host.endswith("." + suffix)
