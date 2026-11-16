@@ -11,7 +11,7 @@ class DraftWriterTests(unittest.TestCase):
             "candidates": [{
                 "notice_id": "a123", "org": "검증대상 기관",
                 "title": "전산직 채용", "employment": "정규직",
-                "application_period": {"end": "2026-11-20"},
+                "application_period": {"end": "2026-11-20", "date_only": True},
                 "official_url": "https://example.org/notice",
                 "source_post_sha256": "abc", "source_detail_sha256": "def",
             }],
@@ -26,6 +26,13 @@ class DraftWriterTests(unittest.TestCase):
         self.assertFalse(draft["approved_for_queue"])
         self.assertFalse(draft["meta_posted"])
         self.assertNotIn("https://", draft["draft_text"])
+
+    def test_timestamp_deadline_keeps_verified_clock(self):
+        candidate = {**self.handoff['candidates'][0],
+                     'application_period': {'end': '2026-11-20T14:00:00+09:00', 'date_only': False}}
+        draft = build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'][0]
+        self.assertIn('14:00 +0900', draft['draft_text'])
+        self.assertNotIn('마감 시각 원문 확인', draft['draft_text'])
 
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
