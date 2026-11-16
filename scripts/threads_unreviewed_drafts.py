@@ -64,6 +64,16 @@ def build_drafts(handoff):
                   continue
           except ValueError:
               continue
+          # Reject untraceable period evidence before producing a review packet.
+          # This is a provenance gate, not semantic official-source approval.
+          evidence = candidate.get('application_evidence')
+          source_ref = candidate.get('application_source_ref')
+          if not isinstance(evidence, str) or len(evidence.strip()) < 8:
+              continue
+          if not isinstance(source_ref, str) or not source_ref.strip():
+              continue
+          if period.get('evidence') != evidence or period.get('source_ref') != source_ref:
+              continue
           # No invented headcount, requirements, or exact cutoff time.
           body = (f"{org} 채용 공고를 확인해 보세요.\n\n"
                   f"모집 공고: {title}\n"
