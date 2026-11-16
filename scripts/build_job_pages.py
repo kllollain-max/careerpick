@@ -784,6 +784,7 @@ def main():
     created = 0
     quality = {
         'total': 0,
+        'verified_editorial_duty_reviews': 0,
         'with_category_only_description': 0,
         'with_qualification': 0,
         'with_process': 0,
@@ -834,6 +835,12 @@ def main():
         # Only an explicit, nonempty source field counts as substantive duties.
         # NCS/category labels in the list feed must never be counted as duties.
         has_description = bool(clean(job_detail.get('jobDscrptn')))
+        editorial = VERIFIED_DUTIES.get(pid, {})
+        editorial_reviewed = (
+            editorial.get('organization') == clean(post.get('org'))
+            and editorial.get('title') == clean(post.get('title'))
+        )
+        quality['verified_editorial_duty_reviews'] += int(editorial_reviewed)
         quality['with_category_only_description'] += int(category_only)
         official_url = safe_url(post.get('src')) or safe_url(post.get('url'))
         has_official = bool(official_url)
@@ -898,6 +905,8 @@ def main():
                 'qualification': has_qualification,
                 'process': has_process,
                 'substantive_description': has_description,
+                'verified_editorial_duties': editorial_reviewed,
+                'editorial_review_scope': editorial.get('scope', '') if editorial_reviewed else '',
             },
         })
 
