@@ -383,6 +383,25 @@ def render(post, detail, related_posts=()):
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
         )
+    if pid == 'a306355':
+        verified_notice_html = (
+            '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
+            '<h2>IBK 체험형 청년인턴 지원 전 핵심 확인</h2>'
+            '<p>공식 ALIO 공고의 모집인원은 총 390명이며 체험형 청년인턴입니다. '
+            '학력과 전공 제한은 없지만, 청년 연령 기준 및 과거 IBK 청년인턴 근무 이력 제한을 확인해야 합니다.</p>'
+            '<p>기본 연령 요건은 2026년 10월 27일 기준 만 19~34세이며, '
+            '제대군인은 군 복무기간에 따른 상한 연장 규정이 적용될 수 있습니다. '
+            '개별 적용 여부와 결격사유는 공식 공고에서 확인하세요.</p>'
+            '<p>전형은 지원서 접수 및 AI역량검사 → 서류심사 → 실기시험 순서입니다. '
+            'AI역량검사 미응시자는 서류심사 불합격 처리된다고 안내되어 있습니다. '
+            '최종 실기시험은 발표·토론 및 심층인터뷰를 포함합니다.</p>'
+            '<p class="source-note">공식 원서접수 마감은 2026년 11월 16일 오전 10시(KST)입니다. '
+            '지원 가능 여부·정정 여부는 채용기관 공식 사이트에서 재확인하세요. '
+            '분야별 구체적 담당업무는 직무기술서 PDF 본문 검증 전까지 추정하지 않습니다.</p>'
+            '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306355" '
+            'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
+            '</section>'
+        )
     coverage_html = (
         '<section aria-label="공고 정보 제공 범위"><h2>공고 정보 제공 범위</h2>'
         f'<p class="source-note">{escape(coverage_note)}</p></section>'
