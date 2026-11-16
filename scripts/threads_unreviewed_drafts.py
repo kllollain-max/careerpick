@@ -97,6 +97,13 @@ def build_drafts(handoff):
               "application_evidence_for_review": candidate.get("application_evidence"),
               "application_source_ref": candidate.get("application_source_ref"),
               "source_snapshot_checked_at": candidate.get("source_snapshot_checked_at"),
+              "recruiting_unit_for_review": {
+                  "title": candidate.get("recruiting_unit_title"),
+                  "count": candidate.get("recruiting_unit_count"),
+                  "scope": candidate.get("recruiting_unit_scope"),
+                  "verification_status": "not_verified",
+              },
+              "selection_review_reasons": candidate.get("selection_review_reasons", []),
               "required_review": {
                   "official_notice_and_attachments": "not_verified",
                   "recruiting_unit_and_headcount": "not_verified",
