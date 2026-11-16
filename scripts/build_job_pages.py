@@ -24,6 +24,9 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306662': '2026-11-18T17:00:00+09:00',
     # Official 307034 notice HWP, section 6; ALIO fileNo=3087622, checked 2026-11-16.
     'a307034': '2026-11-20T16:00:00+09:00',
+    # Official notice originals: HWP 3085542 section 6; PDF 3087571 page 2.
+    'a306774': '2026-11-17T13:00:00+09:00',
+    'a307061': '2026-11-30T18:00:00+09:00',
 }
 VERIFIED_DUTIES = json.loads(
     (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
@@ -503,6 +506,32 @@ def render(post, detail, related_posts=()):
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
         )
+    # Structured editorial notes inherit the exact source identity check above.
+    # Metadata contains plain text only; never insert source text as HTML.
+    sections = verified_duties.get('notice_sections', [])
+    notice_source = safe_url(verified_duties.get('notice_source_url'))
+    if isinstance(sections, list) and sections and notice_source:
+        parts = []
+        for section in sections:
+            if not isinstance(section, dict) or not isinstance(section.get('heading'), str):
+                continue
+            paragraphs = section.get('paragraphs', [])
+            if not isinstance(paragraphs, list):
+                continue
+            parts.append(f'<h3>{escape(section["heading"])}</h3>')
+            parts.extend(f'<p>{escape(value)}</p>' for value in paragraphs
+                         if isinstance(value, str) and value.strip())
+        if parts:
+            verified_notice_html = (
+                '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
+                '<h2>공식 원문과 대조한 지원 안내</h2>' + ''.join(parts)
+                + f'<p class="source-meta">원본 확인일: {escape(verified_duties["checked_on"])} · '
+                'AI 원문 대조·요약. 최신 정정 공고가 우선합니다.</p>'
+                + f'<p><a href="{escape(notice_source, quote=True)}" target="_blank" '
+                'rel="noopener noreferrer">공식 공고문 원본: '
+                + escape(verified_duties.get('notice_source_label', '공고문'))
+                + '</a></p></section>'
+            )
     coverage_html = (
         '<section aria-label="공고 정보 제공 범위"><h2>공고 정보 제공 범위</h2>'
         f'<p class="source-note">{escape(coverage_note)}</p></section>'
