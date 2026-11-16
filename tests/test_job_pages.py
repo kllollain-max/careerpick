@@ -7,12 +7,48 @@ import copy
 import json
 import re
 import tempfile
+from datetime import datetime, timezone
+from unittest.mock import patch
 from pathlib import Path
 
 from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_verified_pdf_summary_is_bound_to_notice_identity(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        for identity, evidence in VERIFIED_DUTIES.items():
+            post = dict(self.post, id=identity, org=evidence['organization'], title=evidence['title'])
+            html = render(post, {})
+            self.assertIn(evidence['summary'], html)
+            self.assertIn('공식 직무기술서에서 확인한 담당업무', html)
+            self.assertIn(evidence['source_url'], html)
+            self.assertIn(evidence['checked_on'], html)
+            unrelated = render(dict(post, title='다른 모집분야'), {})
+            self.assertNotIn(evidence['summary'], unrelated)
+            wrong_org = render(dict(post, org='다른 기관'), {})
+            self.assertNotIn(evidence['summary'], wrong_org)
+
+    def test_verified_application_cutoff_expires_before_publication_end(self):
+        post = {'id': 'a306355', 'alio': True, 'due': '2026-11-16T23:59:00+09:00'}
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 16, 1, 0, 1, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertIn('공식 확인된 원서접수 마감시각이 지난 보관 공고', html)
+        self.assertIn('noindex,follow', html)
+        self.assertNotIn('application/ld+json', html)
+        self.assertEqual(post['due'], '2026-11-16T23:59:00+09:00')
+
+    def test_verified_application_cutoff_remains_open_before_cutoff(self):
+        post = {'id': 'a306355', 'alio': True, 'due': '2026-11-16T23:59:00+09:00'}
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 16, 0, 59, 59, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertNotIn('class="closed"', html)
+        self.assertNotIn('noindex,follow', html)
+
     def setUp(self):
         self.post = {
             'id': 'a123456',

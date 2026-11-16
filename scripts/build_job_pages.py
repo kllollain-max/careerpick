@@ -17,6 +17,9 @@ DATA = ROOT / 'alio.json'
 DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
+VERIFIED_DUTIES = json.loads(
+    (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
+) if Path(__file__).with_name('verified_job_duties.json').exists() else {}
 
 DETAIL_LABELS = {
     'recrutSeNm': '채용 구분',
@@ -180,7 +183,13 @@ def render(post, detail, related_posts=()):
     }
     confirmed_cutoff = confirmed_cutoffs.get(pid, '')
     deadline = parse_date(due, end_of_day=True)
-    closed = is_closed(due)
+    # A verified application cutoff takes precedence over the publication end
+    # date. Keep the feed intact and preserve the archived URL/bookmarks.
+    application_cutoff = (
+        confirmed_cutoff.replace(' (KST)', '').replace(' ', 'T') + '+09:00'
+        if confirmed_cutoff else ''
+    )
+    closed = is_closed(application_cutoff or due)
 
     official = (
         safe_url(post.get('src'))
@@ -318,7 +327,13 @@ def render(post, detail, related_posts=()):
     # 자료가 없는 공고에 사실처럼 보이는 직무 설명을 생성하지 않습니다.
     # ALIO desc는 alio.py에서 ncsCdNmLst로 생성된 직무 분류입니다.
     # 글자 수나 구분자에 관계없이 실제 담당업무 설명으로 판단하지 않습니다.
-    has_substantive_desc = False
+    verified_duties = VERIFIED_DUTIES.get(pid, {})
+    # Bind editorial evidence to the exact notice, organization and title.
+    # A reused ID or changed notice must be reviewed again before reuse.
+    if (verified_duties.get('organization') != org
+            or verified_duties.get('title') != title):
+        verified_duties = {}
+    has_substantive_desc = bool(verified_duties)
     if qualification and process:
         coverage_note = '지원 자격과 채용 절차 정보가 제공된 공고입니다.'
     elif qualification or process or has_substantive_desc:
@@ -364,6 +379,20 @@ def render(post, detail, related_posts=()):
         '<p class="source-note">이 안내는 공고별 업무를 추정한 설명이 아니라 공식 원문 확인을 돕는 점검표입니다.</p>'
         '</section>'
     )
+    if verified_duties:
+        duties_checklist_html = (
+            '<section id="job-duties" aria-label="공식 직무기술서 확인 요약">'
+            '<h2>공식 직무기술서에서 확인한 담당업무</h2>'
+            f'<h3>{escape(verified_duties["scope"])}</h3>'
+            f'<p>{escape(verified_duties["summary"])}</p>'
+            f'<p class="source-note">지원 전 비교: {escape(verified_duties["applicant_check"])}</p>'
+            '<p>모든 모집분야를 검증한 것은 아닙니다. 위 범위 이외의 담당업무·인원·근무조건은 공식 원문 확인 필요.</p>'
+            f'<p class="source-meta">원본 확인일: {escape(verified_duties["checked_on"])} · '
+            'AI 원문 대조·요약. 기관의 공식 공고와 최신 정정 내용이 우선합니다.</p>'
+            f'<p><a href="{escape(verified_duties["source_url"], quote=True)}" '
+            'target="_blank" rel="noopener noreferrer">'
+            f'공식 첨부 원문: {escape(verified_duties["source_label"])}</a></p></section>'
+        )
     # A notice-specific, source-checked editorial note; never infer HWP duties.
     verified_notice_html = ''
     if pid == 'a306436':
@@ -378,7 +407,8 @@ def render(post, detail, related_posts=()):
             '적격자가 있으면 즉시 채용될 수 있습니다.</p>'
             '<p class="source-note">ALIO의 2026-11-30은 공고 게시 종료일입니다. '
             '원서접수 마감시각이나 지원 가능 상태를 보증하지 않습니다. '
-            '세부 담당업무는 공식 직무기술서 HWP 본문을 확인해야 합니다.</p>'
+            '세부 담당업무는 공식 직무기술서 HWP 본문을 확인해야 합니다. '
+            '확인한 담당업무 요약과 공식 원문은 아래 별도 항목에서 확인하세요.</p>'
             '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306436" '
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
@@ -408,6 +438,7 @@ def render(post, detail, related_posts=()):
             '2027년 1월 4일 기준입니다.</p>'
             '<p class="source-note">위 내용은 공식 ALIO 공고의 분야별 지원자격 요약이며 '
             '실제 담당업무를 설명하는 직무기술서가 아닙니다. '
+            '담당업무 요약과 직무기술서 원문은 아래 별도 항목에서 확인하세요. '
             '공식 접수마감은 2026년 11월 19일 오전 10시(KST)로 안내됐으며, '
             '정정 여부와 분야별 세부사항은 기관 공고에서 다시 확인하세요.</p>'
             '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306750" '
@@ -428,7 +459,7 @@ def render(post, detail, related_posts=()):
             '최종 실기시험은 발표·토론 및 심층인터뷰를 포함합니다.</p>'
             '<p class="source-note">공식 원서접수 마감은 2026년 11월 16일 오전 10시(KST)입니다. '
             '지원 가능 여부·정정 여부는 채용기관 공식 사이트에서 재확인하세요. '
-            '분야별 구체적 담당업무는 직무기술서 PDF 본문 검증 전까지 추정하지 않습니다.</p>'
+            '분야별 담당업무 요약과 공식 직무기술서 PDF는 아래 별도 항목에서 확인하세요.</p>'
             '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306355" '
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
@@ -572,7 +603,9 @@ def render(post, detail, related_posts=()):
 
     notice = (
         '<p class="closed">'
-        '표시된 종료일이 지난 보관 공고입니다. '
+        + ('공식 확인된 원서접수 마감시각이 지난 보관 공고입니다. '
+           if application_cutoff else '표시된 종료일이 지난 보관 공고입니다. ')
+        +
         '실제 접수 종료·연장 여부는 공식 공고를 확인하세요.'
         '</p>'
         if closed
