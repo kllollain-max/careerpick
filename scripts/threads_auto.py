@@ -198,6 +198,15 @@ def prepare_master(history, now, run_id):
           'IMAGE' if image_turn else 'TEXT')
 
 
+def reviewed_text_fallback_allowed(record):
+    """User-authorized v6 availability fallback; never changes approved prose."""
+    return (os.getenv('THREADS_ALLOW_V5_TEXT_FALLBACK', 'false').lower() == 'true'
+            and record.get('content_type') == 'master_job'
+            and record.get('publication_style') == 'single_main_v5'
+            and record.get('writer_review', {}).get('v5', {}).get('contract_version') == 2
+            and not record.get('reply_text') and not record.get('engagement_text'))
+
+
 def validate_master_before_send(record, history, now):
     from scripts.threads_writer_queue import select_ready, fingerprint
     entry = record.get('writer_entry')
@@ -215,6 +224,9 @@ def validate_master_before_send(record, history, now):
     if record.get('image_url'):
         if record.get('image_job') != validated['image_job']:
             raise RuntimeError('Reserved image facts changed')
+        if (reviewed_text_fallback_allowed(record) and
+                os.getenv('THREADS_IMAGE_PREPARATION_FAILED', 'false').lower() == 'true'):
+            return  # Exact text and all source facts were validated above.
         if not re.fullmatch(r'[0-9a-f]{64}', str(record.get('image_sha256', ''))):
             raise RuntimeError('High-quality image has not been verified')
         if record.get('writer_review', {}).get('v5', {}).get('contract_version') == 2:
@@ -839,7 +851,7 @@ def publish_post(record, history):
             print('Publishing image post')
             params = {'media_type': 'IMAGE', 'image_url': image_url, 'text': record['text']}
         elif image_url:
-            if record.get('content_type') == 'master_job':
+            if record.get('content_type') == 'master_job' and not reviewed_text_fallback_allowed(record):
                 raise RuntimeError('Required image unavailable; keep image turn and repair before sending')
             # This decision is made before any publishing request or slot claim.
             # Preserve the intended image for review, but record the actual format.
@@ -849,6 +861,8 @@ def publish_post(record, history):
             record['requested_image_url'] = image_url
             record['image_url'] = ''
             record['image_fallback'] = 'pre_request_unavailable'
+            if record.get('content_type') == 'master_job':
+                record['image_fallback_policy'] = 'user-authorized-v6-20261116'
             print('Public image unavailable; using validated text before sending')
             params = {'media_type': 'TEXT', 'text': text}
         else:

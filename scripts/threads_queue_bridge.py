@@ -26,6 +26,7 @@ from scripts.threads_v5 import STYLE as V5_STYLE
 
 KST = ZoneInfo('Asia/Seoul')
 HOURS = (8, 12, 16, 20)
+SUPPLY_TARGET = 8
 BRANCH = 'threads-publisher-state'
 QUEUE = 'threads/writer-queue.json'
 STAGING = 'threads/reviewed-staging.json'
@@ -48,14 +49,22 @@ def official_notice_url(post):
 
 
 def future_slots(now):
+    """Plan eight slots in KST; validation still enforces 24h freshness.
+
+    Distant drafts require fresh source and semantic review before promotion.
+    The planning horizon never makes stale evidence valid.
+    """
+    if now.utcoffset() is None:
+        raise ValueError("NOW_TIMEZONE")
+    now = now.astimezone(KST)
     result = []
-    for day in range(3):
+    for day in range(4):
         date = (now + timedelta(days=day)).date()
         for hour in HOURS:
             slot = datetime.combine(date, datetime.min.time(), tzinfo=KST).replace(hour=hour)
-            if now < slot <= now + timedelta(hours=25):
+            if now < slot:
                 result.append(slot.isoformat())
-    return result
+    return result[:SUPPLY_TARGET]
 
 
 def next_media(history):
@@ -192,6 +201,9 @@ def verified_supply_status(entries, now, history, policy, source, details):
     missing = [slot for slot in readiness['future_slots'] if slot not in valid_slots]
     return {**readiness, 'approved_future_slots': approved, 'missing_slots': missing,
             'next_slot_missing': bool(missing and missing[0] == readiness['future_slots'][0]),
+            'approved_inventory_count': len(approved), 'inventory_target': SUPPLY_TARGET,
+            'inventory_shortfall': max(0, SUPPLY_TARGET - len(approved)),
+            'replenishment_required': len(approved) < SUPPLY_TARGET,
             'invalid_ready_entries': invalid_ready}
 
 
@@ -253,7 +265,11 @@ def run(apply=False):
         approved_slots = readiness['approved_future_slots']
         invalid_ready = readiness['invalid_ready_entries']
         report.update(queue_sha=sha, staged_sha=stage_sha,
-                      approved_supply_count=len(approved),
+                      promoted_count=len(approved),
+                      approved_supply_count=len(approved_slots),
+                      inventory_target=SUPPLY_TARGET,
+                      inventory_shortfall=readiness['inventory_shortfall'],
+                      replenishment_required=readiness['replenishment_required'],
                       invalid_ready_entries=invalid_ready,
                       approved_future_slots=approved_slots,
                       missing_slots=readiness['missing_slots'],

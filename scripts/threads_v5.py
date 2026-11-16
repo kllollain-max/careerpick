@@ -397,7 +397,8 @@ def ranking_key(row, now=None, history=()):
     recent=_published(history)[-8:]
     repetition=sum(r.get('image_job',{}).get('org')==row.get('org') for r in recent if isinstance(r.get('image_job'),dict))
     advantage=0 if row.get('verified_advantages') else 1
-    return (-score,row['employment_priority'],count is None,-(count or 0),advantage,
+    return (row['employment_priority'],count is None,-(count or 0),-score,
+            row.get('sector_priority', 1),advantage,
             preparation,repetition,period,row['notice_id'])
 
 

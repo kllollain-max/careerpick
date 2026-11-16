@@ -15,7 +15,6 @@ from html.parser import HTMLParser
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-# Support the exact direct-script entry point used by GitHub Actions.
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -100,7 +99,7 @@ def read_official(url, opener=None):
     return info
 
 
-def build_packet(bundle, fetch=read_official, limit=4):
+def build_packet(bundle, fetch=read_official, limit=8):
     if (not isinstance(bundle, dict) or bundle.get("status") != "review_required"
             or bundle.get("approved_for_queue") is not False
             or not isinstance(bundle.get("drafts"), list)):
