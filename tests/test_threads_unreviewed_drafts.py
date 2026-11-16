@@ -11,7 +11,7 @@ class DraftWriterTests(unittest.TestCase):
             "candidates": [{
                 "notice_id": "a123", "org": "검증대상 기관",
                 "title": "전산직 채용", "employment": "정규직",
-                "application_period": {"start": "2026-11-16T09:00:00+09:00", "start_date_only": False, "end": "2026-11-20", "date_only": True},
+                "application_period": {"start": "2026-11-16T09:00:00+09:00", "start_date_only": False, "end": "2026-11-20", "date_only": True, "evidence": "접수기간 2026.11.17 ~ 2026.11.20", "source_ref": "alio-detail.json#123/scrnprcdrMthdExpln"},
                 "official_url": "https://example.org/notice",
                 "source_post_sha256": "abc", "source_detail_sha256": "def",
                 "application_evidence": "접수기간 2026.11.17 ~ 2026.11.20",
@@ -32,7 +32,7 @@ class DraftWriterTests(unittest.TestCase):
 
     def test_timestamp_deadline_keeps_verified_clock(self):
         candidate = {**self.handoff['candidates'][0],
-                     'application_period': {'start': '2026-11-16T09:00:00+09:00', 'start_date_only': False, 'end': '2026-11-20T14:00:00+09:00', 'date_only': False}}
+                     'application_period': {'start': '2026-11-16T09:00:00+09:00', 'start_date_only': False, 'end': '2026-11-20T14:00:00+09:00', 'date_only': False, 'evidence': self.handoff['candidates'][0]['application_evidence'], 'source_ref': self.handoff['candidates'][0]['application_source_ref']}}
         draft = build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'][0]
         self.assertIn('14:00 +0900', draft['draft_text'])
         self.assertNotIn('마감 시각 원문 확인', draft['draft_text'])
@@ -79,6 +79,11 @@ class DraftWriterTests(unittest.TestCase):
                      "application_period": {"start": "2026-11-18T09:00:00+09:00",
                                             "start_date_only": False, "end": "2026-11-20",
                                             "date_only": True}}
+        self.assertEqual(build_drafts({**self.handoff, "candidates": [candidate]})["drafts"], [])
+
+    def test_mismatched_evidence_is_excluded(self):
+        candidate = {**self.handoff["candidates"][0],
+                     "application_evidence": "다른 자료의 접수기간"}
         self.assertEqual(build_drafts({**self.handoff, "candidates": [candidate]})["drafts"], [])
 
     def test_reject_unsafe_handoff(self):
