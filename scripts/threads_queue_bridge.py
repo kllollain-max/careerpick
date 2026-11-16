@@ -48,6 +48,40 @@ def official_notice_url(post):
     return None
 
 
+def review_period(item):
+    """Carry exact Cleaneye API date provenance to UNAPPROVED review drafts.
+
+    The API's date-only precision remains date-only. This is not a receipt for
+    independently read attachments and cannot satisfy v5 final approval.
+    """
+    context = item.get('selection_context', {})
+    period = context.get('application_period')
+    if not isinstance(period, dict):
+        return period
+    if period.get('evidence') and period.get('source_ref'):
+        return dict(period)
+    if item.get('source') != 'cleaneye':
+        return dict(period)
+    detail = item.get('source_detail', {})
+    nid = item.get('notice_id')
+    if not isinstance(nid, str) or not nid.startswith('cleaneye-'):
+        return dict(period)
+    from scripts.cleaneye_source_adapter import source_date, SourceValidationError
+    raw_start, raw_end = detail.get('접수개시일 원문'), detail.get('접수마감일 원문')
+    try:
+        for key, flag, raw in [('start', 'start_date_only', raw_start), ('end', 'date_only', raw_end)]:
+            parsed, has_time = source_date(raw)
+            if period.get(flag) is not (not has_time):
+                return dict(period)
+            expected = parsed.isoformat() if has_time else parsed.date().isoformat()
+            if period.get(key) != expected:
+                return dict(period)
+    except (SourceValidationError, ValueError, TypeError):
+        return dict(period)
+    return {**period, 'source_ref': 'cleaneye.json#' + nid + '/application_period',
+            'evidence': f'접수개시일 원문: {raw_start}; 접수마감일 원문: {raw_end}'}
+
+
 def future_slots(now):
     """Plan eight slots in KST; validation still enforces 24h freshness.
 
@@ -261,6 +295,9 @@ def run(apply=False):
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
         selection = build_selection(source, details, history, policy, now, 60,
                                     queued_entries=[*merged['entries'], *staged['entries']])
+        for item in selection.get('candidates', []):
+            item['selection_context'] = {**item.get('selection_context', {}),
+                                         'application_period': review_period(item)}
         readiness = verified_supply_status(merged['entries'], now, history, policy, source, details)
         approved_slots = readiness['approved_future_slots']
         invalid_ready = readiness['invalid_ready_entries']
@@ -296,7 +333,7 @@ def run(apply=False):
                                                       'review_status': 'official_review_required',
                                                       'application_evidence': item.get('selection_context', {}).get('application_period', {}).get('evidence') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
                                                       'application_source_ref': item.get('selection_context', {}).get('application_period', {}).get('source_ref') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
-                                                      'source_snapshot_checked_at': source.get('_operations', {}).get('last_success_at') if isinstance(source.get('_operations'), dict) else None}
+                                                      'source_snapshot_checked_at': (source.get('_cleaneye', {}).get('updated') if item.get('source') == 'cleaneye' else source.get('_operations', {}).get('last_success_at'))}
                                                      for item in selection.get('candidates', [])[:100]],
                                       'automatic_approval': False,
                                       'meta_posted': False},
