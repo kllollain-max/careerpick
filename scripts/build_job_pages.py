@@ -17,6 +17,9 @@ DATA = ROOT / 'alio.json'
 DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
+VERIFIED_DUTIES = json.loads(
+    (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
+) if Path(__file__).with_name('verified_job_duties.json').exists() else {}
 
 DETAIL_LABELS = {
     'recrutSeNm': '채용 구분',
@@ -324,7 +327,13 @@ def render(post, detail, related_posts=()):
     # 자료가 없는 공고에 사실처럼 보이는 직무 설명을 생성하지 않습니다.
     # ALIO desc는 alio.py에서 ncsCdNmLst로 생성된 직무 분류입니다.
     # 글자 수나 구분자에 관계없이 실제 담당업무 설명으로 판단하지 않습니다.
-    has_substantive_desc = False
+    verified_duties = VERIFIED_DUTIES.get(pid, {})
+    # Bind editorial evidence to the exact notice, organization and title.
+    # A reused ID or changed notice must be reviewed again before reuse.
+    if (verified_duties.get('organization') != org
+            or verified_duties.get('title') != title):
+        verified_duties = {}
+    has_substantive_desc = bool(verified_duties)
     if qualification and process:
         coverage_note = '지원 자격과 채용 절차 정보가 제공된 공고입니다.'
     elif qualification or process or has_substantive_desc:
@@ -370,6 +379,20 @@ def render(post, detail, related_posts=()):
         '<p class="source-note">이 안내는 공고별 업무를 추정한 설명이 아니라 공식 원문 확인을 돕는 점검표입니다.</p>'
         '</section>'
     )
+    if verified_duties:
+        duties_checklist_html = (
+            '<section id="job-duties" aria-label="공식 직무기술서 확인 요약">'
+            '<h2>공식 직무기술서에서 확인한 담당업무</h2>'
+            f'<h3>{escape(verified_duties["scope"])}</h3>'
+            f'<p>{escape(verified_duties["summary"])}</p>'
+            f'<p class="source-note">지원 전 비교: {escape(verified_duties["applicant_check"])}</p>'
+            '<p>모든 모집분야를 검증한 것은 아닙니다. 위 범위 이외의 담당업무·인원·근무조건은 공식 원문 확인 필요.</p>'
+            f'<p class="source-meta">원본 확인일: {escape(verified_duties["checked_on"])} · '
+            'AI 원문 대조·요약. 기관의 공식 공고와 최신 정정 내용이 우선합니다.</p>'
+            f'<p><a href="{escape(verified_duties["source_url"], quote=True)}" '
+            'target="_blank" rel="noopener noreferrer">'
+            f'공식 첨부 원문: {escape(verified_duties["source_label"])}</a></p></section>'
+        )
     # A notice-specific, source-checked editorial note; never infer HWP duties.
     verified_notice_html = ''
     if pid == 'a306436':
