@@ -1,0 +1,84 @@
+name: Strict Threads 80848 original PDF reviewed-supply test (no publish)
+on:
+  push:
+    branches:
+      - fix/threads-80848-verified-pdf-20261117
+    paths:
+      - .github/workflows/threads-80848-strict-source-test.yml
+      - threads/independent-review/cleaneye-80848-20261117-pdf-reviewed.json
+      - tests/test_threads_cleanmetro_exact_pdf.py
+      - scripts/threads_cleanmetro_original_pdf_digest.cjs
+      - scripts/threads_reviewed_ingest.py
+      - threads/writer-policy.json
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install independent image-pixel + exact PDF browser dependencies
+        run: |
+          python -m pip install --quiet Pillow
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test exact pin and fail-closed security
+        run: python -m unittest discover -s tests -p test_threads_cleanmetro_exact_pdf.py -v
+      - name: Strict existing v5 validator + real pixels + current raw original PDF and applicant page
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p official-reviewed-evidence
+          python - <<'PY'
+          import json, pathlib, traceback
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from scripts.threads_auto import writer_inputs, load
+          from scripts.threads_writer_queue import validate_entry
+          from scripts.threads_card_review import verify_reviewed_card
+          from scripts.threads_reviewed_ingest import verify_official_receipt
+          root=pathlib.Path.cwd()
+          bundle=json.loads((root/'threads/independent-review/cleaneye-80848-20261117-pdf-reviewed.json').read_text())
+          entry=bundle['entries'][0]
+          policy,source,details=writer_inputs(root)
+          history=load(root/'threads_posted.json',{'records':[],'posted_ids':[]})
+          now=datetime.now(ZoneInfo('Asia/Seoul'))
+          result={'now':now.isoformat(),'notice_id':entry['notice_id'],'slot':entry['scheduled_at'],
+                  'v5_validated':False,'card_pixels_verified':False,
+                  'official_raw_receipt_verified':False,'meta_posted':False,'queue_updated':False}
+          try:
+              v=validate_entry(entry,datetime.fromisoformat(entry['scheduled_at']),now,history,source,details,policy)
+              result['v5_validated']=True
+              card=verify_reviewed_card(v['image_job'],v['writer_review'],root,now,verify_pixels=True)
+              result['card_pixels_verified']=card['pixel_verification']=='passed'
+              result['card_sha256']=card['sha256']
+              source_receipt=verify_official_receipt(entry)
+              result['official_raw_receipt_verified']=True
+              result['verified_fact_sources']=source_receipt['verified_fact_sources']
+          except Exception as exc:
+              result['error']=str(exc)
+              result['exception_type']=type(exc).__name__
+              traceback.print_exc()
+          finally:
+              (root/'official-reviewed-evidence/v5-validation.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+              print('V5_ORIGINAL_PDF_REVIEW='+json.dumps(result,ensure_ascii=False))
+          if not all(result[k] for k in ('v5_validated','card_pixels_verified','official_raw_receipt_verified')):
+              raise SystemExit('UNAPPROVED: strict validation has not passed, no CAS or publish allowed')
+          PY
+      - name: Preserve exact validation receipt (never public credentials)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80848-strict-review-receipt
+          path: official-reviewed-evidence/
+          retention-days: 7
