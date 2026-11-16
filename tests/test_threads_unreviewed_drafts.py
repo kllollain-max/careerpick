@@ -13,7 +13,7 @@ class DraftWriterTests(unittest.TestCase):
                 "title": "전산직 채용", "employment": "정규직",
                 "application_period": {"start": "2026-11-16T09:00:00+09:00", "start_date_only": False, "end": "2026-11-20", "date_only": True, "evidence": "접수기간 2026.11.17 ~ 2026.11.20", "source_ref": "alio-detail.json#123/scrnprcdrMthdExpln"},
                 "official_url": "https://example.org/notice",
-                "source_post_sha256": "abc", "source_detail_sha256": "def",
+                "source_post_sha256": "a" * 64, "source_detail_sha256": "b" * 64,
                 "application_evidence": "접수기간 2026.11.17 ~ 2026.11.20",
                 "application_source_ref": "alio-detail.json#123/scrnprcdrMthdExpln",
                 "source_snapshot_checked_at": "2026-11-16T08:00:00+09:00",
@@ -104,6 +104,12 @@ class DraftWriterTests(unittest.TestCase):
             {**self.handoff["candidates"][0], "application_period": None}
         ]}
         self.assertEqual(build_drafts(handoff)["drafts"], [])
+
+    def test_rejects_missing_or_invalid_source_fingerprints(self):
+        for bad in (None, "", "abc", "g" * 64):
+            candidate = {**self.handoff["candidates"][0], "source_post_sha256": bad}
+            handoff = {**self.handoff, "candidates": [candidate]}
+            self.assertEqual(build_drafts(handoff)["drafts"], [])
 
     def test_no_draft_without_source_identity(self):
         handoff = {**self.handoff, "candidates": [
