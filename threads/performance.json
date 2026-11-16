@@ -4521,6 +4521,476 @@
           "final_first_sentence": "한국 공인회계사 자격이 있다면,"
         }
       }
+    },
+    {
+      "observation_id": "29baf4eb110eccde3c67bed62e2a5f545a501283c63ffd30610d171ba432ab15",
+      "post_id": "18111349063925875",
+      "window": "24h",
+      "captured_at": "2026-11-16T11:49:43.547643+00:00",
+      "published_at": "2026-11-15T11:28:51.273502+00:00",
+      "elapsed_seconds": 87652.274141,
+      "delay_seconds": 1252.274141,
+      "timing": "within_one_hour",
+      "comparable_milestone": true,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 1076,
+        "likes": 3,
+        "replies": 0,
+        "reposts": 2,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.2788104089219331,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "18111349063925875",
+        "checked_at": "2026-11-16T11:49:43.264722+00:00",
+        "reason": null,
+        "expected_text_sha256": "df8cca712334cd1a1cd2fc7b1844bad50b95c7f37de4b4b77c03dc89fa315c18",
+        "actual_text_sha256": "df8cca712334cd1a1cd2fc7b1844bad50b95c7f37de4b4b77c03dc89fa315c18",
+        "actual_first_sentence": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "18111349063925875",
+        "notice_id": "a305734",
+        "published_at": "2026-11-15T11:28:51.273502+00:00",
+        "scheduled_at": "2026-11-15T20:00:00+09:00",
+        "slot_hour_kst": 20,
+        "actual_hour_kst": 20,
+        "body_chars": 230,
+        "first_sentence": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,\n세종 한국조세재정연구원 (부)연구위원 정규직 10명 모집을 확인해요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "박사학위 취득예정자도 지원할 수 있어요.\n한국조세재정연구원 (부)연구위원 정규직 10명, 세종 근무예요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "조세·재정 정책을 연구할 분을 모집해요.\n한국조세재정연구원 (부)연구위원 정규직 10명이에요."
+            }
+          ],
+          "selected_hook_id": "target",
+          "first_sentence_type": "target",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "경제학 또는 관련 분야 박사학위 소지자·취득예정자",
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "excerpt": "경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함)",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "경제학",
+                  "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+                  "excerpt": "경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함)"
+                },
+                {
+                  "summary": "관련 분야",
+                  "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+                  "excerpt": "경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함)"
+                }
+              ]
+            },
+            {
+              "text": "임용 시 박사학위와 한국어 소통·독립연구 역량이 필요해요.",
+              "source_ref": "https://econjobmarket.org/positions/12745",
+              "excerpt": "Applicants must have Ph.D. Degree in Economics or related field at the time employment begins. The candidates selected for the position must demonstrate strong independent research abilities and fluent communication skills in Korean.",
+              "classification": "required",
+              "logic": "all_of",
+              "paths": [
+                {
+                  "summary": "박사학위",
+                  "source_ref": "https://econjobmarket.org/positions/12745",
+                  "excerpt": "Applicants must have Ph.D. Degree in Economics or related field at the time employment begins."
+                },
+                {
+                  "summary": "한국어 소통·독립연구 역량",
+                  "source_ref": "https://econjobmarket.org/positions/12745",
+                  "excerpt": "The candidates selected for the position must demonstrate strong independent research abilities and fluent communication skills in Korean."
+                }
+              ]
+            },
+            {
+              "text": "전일근무(09~18시)가 가능해야 해요.",
+              "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+              "excerpt": "전일근무(09:00∼18:00) 가능한 자",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "추천서 3부는 추천인 3명이 접수 시스템으로 제출해요.",
+            "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+            "excerpt": "추천서 3부 ※추천인 3인이 Econ Job Market 시스템을 통하여 제출"
+          },
+          "recruitment_unit": {
+            "title": "(부)연구위원",
+            "count": 10,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+            "excerpt": "연구직 (부)연구위원 경제학 또는 관련 분야 박사학위 소지자 (학위취득 예정자 포함) 10명"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-15T17:41:19.421692+09:00",
+            "result": "none_found",
+            "source_ref": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/list.do",
+            "checked_scope": "Current official detail, PDF pages 1–2, latest recruitment board page 1 (9 entries through 2026-11-13), current ALIO notice and institution-linked EJM accepting applications.",
+            "limitations": "Not exhaustive across all 43 board pages or other boards. Earlier web retrieval 502; subsequent direct official detail and board GET succeeded."
+          },
+          "style_rewrites": 0,
+          "selection_reason": "Confirmed regular employment and a single unit of 10, sufficient preparation interval, research role adds occupational diversity. No measured occupation/region interest or invented popularity. Target intro matches 20h TEXT balance recommendation.",
+          "public_preview": {
+            "main_text": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,\n세종 한국조세재정연구원 (부)연구위원 정규직 10명 모집을 확인해요.\n\n임용 시 박사학위와 한국어 소통·독립연구 역량이 필요해요. 전일근무(09~18시)가 가능해야 해요.\n추천서 3부는 추천인 3명이 접수 시스템으로 제출해요.\n\n마감은 11월 30일 23:59:59 UTC예요. 한국시간으로 12월 1일 08:59:59예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "presentation_style": "eligibility_info",
+          "experiment_eligible": true,
+          "comparison_context": {
+            "media": "TEXT",
+            "slot_hour_kst": 20,
+            "employment": "정규직",
+            "unit_count": 10,
+            "job": "연구",
+            "region": "세종",
+            "deadline_remaining_hours": 372.9997222222222,
+            "measured_reader_interest": null
+          },
+          "value_sentence": null,
+          "question": null
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "deadline_opportunity",
+        "media": "TEXT",
+        "org": "한국조세재정연구원",
+        "job": "(부)연구위원",
+        "employment": "정규직",
+        "recruitment_unit_count": 10,
+        "location": "세종",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "media": "TEXT",
+          "slot_hour_kst": 20,
+          "employment": "정규직",
+          "unit_count": 10,
+          "job": "연구",
+          "region": "세종",
+          "deadline_remaining_hours": 372.9997222222222,
+          "measured_reader_interest": null
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-30T23:59:59+00:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 1341067.726498,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "18111349063925875",
+          "checked_at": "2026-11-16T11:49:43.264722+00:00",
+          "reason": null,
+          "expected_text_sha256": "df8cca712334cd1a1cd2fc7b1844bad50b95c7f37de4b4b77c03dc89fa315c18",
+          "actual_text_sha256": "df8cca712334cd1a1cd2fc7b1844bad50b95c7f37de4b4b77c03dc89fa315c18",
+          "actual_first_sentence": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,"
+        }
+      }
+    },
+    {
+      "observation_id": "672e71b2a3e117f0d5ffc7a2dfe275e5657d7e1a5c0dbd5c286316e0473d1bbb",
+      "post_id": "17922530685243848",
+      "window": "72h",
+      "captured_at": "2026-11-16T11:49:43.887535+00:00",
+      "published_at": "2026-11-13T11:46:01.646497+00:00",
+      "elapsed_seconds": 259422.241038,
+      "delay_seconds": 222.241038,
+      "timing": "within_one_hour",
+      "comparable_milestone": true,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 9324,
+        "likes": 28,
+        "replies": 0,
+        "reposts": 5,
+        "quotes": 1
+      },
+      "likes_rate_percent": 0.3003003003003003,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "17922530685243848",
+        "checked_at": "2026-11-16T11:49:43.687420+00:00",
+        "reason": null,
+        "expected_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+        "actual_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+        "actual_first_sentence": "접수·진료 보조 일을 찾는다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "17922530685243848",
+        "notice_id": "a306717",
+        "published_at": "2026-11-13T11:46:01.646497+00:00",
+        "scheduled_at": "2026-11-13T20:00:00+09:00",
+        "slot_hour_kst": 20,
+        "actual_hour_kst": 20,
+        "body_chars": 298,
+        "first_sentence": "접수·진료 보조 일을 찾는다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "접수·진료 보조 일을 찾는다면,\n서울대학교치과병원 간호원무직 정규직 1명 공고예요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "간호조무사 자격증은 우대인 공고예요.\n서울대학교치과병원 간호원무직 정규직 1명을 뽑아요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "환자 접수와 진료보조를 맡아요.\n서울대학교치과병원 간호원무직 정규직 1명 공고예요."
+            }
+          ],
+          "selected_hook_id": "target",
+          "first_sentence_type": "target",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "간호조무사 자격증은 우대예요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "원무직 간호원무직 A1 1 - 간호조무사 자격증 소지자 및 장애인 , 국가보훈대상자",
+              "classification": "preferred",
+              "logic": "single"
+            },
+            {
+              "text": "11월 4일 공고일 기준 만 60세 미만이어야 해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "공고일 기준 정년퇴직 기준연령 ( 만 60 세 ) 에 도달한 자는 지원할 수 없음",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "남자는 2027년 1월 1일 임용일 기준 병역필 또는 면제여야 해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "남자는 임용일 (‘27.1.1.) 기준 병역필 또는 면제자에 한함",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "병역필",
+                  "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+                  "excerpt": "남자는 임용일 (‘27.1.1.) 기준 병역필 또는 면제자에 한함"
+                },
+                {
+                  "summary": "면제",
+                  "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+                  "excerpt": "남자는 임용일 (‘27.1.1.) 기준 병역필 또는 면제자에 한함"
+                }
+              ]
+            },
+            {
+              "text": "3개월 조건부 평가가 양호해야 정식 임용돼요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "다 . 인사규정 제 21 조에 의거하여 최종합격자는 채용될 직위에 3 개월간의 조건부 기간을 거쳐 근무성적이 양호한 때 정규직원으로 임용함 . 다만 , 인력수급상 특히 필요하다고 인정되는 경우에는 적용하지 않을 수 있음 ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "서울 근무, 분원·수탁기관 배치와 다른 직무 수행도 가능해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "마 . 동종 직무를 수행하는 다른 부서 ( 분원 , 수탁기관 포함 ) 에서도 근무할 수 있음 바 . 입사 후 인사관리 상 지원직무 외 타 직무를 수행할 수 있음 ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "다른 진행 공고와 중복지원은 안 돼요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "동시 진행 중인 본원 타 채용공고에 중복지원 불가",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "최종면접 전 인성검사를 완료해야 해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "2) 실무면접 합격자는 최종면접 이전 인성검사에 응시해야 하며 , 인성검사는 면접 참고자료로 활용 ( 인성검사 미응시 · 미완료시 최종면접 응시 불가 ) ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "결격 기준도 확인해요.",
+              "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+              "excerpt": "나 . 국가공무원법 제 33 조 , 인사규정 제 19 조 ( 결격사유 ), 직원 채용 세칙 제 15 조 ( 채용 취소 ) 에 해당하는 경우 합격 또는 임용이 취소됨 ",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "최종면접 전 인성검사를 완료해야 해요.",
+            "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+            "excerpt": "2) 실무면접 합격자는 최종면접 이전 인성검사에 응시해야 하며 , 인성검사는 면접 참고자료로 활용 ( 인성검사 미응시 · 미완료시 최종면접 응시 불가 ) "
+          },
+          "recruitment_unit": {
+            "title": "간호원무직",
+            "count": 1,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+            "excerpt": "원무직 간호원무직 A1 1 - 간호조무사 자격증 소지자 및 장애인 , 국가보훈대상자",
+            "normalization": "A1 is the grade; the following integer 1 is this row count. Notice-wide 15 is not used."
+          },
+          "correction_check": {
+            "checked_at": "2026-11-13T08:29:10.046790+09:00",
+            "result": "none_found",
+            "source_ref": "https://snudh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271419",
+            "checked_scope": "현재 ALIO 상세, 동일 ATS 원무직 지원 공고 전체 본문 및 첨부 공고 3쪽 시각검토, 직무기술서·블라인드 기준·서류전형 기준 본문 대조",
+            "limitations": [
+              "별도 정정 게시판·FAQ의 과거 전체 이력은 조회하지 않음",
+              "입사지원 작성요령 PDF는 다운로드·해시 확인만 했고 전체 시각검토하지 않음",
+              "서류반환·이의신청 HWP 양식 및 성적계산 엑셀은 열지 않음; 실제 지원 입력·제출은 하지 않음"
+            ]
+          },
+          "style_rewrites": 2,
+          "selection_reason": "공식 진행 중인 정규직 단일 모집단위 1명. 필수 자격증이 없고 우대와 공통 제한을 구분할 수 있으며 11월18일 정오까지 준비시간을 확보한다. 최근 기계·광해·회계 공고 이후 업무 다양성을 고려하며 직무·지역 인기도를 추정하지 않는다.",
+          "presentation_style": "regular_interest",
+          "presentation_style_reason": "앞선16시 자격조건 정보형 뒤에 직무 대상형 도입을 사용한다. 실제 미디어 교대와 독립적으로 운용하고 성과 승자·비중 조정은 유보한다.",
+          "public_preview": {
+            "main_text": "접수·진료 보조 일을 찾는다면,\n서울대학교치과병원 간호원무직 정규직 1명 공고예요.\n\n간호조무사 자격증은 우대예요.\n11월 4일 공고일 기준 만 60세 미만이어야 해요.\n남자는 2027년 1월 1일 임용일 기준 병역필 또는 면제여야 해요.\n\n3개월 조건부 평가가 양호해야 정식 임용돼요.\n서울 근무, 분원·수탁기관 배치와 다른 직무 수행도 가능해요.\n\n다른 진행 공고와 중복지원은 안 돼요.\n최종면접 전 인성검사를 완료해야 해요.\n결격 기준도 확인해요.\n\n11월 18일 12:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "card_restriction": "공고일 기준 만 60세 미만",
+          "experiment_eligible": true,
+          "comparison_context": {
+            "comparison": "different notices observational only",
+            "media_assignment": "actual successful ledger at reservation; image asset prepared without consuming alternation",
+            "weights_changed": false,
+            "length_target_note": "298자; 연령 기준일·병역 OR·조건부 임용·배치 범위를 보존하여 목표250자를 초과하나 정상상한300자 이내"
+          },
+          "card_visual_review": {
+            "status": "passed",
+            "reviewed_width": 360,
+            "reviewed_at": "2026-11-13T08:38:07.267373+09:00",
+            "sha256": "8795970f5bb7b9a084685818c717ce0ee72c7a3ff1ea8f22dfd5f9aaf487a66b",
+            "preview_sha256": "44719accf039f2f3cbd9deb835e156c09645ac585a17e30cf5aed998a449ee10",
+            "asset_path": "threads-images/a306717.jpg",
+            "preview_asset_path": "threads-images/a306717-360.png",
+            "facts_sha256": "f898b3fcad8ba73266d5c721f62791c1e0327c8c91cf5af36d1386ab85a236f6",
+            "layout_version": "careerpick-single-main-card-v2",
+            "observations": "실제1080JPEG와 동일JPEG에서 LANCZOS 생성한360PNG를 열어 간호원무직/정규직1명/서울대학교치과병원/11월18일12:00/공고일기준만60세미만 한글·숫자·잘림·본문 일치를 확인함. 둘 다 모든 핵심문구 가독성 양호."
+          }
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "deadline_opportunity",
+        "media": "IMAGE",
+        "org": "서울대학교치과병원",
+        "job": "간호원무직",
+        "employment": "정규직",
+        "recruitment_unit_count": 1,
+        "location": "서울",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "comparison": "different notices observational only",
+          "media_assignment": "actual successful ledger at reservation; image asset prepared without consuming alternation",
+          "weights_changed": false,
+          "length_target_note": "298자; 연령 기준일·병역 OR·조건부 임용·배치 범위를 보존하여 목표250자를 초과하나 정상상한300자 이내"
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-18T12:00:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 400438.353503,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "17922530685243848",
+          "checked_at": "2026-11-16T11:49:43.687420+00:00",
+          "reason": null,
+          "expected_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+          "actual_text_sha256": "116b6db1a4f1801c1819f6aedb96251fdcb7fd3f3096db9a11a557d1947885c0",
+          "actual_first_sentence": "접수·진료 보조 일을 찾는다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "접수·진료 보조 일을 찾는다면,"
+        }
+      }
     }
   ],
   "account_observations": [
@@ -4729,6 +5199,16 @@
       "account": "hid_119",
       "captured_at": "2026-11-16T10:46:52.260279+00:00",
       "followers_count": 477,
+      "status": "captured",
+      "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
+      "scope": "account_total",
+      "post_attribution": null
+    },
+    {
+      "observation_id": "e98417f82464834ab5ba44c4bfafc1e4eef2e5849f14c30b13a89c4fe7948ecf",
+      "account": "hid_119",
+      "captured_at": "2026-11-16T11:49:44.062754+00:00",
+      "followers_count": 478,
       "status": "captured",
       "source": "https://graph.threads.net/v1.0/me/threads_insights?metric=followers_count",
       "scope": "account_total",
