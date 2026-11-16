@@ -72,6 +72,10 @@ def build_drafts(handoff):
               continue
           if not isinstance(source_ref, str) or not source_ref.strip():
               continue
+          # Candidate identity must remain traceable to immutable source snapshots.
+          hashes = (candidate.get("source_post_sha256"), candidate.get("source_detail_sha256"))
+          if any(not isinstance(h, str) or len(h) != 64 or any(c not in "0123456789abcdef" for c in h) for h in hashes):
+              continue
           if period.get('evidence') != evidence or period.get('source_ref') != source_ref:
               continue
           # No invented headcount, requirements, or exact cutoff time.
