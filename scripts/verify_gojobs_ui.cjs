@@ -10,7 +10,15 @@ assert(candidates.length,'No currently open GOJOBS notices in public feed; check
 let selected=null;
 for(const candidate of candidates){
   await page.goto(BASE+'?q='+encodeURIComponent(candidate.title),{waitUntil:'networkidle'});
-  if(await page.locator('[data-open="'+candidate.id+'"]').first().isVisible().catch(()=>false)){selected=candidate;break;}
+  // networkidle does not mean the deferred feed merge and card render finished.
+  // Wait for the actual card; an immediate visibility read can fail just before
+  // that same card appears in the diagnostic screenshot (public run 21).
+  try{
+    await page.locator('[data-open="'+candidate.id+'"]').first().waitFor({state:'visible',timeout:10000});
+    selected=candidate;break;
+  }catch(error){
+    if(error.name!=='TimeoutError')throw error;
+  }
 }
 if(!selected){
   const diag=await page.evaluate((candidateIds)=>({
