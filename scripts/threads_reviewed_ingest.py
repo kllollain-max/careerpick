@@ -92,7 +92,7 @@ def official_url_allowed(url):
             path = unquote(parts.path)
             if path == "/web/lay1/bbs/S1T225C230/A/3/view.do":
                 return parts.query == "article_seq=5841" and not parts.fragment
-            if re.fullmatch(r"/download\\.do(?:;jsessionid=[0-9A-Fa-f]{32})?", path):
+            if re.fullmatch(r"/download\.do(?:;jsessionid=[0-9A-Fa-f]{32})?", path):
                 return (parts.query in {
                     "uuid=67d8c76c-8846-46d8-9e8f-a87d7ca79983.pdf",
                     "uuid=b96140dd-9408-4fd8-b5ac-361b21f40e53.pdf",
