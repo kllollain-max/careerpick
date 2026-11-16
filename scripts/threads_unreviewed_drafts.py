@@ -26,11 +26,28 @@ def build_drafts(handoff):
         period = candidate.get("application_period")
         if not isinstance(period, dict) or not period.get("end"):
             continue
+        # A date-only end has no verified cutoff clock; a timestamp does.
+        end = period['end']
+        if not isinstance(end, str):
+            continue
+        try:
+            from datetime import date, datetime
+            if period.get('date_only') is True:
+                deadline = date.fromisoformat(end).isoformat() + ' (마감 시각 원문 확인)'
+            elif period.get('date_only') is False:
+                parsed = datetime.fromisoformat(end)
+                if parsed.utcoffset() is None:
+                    continue
+                deadline = parsed.strftime('%Y-%m-%d %H:%M %z')
+            else:
+                continue
+        except ValueError:
+            continue
         # No invented headcount, requirements, or exact cutoff time.
         body = (f"{org} 채용 공고를 확인해 보세요.\n\n"
                 f"모집 공고: {title}\n"
                 f"고용형태: {candidate.get('employment') or '공식 공고 확인 필요'}\n"
-                f"접수 마감: {period['end']} (정확한 시각은 원문 확인)\n\n"
+                f"접수 마감: {deadline}\n\n"
                 "지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n"
                 "자세한 사항은 프로필링크 확인")
         drafts.append({
