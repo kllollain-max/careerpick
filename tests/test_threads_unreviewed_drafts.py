@@ -103,6 +103,20 @@ class DraftWriterTests(unittest.TestCase):
         self.assertEqual(coverage["approved_slots"], [])
         self.assertFalse(result["approved_for_queue"])
 
+    def test_recruiting_unit_is_review_only_not_published_as_fact(self):
+        candidate = {**self.handoff["candidates"][0],
+                     "recruiting_unit_title": "전산직 6급",
+                     "recruiting_unit_count": 5,
+                     "recruiting_unit_scope": "provisional",
+                     "selection_review_reasons": ["OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"]}
+        result = build_drafts({**self.handoff, "candidates": [candidate]})
+        draft = result["drafts"][0]
+        self.assertEqual(draft["recruiting_unit_for_review"]["count"], 5)
+        self.assertEqual(draft["recruiting_unit_for_review"]["verification_status"], "not_verified")
+        self.assertIn("OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED", draft["selection_review_reasons"])
+        self.assertNotIn("5명", draft["draft_text"])
+        self.assertFalse(draft["approved_for_queue"])
+
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
             handoff = {**self.handoff, flag: True}
