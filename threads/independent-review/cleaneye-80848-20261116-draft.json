@@ -16,7 +16,15 @@
     "status": "모집중",
     "opens": "2026-11-01T09:00:00+09:00",
     "closes": "2026-11-20T12:00:00+09:00",
-    "recruiting_unit": "공무직 사원"
+    "recruiting_unit": "공무직 사원",
+    "source_raw_receipt": {
+      "url": "https://recruit.incruit.com/cleanmetro/job/2610280002",
+      "sha256": "c54008ee643aa3a662419a18ccd65488a2fb30e1e9e4527230a35d66204439b0",
+      "size_bytes": 18576,
+      "checked_at": "2026-11-16T20:13:21.935444+09:00",
+      "status": "html_bytes_verified",
+      "proof_run_id": "43855799922"
+    }
   },
   "published_ad_full_text": {
     "url": "https://lab.incruit.com/jobs/2610300002976",
@@ -85,9 +93,14 @@
         1,
         2
       ],
-      "sha256_verified": false,
+      "sha256_verified": true,
       "source": "Company-published Incruit-hosted attachments",
-      "semantic_scope": "company and security-occupation disqualification"
+      "semantic_scope": "company and security-occupation disqualification",
+      "document_sha256": "d46803ffed8346db7482683707aa9deaf98ba4b51821eb8dac3f273384cf4387",
+      "size_bytes": 141557,
+      "raw_bytes_checked_at": "2026-11-16T20:13:23.979028+09:00",
+      "pdf_magic_valid": true,
+      "raw_bytes_proof_run_id": "43855799922"
     },
     {
       "filename": "붙임2. 서류전형 평가기준.pdf",
@@ -98,9 +111,14 @@
         1,
         2
       ],
-      "sha256_verified": false,
+      "sha256_verified": true,
       "source": "Company-published Incruit-hosted attachments",
-      "semantic_scope": "self-introduction and blind-recruitment assessment rules"
+      "semantic_scope": "self-introduction and blind-recruitment assessment rules",
+      "document_sha256": "a6061bc734d14dbc650e3b20eac06030b275023ede5b3f18c907159ad908b207",
+      "size_bytes": 74791,
+      "raw_bytes_checked_at": "2026-11-16T20:13:25.077373+09:00",
+      "pdf_magic_valid": true,
+      "raw_bytes_proof_run_id": "43855799922"
     },
     {
       "filename": "붙임3. 서울교통공사 재취업심사 및 취업제한심사 관련.pdf",
@@ -111,9 +129,14 @@
         1,
         2
       ],
-      "sha256_verified": false,
+      "sha256_verified": true,
       "source": "Company-published Incruit-hosted attachments",
-      "semantic_scope": "Seoul Metro reemployment/employment-restriction review"
+      "semantic_scope": "Seoul Metro reemployment/employment-restriction review",
+      "document_sha256": "cc030bb9589c14280840db8a0272f6a36e2b42396a722bef4be9bf0fcc91d022",
+      "size_bytes": 170020,
+      "raw_bytes_checked_at": "2026-11-16T20:13:27.012340+09:00",
+      "pdf_magic_valid": true,
+      "raw_bytes_proof_run_id": "43855799922"
     }
   ],
   "draft_only": {
@@ -127,11 +150,12 @@
     "media_hint": "TEXT"
   },
   "blockers": [
-    "Original binary PDF downloads and independently recalculated SHA256 still required; parsed/read website PDF does not prove production fetch_official_digest.",
+    "Independent original bytes SHA256 for the correct employer-published 103-person unit detail https://lab.incruit.com/jobs/2610300002976 must be captured live and connected to fact_evidence before approval.",
     "Latest correction/cancellation status must be checked on employer's official recruitment notices before approval.",
     "Current CareerPick profile destination #job=cleaneye-80848 must be rendered and verified.",
     "validate_entry, v5 text metadata, official receipt verification, and publisher-state CAS supply have not passed for this candidate.",
-    "24-hour evidence freshness must be measured by actual new independent read at approval time; no artificial checked_at."
+    "24-hour evidence freshness must be measured by actual new independent read at approval time; no artificial checked_at.",
+    "Three PDF raw-byte SHA256s verified by isolated GitHub Actions 43855799922; this is NOT approval or proof that no correction exists."
   ],
   "queue_safety": {
     "unreviewed_only": true,
@@ -151,9 +175,11 @@
     "wrong_source_url_replaced": "https://jlab.incruit.com/jobs/2610300002972",
     "wrong_source_unit_title": "2026년 하반기 공개채용 [일반경비원]",
     "basis": "Actual employer-published general-staff 103 versus total 153 and application deadline read directly from the correct public unit page; all three original 2-page published attachment PDFs were independently viewed. PDF original-byte SHA256 and final correction/cancellation cross-check are still required before approval.",
-    "attachment_byte_sha256_verified": false,
+    "attachment_byte_sha256_verified": true,
     "validate_entry_run": false,
     "publisher_cas_supplied": false,
-    "meta_posted": false
+    "meta_posted": false,
+    "attachment_raw_proof_run_id": "43855799922",
+    "actual_details_hash_verified": false
   }
 }

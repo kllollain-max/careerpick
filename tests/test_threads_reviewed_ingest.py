@@ -212,5 +212,21 @@ class ReviewedIngestTests(unittest.TestCase):
 
 
 
+    def test_only_exact_checked_80848_general_staff_employer_detail_allowed(self):
+        canonical = "https://lab.incruit.com/jobs/2610300002976"
+        self.assertTrue(official_url_allowed(canonical))
+        for url in [
+            "https://lab.incruit.com/jobs/2610300002972",
+            "https://jlab.incruit.com/jobs/2610300002976",
+            "https://lab.incruit.com/jobs/2610300002976?fake=1",
+            "https://lab.incruit.com/jobs/2610300002976#top",
+            "https://lab.incruit.com/jobs/2610300002977",
+            "https://evil.lab.incruit.com/jobs/2610300002976",
+            "http://lab.incruit.com/jobs/2610300002976",
+        ]:
+            with self.subTest(url=url):
+                self.assertFalse(official_url_allowed(url))
+
+
 if __name__ == "__main__":
     unittest.main()
