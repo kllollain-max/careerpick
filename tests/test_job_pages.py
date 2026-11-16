@@ -53,6 +53,8 @@ class JobPageTests(unittest.TestCase):
         post.pop('dueHasTime')
         html = render(post, {})
         self.assertIn('<dt>기관 공식 확인 접수마감</dt><dd>2026-11-16 10:00 (KST)</dd>', html)
+        self.assertIn('<dt>원서 접수기간</dt><dd>접수 시작일 및 변경 여부는 공식 공고에서 확인</dd>', html)
+        self.assertNotIn('시작일·마감일·마감시각은 공식 첨부 공고에서 확인', html)
         self.assertIn('<dt>ALIO 게시 종료일 · 접수마감 원문 확인</dt><dd>2026-11-16</dd>', html)
         self.assertNotIn('2026-11-16 23:59', html)
         self.assertNotIn('<script type="application/ld+json">', html)
