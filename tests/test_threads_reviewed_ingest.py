@@ -34,6 +34,26 @@ class ReviewedIngestTests(unittest.TestCase):
                     {}, {}, {}, self.now, fetch_digest=fetch_digest or (lambda url: "a" * 64),
                     claimed_slots=claimed_slots)
 
+
+    def test_wonju_employer_exact_notice_and_two_annexes_only(self):
+        notice = "https://cms.wfmc.kr/web/lay1/bbs/S1T225C230/A/3/view.do?article_seq=5841"
+        pdf1 = "https://cms.wfmc.kr/download.do?uuid=67d8c76c-8846-46d8-9e8f-a87d7ca79983.pdf"
+        pdf2 = "https://cms.wfmc.kr/download.do?uuid=b96140dd-9408-4fd8-b5ac-361b21f40e53.pdf"
+        for url in (notice, pdf1, pdf2):
+            self.assertTrue(official_url_allowed(url), url)
+        # The server may redirect a download to this exact sessionized path.
+        self.assertTrue(official_url_allowed(
+            "https://cms.wfmc.kr/download.do;jsessionid=" + "A" * 32 +
+            "?uuid=67d8c76c-8846-46d8-9e8f-a87d7ca79983.pdf"))
+        self.assertFalse(official_url_allowed(notice.replace("5841", "5842")))
+        self.assertFalse(official_url_allowed(pdf1.replace("67d8c76c", "67d8c76d")))
+        self.assertFalse(official_url_allowed(pdf1 + "&extra=1"))
+        self.assertFalse(official_url_allowed(pdf1.replace("https:", "http:")))
+        self.assertFalse(official_url_allowed(pdf2 + "#other"))
+        self.assertFalse(official_url_allowed(
+            "https://cms.wfmc.kr/download.do;jsessionid=x?uuid=b96140dd-9408-4fd8-b5ac-361b21f40e53.pdf"))
+        self.assertFalse(official_url_allowed("https://fake-wfmc.kr/download.do?uuid=x"))
+
     def test_official_receipt_fetch_retries_only_transient_reads(self):
         import hashlib
         import urllib.error

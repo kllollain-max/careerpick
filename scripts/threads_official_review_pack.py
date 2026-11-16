@@ -45,6 +45,14 @@ CANONICAL_REVIEW_URLS = {
         "source_detail_sha256": "f342ddd996f5d36479de4899f66d7e4d97355a1f6c28c252913b399a7b9a6371",
         "url": "https://recruit.incruit.com/cleanmetro/job/2610280002",
     },
+    # Exact city-facility employer posting, matched to one Cleaneye 81115
+    # snapshot. The attached 22-page notice and three-page job description
+    # remain independent editorial review material, never auto-approval.
+    "cleaneye-81115": {
+        "source_post_sha256": "c2be94b6d942146ecb2f7abd5db2bb322c37e8add110f45d6fb3014575288305",
+        "source_detail_sha256": "c74f8386011d789fa568f6d731b80d723fea7ac14f92661f57642b60316b66cb",
+        "url": "https://cms.wfmc.kr/web/lay1/bbs/S1T225C230/A/3/view.do?article_seq=5841",
+    },
 }
 
 # Exact attachments published with the independently located 2026-17 employer
@@ -54,6 +62,12 @@ CANONICAL_REVIEW_ANNEXES = {
             "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%841.%20%EC%B1%84%EC%9A%A9%EA%B2%B0%EA%B2%A9%EC%82%AC%EC%9C%A0%20%EA%B4%80%EB%A0%A8.pdf",
             "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%842.%20%EC%84%9C%EB%A5%98%EC%A0%84%ED%98%95%20%ED%8F%89%EA%B0%80%EA%B8%B0%EC%A4%80.pdf",
             "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%843.%20%EC%84%9C%EC%9A%B8%EA%B5%90%ED%86%B5%EA%B3%B5%EC%82%AC%20%EC%9E%AC%EC%B7%A8%EC%97%85%EC%8B%AC%EC%82%AC%20%EB%B0%8F%20%EC%B7%A8%EC%97%85%EC%A0%9C%ED%95%9C%EC%8B%AC%EC%82%AC%20%EA%B4%80%EB%A0%A8.pdf"
+    ],
+    # These are the two exact PDFs linked from the 2026-17 employer
+    # posting. Source bytes must be fetched and reviewed independently.
+    "cleaneye-81115": [
+        "https://cms.wfmc.kr/download.do?uuid=67d8c76c-8846-46d8-9e8f-a87d7ca79983.pdf",
+        "https://cms.wfmc.kr/download.do?uuid=b96140dd-9408-4fd8-b5ac-361b21f40e53.pdf"
     ],
 }
 
