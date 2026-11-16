@@ -20,6 +20,9 @@ def build_drafts(handoff):
         raise ValueError("INVALID_HANDOFF")
     drafts = []
     used_notice_ids = set()
+    # Reject duplicate or malformed slot identifiers before preparing any draft.
+    if any(not isinstance(slot, str) for slot in slots) or len(set(slots)) != len(slots):
+        raise ValueError("INVALID_OR_DUPLICATE_SLOTS")
     # Keep independent alternatives when the first official review fails.
     # These remain unapproved and cannot reach the publisher.
     for slot in slots:
