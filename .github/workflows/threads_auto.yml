@@ -58,10 +58,27 @@ jobs:
           python-version: '3.11'
       - name: Read digest-bound verification of unchanged collection snapshots
         run: python scripts/threads_source_verification.py
+      - name: Read independently reviewed submissions from publisher-state (no approval)
+        run: |
+          python - <<'PY'
+          import json, os, urllib.error
+          from pathlib import Path
+          from scripts.threads_queue_bridge import read
+          try:
+              bundle, _ = read('threads/reviewed-submissions.json', os.environ['THREADS_CLAIM_TOKEN'])
+          except urllib.error.HTTPError as exc:
+              if exc.code != 404:
+                  raise
+              print('No independently reviewed submissions on publisher-state; unreviewed drafts cannot be promoted.')
+          else:
+              Path('threads-reviewed-submissions-input.json').write_text(
+                  json.dumps(bundle, ensure_ascii=False, indent=2) + '\\n', encoding='utf-8')
+              print('Reviewed submissions fetched for full official-source and publisher validation.')
+          PY
       - name: Intake independently reviewed v5 entries only (optional, never auto-approve)
         run: |
-          if [ -f threads/reviewed-submissions.json ]; then
-            python scripts/threads_reviewed_ingest.py --input threads/reviewed-submissions.json --apply --output threads-reviewed-ingest-report.json
+          if [ -f threads-reviewed-submissions-input.json ]; then
+            python scripts/threads_reviewed_ingest.py --input threads-reviewed-submissions-input.json --apply --output threads-reviewed-ingest-report.json
           else
             echo 'No independently reviewed submissions supplied; cannot synthesize approval from candidate data.'
           fi
