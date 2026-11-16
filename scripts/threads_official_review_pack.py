@@ -58,6 +58,19 @@ CANONICAL_REVIEW_ANNEXES = {
 }
 
 
+# Exact original employer recruitment board. This only supplies independent
+# evidence for correction review, never confirmation that every other board
+# contains no amendment, and never automatic editorial approval.
+CANONICAL_REVIEW_BOARDS = {
+    "cleaneye-80848": {
+        "source_post_sha256": "60f60ec1399d17fc1cf09cae49d3365377ee78ff20f4bb584a15398fc14c8ada",
+        "source_detail_sha256": "f342ddd996f5d36479de4899f66d7e4d97355a1f6c28c252913b399a7b9a6371",
+        "url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1",
+        "expected_notice": "[공고 제2026-17호]",
+    },
+}
+
+
 def independently_located_notice(draft):
     reviewed = CANONICAL_REVIEW_URLS.get(draft.get("notice_id"))
     if (reviewed and
@@ -219,6 +232,41 @@ def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
                         r["status"] == "raw_pdf_sha256_captured" for r in receipts)
                     else "raw_pdf_receipts_incomplete")
                 item["attachment_review_required"] = True
+            # A board receipt is an independent reviewer input, not a
+            # claim that later corrections are impossible. Any denial or
+            # redirect remains a blocking, explicitly reported source failure.
+            board = CANONICAL_REVIEW_BOARDS.get(nid)
+            if (board and draft.get("source_post_sha256") == board["source_post_sha256"]
+                    and draft.get("source_detail_sha256") == board["source_detail_sha256"]):
+                receipt = {
+                    "url": board["url"],
+                    "status": "not_verified",
+                    "correction_absence_verified": False,
+                    "publisher_validate_entry": "not_run",
+                }
+                try:
+                    if not official_url_allowed(board["url"]):
+                        raise ValueError("OFFICIAL_RECRUITMENT_BOARD_URL_NOT_ALLOWED")
+                    fetched = fetch(board["url"])
+                    if (not isinstance(fetched, dict)
+                            or fetched.get("url") != board["url"]
+                            or not re.fullmatch(r"[0-9a-f]{64}", str(fetched.get("sha256", "")))):
+                        raise ValueError("OFFICIAL_RECRUITMENT_BOARD_RECEIPT_INVALID")
+                    excerpt = fetched.get("visible_text_excerpt") or ""
+                    receipt.update(
+                        status="board_bytes_fetched_for_independent_review",
+                        sha256=fetched["sha256"],
+                        size_bytes=fetched.get("size_bytes"),
+                        checked_at=fetched.get("checked_at"),
+                        target_notice_visible=board["expected_notice"] in excerpt,
+                        semantic_review="required",
+                    )
+                except (ValueError, OSError, urllib.error.URLError) as exc:
+                    receipt["block_reason"] = (
+                        str(exc) if isinstance(exc, ValueError)
+                        else "OFFICIAL_RECRUITMENT_BOARD_UNAVAILABLE"
+                    )[:120]
+                item["employer_recruitment_board_receipt"] = receipt
         except (ValueError, OSError, urllib.error.URLError) as error:
             item["block_reason"] = (str(error) if isinstance(error, ValueError)
                                     else "OFFICIAL_SOURCE_UNAVAILABLE")[:120]
