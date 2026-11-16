@@ -35,8 +35,8 @@ jobs:
               await p.goto(candidate.href,{waitUntil:'domcontentloaded',timeout:45000});
               await p.waitForTimeout(5000);
               const original=await p.locator('body').innerText({timeout:15000});
-              if(!/병동/.test(original)||!/50/.test(original)||!/11[.]?20/.test(original)) throw Error('EMPLOYER_NOTICE_DOES_NOT_MATCH_OFFICIAL_ALIO_66_50');
               console.log('SNUBH_LIVE_EXACT_NOTICE',JSON.stringify({url:p.url(),title:candidate.text,body:original.slice(0,14500)},null,2));
+              if(!/병동/.test(original)||!/50/.test(original)||!/11[.]?\\s*20/.test(original)) throw Error('EMPLOYER_NOTICE_DOES_NOT_MATCH_OFFICIAL_ALIO_66_50');
             }finally{await b.close()}
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
