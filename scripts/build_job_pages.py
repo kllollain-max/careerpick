@@ -343,6 +343,8 @@ def render(post, detail, related_posts=(), notice_review=None):
     # 같은 기관의 다른 ALIO 공고만 연결하며 모집분야가 같다고 추정하지 않습니다.
     related_items = []
     for other in related_posts:
+        if review.get("decision") == "same_notice" and other.get("id") in review["peer_ids"]:
+            continue
         other_id = clean(other.get('id'))
         if other_id == pid or not re.fullmatch(r'a[0-9]+', other_id):
             continue
@@ -910,6 +912,9 @@ def main():
             continue
         item_id = clean(item.get('id'))
         item_org = clean(item.get('org'))
+        item_review = notice_reviews.get(item_id, {})
+        if item_review.get('decision') == 'same_notice' and item_review['representative_id'] != item_id:
+            continue
         if re.fullmatch(r'a[0-9]+', item_id) and item_org and clean(item.get('title')):
             by_org.setdefault(item_org, []).append(item)
     for group in by_org.values():
