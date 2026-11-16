@@ -20,6 +20,15 @@ class DraftWriterTests(unittest.TestCase):
             }],
         }
 
+    def test_duplicate_missing_slots_are_rejected(self):
+        slot = self.handoff["missing_slots"][0]
+        with self.assertRaisesRegex(ValueError, "INVALID_OR_DUPLICATE_SLOTS"):
+            build_drafts({**self.handoff, "missing_slots": [slot, slot]})
+
+    def test_non_string_missing_slot_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "INVALID_OR_DUPLICATE_SLOTS"):
+            build_drafts({**self.handoff, "missing_slots": [None]})
+
     def test_draft_is_never_approved_or_posted(self):
         result = build_drafts(self.handoff)
         self.assertEqual(len(result["drafts"]), 1)
