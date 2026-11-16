@@ -196,6 +196,21 @@ class ReviewedIngestTests(unittest.TestCase):
         self.assertEqual(refused[0]["reason"], "NOTICE_ALREADY_USED_OR_INVALID")
 
 
+    def test_only_exact_cleanmetro_full_ad_source_is_allowed(self):
+        exact = "https://lab.incruit.com/jobs/2610300002976"
+        self.assertTrue(official_url_allowed(exact))
+        for bad in (
+            "https://lab.incruit.com/jobs/2610300002972",
+            "https://lab.incruit.com/jobs/2610300002976?foo=bar",
+            "https://lab.incruit.com/jobs/2610300002976#x",
+            "https://evil.lab.incruit.com/jobs/2610300002976",
+            "http://lab.incruit.com/jobs/2610300002976",
+            "https://lab.incruit.com/other",
+            "https://lab.incruit.com/jobs/26103000029760",
+        ):
+            with self.subTest(url=bad):
+                self.assertFalse(official_url_allowed(bad))
+
     def test_only_exact_checked_smrtg_notice_is_allowed(self):
         canonical = "https://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155"
         self.assertTrue(official_url_allowed(canonical))
