@@ -12,6 +12,7 @@ import ipaddress
 import json
 import os
 import re
+import subprocess
 import time
 import urllib.error
 import urllib.request
@@ -31,6 +32,11 @@ from scripts.threads_queue_bridge import (ROOT, BRANCH, QUEUE, STAGING, future_s
 
 KST = ZoneInfo("Asia/Seoul")
 MAX_OFFICIAL_BYTES = 20_000_000
+# Exact original notice attachment chosen from the employer's live job board:
+# https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&wr_id=430
+# Signed download nonces rotate, but this canonical three-field reference
+# always resolves ONLY to the employer's original PDF attachment no=11.
+CLEANMETRO_2026_17_PDF = "https://cleanmetro.co.kr/bbs/download.php?bo_table=recruit&wr_id=430&no=11"
 
 
 def official_url_allowed(url):
@@ -58,9 +64,13 @@ def official_url_allowed(url):
         # identified Cleanmetro 2026-17 notice. This is review evidence only;
         # it must never certify corrections absent or automatically approve.
         if host == "cleanmetro.co.kr":
-            return (parts.path == "/bbs/board.php"
+            pinned_original = (parts.path == "/bbs/download.php"
+                    and parts.query == "bo_table=recruit&wr_id=430&no=11"
+                    and not parts.fragment)
+            pinned_board = (parts.path == "/bbs/board.php"
                     and re.fullmatch(r"bo_table=recruit&page=1(?:&ckattempt=[1-3])?", parts.query) is not None
                     and not parts.fragment)
+            return pinned_original or pinned_board
         # Independently identified employer-managed recruiting portal for
         # Cleaneye 80848. Do not accept unrelated Incruit employers or pages.
         if host == "recruit.incruit.com":
@@ -117,6 +127,20 @@ def fetch_official_digest(url):
     """Re-read actual official bytes, not the writer's claimed excerpt."""
     if not official_url_allowed(url):
         raise ValueError("OFFICIAL_SOURCE_URL_NOT_ALLOWED")
+    if url == CLEANMETRO_2026_17_PDF:
+        # Only exact employer-issued PDF original; NEVER accept a moving HTML
+        # snapshot, guessed document digest, unchecked redirects or stale hash.
+        script = ROOT / "scripts" / "threads_cleanmetro_original_pdf_digest.cjs"
+        try:
+            completed = subprocess.run(
+                ["node", str(script)], cwd=str(ROOT), capture_output=True,
+                text=True, timeout=130, check=True)
+            digest = completed.stdout.strip()
+        except (OSError, subprocess.SubprocessError) as exc:
+            raise ValueError("OFFICIAL_SOURCE_UNAVAILABLE") from exc
+        if not re.fullmatch(r"[0-9a-f]{64}", digest):
+            raise ValueError("OFFICIAL_DOCUMENT_DIGEST_INVALID")
+        return digest
     opener = urllib.request.build_opener(OfficialRedirect())
     req = urllib.request.Request(url, headers={"User-Agent": "CareerPickOfficialReview/1.0",
                                                 "Accept": "*/*"})

@@ -83,6 +83,24 @@ jobs:
                   json.dumps(bundle, ensure_ascii=False, indent=2) + chr(10), encoding='utf-8')
               print('Reviewed submissions fetched for full official-source and publisher validation.')
           PY
+      - name: Detect exact independently reviewed employer PDF requirement
+        id: exact_original_pdf
+        shell: bash
+        run: |
+          if [ -f threads-reviewed-submissions-input.json ] && grep -q '"cleaneye-80848"' threads-reviewed-submissions-input.json; then
+            echo 'required=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'required=false' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.exact_original_pdf.outputs.required == 'true'
+        with:
+          node-version: '22'
+      - name: Install isolated Chromium only for exact employer PDF raw verification
+        if: steps.exact_original_pdf.outputs.required == 'true'
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
       - name: Intake independently reviewed v5 entries only (optional, never auto-approve)
         run: |
           if [ -f threads-reviewed-submissions-input.json ]; then
