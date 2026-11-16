@@ -6,8 +6,10 @@ Uses the actual publisher validator and verifies the original image asset.
 """
 import argparse
 import base64
+import hashlib
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -258,7 +260,35 @@ def request(method, path, token, payload=None):
 
 def read(path, token):
     result = request('GET', path, token)
-    return json.loads(base64.b64decode(result['content']).decode()), result['sha']
+    # Contents responses omit inline data above 1 MiB. Fetch the immutable
+    # blob, never a caller-provided download_url or a moving branch revision.
+    sha = result['sha']
+    if not result.get('content') and result.get('size', 0) > 0:
+        if (not isinstance(sha, str) or not re.fullmatch(r'[0-9a-f]{40}', sha)
+                or type(result.get('size')) is not int
+                or not 0 < result['size'] <= 20_000_000):
+            raise ValueError('QUEUE_BLOB_METADATA_INVALID')
+        repo = os.environ['GITHUB_REPOSITORY']
+        req = urllib.request.Request(
+            'https://api.github.com/repos/' + repo + '/git/blobs/' + sha,
+            headers={'Authorization': 'Bearer ' + token,
+                     'Accept': 'application/vnd.github+json',
+                     'X-GitHub-Api-Version': '2022-11-28'})
+        with urllib.request.urlopen(req, timeout=25) as response:
+            wire = response.read(28_000_001)
+        if len(wire) > 28_000_000:
+            raise ValueError('QUEUE_BLOB_TOO_LARGE')
+        blob = json.loads(wire)
+        if (blob.get('sha') != sha or blob.get('size') != result['size']
+                or blob.get('encoding') != 'base64'):
+            raise ValueError('QUEUE_BLOB_METADATA_MISMATCH')
+        raw = base64.b64decode(''.join(blob['content'].split()), validate=True)
+        actual = hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest()
+        if len(raw) != result['size'] or actual != sha:
+            raise ValueError('QUEUE_BLOB_CONTENT_MISMATCH')
+    else:
+        raw = base64.b64decode(result['content'])
+    return json.loads(raw.decode()), sha
 
 
 def run(apply=False):
