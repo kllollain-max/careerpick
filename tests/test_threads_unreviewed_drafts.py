@@ -59,7 +59,7 @@ class DraftWriterTests(unittest.TestCase):
         self.assertEqual(len(build_drafts(handoff)["drafts"]), 1)
 
     def test_v5_overlength_notice_is_not_silently_truncated(self):
-        candidate = {**self.handoff["candidates"][0], "title": "긴 공고명" * 35}
+        candidate = {**self.handoff["candidates"][0], "title": "긴 공고명" * 100}
         result = build_drafts({**self.handoff, "candidates": [candidate]})
         self.assertEqual(result["drafts"], [])
 
