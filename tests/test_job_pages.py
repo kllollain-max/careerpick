@@ -15,6 +15,46 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_new_official_windows_preserve_publication_and_source_data(self):
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        for pid, start, end in [('a307067', '2026-11-18', '2026-12-01 15:00'),
+                                ('a306816', '2026-11-18 10:00', '2026-11-25 18:00'),
+                                ('a307024', '2026-11-23 10:00', '2026-11-30 10:00')]:
+            p = posts[pid]; original = copy.deepcopy(p)
+            html = render(p, {'pbancBgngYmd': p['pub'][:10]})
+            self.assertIn(start + ' ~ ' + end + ' (KST)', html)
+            self.assertIn('ALIO 게시 시작일', html)
+            self.assertIn('원본 확인일: 2026-11-16', html)
+            self.assertEqual(p, original)
+        self.assertIn('경영·경제 4명, AI 2명', render(posts['a307067'], {}))
+        self.assertIn('무기계약 14명과 기간제 28명', render(posts['a306816'], {}))
+        self.assertIn('실무직 2명·공무직 21명', render(posts['a307024'], {}))
+
+    def test_application_start_metadata_requires_valid_order_and_exact_source(self):
+        from scripts.build_public_site import homepage_cutoff_metadata
+        p = dict(id='a1', alio=True, org='기관', title='공고', due='2026-11-30')
+        proof = dict(organization='기관', title='공고', application_start='2026-11-23T10:00:00+09:00')
+        clocks = {'a1': '2026-11-30T10:00:00+09:00'}
+        def metadata(): return homepage_cutoff_metadata([p], clocks, {'a1': proof})
+        self.assertEqual(metadata()['a1']['start'], proof['application_start'])
+        for value in ['2026-11-31', '2026-12-01', 'invalid', 42]:
+            proof['application_start'] = value
+            self.assertNotIn('start', metadata()['a1'])
+        proof['application_start'] = '2026-11-23'; proof['title'] = '다른 공고'
+        self.assertEqual(metadata(), {})
+
+    def test_static_open_list_waits_for_official_start_and_preserves_source(self):
+        from scripts.build_public_site import static_recruitment_posts
+        posts = [dict(id='a1', pub='2026-11-16'), dict(id='other')]
+        original = copy.deepcopy(posts)
+        metadata = {'a1': dict(start='2026-11-18T10:00:00+09:00', cutoff='2026-11-25T18:00:00+09:00')}
+        for stamp, expected in [('2026-11-18T00:59:59+00:00', ['other']),
+                                ('2026-11-18T01:00:00+00:00', ['a1', 'other']),
+                                ('2026-11-25T09:00:00+00:00', ['other'])]:
+            result = static_recruitment_posts(posts, metadata, datetime.fromisoformat(stamp))
+            self.assertEqual([p['id'] for p in result], expected)
+        self.assertEqual(posts, original)
+
     def test_sector_notices_keep_field_counts_and_unknown_clock(self):
         from scripts.build_job_pages import VERIFIED_DUTIES
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}

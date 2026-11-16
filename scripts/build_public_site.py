@@ -46,7 +46,32 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
             continue
         result[pid] = dict(cutoff=cutoff, org=post['org'], title=post['title'],
                            sourceEndDate=source_end)
+        start = proof.get('application_start', '')
+        if isinstance(start, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?', start):
+            try:
+                clock = datetime.fromisoformat(start if 'T' in start else start + 'T00:00:00+09:00')
+                if clock <= datetime.fromisoformat(cutoff):
+                    result[pid]['start'] = start
+            except ValueError:
+                pass
     return result
+
+def static_recruitment_posts(posts, metadata, now):
+    """Keep future official reception windows out of the static open-job list."""
+    selected = []
+    for post in posts:
+        proof = metadata.get(post.get('id'), {})
+        if proof:
+            if now >= datetime.fromisoformat(proof['cutoff']):
+                continue
+            start = proof.get('start')
+            if start:
+                clock = datetime.fromisoformat(start if 'T' in start else start + 'T00:00:00+09:00')
+                if now < clock:
+                    continue
+        selected.append(post)
+    return selected
+
 
 HOST = "kllollain-max.github.io"
 PREFIX = "/careerpick/"
@@ -274,8 +299,7 @@ def main() -> dict:
     bundle.write_text('window.CP_VERIFIED_APPLICATION_CUTOFFS = ' +
                       json.dumps(cutoffs, ensure_ascii=False) + ';\n' + bundle.read_text(),
                       encoding='utf-8')
-    static_posts = [p for p in alio['posts']
-                    if p['id'] not in cutoffs or not pages.is_closed(cutoffs[p['id']]['cutoff'])]
+    static_posts = static_recruitment_posts(alio['posts'], cutoffs, datetime.now(timezone.utc))
     static_posts += [p for p in blogs['posts'] if p.get('type') != 'j']
     report = output / "job-quality-report.json"
     if report.exists():

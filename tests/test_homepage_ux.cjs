@@ -11,6 +11,29 @@ function cutoffFixture(){
   vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
   return {post,proof,context,api:context.window.CPHome};
 }
+test('official reception start overrides an already published ALIO notice',()=>{
+  const {post,proof,api}=cutoffFixture();
+  proof.start='2026-11-12T10:00:00+09:00';
+  const before=JSON.stringify(post),p={...post,startDate:'2026-11-01'};
+  assert.equal(api.deadline(p,new Date('2026-11-12T00:59:59Z')).cls,'upcoming');
+  assert.notEqual(api.deadline(p,new Date('2026-11-12T01:00:00Z')).cls,'upcoming');
+  assert.equal(api.deadline(p,new Date('2026-11-16T01:00:00Z')).cls,'closed');
+  assert.equal(JSON.stringify(post),before);
+});
+test('date-only official start changes on Korean calendar day without invented clock',()=>{
+  const {post,proof,api}=cutoffFixture();proof.start='2026-11-12';
+  assert.equal(api.deadline(post,new Date('2026-11-11T14:59:59Z')).cls,'upcoming');
+  assert.notEqual(api.deadline(post,new Date('2026-11-11T15:00:00Z')).cls,'upcoming');
+});
+test('invalid or mismatched start evidence never overrides existing dates',()=>{
+  const {post,proof,api}=cutoffFixture();
+  for(const value of ['bad','2026-11-30','2026-13-01',42]){
+    proof.start=value;assert.equal(api.confirmedApplicationStart(post),null);
+  }
+  proof.start='2026-11-12';
+  for(const change of [{title:'changed'},{org:'other'},{due:'2026-11-17'},{alio:false}])
+    assert.equal(api.confirmedApplicationStart({...post,...change}),null);
+});
 test('confirmed cutoff closes at equality while preserving publication metadata',()=>{
   const {post,api}=cutoffFixture(),before=JSON.stringify(post);
   const parsed=api.parseFeed({posts:[post]}).rows[0];

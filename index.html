@@ -817,6 +817,13 @@ function cpConfirmedCutoffLabel(p){
   return cutoff ? `${kst(cutoff).getUTCFullYear()}.${dueLong(cutoff,true)} (KST)` : '';
 }
 
+function cpConfirmedStartLabel(p){
+  const start=CPHome.confirmedApplicationStart?.(p);
+  if(!start)return '';
+  const raw=window.CP_VERIFIED_APPLICATION_CUTOFFS?.[p.id]?.start || '';
+  return `${kst(start).getUTCFullYear()}.${dueLong(start,raw.includes('T'))} (KST)`;
+}
+
 // Keep source health in the feed status; omit the homepage alert banner.
 function updateDataHealth(){
   const el=$("dataHealth");if(!el)return;
@@ -1441,6 +1448,7 @@ function jobCard(p, now){
         ${CPHome.career(p).length ? `<div class="cp-card-career">${esc(CPHome.career(p).join(" · "))}</div>` : ""}
         ${p.start || p.startDate ? `<div class="cp-card-footer">${p.alio ? "ALIO 게시 시작" : "접수 시작"} ${esc(p.start || p.startDate)}</div>` : ""}
         ${p.due ? `<div class="due ${d.cls==="hot" ? "hot" : d.cls==="closed" ? "closed" : ""}">${p.alio ? "ALIO 게시 종료 · 접수마감 원문 확인" : "접수 마감"} ${cpDueLabel(p,{now})}</div>` : `<div class="due closed">${p.always ? "상시 모집 (채용 시 마감)" : "마감일은 원문에서 확인"}</div>`}
+        ${cpConfirmedStartLabel(p) ? `<div class="cp-card-footer">공식 확인 접수시작 ${esc(cpConfirmedStartLabel(p))}</div>` : ''}
         ${cpConfirmedCutoffLabel(p) ? `<div class="cp-card-footer">공식 확인 접수마감 ${esc(cpConfirmedCutoffLabel(p))}</div>` : ''}
       </div>
     </a>
@@ -1461,6 +1469,7 @@ function rowCard(p, now){
   if(p.n) meta.push(p.cleaneye ? cpRecruitCount(p.n) : p.n + "명");
   if((p.emp||[])[0]) meta.push(p.emp[0]);
   if(p.due) meta.push("마감 " + cpDueLabel(p,{now}));
+  if(cpConfirmedStartLabel(p))meta.push('공식 확인 접수시작 '+cpConfirmedStartLabel(p));
   if(cpConfirmedCutoffLabel(p))meta.push('공식 확인 접수마감 '+cpConfirmedCutoffLabel(p));
   const href = esc(jobHref(p));
   const attr = jobAnchorAttrs(p);
@@ -2172,6 +2181,7 @@ function jobViewHTML(p, det){
   const endTxt = p.due ? cpDueLabel(p,{now}) + (p.dueHasTime ? "" : " · 시각 미확인") : p.always ? "상시 모집 (원문 확인)" : "접수 일정 미확인";
   const period = (p.officialNoticeNumber || p.gojobs || p.cleaneye) && p.start ? `${p.start} ~ ${endTxt}` : p.alio ? '실제 접수 시작일·마감일·마감시각은 공식 첨부 공고 확인' : `시작일 미확인 ~ ${endTxt}`;
   rows.push(["접수 기간", period]);
+  if(cpConfirmedStartLabel(p))rows.push(['공식 확인 접수시작',cpConfirmedStartLabel(p)]);
   if(cpConfirmedCutoffLabel(p))rows.push(['공식 확인 접수마감',cpConfirmedCutoffLabel(p)]);
   if(det?.pbancBgngYmd || det?.pbancEndYmd)rows.push(["ALIO 게시기간 · 접수기간과 다를 수 있음",`${String(det.pbancBgngYmd || '미기재')} ~ ${String(det.pbancEndYmd || '미기재')}`]);
   for(const [k, label] of JV_SUMMARY){
