@@ -72,7 +72,7 @@ jobs:
               print('No independently reviewed submissions on publisher-state; unreviewed drafts cannot be promoted.')
           else:
               Path('threads-reviewed-submissions-input.json').write_text(
-                  json.dumps(bundle, ensure_ascii=False, indent=2) + '\\n', encoding='utf-8')
+                  json.dumps(bundle, ensure_ascii=False, indent=2) + chr(10), encoding='utf-8')
               print('Reviewed submissions fetched for full official-source and publisher validation.')
           PY
       - name: Intake independently reviewed v5 entries only (optional, never auto-approve)
