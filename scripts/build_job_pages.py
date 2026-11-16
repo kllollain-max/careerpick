@@ -383,6 +383,29 @@ def render(post, detail, related_posts=()):
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
         )
+    if pid == 'a306750':
+        verified_notice_html = (
+            '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
+            '<h2>코레일유통 물류사업 채용 분야별 지원자격</h2>'
+            '<p>모집인원 723명은 공고 전체 인원입니다. 직무별 모집인원·근무장소·근무형태는 '
+            '공식 첨부 공고문에서 각각 확인해야 합니다.</p>'
+            '<ul class="checks">'
+            '<li><strong>부산지점 물류운영 기술직 6급</strong> — 컨테이너크레인운전기능사와 '
+            '지게차운전기능사 두 자격 모두 필요</li>'
+            '<li><strong>현장안전처 팀장</strong> — 철도 안전계획·안전관리 업무 경력 7년 이상</li>'
+            '<li><strong>현장안전처 안전지도사</strong> — 철도 안전지도사 업무 경력 4년 이상</li>'
+            '<li><strong>운영관리처 팀장·팀원</strong> — 관련 관리 업무 경력 각각 7년·4년 이상</li>'
+            '<li><strong>철도운영단 구내운전직</strong> — 지정 철도차량 운전면허 중 하나와 '
+            '철도운영기관 기관사 경력 2년 이상</li>'
+            '</ul>'
+            '<p class="source-note">위 내용은 공식 ALIO 공고의 분야별 지원자격 요약이며 '
+            '실제 담당업무를 설명하는 직무기술서가 아닙니다. '
+            '공식 접수마감은 2026년 11월 19일 오전 10시(KST)로 안내됐으며, '
+            '정정 여부와 분야별 세부사항은 기관 공고에서 다시 확인하세요.</p>'
+            '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306750" '
+            'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
+            '</section>'
+        )
     if pid == 'a306355':
         verified_notice_html = (
             '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
