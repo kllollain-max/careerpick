@@ -99,6 +99,21 @@ class JobPageTests(unittest.TestCase):
         self.assertNotIn('코레일유통 물류사업 채용 분야별 지원자격',
                          render(dict(korail, id='a306355'), {}))
 
+    def test_kps_yangju_official_guidance_keeps_application_deadline_unverified(self):
+        yangju = dict(self.post, id='a307034', due='2026-11-20T23:59:00+09:00')
+        yangju.pop('dueHasTime')
+        html = render(yangju, {})
+        self.assertIn('한전KPS 양주지점 부지정리 단기노무원 지원 안내', html)
+        self.assertIn('서류접수 → 면접전형 → 신체검사', html)
+        self.assertIn('예정 근무기간은 2026년 12월 1일~12월 31일', html)
+        self.assertIn('공고 게시기간은 2026년 11월 16일~20일', html)
+        self.assertIn('이 날짜를 접수마감 시각으로 간주하지 마세요', html)
+        self.assertNotIn('2026-11-20 23:59', html)
+        self.assertNotIn('<script type="application/ld+json">', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        unrelated = render(dict(yangju, id='a307043'), {})
+        self.assertNotIn('한전KPS 양주지점 부지정리 단기노무원 지원 안내', unrelated)
+
     def test_full_detail_regions_reach_summary_checks_metadata_and_schema(self):
         post = dict(self.post, region='인천')
         detail = {'recrutPblntSn': '123456', 'workRgnNmLst': '인천,충남,전북'}
