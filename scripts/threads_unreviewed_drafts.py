@@ -59,9 +59,9 @@ def build_drafts(handoff):
                   f"접수 마감: {deadline}\n\n"
                   "지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n"
                   "자세한 사항은 프로필링크 확인")
-          # Keep draft output within the publisher's 450-character limit.
+          # V5 normally permits at most 300 characters; never auto-claim an exception.
           # Long institution/notice names must be reviewed, never truncated silently.
-          if len(body) > 450:
+          if len(body) > 300:
               continue
           drafts.append({
               "notice_id": nid, "suggested_slot": slot, "draft_text": body,
