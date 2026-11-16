@@ -47,6 +47,16 @@ CANONICAL_REVIEW_URLS = {
     },
 }
 
+# Exact attachments published with the independently located 2026-17 employer
+# advert. These URLs were checked individually; none implies editorial approval.
+CANONICAL_REVIEW_ANNEXES = {
+    "cleaneye-80848": [
+            "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%841.%20%EC%B1%84%EC%9A%A9%EA%B2%B0%EA%B2%A9%EC%82%AC%EC%9C%A0%20%EA%B4%80%EB%A0%A8.pdf",
+            "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%842.%20%EC%84%9C%EB%A5%98%EC%A0%84%ED%98%95%20%ED%8F%89%EA%B0%80%EA%B8%B0%EC%A4%80.pdf",
+            "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%843.%20%EC%84%9C%EC%9A%B8%EA%B5%90%ED%86%B5%EA%B3%B5%EC%82%AC%20%EC%9E%AC%EC%B7%A8%EC%97%85%EC%8B%AC%EC%82%AC%20%EB%B0%8F%20%EC%B7%A8%EC%97%85%EC%A0%9C%ED%95%9C%EC%8B%AC%EC%82%AC%20%EA%B4%80%EB%A0%A8.pdf"
+    ],
+}
+
 
 def independently_located_notice(draft):
     reviewed = CANONICAL_REVIEW_URLS.get(draft.get("notice_id"))
@@ -106,6 +116,7 @@ def read_official(url, opener=None):
     info = {"url": url, "final_url": final, "sha256": hashlib.sha256(data).hexdigest(),
             "size_bytes": len(data), "content_type": content_type,
             "checked_at": datetime.now(KST).isoformat(),
+            "pdf_magic_valid": data.startswith(b"%PDF-"),
             "text_available": False, "official_page_title": None,
             "visible_text_excerpt": None}
     if "html" in content_type:
@@ -175,6 +186,39 @@ def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
                         text_requires_independent_review=True,
                         notice_body_has_text=bool(excerpt),
                         draft_text_has_notice=bool(title))
+            # Capture the original byte digests for precisely pinned annexes.
+            # A parsed page or PDF metadata alone cannot approve a manuscript.
+            # This never writes to reviewed-staging or publisher queue.
+            pinned = CANONICAL_REVIEW_URLS.get(nid)
+            if (nid in CANONICAL_REVIEW_ANNEXES and pinned
+                    and draft.get("source_post_sha256") == pinned["source_post_sha256"]
+                    and draft.get("source_detail_sha256") == pinned["source_detail_sha256"]):
+                receipts = []
+                for annex_url in CANONICAL_REVIEW_ANNEXES[nid]:
+                    try:
+                        if not official_url_allowed(annex_url):
+                            raise ValueError("ATTACHMENT_URL_NOT_ALLOWED")
+                        evidence = fetch(annex_url)
+                        if (not isinstance(evidence, dict)
+                                or not re.fullmatch(r"[0-9a-f]{64}", str(evidence.get("sha256", "")))
+                                or evidence.get("pdf_magic_valid") is not True
+                                or evidence.get("url") != annex_url):
+                            raise ValueError("ATTACHMENT_RAW_PDF_NOT_VERIFIED")
+                        receipts.append({"url": annex_url, "status": "raw_pdf_sha256_captured",
+                                         "sha256": evidence["sha256"],
+                                         "size_bytes": evidence.get("size_bytes"),
+                                         "checked_at": evidence.get("checked_at"),
+                                         "semantic_review": "required"})
+                    except (ValueError, OSError, urllib.error.URLError) as exc:
+                        receipts.append({"url": annex_url, "status": "unverified",
+                                         "block_reason": (str(exc) if isinstance(exc, ValueError)
+                                                          else "ATTACHMENT_SOURCE_UNAVAILABLE")[:120]})
+                item["attachment_receipts"] = receipts
+                item["attachment_status"] = (
+                    "all_raw_pdf_sha256_captured" if all(
+                        r["status"] == "raw_pdf_sha256_captured" for r in receipts)
+                    else "raw_pdf_receipts_incomplete")
+                item["attachment_review_required"] = True
         except (ValueError, OSError, urllib.error.URLError) as error:
             item["block_reason"] = (str(error) if isinstance(error, ValueError)
                                     else "OFFICIAL_SOURCE_UNAVAILABLE")[:120]
