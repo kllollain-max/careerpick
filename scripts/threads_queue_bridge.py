@@ -258,6 +258,7 @@ def run(apply=False):
                                                       'application_period': item.get('selection_context', {}).get('application_period'),
                                                       'source_post_sha256': item.get('source_post_sha256'),
                                                       'source_detail_sha256': item.get('source_detail_sha256'),
+                                                      'official_detail_fields_for_review': {k: v[:1500] for k, v in item.get('source_detail', {}).items() if isinstance(v, str) and k in ('scrnprcdrMthdExpln', 'recrutSe', 'aplyQlfcCn', 'prefCn', 'hireTypeNmLst', 'recrutNope', 'workRgnNmLst', '채용인원', '고용형태 원문', '접수개시일 원문', '접수마감일 원문')},
                                                       'review_status': 'official_review_required',
                                                       'application_evidence': item.get('selection_context', {}).get('application_period', {}).get('evidence') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
                                                       'application_source_ref': item.get('selection_context', {}).get('application_period', {}).get('source_ref') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
