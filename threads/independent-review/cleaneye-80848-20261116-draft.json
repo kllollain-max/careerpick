@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "notice_id": "cleaneye-80848",
-  "review_status": "PARTIAL_NOT_APPROVED",
+  "review_status": "RAW_EVIDENCE_AND_SEMANTICS_CHECKED_PENDING_PROFILE_AND_CORRECTIONS",
   "approved_for_queue": false,
   "meta_posted": false,
   "review_kind": "independent_external_semantic_review_of_employer_application_and_published_attachment_pages",
@@ -85,9 +85,12 @@
         1,
         2
       ],
-      "sha256_verified": false,
+      "sha256_verified": true,
       "source": "Company-published Incruit-hosted attachments",
-      "semantic_scope": "company and security-occupation disqualification"
+      "semantic_scope": "company and security-occupation disqualification",
+      "sha256": "d46803ffed8346db7482683707aa9deaf98ba4b51821eb8dac3f273384cf4387",
+      "raw_bytes_checked_at": "2026-11-16T20:19:28.095344+09:00",
+      "raw_pdf_magic_valid": true
     },
     {
       "filename": "붙임2. 서류전형 평가기준.pdf",
@@ -98,9 +101,12 @@
         1,
         2
       ],
-      "sha256_verified": false,
+      "sha256_verified": true,
       "source": "Company-published Incruit-hosted attachments",
-      "semantic_scope": "self-introduction and blind-recruitment assessment rules"
+      "semantic_scope": "self-introduction and blind-recruitment assessment rules",
+      "sha256": "a6061bc734d14dbc650e3b20eac06030b275023ede5b3f18c907159ad908b207",
+      "raw_bytes_checked_at": "2026-11-16T20:19:29.455827+09:00",
+      "raw_pdf_magic_valid": true
     },
     {
       "filename": "붙임3. 서울교통공사 재취업심사 및 취업제한심사 관련.pdf",
@@ -111,9 +117,12 @@
         1,
         2
       ],
-      "sha256_verified": false,
+      "sha256_verified": true,
       "source": "Company-published Incruit-hosted attachments",
-      "semantic_scope": "Seoul Metro reemployment/employment-restriction review"
+      "semantic_scope": "Seoul Metro reemployment/employment-restriction review",
+      "sha256": "cc030bb9589c14280840db8a0272f6a36e2b42396a722bef4be9bf0fcc91d022",
+      "raw_bytes_checked_at": "2026-11-16T20:19:31.322744+09:00",
+      "raw_pdf_magic_valid": true
     }
   ],
   "draft_only": {
@@ -127,11 +136,10 @@
     "media_hint": "TEXT"
   },
   "blockers": [
-    "Original binary PDF downloads and independently recalculated SHA256 still required; parsed/read website PDF does not prove production fetch_official_digest.",
-    "Latest correction/cancellation status must be checked on employer's official recruitment notices before approval.",
-    "Current CareerPick profile destination #job=cleaneye-80848 must be rendered and verified.",
-    "validate_entry, v5 text metadata, official receipt verification, and publisher-state CAS supply have not passed for this candidate.",
-    "24-hour evidence freshness must be measured by actual new independent read at approval time; no artificial checked_at."
+    "The employer's own correction/cancellation board must be directly inspected within 24h; application status alone is not proof there is no correction.",
+    "CareerPick #job=cleaneye-80848 must be actually rendered and its original notice link/job identity checked before setting profile_target.verified.",
+    "Construct full v5 entry from current Cleaneye source fingerprints and exact documentary evidence, and pass validate_entry/verify_official_receipt/CAS in future eligible slot. No auto-approval.",
+    "Media alternation for the target slot must be checked against actual newest Meta receipts before promotion."
   ],
   "queue_safety": {
     "unreviewed_only": true,
@@ -155,5 +163,61 @@
     "validate_entry_run": false,
     "publisher_cas_supplied": false,
     "meta_posted": false
+  },
+  "official_raw_bytes_receipt": {
+    "workflow_run_id": "43856688117",
+    "workflow_artifact_id": 14220964098,
+    "run_completed": "2026-11-16T20:19:32+09:00",
+    "hash_meaning": "Independent raw-binary downloads and SHA-256; not an automatic semantic or editorial approval",
+    "records": [
+      {
+        "url": "https://recruit.incruit.com/cleanmetro/job/2610280002",
+        "document_sha256": "c54008ee643aa3a662419a18ccd65488a2fb30e1e9e4527230a35d66204439b0",
+        "size_bytes": 18576,
+        "checked_at": "2026-11-16T20:19:23.000710+09:00",
+        "status": "html_bytes_verified"
+      },
+      {
+        "url": "https://lab.incruit.com/jobs/2610300002976",
+        "document_sha256": "a8010f1a2e8c3c75185aa72c304c0a5f3832cbca6fa09cbe3a205155dd50e17c",
+        "size_bytes": 466554,
+        "checked_at": "2026-11-16T20:19:26.043917+09:00",
+        "status": "html_bytes_verified"
+      },
+      {
+        "url": "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%841.%20%EC%B1%84%EC%9A%A9%EA%B2%B0%EA%B2%A9%EC%82%AC%EC%9C%A0%20%EA%B4%80%EB%A0%A8.pdf",
+        "document_sha256": "d46803ffed8346db7482683707aa9deaf98ba4b51821eb8dac3f273384cf4387",
+        "size_bytes": 141557,
+        "checked_at": "2026-11-16T20:19:28.095344+09:00",
+        "status": "raw_pdf_verified"
+      },
+      {
+        "url": "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%842.%20%EC%84%9C%EB%A5%98%EC%A0%84%ED%98%95%20%ED%8F%89%EA%B0%80%EA%B8%B0%EC%A4%80.pdf",
+        "document_sha256": "a6061bc734d14dbc650e3b20eac06030b275023ede5b3f18c907159ad908b207",
+        "size_bytes": 74791,
+        "checked_at": "2026-11-16T20:19:29.455827+09:00",
+        "status": "raw_pdf_verified"
+      },
+      {
+        "url": "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%843.%20%EC%84%9C%EC%9A%B8%EA%B5%90%ED%86%B5%EA%B3%B5%EC%82%AC%20%EC%9E%AC%EC%B7%A8%EC%97%85%EC%8B%AC%EC%82%AC%20%EA%B4%80%EB%A0%A8.pdf",
+        "document_sha256": "cc030bb9589c14280840db8a0272f6a36e2b42396a722bef4be9bf0fcc91d022",
+        "size_bytes": 170020,
+        "checked_at": "2026-11-16T20:19:31.322744+09:00",
+        "status": "raw_pdf_verified"
+      }
+    ]
+  },
+  "independent_semantic_recheck": {
+    "date_kst": "2026-11-16",
+    "published_full_ad": "https://lab.incruit.com/jobs/2610300002976",
+    "employer_application": "https://recruit.incruit.com/cleanmetro/job/2610280002",
+    "job_unit_confirmed": "공무직 사원 103명 / 총 153명; 경비원 19명 별도",
+    "employment": "정규직",
+    "eligibility": "공고일 기준 18세 이상 65세 미만; 공무직 사원 별도 자격 제한없음; 공통 결격·병역·일부 재취업 제한 적용",
+    "selection": "서류전형 후 체력검정(줄넘기70+앉았다 일어서기30, 총점60점 미만 불합격); 자기소개서 불성실/블라인드 위반 서류 탈락",
+    "application": "2026-11-01 09:00 ~ 2026-11-20 12:00 KST, 온라인 지원",
+    "attachment_inspection": "Three exact employer-linked 2-page PDFs read and first pages visually inspected independently; raw bytes hashed in run43856688117",
+    "correction_status": "The exact employer-managed application is currently 모집중. Separately published employer-wide correction/cancellation notices not exhaustively inspected.",
+    "profile_status": "Not yet actually rendered and compared against cleaneye-80848 detail; never label verified until inspection."
   }
 }
