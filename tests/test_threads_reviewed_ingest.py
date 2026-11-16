@@ -179,5 +179,21 @@ class ReviewedIngestTests(unittest.TestCase):
         self.assertEqual(refused[0]["reason"], "NOTICE_ALREADY_USED_OR_INVALID")
 
 
+    def test_only_exact_checked_smrtg_notice_is_allowed(self):
+        canonical = "https://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155"
+        self.assertTrue(official_url_allowed(canonical))
+        self.assertTrue(official_url_allowed(canonical.replace("www.", "")))
+        for url in [
+            "https://www.smrtg.co.kr/",
+            "https://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0156",
+            "https://www.smrtg.co.kr/employment/stffPbanList.do",
+            "https://other.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155",
+            "http://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155",
+        ]:
+            with self.subTest(url=url):
+                self.assertFalse(official_url_allowed(url))
+
+
+
 if __name__ == "__main__":
     unittest.main()
