@@ -36,6 +36,7 @@ jobs:
           html=session.get(source,timeout=25)
           html.raise_for_status()
           page=html.content.decode(html.apparent_encoding or 'utf-8',errors='replace')
+          print('EMPLOYER_PAGE_DIAG='+json.dumps({'http_status':html.status_code,'final_url':html.url,'bytes':len(html.content),'ascii_notice_id_present':'2026-17' in page,'text_sample':page[:550]},ensure_ascii=False))
           if '2026-17' not in page or '공무·경비직' not in page:
               raise SystemExit('EXACT_EMPLOYER_NOTICE_NOT_VERIFIED')
           soup=bs4.BeautifulSoup(html.content,'html.parser')
