@@ -125,6 +125,14 @@ def merge(queue, staged, history, policy, source, details, now, claimed_slots=()
     return {**queue, 'entries': [*queue['entries'], *approved]}, approved, refused
 
 
+def ready_future_slots(entries, now):
+    """Only approved, ready drafts occupy a future publishing slot."""
+    ready = {entry.get('scheduled_at') for entry in entries
+             if isinstance(entry, dict) and isinstance(entry.get('writer'), dict)
+             and entry['writer'].get('status') == 'ready'}
+    return [slot for slot in future_slots(now) if slot in ready]
+
+
 def request(method, path, token, payload=None):
     repo = os.environ['GITHUB_REPOSITORY']
     url = 'https://api.github.com/repos/' + repo + '/contents/' + path
@@ -179,13 +187,11 @@ def run(apply=False):
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
         selection = build_selection(source, details, history, policy, now, 24,
                                     queued_entries=queue['entries'])
-        ready_slots = {entry.get('scheduled_at') for entry in merged['entries']
-                       if isinstance(entry, dict) and isinstance(entry.get('writer'), dict)
-                       and entry['writer'].get('status') == 'ready'}
+        approved_slots = ready_future_slots(merged['entries'], now)
         report.update(queue_sha=sha, staged_sha=stage_sha,
                       approved_supply_count=len(approved),
-                      approved_future_slots=[slot for slot in future_slots(now) if slot in ready_slots],
-                      missing_slots=[slot for slot in future_slots(now) if slot not in ready_slots],
+                      approved_future_slots=approved_slots,
+                      missing_slots=[slot for slot in future_slots(now) if slot not in approved_slots],
                       source_candidate_count=len(selection.get('candidates', [])),
                       shortlisted=[{'notice_id': e.get('notice_id'), 'org': e.get('org'),
                                     'title': e.get('title')}
