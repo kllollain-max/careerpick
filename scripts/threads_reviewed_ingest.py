@@ -59,7 +59,7 @@ def official_url_allowed(url):
         # it must never certify corrections absent or automatically approve.
         if host == "cleanmetro.co.kr":
             return (parts.path == "/bbs/board.php"
-                    and parts.query == "bo_table=recruit&page=1"
+                    and re.fullmatch(r"bo_table=recruit&page=1(?:&ckattempt=[1-3])?", parts.query) is not None
                     and not parts.fragment)
         # Independently identified employer-managed recruiting portal for
         # Cleaneye 80848. Do not accept unrelated Incruit employers or pages.
