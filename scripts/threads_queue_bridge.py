@@ -51,9 +51,15 @@ def next_media(history):
 
 def eligible_staged_slot(entry, now):
     """Keep the publisher's existing 2h grace only for pre-slot reviewed entries."""
+    if not isinstance(entry, dict):
+        return False
     supplied = entry.get('scheduled_at')
     if supplied in future_slots(now):
-        return True
+        try:
+            slot = datetime.fromisoformat(supplied)
+            return slot.utcoffset() is not None
+        except (TypeError, ValueError):
+            return False
     try:
         slot = datetime.fromisoformat(supplied)
         prepared = datetime.fromisoformat(entry['prepared_at'])
@@ -93,25 +99,33 @@ def merge(queue, staged, history, policy, source, details, now, claimed_slots=()
         raise ValueError('QUEUE_SCHEMA')
     if staged.get('schema_version') != 1 or not isinstance(staged.get('entries'), list):
         raise ValueError('STAGING_SCHEMA')
+    if any(not isinstance(entry, dict) for entry in staged['entries']):
+        raise ValueError('STAGING_ENTRY_SCHEMA')
+    if any(not isinstance(entry, dict) for entry in queue['entries']):
+        raise ValueError('QUEUE_ENTRY_SCHEMA')
+    if not isinstance(history, dict) or not isinstance(history.get('records'), list) or not isinstance(history.get('posted_ids'), list):
+        raise ValueError('HISTORY_SCHEMA')
     blocked = set(map(str, history.get('posted_ids', [])))
     for r in history.get('records', []):
         if r.get('job_id'):
             blocked.add(str(r['job_id']))
         blocked.update(str(x) for x in r.get('job_ids', []) if x)
-    occupied = {x.get('scheduled_at') for x in queue['entries']}
-    used = {x.get('notice_id') for x in queue['entries']
+    entries = list(queue['entries'])
+    occupied = {x.get('scheduled_at') for x in entries}
+    used = {x.get('notice_id') for x in entries
             if isinstance(x.get('writer'), dict) and x['writer'].get('status') == 'ready'}
     approved, refused = [], []
     for entry in staged['entries']:
         nid = entry.get('notice_id') if isinstance(entry, dict) else None
         try:
-            if not isinstance(nid, str) or nid in blocked:
+            if not isinstance(entry, dict) or not isinstance(nid, str) or nid in blocked:
                 raise ValueError('DUPLICATE_POST')
-            if entry.get('scheduled_at') in occupied:
+            slot = entry.get('scheduled_at')
+            if slot in occupied:
                 raise ValueError('SLOT_ALREADY_OCCUPIED')
-            if entry.get('scheduled_at') in claimed_slots:
+            if slot in claimed_slots:
                 raise ValueError('SLOT_ALREADY_CLAIMED')
-            if any(r.get('scheduled_at') == entry.get('scheduled_at') for r in history.get('records', [])):
+            if any(r.get('scheduled_at') == slot for r in history.get('records', [])):
                 raise ValueError('SLOT_ALREADY_STARTED')
             if nid in used:
                 raise ValueError('DUPLICATE_QUEUE_NOTICE')
@@ -120,9 +134,49 @@ def merge(queue, staged, history, policy, source, details, now, claimed_slots=()
             refused.append({'notice_id': nid, 'reason': str(exc)[:140]})
             continue
         approved.append(entry)
-        occupied.add(entry['scheduled_at'])
+        entries.append(entry)
+        occupied.add(slot)
         used.add(nid)
-    return {**queue, 'entries': [*queue['entries'], *approved]}, approved, refused
+    return {**queue, 'entries': entries}, approved, refused
+
+
+def ready_future_slots(entries, now):
+    """Only approved, ready drafts occupy a future publishing slot."""
+    ready = {entry.get('scheduled_at') for entry in entries
+             if isinstance(entry, dict) and isinstance(entry.get('writer'), dict)
+             and entry['writer'].get('status') == 'ready'}
+    return [slot for slot in future_slots(now) if slot in ready]
+
+
+def supply_status(entries, now):
+    """Classify immediate versus later missing slots without approving drafts."""
+    slots = future_slots(now)
+    approved = set(ready_future_slots(entries, now))
+    missing = [slot for slot in slots if slot not in approved]
+    return {'future_slots': slots, 'approved_future_slots': [slot for slot in slots if slot in approved],
+            'missing_slots': missing, 'next_slot_missing': bool(slots and slots[0] in missing)}
+
+
+def verified_supply_status(entries, now, history, policy, source, details):
+    """Only currently validated ready entries count as supplied; no writes."""
+    readiness = supply_status(entries, now)
+    valid_slots, invalid_ready = set(), []
+    for entry in entries:
+        if not isinstance(entry, dict) or entry.get('scheduled_at') not in readiness['future_slots']:
+            continue
+        if not isinstance(entry.get('writer'), dict) or entry['writer'].get('status') != 'ready':
+            continue
+        try:
+            verify_entry(entry, now, history, policy, source, details)
+            valid_slots.add(entry['scheduled_at'])
+        except (ValueError, KeyError, TypeError, RuntimeError) as exc:
+            invalid_ready.append({'notice_id': entry.get('notice_id'),
+                                  'slot': entry.get('scheduled_at'), 'reason': str(exc)[:140]})
+    approved = [slot for slot in readiness['future_slots'] if slot in valid_slots]
+    missing = [slot for slot in readiness['future_slots'] if slot not in valid_slots]
+    return {**readiness, 'approved_future_slots': approved, 'missing_slots': missing,
+            'next_slot_missing': bool(missing and missing[0] == readiness['future_slots'][0]),
+            'invalid_ready_entries': invalid_ready}
 
 
 def request(method, path, token, payload=None):
@@ -177,14 +231,48 @@ def run(apply=False):
                     if exc.code != 404:
                         raise
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
-        selection = build_selection(source, details, history, policy, now, 24,
-                                    queued_entries=queue['entries'])
+        selection = build_selection(source, details, history, policy, now, 60,
+                                    queued_entries=[*merged['entries'], *staged['entries']])
+        readiness = verified_supply_status(merged['entries'], now, history, policy, source, details)
+        approved_slots = readiness['approved_future_slots']
+        invalid_ready = readiness['invalid_ready_entries']
         report.update(queue_sha=sha, staged_sha=stage_sha,
-                      missing_slots=[s for s in future_slots(now)
-                                     if s not in {e.get('scheduled_at') for e in queue['entries']}],
+                      approved_supply_count=len(approved),
+                      invalid_ready_entries=invalid_ready,
+                      approved_future_slots=approved_slots,
+                      missing_slots=readiness['missing_slots'],
+                      next_slot_missing=readiness['next_slot_missing'],
                       source_candidate_count=len(selection.get('candidates', [])),
-                      shortlisted=[{'notice_id': e.get('notice_id'), 'org': e.get('org'),
-                                    'title': e.get('title')}
+                      writer_handoff={'status': 'review_required',
+                                      'missing_slots': [slot for slot in future_slots(now)
+                                                        if slot not in approved_slots],
+                                      'candidate_notice_ids': [item.get('notice_id')
+                                                               for item in selection.get('candidates', [])[:100]],
+                                      'candidates': [{'notice_id': item.get('notice_id'),
+                                                      'org': item.get('source_post', {}).get('org'),
+                                                      'title': item.get('source_post', {}).get('title'),
+                                                      'official_url': item.get('source_post', {}).get('src') or item.get('source_post', {}).get('url'),
+                                                      'employment': item.get('selection_context', {}).get('employment'),
+                                                      'recruiting_unit_title': item.get('selection_context', {}).get('unit_title'),
+                                                      'recruiting_unit_count': item.get('selection_context', {}).get('unit_count'),
+                                                      'recruiting_unit_scope': item.get('selection_context', {}).get('unit_scope'),
+                                                      'selection_review_reasons': item.get('selection_context', {}).get('reasons', []),
+                                                      'application_period': item.get('selection_context', {}).get('application_period'),
+                                                      'source_post_sha256': item.get('source_post_sha256'),
+                                                      'source_detail_sha256': item.get('source_detail_sha256'),
+                                                      'official_detail_fields_for_review': {k: v[:1500] for k, v in item.get('source_detail', {}).items() if isinstance(v, str) and k in ('scrnprcdrMthdExpln', 'recrutSe', 'aplyQlfcCn', 'prefCn', 'hireTypeNmLst', 'recrutNope', 'workRgnNmLst', '채용인원', '고용형태 원문', '접수개시일 원문', '접수마감일 원문')},
+                                                      'review_status': 'official_review_required',
+                                                      'application_evidence': item.get('selection_context', {}).get('application_period', {}).get('evidence') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
+                                                      'application_source_ref': item.get('selection_context', {}).get('application_period', {}).get('source_ref') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
+                                                      'source_snapshot_checked_at': source.get('_operations', {}).get('last_success_at') if isinstance(source.get('_operations'), dict) else None}
+                                                     for item in selection.get('candidates', [])[:100]],
+                                      'automatic_approval': False,
+                                      'meta_posted': False},
+                      shortlisted=[{'notice_id': e.get('notice_id'),
+                                    'org': e.get('source_post', {}).get('org'),
+                                    'title': e.get('source_post', {}).get('title'),
+                                    'employment': e.get('selection_context', {}).get('employment'),
+                                    'application_period': e.get('selection_context', {}).get('application_period')}
                                    for e in selection.get('candidates', [])[:12]],
                       promoted=[{'notice_id': e['notice_id'], 'slot': e['scheduled_at'],
                                  'fingerprint': fingerprint(e)} for e in approved],
