@@ -71,6 +71,8 @@ jobs:
               raise SystemExit('Unsafe writer handoff flags')
           Path('threads-writer-handoff.json').write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + chr(10), encoding='utf-8')
           PY
+      - name: Prepare unreviewed candidate drafts without posting
+        run: python scripts/threads_unreviewed_drafts.py --input threads-writer-handoff.json --output threads-unreviewed-drafts.json
       - name: Flag missing approved supply with actionable diagnostics
         run: |
           python - <<'PY'
@@ -101,6 +103,7 @@ jobs:
           path: |
             threads-queue-preflight.json
             threads-writer-handoff.json
+            threads-unreviewed-drafts.json
           if-no-files-found: ignore
           retention-days: 14
 
