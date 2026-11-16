@@ -83,6 +83,21 @@ def official_url_allowed(url):
                 "/newjobpost/2026/10_cleanmetro/붙임2. 서류전형 평가기준.pdf",
                 "/newjobpost/2026/10_cleanmetro/붙임3. 서울교통공사 재취업심사 및 취업제한심사 관련.pdf",
             } and not parts.query and not parts.fragment)
+        # Independently checked Wonju Facilities Corporation notice and two
+        # attachments. Neither an arbitrary .kr nor a different notice/UUID
+        # is trusted. The employer may add a session ID while redirecting
+        # downloads: only a 32-hex session suffix on the same pinned endpoint
+        # is allowed; unrelated redirects still fail closed.
+        if host == "cms.wfmc.kr":
+            path = unquote(parts.path)
+            if path == "/web/lay1/bbs/S1T225C230/A/3/view.do":
+                return parts.query == "article_seq=5841" and not parts.fragment
+            if re.fullmatch(r"/download\\.do(?:;jsessionid=[0-9A-Fa-f]{32})?", path):
+                return (parts.query in {
+                    "uuid=67d8c76c-8846-46d8-9e8f-a87d7ca79983.pdf",
+                    "uuid=b96140dd-9408-4fd8-b5ac-361b21f40e53.pdf",
+                } and not parts.fragment)
+            return False
         # A conservative institutional-source allowlist, not a domain trust
         # assertion. Other domains need independently reviewed support first.
         return any(host == suffix or host.endswith("." + suffix)
