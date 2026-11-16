@@ -1,5 +1,6 @@
 import json
 import unittest
+from unittest.mock import patch
 
 from scripts import check_search_public as audit
 
@@ -17,6 +18,17 @@ def page(url, robots='', schema=''):
 
 
 class PublicSearchAuditTests(unittest.TestCase):
+    def test_verified_application_cutoff_overrides_later_publication_end(self):
+        load, _ = self.loader(feed=[{'id': 'a999', 'due': '2099-12-31T23:59:00+09:00'}])
+        with patch.dict(audit.CONFIRMED_APPLICATION_CUTOFFS, {'a999': '2020-01-01T10:00:00+09:00'}):
+            report = audit.run(loader=load)
+        self.assertFalse(report['errors'])
+        self.assertEqual(report['public_feed']['missing_sitemap_ids'], [])
+        self.assertEqual(report['public_feed']['verified_application_cutoff_exclusions'], ['a999'])
+        # Without verified evidence the same omission must still fail.
+        report = audit.run(loader=load)
+        self.assertIn('current_notices_missing_from_sitemap', report['errors'])
+
     def loader(self, paths=None, robots_status=404, robots=b'', feed=None):
         paths = audit.SAMPLES if paths is None else paths
         calls = []

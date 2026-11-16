@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import re
+import time
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
@@ -15,6 +16,7 @@ from xml.etree import ElementTree as ET
 HOST = 'https://kllollain-max.github.io/'
 NS = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
 LIMIT = 2 * 1024 * 1024
+TRANSIENT = {408, 429, 500, 502, 503, 504}
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -22,7 +24,7 @@ class NoRedirect(HTTPRedirectHandler):
         return None  # Observe redirects; never follow to another host or into an ad URL.
 
 
-def fetch(url):
+def _fetch_once(url):
     p = urlsplit(url)
     if p.scheme != 'https' or p.netloc != urlsplit(HOST).netloc or p.query or p.fragment:
         raise ValueError('outside_host')
@@ -37,6 +39,20 @@ def fetch(url):
         return {'status': error.code}, b''
     except (OSError, ValueError) as error:
         return {'status': 'unverified', 'error': type(error).__name__}, b''
+
+
+def fetch(url):
+    """Retry bounded transport failures; never turn an unavailable body into facts."""
+    for attempt in range(1, 4):
+        item, raw = _fetch_once(url)
+        retryable = item['status'] in TRANSIENT or (
+            item['status'] == 'unverified' and item.get('error') in {
+                'URLError', 'TimeoutError', 'ConnectionResetError', 'OSError',
+            }
+        )
+        if not retryable or attempt == 3:
+            return dict(item, attempts=attempt), raw
+        time.sleep(0.25 * attempt)
 
 
 class Head(HTMLParser):
@@ -66,21 +82,24 @@ def run(project, loader=fetch):
         item, raw = loader(url)
         report['observations'][url] = item
         if item['status'] != 200:
-            report['unverified' if item['status'] == 'unverified' else 'errors'].append(url + ': ' + str(item['status']))
+            uncertain = item['status'] == 'unverified' or item['status'] in TRANSIENT
+            report['unverified' if uncertain else 'errors'].append(url + ': ' + str(item['status']))
         return item, raw
-    _, root = read(HOST)
-    _, ads = read(HOST + 'ads.txt')
-    _, robots = read(HOST + 'robots.txt')
-    _, xml = read(base + 'sitemap.xml')
+    root_item, root = read(HOST)
+    ads_item, ads = read(HOST + 'ads.txt')
+    robots_item, robots = read(HOST + 'robots.txt')
+    sitemap_item, xml = read(base + 'sitemap.xml')
     try:
-        publishers = Head(root).publishers
-        if len(publishers) != 1 or not re.fullmatch(r'ca-pub-\d{16}', publishers[0]):
+        publishers = Head(root).publishers if root_item['status'] == 200 else None
+        if publishers is not None and (len(publishers) != 1 or not re.fullmatch(r'ca-pub-\d{16}', publishers[0])):
             report['errors'].append('missing_or_ambiguous_host_publisher_meta')
-        else:
+        elif publishers and ads_item['status'] == 200:
             publisher = publishers[0].removeprefix('ca-')
             rows = [line.split('#', 1)[0].strip().split(',') for line in ads.decode().splitlines()]
             if not any([v.strip() for v in row] == ['google.com', publisher, 'DIRECT', 'f08c47fec0942fa0'] for row in rows):
                 report['errors'].append('host_ads_txt_publisher_mismatch')
+        if sitemap_item['status'] != 200:
+            return report  # No XML body was obtained; do not invent a sitemap error.
         tree = ET.fromstring(xml)
         if tree.tag != '{' + NS['s'] + '}urlset': raise ValueError('sitemap_namespace')
         urls = [node.text or '' for node in tree.findall('s:url/s:loc', NS)]
@@ -108,7 +127,7 @@ def run(project, loader=fetch):
         parser = RobotFileParser(); parser.parse(robots.decode().splitlines())
         for url in selected:
             for agent in ('Googlebot', 'Mediapartners-Google', 'Google-Display-Ads-Bot'):
-                if not parser.can_fetch(agent, url): report['errors'].append('robots_disallow: ' + agent + ' ' + url)
+                if robots_item['status'] == 200 and not parser.can_fetch(agent, url): report['errors'].append('robots_disallow: ' + agent + ' ' + url)
             item, raw = read(url)
             if item['status'] != 200: continue
             doc = Head(raw)

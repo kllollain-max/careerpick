@@ -1,0 +1,174 @@
+"""Unreviewed draft writer safety regression tests; no network or publication."""
+import unittest
+from scripts.threads_unreviewed_drafts import build_drafts
+
+
+class DraftWriterTests(unittest.TestCase):
+    def setUp(self):
+        self.handoff = {
+            "automatic_approval": False, "meta_posted": False,
+            "missing_slots": ["2026-11-17T08:00:00+09:00"],
+            "candidates": [{
+                "notice_id": "a123", "org": "검증대상 기관",
+                "title": "전산직 채용", "employment": "정규직",
+                "application_period": {"start": "2026-11-16T09:00:00+09:00", "start_date_only": False, "end": "2026-11-20", "date_only": True, "evidence": "접수기간 2026.11.17 ~ 2026.11.20", "source_ref": "alio-detail.json#123/scrnprcdrMthdExpln"},
+                "official_url": "https://example.org/notice",
+                "source_post_sha256": "a" * 64, "source_detail_sha256": "b" * 64,
+                "application_evidence": "접수기간 2026.11.17 ~ 2026.11.20",
+                "application_source_ref": "alio-detail.json#123/scrnprcdrMthdExpln",
+                "source_snapshot_checked_at": "2026-11-16T08:00:00+09:00",
+            }],
+        }
+
+    def test_duplicate_missing_slots_are_rejected(self):
+        slot = self.handoff["missing_slots"][0]
+        with self.assertRaisesRegex(ValueError, "INVALID_OR_DUPLICATE_SLOTS"):
+            build_drafts({**self.handoff, "missing_slots": [slot, slot]})
+
+    def test_non_string_missing_slot_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "INVALID_OR_DUPLICATE_SLOTS"):
+            build_drafts({**self.handoff, "missing_slots": [None]})
+
+    def test_draft_is_never_approved_or_posted(self):
+        result = build_drafts(self.handoff)
+        self.assertEqual(len(result["drafts"]), 1)
+        self.assertFalse(result["approved_for_queue"])
+        draft = result["drafts"][0]
+        self.assertEqual(draft["status"], "unreviewed")
+        self.assertFalse(draft["approved_for_queue"])
+        self.assertFalse(draft["meta_posted"])
+        self.assertNotIn("https://", draft["draft_text"])
+
+    def test_timestamp_deadline_keeps_verified_clock(self):
+        candidate = {**self.handoff['candidates'][0],
+                     'application_period': {'start': '2026-11-16T09:00:00+09:00', 'start_date_only': False, 'end': '2026-11-20T14:00:00+09:00', 'date_only': False, 'evidence': self.handoff['candidates'][0]['application_evidence'], 'source_ref': self.handoff['candidates'][0]['application_source_ref']}}
+        draft = build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'][0]
+        self.assertIn('14:00 +0900', draft['draft_text'])
+        self.assertNotIn('마감 시각 원문 확인', draft['draft_text'])
+
+    def test_expired_notice_is_excluded(self):
+        candidate = {**self.handoff['candidates'][0],
+                     'application_period': {'start': '2026-11-15T09:00:00+09:00', 'start_date_only': False, 'end': '2026-11-16T10:00:00+09:00', 'date_only': False}}
+        self.assertEqual(build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'], [])
+
+    def test_deadline_day_without_clock_is_excluded(self):
+        candidate = {**self.handoff['candidates'][0],
+                     'application_period': {'start': '2026-11-15T09:00:00+09:00', 'start_date_only': False, 'end': '2026-11-17', 'date_only': True}}
+        self.assertEqual(build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'], [])
+
+    def test_skips_expired_candidate_and_uses_next(self):
+        expired = {**self.handoff["candidates"][0],
+                   "notice_id": "expired",
+                   "application_period": {"end": "2026-11-16T10:00:00+09:00", "date_only": False}}
+        handoff = {**self.handoff, "candidates": [expired, self.handoff["candidates"][0]]}
+        result = build_drafts(handoff)
+        self.assertEqual(len(result["drafts"]), 1)
+        self.assertEqual(result["drafts"][0]["notice_id"], "a123")
+
+    def test_three_fallback_drafts_per_slot_remain_unapproved(self):
+        base = self.handoff["candidates"][0]
+        candidates = [{**base, "notice_id": f"a{number}"} for number in range(101, 106)]
+        result = build_drafts({**self.handoff, "candidates": candidates})
+        self.assertEqual([d["notice_id"] for d in result["drafts"]], ["a101", "a102", "a103"])
+        self.assertTrue(all(d["suggested_slot"] == self.handoff["missing_slots"][0] for d in result["drafts"]))
+        self.assertTrue(all(not d["approved_for_queue"] for d in result["drafts"]))
+        self.assertEqual(result["slot_coverage"]["approved_slots"], [])
+
+    def test_never_reuses_notice_for_multiple_slots(self):
+        handoff = {**self.handoff, "missing_slots": [
+            "2026-11-17T08:00:00+09:00", "2026-11-17T12:00:00+09:00"]}
+        self.assertEqual(len(build_drafts(handoff)["drafts"]), 1)
+
+    def test_v5_overlength_notice_is_not_silently_truncated(self):
+        candidate = {**self.handoff["candidates"][0], "title": "긴 공고명" * 100}
+        result = build_drafts({**self.handoff, "candidates": [candidate]})
+        self.assertEqual(result["drafts"], [])
+
+    def test_official_evidence_survives_review_handoff(self):
+        draft = build_drafts(self.handoff)["drafts"][0]
+        self.assertEqual(draft["application_evidence_for_review"],
+                         self.handoff["candidates"][0]["application_evidence"])
+        self.assertEqual(draft["application_source_ref"],
+                         self.handoff["candidates"][0]["application_source_ref"])
+        self.assertFalse(draft["approved_for_queue"])
+
+    def test_future_application_start_excluded(self):
+        candidate = {**self.handoff["candidates"][0],
+                     "application_period": {"start": "2026-11-18T09:00:00+09:00",
+                                            "start_date_only": False, "end": "2026-11-20",
+                                            "date_only": True}}
+        self.assertEqual(build_drafts({**self.handoff, "candidates": [candidate]})["drafts"], [])
+
+    def test_mismatched_evidence_is_excluded(self):
+        candidate = {**self.handoff["candidates"][0],
+                     "application_evidence": "다른 자료의 접수기간"}
+        self.assertEqual(build_drafts({**self.handoff, "candidates": [candidate]})["drafts"], [])
+
+    def test_review_blockers_are_explicit_and_never_preapproved(self):
+        draft = build_drafts(self.handoff)["drafts"][0]
+        blockers = draft["required_review"]
+        self.assertEqual(blockers["publisher_validate_entry"], "not_run")
+        self.assertTrue(all(value in {"not_verified", "not_run"} for value in blockers.values()))
+        self.assertFalse(draft["approved_for_queue"])
+
+    def test_slot_coverage_reports_missing_draft_and_no_approvals(self):
+        slots = ["2026-11-17T08:00:00+09:00", "2026-11-17T12:00:00+09:00"]
+        result = build_drafts({**self.handoff, "missing_slots": slots})
+        coverage = result["slot_coverage"]
+        self.assertEqual(coverage["requested_slots"], slots)
+        self.assertEqual(coverage["draft_slots"], slots[:1])
+        self.assertEqual(coverage["no_draft_slots"], slots[1:])
+        self.assertEqual(coverage["approved_slots"], [])
+        self.assertFalse(result["approved_for_queue"])
+
+    def test_recruiting_unit_is_review_only_not_published_as_fact(self):
+        candidate = {**self.handoff["candidates"][0],
+                     "recruiting_unit_title": "전산직 6급",
+                     "recruiting_unit_count": 5,
+                     "recruiting_unit_scope": "provisional",
+                     "selection_review_reasons": ["OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"]}
+        result = build_drafts({**self.handoff, "candidates": [candidate]})
+        draft = result["drafts"][0]
+        self.assertEqual(draft["recruiting_unit_for_review"]["count"], 5)
+        self.assertEqual(draft["recruiting_unit_for_review"]["verification_status"], "not_verified")
+        self.assertIn("OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED", draft["selection_review_reasons"])
+        self.assertNotIn("5명", draft["draft_text"])
+        self.assertFalse(draft["approved_for_queue"])
+
+    def test_official_detail_evidence_reaches_review_not_public_copy(self):
+        evidence = {"aplyQlfcCn": "전산 관련 자격증 필수", "recrutNope": "5"}
+        candidate = {**self.handoff["candidates"][0],
+                     "official_detail_fields_for_review": evidence}
+        result = build_drafts({**self.handoff, "candidates": [candidate]})
+        draft = result["drafts"][0]
+        self.assertEqual(draft["official_detail_fields_for_review"], evidence)
+        self.assertNotIn("전산 관련 자격증 필수", draft["draft_text"])
+        self.assertFalse(draft["approved_for_queue"])
+
+    def test_reject_unsafe_handoff(self):
+        for flag in ("automatic_approval", "meta_posted"):
+            handoff = {**self.handoff, flag: True}
+            with self.assertRaises(ValueError):
+                build_drafts(handoff)
+
+    def test_no_draft_without_application_period(self):
+        handoff = {**self.handoff, "candidates": [
+            {**self.handoff["candidates"][0], "application_period": None}
+        ]}
+        self.assertEqual(build_drafts(handoff)["drafts"], [])
+
+    def test_rejects_missing_or_invalid_source_fingerprints(self):
+        for bad in (None, "", "abc", "g" * 64):
+            candidate = {**self.handoff["candidates"][0], "source_post_sha256": bad}
+            handoff = {**self.handoff, "candidates": [candidate]}
+            self.assertEqual(build_drafts(handoff)["drafts"], [])
+
+    def test_no_draft_without_source_identity(self):
+        handoff = {**self.handoff, "candidates": [
+            {**self.handoff["candidates"][0], "notice_id": ""}
+        ]}
+        self.assertEqual(build_drafts(handoff)["drafts"], [])
+
+
+if __name__ == "__main__":
+    unittest.main()

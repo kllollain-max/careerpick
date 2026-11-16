@@ -28,7 +28,13 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch({headless:true});
   const results = [];
   try {
-    const pages = project === 'careerpick' ? ['guides/after-application-checklist.html', 'privacy.html'] : ['benefits/149200000026/', 'privacy.html'];
+    const pages = project === 'careerpick' ? [
+      'guides/after-application-checklist.html', 'privacy.html',
+      'guides/career-certificate-checklist.html',
+      'guides/interview-institution-research.html',
+      ...Object.keys(JSON.parse(await fs.readFile('scripts/verified_job_duties.json', 'utf8')))
+        .map(id => 'jobs/' + id + '.html'),
+    ] : ['benefits/149200000026/', 'privacy.html'];
     await fs.mkdir('mobile-evidence', {recursive:true});
     for (const width of [320,390,1440]) {
       const context = await browser.newContext({viewport:{width,height:900},serviceWorkers:'block'});

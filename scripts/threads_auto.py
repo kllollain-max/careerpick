@@ -105,7 +105,11 @@ def prepare_master(history, now, run_id):
         raise RuntimeError('Reruns require remote reconciliation')
     requested = current_publication_slot(now)
     scheduled = requested
-    if os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true':
+    recovery = os.getenv('THREADS_RECOVERY_SLOT', '').strip()
+    if recovery or os.getenv('THREADS_RECOVERY_CONFIRMATION') == 'RECOVER_SLOT':
+        from scripts.threads_catchup import recovery_slot
+        scheduled = recovery_slot(recovery, now)
+    elif os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() == 'true':
         # Preserve the existing minute-level dispatch nonce, but bind it to
         # exactly one currently eligible regular reviewed slot. No catch-up.
         from datetime import timedelta
@@ -129,8 +133,15 @@ def prepare_master(history, now, run_id):
     queue = load(ROOT / '.threads-writer-queue.json', {})
     from scripts.threads_writer_queue import QueueValidationError
     try:
-        selected = select_ready(queue, scheduled, now, history, source, details, policy)
+        if recovery:
+            from scripts.threads_catchup import select_recovery, read_live_inventory
+            selected = select_recovery(queue, scheduled, now, history, source, details, policy,
+                os.getenv('THREADS_DISPATCH_NOTICE_ID', '').strip(), read_live_inventory(ROOT, now))
+        else:
+            selected = select_ready(queue, scheduled, now, history, source, details, policy)
     except QueueValidationError as exc:
+        if recovery:
+            raise
         if str(exc) != 'QUEUE_SLOT_MISSING':
             raise
         # Never invent a reviewed draft or send an unapproved notice.
@@ -182,6 +193,9 @@ def prepare_master(history, now, run_id):
               'image_url': ('https://raw.githubusercontent.com/kllollain-max/careerpick/main/threads-images/'
                             + identifier + '.jpg') if image_turn else '',
               'image_job': image_job}
+    if recovery:
+        record['recovery_for_slot'] = scheduled.isoformat()
+        record['recovery_mode'] = 'explicit_reviewed_missing_slot'
     if selected.get('writer_review', {}).get('v5'):
         record['publication_policy_id'] = policy['editorial_v5']['id']
         record['publication_policy_sha256'] = policy['editorial_v5']['sha256']
@@ -198,6 +212,15 @@ def prepare_master(history, now, run_id):
           'IMAGE' if image_turn else 'TEXT')
 
 
+def reviewed_text_fallback_allowed(record):
+    """User-authorized v6 availability fallback; never changes approved prose."""
+    return (os.getenv('THREADS_ALLOW_V5_TEXT_FALLBACK', 'false').lower() == 'true'
+            and record.get('content_type') == 'master_job'
+            and record.get('publication_style') == 'single_main_v5'
+            and record.get('writer_review', {}).get('v5', {}).get('contract_version') == 2
+            and not record.get('reply_text') and not record.get('engagement_text'))
+
+
 def validate_master_before_send(record, history, now):
     from scripts.threads_writer_queue import select_ready, fingerprint
     entry = record.get('writer_entry')
@@ -205,9 +228,20 @@ def validate_master_before_send(record, history, now):
         raise RuntimeError('Reserved writer entry changed')
     policy, source, details = writer_inputs()
     other_history = {**history, 'records': [r for r in history['records'] if r is not record]}
-    validated = select_ready({'schema_version': 1, 'entries': [entry]},
-                             datetime.fromisoformat(record['scheduled_at']), now,
-                             other_history, source, details, policy)
+    if record.get('recovery_for_slot'):
+        from scripts.threads_catchup import select_recovery, read_live_inventory
+        current_publication_slot(now)  # A genuine current dispatch nonce, never a fake cron.
+        if (record.get('recovery_mode') != 'explicit_reviewed_missing_slot'
+                or record['recovery_for_slot'] != record['scheduled_at']
+                or os.getenv('THREADS_RECOVERY_SLOT') != record['scheduled_at']):
+            raise RuntimeError('CATCHUP_RESERVED_SLOT_CHANGED')
+        validated = select_recovery({'schema_version':1, 'entries':[entry]},
+            datetime.fromisoformat(record['scheduled_at']), now, other_history, source, details,
+            policy, os.getenv('THREADS_DISPATCH_NOTICE_ID', '').strip(), read_live_inventory(ROOT, now))
+    else:
+        validated = select_ready({'schema_version': 1, 'entries': [entry]},
+                                 datetime.fromisoformat(record['scheduled_at']), now,
+                                 other_history, source, details, policy)
     main_text, reply_text = master_public_copy(validated, record.get('publication_style'), now=now)
     if (record.get('text') != main_text or record.get('format_id') != validated['format_id']
             or (record.get('reply_text') or '') != reply_text or record.get('engagement_text')):
@@ -215,6 +249,9 @@ def validate_master_before_send(record, history, now):
     if record.get('image_url'):
         if record.get('image_job') != validated['image_job']:
             raise RuntimeError('Reserved image facts changed')
+        if (reviewed_text_fallback_allowed(record) and
+                os.getenv('THREADS_IMAGE_PREPARATION_FAILED', 'false').lower() == 'true'):
+            return  # Exact text and all source facts were validated above.
         if not re.fullmatch(r'[0-9a-f]{64}', str(record.get('image_sha256', ''))):
             raise RuntimeError('High-quality image has not been verified')
         if record.get('writer_review', {}).get('v5', {}).get('contract_version') == 2:
@@ -839,7 +876,7 @@ def publish_post(record, history):
             print('Publishing image post')
             params = {'media_type': 'IMAGE', 'image_url': image_url, 'text': record['text']}
         elif image_url:
-            if record.get('content_type') == 'master_job':
+            if record.get('content_type') == 'master_job' and not reviewed_text_fallback_allowed(record):
                 raise RuntimeError('Required image unavailable; keep image turn and repair before sending')
             # This decision is made before any publishing request or slot claim.
             # Preserve the intended image for review, but record the actual format.
@@ -849,6 +886,8 @@ def publish_post(record, history):
             record['requested_image_url'] = image_url
             record['image_url'] = ''
             record['image_fallback'] = 'pre_request_unavailable'
+            if record.get('content_type') == 'master_job':
+                record['image_fallback_policy'] = 'user-authorized-v6-20261116'
             print('Public image unavailable; using validated text before sending')
             params = {'media_type': 'TEXT', 'text': text}
         else:

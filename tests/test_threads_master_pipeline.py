@@ -142,6 +142,27 @@ class MasterPipelineTests(unittest.TestCase):
         self.assertTrue(record['safe_no_send'])
         self.assertEqual(record['failure_stage'], 'before_remote_claim')
 
+    def test_authorized_v5_image_failure_uses_exact_text_once(self):
+        history, record = self.prepare('')
+        record['publication_style'] = 'single_main_v5'
+        record['writer_review']['v5'] = {'contract_version': 2}
+        body = record['text']
+        env = {**self.env, 'THREADS_ALLOW_V5_TEXT_FALLBACK': 'true',
+               'THREADS_IMAGE_PREPARATION_FAILED': 'true'}
+        with patch.dict(os.environ, env), patch.object(publisher, 'validate_master_before_send') as validate, \
+                patch.object(publisher, 'verify_account', return_value='1'), \
+                patch.object(publisher, 'save'), patch('scripts.threads_remote_claim.GitHubClaims'), \
+                patch.object(publisher, 'create_media', return_value='12345') as media:
+            publisher.publish_post(record, history)
+            publisher.publish_post(record, history)
+        validate.assert_called_once()
+        media.assert_called_once_with('fake', {'media_type': 'TEXT', 'text': body})
+        self.assertEqual(record['text'], body)
+        self.assertEqual(record['image_url'], '')
+        self.assertTrue(record['requested_image_url'])
+        self.assertEqual(record['image_fallback_policy'], 'user-authorized-v6-20261116')
+        self.assertEqual(record['threads_post_id'], '12345')
+
     def test_ambiguous_claim_is_marked_before_mutation_and_never_released(self):
         history, record = self.prepare()
         snapshots = []

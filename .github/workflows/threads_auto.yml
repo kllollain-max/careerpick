@@ -5,16 +5,20 @@ on:
   workflow_dispatch:
     inputs:
       confirm_publish:
-        description: 'Type PUBLISH to authorize ONE reviewed current-slot post'
-        required: true
+        description: 'CHECK verifies supply; PUBLISH sends current slot; RECOVER_SLOT sends a separately reviewed missing slot'
+        required: false
         type: string
       notice_id:
         description: 'Exact reviewed notice ID already in the queue'
-        required: true
+        required: false
         type: string
       slot_kst:
         description: 'Current KST minute e.g. 2026-11-15T12:35:00+09:00; must be within 10m and active regular slot'
-        required: true
+        required: false
+        type: string
+      recovery_slot_kst:
+        description: 'RECOVER_SLOT only: exact missing same-day regular KST slot; never substitutes current time'
+        required: false
         type: string
   schedule:
     # UTC -> KST 08:00, 12:00, 16:00, 20:00 (4-hour spacing)
@@ -26,6 +30,7 @@ on:
     - cron: '45 2 * * *'
     - cron: '45 6 * * *'
     - cron: '45 10 * * *'
+    - cron: '15 * * * *'
 
 permissions:
   contents: write
@@ -39,15 +44,18 @@ concurrency:
 jobs:
   queue_preflight:
     name: Preflight reviewed Threads drafts without posting
-    if: github.event_name == 'schedule' && (github.event.schedule == '45 22 * * *' || github.event.schedule == '45 2 * * *' || github.event.schedule == '45 6 * * *' || github.event.schedule == '45 10 * * *') && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: ((github.event_name == 'schedule' && (github.event.schedule == '15 * * * *' || github.event.schedule == '45 22 * * *' || github.event.schedule == '45 2 * * *' || github.event.schedule == '45 6 * * *' || github.event.schedule == '45 10 * * *')) || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'CHECK')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 12
     permissions:
       contents: write
       actions: read
     env:
       TZ: Asia/Seoul
       THREADS_CLAIM_TOKEN: ${{ github.token }}
+      THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      THREADS_USER_ID: '28818095904512513'
+      THREADS_EXPECTED_USERNAME: hid_119
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,8 +66,51 @@ jobs:
           python-version: '3.11'
       - name: Read digest-bound verification of unchanged collection snapshots
         run: python scripts/threads_source_verification.py
-      - name: Review official sources and promote validated staged entries by CAS
+      - name: Read independently reviewed submissions from publisher-state (no approval)
+        run: |
+          python - <<'PY'
+          import json, os, urllib.error
+          from pathlib import Path
+          from scripts.threads_queue_bridge import read
+          try:
+              bundle, _ = read('threads/reviewed-submissions.json', os.environ['THREADS_CLAIM_TOKEN'])
+          except urllib.error.HTTPError as exc:
+              if exc.code != 404:
+                  raise
+              print('No independently reviewed submissions on publisher-state; unreviewed drafts cannot be promoted.')
+          else:
+              Path('threads-reviewed-submissions-input.json').write_text(
+                  json.dumps(bundle, ensure_ascii=False, indent=2) + chr(10), encoding='utf-8')
+              print('Reviewed submissions fetched for full official-source and publisher validation.')
+          PY
+      - name: Intake independently reviewed v5 entries only (optional, never auto-approve)
+        run: |
+          if [ -f threads-reviewed-submissions-input.json ]; then
+            python -m scripts.threads_reviewed_ingest --input threads-reviewed-submissions-input.json --apply --output threads-reviewed-ingest-report.json
+          else
+            echo 'No independently reviewed submissions supplied; cannot synthesize approval from candidate data.'
+          fi
+      - name: Promote only existing publisher-validated staged entries by CAS
         run: python scripts/threads_queue_bridge.py --apply --output threads-queue-preflight.json
+      - name: Export missing-slot writer handoff (no automatic approval)
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('threads-queue-preflight.json').read_text(encoding='utf-8'))
+          handoff = report.get('writer_handoff', {})
+          if handoff.get('automatic_approval') is not False or handoff.get('meta_posted') is not False:
+              raise SystemExit('Unsafe writer handoff flags')
+          Path('threads-writer-handoff.json').write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + chr(10), encoding='utf-8')
+          PY
+      - name: Prepare unreviewed candidate drafts without posting
+        run: python scripts/threads_unreviewed_drafts.py --input threads-writer-handoff.json --output threads-unreviewed-drafts.json
+      - name: Capture independent live official-source evidence for review (no approval)
+        run: python -m scripts.threads_official_review_pack --input threads-unreviewed-drafts.json --output threads-official-evidence.json
+      - name: Read actual recent Threads receipts without publishing
+        run: python -m scripts.threads_live_inventory
+      - name: Persist replenishment handoff for the independent writer
+        run: python -m scripts.threads_supply_audit --persist
       - name: Flag missing approved supply with actionable diagnostics
         run: |
           python - <<'PY'
@@ -72,24 +123,47 @@ jobs:
           summary = Path(os.environ['GITHUB_STEP_SUMMARY'])
           with summary.open('a', encoding='utf-8') as out:
               out.write(f'## Threads reviewed supply preflight\\nMissing future slots: {len(missing)}\\nPromoted: {len(promoted)}\\nCandidate shortlist: {len(report.get("shortlisted", []))}\\n')
-              if missing and not promoted:
+              out.write(f'Next slot missing: {report.get("next_slot_missing", False)}\\nApproved future slots: {len(report.get("approved_future_slots", []))}\\n')
+              if missing:
                   out.write('ACTION REQUIRED: verified staging has not supplied the next slots. No unverified notice will be posted.\\n')
-          if missing and not promoted:
-              print('::warning title=THREADS_SUPPLY_EMPTY::No verified staged manuscripts promoted; review shortlist in preflight artifact')
+          draft_file = Path('threads-unreviewed-drafts.json')
+          if draft_file.exists():
+              draft_report = json.loads(draft_file.read_text(encoding='utf-8'))
+              coverage = draft_report.get('slot_coverage', {})
+              with summary.open('a', encoding='utf-8') as out:
+                  out.write(f'Draft-only slots: {len(coverage.get("draft_slots", []))}\\n')
+                  out.write(f'No draft slots: {len(coverage.get("no_draft_slots", []))}\\n')
+                  for slot in coverage.get('no_draft_slots', []):
+                      out.write(f'- NO_DRAFT: {slot}\\n')
+                  out.write('Drafts are NOT approved for publishing.\\n')
+                  out.write(f"Approved inventory: {report.get('approved_supply_count', 0)}/8; replenishment required: {report.get('replenishment_required', True)}\\n")
+          next_slot = report.get('future_slots', [None])[0]
+          if next_slot in missing:
+              print('::error title=THREADS_SUPPLY_EMPTY::Next publishing slot lacks an approved manuscript')
+              raise SystemExit('THREADS_SUPPLY_EMPTY: next publishing slot not ready')
+          if missing:
+              print('::warning title=THREADS_SUPPLY_LOW::Later publishing slots need approved manuscripts')
           PY
       - name: Preserve source and queue readiness audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: threads-preflight-${{ github.run_id }}
-          path: threads-queue-preflight.json
+          path: |
+            threads-queue-preflight.json
+            threads-reviewed-ingest-report.json
+            threads-writer-handoff.json
+            threads-unreviewed-drafts.json
+            threads-official-evidence.json
+            threads-supply-audit.json
+            threads-live-inventory.json
           if-no-files-found: ignore
           retention-days: 14
 
   publish:
     outputs:
       queue_missing: ${{ steps.reserve.outputs.queue_missing }}
-    if: ((github.event_name == 'schedule' && (github.event.schedule == '0 23 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 7 * * *' || github.event.schedule == '0 11 * * *')) || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'PUBLISH')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: ((github.event_name == 'schedule' && (github.event.schedule == '0 23 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 7 * * *' || github.event.schedule == '0 11 * * *')) || (github.event_name == 'workflow_dispatch' && (inputs.confirm_publish == 'PUBLISH' || inputs.confirm_publish == 'RECOVER_SLOT'))) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
 
@@ -98,6 +172,8 @@ jobs:
       PYTHONUNBUFFERED: "1"
       THREADS_MANUAL_PUBLISH: ${{ github.event_name == 'workflow_dispatch' }}
       THREADS_MANUAL_SLOT: ${{ inputs.slot_kst }}
+      THREADS_RECOVERY_SLOT: ${{ inputs.recovery_slot_kst }}
+      THREADS_RECOVERY_CONFIRMATION: ${{ inputs.confirm_publish }}
       THREADS_DISPATCH_NOTICE_ID: ${{ inputs.notice_id }}
       THREADS_SCHEDULE_CRON: ${{ github.event.schedule }}
       THREADS_CLAIM_REPO: ${{ github.repository }}
@@ -106,6 +182,7 @@ jobs:
       THREADS_NO_SEND: "false"
       THREADS_NEW_CONTENT: "false"
       THREADS_MASTER_WRITER: "true"
+      THREADS_ALLOW_V5_TEXT_FALLBACK: "true"
       THREADS_ENABLED: "true"
       THREADS_EDITORIAL_ENABLED: ${{ vars.THREADS_EDITORIAL_ENABLED == 'true' }}
       THREADS_CONVERSATION_ENABLED: ${{ vars.THREADS_CONVERSATION_ENABLED != 'false' }}
@@ -163,7 +240,11 @@ jobs:
       - name: Read reviewed AI writer queue
         run: |
           git fetch origin threads-publisher-state
-          git show FETCH_HEAD:threads/writer-queue.json > .threads-writer-queue.json
+          if [ "$THREADS_RECOVERY_CONFIRMATION" = 'RECOVER_SLOT' ]; then
+            git show FETCH_HEAD:threads/recovery-staging.json > .threads-writer-queue.json
+          else
+            git show FETCH_HEAD:threads/writer-queue.json > .threads-writer-queue.json
+          fi
 
       - name: Reserve one job
         id: reserve
@@ -186,6 +267,7 @@ jobs:
           ready = len(mine) == 1
           with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
               output.write(f"ready={'true' if ready else 'false'}\\n".replace('\\n', '\n'))
+              output.write('queue_missing=' + ('false' if ready else 'true') + chr(10))
               output.write('needs_image=' + ('true' if ready and mine[0].get('image_job') else 'false') + chr(10))
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
               if ready:
@@ -196,10 +278,14 @@ jobs:
           unresolved = [r for r in records if r.get('status') == 'pending' and not r.get('threads_post_id')]
           if not ready and unresolved:
               raise SystemExit('Unresolved Threads reservation; reconcile remote state before further posting')
+          if not ready:
+              print('::error title=QUEUE_SLOT_MISSING::No approved manuscript reserved for this slot; Meta POST skipped')
+              raise SystemExit('QUEUE_SLOT_MISSING: no approved manuscript; publication skipped')
           PY
 
       - name: Install Korean fonts and Pillow
         id: image_tools
+        continue-on-error: true
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true'
         run: |
           sudo apt-get update -qq
@@ -208,6 +294,7 @@ jobs:
 
       - name: Verify reviewed card or generate legacy image
         id: image_generate
+        continue-on-error: true
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true' && steps.image_tools.outcome == 'success'
         run: |
           python - <<'PY'
@@ -421,6 +508,7 @@ jobs:
             .threads-writer-queue.json
             .threads-recovery-report.json
             .threads-output-evidence.json
+            threads-live-inventory.json
           include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 30
@@ -459,8 +547,8 @@ jobs:
 
   alert:
     name: Alert on Threads publishing failure
-    needs: publish
-    if: ${{ always() && (needs.publish.result == 'failure' || needs.publish.outputs.queue_missing == 'true') }}
+    needs: [publish, queue_preflight]
+    if: ${{ always() && (needs.publish.result == 'failure' || needs.publish.outputs.queue_missing == 'true' || needs.queue_preflight.result == 'failure') }}
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:

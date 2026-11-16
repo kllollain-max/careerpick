@@ -24,7 +24,7 @@ def retry_delay(error, attempt):
             return delay if delay <= 30 else None
     elif not isinstance(error, (urllib.error.URLError, TimeoutError, ConnectionError)):
         return None
-    return (2, 5)[min(attempt, 1)]
+    return 2 ** (min(attempt, 1) + 1)
 
 
 def read_response(request, timeout=20, *, opener=None, sleeper=None):

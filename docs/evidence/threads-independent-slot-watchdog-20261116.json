@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "automation_id": "Automation_b88881f78430819184df61abae51cce8",
+  "title": "커리어픽 예약 게시 누락 복구",
+  "timezone": "Asia/Seoul",
+  "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261116T201000\nRRULE:FREQ=DAILY;BYHOUR=8,12,16,20;BYMINUTE=10;BYSECOND=0\nEND:VEVENT",
+  "next_run_time": "2026-11-16T20:10:00+09:00",
+  "purpose": "Independently verify each regular slot ten minutes after due time; use existing same-slot approved publisher and remote claim only when confirmed missing.",
+  "normal_github_cron_preserved": true,
+  "publication_grace_hours": 2,
+  "per_day_main_limit": 4,
+  "known_noon_recovery_post_id": "17918956251546576",
+  "next_regular_slot": "2026-11-16T20:00:00+09:00",
+  "next_notice": "a306752",
+  "next_regular_slot_actual_execution_verified": false,
+  "remaining_approved_inventory": 2,
+  "inventory_target": 8,
+  "stock_shortfall": 6,
+  "regular_queue_blob": "3cfaca455e1897a984889cf38e9f1de2ea0819e2"
+}

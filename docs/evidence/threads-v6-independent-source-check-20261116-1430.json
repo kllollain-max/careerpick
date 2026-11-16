@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "checked_at_kst": "2026-11-16T14:30:00+09:00",
+  "status": "partial_recovery_not_publication_complete",
+  "incident": {
+    "slot": "2026-11-16T12:00:00+09:00",
+    "run_id": 43801068811,
+    "actual_started_at_kst": "2026-11-16T12:56:18+09:00",
+    "reason": "QUEUE_SLOT_MISSING",
+    "meta_post_attempted": false,
+    "false_green_confirmed": true
+  },
+  "deployed": {
+    "pr63_merge_sha": "406036558b48f7543094143c8542a6b982a90885",
+    "subsequent_main_sha": "6854f2f6b47e87383392ea52d978c0df8fbd65b0",
+    "backup_branch": "backup/threads-before-v6-20261116",
+    "preflight_run_id": 43809834908,
+    "preflight_conclusion": "success_no_post",
+    "approved_future_count_observed": 1,
+    "next_slot": "2026-11-16T16:00:00+09:00",
+    "next_notice_id": "cleaneye-80976"
+  },
+  "independent_checks": [
+    {
+      "notice_id": "cleaneye-80976",
+      "kind": "cited_official_document_live_sha256_comparison",
+      "result": "matched_existing_review",
+      "sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5"
+    },
+    {
+      "notice_id": "a306752",
+      "kind": "exact_official_https_notice_live_fetch",
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306752",
+      "sha256": "2aaeaf5372db0e57b184b98a77e068fa96339c98897b7ac2b48cf71ecd54e221",
+      "size_bytes": 11178,
+      "checked_at_kst": "2026-11-16T14:29:29+09:00",
+      "semantic_approval": false
+    },
+    {
+      "notice_id": "cleaneye-80848",
+      "kind": "official_mpva_hosted_original_recruitment_pdf",
+      "url": "https://job.mpva.go.kr/common/fileDownload.do?atchFileId=FILE_100000000003755&fileSn=1&orgNm=%5B%28%EC%A3%BC%29%EC%84%9C%EC%9A%B8%EB%A9%94%ED%8A%B8%EB%A1%9C%ED%99%98%EA%B2%BD%5D+2026%EB%85%84+%ED%95%98%EB%B0%98%EA%B8%B0+%EA%B3%B5%EB%AC%B4%C2%B7%EA%B2%BD%EB%B9%84%EC%A7%81+%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+      "sha256": "f7899ab44637235d87de4b844489bff40f4f3039beb1f3930856c2315ad6303a",
+      "size_bytes": 254998,
+      "pdf_text_extracted": true,
+      "review_findings": {
+        "notice_total": 153,
+        "one_recruitment_unit": {
+          "title": "공무직 사원",
+          "count": 103,
+          "employment": "정규직"
+        },
+        "actual_application_end_kst": "2026-11-20T12:00:00+09:00",
+        "employer": "서울메트로환경",
+        "source_api_parent_org": "서울교통공사",
+        "source_granularity_requires_review": true,
+        "application_url": "https://recruit.incruit.com/cleanmetro/job/2610280002"
+      },
+      "semantic_approval": false
+    }
+  ],
+  "remaining": [
+    "Independently author and fully validate at least seven additional unique current manuscripts; the new PDF is NOT yet an approved entry",
+    "Implement and validate a separate safe noon catch-up before claiming recovery",
+    "Observe actual Threads POST ID, permalink and GET verification",
+    "Confirm later scheduled publication and sustained stock replenishment"
+  ],
+  "tokens_or_secrets_included": false
+}

@@ -1,0 +1,31 @@
+name: Threads queue regression checks
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/threads_*.py'
+      - 'tests/test_threads*.py'
+      - '.github/workflows/threads_auto.yml'
+      - '.github/workflows/threads_queue_regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    name: Validate queue logic without posting
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check Python syntax
+        run: python -m py_compile scripts/threads_queue_bridge.py tests/test_threads_queue_bridge_preflight.py scripts/threads_unreviewed_drafts.py tests/test_threads_unreviewed_drafts.py scripts/threads_reviewed_ingest.py tests/test_threads_reviewed_ingest.py scripts/threads_official_review_pack.py tests/test_threads_official_review_pack.py
+      - name: Test source, staging, supply and real workflow entrypoints
+        run: |
+          for pattern in test_threads_queue_bridge_preflight.py test_threads_reviewed_ingest.py test_threads_official_review_pack.py test_threads_unreviewed_drafts.py test_threads_workflow_entrypoints.py test_threads_supply_audit.py test_threads_live_inventory.py; do
+            python -m unittest discover -s tests -p "$pattern" -v || exit 1
+          done

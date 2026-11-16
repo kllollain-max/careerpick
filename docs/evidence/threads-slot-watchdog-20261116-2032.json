@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "careerpick-threads-independent-slot-watchdog",
+  "scope": {
+    "repository": "kllollain-max/careerpick",
+    "account": "@hid_119",
+    "supportpick_untouched": true,
+    "website_collection_search_push_untouched": true
+  },
+  "observed_at": "2026-11-16T20:32:37+09:00",
+  "target_slot": "2026-11-16T20:00:00+09:00",
+  "reason": "The regular 20:00 schedule had not started within the independent watchdog window; the 19:46 preflight proved the approved current-slot manuscript existed. A genuine current-minute PUBLISH fallback was dispatched without moving the future slot.",
+  "dispatch": {
+    "mode": "PUBLISH",
+    "notice_id": "a306752",
+    "nonce_kst": "2026-11-16T20:31:00+09:00",
+    "run_id": "43858550129",
+    "workflow_run_url": "https://github.com/kllollain-max/careerpick/actions/runs/43858550129",
+    "head_sha": "02bc597c1f76f53f50bd0474dfeab6066cae0466",
+    "conclusion": "success"
+  },
+  "claim": {
+    "path": "threads-claims/20261116T1100Z.json",
+    "state": "accepted",
+    "run_id": "43858550129",
+    "post_id": "18134891626705962",
+    "blob_sha": "a62320c8e983151a6db61bb53d995581dfdf3dd2"
+  },
+  "publication": {
+    "notice_id": "a306752",
+    "post_id": "18134891626705962",
+    "permalink": "https://www.threads.com/@hid_119/post/DfzQXwBGxOw",
+    "published_at": "2026-11-16T20:32:36.915410+09:00",
+    "request_status": "confirmed",
+    "status": "published",
+    "media_type": "IMAGE",
+    "body_chars": 274,
+    "automatic_reply_count": 0,
+    "own_replies": 0,
+    "own_replies_status": "verified",
+    "actual_text": "간담췌외과 전문의 채용을 찾는 분께,\n한국원자력의학원 외과 의사 정규직 1명 공고예요.\n\n서울 근무예요. 의사면허·외과전문의·간담췌분과전문의(취득예정 포함)가 필수예요.\n최근 5년 연구실적 3편 이상 또는 최근 3년 SCI(SCIE) 주저자 논문 1편 이상도 필요해요.\n공고일 기준 만65세 미만, 병역·결격 요건을 확인해요.\n\n11월 20일 17:00까지 의학원 채용사이트에서 접수해요.\n서류는 개인정보를 가리고, 면허·자격 및 연구 증빙을 빠짐없이 내요.\n\n자세한 사항은 프로필링크 확인",
+    "expected_image_sha256": "a043941196059f5eda9d7fffcd4b7e919511eae02f33bc5c54fe320836c6b85d"
+  },
+  "history": {
+    "source_commit": "7e7e93b308e3cbb936b809a933d38a1bbfd0f1ba",
+    "record_count": 87,
+    "matching_slot_records": 1
+  },
+  "next_slot": {
+    "scheduled_at": "2026-11-17T08:00:00+09:00",
+    "notice_id": "a306913",
+    "approved": true
+  },
+  "approved_future_inventory": {
+    "count": 1,
+    "target": 8,
+    "shortfall": 7,
+    "replenishment_required": true
+  },
+  "duplicate_prevention": {
+    "remote_create_only_claim": "accepted",
+    "matching_slot_records": 1,
+    "rerun_forbidden": true
+  }
+}

@@ -1,10 +1,48 @@
 """No-network regressions for verified queue CAS feeder."""
 import unittest
+import base64
+import hashlib
+import io
+import json
 from datetime import datetime
 from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
 from scripts import threads_queue_bridge as bridge
+
+
+class LargeQueueReadTests(unittest.TestCase):
+    def read_large(self, corrupt=False):
+        # Actual >1MiB Unicode JSON response with omitted Contents payload.
+        raw = json.dumps({'entries': ['검증된 원고' * 100_000]}, ensure_ascii=False).encode()
+        sha = hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest()
+        meta = {'sha': sha, 'size': len(raw), 'content': '', 'encoding': 'none',
+                'download_url': 'https://untrusted.invalid/never-follow'}
+        blob = {'sha': sha, 'size': len(raw), 'encoding': 'base64',
+                'content': base64.b64encode(raw.replace(b'entries', b'changed') if corrupt else raw).decode()}
+        with patch.object(bridge, 'request', return_value=meta), \
+             patch.dict(bridge.os.environ, {'GITHUB_REPOSITORY': 'owner/repo'}), \
+             patch.object(bridge.urllib.request, 'urlopen', return_value=io.BytesIO(json.dumps(blob).encode())) as opened:
+            value = bridge.read('threads/writer-queue.json', 'private-test-token')
+            self.assertEqual(opened.call_args.args[0].full_url,
+                             'https://api.github.com/repos/owner/repo/git/blobs/' + sha)
+        return value, sha
+
+    def test_large_unicode_queue_reads_exact_immutable_blob(self):
+        (value, actual), expected = self.read_large()
+        self.assertEqual(actual, expected)
+        self.assertEqual(value['entries'], ['검증된 원고' * 100_000])
+
+    def test_changed_blob_never_accepted(self):
+        with self.assertRaisesRegex(ValueError, 'QUEUE_BLOB_CONTENT_MISMATCH'):
+            self.read_large(corrupt=True)
+
+    def test_oversized_metadata_rejected_without_network(self):
+        with patch.object(bridge, 'request', return_value={'sha': 'a'*40, 'size': 20_000_001, 'content': ''}), \
+             patch.object(bridge.urllib.request, 'urlopen') as opened:
+            with self.assertRaisesRegex(ValueError, 'QUEUE_BLOB_METADATA_INVALID'):
+                bridge.read('threads/writer-queue.json', 'private-test-token')
+            opened.assert_not_called()
 
 
 class ReviewedBridgeTests(unittest.TestCase):

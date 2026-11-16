@@ -1,0 +1,30 @@
+{
+  "incident": "2026-11-16T12:00:00+09:00",
+  "run_id": 43801068811,
+  "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/43801068811",
+  "started_at": "2026-11-16T03:56:18Z",
+  "job_id": 133081190451,
+  "observed_error": "QUEUE_SLOT_MISSING",
+  "reservation_ready": false,
+  "publish_step": "skipped",
+  "verification_step": "skipped",
+  "run_conclusion": "success",
+  "cause": "No approved manuscript for the noon slot; the reservation step returned success without a reservation.",
+  "staging_entries": 3,
+  "queue_entries": 34,
+  "currently_validated_future_entries": 1,
+  "validated_future_slot": "2026-11-16T16:00:00+09:00",
+  "validated_notice_id": "cleaneye-80976",
+  "official_fact_document_download_digest_matched": true,
+  "official_fact_document_sha256": "9d4e7f6b0c1c33a47e7f8219cb9a0c296a83dceceb5b3a2dc82e69ba25c9a7d5",
+  "noon_catchup_posted_in_this_repair": false,
+  "local_threads_tests": {"count": 359, "result": "passed", "actual_meta_calls": 0},
+  "backup_branch": "backup/threads-v6-before-20261116",
+  "backup_sha": "75e0faace28a29784a704b9ca4ec07531eae856c",
+  "limitations": [
+    "Eight approved manuscripts have not been supplied.",
+    "No actual publication success is claimed by local tests.",
+    "Past-slot catch-up outside the existing two-hour window needs a separate tested recovery path.",
+    "Planning eight future slots does not override the existing 24-hour evidence freshness limit."
+  ]
+}
