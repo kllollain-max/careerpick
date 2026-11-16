@@ -17,7 +17,7 @@ import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 from zoneinfo import ZoneInfo
 
 # Support the exact direct-script entry point used by GitHub Actions.
@@ -54,6 +54,20 @@ def official_url_allowed(url):
             return (parts.path == "/employment/stffPbanInfo.do"
                     and parts.query == "stffPbanNo=2026-0155"
                     and not parts.fragment)
+        # Independently identified employer-managed recruiting portal for
+        # Cleaneye 80848. Do not accept unrelated Incruit employers or pages.
+        if host == "recruit.incruit.com":
+            return (parts.path == "/cleanmetro/job/2610280002"
+                    and not parts.query and not parts.fragment)
+        # Only these three publicly linked PDF attachments belong to this
+        # 2026-17 notice. Their exact bytes must still be downloaded, digested,
+        # semantically checked, and bound to evidence before approval.
+        if host == "c.incru.it":
+            return (unquote(parts.path) in {
+                "/newjobpost/2026/10_cleanmetro/붙임1. 채용결격사유 관련.pdf",
+                "/newjobpost/2026/10_cleanmetro/붙임2. 서류전형 평가기준.pdf",
+                "/newjobpost/2026/10_cleanmetro/붙임3. 서울교통공사 재취업심사 및 취업제한심사 관련.pdf",
+            } and not parts.query and not parts.fragment)
         # A conservative institutional-source allowlist, not a domain trust
         # assertion. Other domains need independently reviewed support first.
         return any(host == suffix or host.endswith("." + suffix)
