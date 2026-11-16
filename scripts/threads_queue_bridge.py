@@ -179,13 +179,13 @@ def run(apply=False):
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
         selection = build_selection(source, details, history, policy, now, 24,
                                     queued_entries=queue['entries'])
+        ready_slots = {entry.get('scheduled_at') for entry in merged['entries']
+                       if isinstance(entry, dict) and isinstance(entry.get('writer'), dict)
+                       and entry['writer'].get('status') == 'ready'}
         report.update(queue_sha=sha, staged_sha=stage_sha,
                       approved_supply_count=len(approved),
-                      approved_future_slots=[slot for slot in future_slots(now)
-                                             if slot in {e.get('scheduled_at') for e in merged['entries']
-                                                         if isinstance(e, dict) and e.get('writer', {}).get('status') == 'ready'}],
-                      missing_slots=[s for s in future_slots(now)
-                                     if s not in {e.get('scheduled_at') for e in merged['entries']}],
+                      approved_future_slots=[slot for slot in future_slots(now) if slot in ready_slots],
+                      missing_slots=[slot for slot in future_slots(now) if slot not in ready_slots],
                       source_candidate_count=len(selection.get('candidates', [])),
                       shortlisted=[{'notice_id': e.get('notice_id'), 'org': e.get('org'),
                                     'title': e.get('title')}
