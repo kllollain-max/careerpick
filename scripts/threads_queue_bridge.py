@@ -51,9 +51,15 @@ def next_media(history):
 
 def eligible_staged_slot(entry, now):
     """Keep the publisher's existing 2h grace only for pre-slot reviewed entries."""
+    if not isinstance(entry, dict):
+        return False
     supplied = entry.get('scheduled_at')
     if supplied in future_slots(now):
-        return True
+        try:
+            slot = datetime.fromisoformat(supplied)
+            return slot.utcoffset() is not None
+        except (TypeError, ValueError):
+            return False
     try:
         slot = datetime.fromisoformat(supplied)
         prepared = datetime.fromisoformat(entry['prepared_at'])
