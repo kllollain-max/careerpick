@@ -211,8 +211,11 @@ def run(apply=False):
                                                                for item in selection.get('candidates', [])[:24]],
                                       'automatic_approval': False,
                                       'meta_posted': False},
-                      shortlisted=[{'notice_id': e.get('notice_id'), 'org': e.get('org'),
-                                    'title': e.get('title')}
+                      shortlisted=[{'notice_id': e.get('notice_id'),
+                                    'org': e.get('source_post', {}).get('org'),
+                                    'title': e.get('source_post', {}).get('title'),
+                                    'employment': e.get('selection_context', {}).get('employment'),
+                                    'application_period': e.get('selection_context', {}).get('application_period')}
                                    for e in selection.get('candidates', [])[:12]],
                       promoted=[{'notice_id': e['notice_id'], 'slot': e['scheduled_at'],
                                  'fingerprint': fingerprint(e)} for e in approved],
