@@ -196,6 +196,9 @@ jobs:
           unresolved = [r for r in records if r.get('status') == 'pending' and not r.get('threads_post_id')]
           if not ready and unresolved:
               raise SystemExit('Unresolved Threads reservation; reconcile remote state before further posting')
+          if not ready:
+              print('::error title=QUEUE_SLOT_MISSING::No approved manuscript reserved for this slot; Meta POST skipped')
+              raise SystemExit('QUEUE_SLOT_MISSING: no approved manuscript; publication skipped')
           PY
 
       - name: Install Korean fonts and Pillow
