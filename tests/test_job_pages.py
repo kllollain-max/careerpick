@@ -15,6 +15,37 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_yangju_notice_reconciles_attachment_without_overriding_feed(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        evidence = VERIFIED_DUTIES['a307034']
+        post = dict(self.post, id='a307034', org=evidence['organization'],
+                    title=evidence['title'], due='2026-11-20T23:59:00+09:00',
+                    dueHasTime=False)
+        original = copy.deepcopy(post)
+        html = render(post, {})
+        self.assertIn('2026-11-20 16:00 (KST)', html)
+        self.assertNotIn('2026-11-20 23:59', html)
+        self.assertNotIn('application/ld+json', html)
+        self.assertIn('모집 3명 이하의 보훈 가점 미적용 원칙', html)
+        self.assertIn('면접전형 가점으로 설명합니다', html)
+        self.assertIn('우대 증빙 제출 시점도 ALIO 요약과 첨부', html)
+        self.assertIn('근무 장소와 면접 장소가 다릅니다', html)
+        self.assertIn('fileNo=3087622', html)
+        self.assertEqual(post, original)
+        for changed in ({'org': '다른 기관'}, {'title': '다른 공고'}, {'id': 'a307035'}):
+            self.assertNotIn('id="verified-notice"', render(dict(post, **changed), {}))
+
+    def test_yangju_archives_at_verified_16h_cutoff(self):
+        post = dict(self.post, id='a307034', due='2026-11-20T23:59:00+09:00',
+                    dueHasTime=False)
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 20, 7, 0, 1, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertIn('공식 확인된 원서접수 마감시각이 지난 보관 공고', html)
+        self.assertIn('noindex,follow', html)
+        self.assertNotIn('application/ld+json', html)
+
     def test_verified_pdf_summary_is_bound_to_notice_identity(self):
         from scripts.build_job_pages import VERIFIED_DUTIES
         for identity, evidence in VERIFIED_DUTIES.items():
