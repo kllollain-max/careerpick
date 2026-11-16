@@ -227,5 +227,25 @@ class ReviewedIngestTests(unittest.TestCase):
 
 
 
+    def test_only_exact_cleanmetro_recruitment_board_is_allowed(self):
+        exact = "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1"
+        self.assertTrue(official_url_allowed(exact))
+        self.assertTrue(official_url_allowed(exact + "&ckattempt=1"))
+        self.assertTrue(official_url_allowed(exact + "&ckattempt=3"))
+        for bad in (
+            "https://cleanmetro.co.kr/bbs/board.php?bo_table=notice&page=1",
+            "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=2",
+            "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit",
+            "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1#x",
+            "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1&x=1",
+            "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1&ckattempt=4",
+            "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1&ckattempt=1&x=1",
+            "https://www.cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1",
+            "https://evil.cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1",
+            "http://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1",
+        ):
+            with self.subTest(url=bad):
+                self.assertFalse(official_url_allowed(bad))
+
 if __name__ == "__main__":
     unittest.main()

@@ -174,7 +174,7 @@ class EvidencePacketTests(unittest.TestCase):
 
     def test_cleaneye_80848_annex_digest_collection_is_pinned_and_unapproved(self):
         from scripts.threads_official_review_pack import (
-            CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES, independently_located_notice)
+            CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES, CANONICAL_REVIEW_BOARDS, independently_located_notice)
         pinned = CANONICAL_REVIEW_URLS["cleaneye-80848"]
         draft = {
             "notice_id": "cleaneye-80848", "status": "unreviewed",
@@ -193,7 +193,10 @@ class EvidencePacketTests(unittest.TestCase):
         packet = build_packet({"status": "review_required", "approved_for_queue": False,
                                "drafts": [draft]}, fetch=fetched)
         record = packet["records"][0]
-        self.assertEqual(called, [pinned["url"], *urls])
+        self.assertEqual(called, [pinned["url"], *urls, CANONICAL_REVIEW_BOARDS["cleaneye-80848"]["url"]])
+        self.assertEqual(record["employer_recruitment_board_receipt"]["status"],
+                         "board_bytes_fetched_for_independent_review")
+        self.assertFalse(record["employer_recruitment_board_receipt"]["correction_absence_verified"])
         self.assertEqual(record["attachment_status"], "all_raw_pdf_sha256_captured")
         self.assertEqual(len(record["attachment_receipts"]), 3)
         self.assertFalse(packet["approved_for_queue"])
@@ -221,6 +224,28 @@ class EvidencePacketTests(unittest.TestCase):
                                "drafts": [draft]}, fetch=fetched)
         self.assertNotIn("attachment_receipts", packet["records"][0])
 
+
+    def test_invalid_employer_board_receipt_fails_closed_without_publishing(self):
+        from scripts.threads_official_review_pack import (
+            CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_BOARDS)
+        pinned = CANONICAL_REVIEW_URLS["cleaneye-80848"]
+        board_url = CANONICAL_REVIEW_BOARDS["cleaneye-80848"]["url"]
+        draft = {"notice_id": "cleaneye-80848", "status": "unreviewed",
+                 "source_post_sha256": pinned["source_post_sha256"],
+                 "source_detail_sha256": pinned["source_detail_sha256"]}
+        def fetched(url):
+            if url == board_url:
+                raise ValueError("BOARD_UNAVAILABLE")
+            return {"url": url, "sha256": "b" * 64, "size_bytes": 100,
+                    "pdf_magic_valid": True}
+        packet = build_packet({"status": "review_required", "approved_for_queue": False,
+                               "drafts": [draft]}, fetch=fetched)
+        receipt = packet["records"][0]["employer_recruitment_board_receipt"]
+        self.assertEqual(receipt["status"], "not_verified")
+        self.assertEqual(receipt["block_reason"], "BOARD_UNAVAILABLE")
+        self.assertFalse(receipt["correction_absence_verified"])
+        self.assertFalse(packet["approved_for_queue"])
+        self.assertFalse(packet["meta_posted"])
 
 if __name__ == "__main__":
     unittest.main()
