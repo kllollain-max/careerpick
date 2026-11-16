@@ -24,6 +24,17 @@ class InventoryTests(unittest.TestCase):
         self.assertNotIn('secret-test-token', str(result))
         self.assertTrue(all(call.args[0] == 'GET' for call in api.call_args_list))
 
+    def test_image_only_receipts_keep_id_without_inventing_text(self):
+        post = {k: v for k, v in self.post.items() if k != 'text'}
+        api = Mock(side_effect=[self.account, {'data': [post]}])
+        result = inventory(api, '', '123', self.now)
+        self.assertEqual(result['posts'][0]['post_id'], '456')
+        self.assertFalse(result['posts'][0]['text_available'])
+        self.assertIsNone(result['posts'][0]['text_sha256'])
+        self.assertFalse(result['safe_to_republish'])
+        api = Mock(side_effect=[self.account, {'data': [{**post, 'text': None}]}])
+        self.assertIsNone(inventory(api, '', '123', self.now)['posts'][0]['text_sha256'])
+
     def test_wrong_account_stops_before_reading_posts(self):
         api = Mock(return_value={**self.account, 'username': 'hid_1004'})
         with self.assertRaisesRegex(ValueError, 'THREADS_ACCOUNT_MISMATCH'):

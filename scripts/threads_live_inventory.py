@@ -34,14 +34,16 @@ def inventory(api, token, expected_id, now, max_pages=4):
                 raise ValueError('INVENTORY_POST_TIMEZONE')
             if post['id'] in seen_ids or not since <= stamp <= now:
                 continue
-            if not isinstance(post.get('text'), str):
+            text = post.get('text')
+            if text is not None and not isinstance(text, str):
                 raise ValueError('INVENTORY_TEXT_INVALID')
             permalink = post.get('permalink')
             if not isinstance(permalink, str) or not permalink.startswith(('https://www.threads.net/', 'https://www.threads.com/', 'https://threads.net/', 'https://threads.com/')):
                 raise ValueError('INVENTORY_PERMALINK_INVALID')
             posts.append({'post_id': str(post['id']), 'timestamp': stamp.isoformat(),
                           'permalink': permalink, 'is_reply': post.get('is_reply'),
-                          'text_sha256': hashlib.sha256(post['text'].encode()).hexdigest()})
+                          'text_available': isinstance(text, str),
+                          'text_sha256': hashlib.sha256(text.encode()).hexdigest() if isinstance(text, str) else None})
             seen_ids.add(post['id'])
         paging = response.get('paging') or {}
         if not paging.get('next'):
