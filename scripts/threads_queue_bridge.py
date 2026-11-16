@@ -186,7 +186,7 @@ def run(apply=False):
                         raise
         merged, approved, refused = merge(queue, staged, history, policy, source, details, now, claimed_slots)
         selection = build_selection(source, details, history, policy, now, 24,
-                                    queued_entries=queue['entries'])
+                                    queued_entries=merged['entries'])
         approved_slots = ready_future_slots(merged['entries'], now)
         report.update(queue_sha=sha, staged_sha=stage_sha,
                       approved_supply_count=len(approved),
