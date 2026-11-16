@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T21:53:14.497339+00:00",
+  "updated_at": "2026-11-17T08:58:22+09:00",
   "last_observed_at": "2026-11-16T21:53:14.497339+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
@@ -13331,408 +13331,17 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "checked_at": "2026-11-15T15:53:15+00:00",
-    "main_sha": "c7b818531e7f25f94cb53590258d6084964397c2",
-    "history_blob_sha": "d6a93fb86b02eb7df904e3493490c8f34eaf1764",
-    "claim_blob_sha": "9663dadce00f46de529e712eff6f073d5831a03d",
-    "latest_publisher_run": {
-      "run_id": 43692396153,
-      "run_attempt": 1,
-      "status": "completed",
-      "conclusion": "success",
-      "updated_at": "2026-11-15T08:00:37Z",
-      "head_sha": "924054e6a435ea7215157770745d544987298257"
-    },
-    "new_publisher_runs": [
-      {
-        "run_id": 43691683586,
-        "kind": "delayed_preflight",
-        "status": "completed",
-        "conclusion": "success",
-        "actual_promoted": 0,
-        "error": "STAGED_SLOT_EXPIRED_OR_FUTURE"
-      }
-    ],
-    "last_confirmed_post_id": "18137768440737022",
-    "publisher_in_progress": false,
-    "status": "staged_ready_wait_regular_preflight",
-    "source_collection": {
-      "alio": {
-        "status": "verified_snapshot",
-        "snapshot_at": "2026-11-15T00:50:19+09:00",
-        "source_checked_at": "2026-11-15T00:50:40+09:00",
-        "total_records": 956,
-        "eligible_count": 29,
-        "review_required_count": 800,
-        "excluded_count": 127,
-        "returned_count": 1,
-        "exclusion_reasons": {
-          "APPLICATION_CLOSED": 36,
-          "NOTICE_ALREADY_USED": 77,
-          "APPLICATION_END_TIME_EVIDENCE_MISMATCH": 1,
-          "SOURCE_NOTICE_UNCONFIRMED": 11,
-          "APPLICATION_END_PRECISION_CONFLICT": 1,
-          "APPLICATION_NOT_OPEN": 1
-        }
-      },
-      "cleaneye": {
-        "status": "verified",
-        "snapshot_at": "2026-11-15T00:51:06+09:00",
-        "source_checked_at": "2026-11-15T00:51:06+09:00",
-        "total_records": 563,
-        "eligible_count": 265,
-        "review_required_count": 0,
-        "excluded_count": 298,
-        "returned_count": 23,
-        "exclusion_reasons": {
-          "CLEANEYE_NOT_VERIFIED_OPEN": 285,
-          "CLEANEYE_NOT_RECRUITMENT": 11,
-          "NOTICE_ALREADY_USED": 2
-        }
-      }
-    },
-    "actions_pages_read": 1,
-    "actions_runs_read": 100,
-    "actions_reported_total": 995,
-    "actions_scope": "checkpoint changes only",
-    "changed_runs_since_checkpoint": [],
-    "monitored_slot": "2026-11-15T08:00:00+09:00",
-    "monitored_slot_grace_ends": "2026-11-15T10:00:00+09:00",
-    "slot_claim_or_reservation_observed": false,
-    "audit_path": "threads/audits/staged-cleaneye-80976-20261116-0050.json",
-    "new_failure_fingerprints": [
-      "43691683586:1:STAGED_SLOT_EXPIRED_OR_FUTURE:a306965"
-    ],
-    "new_metric_observations": 0,
-    "new_account_observations": 0,
-    "new_ready_saved": 1,
-    "new_held_drafts_saved": 1,
-    "queue_changed": false,
-    "existing_automation": {
-      "id": "6ae092084b988191a23a38300212ebdc",
-      "is_enabled": true,
-      "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261115T123000\nRRULE:FREQ=HOURLY;BYMINUTE=30;BYSECOND=0\nEND:VEVENT",
-      "conversation_id": "6ae9f03d-2634-83ee-ab2d-454b9ebc3d07",
-      "changed": false
-    },
-    "new_comparable_24h_observations": 0,
-    "new_late_cumulative_observations": 0,
-    "new_candidate_fact_reviews": 0,
-    "held_draft_card_completed": "a306965",
-    "scheduled12_status": "workflow_success_publish_skipped",
-    "retrieval_limitations": [
-      "Official GET was executed in the observed publisher run at17:00:20; receipt, accepted claim, account logs and actual media bytes were read and checked in this maintenance.",
-      "Own reply scan covers top-level all pages; not all nested replies."
-    ],
-    "next_regular_slot": "2026-11-16T08:00:00+09:00",
-    "next_actual_media": "IMAGE",
-    "scheduled16_status": "published_and_official_GET_verified_at17:00_within_existing2h_grace",
-    "scheduled20_status": "unstarted_no_new_ready",
-    "queue_blob_sha": "972489ba92126286e40014c2d48bf2aa5ff72298",
-    "maintenance_input_blob_sha": "4eb2a67e86aad1e947a2cd1fbd0362cc06789100",
-    "performance_blob_sha": "aec6aeaa35d7ab21637e7b33c824046f0ce83cd8",
-    "scheduled08_status": "confirmed_presend_failure_grace_expired_no_backfill",
-    "executed_archive_main_sha": "7a0fa7339cacae16bac32f6a9b310bc87a39d669",
-    "archive_to_current_changes": [],
-    "new_duplicate_exclusions": 1,
-    "accepted_claims_read": 44,
-    "accepted_claims_without_history": 0,
-    "new_ready_saved_to_staging": 1,
-    "staging_changed": true,
-    "latest_stage_recheck": {
-      "checked_at": "2026-11-15T15:17:58.708496+09:00",
-      "main_sha": "924054e6a435ea7215157770745d544987298257",
-      "notice_id": "a306965",
-      "slot": "2026-11-15T16:00:00+09:00",
-      "stage_entry_sha256": "6c6c944a06dd65b2caae1f8c185a03e07350013f27a5b549379aab90c5ce785b",
-      "source_sha256": "4155e7f65e3227d5dd9a3e238d914ab45ad8e2b828eb70208f5144fa03e76105",
-      "official_source_GET": 200,
-      "official_bytes_unchanged": true,
-      "policy_hashes": {
-        "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
-        "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
-        "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
-        "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
-      },
-      "full_entry_validation": "passed",
-      "bridge_merge": "passed",
-      "whole_prospective_queue_validation": "passed",
-      "card_exact_byte_check": {
-        "valid": true,
-        "format": "JPEG",
-        "width": 1080,
-        "height": 1080,
-        "mode": "RGB",
-        "file_size_bytes": 143628,
-        "pixel_verification": "passed",
-        "layout_version": "careerpick-single-main-card-v2",
-        "asset_path": "threads-images/a306965.jpg",
-        "local_path": "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/threads-images/a306965.jpg",
-        "sha256": "15185e50d799d47385cd486ec190b5905023671573293181caf711d672a0e6f3",
-        "facts_sha256": "b16473f69832a74a15e0669b33fbe8befcc8e8c4c7d3b2f063b351d80898ad76",
-        "preview_asset_path": "threads-images/a306965-360.png",
-        "preview_sha256": "1259ffd15ddca6609c4046ae2f658dce5f98d9acdeb10e4b110ee3815e7bff4b",
-        "reviewed_width": 360,
-        "reviewed_at": "2026-11-15T03:30:54.872465+00:00",
-        "visual_review": "attestation_and_exact_assets_verified"
-      },
-      "current_queue_ready": 0,
-      "staging_ready": 1,
-      "preserved_historical_entries": 31,
-      "pending_history": 0,
-      "next_media": "IMAGE",
-      "candidate_count": 24,
-      "unconfirmed_count": 800,
-      "recent_successes": 8,
-      "future_slots": [
-        {
-          "scheduled_at": "2026-11-15T16:00:00+09:00",
-          "format_id": "interest",
-          "hook_type": "target",
-          "planned_media": "IMAGE",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "regular_interest",
-          "presentation_style_planning_only": true
-        },
-        {
-          "scheduled_at": "2026-11-15T20:00:00+09:00",
-          "format_id": "deadline_opportunity",
-          "hook_type": "target",
-          "planned_media": "TEXT",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "eligibility_info",
-          "presentation_style_planning_only": true
-        },
-        {
-          "scheduled_at": "2026-11-16T08:00:00+09:00",
-          "format_id": "hiring_core",
-          "hook_type": "condition",
-          "planned_media": "IMAGE",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "regular_interest",
-          "presentation_style_planning_only": true
-        },
-        {
-          "scheduled_at": "2026-11-16T12:00:00+09:00",
-          "format_id": "eligibility",
-          "hook_type": "target",
-          "planned_media": "TEXT",
-          "experiment_variable": "intro_target_vs_condition_only",
-          "planning_only_recheck_actual_success_history": true,
-          "presentation_style": "eligibility_info",
-          "presentation_style_planning_only": true
-        }
-      ],
-      "commands": [
-        {
-          "command": [
-            "python",
-            "scripts/threads_writer_input.py",
-            "--limit",
-            "24",
-            "--queue-for-selection",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
-          ],
-          "exit_code": 0
-        },
-        {
-          "command": [
-            "python",
-            "scripts/threads_writer_input.py",
-            "--check-queue",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/queue.json"
-          ],
-          "exit_code": 0
-        },
-        {
-          "command": [
-            "python",
-            "scripts/threads_performance.py",
-            "--mode",
-            "summarize",
-            "--state",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/recovery-1400/performance.json",
-            "--history",
-            "threads_posted.json",
-            "--output",
-            "/workspace/scratch/697589ed75d9/threads-1400-ry0z08lu/careerpick-924054e6a435ea7215157770745d544987298257/monitor-1517/performance-summary.json"
-          ],
-          "exit_code": 0
-        }
-      ],
-      "performance_24h": {
-        "verified_main_count": 2,
-        "metric_medians": {
-          "views": 2630,
-          "likes": 6,
-          "replies": 0,
-          "reposts": 0.5,
-          "quotes": 0
-        },
-        "metric_observed_counts": {
-          "views": 2,
-          "likes": 2,
-          "replies": 2,
-          "reposts": 2,
-          "quotes": 2
-        },
-        "metric_totals": {
-          "views": 5260,
-          "likes": 12,
-          "replies": 0,
-          "reposts": 1,
-          "quotes": 0
-        },
-        "views_distribution": [
-          {
-            "post_id": "17918731521553015",
-            "views": 2231
-          },
-          {
-            "post_id": "17896425015438025",
-            "views": 3029
-          }
-        ],
-        "likes_rate_percent_median": 0.23351143636317628,
-        "likes_rate_percent_observed_posts": 2,
-        "reader_replies": null,
-        "reader_replies_status": "see_per_post_author_separation_status",
-        "profile_visits": null,
-        "follow_increase": null,
-        "link_clicks": null
-      },
-      "performance_72h": {
-        "verified_main_count": 1,
-        "metric_medians": {
-          "views": 2484,
-          "likes": 7,
-          "replies": 0,
-          "reposts": 2,
-          "quotes": 0
-        },
-        "metric_observed_counts": {
-          "views": 1,
-          "likes": 1,
-          "replies": 1,
-          "reposts": 1,
-          "quotes": 1
-        },
-        "metric_totals": {
-          "views": 2484,
-          "likes": 7,
-          "replies": 0,
-          "reposts": 2,
-          "quotes": 0
-        },
-        "views_distribution": [
-          {
-            "post_id": "17918731521553015",
-            "views": 2484
-          }
-        ],
-        "likes_rate_percent_median": 0.28180354267310787,
-        "likes_rate_percent_observed_posts": 1,
-        "reader_replies": null,
-        "reader_replies_status": "see_per_post_author_separation_status",
-        "profile_visits": null,
-        "follow_increase": null,
-        "link_clicks": null
-      },
-      "performance_file_observations_unchanged": true,
-      "new_posts": 0,
-      "new_post_id": null,
-      "queue_changed": false,
-      "stage_changed": false,
-      "manual_dispatch": false,
-      "Meta_POST": false,
-      "audit_path": "threads/audits/staging-preflight-readiness-a306965-20261115-1517.json",
-      "stage_sha": "94bfb533c1fb65347bc483db4bf4eeeb61dd3039",
-      "queue_sha": "10bffd82c989f23f4cc572babb5f00a250facb75",
-      "history_sha": "854f5c0ad77580084a5aedd53bfb60011f8b147c",
-      "performance_sha": "0e523eb6ee1ff06f2c77b45d5f15a25cb2b5d608",
-      "claims_read": 43,
-      "accepted_claims_without_history": 0,
-      "new_publisher_runs": [],
-      "new_metric_observations": 0,
-      "next_regular_preflight": "2026-11-15T15:45:00+09:00",
-      "preflight_not_yet_due": true,
-      "next_regular_publisher": "2026-11-15T16:00:00+09:00"
-    },
-    "latest_regular_publisher_16h": "verified",
-    "new_regular_publications": 0,
-    "notice_id": "cleaneye-80792",
-    "staging_blob_sha": "a48ee17dbac29ee5d662cf30f1b9b2f030c38a91",
-    "claim_count": 45,
-    "latest_regular_runs": [
-      {
-        "id": 43709072093,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-15T11:29:05Z",
-        "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
-        "run_attempt": 1
-      },
-      {
-        "id": 43708516229,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-15T11:21:31Z",
-        "head_sha": "61a7af7d49c88f08d5c1c14a9f19fd6c173b5623",
-        "run_attempt": 1
-      },
-      {
-        "id": 43692396153,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-15T08:00:37Z",
-        "head_sha": "924054e6a435ea7215157770745d544987298257",
-        "run_attempt": 1
-      },
-      {
-        "id": 43691683586,
-        "status": "completed",
-        "conclusion": "success",
-        "updated_at": "2026-11-15T07:50:07Z",
-        "head_sha": "924054e6a435ea7215157770745d544987298257",
-        "run_attempt": 1
-      }
-    ],
-    "next_slot_source_gate": "CLEANEYE_SOURCE_STALE",
-    "source_collection_evidence": {
-      "run_id": 43717162751,
-      "job_id": 132821064648,
-      "alio_verified_at": "2026-11-15T22:06:05+09:00",
-      "cleaneye_complete_report_logged_at": "2026-11-15T13:07:40.5808225Z",
-      "unchanged": true,
-      "storage_skipped": true,
-      "live_verification_not_persisted_to_main": true
-    },
-    "whole_queue_validation": {
-      "status": "validated",
-      "ready_entries": []
-    },
-    "candidate_full_validation": {
-      "status": "NOT_RUN",
-      "reason": "required metadata and actual card are incomplete; candidate is not READY"
-    },
-    "hold_reasons": [
-      "CLEANEYE_SOURCE_STALE at next08: feed.updated remains2026-11-15T00:51:06+09:00 despite successful unchanged collection22:07",
-      "WORKPLACE_UNVERIFIED: institution address is not sufficient workplace evidence",
-      "CORRECTION_CHECK_INCOMPLETE: ATS notice board heading without rows cannot prove no correction",
-      "PERSONNEL_RULE14_FULL_CHECK_PENDING",
-      "CARD_NOT_GENERATED_AND_FULL_ENTRY_VALIDATOR_NOT_RUN"
-    ],
-    "automation_enabled": true,
-    "schedule_unchanged": true,
-    "new_live_meta_get": false,
-    "new_actual_meta_post_id": null,
-    "new_72h_observations": 0,
-    "audit_blob_sha": "70a9c30055d8a35897b1f57fa44d8e4d1f93bd7a",
-    "scope_limited_resolution": "No source collector/site writes. Existing Threads gate has no trusted unchanged-run freshness evidence input; source/time gate was not weakened. Operational resolution remains incomplete.",
-    "stage_sha": "eebd5db5bc2a0aa81819c3f5e202faca0e0ea213"
+    "observed_at": "2026-11-17T08:58:22+09:00",
+    "status": "REGULAR_08_POST_ACTUALLY_VERIFIED_REMAINING_THREE_QUEUE_VALIDATED",
+    "audit_path": "threads/audits/monitor-20261117-0858-regular08-verified.json",
+    "main_sha": "e280b92b6347ea0a6af13240d27b5d4d6c4b4ef8",
+    "run_id": "43979806022",
+    "post_id": "18174469135462070",
+    "queue_sha": "5d58aed330bcd8cd425a6bb6fc92161a67086e5c",
+    "stage_sha": "240e4eff816ace737059e4d0f52a846abf884cfd",
+    "remaining_ready_count": 3,
+    "actual_new_post_this_monitor": false,
+    "next_supply_gap": "2026-11-18T08:00:00+09:00"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -21284,6 +20893,60 @@
       "actual_post_id": "18137768440737022",
       "preventive_PR60_merged": true,
       "preventive_merge_commit": "cdec1785469cd32091e5731bc02551881bb9b016"
+    },
+    "latest_actual_text_verification": {
+      "notice_id": "a306913",
+      "scheduled_at": "2026-11-17T08:00:00+09:00",
+      "published_at": "2026-11-17T08:30:48.358406+09:00",
+      "run_id": "43979806022",
+      "run_attempt": 1,
+      "run_conclusion": "success",
+      "run_updated_at": "2026-11-16T23:31:12Z",
+      "run_head_sha": "eafefa652be010400e2b24ed5a8e2eb01406aba4",
+      "claim": {
+        "content": "{\"slot\": \"2026-11-17T08:00:00+09:00\", \"run_id\": \"43979806022\", \"state\": \"accepted\", \"post_id\": \"18174469135462070\"}",
+        "encoding": "utf-8",
+        "sha": "8b262155615d56a2d0d895933b76583190841b7d",
+        "display_url": "https://github.com/kllollain-max/careerpick/blob/threads-publisher-state/threads-claims/20261116T2300Z.json",
+        "display_title": "20261116T2300Z.json"
+      },
+      "public_output_verification": {
+        "checked_at": "2026-11-17T08:30:48.815991+09:00",
+        "post_id": "18174469135462070",
+        "status": "verified",
+        "permalink": "https://www.threads.com/@hid_119/post/Df0ijwBDnfj",
+        "actual_text": "유기오염물질 연구자를 찾고 있어요.\n한국해양과학기술원 환경유기화학·신규오염물질 정규직 1명, 부산 근무예요.\n\n관련 박사(2027년 2월 졸업예정 포함)와 마감일 기준 최근 4년 SCIE 주저자(교신 포함) 논문 2편 이상이 필요해요.\n2027년 3월 1일 기준 18~59세·전일제 근무, 병역·결격·연구참여제한 요건도 확인해요.\n초임계약 1년 뒤 평가를 거쳐 3년 단위로 재임용해요.\n\n11월 26일 10:00까지 채용사이트 온라인 접수예요.\n접수기간 이후 보완·수정이 불가하니 증빙을 미리 확인해요.\n\n자세한 사항은 프로필링크 확인",
+        "actual_text_sha256": "79aa1f47c8754d5874207b67961b39740f4a849c3b553a4cdd8ff69037075fb9",
+        "body_chars": 299,
+        "media_type": "TEXT_POST",
+        "media_url": null,
+        "expected_image_sha256": null,
+        "automatic_reply_count": 0,
+        "own_replies": 0,
+        "own_replies_status": "verified",
+        "contract_version": 2,
+        "code_commit": "eafefa652be010400e2b24ed5a8e2eb01406aba4",
+        "own_reply_ids": [],
+        "reply_scan_scope": "top_level_all_pages"
+      },
+      "api_account_username": "hid_119",
+      "account_observed_at": "2026-11-17T08:30:22.5992569+09:00",
+      "meta_get_verified_log_at": "2026-11-17T08:30:49.0142492+09:00",
+      "verification_scope": "Existing scheduled publisher performed official Meta GET after publication; this monitor reread stored receipt, accepted claim and actual Actions logs. No new Meta GET was issued by this monitor.",
+      "source_review_checked_at": "2026-11-16T15:40:55.886784+09:00"
+    },
+    "latest_independent_monitor_check": {
+      "observed_at": "2026-11-17T08:58:22+09:00",
+      "status": "REGULAR_08_POST_ACTUALLY_VERIFIED_REMAINING_THREE_QUEUE_VALIDATED",
+      "audit_path": "threads/audits/monitor-20261117-0858-regular08-verified.json",
+      "main_sha": "e280b92b6347ea0a6af13240d27b5d4d6c4b4ef8",
+      "run_id": "43979806022",
+      "post_id": "18174469135462070",
+      "queue_sha": "5d58aed330bcd8cd425a6bb6fc92161a67086e5c",
+      "stage_sha": "240e4eff816ace737059e4d0f52a846abf884cfd",
+      "remaining_ready_count": 3,
+      "actual_new_post_this_monitor": false,
+      "next_supply_gap": "2026-11-18T08:00:00+09:00"
     }
   },
   "single_main_v2_writer_performance": {
@@ -22385,6 +22048,42 @@
       "likes_rate_percent": 0.16,
       "comparable_milestone": false,
       "late_future_collection_must_not_be_backdated": true
+    },
+    "latest_monitor_summary": {
+      "state_sha": "89116c86308aa84e8cd463c20d6274b2c2f5d2ca",
+      "summarize_exit_code": 0,
+      "windows": {
+        "24h": {
+          "n": 4,
+          "median_views": 1653.5,
+          "likes_total": 17
+        },
+        "72h": {
+          "n": 6,
+          "median_views": 3253,
+          "likes_total": 62
+        }
+      },
+      "new_72h_observation": {
+        "notice_id": "a306760",
+        "post_id": "18101198159539744",
+        "captured_at": "2026-11-16T23:31:04.610421+00:00",
+        "elapsed_seconds": 259336.183226,
+        "views": 10927,
+        "likes": 13,
+        "likes_rate_percent": 0.11897135535828682
+      },
+      "new08post": "24h_and_72h_not_due",
+      "account_followers": {
+        "start": 415,
+        "end": 482,
+        "net_change": 67,
+        "observed_start": "2026-11-11T11:45:32.854727+00:00",
+        "observed_end": "2026-11-16T22:58:47.350283+00:00",
+        "post_attribution": null
+      },
+      "editorial_weight_change": false,
+      "improvement_established": false
     }
   },
   "writer_ready_reviews": {
