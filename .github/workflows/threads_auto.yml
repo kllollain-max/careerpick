@@ -58,7 +58,14 @@ jobs:
           python-version: '3.11'
       - name: Read digest-bound verification of unchanged collection snapshots
         run: python scripts/threads_source_verification.py
-      - name: Review official sources and promote validated staged entries by CAS
+      - name: Intake independently reviewed v5 entries only (optional, never auto-approve)
+        run: |
+          if [ -f threads/reviewed-submissions.json ]; then
+            python scripts/threads_reviewed_ingest.py --input threads/reviewed-submissions.json --apply --output threads-reviewed-ingest-report.json
+          else
+            echo 'No independently reviewed submissions supplied; cannot synthesize approval from candidate data.'
+          fi
+      - name: Promote only existing publisher-validated staged entries by CAS
         run: python scripts/threads_queue_bridge.py --apply --output threads-queue-preflight.json
       - name: Export missing-slot writer handoff (no automatic approval)
         run: |
@@ -112,6 +119,7 @@ jobs:
           name: threads-preflight-${{ github.run_id }}
           path: |
             threads-queue-preflight.json
+            threads-reviewed-ingest-report.json
             threads-writer-handoff.json
             threads-unreviewed-drafts.json
           if-no-files-found: ignore
