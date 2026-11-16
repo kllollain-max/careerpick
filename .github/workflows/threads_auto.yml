@@ -75,7 +75,8 @@ jobs:
               if missing and not promoted:
                   out.write('ACTION REQUIRED: verified staging has not supplied the next slots. No unverified notice will be posted.\\n')
           if missing and not promoted:
-              print('::warning title=THREADS_SUPPLY_EMPTY::No verified staged manuscripts promoted; review shortlist in preflight artifact')
+              print('::error title=THREADS_SUPPLY_EMPTY::No verified staged manuscripts promoted; review shortlist in preflight artifact')
+              raise SystemExit('THREADS_SUPPLY_EMPTY: missing future approved slots')
           PY
       - name: Preserve source and queue readiness audit
         if: always()
