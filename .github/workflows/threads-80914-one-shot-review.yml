@@ -59,3 +59,58 @@ jobs:
           name: yangju-80914-pdf-review
           path: yangju_80914_official_receipt.json
           retention-days: 7
+
+  browser-target:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Read-only Chromium profile modal and employer ATS status
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          import json, time
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          opt=Options()
+          for a in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1280,900'):
+              opt.add_argument(a)
+          d=webdriver.Chrome(options=opt)
+          observations={}
+          try:
+              targets={
+                'profile':'https://kllollain-max.github.io/careerpick/#job=cleaneye-80914',
+                'ats':'https://yjuc.plusrecruit.co.kr/'
+              }
+              for key,url in targets.items():
+                  d.set_page_load_timeout(50)
+                  d.get(url)
+                  try:
+                      WebDriverWait(d,18).until(lambda w: len(w.find_element(By.TAG_NAME,'body').text)>150)
+                  except Exception: pass
+                  body=d.find_element(By.TAG_NAME,'body').text
+                  anchors=[{'text':a.text[:100], 'href':a.get_attribute('href')} for a in d.find_elements(By.TAG_NAME,'a')]
+                  observations[key]={'requested':url,'actual':d.current_url,'title':d.title,'body_length':len(body),'body_excerpt':body[:9000],
+                                     'relevant_links':[a for a in anchors if '80914' in (a['href'] or '') or 'yjuc' in (a['href'] or '').lower() or '채용' in a['text']][:30]}
+                  d.save_screenshot('80914-'+key+'.png')
+                  print('BROWSER',key,'TITLE',d.title,'URL',d.current_url,'CHARS',len(body))
+                  print('BODY',body[:2000])
+                  print('RELEVANT',observations[key]['relevant_links'])
+              print('PROFILE_EMPLOYER_FOUND', '양주도시공사' in observations['profile']['body_excerpt'])
+              print('ATS_HAS_TEXT',len(observations['ats']['body_excerpt'])>150)
+              with open('80914-browser-review.json','w') as f:
+                  json.dump(observations,f,ensure_ascii=False,indent=2)
+          finally:
+              d.quit()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yangju-80914-browser-review
+          path: |
+            80914-browser-review.json
+            80914-profile.png
+            80914-ats.png
+          retention-days: 7
