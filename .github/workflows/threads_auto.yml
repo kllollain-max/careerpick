@@ -5,15 +5,15 @@ on:
   workflow_dispatch:
     inputs:
       confirm_publish:
-        description: 'PUBLISH for one reviewed current-slot post; CHECK for supply preflight only'
-        required: true
+        description: 'CHECK verifies supply without posting; PUBLISH sends one reviewed current-slot post'
+        required: false
         type: string
       notice_id:
-        description: 'Exact reviewed notice ID already in the queue (PUBLISH only)'
+        description: 'Exact reviewed notice ID already in the queue'
         required: false
         type: string
       slot_kst:
-        description: 'Current KST minute; within 10m and active regular slot (PUBLISH only)'
+        description: 'Current KST minute e.g. 2026-11-15T12:35:00+09:00; must be within 10m and active regular slot'
         required: false
         type: string
   schedule:
@@ -26,6 +26,7 @@ on:
     - cron: '45 2 * * *'
     - cron: '45 6 * * *'
     - cron: '45 10 * * *'
+    - cron: '15 * * * *'
 
 permissions:
   contents: write
@@ -39,15 +40,18 @@ concurrency:
 jobs:
   queue_preflight:
     name: Preflight reviewed Threads drafts without posting
-    if: ((github.event_name == 'schedule' && (github.event.schedule == '45 22 * * *' || github.event.schedule == '45 2 * * *' || github.event.schedule == '45 6 * * *' || github.event.schedule == '45 10 * * *')) || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'CHECK')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
+    if: ((github.event_name == 'schedule' && (github.event.schedule == '15 * * * *' || github.event.schedule == '45 22 * * *' || github.event.schedule == '45 2 * * *' || github.event.schedule == '45 6 * * *' || github.event.schedule == '45 10 * * *')) || (github.event_name == 'workflow_dispatch' && inputs.confirm_publish == 'CHECK')) && vars.THREADS_ENABLED == 'true' && vars.THREADS_MIGRATION_READY == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 12
     permissions:
       contents: write
       actions: read
     env:
       TZ: Asia/Seoul
       THREADS_CLAIM_TOKEN: ${{ github.token }}
+      THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      THREADS_USER_ID: '28818095904512513'
+      THREADS_EXPECTED_USERNAME: hid_119
     steps:
       - uses: actions/checkout@v4
         with:
@@ -78,7 +82,7 @@ jobs:
       - name: Intake independently reviewed v5 entries only (optional, never auto-approve)
         run: |
           if [ -f threads-reviewed-submissions-input.json ]; then
-            python scripts/threads_reviewed_ingest.py --input threads-reviewed-submissions-input.json --apply --output threads-reviewed-ingest-report.json
+            python -m scripts.threads_reviewed_ingest --input threads-reviewed-submissions-input.json --apply --output threads-reviewed-ingest-report.json
           else
             echo 'No independently reviewed submissions supplied; cannot synthesize approval from candidate data.'
           fi
@@ -98,7 +102,19 @@ jobs:
       - name: Prepare unreviewed candidate drafts without posting
         run: python scripts/threads_unreviewed_drafts.py --input threads-writer-handoff.json --output threads-unreviewed-drafts.json
       - name: Capture independent live official-source evidence for review (no approval)
-        run: python scripts/threads_official_review_pack.py --input threads-unreviewed-drafts.json --output threads-official-evidence.json
+        run: python -m scripts.threads_official_review_pack --input threads-unreviewed-drafts.json --output threads-official-evidence.json
+      - name: Persist replenishment handoff for the independent writer
+        run: python -m scripts.threads_supply_audit --persist
+      - name: Verify account authentication without posting
+        run: |
+          python - <<'PY'
+          import os
+          from scripts.threads_auto import api
+          account = api('GET', '/me', os.environ['THREADS_ACCESS_TOKEN'], {'fields': 'id,username'})
+          if str(account.get('id')) != os.environ['THREADS_USER_ID'] or account.get('username') != 'hid_119':
+              raise SystemExit('THREADS_ACCOUNT_MISMATCH')
+          print('Threads account authentication verified: hid_119')
+          PY
       - name: Flag missing approved supply with actionable diagnostics
         run: |
           python - <<'PY'
@@ -124,6 +140,7 @@ jobs:
                   for slot in coverage.get('no_draft_slots', []):
                       out.write(f'- NO_DRAFT: {slot}\\n')
                   out.write('Drafts are NOT approved for publishing.\\n')
+                  out.write(f"Approved inventory: {report.get('approved_supply_count', 0)}/8; replenishment required: {report.get('replenishment_required', True)}\\n")
           next_slot = report.get('future_slots', [None])[0]
           if next_slot in missing:
               print('::error title=THREADS_SUPPLY_EMPTY::Next publishing slot lacks an approved manuscript')
@@ -142,6 +159,7 @@ jobs:
             threads-writer-handoff.json
             threads-unreviewed-drafts.json
             threads-official-evidence.json
+            threads-supply-audit.json
           if-no-files-found: ignore
           retention-days: 14
 
@@ -165,6 +183,7 @@ jobs:
       THREADS_NO_SEND: "false"
       THREADS_NEW_CONTENT: "false"
       THREADS_MASTER_WRITER: "true"
+      THREADS_ALLOW_V5_TEXT_FALLBACK: "true"
       THREADS_ENABLED: "true"
       THREADS_EDITORIAL_ENABLED: ${{ vars.THREADS_EDITORIAL_ENABLED == 'true' }}
       THREADS_CONVERSATION_ENABLED: ${{ vars.THREADS_CONVERSATION_ENABLED != 'false' }}
@@ -245,6 +264,7 @@ jobs:
           ready = len(mine) == 1
           with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
               output.write(f"ready={'true' if ready else 'false'}\\n".replace('\\n', '\n'))
+              output.write('queue_missing=' + ('false' if ready else 'true') + chr(10))
               output.write('needs_image=' + ('true' if ready and mine[0].get('image_job') else 'false') + chr(10))
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
               if ready:
@@ -262,6 +282,7 @@ jobs:
 
       - name: Install Korean fonts and Pillow
         id: image_tools
+        continue-on-error: true
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true'
         run: |
           sudo apt-get update -qq
@@ -270,6 +291,7 @@ jobs:
 
       - name: Verify reviewed card or generate legacy image
         id: image_generate
+        continue-on-error: true
         if: env.THREADS_ENABLED == 'true' && steps.reserve.outputs.ready == 'true' && steps.reserve.outputs.needs_image == 'true' && steps.image_tools.outcome == 'success'
         run: |
           python - <<'PY'

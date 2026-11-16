@@ -401,10 +401,10 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
              "review_errors": review_errors, "rows": rows}
     if policy.get('editorial_v5', {}).get('enabled'):
         audit['policy_id'] = 'careerpick-threads-selection-v5-20261111'
-        audit['sector_policy']['scope'] = 'descriptive_only_no_assumed_reader_interest'
-        audit['sector_policy']['priority_order'] = None
-        audit['ranking_order'] = ['current_application_open','verified_reader_relevance_if_available',
-                                  'exact_employment_type','verified_unit_count_desc',
+        audit['sector_policy']['scope'] = 'user_preference_after_employment_count_and_verified_interest'
+        audit['sector_policy']['priority_order'] = SECTOR_ORDER.copy()
+        audit['ranking_order'] = ['current_application_open','exact_employment_type','verified_unit_count_desc',
+                                  'verified_reader_relevance_if_available','user_sector_preference',
                                   'verified_advantage_if_available','preparation_time',
                                   'recent_notice_diversity','actual_deadline','notice_id_tiebreak']
         audit['preparation_time_heuristic_hours'] = 48
