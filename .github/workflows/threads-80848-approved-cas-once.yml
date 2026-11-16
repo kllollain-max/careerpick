@@ -48,7 +48,7 @@ jobs:
           root=pathlib.Path.cwd()
           data=json.loads((root/'threads/independent-review/cleaneye-80848-20261117-pdf-reviewed.json').read_text())
           e=data['entries'][0]
-          if data.get('approved_for_queue') is not False or e.get('notice_id')!='cleaneye-80848' or e.get('scheduled_at')!='2026-11-17T16:00:00+09:00' or e['writer']['status']!='ready':
+          if data.get('approved_for_queue') is not False or e.get('notice_id')!='cleaneye-80848' or e.get('scheduled_at')!='2026-11-17T20:00:00+09:00' or e['writer']['status']!='ready':
               raise SystemExit('REVIEWED_SINGLE_ENTRY_ID_SLOT_OR_STATUS_MISMATCH')
           if e['writer']['post_text'].count('자세한 사항은 프로필링크 확인')!=1 or e['writer']['reply_texts']:
               raise SystemExit('V5_COPY_OR_REPLY_MISMATCH')
@@ -57,7 +57,7 @@ jobs:
               raise SystemExit('PINNED_PDF_MISMATCH')
           bundle={'schema_version':1,'automatic_approval':False,'meta_posted':False,'entries':[e]}
           (root/'verified-cas-report/reviewed-submissions.json').write_text(json.dumps(bundle,ensure_ascii=False,indent=2)+'\n')
-          print('REVIEWED_ONE_ENTRY_PREPARED 80848 2026-11-17T16:00:00+09:00, NOT YET STAGED')
+          print('REVIEWED_ONE_ENTRY_PREPARED 80848 2026-11-17T20:00:00+09:00, NOT YET STAGED')
           PY
       - name: Verify live original employer bytes and stage only after v5 and CAS checks
         shell: bash
@@ -81,10 +81,10 @@ jobs:
           from scripts.threads_queue_bridge import read, QUEUE, STAGING
           q,qs=read(QUEUE,os.environ['THREADS_CLAIM_TOKEN'])
           s,ss=read(STAGING,os.environ['THREADS_CLAIM_TOKEN'])
-          rows=[e for e in q['entries'] if e.get('notice_id')=='cleaneye-80848' and e.get('scheduled_at')=='2026-11-17T16:00:00+09:00' and e.get('writer',{}).get('status')=='ready']
+          rows=[e for e in q['entries'] if e.get('notice_id')=='cleaneye-80848' and e.get('scheduled_at')=='2026-11-17T20:00:00+09:00' and e.get('writer',{}).get('status')=='ready']
           if len(rows)!=1:raise SystemExit('NO_SINGLE_READY_80848_IN_LIVE_QUEUE')
-          if len([e for e in q['entries'] if e.get('scheduled_at')=='2026-11-17T16:00:00+09:00'])!=1:raise SystemExit('LIVE_SLOT_COLLISION')
-          report={'notice_id':'cleaneye-80848','slot':'2026-11-17T16:00:00+09:00','live_approved':True,
+          if len([e for e in q['entries'] if e.get('scheduled_at')=='2026-11-17T20:00:00+09:00'])!=1:raise SystemExit('LIVE_SLOT_COLLISION')
+          report={'notice_id':'cleaneye-80848','slot':'2026-11-17T20:00:00+09:00','live_approved':True,
               'queue_sha':qs,'staging_sha':ss,'writer_queue_entries':len(q['entries']),
               'meta_posted':False,'post_id':None}
           with open('verified-cas-report/live-queue-readback.json','w') as f:json.dump(report,f,ensure_ascii=False,indent=2)
