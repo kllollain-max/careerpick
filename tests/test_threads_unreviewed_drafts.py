@@ -58,6 +58,11 @@ class DraftWriterTests(unittest.TestCase):
             "2026-11-17T08:00:00+09:00", "2026-11-17T12:00:00+09:00"]}
         self.assertEqual(len(build_drafts(handoff)["drafts"]), 1)
 
+    def test_overlength_notice_is_not_silently_truncated(self):
+        candidate = {**self.handoff["candidates"][0], "title": "긴 공고명" * 100}
+        result = build_drafts({**self.handoff, "candidates": [candidate]})
+        self.assertEqual(result["drafts"], [])
+
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
             handoff = {**self.handoff, flag: True}
