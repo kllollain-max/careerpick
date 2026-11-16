@@ -14,6 +14,9 @@ class DraftWriterTests(unittest.TestCase):
                 "application_period": {"end": "2026-11-20", "date_only": True},
                 "official_url": "https://example.org/notice",
                 "source_post_sha256": "abc", "source_detail_sha256": "def",
+                "application_evidence": "접수기간 2026.11.17 ~ 2026.11.20",
+                "application_source_ref": "alio-detail.json#123/scrnprcdrMthdExpln",
+                "source_snapshot_checked_at": "2026-11-16T08:00:00+09:00",
             }],
         }
 
@@ -62,6 +65,14 @@ class DraftWriterTests(unittest.TestCase):
         candidate = {**self.handoff["candidates"][0], "title": "긴 공고명" * 100}
         result = build_drafts({**self.handoff, "candidates": [candidate]})
         self.assertEqual(result["drafts"], [])
+
+    def test_official_evidence_survives_review_handoff(self):
+        draft = build_drafts(self.handoff)["drafts"][0]
+        self.assertEqual(draft["application_evidence_for_review"],
+                         self.handoff["candidates"][0]["application_evidence"])
+        self.assertEqual(draft["application_source_ref"],
+                         self.handoff["candidates"][0]["application_source_ref"])
+        self.assertFalse(draft["approved_for_queue"])
 
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
