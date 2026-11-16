@@ -86,6 +86,13 @@ class DraftWriterTests(unittest.TestCase):
                      "application_evidence": "다른 자료의 접수기간"}
         self.assertEqual(build_drafts({**self.handoff, "candidates": [candidate]})["drafts"], [])
 
+    def test_review_blockers_are_explicit_and_never_preapproved(self):
+        draft = build_drafts(self.handoff)["drafts"][0]
+        blockers = draft["required_review"]
+        self.assertEqual(blockers["publisher_validate_entry"], "not_run")
+        self.assertTrue(all(value in {"not_verified", "not_run"} for value in blockers.values()))
+        self.assertFalse(draft["approved_for_queue"])
+
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
             handoff = {**self.handoff, flag: True}
