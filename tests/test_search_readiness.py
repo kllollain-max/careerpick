@@ -165,3 +165,35 @@ class SearchReadinessTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class VerifiedAliasSearchTests(unittest.TestCase):
+    def test_only_validated_alias_is_accepted_and_omitted_from_sitemap(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for name in ['alio.json', 'alio-detail.json']:
+                (root / name).write_bytes(Path(name).read_bytes())
+            old, new = 'jobs/a305959.html', 'jobs/a306724.html'
+            page = write_page(root, old, title='동일 공고 안내')
+            page.write_text(page.read_text().replace(BASE + old, BASE + new))
+            write_page(root, new, title='대표 공고 안내')
+            write_page(root, 'jobs/a298710.html', title='창원 공고')
+            sitemap(root, [old,new,'jobs/a298710.html'])
+            with patch.multiple(build_sitemap, ROOT=root, SITEMAP=root/'sitemap.xml', JOBS=root/'jobs'):
+                build_sitemap.main()
+            xml = (root/'sitemap.xml').read_text()
+            self.assertNotIn(BASE + old, xml)
+            self.assertIn(BASE + new, xml)
+            self.assertIn(BASE + 'jobs/a298710.html', xml)
+            self.assertFalse(inspect(root)['errors'])
+            details = json.loads((root/'alio-detail.json').read_text())
+            details['a306724']['aplyQlfcCn'] = 'changed terms'
+            (root/'alio-detail.json').write_text(json.dumps(details))
+            self.assertIn(old + ': canonical mismatch', inspect(root)['errors'])
+
+    def test_unknown_cross_canonical_is_still_an_error(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            page = write_page(root, 'index.html', title='첫 화면')
+            page.write_text(page.read_text().replace(BASE+'"', BASE+'other.html"'))
+            sitemap(root, [])
+            self.assertIn('index.html: canonical mismatch', inspect(root)['errors'])

@@ -8,6 +8,11 @@ import re
 from pathlib import Path
 from html.parser import HTMLParser
 
+try:
+    from scripts.notice_review import load as load_notice_reviews
+except ModuleNotFoundError:
+    from notice_review import load as load_notice_reviews
+
 BASE='https://kllollain-max.github.io/careerpick/'
 ROOT=Path(__file__).resolve().parents[1]
 AD_REQUEST=re.compile(r'(?:pagead\d*\.googlesyndication\.com|googleads\.g\.doubleclick\.net|adsbygoogle)',re.I)
@@ -43,10 +48,14 @@ class Inventory(HTMLParser):
 
 def inspect(output):
     rows=[];failures=[]
+    notice_reviews=load_notice_reviews(output)
     for p in sorted(list(output.rglob('*.html'))):
         rel=p.relative_to(output).as_posix();s=p.read_text();t=Inventory();t.feed(s)
         kind=('job' if rel.startswith('jobs/') else 'guide_index' if rel=='guides/index.html' else 'guide' if rel.startswith('guides/') else 'organization' if rel.startswith('org-') else 'policy' if rel in ['about.html','privacy.html','contact.html'] else 'app' if rel=='index.html' else 'collection_or_tool')
         expected=BASE+(rel[:-10] if rel.endswith('index.html') else rel)
+        review=notice_reviews.get(p.stem,{}) if rel.startswith('jobs/') else {}
+        if review.get('decision')=='same_notice':
+            expected=BASE+'jobs/'+review['representative_id']+'.html'
         if t.canonical!=[expected]:failures.append(rel+': canonical mismatch')
         if any(x!=expected for x in t.og):failures.append(rel+': og:url mismatch')
         if AD_REQUEST.search(s):failures.append(rel+': advertising request/slot marker')

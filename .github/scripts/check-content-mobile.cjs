@@ -32,8 +32,8 @@ const { chromium } = require('playwright');
       'privacy.html',
       ...(await fs.readdir('guides')).filter(name => name.endsWith('.html'))
         .sort().map(name => 'guides/' + name),
-      ...Object.keys(JSON.parse(await fs.readFile('scripts/verified_job_duties.json', 'utf8')))
-        .map(id => 'jobs/' + id + '.html'),
+      ...[...new Set([...Object.keys(JSON.parse(await fs.readFile('scripts/verified_job_duties.json', 'utf8'))),
+        ...JSON.parse(await fs.readFile('scripts/verified_notice_reviews.json', 'utf8')).flatMap(review => review.members.map(member => member.id))])].map(id => 'jobs/' + id + '.html'),
     ] : ['benefits/149200000026/', 'privacy.html'];
     await fs.mkdir('mobile-evidence', {recursive:true});
     for (const width of [320,390,1440]) {
