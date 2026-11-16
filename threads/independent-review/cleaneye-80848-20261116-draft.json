@@ -136,7 +136,7 @@
     "media_hint": "TEXT"
   },
   "blockers": [
-    "The employer's own correction/cancellation board must be directly inspected within 24h; application status alone is not proof there is no correction.",
+    "Employer recruitment-board top page independently inspected on 2026-11-16: newest entry is 2026-17 dated Oct30 and no later recruitment correction is visible there. General notices board page1 returned 403/proxy_error; do not claim all-channel cancellation absence, and refresh this board close to approval.",
     "CareerPick #job=cleaneye-80848 must be actually rendered and its original notice link/job identity checked before setting profile_target.verified.",
     "Construct full v5 entry from current Cleaneye source fingerprints and exact documentary evidence, and pass validate_entry/verify_official_receipt/CAS in future eligible slot. No auto-approval.",
     "Media alternation for the target slot must be checked against actual newest Meta receipts before promotion."
@@ -219,5 +219,20 @@
     "attachment_inspection": "Three exact employer-linked 2-page PDFs read and first pages visually inspected independently; raw bytes hashed in run43856688117",
     "correction_status": "The exact employer-managed application is currently 모집중. Separately published employer-wide correction/cancellation notices not exhaustively inspected.",
     "profile_status": "Not yet actually rendered and compared against cleaneye-80848 detail; never label verified until inspection."
+  },
+  "employer_recruitment_board_observation": {
+    "url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1",
+    "independently_read_at_utc": "2026-11-16T13:29:21.843Z",
+    "method": "Live public employer recruitment board text extraction; read top-to-bottom listing; not browser login and not raw-byte SHA",
+    "latest_visible_notice_number": 367,
+    "latest_visible_notice_title": "[공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고",
+    "latest_visible_notice_date": "2026-10-30",
+    "following_entries": "2026-16호(2026-08-25), 2026-15호(2026-05-14), earlier",
+    "newer_amendment_or_cancellation_visible_in_recruitment_board_top_page": false,
+    "general_notices_board_page_1": "unavailable: 403/proxy_error",
+    "general_notices_board_page_2": "read, older notices visible only; not sufficient to infer page1",
+    "independent_review_scope": "top page only; absence across all media/channels is not established",
+    "reviewer_conclusion": "Employer recruitment board independently checked; no subsequent 2026-17 amendment shown on visible top page; fresh end-to-end check still required before publisher approval",
+    "source_text_excerpt": "367 [공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고 (주)서울메트로환경 2026.10.30; 366 [공고 제2026-16호](주)서울메트로환경 임원(사장) 후보 초빙 공고 2026.08.25"
   }
 }
