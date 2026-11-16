@@ -364,6 +364,25 @@ def render(post, detail, related_posts=()):
         '<p class="source-note">이 안내는 공고별 업무를 추정한 설명이 아니라 공식 원문 확인을 돕는 점검표입니다.</p>'
         '</section>'
     )
+    # A notice-specific, source-checked editorial note; never infer HWP duties.
+    verified_notice_html = ''
+    if pid == 'a306436':
+        verified_notice_html = (
+            '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
+            '<h2>안양·부평 우편물구분 채용 확인사항</h2>'
+            '<p>공식 ALIO 공고는 안양·부평물류사업소의 기간제(일용직) 우편물구분 분야를 안내합니다. '
+            '근무지역은 인천·경기이며, 채용인원은 전체 115명입니다. '
+            '사업소별 인원과 근무시간·임금은 첨부 공고문을 확인하세요.</p>'
+            '<p>지원자는 우체국물류지원단 인사규정상 결격사유가 없어야 하고, '
+            '채용 즉시 근무할 수 있어야 합니다. 전형은 서류심사 후 적격자 면접심사로 진행하며, '
+            '적격자가 있으면 즉시 채용될 수 있습니다.</p>'
+            '<p class="source-note">ALIO의 2026-11-30은 공고 게시 종료일입니다. '
+            '원서접수 마감시각이나 지원 가능 상태를 보증하지 않습니다. '
+            '세부 담당업무는 공식 직무기술서 HWP 본문을 확인해야 합니다.</p>'
+            '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306436" '
+            'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
+            '</section>'
+        )
     coverage_html = (
         '<section aria-label="공고 정보 제공 범위"><h2>공고 정보 제공 범위</h2>'
         f'<p class="source-note">{escape(coverage_note)}</p></section>'
@@ -617,6 +636,7 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 <ul class="checks">{checks}</ul>
 </section>
 {coverage_html}
+{verified_notice_html}
 {duties_checklist_html}
 {completeness_html}
 {detail_status}
