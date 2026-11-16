@@ -533,3 +533,59 @@ if __name__ == '__main__':
     unittest.main()
 
 
+
+class OriginalNoticeComparisonTests(unittest.TestCase):
+    def setUp(self):
+        from scripts.notice_review import resolve
+        self.posts = json.loads(Path('alio.json').read_text())['posts']
+        self.details = json.loads(Path('alio-detail.json').read_text())
+        self.rules = json.loads(Path('scripts/verified_notice_reviews.json').read_text())
+        self.reviews = resolve(self.posts, self.details, self.rules)
+
+    def test_only_original_confirmed_pair_canonicalizes_and_keeps_bookmark_content(self):
+        self.assertEqual(len(self.reviews), 8)
+        for old, new in [('a305959','a306724'), ('a306564','a306800')]:
+            post = next(p for p in self.posts if p['id'] == old)
+            before = copy.deepcopy(post)
+            html = render(post, self.details[old], notice_review=self.reviews[old])
+            self.assertIn(f'rel="canonical" href="https://kllollain-max.github.io/careerpick/jobs/{new}.html"', html)
+            self.assertIn(post['title'], html)
+            self.assertIn('동일 채용의 대표 공고 보기', html)
+            self.assertNotIn('application/ld+json', html)
+            self.assertEqual(post, before)
+
+    def test_similar_titles_with_different_worksite_or_specialty_keep_self_canonical(self):
+        for pid, text in [('a298710','창원 1명'), ('a299406','진주 1명'), ('a295395','소화기내과 우대'), ('a296837','신경과')]:
+            post = next(p for p in self.posts if p['id'] == pid)
+            html = render(post, self.details[pid], notice_review=self.reviews[pid])
+            self.assertIn(f'rel="canonical" href="https://kllollain-max.github.io/careerpick/jobs/{pid}.html"', html)
+            self.assertIn(text, html)
+            self.assertNotIn('동일 채용의 대표 공고 보기', html)
+
+    def test_changed_peer_identity_or_terms_disable_entire_pair(self):
+        from scripts.notice_review import resolve
+        for field in ['org','title','n','due','pub','src','region']:
+            posts = copy.deepcopy(self.posts)
+            next(p for p in posts if p['id']=='a306724')[field] = 'changed'
+            resolved = resolve(posts, self.details, self.rules)
+            self.assertNotIn('a305959', resolved)
+            self.assertNotIn('a306724', resolved)
+        details = copy.deepcopy(self.details)
+        details['a306724']['aplyQlfcCn'] = 'changed qualification'
+        self.assertNotIn('a305959', resolve(self.posts, details, self.rules))
+        self.assertNotIn('a305959', resolve([p for p in self.posts if p['id']!='a306724'], self.details, self.rules))
+
+    def test_different_original_bytes_or_external_representative_never_merge(self):
+        from scripts.notice_review import resolve
+        rules = copy.deepcopy(self.rules)
+        rules[0]['members'][0]['sources'][0]['sha256'] = '0'*64
+        self.assertNotIn('a305959', resolve(self.posts, self.details, rules))
+        rules = copy.deepcopy(self.rules)
+        rules[0]['representative_id'] = 'https://example.com'
+        self.assertNotIn('a305959', resolve(self.posts, self.details, rules))
+
+    def test_stale_render_review_cannot_override_other_notice(self):
+        post = next(p for p in self.posts if p['id']=='a306750')
+        html = render(post, self.details[post['id']], notice_review=self.reviews['a305959'])
+        self.assertIn('/jobs/a306750.html', html)
+        self.assertNotIn('id="notice-review"', html)

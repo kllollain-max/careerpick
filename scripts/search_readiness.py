@@ -9,6 +9,11 @@ from pathlib import Path
 from urllib.parse import unquote, urljoin, urlparse
 import xml.etree.ElementTree as ET
 
+try:
+    from scripts.notice_review import load as load_notice_reviews
+except ModuleNotFoundError:
+    from notice_review import load as load_notice_reviews
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://kllollain-max.github.io/careerpick/'
 NS = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
@@ -148,11 +153,15 @@ def remove_unverified_archived_schema(output, current_ids, writer=None):
 def inspect(output, at=None):
     at = at or datetime.now(timezone.utc)
     errors, warnings, pages = [], [], {}
+    notice_reviews = load_notice_reviews(output)
     for path in sorted(output.rglob('*.html')):
         relative = path.relative_to(output).as_posix()
         doc = Page(path.read_text(encoding='utf-8'))
         pages[relative] = doc
         expected = BASE + (relative[:-10] if relative.endswith('index.html') else relative)
+        review = notice_reviews.get(path.stem, {}) if relative.startswith('jobs/') else {}
+        if review.get('decision') == 'same_notice':
+            expected = BASE + 'jobs/' + review['representative_id'] + '.html'
         if len(doc.canonicals) != 1 or not same_url(doc.canonicals[0], expected):
             errors.append(relative + ': canonical mismatch')
         if not doc.title.strip():

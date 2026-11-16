@@ -12,6 +12,11 @@ from html import escape
 from pathlib import Path
 from urllib.parse import quote, urlparse
 
+try:
+    from scripts.notice_review import fingerprint as notice_fingerprint, resolve as resolve_notice_reviews
+except ModuleNotFoundError:
+    from notice_review import fingerprint as notice_fingerprint, resolve as resolve_notice_reviews
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'alio.json'
 DETAIL = ROOT / 'alio-detail.json'
@@ -165,7 +170,20 @@ def is_closed(due):
         return False
 
 
-def render(post, detail, related_posts=()):
+def render(post, detail, related_posts=(), notice_review=None):
+    review = notice_review or {}
+    if review.get("fingerprint") != notice_fingerprint(post, detail):
+        review = {}
+    duplicate_id = review.get("representative_id") if review.get("decision") == "same_notice" else None
+    duplicate = bool(duplicate_id and duplicate_id != post.get("id"))
+    review_html = ""
+    if review:
+        peer_links = " · ".join(f'<a href="{peer}.html">{peer} 공고 비교</a>' for peer in review["peer_ids"] if peer != post.get("id"))
+        proof_links = " · ".join(f'<a href="{escape(src["url"], quote=True)}" rel="noopener noreferrer">공식 {label} 원본</a>' for label, src in zip(("공고문", "직무기술서"), review["sources"]))
+        review_html = ('<section id="notice-review" aria-label="유사 공고 구분 안내"><h2>유사 공고 구분 안내</h2>'
+            + f'<p>{escape(review["public_note"])}</p><p>{peer_links}</p>'
+            + (f'<p><a href="{duplicate_id}.html">동일 채용의 대표 공고 보기</a></p>' if duplicate else "")
+            + f'<p>{proof_links} · 최종 확인일: {escape(review["checked_on"])}</p></section>')
     # The list feed can contain only the first work region. Use the same
     # notice's explicit detail regions throughout the rendered page, without
     # changing the collected post or inventing nationwide coverage.
@@ -195,7 +213,7 @@ def render(post, detail, related_posts=()):
             or verified_duties.get('title') != title):
         verified_duties = {}
 
-    canonical = f'{BASE}/jobs/{quote(pid, safe="")}.html'
+    canonical = f'{BASE}/jobs/{quote(duplicate_id or pid, safe="")}.html'
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
@@ -674,7 +692,7 @@ def render(post, detail, related_posts=()):
     # 안내용 HTML 페이지는 그대로 유지합니다.
     # Publication end dates are not verified application deadlines. Keep the
     # useful HTML, but do not emit a JobPosting with an invented validThrough.
-    schema_json = '' if closed or post.get('dueHasTime') is not True else (
+    schema_json = '' if duplicate or closed or post.get('dueHasTime') is not True else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
@@ -791,6 +809,7 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 {source_html}
 {notice}
 {toc_html}
+{review_html}
 <h2 id="job-summary">모집 요약</h2>
 <dl>{rows}</dl>
 {conflict_html}
@@ -863,6 +882,7 @@ def main():
             '공고 데이터가 비어 있어 기존 페이지를 보존합니다.'
         )
 
+    notice_reviews = resolve_notice_reviews(posts, details)
     OUT.mkdir(exist_ok=True)
     created = 0
     quality = {
@@ -994,7 +1014,7 @@ def main():
         })
 
         target = OUT / f'{pid}.html'
-        html = render(dict(post, _snapshot_at=raw.get('updated', '')), job_detail, by_org.get(clean(post.get('org')), ()))
+        html = render(dict(post, _snapshot_at=raw.get('updated', '')), job_detail, by_org.get(clean(post.get('org')), ()), notice_reviews.get(pid))
 
         if (
             not target.exists()
@@ -1047,6 +1067,9 @@ def main():
             ),
         })
     suspected_duplicates.sort(key=lambda item: (item['organization'], item['title'], item['deadline']))
+    quality['original_review_page_ids'] = len(notice_reviews)
+    quality['confirmed_duplicate_alias_pages'] = sum(v.get('representative_id') != pid for pid, v in notice_reviews.items() if v['decision'] == 'same_notice')
+    quality['verified_editorial_unique_notices'] = len({notice_reviews.get(pid, {}).get('representative_id') or pid for pid in VERIFIED_DUTIES})
     quality['suspected_duplicate_groups'] = len(suspected_duplicates)
     quality['duplicate_groups_with_distinct_official_links'] = sum(
         item['distinct_official_link_count'] > 1 for item in suspected_duplicates

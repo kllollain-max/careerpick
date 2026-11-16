@@ -4,6 +4,11 @@ from pathlib import Path
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
+try:
+    from scripts.notice_review import load as load_notice_reviews
+except ModuleNotFoundError:
+    from notice_review import load as load_notice_reviews
+
 ROOT = Path(__file__).resolve().parent.parent
 SITEMAP = ROOT / "sitemap.xml"
 JOBS = ROOT / "jobs"
@@ -59,9 +64,13 @@ def main():
 
     # Never advertise pages explicitly excluded from search indexing.
     # Check the generated HTML, not inferred expiration dates.
+    notice_reviews = load_notice_reviews(ROOT)
     def indexable(page):
         import re
         source = page.read_text(encoding="utf-8")
+        review = notice_reviews.get(page.stem, {})
+        if review.get("decision") == "same_notice" and review["representative_id"] != page.stem:
+            return False
         return not re.search(
             r'<meta\s+[^>]*name=["\']robots["\'][^>]*content=["\'][^"\']*\bnoindex\b',
             source, re.IGNORECASE,
