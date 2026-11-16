@@ -74,10 +74,13 @@ def fetch_official_digest(url):
 
 
 def verify_official_receipt(entry, fetch_digest=fetch_official_digest):
-    """Require a previously reviewed primary official document to match NOW.
+    """Verify the CURRENT bytes of every official document used for a post fact.
 
-    Raw-byte identity is necessary, NOT sufficient for semantic review: the
-    existing validate_entry/v5 review must independently accept every fact.
+    Matching a random homepage or unrelated attachment is never enough. Title,
+    recruiting-unit headcount and employment evidence must each cite an official
+    source_ref with a prior reviewed digest; every distinct cited URL is fetched
+    again. This checks byte identity, NOT semantic correctness: validate_entry
+    still makes the full independent editorial and publisher decision.
     """
     writer = entry.get("writer")
     review = writer.get("review", {}) if isinstance(writer, dict) else {}
@@ -86,10 +89,7 @@ def verify_official_receipt(entry, fetch_digest=fetch_official_digest):
     refs = review.get("source_refs", [])
     if not isinstance(refs, list):
         raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
-    # Existing independently reviewed source_refs use document_sha256.
-    # Accept the same digest key as the publisher's evidence contract without
-    # weakening the source check: malformed or conflicting digests hard-block.
-    eligible = []
+    eligible = {}
     for ref in refs:
         if not isinstance(ref, dict) or not official_url_allowed(ref.get("url")):
             continue
@@ -99,20 +99,54 @@ def verify_official_receipt(entry, fetch_digest=fetch_official_digest):
         expected = reviewed if reviewed is not None else legacy
         if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-f]{64}", expected):
             raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
-        eligible.append({"url": ref["url"], "sha256": expected})
+        old = eligible.get(ref["url"])
+        if old is not None and old != expected:
+            raise ValueError("OFFICIAL_SOURCE_DIGEST_CONFLICT")
+        eligible[ref["url"]] = expected
     if not eligible:
         raise ValueError("OFFICIAL_SOURCE_RECEIPT_REQUIRED")
-    errors = []
-    for ref in eligible:
+
+    # Only review-backed, explicitly cited official documents are evidence.
+    # An unrelated, unchanged institutional landing page must not allow
+    # publication after the cited recruitment notice or attachment changes.
+    facts = review.get("fact_evidence")
+    if not isinstance(facts, list) or any(not isinstance(x, dict) for x in facts):
+        raise ValueError("OFFICIAL_FACT_SOURCE_REQUIRED")
+    required = {"title", "count", "employment"}
+    cited = {}
+    for fact in facts:
+        field = fact.get("field")
+        if field not in required:
+            continue
+        url = fact.get("source_ref")
+        if not isinstance(url, str) or url not in eligible:
+            raise ValueError("OFFICIAL_FACT_SOURCE_REQUIRED")
+        cited.setdefault(field, set()).add(url)
+    if not required.issubset(cited):
+        raise ValueError("OFFICIAL_FACT_SOURCE_REQUIRED")
+    urls = set().union(*(cited[field] for field in required))
+
+    # When the application period cites a downloaded official URL, verify it
+    # too. Non-URL snapshot references still require validate_entry to accept
+    # their original source identity and excerpt.
+    period = review.get("application_period")
+    if isinstance(period, dict):
+        ref = period.get("source_ref")
+        if isinstance(ref, str) and ref.startswith(("http://", "https://")):
+            if ref not in eligible:
+                raise ValueError("OFFICIAL_PERIOD_SOURCE_REQUIRED")
+            urls.add(ref)
+
+    verified = []
+    for url in sorted(urls):
         try:
-            if fetch_digest(ref["url"]) == ref["sha256"]:
-                return {"url": ref["url"], "sha256": ref["sha256"]}
-            errors.append("OFFICIAL_SOURCE_BYTES_CHANGED")
-        except (ValueError, OSError, urllib.error.URLError):
-            errors.append("OFFICIAL_SOURCE_UNAVAILABLE")
-    raise ValueError("OFFICIAL_SOURCE_BYTES_CHANGED" if
-                     "OFFICIAL_SOURCE_BYTES_CHANGED" in errors else
-                     "OFFICIAL_SOURCE_UNAVAILABLE")
+            current = fetch_digest(url)
+        except (ValueError, OSError, urllib.error.URLError) as exc:
+            raise ValueError("OFFICIAL_SOURCE_UNAVAILABLE") from exc
+        if current != eligible[url]:
+            raise ValueError("OFFICIAL_SOURCE_BYTES_CHANGED")
+        verified.append({"url": url, "sha256": current})
+    return {**verified[0], "verified_fact_sources": verified}
 
 
 def plan(queue, staged, submitted, history, policy, source, details, now,
