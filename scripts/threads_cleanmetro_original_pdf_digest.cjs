@@ -17,7 +17,7 @@ const fs=require('fs'),crypto=require('crypto');
     const found=await page.locator('a[href]').evaluateAll(els=>els.map(a=>({url:a.href,label:a.innerText})).filter(x=>{
       try{const u=new URL(x.url);return u.protocol==='https:'&&u.hostname==='cleanmetro.co.kr'&&u.pathname==='/bbs/download.php'&&u.searchParams.get('bo_table')==='recruit'&&u.searchParams.get('wr_id')==='430'&&u.searchParams.get('no')==='11'}catch{return false}
     }));
-    if(found.length!==1||!found[0].label.includes('2026-17')||!found[0].label.endsWith('.pdf'))throw Error('EXACT_ATTACHMENT_MISMATCH');
+    if(found.length!==1||!found[0].label.includes('2026-17')||!found[0].label.includes('.pdf'))throw Error('EXACT_ATTACHMENT_MISMATCH');
     const [download]=await Promise.all([page.waitForEvent('download',{timeout:45000}),page.locator('a[href*="download.php"][href*="no=11"]').first().click()]);
     const p=await download.path();
     if(!p)throw Error('PDF_DOWNLOAD_MISSING');
