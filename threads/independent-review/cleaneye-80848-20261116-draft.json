@@ -126,20 +126,21 @@
     }
   ],
   "draft_only": {
-    "post_text": "서울 지하철 청소 분야 정규직 채용 공고예요.\n\n서울메트로환경이 2026년 하반기 공무직 사원 103명을 모집합니다. 전체 153명 가운데 이 분야는 103명이며, 경비직 등 다른 분야 인원은 포함하지 않았어요.\n\n근무지는 1~4호선 역사·차량기지·청사 등이며 통상 또는 교대근무로 청소·미화 업무를 맡습니다. 공고일 기준 18세 이상 65세 미만이고, 공통 병역·채용 결격 요건을 확인해야 해요.\n\n서류전형 뒤 체력검정은 줄넘기와 앉았다 일어서기로 평가합니다. 온라인 지원은 11월 20일 낮 12시에 마감해요.\n\n자세한 사항은 프로필링크 확인",
-    "characters": 305,
+    "post_text": "서울 지하철 1~4호선 청소·미화 일자리를 찾는 분께,\n서울메트로환경에서 공무직 사원 103명을 모집해요.\n전체 채용 153명 중 일반 사원 103명으로, 경비직·보훈·장애인 분야와 달라요.\n\n역사·차량기지·청사 등에서 미화업무를 맡고 통상·교대근무를 해요.\n공고일 기준 18세 이상 65세 미만, 학력·전공 제한은 없어요. 병역·결격·해당자 재취업심사 기준을 확인해야 해요.\n\n서류전형 뒤 줄넘기·앉았다 일어서기 체력검정과 면접을 진행해요.\n11월 20일 낮 12시까지 공식 채용 페이지에서 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "characters": 303,
     "replies": [],
     "card": null,
     "cta": "자세한 사항은 프로필링크 확인",
     "proposed_slot_kst": "2026-11-17T12:00:00+09:00",
     "slot_reserved": false,
-    "media_hint": "TEXT"
+    "media_hint": "IMAGE_REQUIRED_IF_PREVIOUS_08_TEXT_CONFIRMED"
   },
   "blockers": [
     "Exact rendered CareerPick #job=cleaneye-80848 detail and its click-through to official Cleaneye notice need independent browser verification; top-level homepage load alone does not prove it.",
     "Rerun employer notice, recruitment and application checks close to final approval: no amendment or cancellation visible on the two checked first pages, but all-channel absence not asserted.",
     "Construct the exact v5 approval entry using current Cleaneye fingerprints, full fact evidence and existing raw PDF hashes; pass validate_entry, verify_official_receipt and CAS without relaxing freshness or duplicate guards.",
-    "Verify next-slot TEXT/IMAGE sequence against current confirmed Meta GET receipts immediately before approval or posting."
+    "Verify next-slot TEXT/IMAGE sequence against current confirmed Meta GET receipts immediately before approval or posting.",
+    "Target 2026-11-17 12:00 slot would require IMAGE if the preceding 08:00 TEXT is confirmed; exact 1080px/360px card visual and hash verification missing. Existing draft card=null and media_hint is conditional, never allow fallback to TEXT just to fill a slot."
   ],
   "queue_safety": {
     "unreviewed_only": true,
@@ -287,5 +288,28 @@
     "not_new_raw_byte_receipt": true,
     "not_approval": true,
     "automatic_approval": false
+  },
+  "editorial_recheck_20261116": {
+    "status": "PRE_APPROVAL_TEXT_ONLY",
+    "verification": "Read full employer-issued job ad and employer application; independent review source refs included elsewhere",
+    "tested_at_utc": "2026-11-16T14:01:37.301Z",
+    "character_count": 303,
+    "checks": {
+      "cta_once": true,
+      "cta_last": true,
+      "no_url": true,
+      "no_hashtag": true,
+      "not_empty": true,
+      "replies_zero": true,
+      "unit103": true,
+      "total153": true,
+      "deadline": true
+    },
+    "first_line_kind": "reader_target",
+    "cta_policy": "exactly once at end",
+    "replies": 0,
+    "card_not_ready": true,
+    "slot_not_reserved": true,
+    "next_media_must_be_recomputed_from_live_receipt": true
   }
 }
