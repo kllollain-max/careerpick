@@ -69,7 +69,7 @@ jobs:
           handoff = report.get('writer_handoff', {})
           if handoff.get('automatic_approval') is not False or handoff.get('meta_posted') is not False:
               raise SystemExit('Unsafe writer handoff flags')
-          Path('threads-writer-handoff.json').write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + '\\n', encoding='utf-8')
+          Path('threads-writer-handoff.json').write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + chr(10), encoding='utf-8')
           PY
       - name: Flag missing approved supply with actionable diagnostics
         run: |
