@@ -34,6 +34,8 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Test exact pin and fail-closed security
         run: python -m unittest discover -s tests -p test_threads_cleanmetro_exact_pdf.py -v
+      - name: Diagnose exact independent original PDF fetch before strict publication gate (read-only)
+        run: node scripts/threads_cleanmetro_original_pdf_digest.cjs
       - name: Strict existing v5 validator + real pixels + current raw original PDF and applicant page
         shell: bash
         run: |
