@@ -15,6 +15,35 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_sector_notices_keep_field_counts_and_unknown_clock(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        for pid, text in [('a306774', '106명'), ('a307046', '96명'),
+                          ('a307061', '상담 51명과 미화 4명')]:
+            html = render(posts[pid], {})
+            self.assertIn('id="verified-notice"', html)
+            self.assertIn(text, html)
+            self.assertIn(VERIFIED_DUTIES[pid]['notice_source_url'], html)
+        self.assertIn('2026-11-17 13:00 (KST)', render(posts['a306774'], {}))
+        self.assertIn('2026-11-30 18:00 (KST)', render(posts['a307061'], {}))
+        unknown = render(posts['a307046'], {})
+        self.assertIn('마감시각은 공식 공고 확인 필요', unknown)
+        self.assertNotIn('2026-11-30 23:59', unknown)
+
+    def test_structured_notice_is_escaped_and_identity_bound(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        evidence = copy.deepcopy(VERIFIED_DUTIES['a307061'])
+        evidence['notice_sections'] = [dict(heading='<script>bad</script>',
+                                               paragraphs=['<img src=x onerror=bad>', 123]), None]
+        post = dict(self.post, id='a307061', org=evidence['organization'], title=evidence['title'])
+        with patch.dict(VERIFIED_DUTIES, {'a307061': evidence}):
+            html = render(post, {})
+            self.assertIn('&lt;script&gt;bad&lt;/script&gt;', html)
+            self.assertNotIn('<img src=x onerror=bad>', html)
+            self.assertNotIn('id="verified-notice"', render(dict(post, title='다른 공고'), {}))
+            evidence['notice_source_url'] = 'javascript:alert(1)'
+            self.assertNotIn('id="verified-notice"', render(post, {}))
+
     def test_homepage_cutoff_bundle_matches_reviewed_source_identity(self):
         from scripts.build_public_site import homepage_cutoff_metadata
         from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_DUTIES
