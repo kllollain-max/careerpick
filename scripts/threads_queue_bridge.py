@@ -193,6 +193,13 @@ def run(apply=False):
                       approved_future_slots=approved_slots,
                       missing_slots=[slot for slot in future_slots(now) if slot not in approved_slots],
                       source_candidate_count=len(selection.get('candidates', [])),
+                      writer_handoff={'status': 'review_required',
+                                      'missing_slots': [slot for slot in future_slots(now)
+                                                        if slot not in approved_slots],
+                                      'candidate_notice_ids': [item.get('notice_id')
+                                                               for item in selection.get('candidates', [])[:24]],
+                                      'automatic_approval': False,
+                                      'meta_posted': False},
                       shortlisted=[{'notice_id': e.get('notice_id'), 'org': e.get('org'),
                                     'title': e.get('title')}
                                    for e in selection.get('candidates', [])[:12]],
