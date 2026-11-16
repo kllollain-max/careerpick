@@ -117,6 +117,16 @@ class DraftWriterTests(unittest.TestCase):
         self.assertNotIn("5명", draft["draft_text"])
         self.assertFalse(draft["approved_for_queue"])
 
+    def test_official_detail_evidence_reaches_review_not_public_copy(self):
+        evidence = {"aplyQlfcCn": "전산 관련 자격증 필수", "recrutNope": "5"}
+        candidate = {**self.handoff["candidates"][0],
+                     "official_detail_fields_for_review": evidence}
+        result = build_drafts({**self.handoff, "candidates": [candidate]})
+        draft = result["drafts"][0]
+        self.assertEqual(draft["official_detail_fields_for_review"], evidence)
+        self.assertNotIn("전산 관련 자격증 필수", draft["draft_text"])
+        self.assertFalse(draft["approved_for_queue"])
+
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
             handoff = {**self.handoff, flag: True}
