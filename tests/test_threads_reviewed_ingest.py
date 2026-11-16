@@ -40,6 +40,36 @@ class ReviewedIngestTests(unittest.TestCase):
         self.assertEqual(accepted[0]["official_receipt"]["sha256"], "a" * 64)
         self.verify.assert_called_once()
 
+    def test_live_v5_reviewed_document_digest_is_accepted(self):
+        # Production reviewed entries use document_sha256, not sha256.
+        self.entry["writer"]["review"]["source_refs"] = [{
+            "url": "https://yscwf.or.kr/nc_client/file/download.jsp?_file_l=notice.hwp",
+            "document_sha256": "a" * 64,
+            "excerpt": "official notice",
+        }]
+        staged, accepted, refused = self.call()
+        self.assertFalse(refused)
+        self.assertEqual(len(staged["entries"]), 1)
+        self.assertEqual(accepted[0]["official_receipt"]["sha256"], "a" * 64)
+        self.verify.assert_called_once()
+
+    def test_conflicting_review_digests_fail_closed(self):
+        self.entry["writer"]["review"]["source_refs"][0]["document_sha256"] = "b" * 64
+        staged, accepted, refused = self.call()
+        self.assertFalse(staged["entries"])
+        self.assertFalse(accepted)
+        self.assertEqual(refused[0]["reason"], "OFFICIAL_SOURCE_DIGEST_CONFLICT")
+        self.verify.assert_not_called()
+
+    def test_malformed_review_digest_fails_closed(self):
+        self.entry["writer"]["review"]["source_refs"] = [{
+            "url": "https://yscwf.or.kr/doc.hwp", "document_sha256": "not-a-sha"
+        }]
+        staged, accepted, refused = self.call()
+        self.assertFalse(accepted)
+        self.assertEqual(refused[0]["reason"], "OFFICIAL_SOURCE_RECEIPT_REQUIRED")
+        self.verify.assert_not_called()
+
     def test_changed_official_document_never_reaches_validator(self):
         staged, accepted, refused = self.call(fetch_digest=lambda url: "b" * 64)
         self.assertEqual(len(staged["entries"]), 0)
