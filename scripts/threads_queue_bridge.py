@@ -31,6 +31,22 @@ QUEUE = 'threads/writer-queue.json'
 STAGING = 'threads/reviewed-staging.json'
 
 
+def official_notice_url(post):
+    """Review the official notice, keeping its separate application URL private.
+
+    ALIO src commonly points at an HTTP recruitment vendor. That URL is not
+    the canonical institutional notice allowed by the evidence reader.
+    """
+    url = post.get('url')
+    if isinstance(url, str):
+        parsed = urllib.parse.urlsplit(url)
+        host = parsed.hostname or ''
+        if parsed.scheme == 'https' and not parsed.username and not parsed.password:
+            if host == 'job.alio.go.kr' or host == 'job.cleaneye.go.kr':
+                return url
+    return None
+
+
 def future_slots(now):
     result = []
     for day in range(3):
@@ -251,7 +267,7 @@ def run(apply=False):
                                       'candidates': [{'notice_id': item.get('notice_id'),
                                                       'org': item.get('source_post', {}).get('org'),
                                                       'title': item.get('source_post', {}).get('title'),
-                                                      'official_url': item.get('source_post', {}).get('src') or item.get('source_post', {}).get('url'),
+                                                      'official_url': official_notice_url(item.get('source_post', {})),
                                                       'employment': item.get('selection_context', {}).get('employment'),
                                                       'recruiting_unit_title': item.get('selection_context', {}).get('unit_title'),
                                                       'recruiting_unit_count': item.get('selection_context', {}).get('unit_count'),

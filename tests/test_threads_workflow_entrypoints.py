@@ -12,6 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class WorkflowEntrypoints(unittest.TestCase):
+    def test_official_notice_routing_does_not_use_external_application_vendor(self):
+        post = {'url': 'https://job.alio.go.kr/recruitview.do?idx=306752',
+                'src': 'http://kirams.recruiter.co.kr'}
+        self.assertEqual(bridge.official_notice_url(post), post['url'])
+        self.assertIsNone(bridge.official_notice_url({'url': post['src']}))
+        self.assertIsNone(bridge.official_notice_url({'url': 'https://job.alio.go.kr.evil.test/'}))
+
     def test_direct_cli_imports_without_pythonpath(self):
         env = dict(os.environ)
         env.pop('PYTHONPATH', None)
