@@ -72,10 +72,10 @@ jobs:
           summary = Path(os.environ['GITHUB_STEP_SUMMARY'])
           with summary.open('a', encoding='utf-8') as out:
               out.write(f'## Threads reviewed supply preflight\\nMissing future slots: {len(missing)}\\nPromoted: {len(promoted)}\\nCandidate shortlist: {len(report.get("shortlisted", []))}\\n')
-              if missing and not promoted:
+              if missing:
                   out.write('ACTION REQUIRED: verified staging has not supplied the next slots. No unverified notice will be posted.\\n')
-          if missing and not promoted:
-              print('::error title=THREADS_SUPPLY_EMPTY::No verified staged manuscripts promoted; review shortlist in preflight artifact')
+          if missing:
+              print('::error title=THREADS_SUPPLY_EMPTY::Future slots still lack approved manuscripts after promotion; review shortlist in preflight artifact')
               raise SystemExit('THREADS_SUPPLY_EMPTY: missing future approved slots')
           PY
       - name: Preserve source and queue readiness audit
