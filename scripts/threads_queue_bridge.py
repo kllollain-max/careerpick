@@ -98,20 +98,22 @@ def merge(queue, staged, history, policy, source, details, now, claimed_slots=()
         if r.get('job_id'):
             blocked.add(str(r['job_id']))
         blocked.update(str(x) for x in r.get('job_ids', []) if x)
-    occupied = {x.get('scheduled_at') for x in queue['entries']}
-    used = {x.get('notice_id') for x in queue['entries']
+    entries = list(queue['entries'])
+    occupied = {x.get('scheduled_at') for x in entries}
+    used = {x.get('notice_id') for x in entries
             if isinstance(x.get('writer'), dict) and x['writer'].get('status') == 'ready'}
     approved, refused = [], []
     for entry in staged['entries']:
         nid = entry.get('notice_id') if isinstance(entry, dict) else None
         try:
-            if not isinstance(nid, str) or nid in blocked:
+            if not isinstance(entry, dict) or not isinstance(nid, str) or nid in blocked:
                 raise ValueError('DUPLICATE_POST')
-            if entry.get('scheduled_at') in occupied:
+            slot = entry.get('scheduled_at')
+            if slot in occupied:
                 raise ValueError('SLOT_ALREADY_OCCUPIED')
-            if entry.get('scheduled_at') in claimed_slots:
+            if slot in claimed_slots:
                 raise ValueError('SLOT_ALREADY_CLAIMED')
-            if any(r.get('scheduled_at') == entry.get('scheduled_at') for r in history.get('records', [])):
+            if any(r.get('scheduled_at') == slot for r in history.get('records', [])):
                 raise ValueError('SLOT_ALREADY_STARTED')
             if nid in used:
                 raise ValueError('DUPLICATE_QUEUE_NOTICE')
@@ -120,9 +122,10 @@ def merge(queue, staged, history, policy, source, details, now, claimed_slots=()
             refused.append({'notice_id': nid, 'reason': str(exc)[:140]})
             continue
         approved.append(entry)
-        occupied.add(entry['scheduled_at'])
+        entries.append(entry)
+        occupied.add(slot)
         used.add(nid)
-    return {**queue, 'entries': [*queue['entries'], *approved]}, approved, refused
+    return {**queue, 'entries': entries}, approved, refused
 
 
 def ready_future_slots(entries, now):
