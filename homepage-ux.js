@@ -15,6 +15,13 @@
        !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(proof.cutoff||''))return null;
     return date(proof.cutoff);
   }
+  function confirmedApplicationStart(p){
+    if(!confirmedApplicationCutoff(p))return null;
+    const value=root.CP_VERIFIED_APPLICATION_CUTOFFS[p.id].start;
+    if(typeof value!=='string' || !/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?$/.test(value))return null;
+    const start=date(value);
+    return start && +start<=+confirmedApplicationCutoff(p) ? start : null;
+  }
   function deadline(p, now = new Date()){
     const confirmed=confirmedApplicationCutoff(p);
     const due = confirmed || date(p.due);
@@ -26,8 +33,8 @@
     const n = Math.round((Date.parse(day(due)) - Date.parse(day(now))) / 86400000);
     if(n < 0 || (exact && +now >= +due)) return {cls:'closed',big:'마감',n:Infinity};
     if(uncertain)return {cls:'verify',big:dateReview?'일정 확인':'상태 확인',n:Infinity};
-    const start = date(p.start || p.startDate);
-    if(start && (/^\d{4}-\d{2}-\d{2}$/.test(String(p.start || p.startDate)) ? String(p.start || p.startDate) > day(now) : +start > +now)) return {cls:'upcoming',big:'접수 예정',n};
+    const start = confirmedApplicationStart(p) || date(p.start || p.startDate);
+    if(start && +start > +now) return {cls:'upcoming',big:'접수 예정',n};
     if(n === 0 && !exact) return {cls:'verify',big:'시각 확인',n:0};
     return {cls:n <= 3 ? 'hot':'open',big:n === 0 ? 'D-DAY':`D-${n}`,n};
   }
@@ -216,7 +223,7 @@
     }
     return fields;
   }
-  const api = {confirmedApplicationCutoff,deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
+  const api = {confirmedApplicationCutoff,confirmedApplicationStart,deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
   if(typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.CPHome = api;
 })(typeof window !== 'undefined' ? window : globalThis);
