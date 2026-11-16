@@ -72,6 +72,28 @@ class ThreadsQueueBridgeTests(unittest.TestCase):
         self.assertEqual(refused[0]["reason"], "SLOT_ALREADY_OCCUPIED")
 
     @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
+    def test_duplicate_staging_same_slot_promotes_only_once(self, _verify):
+        duplicate = {**self.entry, "notice_id": "verified-unique-2"}
+        stage = {"schema_version": 1, "entries": [self.entry, duplicate]}
+        merged, approved, refused = merge(
+            self.queue, stage, self.history, {}, {}, {}, self.now
+        )
+        self.assertEqual(len(approved), 1)
+        self.assertEqual(len(merged["entries"]), 1)
+        self.assertEqual(refused[0]["reason"], "SLOT_ALREADY_OCCUPIED")
+
+    @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
+    def test_duplicate_staging_notice_across_slots_promotes_only_once(self, _verify):
+        duplicate = {**self.entry, "scheduled_at": "2026-11-16T16:00:00+09:00"}
+        stage = {"schema_version": 1, "entries": [self.entry, duplicate]}
+        merged, approved, refused = merge(
+            self.queue, stage, self.history, {}, {}, {}, self.now
+        )
+        self.assertEqual(len(approved), 1)
+        self.assertEqual(len(merged["entries"]), 1)
+        self.assertEqual(refused[0]["reason"], "DUPLICATE_QUEUE_NOTICE")
+
+    @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
     def test_claimed_slot_not_promoted(self, _verify):
         _, approved, refused = merge(
             self.queue, self.stage, self.history, {}, {}, {}, self.now,
