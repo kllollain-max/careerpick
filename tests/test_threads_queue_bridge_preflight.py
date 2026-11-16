@@ -93,6 +93,16 @@ class ThreadsQueueBridgeTests(unittest.TestCase):
         self.assertEqual(len(merged["entries"]), 1)
         self.assertEqual(refused[0]["reason"], "DUPLICATE_QUEUE_NOTICE")
 
+    def test_malformed_queue_entry_fails_closed(self):
+        queue = {"schema_version": 1, "entries": [None]}
+        with self.assertRaisesRegex(ValueError, "QUEUE_ENTRY_SCHEMA"):
+            merge(queue, self.stage, self.history, {}, {}, {}, self.now)
+
+    def test_malformed_history_fails_closed(self):
+        history = {"records": "invalid", "posted_ids": []}
+        with self.assertRaisesRegex(ValueError, "HISTORY_SCHEMA"):
+            merge(self.queue, self.stage, history, {}, {}, {}, self.now)
+
     @patch("scripts.threads_queue_bridge.verify_entry", return_value={})
     def test_claimed_slot_not_promoted(self, _verify):
         _, approved, refused = merge(
