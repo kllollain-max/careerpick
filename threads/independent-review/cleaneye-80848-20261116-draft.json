@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "notice_id": "cleaneye-80848",
-  "review_status": "RAW_EVIDENCE_AND_SEMANTICS_CHECKED_PENDING_PROFILE_AND_CORRECTIONS",
+  "review_status": "EMPLOYER_BOARD_AND_GENERAL_NOTICES_FIRST_PAGES_CHECKED_PENDING_LIVE_PROFILE_AND_VALIDATORS",
   "approved_for_queue": false,
   "meta_posted": false,
   "review_kind": "independent_external_semantic_review_of_employer_application_and_published_attachment_pages",
@@ -126,20 +126,21 @@
     }
   ],
   "draft_only": {
-    "post_text": "서울 지하철 청소 분야 정규직 채용 공고예요.\n\n서울메트로환경이 2026년 하반기 공무직 사원 103명을 모집합니다. 전체 153명 가운데 이 분야는 103명이며, 경비직 등 다른 분야 인원은 포함하지 않았어요.\n\n근무지는 1~4호선 역사·차량기지·청사 등이며 통상 또는 교대근무로 청소·미화 업무를 맡습니다. 공고일 기준 18세 이상 65세 미만이고, 공통 병역·채용 결격 요건을 확인해야 해요.\n\n서류전형 뒤 체력검정은 줄넘기와 앉았다 일어서기로 평가합니다. 온라인 지원은 11월 20일 낮 12시에 마감해요.\n\n자세한 사항은 프로필링크 확인",
-    "characters": 305,
+    "post_text": "서울 지하철 1~4호선 청소·미화 일자리를 찾는 분께,\n서울메트로환경에서 공무직 사원 103명을 모집해요.\n전체 채용 153명 중 일반 사원 103명으로, 경비직·보훈·장애인 분야와 달라요.\n\n역사·차량기지·청사 등에서 미화업무를 맡고 통상·교대근무를 해요.\n공고일 기준 18세 이상 65세 미만, 학력·전공 제한은 없어요. 병역·결격·해당자 재취업심사 기준을 확인해야 해요.\n\n서류전형 뒤 줄넘기·앉았다 일어서기 체력검정과 면접을 진행해요.\n11월 20일 낮 12시까지 공식 채용 페이지에서 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "characters": 303,
     "replies": [],
     "card": null,
     "cta": "자세한 사항은 프로필링크 확인",
     "proposed_slot_kst": "2026-11-17T12:00:00+09:00",
     "slot_reserved": false,
-    "media_hint": "TEXT"
+    "media_hint": "IMAGE_REQUIRED_IF_PREVIOUS_08_TEXT_CONFIRMED"
   },
   "blockers": [
-    "Employer recruitment-board top page independently inspected on 2026-11-16: newest entry is 2026-17 dated Oct30 and no later recruitment correction is visible there. General notices board page1 returned 403/proxy_error; do not claim all-channel cancellation absence, and refresh this board close to approval.",
-    "CareerPick #job=cleaneye-80848 must be actually rendered and its original notice link/job identity checked before setting profile_target.verified.",
-    "Construct full v5 entry from current Cleaneye source fingerprints and exact documentary evidence, and pass validate_entry/verify_official_receipt/CAS in future eligible slot. No auto-approval.",
-    "Media alternation for the target slot must be checked against actual newest Meta receipts before promotion."
+    "Exact rendered CareerPick #job=cleaneye-80848 detail and its click-through to official Cleaneye notice need independent browser verification; top-level homepage load alone does not prove it.",
+    "Rerun employer notice, recruitment and application checks close to final approval: no amendment or cancellation visible on the two checked first pages, but all-channel absence not asserted.",
+    "Construct the exact v5 approval entry using current Cleaneye fingerprints, full fact evidence and existing raw PDF hashes; pass validate_entry, verify_official_receipt and CAS without relaxing freshness or duplicate guards.",
+    "Verify next-slot TEXT/IMAGE sequence against current confirmed Meta GET receipts immediately before approval or posting.",
+    "Target 2026-11-17 12:00 slot would require IMAGE if the preceding 08:00 TEXT is confirmed; exact 1080px/360px card visual and hash verification missing. Existing draft card=null and media_hint is conditional, never allow fallback to TEXT just to fill a slot."
   ],
   "queue_safety": {
     "unreviewed_only": true,
@@ -218,7 +219,10 @@
     "application": "2026-11-01 09:00 ~ 2026-11-20 12:00 KST, 온라인 지원",
     "attachment_inspection": "Three exact employer-linked 2-page PDFs read and first pages visually inspected independently; raw bytes hashed in run43856688117",
     "correction_status": "The exact employer-managed application is currently 모집중. Separately published employer-wide correction/cancellation notices not exhaustively inspected.",
-    "profile_status": "Not yet actually rendered and compared against cleaneye-80848 detail; never label verified until inspection."
+    "profile_status": "Live hash-deep-link job detail was not independently rendered to confirm exact job and source navigation; do not mark verified.",
+    "employer_recruitment_board_first_page_rechecked_at_utc": "2026-11-16T13:57:38.544Z",
+    "general_notices_board_first_page_now_read_at_utc": "2026-11-16T13:57:38.544Z",
+    "application_page_rechecked_at_utc": "2026-11-16T13:57:38.544Z"
   },
   "employer_recruitment_board_observation": {
     "url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1",
@@ -234,5 +238,78 @@
     "independent_review_scope": "top page only; absence across all media/channels is not established",
     "reviewer_conclusion": "Employer recruitment board independently checked; no subsequent 2026-17 amendment shown on visible top page; fresh end-to-end check still required before publisher approval",
     "source_text_excerpt": "367 [공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고 (주)서울메트로환경 2026.10.30; 366 [공고 제2026-16호](주)서울메트로환경 임원(사장) 후보 초빙 공고 2026.08.25"
+  },
+  "employer_notice_board_and_application_recheck": {
+    "checked_at_utc": "2026-11-16T13:57:38.544Z",
+    "read_only": true,
+    "scope": "Employer recruitment board first page and general notices first page, plus employer-operated official application and employer-issued full recruitment advertisement. The observation cannot prove absence from all channels.",
+    "observations": [
+      {
+        "url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&page=1",
+        "result": "read_success",
+        "latest_notice_id": "367",
+        "latest_title": "[공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고",
+        "latest_notice_date": "2026-10-30",
+        "subsequent_recruitment_amendment_visible": false,
+        "source_excerpt": "367 [공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고; 366 [공고 제2026-16호](주)서울메트로환경 임원(사장) 후보 초빙 공고"
+      },
+      {
+        "url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=notice&page=1",
+        "result": "read_success_after_prior_403",
+        "latest_non_pinned_notice_id": "50",
+        "latest_non_pinned_notice_title": "제5대 홍길식 사장 취임사",
+        "latest_non_pinned_notice_date": "2026-10-06",
+        "recruitment_2026_17_correction_or_cancellation_visible": false,
+        "source_excerpt": "50 제5대 홍길식 사장 취임사 2026.10.06; 49 과반수 노동조합에 대한 공고 2026.06.29"
+      },
+      {
+        "url": "https://recruit.incruit.com/cleanmetro/job/2610280002",
+        "result": "read_success",
+        "status": "모집중",
+        "unit": "공무직 사원",
+        "application_closes": "2026-11-20T12:00:00+09:00",
+        "excerpt": "모집중 2026.11.01 09:00 ~ 2026.11.20 12:00 2026년 하반기 공개채용 [공무직 사원]"
+      },
+      {
+        "url": "https://lab.incruit.com/jobs/2610300002976",
+        "result": "read_success",
+        "issued_ad": "㈜서울메트로환경 공고 제2026-17호",
+        "employment": "정규직",
+        "unit": "공무직 사원",
+        "unit_count": 103,
+        "all_units_total": 153,
+        "age": "공고일 기준 18세 이상 65세 미만",
+        "fitness": "줄넘기(70점)+앉았다 일어서기(30점), 체력검정 점수 60점 미만 불합격",
+        "application_closes": "2026-11-20T12:00:00+09:00"
+      }
+    ],
+    "profile_actual_rendered_verified": false,
+    "source_byte_sha256_was_previously_verified": true,
+    "not_new_raw_byte_receipt": true,
+    "not_approval": true,
+    "automatic_approval": false
+  },
+  "editorial_recheck_20261116": {
+    "status": "PRE_APPROVAL_TEXT_ONLY",
+    "verification": "Read full employer-issued job ad and employer application; independent review source refs included elsewhere",
+    "tested_at_utc": "2026-11-16T14:01:37.301Z",
+    "character_count": 303,
+    "checks": {
+      "cta_once": true,
+      "cta_last": true,
+      "no_url": true,
+      "no_hashtag": true,
+      "not_empty": true,
+      "replies_zero": true,
+      "unit103": true,
+      "total153": true,
+      "deadline": true
+    },
+    "first_line_kind": "reader_target",
+    "cta_policy": "exactly once at end",
+    "replies": 0,
+    "card_not_ready": true,
+    "slot_not_reserved": true,
+    "next_media_must_be_recomputed_from_live_receipt": true
   }
 }
