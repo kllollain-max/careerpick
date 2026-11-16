@@ -98,6 +98,28 @@ def master_public_copy(selected, style, *, now=None):
     return main, detail
 
 
+
+def verified_published_slot(history, scheduled):
+    """Only a previously Meta-GET-verified single slot may be skipped as already sent."""
+    matches = [row for row in history.get('records', [])
+               if row.get('scheduled_at') == scheduled.isoformat()]
+    if len(matches) != 1:
+        return False
+    row = matches[0]
+    proof = row.get('public_output_verification')
+    post_id = str(row.get('threads_post_id') or '')
+    return bool(
+        row.get('status') == 'published'
+        and post_id
+        and isinstance(proof, dict)
+        and proof.get('status') == 'verified'
+        and str(proof.get('post_id') or '') == post_id
+        and proof.get('own_replies_status') == 'verified'
+        and str(proof.get('permalink') or '').startswith(
+            'https://www.threads.com/@hid_119/post/')
+    )
+
+
 def prepare_master(history, now, run_id):
     """Consume AI-written, reviewed slot drafts; never fall back to old templates."""
     from scripts.threads_writer_queue import select_ready, fingerprint
@@ -128,6 +150,12 @@ def prepare_master(history, now, run_id):
         print('Daily limit reached; no reservation created')
         return
     if any(r.get('scheduled_at') == scheduled.isoformat() for r in history['records']):
+        if (not recovery
+                and os.getenv('THREADS_MANUAL_PUBLISH', 'false').lower() != 'true'
+                and verified_published_slot(history, scheduled)):
+            print('::notice title=ALREADY_PUBLISHED_VERIFIED::Scheduled slot already has '
+                  'one Meta-verified receipt; no new reservation or POST')
+            return
         raise RuntimeError('Slot already reserved')
     policy, source, details = writer_inputs()
     queue = load(ROOT / '.threads-writer-queue.json', {})
