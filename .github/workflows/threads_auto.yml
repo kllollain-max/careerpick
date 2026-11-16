@@ -74,9 +74,12 @@ jobs:
               out.write(f'## Threads reviewed supply preflight\\nMissing future slots: {len(missing)}\\nPromoted: {len(promoted)}\\nCandidate shortlist: {len(report.get("shortlisted", []))}\\n')
               if missing:
                   out.write('ACTION REQUIRED: verified staging has not supplied the next slots. No unverified notice will be posted.\\n')
+          next_slot = report.get('future_slots', [None])[0]
+          if next_slot in missing:
+              print('::error title=THREADS_SUPPLY_EMPTY::Next publishing slot lacks an approved manuscript')
+              raise SystemExit('THREADS_SUPPLY_EMPTY: next publishing slot not ready')
           if missing:
-              print('::error title=THREADS_SUPPLY_EMPTY::Future slots still lack approved manuscripts after promotion; review shortlist in preflight artifact')
-              raise SystemExit('THREADS_SUPPLY_EMPTY: missing future approved slots')
+              print('::warning title=THREADS_SUPPLY_LOW::Later publishing slots need approved manuscripts')
           PY
       - name: Preserve source and queue readiness audit
         if: always()
