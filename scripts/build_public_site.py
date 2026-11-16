@@ -21,6 +21,33 @@ from urllib.parse import unquote, urljoin, urlparse
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def homepage_cutoff_metadata(posts, cutoffs, duties):
+    """Bind existing source-verified cutoffs to their independently reviewed identity.
+
+    Keep source snapshots intact. A changed notice title/org/publication end
+    must be rechecked rather than inheriting a prior editorial clock time.
+    """
+    result = {}
+    for post in posts:
+        pid = post.get('id')
+        cutoff, proof = cutoffs.get(pid, ''), duties.get(pid, {})
+        source_end = proof.get('source_end_date') or cutoff[:10]
+        if (post.get('alio') is not True or not proof
+                or proof.get('organization') != post.get('org')
+                or proof.get('title') != post.get('title')
+                or str(post.get('due', ''))[:10] != source_end
+                or not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00', cutoff)):
+            continue
+        try:
+            datetime.fromisoformat(cutoff)
+        except ValueError:
+            continue
+        result[pid] = dict(cutoff=cutoff, org=post['org'], title=post['title'],
+                           sourceEndDate=source_end)
+    return result
+
 HOST = "kllollain-max.github.io"
 PREFIX = "/careerpick/"
 BASE = "https://" + HOST + PREFIX
@@ -237,11 +264,19 @@ def main() -> dict:
     # Use the preserved official ALIO rows for the static first view.
     alio = json.loads((output / "alio.json").read_text())
     blogs = json.loads((output / "posts.json").read_text())
-    static_posts = alio["posts"] + [p for p in blogs["posts"] if p.get("type") != "j"]
     pages = load_module("careerpick_job_pages", "scripts/build_job_pages.py")
     pages.ROOT = output
     pages.DATA, pages.DETAIL, pages.OUT = output / "alio.json", output / "alio-detail.json", output / "jobs"
     pages.main()
+    cutoffs = homepage_cutoff_metadata(alio['posts'], pages.CONFIRMED_APPLICATION_CUTOFFS,
+                                       pages.VERIFIED_DUTIES)
+    bundle = output / 'homepage-ux.js'
+    bundle.write_text('window.CP_VERIFIED_APPLICATION_CUTOFFS = ' +
+                      json.dumps(cutoffs, ensure_ascii=False) + ';\n' + bundle.read_text(),
+                      encoding='utf-8')
+    static_posts = [p for p in alio['posts']
+                    if p['id'] not in cutoffs or not pages.is_closed(cutoffs[p['id']]['cutoff'])]
+    static_posts += [p for p in blogs['posts'] if p.get('type') != 'j']
     report = output / "job-quality-report.json"
     if report.exists():
         report.replace(ROOT / "build-job-quality-report.json")
@@ -274,6 +309,11 @@ def main() -> dict:
             manifest["start_url"], manifest["scope"] = PREFIX + "?src=app", PREFIX
             text = json.dumps(manifest, ensure_ascii=False, indent=2)
         write_text_atomic(file, text)
+    # Hash the final scoped bundle, after the URL-rewrite pass above.
+    homepage = output / 'index.html'
+    homepage.write_text(homepage.read_text().replace(
+        'src="homepage-ux.js"', 'src="homepage-ux.js?v=' + digest(bundle)[:16] + '"', 1),
+        encoding='utf-8')
     search = load_module("careerpick_search", "scripts/search_readiness.py")
     archived_schema_removed = search.remove_unverified_archived_schema(output, {p['id'] for p in alio['posts']}, write_text_atomic)
     metadata_updates = search.normalize_duplicate_metadata(output, write_text_atomic)

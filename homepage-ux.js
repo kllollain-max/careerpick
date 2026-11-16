@@ -8,13 +8,21 @@
     }
     const d=v instanceof Date?v:new Date(v);return v && Number.isFinite(+d)?d:null;
   };
+  function confirmedApplicationCutoff(p){
+    const proof=root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p.id];
+    if(!p.alio || !proof || proof.org!==p.org || proof.title!==p.title ||
+       !date(p.due) || day(date(p.due))!==proof.sourceEndDate ||
+       !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(proof.cutoff||''))return null;
+    return date(proof.cutoff);
+  }
   function deadline(p, now = new Date()){
-    const due = date(p.due);
+    const confirmed=confirmedApplicationCutoff(p);
+    const due = confirmed || date(p.due);
     if(p.cleaneye && ['expired','cancelled'].includes(p.receptionState))return {cls:'closed',big:p.receptionState==='cancelled'?'취소':'마감',n:Infinity};
     const dateReview=p.cleaneye && p.deadlineReviewReason==='far_future_source_date';
     const uncertain=dateReview || p.cleaneye && ['verification_pending','source_error','invalid_date'].includes(p.receptionState);
     if(!due) return uncertain ? {cls:'verify',big:dateReview?'일정 확인':'상태 확인',n:Infinity} : null;
-    const exact=p.dueHasTime===true && !(typeof p.due==='string' && /^\d{4}-\d{2}-\d{2}$/.test(p.due));
+    const exact=!!confirmed || p.dueHasTime===true && !(typeof p.due==='string' && /^\d{4}-\d{2}-\d{2}$/.test(p.due));
     const n = Math.round((Date.parse(day(due)) - Date.parse(day(now))) / 86400000);
     if(n < 0 || (exact && +now >= +due)) return {cls:'closed',big:'마감',n:Infinity};
     if(uncertain)return {cls:'verify',big:dateReview?'일정 확인':'상태 확인',n:Infinity};
@@ -208,7 +216,7 @@
     }
     return fields;
   }
-  const api = {deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
+  const api = {confirmedApplicationCutoff,deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
   if(typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.CPHome = api;
 })(typeof window !== 'undefined' ? window : globalThis);
