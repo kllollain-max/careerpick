@@ -1,0 +1,45 @@
+name: Threads a306875 official PDF original read-only inspection
+on:
+  push:
+    branches:
+      - work/threads-a306875-original-pdf-check-20261117
+permissions:
+  contents: read
+jobs:
+  original-pdf:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Verify exact original ALIO files and independently read PDF full text
+        shell: bash
+        run: |
+          command -v pdftotext || (sudo apt-get update -qq && sudo apt-get install -y poppler-utils)
+          python3 - <<'PY'
+          import urllib.request, hashlib, subprocess, re, json
+          urls={3086118:'채용공고 원문',3086119:'입사지원서',3086120:'직무기술서'}
+          receipts=[]
+          for no,label in urls.items():
+              u='https://www.alio.go.kr/download/download.json?fileNo='+str(no)
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) Chrome/125.0','Accept':'application/pdf,application/octet-stream,*/*'})
+              try:
+                  with urllib.request.urlopen(req,timeout=28) as resp:
+                      content=resp.read(10000001)
+                      status=resp.status
+              except Exception as exc:
+                  print('ALIO_OFFICIAL_ORIGINAL_UNAVAILABLE',json.dumps({'fileNo':no,'error':str(exc)},ensure_ascii=False),flush=True)
+                  continue
+              if not content.startswith(b'%PDF-'):
+                  print('ALIO_OFFICIAL_NOT_PDF',no,len(content),content[:40],flush=True)
+                  continue
+              p=subprocess.run(['pdftotext','-layout','-','-'],input=content,capture_output=True)
+              if p.returncode!=0:
+                  print('ALIO_PDF_TEXT_EXTRACTION_FAILED',no,p.stderr.decode('utf-8','replace')[:300],flush=True)
+                  continue
+              text=' '.join(p.stdout.decode('utf-8','replace').split())
+              receipt={'fileNo':no,'url':u,'http_status':status,'size':len(content),'sha256':hashlib.sha256(content).hexdigest(),'text_chars':len(text),'first_text':text[:950],'deadline_candidates':re.findall(r'(?:(?:11[.]?\s*20)|(?:11월\s*20일))[^\n]{0,75}',text)[:8]}
+              print('ALIO_OFFICIAL_ORIGINAL_READ',json.dumps(receipt,ensure_ascii=False),flush=True)
+              receipts.append(receipt)
+          print('ALIO_OFFICIAL_RECEIPT_COUNT',len(receipts),flush=True)
+          if not any(item['fileNo']==3086118 for item in receipts):
+              raise SystemExit('OFFICIAL_ANNOUNCEMENT_PDF_READ_FAILED')
+          PY
