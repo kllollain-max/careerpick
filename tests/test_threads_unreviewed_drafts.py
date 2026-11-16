@@ -56,6 +56,15 @@ class DraftWriterTests(unittest.TestCase):
         self.assertEqual(len(result["drafts"]), 1)
         self.assertEqual(result["drafts"][0]["notice_id"], "a123")
 
+    def test_three_fallback_drafts_per_slot_remain_unapproved(self):
+        base = self.handoff["candidates"][0]
+        candidates = [{**base, "notice_id": f"a{number}"} for number in range(101, 106)]
+        result = build_drafts({**self.handoff, "candidates": candidates})
+        self.assertEqual([d["notice_id"] for d in result["drafts"]], ["a101", "a102", "a103"])
+        self.assertTrue(all(d["suggested_slot"] == self.handoff["missing_slots"][0] for d in result["drafts"]))
+        self.assertTrue(all(not d["approved_for_queue"] for d in result["drafts"]))
+        self.assertEqual(result["slot_coverage"]["approved_slots"], [])
+
     def test_never_reuses_notice_for_multiple_slots(self):
         handoff = {**self.handoff, "missing_slots": [
             "2026-11-17T08:00:00+09:00", "2026-11-17T12:00:00+09:00"]}
