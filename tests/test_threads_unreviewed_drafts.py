@@ -34,6 +34,16 @@ class DraftWriterTests(unittest.TestCase):
         self.assertIn('14:00 +0900', draft['draft_text'])
         self.assertNotIn('마감 시각 원문 확인', draft['draft_text'])
 
+    def test_expired_notice_is_excluded(self):
+        candidate = {**self.handoff['candidates'][0],
+                     'application_period': {'end': '2026-11-16T10:00:00+09:00', 'date_only': False}}
+        self.assertEqual(build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'], [])
+
+    def test_deadline_day_without_clock_is_excluded(self):
+        candidate = {**self.handoff['candidates'][0],
+                     'application_period': {'end': '2026-11-17', 'date_only': True}}
+        self.assertEqual(build_drafts({**self.handoff, 'candidates': [candidate]})['drafts'], [])
+
     def test_reject_unsafe_handoff(self):
         for flag in ("automatic_approval", "meta_posted"):
             handoff = {**self.handoff, flag: True}
