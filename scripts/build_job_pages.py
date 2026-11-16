@@ -17,6 +17,17 @@ DATA = ROOT / 'alio.json'
 DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
+CONFIRMED_APPLICATION_CUTOFFS = {
+    'a306750': '2026-11-19T10:00:00+09:00',
+    'a306355': '2026-11-16T10:00:00+09:00',
+    'a306799': '2026-11-23T10:00:00+09:00',
+    'a306662': '2026-11-18T17:00:00+09:00',
+    # Official 307034 notice HWP, section 6; ALIO fileNo=3087622, checked 2026-11-16.
+    'a307034': '2026-11-20T16:00:00+09:00',
+}
+VERIFIED_DUTIES = json.loads(
+    (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
+) if Path(__file__).with_name('verified_job_duties.json').exists() else {}
 
 DETAIL_LABELS = {
     'recrutSeNm': '채용 구분',
@@ -174,13 +185,12 @@ def render(post, detail, related_posts=()):
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
-    confirmed_cutoffs = {
-        'a306750': '2026-11-19 10:00 (KST)',  # Korail Retail employer notice
-        'a306355': '2026-11-16 10:00 (KST)',  # IBK ALIO application instructions
-    }
-    confirmed_cutoff = confirmed_cutoffs.get(pid, '')
+    application_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
+    confirmed_cutoff = application_cutoff[:16].replace('T', ' ') + ' (KST)' if application_cutoff else ''
     deadline = parse_date(due, end_of_day=True)
-    closed = is_closed(due)
+    # A verified application cutoff takes precedence over the publication end
+    # date. Keep the feed intact and preserve the archived URL/bookmarks.
+    closed = is_closed(application_cutoff or due)
 
     official = (
         safe_url(post.get('src'))
@@ -318,7 +328,13 @@ def render(post, detail, related_posts=()):
     # 자료가 없는 공고에 사실처럼 보이는 직무 설명을 생성하지 않습니다.
     # ALIO desc는 alio.py에서 ncsCdNmLst로 생성된 직무 분류입니다.
     # 글자 수나 구분자에 관계없이 실제 담당업무 설명으로 판단하지 않습니다.
-    has_substantive_desc = False
+    verified_duties = VERIFIED_DUTIES.get(pid, {})
+    # Bind editorial evidence to the exact notice, organization and title.
+    # A reused ID or changed notice must be reviewed again before reuse.
+    if (verified_duties.get('organization') != org
+            or verified_duties.get('title') != title):
+        verified_duties = {}
+    has_substantive_desc = bool(verified_duties)
     if qualification and process:
         coverage_note = '지원 자격과 채용 절차 정보가 제공된 공고입니다.'
     elif qualification or process or has_substantive_desc:
@@ -364,8 +380,60 @@ def render(post, detail, related_posts=()):
         '<p class="source-note">이 안내는 공고별 업무를 추정한 설명이 아니라 공식 원문 확인을 돕는 점검표입니다.</p>'
         '</section>'
     )
+    if verified_duties:
+        duties_checklist_html = (
+            '<section id="job-duties" aria-label="공식 직무기술서 확인 요약">'
+            '<h2>공식 직무기술서에서 확인한 담당업무</h2>'
+            f'<h3>{escape(verified_duties["scope"])}</h3>'
+            f'<p>{escape(verified_duties["summary"])}</p>'
+            f'<p class="source-note">지원 전 비교: {escape(verified_duties["applicant_check"])}</p>'
+            '<p>모든 모집분야를 검증한 것은 아닙니다. 위 범위 이외의 담당업무·인원·근무조건은 공식 원문 확인 필요.</p>'
+            f'<p class="source-meta">원본 확인일: {escape(verified_duties["checked_on"])} · '
+            'AI 원문 대조·요약. 기관의 공식 공고와 최신 정정 내용이 우선합니다.</p>'
+            f'<p><a href="{escape(verified_duties["source_url"], quote=True)}" '
+            'target="_blank" rel="noopener noreferrer">'
+            f'공식 첨부 원문: {escape(verified_duties["source_label"])}</a></p></section>'
+        )
     # A notice-specific, source-checked editorial note; never infer HWP duties.
     verified_notice_html = ''
+    if (pid == 'a307034' and org == '한전KPS(주)'
+            and title == '한전KPS(주) 서울경기전력지사 양주지점 단기노무원(부지정리) 모집'):
+        verified_notice_html = (
+            '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
+            '<h2>한전KPS 양주지점 부지정리 단기노무원 지원 안내</h2>'
+            '<p>부지정리 단기노무원 2명 모집입니다. 일반 사무직이나 정규직 모집이 아닙니다. '
+            '공식 공고문 6항의 접수기간은 2026년 11월 16일~11월 20일 16시(KST)이며, '
+            '기간 후 접수는 불가하다고 안내합니다. 이메일 또는 우편·방문 접수입니다. '
+            '우편 도착 인정 기준과 변경 여부는 공식 담당자에게 확인하세요.</p>'
+            '<h3>근무 장소와 면접 장소가 다릅니다</h3>'
+            '<p>근무지는 양주지점 관내 송전철탑 주변입니다. 예정 근무기간은 '
+            '2026년 12월 1일~12월 31일이며 월별 계약입니다. 기상·회사 사정으로 '
+            '미투입되는 날이 있을 수 있고 실제 근로일 기준 계약·근무일 조정이 안내됩니다. '
+            '예정 근무시간은 주 5일, 08:00~16:00 중 휴게 1시간을 제외한 7시간입니다. '
+            '한 달 전체 근무일수나 임금 총액이 보장된다는 뜻은 아닙니다.</p>'
+            '<p>서류접수 → 면접 → 신체검사 → 채용통보 순서이며, '
+            '면접은 11월 24일 14시 수원시 영통구 대학3로 20의 서울경기전력지사에서 '
+            '진행할 예정입니다. 양주 근무지로 바로 찾아가지 말고 개별 통보를 확인하세요.</p>'
+            '<h3>우대 가점은 자동 적용으로 계산하지 마세요</h3>'
+            '<p>ALIO 요약에는 각 전형단계 가점으로 기재돼 있지만, 첨부 공고문 4항은 '
+            '면접전형 가점으로 설명합니다. 보훈 5~10%, 장애인 5%, 건설업 기초안전보건교육 '
+            '수료자 5%가 제시되며, 모집 3명 이하의 보훈 가점 미적용 원칙과 응시자 수에 따른 '
+            '예외도 함께 적혀 있습니다. 이 공고는 2명 모집이므로 본인 적용 여부를 담당자에게 '
+            '확인해야 합니다. 블라인드 지원서에는 공고에서 금지한 출신학교·가족관계 등 '
+            '개인정보와 사진을 넣지 마세요.</p>'
+            '<p>채용예정일 즉시 근무할 수 있어야 하며, 공고문은 현장업무 수행 전에 '
+            '건설업 기초안전보건교육 4시간 이수를 요구합니다. 직무기술서의 권장 항목만 보고 '
+            '교육이 불필요하다고 판단하지 마세요. 우대 증빙 제출 시점도 ALIO 요약과 첨부 '
+            '공고문의 표현이 달라 제출 전에 담당자 확인이 필요합니다.</p>'
+            '<p class="source-note">AI 원문 대조일: 2026-11-16. 첨부 공고문 1~7항과 '
+            '직무기술서를 대조했습니다. 세부 가점과 제출시점 차이를 임의로 해석하지 않았습니다. '
+            '공식 정정 공고와 담당자 안내를 함께 확인하세요.</p>'
+            '<p><a href="https://www.alio.go.kr/download/download.json?fileNo=3087622" '
+            'rel="noopener noreferrer" target="_blank">공식 채용공고문 HWP</a> · '
+            '<a href="https://job.alio.go.kr/recruitview.do?idx=307034" '
+            'rel="noopener noreferrer" target="_blank">공식 ALIO 공고·담당자 확인</a></p>'
+            '</section>'
+        )
     if pid == 'a306436':
         verified_notice_html = (
             '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
@@ -378,33 +446,9 @@ def render(post, detail, related_posts=()):
             '적격자가 있으면 즉시 채용될 수 있습니다.</p>'
             '<p class="source-note">ALIO의 2026-11-30은 공고 게시 종료일입니다. '
             '원서접수 마감시각이나 지원 가능 상태를 보증하지 않습니다. '
-            '세부 담당업무는 공식 직무기술서 HWP 본문을 확인해야 합니다.</p>'
+            '세부 담당업무는 공식 직무기술서 HWP 본문을 확인해야 합니다. '
+            '확인한 담당업무 요약과 공식 원문은 아래 별도 항목에서 확인하세요.</p>'
             '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306436" '
-            'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
-            '</section>'
-        )
-    if pid == 'a307034':
-        # ALIO official record 307034, rechecked 2026-11-16.
-        # The publication end date is not a verified time-of-day cutoff.
-        verified_notice_html = (
-            '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
-            '<h2>한전KPS 양주지점 부지정리 단기노무원 지원 안내</h2>'
-            '<p>경기 지역 양주지점의 부지정리 분야 2명 모집입니다. '
-            '공식 공고상 학력 제한은 없으며 채용예정일에 즉시 근무할 수 있어야 합니다.</p>'
-            '<p>전형은 서류접수 → 면접전형 → 신체검사(적부판정) → 합격자 발표 순서입니다. '
-            'E-mail, 우편 또는 방문으로 접수하며, 채용 전 블라인드 입사지원서가 필요합니다. '
-            '면접 때는 해당자에 한해 우대사항 증빙서류를 제출합니다. '
-            '채용 후에는 본인 명의 통장사본과 신분증 사본을 제출하도록 안내됩니다.</p>'
-            '<p>보훈대상자에게는 각 전형단계에서 5~10%, 장애인에게는 5%, '
-            '건설업 기초안전보건교육 수료자에게는 5% 가점이 안내되어 있습니다. '
-            '가점 적용 조건은 원문을 확인하세요. 예정 근무기간은 '
-            '2026년 12월 1일~12월 31일입니다.</p>'
-            '<p>공식 공고의 결격사유는 신체검사 결과 부적격 판정 또는 '
-            '채용 구비서류에 허위사실이 발견된 경우입니다.</p>'
-            '<p class="source-note">ALIO 공고 게시기간은 2026년 11월 16일~20일입니다. '
-            '이 날짜를 접수마감 시각으로 간주하지 마세요. '
-            '실제 접수 가능 여부와 상세 담당업무는 공식 첨부 공고문·직무기술서에서 확인하세요.</p>'
-            '<p><a href="https://job.alio.go.kr/recruitview.do?idx=307034" '
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
         )
@@ -433,6 +477,7 @@ def render(post, detail, related_posts=()):
             '2027년 1월 4일 기준입니다.</p>'
             '<p class="source-note">위 내용은 공식 ALIO 공고의 분야별 지원자격 요약이며 '
             '실제 담당업무를 설명하는 직무기술서가 아닙니다. '
+            '담당업무 요약과 직무기술서 원문은 아래 별도 항목에서 확인하세요. '
             '공식 접수마감은 2026년 11월 19일 오전 10시(KST)로 안내됐으며, '
             '정정 여부와 분야별 세부사항은 기관 공고에서 다시 확인하세요.</p>'
             '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306750" '
@@ -453,7 +498,7 @@ def render(post, detail, related_posts=()):
             '최종 실기시험은 발표·토론 및 심층인터뷰를 포함합니다.</p>'
             '<p class="source-note">공식 원서접수 마감은 2026년 11월 16일 오전 10시(KST)입니다. '
             '지원 가능 여부·정정 여부는 채용기관 공식 사이트에서 재확인하세요. '
-            '분야별 구체적 담당업무는 직무기술서 PDF 본문 검증 전까지 추정하지 않습니다.</p>'
+            '분야별 담당업무 요약과 공식 직무기술서 PDF는 아래 별도 항목에서 확인하세요.</p>'
             '<p><a href="https://job.alio.go.kr/recruitview.do?idx=306355" '
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
@@ -597,7 +642,9 @@ def render(post, detail, related_posts=()):
 
     notice = (
         '<p class="closed">'
-        '표시된 종료일이 지난 보관 공고입니다. '
+        + ('공식 확인된 원서접수 마감시각이 지난 보관 공고입니다. '
+           if application_cutoff else '표시된 종료일이 지난 보관 공고입니다. ')
+        +
         '실제 접수 종료·연장 여부는 공식 공고를 확인하세요.'
         '</p>'
         if closed
@@ -777,6 +824,7 @@ def main():
     created = 0
     quality = {
         'total': 0,
+        'verified_editorial_duty_reviews': 0,
         'with_category_only_description': 0,
         'with_qualification': 0,
         'with_process': 0,
@@ -827,6 +875,12 @@ def main():
         # Only an explicit, nonempty source field counts as substantive duties.
         # NCS/category labels in the list feed must never be counted as duties.
         has_description = bool(clean(job_detail.get('jobDscrptn')))
+        editorial = VERIFIED_DUTIES.get(pid, {})
+        editorial_reviewed = (
+            editorial.get('organization') == clean(post.get('org'))
+            and editorial.get('title') == clean(post.get('title'))
+        )
+        quality['verified_editorial_duty_reviews'] += int(editorial_reviewed)
         quality['with_category_only_description'] += int(category_only)
         official_url = safe_url(post.get('src')) or safe_url(post.get('url'))
         has_official = bool(official_url)
@@ -891,6 +945,8 @@ def main():
                 'qualification': has_qualification,
                 'process': has_process,
                 'substantive_description': has_description,
+                'verified_editorial_duties': editorial_reviewed,
+                'editorial_review_scope': editorial.get('scope', '') if editorial_reviewed else '',
             },
         })
 
