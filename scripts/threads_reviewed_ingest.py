@@ -59,6 +59,12 @@ def official_url_allowed(url):
         if host == "recruit.incruit.com":
             return (parts.path == "/cleanmetro/job/2610280002"
                     and not parts.query and not parts.fragment)
+        # Exact employer-published 2026-17 공무직 사원 detail, visually
+        # read for 103-unit count and employment type. The similarly numbered
+        # security guard posting is NOT a source for these facts.
+        if host == "lab.incruit.com":
+            return (parts.path == "/jobs/2610300002976"
+                    and not parts.query and not parts.fragment)
         # Only these three publicly linked PDF attachments belong to this
         # 2026-17 notice. Their exact bytes must still be downloaded, digested,
         # semantically checked, and bound to evidence before approval.
