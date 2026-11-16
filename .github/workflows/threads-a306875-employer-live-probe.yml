@@ -1,0 +1,42 @@
+name: Threads a306875 employer recruiting notice live-read (no posts)
+on:
+  push:
+    branches:
+      - work/threads-a306875-original-pdf-check-20261117
+permissions:
+  contents: read
+jobs:
+  employer-live:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install chromium
+      - name: Read current employer notice list and exact job deadline
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const b=await chromium.launch({headless:true});
+            const p=await b.newPage({viewport:{width:1280,height:900}});
+            try{
+              await p.goto('https://snubh.recruiter.co.kr/app/jobnotice/list',{waitUntil:'domcontentloaded',timeout:45000});
+              await p.waitForTimeout(7000);
+              const text=await p.locator('body').innerText({timeout:15000});
+              const anchors=await p.locator('a[href]').evaluateAll(all=>all.map(a=>({text:(a.innerText||'').trim().slice(0,180),href:a.href})).filter(x=>/업무지원직|11월|채용|jobnotice/i.test(x.text+' '+x.href)).slice(0,80));
+              console.log('SNUBH_LIVE_LIST',JSON.stringify({url:p.url(),text:text.slice(0,14000),anchors},null,2));
+              const candidate=anchors.find(x=>/26년 11월.*업무지원직|11월.*업무지원직/i.test(x.text));
+              if(!candidate) throw Error('EXACT_2026_NOVEMBER_UNIT_NOTICE_LINK_NOT_IDENTIFIED');
+              await p.goto(candidate.href,{waitUntil:'domcontentloaded',timeout:45000});
+              await p.waitForTimeout(5000);
+              const original=await p.locator('body').innerText({timeout:15000});
+              if(!/병동/.test(original)||!/50/.test(original)||!/11[.]?20/.test(original)) throw Error('EMPLOYER_NOTICE_DOES_NOT_MATCH_OFFICIAL_ALIO_66_50');
+              console.log('SNUBH_LIVE_EXACT_NOTICE',JSON.stringify({url:p.url(),title:candidate.text,body:original.slice(0,14500)},null,2));
+            }finally{await b.close()}
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
