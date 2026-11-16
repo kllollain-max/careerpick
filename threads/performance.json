@@ -4991,6 +4991,271 @@
           "final_first_sentence": "접수·진료 보조 일을 찾는다면,"
         }
       }
+    },
+    {
+      "observation_id": "d23eb6ee00d2b4ce1885d6ce48207b7086f35e2d3fa8cac095049b36ccb65790",
+      "post_id": "18101198159539744",
+      "window": "72h",
+      "captured_at": "2026-11-16T23:31:04.610421+00:00",
+      "published_at": "2026-11-13T23:28:48.427195+00:00",
+      "elapsed_seconds": 259336.183226,
+      "delay_seconds": 136.183226,
+      "timing": "within_one_hour",
+      "comparable_milestone": true,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 10927,
+        "likes": 13,
+        "replies": 0,
+        "reposts": 6,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.11897135535828682,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "18101198159539744",
+        "checked_at": "2026-11-16T23:31:04.296741+00:00",
+        "reason": null,
+        "expected_text_sha256": "b271ee20640132ec8191a67d8425deccce2afbefab323ba58192ac42443f424c",
+        "actual_text_sha256": "b271ee20640132ec8191a67d8425deccce2afbefab323ba58192ac42443f424c",
+        "actual_first_sentence": "간호사 면허 또는 1급 응급구조사 자격이 있다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "18101198159539744",
+        "notice_id": "a306760",
+        "published_at": "2026-11-13T23:28:48.427195+00:00",
+        "scheduled_at": "2026-11-14T08:00:00+09:00",
+        "slot_hour_kst": 8,
+        "actual_hour_kst": 8,
+        "body_chars": 299,
+        "first_sentence": "간호사 면허 또는 1급 응급구조사 자격이 있다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,\n국립중앙의료원 중앙응급의료상황실 정규직 4명 공고예요."
+            },
+            {
+              "id": "target",
+              "type": "target",
+              "text": "응급환자 이송병원을 조정할 분께,\n국립중앙의료원 상황실 정규직 4명 공고예요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "응급환자 이송·전원 조정을 맡아요.\n국립중앙의료원 상황실 정규직 4명 공고예요."
+            }
+          ],
+          "selected_hook_id": "condition",
+          "first_sentence_type": "condition",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+              "excerpt": "간호사 면허 또는 1급 응급구조사 자격 소지자",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "간호사 면허",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+                  "excerpt": "간호사 면허 또는 1급 응급구조사 자격 소지자"
+                },
+                {
+                  "summary": "1급 응급구조사 자격",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+                  "excerpt": "간호사 면허 또는 1급 응급구조사 자격 소지자"
+                }
+              ]
+            },
+            {
+              "text": "3교대와 전지역 근무가 모두 가능해야 해요.",
+              "source_ref": "official-composite:a306760:1",
+              "excerpt": "3교대 근무 가능자\n· 지방근무 가능자(전지역), 최초근무지(서울, 경기, 대전, 광주,\n                      대구, 부산)\n                   ",
+              "classification": "required",
+              "logic": "all_of",
+              "paths": [
+                {
+                  "summary": "3교대",
+                  "source_ref": "official-composite:a306760:1",
+                  "excerpt": "3교대 근무 가능자\n· 지방근무 가능자(전지역), 최초근무지(서울, 경기, 대전, 광주,\n                      대구, 부산)\n                   "
+                },
+                {
+                  "summary": "전지역",
+                  "source_ref": "official-composite:a306760:1",
+                  "excerpt": "3교대 근무 가능자\n· 지방근무 가능자(전지역), 최초근무지(서울, 경기, 대전, 광주,\n                      대구, 부산)\n                   "
+                }
+              ]
+            },
+            {
+              "text": "최초 근무지는 서울·경기·대전·광주·대구·부산 중 합격 후 정해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+              "excerpt": "· 지방근무 가능자(전지역), 최초근무지(서울, 경기, 대전, 광주,\n                      대구, 부산)\n                   ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "최초 계약 1년, 재임용 심사 후 정년까지예요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+              "excerpt": "○ 계약기간: 일반직(사무행정직, 간호직, 보건의료직, 기술직, 약무직) 최초\n   임용계약은 1년 이며, 재계약 임용 심사를 통과하는 경우 임용 기간은 정년\n   까지입니다.\n  * 최초 임용 후 3개월 동안 수습기간 적용 및 평가 실시\n\n",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.",
+              "source_ref": "official-composite:a306760:4",
+              "excerpt": "○ 계약기간: 일반직(사무행정직, 간호직, 보건의료직, 기술직, 약무직) 최초\n   임용계약은 1년 이며, 재계약 임용 심사를 통과하는 경우 임용 기간은 정년\n   까지입니다.\n  * 최초 임용 후 3개월 동안 수습기간 적용 및 평가 실시\n\n\n○ 정규직, 무기계약직 등 정년(만 60세)이 정해져 있는 분야의 경우, 공고마감\n  일 기준 정년퇴직 기준연령에 도달한 자는 지원할 수 없습니다.\n\n",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.",
+              "source_ref": "official-composite:a306760:5",
+              "excerpt": "○ 남자인 경우, 공고마감일 기준 병역필 또는 면제자만 지원할 수 있습니다.\n  (단, 임용예정일에 근무 가능한 전역예정자는 응시 가능)\n\n\n○ 본인이나 타인의 부당·위법한 방식으로의 채용 등 채용비리가 적발되었을\n  경우 또는 국립중앙의료원 인사규정 제19조(결격사유)에 해당하는 사실이\n  확인될 경우 채용의 취소 또는 근로계약의 해지 등이 가능합니다. 아울러\n  채용비리자에게는 사법처리 등 추가적 불이익이 발생할 수 있습니다.\n\n○ 최종합격자는 합격통보 시 지정된 일자까지 최종합격자 등록서류 제출을\n  완료해야하며, 지정받은 임용예정일에 입사 불가능한 경우 합격이 취소될\n  수 있습니다.\n ▪ 채용 신체검사는 국민건강보험공단에서 발행하는 ‘채용 건강검진 대체\n  통보서’로 갈음하며, 채용 신체검사 비용은 의료원이 부담합니다.\n",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "중복지원은 안 돼요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+              "excerpt": "○ 현재 우리원에서 채용전형이 진행 중(공고 ~ 최종합격자 임용)인 모든 채용공고에\n  대한 중복지원은 불가합니다.\n▪ 중복지원이 발생할 시 입사지원서 접수 마감일 또는 상기의 채용공고 게시\n  순서가 후순위(최신)인 공고 외의 응시사항은 응시자 개인의 의사에 따라\n  지원 포기한 것으로 간주\n\n",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "인성검사는 미응시·미완료 시 탈락해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+              "excerpt": "5) 통합역량검사(인성검사) 미응시 또는 기간 내 미완료한 경우 면접참여 의사가 없는 것으로\n   간주하여 자동 불합격 처리합니다.\n\n\n\n                                     ",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "인성검사는 미응시·미완료 시 탈락해요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3085485",
+            "excerpt": "5) 통합역량검사(인성검사) 미응시 또는 기간 내 미완료한 경우 면접참여 의사가 없는 것으로\n   간주하여 자동 불합격 처리합니다.\n\n\n\n                                     "
+          },
+          "recruitment_unit": {
+            "title": "중앙응급의료상황실",
+            "count": 4,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271564",
+            "excerpt": "보건의료직 6 급 (중앙응급의료상황실 ) 4명",
+            "normalization": "같은간호사/응급구조사선택자격의단일분야4명; 자격별4명합산아님"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-13T11:23:42.151965+09:00",
+            "result": "none_found",
+            "source_ref": "https://nmc.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271564",
+            "checked_scope": "현재ALIO·동일ATS271564·원본공고PDF11쪽추출텍스트 대조; ATS접수기간확인",
+            "limitations": [
+              "기관전체별도정정게시판 과거이력전수조사아님",
+              "ATS우대요약과PDF의종합병원이상표현차이는기록하고우대세부본문미사용",
+              "PDF전쪽시각검토아님; 텍스트근거기반. 실제지원·로그인·제출안함"
+            ]
+          },
+          "style_rewrites": 1,
+          "selection_reason": "미배정초안의공식단일분야4명·정규직·자격OR와준비기간을검증하고10:23정규수집갱신으로새슬롯신선도조건해결. 직무/지역인기도추정없음. 최근NMC통신직과직무·대상다르며같은공고재사용아님.",
+          "presentation_style": "eligibility_info",
+          "presentation_style_reason": "직전계획20시정규직관심형다음지원자격형. planner권고target보다OR자격과교대/배치가핵심이라condition선택. 시간과미디어에고정하지않음.",
+          "public_preview": {
+            "main_text": "간호사 면허 또는 1급 응급구조사 자격이 있다면,\n국립중앙의료원 중앙응급의료상황실 정규직 4명 공고예요.\n\n3교대와 전지역 근무가 모두 가능해야 해요.\n최초 근무지는 서울·경기·대전·광주·대구·부산 중 합격 후 정해요.\n\n최초 계약 1년, 재임용 심사 후 정년까지예요.\n3개월 수습평가가 있고, 마감일 만 60세 미만이어야 해요.\n병역은 전역예정 인정조건도, 결격·지정일 입사 조건도 확인해요.\n\n중복지원은 안 돼요.\n인성검사는 미응시·미완료 시 탈락해요.\n11월 20일 23:59까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "card_restriction": "3교대와 전지역 근무가 모두 가능",
+          "experiment_eligible": true,
+          "comparison_context": {
+            "different_notice_observational_comparison": true,
+            "media_planned": "TEXT",
+            "media_rechecked_against_actual_success": true,
+            "weights_changed": false,
+            "recommended_length_note": "중요자격과배치/임용조건보존으로권장250자초과,일반300자이내"
+          },
+          "card_visual_review": {
+            "status": "passed",
+            "reviewed_width": 360,
+            "reviewed_at": "2026-11-13T11:26:06.224184+09:00",
+            "sha256": "c333196b2d4e769e2dcb5d58b11441ca4b248d1a65a0a2ca27915fcae5de3f59",
+            "preview_sha256": "65301aec9ba464b3259e8c4e071d3df319a5a5bdc44b2260abec1a67ff6fd44c",
+            "asset_path": "threads-images/a306760.jpg",
+            "preview_asset_path": "threads-images/a306760-360.png",
+            "facts_sha256": "ed411d3e1eaac24ed7a76db9f5fb1242032e061a36392427656aaec2701069b9",
+            "layout_version": "careerpick-single-main-card-v2",
+            "observations": "실제1080JPEG와동일JPEG의LANCZOS360PNG를열어 중앙응급의료상황실·정규직4명·국립중앙의료원·11월20일23:59·3교대와전지역모두가능의한글/숫자/잘림/본문일치를확인. 원본및360에서모든핵심문구가독성양호."
+          }
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "hiring_core",
+        "media": "TEXT",
+        "org": "국립중앙의료원",
+        "job": "중앙응급의료상황실",
+        "employment": "정규직",
+        "recruitment_unit_count": 4,
+        "location": "전지역",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "different_notice_observational_comparison": true,
+          "media_planned": "TEXT",
+          "media_rechecked_against_actual_success": true,
+          "weights_changed": false,
+          "recommended_length_note": "중요자격과배치/임용조건보존으로권장250자초과,일반300자이내"
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-20T23:59:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 574211.572805,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "18101198159539744",
+          "checked_at": "2026-11-16T23:31:04.296741+00:00",
+          "reason": null,
+          "expected_text_sha256": "b271ee20640132ec8191a67d8425deccce2afbefab323ba58192ac42443f424c",
+          "actual_text_sha256": "b271ee20640132ec8191a67d8425deccce2afbefab323ba58192ac42443f424c",
+          "actual_first_sentence": "간호사 면허 또는 1급 응급구조사 자격이 있다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "간호사 면허 또는 1급 응급구조사 자격이 있다면,"
+        }
+      }
     }
   ],
   "account_observations": [
