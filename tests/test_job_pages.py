@@ -589,3 +589,15 @@ class OriginalNoticeComparisonTests(unittest.TestCase):
         html = render(post, self.details[post['id']], notice_review=self.reviews['a305959'])
         self.assertIn('/jobs/a306750.html', html)
         self.assertNotIn('id="notice-review"', html)
+
+
+class DuplicateRelatedNoticeTests(unittest.TestCase):
+    def test_same_notice_is_not_presented_as_separate_recruitment(self):
+        from scripts.notice_review import load
+        posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        details=json.loads(Path('alio-detail.json').read_text());reviews=load(Path('.'))
+        for pid, peer in [('a305959','a306724'),('a306724','a305959')]:
+            html=render(posts[pid],details[pid],[posts[peer]],reviews[pid])
+            self.assertIn('유사 공고 구분 안내',html)
+            self.assertNotIn('같은 기관의 다른 채용공고',html)
+            self.assertIn(peer+'.html',html)
