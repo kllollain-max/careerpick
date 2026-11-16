@@ -68,6 +68,9 @@ def build_drafts(handoff):
               "official_url_for_private_review": candidate.get("official_url"),
               "source_post_sha256": candidate.get("source_post_sha256"),
               "source_detail_sha256": candidate.get("source_detail_sha256"),
+              "application_evidence_for_review": candidate.get("application_evidence"),
+              "application_source_ref": candidate.get("application_source_ref"),
+              "source_snapshot_checked_at": candidate.get("source_snapshot_checked_at"),
               "status": "unreviewed", "requires_official_source_review": True,
               "approved_for_queue": False, "meta_posted": False,
           })
