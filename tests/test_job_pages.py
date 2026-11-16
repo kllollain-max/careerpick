@@ -15,6 +15,45 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_protected_notice_supplements_keep_existing_guidance_and_unique_anchors(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        for pid in ['a306750', 'a306355', 'a306436']:
+            post = posts[pid]; original = copy.deepcopy(post); html = render(post, {})
+            self.assertEqual(html.count('id="verified-notice"'), 1)
+            self.assertEqual(html.count('id="verified-notice-supplement"'), 1)
+            self.assertIn('공고문 확인일: 2026-11-17', html)
+            self.assertIn(VERIFIED_DUTIES[pid]['notice_source_url'], html)
+            self.assertIn('원본 확인일: 2026-11-16', html)
+            self.assertEqual(post, original)
+        korail = render(posts['a306750'], {})
+        self.assertIn('공무직(무기계약직) 6명과 계약직(기간제) 717명', korail)
+        self.assertIn('구내운전직 280명·전호연료직 427명', korail)
+        self.assertIn('2026-11-13 ~ 2026-11-19 10:00 (KST)', korail)
+        self.assertIn('컨테이너크레인운전기능사와 지게차운전기능사', korail)
+
+    def test_postal_daily_pool_does_not_invent_a_final_clock_or_live_vacancies(self):
+        post = next(p for p in json.loads(Path('alio.json').read_text())['posts'] if p['id']=='a306436')
+        html = render(post, {})
+        self.assertIn('안양물류사업소 60명', html)
+        self.assertIn('부평물류사업소 55명', html)
+        self.assertIn('일 단위로 모집·근무', html)
+        self.assertIn('현재 모두 공석', html)
+        self.assertIn('기관 이메일이 표에 있다는 이유만으로 이메일 제출이 허용된다고 추정하지', html)
+        self.assertNotIn('2026-11-30 23:59', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('application/ld+json', html)
+
+    def test_expired_ibk_supplement_retains_history_and_correct_field_counts(self):
+        post = next(p for p in json.loads(Path('alio.json').read_text())['posts'] if p['id']=='a306355')
+        html = render(post, {})
+        self.assertIn('접수 종료 공고', html)
+        self.assertIn('금융일반 340명과 디지털·IT 50명', html)
+        self.assertIn('서울·수도권 250명', html)
+        self.assertIn('충청·강원권 20명', html)
+        self.assertIn('AI역량검사 미응시자는 서류심사 불합격', html)
+        self.assertNotIn('application/ld+json', html)
+
     def test_new_official_windows_preserve_publication_and_source_data(self):
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
         for pid, start, end in [('a307067', '2026-11-18', '2026-12-01 15:00'),
