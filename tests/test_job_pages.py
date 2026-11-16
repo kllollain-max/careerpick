@@ -7,12 +7,34 @@ import copy
 import json
 import re
 import tempfile
+from datetime import datetime, timezone
+from unittest.mock import patch
 from pathlib import Path
 
 from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_verified_application_cutoff_expires_before_publication_end(self):
+        post = {'id': 'a306355', 'alio': True, 'due': '2026-11-16T23:59:00+09:00'}
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 16, 1, 0, 1, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertIn('공식 확인된 원서접수 마감시각이 지난 보관 공고', html)
+        self.assertIn('noindex,follow', html)
+        self.assertNotIn('application/ld+json', html)
+        self.assertEqual(post['due'], '2026-11-16T23:59:00+09:00')
+
+    def test_verified_application_cutoff_remains_open_before_cutoff(self):
+        post = {'id': 'a306355', 'alio': True, 'due': '2026-11-16T23:59:00+09:00'}
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 16, 0, 59, 59, tzinfo=timezone.utc)
+            html = render(post, {})
+        self.assertNotIn('class="closed"', html)
+        self.assertNotIn('noindex,follow', html)
+
     def setUp(self):
         self.post = {
             'id': 'a123456',
