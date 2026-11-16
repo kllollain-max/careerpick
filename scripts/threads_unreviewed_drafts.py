@@ -112,8 +112,16 @@ def build_drafts(handoff):
           })
           used_notice_ids.add(nid)
           break
+    covered = {draft["suggested_slot"] for draft in drafts}
     return {"schema_version": 1, "status": "review_required",
-            "approved_for_queue": False, "drafts": drafts}
+            "approved_for_queue": False, "drafts": drafts,
+            "slot_coverage": {
+                "requested_slots": slots,
+                "draft_slots": [slot for slot in slots if slot in covered],
+                "no_draft_slots": [slot for slot in slots if slot not in covered],
+                "approved_slots": [],
+                "reason": "OFFICIAL_REVIEW_AND_PUBLISHER_VALIDATION_REQUIRED",
+            }}
 
 
 def main():
