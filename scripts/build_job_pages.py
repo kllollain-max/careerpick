@@ -20,6 +20,8 @@ BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
     'a306750': '2026-11-19T10:00:00+09:00',
     'a306355': '2026-11-16T10:00:00+09:00',
+    'a306799': '2026-11-23T10:00:00+09:00',
+    'a306662': '2026-11-18T17:00:00+09:00',
 }
 VERIFIED_DUTIES = json.loads(
     (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
