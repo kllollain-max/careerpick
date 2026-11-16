@@ -533,10 +533,13 @@ def render(post, detail, related_posts=()):
             parts.extend(f'<p>{escape(value)}</p>' for value in paragraphs
                          if isinstance(value, str) and value.strip())
         if parts:
-            verified_notice_html = (
-                '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
+            # Preserve previously verified guidance and unique anchors when adding detail.
+            section_id = 'verified-notice-supplement' if verified_notice_html else 'verified-notice'
+            checked_on = verified_duties.get('notice_checked_on', verified_duties['checked_on'])
+            verified_notice_html += (
+                f'<section id="{section_id}" aria-label="공식 공고 핵심 안내">'
                 '<h2>공식 원문과 대조한 지원 안내</h2>' + ''.join(parts)
-                + f'<p class="source-meta">원본 확인일: {escape(verified_duties["checked_on"])} · '
+                + f'<p class="source-meta">공고문 확인일: {escape(checked_on)} · '
                 'AI 원문 대조·요약. 최신 정정 공고가 우선합니다.</p>'
                 + f'<p><a href="{escape(notice_source, quote=True)}" target="_blank" '
                 'rel="noopener noreferrer">공식 공고문 원본: '
