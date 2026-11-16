@@ -89,6 +89,11 @@ class JobPageTests(unittest.TestCase):
         html = render(korail, {})
         self.assertIn('코레일유통 물류사업 채용 분야별 지원자격', html)
         self.assertIn('컨테이너크레인운전기능사', html)
+        self.assertIn('철도운영단 전호연료직', html)
+        self.assertIn('직종별 연령 기준 날짜가 다릅니다', html)
+        self.assertIn('2027년 1월 4일 기준입니다', html)
+        self.assertIn('만 18세 이상~만 60세 이하', html)
+        self.assertIn('만 18세 이상~만 70세 미만', html)
         self.assertIn('실제 담당업무를 설명하는 직무기술서가 아닙니다', html)
         self.assertNotIn('2026-11-19 23:59', html)
         self.assertNotIn('코레일유통 물류사업 채용 분야별 지원자격',
