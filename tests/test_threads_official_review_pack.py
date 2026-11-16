@@ -165,6 +165,45 @@ class EvidencePacketTests(unittest.TestCase):
 
 
 
+
+    def test_cleaneye_81115_pinned_two_real_pdf_sources_are_review_only(self):
+        from scripts.threads_official_review_pack import (
+            CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES, independently_located_notice)
+        pin = CANONICAL_REVIEW_URLS["cleaneye-81115"]
+        draft = {"notice_id": "cleaneye-81115", "status": "unreviewed",
+                 "source_post_sha256": pin["source_post_sha256"],
+                 "source_detail_sha256": pin["source_detail_sha256"],
+                 "official_url_for_private_review":
+                 "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81115"}
+        annexes = CANONICAL_REVIEW_ANNEXES["cleaneye-81115"]
+        self.assertEqual(len(annexes), 2)
+        self.assertEqual(independently_located_notice(draft), pin["url"])
+        urls_seen = []
+        def fetched(url):
+            urls_seen.append(url)
+            return {"url": url, "sha256": "a" * 64, "size_bytes": 200,
+                    "pdf_magic_valid": url in annexes,
+                    "checked_at": "2026-11-17T01:00:00+09:00"}
+        packet = build_packet({"status": "review_required",
+                               "approved_for_queue": False,
+                               "drafts": [draft]}, fetch=fetched)
+        self.assertEqual(urls_seen, [pin["url"], *annexes])
+        self.assertEqual(packet["checked"], 1)
+        record = packet["records"][0]
+        self.assertEqual(record["attachment_status"],
+                         "all_raw_pdf_sha256_captured")
+        self.assertEqual(len(record["attachment_receipts"]), 2)
+        self.assertFalse(packet["approved_for_queue"])
+        self.assertFalse(packet["automatic_approval"])
+        self.assertEqual(record["publisher_validate_entry"], "not_run")
+        self.assertTrue(record["attachment_review_required"])
+        draft["source_detail_sha256"] = "a" * 64
+        self.assertEqual(independently_located_notice(draft),
+                         draft["official_url_for_private_review"])
+        other = dict(draft, notice_id="cleaneye-81116")
+        self.assertEqual(independently_located_notice(other),
+                         other["official_url_for_private_review"])
+
     def test_pdf_magic_from_downloaded_bytes_not_content_type_alone(self):
         url = "https://www.alio.go.kr/notice"
         self.assertTrue(read_official(url, opener=Opener(
