@@ -5,8 +5,8 @@
   "entries": [
     {
       "notice_id": "cleaneye-80848",
-      "scheduled_at": "2026-11-17T12:00:00+09:00",
-      "format_id": "eligibility",
+      "scheduled_at": "2026-11-17T16:00:00+09:00",
+      "format_id": "interest",
       "prepared_at": "2026-11-16T20:04:18.906Z",
       "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
       "publication_policy_id": "careerpick-threads-v5-20261111",
@@ -33,7 +33,7 @@
         "reply_texts": [],
         "review": {
           "notice_id": "cleaneye-80848",
-          "scheduled_at": "2026-11-17T12:00:00+09:00",
+          "scheduled_at": "2026-11-17T16:00:00+09:00",
           "verification_basis": "checked_official_source",
           "missing_or_conflicting": [],
           "cta_check": "passed",
@@ -105,7 +105,7 @@
             }
           ],
           "checked_at": "2026-11-16T20:19:31.322744+09:00",
-          "reference_at": "2026-11-16T20:06:49.049Z",
+          "reference_at": "2026-11-16T20:20:55.813Z",
           "repetition_check": "checked",
           "profile_target": {
             "verified": true,
@@ -243,5 +243,23 @@
       }
     }
   ],
-  "note": "Not approved yet: fail-closed independent validate_entry/card/digest/CAS required. No Meta POST."
+  "note": "v5 validate_entry + card exact pixels previously passed for 12:00 before slot conflict; strict original source receipt FAILED and was held. 12:00 is now occupied by independently approved cleaneye-81115. This isolated draft was moved to unoccupied 16:00 candidate only; 16:00 has NOT been revalidated and neither CAS nor Meta posted.",
+  "approved_for_queue": false,
+  "review_status": "HOLD_OFFICIAL_HTML_NONDETERMINISTIC",
+  "official_pdf_evidence": {
+    "source_notice_url": "https://cleanmetro.co.kr/bbs/board.php?bo_table=recruit&wr_id=430",
+    "filename": "[공고 제2026-17호]2026년 하반기 공무·경비직 공개채용 모집공고.pdf",
+    "pages": 11,
+    "bytes": 254970,
+    "sha256": "0220ac9a77a4ec8d3bfcec3cb2af4d1afcd685e5155e99e7f44c56aaba4e8470",
+    "checked_at": "2026-11-17T05:19:10.532+09:00",
+    "actual_download": "GitHub Actions 43948288993 real Chromium official board download, original PDF complete text independently extracted; unit 103 and total 153 verified",
+    "not_yet_bound_to_current_official_receipt": true
+  },
+  "blockers": [
+    "Official live HTML source lab.incruit.com yielded two different SHA256 within seconds; do not substitute or accept stale digest",
+    "Production official_receipt verifier does not yet support exact authenticated/signed employer original PDF as a canonical bound source; no approval until strict current origin-byte verification is implemented",
+    "Retest 16:00 slot and actual media after current live queue refresh, which already approved another notice at 12:00",
+    "Recheck correction/cancellation first pages and official applicant status immediately before publisher approval"
+  ]
 }
