@@ -97,6 +97,8 @@ jobs:
           PY
       - name: Prepare unreviewed candidate drafts without posting
         run: python scripts/threads_unreviewed_drafts.py --input threads-writer-handoff.json --output threads-unreviewed-drafts.json
+      - name: Capture independent live official-source evidence for review (no approval)
+        run: python scripts/threads_official_review_pack.py --input threads-unreviewed-drafts.json --output threads-official-evidence.json
       - name: Flag missing approved supply with actionable diagnostics
         run: |
           python - <<'PY'
@@ -139,6 +141,7 @@ jobs:
             threads-reviewed-ingest-report.json
             threads-writer-handoff.json
             threads-unreviewed-drafts.json
+            threads-official-evidence.json
           if-no-files-found: ignore
           retention-days: 14
 
