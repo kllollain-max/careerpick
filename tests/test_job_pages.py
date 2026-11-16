@@ -15,6 +15,29 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_homepage_cutoff_bundle_matches_reviewed_source_identity(self):
+        from scripts.build_public_site import homepage_cutoff_metadata
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_DUTIES
+        root = Path(__file__).resolve().parents[1]
+        posts = json.loads((root / 'alio.json').read_text())['posts']
+        original = copy.deepcopy(posts)
+        result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_DUTIES)
+        self.assertEqual(set(result), set(CONFIRMED_APPLICATION_CUTOFFS))
+        self.assertEqual(result['a306355']['cutoff'], '2026-11-16T10:00:00+09:00')
+        self.assertEqual(result['a307034']['cutoff'], '2026-11-20T16:00:00+09:00')
+        self.assertEqual(posts, original)
+
+    def test_homepage_cutoff_bundle_rejects_stale_or_unreviewed_identity(self):
+        from scripts.build_public_site import homepage_cutoff_metadata
+        post = dict(id='a1', alio=True, org='기관', title='공고', due='2026-11-20')
+        proofs = {'a1': dict(organization='기관', title='공고')}
+        clocks = {'a1': '2026-11-20T16:00:00+09:00'}
+        self.assertIn('a1', homepage_cutoff_metadata([post], clocks, proofs))
+        for change in ({'org': '다른 기관'}, {'title': '정정 공고'}, {'due': '2026-11-21'}, {'alio': False}):
+            self.assertEqual(homepage_cutoff_metadata([dict(post, **change)], clocks, proofs), {})
+        self.assertEqual(homepage_cutoff_metadata([post], clocks, {}), {})
+        self.assertEqual(homepage_cutoff_metadata([post], {'a1': '2026-11-20'}, proofs), {})
+
     def test_yangju_notice_reconciles_attachment_without_overriding_feed(self):
         from scripts.build_job_pages import VERIFIED_DUTIES
         evidence = VERIFIED_DUTIES['a307034']
