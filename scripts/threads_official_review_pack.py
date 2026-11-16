@@ -37,6 +37,14 @@ CANONICAL_REVIEW_URLS = {
         "source_detail_sha256": "c67be70000794ee30457361c24cb0ba633e4efc2d2b145790074b1dde8b0834e",
         "url": "https://www.smrtg.co.kr/employment/stffPbanInfo.do?stffPbanNo=2026-0155",
     },
+    # Employer-run Incruit applicant portal is scoped to this one Cleaneye
+    # notice/snapshot. The 153-person posting has several distinct hiring
+    # units; this mapping does not certify any unit count or approve a draft.
+    "cleaneye-80848": {
+        "source_post_sha256": "60f60ec1399d17fc1cf09cae49d3365377ee78ff20f4bb584a15398fc14c8ada",
+        "source_detail_sha256": "f342ddd996f5d36479de4899f66d7e4d97355a1f6c28c252913b399a7b9a6371",
+        "url": "https://recruit.incruit.com/cleanmetro/job/2610280002",
+    },
 }
 
 
