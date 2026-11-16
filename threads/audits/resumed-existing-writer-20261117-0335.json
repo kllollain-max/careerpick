@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-11-16 18:33:08 UTC",
+  "automation_id": "6ae092084b988191a23a38300212ebdc",
+  "action": "resume_existing_automation",
+  "is_enabled": true,
+  "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Seoul:20261115T123000\nRRULE:FREQ=HOURLY;BYMINUTE=30;BYSECOND=0\nEND:VEVENT",
+  "confirmation": "update success and fresh peek matched",
+  "preserved": [
+    "prompt",
+    "schedule",
+    "conversation_id",
+    "environments"
+  ],
+  "supply_audit": "threads/audits/held-cleaneye-81115-upload-interrupted-20261117-0331.json",
+  "remaining_holds": [
+    "81115 remote binary assets missing and source review stale",
+    "Nov16 noon publication at17:20 outside requested2h window; recorded unresolved, no repost"
+  ],
+  "actual_new_post_from_this_execution": null
+}
