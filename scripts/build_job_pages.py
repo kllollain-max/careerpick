@@ -383,6 +383,27 @@ def render(post, detail, related_posts=()):
             'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
             '</section>'
         )
+    if pid == 'a307034':
+        # ALIO official record 307034, rechecked 2026-11-16.
+        # The publication end date is not a verified time-of-day cutoff.
+        verified_notice_html = (
+            '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
+            '<h2>한전KPS 양주지점 부지정리 단기노무원 지원 안내</h2>'
+            '<p>경기 지역 양주지점의 부지정리 분야 2명 모집입니다. '
+            '공식 공고상 학력 제한은 없으며 채용예정일에 즉시 근무할 수 있어야 합니다.</p>'
+            '<p>전형은 서류접수 → 면접전형 → 신체검사(적부판정) → 합격자 발표 순서입니다. '
+            'E-mail, 우편 또는 방문으로 접수하며, 채용 전 블라인드 입사지원서가 필요합니다. '
+            '면접 때는 해당자에 한해 우대사항 증빙서류를 제출합니다.</p>'
+            '<p>보훈대상자·장애인·건설업 기초안전보건교육 수료자에게 '
+            '공고에 따른 전형별 가점이 적용될 수 있으니 본인의 해당 여부를 확인하세요. '
+            '예정 근무기간은 2026년 12월 1일~12월 31일입니다.</p>'
+            '<p class="source-note">ALIO 공고 게시기간은 2026년 11월 16일~20일입니다. '
+            '이 날짜를 접수마감 시각으로 간주하지 마세요. '
+            '실제 접수 가능 여부와 상세 담당업무는 공식 첨부 공고문·직무기술서에서 확인하세요.</p>'
+            '<p><a href="https://job.alio.go.kr/recruitview.do?idx=307034" '
+            'rel="noopener noreferrer" target="_blank">공식 ALIO 공고 확인</a></p>'
+            '</section>'
+        )
     if pid == 'a306750':
         verified_notice_html = (
             '<section id="verified-notice" aria-label="공식 공고 핵심 안내">'
