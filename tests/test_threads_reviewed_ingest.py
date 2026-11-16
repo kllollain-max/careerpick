@@ -34,6 +34,23 @@ class ReviewedIngestTests(unittest.TestCase):
                     {}, {}, {}, self.now, fetch_digest=fetch_digest or (lambda url: "a" * 64),
                     claimed_slots=claimed_slots)
 
+    def test_official_receipt_fetch_retries_only_transient_reads(self):
+        import hashlib
+        import urllib.error
+        from unittest.mock import Mock
+        from scripts.threads_reviewed_ingest import fetch_official_digest
+        response = Mock()
+        response.__enter__ = Mock(return_value=response)
+        response.__exit__ = Mock(return_value=False)
+        response.read.return_value = b'official attachment'
+        opener = Mock()
+        opener.open.side_effect = [urllib.error.HTTPError('https://www.alio.go.kr/a', 503, '', {}, None), response]
+        with patch('scripts.threads_reviewed_ingest.urllib.request.build_opener', return_value=opener), patch('scripts.threads_http.time.sleep') as sleeper:
+            digest = fetch_official_digest('https://www.alio.go.kr/a')
+        self.assertEqual(digest, hashlib.sha256(b'official attachment').hexdigest())
+        self.assertEqual(opener.open.call_count, 2)
+        sleeper.assert_called_once_with(2)
+
     def test_real_digest_and_existing_validator_are_both_required(self):
         staged, accepted, refused = self.call()
         self.assertEqual(len(accepted), 1)

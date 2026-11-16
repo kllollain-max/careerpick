@@ -61,7 +61,7 @@ def audit_slots(history, now):
             'needs_attention': [s for s in slots if s['status'] != 'recorded_publication']}
 
 
-def build_handoff(preflight, handoff, drafts, evidence, history, now):
+def build_handoff(preflight, handoff, drafts, evidence, history, now, live_inventory=None):
     if (handoff.get('automatic_approval') is not False or handoff.get('meta_posted') is not False
             or drafts.get('approved_for_queue') is not False
             or evidence.get('approved_for_queue') is not False):
@@ -72,7 +72,8 @@ def build_handoff(preflight, handoff, drafts, evidence, history, now):
             'status': 'independent_review_required', 'automatic_approval': False,
             'meta_posted': False, 'preflight': preflight, 'writer_handoff': handoff,
             'unreviewed_drafts': drafts, 'official_evidence': evidence,
-            'publication_audit': audit_slots(history, now)}
+            'publication_audit': audit_slots(history, now),
+            'live_inventory': live_inventory}
 
 
 def persist_handoff(bundle, token, reader=read, writer=request, sleeper=time.sleep):
@@ -115,7 +116,8 @@ def main():
         return json.loads(Path(name).read_text(encoding='utf-8'))
     bundle = build_handoff(load('threads-queue-preflight.json'), load('threads-writer-handoff.json'),
                            load('threads-unreviewed-drafts.json'), load('threads-official-evidence.json'),
-                           load('threads_posted.json'), datetime.now(KST))
+                           load('threads_posted.json'), datetime.now(KST),
+                           load('threads-live-inventory.json'))
     result = {'persisted': False, 'meta_posted': False,
               'publication_audit': bundle['publication_audit']}
     if args.persist:

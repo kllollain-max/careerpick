@@ -82,6 +82,62 @@ class EvidencePacketTests(unittest.TestCase):
         self.assertEqual(packet["checked"], 0)
         self.assertEqual(packet["records"][0]["block_reason"], "OFFICIAL_EVIDENCE_INVALID")
 
+    def test_first_eight_unavailable_do_not_starve_later_official_source(self):
+        import urllib.error
+        self.bundle['drafts'] = [dict(self.bundle['drafts'][0], notice_id=str(i),
+             official_url_for_private_review=f'https://source{i//4}.go.kr/{i}') for i in range(24)]
+        called = []
+        def fetch(url):
+            called.append(url)
+            if int(url.rsplit('/', 1)[-1]) < 8:
+                raise urllib.error.URLError('temporary outage')
+            return {'url': url, 'sha256': 'a' * 64}
+        result = build_packet(self.bundle, fetch=fetch)
+        self.assertEqual(result['checked'], 8)
+        self.assertEqual(result['attempted'], 16)
+        self.assertFalse(result['approved_for_queue'])
+        self.assertFalse(result['meta_posted'])
+        self.assertEqual([r['notice_id'] for r in result['records']], list(map(str, range(16))))
+
+    def test_outage_defers_same_host_but_checks_later_alternative(self):
+        import urllib.error
+        self.bundle['drafts'] = [dict(self.bundle['drafts'][0], notice_id=str(i),
+             official_url_for_private_review=f'https://job.cleaneye.go.kr/{i}') for i in range(21)]
+        self.bundle['official_source_alternatives'] = [{
+             'notice_id': 'alio-alternative', 'status': 'unreviewed',
+             'official_url_for_private_review': 'https://job.alio.go.kr/notice'}]
+        def fetch(url):
+            if 'cleaneye' in url:
+                raise urllib.error.URLError('unavailable')
+            return {'url': url, 'sha256': 'a' * 64}
+        result = build_packet(self.bundle, fetch=fetch)
+        self.assertEqual(result['attempted'], 5)
+        self.assertEqual(result['checked'], 1)
+        self.assertEqual(len(result['deferred_notice_ids']), 17)
+        self.assertEqual(result['unavailable_hosts'], ['job.cleaneye.go.kr'])
+        self.assertFalse(result['approved_for_queue'])
+
+    def test_total_failed_source_attempts_are_bounded(self):
+        import urllib.error
+        self.bundle['drafts'] = [dict(self.bundle['drafts'][0], notice_id=str(i), official_url_for_private_review=f'https://source{i}.go.kr/{i}') for i in range(30)]
+        def fetch(url):
+            raise urllib.error.URLError('temporary outage')
+        result = build_packet(self.bundle, fetch=fetch)
+        self.assertEqual(result['attempted'], 24)
+        self.assertEqual(result['checked'], 0)
+
+    def test_official_get_retries_transient_503_before_reading_bytes(self):
+        from unittest.mock import Mock, patch
+        import urllib.error
+        response = Response()
+        opener = Mock()
+        opener.open.side_effect = [urllib.error.HTTPError(self.url, 503, '', {}, None), response]
+        with patch('scripts.threads_http.time.sleep') as sleeper:
+            result = read_official(self.url, opener=opener)
+        self.assertEqual(opener.open.call_count, 2)
+        sleeper.assert_called_once_with(2)
+        self.assertTrue(result['text_available'])
+
     def test_rejects_unsafe_input_bundle(self):
         self.bundle["approved_for_queue"] = True
         with self.assertRaisesRegex(ValueError, "UNREVIEWED_DRAFT_BUNDLE_REQUIRED"):
