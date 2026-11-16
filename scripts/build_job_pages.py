@@ -202,7 +202,7 @@ def render(post, detail, related_posts=()):
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
         ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
-        ('원서 접수기간', '시작일·마감일·마감시각은 공식 첨부 공고에서 확인'),
+        ('원서 접수기간', '접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인'),
         *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
 
