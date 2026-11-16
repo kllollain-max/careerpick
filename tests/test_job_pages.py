@@ -73,6 +73,16 @@ class JobPageTests(unittest.TestCase):
         other = render(dict(postal, id='a306355'), {})
         self.assertNotIn('안양·부평 우편물구분 채용 확인사항', other)
 
+    def test_ibk_source_checked_selection_guide_is_scoped(self):
+        ibk = dict(self.post, id='a306355', due='2026-11-16T23:59:00+09:00')
+        ibk.pop('dueHasTime')
+        html = render(ibk, {})
+        self.assertIn('IBK 체험형 청년인턴 지원 전 핵심 확인', html)
+        self.assertIn('AI역량검사 미응시자는 서류심사 불합격', html)
+        self.assertIn('2026년 11월 16일 오전 10시', html)
+        self.assertNotIn('분야별 구체적 담당업무는 직무기술서 PDF 본문 검증 전까지 추정하지 않습니다.', render(dict(ibk, id='a306750'), {}))
+        self.assertNotIn('IBK 체험형 청년인턴 지원 전 핵심 확인', render(dict(ibk, id='a306436'), {}))
+
     def test_full_detail_regions_reach_summary_checks_metadata_and_schema(self):
         post = dict(self.post, region='인천')
         detail = {'recrutPblntSn': '123456', 'workRgnNmLst': '인천,충남,전북'}
