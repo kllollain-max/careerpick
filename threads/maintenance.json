@@ -13331,21 +13331,32 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-17T04:27:52.748135+00:00",
-    "status": "NEXT_THREE_VALIDATED_NEW_CANDIDATE_LOCATION_HOLD",
-    "main_sha": "46a76d65821533d46e1793f83f1b7523547fa6a5",
-    "latest_preflight_run_id": 44014924297,
+    "observed_at_utc": "2026-11-17 05:29:37 UTC",
+    "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "notice_id": "a306807",
+    "scheduled_at": "2026-11-18T12:00:00+09:00",
+    "planned_media": "IMAGE",
+    "stage_sha": "65b9fc8f175436b9699be5522d37a0ba75270ec0",
+    "queue_sha": "88cbe909a4af4c88ec05495fb99cd5427e32a5a9",
+    "full_remote_validator": "passed",
+    "ready_future_slots": [
+      "2026-11-17T16:00:00+09:00",
+      "2026-11-17T20:00:00+09:00",
+      "2026-11-18T08:00:00+09:00",
+      "2026-11-18T12:00:00+09:00"
+    ],
+    "actual_post_id": null,
+    "audit_path": "threads/audits/supply-a306807-20261118-12-ready-20261117-1430.json",
+    "audit_blob": "cdab7c351b7cb283532da051af9df3474e5249fc",
+    "next_action": "Observe existing regular publisher only; no extra dispatch or POST.",
+    "main_sha": "af3e196b7d56ffba52cfaa25d4054a49aec59053",
+    "latest_preflight_run_id": 44022360552,
     "latest_preflight_conclusion": "success",
     "new_posts_observed": 0,
-    "last_actual_post_id": "17919668721264551",
-    "queue_sha": "aff1f8f82162cb5b9f1ec04b1440466fabe49a01",
-    "stage_sha": "8e1fc047461ddef0e3a21de957d32ae47eef596b",
-    "validated_future_slots": 3,
+    "validated_future_slots": 4,
     "next_slot_missing": false,
     "replenishment_required": true,
-    "first_unsupplied_future_slot": "2026-11-18T12:00:00+09:00",
-    "audit_path": "threads/audits/monitor-20261117-1330-next-supply-review.json",
-    "audit_sha": "6b089e9b57321fb9b1d916d2ee05ed3dd90721f8"
+    "first_unsupplied_future_slot": "2026-11-18T16:00:00+09:00"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20258,25 +20269,24 @@
       "performance_improvement": "not_established_insufficient_unbalanced_sample"
     },
     "latest_independent_writer_check": {
-      "observed_at": "2026-11-17T10:36:01+09:00",
+      "observed_at_utc": "2026-11-17 05:29:37 UTC",
       "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
-      "notice_id": "a306875",
-      "scheduled_at": "2026-11-18T08:00:00+09:00",
-      "stage_sha": "8e1fc047461ddef0e3a21de957d32ae47eef596b",
-      "queue_sha": "aff1f8f82162cb5b9f1ec04b1440466fabe49a01",
-      "entry_fingerprint": "47ceffc2bc6e26cedb5a5f4e8e9b959c0c96a806885406620be60d337e0f7bf2",
+      "notice_id": "a306807",
+      "scheduled_at": "2026-11-18T12:00:00+09:00",
+      "planned_media": "IMAGE",
+      "stage_sha": "65b9fc8f175436b9699be5522d37a0ba75270ec0",
+      "queue_sha": "88cbe909a4af4c88ec05495fb99cd5427e32a5a9",
       "full_remote_validator": "passed",
       "ready_future_slots": [
-        "2026-11-17T12:00:00+09:00",
         "2026-11-17T16:00:00+09:00",
         "2026-11-17T20:00:00+09:00",
-        "2026-11-18T08:00:00+09:00"
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00"
       ],
-      "planned_media": "TEXT",
       "actual_post_id": null,
-      "audit_path": "threads/audits/supply-a306875-20261118-08-ready-20261117-1036.json",
-      "audit_blob": "c2f02fee9af2f6f7ba8489cc3c0e6ea150a812ff",
-      "next_action": "Observe existing scheduled publisher and official Meta GET; no extra dispatch or post."
+      "audit_path": "threads/audits/supply-a306807-20261118-12-ready-20261117-1430.json",
+      "audit_blob": "cdab7c351b7cb283532da051af9df3474e5249fc",
+      "next_action": "Observe existing regular publisher only; no extra dispatch or POST."
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -26369,5 +26379,25 @@
     "audit_path": "threads/audits/monitor-20261117-1330-next-supply-review.json",
     "audit_sha": "6b089e9b57321fb9b1d916d2ee05ed3dd90721f8",
     "no_queue_mutation": true
+  },
+  "writer_supply_recovery_20261117_1430": {
+    "observed_at_utc": "2026-11-17 05:29:37 UTC",
+    "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "notice_id": "a306807",
+    "scheduled_at": "2026-11-18T12:00:00+09:00",
+    "planned_media": "IMAGE",
+    "stage_sha": "65b9fc8f175436b9699be5522d37a0ba75270ec0",
+    "queue_sha": "88cbe909a4af4c88ec05495fb99cd5427e32a5a9",
+    "full_remote_validator": "passed",
+    "ready_future_slots": [
+      "2026-11-17T16:00:00+09:00",
+      "2026-11-17T20:00:00+09:00",
+      "2026-11-18T08:00:00+09:00",
+      "2026-11-18T12:00:00+09:00"
+    ],
+    "actual_post_id": null,
+    "audit_path": "threads/audits/supply-a306807-20261118-12-ready-20261117-1430.json",
+    "audit_blob": "cdab7c351b7cb283532da051af9df3474e5249fc",
+    "next_action": "Observe existing regular publisher only; no extra dispatch or POST."
   }
 }
