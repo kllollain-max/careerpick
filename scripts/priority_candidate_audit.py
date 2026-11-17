@@ -23,7 +23,8 @@ def seat_count(value):
         return count if 1 <= count <= 5000 else None
     return None
 
-def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None):
+def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
+              verified_duplicate_representatives=None):
     if not isinstance(feed, dict) or not isinstance(feed.get('posts'), list):
         raise ValueError('invalid_feed')
     if not isinstance(today, date) or not isinstance(limit, int) or not 1 <= limit <= 100:
@@ -107,9 +108,20 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None):
                      '개방형직위', '공무직', '비정규직', '파견직')
     priority_sector_terms = ('발전', '전력', '에너지', '철도', '교통',
                              '금융', '은행', '신용보증', '공제', '연금', '물류')
-    regular_review, held_regular = [], []
+    regular_review, held_regular, verified_duplicate_exclusions = [], [], []
+    # Only a current-source fingerprint verified SAME-notice decision may
+    # suppress a duplicate from the editor's regular-only 20-row work queue.
+    # Leave the original cross-employment `top` output and public pages intact.
+    verified_duplicate_representatives = verified_duplicate_representatives or {}
+    eligible_ids = {item['id'] for item in selected}
     for item in selected:
         if not item['regular_only_classified']:
+            continue
+        representative = verified_duplicate_representatives.get(item['id'])
+        if (isinstance(representative, str) and representative != item['id']
+                and representative in eligible_ids):
+            verified_duplicate_exclusions.append({
+                'id': item['id'], 'representative_id': representative})
             continue
         if any(term in item['title'] for term in caution_terms):
             held_regular.append(item['id'])
@@ -127,6 +139,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None):
             'eligible_rows': len(selected), 'excluded': rejected, 'top': selected[:limit],
             'regular_review_candidates': regular_review[:min(limit, 20)],
             'regular_review_candidate_rows': len(regular_review),
+            'regular_review_verified_duplicate_exclusions': verified_duplicate_exclusions,
             'regular_title_conflict_hold_ids': held_regular,
             'limitations': ['Not a search-volume or actual popularity ranking',
                             'Reported hiring counts are source fields, not independently confirmed headcount',
@@ -137,6 +150,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None):
                             'Real-time exclusion uses only identity-bound verified opening/cutoff clocks; historical --as-of remains date-only',
                             'Unknown and expired deadlines are never promoted',
                             'Regular review candidates are UNVERIFIED; official duties, eligibility, independent seats and live reception require separate original-source review',
+                            'Only exact-current-source dual-original verified same notices are removed from the 20-row review queue, not the all-employment top list',
                             'Title/employment conflicts are held for review, not declared nonregular',
                             'Sector labels are editorial hints, not popularity or eligibility evidence']}
 
@@ -166,9 +180,23 @@ def main():
             windows[pid] = {**proof, 'source_end_date': source_end}
             if official_cutoff:
                 windows[pid]['application_cutoff'] = official_cutoff
+    # The canonical comparison is invalidated by changed/missing source data.
+    # Do not infer duplicates merely from a matching institution/title/date.
+    try:
+        from scripts.notice_review import load as load_notice_reviews
+    except ModuleNotFoundError:
+        from notice_review import load as load_notice_reviews
+    resolved = load_notice_reviews(Path(args.source).resolve().parent)
+    verified_duplicates = {
+        pid: proof['representative_id'] for pid, proof in resolved.items()
+        if proof.get('decision') == 'same_notice'
+        and pid != proof.get('representative_id')
+        and isinstance(proof.get('representative_id'), str)
+    }
     report = shortlist(json.loads(Path(args.source).read_text(encoding='utf-8')),
                        review_date, verified_windows=windows,
-                       as_of_instant=now_kst if args.as_of is None else None)
+                       as_of_instant=now_kst if args.as_of is None else None,
+                       verified_duplicate_representatives=verified_duplicates)
     output = Path(args.output); output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print(json.dumps({'source_rows': report['source_rows'], 'eligible_rows': report['eligible_rows'],
