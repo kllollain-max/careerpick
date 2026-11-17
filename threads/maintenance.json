@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17 14:02:26 UTC",
-  "last_observed_at": "2026-11-17 14:02:26 UTC",
+  "updated_at": "2026-11-17T14:56:45.751264+00:00",
+  "last_observed_at": "2026-11-17T14:56:45.751264+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13331,21 +13331,23 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at_utc": "2026-11-17 11:44:19 UTC",
-    "status": "REGULAR20_IMAGE_POST_VERIFIED_NEXT3_VALIDATED",
-    "main_sha": "0dd86a6fca0c37a1ad77796804f6819a3bb78f4c",
-    "latest_publication_run_id": 44076099254,
-    "publication_run_event": "schedule",
-    "run_conclusion": "success",
-    "actual_post_id": "18102493658425564",
-    "new_posts_observed": 1,
-    "validated_future_slots": 3,
-    "next_slot_missing": false,
+    "observed_at": "2026-11-17T14:56:45.751264+00:00",
+    "status": "ready4_validated_no_new_publication",
+    "main_sha": "b537fc1daa579df5baf4a1e4a819e1c05a468eca",
+    "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
+    "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
+    "ready_ids": [
+      "a306875",
+      "a306807",
+      "cleaneye-81112",
+      "a307141"
+    ],
     "pending_claims": 0,
-    "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
-    "stage_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
-    "audit_path": "threads/audits/published-cleaneye-80848-20261117-2041.json",
-    "audit_sha": "66474e0a4e540ab32fe416eff97669e2e06dd76b"
+    "latest_observed_regular_run": 44092701562,
+    "next_post_slot": "2026-11-18T08:00:00+09:00",
+    "next_regular_preflight_observation": "pending_not_yet_observed",
+    "new_meta_post_ids": [],
+    "audit_path": "threads/audits/monitor-20261117-2357.json"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20909,22 +20911,23 @@
       "audit_blob": "2d68d3ddde3cd17498a92699933dc2ef725c2305"
     },
     "latest_independent_monitor_check": {
-      "observed_at": "2026-11-17 14:02:26 UTC",
-      "notice_id": "a307141",
-      "status": "READY_QUEUED_NOT_PUBLISHED",
-      "slot": "2026-11-18T20:00:00+09:00",
-      "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
+      "observed_at": "2026-11-17T14:56:45.751264+00:00",
+      "status": "ready4_validated_no_new_publication",
+      "main_sha": "b537fc1daa579df5baf4a1e4a819e1c05a468eca",
       "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
-      "entry_sha256": "781c8f70a78cbbd52d52047e4e20919a0b0bba8e7a49fc1d2562c79a51518446",
-      "full_validator": "passed",
-      "whole_remote_queue": "validated",
-      "ready_count": 4,
-      "audit_path": "threads/audits/supply-a307141-ready-20261117-2301.json",
-      "source_verified_at": "2026-11-17T22:24:43+09:00",
-      "regression_pr": 120,
-      "regression_merged": true,
-      "actual_meta_post_id": null,
-      "next_action": "Observe existing next regular preflight/publisher; confirm actual account, main text, IMAGE,0automatic replies and Meta post_id/permalink after Nov18 20. Continue independent future supply without changing ready/reserved/posted entries."
+      "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
+      "ready_ids": [
+        "a306875",
+        "a306807",
+        "cleaneye-81112",
+        "a307141"
+      ],
+      "pending_claims": 0,
+      "latest_observed_regular_run": 44092701562,
+      "next_post_slot": "2026-11-18T08:00:00+09:00",
+      "next_regular_preflight_observation": "pending_not_yet_observed",
+      "new_meta_post_ids": [],
+      "audit_path": "threads/audits/monitor-20261117-2357.json"
     },
     "latest_observation_status": {
       "checked_at": "2026-11-17 08:42:33 UTC",
