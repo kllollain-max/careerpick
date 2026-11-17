@@ -15,6 +15,16 @@ def as_date(value):
     except ValueError:
         return None
 
+def verified_kst_clock(value):
+    """Parse only a real, exact official KST timestamp; invalid source data is not proof."""
+    if not isinstance(value, str) or not re.fullmatch(
+            r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00', value):
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        return None
+
 def seat_count(value):
     if isinstance(value, int) and not isinstance(value, bool):
         return value if 1 <= value <= 5000 else None
@@ -66,13 +76,20 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                     and proof.get('source_end_date') == str(p.get('due', ''))[:10]):
                 start = proof.get('application_start')
                 end_text = proof.get('application_end_date')
+                cutoff_clock = verified_kst_clock(proof.get('application_cutoff'))
+                start_clock = verified_kst_clock(start)
                 start_day = as_date(start) if isinstance(start, str) else None
                 end_day = (as_date(end_text) if isinstance(end_text, str)
                            and re.fullmatch(r'\d{4}-\d{2}-\d{2}', end_text) else None)
-                if start_day and end_day and start_day > end_day:
-                    # Contradictory official dates cannot justify suppression.
+                if ((start_day and end_day and start_day > end_day)
+                        or (start_clock and cutoff_clock and start_clock > cutoff_clock)
+                        or (start_day and cutoff_clock and start_day > cutoff_clock.date())
+                        or (end_day and cutoff_clock and end_day != cutoff_clock.date())):
+                    # Official-window evidence is internally inconsistent.
+                    # Never suppress a candidate using ANY part of this proof.
                     start = None
                     end_text = None
+                    cutoff_clock = None
                 if (isinstance(start, str) and re.fullmatch(
                         r'\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?', start)):
                     start_day = as_date(start)
@@ -83,8 +100,8 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                         # A date alone cannot certify the opening HOUR.
                         # Keep it in the broad top queue, not the current regular-20 queue.
                         start_day_clock_unknown = True
-                    elif (as_of_instant is not None and 'T' in start
-                          and as_of_instant < datetime.fromisoformat(start)):
+                    elif (as_of_instant is not None and start_clock is not None
+                          and as_of_instant < start_clock):
                         reason = 'official_reception_not_open'
                 if (reason is None and isinstance(end_text, str)
                         and re.fullmatch(r'\d{4}-\d{2}-\d{2}', end_text)):
@@ -97,12 +114,9 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                 # A verified reception cutoff is different from ALIO's
                 # publication end (often 23:59). Apply the clock only when
                 # bound to the exact ALIO ID, organization, title and end date.
-                cutoff = proof.get('application_cutoff')
                 if (reason is None and as_of_instant is not None
-                        and isinstance(cutoff, str)
-                        and re.fullmatch(
-                            r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00', cutoff)
-                        and as_of_instant >= datetime.fromisoformat(cutoff)):
+                        and cutoff_clock is not None
+                        and as_of_instant >= cutoff_clock):
                     reason = 'official_reception_closed'
         if reason:
             rejected[reason] = rejected.get(reason, 0) + 1
