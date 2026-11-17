@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-17T21:01:29.502589+09:00",
-  "run_id": "44079104236",
-  "source_commit": "0dd86a6fca0c37a1ad77796804f6819a3bb78f4c",
+  "captured_at": "2026-11-17T22:27:08.544353+09:00",
+  "run_id": "44092701562",
+  "source_commit": "8293ee17df4ecfa453e6ef4c0d5f9e0798550290",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-17T21:00:40.162202+09:00",
+    "time": "2026-11-17T22:26:20.220975+09:00",
     "future_slots": [
       "2026-11-18T08:00:00+09:00",
       "2026-11-18T12:00:00+09:00",
@@ -64,12 +64,16 @@
       {
         "notice_id": "cleaneye-81112",
         "reason": "SLOT_ALREADY_OCCUPIED"
+      },
+      {
+        "notice_id": "a307141",
+        "reason": "STAGED_NOT_READY"
       }
     ],
     "queue_updated": false,
     "meta_posted": false,
     "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
-    "staged_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
+    "staged_sha": "e083ce9af28292e91eb290455703bd9ac2005445",
     "promoted_count": 0,
     "approved_supply_count": 3,
     "inventory_target": 8,
@@ -1417,7 +1421,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026.11.16.(월) ~ 2026.11.20.(금)",
           "application_source_ref": "alio-detail.json#306992/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-17T19:19:34+09:00"
+          "source_snapshot_checked_at": "2026-11-17T22:24:43+09:00"
         },
         {
           "notice_id": "cleaneye-81146",
@@ -1717,7 +1721,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026.11.16.~2026.11.23.",
           "application_source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-17T19:19:34+09:00"
+          "source_snapshot_checked_at": "2026-11-17T22:24:43+09:00"
         },
         {
           "notice_id": "cleaneye-81150",
@@ -3650,7 +3654,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026.11.16.(월) ~ 2026.11.20.(금)",
         "application_source_ref": "alio-detail.json#306992/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-17T19:19:34+09:00"
+        "source_snapshot_checked_at": "2026-11-17T22:24:43+09:00"
       },
       {
         "notice_id": "cleaneye-81146",
@@ -3950,7 +3954,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026.11.16.~2026.11.23.",
         "application_source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-17T19:19:34+09:00"
+        "source_snapshot_checked_at": "2026-11-17T22:24:43+09:00"
       },
       {
         "notice_id": "cleaneye-81150",
@@ -5339,7 +5343,7 @@
           "sha256": "f8167dd9d74890db2d7b387d690dec497897ea92c61e9ec334c3ed562463be3b",
           "size_bytes": 14360,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-17T21:01:28.413011+09:00",
+          "checked_at": "2026-11-17T22:27:07.724318+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5362,7 +5366,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-17T21:01:28.500031+09:00",
+          "checked_at": "2026-11-17T22:27:07.479097+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5485,11 +5489,18 @@
           "18121803568969931"
         ],
         "status": "recorded_publication"
+      },
+      {
+        "scheduled_at": "2026-11-17T20:00:00+09:00",
+        "post_ids": [
+          "18102493658425564"
+        ],
+        "status": "recorded_publication"
       }
     ],
-    "expected_slots": 7,
-    "recorded_publications": 6,
-    "receipt_success_rate": 0.8571428571428571,
+    "expected_slots": 8,
+    "recorded_publications": 7,
+    "receipt_success_rate": 0.875,
     "live_meta_verification_performed": false,
     "needs_attention": [
       {
@@ -5501,8 +5512,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-17T21:01:28.584447+09:00",
-    "window_start": "2026-11-15T12:01:28.584447+00:00",
+    "checked_at": "2026-11-17T22:27:07.798219+09:00",
+    "window_start": "2026-11-15T13:27:07.798219+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
@@ -5562,102 +5573,6 @@
         "is_reply": false,
         "text_available": true,
         "text_sha256": "bbd48e7a0e7deb8cfa5ca9cf337a281ee7335baab8df734f8470f48a760944c0"
-      },
-      {
-        "post_id": "18097898489149641",
-        "timestamp": "2026-11-15T12:14:55+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwdgDk51O",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18178456390447632",
-        "timestamp": "2026-11-15T12:14:52+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwdJ8E_DH",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18104392913366605",
-        "timestamp": "2026-11-15T12:14:48+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwcrzEzM4",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "17974134387077131",
-        "timestamp": "2026-11-15T12:14:46+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/Dfwwcdhkxva",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18116517151860326",
-        "timestamp": "2026-11-15T12:14:44+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwcIME0i5",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18121680109977187",
-        "timestamp": "2026-11-15T12:14:42+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/Dfwwb3_k1p0",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18346612558252249",
-        "timestamp": "2026-11-15T12:14:39+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/Dfwwbihk0xZ",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18136365244673483",
-        "timestamp": "2026-11-15T12:14:37+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwbQAE8Qh",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18114388244168209",
-        "timestamp": "2026-11-15T12:14:33+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/Dfwwa3KE3Qg",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18037283834856900",
-        "timestamp": "2026-11-15T12:14:25+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwZzykzGh",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "18399454027161564",
-        "timestamp": "2026-11-15T12:14:22+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwZcHk112",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
-      },
-      {
-        "post_id": "17874979059640235",
-        "timestamp": "2026-11-15T12:14:18+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfwwY8_kzMb",
-        "is_reply": false,
-        "text_available": false,
-        "text_sha256": null
       }
     ],
     "meta_posted": false,
