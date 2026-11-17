@@ -2,7 +2,7 @@
   "schema_version": 1,
   "notice_id": "cleaneye-80792",
   "employer": "서울물재생시설공단",
-  "review_status": "INDEPENDENT_EMPLOYER_PRIMARY_AND_BINARY_PDF_AND_LIVE_PROFILE_ATS_VERIFIED_NOT_APPROVED",
+  "review_status": "ORIGINAL_6P_AND_EXACT_UNIT_2P_SHA_SEMANTIC_AND_LIVE_ATS_VERIFIED_UNAPPROVED",
   "approved_for_queue": false,
   "slot_reserved": false,
   "meta_posted": false,
@@ -34,6 +34,24 @@
       "verified_at_actual": "2026-11-17T09:53:56+09:00",
       "actual_receipt_url": "https://github.com/kllollain-max/careerpick/actions/runs/43991277527",
       "verified_by": "GitHub Actions independent GET 200 + PyMuPDF all 6 text pages; actual SHA256 computed, no assumed hash"
+    },
+    {
+      "kind": "actual_official_ats_exact_unit_job_description",
+      "title": "직무기술서 일반직 9급 (행정).pdf",
+      "source_url": "https://jpsp-swr.s3.ap-northeast-2.amazonaws.com/upload/recruit/1793233828_a9b2dd779465ca842ef4.pdf",
+      "employer_official_page": "https://swr.plusrecruit.co.kr/#/recruitment/detail/39",
+      "pages": 2,
+      "semantic_read": true,
+      "original_bytes_verified": true,
+      "bytes": 81442,
+      "pdf_magic": "%PDF-1.6",
+      "sha256": "5c34ba07355070a0875cf5162982ba66e32a1665f633223fa0d7027885d99fb2",
+      "verified_at_actual": "2026-11-17T10:00:20+09:00",
+      "proof_url": "https://github.com/kllollain-max/careerpick/actions/runs/43992050871",
+      "actual_job_fields": "NCS 9급 행정: 경영기획, 경영평가, 총무, 인사, 노무, 사무행정, 예산, 회계",
+      "related_not_required_licenses": "Accounting, computer competency etc are related qualifications in job description, not mandatory entry qualifications.",
+      "workplace_explicitly_found": false,
+      "verification_limitation": "Full original 2pp job description contains no explicitly identified workplace (근무장소/근무지/근무지역/배치장소). 서울 appears in employer name and introduction only, not a recruit unit workplace label."
     }
   ],
   "independently_read_facts": [
@@ -87,7 +105,13 @@
     "portal_exact_application_open_confirmed": true,
     "employer_job_listing_rechecked_at_actual": "2026-11-17T09:53:56+09:00",
     "notes": "Employer job board exact GET200 and first page GET200; no target-specific correction seen in first-page snippet, not an all-channels proof.",
-    "ats_notice_board_read_20261117": true
+    "ats_notice_board_read_20261117": true,
+    "exact_ats_notice_reviewed_at_actual": "2026-11-17T09:58:37+09:00",
+    "exact_ats_detail": "https://swr.plusrecruit.co.kr/#/recruitment/detail/39",
+    "exact_ats_application_start": "2026-11-11T10:00:00+09:00",
+    "exact_ats_application_end": "2026-11-18T18:00:00+09:00",
+    "exact_ats_notice_status": "접수중",
+    "exact_ats_attached_job_description_read": true
   },
   "v5_draft": {
     "post_text": "공공기관 사무행정 정규직을 찾는 분께,\n서울물재생시설공단 신입 일반직 9급 행정 4명을 모집해요.\n\n전체 정규직 16명 중 행정은 4명이에요.\n인사·총무와 예산·회계, 경영평가 관련 업무를 맡아요.\n\n임용예정일 기준 만 18세 이상 60세 미만이고, 이 직무는 공통요건 외 별도 필수자격이 없어요.\n서류 심사 후 NCS·전공 필기와 온라인 인성검사, 면접이 있어요.\n\n11월 18일 18:00까지 공식 채용시스템에서 온라인 접수해요.\n다른 직종과 중복지원은 할 수 없어요.\n\n자세한 사항은 프로필링크 확인",
@@ -103,11 +127,11 @@
     "slot_reserved": false
   },
   "validation_blockers": [
-    "Job-unit-specific worksite is not explicitly stated in the current six-page announcement; publisher's cleaneye workplace evidence check requires an independent official workplace fact. Do not infer from institution address or 2026 earlier recruitment notice.",
-    "Current cleaneye collection snapshot must be actually refreshed, not timestamp-forged, for next-day 08 publisher max 24h freshness.",
-    "The 2026-11-18 08:00 target is conditional on prior 11/17 12/16/20 verified IMAGE/TEXT alternation; no media was allocated yet.",
-    "Production validate_entry, official receipt digest at ingestion, v5 fact/length/card where applicable and CAS reviewed-submissions -> staging -> queue are unexecuted; keep this unapproved.",
-    "Final all-channel amendment/cancellation check beyond live first-page official job listing and employer ATS notices is pending."
+    "Verified current original 6pp advertisement and exact official ATS 9급 행정 2pp document both lack an explicit unit workplace. Publisher requires source-backed actual workplace, not institution address inference; DO NOT approve or fake location.",
+    "Next-day 2026-11-18 08:00 review requires genuine current source freshness <=24h; never fake recheck time or relax validation.",
+    "Actual 11/17 noon/16/20 posting receipts and media alternation must be independently checked again before slot approval.",
+    "Production validate_entry, exact current official receipt at intake, v5 fact/media checks, reviewed-submissions ingestion and CAS queue bridge NOT executed; approved count remains zero new.",
+    "Employer recruitment and live ATS visible and current, but exhaustive amendment/cancellation scan across all official channels remains incomplete."
   ],
   "safety": "No profile/byte-review timestamps fabricated; no queue, published record, website, crawler or unrelated account modification.",
   "evidence_run": {
@@ -120,7 +144,11 @@
     "do_not_count_as_approved": true,
     "profile_visible_after_real_data_load": true,
     "application_target_visible_after_real_data_load": true,
-    "browser_run": 43991441074
+    "browser_run": 43991441074,
+    "exact_unit_description_run": 43992050871,
+    "exact_unit_description_sha256": "5c34ba07355070a0875cf5162982ba66e32a1665f633223fa0d7027885d99fb2",
+    "exact_unit_description_bytes": 81442,
+    "current_approval_status": "UNAPPROVED_DO_NOT_CAS_OR_PUBLISH"
   },
   "browser_independent_review": {
     "actual_run": 43991441074,
