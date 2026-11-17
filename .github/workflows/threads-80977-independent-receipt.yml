@@ -16,7 +16,7 @@ jobs:
         run: |
           python -m pip install --quiet requests pymupdf beautifulsoup4
           python - <<'PY'
-          import requests,hashlib,json,re,sys,urllib3
+          import requests,hashlib,json,re,sys,urllib3,io,zipfile
           from urllib.parse import urljoin
           from bs4 import BeautifulSoup
           import fitz
@@ -61,7 +61,7 @@ jobs:
               print('EMPLOYER_PAGE_FAILED',url,str(exc)[:300],flush=True)
               outcome['official_pages'].append({'url':url,'error':str(exc)[:200]})
           # Do not treat a metadata hash as original-document review.
-          seen=set()
+          # Endpoints from actual official onsite JavaScript function opendownload.\n          candidates.extend([urljoin(targets[0], 'bbs_download.php?bcd=01_05_05_00_00&bn=346&num='+str(n)) for n in (0,1)])\n          seen=set()
           for url in candidates[:25]:
             if url in seen:continue
             seen.add(url)
@@ -80,6 +80,24 @@ jobs:
                   print(txt[:18000],flush=True)
                   pages.append(txt)
                 rec['full_document_text']='\n'.join(pages)[:130000]
+              elif zipfile.is_zipfile(io.BytesIO(body)):
+                with zipfile.ZipFile(io.BytesIO(body)) as archive:
+                  member_list=[]
+                  for member in archive.infolist():
+                    if member.is_dir():continue
+                    item={'name':member.filename,'bytes':member.file_size}
+                    print('EXACT_ZIP_MEMBER',repr(member.filename),'SIZE',member.file_size,flush=True)
+                    if 0<member.file_size<15_000_000:
+                      contents=archive.read(member.filename)
+                      item['sha256']=hashlib.sha256(contents).hexdigest()
+                      if contents.startswith(b'%PDF-'):
+                        pdf=fitz.open(stream=contents,filetype='pdf')
+                        item['pdf_pages']=len(pdf)
+                        item['pdf_text']='\\n'.join(page.get_text(sort=True) for page in pdf)[:80000]
+                        print('EXACT_ZIP_PDF',repr(member.filename),'PAGES',len(pdf),'SHA256',item['sha256'],flush=True)
+                        print(item['pdf_text'][:18000],flush=True)
+                    member_list.append(item)
+                  rec['zip_members']=member_list
               outcome['attachments'].append(rec)
             except Exception as exc:
               print('ATTACHMENT_FAILED',url,str(exc)[:300],flush=True)
