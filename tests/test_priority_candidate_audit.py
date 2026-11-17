@@ -49,6 +49,49 @@ class PriorityAuditTests(unittest.TestCase):
         self.assertEqual(result['top'][0]['reported_seats'],15)
         self.assertTrue(any('not independently confirmed' in x for x in result['limitations']))
 
+    def test_official_future_windows_excluded_only_when_original_identity_matches(self):
+        import copy
+        east = dict(row('a307149', due='2026-12-01', emp=['정규직'], n='101'),
+                    alio=True, org='한국동서발전(주)', title='2027년 상반기 신입직원')
+        credit = dict(row('a307067', due='2026-12-01', emp=['정규직'], n='6'),
+                      alio=True, org='신용보증재단중앙회', title='2026년 신입직원')
+        future_dental = dict(row('a306925', due='2027-01-22', emp=['정규직'], n='48'),
+                             alio=True, org='서울대학교치과병원', title='전공의 인턴')
+        current = dict(row('a306799', due='2026-11-23', emp=['정규직'], n='97'),
+                       alio=True, org='국립중앙의료원', title='신규 간호사')
+        feed = {'posts': [east, credit, future_dental, current]}
+        before = copy.deepcopy(feed)
+        windows = {
+            'a307149': dict(organization=east['org'], title=east['title'],
+                            source_end_date='2026-12-01', application_start='2026-11-24'),
+            'a307067': dict(organization=credit['org'], title=credit['title'],
+                            source_end_date='2026-12-01', application_start='2026-11-18'),
+            'a306925': dict(organization=future_dental['org'], title=future_dental['title'],
+                            source_end_date='2027-01-22',
+                            application_start='2027-01-18T09:00:00+09:00'),
+        }
+        report = shortlist(feed, date(2026, 11, 17), verified_windows=windows)
+        self.assertEqual([x['id'] for x in report['top']], ['a306799'])
+        self.assertEqual(report['excluded']['official_reception_not_open'], 3)
+        self.assertEqual(feed, before)
+        # Start DATE is confirmed, but the actual opening CLOCK is unknown.
+        on_start = shortlist(feed, date(2026, 11, 24), verified_windows=windows)
+        self.assertIn('a307149', [x['id'] for x in on_start['top']])
+        self.assertIn('Date-only evaluation' , ' '.join(on_start['limitations']))
+        # A revised notice is never suppressed by stale evidence.
+        changed = dict(east, title='수정 공고')
+        stale = shortlist({'posts': [changed]}, date(2026, 11, 17),
+                          verified_windows=windows)
+        self.assertEqual(len(stale['top']), 1)
+        changed = dict(east, due='2026-12-02T23:59:00+09:00')
+        stale = shortlist({'posts': [changed]}, date(2026, 11, 17),
+                          verified_windows=windows)
+        self.assertEqual(len(stale['top']), 1)
+        changed = dict(east, alio=False)
+        stale = shortlist({'posts': [changed]}, date(2026, 11, 17),
+                          verified_windows=windows)
+        self.assertEqual(len(stale['top']), 1)
+
     def test_no_fake_popularity_or_count(self):
         self.assertIsNone(seat_count('10명'))
         self.assertIsNone(seat_count('-1'))
