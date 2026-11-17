@@ -60,6 +60,26 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # Original PDFs already reviewed in VERIFIED_DUTIES (39-record count unchanged).
+    # These independent employer notices corroborate the actual reception clocks.
+    'a306662': {
+        'organization': '한국원자력의학원',
+        'title': '2027년 한국원자력의학원 신규간호사 공개채용 공고',
+        'source_end_date': '2026-11-18',
+        'application_start': '2026-11-03',
+        'source_url': 'https://kcch.re.kr/rirams/board/generalBoardView7.do?no=23098',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer recruitment notice 2026-40: nursing 50 places and online reception through 2026-11-18 17:00 KST; official HTML is separate from already verified ALIO PDF',
+    },
+    'a306799': {
+        'organization': '국립중앙의료원',
+        'title': '2027년 신규간호사(간호직 6급, 간호부) 채용 공고',
+        'source_end_date': '2026-11-23',
+        'application_start': '2026-11-06',
+        'source_url': 'https://www.nmc.or.kr/nmc/board/B0000007/28373',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer recruitment notice 2026-436: online reception through 2026-11-23 10:00 KST; 97 positions and pool nature originate from existing ALIO PDF review',
+    },
     'a306755': {
         'organization': '한국원자력의학원',
         'title': '제2026-5회 한국원자력의학원 정기직원채용',
