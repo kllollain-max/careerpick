@@ -1,0 +1,51 @@
+name: Verify future Threads media alternation against live queue (no posting)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/threads_queue_bridge.py'
+      - 'scripts/threads_reviewed_ingest.py'
+      - 'tests/test_threads_future_media_plan.py'
+      - '.github/workflows/threads-future-media-preflight-check.yml'
+permissions:
+  contents: read
+jobs:
+  live-queue-read-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run actual targeted slot plan regression
+        run: python -m unittest tests.test_threads_future_media_plan -v
+      - name: Recalculate actual current future slots (read only, no Meta)
+        env:
+          THREADS_CLAIM_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: kllollain-max/careerpick
+        run: |
+          python scripts/threads_queue_bridge.py --output threads-media-preflight-result.json
+          python - <<'PY'
+          import json
+          p=json.load(open('threads-media-preflight-result.json'))
+          print('APPROVED',p.get('approved_supply_count'),'MISSING',p.get('missing_slots'))
+          print('INVALID',p.get('invalid_ready_entries'))
+          bad=[x for x in p.get('invalid_ready_entries',[]) if
+               x.get('notice_id')=='cleaneye-81249' and
+               x.get('reason')=='CARD_VISUAL_REVIEW_REQUIRED']
+          if bad:
+              raise SystemExit('16:00 TEXT still incorrectly demands an IMAGE card')
+          required='2026-11-17T16:00:00+09:00'
+          if required not in p.get('approved_future_slots',[]):
+              raise SystemExit('16:00 reviewed slot not currently validated; do not certify')
+          print('SAFE_MEDIA_FORECAST_VERIFIED')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: careerpick-read-only-future-media-status
+          path: threads-media-preflight-result.json
+          retention-days: 7
