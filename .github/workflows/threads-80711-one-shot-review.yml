@@ -1,0 +1,59 @@
+name: "Threads 80711 official original independent read (no publishing)"
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/threads-80711-one-shot-review.yml"
+permissions:
+  contents: read
+jobs:
+  exact-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download exact employer PDF, digest and print complete official text
+        shell: bash
+        run: |
+          python -m pip install --quiet requests pymupdf beautifulsoup4
+          python - <<'PY'
+          import requests,hashlib,json,sys
+          from bs4 import BeautifulSoup
+          import pymupdf
+          root='https://www.cjfmc.or.kr/www/selectBbsNttView.do?bbsNo=7&integrDeptCode=&key=113&nttNo=15610&pageIndex=1&searchCnd=all&searchCtgry=&searchKrwd='
+          attachment='https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566'
+          s=requests.Session()
+          s.headers.update({'User-Agent':'Mozilla/5.0 Chrome/132 Safari/537.36', 'Accept-Language':'ko-KR,ko;q=0.9'})
+          page=s.get(root,timeout=35)
+          page.encoding=page.apparent_encoding
+          bt=BeautifulSoup(page.text,'html.parser').get_text(' ',strip=True)
+          print('OFFICIAL_BOARD_HTTP',page.status_code,'BYTES',len(page.content),'SOURCE_HAS_2026_97',('2026-97' in bt),'HAS_APPLICATION',('cjfmc.jobnlab.co.kr' in bt))
+          assert page.status_code==200 and '2026-97' in bt
+          doc=s.get(attachment,timeout=45,headers={'Referer':root,'Accept':'application/pdf,*/*'})
+          print('OFFICIAL_PDF_HTTP',doc.status_code,'BYTES',len(doc.content),'TYPE',doc.headers.get('Content-Type'),'MAGIC',repr(doc.content[:12]),'FINAL',doc.url)
+          if doc.status_code!=200 or not doc.content.startswith(b'%PDF-'):
+              print('FAILED_SAFE: exact original PDF not accessible; no approval')
+              raise SystemExit(2)
+          sha=hashlib.sha256(doc.content).hexdigest()
+          pdf=pymupdf.open(stream=doc.content,filetype='pdf')
+          print('OFFICIAL_PDF_SHA256',sha,'PAGES',len(pdf))
+          text='\n'.join(p.get_text() for p in pdf)
+          for i,p in enumerate(pdf):
+              txt=p.get_text()
+              print('*** VERIFIED_PDF_PAGE',i+1,'CHARS',len(txt),'***')
+              print(txt[:14000])
+          for kw in ('2026. 11. 23','2026.11.23','13명','경영','시설','자격','접수','충주','정정','취소','18:00','17:00'):
+              print('TERM',repr(kw),'FOUND',kw in text)
+          ats='https://cjfmc.jobnlab.co.kr'
+          try:
+              r=s.get(ats,timeout=25)
+              print('OFFICIAL_APPLICATION_GET',r.status_code,'FINAL',r.url,'BODY_CHARS',len(r.text))
+              print('ATS_TITLE_TEXT',BeautifulSoup(r.text,'html.parser').get_text(' ',strip=True)[:1500])
+          except Exception as e:print('OFFICIAL_APPLICATION_UNAVAILABLE',str(e)[:300])
+          with open('80711-independent-evidence.json','w',encoding='utf-8') as f:
+              json.dump({'source':root,'original_pdf':attachment,'sha256':sha,'bytes':len(doc.content),'pages':len(pdf),'extracted_text':text,'approval':False,'meta_publish':False},f,ensure_ascii=False)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 80711-original-receipt
+          path: 80711-independent-evidence.json
+          retention-days: 7
