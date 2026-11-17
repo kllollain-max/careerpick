@@ -87,6 +87,51 @@ jobs:
           with open('official-80977-read-only.json','w',encoding='utf-8') as f:json.dump(outcome,f,ensure_ascii=False,indent=2)
           print('REVIEW_ONLY_ATTACHMENT_COUNT',len(outcome['attachments']),'PDF_COUNT',sum('pdf_pages' in v for v in outcome['attachments']),flush=True)
           PY
+      - name: Click employer's exact attachment JavaScript in a read-only browser
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium pymupdf
+          python - <<'PY'
+          import os,time,tempfile,glob,hashlib,json
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+          import fitz
+          folder=tempfile.mkdtemp(prefix='official80977_')
+          o=Options()
+          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--ignore-certificate-errors','--window-size=1280,900'):
+            o.add_argument(arg)
+          o.add_experimental_option('prefs',{'download.default_directory':folder,'download.prompt_for_download':False,'download.directory_upgrade':True,'safebrowsing.enabled':True})
+          d=webdriver.Chrome(options=o)
+          try:
+            d.execute_cdp_cmd('Page.setDownloadBehavior',{'behavior':'allow','downloadPath':folder})
+            url='https://cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1'
+            d.get(url)
+            print('BROWSER_EMPOYER_TITLE',d.title,flush=True)
+            print('BROWSER_DOWNLOAD_FUNCTION_TYPE',d.execute_script('return typeof opendownload'),flush=True)
+            print('BROWSER_DOWNLOAD_FUNCTION_SOURCE',d.execute_script('return typeof opendownload === "function" ? String(opendownload).slice(0,2400): "missing"'),flush=True)
+            links=d.find_elements(By.CSS_SELECTOR,'a[href*="opendownload"]')
+            print('BROWSER_EXACT_ATTACHMENT_LINKS',[(x.text,x.get_attribute('href')) for x in links],flush=True)
+            if links:
+              links[0].click()
+              for _ in range(24):
+                found=[x for x in glob.glob(folder+'/*') if os.path.isfile(x) and not x.endswith('.crdownload')]
+                if found:break
+                time.sleep(1)
+              for file in found if 'found' in locals() else []:
+                data=open(file,'rb').read()
+                print('EMPLOYER_DOWNLOADED',os.path.basename(file),'BYTES',len(data),'SHA256',hashlib.sha256(data).hexdigest(),'MAGIC',repr(data[:12]),flush=True)
+                if data.startswith(b'%PDF-'):
+                  doc=fitz.open(stream=data,filetype='pdf')
+                  print('EMPLOYER_EXACT_PDF_PAGES',len(doc),flush=True)
+                  for i,page in enumerate(doc,1):
+                    t=page.get_text(sort=True)
+                    print('==== ORIGINAL ATTACHMENT PAGE',i,'CHARS',len(t),'====',flush=True)
+                    print(t[:21000],flush=True)
+            else:print('EXACT_ATTACHMENT_LINK_NOT_FOUND',flush=True)
+          finally:
+            d.quit()
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
