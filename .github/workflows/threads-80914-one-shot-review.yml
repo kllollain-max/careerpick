@@ -82,7 +82,9 @@ jobs:
           try:
               targets={
                 'profile':'https://kllollain-max.github.io/careerpick/#job=cleaneye-80914',
-                'ats':'https://yjuc.plusrecruit.co.kr/'
+                'ats':'https://yjuc.plusrecruit.co.kr/',
+                'ats_list':'https://yjuc.plusrecruit.co.kr/#/recruitment/list',
+                'ats_notices':'https://yjuc.plusrecruit.co.kr/#/board/notice/list'
               }
               for key,url in targets.items():
                   d.set_page_load_timeout(50)
