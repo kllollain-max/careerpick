@@ -94,6 +94,29 @@ jobs:
           if not receipts.get("employer_original",{}).get("parsed"):
             raise SystemExit("REQUIRED_EMPLOYER_ORIGINAL_NOT_READ")
           PY
+      - name: Probe live employer ATS and public profile landing without posting or auth
+        if: success()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,json,datetime,pathlib
+          ulist={
+            "employer_ATS":"https://www.redcross.or.kr/redrecruit/",
+            "ATS_official_menu":"https://www.redcross.or.kr/redrecruit/reMenuAction.do",
+            "careerpick_profile_landing":"https://kllollain-max.github.io/careerpick/"
+          }
+          results={}
+          for key,url in ulist.items():
+            record={"url":url,"actual_checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+            try:
+              response=requests.get(url,timeout=(7,15),headers={"User-Agent":"Mozilla/5.0 CareerPickSourceVerification/1.0"},allow_redirects=True)
+              record.update({"http_status":response.status_code,"final_url":response.url,"bytes":len(response.content),"contains_a307082_in_raw_html":"a307082" in response.text,"contains_nurse_in_raw_html":"간호사" in response.text,"contains_서울적십자병원_in_raw_html":"서울적십자병원" in response.text})
+            except requests.RequestException as e:
+              record["error"]=str(e)[:280]
+            print("PORTAL_READONLY_PROBE="+json.dumps({key:record},ensure_ascii=False))
+            results[key]=record
+          pathlib.Path("official-a307082-evidence/live-portal-probe.json").write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding="utf-8")
+          PY
       - name: Preserve raw official originals and independently extracted text (no approval)
         if: always()
         uses: actions/upload-artifact@v4
