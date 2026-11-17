@@ -27,6 +27,8 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306755': '2026-11-20T17:00:00+09:00',
     # SNU Dental Hospital official notice: reception opens 2027-01-18 09:00.
     'a306925': '2027-01-22T18:00:00+09:00',
+    # CNUH official recruitment portal (its own ALIO a306942 notice), checked 2026-11-17.
+    'a306942': '2027-01-22T17:00:00+09:00',
     'a306545': '2026-11-17T17:00:00+09:00',
     'a306512': '2026-11-12T15:00:00+09:00',
     'a306648': '2026-11-12T15:00:00+09:00',
@@ -73,6 +75,15 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_url': 'https://www.snudh.org/portal/blindEmpmn/view.do?menuNo=29060340&empSeq=6676',
         'checked_on': '2026-11-17',
         'scope': 'Employer official HTML: in-person/postal reception starts 2027-01-18 09:00 and ends 2027-01-22 18:00; not ALIO publication start or a new job-duty original',
+    },
+    'a306942': {
+        'organization': '전남대학교병원',
+        'title': '2027년도 치과의사전공의(인턴) 모집 공고',
+        'source_end_date': '2027-01-22',
+        'application_start': '2027-01-18T09:00:00+09:00',
+        'source_url': 'https://cnuh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271734',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer official 2027 internship recruitment portal: online application 2027-01-18 09:00 to 2027-01-22 17:00 KST; distinct from ALIO publication and existing 2024 curriculum-only HWP proof',
     }
 }
 
