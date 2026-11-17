@@ -49,6 +49,13 @@ jobs:
                   if href.startswith(('https://','http://','/')) and not href.startswith('javascript:'):
                     candidates.append(urljoin(r.url,href))
               print('EMPLOYER_ATTACHMENT_LINKS',json.dumps(found[:40],ensure_ascii=False),flush=True)
+              # Inspect actual website script definition rather than guessing a download endpoint.
+              for match in list(re.finditer(r'(?i)function\\s+opendownload\\s*\\(',r.text))[:5]:
+                print('OPENDOWNLOAD_DEFINITION',repr(r.text[match.start():match.start()+1600]),flush=True)
+              for script in soup.select('script[src]'):
+                src=urljoin(r.url,script.get('src',''))
+                if any(k in src.lower() for k in ('bbs','board','common','twb')):
+                  print('CANDIDATE_SCRIPT',src,flush=True)
               outcome['official_pages'].append({'url':r.url,'http':r.status_code,'sha256':hashlib.sha256(r.content).hexdigest(),'bytes':len(r.content),'notice_title_visible':('제5차' in txt),'text_excerpt':txt[:7000],'attachment_links':found[:40]})
             except Exception as exc:
               print('EMPLOYER_PAGE_FAILED',url,str(exc)[:300],flush=True)
