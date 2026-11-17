@@ -29,6 +29,8 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306925': '2027-01-22T18:00:00+09:00',
     # CNUH official recruitment portal (its own ALIO a306942 notice), checked 2026-11-17.
     'a306942': '2027-01-22T17:00:00+09:00',
+    # Official Nara Iltter KIOST notice 308183: end of application, not ALIO 23:59.
+    'a306913': '2026-11-26T10:00:00+09:00',
     'a306545': '2026-11-17T17:00:00+09:00',
     'a306512': '2026-11-12T15:00:00+09:00',
     'a306648': '2026-11-12T15:00:00+09:00',
@@ -84,6 +86,16 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_url': 'https://cnuh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271734',
         'checked_on': '2026-11-17',
         'scope': 'Employer official 2027 internship recruitment portal: online application 2027-01-18 09:00 to 2027-01-22 17:00 KST; distinct from ALIO publication and existing 2024 curriculum-only HWP proof',
+    },
+    'a306913': {
+        'organization': '한국해양과학기술원',
+        'title': '[제27-01-01호 및 제27-02-01호]한국해양과학기술원 2027년 1차 직원(정규직/무기계약직) 채용',
+        'source_end_date': '2026-11-26',
+        'application_start': '2026-11-13',
+        'source_url': 'https://www.gojobs.go.kr/apmView.do?empmnsn=308183',
+        'checked_on': '2026-11-17',
+        'hiring_breakdown': '정규직 9명 · 무기계약직 14명 (합계 23명)',
+        'scope': 'Nara Iltter official notice 308183: application dates 2026-11-13 to 11-26 10:00 KST and employment types 9+14; not attachment/PDF byte validation or duties verification',
     }
 }
 
@@ -316,6 +328,8 @@ def render(post, detail, related_posts=(), notice_review=None):
             '모집인원',
             count_label(post.get('n'))
         ),
+        *(([('기관 공식 확인 고용형태별 인원', verified_application_notice['hiring_breakdown'])])
+          if verified_application_notice.get('hiring_breakdown') else []),
         ('고용형태', clean(post.get('emp')) or '공고 확인'),
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
