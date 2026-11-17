@@ -65,7 +65,14 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                     and proof.get('title') == title
                     and proof.get('source_end_date') == str(p.get('due', ''))[:10]):
                 start = proof.get('application_start')
-                start_day = None
+                end_text = proof.get('application_end_date')
+                start_day = as_date(start) if isinstance(start, str) else None
+                end_day = (as_date(end_text) if isinstance(end_text, str)
+                           and re.fullmatch(r'\d{4}-\d{2}-\d{2}', end_text) else None)
+                if start_day and end_day and start_day > end_day:
+                    # Contradictory official dates cannot justify suppression.
+                    start = None
+                    end_text = None
                 if (isinstance(start, str) and re.fullmatch(
                         r'\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?', start)):
                     start_day = as_date(start)
@@ -79,7 +86,6 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                     elif (as_of_instant is not None and 'T' in start
                           and as_of_instant < datetime.fromisoformat(start)):
                         reason = 'official_reception_not_open'
-                end_text = proof.get('application_end_date')
                 if (reason is None and isinstance(end_text, str)
                         and re.fullmatch(r'\d{4}-\d{2}-\d{2}', end_text)):
                     end_day = as_date(end_text)
