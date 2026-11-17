@@ -306,6 +306,47 @@ class PriorityAuditTests(unittest.TestCase):
                          ['a50'])
         self.assertEqual(report['regular_review_verified_duplicate_exclusions'], [])
 
+    def test_conflicting_official_start_and_cutoff_never_hide_candidate(self):
+        # Two internally contradictory official timestamps are not proof of closure.
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        now = datetime(2026, 11, 18, 18, 0, tzinfo=ZoneInfo('Asia/Seoul'))
+        post = dict(row('a77', due='2026-12-01', emp=['정규직'], n='7'),
+                    alio=True, title='정규 공채', org='기관Z')
+        base = dict(organization='기관Z', title='정규 공채',
+                    source_end_date='2026-12-01')
+        conflicts = [
+            dict(application_start='2026-11-19',
+                 application_cutoff='2026-11-17T17:00:00+09:00'),
+            dict(application_start='2026-11-18T18:00:00+09:00',
+                 application_cutoff='2026-11-18T17:00:00+09:00'),
+            dict(application_start='2026-11-01',
+                 application_end_date='2026-11-19',
+                 application_cutoff='2026-11-17T17:00:00+09:00'),
+        ]
+        for conflict in conflicts:
+            with self.subTest(conflict=conflict):
+                result = shortlist({'posts':[post]}, now.date(),
+                                   verified_windows={'a77':{**base, **conflict}},
+                                   as_of_instant=now)
+                self.assertEqual([p['id'] for p in result['top']], ['a77'])
+                self.assertEqual(result['regular_review_candidate_rows'], 1)
+                self.assertFalse(result['excluded'])
+
+    def test_invalid_official_kst_clock_is_not_used_or_parsed_as_proof(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        now = datetime(2026, 11, 18, 18, 0, tzinfo=ZoneInfo('Asia/Seoul'))
+        post = dict(row('a77', due='2026-12-01', emp=['정규직']),
+                    alio=True, title='정규 공채', org='기관Z')
+        proof = {'a77': dict(organization='기관Z', title='정규 공채',
+                             source_end_date='2026-12-01',
+                             application_start='2026-11-18T99:00:00+09:00',
+                             application_cutoff='2026-11-17T99:00:00+09:00')}
+        result = shortlist({'posts':[post]}, now.date(),
+                           verified_windows=proof, as_of_instant=now)
+        self.assertEqual([p['id'] for p in result['top']], ['a77'])
+
     def test_no_fake_popularity_or_count(self):
         self.assertIsNone(seat_count('10명'))
         self.assertIsNone(seat_count('-1'))
