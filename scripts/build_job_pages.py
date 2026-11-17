@@ -117,6 +117,19 @@ VERIFIED_APPLICATION_NOTICES = {
         'hiring_breakdown': '정규직 9명 · 무기계약직 14명 (합계 23명)',
         'scope': 'Nara Iltter official notice 308183: application dates 2026-11-13 to 11-26 10:00 KST and employment types 9+14; not attachment/PDF byte validation or duties verification',
     }
+    # Official JOB-ALIO a307149 details, read 2026-11-17: the announcement
+    # appears 11/17, but applications do NOT begin until 11/24. Neither
+    # opening clock nor closing clock was confirmed: preserve date-only.
+    'a307149': {
+        'organization': '한국동서발전(주)',
+        'title': '한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발',
+        'source_end_date': '2026-12-01',
+        'application_start': '2026-11-24',
+        'application_end_date': '2026-12-01',
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307149',
+        'checked_on': '2026-11-17',
+        'scope': 'Official ALIO recruitment method: published 11/17, actual application 11/24–12/01, regular positions 101 total; start/cutoff clocks unverified, not a PDF/HWP original review',
+    },
 }
 
 
@@ -332,7 +345,7 @@ def render(post, detail, related_posts=(), notice_review=None):
 
     verified_start = verified_duties.get('application_start', '') or verified_application_notice.get('application_start', '')
     parsed_start = parse_date(verified_start)
-    verified_end = verified_duties.get('application_end_date', '')
+    verified_end = verified_duties.get('application_end_date', '') or verified_application_notice.get('application_end_date', '')
     date_end = parse_date(verified_end, end_of_day=True) if re.fullmatch(r'\d{4}-\d{2}-\d{2}', verified_end) else None
     period_end = parse_date(application_cutoff) if application_cutoff else date_end
     source_end = verified_duties.get('source_end_date', verified_application_notice.get('source_end_date', application_cutoff[:10]))
