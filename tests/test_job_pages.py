@@ -54,6 +54,29 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('AI역량검사 미응시자는 서류심사 불합격', html)
         self.assertNotIn('application/ld+json', html)
 
+    def test_alio_detailed_application_cutoff_is_source_bound_without_duty_pdf_claim(self):
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES
+        from scripts.build_public_site import homepage_cutoff_metadata
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306755']; original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a306755']
+        self.assertEqual(proof['source_url'], 'https://job.alio.go.kr/recruitview.do?idx=306755')
+        self.assertNotIn('a306755', VERIFIED_DUTIES)
+        html = render(post, {})
+        self.assertIn('2026-11-20 17:00 (KST)', html)
+        self.assertIn('2026-11-05 ~ 2026-11-20 17:00 (KST)', html)
+        self.assertNotIn('2026-11-20 23:59', html)
+        self.assertEqual(post, original)
+        clocks = {'a306755': CONFIRMED_APPLICATION_CUTOFFS['a306755']}
+        proof_map = {'a306755': proof}
+        meta = homepage_cutoff_metadata([post], clocks, proof_map)
+        self.assertEqual(meta['a306755']['cutoff'], '2026-11-20T17:00:00+09:00')
+        self.assertEqual(meta['a306755']['start'], '2026-11-05')
+        for changes in ({'org': '다른 기관'}, {'title': '다른 공고'}, {'due': '2026-11-21T23:59:00+09:00'}, {'alio': False}):
+            altered = dict(post, **changes)
+            self.assertEqual(homepage_cutoff_metadata([altered], clocks, proof_map), {})
+            self.assertNotIn('기관 공식 확인 접수마감', render(altered, {}))
+
     def test_new_official_windows_preserve_publication_and_source_data(self):
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
         for pid, start, end in [('a307067', '2026-11-18', '2026-12-01 15:00'),
@@ -125,11 +148,12 @@ class JobPageTests(unittest.TestCase):
 
     def test_homepage_cutoff_bundle_matches_reviewed_source_identity(self):
         from scripts.build_public_site import homepage_cutoff_metadata
-        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_DUTIES
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES
         root = Path(__file__).resolve().parents[1]
         posts = json.loads((root / 'alio.json').read_text())['posts']
         original = copy.deepcopy(posts)
-        result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_DUTIES)
+        result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS,
+                                          {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES})
         self.assertEqual(set(result), set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929','a306963'})
         self.assertEqual(result['a306355']['cutoff'], '2026-11-16T10:00:00+09:00')
         self.assertEqual(result['a307034']['cutoff'], '2026-11-20T16:00:00+09:00')
