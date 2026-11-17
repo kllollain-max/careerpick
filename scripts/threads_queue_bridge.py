@@ -134,7 +134,7 @@ def eligible_staged_slot(entry, now):
         return False
 
 
-def verify_entry(entry, now, history, policy, source, details):
+def verify_entry(entry, now, history, policy, source, details, *, expected_media=None):
     if not isinstance(entry, dict) or not isinstance(entry.get('writer'), dict):
         raise ValueError('STAGED_ENTRY_SCHEMA')
     if entry['writer'].get('status') != 'ready':
@@ -148,11 +148,47 @@ def verify_entry(entry, now, history, policy, source, details):
     text, reply = master_public_copy(selected, V5_STYLE, now=now)
     if reply or text != entry['writer'].get('post_text'):
         raise ValueError('PUBLIC_TEXT_MISMATCH')
-    if next_media(history) == 'IMAGE':
+    media = next_media(history) if expected_media is None else expected_media
+    if media not in ('IMAGE', 'TEXT'):
+        raise ValueError('EXPECTED_MEDIA_INVALID')
+    if media == 'IMAGE':
         from scripts.threads_card_review import verify_reviewed_card
         verify_reviewed_card(selected['image_job'], selected['writer_review'],
                              ROOT, now, verify_pixels=False)
     return selected
+
+
+
+def media_for_slot(history, prior_entries, target_slot, now, policy, source, details):
+    """Forecast the next media using only earlier, individually valid queue entries.
+
+    The *latest published receipt* determines the first future media type.
+    A verified earlier planned IMAGE turn flips the following slot to TEXT,
+    and vice versa. Missing, rejected, unapproved or unscheduled turns NEVER
+    advance the alternation; later posts still require the correct card.
+    This is a read-only preflight forecast, not authority to publish.
+    """
+    if not isinstance(target_slot, str):
+        raise ValueError('TARGET_SLOT_INVALID')
+    media = next_media(history)
+    for item in sorted(
+            prior_entries,
+            key=lambda e: str(e.get('scheduled_at', '')) if isinstance(e, dict) else ''):
+        if (not isinstance(item, dict)
+                or not isinstance(item.get('writer'), dict)
+                or item['writer'].get('status') != 'ready'):
+            continue
+        slot = item.get('scheduled_at')
+        if (not isinstance(slot, str) or slot >= target_slot
+                or slot not in future_slots(now)):
+            continue
+        try:
+            verify_entry(item, now, history, policy, source, details,
+                         expected_media=media)
+        except (ValueError, KeyError, TypeError, RuntimeError):
+            continue
+        media = 'TEXT' if media == 'IMAGE' else 'IMAGE'
+    return media
 
 
 def merge(queue, staged, history, policy, source, details, now, claimed_slots=()):
@@ -190,7 +226,9 @@ def merge(queue, staged, history, policy, source, details, now, claimed_slots=()
                 raise ValueError('SLOT_ALREADY_STARTED')
             if nid in used:
                 raise ValueError('DUPLICATE_QUEUE_NOTICE')
-            verify_entry(entry, now, history, policy, source, details)
+            verify_entry(entry, now, history, policy, source, details,
+                         expected_media=media_for_slot(
+                             history, entries, slot, now, policy, source, details))
         except (ValueError, KeyError, TypeError, RuntimeError) as exc:
             refused.append({'notice_id': nid, 'reason': str(exc)[:140]})
             continue
@@ -222,14 +260,20 @@ def verified_supply_status(entries, now, history, policy, source, details):
     """Only currently validated ready entries count as supplied; no writes."""
     readiness = supply_status(entries, now)
     valid_slots, invalid_ready = set(), []
-    for entry in entries:
+    next_planned_media = next_media(history)
+    for entry in sorted(
+            entries, key=lambda e: str(e.get('scheduled_at', '')) if isinstance(e, dict) else ''):
         if not isinstance(entry, dict) or entry.get('scheduled_at') not in readiness['future_slots']:
             continue
         if not isinstance(entry.get('writer'), dict) or entry['writer'].get('status') != 'ready':
             continue
         try:
-            verify_entry(entry, now, history, policy, source, details)
+            if entry['scheduled_at'] in valid_slots:
+                raise ValueError('DUPLICATE_APPROVED_SLOT')
+            verify_entry(entry, now, history, policy, source, details,
+                         expected_media=next_planned_media)
             valid_slots.add(entry['scheduled_at'])
+            next_planned_media = 'TEXT' if next_planned_media == 'IMAGE' else 'IMAGE'
         except (ValueError, KeyError, TypeError, RuntimeError) as exc:
             invalid_ready.append({'notice_id': entry.get('notice_id'),
                                   'slot': entry.get('scheduled_at'), 'reason': str(exc)[:140]})
