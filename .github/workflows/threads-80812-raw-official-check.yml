@@ -20,8 +20,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install read-only official HWP parser
-        run: python -m pip install --quiet olefile requests
+        run: python -m pip install --quiet olefile requests beautifulsoup4
       - name: Download exact Cleaneye official attached HWP and independently extract complete section text
+        continue-on-error: true
         env:
           OFFICIAL_HWP_URL: "https://job.cleaneye.go.kr/file/FileDownload.do?FILE_PATH=ypMng%7Cjobplus%7C2026%7C&ORIGINAL_FILENAME=%E2%98%85+%5B%EA%B3%B5%EA%B3%A0%5D_2026%EB%85%84+%EC%A0%9C3%ED%9A%8C+%EB%B6%80%ED%8F%89%EA%B5%AC%EC%8B%9C%EC%84%A4%EA%B4%80%EB%A6%AC%EA%B3%B5%EB%8B%A8+%EC%A7%81%EC%9B%90+%EA%B3%B5%EA%B0%9C%EA%B2%BD%EC%9F%81+%EC%B1%84%EC%9A%A9%EC%8B%9C%ED%97%98+%EA%B3%B5%EA%B3%A0.hwp&UPLOAD_FILENAME=20261030291648589_007004_2007100290.hwp"
         run: |
@@ -99,6 +100,69 @@ jobs:
           finally:
               (evidence/'raw-hwp-receipt.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
               print('OFFICIAL_HWP_RECEIPT='+json.dumps(result,ensure_ascii=False))
+          PY
+      - name: Try municipality-hosted official attachment instead of repeatedly retrying inaccessible Cleaneye
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib,re,urllib.parse
+          import requests
+          from bs4 import BeautifulSoup
+          from datetime import datetime,timezone
+          page='https://www.icbp.go.kr/main/bbs/bbsMsgDetail.do?bcd=etcnotice&msg_seq=928'
+          evidence=pathlib.Path('official-80812-review-evidence');evidence.mkdir(exist_ok=True)
+          result={'source':'official_incheon_bupyeong_government','page':page,
+                  'checked_at_utc':datetime.now(timezone.utc).isoformat(),
+                  'downloaded':False,'parsed':False,'approved':False,'cas_updated':False,'meta_posted':False}
+          try:
+              response=requests.get(page,timeout=(12,25),headers={'User-Agent':'Mozilla/5.0 (compatible; CareerPickSourceReview/1.0)'})
+              response.raise_for_status()
+              response.encoding=response.apparent_encoding or 'utf-8'
+              raw_html=response.text
+              if '제3회' not in raw_html or '부평구시설관리공단' not in raw_html:
+                  raise ValueError('official municipality page title did not match expected exact hiring notice')
+              soup=BeautifulSoup(raw_html,'html.parser')
+              candidates=[]
+              for a in soup.find_all(['a','button']):
+                  label=a.get_text(' ',strip=True)
+                  href=(a.get('href') or '').strip()
+                  click=(a.get('onclick') or '').strip()
+                  desc=(label+' '+href+' '+click)
+                  if '채용시험' in desc and 'hwp' in desc.lower() or ('공개경쟁' in desc and 'hwp' in desc.lower()):
+                      candidates.append({'label':label[:300],'href':href[:600],'onclick':click[:1000]})
+              result.update(page_status=response.status_code,html_chars=len(raw_html),
+                            anchors=candidates,link_count=len(candidates))
+              # Choose only explicit URLs from the official municipality page, never invent download endpoints.
+              link=None
+              for item in candidates:
+                  href=item['href']
+                  if not href or href.startswith('#') or href.lower().startswith('javascript:'):continue
+                  full=urllib.parse.urljoin(page,href)
+                  u=urllib.parse.urlparse(full)
+                  if u.scheme=='https' and u.netloc in {'www.icbp.go.kr','icbp.go.kr'}:
+                      link=full;break
+              if link:
+                  resp=requests.get(link,timeout=(12,25))
+                  resp.raise_for_status()
+                  result.update(download_url=link,attachment_size=len(resp.content),
+                                attachment_sha256=hashlib.sha256(resp.content).hexdigest(),
+                                attachment_content_type=resp.headers.get('Content-Type'),
+                                downloaded=bool(resp.content),hwp_signature_ok=resp.content.startswith(b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1'))
+                  if not result['hwp_signature_ok']:
+                      raise ValueError('official municipality response was not OLE HWP')
+                  import olefile,io
+                  ole=olefile.OleFileIO(io.BytesIO(resp.content))
+                  names=['/'.join(p) for p in ole.listdir()]
+                  result.update(parsed=('FileHeader' in names and any(z.startswith('BodyText/Section') for z in names)),section_names=[z for z in names if z.startswith('BodyText/Section')])
+                  if not result['parsed']:raise ValueError('HWP sections not found')
+              else:
+                  result['error']='official HTML attachment uses a non-href client action; exact URL/params must be derived from page safely before acquisition'
+          except Exception as e:
+              result.update(error=str(e),exception_type=type(e).__name__)
+          finally:
+              print('MUNICIPAL_HWP_RECEIPT='+json.dumps(result,ensure_ascii=False))
+              (evidence/'municipal-hwp-receipt.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          if not result['parsed']:raise SystemExit('HOLD: municipality HWP raw data not acquired')
           PY
       - name: Preserve raw SHA and complete extracted text only; NEVER approve or post
         if: always()
