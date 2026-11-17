@@ -82,15 +82,44 @@ def shortlist(feed, today, limit=30, verified_windows=None):
                          'mixed_employment_with_regular': mixed_regular,
                          'triage_score': score, 'official_url': url})
     selected.sort(key=lambda x: (-x['triage_score'], x['due'], x['id']))
+    # A separate 20-row EDITORIAL WORK QUEUE, never a verified list of
+    # independent, currently open regular positions. Keep the original
+    # cross-employment triage output stable for its existing consumers.
+    caution_terms = ('인턴', '체험형', '기간제', '계약직', '위촉직',
+                     '개방형직위', '공무직', '비정규직', '파견직')
+    priority_sector_terms = ('발전', '전력', '에너지', '철도', '교통',
+                             '금융', '은행', '신용보증', '공제', '연금', '물류')
+    regular_review, held_regular = [], []
+    for item in selected:
+        if not item['regular_only_classified']:
+            continue
+        if any(term in item['title'] for term in caution_terms):
+            held_regular.append(item['id'])
+            continue
+        sector_text = item['organization'] + ' ' + item['title']
+        priority_sector = (any(term in sector_text for term in priority_sector_terms)
+                           or '금융.보험' in next((str(p.get('desc', '')) for p in feed['posts']
+                                                  if isinstance(p, dict) and p.get('id') == item['id']), ''))
+        regular_review.append({**item, 'priority_sector_hint': priority_sector,
+                               'official_position_and_qualification_review': 'pending',
+                               'official_reception_status': 'unverified'})
+    regular_review.sort(key=lambda x: (not x['priority_sector_hint'],
+                                       -(x['reported_seats'] or 0), x['due'], x['id']))
     return {'as_of': today.isoformat(), 'source': 'ALIO existing validated feed', 'source_rows': len(feed['posts']),
             'eligible_rows': len(selected), 'excluded': rejected, 'top': selected[:limit],
+            'regular_review_candidates': regular_review[:min(limit, 20)],
+            'regular_review_candidate_rows': len(regular_review),
+            'regular_title_conflict_hold_ids': held_regular,
             'limitations': ['Not a search-volume or actual popularity ranking',
                             'Reported hiring counts are source fields, not independently confirmed headcount',
                             'Mixed-employment notices report total seats, not verified regular-only seats; no regular-only score boost',
                             'Application requirements and current status must be reviewed at the official page',
                             'Known future official reception dates are excluded only on exact notice identity',
                             'Date-only evaluation cannot certify same-day opening or closing hours',
-                            'Unknown and expired deadlines are never promoted']}
+                            'Unknown and expired deadlines are never promoted',
+                            'Regular review candidates are UNVERIFIED; official duties, eligibility, independent seats and live reception require separate original-source review',
+                            'Title/employment conflicts are held for review, not declared nonregular',
+                            'Sector labels are editorial hints, not popularity or eligibility evidence']}
 
 def main():
     parser = argparse.ArgumentParser()
