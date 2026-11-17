@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T08:58:22+09:00",
+  "updated_at": "2026-11-17T10:36:01+09:00",
   "last_observed_at": "2026-11-16T21:53:14.497339+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
@@ -20254,40 +20254,25 @@
       "performance_improvement": "not_established_insufficient_unbalanced_sample"
     },
     "latest_independent_writer_check": {
-      "observed_at": "2026-11-16T21:53:14.497339+00:00",
-      "status": "FOUR_FUTURE_SLOTS_VALIDATED_DELAY_FRESHNESS_REPAIRED",
-      "notice_id": "cleaneye-80848",
-      "scheduled_at": "2026-11-17T20:00:00+09:00",
-      "stage_sha": "240e4eff816ace737059e4d0f52a846abf884cfd",
-      "queue_sha": "5d58aed330bcd8cd425a6bb6fc92161a67086e5c",
-      "original_fingerprint": "7fd8ca8420f2724a6f4f3b0c6d6cf0e23229c8f777f1f49b86551dbed3749c30",
-      "updated_fingerprint": "88fd72d2522a06d893017c56c50486a5d99f56654c4a122bca745ea5899f75f8",
-      "body_assets_unchanged": true,
-      "regression_cases": [
-        {
-          "case": "actual_now",
-          "result": "PASS"
-        },
-        {
-          "case": "scheduled",
-          "result": "PASS"
-        },
-        {
-          "case": "delay35m",
-          "result": "PASS"
-        },
-        {
-          "case": "delay119m",
-          "result": "PASS"
-        }
+      "observed_at": "2026-11-17T10:36:01+09:00",
+      "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+      "notice_id": "a306875",
+      "scheduled_at": "2026-11-18T08:00:00+09:00",
+      "stage_sha": "8e1fc047461ddef0e3a21de957d32ae47eef596b",
+      "queue_sha": "aff1f8f82162cb5b9f1ec04b1440466fabe49a01",
+      "entry_fingerprint": "47ceffc2bc6e26cedb5a5f4e8e9b959c0c96a806885406620be60d337e0f7bf2",
+      "full_remote_validator": "passed",
+      "ready_future_slots": [
+        "2026-11-17T12:00:00+09:00",
+        "2026-11-17T16:00:00+09:00",
+        "2026-11-17T20:00:00+09:00",
+        "2026-11-18T08:00:00+09:00"
       ],
-      "full_queue_validator": "validated",
-      "latest_regular_preflight_run": 43955556414,
-      "actual_meta_post_id": null,
-      "actual_permalink": null,
-      "meta_posted": false,
-      "audit_path": "threads/audits/prevent-80848-source-stale-20261117-0654.json",
-      "pdf_current_reread": "HTML challenge, not verified PDF; no bypass"
+      "planned_media": "TEXT",
+      "actual_post_id": null,
+      "audit_path": "threads/audits/supply-a306875-20261118-08-ready-20261117-1036.json",
+      "audit_blob": "c2f02fee9af2f6f7ba8489cc3c0e6ea150a812ff",
+      "next_action": "Observe existing scheduled publisher and official Meta GET; no extra dispatch or post."
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -26307,7 +26292,7 @@
     "observed_at": "2026-11-17 00:57:10 UTC",
     "notice_id": "a306875",
     "proposed_slot": "2026-11-18T08:00:00+09:00",
-    "status": "HOLD_SOURCE_STALE_ONLY_CODE_REPAIRED",
+    "status": "RESOLVED_READY_STAGED_AND_QUEUE_PROMOTED",
     "audit_path": "threads/audits/supply-a306875-20261118-08-HOLD-20261117-0953.json",
     "audit_blob": "a6c5ad36d34e8b19d4107342f869b6f92af857bd",
     "repair_pr": 107,
@@ -26323,6 +26308,49 @@
     ],
     "next_action": "Read next actual regular collection receipt, then revalidate all source/official fact/media gates and CAS staging; no future full validator PASS yet.",
     "repair_merge_sha": "61784610dd27b8c0ca1ff080ca1204a25ce6c3a7",
-    "ci_all_five_success": true
+    "ci_all_five_success": true,
+    "resolved_at": "2026-11-17T10:36:01+09:00",
+    "resolution": {
+      "observed_at": "2026-11-17T10:36:01+09:00",
+      "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+      "notice_id": "a306875",
+      "scheduled_at": "2026-11-18T08:00:00+09:00",
+      "stage_sha": "8e1fc047461ddef0e3a21de957d32ae47eef596b",
+      "queue_sha": "aff1f8f82162cb5b9f1ec04b1440466fabe49a01",
+      "entry_fingerprint": "47ceffc2bc6e26cedb5a5f4e8e9b959c0c96a806885406620be60d337e0f7bf2",
+      "full_remote_validator": "passed",
+      "ready_future_slots": [
+        "2026-11-17T12:00:00+09:00",
+        "2026-11-17T16:00:00+09:00",
+        "2026-11-17T20:00:00+09:00",
+        "2026-11-18T08:00:00+09:00"
+      ],
+      "planned_media": "TEXT",
+      "actual_post_id": null,
+      "audit_path": "threads/audits/supply-a306875-20261118-08-ready-20261117-1036.json",
+      "audit_blob": "c2f02fee9af2f6f7ba8489cc3c0e6ea150a812ff",
+      "next_action": "Observe existing scheduled publisher and official Meta GET; no extra dispatch or post."
+    }
+  },
+  "writer_supply_recovery_20261117_1036": {
+    "observed_at": "2026-11-17T10:36:01+09:00",
+    "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "notice_id": "a306875",
+    "scheduled_at": "2026-11-18T08:00:00+09:00",
+    "stage_sha": "8e1fc047461ddef0e3a21de957d32ae47eef596b",
+    "queue_sha": "aff1f8f82162cb5b9f1ec04b1440466fabe49a01",
+    "entry_fingerprint": "47ceffc2bc6e26cedb5a5f4e8e9b959c0c96a806885406620be60d337e0f7bf2",
+    "full_remote_validator": "passed",
+    "ready_future_slots": [
+      "2026-11-17T12:00:00+09:00",
+      "2026-11-17T16:00:00+09:00",
+      "2026-11-17T20:00:00+09:00",
+      "2026-11-18T08:00:00+09:00"
+    ],
+    "planned_media": "TEXT",
+    "actual_post_id": null,
+    "audit_path": "threads/audits/supply-a306875-20261118-08-ready-20261117-1036.json",
+    "audit_blob": "c2f02fee9af2f6f7ba8489cc3c0e6ea150a812ff",
+    "next_action": "Observe existing scheduled publisher and official Meta GET; no extra dispatch or post."
   }
 }
