@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "account": "hid_119",
+  "observed_at": "2026-11-17T19:48:45.840623+00:00",
+  "status": "four_ready_validated_regular_preflight_resumed",
+  "regular_run_id": 44156636691,
+  "regular_report_at": "2026-11-18T04:15:50.786009+09:00",
+  "regular_conclusion": "success",
+  "ready_count": 4,
+  "ready_ids": [
+    "a306875",
+    "a306807",
+    "cleaneye-81112",
+    "a307141"
+  ],
+  "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
+  "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
+  "next_slot_missing": false,
+  "pending_claims": 0,
+  "new_meta_post_ids": [],
+  "next_slot": "2026-11-18T08:00:00+09:00",
+  "source_verified_at": "2026-11-18T01:08:02+09:00",
+  "audit_path": "threads/audits/monitor-20261118-0448.json",
+  "candidate_review": {
+    "notice_id": "cleaneye-81220",
+    "original_visual_review": "completed",
+    "approval": "HOLD",
+    "reason": "GENERAL_ADMIN_EDUCATION_APPLICATION_UNRESOLVED"
+  },
+  "main_sha": "d7def62a10f0d6233d7701236634e0168a68d485",
+  "automation_enabled": true,
+  "regular_run": {
+    "id": 44156636691,
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "event": "schedule",
+    "updated_at": "2026-11-17T19:16:46Z",
+    "head_sha": "d7def62a10f0d6233d7701236634e0168a68d485",
+    "publish": "skipped_expected_nonpublication_run"
+  },
+  "regular_report": {
+    "time": "2026-11-18T04:15:50.786009+09:00",
+    "approved_supply_count": 4,
+    "approved_future_slots": [
+      "2026-11-18T08:00:00+09:00",
+      "2026-11-18T12:00:00+09:00",
+      "2026-11-18T16:00:00+09:00",
+      "2026-11-18T20:00:00+09:00"
+    ],
+    "invalid_ready_entries": [],
+    "missing_slots": [
+      "2026-11-19T08:00:00+09:00",
+      "2026-11-19T12:00:00+09:00",
+      "2026-11-19T16:00:00+09:00",
+      "2026-11-19T20:00:00+09:00"
+    ],
+    "next_slot_missing": false,
+    "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
+    "staged_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1"
+  },
+  "claims": {
+    "read": 52,
+    "accepted": 51,
+    "historical_verified": 1,
+    "pending": 0
+  },
+  "ledger_sha": "7e8d9570f3377d45ca9c097c99f04c8589259c53",
+  "performance_sha": "bfb5dfe0cb0036d8d55d2a88bb3bd564ec6b7c97",
+  "verification": {
+    "observed_at": "2026-11-17T19:48:45.840623+00:00",
+    "full_queue_status": "validated",
+    "policy_hashes": {
+      "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+      "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+    },
+    "ready": [
+      {
+        "notice_id": "a306875",
+        "slot": "2026-11-18T08:00:00+09:00",
+        "media": "TEXT",
+        "entry_sha256": "47ceffc2bc6e26cedb5a5f4e8e9b959c0c96a806885406620be60d337e0f7bf2",
+        "chars": 284,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": null
+      },
+      {
+        "notice_id": "a306807",
+        "slot": "2026-11-18T12:00:00+09:00",
+        "media": "IMAGE",
+        "entry_sha256": "e29bd5483cf9880814265d4a57cfa277dba5bbcf0d103a3d5eca179957795875",
+        "chars": 323,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 113172,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a306807.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/threads0130-o5fbnrj2/careerpick-d7def62a10f0d6233d7701236634e0168a68d485/threads-images/a306807.jpg",
+          "sha256": "d19c6ebcc29b7ca84a9e46849c9bd36d22ef90ed76bd0143d80a6c4f16087129",
+          "facts_sha256": "07caf2e8fa8e7809b7152453d587f74587bfb2b1589a072246afce56168ae7fc",
+          "preview_asset_path": "threads-images/a306807-360.png",
+          "preview_sha256": "a37add0e0fb08d6108bcabdb69ab24c424d5ff04acb6b673f6d868bc8de51d3a",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-17T05:26:02.897345+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      },
+      {
+        "notice_id": "cleaneye-81112",
+        "slot": "2026-11-18T16:00:00+09:00",
+        "media": "TEXT",
+        "entry_sha256": "40a444398271b62e6c0b8af7a738ee752adcafc7ff06ea5900d281e47e8b8482",
+        "chars": 326,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": null
+      },
+      {
+        "notice_id": "a307141",
+        "slot": "2026-11-18T20:00:00+09:00",
+        "media": "IMAGE",
+        "entry_sha256": "781c8f70a78cbbd52d52047e4e20919a0b0bba8e7a49fc1d2562c79a51518446",
+        "chars": 342,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 110992,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a307141.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/threads0130-o5fbnrj2/careerpick-d7def62a10f0d6233d7701236634e0168a68d485/threads-images/a307141.jpg",
+          "sha256": "3bfcae9f653e7392f124958b8ee50c8abeb2b9a606f3605642035c3bef634fd4",
+          "facts_sha256": "69b66d33a6770274f96b6ac1000404a180a0c755623b0a05904e4c1379853c00",
+          "preview_asset_path": "threads-images/a307141-360.png",
+          "preview_sha256": "3a09dc6d45087d271edd739e4c37b55e9a19b3d64cadb27dd3303455be06c2ce",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-17T13:05:33.567778+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      }
+    ],
+    "supply": {
+      "future_slots": [
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00",
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00"
+      ],
+      "approved_future_slots": [
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00",
+        "2026-11-18T20:00:00+09:00"
+      ],
+      "missing_slots": [
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00"
+      ],
+      "next_slot_missing": false,
+      "approved_inventory_count": 4,
+      "inventory_target": 8,
+      "inventory_shortfall": 4,
+      "replenishment_required": true,
+      "invalid_ready_entries": []
+    },
+    "source_verified_at": "2026-11-18T01:08:02+09:00",
+    "selection": {
+      "total_scanned": 1723,
+      "eligible_before_limit": 285,
+      "returned_count": 24
+    },
+    "performance": {
+      "24h": {
+        "verified_count": 7,
+        "medians": {
+          "views": 2202,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        }
+      },
+      "72h": {
+        "verified_count": 6,
+        "medians": {
+          "views": 3253,
+          "likes": 7,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        }
+      }
+    },
+    "followers": {
+      "account": "hid_119",
+      "scope": "account_total",
+      "requested_start": "2026-11-11T11:45:18.355131+00:00",
+      "requested_end": "2026-11-17T19:48:05.611596+00:00",
+      "observed_start": "2026-11-11T11:45:32.854727+00:00",
+      "observed_end": "2026-11-17T19:15:42.627060+00:00",
+      "start_followers": 415,
+      "end_followers": 494,
+      "net_change": 79,
+      "status": "observed_interval",
+      "exact_requested_boundaries": false,
+      "observation_statuses": {
+        "captured": 40
+      },
+      "post_attribution": null,
+      "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+    }
+  },
+  "candidate": {
+    "notice_id": "cleaneye-81220",
+    "reviewed_at": "2026-11-17T19:48:45.840623+00:00",
+    "status": "HOLD",
+    "visual_review": {
+      "entire_original_opened": true,
+      "original_width": 992,
+      "original_height": 23483,
+      "segments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "method": "Read 8 consecutive source-image segments covering all original pixels; no rewritten source image used as fact evidence."
+    },
+    "facts": {
+      "original_notice_number": "안성시시설관리공단 공고 제2026-151호",
+      "title": "2026년도 제5회 직원 채용 계획 공고",
+      "notice_date": "2026-11-13",
+      "whole_count": 7,
+      "units": [
+        {
+          "category": "일반직",
+          "title": "일반행정",
+          "grade": "일반7급",
+          "count": 1,
+          "required_experience": "급여관리, 퇴직금 정산, 4대 보험, 원천징수 및 연말정산 등 관련 업무 수행 경력 1년 이상",
+          "preferred": "ERP 등 급여·회계 관련 전산시스템 경력 및 활용 가능자 등",
+          "workplace": "경기도 안성시 종합운동장안길 9",
+          "age_exact": "최종시험 예정일이 속한 연도에 만19세 이상으로 우리공단 정년(만60세)에 해당하지 않는 자",
+          "sex_residence": "성별·거주지 제한 없음",
+          "probation": "시용기간 3개월 중 근무성적에 따라 면직 가능",
+          "planned_start": "2026-12-21",
+          "duties": "보수·퇴직금 및 보험·세무 관련 행정"
+        },
+        {
+          "category": "기능직",
+          "title": "운전(청년)",
+          "grade": "기능4급",
+          "count": 1,
+          "age_exact": "채용예정일 기준 만15세 이상 만34세 이하",
+          "logic": "1종 대형면허와 관련 운전경력1년 이상이 모두 필요; 원문의 차량별 대체경로는 게시 승인 전 별도 확대 대조 필요"
+        },
+        {
+          "category": "공무직",
+          "title": "환경미화원",
+          "count": 5,
+          "workplace": "경기도 안성시 바우덕이로 518(생활자원회수센터)",
+          "qualification_main": "자격요건 해당사항 없음; 공통 연령·결격·야간/교대/초과/순환·주휴일 달라짐 조건 적용",
+          "physical_test": "5개 종목 총30점 중18점 이상, 원본 배점표 참조"
+        }
+      ],
+      "application": {
+        "start": "2026-11-17T09:00:00+09:00",
+        "end": "2026-11-23T17:00:00+09:00",
+        "methods": [
+          "방문접수",
+          "기관 홈페이지 접수"
+        ],
+        "lunch_exclusion": "12:00~13:00 접수불가",
+        "online_receipt": "홈페이지 접수자는 접수 후 유선 접수 유무 반드시 확인"
+      },
+      "common_conditions": [
+        "야간·교대·초과·순환보직 가능",
+        "안성시 관내 사업장 근무 가능",
+        "사업장 특성에 따라 주휴일을 달리 할 수 있음",
+        "결격 및 겸업·이중취업 제한"
+      ],
+      "general_admin_selection": "서류→필기(일반상식·영어·선택1과목)→인적성→면접",
+      "education_conflict": {
+        "notice": "일반행정 자격표는 관련업무1년 이상 및 우대조건 명시",
+        "attached_job_description": "직무기술서의 최소요구학위는 학사로 표시",
+        "resolution": "학력무관 또는 고졸지원가능을 추정하지 않음; 본공고와 직무기술서의 자격 적용관계 추가 확인 전 HOLD"
+      }
+    },
+    "remaining": [
+      "일반행정 최소요구학위 학사 적용 여부",
+      "일반직 고용형태의 정확한 근거 바인딩",
+      "직무기술서 별도 필수요건/세부 정정 최종 대조",
+      "프로필 표시·접수 타깃 실제 검수",
+      "미래 신규 슬롯의 source freshness/full review.v5/미디어 검증"
+    ],
+    "ready": false,
+    "queue_written": false,
+    "meta_posted": false
+  },
+  "changes": {
+    "production_main": false,
+    "queue": false,
+    "staging": false,
+    "assets": false,
+    "schedule": false,
+    "meta_post": false
+  },
+  "limits": [
+    "03:15 scheduled run remains absent from observed list;04:15 subsequent regular preflight completed successfully. No manual retry or catchup performed.",
+    "No new actual publication; next08KST receipt pending.",
+    "No new24h/72h observations; no editorial winner or follower post attribution inferred."
+  ]
+}
