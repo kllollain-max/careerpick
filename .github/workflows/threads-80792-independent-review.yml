@@ -80,8 +80,18 @@ jobs:
               for key,url in targets.items():
                   driver.set_page_load_timeout(45)
                   driver.get(url)
+                  # The homepage initially renders 0 records while loading large JSON.
+                  # Wait for the exact notice modal, not generic nav text (>150 chars).
                   try:
-                      WebDriverWait(driver,20).until(lambda w:len(w.execute_script("return document.body?.innerText||''"))>150)
+                      if key=='profile':
+                          WebDriverWait(driver,75).until(lambda w:
+                              '서울물재생시설공단' in w.execute_script("return document.body?.innerText||''")
+                              or '공고를 찾을 수 없습니다' in w.execute_script("return document.body?.innerText||''"))
+                      else:
+                          WebDriverWait(driver,40).until(lambda w:
+                              '2026년 하반기 정규직' in w.execute_script("return document.body?.innerText||''")
+                              or '모집중' in w.execute_script("return document.body?.innerText||''")
+                              or '지원서 접수' in w.execute_script("return document.body?.innerText||''"))
                   except Exception:pass
                   info=driver.execute_script("""return {body:document.body?.innerText||'',hrefs:Array.from(document.querySelectorAll('a')).map(a=>({text:(a.innerText||'').slice(0,70),url:a.href||''}))}""")
                   body=info['body']
