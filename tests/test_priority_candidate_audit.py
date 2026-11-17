@@ -92,6 +92,33 @@ class PriorityAuditTests(unittest.TestCase):
                           verified_windows=windows)
         self.assertEqual(len(stale['top']), 1)
 
+    def test_separate_regular_review_queue_holds_ambiguous_titles(self):
+        # Metadata-level queue only: not proof of open recruitment or seats.
+        feed={'posts': [
+            dict(row('a1', emp=['정규직'], n='97'), org='의료원'),
+            dict(row('a2', emp=['정규직'], n='2'), org='국민연금공단'),
+            dict(row('a3', emp=['정규직'], n='40', due='2026-12-01'),
+                 alio=True, org='발전기관', title='발전 신입'),
+            dict(row('a4', emp=['정규직', '무기계약직'], n='80'), org='철도공단'),
+            dict(row('a5', emp=['정규직'], n='90'), title='위촉직 임시 모집'),
+            dict(row('a6', emp=['정규직'], n='3'), org='철도공사'),
+        ]}
+        windows={'a3': {'organization':'발전기관', 'title':'발전 신입',
+                        'source_end_date':'2026-12-01',
+                        'application_start':'2026-11-24'}}
+        report=shortlist(feed, date(2026,11,17),verified_windows=windows)
+        review=report['regular_review_candidates']
+        self.assertEqual([x['id'] for x in review],['a6','a2','a1'])
+        self.assertEqual(report['regular_review_candidate_rows'],3)
+        self.assertEqual(report['regular_title_conflict_hold_ids'],['a5'])
+        self.assertEqual(report['excluded']['official_reception_not_open'],1)
+        self.assertIn('a4',[x['id'] for x in report['top']])
+        self.assertTrue(all(x['official_reception_status']=='unverified' for x in review))
+        self.assertTrue(all(x['official_position_and_qualification_review']=='pending' for x in review))
+        self.assertTrue(any('UNVERIFIED' in x for x in report['limitations']))
+        short=shortlist(feed, date(2026,11,17),limit=2,verified_windows=windows)
+        self.assertEqual(len(short['regular_review_candidates']),2)
+
     def test_no_fake_popularity_or_count(self):
         self.assertIsNone(seat_count('10명'))
         self.assertIsNone(seat_count('-1'))
