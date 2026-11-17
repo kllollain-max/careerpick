@@ -40,6 +40,25 @@
       "recruitment_list_status": "접수중",
       "notice_board_visible_items": 0,
       "browser_source": "https://github.com/kllollain-max/careerpick/actions/runs/43999516178"
+    },
+    "original_digest_reconfirmed_at": "2026-11-17T11:02:15+09:00",
+    "pdf_second_read_unchanged": true,
+    "compact_image_draft": {
+      "layout": "careerpick-single-main-card-v2",
+      "original_jpeg_width": 1080,
+      "original_jpeg_height": 1080,
+      "original_jpeg_bytes": 129574,
+      "original_jpeg_sha256": "c46e92148171acb5bf7c644edb93125750336c25d3fe5e45b5a588487013d38a",
+      "preview_width": 360,
+      "preview_height": 360,
+      "preview_png_sha256": "3a3a8becf5d5d1db63b70556eff6ac9fb6baa8ecbed3e079acb413d63ad3a01c",
+      "visual_review_performed_at": "2026-11-17T11:04:23+09:00",
+      "preview_visual_findings": "All four critical card facts: exact administrative unit, 3 regular places, Nov23 18:00 deadline, Chungju residence requirement present, visibly legible and uncropped at 360px",
+      "pixel_verified": true,
+      "workflow_artifact_id": 14291423398,
+      "workflow_run": "https://github.com/kllollain-max/careerpick/actions/runs/43999968716",
+      "persistent_repo_asset_written": false,
+      "scope": "draft-only, no production card attestation or queue application"
     }
   },
   "selected_unit": {
@@ -83,14 +102,15 @@
     "cta": "자세한 사항은 프로필링크 확인",
     "cta_count": 1,
     "no_domains_urls_hashtags": true,
-    "media": "IMAGE_DRAFT_COMPACT_V2_PREVIEW_IN_REVIEW_PENDING_APPROVAL",
+    "media": "IMAGE_COMPACT_360_VISUALLY_REVIEWED_NOT_IN_REPO_NOT_CAS",
     "scheduled_at": null
   },
   "blocking_steps": [
     "Official source recheck within 24h and exact body/citation semantic validation; no false time renewal",
-    "For next 2026-11-18 12:00 IMAGE slot, actual JPEG and 360px preview with human-visible complete facts, pixel and SHA attestation required",
     "Run full validate_entry and verify_official_receipt in existing production pipeline, official source same actual bytes and current correction status",
-    "Prepare reviewed-submissions.json entry and CAS reviewed ingest + bridge only after all validations and remote concurrent-state re-read; currently not approved"
+    "Prepare reviewed-submissions.json entry and CAS reviewed ingest + bridge only after all validations and remote concurrent-state re-read; currently not approved",
+    "Card JPEG and 360px PNG verified visually and hashed in Actions artifact, but not yet saved as exact production repo assets; do not approve until backed-up and hash-bound.",
+    "Scheduled 2026-11-18 12:00 slot is beyond 24-hour current official-source freshness window at 11:04 KST on Nov17; re-download/recheck before approval rather than falsify verification time."
   ],
   "safety_policy": "Draft and original semantic evidence only; no queue alteration or Meta post, preserve all other brands"
 }
