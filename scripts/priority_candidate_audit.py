@@ -23,11 +23,16 @@ def seat_count(value):
         return count if 1 <= count <= 5000 else None
     return None
 
-def shortlist(feed, today, limit=30, verified_windows=None):
+def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None):
     if not isinstance(feed, dict) or not isinstance(feed.get('posts'), list):
         raise ValueError('invalid_feed')
     if not isinstance(today, date) or not isinstance(limit, int) or not 1 <= limit <= 100:
         raise ValueError('invalid_arguments')
+    if as_of_instant is not None:
+        if (not isinstance(as_of_instant, datetime) or as_of_instant.tzinfo is None
+                or as_of_instant.utcoffset() is None
+                or as_of_instant.astimezone(ZoneInfo('Asia/Seoul')).date() != today):
+            raise ValueError('invalid_as_of_instant')
     selected, rejected, seen = [], {}, set()
     verified_windows = verified_windows or {}
     for p in feed['posts']:
@@ -63,6 +68,19 @@ def shortlist(feed, today, limit=30, verified_windows=None):
                     start_day = as_date(start)
                     if start_day and start_day > today:
                         reason = 'official_reception_not_open'
+                    elif (as_of_instant is not None and 'T' in start
+                          and as_of_instant < datetime.fromisoformat(start)):
+                        reason = 'official_reception_not_open'
+                # A verified reception cutoff is different from ALIO's
+                # publication end (often 23:59). Apply the clock only when
+                # bound to the exact ALIO ID, organization, title and end date.
+                cutoff = proof.get('application_cutoff')
+                if (reason is None and as_of_instant is not None
+                        and isinstance(cutoff, str)
+                        and re.fullmatch(
+                            r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00', cutoff)
+                        and as_of_instant >= datetime.fromisoformat(cutoff)):
+                    reason = 'official_reception_closed'
         if reason:
             rejected[reason] = rejected.get(reason, 0) + 1
             continue
@@ -116,6 +134,7 @@ def shortlist(feed, today, limit=30, verified_windows=None):
                             'Application requirements and current status must be reviewed at the official page',
                             'Known future official reception dates are excluded only on exact notice identity',
                             'Date-only evaluation cannot certify same-day opening or closing hours',
+                            'Real-time exclusion uses only identity-bound verified opening/cutoff clocks; historical --as-of remains date-only',
                             'Unknown and expired deadlines are never promoted',
                             'Regular review candidates are UNVERIFIED; official duties, eligibility, independent seats and live reception require separate original-source review',
                             'Title/employment conflicts are held for review, not declared nonregular',
@@ -125,8 +144,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--source', default='alio.json')
     parser.add_argument('--output', default='review-only/job-priority-candidates.json')
-    parser.add_argument('--as-of', default=datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat())
+    parser.add_argument('--as-of', default=None,
+                        help='Historical date-only review; omit for current Korea-time cutoff checks')
     args = parser.parse_args()
+    now_kst = datetime.now(ZoneInfo('Asia/Seoul'))
+    review_date = date.fromisoformat(args.as_of) if args.as_of else now_kst.date()
     # Use already reviewed originals; no network, collector or source JSON writes.
     try:
         from scripts.build_job_pages import (VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES,
@@ -138,11 +160,15 @@ def main():
     for pid, proof in {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES}.items():
         if not isinstance(proof, dict) or not proof.get('application_start'):
             continue
-        source_end = proof.get('source_end_date') or CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')[:10]
+        official_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
+        source_end = proof.get('source_end_date') or official_cutoff[:10]
         if source_end:
             windows[pid] = {**proof, 'source_end_date': source_end}
+            if official_cutoff:
+                windows[pid]['application_cutoff'] = official_cutoff
     report = shortlist(json.loads(Path(args.source).read_text(encoding='utf-8')),
-                       date.fromisoformat(args.as_of), verified_windows=windows)
+                       review_date, verified_windows=windows,
+                       as_of_instant=now_kst if args.as_of is None else None)
     output = Path(args.output); output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print(json.dumps({'source_rows': report['source_rows'], 'eligible_rows': report['eligible_rows'],
