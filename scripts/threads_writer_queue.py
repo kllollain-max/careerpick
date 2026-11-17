@@ -467,8 +467,19 @@ def _image(entry, post, detail, review, refs, end_date, period, end_has_seconds,
     verified_employer(entry, post, detail, review, refs, policy)
     title = image.get("title")
     official_title = _normal(facts["title"])
-    if not isinstance(title, str) or len(_normal(title)) < 3:
+    if not isinstance(title, str) or len(_normal(title)) < 2:
         _fail("IMAGE_TITLE_INVALID")
+    if len(_normal(title)) == 2:
+        # Official units such as 병동/외래 are two characters. Accept only
+        # the exact, source-backed v5 unit row and its independently checked
+        # title fact; a short arbitrary label or legacy entry still fails.
+        if (policy.get("editorial_v5", {}).get("enabled") is not True
+                or not isinstance(review.get("v5"), dict)
+                or review["v5"].get("contract_version") != 2
+                or not _fact_supported("title", title, review, refs, detail)):
+            _fail("IMAGE_TITLE_INVALID")
+        from scripts.threads_v5 import _recruitment_unit
+        _recruitment_unit(review["v5"], image, refs, detail)
     if _normal(title) not in official_title and not _fact_supported("title", title, review, refs, detail):
         _fail("IMAGE_TITLE_UNSUPPORTED")
     count = image.get("count")
