@@ -361,6 +361,8 @@ class JobPageTests(unittest.TestCase):
         expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963'}
         if any(p.get('id') == 'a307149' for p in posts):
             expected.add('a307149')
+        if any(p.get('id') == 'a306988' for p in posts):
+            expected.add('a306988')  # employer-confirmed date-only window, no invented clock
         self.assertEqual(set(result), expected)
         self.assertEqual(result['a306355']['cutoff'], '2026-11-16T10:00:00+09:00')
         self.assertEqual(result['a307034']['cutoff'], '2026-11-20T16:00:00+09:00')
