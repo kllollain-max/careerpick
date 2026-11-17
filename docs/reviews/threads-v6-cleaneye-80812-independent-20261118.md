@@ -39,3 +39,10 @@
 **HOLD, 실게시 금지.** 공식 HWP 원본 전체와 실제 지원 양식·직무 자격조건을 독립적으로 다시 확보하여 직무별 요건·전형방식·마감시각을 정밀 확인해야 함. 공식 정정/취소, 원서접수 URL, 미게시 history, profile 상세, source raw SHA256, 해당 슬롯 24h 신선도, 이미지/텍스트 교대, `validate_entry` / `verify_official_receipt` / 카드 픽셀(필요시) / `threads_reviewed_ingest` / `queue_bridge` / remote CAS 전부 통과해야 실제 승인 공급 가능.
 
 아직 `reviewed-submissions.json`, `reviewed-staging.json`, `writer-queue.json`, `threads_posted.json`, Meta POST를 변경하거나 진행하지 않았음. 기존 2026-11-18 정규 08·12·16·20 KST 승인 원고와 다른 저장소/기능은 보존.
+
+## 2026-11-18 02:52 KST 공식 원본 수신 시험 결과 (미해결)
+
+- [실제 실행 run 44141508892](https://github.com/kllollain-max/careerpick/actions/runs/44141508892), commit `cac4b27377a6c32368774366848e4de38b49c221`, **completed/failure**.
+- Cleaneye 정확한 공식 HWP 첨부 `job.cleaneye.go.kr/file/FileDownload.do` 에 3회 유한 시도 (2초·4초 백오프); 매회 HTTPS 연결 제한시간 10초 초과, 마지막 `requests.exceptions.ConnectTimeout` 로 종료.
+- 증거 artifact [14353219848](https://github.com/kllollain-max/careerpick/actions/runs/44141508892/artifacts/14353219848)에 `downloaded=false, parsed=false, verified_meaning=false, approved=false, cas_updated=false, meta_posted=false` 보존됨. **SHA-256 및 공식 전문 미확보**. 근거를 취득한 것처럼 검토시간을 갱신하거나 기존 보류를 해제하지 않음.
+- 별도 부평구청 공식 HTML 공고는 다시 읽을 수 있으나 HWP 원문 수신증을 대신하지 못함. 공식 HWP 원본 다운로드가 가능한 기관 대체 주소가 발견되면 정확 도메인/경로만 고정하여 재시도하고, 그 전에는 HOLD 유지. 위 단일 브랜치 외 운영 코드는 미변경.
