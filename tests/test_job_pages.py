@@ -215,6 +215,43 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('기관 공식 확인 접수마감', render(altered, {}))
         self.assertEqual(post, original)
 
+    def test_eastwest_307149_official_reception_dates_preserve_unknown_clock(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        pid = 'a307149'
+        proof = VERIFIED_APPLICATION_NOTICES[pid]
+        post = {
+            'id': pid, 'alio': True, 'org': '한국동서발전(주)',
+            'title': '한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발',
+            'pub': '2026-11-17T00:00:00+09:00',
+            'due': '2026-12-01T23:59:00+09:00',
+            'dueHasTime': False, 'n': '101', 'emp': ['정규직'],
+            'url': 'https://job.alio.go.kr/recruitview.do?idx=307149',
+        }
+        before = copy.deepcopy(post)
+        self.assertEqual(proof['source_url'], post['url'])
+        self.assertEqual(proof['application_start'], '2026-11-24')
+        self.assertEqual(proof['application_end_date'], '2026-12-01')
+        self.assertNotIn(pid, CONFIRMED_APPLICATION_CUTOFFS)
+        html = render(post, {})
+        self.assertIn('2026-11-24 ~ 2026-12-01 (마감시각 공식 공고 확인 필요)', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('2026-12-01 23:59 (KST)', html)
+        self.assertNotIn('type="application/ld+json"', html)
+        meta = homepage_cutoff_metadata([post], {}, {pid: proof})
+        self.assertEqual(meta[pid]['start'], '2026-11-24')
+        self.assertEqual(meta[pid]['endDate'], '2026-12-01')
+        self.assertNotIn('cutoff', meta[pid])
+        self.assertEqual(static_recruitment_posts(
+            [post], meta, datetime.fromisoformat('2026-11-23T23:59:59+09:00')), [])
+        # Date-only evidence must not generate a fabricated 00:00/23:59 cutoff.
+        for change in ({'org': '다른 기관'}, {'title': '변경 공고'},
+                       {'due': '2026-12-02T23:59:00+09:00'}, {'alio': False}):
+            altered = dict(post, **change)
+            self.assertEqual(homepage_cutoff_metadata([altered], {}, {pid: proof}), {})
+            self.assertNotIn('2026-11-24 ~ 2026-12-01', render(altered, {}))
+        self.assertEqual(post, before)
+
     def test_new_official_windows_preserve_publication_and_source_data(self):
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
         for pid, start, end in [('a307067', '2026-11-18', '2026-12-01 15:00'),
@@ -292,7 +329,10 @@ class JobPageTests(unittest.TestCase):
         original = copy.deepcopy(posts)
         result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS,
                                           {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES})
-        self.assertEqual(set(result), set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929','a306963'})
+        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963'}
+        if any(p.get('id') == 'a307149' for p in posts):
+            expected.add('a307149')
+        self.assertEqual(set(result), expected)
         self.assertEqual(result['a306355']['cutoff'], '2026-11-16T10:00:00+09:00')
         self.assertEqual(result['a307034']['cutoff'], '2026-11-20T16:00:00+09:00')
         self.assertEqual(posts, original)
