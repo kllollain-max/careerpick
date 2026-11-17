@@ -54,6 +54,47 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('AI역량검사 미응시자는 서류심사 불합격', html)
         self.assertNotIn('application/ld+json', html)
 
+    def test_existing_nurse_originals_get_identity_bound_employer_reception_clocks(self):
+        from scripts.build_job_pages import (
+            CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES)
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        cases = (
+            ('a306662', '2026-11-03', '2026-11-18T17:00:00+09:00',
+             'https://kcch.re.kr/rirams/board/generalBoardView7.do?no=23098'),
+            ('a306799', '2026-11-06', '2026-11-23T10:00:00+09:00',
+             'https://www.nmc.or.kr/nmc/board/B0000007/28373'),
+        )
+        for pid, start, cutoff, url in cases:
+            with self.subTest(pid=pid):
+                post = posts[pid]; original = copy.deepcopy(post)
+                proof = VERIFIED_APPLICATION_NOTICES[pid]
+                self.assertEqual(proof['source_url'], url)
+                self.assertEqual(proof['application_start'], start)
+                self.assertEqual(proof['source_end_date'], post['due'][:10])
+                self.assertIn(pid, VERIFIED_DUTIES)  # existing PDF review, not new PDF verification
+                self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS[pid], cutoff)
+                html = render(post, {})
+                self.assertIn(f"{start} ~ {cutoff[:16].replace('T', ' ')} (KST)", html)
+                self.assertNotIn(cutoff[:10] + ' 23:59 (KST)', html)
+                meta = homepage_cutoff_metadata(
+                    [post], {pid: cutoff},
+                    {pid: {**VERIFIED_DUTIES[pid], **proof}})
+                self.assertEqual(meta[pid]['cutoff'], cutoff)
+                self.assertEqual(meta[pid]['start'], start)
+                at_cutoff = datetime.fromisoformat(cutoff)
+                from datetime import timedelta
+                self.assertEqual(static_recruitment_posts(
+                    [post], meta, at_cutoff - timedelta(seconds=1)), [post])
+                self.assertEqual(static_recruitment_posts([post], meta, at_cutoff), [])
+                for change in ({'org': 'changed org'}, {'title': 'changed title'},
+                               {'due': '2027-02-01T23:59:00+09:00'}, {'alio': False}):
+                    changed = dict(post, **change)
+                    self.assertEqual(homepage_cutoff_metadata(
+                        [changed], {pid: cutoff}, {pid: proof}), {})
+                    self.assertNotIn('기관 공식 확인 접수마감', render(changed, {}))
+                self.assertEqual(post, original)
+
     def test_alio_detailed_application_cutoff_is_source_bound_without_duty_pdf_claim(self):
         from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES
         from scripts.build_public_site import homepage_cutoff_metadata
