@@ -28,7 +28,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.threads_http import read_response
 from scripts.threads_auto import load, writer_inputs
 from scripts.threads_queue_bridge import (ROOT, BRANCH, QUEUE, STAGING, future_slots,
-    verify_entry, read, request)
+    verify_entry, media_for_slot, read, request)
 
 KST = ZoneInfo("Asia/Seoul")
 MAX_OFFICIAL_BYTES = 20_000_000
@@ -254,6 +254,7 @@ def plan(queue, staged, submitted, history, policy, source, details, now,
         used.update(str(x) for x in record.get("job_ids", []) if x)
     result = {**staged, "entries": list(staged["entries"])}
     accepted, refused = [], []
+    accepted_prior = []  # Only verified new candidates advance future media.
     for entry in submitted["entries"]:
         nid = entry.get("notice_id")
         slot = entry.get("scheduled_at")
@@ -270,11 +271,15 @@ def plan(queue, staged, submitted, history, policy, source, details, now,
             if not isinstance(entry.get("writer"), dict) or entry["writer"].get("status") != "ready":
                 raise ValueError("NOT_A_REVIEWED_ENTRY")
             receipt = verify_official_receipt(entry, fetch_digest=fetch_digest)
-            verify_entry(entry, now, history, policy, source, details)
+            media = media_for_slot(history, queue["entries"] + accepted_prior,
+                                   slot, now, policy, source, details)
+            verify_entry(entry, now, history, policy, source, details,
+                         expected_media=media)
         except (ValueError, KeyError, TypeError, RuntimeError) as exc:
             refused.append({"notice_id": nid, "slot": slot, "reason": str(exc)[:140]})
             continue
         result["entries"].append(entry)
+        accepted_prior.append(entry)
         accepted.append({"notice_id": nid, "slot": slot, "official_receipt": receipt})
         occupied.add(slot)
         used.add(nid)
