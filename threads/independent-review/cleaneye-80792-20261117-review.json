@@ -2,7 +2,7 @@
   "schema_version": 1,
   "notice_id": "cleaneye-80792",
   "employer": "서울물재생시설공단",
-  "review_status": "OFFICIAL_PRIMARY_SEMANTIC_AND_6PAGE_PDF_BYTE_SHA_VERIFIED_BUT_PROFILE_ATS_UNAPPROVED",
+  "review_status": "INDEPENDENT_EMPLOYER_PRIMARY_AND_BINARY_PDF_AND_LIVE_PROFILE_ATS_VERIFIED_NOT_APPROVED",
   "approved_for_queue": false,
   "slot_reserved": false,
   "meta_posted": false,
@@ -11,7 +11,10 @@
     "employer_current_job_listing": "https://www.swr.or.kr/cpage/board/job.do?menu_cd=C0003&srch_input1=00002",
     "official_application_url": "https://swr.plusrecruit.co.kr/",
     "original_pdf_mirror": "https://sejongurimal.korea.ac.kr/bbs/cdc/526/183852/download.do",
-    "cleaneye_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80792"
+    "cleaneye_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80792",
+    "live_browser_run": "https://github.com/kllollain-max/careerpick/actions/runs/43991441074",
+    "application_status": "접수중 — 2026년 하반기 정규직 채용공고, actual live employer ATS page",
+    "public_profile_notice_displayed": true
   },
   "official_documents": [
     {
@@ -81,12 +84,13 @@
     "target_notice_still_listed": true,
     "newer_specific_cancellation_visible_first_page": false,
     "all_channels_checked": false,
-    "portal_exact_application_open_confirmed": false,
+    "portal_exact_application_open_confirmed": true,
     "employer_job_listing_rechecked_at_actual": "2026-11-17T09:53:56+09:00",
-    "notes": "Employer job board exact GET200 and first page GET200; no target-specific correction seen in first-page snippet, not an all-channels proof."
+    "notes": "Employer job board exact GET200 and first page GET200; no target-specific correction seen in first-page snippet, not an all-channels proof.",
+    "ats_notice_board_read_20261117": true
   },
   "v5_draft": {
-    "post_text": "서울에서 사무행정 정규직을 찾는 분께,\n서울물재생시설공단 신입 일반직 9급 행정 4명을 모집해요.\n\n전체 정규직 16명 중 행정은 4명이에요.\n인사·총무와 예산·회계, 경영평가 관련 업무를 맡아요.\n\n임용예정일 기준 만 18세 이상 60세 미만이고, 이 직무는 공통요건 외 별도 필수자격이 없어요.\n서류 심사 후 NCS·전공 필기와 온라인 인성검사, 면접이 있어요.\n\n11월 18일 18:00까지 공식 채용시스템에서 온라인 접수해요.\n다른 직종과 중복지원은 할 수 없어요.\n\n자세한 사항은 프로필링크 확인",
+    "post_text": "공공기관 사무행정 정규직을 찾는 분께,\n서울물재생시설공단 신입 일반직 9급 행정 4명을 모집해요.\n\n전체 정규직 16명 중 행정은 4명이에요.\n인사·총무와 예산·회계, 경영평가 관련 업무를 맡아요.\n\n임용예정일 기준 만 18세 이상 60세 미만이고, 이 직무는 공통요건 외 별도 필수자격이 없어요.\n서류 심사 후 NCS·전공 필기와 온라인 인성검사, 면접이 있어요.\n\n11월 18일 18:00까지 공식 채용시스템에서 온라인 접수해요.\n다른 직종과 중복지원은 할 수 없어요.\n\n자세한 사항은 프로필링크 확인",
     "characters": 282,
     "replies": [],
     "cta": "자세한 사항은 프로필링크 확인",
@@ -99,12 +103,11 @@
     "slot_reserved": false
   },
   "validation_blockers": [
-    "Official PDF digest verified on 2026-11-17 09:53:56 KST; MUST re-fetch at intake and pass exact digest, not reuse as automatically fresh.",
-    "Actual employer current recruitment listing and correction/cancellation across channels not exhaustively confirmed.",
-    "Rendered CareerPick #job=cleaneye-80792 and exact official clickthrough not yet independently verified.",
-    "Prior 11/17 noon, 16 and 20 actual posts and TEXT/IMAGE alternation must be verified before 11/18 08 approval.",
-    "No production validate_entry / official receipt / CAS staging+queue run yet.",
-    "Initial Chromium profile rendered only 0 results before initial load; second CI uses wait-for-notice, otherwise no approval."
+    "Job-unit-specific worksite is not explicitly stated in the current six-page announcement; publisher's cleaneye workplace evidence check requires an independent official workplace fact. Do not infer from institution address or 2026 earlier recruitment notice.",
+    "Current cleaneye collection snapshot must be actually refreshed, not timestamp-forged, for next-day 08 publisher max 24h freshness.",
+    "The 2026-11-18 08:00 target is conditional on prior 11/17 12/16/20 verified IMAGE/TEXT alternation; no media was allocated yet.",
+    "Production validate_entry, official receipt digest at ingestion, v5 fact/length/card where applicable and CAS reviewed-submissions -> staging -> queue are unexecuted; keep this unapproved.",
+    "Final all-channel amendment/cancellation check beyond live first-page official job listing and employer ATS notices is pending."
   ],
   "safety": "No profile/byte-review timestamps fabricated; no queue, published record, website, crawler or unrelated account modification.",
   "evidence_run": {
@@ -114,6 +117,34 @@
     "verified_at": "2026-11-17T09:53:56+09:00",
     "profile_visible_first_20sec": false,
     "ats_target_exact_visible_first_20sec": false,
-    "do_not_count_as_approved": true
+    "do_not_count_as_approved": true,
+    "profile_visible_after_real_data_load": true,
+    "application_target_visible_after_real_data_load": true,
+    "browser_run": 43991441074
+  },
+  "browser_independent_review": {
+    "actual_run": 43991441074,
+    "actual_checked_at": "2026-11-17T09:55:03+09:00",
+    "profile": {
+      "url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-80792",
+      "exact_notice_id_visible": true,
+      "exact_employer_visible": true,
+      "full_page_after_real_data_load": true,
+      "original_feed_deadline_time_only_date": true,
+      "official_clickthrough_is_cleaneye": true,
+      "do_not_claim_internal_page_contains_exact_18_clock": true
+    },
+    "application": {
+      "url": "https://swr.plusrecruit.co.kr/",
+      "exact_notice": "2026년 하반기 정규직 채용공고",
+      "status": "접수중",
+      "exact_close_time_on_primary_employer_notice": "2026-11-18T18:00:00+09:00"
+    },
+    "restriction": {
+      "workplace_exact_for_specific_unit_stated_in_current_official_ad": false,
+      "no_assumption_from_employer_address": true
+    },
+    "evidence_zip_artifact_id": 14288650000,
+    "strict_publishing_status": "NOT APPROVED"
   }
 }
