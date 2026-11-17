@@ -265,5 +265,42 @@
     "Observe PR107 required checks, then merge only if all passed and no conflict.",
     "Read next actual regular collection receipt; no source timestamp rewrite or freshness bypass.",
     "Revalidate exact entry source fingerprints and official live facts. Only after full future validator and projected media checks pass, save reviewed staging by latest SHA/CAS, readback and observe regular preflight promotion."
-  ]
+  ],
+  "followup": {
+    "observed_at": "2026-11-17 00:55:30 UTC",
+    "latest_code_head_sha": "678ea4bcff41a6c59eaf10ef6f5d73497c90d6c9",
+    "local_test_counts": {
+      "short_unit": 9,
+      "writer_queue": 30,
+      "v5": 31,
+      "future_media": 5,
+      "total": 75
+    },
+    "ci": {
+      "run_id": 43991345545,
+      "job_id": 133732417044,
+      "conclusion": "success",
+      "lines": [
+        "2026-11-17T00:54:22.9825433Z test_disabled_v5_cannot_enable_short_title_via_review (test_threads_short_unit_title.ShortUnitTitleTests.test_disabled_v5_cannot_enable_short_title_via_review) ... ok",
+        "2026-11-17T00:54:22.9831575Z test_exact_two_character_unit_is_accepted (test_threads_short_unit_title.ShortUnitTitleTests.test_exact_two_character_unit_is_accepted) ... ok",
+        "2026-11-17T00:54:22.9832979Z test_legacy_short_title_remains_rejected (test_threads_short_unit_title.ShortUnitTitleTests.test_legacy_short_title_remains_rejected) ... ok",
+        "2026-11-17T00:54:22.9834261Z test_malformed_v5_is_rejected_with_validation_error (test_threads_short_unit_title.ShortUnitTitleTests.test_malformed_v5_is_rejected_with_validation_error) ... ok",
+        "2026-11-17T00:54:22.9835847Z test_notice_total_cannot_replace_unit_count (test_threads_short_unit_title.ShortUnitTitleTests.test_notice_total_cannot_replace_unit_count) ... ok",
+        "2026-11-17T00:54:22.9837013Z test_one_character_label_remains_rejected (test_threads_short_unit_title.ShortUnitTitleTests.test_one_character_label_remains_rejected) ... ok",
+        "2026-11-17T00:54:22.9838530Z test_short_title_without_independent_fact_is_rejected (test_threads_short_unit_title.ShortUnitTitleTests.test_short_title_without_independent_fact_is_rejected) ... ok",
+        "2026-11-17T00:54:22.9839898Z test_unit_scope_cannot_be_notice_total (test_threads_short_unit_title.ShortUnitTitleTests.test_unit_scope_cannot_be_notice_total) ... ok",
+        "2026-11-17T00:54:22.9840882Z test_unretained_source_row_is_rejected (test_threads_short_unit_title.ShortUnitTitleTests.test_unretained_source_row_is_rejected) ... ok",
+        "2026-11-17T00:54:25.0947380Z Ran 428 tests in 5.070s",
+        "2026-11-17T00:54:25.2368007Z Ran 18 tests in 0.026s"
+      ]
+    },
+    "previous_same_org_notice": {
+      "id": "a306200",
+      "posted_at": "2026-10-23T11:45:12.631946+09:00",
+      "closing_date": "2026-11-02",
+      "count": 50,
+      "distinction": "Current a306875 is a new November11 campaign overall66 with separately sourced ward50 and November20 deadline. Not a reuse of the closed October23/November2 notice."
+    },
+    "employer_notice_after_load_rechecked": "still registered notices absent; browserAX after full load"
+  }
 }
