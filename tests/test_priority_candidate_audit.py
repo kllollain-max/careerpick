@@ -263,6 +263,49 @@ class PriorityAuditTests(unittest.TestCase):
         self.assertEqual(len(shortlist({'posts':[post]}, date(2026, 11, 18),
                                        verified_windows=bad)['top']), 1)
 
+    def test_duplicate_guard_never_hides_regular_behind_ineligible_representative(self):
+        # Resolver's proof says the notice originals match, but feed employment
+        # classification or cautious title review can still differ. Preserve
+        # at least one REGULAR review candidate rather than silently lose both.
+        feed = {'posts': [
+            dict(row('a20', emp=['정규직', '인턴'], n='12'), title='통합 채용'),
+            dict(row('a21', emp=['정규직'], n='12'), title='통합 채용'),
+            dict(row('a30', emp=['정규직'], n='9'), title='인턴 포함 정규채용'),
+            dict(row('a31', emp=['정규직'], n='9'), title='일반 정규채용'),
+            dict(row('a40', emp=['정규직'], n='3'), title='채용A'),
+            dict(row('a41', emp=['정규직'], n='3'), title='채용A'),
+        ]}
+        report = shortlist(feed, date(2026, 11, 18),
+                           verified_duplicate_representatives={
+                               'a21': 'a20', 'a31': 'a30',
+                               'a40': 'a41', 'a41': 'a40'})
+        kept = {x['id'] for x in report['regular_review_candidates']}
+        self.assertEqual(kept, {'a21', 'a31', 'a40', 'a41'})
+        self.assertEqual(report['regular_review_verified_duplicate_exclusions'], [])
+        self.assertIn('a30', report['regular_title_conflict_hold_ids'])
+        self.assertEqual(report['eligible_rows'], 6)
+
+    def test_duplicate_guard_preserves_candidate_when_representative_start_hour_unknown(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        rep = dict(row('a50', emp=['정규직'], n='5'), alio=True,
+                   title='정규직 공채', org='기관Z')
+        other = dict(row('a51', emp=['정규직'], n='5'),
+                     title='정규직 공채', org='기관Z')
+        proof = {'a50': {'organization': '기관Z', 'title': '정규직 공채',
+                         'source_end_date': '2026-12-01',
+                         'application_start': '2026-11-18'}}
+        report = shortlist({'posts': [rep, other]}, date(2026, 11, 18),
+                           verified_windows=proof,
+                           verified_duplicate_representatives={'a51': 'a50'},
+                           as_of_instant=datetime(2026, 11, 18, 4, 20,
+                                                  tzinfo=ZoneInfo('Asia/Seoul')))
+        self.assertEqual([x['id'] for x in report['regular_review_candidates']],
+                         ['a51'])
+        self.assertEqual(report['regular_start_day_clock_unconfirmed_hold_ids'],
+                         ['a50'])
+        self.assertEqual(report['regular_review_verified_duplicate_exclusions'], [])
+
     def test_no_fake_popularity_or_count(self):
         self.assertIsNone(seat_count('10명'))
         self.assertIsNone(seat_count('-1'))
