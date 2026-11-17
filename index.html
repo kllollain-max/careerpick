@@ -1427,7 +1427,9 @@ function jobCard(p, now){
     : `<div class="dd none"><span class="big">일정 확인</span></div>`;
   const tags = [];
   if(p.n) tags.push(`<span class="tag n">${esc(p.cleaneye ? cpRecruitCount(p.n) : p.n+'명')}</span>`);
-  (p.emp||[]).filter(e => !/^(신입|경력)$/.test(e)).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
+  CPHome.employmentTerms(p).filter(e => !/^(신입|경력)$/.test(e)).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
+  if(CPHome.reviewedEmployment(p))tags.push('<span class="tag">ALIO 분류와 원문 차이 확인</span>');
+  if(CPHome.reviewedStatus(p))tags.push('<span class="tag">현재 접수상태 확인 필요</span>');
   (p.edu||[]).forEach(e => tags.push(`<span class="tag">${esc(e)}</span>`));
   const off = officialLink(p);
   const saved = SAVED.has(cpSavedId(p));
@@ -2174,6 +2176,9 @@ function jobViewHTML(p, det){
   const displayReview=CPHome.reviewedDetailDisplay(p,det);
   det=displayReview.detail;
   const warnings=cpDetailWarnings(p,det);
+  const employmentReview=CPHome.reviewedEmployment(p);
+  if(employmentReview)warnings.push(employmentReview.note);
+  if(CPHome.reviewedStatus(p))warnings.push(CPHome.reviewedStatus(p));
   if(det?.recrutPblntSn && p.alio && String(det.recrutPblntSn)!==String(p.id).slice(1))det={};
   const now = new Date(), d = dday(p, now);
   const saved = SAVED.has(cpSavedId(p)), ap = APPS[cpApplicationId(p)];
