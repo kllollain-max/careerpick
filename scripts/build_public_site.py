@@ -56,6 +56,26 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
                 pass
     return result
 
+def homepage_detail_corrections(posts, duties, cutoffs):
+    """Export source-bound display-only corrections, never collection changes."""
+    result = {}
+    for post in posts:
+        pid = post.get('id'); proof = duties.get(pid, {})
+        source_end = proof.get('source_end_date') or cutoffs.get(pid, '')[:10]
+        if (post.get('alio') is not True or proof.get('organization') != post.get('org')
+                or proof.get('title') != post.get('title')
+                or not source_end or str(post.get('due', ''))[:10] != source_end):
+            continue
+        changes = {field: value for field, value in proof.get('detail_display_corrections', {}).items()
+                   if field in ('aplyQlfcCn', 'disqlfcRsn') and isinstance(value, dict)
+                   and isinstance(value.get('expected'), str) and value['expected']
+                   and isinstance(value.get('value'), str) and value['value']}
+        if changes:
+            result[pid] = dict(org=post['org'], title=post['title'], sourceEndDate=source_end,
+                              corrections=changes)
+    return result
+
+
 def static_recruitment_posts(posts, metadata, now):
     """Keep future official reception windows out of the static open-job list."""
     selected = []
@@ -297,7 +317,10 @@ def main() -> dict:
                                        pages.VERIFIED_DUTIES)
     bundle = output / 'homepage-ux.js'
     bundle.write_text('window.CP_VERIFIED_APPLICATION_CUTOFFS = ' +
-                      json.dumps(cutoffs, ensure_ascii=False) + ';\n' + bundle.read_text(),
+                      json.dumps(cutoffs, ensure_ascii=False) + ';\nwindow.CP_VERIFIED_DETAIL_CORRECTIONS = ' +
+                      json.dumps(homepage_detail_corrections(alio['posts'], pages.VERIFIED_DUTIES,
+                                                            pages.CONFIRMED_APPLICATION_CUTOFFS), ensure_ascii=False)
+                      + ';\n' + bundle.read_text(),
                       encoding='utf-8')
     static_posts = static_recruitment_posts(alio['posts'], cutoffs, datetime.now(timezone.utc))
     static_posts += [p for p in blogs['posts'] if p.get('type') != 'j']

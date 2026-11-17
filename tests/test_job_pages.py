@@ -734,3 +734,15 @@ class RemainingOriginalReviewTests(unittest.TestCase):
         self.assertIn('외래 진료 동행',html)
         self.assertIn('간호사 1명',html)
         self.assertIn('요양보호사 업무 제외',html)
+
+class DetailDisplayMetadataTests(unittest.TestCase):
+    def test_export_requires_exact_identity_source_end_and_supported_field(self):
+        from scripts.build_public_site import homepage_detail_corrections
+        post=dict(id='a1',alio=True,org='기관',title='공고',due='2027-01-22')
+        proof=dict(organization='기관',title='공고',source_end_date='2027-01-22',detail_display_corrections={'disqlfcRsn':{'expected':'old','value':'checked'},'recrutNope':{'expected':'1','value':'2'}})
+        before=copy.deepcopy((post,proof))
+        got=homepage_detail_corrections([post],{'a1':proof},{})
+        self.assertEqual(set(got['a1']['corrections']),{'disqlfcRsn'})
+        self.assertEqual((post,proof),before)
+        for change in [{'title':'changed'},{'org':'other'},{'due':'2027-01-23'},{'alio':False}]:
+            self.assertEqual(homepage_detail_corrections([dict(post,**change)],{'a1':proof},{}),{})

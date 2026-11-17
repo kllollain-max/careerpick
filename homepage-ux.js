@@ -15,6 +15,21 @@
        !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(proof.cutoff||''))return null;
     return date(proof.cutoff);
   }
+  function reviewedDetailDisplay(p,det){
+    const unchanged={detail:det,changed:[]};
+    const proof=root.CP_VERIFIED_DETAIL_CORRECTIONS?.[p?.id];
+    if(!p?.alio || !det || typeof det!=='object' || Array.isArray(det) || !proof ||
+       proof.org!==p.org || proof.title!==p.title || !date(p.due) ||
+       day(date(p.due))!==proof.sourceEndDate || String(det.recrutPblntSn)!==noticeKey(p))return unchanged;
+    let result=det;const changed=[];
+    for(const [field,fix] of Object.entries(proof.corrections||{})){
+      if(!['aplyQlfcCn','disqlfcRsn'].includes(field) || typeof fix?.expected!=='string' ||
+         typeof fix?.value!=='string' || !fix.expected || det[field]!==fix.expected)continue;
+      if(result===det)result={...det};
+      result[field]=fix.value;changed.push(field);
+    }
+    return {detail:result,changed};
+  }
   function confirmedApplicationStart(p){
     if(!confirmedApplicationCutoff(p))return null;
     const value=root.CP_VERIFIED_APPLICATION_CUTOFFS[p.id].start;
@@ -223,7 +238,7 @@
     }
     return fields;
   }
-  const api = {confirmedApplicationCutoff,confirmedApplicationStart,deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
+  const api = {reviewedDetailDisplay,confirmedApplicationCutoff,confirmedApplicationStart,deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
   if(typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.CPHome = api;
 })(typeof window !== 'undefined' ? window : globalThis);
