@@ -109,10 +109,19 @@ jobs:
                           merge_fields[sel["name"]]=chosen.get("value","") if chosen else ""
               for k,v in merge_fields.items():pairs.setdefault(k,v)
               receipt.update(view_action=action,form_original_inputs=pairs,merged_list_fields=merge_fields,anchor_attrs=dict(anchor.attrs))
-              # The employer's own yhLib.inline.post() sends the anchor's data-req-p-idx with this form.
-              if "pIdx" in pairs:pairs["pIdx"]=exact_idx
-              elif "idx" in pairs:pairs["idx"]=exact_idx
-              else:pairs["pIdx"]=exact_idx
+              # Official /common/js/lib.js paramsOf strips data-req-p- verbatim.
+              # Do not guess camelCase: data-req-p-idx is idx, never pIdx.
+              def official_anchor_parameters(attrs):
+                  prefix="data-req-p-"
+                  return {key[len(prefix):]:value for key,value in attrs.items() if key.startswith(prefix)}
+              # Regression checks: exact observed name, unrelated metadata, no camelCase rewrite.
+              assert official_anchor_parameters({"data-req-p-idx":"1745"})=={"idx":"1745"}
+              assert official_anchor_parameters({"data-req-form-id":"view","data-req-p-idx":"1745"})=={"idx":"1745"}
+              assert official_anchor_parameters({"data-req-p-list-idx":"7"})=={"list-idx":"7"}
+              anchor_fields=official_anchor_parameters(anchor.attrs)
+              if anchor_fields!={"idx":exact_idx}:raise ValueError("UNEXPECTED_OFFICIAL_ANCHOR_PARAMETERS")
+              pairs.update(anchor_fields)
+              receipt.update(submitted_field_names=sorted(pairs),anchor_fields=anchor_fields,parameter_regression_checks=3)
               response=sess.post(action,data=pairs,headers={"Referer":base},timeout=(10,30),allow_redirects=True)
               response.raise_for_status()
               if urllib.parse.urlparse(response.url).hostname!="www.asimc.or.kr":raise ValueError("UNEXPECTED_VIEW_REDIRECT")
