@@ -119,6 +119,60 @@ class PriorityAuditTests(unittest.TestCase):
         short=shortlist(feed, date(2026,11,17),limit=2,verified_windows=windows)
         self.assertEqual(len(short['regular_review_candidates']),2)
 
+    def test_realtime_exact_official_cutoff_excludes_same_day_after_close(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        kst = ZoneInfo('Asia/Seoul')
+        post = dict(row('a306662', due='2026-11-18', emp=['정규직'], n='50'),
+                    alio=True, org='한국원자력의학원', title='신규간호사')
+        proof = {'a306662': dict(organization='한국원자력의학원',
+                                title='신규간호사', source_end_date='2026-11-18',
+                                application_start='2026-11-03',
+                                application_cutoff='2026-11-18T17:00:00+09:00')}
+        feed = {'posts': [post]}
+        before = shortlist(feed, date(2026, 11, 18), verified_windows=proof,
+                           as_of_instant=datetime(2026, 11, 18, 16, 59, tzinfo=kst))
+        self.assertEqual([x['id'] for x in before['top']], ['a306662'])
+        at_close = shortlist(feed, date(2026, 11, 18), verified_windows=proof,
+                             as_of_instant=datetime(2026, 11, 18, 17, 0, tzinfo=kst))
+        self.assertEqual(at_close['excluded']['official_reception_closed'], 1)
+        self.assertEqual(at_close['regular_review_candidate_rows'], 0)
+        # Historical --as-of runs have only a date; no invented same-day clock.
+        historical = shortlist(feed, date(2026, 11, 18), verified_windows=proof)
+        self.assertEqual(len(historical['top']), 1)
+        # Stale official evidence must NEVER suppress a changed source.
+        changed = dict(post, title='수정 공고')
+        self.assertEqual(len(shortlist({'posts':[changed]}, date(2026,11,18),
+                                       verified_windows=proof,
+                                       as_of_instant=datetime(2026,11,18,17,0,tzinfo=kst))['top']), 1)
+        with self.assertRaises(ValueError):
+            shortlist(feed, date(2026,11,18), verified_windows=proof,
+                      as_of_instant=datetime(2026,11,18,17,0))
+
+    def test_clock_aware_opening_never_infers_date_only_close(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        kst = ZoneInfo('Asia/Seoul')
+        post = dict(row('a306925', due='2027-01-22', emp=['정규직'], n='48'),
+                    alio=True, org='서울대학교치과병원', title='치과 인턴')
+        proof = {'a306925': dict(organization='서울대학교치과병원', title='치과 인턴',
+                                source_end_date='2027-01-22',
+                                application_start='2027-01-18T09:00:00+09:00')}
+        feed = {'posts':[post]}
+        early = shortlist(feed,date(2027,1,18),verified_windows=proof,
+                          as_of_instant=datetime(2027,1,18,8,59,tzinfo=kst))
+        self.assertEqual(early['excluded']['official_reception_not_open'],1)
+        opened = shortlist(feed,date(2027,1,18),verified_windows=proof,
+                           as_of_instant=datetime(2027,1,18,9,0,tzinfo=kst))
+        self.assertEqual(len(opened['top']),1)
+        date_only = {'a306925': {**proof['a306925'],
+                                 'application_start':'2027-01-18',
+                                 'application_end_date':'2027-01-22'}}
+        late = shortlist(feed,date(2027,1,22),verified_windows=date_only,
+                         as_of_instant=datetime(2027,1,22,23,58,tzinfo=kst))
+        self.assertEqual(len(late['top']),1)
+        self.assertNotIn('official_reception_closed',late['excluded'])
+
     def test_no_fake_popularity_or_count(self):
         self.assertIsNone(seat_count('10명'))
         self.assertIsNone(seat_count('-1'))
