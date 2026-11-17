@@ -173,6 +173,34 @@ class PriorityAuditTests(unittest.TestCase):
         self.assertEqual(len(late['top']),1)
         self.assertNotIn('official_reception_closed',late['excluded'])
 
+    def test_current_verified_same_notice_only_suppresses_regular_review_queue(self):
+        # These are synthetic notices; the production mapping is populated
+        # exclusively by notice_review.load with current feed+detail fingerprints
+        # and identical announcement AND job-duty original SHA-256.
+        original = dict(row('a1', emp=['정규직'], n='20'), org='같은기관', title='모집A')
+        same = dict(row('a2', emp=['정규직'], n='20'), org='같은기관', title='모집A')
+        distinct_one = dict(row('a3', emp=['정규직'], n='1'), org='다른기관', title='독립모집1')
+        distinct_two = dict(row('a4', emp=['정규직'], n='1'), org='다른기관', title='독립모집2')
+        feed = {'posts': [original, same, distinct_one, distinct_two]}
+        before = shortlist(feed, date(2026, 11, 18))
+        self.assertEqual(len(before['regular_review_candidates']), 4)
+        after = shortlist(feed, date(2026, 11, 18),
+                          verified_duplicate_representatives={'a2': 'a1'})
+        self.assertEqual(after['eligible_rows'], before['eligible_rows'])
+        self.assertEqual([r['id'] for r in after['top']],
+                         [r['id'] for r in before['top']])
+        self.assertEqual({r['id'] for r in after['regular_review_candidates']},
+                         {'a1', 'a3', 'a4'})
+        self.assertEqual(after['regular_review_verified_duplicate_exclusions'],
+                         [{'id': 'a2', 'representative_id': 'a1'}])
+        # Never remove a notice if its verified representative is absent/expired.
+        absent = shortlist(feed, date(2026, 11, 18),
+                           verified_duplicate_representatives={'a2': 'a99'})
+        self.assertEqual(absent['regular_review_candidate_rows'], 4)
+        # A title-only coincidence is not a duplicate; only explicit proof
+        # supplied by the identity-bound resolver may remove it.
+        self.assertIn('a4', [r['id'] for r in after['regular_review_candidates']])
+
     def test_no_fake_popularity_or_count(self):
         self.assertIsNone(seat_count('10명'))
         self.assertIsNone(seat_count('-1'))
