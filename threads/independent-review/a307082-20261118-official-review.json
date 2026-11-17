@@ -6,8 +6,8 @@
   "approved_for_queue": false,
   "cas_registered": false,
   "meta_posted": false,
-  "post_text": "병동 경력 간호사에게 정규직 채용 소식!\n대한적십자사 서울적십자병원에서 정규직 간호사 4명을 모집해요.\n\n간호사 면허, 간호학 성적·졸업증명서, 임상 병동 경력 1년 이상 증명이 모두 필요해요.\n임용일 기준 만 60세 미만이어야 하며 취업지원대상자·장애인·북한이탈주민은 요건에 따라 우대해요.\n\n서류심사 합격자 발표는 11월 26일, 면접은 12월 1일 예정이에요.\n원서접수는 11월 23일까지로 안내됐으며 정확한 마감 시각은 공식 첨부 검증 전이에요.\n\n자세한 사항은 프로필링크 확인",
-  "post_characters": 271,
+  "post_text": "병동 간호 경력자에게 정규직 채용 소식!\n서울적십자병원에서 정규직 간호사 4명을 모집해요.\n\n병동 3교대 근무이며 간호사 면허, 간호학 성적·졸업증명서, 병동 임상경력 1년 이상이 모두 필요해요.\n간호학 누적 백분위 성적 80점 미만은 과락이고, 공고일 기준 만 60세 미만이어야 해요.\n\n경력증명서에는 근무부서·담당업무가 필요하며, 서울적십자병원 다른 채용공고와 중복 지원하면 모두 과락이에요.\n11월 23일 오전 10시까지 온라인 접수, 12월 1일 면접 예정이에요.\n\n자세한 사항은 프로필링크 확인",
+  "post_characters": 281,
   "reply_texts": [],
   "static_copy_checks": {
     "single_body": true,
@@ -39,18 +39,51 @@
       "북한이탈주민"
     ],
     "application_start": "2026-11-16",
-    "application_end": "2026-11-23",
-    "application_deadline_time": "UNCONFIRMED",
+    "application_end": "2026-11-23T10:00:00+09:00",
+    "application_deadline_time": "10:00 KST from original hospital-issued HWP",
     "procedure": [
       "11/26 서류심사 발표",
       "12/1 면접",
       "12/4 최종 발표"
     ],
-    "note": "ALIO and identical date employer board posting re-read in actual web; source binary HWP web click unsupported, must independently acquire, parse and check amendment/cancellation; this is not validated approval."
+    "note": "ALIO and identical date employer board posting re-read in actual web; source binary HWP web click unsupported, must independently acquire, parse and check amendment/cancellation; this is not validated approval.",
+    "employer_original_receipt": {
+      "checked_at_actual": "2026-11-18T07:56:12.362637+09:00",
+      "raw_bytes": 57856,
+      "sha256": "47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478",
+      "hwp_sections": 1,
+      "hwp_paragraphs": 174,
+      "extracted_characters": 5631
+    },
+    "alio_original_independent_receipt": {
+      "checked_at_actual": "2026-11-18T07:56:14.316792+09:00",
+      "raw_bytes": 57856,
+      "sha256": "47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478",
+      "byte_identity_equal_to_employer_original": true
+    },
+    "job_description_independent_receipt": {
+      "checked_at_actual": "2026-11-18T07:56:16.327650+09:00",
+      "raw_bytes": 82432,
+      "sha256": "bdc646e6357740bb8bbf103814a16bd532ead87e9a70c13ab22164574cf48b69",
+      "extracted_characters": 1590
+    },
+    "official_attachment_novel_semantic_facts": [
+      "Selected job unit 4 regular nurses, ward 3-shift; not prior older 1-nurse posting",
+      "Original application deadline Monday Nov 23 2026 10:00 KST (ALIO only date precision)",
+      "Mandatory nursing transcript cumulative percentage score >=80 or fail; transcript must include percentile",
+      "All 3 nurse licence, nursing school diploma/transcript, and ward clinical >=1yr service certificate required",
+      "Work unit and duties on service certificate mandatory; national pension/insurance printout not sufficient",
+      "Employer 2026-12-07 planned appointment, 3 shifts, interview 2026-12-01",
+      "Multiple same-hospital applications -> fail all"
+    ],
+    "full_original_read_action": "https://github.com/kllollain-max/careerpick/actions/runs/44194768350",
+    "official_original_artifact": "https://github.com/kllollain-max/careerpick/actions/runs/44194768350/artifacts/14377483860",
+    "read_status": "three real HWP originals acquired and parsed with source equality; semantic table independently reviewed"
   },
   "hold_reasons": [
-    "HWP original actual bytes and full semantic extraction pending",
-    "Exact application deadline hour unavailable in ALIO HTML",
+    "Original HWP semantics and exact 10:00 cutoff independently verified; NEXT: fresh recheck after 08:00 KST for Nov19 08:00 24h validity (07:56 is 24h+ before slot)",
+    "Official online portal currently inaccessible for live submission and correction/cancellation exhaustive confirmation",
+    "Need official site full active status, recruitment profile and pixel-based card if IMAGE, production validator and CAS",
     "Live submission form and cancellation/corrections not independently verified",
     "Need matching card/pixel verification if IMAGE and profile target verification",
     "Source checked_at and 24h freshness must be established only from actual future source rereads",
