@@ -39,7 +39,7 @@ jobs:
           from pathlib import Path
           import hashlib, re
           text = Path('original-80711.txt').read_text(encoding='utf-8')
-          normalized = re.sub(r'\\s+', '', text)
+          normalized = re.sub(r'\s+', '', text)
           assert '충주시시설관리공단' in normalized
           assert '공고제2026-97호' in normalized
           assert '일반행정' in normalized
@@ -47,7 +47,7 @@ jobs:
           print('semantic_identity_check=pass')
           print('text_bytes=', len(text.encode('utf-8')))
           print('text_sha256=', hashlib.sha256(text.encode('utf-8')).hexdigest())
-          print('form_feeds=', text.count('\\f'))
+          print('form_feeds=', text.count('\f'))
           PY
       - name: Store original and text as evidence only
         if: success()
