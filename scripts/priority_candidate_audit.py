@@ -137,13 +137,23 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
     # suppress a duplicate from the editor's regular-only 20-row work queue.
     # Leave the original cross-employment `top` output and public pages intact.
     verified_duplicate_representatives = verified_duplicate_representatives or {}
-    eligible_ids = {item['id'] for item in selected}
+    # Never hide a regular candidate behind a representative that cannot itself
+    # appear in this regular-20 review queue (mixed employment, title HOLD,
+    # unknown same-day opening hour, or another duplicate pointing onward).
+    # The source-original SHA checks are still the resolver's responsibility.
+    eligible_review_representatives = {
+        candidate['id'] for candidate in selected
+        if candidate['regular_only_classified']
+        and not candidate['official_start_day_clock_unconfirmed']
+        and not any(term in candidate['title'] for term in caution_terms)
+        and verified_duplicate_representatives.get(candidate['id'], candidate['id']) == candidate['id']
+    }
     for item in selected:
         if not item['regular_only_classified']:
             continue
         representative = verified_duplicate_representatives.get(item['id'])
         if (isinstance(representative, str) and representative != item['id']
-                and representative in eligible_ids):
+                and representative in eligible_review_representatives):
             verified_duplicate_exclusions.append({
                 'id': item['id'], 'representative_id': representative})
             continue
