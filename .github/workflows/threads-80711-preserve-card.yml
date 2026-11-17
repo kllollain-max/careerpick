@@ -29,6 +29,7 @@ jobs:
           headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],
                    'Accept':'application/vnd.github+json',
                    'User-Agent':'CareerPick-Threads-Verified-Asset-Preserve/1.0'}
+          # Requests drops the GitHub bearer token on cross-host signed blob redirects.
           r=requests.get(url,headers=headers,timeout=50,allow_redirects=True)
           r.raise_for_status()
           data=r.content
