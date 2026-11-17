@@ -1,0 +1,82 @@
+name: Threads 81199 official attachment independent verification (no publication)
+on:
+  push:
+    branches:
+      - review/threads-81199-official-20261118-0644
+    paths:
+      - .github/workflows/threads-81199-official-pdf-review.yml
+permissions:
+  contents: read
+jobs:
+  independent-official-pdf:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests pymupdf
+      - name: Fetch original employer notice and NCS description; hash and read every page
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,hashlib,json,pathlib,datetime,time,urllib.parse
+          import fitz
+          out=pathlib.Path("official-81199-evidence")
+          out.mkdir(exist_ok=True)
+          sources={
+            "notice":"https://www.ggcf.kr/index.php/attachment/20642/download",
+            "ncs_cultural_administration":"https://www.ggcf.kr/attachment/20648/download"
+          }
+          session=requests.Session()
+          session.headers["User-Agent"]="Mozilla/5.0 CareerPick official attachment independent reviewer"
+          receipts={}
+          for kind,url in sources.items():
+              for attempt in range(3):
+                  try:
+                      r=session.get(url,timeout=(12,35),allow_redirects=True)
+                      r.raise_for_status()
+                      break
+                  except requests.RequestException:
+                      if attempt==2:raise
+                      time.sleep((2,4)[attempt])
+              host=urllib.parse.urlparse(r.url).hostname
+              if host not in ("www.ggcf.kr","ggcf.kr"):
+                  raise ValueError("UNVERIFIED_EXTERNAL_REDIRECT: "+str(host))
+              data=r.content
+              if not data.startswith(b"%PDF-"):
+                  raise ValueError("ORIGINAL_ATTACHMENT_NOT_PDF: "+kind)
+              doc=fitz.open(stream=data,filetype="pdf")
+              pages=[page.get_text(sort=True) for page in doc]
+              text="\n\n=== PAGE BREAK ===\n\n".join(pages)
+              if len(text.strip())<450:
+                  raise ValueError("PDF_TEXT_TOO_SHORT: "+kind)
+              if "문화행정직" not in text:
+                  raise ValueError("TARGET_UNIT_MISSING_IN_PDF: "+kind)
+              if kind=="notice" and "경기문화재단" not in text:
+                  raise ValueError("EMPLOYER_MISSING_IN_NOTICE")
+              (out/(kind+".pdf")).write_bytes(data)
+              (out/(kind+".txt")).write_text(text,encoding="utf-8")
+              receipts[kind]={
+                "requested_url":url,"response_url":r.url,
+                "http_status":r.status_code,
+                "bytes":len(data),
+                "sha256":hashlib.sha256(data).hexdigest(),
+                "pages":len(pages),"page_text_character_counts":[len(t) for t in pages],
+                "checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "no_approval":True,"no_meta_post":True,"no_cas_registration":True
+              }
+          (out/"receipts.json").write_text(json.dumps(receipts,ensure_ascii=False,indent=2),encoding="utf-8")
+          print("INDEPENDENT_SOURCE_RECEIPT="+json.dumps(receipts,ensure_ascii=False))
+          print("NO_POST_NO_APPROVAL_NO_CAS")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-81199-independent-official-attachments
+          path: official-81199-evidence/
+          if-no-files-found: warn
+          retention-days: 14
