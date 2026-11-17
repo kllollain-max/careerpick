@@ -31,11 +31,15 @@
     return {detail:result,changed};
   }
   function confirmedApplicationStart(p){
-    if(!confirmedApplicationCutoff(p))return null;
-    const value=root.CP_VERIFIED_APPLICATION_CUTOFFS[p.id].start;
+    const proof=root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p.id];
+    if(!p.alio || !proof || proof.org!==p.org || proof.title!==p.title ||
+       !date(p.due) || day(date(p.due))!==proof.sourceEndDate)return null;
+    const cutoff=confirmedApplicationCutoff(p);
+    if(!cutoff && (!/^\d{4}-\d{2}-\d{2}$/.test(proof.endDate||'') || !date(proof.endDate)))return null;
+    const value=proof.start;
     if(typeof value!=='string' || !/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?$/.test(value))return null;
     const start=date(value);
-    return start && +start<=+confirmedApplicationCutoff(p) ? start : null;
+    return start && (cutoff ? +start<=+cutoff : day(start)<=proof.endDate) ? start : null;
   }
   function deadline(p, now = new Date()){
     const confirmed=confirmedApplicationCutoff(p);

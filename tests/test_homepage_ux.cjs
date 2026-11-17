@@ -360,3 +360,16 @@ test('display metadata cannot change other fields or supply a missing expected s
   evidence.corrections={recrutNope:{expected:source.recrutNope,value:'999'},disqlfcRsn:{value:'unverified'}};
   assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
 });
+test('a verified date-only window marks future reception without inventing a final clock',()=>{
+  const post=require('../alio.json').posts.find(p=>p.id==='a306963');
+  const proof={org:post.org,title:post.title,sourceEndDate:'2027-01-22',start:'2027-01-18',endDate:'2027-01-22'};
+  const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[post.id]:proof}},Date});
+  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
+  const api=context.window.CPHome;
+  assert.equal(api.confirmedApplicationCutoff(post),null);
+  assert.equal(api.deadline(post,new Date('2027-01-17T14:59:59Z')).cls,'upcoming');
+  assert.notEqual(api.deadline(post,new Date('2027-01-17T15:00:00Z')).cls,'upcoming');
+  assert.equal(api.deadline(post,new Date('2027-01-22T03:00:00Z')).cls,'verify');
+  assert.equal(api.confirmedApplicationStart({...post,title:'changed'}),null);
+  proof.endDate='2027-01-17';assert.equal(api.confirmedApplicationStart(post),null);
+});

@@ -130,7 +130,7 @@ class JobPageTests(unittest.TestCase):
         posts = json.loads((root / 'alio.json').read_text())['posts']
         original = copy.deepcopy(posts)
         result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_DUTIES)
-        self.assertEqual(set(result), set(CONFIRMED_APPLICATION_CUTOFFS))
+        self.assertEqual(set(result), set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929','a306963'})
         self.assertEqual(result['a306355']['cutoff'], '2026-11-16T10:00:00+09:00')
         self.assertEqual(result['a307034']['cutoff'], '2026-11-20T16:00:00+09:00')
         self.assertEqual(posts, original)
@@ -746,3 +746,15 @@ class DetailDisplayMetadataTests(unittest.TestCase):
         self.assertEqual((post,proof),before)
         for change in [{'title':'changed'},{'org':'other'},{'due':'2027-01-23'},{'alio':False}]:
             self.assertEqual(homepage_detail_corrections([dict(post,**change)],{'a1':proof},{}),{})
+
+class DateOnlyReceptionMetadataTests(unittest.TestCase):
+    def test_date_only_window_filters_future_static_list_without_a_fake_cutoff(self):
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        post=dict(id='a1',alio=True,org='기관',title='공고',due='2027-01-22')
+        proof=dict(organization='기관',title='공고',source_end_date='2027-01-22',application_start='2027-01-18',application_end_date='2027-01-22')
+        meta=homepage_cutoff_metadata([post],{}, {'a1':proof})
+        self.assertNotIn('cutoff',meta['a1'])
+        self.assertEqual(static_recruitment_posts([post],meta,datetime.fromisoformat('2027-01-17T23:59:59+09:00')),[])
+        self.assertEqual(static_recruitment_posts([post],meta,datetime.fromisoformat('2027-01-18T00:00:00+09:00')),[post])
+        for change in [{'title':'changed'},{'due':'2027-01-23'}]:
+            self.assertEqual(homepage_cutoff_metadata([dict(post,**change)],{}, {'a1':proof}),{})

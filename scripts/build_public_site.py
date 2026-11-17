@@ -54,6 +54,25 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
                     result[pid]['start'] = start
             except ValueError:
                 pass
+    # Preserve date-only reception facts without manufacturing a clock time.
+    for post in posts:
+        pid = post.get('id'); proof = duties.get(pid, {})
+        start, end = proof.get('application_start', ''), proof.get('application_end_date', '')
+        source_end = proof.get('source_end_date', '')
+        if (pid in result or post.get('alio') is not True
+                or proof.get('organization') != post.get('org') or proof.get('title') != post.get('title')
+                or not source_end or str(post.get('due', ''))[:10] != source_end
+                or not isinstance(start, str) or not isinstance(end, str)
+                or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', start)
+                or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', end)):
+            continue
+        try:
+            if datetime.fromisoformat(start) > datetime.fromisoformat(end):
+                continue
+        except ValueError:
+            continue
+        result[pid] = dict(org=post['org'], title=post['title'], sourceEndDate=source_end,
+                           start=start, endDate=end)
     return result
 
 def homepage_detail_corrections(posts, duties, cutoffs):
@@ -82,7 +101,7 @@ def static_recruitment_posts(posts, metadata, now):
     for post in posts:
         proof = metadata.get(post.get('id'), {})
         if proof:
-            if now >= datetime.fromisoformat(proof['cutoff']):
+            if proof.get('cutoff') and now >= datetime.fromisoformat(proof['cutoff']):
                 continue
             start = proof.get('start')
             if start:
