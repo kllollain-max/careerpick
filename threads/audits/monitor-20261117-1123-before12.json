@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-17 02:24:03 UTC",
+  "status": "FOUR_FUTURE_SLOTS_VALIDATED_AWAIT_REGULAR12",
+  "account": "hid_119",
+  "main_sha": "d2961ab57ffdd162c041d4520e5318e503a3d49f",
+  "policy_all_four_prompt_hashes": "matched_actual_bytes",
+  "latest_preflight": {
+    "run_id": 43995694798,
+    "run_attempt": 1,
+    "conclusion": "success",
+    "updated_at": "2026-11-17T01:28:19Z",
+    "head_sha": "61784610dd27b8c0ca1ff080ca1204a25ce6c3a7",
+    "preflight_job_id": 133747070390,
+    "publish_job": "skipped_expected_nonpublication_preflight",
+    "receipt_scope": "This run preceded a306875 CAS supply. Its approved3 inventory warning is historical; current full queue actually validates4.",
+    "then_next_slot_missing": false
+  },
+  "current": {
+    "stage_sha": "8e1fc047461ddef0e3a21de957d32ae47eef596b",
+    "queue_sha": "aff1f8f82162cb5b9f1ec04b1440466fabe49a01",
+    "total_queue": 40,
+    "total_staged": 9,
+    "full_remote_queue_validator": "passed",
+    "approved_future": [
+      {
+        "slot": "2026-11-17T12:00:00+09:00",
+        "id": "cleaneye-81115",
+        "chars": 347,
+        "planned_media": "IMAGE"
+      },
+      {
+        "slot": "2026-11-17T16:00:00+09:00",
+        "id": "cleaneye-81249",
+        "chars": 281,
+        "planned_media": "TEXT"
+      },
+      {
+        "slot": "2026-11-17T20:00:00+09:00",
+        "id": "cleaneye-80848",
+        "chars": 293,
+        "planned_media": "IMAGE"
+      },
+      {
+        "slot": "2026-11-18T08:00:00+09:00",
+        "id": "a306875",
+        "chars": 284,
+        "planned_media": "TEXT"
+      }
+    ],
+    "main_only_reply0_cta1": "all_passed",
+    "existing_image_cards": "both_exact_reviewed_bytes_full_pixels_passed",
+    "pending_history_records": 0,
+    "claims_read": 49,
+    "claim_read_failures": 0
+  },
+  "last_actual_publication": {
+    "notice_id": "a306913",
+    "published_at": "2026-11-17T08:30:48.358406+09:00",
+    "post_id": "18174469135462070",
+    "run_id": "43979806022",
+    "accepted_claim_sha": "8b262155615d56a2d0d895933b76583190841b7d",
+    "note": "Freshly reread ledger/claim, not a new officialMetaGET by this monitor; prior publisher verified output already reported."
+  },
+  "performance": {
+    "state_sha": "d2259dac3032bc6ac62ed01721ec9e965246330b",
+    "summarizer_exit": 0,
+    "observed_24h_posts": 4,
+    "median24h_views": 1653.5,
+    "observed_72h_posts": 6,
+    "median72h_views": 3253,
+    "followers": {
+      "start": 415,
+      "end": 484,
+      "delta": 69,
+      "actual_start": "2026-11-11T11:45:32.854727+00:00",
+      "actual_end": "2026-11-17T01:27:21.329054+00:00",
+      "post_attribution": null
+    },
+    "editorial_weight_change": false,
+    "performance_improvement_established": false
+  },
+  "new_manuscripts": 0,
+  "new_posts": 0,
+  "queue_or_stage_changes": false,
+  "manual_dispatches": 0,
+  "direct_meta_posts": 0,
+  "next_action": "Observe existing11:45preflight and12:00regularIMAGE publisher; do not count preflight success as a new publication."
+}
