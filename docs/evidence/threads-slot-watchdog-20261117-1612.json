@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "evidence_type": "threads_slot_watchdog_recovery",
+  "account": "@hid_119",
+  "repository": "kllollain-max/careerpick",
+  "regular_slot_kst": "2026-11-17T16:00:00+09:00",
+  "watchdog_observed_at_kst": "2026-11-17T16:11:01+09:00",
+  "pre_recovery": {
+    "main_sha": "af3e196b7d56ffba52cfaa25d4054a49aec59053",
+    "publisher_state_sha": "6fe11884fb29414e57654f577fcee961c03f38fb",
+    "history_record_present": false,
+    "claim_present": false,
+    "regular_workflow_run_present": false,
+    "approved_current_slot": {
+      "notice_id": "cleaneye-81249",
+      "scheduled_at": "2026-11-17T16:00:00+09:00",
+      "writer_status": "ready",
+      "verification_basis": "checked_official_source",
+      "missing_or_conflicting": []
+    }
+  },
+  "recovery_dispatch": {
+    "workflow": ".github/workflows/threads_auto.yml",
+    "confirmation": "PUBLISH",
+    "notice_id": "cleaneye-81249",
+    "nonce_slot_kst": "2026-11-17T16:11:00+09:00",
+    "run_id": 44036825332,
+    "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/44036825332",
+    "conclusion": "success"
+  },
+  "verified_result": {
+    "published_at_kst": "2026-11-17T16:12:31.825026+09:00",
+    "meta_get_checked_at_kst": "2026-11-17T16:12:32.444986+09:00",
+    "post_id": "18121803568969931",
+    "permalink": "https://www.threads.com/@hid_119/post/Df1XZxUEfLk",
+    "request_status": "confirmed",
+    "actual_text_sha256": "4487ee42786ea764238c8b7aaf967fa9c4c3f47f4ce9b9034b0881ecda7cef6f",
+    "body_chars": 281,
+    "media_type": "TEXT_POST",
+    "automatic_reply_count": 0,
+    "own_replies": 0,
+    "own_replies_status": "verified",
+    "meta_status": "verified",
+    "history_post_id_count": 1,
+    "notice_published_count": 1
+  },
+  "remote_claim": {
+    "path": "threads-claims/20261117T0700Z.json",
+    "state": "accepted",
+    "run_id": "44036825332",
+    "post_id": "18121803568969931",
+    "publisher_state_sha": "ac5d47c7203438c819fc02f43e24a48b0ff32926"
+  },
+  "main_history": {
+    "sha_after_publication": "553417b9100becb0aab4149272335b5188597787",
+    "status": "published",
+    "scheduled_at": "2026-11-17T16:00:00+09:00",
+    "single_record_verified": true
+  },
+  "next_regular_slot": {
+    "scheduled_at": "2026-11-17T20:00:00+09:00",
+    "notice_id": "cleaneye-80848",
+    "writer_status": "ready"
+  },
+  "protected_scope": {
+    "supportpick_hid_1004_modified": false,
+    "homepage_modified": false,
+    "collection_modified": false,
+    "search_modified": false,
+    "webpush_modified": false,
+    "cron_modified": false
+  }
+}
