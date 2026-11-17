@@ -109,12 +109,13 @@ jobs:
           import json,hashlib
           from pathlib import Path
           from PIL import Image
-          from scripts.create_thumbnail import generate,verify_thumbnail
+          from scripts.create_thumbnail import generate_compact_card,verify_thumbnail
           job={'id':'cleaneye-80711','org':'충주시시설관리공단','title':'행정9급(일반행정)',
                'count':3,'employment':'정규직','location':'충주시시설관리공단 사업장 내',
                'due':'2026-11-23','deadline_label':'2026-11-23 18:00','restriction':'충주 거주지 요건'}
-          jpg=generate(job)
-          info=verify_thumbnail(jpg)
+          jpg=Path('threads-images/cleaneye-80711.jpg')
+          info=generate_compact_card(job,jpg)
+          info.update(verify_thumbnail(jpg))
           with Image.open(jpg) as im:
               im.load()
               im.resize((360,360),Image.Resampling.LANCZOS).save(jpg.parent/'cleaneye-80711-360.png',format='PNG')
