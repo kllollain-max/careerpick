@@ -6,6 +6,8 @@ on:
       - 'scripts/threads_queue_bridge.py'
       - 'scripts/threads_reviewed_ingest.py'
       - 'tests/test_threads_future_media_plan.py'
+      - 'scripts/threads_media_preflight_check.py'
+      - 'tests/test_threads_media_preflight_check.py'
       - '.github/workflows/threads-future-media-preflight-check.yml'
 permissions:
   contents: read
@@ -28,21 +30,7 @@ jobs:
           GITHUB_REPOSITORY: kllollain-max/careerpick
         run: |
           python scripts/threads_queue_bridge.py --output threads-media-preflight-result.json
-          python - <<'PY'
-          import json
-          p=json.load(open('threads-media-preflight-result.json'))
-          print('APPROVED',p.get('approved_supply_count'),'MISSING',p.get('missing_slots'))
-          print('INVALID',p.get('invalid_ready_entries'))
-          bad=[x for x in p.get('invalid_ready_entries',[]) if
-               x.get('notice_id')=='cleaneye-81249' and
-               x.get('reason')=='CARD_VISUAL_REVIEW_REQUIRED']
-          if bad:
-              raise SystemExit('16:00 TEXT still incorrectly demands an IMAGE card')
-          required='2026-11-17T16:00:00+09:00'
-          if required not in p.get('approved_future_slots',[]):
-              raise SystemExit('16:00 reviewed slot not currently validated; do not certify')
-          print('SAFE_MEDIA_FORECAST_VERIFIED')
-          PY
+          python -m scripts.threads_media_preflight_check --report threads-media-preflight-result.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
