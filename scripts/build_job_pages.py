@@ -97,6 +97,16 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_url': 'https://www.snudh.org/portal/blindEmpmn/view.do?menuNo=29060340&empSeq=6676',
         'checked_on': '2026-11-17',
         'scope': 'Employer official HTML: in-person/postal reception starts 2027-01-18 09:00 and ends 2027-01-22 18:00; not ALIO publication start or a new job-duty original',
+        # SNUDH employer notice HTML 2026-11-11 says 2027 for expected dentist licensure,
+        # whereas the ALIO a306925 public qualification still says 2026.
+        # Keep collected originals unchanged and show the discrepancy only if
+        # the exact old phrase is still present in this notice's detail.
+        'qualification_year_discrepancy': {
+            'expected_alio_fragment': '2026년도 취득예정자',
+            'notice': ('ALIO 응시자격에는 2026년도 취득예정자로 표시되지만, '
+                       '서울대학교치과병원 공식 2027년도 인턴 모집공고에는 '
+                       '2027년도 취득예정자로 표시됩니다. 지원 전 기관 원문을 확인하세요.'),
+        },
     },
     'a306942': {
         'organization': '전남대학교병원',
@@ -385,6 +395,17 @@ def render(post, detail, related_posts=(), notice_review=None):
         ('원서 접수기간', confirmed_period or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
         *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
+
+    # Visible discrepancy, not a rewrite: an institution's 2027 eligibility
+    # wording differs from ALIO's older 2026 wording for this exact notice.
+    # If the collected detail changes, do not display stale editorial evidence.
+    qualification_delta = verified_application_notice.get('qualification_year_discrepancy')
+    if (isinstance(qualification_delta, dict)
+            and isinstance(detail.get('aplyQlfcCn'), str)
+            and isinstance(qualification_delta.get('expected_alio_fragment'), str)
+            and qualification_delta['expected_alio_fragment'] in detail['aplyQlfcCn']
+            and isinstance(qualification_delta.get('notice'), str)):
+        fields.append(('기관 공고와 ALIO 지원자격 연도 차이', qualification_delta['notice']))
 
     conflicts = []
     if post.get('n') is not None and detail.get('recrutNope') is not None and count_label(post['n']) != count_label(detail['recrutNope']):
