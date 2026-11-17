@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T22:37:32.058680+00:00",
-  "last_observed_at": "2026-11-17T22:37:32.058680+00:00",
+  "updated_at": "2026-11-17T23:21:01+00:00",
+  "last_observed_at": "2026-11-17T23:21:01+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13331,26 +13331,27 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-17T22:37:32.058680+00:00",
-    "status": "four_ready_validated_no_new_publication",
-    "regular_run_id": 44186391922,
-    "regular_report_at": "2026-11-18T07:04:49.907497+09:00",
+    "observed_at": "2026-11-17T23:21:01+00:00",
+    "status": "media_forecast_repaired_08_publication_pending",
+    "regular_run_id": 44196235724,
+    "regular_report_at": "2026-11-18T08:05:46.247128+09:00",
     "regular_conclusion": "success",
-    "ready_count": 4,
+    "future_ready_count": 3,
     "ready_ids": [
-      "a306875",
       "a306807",
       "cleaneye-81112",
       "a307141"
     ],
+    "active_pending_notice_id": "a306875",
+    "active_pending_slot": "2026-11-18T08:00:00+09:00",
     "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
     "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
-    "next_slot_missing": false,
     "pending_claims": 0,
     "new_meta_post_ids": [],
+    "recovery_pr": 130,
+    "recovery_main_sha": "f68d6ac0a4730a9172398aa2e042a93c9b729694",
     "next_slot": "2026-11-18T08:00:00+09:00",
-    "source_verified_at": "2026-11-18T01:08:02+09:00",
-    "audit_path": "threads/audits/monitor-20261118-0737.json"
+    "audit_path": "threads/audits/recovery-active-slot-media-20261118-0820.json"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20935,26 +20936,27 @@
       "audit_blob": "2d68d3ddde3cd17498a92699933dc2ef725c2305"
     },
     "latest_independent_monitor_check": {
-      "observed_at": "2026-11-17T22:37:32.058680+00:00",
-      "status": "four_ready_validated_no_new_publication",
-      "regular_run_id": 44186391922,
-      "regular_report_at": "2026-11-18T07:04:49.907497+09:00",
+      "observed_at": "2026-11-17T23:21:01+00:00",
+      "status": "media_forecast_repaired_08_publication_pending",
+      "regular_run_id": 44196235724,
+      "regular_report_at": "2026-11-18T08:05:46.247128+09:00",
       "regular_conclusion": "success",
-      "ready_count": 4,
+      "future_ready_count": 3,
       "ready_ids": [
-        "a306875",
         "a306807",
         "cleaneye-81112",
         "a307141"
       ],
+      "active_pending_notice_id": "a306875",
+      "active_pending_slot": "2026-11-18T08:00:00+09:00",
       "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
       "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
-      "next_slot_missing": false,
       "pending_claims": 0,
       "new_meta_post_ids": [],
+      "recovery_pr": 130,
+      "recovery_main_sha": "f68d6ac0a4730a9172398aa2e042a93c9b729694",
       "next_slot": "2026-11-18T08:00:00+09:00",
-      "source_verified_at": "2026-11-18T01:08:02+09:00",
-      "audit_path": "threads/audits/monitor-20261118-0737.json"
+      "audit_path": "threads/audits/recovery-active-slot-media-20261118-0820.json"
     },
     "latest_observation_status": {
       "checked_at": "2026-11-17 08:42:33 UTC",
@@ -20985,6 +20987,14 @@
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
       "audit_path": "threads/audits/monitor-20261117-1745-supply-performance.json"
+    },
+    "latest_media_forecast_recovery": {
+      "pr": 130,
+      "main_sha": "f68d6ac0a4730a9172398aa2e042a93c9b729694",
+      "local_tests": 440,
+      "ci_passed": 6,
+      "live_queue_run": 44197613811,
+      "status": "code_applied_publication_pending"
     }
   },
   "single_main_v2_writer_performance": {
