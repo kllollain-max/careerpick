@@ -122,7 +122,13 @@
     "production_changed": false,
     "ci_threads_regression_run": 44089815905,
     "ci_threads_regression": "success",
-    "other_ci": "in_progress_at_observation"
+    "other_ci": "in_progress_at_observation",
+    "local_all_threads_count": 449,
+    "local_all_threads_result": "passed (network/API calls mocked; zero live publish)",
+    "ci_migration_run": 44089815949,
+    "ci_migration": "success",
+    "ci_offline": "success",
+    "ci_mobile": "in_progress at2026-11-17T13:12:25Z"
   },
   "next_action": "After real scheduled source collection, reread main,history,claims,queue,staging and policy; preserve exact card bytes, update actual source digests if unchanged facts, rerun full validator/card, only then ready CAS. No force/bypass/manual dispatch.",
   "no_meta_post": true,
@@ -139,5 +145,19 @@
     "reader_replies": null,
     "reader_reply_status": "author_separation_unverified",
     "not_causal_improvement_claim": true
+  },
+  "stage_promotion_readback": {
+    "status": "refused_as_expected",
+    "reason": "STAGED_NOT_READY",
+    "queue_unchanged": true,
+    "promoted": 0,
+    "forecast_media_for_slot": "IMAGE"
+  },
+  "asset_commit_diff_verified": {
+    "added": [
+      "threads-images/a307141.jpg",
+      "threads-images/a307141-360.png"
+    ],
+    "other_changed_files": 0
   }
 }
