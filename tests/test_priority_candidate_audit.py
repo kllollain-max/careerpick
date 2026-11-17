@@ -201,6 +201,68 @@ class PriorityAuditTests(unittest.TestCase):
         # supplied by the identity-bound resolver may remove it.
         self.assertIn('a4', [r['id'] for r in after['regular_review_candidates']])
 
+
+    def test_date_only_start_on_today_is_not_certified_as_current_regular_opening(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        now = datetime(2026, 11, 18, 3, 19, tzinfo=ZoneInfo('Asia/Seoul'))
+        post = dict(row('a307067', due='2026-12-01', emp=['정규직'], n='6'),
+                    alio=True, org='신용보증재단중앙회', title='정규직 신입')
+        proof = {'a307067': dict(organization=post['org'], title=post['title'],
+                                 source_end_date='2026-12-01',
+                                 application_start='2026-11-18',
+                                 application_end_date='2026-12-01')}
+        feed = {'posts': [post]}
+        before = __import__('copy').deepcopy(feed)
+        report = shortlist(feed, date(2026, 11, 18), verified_windows=proof,
+                           as_of_instant=now)
+        # A public listing can remain a candidate, but same-day unknown
+        # opening hour must not be certified as part of the current regular-20.
+        self.assertEqual([x['id'] for x in report['top']], ['a307067'])
+        self.assertEqual(report['regular_review_candidate_rows'], 0)
+        self.assertEqual(report['regular_start_day_clock_unconfirmed_hold_ids'], ['a307067'])
+        self.assertTrue(report['top'][0]['official_start_day_clock_unconfirmed'])
+        tomorrow = shortlist(feed, date(2026, 11, 19), verified_windows=proof,
+                             as_of_instant=datetime(2026, 11, 19, 0, 1,
+                                                    tzinfo=ZoneInfo('Asia/Seoul')))
+        self.assertEqual(tomorrow['regular_review_candidate_rows'], 1)
+        self.assertEqual(tomorrow['regular_start_day_clock_unconfirmed_hold_ids'], [])
+        historical = shortlist(feed, date(2026, 11, 18), verified_windows=proof)
+        self.assertEqual(historical['regular_review_candidate_rows'], 1)
+        changed = shortlist({'posts': [dict(post, title='변경된 공고')]},
+                            date(2026, 11, 18), verified_windows=proof,
+                            as_of_instant=now)
+        self.assertEqual(changed['regular_review_candidate_rows'], 1)
+        self.assertEqual(feed, before)
+
+    def test_official_date_only_end_excludes_after_end_not_on_end_day(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        kst = ZoneInfo('Asia/Seoul')
+        post = dict(row('a1', due='2026-12-01', emp=['정규직'], n='2'),
+                    alio=True, org='기관A', title='정규직 경력')
+        proof = {'a1': dict(organization=post['org'], title=post['title'],
+                            source_end_date='2026-12-01',
+                            application_start='2026-11-01',
+                            application_end_date='2026-11-17')}
+        last_day = shortlist({'posts':[post]}, date(2026, 11, 17),
+                             verified_windows=proof,
+                             as_of_instant=datetime(2026, 11, 17, 23, 59, tzinfo=kst))
+        self.assertEqual([x['id'] for x in last_day['top']], ['a1'])
+        next_day = shortlist({'posts':[post]}, date(2026, 11, 18),
+                             verified_windows=proof,
+                             as_of_instant=datetime(2026, 11, 18, 0, 1, tzinfo=kst))
+        self.assertEqual(next_day['excluded']['official_reception_closed_by_date'], 1)
+        self.assertEqual(next_day['regular_review_candidate_rows'], 0)
+        # Unchanged but outdated confirmation must not suppress a reissued notice.
+        revised = shortlist({'posts':[dict(post, due='2026-12-02')]},
+                            date(2026, 11, 18), verified_windows=proof)
+        self.assertEqual(len(revised['top']), 1)
+        # An inconsistent official window is not sufficient evidence to exclude.
+        bad = {'a1': {**proof['a1'], 'application_start': '2026-11-25'}}
+        self.assertEqual(len(shortlist({'posts':[post]}, date(2026, 11, 18),
+                                       verified_windows=bad)['top']), 1)
+
     def test_no_fake_popularity_or_count(self):
         self.assertIsNone(seat_count('10명'))
         self.assertIsNone(seat_count('-1'))
