@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17 08:42:33 UTC",
-  "last_observed_at": "2026-11-17 08:42:33 UTC",
+  "updated_at": "2026-11-17 10:06:31 UTC",
+  "last_observed_at": "2026-11-17 10:06:31 UTC",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13331,21 +13331,35 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at_utc": "2026-11-17 08:42:33 UTC",
-    "status": "THREE_FUTURE_SLOTS_PASS_LATE_REGULAR16_DUPLICATE_GUARD_VERIFIED_NEW_METRICS_SOURCE_RECOVERED",
+    "observed_at_utc": "2026-11-17 10:06:31 UTC",
+    "status": "READY_STAGED_QUEUE_PROMOTED_FULL_READBACK_VALIDATED_NOT_PUBLISHED",
+    "notice_id": "cleaneye-81112",
+    "scheduled_at": "2026-11-18T16:00:00+09:00",
+    "planned_media": "TEXT",
+    "stage_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
+    "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
+    "full_remote_validator": "passed",
+    "ready_future_slots": [
+      "2026-11-17T20:00:00+09:00",
+      "2026-11-18T08:00:00+09:00",
+      "2026-11-18T12:00:00+09:00",
+      "2026-11-18T16:00:00+09:00"
+    ],
+    "actual_post_id": null,
+    "audit_path": "threads/audits/supply-cleaneye-81112-20261118-16-ready-20261117-1906.json",
+    "audit_blob": "b9a7a166cd525573878b06f2759b87cc7f7db4c7",
+    "entry_sha256": "40a444398271b62e6c0b8af7a738ee752adcafc7ff06ea5900d281e47e8b8482",
+    "body_chars": 326,
+    "next_action": "Existing regular preflight/publisher observation only; no manual dispatch or POST.",
     "main_sha": "84af0cefbcf0cc42bb187c3e5c5752eaa40c6618",
-    "queue_sha": "882b4ebc1c5d8e82648e34d0df6ba953c39e3f8f",
-    "stage_sha": "931eef7b77b1f550f58d9eef71a1fa241ba265fb",
-    "performance_sha": "8c228af0d29a8f628fb15bba5f9ee8e30947fb09",
-    "latest_preflight_run_id": 44046932829,
-    "regular16_run_id": 44045639462,
-    "regular16_no_duplicate_POST_verified": true,
+    "validated_future_slots": 4,
     "new_posts_observed": 0,
-    "validated_future_slots": 3,
-    "first_unsupplied_future_slot": "2026-11-18T16:00:00+09:00",
-    "candidate_hold": "cleaneye-81054",
-    "audit_path": "threads/audits/monitor-20261117-1745-supply-performance.json",
-    "audit_sha": "28bee2e2b1fdca15c99ddfcc1621095ab583294b"
+    "pending_claims": 0,
+    "first_unsupplied_future_slot": "2026-11-18T20:00:00+09:00",
+    "latest_actual_post_id": "18121803568969931",
+    "latest_run_id": 44046932829,
+    "latest_run_conclusion": "success",
+    "automation_enabled": true
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20258,37 +20272,26 @@
       "performance_improvement": "not_established_insufficient_unbalanced_sample"
     },
     "latest_independent_writer_check": {
-      "observed_at_utc": "2026-11-17 05:29:37 UTC",
-      "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
-      "notice_id": "a306807",
-      "scheduled_at": "2026-11-18T12:00:00+09:00",
-      "planned_media": "IMAGE",
-      "stage_sha": "931eef7b77b1f550f58d9eef71a1fa241ba265fb",
-      "queue_sha": "882b4ebc1c5d8e82648e34d0df6ba953c39e3f8f",
+      "observed_at_utc": "2026-11-17 10:06:31 UTC",
+      "status": "READY_STAGED_QUEUE_PROMOTED_FULL_READBACK_VALIDATED_NOT_PUBLISHED",
+      "notice_id": "cleaneye-81112",
+      "scheduled_at": "2026-11-18T16:00:00+09:00",
+      "planned_media": "TEXT",
+      "stage_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
+      "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
       "full_remote_validator": "passed",
       "ready_future_slots": [
-        "2026-11-17T16:00:00+09:00",
         "2026-11-17T20:00:00+09:00",
         "2026-11-18T08:00:00+09:00",
-        "2026-11-18T12:00:00+09:00"
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00"
       ],
       "actual_post_id": null,
-      "audit_path": "threads/audits/supply-a306807-20261118-12-final-degree-wording.json",
-      "audit_blob": "db8cafaa9a0f920f80ef34a44602d42667ce00fc",
-      "next_action": "Observe existing regular publisher only; no extra dispatch or POST.",
-      "body_chars": 323,
-      "scheduled_preflight_acceptance": {
-        "run_id": 44030015033,
-        "run_attempt": 1,
-        "head_sha": "af3e196b7d56ffba52cfaa25d4054a49aec59053",
-        "actual_report_time": "2026-11-17T15:16:46.715291+09:00",
-        "conclusion": "success",
-        "approved_future_slots_count": 4,
-        "notice_id": "a306807",
-        "scheduled_at": "2026-11-18T12:00:00+09:00",
-        "actual_meta_post_id": null,
-        "audit_path": "threads/audits/monitor-20261117-1552-before16.json"
-      }
+      "audit_path": "threads/audits/supply-cleaneye-81112-20261118-16-ready-20261117-1906.json",
+      "audit_blob": "b9a7a166cd525573878b06f2759b87cc7f7db4c7",
+      "entry_sha256": "40a444398271b62e6c0b8af7a738ee752adcafc7ff06ea5900d281e47e8b8482",
+      "body_chars": 326,
+      "next_action": "Existing regular preflight/publisher observation only; no manual dispatch or POST."
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
@@ -26449,5 +26452,27 @@
       "Full review.v5 metadata and actual validate_entry with recovered attachment route",
       "Future slot fresh claims/history/media validation then staging CAS/queue promotion/readback"
     ]
+  },
+  "writer_supply_recovery_20261117_1906": {
+    "observed_at_utc": "2026-11-17 10:06:31 UTC",
+    "status": "READY_STAGED_QUEUE_PROMOTED_FULL_READBACK_VALIDATED_NOT_PUBLISHED",
+    "notice_id": "cleaneye-81112",
+    "scheduled_at": "2026-11-18T16:00:00+09:00",
+    "planned_media": "TEXT",
+    "stage_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
+    "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
+    "full_remote_validator": "passed",
+    "ready_future_slots": [
+      "2026-11-17T20:00:00+09:00",
+      "2026-11-18T08:00:00+09:00",
+      "2026-11-18T12:00:00+09:00",
+      "2026-11-18T16:00:00+09:00"
+    ],
+    "actual_post_id": null,
+    "audit_path": "threads/audits/supply-cleaneye-81112-20261118-16-ready-20261117-1906.json",
+    "audit_blob": "b9a7a166cd525573878b06f2759b87cc7f7db4c7",
+    "entry_sha256": "40a444398271b62e6c0b8af7a738ee752adcafc7ff06ea5900d281e47e8b8482",
+    "body_chars": 326,
+    "next_action": "Existing regular preflight/publisher observation only; no manual dispatch or POST."
   }
 }
