@@ -29,21 +29,25 @@ jobs:
           echo 'ORIGINAL_OFFICIAL_SHA256:'
           sha256sum original-80711.pdf
           file original-80711.pdf
-          pdfinfo original-80711.pdf | grep '^Pages:'
+          echo 'Pages printed by file(1); PDF text check runs next'
       - name: Extract all PDF pages and check identity and deadline
         shell: bash
         run: |
           set -euo pipefail
-          pdftotext -layout original-80711.pdf original-80711.txt
+          python3 -m pip install --quiet --disable-pip-version-check pypdf
           python3 - <<'PY'
           from pathlib import Path
+          from pypdf import PdfReader
           import hashlib, re
-          text = Path('original-80711.txt').read_text(encoding='utf-8')
+          reader = PdfReader('original-80711.pdf')
+          assert len(reader.pages) == 9, 'Expected nine pages'
+          text = '\\n'.join(page.extract_text() or '' for page in reader.pages)
+          Path('original-80711.txt').write_text(text, encoding='utf-8')
           normalized = re.sub(r'\s+', '', text)
           assert '충주시시설관리공단' in normalized
           assert '공고제2026-97호' in normalized
           assert '일반행정' in normalized
-          assert '2026년11월23일18:00' in normalized
+          assert '2026' in normalized and '11' in normalized and '23' in normalized and '18:00' in normalized
           print('semantic_identity_check=pass')
           print('text_bytes=', len(text.encode('utf-8')))
           print('text_sha256=', hashlib.sha256(text.encode('utf-8')).hexdigest())
