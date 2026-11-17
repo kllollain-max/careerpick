@@ -117,6 +117,21 @@ VERIFIED_APPLICATION_NOTICES = {
         'hiring_breakdown': '정규직 9명 · 무기계약직 14명 (합계 23명)',
         'scope': 'Nara Iltter official notice 308183: application dates 2026-11-13 to 11-26 10:00 KST and employment types 9+14; not attachment/PDF byte validation or duties verification',
     },
+    # 2026-11-18 employer-operated NPS recruitment portal (readable HTML).
+    # This confirms the reception DATE window, not the precise cutoff clock.
+    # ALIO official detail provides total regular positions (2), domestic
+    # lawyer qualification and role-specific three-year experience. The
+    # 1+1 allocation is NOT confirmed. No PDF/HWP bytes read in this check.
+    'a306988': {
+        'organization': '국민연금공단',
+        'title': '2026년 제1차 국민연금공단 준법감시담당자(기금운용직) 채용공고',
+        'source_end_date': '2026-12-01',
+        'application_start': '2026-11-17',
+        'application_end_date': '2026-12-01',
+        'source_url': 'https://www.nps.or.kr/pnsgdnc/hiregdnc/getOHAE0005M0.do',
+        'checked_on': '2026-11-18',
+        'scope': 'Employer recruitment portal: recruiting and application dates 11/17-12/01; official ALIO public detail: regular total 2 for compliance and domestic lawyer careers with domestic lawyer license and 3+ years applicable experience. Track counts and exact cutoff time unverified. No PDF/HWP byte inspection.',
+    },
     # Official JOB-ALIO a307149 details, read 2026-11-17: the announcement
     # appears 11/17, but applications do NOT begin until 11/24. Neither
     # opening clock nor closing clock was confirmed: preserve date-only.

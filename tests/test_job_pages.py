@@ -252,6 +252,35 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('2026-11-24 ~ 2026-12-01', render(altered, {}))
         self.assertEqual(post, before)
 
+    def test_nps_306988_employer_date_window_does_not_fabricate_clock(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.build_public_site import homepage_cutoff_metadata
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        pid = 'a306988'
+        post = posts[pid]
+        before = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES[pid]
+        self.assertEqual(proof['organization'], post['org'])
+        self.assertEqual(proof['title'], post['title'])
+        self.assertEqual(proof['source_end_date'], post['due'][:10])
+        self.assertEqual(proof['application_start'], '2026-11-17')
+        self.assertEqual(proof['application_end_date'], '2026-12-01')
+        self.assertNotIn(pid, CONFIRMED_APPLICATION_CUTOFFS)
+        html = render(post, {})
+        self.assertIn('2026-11-17 ~ 2026-12-01 (마감시각 공식 공고 확인 필요)', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('2026-12-01 23:59 (KST)', html)
+        metadata = homepage_cutoff_metadata([post], {}, {pid: proof})
+        self.assertEqual(metadata[pid]['start'], '2026-11-17')
+        self.assertEqual(metadata[pid]['endDate'], '2026-12-01')
+        self.assertNotIn('cutoff', metadata[pid])
+        for change in ({'org': '다른 기관'}, {'title': '정정 공고'},
+                       {'due': '2026-12-02T23:59:00+09:00'}, {'alio': False}):
+            altered = dict(post, **change)
+            self.assertEqual(homepage_cutoff_metadata([altered], {}, {pid: proof}), {})
+            self.assertNotIn('2026-11-17 ~ 2026-12-01', render(altered, {}))
+        self.assertEqual(post, before)
+
     def test_new_official_windows_preserve_publication_and_source_data(self):
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
         for pid, start, end in [('a307067', '2026-11-18', '2026-12-01 15:00'),
