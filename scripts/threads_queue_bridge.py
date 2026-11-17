@@ -159,8 +159,25 @@ def verify_entry(entry, now, history, policy, source, details, *, expected_media
 
 
 
+
+def pending_active_slot(entry, now, history):
+    """A pre-reviewed, unstarted slot still inside grace may affect forecasts only.
+
+    Published or started receipts never count twice. This does not reserve,
+    publish, modify history or relax any entry/card/source validator.
+    """
+    if not isinstance(entry, dict) or entry.get('scheduled_at') in future_slots(now):
+        return False
+    if not eligible_staged_slot(entry, now):
+        return False
+    if entry.get('notice_id') in history.get('posted_ids', []):
+        return False
+    return not any(r.get('scheduled_at') == entry.get('scheduled_at')
+                   for r in history.get('records', []))
+
+
 def media_for_slot(history, prior_entries, target_slot, now, policy, source, details):
-    """Forecast the next media using only earlier, individually valid queue entries.
+    """Forecast media from valid earlier future or unstarted grace-window entries.
 
     The *latest published receipt* determines the first future media type.
     A verified earlier planned IMAGE turn flips the following slot to TEXT,
@@ -180,7 +197,7 @@ def media_for_slot(history, prior_entries, target_slot, now, policy, source, det
             continue
         slot = item.get('scheduled_at')
         if (not isinstance(slot, str) or slot >= target_slot
-                or slot not in future_slots(now)):
+                or (slot not in future_slots(now) and not pending_active_slot(item, now, history))):
             continue
         try:
             verify_entry(item, now, history, policy, source, details,
@@ -259,11 +276,14 @@ def supply_status(entries, now):
 def verified_supply_status(entries, now, history, policy, source, details):
     """Only currently validated ready entries count as supplied; no writes."""
     readiness = supply_status(entries, now)
-    valid_slots, invalid_ready = set(), []
+    valid_slots, invalid_ready, active_pending = set(), [], []
     next_planned_media = next_media(history)
     for entry in sorted(
             entries, key=lambda e: str(e.get('scheduled_at', '')) if isinstance(e, dict) else ''):
-        if not isinstance(entry, dict) or entry.get('scheduled_at') not in readiness['future_slots']:
+        if not isinstance(entry, dict):
+            continue
+        active = pending_active_slot(entry, now, history)
+        if entry.get('scheduled_at') not in readiness['future_slots'] and not active:
             continue
         if not isinstance(entry.get('writer'), dict) or entry['writer'].get('status') != 'ready':
             continue
@@ -273,6 +293,8 @@ def verified_supply_status(entries, now, history, policy, source, details):
             verify_entry(entry, now, history, policy, source, details,
                          expected_media=next_planned_media)
             valid_slots.add(entry['scheduled_at'])
+            if active:
+                active_pending.append(entry['scheduled_at'])
             next_planned_media = 'TEXT' if next_planned_media == 'IMAGE' else 'IMAGE'
         except (ValueError, KeyError, TypeError, RuntimeError) as exc:
             invalid_ready.append({'notice_id': entry.get('notice_id'),
@@ -284,7 +306,9 @@ def verified_supply_status(entries, now, history, policy, source, details):
             'approved_inventory_count': len(approved), 'inventory_target': SUPPLY_TARGET,
             'inventory_shortfall': max(0, SUPPLY_TARGET - len(approved)),
             'replenishment_required': len(approved) < SUPPLY_TARGET,
-            'invalid_ready_entries': invalid_ready}
+            'invalid_ready_entries': invalid_ready,
+            'pending_active_slots': active_pending,
+            'media_forecast_conditional_on_active_slot': bool(active_pending)}
 
 
 def request(method, path, token, payload=None):
