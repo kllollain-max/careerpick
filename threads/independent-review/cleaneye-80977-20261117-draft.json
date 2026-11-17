@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "notice_id": "cleaneye-80977",
-  "status": "INDEPENDENT_PDF_SEMANTIC_DRAFT_UNAPPROVED",
+  "status": "OFFICIAL_PDF_AND_2_ROLE_HWP_SEMANTIC_DRAFT_UNAPPROVED_TLS_UNVERIFIED",
   "approved_for_queue": false,
   "meta_posted": false,
   "slot_reserved": false,
@@ -46,14 +46,58 @@
   "workflow": {
     "run": "https://github.com/kllollain-max/careerpick/actions/runs/44034625687",
     "job_id": 133874408081,
-    "other_run": "https://github.com/kllollain-max/careerpick/actions/runs/44034925349"
+    "other_run": "https://github.com/kllollain-max/careerpick/actions/runs/44034925349",
+    "hwp_full_text_run": "https://github.com/kllollain-max/careerpick/actions/runs/44035876318",
+    "hwp_job_id": 133878504055
   },
   "blockers": [
+    "Original PDF and both role-level HWP full semantics independently read; TLS certificate remains unverified, so not an authenticated publication receipt",
     "Employer TLS certificate-chain verification failed; source bytes exploratory only, not verified official receipt",
-    "Full ZIP job-description evidence and corrections across all employer channels pending",
     "Rendered CareerPick profile/employer exact link not independently verified",
     "No fresh 24h official verification for later slot; production validate_entry/card/CAS not run",
     "Source-backed workplace not determined"
   ],
-  "policy": "Do not promote from this draft, do not change clocks or reassign existing slots"
+  "policy": "Do not promote from this draft, do not change clocks or reassign existing slots",
+  "role_attachments": {
+    "zip_url": "https://cbf.or.kr/twb_bbs/bbs_download.php?bcd=01_05_05_00_00&bn=346&num=1",
+    "zip_bytes": 259453,
+    "zip_sha256": "521fb1cf31c5e34db02370635fabd0b22886046207aaaf8fd8767de86487c3cf",
+    "read_at_kst": "2026-11-17T16:05:27+09:00",
+    "tls_certificate_chain_validated": false,
+    "zip_members": 5,
+    "independent_full_text_read": true,
+    "job_descriptions": [
+      {
+        "unit": "사업기획 및 관리·운영",
+        "employment": "정규직",
+        "kind": "전문직 원급",
+        "count": 1,
+        "hwp_bytes": 85504,
+        "hwp_sha256": "5e2fb8692dc72c9936bfbc270924f2253f3c0784eea4db0f71fc76b4efeb1a14",
+        "hwp_decoded_chars": 1567,
+        "hwp_records": 68,
+        "verified_duties": [
+          "AI양자 융복합 바이오헬스 정책/산업화 기획",
+          "중앙·지방정부 정책자료 조사·분석",
+          "중앙정부/지자체 과제계획 수립",
+          "대외기관 협력·자료 대응"
+        ]
+      },
+      {
+        "unit": "바이오산업 분야 인력양성 및 기업지원",
+        "employment": "정규직",
+        "kind": "일반직 원급",
+        "count": 1,
+        "hwp_bytes": 51712,
+        "hwp_sha256": "45eace4cd18c363d6bd0cb98842dbc63cf61bf75af6686789db6caea1d013b58",
+        "hwp_decoded_chars": 2193,
+        "hwp_records": 84,
+        "verified_duties": [
+          "교육생 모집·선발·교육과정 운영",
+          "바이오기업 성장·기술사업화 지원",
+          "정부지자체사업 예산·성과관리"
+        ]
+      }
+    ]
+  }
 }
