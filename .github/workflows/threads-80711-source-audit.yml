@@ -41,7 +41,7 @@ jobs:
           import hashlib, re
           reader = PdfReader('original-80711.pdf')
           assert len(reader.pages) == 9, 'Expected nine pages'
-          text = '\\n'.join(page.extract_text() or '' for page in reader.pages)
+          text = '\n'.join(page.extract_text() or '' for page in reader.pages)
           Path('original-80711.txt').write_text(text, encoding='utf-8')
           normalized = re.sub(r'\s+', '', text)
           assert '충주시시설관리공단' in normalized
