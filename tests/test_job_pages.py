@@ -26,6 +26,8 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('<th scope="row">병동</th><td>50명</td>', html)
         self.assertIn('근무경험만으로 자격증 요건을 대신', html)
         self.assertIn('실제 원서접수 마감시각으로 사용하지 않으며', html)
+        self.assertIn('2026-11-11 ~ 2026-11-20 (마감시각 공식 공고 확인 필요)', html)
+        self.assertIn('fileNo=3086118', html)
         self.assertEqual((post, detail), originals)
 
     def test_snubh_requirements_table_rejects_changed_or_wrong_source(self):
@@ -410,12 +412,14 @@ class JobPageTests(unittest.TestCase):
         original = copy.deepcopy(posts)
         result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS,
                                           {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES})
-        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963'}
+        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963', 'a306875'}
         if any(p.get('id') == 'a307149' for p in posts):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
             expected.add('a306988')  # employer-confirmed date-only window, no invented clock
         self.assertEqual(set(result), expected)
+        self.assertEqual(result['a306875']['endDate'], '2026-11-20')
+        self.assertNotIn('cutoff', result['a306875'])
         self.assertEqual(result['a306355']['cutoff'], '2026-11-16T10:00:00+09:00')
         self.assertEqual(result['a307034']['cutoff'], '2026-11-20T16:00:00+09:00')
         self.assertEqual(posts, original)

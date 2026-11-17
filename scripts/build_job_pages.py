@@ -67,6 +67,10 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_end_date': '2026-11-20',
         'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306875',
         'checked_on': '2026-11-18',
+        'application_start': '2026-11-11',
+        'application_end_date': '2026-11-20',
+        'notice_source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3086118',
+        'notice_source_sha256': '673c2e9f3ba930f5c4d69b9bcf1a7410f44818ae26228059f4ef84f81f9f2e82',
         'qualification_sha256': '2024e16e7fce0db8cdc3a5633b17fa8200d330a899d7736e00468b3f8c521331',
         'reported_total': '66',
         'field_requirements': [
@@ -78,7 +82,7 @@ VERIFIED_APPLICATION_NOTICES = {
             ('시설유지보수(기계)', 4, '온수온돌·공조냉동기계·자동화설비·용접 분야·위험물·가스·에너지관리 기능사 중 1개 이상. 해당 상위 자격도 인정'),
             ('시설유지보수(환경처리)', 1, '환경기능사 또는 수질환경산업기사 이상 중 1개 이상'),
         ],
-        'scope': '공개 ALIO 지원자격의 분야별 인원·필수요건 대조. 실제 접수기간·마감시각과 새로운 PDF 직무 검증이 아님.',
+        'scope': '공개 ALIO 지원자격과 공고문 PDF 1쪽의 분야별 인원·필수요건, PDF 3쪽의 접수 날짜 대조. 정확한 마감시각은 공고문에 미기재. 기존 외래 직무 검증 범위는 유지.',
     },
     # Original PDFs already reviewed in VERIFIED_DUTIES (39-record count unchanged).
     # These independent employer notices corroborate the actual reception clocks.
@@ -468,7 +472,8 @@ def render(post, detail, related_posts=(), notice_review=None):
                 '2차에서도 기준에 못 미치면 임용취소 또는 계약해지가 가능하다고 안내합니다. '
                 '합격 후 임용후보자로 대기할 수 있으므로 합격 발표일을 출근일로 단정하지 마세요.</p>'
                 '<p>이 표는 모집인원·자격 비교입니다. 각 분야의 상세 담당업무를 새로 검증한 표가 아닙니다. '
-                '게시 종료일 11월 20일을 실제 원서접수 마감시각으로 사용하지 않으며, 접수기간·시각은 기관 공고 확인 필요입니다.</p>')
+                '공고문에서 접수기간 11월 11~20일은 확인했지만 정확한 마감시각은 확인되지 않았습니다. '
+                '게시 종료시각을 실제 원서접수 마감시각으로 사용하지 않으며, 마감시각은 기관 공고 확인 필요입니다.</p>')
         reception = ('<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>') if confirmed_period else ''
         if proof_url and (reception or field_review):
             application_review_html = (
@@ -478,6 +483,11 @@ def render(post, detail, related_posts=(), notice_review=None):
                 + '</p><p><a href="' + escape(proof_url, quote=True)
                 + '" target="_blank" rel="noopener noreferrer">대조한 공식 원문</a> · 확인일: '
                 + escape(proof_date) + ' · 최신 정정 공고가 우선합니다.</p></section>')
+            notice_url = safe_url(verified_application_notice.get('notice_source_url'))
+            if notice_url:
+                application_review_html = application_review_html.removesuffix('</section>') + (
+                    '<p><a href="' + escape(notice_url, quote=True)
+                    + '" target="_blank" rel="noopener noreferrer">대조한 공식 첨부 공고문</a></p></section>')
 
     # 표시하는 내용은 ALIO 원본 필드에 존재하는 사실만 사용합니다.
     detail = detail if isinstance(detail, dict) else {}
