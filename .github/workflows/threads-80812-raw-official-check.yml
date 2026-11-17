@@ -1,0 +1,109 @@
+name: Threads 80812 independent official HWP acquisition (no publish)
+on:
+  push:
+    branches:
+      - review/threads-80812-official-20261118-0245
+    paths:
+      - .github/workflows/threads-80812-raw-official-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  raw-official-receipt:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only official HWP parser
+        run: python -m pip install --quiet olefile requests
+      - name: Download exact Cleaneye official attached HWP and independently extract complete section text
+        env:
+          OFFICIAL_HWP_URL: "https://job.cleaneye.go.kr/file/FileDownload.do?FILE_PATH=ypMng%7Cjobplus%7C2026%7C&ORIGINAL_FILENAME=%E2%98%85+%5B%EA%B3%B5%EA%B3%A0%5D_2026%EB%85%84+%EC%A0%9C3%ED%9A%8C+%EB%B6%80%ED%8F%89%EA%B5%AC%EC%8B%9C%EC%84%A4%EA%B4%80%EB%A6%AC%EA%B3%B5%EB%8B%A8+%EC%A7%81%EC%9B%90+%EA%B3%B5%EA%B0%9C%EA%B2%BD%EC%9F%81+%EC%B1%84%EC%9A%A9%EC%8B%9C%ED%97%98+%EA%B3%B5%EA%B3%A0.hwp&UPLOAD_FILENAME=20261030291648589_007004_2007100290.hwp"
+        run: |
+          python - <<'PY'
+          import hashlib,io,json,os,pathlib,struct,time,zlib
+          import olefile,requests
+          from datetime import datetime,timezone
+          evidence=pathlib.Path('official-80812-review-evidence')
+          evidence.mkdir(exist_ok=True)
+          url=os.environ['OFFICIAL_HWP_URL']
+          result={'notice_id':'cleaneye-80812','source_url':url,
+                  'checked_at_utc':datetime.now(timezone.utc).isoformat(),
+                  'downloaded':False,'parsed':False,'verified_meaning':False,
+                  'approved':False,'meta_posted':False,'cas_updated':False}
+          try:
+              if not url.startswith('https://job.cleaneye.go.kr/file/FileDownload.do?'):
+                  raise ValueError('not the pinned official Cleaneye attachment endpoint')
+              s=requests.Session()
+              s.headers.update({'User-Agent':'Mozilla/5.0 CareerPick-Source-Verification/1.0',
+                                'Accept':'application/octet-stream,*/*'})
+              resp=None
+              for attempt in range(3):
+                  try:
+                      resp=s.get(url,timeout=(10,25),allow_redirects=True)
+                      resp.raise_for_status()
+                      if resp.content and len(resp.content)>4000:break
+                      raise ValueError('official response empty or too small')
+                  except (requests.RequestException,ValueError):
+                      if attempt==2:raise
+                      time.sleep(2 if attempt==0 else 4)
+              raw=resp.content
+              result.update(http_status=resp.status_code,final_url=resp.url,
+                            content_type=resp.headers.get('Content-Type'),
+                            size_bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),
+                            downloaded=True)
+              if not olefile.isOleFile(io.BytesIO(raw)):
+                  raise ValueError('official file is not a valid OLE HWP; no semantic approval')
+              doc=olefile.OleFileIO(io.BytesIO(raw))
+              paths=[x for x in doc.listdir() if len(x)==2 and x[0]=='BodyText' and x[1].startswith('Section')]
+              paths.sort(key=lambda p:int(p[1][7:]))
+              flag=struct.unpack_from('<I',doc.openstream('FileHeader').read(),36)[0]
+              is_compressed=bool(flag&1)
+              all_text=[]
+              for path in paths:
+                  data=doc.openstream(path).read()
+                  if is_compressed:data=zlib.decompress(data,-15)
+                  off=0
+                  while off+4<=len(data):
+                      rec=struct.unpack_from('<I',data,off)[0];off+=4
+                      tag=rec&0x3ff;size=(rec>>20)&0xfff
+                      if size==0xfff:
+                          if off+4>len(data):break
+                          size=struct.unpack_from('<I',data,off)[0];off+=4
+                      payload=data[off:off+size];off+=size
+                      if tag==67:
+                          value=payload.decode('utf-16le','ignore')
+                          cleaned=''.join(c if (c.isprintable() or c in '\n\t') else ' ' for c in value)
+                          if cleaned.strip():all_text.append(cleaned)
+              text='\n'.join(all_text)
+              (evidence/'official-hwp-paragraph-text.txt').write_text(text,encoding='utf-8')
+              result.update(parsed=bool(text.strip()),paragraphs=len(all_text),
+                            text_sha256=hashlib.sha256(text.encode()).hexdigest(),
+                            text_length=len(text),sections=len(paths),
+                            has_bupyeong='부평' in text,has_office='사무직' in text,
+                            has_2026='2026' in text)
+              if len(text)<1200 or len(paths)==0:
+                  raise ValueError('truncated official HWP text; no approval')
+              if not all(result[k] for k in ['has_bupyeong','has_office','has_2026']):
+                  raise ValueError('required official semantic markers absent; keep HOLD')
+              print('RAW_OFFICIAL_HWP_READ_SUCCESS; contents still require human fact-by-fact and correction review')
+          except Exception as exc:
+              result['error']=str(exc)
+              result['exception_type']=type(exc).__name__
+              raise
+          finally:
+              (evidence/'raw-hwp-receipt.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              print('OFFICIAL_HWP_RECEIPT='+json.dumps(result,ensure_ascii=False))
+          PY
+      - name: Preserve raw SHA and complete extracted text only; NEVER approve or post
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80812-independent-raw-hwp-receipt
+          path: official-80812-review-evidence/
+          retention-days: 7
