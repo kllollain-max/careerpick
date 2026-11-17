@@ -90,10 +90,15 @@ jobs:
                   d.set_page_load_timeout(50)
                   d.get(url)
                   try:
-                      WebDriverWait(d,18).until(lambda w: len(w.find_element(By.TAG_NAME,'body').text)>150)
+                      WebDriverWait(d,18).until(lambda w: len(w.execute_script("return document.body?.innerText || ''"))>150)
                   except Exception: pass
-                  body=d.find_element(By.TAG_NAME,'body').text
-                  anchors=[{'text':a.text[:100], 'href':a.get_attribute('href')} for a in d.find_elements(By.TAG_NAME,'a')]
+                  # Atomic DOM snapshot avoids stale WebElement references while this SPA redraws.
+                  snap=d.execute_script("""return {body: document.body?.innerText || '',
+                    links: Array.from(document.querySelectorAll('a')).map(a=>({
+                      text: (a.innerText||'').slice(0,100), href: a.href||null
+                    }))}""")
+                  body=snap['body']
+                  anchors=snap['links']
                   observations[key]={'requested':url,'actual':d.current_url,'title':d.title,'body_length':len(body),'body_excerpt':body[:9000],
                                      'relevant_links':[a for a in anchors if '80914' in (a['href'] or '') or 'yjuc' in (a['href'] or '').lower() or '채용' in a['text']][:30]}
                   d.save_screenshot('80914-'+key+'.png')
