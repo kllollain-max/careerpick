@@ -38,3 +38,13 @@
 별도 **실제 조회** [run 44152232401](https://github.com/kllollain-max/careerpick/actions/runs/44152232401)와 원본 `list` 폼의 `currentPageNo,recordCountPerPage,keyword,state,keywordType`를 함께 병합해 요청한 [run 44152403657](https://github.com/kllollain-max/careerpick/actions/runs/44152403657)은 HTTP 200을 받았지만, 공고명·첨부가 없는 빈 상세 틀만 수신됐다. 마지막 상세 원본 SHA-256 `20e32f34d54da46b0cd73f8958dd4be15390eec53beb32b9e7125943af8ba371`, 185,771 bytes. **서버 200이나 폼 발견을 공식 상세 의미검증 성공으로 표시하지 않는다.** 실행 검증 단계는 실제 `OFFICIAL_NOTICE_BODY_MISSING`으로 실패 처리하고 영수증 artifact를 보존했다.
 
 따라서 현재는 **공식 목록/접수시간·모집 총수 수신 성공, 상세 PDF/HWP·직무별 정규직 인원·자격·정정 전수·접수 상세 URL 독립검증 실패, 승인 0/CAS 0/게시 0**. 원격 상태의 기존 4개 준비 원고를 유지하고 앞으로 공식 상세의 정확한 로딩 경로를 해결하기 전까지 `cleaneye-81220` 승인 금지.
+
+## 2026-11-18 04:02 KST — 상세 조회 결함 실제 복구
+
+실패 원인은 폼 필드명 추정이었다. 공식 `/common/js/lib.js`의 `paramsOf`는 `data-req-p-` 접두어를 그대로 제거한다. 따라서 `data-req-p-idx="1745"`는 `idx=1745`이며 `pIdx`가 아니다. 공식 JavaScript를 실제 GET으로 읽고 이를 재현하여 상세 내용 수신을 복구했다. 이름 변환/비관련 속성 제외/하이픈 보존 회귀검사 3개를 추가했다.
+
+수정 commit `8797b997dfd40230024a7e0f73c61db999e6529a`, 읽기 전용 [Actions 44154148828](https://github.com/kllollain-max/careerpick/actions/runs/44154148828) completed/success (2026-11-17T19:02:11Z). 실제 제출 필드는 `idx`; 공고명·접수기간·전체 7명·모집중·첨부목록이 존재하는 상세 HTML 188849 bytes, SHA256 `68a851686f9837287835bf7ee247cc0e90e25df6eed4059ac914a9187c5220c9`. 이는 같은 페이지라도 관측별 동적 HTML 바이트가 다를 수 있으므로 이전 조회 해시와 혼동하지 않는다.
+
+실제 원본 공고 JPEG는 2026-11-17T19:02:21.641504Z HTTP200으로 확보했다. 4469403 bytes, JPEG 992×23483, SHA256 `254101cdb452944232c64fe89c95278fdfb018e2fcd3862dcbacad7c92b93c0e`. 공식 상세에 선언된 `yhLib.file.download`의 첨부 식별자를 사용했다. 원본 URL: https://www.asimc.or.kr/common/file/download.do?atchFileId=AF14434FE5C194387B3F8A3241ADC05EB545DCED467F968B1B9B8012D9ACC4DF&fileSn=125EB0AE64ED2AE7001CFD6CFA9E31E8
+
+**남은 HOLD:** 원본 JPEG 전문의 실제 시각판독과 직무별 정규직/인원/자격/정정·프로필 검수 미완료. 다운로드 성공은 원고 검수통과가 아니다. 승인/CAS/Meta 게시 없음. 기존 11월18일 08/12/16/20 READY 4건, 게시기 main·정규 일정·타 브랜드는 변경하지 않았다. 이 수정은 원문 조회 전용 Draft 브랜치이며 운영 main에 병합하지 않았다.
