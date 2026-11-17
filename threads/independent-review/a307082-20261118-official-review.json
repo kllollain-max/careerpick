@@ -78,7 +78,33 @@
     ],
     "full_original_read_action": "https://github.com/kllollain-max/careerpick/actions/runs/44194768350",
     "official_original_artifact": "https://github.com/kllollain-max/careerpick/actions/runs/44194768350/artifacts/14377483860",
-    "read_status": "three real HWP originals acquired and parsed with source equality; semantic table independently reviewed"
+    "read_status": "three real HWP originals acquired and parsed with source equality; semantic table independently reviewed",
+    "official_latest_revalidation": {
+      "checked_at_kst": "2026-11-18T08:00:13.683366+09:00",
+      "employer_hwp_sha256": "47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478",
+      "alio_hwp_sha256": "47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478",
+      "job_ncs_sha256": "bdc646e6357740bb8bbf103814a16bd532ead87e9a70c13ab22164574cf48b69",
+      "source_bytes_unchanged": true,
+      "action_run": "https://github.com/kllollain-max/careerpick/actions/runs/44195337375",
+      "source_age_warning": "08:00:13 verified for the future 11/19 08 slot, but any delayed post >13s beyond 08:00 may require another fresh recheck; do not assume evergreen approval"
+    },
+    "read_only_live_probe": {
+      "checked_at_kst": "2026-11-18T08:00:17+09:00",
+      "redcross_ATS_http200": true,
+      "redcross_ATS_static_html_bytes": 45832,
+      "redcross_ATS_specific_a307082_visible": false,
+      "redcross_ATS_live_application_confirmed": false,
+      "careerpick_landing_http200": true,
+      "careerpick_landing_static_html_bytes": 235929,
+      "careerpick_exact_profile_render_verified": false
+    },
+    "correction_and_cancellation_review": {
+      "official_employer_listing_first_page_checked": true,
+      "original_nov16_notice_present": true,
+      "distinct_correction_notice_first_page_visible": false,
+      "exhaustive_announcements_check_complete": false,
+      "final_cancellation_status": "UNVERIFIED"
+    }
   },
   "hold_reasons": [
     "Original HWP semantics and exact 10:00 cutoff independently verified; NEXT: fresh recheck after 08:00 KST for Nov19 08:00 24h validity (07:56 is 24h+ before slot)",
@@ -87,7 +113,10 @@
     "Live submission form and cancellation/corrections not independently verified",
     "Need matching card/pixel verification if IMAGE and profile target verification",
     "Source checked_at and 24h freshness must be established only from actual future source rereads",
-    "Production validate_entry and official_receipt and queue_bridge CAS not executed"
+    "Production validate_entry and official_receipt and queue_bridge CAS not executed",
+    "Official ALIO age clause refers to appointment date whereas original employer HWP says notice date: do not claim date-based age eligibility as definitively reconciled without employer clarification",
+    "ATS GET 200 root page is not proof that exact application a307082 is open, needs real job detail and interactive form check",
+    "CareerPick landing GET200 is not evidence that #job=a307082 actually renders required exact vacancy"
   ],
   "protected_systems": [
     "supportpick",
