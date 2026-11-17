@@ -224,7 +224,7 @@ jobs:
                   payload=data[p:p+length];p+=length
                   if tag==67 and length>0:
                     s=payload.decode('utf-16le',errors='ignore')
-                    s=re.sub(r'[\\x00-\\x08\\x0b-\\x1f]',' ',s)
+                    s=''.join(ch if ord(ch)>=32 or ch in ('\\t','\\n','\\r') else ' ' for ch in s)
                     if s.strip():texts.append(s)
               text='\n'.join(texts)
               print('HWP_ROLE_BODY_CHARS',len(text),'PARAGRAPHS',len(texts),flush=True)
