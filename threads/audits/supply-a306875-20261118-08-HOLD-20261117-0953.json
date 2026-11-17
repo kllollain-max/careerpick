@@ -2,7 +2,7 @@
   "schema_version": 1,
   "observed_at": "2026-11-17 00:52:05 UTC",
   "notice_id": "a306875",
-  "status": "HOLD_NOT_READY_NOT_PUBLISHED",
+  "status": "HOLD_SOURCE_STALE_ONLY_CODE_REPAIRED",
   "proposed_slot": "2026-11-18T08:00:00+09:00",
   "source_facts_reviewed": true,
   "profile_actual_get_and_browser_display_verified": true,
@@ -41,8 +41,7 @@
         "scheduled_at": "2026-11-18T08:00:00+09:00",
         "verification_basis": "checked_official_source",
         "missing_or_conflicting": [
-          "SOURCE_STALE: original collection/verified unchanged-source receipt is older than24h at2026-11-18T08:00 KST; await an actual fresh regular collection receipt.",
-          "SHORT_UNIT_CODE_NOT_DEPLOYED: PR107 CI and merge required before full publisher validation."
+          "SOURCE_STALE: original collection/verified unchanged-source receipt is older than24h at2026-11-18T08:00 KST; await an actual fresh regular collection receipt."
         ],
         "cta_check": "passed",
         "media_check": "not_supplied",
@@ -262,7 +261,6 @@
     "city_original_pdf_sha256": "7c38089a2f464ceb1fd63b630950c3cd0d9704b1d32a96a736f4b380a6ab2e43"
   },
   "next_required_actions": [
-    "Observe PR107 required checks, then merge only if all passed and no conflict.",
     "Read next actual regular collection receipt; no source timestamp rewrite or freshness bypass.",
     "Revalidate exact entry source fingerprints and official live facts. Only after full future validator and projected media checks pass, save reviewed staging by latest SHA/CAS, readback and observe regular preflight promotion."
   ],
@@ -302,5 +300,48 @@
       "distinction": "Current a306875 is a new November11 campaign overall66 with separately sourced ward50 and November20 deadline. Not a reuse of the closed October23/November2 notice."
     },
     "employer_notice_after_load_rechecked": "still registered notices absent; browserAX after full load"
+  },
+  "deployed_repair": {
+    "merged": true,
+    "pr": 107,
+    "merge_sha": "61784610dd27b8c0ca1ff080ca1204a25ce6c3a7",
+    "head_sha": "678ea4bcff41a6c59eaf10ef6f5d73497c90d6c9",
+    "main_code_blob": "ef3a22bdf794658af48c220235257e9b9baf07af",
+    "ci_all_five_success": true,
+    "ci": [
+      {
+        "id": 43991345467,
+        "name": "Threads queue regression checks",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 43991345545,
+        "name": "Verify Threads migration without publishing",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 43991345427,
+        "name": "Offline AdSense preparation checks",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 43991345430,
+        "name": "Verify targeted push recovery without sending",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 43991345416,
+        "name": "Content mobile readability check",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "local_tests": 75,
+    "ci_threads_tests": 428,
+    "ci_recovery_tests": 18
   }
 }
