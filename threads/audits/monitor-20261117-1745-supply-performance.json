@@ -11,19 +11,7 @@
   },
   "claims_read": 51,
   "claim_errors": [],
-  "pending_claims": [
-    {
-      "slot": "2026-10-31T08:00:00+09:00",
-      "run_id": "41144576550",
-      "state": "historical_verified",
-      "post_id": "18029250455877919",
-      "reply_post_ids": [
-        "17909910720593443",
-        "18132626512765431"
-      ],
-      "source": "Official Meta GET run41598910642; original accepted receipt unavailable. This is an observed historical barrier, not a reconstructed accepted receipt."
-    }
-  ],
+  "pending_claims": [],
   "regular16": {
     "run_id": 44045639462,
     "event": "schedule",
@@ -2569,5 +2557,18 @@
     "No new Meta GET performed by monitor; existing receipt and scheduled duplicate guard observed.",
     "New candidate remains held because direct official corrections page503; metadata/gates not bypassed.",
     "24h and72h observations retain actual capture times; no result guarantee or causal improvement claimed."
+  ],
+  "historical_verified_claims": [
+    {
+      "slot": "2026-10-31T08:00:00+09:00",
+      "run_id": "41144576550",
+      "state": "historical_verified",
+      "post_id": "18029250455877919",
+      "reply_post_ids": [
+        "17909910720593443",
+        "18132626512765431"
+      ],
+      "source": "Official Meta GET run41598910642; original accepted receipt unavailable. This is an observed historical barrier, not a reconstructed accepted receipt."
+    }
   ]
 }
