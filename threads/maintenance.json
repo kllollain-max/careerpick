@@ -26307,20 +26307,22 @@
     "observed_at": "2026-11-17 00:57:10 UTC",
     "notice_id": "a306875",
     "proposed_slot": "2026-11-18T08:00:00+09:00",
-    "status": "HOLD_FULL_FUTURE_SOURCE_FRESHNESS_PENDING",
+    "status": "HOLD_SOURCE_STALE_ONLY_CODE_REPAIRED",
     "audit_path": "threads/audits/supply-a306875-20261118-08-HOLD-20261117-0953.json",
-    "audit_blob": "d544bdda1273cf5e09178cb11a4be4b685e77b6d",
+    "audit_blob": "a6c5ad36d34e8b19d4107342f869b6f92af857bd",
     "repair_pr": 107,
     "repair_head_sha": "678ea4bcff41a6c59eaf10ef6f5d73497c90d6c9",
     "local_tests_passed": 75,
     "ci_threads_tests_passed": 428,
     "ci_recovery_tests_passed": 18,
-    "operating_patch_merged": false,
+    "operating_patch_merged": true,
     "current_ready_slots": [
       "2026-11-17T12:00:00+09:00",
       "2026-11-17T16:00:00+09:00",
       "2026-11-17T20:00:00+09:00"
     ],
-    "next_action": "Read actual next regular collector receipt; do not rewrite source timestamps or bypass24h. After source+code gates pass, revalidate exact official facts/media then save staging using latestSHA/CAS."
+    "next_action": "Read next actual regular collection receipt, then revalidate all source/official fact/media gates and CAS staging; no future full validator PASS yet.",
+    "repair_merge_sha": "61784610dd27b8c0ca1ff080ca1204a25ce6c3a7",
+    "ci_all_five_success": true
   }
 }
