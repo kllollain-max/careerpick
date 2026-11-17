@@ -473,7 +473,8 @@ def _image(entry, post, detail, review, refs, end_date, period, end_has_seconds,
         # Official units such as 병동/외래 are two characters. Accept only
         # the exact, source-backed v5 unit row and its independently checked
         # title fact; a short arbitrary label or legacy entry still fails.
-        if (review.get("v5", {}).get("contract_version") != 2
+        if (not isinstance(review.get("v5"), dict)
+                or review["v5"].get("contract_version") != 2
                 or not _fact_supported("title", title, review, refs, detail)):
             _fail("IMAGE_TITLE_INVALID")
         from scripts.threads_v5 import _recruitment_unit

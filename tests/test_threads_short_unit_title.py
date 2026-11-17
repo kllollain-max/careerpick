@@ -55,3 +55,8 @@ class ShortUnitTitleTests(unittest.TestCase):
         self.job['title'] = '병'
         with self.assertRaisesRegex(QueueValidationError, 'IMAGE_TITLE_INVALID'):
             self.validate()
+
+    def test_malformed_v5_is_rejected_with_validation_error(self):
+        self.review['v5'] = 'untrusted'
+        with self.assertRaisesRegex(QueueValidationError, 'IMAGE_TITLE_INVALID'):
+            self.validate()
