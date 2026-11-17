@@ -1,0 +1,60 @@
+name: "Review-only: verify cleaneye-80711 exact official PDF bytes"
+
+on:
+  push:
+    branches:
+      - review/threads-80711-employer-pdf-20261118
+    paths:
+      - .github/workflows/threads-80711-source-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Fetch original employer PDF and calculate SHA-256 (GET only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 --location --fail --silent --show-error --max-time 90 \
+            --retry 2 --retry-delay 2 --retry-all-errors \
+            'https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566' -o original-80711.pdf
+          test "$(head -c 5 original-80711.pdf)" = '%PDF-'
+          echo 'ORIGINAL_OFFICIAL_BYTES:'
+          wc -c < original-80711.pdf
+          echo 'ORIGINAL_OFFICIAL_SHA256:'
+          sha256sum original-80711.pdf
+          file original-80711.pdf
+          pdfinfo original-80711.pdf | grep '^Pages:'
+      - name: Extract all PDF pages and check identity and deadline
+        shell: bash
+        run: |
+          set -euo pipefail
+          pdftotext -layout original-80711.pdf original-80711.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, re
+          text = Path('original-80711.txt').read_text(encoding='utf-8')
+          normalized = re.sub(r'\\s+', '', text)
+          assert '충주시시설관리공단' in normalized
+          assert '공고제2026-97호' in normalized
+          assert '일반행정' in normalized
+          assert '2026년11월23일18:00' in normalized
+          print('semantic_identity_check=pass')
+          print('text_bytes=', len(text.encode('utf-8')))
+          print('text_sha256=', hashlib.sha256(text.encode('utf-8')).hexdigest())
+          print('form_feeds=', text.count('\\f'))
+          PY
+      - name: Store original and text as evidence only
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-80711-original-official-pdf-20261118
+          path: |
+            original-80711.pdf
+            original-80711.txt
+          retention-days: 7
