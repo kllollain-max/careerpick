@@ -5,6 +5,7 @@ Run from the repository root: python scripts/build_job_pages.py
 """
 
 import ipaddress
+import hashlib
 import json
 import re
 from datetime import date, datetime, timezone
@@ -60,6 +61,25 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a306875': {
+        'organization': '분당서울대학교병원',
+        'title': '분당서울대학교병원 신입(업무지원직) 직원 채용 공고',
+        'source_end_date': '2026-11-20',
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306875',
+        'checked_on': '2026-11-18',
+        'qualification_sha256': '2024e16e7fce0db8cdc3a5633b17fa8200d330a899d7736e00468b3f8c521331',
+        'reported_total': '66',
+        'field_requirements': [
+            ('외래', 3, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('병동', 50, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('린넨·멸균·세척·수선', 5, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('주차·보안·환자이송·물류창고·배송·약품배송·관리', 2, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('시설유지보수(목마공)', 1, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('시설유지보수(기계)', 4, '온수온돌·공조냉동기계·자동화설비·용접 분야·위험물·가스·에너지관리 기능사 중 1개 이상. 해당 상위 자격도 인정'),
+            ('시설유지보수(환경처리)', 1, '환경기능사 또는 수질환경산업기사 이상 중 1개 이상'),
+        ],
+        'scope': '공개 ALIO 지원자격의 분야별 인원·필수요건 대조. 실제 접수기간·마감시각과 새로운 PDF 직무 검증이 아님.',
+    },
     # Original PDFs already reviewed in VERIFIED_DUTIES (39-record count unchanged).
     # These independent employer notices corroborate the actual reception clocks.
     'a306662': {
@@ -419,6 +439,45 @@ def render(post, detail, related_posts=(), notice_review=None):
         f'<dt>{escape(k)}</dt><dd>{escape(v)}</dd>'
         for k, v in fields
     )
+
+    application_review_html = ''
+    if verified_application_notice:
+        proof_url = safe_url(verified_application_notice.get('source_url'))
+        proof_date = clean(verified_application_notice.get('checked_on'))
+        field_rows = verified_application_notice.get('field_requirements', [])
+        field_review = ''
+        if (field_rows and str(detail.get('recrutPblntSn')) == pid.removeprefix('a')
+                and str(post.get('n')) == verified_application_notice.get('reported_total')
+                and isinstance(detail.get('aplyQlfcCn'), str)
+                and hashlib.sha256(detail['aplyQlfcCn'].encode()).hexdigest()
+                == verified_application_notice.get('qualification_sha256')):
+            table_rows = ''.join(
+                '<tr><th scope="row">' + escape(name) + '</th><td>' + str(count)
+                + '명</td><td>' + escape(requirement) + '</td></tr>'
+                for name, count, requirement in field_rows)
+            field_review = (
+                '<h3>같은 업무지원직이라도 필수요건이 다릅니다</h3>'
+                '<div class="review-table"><table><caption>공식 지원자격과 대조한 분야별 인원·필수요건</caption>'
+                '<thead><tr><th scope="col">분야</th><th scope="col">인원</th>'
+                '<th scope="col">필수요건</th></tr></thead><tbody>' + table_rows
+                + '</tbody></table></div>'
+                '<p>합계는 66명입니다. 여러 업무가 함께 적힌 2명 모집을 업무마다 2명씩으로 합산하지 마세요. '
+                '앞의 다섯 분야는 6개월 근무경험을, 기계·환경처리는 지정 자격증을 먼저 확인해야 합니다. '
+                '근무경험만으로 자격증 요건을 대신한다고 해석할 수 없습니다.</p>'
+                '<p>정규직도 3개월 수습과 평가 조건이 있습니다. 1차 평가 60점 미만이면 추가 2개월 평가를 거치며, '
+                '2차에서도 기준에 못 미치면 임용취소 또는 계약해지가 가능하다고 안내합니다. '
+                '합격 후 임용후보자로 대기할 수 있으므로 합격 발표일을 출근일로 단정하지 마세요.</p>'
+                '<p>이 표는 모집인원·자격 비교입니다. 각 분야의 상세 담당업무를 새로 검증한 표가 아닙니다. '
+                '게시 종료일 11월 20일을 실제 원서접수 마감시각으로 사용하지 않으며, 접수기간·시각은 기관 공고 확인 필요입니다.</p>')
+        reception = ('<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>') if confirmed_period else ''
+        if proof_url and (reception or field_review):
+            application_review_html = (
+                '<section id="application-review" aria-label="공식 공고 추가 대조">'
+                '<h2>공식 공고와 추가 대조한 지원 정보</h2>' + reception + field_review
+                + '<p class="muted">대조 범위: ' + escape(verified_application_notice.get('scope', ''))
+                + '</p><p><a href="' + escape(proof_url, quote=True)
+                + '" target="_blank" rel="noopener noreferrer">대조한 공식 원문</a> · 확인일: '
+                + escape(proof_date) + ' · 최신 정정 공고가 우선합니다.</p></section>')
 
     # 표시하는 내용은 ALIO 원본 필드에 존재하는 사실만 사용합니다.
     detail = detail if isinstance(detail, dict) else {}
@@ -948,6 +1007,7 @@ section h2{{margin-bottom:10px;line-height:1.45}}
 .job-toc div{{display:flex;flex-wrap:wrap;gap:8px}}
 .job-toc a{{background:#fff;border:1px solid #c7d2fe;border-radius:999px;padding:7px 11px;text-decoration:none;font-size:13px;font-weight:700}}
 .source-meta{{font-size:12px;color:#475569;border-left:3px solid #1f3fbf;padding:8px 12px;background:#f8fafc}}
+.review-table{{overflow-x:auto}}.review-table table{{border-collapse:collapse;width:100%;font-size:14px;table-layout:fixed}}.review-table td,.review-table th{{border:1px solid #cbd5e1;padding:8px;overflow-wrap:anywhere;vertical-align:top}}.review-table th:nth-child(2),.review-table td:nth-child(2){{width:3em}}.review-table caption{{text-align:left;padding:8px 0}}
 html{{scroll-behavior:smooth}}
 section[id],h2[id]{{scroll-margin-top:20px}}
 @media(max-width:480px){{dl{{grid-template-columns:1fr;gap:0}}dt{{border:0;padding-bottom:0}}dd{{padding-top:0}}}}
@@ -975,6 +1035,7 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 <ul class="checks">{checks}</ul>
 </section>
 {coverage_html}
+{application_review_html}
 {verified_notice_html}
 {duties_checklist_html}
 {completeness_html}

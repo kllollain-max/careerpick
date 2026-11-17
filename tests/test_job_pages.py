@@ -15,6 +15,34 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_snubh_requirements_table_matches_current_source_and_preserves_raw(self):
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        detail = json.loads(Path('alio-detail.json').read_text())['a306875']
+        post = posts['a306875']
+        originals = copy.deepcopy((post, detail))
+        html = render(post, detail)
+        self.assertIn('공식 지원자격과 대조한 분야별 인원·필수요건', html)
+        self.assertIn('합계는 66명입니다', html)
+        self.assertIn('<th scope="row">병동</th><td>50명</td>', html)
+        self.assertIn('근무경험만으로 자격증 요건을 대신', html)
+        self.assertIn('실제 원서접수 마감시각으로 사용하지 않으며', html)
+        self.assertEqual((post, detail), originals)
+
+    def test_snubh_requirements_table_rejects_changed_or_wrong_source(self):
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        detail = json.loads(Path('alio-detail.json').read_text())['a306875']
+        post = posts['a306875']
+        marker = '공식 지원자격과 대조한 분야별 인원·필수요건'
+        for revised_post, revised_detail in [
+                ({**post, 'n': '65'}, detail),
+                ({**post, 'title': '정정채용'}, detail),
+                ({**post, 'due': '2026-11-21'}, detail),
+                (post, {**detail, 'recrutPblntSn': '999999'}),
+                (post, {**detail, 'aplyQlfcCn': detail['aplyQlfcCn'] + '정정'}),
+                (post, {**detail, 'aplyQlfcCn': None})]:
+            with self.subTest(post=revised_post['title']):
+                self.assertNotIn(marker, render(revised_post, revised_detail))
+
     def test_snudh_alio_qualification_year_conflict_is_source_bound_and_original_preserved(self):
         # ALIO a306925 shows 2026 expected licensure; SNUDH employer 2027
         # internship notice explicitly shows 2027. Do not silently alter raw.
