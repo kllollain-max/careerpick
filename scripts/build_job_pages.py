@@ -23,6 +23,8 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # ALIO official detail (not publication end), checked 2026-11-17.
+    'a306755': '2026-11-20T17:00:00+09:00',
     'a306545': '2026-11-17T17:00:00+09:00',
     'a306512': '2026-11-12T15:00:00+09:00',
     'a306648': '2026-11-12T15:00:00+09:00',
@@ -48,6 +50,21 @@ CONFIRMED_APPLICATION_CUTOFFS = {
 VERIFIED_DUTIES = json.loads(
     (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
 ) if Path(__file__).with_name('verified_job_duties.json').exists() else {}
+
+# ALIO official detailed recruitment text, not an independently read PDF/HWP
+# job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
+VERIFIED_APPLICATION_NOTICES = {
+    'a306755': {
+        'organization': '한국원자력의학원',
+        'title': '제2026-5회 한국원자력의학원 정기직원채용',
+        'source_end_date': '2026-11-20',
+        'application_start': '2026-11-05',
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306755',
+        'checked_on': '2026-11-17',
+        'scope': 'ALIO official detailed text: application window and 17:00 cutoff; no attachment-byte or field-by-field headcount verification',
+    }
+}
+
 
 DETAIL_LABELS = {
     'recrutSeNm': '채용 구분',
@@ -214,6 +231,12 @@ def render(post, detail, related_posts=(), notice_review=None):
     org = clean(post.get('org'))
     pid = clean(post.get('id'))
 
+    verified_application_notice = VERIFIED_APPLICATION_NOTICES.get(pid, {})
+    if (verified_application_notice and (post.get('alio') is not True
+            or verified_application_notice['organization'] != org
+            or verified_application_notice['title'] != title
+            or verified_application_notice['source_end_date'] != clean(post.get('due'))[:10])):
+        verified_application_notice = {}
     verified_duties = VERIFIED_DUTIES.get(pid, {})
     # Bind editorial evidence to the exact notice, organization and title.
     # A reused ID or changed notice must be reviewed again before reuse.
@@ -235,6 +258,8 @@ def render(post, detail, related_posts=(), notice_review=None):
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
     application_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
+    if pid in VERIFIED_APPLICATION_NOTICES and not verified_application_notice:
+        application_cutoff = ''
     confirmed_cutoff = application_cutoff[:16].replace('T', ' ') + ' (KST)' if application_cutoff else ''
     deadline = parse_date(due, end_of_day=True)
     # A verified application cutoff takes precedence over the publication end
@@ -251,12 +276,12 @@ def render(post, detail, related_posts=(), notice_review=None):
         alio_reference = ''
     # 허용 가능한 HTTPS 링크라는 뜻이지, 링크 응답이나 접수 가능성을 실시간 검증한 것은 아닙니다.
 
-    verified_start = verified_duties.get('application_start', '')
+    verified_start = verified_duties.get('application_start', '') or verified_application_notice.get('application_start', '')
     parsed_start = parse_date(verified_start)
     verified_end = verified_duties.get('application_end_date', '')
     date_end = parse_date(verified_end, end_of_day=True) if re.fullmatch(r'\d{4}-\d{2}-\d{2}', verified_end) else None
     period_end = parse_date(application_cutoff) if application_cutoff else date_end
-    source_end = verified_duties.get('source_end_date', application_cutoff[:10])
+    source_end = verified_duties.get('source_end_date', verified_application_notice.get('source_end_date', application_cutoff[:10]))
     if (not parsed_start or not period_end or parsed_start > period_end
             or source_end != due[:10]):
         verified_start = ''
