@@ -61,7 +61,9 @@ jobs:
               print('EMPLOYER_PAGE_FAILED',url,str(exc)[:300],flush=True)
               outcome['official_pages'].append({'url':url,'error':str(exc)[:200]})
           # Do not treat a metadata hash as original-document review.
-          # Endpoints from actual official onsite JavaScript function opendownload.\n          candidates.extend([urljoin(targets[0], 'bbs_download.php?bcd=01_05_05_00_00&bn=346&num='+str(n)) for n in (0,1)])\n          seen=set()
+          # Endpoints from actual official onsite JavaScript function opendownload.
+          candidates.extend([urljoin(targets[0], 'bbs_download.php?bcd=01_05_05_00_00&bn=346&num='+str(n)) for n in (0,1)])
+          seen=set()
           for url in candidates[:25]:
             if url in seen:continue
             seen.add(url)
