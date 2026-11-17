@@ -543,7 +543,7 @@ class OriginalNoticeComparisonTests(unittest.TestCase):
         self.reviews = resolve(self.posts, self.details, self.rules)
 
     def test_only_original_confirmed_pair_canonicalizes_and_keeps_bookmark_content(self):
-        self.assertEqual(len(self.reviews), 12)
+        self.assertEqual(len(self.reviews), 56)
         for old, new in [('a305959','a306724'), ('a306564','a306800')]:
             post = next(p for p in self.posts if p['id'] == old)
             before = copy.deepcopy(post)
@@ -666,3 +666,71 @@ class CorrectedAndSharedOriginalTests(unittest.TestCase):
         postal=render(self.posts['a306653'],self.details['a306653'])
         self.assertIn('기술원 항목',postal)
         self.assertIn('모든 모집분야 공통 업무가 아님',postal)
+
+class RemainingOriginalReviewTests(unittest.TestCase):
+    def setUp(self):
+        from scripts.notice_review import load
+        self.posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        self.details=json.loads(Path('alio-detail.json').read_text())
+        self.reviews=load(Path('.'))
+
+    def test_single_notice_comparison_cannot_enable_duplicate_canonical(self):
+        from scripts.notice_review import resolve
+        rules=json.loads(Path('scripts/verified_notice_reviews.json').read_text())
+        row=next(r for r in rules if r['members'][0]['id']=='a293321')
+        self.assertEqual(len(row['members'][0]['sources']),1)
+        self.assertIn('a293321',self.reviews)
+        changed=copy.deepcopy(row);changed['decision']='same_notice';changed['representative_id']='a304271'
+        same_source=changed['members'][0]['sources']
+        for m in changed['members']:m['sources']=copy.deepcopy(same_source)
+        self.assertNotIn('a293321',resolve(list(self.posts.values()),self.details,[changed]))
+
+    def test_same_originals_have_representatives_without_merging_other_versions(self):
+        for old,new in [('a306512','a306648'),('a306929','a306963')]:
+            html=render(self.posts[old],self.details[old],notice_review=self.reviews[old])
+            self.assertIn('rel="canonical" href="https://kllollain-max.github.io/careerpick/jobs/'+new+'.html"',html)
+            self.assertIn('동일 채용의 대표 공고 보기',html)
+        for pid in ['a306858','a306869','a294622','a305301']:
+            html=render(self.posts[pid],self.details[pid],notice_review=self.reviews[pid])
+            self.assertIn('rel="canonical" href="https://kllollain-max.github.io/careerpick/jobs/'+pid+'.html"',html)
+            self.assertNotIn('동일 채용의 대표 공고 보기',html)
+        self.assertNotIn('id="notice-review"',render(self.posts['a294622'],self.details['a294622'],notice_review=self.reviews['a294622']))
+
+    def test_reviewed_source_display_corrects_only_the_unchanged_exact_field(self):
+        for old,new,field in [('a306512','a306648','aplyQlfcCn'),('a306929','a306963','disqlfcRsn')]:
+            source=copy.deepcopy(self.details[old]);before=copy.deepcopy(source)
+            html=render(self.posts[old],source)
+            section_id='detail-'+field.lower()
+            section=html.split('id="'+section_id+'"',1)[1].split('</section>',1)[0]
+            if field=='disqlfcRsn':
+                self.assertIn('2027. 3. 1.',section)
+                self.assertNotIn('2026. 3. 1.',section)
+            else:
+                self.assertNotIn('만 60세 이상인 자는 지원 불가',section)
+            self.assertEqual(source,before)
+            source[field]='changed source must survive'
+            self.assertIn('changed source must survive',render(self.posts[old],source))
+            source[field]=before[field]
+            mismatch=dict(self.posts[old],title='different source notice')
+            if field=='disqlfcRsn':self.assertIn('2026. 3. 1.',render(mismatch,source))
+
+    def test_date_only_application_period_never_invents_a_clock(self):
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+        for pid in ['a306929','a306963']:
+            html=render(self.posts[pid],self.details[pid])
+            self.assertIn('2027-01-18 ~ 2027-01-22 (마감시각 공식 공고 확인 필요)',html)
+            self.assertNotIn(pid,CONFIRMED_APPLICATION_CUTOFFS)
+            self.assertNotIn('2027-01-22 23:59',html)
+            self.assertNotIn('application/ld+json',html)
+            self.assertIn('세부 진료행위 미기재',html)
+
+    def test_nursing_duties_and_public_notice_are_independently_verified(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        evidence=VERIFIED_DUTIES['a306545']
+        self.assertIn('3084175',evidence['source_url'])
+        self.assertEqual(evidence['notice_source_url'],'https://job.alio.go.kr/recruitview.do?idx=306545')
+        html=render(self.posts['a306545'],self.details['a306545'])
+        self.assertIn('2026-11-17 17:00 (KST)',html)
+        self.assertIn('외래 진료 동행',html)
+        self.assertIn('간호사 1명',html)
+        self.assertIn('요양보호사 업무 제외',html)
