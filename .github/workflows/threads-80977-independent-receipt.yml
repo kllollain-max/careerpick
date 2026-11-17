@@ -1,0 +1,86 @@
+name: Threads 80977 independent official review (read-only)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/threads-80977-independent-receipt.yml'
+permissions:
+  contents: read
+jobs:
+  exact-official-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Read employer original notice and attachment, without approval or posting
+        shell: bash
+        run: |
+          python -m pip install --quiet requests pymupdf beautifulsoup4
+          python - <<'PY'
+          import requests,hashlib,json,re,sys
+          from urllib.parse import urljoin
+          from bs4 import BeautifulSoup
+          import fitz
+          session=requests.Session()
+          session.headers.update({'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/132.0 Safari/537.36','Accept-Language':'ko-KR,ko;q=0.9'})
+          targets=[
+            'https://cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1',
+            'https://www.cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1',
+            'https://cbf.or.kr/twb_bbs/bbs_list.php?bcd=01_05_05_00_00&groupid=1'
+          ]
+          outcome={'notice_id':'cleaneye-80977','approved':False,'posted':False,'official_pages':[],'attachments':[]}
+          candidates=[]
+          for url in targets:
+            try:
+              r=session.get(url,timeout=18,allow_redirects=True)
+              soup=BeautifulSoup(r.text,'html.parser')
+              txt=soup.get_text(' ',strip=True)
+              print('EMPLOYER_PAGE',r.status_code,r.url,'BYTES',len(r.content),'TITLE',soup.title.get_text(' ',strip=True) if soup.title else '',flush=True)
+              print('EMPLOYER_TEXT',txt[:10000],flush=True)
+              found=[]
+              for a in soup.select('a[href],a[onclick]'):
+                href=a.get('href','')
+                onclick=a.get('onclick','')
+                label=a.get_text(' ',strip=True)
+                if any(k in (href+' '+label+' '+onclick).lower() for k in ['.pdf','.hwp','.zip','download','공고문','첨부','붙임','file']):
+                  record={'href':href,'onclick':onclick,'label':label,'source':r.url}
+                  found.append(record)
+                  if href.startswith(('https://','http://','/')) and not href.startswith('javascript:'):
+                    candidates.append(urljoin(r.url,href))
+              print('EMPLOYER_ATTACHMENT_LINKS',json.dumps(found[:40],ensure_ascii=False),flush=True)
+              outcome['official_pages'].append({'url':r.url,'http':r.status_code,'sha256':hashlib.sha256(r.content).hexdigest(),'bytes':len(r.content),'notice_title_visible':('제5차' in txt),'text_excerpt':txt[:7000],'attachment_links':found[:40]})
+            except Exception as exc:
+              print('EMPLOYER_PAGE_FAILED',url,str(exc)[:300],flush=True)
+              outcome['official_pages'].append({'url':url,'error':str(exc)[:200]})
+          # Do not treat a metadata hash as original-document review.
+          seen=set()
+          for url in candidates[:25]:
+            if url in seen:continue
+            seen.add(url)
+            try:
+              r=session.get(url,timeout=25,headers={'Referer':targets[0],'Accept':'application/pdf,application/octet-stream,*/*'})
+              body=r.content
+              rec={'url':r.url,'status':r.status_code,'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'magic':body[:12].hex(),'content_type':r.headers.get('Content-Type')}
+              print('ATTACHMENT_RECEIPT',json.dumps(rec,ensure_ascii=False),flush=True)
+              if r.status_code==200 and body.startswith(b'%PDF-'):
+                doc=fitz.open(stream=body,filetype='pdf')
+                rec['pdf_pages']=len(doc)
+                pages=[]
+                for pno,page in enumerate(doc,1):
+                  txt=page.get_text(sort=True)
+                  print('---- ORIGINAL PDF PAGE',pno,'/',len(doc),'CHARS',len(txt),'----',flush=True)
+                  print(txt[:18000],flush=True)
+                  pages.append(txt)
+                rec['full_document_text']='\n'.join(pages)[:130000]
+              outcome['attachments'].append(rec)
+            except Exception as exc:
+              print('ATTACHMENT_FAILED',url,str(exc)[:300],flush=True)
+              outcome['attachments'].append({'url':url,'error':str(exc)[:200]})
+          with open('official-80977-read-only.json','w',encoding='utf-8') as f:json.dump(outcome,f,ensure_ascii=False,indent=2)
+          print('REVIEW_ONLY_ATTACHMENT_COUNT',len(outcome['attachments']),'PDF_COUNT',sum('pdf_pages' in v for v in outcome['attachments']),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: independent-80977-source-evidence
+          path: official-80977-read-only.json
+          retention-days: 7
