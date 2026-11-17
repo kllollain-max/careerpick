@@ -13331,33 +13331,18 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at_utc": "2026-11-17 05:29:37 UTC",
-    "status": "READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
-    "notice_id": "a306807",
-    "scheduled_at": "2026-11-18T12:00:00+09:00",
-    "planned_media": "IMAGE",
-    "stage_sha": "931eef7b77b1f550f58d9eef71a1fa241ba265fb",
-    "queue_sha": "882b4ebc1c5d8e82648e34d0df6ba953c39e3f8f",
-    "full_remote_validator": "passed",
-    "ready_future_slots": [
-      "2026-11-17T16:00:00+09:00",
-      "2026-11-17T20:00:00+09:00",
-      "2026-11-18T08:00:00+09:00",
-      "2026-11-18T12:00:00+09:00"
-    ],
-    "actual_post_id": null,
-    "audit_path": "threads/audits/supply-a306807-20261118-12-final-degree-wording.json",
-    "audit_blob": "db8cafaa9a0f920f80ef34a44602d42667ce00fc",
-    "next_action": "Observe existing regular publisher only; no extra dispatch or POST.",
+    "observed_at_utc": "2026-11-17 06:52:56 UTC",
+    "status": "FOUR_UPCOMING_SLOTS_VALIDATED_AWAIT16",
     "main_sha": "af3e196b7d56ffba52cfaa25d4054a49aec59053",
-    "latest_preflight_run_id": 44022360552,
+    "latest_preflight_run_id": 44030015033,
     "latest_preflight_conclusion": "success",
-    "new_posts_observed": 0,
+    "queue_sha": "882b4ebc1c5d8e82648e34d0df6ba953c39e3f8f",
+    "stage_sha": "931eef7b77b1f550f58d9eef71a1fa241ba265fb",
     "validated_future_slots": 4,
+    "new_posts_observed": 0,
     "next_slot_missing": false,
-    "replenishment_required": true,
-    "first_unsupplied_future_slot": "2026-11-18T16:00:00+09:00",
-    "body_chars": 323
+    "audit_path": "threads/audits/monitor-20261117-1552-before16.json",
+    "audit_sha": "6e5da2e30772d7e2600274adf23a50247d735630"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20288,7 +20273,19 @@
       "audit_path": "threads/audits/supply-a306807-20261118-12-final-degree-wording.json",
       "audit_blob": "db8cafaa9a0f920f80ef34a44602d42667ce00fc",
       "next_action": "Observe existing regular publisher only; no extra dispatch or POST.",
-      "body_chars": 323
+      "body_chars": 323,
+      "scheduled_preflight_acceptance": {
+        "run_id": 44030015033,
+        "run_attempt": 1,
+        "head_sha": "af3e196b7d56ffba52cfaa25d4054a49aec59053",
+        "actual_report_time": "2026-11-17T15:16:46.715291+09:00",
+        "conclusion": "success",
+        "approved_future_slots_count": 4,
+        "notice_id": "a306807",
+        "scheduled_at": "2026-11-18T12:00:00+09:00",
+        "actual_meta_post_id": null,
+        "audit_path": "threads/audits/monitor-20261117-1552-before16.json"
+      }
     },
     "approved_intro_styles": {
       "code_commit": "13229cb2a474a9114d960f68e0f87df55d592aa0",
