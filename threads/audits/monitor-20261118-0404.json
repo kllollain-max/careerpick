@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "account": "hid_119",
+  "observed_at": "2026-11-17 19:03:43 UTC",
+  "status": "four_ready_validated_candidate_source_recovery",
+  "regular_run_id": 44135426227,
+  "regular_report_at": "2026-11-18T02:18:08.361747+09:00",
+  "ready_count": 4,
+  "ready_ids": [
+    "a306875",
+    "a306807",
+    "cleaneye-81112",
+    "a307141"
+  ],
+  "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
+  "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
+  "pending_claims": 0,
+  "new_meta_post_ids": [],
+  "next_slot": "2026-11-18T08:00:00+09:00",
+  "audit_path": "threads/audits/monitor-20261118-0404.json",
+  "source_recovery_run_id": 44154148828,
+  "source_recovery_notice": "cleaneye-81220",
+  "candidate_status": "HOLD",
+  "hourly_0315_run_observed": false,
+  "main_sha": "d7def62a10f0d6233d7701236634e0168a68d485",
+  "automation_enabled": true,
+  "verification": {
+    "observed_at": "2026-11-17T18:59:47.623140+00:00",
+    "full_queue_status": "validated",
+    "policy_hashes": {
+      "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+      "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+    },
+    "ready": [
+      {
+        "notice_id": "a306875",
+        "slot": "2026-11-18T08:00:00+09:00",
+        "media": "TEXT",
+        "entry_sha256": "47ceffc2bc6e26cedb5a5f4e8e9b959c0c96a806885406620be60d337e0f7bf2",
+        "chars": 284,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": null
+      },
+      {
+        "notice_id": "a306807",
+        "slot": "2026-11-18T12:00:00+09:00",
+        "media": "IMAGE",
+        "entry_sha256": "e29bd5483cf9880814265d4a57cfa277dba5bbcf0d103a3d5eca179957795875",
+        "chars": 323,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 113172,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a306807.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/threads0130-o5fbnrj2/careerpick-d7def62a10f0d6233d7701236634e0168a68d485/threads-images/a306807.jpg",
+          "sha256": "d19c6ebcc29b7ca84a9e46849c9bd36d22ef90ed76bd0143d80a6c4f16087129",
+          "facts_sha256": "07caf2e8fa8e7809b7152453d587f74587bfb2b1589a072246afce56168ae7fc",
+          "preview_asset_path": "threads-images/a306807-360.png",
+          "preview_sha256": "a37add0e0fb08d6108bcabdb69ab24c424d5ff04acb6b673f6d868bc8de51d3a",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-17T05:26:02.897345+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      },
+      {
+        "notice_id": "cleaneye-81112",
+        "slot": "2026-11-18T16:00:00+09:00",
+        "media": "TEXT",
+        "entry_sha256": "40a444398271b62e6c0b8af7a738ee752adcafc7ff06ea5900d281e47e8b8482",
+        "chars": 326,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": null
+      },
+      {
+        "notice_id": "a307141",
+        "slot": "2026-11-18T20:00:00+09:00",
+        "media": "IMAGE",
+        "entry_sha256": "781c8f70a78cbbd52d52047e4e20919a0b0bba8e7a49fc1d2562c79a51518446",
+        "chars": 342,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 110992,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a307141.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/threads0130-o5fbnrj2/careerpick-d7def62a10f0d6233d7701236634e0168a68d485/threads-images/a307141.jpg",
+          "sha256": "3bfcae9f653e7392f124958b8ee50c8abeb2b9a606f3605642035c3bef634fd4",
+          "facts_sha256": "69b66d33a6770274f96b6ac1000404a180a0c755623b0a05904e4c1379853c00",
+          "preview_asset_path": "threads-images/a307141-360.png",
+          "preview_sha256": "3a09dc6d45087d271edd739e4c37b55e9a19b3d64cadb27dd3303455be06c2ce",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-17T13:05:33.567778+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      }
+    ],
+    "supply": {
+      "future_slots": [
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00",
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00"
+      ],
+      "approved_future_slots": [
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00",
+        "2026-11-18T20:00:00+09:00"
+      ],
+      "missing_slots": [
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00"
+      ],
+      "next_slot_missing": false,
+      "approved_inventory_count": 4,
+      "inventory_target": 8,
+      "inventory_shortfall": 4,
+      "replenishment_required": true,
+      "invalid_ready_entries": []
+    },
+    "source_updated": "2026-11-18T01:07:39+09:00",
+    "source_verified_at": "2026-11-18T01:08:02+09:00",
+    "cleaneye_source": {
+      "status": "verified",
+      "updated": "2026-11-18T01:08:36+09:00"
+    },
+    "selection": {
+      "total_scanned": 1723,
+      "eligible_before_limit": 285,
+      "returned_count": 24
+    },
+    "performance": {
+      "24h": {
+        "verified_count": 7,
+        "medians": {
+          "views": 2202,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        },
+        "reader_replies": null
+      },
+      "72h": {
+        "verified_count": 6,
+        "medians": {
+          "views": 3253,
+          "likes": 7,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "reader_replies": null
+      }
+    },
+    "account_followers": {
+      "account": "hid_119",
+      "scope": "account_total",
+      "requested_start": "2026-11-11T11:45:18.355131+00:00",
+      "requested_end": "2026-11-17T18:59:14.029377+00:00",
+      "observed_start": "2026-11-11T11:45:32.854727+00:00",
+      "observed_end": "2026-11-17T17:18:05.196303+00:00",
+      "start_followers": 415,
+      "end_followers": 494,
+      "net_change": 79,
+      "status": "observed_interval",
+      "exact_requested_boundaries": false,
+      "observation_statuses": {
+        "captured": 39
+      },
+      "post_attribution": null,
+      "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+    },
+    "last_actual_post": {
+      "notice_id": "cleaneye-80848",
+      "post_id": "18102493658425564",
+      "published_at": "2026-11-17T20:41:10.482040+09:00"
+    }
+  },
+  "claims": {
+    "read": 52,
+    "accepted": 51,
+    "historical_verified": 1,
+    "pending": 0
+  },
+  "ledger_sha": "7e8d9570f3377d45ca9c097c99f04c8589259c53",
+  "performance_sha": "5674cc4a037a4d1195da45f676d92f0ac1519d50",
+  "recovery": {
+    "original_failed_run": 44152403657,
+    "original_error": "OFFICIAL_NOTICE_BODY_MISSING",
+    "cause": "Official paramsOf strips data-req-p-; wrong guessed pIdx replaced by actual idx.",
+    "fix_commit": "8797b997dfd40230024a7e0f73c61db999e6529a",
+    "run": {
+      "id": 44154148828,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-17T19:02:11Z",
+      "run_attempt": 1,
+      "event": "push"
+    },
+    "regression_checks": 3,
+    "receipt": {
+      "target": "cleaneye-81220",
+      "official_listing_number": "1720",
+      "official_form_p_idx": "1745",
+      "captured_at_utc": "2026-11-17T19:02:03.093847+00:00",
+      "read_only": true,
+      "detail_verified": true,
+      "approved": false,
+      "cas_updated": false,
+      "meta_posted": false,
+      "view_action": "https://www.asimc.or.kr/portal/recruit/notice/view.do?mid=0302010100",
+      "form_original_inputs": {
+        "currentPageNo": "1",
+        "recordCountPerPage": "10",
+        "keyword": "",
+        "state": "",
+        "keywordType": "",
+        "idx": "1745"
+      },
+      "merged_list_fields": {
+        "currentPageNo": "1",
+        "recordCountPerPage": "10",
+        "keyword": "",
+        "state": "",
+        "keywordType": ""
+      },
+      "anchor_attrs": {
+        "href": "javascript:void(0);",
+        "onclick": "yhLib.inline.post(this);",
+        "data-req-form-id": "view",
+        "data-req-merge-form-id": "list",
+        "data-req-p-idx": "1745"
+      },
+      "submitted_field_names": [
+        "currentPageNo",
+        "idx",
+        "keyword",
+        "keywordType",
+        "recordCountPerPage",
+        "state"
+      ],
+      "anchor_fields": {
+        "idx": "1745"
+      },
+      "parameter_regression_checks": 3,
+      "detail_url": "https://www.asimc.or.kr/portal/recruit/notice/view.do?mid=0302010100",
+      "detail_status": 200,
+      "detail_bytes": 188849,
+      "detail_sha256": "68a851686f9837287835bf7ee247cc0e90e25df6eed4059ac914a9187c5220c9",
+      "detail_text": "2026년도 제5회 직원 채용 공고 - 인사채용의 공고명, 공고기간, 접수기간, 모집인원, 응시직종, 우대사항, 상태, 공고내용, 첨부파일 등으로 안내하는 표입니다. 공고명 2026년도 제5회 직원 채용 공고 공고기간 2026-11-13 ~ 2026-11-23 접수기간 2026-11-17 09:00 ~ 2026-11-23 17:00 모집인원 7명 응시직종 공통 모집분야 채용구분 신입+경력 고용형태 공통 상태 모집중 공고내용 2026년도 제5회 직원 채용 공고 첨부파일 2026년도 제5회 직원 채용 계획 공고.jpg [4.47MB] 채용응시원서입사지원서 및 개인정보 수집이용 동의 및 제3자 제공동의서(제5회).hwp [0.59MB] 채용서류 반환청구서 및 채용 이의 신청서.hwp [0.02MB]",
+      "download_candidates": [
+        {
+          "title": "2026년도 제5회 직원 채용 계획 공고.jpg [4.47MB]",
+          "href": "#",
+          "onclick": " yhLib.file.download('AF14434FE5C194387B3F8A3241ADC05EB545DCED467F968B1B9B8012D9ACC4DF','125EB0AE64ED2AE7001CFD6CFA9E31E8'); return false;",
+          "attrs": {}
+        },
+        {
+          "title": "채용응시원서입사지원서 및 개인정보 수집이용 동의 및 제3자 제공동의서(제5회).hwp [0.59MB]",
+          "href": "#",
+          "onclick": " yhLib.file.download('AF14434FE5C194387B3F8A3241ADC05EB545DCED467F968B1B9B8012D9ACC4DF','021600BA8EE448329209E62409851956'); return false;",
+          "attrs": {}
+        },
+        {
+          "title": "채용서류 반환청구서 및 채용 이의 신청서.hwp [0.02MB]",
+          "href": "#",
+          "onclick": " yhLib.file.download('AF14434FE5C194387B3F8A3241ADC05EB545DCED467F968B1B9B8012D9ACC4DF','F1877974FB248B77C7B5C819ED9962A3'); return false;",
+          "attrs": {}
+        }
+      ]
+    },
+    "original_download": {
+      "notice_id": "cleaneye-81220",
+      "url": "https://www.asimc.or.kr/common/file/download.do?atchFileId=AF14434FE5C194387B3F8A3241ADC05EB545DCED467F968B1B9B8012D9ACC4DF&fileSn=125EB0AE64ED2AE7001CFD6CFA9E31E8",
+      "status": 200,
+      "type": "application/x-msdownload;charset=UTF-8",
+      "bytes": 4469403,
+      "sha256": "254101cdb452944232c64fe89c95278fdfb018e2fcd3862dcbacad7c92b93c0e",
+      "captured_at": "2026-11-17T19:02:21.641504+00:00",
+      "magic_jpeg": true
+    },
+    "hold_remaining": [
+      "Full original JPEG visual review",
+      "Recruitment unit employment/count/qualifications/corrections",
+      "Profile target and full v5 review"
+    ],
+    "production_main_changed": false
+  },
+  "observations": [
+    "Scheduled hourly 03:15KST run absent from fresh100-run listing at03:58KST. Provider scheduling cause unverified; no manual dispatch/rerun or schedule changes. Full local current queue validation passed; next regular publication08KST pending.",
+    "No new Meta posts or24h/72h measurements.",
+    "November19 slots not marked READY without fresh full review."
+  ]
+}
