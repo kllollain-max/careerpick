@@ -28,3 +28,13 @@
 ## 다음 조치
 
 기관 1720번 게시물 클릭에 필요한 HTML 원본 버튼/링크 및 공고 첨부 원본을 찾아 별도 읽기 전용 workflow에서 수신증을 검증. 실제 다운로드·전문 판독 전에는 SHA나 검토시각을 생성해 승인하지 않는다.
+
+## 2026-11-18 03:49~03:52 KST — 실제 공식 HTML 원본 수신·상세 조회 결과
+
+**공식 채용 포털 HTML 원본을 실제 독립 다운로드했다.** [Actions run 44151987199](https://github.com/kllollain-max/careerpick/actions/runs/44151987199) `completed/success`, 공식 GET 200, 원본 HTML **192,159 bytes**, SHA-256 `f7bad32ce4f4b98795f573d0fc740be43b7b1173ea04c8b0628d25fd1cf75db1`. 해당 실행 시 1720번 원문의 실제 상태 `모집중`, 지원 `3/7`, 2026-11-17 09:00~2026-11-23 17:00, 등록 11/13을 파싱했다. `1723` 제4회 기간제 정정 공고는 별개의 row임.
+
+기관 원본 DOM에서 실제 클릭 참조를 특정했다: 게시번호 `1720` → 앵커 `data-req-form-id=view`, `data-req-merge-form-id=list`, `data-req-p-idx=1745`, `onclick=yhLib.inline.post(this)`. 정확한 POST 대상은 **https://www.asimc.or.kr/portal/recruit/notice/view.do?mid=0302010100** 이며 공식 게시판의 내부 `pIdx`는 **1745**이다. 이 두 숫자를 혼동하지 않는다.
+
+별도 **실제 조회** [run 44152232401](https://github.com/kllollain-max/careerpick/actions/runs/44152232401)와 원본 `list` 폼의 `currentPageNo,recordCountPerPage,keyword,state,keywordType`를 함께 병합해 요청한 [run 44152403657](https://github.com/kllollain-max/careerpick/actions/runs/44152403657)은 HTTP 200을 받았지만, 공고명·첨부가 없는 빈 상세 틀만 수신됐다. 마지막 상세 원본 SHA-256 `20e32f34d54da46b0cd73f8958dd4be15390eec53beb32b9e7125943af8ba371`, 185,771 bytes. **서버 200이나 폼 발견을 공식 상세 의미검증 성공으로 표시하지 않는다.** 실행 검증 단계는 실제 `OFFICIAL_NOTICE_BODY_MISSING`으로 실패 처리하고 영수증 artifact를 보존했다.
+
+따라서 현재는 **공식 목록/접수시간·모집 총수 수신 성공, 상세 PDF/HWP·직무별 정규직 인원·자격·정정 전수·접수 상세 URL 독립검증 실패, 승인 0/CAS 0/게시 0**. 원격 상태의 기존 4개 준비 원고를 유지하고 앞으로 공식 상세의 정확한 로딩 경로를 해결하기 전까지 `cleaneye-81220` 승인 금지.
