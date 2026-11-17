@@ -333,7 +333,7 @@ def main() -> dict:
     pages.DATA, pages.DETAIL, pages.OUT = output / "alio.json", output / "alio-detail.json", output / "jobs"
     pages.main()
     cutoffs = homepage_cutoff_metadata(alio['posts'], pages.CONFIRMED_APPLICATION_CUTOFFS,
-                                       pages.VERIFIED_DUTIES)
+                                       {**pages.VERIFIED_DUTIES, **pages.VERIFIED_APPLICATION_NOTICES})
     bundle = output / 'homepage-ux.js'
     bundle.write_text('window.CP_VERIFIED_APPLICATION_CUTOFFS = ' +
                       json.dumps(cutoffs, ensure_ascii=False) + ';\nwindow.CP_VERIFIED_DETAIL_CORRECTIONS = ' +

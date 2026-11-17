@@ -5,6 +5,7 @@ Run from the repository root: python scripts/build_job_pages.py
 """
 
 import ipaddress
+import hashlib
 import json
 import re
 from datetime import date, datetime, timezone
@@ -23,6 +24,14 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # ALIO official detail (not publication end), checked 2026-11-17.
+    'a306755': '2026-11-20T17:00:00+09:00',
+    # SNU Dental Hospital official notice: reception opens 2027-01-18 09:00.
+    'a306925': '2027-01-22T18:00:00+09:00',
+    # CNUH official recruitment portal (its own ALIO a306942 notice), checked 2026-11-17.
+    'a306942': '2027-01-22T17:00:00+09:00',
+    # Official Nara Iltter KIOST notice 308183: end of application, not ALIO 23:59.
+    'a306913': '2026-11-26T10:00:00+09:00',
     'a306545': '2026-11-17T17:00:00+09:00',
     'a306512': '2026-11-12T15:00:00+09:00',
     'a306648': '2026-11-12T15:00:00+09:00',
@@ -48,6 +57,130 @@ CONFIRMED_APPLICATION_CUTOFFS = {
 VERIFIED_DUTIES = json.loads(
     (Path(__file__).with_name('verified_job_duties.json')).read_text(encoding='utf-8')
 ) if Path(__file__).with_name('verified_job_duties.json').exists() else {}
+
+# ALIO official detailed recruitment text, not an independently read PDF/HWP
+# job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
+VERIFIED_APPLICATION_NOTICES = {
+    'a306875': {
+        'organization': '분당서울대학교병원',
+        'title': '분당서울대학교병원 신입(업무지원직) 직원 채용 공고',
+        'source_end_date': '2026-11-20',
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306875',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-11',
+        'application_end_date': '2026-11-20',
+        'notice_source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3086118',
+        'notice_source_sha256': '673c2e9f3ba930f5c4d69b9bcf1a7410f44818ae26228059f4ef84f81f9f2e82',
+        'qualification_sha256': '2024e16e7fce0db8cdc3a5633b17fa8200d330a899d7736e00468b3f8c521331',
+        'reported_total': '66',
+        'field_requirements': [
+            ('외래', 3, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('병동', 50, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('린넨·멸균·세척·수선', 5, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('주차·보안·환자이송·물류창고·배송·약품배송·관리', 2, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('시설유지보수(목마공)', 1, '의료기관 또는 기업체·기관·단체 근무경험 6개월 이상'),
+            ('시설유지보수(기계)', 4, '온수온돌·공조냉동기계·자동화설비·용접 분야·위험물·가스·에너지관리 기능사 중 1개 이상. 해당 상위 자격도 인정'),
+            ('시설유지보수(환경처리)', 1, '환경기능사 또는 수질환경산업기사 이상 중 1개 이상'),
+        ],
+        'scope': '공개 ALIO 지원자격과 공고문 PDF 1쪽의 분야별 인원·필수요건, PDF 3쪽의 접수 날짜 대조. 정확한 마감시각은 공고문에 미기재. 기존 외래 직무 검증 범위는 유지.',
+    },
+    # Original PDFs already reviewed in VERIFIED_DUTIES (39-record count unchanged).
+    # These independent employer notices corroborate the actual reception clocks.
+    'a306662': {
+        'organization': '한국원자력의학원',
+        'title': '2027년 한국원자력의학원 신규간호사 공개채용 공고',
+        'source_end_date': '2026-11-18',
+        'application_start': '2026-11-03',
+        'source_url': 'https://kcch.re.kr/rirams/board/generalBoardView7.do?no=23098',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer recruitment notice 2026-40: nursing 50 places and online reception through 2026-11-18 17:00 KST; official HTML is separate from already verified ALIO PDF',
+    },
+    'a306799': {
+        'organization': '국립중앙의료원',
+        'title': '2027년 신규간호사(간호직 6급, 간호부) 채용 공고',
+        'source_end_date': '2026-11-23',
+        'application_start': '2026-11-06',
+        'source_url': 'https://www.nmc.or.kr/nmc/board/B0000007/28373',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer recruitment notice 2026-436: online reception through 2026-11-23 10:00 KST; 97 positions and pool nature originate from existing ALIO PDF review',
+    },
+    'a306755': {
+        'organization': '한국원자력의학원',
+        'title': '제2026-5회 한국원자력의학원 정기직원채용',
+        'source_end_date': '2026-11-20',
+        'application_start': '2026-11-05',
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306755',
+        'checked_on': '2026-11-17',
+        'scope': 'ALIO official detailed text: application window and 17:00 cutoff; no attachment-byte or field-by-field headcount verification',
+    },
+    'a306925': {
+        'organization': '서울대학교치과병원',
+        'title': '2027년도 치과의사전공의(인턴) 모집 공고',
+        'source_end_date': '2027-01-22',
+        'application_start': '2027-01-18T09:00:00+09:00',
+        'source_url': 'https://www.snudh.org/portal/blindEmpmn/view.do?menuNo=29060340&empSeq=6676',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer official HTML: in-person/postal reception starts 2027-01-18 09:00 and ends 2027-01-22 18:00; not ALIO publication start or a new job-duty original',
+        # SNUDH employer notice HTML 2026-11-11 says 2027 for expected dentist licensure,
+        # whereas the ALIO a306925 public qualification still says 2026.
+        # Keep collected originals unchanged and show the discrepancy only if
+        # the exact old phrase is still present in this notice's detail.
+        'qualification_year_discrepancy': {
+            'expected_alio_fragment': '2026년도 취득예정자',
+            'notice': ('ALIO 응시자격에는 2026년도 취득예정자로 표시되지만, '
+                       '서울대학교치과병원 공식 2027년도 인턴 모집공고에는 '
+                       '2027년도 취득예정자로 표시됩니다. 지원 전 기관 원문을 확인하세요.'),
+        },
+    },
+    'a306942': {
+        'organization': '전남대학교병원',
+        'title': '2027년도 치과의사전공의(인턴) 모집 공고',
+        'source_end_date': '2027-01-22',
+        'application_start': '2027-01-18T09:00:00+09:00',
+        'source_url': 'https://cnuh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=271734',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer official 2027 internship recruitment portal: online application 2027-01-18 09:00 to 2027-01-22 17:00 KST; distinct from ALIO publication and existing 2024 curriculum-only HWP proof',
+    },
+    'a306913': {
+        'organization': '한국해양과학기술원',
+        'title': '[제27-01-01호 및 제27-02-01호]한국해양과학기술원 2027년 1차 직원(정규직/무기계약직) 채용',
+        'source_end_date': '2026-11-26',
+        'application_start': '2026-11-13',
+        'source_url': 'https://www.gojobs.go.kr/apmView.do?empmnsn=308183',
+        'checked_on': '2026-11-17',
+        'hiring_breakdown': '정규직 9명 · 무기계약직 14명 (합계 23명)',
+        'scope': 'Nara Iltter official notice 308183: application dates 2026-11-13 to 11-26 10:00 KST and employment types 9+14; not attachment/PDF byte validation or duties verification',
+    },
+    # 2026-11-18 employer-operated NPS recruitment portal (readable HTML).
+    # This confirms the reception DATE window, not the precise cutoff clock.
+    # ALIO official detail provides total regular positions (2), domestic
+    # lawyer qualification and role-specific three-year experience. The
+    # 1+1 allocation is NOT confirmed. No PDF/HWP bytes read in this check.
+    'a306988': {
+        'organization': '국민연금공단',
+        'title': '2026년 제1차 국민연금공단 준법감시담당자(기금운용직) 채용공고',
+        'source_end_date': '2026-12-01',
+        'application_start': '2026-11-17',
+        'application_end_date': '2026-12-01',
+        'source_url': 'https://www.nps.or.kr/pnsgdnc/hiregdnc/getOHAE0005M0.do',
+        'checked_on': '2026-11-18',
+        'scope': 'Employer recruitment portal: recruiting and application dates 11/17-12/01; official ALIO public detail: regular total 2 for compliance and domestic lawyer careers with domestic lawyer license and 3+ years applicable experience. Track counts and exact cutoff time unverified. No PDF/HWP byte inspection.',
+    },
+    # Official JOB-ALIO a307149 details, read 2026-11-17: the announcement
+    # appears 11/17, but applications do NOT begin until 11/24. Neither
+    # opening clock nor closing clock was confirmed: preserve date-only.
+    'a307149': {
+        'organization': '한국동서발전(주)',
+        'title': '한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발',
+        'source_end_date': '2026-12-01',
+        'application_start': '2026-11-24',
+        'application_end_date': '2026-12-01',
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307149',
+        'checked_on': '2026-11-17',
+        'scope': 'Official ALIO recruitment method: published 11/17, actual application 11/24–12/01, regular positions 101 total; start/cutoff clocks unverified, not a PDF/HWP original review',
+    },
+}
+
 
 DETAIL_LABELS = {
     'recrutSeNm': '채용 구분',
@@ -214,6 +347,12 @@ def render(post, detail, related_posts=(), notice_review=None):
     org = clean(post.get('org'))
     pid = clean(post.get('id'))
 
+    verified_application_notice = VERIFIED_APPLICATION_NOTICES.get(pid, {})
+    if (verified_application_notice and (post.get('alio') is not True
+            or verified_application_notice['organization'] != org
+            or verified_application_notice['title'] != title
+            or verified_application_notice['source_end_date'] != clean(post.get('due'))[:10])):
+        verified_application_notice = {}
     verified_duties = VERIFIED_DUTIES.get(pid, {})
     # Bind editorial evidence to the exact notice, organization and title.
     # A reused ID or changed notice must be reviewed again before reuse.
@@ -235,6 +374,8 @@ def render(post, detail, related_posts=(), notice_review=None):
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
     application_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
+    if pid in VERIFIED_APPLICATION_NOTICES and not verified_application_notice:
+        application_cutoff = ''
     confirmed_cutoff = application_cutoff[:16].replace('T', ' ') + ' (KST)' if application_cutoff else ''
     deadline = parse_date(due, end_of_day=True)
     # A verified application cutoff takes precedence over the publication end
@@ -251,12 +392,12 @@ def render(post, detail, related_posts=(), notice_review=None):
         alio_reference = ''
     # 허용 가능한 HTTPS 링크라는 뜻이지, 링크 응답이나 접수 가능성을 실시간 검증한 것은 아닙니다.
 
-    verified_start = verified_duties.get('application_start', '')
+    verified_start = verified_duties.get('application_start', '') or verified_application_notice.get('application_start', '')
     parsed_start = parse_date(verified_start)
-    verified_end = verified_duties.get('application_end_date', '')
+    verified_end = verified_duties.get('application_end_date', '') or verified_application_notice.get('application_end_date', '')
     date_end = parse_date(verified_end, end_of_day=True) if re.fullmatch(r'\d{4}-\d{2}-\d{2}', verified_end) else None
     period_end = parse_date(application_cutoff) if application_cutoff else date_end
-    source_end = verified_duties.get('source_end_date', application_cutoff[:10])
+    source_end = verified_duties.get('source_end_date', verified_application_notice.get('source_end_date', application_cutoff[:10]))
     if (not parsed_start or not period_end or parsed_start > period_end
             or source_end != due[:10]):
         verified_start = ''
@@ -269,6 +410,8 @@ def render(post, detail, related_posts=(), notice_review=None):
             '모집인원',
             count_label(post.get('n'))
         ),
+        *(([('기관 공식 확인 고용형태별 인원', verified_application_notice['hiring_breakdown'])])
+          if verified_application_notice.get('hiring_breakdown') else []),
         ('고용형태', clean(post.get('emp')) or '공고 확인'),
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
@@ -276,6 +419,17 @@ def render(post, detail, related_posts=(), notice_review=None):
         ('원서 접수기간', confirmed_period or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
         *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
+
+    # Visible discrepancy, not a rewrite: an institution's 2027 eligibility
+    # wording differs from ALIO's older 2026 wording for this exact notice.
+    # If the collected detail changes, do not display stale editorial evidence.
+    qualification_delta = verified_application_notice.get('qualification_year_discrepancy')
+    if (isinstance(qualification_delta, dict)
+            and isinstance(detail.get('aplyQlfcCn'), str)
+            and isinstance(qualification_delta.get('expected_alio_fragment'), str)
+            and qualification_delta['expected_alio_fragment'] in detail['aplyQlfcCn']
+            and isinstance(qualification_delta.get('notice'), str)):
+        fields.append(('기관 공고와 ALIO 지원자격 연도 차이', qualification_delta['notice']))
 
     conflicts = []
     if post.get('n') is not None and detail.get('recrutNope') is not None and count_label(post['n']) != count_label(detail['recrutNope']):
@@ -289,6 +443,51 @@ def render(post, detail, related_posts=(), notice_review=None):
         f'<dt>{escape(k)}</dt><dd>{escape(v)}</dd>'
         for k, v in fields
     )
+
+    application_review_html = ''
+    if verified_application_notice:
+        proof_url = safe_url(verified_application_notice.get('source_url'))
+        proof_date = clean(verified_application_notice.get('checked_on'))
+        field_rows = verified_application_notice.get('field_requirements', [])
+        field_review = ''
+        if (field_rows and str(detail.get('recrutPblntSn')) == pid.removeprefix('a')
+                and str(post.get('n')) == verified_application_notice.get('reported_total')
+                and isinstance(detail.get('aplyQlfcCn'), str)
+                and hashlib.sha256(detail['aplyQlfcCn'].encode()).hexdigest()
+                == verified_application_notice.get('qualification_sha256')):
+            table_rows = ''.join(
+                '<tr><th scope="row">' + escape(name) + '</th><td>' + str(count)
+                + '명</td><td>' + escape(requirement) + '</td></tr>'
+                for name, count, requirement in field_rows)
+            field_review = (
+                '<h3>같은 업무지원직이라도 필수요건이 다릅니다</h3>'
+                '<div class="review-table"><table><caption>공식 지원자격과 대조한 분야별 인원·필수요건</caption>'
+                '<thead><tr><th scope="col">분야</th><th scope="col">인원</th>'
+                '<th scope="col">필수요건</th></tr></thead><tbody>' + table_rows
+                + '</tbody></table></div>'
+                '<p>합계는 66명입니다. 여러 업무가 함께 적힌 2명 모집을 업무마다 2명씩으로 합산하지 마세요. '
+                '앞의 다섯 분야는 6개월 근무경험을, 기계·환경처리는 지정 자격증을 먼저 확인해야 합니다. '
+                '근무경험만으로 자격증 요건을 대신한다고 해석할 수 없습니다.</p>'
+                '<p>정규직도 3개월 수습과 평가 조건이 있습니다. 1차 평가 60점 미만이면 추가 2개월 평가를 거치며, '
+                '2차에서도 기준에 못 미치면 임용취소 또는 계약해지가 가능하다고 안내합니다. '
+                '합격 후 임용후보자로 대기할 수 있으므로 합격 발표일을 출근일로 단정하지 마세요.</p>'
+                '<p>이 표는 모집인원·자격 비교입니다. 각 분야의 상세 담당업무를 새로 검증한 표가 아닙니다. '
+                '공고문에서 접수기간 11월 11~20일은 확인했지만 정확한 마감시각은 확인되지 않았습니다. '
+                '게시 종료시각을 실제 원서접수 마감시각으로 사용하지 않으며, 마감시각은 기관 공고 확인 필요입니다.</p>')
+        reception = ('<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>') if confirmed_period else ''
+        if proof_url and (reception or field_review):
+            application_review_html = (
+                '<section id="application-review" aria-label="공식 공고 추가 대조">'
+                '<h2>공식 공고와 추가 대조한 지원 정보</h2>' + reception + field_review
+                + '<p class="muted">대조 범위: ' + escape(verified_application_notice.get('scope', ''))
+                + '</p><p><a href="' + escape(proof_url, quote=True)
+                + '" target="_blank" rel="noopener noreferrer">대조한 공식 원문</a> · 확인일: '
+                + escape(proof_date) + ' · 최신 정정 공고가 우선합니다.</p></section>')
+            notice_url = safe_url(verified_application_notice.get('notice_source_url'))
+            if notice_url:
+                application_review_html = application_review_html.removesuffix('</section>') + (
+                    '<p><a href="' + escape(notice_url, quote=True)
+                    + '" target="_blank" rel="noopener noreferrer">대조한 공식 첨부 공고문</a></p></section>')
 
     # 표시하는 내용은 ALIO 원본 필드에 존재하는 사실만 사용합니다.
     detail = detail if isinstance(detail, dict) else {}
@@ -818,6 +1017,7 @@ section h2{{margin-bottom:10px;line-height:1.45}}
 .job-toc div{{display:flex;flex-wrap:wrap;gap:8px}}
 .job-toc a{{background:#fff;border:1px solid #c7d2fe;border-radius:999px;padding:7px 11px;text-decoration:none;font-size:13px;font-weight:700}}
 .source-meta{{font-size:12px;color:#475569;border-left:3px solid #1f3fbf;padding:8px 12px;background:#f8fafc}}
+.review-table{{overflow-x:auto}}.review-table table{{border-collapse:collapse;width:100%;font-size:14px;table-layout:fixed}}.review-table td,.review-table th{{border:1px solid #cbd5e1;padding:8px;overflow-wrap:anywhere;vertical-align:top}}.review-table th:nth-child(2),.review-table td:nth-child(2){{width:3em}}.review-table caption{{text-align:left;padding:8px 0}}
 html{{scroll-behavior:smooth}}
 section[id],h2[id]{{scroll-margin-top:20px}}
 @media(max-width:480px){{dl{{grid-template-columns:1fr;gap:0}}dt{{border:0;padding-bottom:0}}dd{{padding-top:0}}}}
@@ -845,6 +1045,7 @@ section[id],h2[id]{{scroll-margin-top:20px}}
 <ul class="checks">{checks}</ul>
 </section>
 {coverage_html}
+{application_review_html}
 {verified_notice_html}
 {duties_checklist_html}
 {completeness_html}
