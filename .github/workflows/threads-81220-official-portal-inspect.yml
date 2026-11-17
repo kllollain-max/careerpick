@@ -1,0 +1,77 @@
+name: Threads 81220 independent official portal source inspection (read-only)
+on:
+  push:
+    branches:
+      - review/threads-81220-official-portal-20261118-0345
+    paths:
+      - .github/workflows/threads-81220-official-portal-inspect.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-official:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests beautifulsoup4
+      - name: Read official portal DOM, discover exact 1720 notice route; no publish, no approval
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime,hashlib,json,pathlib,re,time,urllib.parse,requests
+          from bs4 import BeautifulSoup
+          base="https://www.asimc.or.kr/portal/recruit/notice/list.do?mid=0302010100"
+          dest=pathlib.Path("threads-81220-official-inspect");dest.mkdir(exist_ok=True)
+          result={"notice_id":"cleaneye-81220","official_url":base,"captured_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"official_http_ok":False,"original_attachment_read":False,"meaning_verified":False,"approved":False,"cas_updated":False,"meta_posted":False}
+          try:
+              sess=requests.Session()
+              sess.headers.update({"User-Agent":"Mozilla/5.0 (compatible; CareerPick official read-only verification)"})
+              errors=[]
+              for attempt in range(3):
+                  try:
+                      response=sess.get(base,timeout=(10,20),allow_redirects=True)
+                      response.raise_for_status()
+                      break
+                  except requests.RequestException as e:
+                      errors.append(type(e).__name__+": "+str(e)[:300])
+                      if attempt==2:raise
+                      time.sleep((2,4)[attempt])
+              if urllib.parse.urlparse(response.url).hostname not in ("www.asimc.or.kr","asimc.or.kr"):
+                  raise ValueError("NON_CANONICAL_REDIRECT")
+              response.encoding=response.apparent_encoding or "utf-8"
+              source=response.text
+              sha=hashlib.sha256(response.content).hexdigest()
+              result.update(official_http_ok=True,status_code=response.status_code,response_url=response.url,bytes=len(response.content),body_sha256=sha,request_retries=len(errors),errors=errors,title=None)
+              (dest/"official-list.html").write_text(source,encoding="utf-8")
+              soup=BeautifulSoup(source,"html.parser")
+              result["title"]=soup.title.get_text(" ",strip=True) if soup.title else None
+              matched=[]
+              for el in soup.find_all(["tr","li","div","a","button"]):
+                  text=el.get_text(" ",strip=True)
+                  if "2026년도 제5회 직원 채용 공고" in text and len(text)<1500:
+                      matched.append({"element":el.name,"text":text[:1000],"html":str(el)[:4500]})
+              result["matching_elements"]=matched[:14]
+              sourcepos=source.find("2026년도 제5회 직원 채용")
+              if sourcepos<0:sourcepos=source.find("1720")
+              result["raw_context"]=source[max(0,sourcepos-1300):sourcepos+2200] if sourcepos>=0 else None
+              result["form_actions"]=[{"action":f.get("action"),"method":f.get("method"),"id":f.get("id")} for f in soup.find_all("form")][:12]
+              result["scripts"]=[str(s.get("src")) for s in soup.find_all("script") if s.get("src") and ("recruit" in s.get("src") or "board" in s.get("src"))][:15]
+              result["related_links"]=[{"text":a.get_text(" ",strip=True)[:130],"href":a.get("href"),"onclick":a.get("onclick")} for a in soup.find_all("a") if any(k in (a.get_text(" ",strip=True)+str(a.get("href"))+str(a.get("onclick"))) for k in ("1720","채용","recruit","notice"))][:40]
+              print("OFFICIAL_PORTAL_READ_ONLY="+json.dumps(result,ensure_ascii=False)[:30000])
+              if not matched:raise ValueError("OFFICIAL_TARGET_ROW_ABSENT")
+          finally:
+              (dest/"official-read-only-receipt.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+      - name: Persist only HTML evidence and status, NEVER publish or CAS
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-81220-official-site-dom-evidence
+          path: threads-81220-official-inspect/
+          retention-days: 7
