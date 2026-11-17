@@ -55,16 +55,24 @@ def shortlist(feed, today, limit=30):
         seen.add(identity)
         seats = seat_count(p.get('n'))
         permanent = any(isinstance(x, str) and ('정규직' in x and '비정규직' not in x) for x in emp)
+        # ALIO's total seats are NOT necessarily regular seats if the notice mixes
+        # regular and intern/permanent-contract roles. A mixed notice must never
+        # receive the regular-only priority boost before its official split is read.
+        regular_only = len(emp) == 1 and isinstance(emp[0], str) and emp[0].strip() == '정규직'
+        mixed_regular = permanent and not regular_only
         # Score is editorial triage only, NOT search demand, application eligibility or popularity.
-        score = (100 if permanent else 0) + (min(seats, 100) if seats is not None else 0)
+        score = (100 if regular_only else 0) + (min(seats, 100) if seats is not None else 0)
         selected.append({'id': identity, 'title': title.strip(), 'organization': str(p.get('org', '')),
                          'due': end.isoformat(), 'employment': emp, 'reported_seats': seats,
-                         'permanent_classified': permanent, 'triage_score': score, 'official_url': url})
+                         'permanent_classified': permanent, 'regular_only_classified': regular_only,
+                         'mixed_employment_with_regular': mixed_regular,
+                         'triage_score': score, 'official_url': url})
     selected.sort(key=lambda x: (-x['triage_score'], x['due'], x['id']))
     return {'as_of': today.isoformat(), 'source': 'ALIO existing validated feed', 'source_rows': len(feed['posts']),
             'eligible_rows': len(selected), 'excluded': rejected, 'top': selected[:limit],
             'limitations': ['Not a search-volume or actual popularity ranking',
                             'Reported hiring counts are source fields, not independently confirmed headcount',
+                            'Mixed-employment notices report total seats, not verified regular-only seats; no regular-only score boost',
                             'Application requirements and current status must be reviewed at the official page',
                             'Unknown and expired deadlines are never promoted']}
 
