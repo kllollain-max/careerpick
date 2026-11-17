@@ -7,7 +7,7 @@
   "cas_registered": false,
   "meta_posted": false,
   "draft_prepared_date_kst": "2026-11-18",
-  "source_freshness_checked_at": null,
+  "source_freshness_checked_at": "2026-11-18T06:51:33.618345+09:00",
   "earliest_missing_slot_conditional": "2026-11-19T08:00:00+09:00",
   "target_media_conditional": "TEXT only if previous live published media is IMAGE and real receipt verified",
   "post_text": "문화예술 기획·운영에 관심 있다면!\n경기문화재단 일반직 6급 문화행정직 정규직 1명을 모집해요.\n\n학력·경력 제한은 없지만 임용예정일 기준 만 60세 미만, 재단 결격사유에 해당하지 않아야 해요.\n문화예술사업을 기획·운영하며 필기는 NCS 50문항, 행정학·예술경영 각 20문항이에요.\n\n학예연구직(장애인 제한경쟁) 1명과 별도 모집이며, 직종 간 중복지원은 불가해요.\n11월 23일 17:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
@@ -31,8 +31,15 @@
     "official_application_portal_url": "https://recruit.incruit.com/ggcf/job/2611100011",
     "direct_source_read": "Original employer PDF full text read using original employer download endpoint; pages 1, 2, 5 independently visually verified; relevant tables, restrictions, exam and online application reviewed",
     "original_pdf_bytes_downloaded_to_runtime": false,
-    "original_pdf_sha256": null,
-    "job_description_pdf_sha256": null
+    "original_pdf_sha256": "a7b01244b5d0ec84608fb746f446fb8ccca1a052868fdece3b679359dae30099",
+    "job_description_pdf_sha256": "d0792f5a29c277a3fabb6728f360346ad05e608a76fc89401cf25534aa790924",
+    "original_pdf_bytes_downloaded_by_github_actions": true,
+    "original_pdf_bytes": 174270,
+    "original_pdf_pages": 9,
+    "job_description_pdf_bytes": 118958,
+    "job_description_pages": 3,
+    "independent_download_run": "https://github.com/kllollain-max/careerpick/actions/runs/44184095864",
+    "independent_download_verified_at": "2026-11-18T06:51:34.044108+09:00"
   },
   "recruiting_unit": {
     "selected": "일반직 문화행정직 6급",
@@ -66,23 +73,22 @@
     "Employer PDF sections 3-4 NCS+two subjects and selection procedure",
     "Employer PDF p5 states 11/23 17:00 online deadline and official recruitment URL",
     "Employer job description separate PDF text inspected",
-    "Employer public listing labels posting 진행 as of review, but Incruit job page labels it 대기중 despite application dates; live application control unresolved"
+    "Employer public listing labels posting 진행 as of review, but Incruit job page labels it 대기중 despite application dates; live application control unresolved",
+    "Independent Github Actions actual PDF GET200: notice 174270 bytes / 9 pages, NCS 118958 bytes / 3 pages; both hashes recorded from raw bytes; GitHub Actions receipt succeeded"
   ],
   "excluded_claims": [
     "Never treat original source hash from collector as semantic validation",
-    "Raw PDF bytes/SHA unavailable in current execution; do not invent",
     "No claim of application submission eligibility or full correction/cancellation check"
   ],
   "hold_reasons": [
     "EARLIEST_UNFILLED_2026_11_19_08_SLOT_REQUIRES_A_POST_2026_11_18_08_OFFICIAL_RECHECK_FOR_24H_FRESHNESS",
-    "RAW_OFFICIAL_PDF_AND_JOB_DESCRIPTION_BINARY_SHA_NOT_VERIFIED",
     "EMPLOYER_RECRUITMENT_SITE_SAYS_WAITING_WHILE_EMPLOYER_BOARD_SAYS_ACTIVE",
     "FINAL_CORRECTION_CANCELLATION_AND_LIVE_APPLICATION_SESSION_NOT_VERIFIED",
     "PROFILE_TARGET_DISPLAY_AND_PRODUCTION_VALIDATE_ENTRY_AND_CARD_IF_IMAGE_NOT_VERIFIED",
     "REMOTE_CAS_SOURCE_REF_QUEUE_HASH_AND_FINAL_LIVE_META_POST_RECEIPT_MUST_BE_RECHECKED"
   ],
   "pre_cas_recheck": [
-    "Fetch official PDF and job description source again inside 24h window, obtain raw bytes+SHA and verify content semantics",
+    "Re-fetch original official PDF+NCS and repeat SHA/semantic review inside 24 hours of target slot (current 06:51 evidence is over 24h before 11/19 08)",
     "Verify corrections/cancellation and active application form on official Incruit site, reconcile state difference",
     "Verify approved v5 post, exact single-body and CTA, media alternation and any card pixels",
     "Verify not already queued/posted and CAS ref/claim/day 4 posts; run validate_entry+official_receipt checks",
