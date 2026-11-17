@@ -6,6 +6,19 @@ def row(identity, due='2026-12-01', emp=None, n='20', url='https://job.alio.go.k
     return {'id':identity,'title':'공식 채용','org':'기관','due':due,'url':url,'emp':emp or [],'n':n}
 
 class PriorityAuditTests(unittest.TestCase):
+    def test_official_contract_and_until_filled_evidence_are_held_from_regular_queue(self):
+        posts=[dict(row('a1',emp=['정규직']),alio=True),dict(row('a2',emp=['정규직']),alio=True)]
+        proof={p['id']:{'organization':p['org'],'title':p['title'],'source_end_date':p['due']} for p in posts}
+        proof['a1'].update(confirmed_employment='계약직',source_employment=['정규직'])
+        proof['a2']['application_status_unconfirmed']=True
+        result=shortlist({'posts':posts},date(2026,11,18),verified_windows=proof)
+        self.assertEqual(result['top'],[])
+        self.assertEqual(result['excluded']['official_employment_conflict'],1)
+        self.assertEqual(result['excluded']['official_current_status_unconfirmed'],1)
+        proof['a1']['title']='수정 공고';proof['a2']['source_end_date']='2026-12-02'
+        result=shortlist({'posts':posts},date(2026,11,18),verified_windows=proof)
+        self.assertEqual(len(result['top']),2)
+
     def test_priority_and_expiry(self):
         feed={'posts':[row('a1',emp=['정규직'],n='3'),row('a2',emp=['정규직'],n='20'),
                        row('a3',emp=['계약직'],n='80'),row('a4',due='2026-01-01')]}

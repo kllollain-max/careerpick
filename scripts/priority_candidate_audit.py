@@ -74,6 +74,11 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                     and proof.get('organization') == p.get('org')
                     and proof.get('title') == title
                     and proof.get('source_end_date') == str(p.get('due', ''))[:10]):
+                if (proof.get('confirmed_employment') == '계약직'
+                        and proof.get('source_employment') == emp):
+                    reason = 'official_employment_conflict'
+                elif proof.get('application_status_unconfirmed') is True:
+                    reason = 'official_current_status_unconfirmed'
                 start = proof.get('application_start')
                 end_text = proof.get('application_end_date')
                 cutoff_clock = verified_kst_clock(proof.get('application_cutoff'))
@@ -226,7 +231,7 @@ def main():
                                      CONFIRMED_APPLICATION_CUTOFFS)
     windows = {}
     for pid, proof in {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES}.items():
-        if not isinstance(proof, dict) or not proof.get('application_start'):
+        if not isinstance(proof, dict) or not (proof.get('application_start') or proof.get('application_status_unconfirmed')):
             continue
         official_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
         source_end = proof.get('source_end_date') or official_cutoff[:10]

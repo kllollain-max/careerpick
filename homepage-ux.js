@@ -51,7 +51,7 @@
     const exact=!!confirmed || p.dueHasTime===true && !(typeof p.due==='string' && /^\d{4}-\d{2}-\d{2}$/.test(p.due));
     const n = Math.round((Date.parse(day(due)) - Date.parse(day(now))) / 86400000);
     if(n < 0 || (exact && +now >= +due)) return {cls:'closed',big:'마감',n:Infinity};
-    if(uncertain)return {cls:'verify',big:dateReview?'일정 확인':'상태 확인',n:Infinity};
+    if(uncertain || reviewedStatus(p))return {cls:'verify',big:dateReview?'일정 확인':'상태 확인',n:Infinity};
     const start = confirmedApplicationStart(p) || date(p.start || p.startDate);
     if(start && +start > +now) return {cls:'upcoming',big:'접수 예정',n};
     if(n === 0 && !exact) return {cls:'verify',big:'시각 확인',n:0};
@@ -65,6 +65,8 @@
     return 'other';
   }
   function employmentTerms(p){
+    const review=reviewedEmployment(p);
+    if(review)return review.terms.slice();
     const values = Array.isArray(p.emp) ? p.emp : [];
     if(!p.cleaneye)return values;
     // Exact observed source labels stay on the record; aliases only aid matching.
@@ -74,6 +76,21 @@
   function employment(p){
     const values = employmentTerms(p);
     return [...new Set(values.flatMap(v => /무기계약|공무직/.test(v) ? ['무기계약직'] : /비정규|계약|기간제/.test(v) ? ['비정규직'] : /인턴/.test(v) ? ['인턴'] : /^정규직$/.test(v) ? ['정규직'] : []))];
+  }
+  function boundApplicationReview(p){
+    const proof=root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p?.id];
+    return p?.alio && proof && proof.org===p.org && proof.title===p.title &&
+      date(p.due) && day(date(p.due))===proof.sourceEndDate ? proof : null;
+  }
+  function reviewedStatus(p){
+    const note=boundApplicationReview(p)?.statusNote;
+    return typeof note==='string' ? note : '';
+  }
+  function reviewedEmployment(p){
+    const review=boundApplicationReview(p)?.employment;
+    if(!review || !Array.isArray(p.emp) || JSON.stringify(p.emp)!==JSON.stringify(review.sourceTerms) ||
+       JSON.stringify(review.terms)!=='["계약직"]' || typeof review.note!=='string')return null;
+    return review;
   }
   function career(p){
     const raw = [p.career,...(p.emp||[])].filter(Boolean).join(' ');
@@ -242,7 +259,7 @@
     }
     return fields;
   }
-  const api = {reviewedDetailDisplay,confirmedApplicationCutoff,confirmedApplicationStart,deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
+  const api = {reviewedStatus,reviewedEmployment,reviewedDetailDisplay,confirmedApplicationCutoff,confirmedApplicationStart,deadline,sector,employmentTerms,employment,career,matches,enterprise,work24,cleaneyeUrl,cleaneye,noticeKey,identity,receptionState,unifyNotices,parseFeed,healthNotices,detailFields};
   if(typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.CPHome = api;
 })(typeof window !== 'undefined' ? window : globalThis);

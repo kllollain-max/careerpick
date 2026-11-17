@@ -46,6 +46,11 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
             continue
         result[pid] = dict(cutoff=cutoff, org=post['org'], title=post['title'],
                            sourceEndDate=source_end)
+        if (proof.get('confirmed_employment') == '계약직'
+                and proof.get('source_employment') == post.get('emp')
+                and isinstance(proof.get('employment_note'), str)):
+            result[pid]['employment'] = dict(sourceTerms=post['emp'], terms=['계약직'],
+                                             note=proof['employment_note'])
         start = proof.get('application_start', '')
         if isinstance(start, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?', start):
             try:
@@ -73,6 +78,16 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
             continue
         result[pid] = dict(org=post['org'], title=post['title'], sourceEndDate=source_end,
                            start=start, endDate=end)
+    for post in posts:
+        pid = post.get('id'); proof = duties.get(pid, {})
+        if (pid not in result and post.get('alio') is True
+                and proof.get('organization') == post.get('org')
+                and proof.get('title') == post.get('title')
+                and proof.get('source_end_date') == str(post.get('due', ''))[:10]
+                and proof.get('application_status_unconfirmed') is True
+                and isinstance(proof.get('status_note'), str) and proof['status_note']):
+            result[pid] = dict(org=post['org'], title=post['title'],
+                               sourceEndDate=proof['source_end_date'], statusNote=proof['status_note'])
     return result
 
 def homepage_detail_corrections(posts, duties, cutoffs):
@@ -101,6 +116,8 @@ def static_recruitment_posts(posts, metadata, now):
     for post in posts:
         proof = metadata.get(post.get('id'), {})
         if proof:
+            if proof.get('statusNote'):
+                continue
             if proof.get('cutoff') and now >= datetime.fromisoformat(proof['cutoff']):
                 continue
             start = proof.get('start')

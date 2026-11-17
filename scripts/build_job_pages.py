@@ -24,6 +24,13 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Official notice originals, read 2026-11-18; postal reception opens 11/24.
+    'a307150': '2026-12-01T10:00:00+09:00',
+    'a307151': '2026-12-01T10:00:00+09:00',
+    'a306988': '2026-12-01T18:00:00+09:00',
+    'a306937': '2026-11-20T17:00:00+09:00',
+    'a306941': '2026-11-20T17:00:00+09:00',
+    'a306962': '2026-11-20T17:00:00+09:00',
     # ALIO official detail (not publication end), checked 2026-11-17.
     'a306755': '2026-11-20T17:00:00+09:00',
     # SNU Dental Hospital official notice: reception opens 2027-01-18 09:00.
@@ -151,20 +158,20 @@ VERIFIED_APPLICATION_NOTICES = {
         'hiring_breakdown': '정규직 9명 · 무기계약직 14명 (합계 23명)',
         'scope': 'Nara Iltter official notice 308183: application dates 2026-11-13 to 11-26 10:00 KST and employment types 9+14; not attachment/PDF byte validation or duties verification',
     },
-    # 2026-11-18 employer-operated NPS recruitment portal (readable HTML).
-    # This confirms the reception DATE window, not the precise cutoff clock.
-    # ALIO official detail provides total regular positions (2), domestic
-    # lawyer qualification and role-specific three-year experience. The
-    # 1+1 allocation is NOT confirmed. No PDF/HWP bytes read in this check.
+    # Official NPS PDF now confirms each track's one contract position and
+    # the exact cutoff. Keep the conflicting ALIO classification unchanged.
     'a306988': {
         'organization': '국민연금공단',
         'title': '2026년 제1차 국민연금공단 준법감시담당자(기금운용직) 채용공고',
         'source_end_date': '2026-12-01',
         'application_start': '2026-11-17',
         'application_end_date': '2026-12-01',
-        'source_url': 'https://www.nps.or.kr/pnsgdnc/hiregdnc/getOHAE0005M0.do',
+        'source_employment': ['정규직'],
+        'confirmed_employment': '계약직',
+        'employment_note': 'ALIO는 정규직으로 분류하지만 공식 공고문은 두 분야 각1명의 계약직, 계약기간3~5년으로 명시합니다. 원문 계약조건을 확인하세요.',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3087074',
         'checked_on': '2026-11-18',
-        'scope': 'Employer recruitment portal: recruiting and application dates 11/17-12/01; official ALIO public detail: regular total 2 for compliance and domestic lawyer careers with domestic lawyer license and 3+ years applicable experience. Track counts and exact cutoff time unverified. No PDF/HWP byte inspection.',
+        'scope': '공식 공고PDF1쪽에서 분야별 각1명·계약직3~5년, 5항에서12월1일18시 마감을 확인. ALIO 정규직 분류와 공고문이 다름. 직무PDF는 별도 확인.',
     },
     # Official JOB-ALIO a307149 details, read 2026-11-17: the announcement
     # appears 11/17, but applications do NOT begin until 11/24. Neither
@@ -351,13 +358,20 @@ def render(post, detail, related_posts=(), notice_review=None):
     if (verified_application_notice and (post.get('alio') is not True
             or verified_application_notice['organization'] != org
             or verified_application_notice['title'] != title
-            or verified_application_notice['source_end_date'] != clean(post.get('due'))[:10])):
+            or verified_application_notice['source_end_date'] != clean(post.get('due'))[:10]
+            or (verified_application_notice.get('source_employment')
+                and verified_application_notice['source_employment'] != post.get('emp')))):
         verified_application_notice = {}
     verified_duties = VERIFIED_DUTIES.get(pid, {})
     # Bind editorial evidence to the exact notice, organization and title.
     # A reused ID or changed notice must be reviewed again before reuse.
     if (verified_duties.get('organization') != org
-            or verified_duties.get('title') != title):
+            or verified_duties.get('title') != title
+            or (verified_duties.get('strict_source_identity') is True
+                and (post.get('alio') is not True
+                     or verified_duties.get('source_end_date') != clean(post.get('due'))[:10]
+                     or (verified_duties.get('source_employment')
+                         and verified_duties['source_employment'] != post.get('emp'))))):
         verified_duties = {}
 
     # Exact-source display correction only: preserve collection snapshots and
@@ -374,6 +388,8 @@ def render(post, detail, related_posts=(), notice_review=None):
     due_display = date_label(due, post.get('dueHasTime') is True)
     # Employer-confirmed cutoff is editorial metadata, not an ALIO feed override.
     application_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
+    if VERIFIED_DUTIES.get(pid, {}).get('strict_source_identity') is True and not verified_duties:
+        application_cutoff = ''
     if pid in VERIFIED_APPLICATION_NOTICES and not verified_application_notice:
         application_cutoff = ''
     confirmed_cutoff = application_cutoff[:16].replace('T', ' ') + ' (KST)' if application_cutoff else ''
@@ -404,6 +420,9 @@ def render(post, detail, related_posts=(), notice_review=None):
     end_label = confirmed_cutoff or (verified_end + ' (마감시각 공식 공고 확인 필요)' if date_end else '')
     confirmed_period = (date_label(verified_start, 'T' in verified_start) + ' ~ ' + end_label) if verified_start else ''
 
+    display_employment = clean(post.get('emp'))
+    if verified_application_notice.get('confirmed_employment'):
+        display_employment = verified_application_notice['confirmed_employment'] + ' · ALIO 분류: ' + display_employment
     fields = [
         ('기관명', org),
         (
@@ -412,7 +431,7 @@ def render(post, detail, related_posts=(), notice_review=None):
         ),
         *(([('기관 공식 확인 고용형태별 인원', verified_application_notice['hiring_breakdown'])])
           if verified_application_notice.get('hiring_breakdown') else []),
-        ('고용형태', clean(post.get('emp')) or '공고 확인'),
+        ('고용형태', display_employment or '공고 확인'),
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
         ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
@@ -432,6 +451,9 @@ def render(post, detail, related_posts=(), notice_review=None):
         fields.append(('기관 공고와 ALIO 지원자격 연도 차이', qualification_delta['notice']))
 
     conflicts = []
+    if verified_application_notice.get('confirmed_employment'):
+        fields.append(('공식 공고문 고용형태', verified_application_notice['confirmed_employment']))
+        conflicts.append(verified_application_notice['employment_note'])
     if post.get('n') is not None and detail.get('recrutNope') is not None and count_label(post['n']) != count_label(detail['recrutNope']):
         conflicts.append('자료 간 정보가 달라 공식 확인이 필요합니다. 모집인원: 목록 ' + count_label(post['n']) + ' / 상세 ' + count_label(detail['recrutNope']))
     for field, label in [('pbancBgngYmd', '게시 시작일'), ('pbancEndYmd', '게시 종료일')]:
@@ -502,7 +524,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     if post.get('region'):
         check_items.append(('근무 지역', f'표시된 근무지역은 {clean(post.get("region"))}입니다. 실제 배치 장소와 전근 가능성은 공식 공고를 확인하세요.'))
     if post.get('emp'):
-        check_items.append(('고용 형태', f'표시된 고용형태는 {clean(post.get("emp"))}입니다. 계약기간과 정규직 전환 여부는 공식 공고를 확인하세요.'))
+        check_items.append(('고용 형태', f'표시된 고용형태는 {display_employment}입니다. 계약기간과 정규직 전환 여부는 공식 공고를 확인하세요.'))
     if post.get('edu'):
         check_items.append(('학력 조건', f'표시된 학력조건은 {clean(post.get("edu"))}입니다. 자격증·경력·우대사항은 별도로 확인하세요.'))
     if not (qualification or process):
@@ -841,7 +863,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     desc = clean(post.get('desc'))
     summary_parts = [
         f'{org}의 {title} 채용공고입니다.',
-        f'고용형태: {clean(post.get("emp"))}.' if post.get('emp') else '',
+        f'고용형태: {display_employment}.' if post.get('emp') else '',
         f'근무지역: {clean(post.get("region"))}.' if post.get('region') else '',
         f'모집인원: {count_label(post.get("n"))}.' if post.get('n') else '',
         f'ALIO 게시 종료일: {due_display}. 실제 접수마감은 원문 확인.' if due else '',
@@ -898,7 +920,8 @@ def render(post, detail, related_posts=(), notice_review=None):
     # ALIO 고용형태는 근로시간과 다른 분류입니다. 부분 문자열 검사로
     # '무기계약직'을 TEMPORARY로 잘못 분류하거나 복수 형태를 단정하지 않습니다.
     if post.get('emp'):
-        raw_employment = post['emp']
+        raw_employment = ([verified_application_notice['confirmed_employment']]
+                          if verified_application_notice.get('confirmed_employment') else post['emp'])
         kinds = raw_employment if isinstance(raw_employment, list) else [raw_employment]
         unique_kinds = {clean(kind) for kind in kinds if clean(kind)}
         # 한 공고 안에 정규직·계약직이 같이 있으면 직무별 고용형태를 알 수 없어 생략.
@@ -966,7 +989,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     if post.get('region'):
         meta_parts.append('근무지역 ' + clean(post['region']))
     if post.get('emp'):
-        meta_parts.append('고용형태 ' + clean(post['emp']))
+        meta_parts.append('고용형태 ' + display_employment)
     if due:
         meta_parts.append('ALIO 게시 종료일 ' + due_display + ' · 접수마감 원문 확인')
     meta_description = ' | '.join(meta_parts)[:155]
