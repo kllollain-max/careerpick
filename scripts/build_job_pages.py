@@ -116,7 +116,7 @@ VERIFIED_APPLICATION_NOTICES = {
         'checked_on': '2026-11-17',
         'hiring_breakdown': '정규직 9명 · 무기계약직 14명 (합계 23명)',
         'scope': 'Nara Iltter official notice 308183: application dates 2026-11-13 to 11-26 10:00 KST and employment types 9+14; not attachment/PDF byte validation or duties verification',
-    }
+    },
     # Official JOB-ALIO a307149 details, read 2026-11-17: the announcement
     # appears 11/17, but applications do NOT begin until 11/24. Neither
     # opening clock nor closing clock was confirmed: preserve date-only.
