@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17 10:54:48 UTC",
-  "last_observed_at": "2026-11-17 10:54:48 UTC",
+  "updated_at": "2026-11-17 11:44:19 UTC",
+  "last_observed_at": "2026-11-17 11:44:19 UTC",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13331,21 +13331,21 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at_utc": "2026-11-17 10:54:48 UTC",
-    "status": "FOUR_FUTURE_SLOTS_VALIDATED_CARD_EXACT_AWAIT20_PUBLICATION",
-    "main_sha": "c9551276dac676190efb76af6fad4ffb88c2b2b1",
-    "latest_preflight_run_id": 44063857751,
-    "latest_preflight_conclusion": "success",
-    "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
-    "stage_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
-    "performance_sha": "0e1c3e32de61b4e9bf4d4ade81de85ef4e713185",
-    "validated_future_slots": 4,
-    "new_posts_observed": 0,
+    "observed_at_utc": "2026-11-17 11:44:19 UTC",
+    "status": "REGULAR20_IMAGE_POST_VERIFIED_NEXT3_VALIDATED",
+    "main_sha": "0dd86a6fca0c37a1ad77796804f6819a3bb78f4c",
+    "latest_publication_run_id": 44076099254,
+    "publication_run_event": "schedule",
+    "run_conclusion": "success",
+    "actual_post_id": "18102493658425564",
+    "new_posts_observed": 1,
+    "validated_future_slots": 3,
     "next_slot_missing": false,
     "pending_claims": 0,
-    "card20_pixels": "passed",
-    "audit_path": "threads/audits/monitor-20261117-1955-before20.json",
-    "audit_sha": "2f9e277f154f4bde169787b2204ded99bcf73652"
+    "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
+    "stage_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
+    "audit_path": "threads/audits/published-cleaneye-80848-20261117-2041.json",
+    "audit_sha": "66474e0a4e540ab32fe416eff97669e2e06dd76b"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20700,45 +20700,47 @@
       }
     },
     "latest_image_verification": {
-      "notice_id": "cleaneye-81115",
-      "post_id": "17919668721264551",
-      "permalink": "https://www.threads.com/@hid_119/post/Df08c0QFKmL",
-      "published_at": "2026-11-17T12:16:59.925845+09:00",
-      "checked_at": "2026-11-17T12:17:00.252111+09:00",
-      "workflow_run_id": 44008952373,
-      "workflow_run_event": "workflow_dispatch",
-      "regular_cron_success_claimed": false,
-      "accepted_claim_blob": "5cc4ed997ebb44d812cac0ac90ca191359d39a80",
-      "actual_text_sha256": "624218e37ff4084db5bec81833914394e0bb2ca786ae77d17f31f62270447e96",
-      "body_chars": 347,
+      "notice_id": "cleaneye-80848",
+      "post_id": "18102493658425564",
+      "permalink": "https://www.threads.com/@hid_119/post/Df12JB7EZ_p",
+      "published_at": "2026-11-17T20:41:10.482040+09:00",
+      "checked_at": "2026-11-17T20:41:11.305571+09:00",
+      "workflow_run_id": 44076099254,
+      "workflow_run_event": "schedule",
+      "regular_cron_success_verified": true,
+      "accepted_claim_blob": "f58db2588dcaeb27abf55485da984e0db1a025df",
+      "history_blob": "7e8d9570f3377d45ca9c097c99f04c8589259c53",
+      "account": "hid_119",
+      "actual_text_sha256": "81401a47fdd88aae633c643861d21f81748a326ab9bcccc8fc656f42e8c80596",
+      "body_chars": 293,
       "automatic_reply_count": 0,
       "own_replies": 0,
       "own_replies_status": "verified",
       "reply_scan_scope": "top_level_all_pages",
       "media_visual_review": {
         "status": "passed",
-        "observed_at": "2026-11-17T03:34:23.900211+00:00",
-        "get_status": 200,
-        "downloaded_bytes": 93053,
-        "sha256": "83a158a821cf90049f0c66a8f20d29514bb4ff87cca9ebed89c049c6f257a843",
-        "width": 1080,
-        "height": 1080,
+        "bytes": 103798,
+        "sha256": "f93aa723e444dbb8a4dcfa2e964ca52c8a74b72deb9ff40c0aa9eee46dd4427f",
+        "checked_at": "2026-11-17T11:42:48.180799+00:00",
+        "uploaded_hash_equality_claimed": false,
         "reviewed_width": 360,
-        "findings": "Original Meta media and 360px reduction opened. Korean title 전기(청년), 정규직1명, 원주시시설관리공단, 11월20일18:00 and 만18~34세 readable with no clipping; matches reviewed source card.",
-        "upload_hash_equality_claimed": false
+        "original_dimensions": [
+          1080,
+          1080
+        ],
+        "findings": "Opened actual Meta media_url JPEG and its360px reduction. Korean 공무직 사원, 정규직103명, 서울메트로환경,11월20일12:00 and 공고일18세이상65세미만 legible and unclipped. No claim transformed Meta JPEG hash equals uploaded original."
       },
-      "audit_path": "threads/audits/monitor-20261117-1230-image-publication.json",
-      "audit_blob": "401efd7f17b1450d349af645266067671f3eb6df"
+      "audit_path": "threads/audits/published-cleaneye-80848-20261117-2041.json",
+      "audit_blob": "66474e0a4e540ab32fe416eff97669e2e06dd76b"
     },
     "current_measurement_status": {
-      "observed_at_utc": "2026-11-17 07:49:51 UTC",
-      "latest_notice_id": "cleaneye-81249",
-      "latest_post_id": "18121803568969931",
-      "latest_post_24h": "not_due",
-      "latest_post_72h": "not_due",
-      "due_24h": "2026-11-18T16:12:31.825026+09:00",
-      "due_72h": "2026-11-20T16:12:31.825026+09:00",
-      "summary_performance_sha": "e3d6f891b2573e0586cda3b9a4963b72d2f47546",
+      "observed_at_utc": "2026-11-17 11:44:19 UTC",
+      "latest_notice_id": "cleaneye-80848",
+      "latest_post_id": "18102493658425564",
+      "window24h": "not_due",
+      "window72h": "not_due",
+      "due24h": "2026-11-18T20:41:10.482040+09:00",
+      "due72h": "2026-11-20T20:41:10.482040+09:00",
       "performance_improvement_confirmed": false
     },
     "latest_unassigned_card_review": {
@@ -26460,5 +26462,22 @@
     "entry_sha256": "40a444398271b62e6c0b8af7a738ee752adcafc7ff06ea5900d281e47e8b8482",
     "body_chars": 326,
     "next_action": "Existing regular preflight/publisher observation only; no manual dispatch or POST."
+  },
+  "preflight_media_hold_20261117_2029": {
+    "run_id": 44074385638,
+    "run_attempt": 1,
+    "event": "schedule",
+    "conclusion": "failure",
+    "updated_at": "2026-11-17T11:30:02Z",
+    "job_id": 134008537320,
+    "actual_report_time": "2026-11-17T20:29:02.156067+09:00",
+    "reason": "CARD_VISUAL_REVIEW_REQUIRED a306875",
+    "context": "Delayed preflight occurred after20slot began but before20IMAGE success was recorded; next future slot8h expected IMAGE according to then latest successfulTEXT. No unverified image or alternation bypass used.",
+    "current_resolution": "Actual20IMAGE receipt advances next mediaTEXT; reran full queue and verified_supply_status using fresh immutable history; next3valid invalid[] missing_nextfalse.",
+    "github_failed_run_rewritten_or_rerun": false,
+    "production_code_changed": false,
+    "resolved": true,
+    "resolved_at": "2026-11-17 11:44:19 UTC",
+    "publication_proof": "threads/audits/published-cleaneye-80848-20261117-2041.json"
   }
 }
