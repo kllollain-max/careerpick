@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-80838",
+  "review_status": "independent_official_pdf_full_read_draft",
+  "approved_for_queue": false,
+  "cas_registered": false,
+  "meta_posted": false,
+  "reason_not_approved": [
+    "SOURCE_CHECK_2026_11_18_0552_KST_TOO_EARLY_FOR_2026_11_19_0800_KST_SLOT_24H_FRESHNESS",
+    "FINAL_OFFICIAL_CORRECTIONS_CANCELLATIONS_AND_APPLICATION_PORTAL_SESSION_UNVERIFIED",
+    "PRODUCTION_VALIDATE_ENTRY_PROFILE_CARD_AND_CAS_NOT_EXECUTED"
+  ],
+  "target_slot_conditional": "2026-11-19T08:00:00+09:00",
+  "target_media_conditional": "TEXT_IF_PREVIOUS_IMAGE_RECEIPT_VERIFIED",
+  "post_text": "여수시도시관리공단 정규직 일반직(행정 6급) 1명을 채용해요.\n\n기획·예산·홍보·회계·인사·전산 등 공단 행정업무를 맡아요.\n해당 직렬은 별도 자격증 제한이 없지만 공고일 기준 만 18~60세, 공고일 전날 주민등록상 전남광주통합특별시 거주 조건이 있어요.\n\n서류 적격심사 후 인성·NCS·행정학 필기, 면접 순서예요.\n최종합격 후 3개월 시용평가를 거쳐 정규임용하며, 평가 결과에 따라 미임용될 수 있어요.\n11월 19일 18시까지 온라인 접수, 분야별 중복지원 불가예요.\n\n자세한 사항은 프로필링크 확인",
+  "post_characters": 283,
+  "text_checks": {
+    "characters": 283,
+    "cta_count": 1,
+    "has_url_or_domain_or_hashtag": false,
+    "auto_reply_count": 0,
+    "max_line_length": 73,
+    "complete_single_body": true
+  },
+  "employer_official_notice": {
+    "institution": "여수시도시관리공단",
+    "notice_number": "제2026-66호",
+    "date": "2026-10-30",
+    "official_detail_url": "https://www.yumcorp.or.kr/www/notify/job?idx=6066&mode=view",
+    "official_pdf_url": "https://www.yumcorp.or.kr/ybscript.io/common/file_download/6066/6975/%EB%B6%99%EC%9E%84_%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf?pkey=BxV8TSjh7",
+    "read_timestamp_kst": "2026-11-18T05:52:07.914216+09:00",
+    "original_pdf_bytes": 561715,
+    "original_pdf_pages": 12,
+    "original_pdf_sha256": "577a571b2c5427e4c8a363404b1c96d74d94a102609e8944e5e32c9754dd8b36",
+    "extracted_pdf_text_sha256": "c55d8507de2f4ee622c44250f26c4a03ca07db370b458bb2a7e3a1f4e8c3dedc",
+    "audit_run_url": "https://github.com/kllollain-max/careerpick/actions/runs/44173763027",
+    "audit_zip_artifact_url": "https://github.com/kllollain-max/careerpick/actions/runs/44173763027/artifacts/14368358532",
+    "evidence_file": "threads/independent-review/evidence-80838/official-80838.txt",
+    "pdf_sha_evidence_file": "threads/independent-review/evidence-80838/official-80838-evidence.json"
+  },
+  "recruiting_unit": {
+    "unit": "일반직(6급) 행정",
+    "headcount": 1,
+    "employment": "정규직(3개월 시용 평가 후 정규임용, 미임용 가능)",
+    "duties": "공단 기획·예산·홍보·회계·인사·노무·총무·전산·행정",
+    "total_other_units": "총11명: 일반직 행정1, 기능직 기계1, 공무직 사무원1 시설관리2 환경미화6; 혼합 고용형태, 총11명을 정규직으로 주장 금지",
+    "mandatory": "공고일 2026-10-30 기준 만18세 이상/만60세 초과하지 않음, 공고일 전날 주민등록상 전남광주통합특별시 거주, 결격사유 없음; 일반직 행정6급은 별도 직렬 자격제한 없음",
+    "exam": "서류 적격심사 → 인성검사/NCS직업기초능력·행정학40문항 필기 → 면접",
+    "official_pdf_pages": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "application": {
+    "start_date": "2026-11-13",
+    "deadline_kst": "2026-11-19T18:00:00+09:00",
+    "official_application_url": "https://yumcorp.plusrecruit.co.kr/",
+    "channel": "online_only",
+    "multiple_units_allowed": false,
+    "pdf_page": 8
+  },
+  "source_review_notes": [
+    "PDF GET original bytes and full 12-page pdftotext read, SHA verified in GitHub Actions artifact; source evidence persisted in isolated Git review branch",
+    "General administration post is ONE and has no separate mandatory qualification; mechanic certificates apply to a different unit",
+    "Age/residency for administrative unit independently distinguished from cleaner/indefinite contract units",
+    "Exact Nov19 18:00 online deadline from PDF page8, 3-month conditional employment from later section",
+    "Employer board currently hosts announcement; exhaustive corrections/cancellation not yet independently closed",
+    "Official application landing route known, real applicant session not confirmed",
+    "Source read at real 2026-11-18 05:52 KST, more than 24 hours before missing 2026-11-19 08 slot; no fabricated checked_at"
+  ],
+  "safe_recheck_before_approval": [
+    "After actual 2026-11-18 08:00 KST re-download official PDF and correction/cancellation list; preserve new exact real checked_at and SHA",
+    "Verify portal application current open state and precise close time, profile detail rendering",
+    "Read latest main + remote Meta receipts, accepted/sending/pending claims, posted history, stage and queue; prohibit duplicate",
+    "Run validate_entry/verify_official_receipt, editorial and real pixel card if image slot",
+    "Only if all pass approve via reviewed-submissions → reviewed ingest → CAS queue_bridge with exact remote SHA lease",
+    "Do not merge this Draft PR or publish from a HOLD record"
+  ]
+}
