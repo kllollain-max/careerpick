@@ -115,3 +115,48 @@ jobs:
             threads-80792-profile.png
             threads-80792-application.png
           retention-days: 14
+
+  employer-ats-detail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Independently open exact 2026 recruitment details and examine job-unit workplace evidence
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          import json
+          o=Options()
+          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1400,1000'):o.add_argument(arg)
+          d=webdriver.Chrome(options=o)
+          result={}
+          try:
+              d.get('https://swr.plusrecruit.co.kr/#/recruitment/list')
+              WebDriverWait(d,55).until(lambda x:'2026년 하반기 정규직 채용공고' in x.execute_script("return document.body.innerText"))
+              match=d.execute_script("""const a=Array.from(document.querySelectorAll('body *')).filter(x=>x.children.length===0 && (x.textContent||'').trim()==='2026년 하반기 정규직 채용공고');return a.slice(0,5).map(e=>({tag:e.tagName,outer:e.outerHTML.slice(0,350),parent:e.parentElement?.outerHTML.slice(0,750)}));""")
+              print('TARGET_CARD_ELEMENTS',json.dumps(match,ensure_ascii=False))
+              # Click the exact current recruitment card, not unrelated notices.
+              d.execute_script("""const a=Array.from(document.querySelectorAll('body *')).find(x=>x.children.length===0 && (x.textContent||'').trim()==='2026년 하반기 정규직 채용공고');if(a) (a.closest('a,button,[role=button],.cursor-pointer,[onclick]')||a.parentElement||a).click();""")
+              try:WebDriverWait(d,20).until(lambda x:'모집분야' in x.execute_script("return document.body.innerText") or '/detail/' in x.current_url or '2026년 하반기 정규직 채용공고' not in x.execute_script("return document.body.innerText"))
+              except Exception:pass
+              body=d.execute_script('return document.body.innerText')
+              print('RECRUITMENT_DETAIL_URL',d.current_url,'CHARS',len(body))
+              print('RECRUITMENT_DETAIL_BODY',body[:9000])
+              for key in ['근무장소','근무지역','근무지','배치장소','2026년 하반기','행정','정정','취소']:
+                  print('EXACT_DETAIL_TERM',key,key in body)
+              result={'url':d.current_url,'body':body,'target_elements':match,'verified_workplace_claim':False,'not_approved':True}
+              d.save_screenshot('threads-80792-recruitment-detail.png')
+              with open('threads-80792-ats-detail.json','w') as f:json.dump(result,f,ensure_ascii=False,indent=2)
+          finally:d.quit()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-80792-recruitment-detail
+          path: |
+            threads-80792-ats-detail.json
+            threads-80792-recruitment-detail.png
+          retention-days: 14
