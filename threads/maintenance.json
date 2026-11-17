@@ -13331,23 +13331,21 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-17T03:34:23.900211+00:00",
-    "status": "ACTUAL_IMAGE_PUBLICATION_VERIFIED_NEXT_THREE_VALIDATED",
-    "main_sha": "9fc18823e3e0a3de7600b2bba9175edd40ccd3e9",
-    "latest_preflight_run_id": 44006974575,
-    "latest_preflight_conclusion": "failure_historical_conservative_media_hold",
-    "publication_run_id": 44008952373,
-    "publication_run_event": "workflow_dispatch",
-    "actual_post_id": "17919668721264551",
+    "observed_at": "2026-11-17T04:27:52.748135+00:00",
+    "status": "NEXT_THREE_VALIDATED_NEW_CANDIDATE_LOCATION_HOLD",
+    "main_sha": "46a76d65821533d46e1793f83f1b7523547fa6a5",
+    "latest_preflight_run_id": 44014924297,
+    "latest_preflight_conclusion": "success",
+    "new_posts_observed": 0,
+    "last_actual_post_id": "17919668721264551",
     "queue_sha": "aff1f8f82162cb5b9f1ec04b1440466fabe49a01",
     "stage_sha": "8e1fc047461ddef0e3a21de957d32ae47eef596b",
     "validated_future_slots": 3,
-    "new_posts_observed": 1,
-    "audit_path": "threads/audits/monitor-20261117-1230-image-publication.json",
-    "audit_sha": "401efd7f17b1450d349af645266067671f3eb6df",
     "next_slot_missing": false,
     "replenishment_required": true,
-    "first_unsupplied_future_slot": "2026-11-18T12:00:00+09:00"
+    "first_unsupplied_future_slot": "2026-11-18T12:00:00+09:00",
+    "audit_path": "threads/audits/monitor-20261117-1330-next-supply-review.json",
+    "audit_sha": "6b089e9b57321fb9b1d916d2ee05ed3dd90721f8"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -26358,5 +26356,18 @@
     "current_invalid_ready_entries": [],
     "guard_unchanged": true,
     "audit_path": "threads/audits/monitor-20261117-1230-image-publication.json"
+  },
+  "next_supply_review_20261117_1330": {
+    "notice_id": "cleaneye-80711",
+    "status": "HOLD_NOT_STAGED",
+    "reviewed_draft_chars": 303,
+    "post_text": null,
+    "blocker": "IMAGE_LOCATION_UNSUPPORTED",
+    "source_snapshot_at": "2026-11-17T13:07:54+09:00",
+    "source_freshness_resolved": true,
+    "official_pdf_sha256": "da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb",
+    "audit_path": "threads/audits/monitor-20261117-1330-next-supply-review.json",
+    "audit_sha": "6b089e9b57321fb9b1d916d2ee05ed3dd90721f8",
+    "no_queue_mutation": true
   }
 }
