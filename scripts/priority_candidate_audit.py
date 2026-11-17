@@ -23,12 +23,13 @@ def seat_count(value):
         return count if 1 <= count <= 5000 else None
     return None
 
-def shortlist(feed, today, limit=30):
+def shortlist(feed, today, limit=30, verified_windows=None):
     if not isinstance(feed, dict) or not isinstance(feed.get('posts'), list):
         raise ValueError('invalid_feed')
     if not isinstance(today, date) or not isinstance(limit, int) or not 1 <= limit <= 100:
         raise ValueError('invalid_arguments')
     selected, rejected, seen = [], {}, set()
+    verified_windows = verified_windows or {}
     for p in feed['posts']:
         if not isinstance(p, dict):
             rejected['malformed'] = rejected.get('malformed', 0) + 1
@@ -49,6 +50,19 @@ def shortlist(feed, today, limit=30):
             reason = 'unverified_source'
         else:
             reason = None
+            # Only exact ALIO identity + official posting-end binding can
+            # exclude a FUTURE reception. Never treat publication as reception.
+            proof = verified_windows.get(identity, {})
+            if (isinstance(proof, dict) and p.get('alio') is True
+                    and proof.get('organization') == p.get('org')
+                    and proof.get('title') == title
+                    and proof.get('source_end_date') == str(p.get('due', ''))[:10]):
+                start = proof.get('application_start')
+                if (isinstance(start, str) and re.fullmatch(
+                        r'\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?', start)):
+                    start_day = as_date(start)
+                    if start_day and start_day > today:
+                        reason = 'official_reception_not_open'
         if reason:
             rejected[reason] = rejected.get(reason, 0) + 1
             continue
@@ -74,6 +88,8 @@ def shortlist(feed, today, limit=30):
                             'Reported hiring counts are source fields, not independently confirmed headcount',
                             'Mixed-employment notices report total seats, not verified regular-only seats; no regular-only score boost',
                             'Application requirements and current status must be reviewed at the official page',
+                            'Known future official reception dates are excluded only on exact notice identity',
+                            'Date-only evaluation cannot certify same-day opening or closing hours',
                             'Unknown and expired deadlines are never promoted']}
 
 def main():
@@ -82,7 +98,22 @@ def main():
     parser.add_argument('--output', default='review-only/job-priority-candidates.json')
     parser.add_argument('--as-of', default=datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat())
     args = parser.parse_args()
-    report = shortlist(json.loads(Path(args.source).read_text(encoding='utf-8')), date.fromisoformat(args.as_of))
+    # Use already reviewed originals; no network, collector or source JSON writes.
+    try:
+        from scripts.build_job_pages import (VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES,
+                                             CONFIRMED_APPLICATION_CUTOFFS)
+    except ModuleNotFoundError:
+        from build_job_pages import (VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES,
+                                     CONFIRMED_APPLICATION_CUTOFFS)
+    windows = {}
+    for pid, proof in {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES}.items():
+        if not isinstance(proof, dict) or not proof.get('application_start'):
+            continue
+        source_end = proof.get('source_end_date') or CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')[:10]
+        if source_end:
+            windows[pid] = {**proof, 'source_end_date': source_end}
+    report = shortlist(json.loads(Path(args.source).read_text(encoding='utf-8')),
+                       date.fromisoformat(args.as_of), verified_windows=windows)
     output = Path(args.output); output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print(json.dumps({'source_rows': report['source_rows'], 'eligible_rows': report['eligible_rows'],
