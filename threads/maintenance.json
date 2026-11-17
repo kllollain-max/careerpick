@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17 11:44:19 UTC",
-  "last_observed_at": "2026-11-17 11:44:19 UTC",
+  "updated_at": "2026-11-17 13:10:33 UTC",
+  "last_observed_at": "2026-11-17 13:10:33 UTC",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -20917,17 +20917,20 @@
       "audit_blob": "2d68d3ddde3cd17498a92699933dc2ef725c2305"
     },
     "latest_independent_monitor_check": {
-      "observed_at": "2026-11-17T08:58:22+09:00",
-      "status": "REGULAR_08_POST_ACTUALLY_VERIFIED_REMAINING_THREE_QUEUE_VALIDATED",
-      "audit_path": "threads/audits/monitor-20261117-0858-regular08-verified.json",
-      "main_sha": "e280b92b6347ea0a6af13240d27b5d4d6c4b4ef8",
-      "run_id": "43979806022",
-      "post_id": "18174469135462070",
-      "queue_sha": "5d58aed330bcd8cd425a6bb6fc92161a67086e5c",
-      "stage_sha": "240e4eff816ace737059e4d0f52a846abf884cfd",
-      "remaining_ready_count": 3,
-      "actual_new_post_this_monitor": false,
-      "next_supply_gap": "2026-11-18T08:00:00+09:00"
+      "observed_at": "2026-11-17 13:10:33 UTC",
+      "status": "HOLD_SOURCE_STALE",
+      "notice_id": "a307141",
+      "slot": "2026-11-18T20:00:00+09:00",
+      "stage_sha": "e083ce9af28292e91eb290455703bd9ac2005445",
+      "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
+      "asset_commit": "35d71862981e627b37a6e60ec7b2db8210b74974",
+      "full_validator": "SOURCE_STALE",
+      "editorial_card_profile": "passed",
+      "ready_count": 3,
+      "queued_new_entries": 0,
+      "audit_path": "threads/audits/supply-a307141-hold-20261117-2209.json",
+      "next_action": "After real scheduled source collection, reread main,history,claims,queue,staging and policy; preserve exact card bytes, update actual source digests if unchanged facts, rerun full validator/card, only then ready CAS. No force/bypass/manual dispatch.",
+      "regression_pr": 120
     },
     "latest_observation_status": {
       "checked_at": "2026-11-17 08:42:33 UTC",
@@ -26478,6 +26481,31 @@
     "production_code_changed": false,
     "resolved": true,
     "resolved_at": "2026-11-17 11:44:19 UTC",
-    "publication_proof": "threads/audits/published-cleaneye-80848-20261117-2041.json"
+    "publication_proof": "threads/audits/published-cleaneye-80848-20261117-2041.json",
+    "followup_regular_preflight": {
+      "run_id": 44079104236,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-17T12:01:37Z",
+      "next_slot_missing": false,
+      "actual_ready_count": 3,
+      "prior_failed_run_not_rewritten": true
+    }
+  },
+  "writer_supply_preparation_20261117_2209": {
+    "observed_at": "2026-11-17 13:10:33 UTC",
+    "status": "HOLD_SOURCE_STALE",
+    "notice_id": "a307141",
+    "slot": "2026-11-18T20:00:00+09:00",
+    "stage_sha": "e083ce9af28292e91eb290455703bd9ac2005445",
+    "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
+    "asset_commit": "35d71862981e627b37a6e60ec7b2db8210b74974",
+    "full_validator": "SOURCE_STALE",
+    "editorial_card_profile": "passed",
+    "ready_count": 3,
+    "queued_new_entries": 0,
+    "audit_path": "threads/audits/supply-a307141-hold-20261117-2209.json",
+    "next_action": "After real scheduled source collection, reread main,history,claims,queue,staging and policy; preserve exact card bytes, update actual source digests if unchanged facts, rerun full validator/card, only then ready CAS. No force/bypass/manual dispatch.",
+    "regression_pr": 120
   }
 }
