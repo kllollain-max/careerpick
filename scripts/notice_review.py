@@ -28,7 +28,7 @@ def resolve(posts, details, rules=None):
             continue
         if any(not re.fullmatch(r'a[0-9]+', pid) for pid in ids):
             continue
-        if rule.get('decision') not in ('same_notice', 'distinct_notice'):
+        if rule.get('decision') not in ('same_notice', 'distinct_notice', 'amended_notice'):
             continue
         representative = rule.get('representative_id')
         if rule['decision'] == 'same_notice' and representative not in ids:

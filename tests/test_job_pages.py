@@ -543,7 +543,7 @@ class OriginalNoticeComparisonTests(unittest.TestCase):
         self.reviews = resolve(self.posts, self.details, self.rules)
 
     def test_only_original_confirmed_pair_canonicalizes_and_keeps_bookmark_content(self):
-        self.assertEqual(len(self.reviews), 8)
+        self.assertEqual(len(self.reviews), 12)
         for old, new in [('a305959','a306724'), ('a306564','a306800')]:
             post = next(p for p in self.posts if p['id'] == old)
             before = copy.deepcopy(post)
@@ -601,3 +601,68 @@ class DuplicateRelatedNoticeTests(unittest.TestCase):
             self.assertIn('유사 공고 구분 안내',html)
             self.assertNotIn('같은 기관의 다른 채용공고',html)
             self.assertIn(peer+'.html',html)
+
+class CorrectedAndSharedOriginalTests(unittest.TestCase):
+    def setUp(self):
+        from scripts.notice_review import load
+        self.posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        self.details=json.loads(Path('alio-detail.json').read_text())
+        self.reviews=load(Path('.'))
+
+    def test_cancelled_postal_position_is_a_revision_not_additional_recruitment(self):
+        for pid,number in [('a306334','23'),('a306653','22')]:
+            self.assertEqual(self.reviews[pid]['decision'],'amended_notice')
+            post=self.posts[pid];before=copy.deepcopy(post)
+            peer='a306653' if pid=='a306334' else 'a306334'
+            html=render(post,self.details[pid],[self.posts[peer]],self.reviews[pid])
+            self.assertIn('부평우체국 금융경비 1명',html)
+            self.assertIn('2026-11-09 18:00 (KST)',html)
+            self.assertIn('meta name="robots" content="noindex,follow"',html)
+            self.assertIn('rel="canonical" href="https://kllollain-max.github.io/careerpick/jobs/'+pid+'.html"',html)
+            self.assertNotIn('같은 기관의 다른 채용공고',html)
+            self.assertNotIn('동일 채용의 대표 공고 보기',html)
+            self.assertEqual(post['n'],number)
+            self.assertEqual(post,before)
+
+    def test_identical_hwp_does_not_collapse_different_start_date_positions(self):
+        from scripts.notice_review import resolve
+        rules=json.loads(Path('scripts/verified_notice_reviews.json').read_text())
+        pair=next(r for r in rules if r['members'][0]['id']=='a306548')
+        self.assertEqual([s['sha256'] for s in pair['members'][0]['sources']],[s['sha256'] for s in pair['members'][1]['sources']])
+        for pid,date in [('a306548','2026년 12월 1일'),('a306553','2027년 1월 1일')]:
+            html=render(self.posts[pid],self.details[pid],notice_review=self.reviews[pid])
+            self.assertIn(date,html)
+            self.assertIn('요양보호사는 총 2명',html)
+            self.assertIn('별도 간호사(비정규직)',html)
+            self.assertIn('2026-11-17 17:00 (KST)',html)
+            self.assertNotIn('2026-11-17 23:59',html)
+            self.assertNotIn('동일 채용의 대표 공고 보기',html)
+            self.assertIn('jobs/'+pid+'.html',html)
+        changed=copy.deepcopy(self.details);changed['a306553']['aplyQlfcCn']='changed appointment'
+        self.assertNotIn('a306548',resolve(list(self.posts.values()),changed))
+
+    def test_confirmed_clock_closes_exactly_at_cutoff(self):
+        from scripts import build_job_pages as pages
+        from datetime import timedelta
+        cutoff=datetime.fromisoformat('2026-11-17T17:00:00+09:00')
+        class Clock(datetime):
+            moment=cutoff
+            @classmethod
+            def now(cls,tz=None):return cls.moment.astimezone(tz)
+        with patch.object(pages,'datetime',Clock):
+            Clock.moment=cutoff-timedelta(seconds=1)
+            self.assertFalse(pages.is_closed(pages.CONFIRMED_APPLICATION_CUTOFFS['a306548']))
+            Clock.moment=cutoff
+            self.assertTrue(pages.is_closed(pages.CONFIRMED_APPLICATION_CUTOFFS['a306548']))
+            html=render(self.posts['a306548'],self.details['a306548'])
+            self.assertIn('meta name="robots" content="noindex,follow"',html)
+            self.assertIn('noindex',html)
+            self.assertNotIn('application/ld+json',html)
+
+    def test_source_duties_are_limited_to_the_verified_role(self):
+        html=render(self.posts['a306548'],self.details['a306548'])
+        self.assertIn('생활·돌봄 일지와 소모품 기록',html)
+        self.assertIn('간호사 업무 제외',html)
+        postal=render(self.posts['a306653'],self.details['a306653'])
+        self.assertIn('기술원 항목',postal)
+        self.assertIn('모든 모집분야 공통 업무가 아님',postal)

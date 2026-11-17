@@ -23,6 +23,11 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Official HWP originals, checked 2026-11-17; not ALIO publication end times.
+    'a306334': '2026-11-09T18:00:00+09:00',
+    'a306653': '2026-11-09T18:00:00+09:00',
+    'a306548': '2026-11-17T17:00:00+09:00',
+    'a306553': '2026-11-17T17:00:00+09:00',
     'a306750': '2026-11-19T10:00:00+09:00',
     'a306355': '2026-11-16T10:00:00+09:00',
     'a306799': '2026-11-23T10:00:00+09:00',
@@ -164,7 +169,7 @@ def is_closed(due):
             return False
         return (
             deadline.astimezone(timezone.utc)
-            < datetime.now(timezone.utc)
+            <= datetime.now(timezone.utc)
         )
     except ValueError:
         return False
@@ -343,7 +348,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     # 같은 기관의 다른 ALIO 공고만 연결하며 모집분야가 같다고 추정하지 않습니다.
     related_items = []
     for other in related_posts:
-        if review.get("decision") == "same_notice" and other.get("id") in review["peer_ids"]:
+        if review.get("decision") in ("same_notice", "amended_notice") and other.get("id") in review["peer_ids"]:
             continue
         other_id = clean(other.get('id'))
         if other_id == pid or not re.fullmatch(r'a[0-9]+', other_id):
