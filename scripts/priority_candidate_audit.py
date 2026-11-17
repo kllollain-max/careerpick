@@ -56,6 +56,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
             reason = 'unverified_source'
         else:
             reason = None
+            start_day_clock_unknown = False
             # Only exact ALIO identity + official posting-end binding can
             # exclude a FUTURE reception. Never treat publication as reception.
             proof = verified_windows.get(identity, {})
@@ -64,14 +65,29 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                     and proof.get('title') == title
                     and proof.get('source_end_date') == str(p.get('due', ''))[:10]):
                 start = proof.get('application_start')
+                start_day = None
                 if (isinstance(start, str) and re.fullmatch(
                         r'\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?', start)):
                     start_day = as_date(start)
                     if start_day and start_day > today:
                         reason = 'official_reception_not_open'
+                    elif (start_day == today and 'T' not in start
+                          and as_of_instant is not None):
+                        # A date alone cannot certify the opening HOUR.
+                        # Keep it in the broad top queue, not the current regular-20 queue.
+                        start_day_clock_unknown = True
                     elif (as_of_instant is not None and 'T' in start
                           and as_of_instant < datetime.fromisoformat(start)):
                         reason = 'official_reception_not_open'
+                end_text = proof.get('application_end_date')
+                if (reason is None and isinstance(end_text, str)
+                        and re.fullmatch(r'\d{4}-\d{2}-\d{2}', end_text)):
+                    end_day = as_date(end_text)
+                    if (end_day and end_day < today
+                            and (start_day is None or start_day <= end_day)):
+                        # A confirmed date-only reception end is authoritative
+                        # AFTER the day; do not fabricate a same-day cutoff.
+                        reason = 'official_reception_closed_by_date'
                 # A verified reception cutoff is different from ALIO's
                 # publication end (often 23:59). Apply the clock only when
                 # bound to the exact ALIO ID, organization, title and end date.
@@ -99,7 +115,8 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                          'due': end.isoformat(), 'employment': emp, 'reported_seats': seats,
                          'permanent_classified': permanent, 'regular_only_classified': regular_only,
                          'mixed_employment_with_regular': mixed_regular,
-                         'triage_score': score, 'official_url': url})
+                         'triage_score': score, 'official_url': url,
+                         'official_start_day_clock_unconfirmed': start_day_clock_unknown})
     selected.sort(key=lambda x: (-x['triage_score'], x['due'], x['id']))
     # A separate 20-row EDITORIAL WORK QUEUE, never a verified list of
     # independent, currently open regular positions. Keep the original
@@ -109,6 +126,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
     priority_sector_terms = ('발전', '전력', '에너지', '철도', '교통',
                              '금융', '은행', '신용보증', '공제', '연금', '물류')
     regular_review, held_regular, verified_duplicate_exclusions = [], [], []
+    held_start_day_clock_unknown = []
     # Only a current-source fingerprint verified SAME-notice decision may
     # suppress a duplicate from the editor's regular-only 20-row work queue.
     # Leave the original cross-employment `top` output and public pages intact.
@@ -122,6 +140,9 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                 and representative in eligible_ids):
             verified_duplicate_exclusions.append({
                 'id': item['id'], 'representative_id': representative})
+            continue
+        if item['official_start_day_clock_unconfirmed']:
+            held_start_day_clock_unknown.append(item['id'])
             continue
         if any(term in item['title'] for term in caution_terms):
             held_regular.append(item['id'])
@@ -141,12 +162,15 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
             'regular_review_candidate_rows': len(regular_review),
             'regular_review_verified_duplicate_exclusions': verified_duplicate_exclusions,
             'regular_title_conflict_hold_ids': held_regular,
+            'regular_start_day_clock_unconfirmed_hold_ids': held_start_day_clock_unknown,
             'limitations': ['Not a search-volume or actual popularity ranking',
                             'Reported hiring counts are source fields, not independently confirmed headcount',
                             'Mixed-employment notices report total seats, not verified regular-only seats; no regular-only score boost',
                             'Application requirements and current status must be reviewed at the official page',
                             'Known future official reception dates are excluded only on exact notice identity',
                             'Date-only evaluation cannot certify same-day opening or closing hours',
+                            'A date-only reception opening TODAY is held from the current regular-20 queue when checking live KST time',
+                            'An officially confirmed date-only reception END excludes only from the following calendar date',
                             'Real-time exclusion uses only identity-bound verified opening/cutoff clocks; historical --as-of remains date-only',
                             'Unknown and expired deadlines are never promoted',
                             'Regular review candidates are UNVERIFIED; official duties, eligibility, independent seats and live reception require separate original-source review',
