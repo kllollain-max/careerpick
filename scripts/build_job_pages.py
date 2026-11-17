@@ -23,6 +23,9 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    'a306545': '2026-11-17T17:00:00+09:00',
+    'a306512': '2026-11-12T15:00:00+09:00',
+    'a306648': '2026-11-12T15:00:00+09:00',
     # Official HWP originals, checked 2026-11-17; not ALIO publication end times.
     'a306334': '2026-11-09T18:00:00+09:00',
     'a306653': '2026-11-09T18:00:00+09:00',
@@ -182,7 +185,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     duplicate_id = review.get("representative_id") if review.get("decision") == "same_notice" else None
     duplicate = bool(duplicate_id and duplicate_id != post.get("id"))
     review_html = ""
-    if review:
+    if review and review.get("publish_note", True):
         peer_links = " · ".join(f'<a href="{peer}.html">{peer} 공고 비교</a>' for peer in review["peer_ids"] if peer != post.get("id"))
         proof_links = " · ".join(f'<a href="{escape(src["url"], quote=True)}" rel="noopener noreferrer">공식 {label} 원본</a>' for label, src in zip(("공고문", "직무기술서"), review["sources"]))
         review_html = ('<section id="notice-review" aria-label="유사 공고 구분 안내"><h2>유사 공고 구분 안내</h2>'
@@ -218,6 +221,15 @@ def render(post, detail, related_posts=(), notice_review=None):
             or verified_duties.get('title') != title):
         verified_duties = {}
 
+    # Exact-source display correction only: preserve collection snapshots and
+    # reject changed source text, identity mismatches and unsupported fields.
+    for field, correction in verified_duties.get('detail_display_corrections', {}).items():
+        if (field in ('aplyQlfcCn', 'disqlfcRsn') and isinstance(correction, dict)
+                and isinstance(correction.get('value'), str)
+                and isinstance(correction.get('expected'), str)
+                and detail.get(field) == correction.get('expected')):
+            detail = dict(detail, **{field: correction['value']})
+
     canonical = f'{BASE}/jobs/{quote(duplicate_id or pid, safe="")}.html'
     due = clean(post.get('due'))
     due_display = date_label(due, post.get('dueHasTime') is True)
@@ -241,9 +253,15 @@ def render(post, detail, related_posts=(), notice_review=None):
 
     verified_start = verified_duties.get('application_start', '')
     parsed_start = parse_date(verified_start)
-    if not parsed_start or not application_cutoff or parsed_start > parse_date(application_cutoff):
+    verified_end = verified_duties.get('application_end_date', '')
+    date_end = parse_date(verified_end, end_of_day=True) if re.fullmatch(r'\d{4}-\d{2}-\d{2}', verified_end) else None
+    period_end = parse_date(application_cutoff) if application_cutoff else date_end
+    source_end = verified_duties.get('source_end_date', application_cutoff[:10])
+    if (not parsed_start or not period_end or parsed_start > period_end
+            or source_end != due[:10]):
         verified_start = ''
-    confirmed_period = (date_label(verified_start, 'T' in verified_start) + ' ~ ' + confirmed_cutoff) if verified_start else ''
+    end_label = confirmed_cutoff or (verified_end + ' (마감시각 공식 공고 확인 필요)' if date_end else '')
+    confirmed_period = (date_label(verified_start, 'T' in verified_start) + ' ~ ' + end_label) if verified_start else ''
 
     fields = [
         ('기관명', org),
@@ -1080,6 +1098,8 @@ def main():
     quality['original_review_page_ids'] = len(notice_reviews)
     quality['confirmed_duplicate_alias_pages'] = sum(v.get('representative_id') != pid for pid, v in notice_reviews.items() if v['decision'] == 'same_notice')
     quality['verified_editorial_unique_notices'] = len({notice_reviews.get(pid, {}).get('representative_id') or pid for row in quality_rows if row['detail_fields']['verified_editorial_duties'] for pid in [row['id']]})
+    quality['official_original_review_groups'] = len({tuple(v['peer_ids']) for v in notice_reviews.values()})
+    quality['unreviewed_duplicate_candidate_groups'] = sum(not set(g['ids']).issubset(notice_reviews) for g in suspected_duplicates)
     quality['suspected_duplicate_groups'] = len(suspected_duplicates)
     quality['duplicate_groups_with_distinct_official_links'] = sum(
         item['distinct_official_link_count'] > 1 for item in suspected_duplicates

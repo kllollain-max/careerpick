@@ -2171,6 +2171,8 @@ function cpDetailWarnings(p,det){
   return p.n!=null && det?.recrutNope!=null && cpRecruitCount(p.n)!==cpRecruitCount(det.recrutNope) ? ['자료 간 정보가 달라 공식 확인이 필요합니다. 모집인원: 목록 '+cpRecruitCount(p.n)+' / 상세 '+cpRecruitCount(det.recrutNope)] : [];
 }
 function jobViewHTML(p, det){
+  const displayReview=CPHome.reviewedDetailDisplay(p,det);
+  det=displayReview.detail;
   const warnings=cpDetailWarnings(p,det);
   if(det?.recrutPblntSn && p.alio && String(det.recrutPblntSn)!==String(p.id).slice(1))det={};
   const now = new Date(), d = dday(p, now);
@@ -2224,6 +2226,7 @@ function jobViewHTML(p, det){
     ${p.gojobs ? "" : `<a class="jv-primary" href="${esc(links.primary)}" target="_blank" rel="noopener noreferrer">${links.exact ? "공식 채용공고 바로가기 ↗" : links.label}</a>`}
     ${secs.length ? `<nav class="jv-toc" aria-label="상세 목차">${secs.map(([a],i)=>`<a href="#cpSection${i}">${esc(a)}</a>`).join("")}</nav>` : ""}
     ${warnings.map(w=>`<p class="cp-link-warning" role="note">${esc(w)}</p>`).join('')}
+    ${displayReview.changed.length ? '<p class="cp-link-warning" role="note">공식 원문과 대조해 지원 자격·결격 사유의 요약 차이를 보완했습니다. 독립 상세페이지의 출처와 최신 기관 공고를 함께 확인하세요.</p>' : ''}
     <p class="jv-note">자료 묶음 조회 시각: ${esc((p.alio ? CP_FEED_STAMPS.alio : p.cleaneye ? CP_FEED_STAMPS.cleaneye : p.gojobs ? CP_FEED_STAMPS.gojobs : UPDATED) || '미확인')} · 개별 원문에 대한 사람의 검토 시각이 아닙니다. 필수자격·우대조건·제출서류와 정정 내용은 공식 공고를 함께 확인하세요.</p>
     ${specBoxHTML(p, det)}
     ${det === null ? "" : ckBoxHTML(p)}

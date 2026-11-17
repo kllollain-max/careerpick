@@ -40,15 +40,16 @@ def resolve(posts, details, rules=None):
         # Same-notice decisions require both the notice AND duties originals
         # to have identical verified bytes, not merely matching API summaries.
         proofs = [m.get('sources', []) for m in members]
-        if any(len(p) != 2 or any(not re.fullmatch(r'[a-f0-9]{64}', s.get('sha256', ''))
+        if any(len(p) not in (1, 2) or any(not re.fullmatch(r'[a-f0-9]{64}', s.get('sha256', ''))
                or not re.fullmatch(r'https://www.alio.go.kr/download/download.json\?fileNo=[0-9]+', s.get('url', '')) for s in p) for p in proofs):
             continue
-        if rule['decision'] == 'same_notice' and len({tuple(s['sha256'] for s in p) for p in proofs}) != 1:
+        if rule['decision'] == 'same_notice' and (any(len(p) != 2 for p in proofs) or len({tuple(s['sha256'] for s in p) for p in proofs}) != 1):
             continue
         used.update(ids)
         for member in members:
             result[member['id']] = dict(member, decision=rule['decision'],
-                representative_id=representative, checked_on=rule['checked_on'], peer_ids=ids)
+                representative_id=representative, checked_on=rule['checked_on'], peer_ids=ids,
+                publish_note=rule.get('publish_note', True))
     return result
 
 def load(root):

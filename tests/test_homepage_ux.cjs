@@ -327,3 +327,49 @@ test('notice display: unified cards retain and escape both official source links
   for(const s of c.p.officialSources)assert(links.includes(s.url));assert(links.includes('rel="noopener noreferrer"'));
   c.p={officialSources:[{url:'https://example.com/?a="<',label:'<script>'}]};assert(!vm.runInContext('cpMergedSourceLinks(p)',c).includes('<script>'));
 });
+function detailCorrectionFixture(id){
+  const post=require('../alio.json').posts.find(p=>p.id===id);
+  const source=require('../alio-detail.json')[id];
+  const reviewed=require('../scripts/verified_job_duties.json')[id];
+  const evidence={org:post.org,title:post.title,sourceEndDate:post.due.slice(0,10),corrections:JSON.parse(JSON.stringify(reviewed.detail_display_corrections))};
+  const context=vm.createContext({window:{CP_VERIFIED_DETAIL_CORRECTIONS:{[id]:evidence}},Date});
+  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
+  return {post,source,evidence,api:context.window.CPHome};
+}
+test('reviewed detail display fixes actual source discrepancies without changing the cache',()=>{
+  for(const [id,field] of [['a306512','aplyQlfcCn'],['a306929','disqlfcRsn']]){
+    const {post,source,evidence,api}=detailCorrectionFixture(id),before=JSON.stringify({post,source});
+    const result=api.reviewedDetailDisplay(post,source);
+    assert.notEqual(result.detail,source);
+    assert.equal(result.detail[field],evidence.corrections[field].value);
+    assert.equal(result.changed.join(','),field);
+    assert.equal(JSON.stringify({post,source}),before);
+  }
+});
+test('changed notice identity date or source text prevents a stale display correction',()=>{
+  const {post,source,api}=detailCorrectionFixture('a306929');
+  for(const changed of [{id:'a1'},{org:'other'},{title:'other'},{due:'2027-01-23'},{alio:false}])
+    assert.equal(api.reviewedDetailDisplay({...post,...changed},source).detail,source);
+  for(const changed of [{recrutPblntSn:'1'},{disqlfcRsn:'new source terms'}]){
+    const detail={...source,...changed};assert.equal(api.reviewedDetailDisplay(post,detail).detail,detail);
+  }
+  assert.equal(api.reviewedDetailDisplay(post,null).detail,null);
+});
+test('display metadata cannot change other fields or supply a missing expected source',()=>{
+  const {post,source,evidence,api}=detailCorrectionFixture('a306929');
+  evidence.corrections={recrutNope:{expected:source.recrutNope,value:'999'},disqlfcRsn:{value:'unverified'}};
+  assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
+});
+test('a verified date-only window marks future reception without inventing a final clock',()=>{
+  const post=require('../alio.json').posts.find(p=>p.id==='a306963');
+  const proof={org:post.org,title:post.title,sourceEndDate:'2027-01-22',start:'2027-01-18',endDate:'2027-01-22'};
+  const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[post.id]:proof}},Date});
+  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
+  const api=context.window.CPHome;
+  assert.equal(api.confirmedApplicationCutoff(post),null);
+  assert.equal(api.deadline(post,new Date('2027-01-17T14:59:59Z')).cls,'upcoming');
+  assert.notEqual(api.deadline(post,new Date('2027-01-17T15:00:00Z')).cls,'upcoming');
+  assert.equal(api.deadline(post,new Date('2027-01-22T03:00:00Z')).cls,'verify');
+  assert.equal(api.confirmedApplicationStart({...post,title:'changed'}),null);
+  proof.endDate='2027-01-17';assert.equal(api.confirmedApplicationStart(post),null);
+});
