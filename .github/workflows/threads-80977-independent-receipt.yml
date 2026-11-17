@@ -16,10 +16,11 @@ jobs:
         run: |
           python -m pip install --quiet requests pymupdf beautifulsoup4
           python - <<'PY'
-          import requests,hashlib,json,re,sys
+          import requests,hashlib,json,re,sys,urllib3
           from urllib.parse import urljoin
           from bs4 import BeautifulSoup
           import fitz
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
           session=requests.Session()
           session.headers.update({'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/132.0 Safari/537.36','Accept-Language':'ko-KR,ko;q=0.9'})
           targets=[
@@ -27,13 +28,14 @@ jobs:
             'https://www.cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1',
             'https://cbf.or.kr/twb_bbs/bbs_list.php?bcd=01_05_05_00_00&groupid=1'
           ]
-          outcome={'notice_id':'cleaneye-80977','approved':False,'posted':False,'official_pages':[],'attachments':[]}
+          outcome={'notice_id':'cleaneye-80977','approved':False,'posted':False,'tls_verified':False,'reason':'Employer site certificate chain failed, so these bytes are exploration only and cannot be approval evidence until authenticated independently','official_pages':[],'attachments':[]}
           candidates=[]
           for url in targets:
             try:
-              r=session.get(url,timeout=18,allow_redirects=True)
+              r=session.get(url,timeout=18,allow_redirects=True,verify=False)
               soup=BeautifulSoup(r.text,'html.parser')
               txt=soup.get_text(' ',strip=True)
+              print('WARNING_EMPLOYER_TLS_NOT_VERIFIED_APPROVAL_PROHIBITED',flush=True)
               print('EMPLOYER_PAGE',r.status_code,r.url,'BYTES',len(r.content),'TITLE',soup.title.get_text(' ',strip=True) if soup.title else '',flush=True)
               print('EMPLOYER_TEXT',txt[:10000],flush=True)
               found=[]
@@ -57,7 +59,7 @@ jobs:
             if url in seen:continue
             seen.add(url)
             try:
-              r=session.get(url,timeout=25,headers={'Referer':targets[0],'Accept':'application/pdf,application/octet-stream,*/*'})
+              r=session.get(url,timeout=25,verify=False,headers={'Referer':targets[0],'Accept':'application/pdf,application/octet-stream,*/*'})
               body=r.content
               rec={'url':r.url,'status':r.status_code,'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'magic':body[:12].hex(),'content_type':r.headers.get('Content-Type')}
               print('ATTACHMENT_RECEIPT',json.dumps(rec,ensure_ascii=False),flush=True)
