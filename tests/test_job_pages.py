@@ -144,6 +144,36 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('기관 공식 확인 접수마감', render(changed, {}))
         self.assertEqual(post, original)
 
+    def test_kiost_official_reception_clock_and_employment_counts_are_source_bound(self):
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306913']; original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a306913']
+        self.assertEqual(proof['source_url'], 'https://www.gojobs.go.kr/apmView.do?empmnsn=308183')
+        self.assertEqual(post['n'], '23')
+        self.assertEqual(proof['hiring_breakdown'], '정규직 9명 · 무기계약직 14명 (합계 23명)')
+        html = render(post, {})
+        self.assertIn('2026-11-13 ~ 2026-11-26 10:00 (KST)', html)
+        self.assertIn('정규직 9명 · 무기계약직 14명 (합계 23명)', html)
+        self.assertNotIn('2026-11-26 23:59 (KST)', html)
+        cutoffs = {'a306913': CONFIRMED_APPLICATION_CUTOFFS['a306913']}
+        proofs = {'a306913': proof}
+        metadata = homepage_cutoff_metadata([post], cutoffs, proofs)
+        self.assertEqual(metadata['a306913']['cutoff'], '2026-11-26T10:00:00+09:00')
+        self.assertEqual(metadata['a306913']['start'], '2026-11-13')
+        self.assertEqual(static_recruitment_posts([post], metadata, datetime.fromisoformat(
+            '2026-11-26T09:59:59+09:00')), [post])
+        self.assertEqual(static_recruitment_posts([post], metadata, datetime.fromisoformat(
+            '2026-11-26T10:00:00+09:00')), [])
+        for changes in ({'org': '다른 기관'}, {'title': '다른 공고'},
+                        {'due': '2026-11-27T23:59:00+09:00'}, {'alio': False}):
+            altered = dict(post, **changes)
+            self.assertEqual(homepage_cutoff_metadata([altered], cutoffs, proofs), {})
+            self.assertNotIn('고용형태별 인원', render(altered, {}))
+            self.assertNotIn('기관 공식 확인 접수마감', render(altered, {}))
+        self.assertEqual(post, original)
+
     def test_new_official_windows_preserve_publication_and_source_data(self):
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
         for pid, start, end in [('a307067', '2026-11-18', '2026-12-01 15:00'),
