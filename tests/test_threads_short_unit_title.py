@@ -10,6 +10,7 @@ class ShortUnitTitleTests(unittest.TestCase):
                         deadline_label='2026-11-20 23:59')
         self.detail = dict(instNm='병원', recrutPbancTtl='신입 업무지원직 채용',
                            recrutNope=66, hireTypeNmLst='정규직', workRgnNmLst='경기')
+        self.policy = {'editorial_v5': {'enabled': True}}
         row = '병동 AA1 50 의료기관 또는 기업체 근무경험 6개월 이상'
         self.refs = [dict(url='https://hospital.example/official', evidence=row)]
         self.review = dict(fact_evidence=[dict(field='title', value='병동',
@@ -21,7 +22,7 @@ class ShortUnitTitleTests(unittest.TestCase):
     def validate(self):
         return _image(dict(notice_id='a700', image_job=self.job), {}, self.detail,
             self.review, self.refs, '2026-11-20', dict(end='2026-11-20T23:59:00+09:00',
-            date_only=False), False, {})
+            date_only=False), False, self.policy)
 
     def test_exact_two_character_unit_is_accepted(self):
         self.assertEqual(self.validate()['count'], 50)
@@ -58,5 +59,10 @@ class ShortUnitTitleTests(unittest.TestCase):
 
     def test_malformed_v5_is_rejected_with_validation_error(self):
         self.review['v5'] = 'untrusted'
+        with self.assertRaisesRegex(QueueValidationError, 'IMAGE_TITLE_INVALID'):
+            self.validate()
+
+    def test_disabled_v5_cannot_enable_short_title_via_review(self):
+        self.policy['editorial_v5']['enabled'] = False
         with self.assertRaisesRegex(QueueValidationError, 'IMAGE_TITLE_INVALID'):
             self.validate()
