@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-80792",
+  "employer": "서울물재생시설공단",
+  "review_status": "EMPLOYER_PRIMARY_NOTICE_AND_6_PAGE_PDF_SEMANTIC_REVIEW_PENDING_BINARY_AND_PROFILE_CHECK",
+  "approved_for_queue": false,
+  "slot_reserved": false,
+  "meta_posted": false,
+  "source_authority": {
+    "canonical_notice": "https://www.swr.or.kr/cpage/board/job/view.do?board_gb=job&board_seq=5890&currRow=1&menu_cd=C0003&srch_input1=00002&srch_input2=&srch_input3=",
+    "employer_current_job_listing": "https://www.swr.or.kr/cpage/board/job.do?menu_cd=C0003&srch_input1=00002",
+    "official_application_url": "https://swr.plusrecruit.co.kr/",
+    "original_pdf_mirror": "https://sejongurimal.korea.ac.kr/bbs/cdc/526/183852/download.do",
+    "cleaneye_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80792"
+  },
+  "official_documents": [
+    {
+      "kind": "university_hosted_official_notice_copy",
+      "pages": 6,
+      "semantic_read": true,
+      "rendered_pages_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "sha256": null,
+      "bytes_verified": false,
+      "limitation": "University-hosted exact announcement PDF is independently semantically reviewed; do not claim employer-origin binary until source signature and current employer notice agree."
+    }
+  ],
+  "independently_read_facts": [
+    {
+      "field": "employment",
+      "value": "일반직 9급 정규직 신입",
+      "source": "기관 상세 채용정보; 공고 PDF 1쪽"
+    },
+    {
+      "field": "recruiting_unit",
+      "value": "일반직 9급 행정 4명",
+      "source": "공고 PDF 1쪽 모집표",
+      "whole_notice_count": 16
+    },
+    {
+      "field": "work",
+      "value": "인사·총무, 예산·회계, 경영평가, 사무행정",
+      "source": "공고 PDF 1쪽"
+    },
+    {
+      "field": "age",
+      "value": "2027-01-01 임용예정일 기준 18세 이상 60세 미만",
+      "source": "공고 PDF 2쪽"
+    },
+    {
+      "field": "mandatory_qualification",
+      "value": "일반직 9급 공통요건 외 별도 자격요건 없음",
+      "source": "공고 PDF 2쪽"
+    },
+    {
+      "field": "selection",
+      "value": "서류, NCS·전공 필기, 온라인 인성검사, 면접",
+      "source": "공고 PDF 3~5쪽"
+    },
+    {
+      "field": "deadline",
+      "value": "2026-11-18T18:00:00+09:00",
+      "source": "공고 PDF 3쪽"
+    },
+    {
+      "field": "application",
+      "value": "기관 지정 온라인 채용시스템, 직종 및 전형 중복지원 불가",
+      "source": "기관 상세 채용정보, 공고 PDF 3쪽"
+    }
+  ],
+  "amendments": {
+    "employer_job_listing_reviewed": true,
+    "target_notice_still_listed": true,
+    "newer_specific_cancellation_visible_first_page": false,
+    "all_channels_checked": false,
+    "portal_exact_application_open_confirmed": false
+  },
+  "v5_draft": {
+    "post_text": "서울에서 사무행정 정규직을 찾는 분께,\n서울물재생시설공단 신입 일반직 9급 행정 4명을 모집해요.\n\n전체 정규직 16명 중 행정은 4명이에요.\n인사·총무와 예산·회계, 경영평가 관련 업무를 맡아요.\n\n임용예정일 기준 만 18세 이상 60세 미만이고, 이 직무는 공통요건 외 별도 필수자격이 없어요.\n서류 심사 후 NCS·전공 필기와 온라인 인성검사, 면접이 있어요.\n\n11월 18일 18:00까지 공식 채용시스템에서 온라인 접수해요.\n다른 직종과 중복지원은 할 수 없어요.\n\n자세한 사항은 프로필링크 확인",
+    "characters": 282,
+    "replies": [],
+    "cta": "자세한 사항은 프로필링크 확인",
+    "cta_count": 1,
+    "no_urls": true,
+    "no_domains": true,
+    "no_hashtags": true,
+    "media": "TEXT_PROVISIONAL_DEPENDS_ON_PRIOR_SLOTS",
+    "proposed_slot": "2026-11-18T08:00:00+09:00",
+    "slot_reserved": false
+  },
+  "validation_blockers": [
+    "Exact PDF bytes independent SHA256 not yet computed; digest must be fetched again during intake.",
+    "Actual employer current recruitment listing and correction/cancellation across channels not exhaustively confirmed.",
+    "Rendered CareerPick #job=cleaneye-80792 and exact official clickthrough not yet independently verified.",
+    "Prior 11/17 noon, 16 and 20 actual posts and TEXT/IMAGE alternation must be verified before 11/18 08 approval.",
+    "No production validate_entry / official receipt / CAS staging+queue run yet."
+  ],
+  "safety": "No profile/byte-review timestamps fabricated; no queue, published record, website, crawler or unrelated account modification."
+}
