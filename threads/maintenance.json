@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17 07:49:51 UTC",
-  "last_observed_at": "2026-11-17 07:49:51 UTC",
+  "updated_at": "2026-11-17 08:42:33 UTC",
+  "last_observed_at": "2026-11-17 08:42:33 UTC",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13331,26 +13331,21 @@
     "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
   },
   "last_monitor_check": {
-    "observed_at_utc": "2026-11-17 07:49:51 UTC",
-    "status": "ACTUAL16_TEXT_POST_VERIFIED_NEXT3_VALIDATED",
+    "observed_at_utc": "2026-11-17 08:42:33 UTC",
+    "status": "THREE_FUTURE_SLOTS_PASS_LATE_REGULAR16_DUPLICATE_GUARD_VERIFIED_NEW_METRICS_SOURCE_RECOVERED",
     "main_sha": "84af0cefbcf0cc42bb187c3e5c5752eaa40c6618",
-    "latest_preflight_run_id": 44030015033,
-    "latest_preflight_conclusion": "success",
-    "publication_run_id": 44036825332,
-    "publication_run_attempt": 1,
-    "publication_run_event": "workflow_dispatch",
-    "regular_cron_success_claimed": false,
-    "actual_meta_post_id": "18121803568969931",
     "queue_sha": "882b4ebc1c5d8e82648e34d0df6ba953c39e3f8f",
     "stage_sha": "931eef7b77b1f550f58d9eef71a1fa241ba265fb",
+    "performance_sha": "8c228af0d29a8f628fb15bba5f9ee8e30947fb09",
+    "latest_preflight_run_id": 44046932829,
+    "regular16_run_id": 44045639462,
+    "regular16_no_duplicate_POST_verified": true,
+    "new_posts_observed": 0,
     "validated_future_slots": 3,
-    "new_posts_observed": 1,
-    "posts_created_by_this_monitor": 0,
-    "next_slot_missing": false,
     "first_unsupplied_future_slot": "2026-11-18T16:00:00+09:00",
-    "audit_path": "threads/audits/monitor-20261117-1645-text-post-verified.json",
-    "audit_sha": "2d68d3ddde3cd17498a92699933dc2ef725c2305",
-    "automation_enabled": true
+    "candidate_hold": "cleaneye-81054",
+    "audit_path": "threads/audits/monitor-20261117-1745-supply-performance.json",
+    "audit_sha": "52180f70fe2b2bf0ae84eeada82e2b6ab3eac0f8"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20944,12 +20939,34 @@
       "next_supply_gap": "2026-11-18T08:00:00+09:00"
     },
     "latest_observation_status": {
-      "checked_at": "2026-11-17T03:34:23.900211+00:00",
+      "checked_at": "2026-11-17 08:42:33 UTC",
       "text_verified": true,
       "image_verified": true,
-      "latest_image_24h": "not_due",
-      "latest_image_72h": "not_due",
-      "performance_improvement": "not_established_insufficient_unbalanced_sample"
+      "latest_text_post_id": "18121803568969931",
+      "latest_text_24h": "not_due",
+      "latest_text_72h": "not_due",
+      "performance_improvement": "not_established_insufficient_unbalanced_sample",
+      "comparable_24h_count": 6,
+      "comparable_72h_count": 6,
+      "account_followers": {
+        "account": "hid_119",
+        "scope": "account_total",
+        "requested_start": "2026-11-11T11:45:18.355131+00:00",
+        "requested_end": "2026-11-17T08:35:42.396060+00:00",
+        "observed_start": "2026-11-11T11:45:32.854727+00:00",
+        "observed_end": "2026-11-17T07:58:55.749819+00:00",
+        "start_followers": 415,
+        "end_followers": 489,
+        "net_change": 74,
+        "status": "observed_interval",
+        "exact_requested_boundaries": false,
+        "observation_statuses": {
+          "captured": 33
+        },
+        "post_attribution": null,
+        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+      },
+      "audit_path": "threads/audits/monitor-20261117-1745-supply-performance.json"
     }
   },
   "single_main_v2_writer_performance": {
@@ -26415,5 +26432,22 @@
     "audit_blob": "db8cafaa9a0f920f80ef34a44602d42667ce00fc",
     "next_action": "Observe existing regular publisher only; no extra dispatch or POST.",
     "body_chars": 323
+  },
+  "next_supply_review_20261117_1745": {
+    "notice_id": "cleaneye-81054",
+    "status": "HOLD_OFFICIAL_ATTACHMENT_RECOVERED_DRAFT_FACTS_CORRECTED",
+    "ready": false,
+    "slot_reserved": false,
+    "source_recovery_pdf_sha256": "482480fea161e9b3567c046c05397ec4569a19573899f3b595e65bf7869ee75b",
+    "source_recovery_path": "threads/audits/recovery-source-cleaneye-81054-20261117-1743.json",
+    "source_recovery_blob": "526363daf60290a1c64bf1cef8bbc858589375cd",
+    "draft_chars": 332,
+    "profile_render_verified": true,
+    "direct_correction_GET_status": 503,
+    "remaining_gates": [
+      "Live official correction/current-status resolution",
+      "Full review.v5 metadata and actual validate_entry with recovered attachment route",
+      "Future slot fresh claims/history/media validation then staging CAS/queue promotion/readback"
+    ]
   }
 }
