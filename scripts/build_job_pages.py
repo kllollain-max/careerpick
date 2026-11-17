@@ -25,6 +25,8 @@ BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
     # ALIO official detail (not publication end), checked 2026-11-17.
     'a306755': '2026-11-20T17:00:00+09:00',
+    # SNU Dental Hospital official notice: reception opens 2027-01-18 09:00.
+    'a306925': '2027-01-22T18:00:00+09:00',
     'a306545': '2026-11-17T17:00:00+09:00',
     'a306512': '2026-11-12T15:00:00+09:00',
     'a306648': '2026-11-12T15:00:00+09:00',
@@ -62,6 +64,15 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306755',
         'checked_on': '2026-11-17',
         'scope': 'ALIO official detailed text: application window and 17:00 cutoff; no attachment-byte or field-by-field headcount verification',
+    },
+    'a306925': {
+        'organization': '서울대학교치과병원',
+        'title': '2027년도 치과의사전공의(인턴) 모집 공고',
+        'source_end_date': '2027-01-22',
+        'application_start': '2027-01-18T09:00:00+09:00',
+        'source_url': 'https://www.snudh.org/portal/blindEmpmn/view.do?menuNo=29060340&empSeq=6676',
+        'checked_on': '2026-11-17',
+        'scope': 'Employer official HTML: in-person/postal reception starts 2027-01-18 09:00 and ends 2027-01-22 18:00; not ALIO publication start or a new job-duty original',
     }
 }
 
