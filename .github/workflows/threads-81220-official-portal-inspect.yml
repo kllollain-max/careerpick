@@ -97,7 +97,18 @@ jobs:
               pairs={}
               for inp in form.find_all("input"):
                   if inp.get("name"):pairs[inp["name"]]=inp.get("value","")
-              receipt.update(view_action=action,form_original_inputs=pairs,anchor_attrs=dict(anchor.attrs))
+              # Match yhLib.inline.post data-req-merge-form-id=list: copy the public list search form fields.
+              merge=soup.find("form",id=anchor.get("data-req-merge-form-id"))
+              merge_fields={}
+              if merge:
+                  for inp in merge.find_all("input"):
+                      if inp.get("name"):merge_fields[inp["name"]]=inp.get("value","")
+                  for sel in merge.find_all("select"):
+                      if sel.get("name"):
+                          chosen=sel.find("option",selected=True) or sel.find("option")
+                          merge_fields[sel["name"]]=chosen.get("value","") if chosen else ""
+              for k,v in merge_fields.items():pairs.setdefault(k,v)
+              receipt.update(view_action=action,form_original_inputs=pairs,merged_list_fields=merge_fields,anchor_attrs=dict(anchor.attrs))
               # The employer's own yhLib.inline.post() sends the anchor's data-req-p-idx with this form.
               if "pIdx" in pairs:pairs["pIdx"]=exact_idx
               elif "idx" in pairs:pairs["idx"]=exact_idx
