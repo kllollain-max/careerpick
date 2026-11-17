@@ -15,6 +15,30 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_snudh_alio_qualification_year_conflict_is_source_bound_and_original_preserved(self):
+        # ALIO a306925 shows 2026 expected licensure; SNUDH employer 2027
+        # internship notice explicitly shows 2027. Do not silently alter raw.
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306925']
+        original = copy.deepcopy(post)
+        detail = {'recrutPblntSn': '306925',
+                  'aplyQlfcCn': '치과의사 면허 취득자 또는 2026년도 취득예정자로서'}
+        old_detail = copy.deepcopy(detail)
+        html = render(post, detail)
+        self.assertIn('기관 공고와 ALIO 지원자격 연도 차이', html)
+        self.assertIn('2027년도 취득예정자로 표시됩니다', html)
+        self.assertIn('2026년도 취득예정자로서', html)
+        self.assertEqual(post, original)
+        self.assertEqual(detail, old_detail)
+        # Correction or identity change invalidates the old discrepancy.
+        revised = render(post, {**detail,
+            'aplyQlfcCn': '치과의사 면허 취득자 또는 2027년도 취득예정자로서'})
+        self.assertNotIn('기관 공고와 ALIO 지원자격 연도 차이', revised)
+        changed = render({**post, 'title': '정정채용'}, detail)
+        self.assertNotIn('기관 공고와 ALIO 지원자격 연도 차이', changed)
+        wrong_detail = render(post, {**detail, 'recrutPblntSn': '999999'})
+        self.assertNotIn('기관 공고와 ALIO 지원자격 연도 차이', wrong_detail)
+
     def test_protected_notice_supplements_keep_existing_guidance_and_unique_anchors(self):
         from scripts.build_job_pages import VERIFIED_DUTIES
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
