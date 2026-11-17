@@ -160,3 +160,63 @@ jobs:
             threads-80792-ats-detail.json
             threads-80792-recruitment-detail.png
           retention-days: 14
+
+  exact-9grade-administration-description:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download and independently read exact live official 9th-grade administration job description
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium pymupdf
+          python - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          from pathlib import Path
+          import json,time,hashlib,fitz
+          directory=Path.cwd()/'swr-target-attachments'
+          directory.mkdir(exist_ok=True)
+          o=Options()
+          for flag in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1300,900'):o.add_argument(flag)
+          o.add_experimental_option('prefs',{'download.default_directory':str(directory),'download.prompt_for_download':False,'safebrowsing.enabled':True,'plugins.always_open_pdf_externally':True})
+          d=webdriver.Chrome(options=o)
+          outcome={'approved':False,'exact_unit_title':'직무기술서 일반직 9급 (행정).pdf'}
+          try:
+              d.execute_cdp_cmd('Page.setDownloadBehavior',{'behavior':'allow','downloadPath':str(directory)})
+              d.get('https://swr.plusrecruit.co.kr/#/recruitment/detail/39')
+              WebDriverWait(d,45).until(lambda w:'직무기술서 일반직 9급 (행정).pdf' in w.execute_script('return document.body.innerText'))
+              elements=d.execute_script("""return Array.from(document.querySelectorAll('body *')).filter(x=>x.children.length===0&&(x.innerText||'').includes('직무기술서 일반직 9급 (행정).pdf')).slice(0,5).map(e=>({tag:e.tagName,parent:e.parentElement?.outerHTML.slice(0,1200)}));""")
+              print('OFFICIAL_JOB_DESCRIPTION_TARGET',json.dumps(elements,ensure_ascii=False))
+              clicked=d.execute_script("""let e=Array.from(document.querySelectorAll('body *')).find(x=>x.children.length===0&&(x.innerText||'').includes('직무기술서 일반직 9급 (행정).pdf'));if(!e)return false;(e.closest('a,button,[onclick]')||e.parentElement||e).click();return true;""")
+              print('CLICKED_EXACT_UNIT_ATTACHMENT',clicked)
+              for i in range(25):
+                  paths=[p for p in directory.iterdir() if p.is_file() and not p.name.endswith('.crdownload')]
+                  if paths:break
+                  time.sleep(1)
+              paths=[p for p in directory.iterdir() if p.is_file() and not p.name.endswith('.crdownload')]
+              print('DOWNLOADED_PATHS',[(p.name,p.stat().st_size) for p in paths])
+              for p in paths:
+                  b=p.read_bytes(); print('ATTACHMENT_BYTES',p.name,len(b),'MAGIC',repr(b[:8]))
+                  if b.startswith(b'%PDF-'):
+                      pdf=fitz.open(stream=b,filetype='pdf')
+                      txt='\n'.join(page.get_text() for page in pdf)
+                      sha=hashlib.sha256(b).hexdigest()
+                      print('OFFICIAL_9GRADE_DESCRIPTION_PDF_SHA256',sha,'PAGES',len(pdf),'TEXT_CHARS',len(txt))
+                      print('DESCRIPTION_TEXT',txt[:15000])
+                      for k in ['근무지역','근무지','근무장소','배치장소','서울']:
+                          print('DESCRIPTION_WORKPLACE_TERM',k,k in txt)
+                      outcome.update({'document_sha256':sha,'pages':len(pdf),'bytes':len(b),'text':txt,'pdf_origin':'Employer actual official live ATS #/recruitment/detail/39','download_time_verified_not_future':True})
+                  else: outcome['blocked']='Attachment click did not download a PDF, no approval'
+              if not paths: outcome['blocked']='Exact job description download not retrievable, no approval'
+              with open('threads-80792-unit-description.json','w') as f:json.dump(outcome,f,ensure_ascii=False,indent=2)
+          finally:d.quit()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-80792-unit-description
+          path: |
+            threads-80792-unit-description.json
+            swr-target-attachments/
+          retention-days: 14
