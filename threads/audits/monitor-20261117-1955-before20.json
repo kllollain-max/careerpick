@@ -1,0 +1,2605 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-17 10:54:48 UTC",
+  "status": "FOUR_FUTURE_SLOTS_VALIDATED_CARD_EXACT_AWAIT20_PUBLICATION",
+  "main_sha": "c9551276dac676190efb76af6fad4ffb88c2b2b1",
+  "blobs": {
+    "threads_posted.json": "4f2d5d92003b2f1339e6b227d30632919482ccf3",
+    "threads/writer-queue.json": "d89de9c50d7e3e607e667adcca935458cc101e8d",
+    "threads/reviewed-staging.json": "f282c67573a8785910e7e94e5e97f95d15b1987f",
+    "threads/performance.json": "0e1c3e32de61b4e9bf4d4ade81de85ef4e713185"
+  },
+  "source": {
+    "alio_updated": "2026-11-17T19:19:00+09:00",
+    "cleaneye_updated": "2026-11-17T19:20:08+09:00",
+    "all_four_policy_byte_sha256_checks_passed": true,
+    "writer_input_limit24_executed": true
+  },
+  "claims": {
+    "read": 51,
+    "pending": 0,
+    "all51_current_blobs_read": true,
+    "errors": 0,
+    "historical_verified_barrier": 1
+  },
+  "latest_preflight": {
+    "run_id": 44063857751,
+    "run_attempt": 1,
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-11-17T10:21:12Z",
+    "head_sha": "84af0cefbcf0cc42bb187c3e5c5752eaa40c6618",
+    "report": {
+      "time": "2026-11-17T19:20:17.539630+09:00",
+      "future_slots": [
+        "2026-11-17T20:00:00+09:00",
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00",
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00"
+      ],
+      "next_media": "IMAGE",
+      "promoted": [],
+      "refused": [
+        {
+          "notice_id": "a306965",
+          "reason": "DUPLICATE_POST"
+        },
+        {
+          "notice_id": "a305734",
+          "reason": "DUPLICATE_POST"
+        },
+        {
+          "notice_id": "cleaneye-80976",
+          "reason": "DUPLICATE_POST"
+        },
+        {
+          "notice_id": "a306752",
+          "reason": "DUPLICATE_POST"
+        },
+        {
+          "notice_id": "a306913",
+          "reason": "DUPLICATE_POST"
+        },
+        {
+          "notice_id": "cleaneye-81115",
+          "reason": "DUPLICATE_POST"
+        },
+        {
+          "notice_id": "cleaneye-81249",
+          "reason": "DUPLICATE_POST"
+        },
+        {
+          "notice_id": "cleaneye-80848",
+          "reason": "SLOT_ALREADY_OCCUPIED"
+        },
+        {
+          "notice_id": "a306875",
+          "reason": "SLOT_ALREADY_OCCUPIED"
+        },
+        {
+          "notice_id": "a306807",
+          "reason": "SLOT_ALREADY_OCCUPIED"
+        },
+        {
+          "notice_id": "cleaneye-81112",
+          "reason": "SLOT_ALREADY_OCCUPIED"
+        }
+      ],
+      "queue_updated": false,
+      "meta_posted": false,
+      "queue_sha": "d89de9c50d7e3e607e667adcca935458cc101e8d",
+      "staged_sha": "f282c67573a8785910e7e94e5e97f95d15b1987f",
+      "promoted_count": 0,
+      "approved_supply_count": 4,
+      "inventory_target": 8,
+      "inventory_shortfall": 4,
+      "replenishment_required": true,
+      "invalid_ready_entries": [],
+      "approved_future_slots": [
+        "2026-11-17T20:00:00+09:00",
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00"
+      ],
+      "missing_slots": [
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00"
+      ],
+      "next_slot_missing": false,
+      "source_candidate_count": 60,
+      "writer_handoff": {
+        "status": "review_required",
+        "missing_slots": [
+          "2026-11-18T20:00:00+09:00",
+          "2026-11-19T08:00:00+09:00",
+          "2026-11-19T12:00:00+09:00",
+          "2026-11-19T16:00:00+09:00"
+        ],
+        "candidate_notice_ids": [
+          "cleaneye-80977",
+          "cleaneye-81054",
+          "cleaneye-81057",
+          "cleaneye-80711",
+          "cleaneye-80914",
+          "cleaneye-81199",
+          "cleaneye-81206",
+          "cleaneye-81209",
+          "cleaneye-81231",
+          "cleaneye-80951",
+          "cleaneye-81095",
+          "cleaneye-81187",
+          "cleaneye-81201",
+          "cleaneye-80989",
+          "cleaneye-80990",
+          "cleaneye-80991",
+          "cleaneye-81114",
+          "cleaneye-81179",
+          "cleaneye-81180",
+          "cleaneye-81255",
+          "cleaneye-81280",
+          "cleaneye-81281",
+          "cleaneye-81282",
+          "cleaneye-81283",
+          "cleaneye-81284",
+          "cleaneye-81285",
+          "cleaneye-81286",
+          "cleaneye-81287",
+          "cleaneye-81183",
+          "cleaneye-81117",
+          "cleaneye-80792",
+          "cleaneye-80805",
+          "cleaneye-80807",
+          "cleaneye-80812",
+          "cleaneye-80838",
+          "cleaneye-81028",
+          "cleaneye-81074",
+          "a306992",
+          "cleaneye-81146",
+          "cleaneye-80956",
+          "cleaneye-81166",
+          "cleaneye-81192",
+          "cleaneye-81193",
+          "cleaneye-81194",
+          "cleaneye-81195",
+          "cleaneye-81196",
+          "a307082",
+          "cleaneye-81150",
+          "cleaneye-81151",
+          "cleaneye-81152",
+          "cleaneye-81153",
+          "cleaneye-81154",
+          "cleaneye-81155",
+          "cleaneye-81156",
+          "cleaneye-81157",
+          "cleaneye-81158",
+          "cleaneye-81232",
+          "cleaneye-81233",
+          "cleaneye-81234",
+          "cleaneye-81235"
+        ],
+        "candidates": [
+          {
+            "notice_id": "cleaneye-80977",
+            "org": "춘천바이오산업진흥원",
+            "title": "2026년 제5차 공개채용(사업기획_원급, 바이오산업분양 인력양성 및 기업지원_원급)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80977",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-20",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80977/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20"
+            },
+            "source_post_sha256": "02dd47260909b5673c3b3f7441e8c3b48c83d9b57b587b14ac1f92a99327d417",
+            "source_detail_sha256": "5960c15d5c90bc35f583cc150ee2c0361f94b260b7a3c707bb44f5b645f5b2ba",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-20",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
+            "application_source_ref": "cleaneye.json#cleaneye-80977/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81054",
+            "org": "대구정책연구원",
+            "title": "2026년 제1차 정규직원 공개채용(연구직) 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81054",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-20",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81054/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20"
+            },
+            "source_post_sha256": "a28da33935db9a8248e6e3ffe0a84868e14ff524a384875e679e411d19e2422f",
+            "source_detail_sha256": "b602c8e10d9e3f63188fa44032e44cc8dc6ece9860f52cb1a7cbd081635f7656",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-20",
+              "채용인원": "3"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
+            "application_source_ref": "cleaneye.json#cleaneye-81054/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81057",
+            "org": "대구정책연구원",
+            "title": "2026년 제1차 정규직원 공개채용(관리직) 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81057",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-20",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81057/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20"
+            },
+            "source_post_sha256": "ba9227dbc9099fd19e446caa36dbe82b259774d9f494fc1cd3af08f3d5d22b7a",
+            "source_detail_sha256": "cefc22fae7e5f9083cc4e974586b7a523453b411f7e2860201abcfc9b87ef7ea",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-20",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
+            "application_source_ref": "cleaneye.json#cleaneye-81057/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80711",
+            "org": "충주시시설관리공단",
+            "title": "2027년 제1회 충주시시설관리공단 직무중심 정규직 공개채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80711",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-02",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80711/application_period",
+              "evidence": "접수개시일 원문: 2026-11-02; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "5fd7736d45bedba0a5860c8b2c2c924d4558efe2aa924aabb6ca561252c59b5a",
+            "source_detail_sha256": "f4f695669d0720a592d6e0a48830e09ba42b46b1204340578ec1c39d6f1c36d4",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-02",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "13"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-02; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-80711/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80914",
+            "org": "양주도시공사",
+            "title": "2026년 제1회 직원 공개경쟁채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80914",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80914/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "0c1b207a752c268f350699861aefca50f8b5b1cbcaa2a45c53af613b4559441b",
+            "source_detail_sha256": "5e8921f33b3a7d3cdf61483dd93a22c44e96aa615e969940dc73ad6b65377bff",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "18"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-80914/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81199",
+            "org": "경기문화재단",
+            "title": "2026년 경기문화재단 제5회 직원채용(일반직)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81199",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81199/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "f58973e06a423d4b8b94129ccfc39f59ff0bf762497feab17e639e8c9d808a02",
+            "source_detail_sha256": "260768c668feb52a5634e2403a8f39937fef75b33c7d3483e0eeba51f0761f7d",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81199/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81206",
+            "org": "경기도사회적경제원",
+            "title": "2026년 제3차 경기도사회적경제원 정규직(장애인 제한) 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81206",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-13",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81206/application_period",
+              "evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "3ca5a3e0e282588a73927537ce721e1394414fb9e0f92b5e750438c88321cc45",
+            "source_detail_sha256": "dd2bd50b48e173f552ee092d70ac4404b743c3eed336a0e80af9c7cfd117f6dc",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-13",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81206/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81209",
+            "org": "마포복지재단",
+            "title": "재단법인 마포복지재단 직원(5급) 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81209",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-14",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81209/application_period",
+              "evidence": "접수개시일 원문: 2026-11-14; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "5be9f538e16b16581c75e7a6cf04302c5ff55e12866524edd0c7866c475969b6",
+            "source_detail_sha256": "0919675bed4e5d762460299de69e650080a5a29ee65ad19852c53ddfe8276703",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-14",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-14; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81209/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81231",
+            "org": "속초시시설관리공단",
+            "title": "2026년 제3회 속초시시설관리공단 신규직원(일반직) 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81231",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81231/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "ac8d517d145f50856cd02aac60ea74bcb1f1dbdaa5ef00d69c7ec10d0eb9f30a",
+            "source_detail_sha256": "5405aac433705285b89587c46a01cbd34e1755ef6b97d58a248a67d8efa54486",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81231/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80951",
+            "org": "울산정보산업진흥원",
+            "title": "(재)울산정보산업진흥원 2026년 6차 직원 채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80951",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-04",
+              "end": "2026-11-24",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80951/application_period",
+              "evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-24"
+            },
+            "source_post_sha256": "512bb1b2d18eb817180ba9fbba6096c0376797b00df798c8be5384f28570ef32",
+            "source_detail_sha256": "15b579b6f8b9a77808bf0d798ee7144d1bece32f5f8e969c50f2aa0d90404373",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-04",
+              "접수마감일 원문": "2026-11-24",
+              "채용인원": "14"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-24",
+            "application_source_ref": "cleaneye.json#cleaneye-80951/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81095",
+            "org": "재단법인 제주특별자치도 사회서비스원",
+            "title": "2026년 제주특별자치도사회서비스원 17차 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81095",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-09",
+              "end": "2026-11-24",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81095/application_period",
+              "evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-24"
+            },
+            "source_post_sha256": "693e780e551dd40ea0537d3afa12ad917001c1241617ba705801fb56952260a7",
+            "source_detail_sha256": "83ea3dbb67752826bca0d7f87df7b744c7f21e92f15a2bbe07d4e85cfad0106e",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-09",
+              "접수마감일 원문": "2026-11-24",
+              "채용인원": "18"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-24",
+            "application_source_ref": "cleaneye.json#cleaneye-81095/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81187",
+            "org": "재단법인 전남여성가족재단",
+            "title": "2026년 제3차 정규직 직원 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81187",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-24",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81187/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24"
+            },
+            "source_post_sha256": "c6f6aebd000f856f081d3d37372ab693852a01c14ba7e3b3f2a247787a480173",
+            "source_detail_sha256": "2408aca2ad9828a3dd2a994984a96b75b208f8d7cdfdd7f61d7f66b432a695ea",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-24",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
+            "application_source_ref": "cleaneye.json#cleaneye-81187/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81201",
+            "org": "강릉과학산업진흥원",
+            "title": "2026년 강릉과학산업진흥원 3차 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81201",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-24",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81201/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24"
+            },
+            "source_post_sha256": "63a557296ec76791cec349c9d8ec8e0722951d8af957b8dbd67147199451e4fb",
+            "source_detail_sha256": "a2cf5776c509e5d0a1243312076a39b4f0f65b7ab9b2bc9a0b9c2296b9ebc584",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-24",
+              "채용인원": "4"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
+            "application_source_ref": "cleaneye.json#cleaneye-81201/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80989",
+            "org": "성동문화재단",
+            "title": "(재)성동문화재단 직원 채용 공고(사회복지직 5급/청소년사업)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80989",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-25",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80989/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25"
+            },
+            "source_post_sha256": "7c377fa297c6f7bb6564a5789efdf3c1ebadfdbda70f058570c54f6fabe5ccc5",
+            "source_detail_sha256": "cf93fab7140fa249478bdc2d39494c85f83e5f2297538b3463ab1ee45be07735",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-25",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+            "application_source_ref": "cleaneye.json#cleaneye-80989/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80990",
+            "org": "성동문화재단",
+            "title": "(재)성동문화재단 직원 채용 공고(사회복지직6급/청소년사업)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80990",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-25",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80990/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25"
+            },
+            "source_post_sha256": "83ed5a79323bd3dc0532f4a5e078e7eda9c246982c3bcbf65c1ddc2572982897",
+            "source_detail_sha256": "0a2e7e262f69afbd32ecbd1c4cc1925df77e615e4ba20908dfb1bbbf183beaa4",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-25",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+            "application_source_ref": "cleaneye.json#cleaneye-80990/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80991",
+            "org": "성동문화재단",
+            "title": "(재)성동문화재단 직원 채용 공고(사회복지직6급/시설운영)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80991",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-25",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80991/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25"
+            },
+            "source_post_sha256": "b228477e0f3a467c680750b42cc140b935dd14dc4a4a59b891a29c07d834ebda",
+            "source_detail_sha256": "3e34ef3fde986df97263f46e65d897a77842694eced12408664e952ab941218a",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-25",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+            "application_source_ref": "cleaneye.json#cleaneye-80991/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81114",
+            "org": "재단법인 강원관광재단",
+            "title": "2026년 하반기 (재)강원관광재단 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81114",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-10",
+              "end": "2026-11-25",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81114/application_period",
+              "evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-25"
+            },
+            "source_post_sha256": "1cf3be281222bd939acdfb7467f716cfb2988ede630e068dab5be0b00baeb26d",
+            "source_detail_sha256": "56f55a0db6802daccc78ebd1ffbfb4dc388667e0d34f37877cc949b110f5ac44",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-10",
+              "접수마감일 원문": "2026-11-25",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-25",
+            "application_source_ref": "cleaneye.json#cleaneye-81114/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81179",
+            "org": "충북여성재단",
+            "title": "충북여성재단 제4차 직원 채용(사무처장)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81179",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-25",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81179/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25"
+            },
+            "source_post_sha256": "b285168130842eca64592a598dfabd20aef28e2185521afc2163e72fbf829d8d",
+            "source_detail_sha256": "aa0171241fffa4bd75a7a8e3055ad145a55aa57de055e8914b0404fe0511221f",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-25",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
+            "application_source_ref": "cleaneye.json#cleaneye-81179/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81180",
+            "org": "충북여성재단",
+            "title": "충북여성재단 제5차 직원 채용 공고(연구위원, 대리-육아휴직대체)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81180",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-25",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81180/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25"
+            },
+            "source_post_sha256": "f7b73fc0dd0b4396a01e4297fe761c7ad5e1c9a881f12df24f9690a1111d226b",
+            "source_detail_sha256": "6c07dc3ff2410c02a08ce89746fdb79b16c5fdc201d05549b55a2de49c5a8999",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-25",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
+            "application_source_ref": "cleaneye.json#cleaneye-81180/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81255",
+            "org": "송파구시설관리공단",
+            "title": "(송파구시설관리공단 공고 제2026-49호)직무능력 중심 경력및 공개경쟁 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81255",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81255/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "7cf94060a429aa0fe0c8a5691366c6011317469846649bfcd6477087ecdabd32",
+            "source_detail_sha256": "1c9f98b63bba25db2e91d975d7f84325d79850e7eb76273aa48dd96f8ed15165",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "4"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81255/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81280",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81280",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81280/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "0f06c97aabb310994599a8a187e24fb2cff737623091cd72d8a7bbf5820d9755",
+            "source_detail_sha256": "7e36aa26f97df334be2328853a1cb89476daec14c1509dbbbbba3066d97c6d3e",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81280/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81281",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81281",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81281/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "663f3be0934e49be7a31e534698865ee5f8eed27fb87b398f1ab7ad75eafac43",
+            "source_detail_sha256": "b59b7442b935571a8b8f2636f903bc8da90f977b5ca8fa36e9173409064f66e6",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81281/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81282",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81282",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81282/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "5757f307b4e4a6b93f85d833dc049387acc0e7a92cdb0fc4302fc7bb073504df",
+            "source_detail_sha256": "ddae7b62bb8ee757e5dd0a2f9be3c74e9ceb66a9ec812f8d32d0b103e9abe963",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81282/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81283",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81283",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81283/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "2c6235dec3d304e0d39edd693a8f1a39cb9fa26a824da5495abbc1ee77ca59ea",
+            "source_detail_sha256": "8158db419dda4a8909cc4a0d1a3f304468b8bbc589dc71559f5d1d851ae08cba",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81283/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81284",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81284",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81284/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "926ad8e827f328a2396253191a6db43031d0a82bf8ad02a42192a06b805cb74e",
+            "source_detail_sha256": "3eb1330986ccac1f5b2518cb1284809d071da7284c92f6fd2be9ece8090f216b",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81284/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81285",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81285",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81285/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "54b60677ff0a3f77bbb8f351c1f1dec5df14d0f43feee73aee86bf4f4405a6b2",
+            "source_detail_sha256": "6bc9c4f23d67874c7fafcc366db8c9ee515956e859548a5677f83c75826a0708",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81285/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81286",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81286",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81286/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "9c0f57f7b72eda9d187db8ef2eacd7e9146c85eb8349d7d45d9076e09be98b29",
+            "source_detail_sha256": "238f3c71378cb2df46cce0177ff793f67c988dca74b3778be592e431ea8b6e4e",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81286/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81287",
+            "org": "용산문화재단",
+            "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81287",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-26",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81287/application_period",
+              "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26"
+            },
+            "source_post_sha256": "47ca4db7414d780795c774869f2d6b167d8e29cf4bfc64e6b60aa76b3ff68462",
+            "source_detail_sha256": "ae54c77fb91271e754dabf5d9f40d8d55d4c24bebcf0bcc696e38b80aca4f002",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-16",
+              "접수마감일 원문": "2026-11-26",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+            "application_source_ref": "cleaneye.json#cleaneye-81287/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81183",
+            "org": "인천광역시서해구시설관리공단",
+            "title": "2026년 제4회 연희노인복지관 정규직 직원(시설관리) 채용 공고문",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81183",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-27",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81183/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-27"
+            },
+            "source_post_sha256": "2e6c462c217d5ac70e2d3ec1c14fcb2b216ac498fb8f62618aa3dfe7c6464d2a",
+            "source_detail_sha256": "27eae620374032b7c55eb8c245b40dc8142673e2fbb8d3600c68cd0208830ae2",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-27",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-27",
+            "application_source_ref": "cleaneye.json#cleaneye-81183/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81117",
+            "org": "세종문화회관",
+            "title": "2026 서울시예술단 일반단원 공개채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81117",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-10",
+              "end": "2026-11-30",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81117/application_period",
+              "evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-30"
+            },
+            "source_post_sha256": "f179170ffd5dd820b90865c206c4059e2056e1caad998c21c685fb7c10991c21",
+            "source_detail_sha256": "f17490d6fce32b6a71bf923051d2d3047b79375b31fac7b3bb56276eb6e75038",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-10",
+              "접수마감일 원문": "2026-11-30",
+              "채용인원": "17"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-30",
+            "application_source_ref": "cleaneye.json#cleaneye-81117/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80792",
+            "org": "서울물재생시설공단",
+            "title": "2026년 하반기 정규직 채용공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80792",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-18",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80792/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-18"
+            },
+            "source_post_sha256": "fe6970f5fcf0e98aae73fca0bd1eab2212d5bf96b820fc06f28da14590bee39a",
+            "source_detail_sha256": "5a020fafbb42184bed38bfd5967d741ee5d96c1655c61a69498bcc6baa8c0360",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-18",
+              "채용인원": "16"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-18",
+            "application_source_ref": "cleaneye.json#cleaneye-80792/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80805",
+            "org": "구미전자정보기술원",
+            "title": "구미전자정보기술원 하반기 정규직 직원채용 공고(2026-299호)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80805",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-10-29",
+              "end": "2026-11-19",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80805/application_period",
+              "evidence": "접수개시일 원문: 2026-10-29; 접수마감일 원문: 2026-11-19"
+            },
+            "source_post_sha256": "0cc4fa59898bcce07f13a4d0d08e263fcc38f255f4f9710062db2b3a0bd9ecd8",
+            "source_detail_sha256": "6e955c650fa761472ebb2fa8374ed0b542a190cbdf07a2d604b6a20c635f7d1d",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-10-29",
+              "접수마감일 원문": "2026-11-19",
+              "채용인원": "6"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-10-29; 접수마감일 원문: 2026-11-19",
+            "application_source_ref": "cleaneye.json#cleaneye-80805/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80807",
+            "org": "구미전자정보기술원",
+            "title": "구미전자정보기술원 상반기 정규직 직원채용 공고(2026-300호(2026-97호 재공고)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80807",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-10-29",
+              "end": "2026-11-19",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80807/application_period",
+              "evidence": "접수개시일 원문: 2026-10-29; 접수마감일 원문: 2026-11-19"
+            },
+            "source_post_sha256": "162aa3e138d41996a51dbff10767aa9b04e50c6f9033fdb418cd053470651d72",
+            "source_detail_sha256": "150b1d4c754dc10e18952a5bf8bb660d82158447277ea2c88e26ddbef863d151",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-10-29",
+              "접수마감일 원문": "2026-11-19",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-10-29; 접수마감일 원문: 2026-11-19",
+            "application_source_ref": "cleaneye.json#cleaneye-80807/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80812",
+            "org": "인천광역시부평구시설관리공단",
+            "title": "2026년 부평구시설관리공단 제3회 직원 공개경쟁 채용시험 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80812",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-09",
+              "end": "2026-11-19",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80812/application_period",
+              "evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-19"
+            },
+            "source_post_sha256": "da2cfa56014f237c6a030b64d69f632d58f79e5e1023b34014271d6ae881d346",
+            "source_detail_sha256": "26ebe76170532f06feb2db587be77853be18c376f4163a9d625344ab95c713e8",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-09",
+              "접수마감일 원문": "2026-11-19",
+              "채용인원": "19"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-19",
+            "application_source_ref": "cleaneye.json#cleaneye-80812/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80838",
+            "org": "여수시도시관리공단",
+            "title": "여수시도시관리공단 제2회 직원(일반직, 기능직, 공무직, 환경미화직) 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80838",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-13",
+              "end": "2026-11-19",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80838/application_period",
+              "evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-19"
+            },
+            "source_post_sha256": "ff1fd37484455a5cde0a65a8e77a4f96d2dff265931828aff910b47c2c6687c0",
+            "source_detail_sha256": "e925f3e1ee5df7a540159abf4b4b847d0edc4e11e09f554ee8296f9210988776",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-13",
+              "접수마감일 원문": "2026-11-19",
+              "채용인원": "11"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-19",
+            "application_source_ref": "cleaneye.json#cleaneye-80838/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81028",
+            "org": "동대문구시설관리공단",
+            "title": "동대문구시설관리공단 직원 공개채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81028",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-09",
+              "end": "2026-11-19",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81028/application_period",
+              "evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-19"
+            },
+            "source_post_sha256": "4e5b4c8543d500fb5a269dd0610846704b48e46a8e95c97f8b485e698d9c2fec",
+            "source_detail_sha256": "19a6cc28c59a4a3fa842c1afe3a1349a0124d655403dbf7176c0f8f95e0f7ae0",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-09",
+              "접수마감일 원문": "2026-11-19",
+              "채용인원": "3"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-19",
+            "application_source_ref": "cleaneye.json#cleaneye-81028/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81074",
+            "org": "세종특별자치시시설관리공단",
+            "title": "2026년 세종시설공단 제3회 직원 공개 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81074",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-10",
+              "end": "2026-11-19",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81074/application_period",
+              "evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-19"
+            },
+            "source_post_sha256": "6b000ec50c93464ebbccc0d0d8b66152a13ea090b87e8f2ff188623b2f82677a",
+            "source_detail_sha256": "66071ec1b321bb273ef3b24eb2eef2e96713702c0aed8c6c28fda879e02e5ec3",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-10",
+              "접수마감일 원문": "2026-11-19",
+              "채용인원": "3"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-19",
+            "application_source_ref": "cleaneye.json#cleaneye-81074/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "a306992",
+            "org": "한국보훈복지의료공단",
+            "title": "[중앙보훈병원]2027년 치과의사전공의(레지던트1년차) 채용공고",
+            "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306992",
+            "employment": "정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-20",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "alio-detail.json#306992/scrnprcdrMthdExpln",
+              "evidence": "접수기간 : 2026.11.16.(월) ~ 2026.11.20.(금)"
+            },
+            "source_post_sha256": "c5945d473911f75f0a400d4dc0321e1ecc288c38ddbfc39bb54172de4860ad55",
+            "source_detail_sha256": "040fe5c6dbf353359a6714fbe928707bf78e8333b2afd3b1d7831a467bc2ccc6",
+            "official_detail_fields_for_review": {
+              "aplyQlfcCn": "○ 응시자격\r\n1) 旣인턴수료자 및 2027년 2월 수료예정자\r\n2)공단(본원) 인사규정 제18조에 의한 결격사유에 해당하지 않는 자\r\n3) 의무사관후보생의 경우 33세 되는 해의 2월까지 수료 가능한자\r\n4)『아동·청소년의성 보호에 관한 법률』제 56 조(아동·청소년\r\n관련 기관 등에서의 취업제한 등)에 해당되지 않는 자\r\n○ 응시제한\r\n1) 타 수련병원(기관) 중복지원 및 응시는 일체 불허\r\n○ 모집분야\r\n- 레지던트 1년차 11명\r\n* 치과 보철과 : 5명\r\n* 치과 치주과 : 3명\r\n* 치과 보존과 : 3명",
+              "hireTypeNmLst": "정규직",
+              "prefCn": "O 취업지원대상자(전형단계별 5%또는10%) : 「국가유공자 등 예우 및 지원에 관한 법률」등에 따른 취업지원 대상자\r\nO 장애인(전형단계별 10%) : 「장애인고용촉진 및직업재활법」제2조 및 시행령 제3조에 따른 등록 장애인",
+              "recrutNope": "11",
+              "recrutSe": "R2030",
+              "scrnprcdrMthdExpln": "O 1차(서류전형)\r\n- 접수기간 : 2026.11.16.(월) ~ 2026.11.20.(금)\r\n- 접수장소 : 중앙보훈병원 교육수련부(방문접수)\r\n- 서류심사방식 : 결격사유 없는 한 전원 합격\r\nO 2차(필기전형)\r\n- 시험일시 : 2026.11.29.(일)\r\n- 주관 : 대한치과병원협회\r\nO 최종(면접)\r\n- 면접일 : 2026. 12. 2.(수)\r\n- 면접장소 : 별도공지\r\n- 합격자발표일 : 2026. 12. 4(금)\r\n※ 보다 자세한 사항은 첨부된 채용공고문 참조",
+              "workRgnNmLst": "서울"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수기간 : 2026.11.16.(월) ~ 2026.11.20.(금)",
+            "application_source_ref": "alio-detail.json#306992/scrnprcdrMthdExpln",
+            "source_snapshot_checked_at": "2026-11-17T16:32:59+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81146",
+            "org": "경상북도포항의료원",
+            "title": "경상북도포항의료원 방사선사 조리원 채용",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81146",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-21",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81146/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-21"
+            },
+            "source_post_sha256": "288931a36edced00f791faa98980777abcd1a9bf0006e4a5b101a49b7943dd3a",
+            "source_detail_sha256": "6a00c675eff36476f439bb0e982325763c06ccf2c660770a4653503a76609dd7",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-21",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-21",
+            "application_source_ref": "cleaneye.json#cleaneye-81146/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-80956",
+            "org": "경상북도안동의료원",
+            "title": "2027년 신규간호사 채용공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80956",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-04",
+              "end": "2026-11-22",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-80956/application_period",
+              "evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22"
+            },
+            "source_post_sha256": "52814d4c017ed1220f2bac38686b5752ff1ffabe182ac0a3036092cf1b1ed9b5",
+            "source_detail_sha256": "343006dcbea58b99159f0a80f7ef9ea4206e28c1b71452f1ed3eee69642f3d74",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-04",
+              "접수마감일 원문": "2026-11-22",
+              "채용인원": "0"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22",
+            "application_source_ref": "cleaneye.json#cleaneye-80956/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81166",
+            "org": "경기도의료원",
+            "title": "경기도의료원 이천병원 공무직 조리원(정규직) 신규채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81166",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-22",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81166/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-22"
+            },
+            "source_post_sha256": "ad6aa5a6041208b41fb21f102fdf187856809dfb2f927836e9b37691efbed43d",
+            "source_detail_sha256": "2554b45c2a64493efe7c943b4583fc309f61e5da77f7cd0daf0d1000ea063493",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-22",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-22",
+            "application_source_ref": "cleaneye.json#cleaneye-81166/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81192",
+            "org": "전북특별자치도 군산의료원",
+            "title": "군산의료원 약사직(약사) 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81192",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-22",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81192/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22"
+            },
+            "source_post_sha256": "dfb9d55220748ffeeda722df214cb9231f2796510318a64a14cee3c2c819e7d3",
+            "source_detail_sha256": "f375038c33933091f6f6b2d64abe9f6faf0117d7fb6b8a17d5001ba144f8cc21",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-22",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
+            "application_source_ref": "cleaneye.json#cleaneye-81192/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81193",
+            "org": "전북특별자치도 군산의료원",
+            "title": "군산의료원 간호조무사 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81193",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-22",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81193/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22"
+            },
+            "source_post_sha256": "8933d84050e9fc589515f202306d7fb3e242113bd8f444afcc8bf6f91bdd388b",
+            "source_detail_sha256": "ec850fdf6123adbe01bcd335ab18c227921eb794d1b2d74d4c3c3509b069acf4",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-22",
+              "채용인원": "6"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
+            "application_source_ref": "cleaneye.json#cleaneye-81193/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81194",
+            "org": "전북특별자치도 군산의료원",
+            "title": "군산의료원 취사원 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81194",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-22",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81194/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22"
+            },
+            "source_post_sha256": "4ce21bad3d7fffc0bea61988a14b4864b3a3e5524fc54f55da30aea2848ff5b8",
+            "source_detail_sha256": "0063886d197ba3db69d775b7f269d6c886050abb490047cdac0e075804591498",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-22",
+              "채용인원": "3"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
+            "application_source_ref": "cleaneye.json#cleaneye-81194/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81195",
+            "org": "전북특별자치도 군산의료원",
+            "title": "군산의료원 보안요원(공무직) 채용 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81195",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-22",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81195/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22"
+            },
+            "source_post_sha256": "6737bd1c31c2d82f560c960e29c7ad04c8f16bd7ce7e0a50db8b01efb926b425",
+            "source_detail_sha256": "ab0df12adde78e9124dc7f7eaa8f17aa0ee9fbeba8991f03e5c6a39d1b11ad7e",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-22",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
+            "application_source_ref": "cleaneye.json#cleaneye-81195/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81196",
+            "org": "전북특별자치도 군산의료원",
+            "title": "군산의료원 주차관리원(단시간) 장애인 제한 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81196",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-12",
+              "end": "2026-11-22",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81196/application_period",
+              "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22"
+            },
+            "source_post_sha256": "23fbf85e8372e679802f0749bb7eb2e0aec7ac6271d4b5747258077fa36fbd94",
+            "source_detail_sha256": "bb9c146c2056d7b95aa40decdc771a65352034f44a469c4503d6b849fbad72a5",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-12",
+              "접수마감일 원문": "2026-11-22",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
+            "application_source_ref": "cleaneye.json#cleaneye-81196/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "a307082",
+            "org": "대한적십자사",
+            "title": "서울적십자병원 정규직 간호사 신규채용 공고",
+            "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+            "employment": "정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-16",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
+              "evidence": "접수기간: 2026.11.16.~2026.11.23."
+            },
+            "source_post_sha256": "1cdadfc2caa1873a36cbff7ac543caee5a55198c2b5fd7238f9b28d3d926e537",
+            "source_detail_sha256": "2d8ffb3626cf412a15907e612a9abe8e24d3afd9a19ae9c18f371f378b1377ee",
+            "official_detail_fields_for_review": {
+              "aplyQlfcCn": "○ 간호사 면허증 제출한 자\r\n○ 최소학력(간호학) 성적증명서 및 졸업증명서 제출한 자\r\n○ 임상(병동) 경력 1년 이상 경력증명서 제출한 자",
+              "hireTypeNmLst": "정규직",
+              "prefCn": "○ 우대사항\r\n- 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n- 5.18민주유공자예우 및 단체설립에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의\r\n규정에 의한 취업지원대상자\r\n- 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유의증 등 환자지원 및 단체설립에관한 법률 제7조에 해당하는 자\r\n- 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n- 북한이탈주민 보호 및 정착지원에 관한 법률에 따른 북한이탈주민",
+              "recrutNope": "4",
+              "recrutSe": "R2030",
+              "scrnprcdrMthdExpln": "○ 접수기간: 2026.11.16.~2026.11.23.\r\n○ 서류심사 합격자 발표: 2026.11.26.\r\n○ 면접전형: 2026.12.01.\r\n○ 최종합격자 발표: 2026.12.04.\r\n※ 각종 제출 서류에 ‘사진, 생년월일, 성별, 학교명’이 들어가는 부분은 삭제 후 제출\r\n※ 전형별 발표방법: 우리병원 홈페이지 (https://www.rch.or.kr/web/rchseoul/bbs/employment) 공고\r\n※ 서류심사: 모집인원의 5배수 이내 합격\r\n※ 면접전형: 면접위원이 채점한 평점의 평균이 15점 이상인 자 중 고득점자 순위(25점 만점)",
+              "workRgnNmLst": "서울"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수기간: 2026.11.16.~2026.11.23.",
+            "application_source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
+            "source_snapshot_checked_at": "2026-11-17T16:32:59+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81150",
+            "org": "강원특별자치도영월의료원",
+            "title": "소화기내과 전문의 공개경쟁 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81150",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81150/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "5fbcb7079b7a9f69cb9a1c50c8f2eea5cf9e2fa71f5e5558545c5465e9c1530d",
+            "source_detail_sha256": "f2e45df7f70368c00c4df14e967446c6a955371c06b8dd403669fccd4bb1f1e5",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81150/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81151",
+            "org": "강원특별자치도영월의료원",
+            "title": "내과 전문의 공개경쟁 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81151",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81151/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "a147bc74cbbfe6f68b764303aa4d0c76b6856437b7781b96352565686619f2d4",
+            "source_detail_sha256": "c71c3105d8c8da15f64743ed2ee98f4ffca22dc4df0f5e7b5d32d99494ced9fb",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81151/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81152",
+            "org": "강원특별자치도영월의료원",
+            "title": "응급의학과 전문의 공개경쟁 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81152",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81152/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "a1f517313c7dd9ec4287703cb154b0f9187395c982074f882f744703ea6c88a7",
+            "source_detail_sha256": "1af91267f446019e3371268eddcffe9c57ac1a28e6d5f07510157e7a67db156f",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81152/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81153",
+            "org": "강원특별자치도영월의료원",
+            "title": "응급실 전담의 공개경쟁 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81153",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81153/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "6c18608fbee8fbbd7f73128bf0e14fbb815bdc25e3ab9c3c24e763901984f544",
+            "source_detail_sha256": "58058b088bf8a4ee70cbdb0b3c7f7f615d7636a82c07085bfec8bbc68d9c6a95",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81153/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81154",
+            "org": "강원특별자치도영월의료원",
+            "title": "소아청소년과 전문의 공개경쟁 채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81154",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81154/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "1db9c4dcce1ca343926ad14585c60d594d23c190bd6fe7428e155cfd2269872b",
+            "source_detail_sha256": "0bd27be66e62344ca9de8ddbf78688d0625feb3c885a00454086f6eb24ae0ede",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81154/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81155",
+            "org": "강원특별자치도영월의료원",
+            "title": "간호사 공개경쟁 채용 재공고(간호직)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81155",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81155/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "5acb0198d02283314bd75e5c13ad0df28ee6347823146e4272e9a98c94a4e956",
+            "source_detail_sha256": "05104b74115b8cf1b4f9f33d76d0e70f81bbb2453451efcedee6b506e9a1fd51",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81155/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81156",
+            "org": "강원특별자치도영월의료원",
+            "title": "간호조무사 공개경쟁 채용 재공고(기능직)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81156",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81156/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "b51b925fa1da3672ed42acbad218c87deb5122786572841b6f9b0ff9498c6a59",
+            "source_detail_sha256": "d53b1973e15a897e7d78a7a6b2b2cb93f3e3fe4e2da7d4723e24cdd1933a4258",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "3"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81156/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81157",
+            "org": "강원특별자치도영월의료원",
+            "title": "난방기사 공개경쟁 채용 재공고(기술직)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81157",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81157/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "49fadc7533fd9216e57f887b197b0f651b7f2ee6127b37ea8d49634edad875c6",
+            "source_detail_sha256": "117f2fecf54e5d0e2d6dffd7669c26efaff13b99b61960b12ddabe694c123fb6",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81157/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81158",
+            "org": "강원특별자치도영월의료원",
+            "title": "조리원 공개경쟁 채용 재공고(공무직)",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81158",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-11",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81158/application_period",
+              "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "ae40291146524ee91deb6a387c210d88c84f81198d69b86c8223d0ce90232a2d",
+            "source_detail_sha256": "20eda513d14c0ac198f2e1a67821a59690722b62089ad1b0fed4da91a463be9e",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-11",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81158/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81232",
+            "org": "서산의료원",
+            "title": "신규직원(정규직 간호사)채용공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81232",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-13",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81232/application_period",
+              "evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "a4363d3d81555e7c8469c52c45897324dbd79baaa44052501b0db1e42d5212bd",
+            "source_detail_sha256": "c6b9d423e77465763b162db68af512ab3bd262ffac9aedc2bbefef80c602ecf4",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-13",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "4"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81232/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81233",
+            "org": "서산의료원",
+            "title": "직원채용(정규직 간호조무사) 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81233",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-13",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81233/application_period",
+              "evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "7f814289c11684c07f92989f53661d4ff0d9ca8e4ccc3191f27b4c30b7b0190d",
+            "source_detail_sha256": "4db3538b6c9e822de2482e23c5ac33e8324511612894be0b4164c0bbd7b0a167",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-13",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "2"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81233/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81234",
+            "org": "서산의료원",
+            "title": "직원채용(정규직 임상병리사) 공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81234",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-13",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81234/application_period",
+              "evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "3378eb8cce6e00d9fa273232b0b29f08e06e26537d1b43c47f2f2cc7d6b4a6d4",
+            "source_detail_sha256": "84816bfe9afd5f4adbc5380d81cf7004faad7a838ccda27f29dc4593571d5735",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-13",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81234/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          },
+          {
+            "notice_id": "cleaneye-81235",
+            "org": "서산의료원",
+            "title": "신규직원(정규직조리원)채용 재공고",
+            "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81235",
+            "employment": "일반정규직",
+            "recruiting_unit_title": null,
+            "recruiting_unit_count": null,
+            "recruiting_unit_scope": "unit_count_unconfirmed",
+            "selection_review_reasons": [
+              "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+            ],
+            "application_period": {
+              "start": "2026-11-13",
+              "end": "2026-11-23",
+              "start_date_only": true,
+              "date_only": true,
+              "source_ref": "cleaneye.json#cleaneye-81235/application_period",
+              "evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23"
+            },
+            "source_post_sha256": "0881490980423805e97c515e5865dbddceefd866c7428b39ec4d45f46264a7f5",
+            "source_detail_sha256": "6e35df18329ad65e53bb05bf3950efccb94c7fb79856339ce2e8dbcd9f84a19f",
+            "official_detail_fields_for_review": {
+              "고용형태 원문": "일반정규직",
+              "접수개시일 원문": "2026-11-13",
+              "접수마감일 원문": "2026-11-23",
+              "채용인원": "1"
+            },
+            "review_status": "official_review_required",
+            "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
+            "application_source_ref": "cleaneye.json#cleaneye-81235/application_period",
+            "source_snapshot_checked_at": "2026-11-17T16:33:39+09:00"
+          }
+        ],
+        "automatic_approval": false,
+        "meta_posted": false
+      },
+      "shortlisted": [
+        {
+          "notice_id": "cleaneye-80977",
+          "org": "춘천바이오산업진흥원",
+          "title": "2026년 제5차 공개채용(사업기획_원급, 바이오산업분양 인력양성 및 기업지원_원급)",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-16",
+            "end": "2026-11-20",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-80977/application_period",
+            "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81054",
+          "org": "대구정책연구원",
+          "title": "2026년 제1차 정규직원 공개채용(연구직) 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-16",
+            "end": "2026-11-20",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81054/application_period",
+            "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81057",
+          "org": "대구정책연구원",
+          "title": "2026년 제1차 정규직원 공개채용(관리직) 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-16",
+            "end": "2026-11-20",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81057/application_period",
+            "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20"
+          }
+        },
+        {
+          "notice_id": "cleaneye-80711",
+          "org": "충주시시설관리공단",
+          "title": "2027년 제1회 충주시시설관리공단 직무중심 정규직 공개채용 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-02",
+            "end": "2026-11-23",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-80711/application_period",
+            "evidence": "접수개시일 원문: 2026-11-02; 접수마감일 원문: 2026-11-23"
+          }
+        },
+        {
+          "notice_id": "cleaneye-80914",
+          "org": "양주도시공사",
+          "title": "2026년 제1회 직원 공개경쟁채용 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-16",
+            "end": "2026-11-23",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-80914/application_period",
+            "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81199",
+          "org": "경기문화재단",
+          "title": "2026년 경기문화재단 제5회 직원채용(일반직)",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-16",
+            "end": "2026-11-23",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81199/application_period",
+            "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81206",
+          "org": "경기도사회적경제원",
+          "title": "2026년 제3차 경기도사회적경제원 정규직(장애인 제한) 채용 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-13",
+            "end": "2026-11-23",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81206/application_period",
+            "evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81209",
+          "org": "마포복지재단",
+          "title": "재단법인 마포복지재단 직원(5급) 채용 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-14",
+            "end": "2026-11-23",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81209/application_period",
+            "evidence": "접수개시일 원문: 2026-11-14; 접수마감일 원문: 2026-11-23"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81231",
+          "org": "속초시시설관리공단",
+          "title": "2026년 제3회 속초시시설관리공단 신규직원(일반직) 채용 재공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-16",
+            "end": "2026-11-23",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81231/application_period",
+            "evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23"
+          }
+        },
+        {
+          "notice_id": "cleaneye-80951",
+          "org": "울산정보산업진흥원",
+          "title": "(재)울산정보산업진흥원 2026년 6차 직원 채용",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-04",
+            "end": "2026-11-24",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-80951/application_period",
+            "evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-24"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81095",
+          "org": "재단법인 제주특별자치도 사회서비스원",
+          "title": "2026년 제주특별자치도사회서비스원 17차 채용 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-09",
+            "end": "2026-11-24",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81095/application_period",
+            "evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-24"
+          }
+        },
+        {
+          "notice_id": "cleaneye-81187",
+          "org": "재단법인 전남여성가족재단",
+          "title": "2026년 제3차 정규직 직원 채용 공고",
+          "employment": "일반정규직",
+          "application_period": {
+            "start": "2026-11-12",
+            "end": "2026-11-24",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81187/application_period",
+            "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24"
+          }
+        }
+      ]
+    },
+    "publishing_skipped": "expected preflight-only run"
+  },
+  "current_validations": {
+    "validation": {
+      "status": "validated",
+      "ready_entries": [
+        {
+          "scheduled_at": "2026-11-17T20:00:00+09:00",
+          "notice_id": "cleaneye-80848",
+          "format_id": "deadline_opportunity",
+          "chars": 293,
+          "public_preview": {
+            "main_text": "서울교통공사 1~4호선 청소·미화 구직자께,\n서울메트로환경 정규직 공무직 사원 103명 채용이에요.\n\n전체 153명 중 일반 사원 103명이며, 경비·보훈·장애인 분야와 달라요.\n역사·차량기지·청사 미화업무를 통상·교대로 해요.\n\n공고일 기준 18세 이상 65세 미만, 학력·전공 제한은 없어요.\n병역·결격·해당자 재취업심사 요건을 확인해요.\n서류 뒤 줄넘기·앉았다 일어서기 체력검정과 면접이 있어요.\n\n11월 20일 12:00까지 공식 채용페이지 온라인 접수예요.\n한 분야만 지원 가능해요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        },
+        {
+          "scheduled_at": "2026-11-18T08:00:00+09:00",
+          "notice_id": "a306875",
+          "format_id": "hiring_core",
+          "chars": 284,
+          "public_preview": {
+            "main_text": "병원 업무지원직을 찾는 분께,\n분당서울대학교병원 병동 정규직 50명, 경기 근무예요.\n\n의료기관 또는 기업체(기관·단체 포함) 근무경험 6개월 이상이 필수예요.\n마감일 기준 기졸업·만60세 미만, 병역·결격 요건과 시차·교대근무 가능 조건을 확인해요.\n\n3개월 수습평가가 있고, 미달 시 2개월 추가평가 후 임용취소될 수 있어요.\n다른 직무 배치와 임용후보 등록 후 대기도 가능해요.\n\n경력증명서와 추가 경험증빙을 함께 준비해요.\n11월 20일 23:59까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        },
+        {
+          "scheduled_at": "2026-11-18T12:00:00+09:00",
+          "notice_id": "a306807",
+          "format_id": "eligibility",
+          "chars": 323,
+          "public_preview": {
+            "main_text": "기록물관리 전문요원 자격과 경력이 있다면,\n한국고용정보원 기록물관리 정규직 1명, 충북 음성 근무예요.\n\n전문요원 자격 취득 후 관련 업무 2년 이상이 필수이며 사서 업무는 제외돼요.\n자격은 기록관리학 석사 이상 또는 기록관리학·역사학·문헌정보학 학사 이상과 교육과정·시험합격 경로를 확인해요.\n\n만60세 미만·결격요건을 충족하고, 2027년 1월 18일 출근 전 기존 직장 퇴사처리가 끝나야 해요.\n3개월 시보평가와 이후 전보·순환근무가 있어요.\n\n경력증명서와 건강보험자격득실확인서 모두 필요해요.\n11월 25일 16:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        },
+        {
+          "scheduled_at": "2026-11-18T16:00:00+09:00",
+          "notice_id": "cleaneye-81112",
+          "format_id": "interest",
+          "chars": 326,
+          "public_preview": {
+            "main_text": "관광 콘텐츠 기획에 관심 있다면,\n재단법인 강원관광재단 관광콘텐츠 6급 주임 정규직 2명을 채용해요.\n\n토익800·뉴텝스309·토플iBT91·지텔프레벨2 76점 중 하나 이상이 필요해요.\n어학은 임용예정일 기준 2년 내 유효·국내 확인 가능 성적만 인정하며 국외 응시는 불인정해요.\n공고일 만18~59세, 남성 병역필·면제, 해외여행·결격 및 즉시 근무 조건도 확인해요.\n\n근무지는 (재)강원관광재단이며 춘천·강릉 순환, 토·공휴일 근무가 가능해요.\n6개월 수습 후 정규 임용 여부를 정해요.\n11월 25일 18:00 온라인 접수, 중복지원 불가예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        }
+      ]
+    },
+    "bridge": {
+      "future_slots": [
+        "2026-11-17T20:00:00+09:00",
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00",
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00"
+      ],
+      "approved_future_slots": [
+        "2026-11-17T20:00:00+09:00",
+        "2026-11-18T08:00:00+09:00",
+        "2026-11-18T12:00:00+09:00",
+        "2026-11-18T16:00:00+09:00"
+      ],
+      "missing_slots": [
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00"
+      ],
+      "next_slot_missing": false,
+      "approved_inventory_count": 4,
+      "inventory_target": 8,
+      "inventory_shortfall": 4,
+      "replenishment_required": true,
+      "invalid_ready_entries": []
+    },
+    "summary": {
+      "as_of": "2026-11-17T10:53:12.758850+00:00",
+      "windows": {
+        "24h": {
+          "verified_main_count": 6,
+          "metric_medians": {
+            "views": 2100,
+            "likes": 5,
+            "replies": 0,
+            "reposts": 1.5,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 6,
+            "likes": 6,
+            "replies": 6,
+            "reposts": 6,
+            "quotes": 6
+          },
+          "metric_totals": {
+            "views": 11470,
+            "likes": 27,
+            "replies": 0,
+            "reposts": 7,
+            "quotes": 0
+          },
+          "views_distribution": [
+            {
+              "post_id": "18137768440737022",
+              "views": 934
+            },
+            {
+              "post_id": "18111349063925875",
+              "views": 1076
+            },
+            {
+              "post_id": "17918956251546576",
+              "views": 1998
+            },
+            {
+              "post_id": "17994147756077569",
+              "views": 2202
+            },
+            {
+              "post_id": "17918731521553015",
+              "views": 2231
+            },
+            {
+              "post_id": "17896425015438025",
+              "views": 3029
+            }
+          ],
+          "likes_rate_percent_median": 0.24153522920651863,
+          "likes_rate_percent_observed_posts": 6,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        },
+        "72h": {
+          "verified_main_count": 6,
+          "metric_medians": {
+            "views": 3253,
+            "likes": 7,
+            "replies": 0,
+            "reposts": 2,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 6,
+            "likes": 6,
+            "replies": 6,
+            "reposts": 6,
+            "quotes": 6
+          },
+          "metric_totals": {
+            "views": 28219,
+            "likes": 62,
+            "replies": 0,
+            "reposts": 19,
+            "quotes": 1
+          },
+          "views_distribution": [
+            {
+              "post_id": "17986024908093257",
+              "views": 439
+            },
+            {
+              "post_id": "18080747462409277",
+              "views": 1023
+            },
+            {
+              "post_id": "17918731521553015",
+              "views": 2484
+            },
+            {
+              "post_id": "18150019906492861",
+              "views": 4022
+            },
+            {
+              "post_id": "17922530685243848",
+              "views": 9324
+            },
+            {
+              "post_id": "18101198159539744",
+              "views": 10927
+            }
+          ],
+          "likes_rate_percent_median": 0.2910519214867041,
+          "likes_rate_percent_observed_posts": 6,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        }
+      },
+      "account_followers": {
+        "account": "hid_119",
+        "scope": "account_total",
+        "requested_start": "2026-11-11T11:45:18.355131+00:00",
+        "requested_end": "2026-11-17T10:53:12.758850+00:00",
+        "observed_start": "2026-11-11T11:45:32.854727+00:00",
+        "observed_end": "2026-11-17T10:20:18.712410+00:00",
+        "start_followers": 415,
+        "end_followers": 490,
+        "net_change": 75,
+        "status": "observed_interval",
+        "exact_requested_boundaries": false,
+        "observation_statuses": {
+          "captured": 34
+        },
+        "post_attribution": null,
+        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+      },
+      "decision": "extend_observation_or_balance_intro_types",
+      "automatic_weight_changes": 0,
+      "statistical_significance_claim": false
+    }
+  },
+  "card20": {
+    "notice_id": "cleaneye-80848",
+    "original_sha256": "f9e2dd1e962b28b5d6f383e637d4207732cab1d0b502eca205c22faa543da906",
+    "preview_sha256": "b81f2d3e8a3ae1aaf3a4a53b7df5cb179043acbb815dd86779dd7e5b5a867bc4",
+    "verify_reviewed_card_pixels": "passed",
+    "real_original_and360_opened_this_run": true,
+    "visual_findings": "공무직 사원, 정규직103명, 서울메트로환경,11월20일12:00,공고일18세이상65세미만 legible and unclipped. Exact reviewed assets reused, no regeneration."
+  },
+  "publication": {
+    "latest_actual_post_id": "18121803568969931",
+    "latest_slot": "2026-11-17T16:00:00+09:00",
+    "latest_media": "TEXT",
+    "next_slot": "2026-11-17T20:00:00+09:00",
+    "next_expected_media": "IMAGE",
+    "new20_slot_claim_observed": false,
+    "new20_meta_post_id": null,
+    "new20_permalink": null,
+    "meta_GET_performed_by_this_monitor": false
+  },
+  "scheduled1945_run_not_yet_observed_as_of": "2026-11-17T19:54:13+09:00",
+  "automation_enabled": true,
+  "changes": {
+    "code": false,
+    "queue": false,
+    "staging": false,
+    "ledger": false,
+    "claims": false,
+    "assets": false,
+    "manual_dispatch": false,
+    "rerun": false,
+    "meta_POST": false
+  },
+  "next_action": "Observe existing regular20publisher; only actual accepted receipt+MetaGET establish publication. Do not duplicatePOST; replenish next unstarted slot when within reviewed window."
+}
