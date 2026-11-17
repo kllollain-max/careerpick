@@ -179,6 +179,59 @@ jobs:
           finally:
             d.quit()
           PY
+      - name: Decode full employer role-specific HWP job descriptions independently
+        shell: bash
+        run: |
+          python -m pip install --quiet requests olefile
+          python - <<'PY'
+          import requests,zipfile,io,hashlib,olefile,zlib,re,struct,urllib3
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          url='https://cbf.or.kr/twb_bbs/bbs_download.php?bcd=01_05_05_00_00&bn=346&num=1'
+          r=requests.get(url,timeout=30,verify=False,headers={'Referer':'https://cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1'})
+          sha=hashlib.sha256(r.content).hexdigest()
+          print('HWP_ZIP_HTTP',r.status_code,'BYTES',len(r.content),'SHA256',sha,'TLS_VERIFIED',False,flush=True)
+          if r.status_code!=200 or sha!='521fb1cf31c5e34db02370635fabd0b22886046207aaaf8fd8767de86487c3cf':
+            raise RuntimeError('HWP_ZIP_CURRENT_BYTES_DIFFER_FROM_INDEPENDENT_RECEIPT')
+          with zipfile.ZipFile(io.BytesIO(r.content)) as archive:
+            for member in archive.infolist():
+              if not ('직무설명서' in member.filename and member.filename.endswith('.hwp')):continue
+              raw=archive.read(member)
+              print('HWP_ROLE_NAME',member.filename,'BYTES',len(raw),'SHA256',hashlib.sha256(raw).hexdigest(),flush=True)
+              ole=olefile.OleFileIO(io.BytesIO(raw))
+              names=ole.listdir()
+              print('HWP_STREAMS',names[:25],flush=True)
+              head=ole.openstream('FileHeader').read()
+              flags=int.from_bytes(head[36:40],'little')
+              compressed=bool(flags&1)
+              print('HWP_COMPRESSED',compressed,flush=True)
+              texts=[]
+              for parts in names:
+                if len(parts)!=2 or parts[0]!='BodyText' or not parts[1].startswith('Section'):continue
+                data=ole.openstream(parts).read()
+                if compressed:
+                  try:data=zlib.decompress(data,-15)
+                  except zlib.error as err:
+                    print('HWP_SECTION_UNPACK_ERROR',str(err),flush=True)
+                    continue
+                p=0
+                while p+4<=len(data):
+                  h=struct.unpack_from('<I',data,p)[0];p+=4
+                  tag=h&0x3ff;length=h>>20
+                  if length==4095:
+                    if p+4>len(data):break
+                    length=struct.unpack_from('<I',data,p)[0];p+=4
+                  if p+length>len(data):break
+                  payload=data[p:p+length];p+=length
+                  if tag==67 and length>0:
+                    s=payload.decode('utf-16le',errors='ignore')
+                    s=re.sub(r'[\\x00-\\x08\\x0b-\\x1f]',' ',s)
+                    if s.strip():texts.append(s)
+              text='\n'.join(texts)
+              print('HWP_ROLE_BODY_CHARS',len(text),'PARAGRAPHS',len(texts),flush=True)
+              print('===== HWP ROLE FULL INDEPENDENT TEXT START =====',flush=True)
+              print(text[:50000],flush=True)
+              print('===== HWP ROLE FULL INDEPENDENT TEXT END =====',flush=True)
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
