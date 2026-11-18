@@ -442,11 +442,28 @@ VERIFIED_APPLICATION_NOTICES = {
         'organization': '한국동서발전(주)',
         'title': '한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발',
         'source_end_date': '2026-12-01',
+        'expected_source_seats': '101',
+        'source_employment': ['정규직'],
         'application_start': '2026-11-24',
         'application_end_date': '2026-12-01',
         'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307149',
-        'checked_on': '2026-11-17',
-        'scope': 'Official ALIO recruitment method: published 11/17, actual application 11/24–12/01, regular positions 101 total; start/cutoff clocks unverified, not a PDF/HWP original review',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 101명은 대졸수준 일반전형, 대졸수준 보훈전형과 '
+            '고졸 일반전형을 합친 공고 전체 인원입니다. 개별 직무별 인원은 '
+            '이 공개 HTML만으로 확정하지 않습니다. '
+            '대졸수준 일반전형은 원칙적으로 TOEIC 700점 이상이 필요하지만 '
+            '보훈대상자·장애인·전문자격증 소지자에게는 공식 예외가 있습니다. '
+            '대졸수준 보훈전형은 별도의 어학 제한이 없고, '
+            '고졸 일반전형은 최종학력 기준을 확인해야 하며 전문대·대학교 '
+            '졸업자 및 졸업예정자는 지원할 수 없습니다. '
+            '원서접수는 11월 24일~12월 1일 예정이나 실제 개시·마감시각은 '
+            '확인되지 않았습니다. '
+            '또한 JOB-ALIO 일정표에는 입사일이 2026년 3월 15일로 표기되어 '
+            '2027년 상반기 채용 일정과 연도가 충돌하므로 기관 정정공고를 '
+            '확인해야 하며 2027년으로 임의 보정하지 않습니다.'
+        ),
+        'scope': '2026-11-19 JOB-ALIO a307149 HTML 직접 재확인: 전체 정규직 101명, 대졸 일반/보훈·고졸 일반 자격 및 어학 예외, 11/24~12/01 날짜만 확인, 입사일 연도 충돌. 직무별 인원·공식 PDF/ZIP 원본 SHA 및 실제 시작/종료시각 미검증.',
     },
 }
 
