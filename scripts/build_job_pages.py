@@ -52,6 +52,9 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306799': '2026-11-23T10:00:00+09:00',
     'a306662': '2026-11-18T17:00:00+09:00',
     # CBNHU official application portal: 2026-11-18 12:00, not ALIO's 23:59 posting end.
+    # KOPO employer notice 790549: registered mail or weekday visit must arrive by 18:00.
+    # This is not the ALIO posting-end 23:59; no feed mutation.
+    'a307171': '2026-11-25T18:00:00+09:00',
     'a306665': '2026-11-18T12:00:00+09:00',
     # Official ALIO recruitment method: 2026-11-18 17:00, not the 23:59 posting end.
     'a306660': '2026-11-18T17:00:00+09:00',
@@ -72,6 +75,29 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # New 2026-11-18 ALIO notice and employer HTML #790549, not a verified
+    # HWP/HWPX job-description file. This is a fixed-term leadership appointment
+    # despite the ALIO feed label "정규직". Never imply an indefinite tenure.
+    'a307171': {
+        'organization': '학교법인한국폴리텍',
+        'title': '한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고',
+        'source_end_date': '2026-11-25',
+        'expected_source_seats': '4',
+        'source_employment': ['정규직'],
+        'source_url': 'https://www.kopo.ac.kr/board.do?menu=10523&mode=view&post=790549',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-18',
+        'application_end_date': '2026-11-25',
+        'role_mix_note': (
+            'ALIO에는 정규직 4명으로 등록되어 있지만 지역대학장 직위의 임기는 2년입니다. '
+            '서울강서·화성·충주·울산캠퍼스 중복지원은 불가합니다. '
+            '기관은 등기우편 또는 평일 방문접수를 받으며 2026년 11월 25일 18:00까지 '
+            '접수처에 도착한 서류만 유효하다고 안내합니다. '
+            '우편 접수자는 정상 접수 여부를 담당자에게 확인해야 합니다. '
+            'ALIO 게시 종료일의 23:59를 원서접수 마감시각으로 해석하지 마세요.'
+        ),
+        'scope': 'ALIO a307171 공개 HTML에서 정규직4명·응시자격 및 2년 임기 확인. 기관 공식 게시물 790549에서 중복지원 금지, 방문/등기우편, 11월25일18:00 도착 마감 교차 확인. 첨부 HWP/HWPX 본문·바이트 SHA 및 현재 접수실화면은 이 검증 범위 밖.',
+    },
     # Official ALIO HTML reviewed 2026-11-18. These do NOT count as newly
     # extracted PDF/HWP duties; the snapshots and field counts remain intact.
     'a306665': {
