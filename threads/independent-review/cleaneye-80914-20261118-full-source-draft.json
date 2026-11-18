@@ -26,7 +26,7 @@
     "original_pdf_sha256": "33765bd2a25f5a85a9e828ae90ec39204ce979c6e923b2291e7b9bfc9498b260",
     "original_pdf_sha_status": "INDEPENDENT_GET200_ORIGINAL_BYTES_SHA256_VERIFIED_GITHUB_ACTION",
     "employer_application_url": "https://yjuc.plusrecruit.co.kr/",
-    "application_portal_actual_state": "SINGLE_PAGE_APP_ONLY_LOADS_DATA_LOADING__NOT_VERIFIED_ACTIVE",
+    "application_portal_actual_state": "READ_ONLY_CHROMIUM_HTTP200_SHOWS_접수중_AND_EXACT_2026_1ST_RECRUITMENT",
     "correction_and_cancellation": "No correction seen at identified employer announcement. Exhaustive independent employer board and portal verification remains needed.",
     "snapshot_metadata_note": "This is an editorial reading receipt, not a digest or posting approval.",
     "official_original_pdf_bytes": 571775,
@@ -34,7 +34,13 @@
     "original_pdf_mime": "application/smnet; Charset=utf-8 (original bytes start %PDF-)",
     "pdf_identity_extraction_note": "Raw byte PDF check passed. Runner pdftotext not installed, so identity-term extraction there not run. Full semantic text independently read from official original through public fetch.",
     "audit_workflow_run": "https://github.com/kllollain-max/careerpick/actions/runs/44211471611",
-    "audit_artifact_url": "https://github.com/kllollain-max/careerpick/actions/runs/44211471611/artifacts/14384639903"
+    "audit_artifact_url": "https://github.com/kllollain-max/careerpick/actions/runs/44211471611/artifacts/14384639903",
+    "portal_rendered_at_utc": "2026-11-18T00:57:25.743030+00:00",
+    "profile_actual_state": "READ_ONLY_CHROMIUM_HTTP200_DETAIL_MODAL_RENDERED_FOR_80914_BUT_SHOWS_GENERAL_REGULAR_18_WHILE_EMPLOYER_PDF_DISTINGUISHES_REGULAR_17_CONTRACT_1",
+    "profile_rendered_at_utc": "2026-11-18T00:57:39.616126+00:00",
+    "profile_data_conflict": "실제 프로필: 고용형태 일반정규직, 모집인원 18명 / 고용기관 원본 PDF: 일반8급 정규직 17명+인공암벽장 계약직 1명. 사용자의 홈페이지 변경금지 조건 준수, 원고는 정확한 5명 직무별 규모만 서술; 공개 승인 전 이 차이를 독립검수에서 해결하거나 반영해야 함.",
+    "readonly_browser_run": "https://github.com/kllollain-max/careerpick/actions/runs/44211980398",
+    "readonly_browser_artifact": "https://github.com/kllollain-max/careerpick/actions/runs/44211980398/artifacts/14387130631"
   },
   "recruiting_unit": {
     "title": "일반8급 운영 환경(청년)",
@@ -61,9 +67,8 @@
     "duplicate_applications": "1개 분야, 중복 전부 무효"
   },
   "independent_review_holds": [
-    "Recruitment SPA currently shows only data loading; must verify the precise employer-authorized active application session",
+    "The employer ATS is actually open and the CareerPick 80914 modal rendered, but the visible CareerPick aggregate shows all 18 as general regular while the employer PDF clearly distinguishes 17 general8 regular and 1 contract. Resolve editorial/profile consistency without changing homepage or misclassifying contracts.",
     "Check any newer correction/cancellation notices on official board",
-    "Validate actual CareerPick profile notice rendering for job 80914",
     "Source freshness must be independently valid at 2026-11-19 08 KST: do not forge/rewrite check times",
     "Run production validate_entry, verify_official_receipt, pixel card verification if image required, actual remote claims and posted inventory, CAS reviewed_ingest and queue_bridge",
     "Original PDF byte SHA is independently verified; semantic interpretation is manually reviewed separately and still requires operational production checker."
