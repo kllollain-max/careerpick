@@ -23,9 +23,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Check Python syntax
-        run: python -m py_compile scripts/threads_queue_bridge.py tests/test_threads_queue_bridge_preflight.py scripts/threads_unreviewed_drafts.py tests/test_threads_unreviewed_drafts.py scripts/threads_reviewed_ingest.py tests/test_threads_reviewed_ingest.py scripts/threads_official_review_pack.py tests/test_threads_official_review_pack.py scripts/threads_auto.py tests/test_threads_verified_slot_idempotence.py
+        run: python -m py_compile scripts/threads_queue_bridge.py tests/test_threads_queue_bridge_preflight.py scripts/threads_unreviewed_drafts.py tests/test_threads_unreviewed_drafts.py scripts/threads_reviewed_ingest.py tests/test_threads_reviewed_ingest.py tests/test_threads_gsipa_pinned_source.py scripts/threads_official_review_pack.py tests/test_threads_official_review_pack.py scripts/threads_auto.py tests/test_threads_verified_slot_idempotence.py
       - name: Test source, staging, supply and real workflow entrypoints
         run: |
-          for pattern in test_threads_queue_bridge_preflight.py test_threads_reviewed_ingest.py test_threads_official_review_pack.py test_threads_unreviewed_drafts.py test_threads_workflow_entrypoints.py test_threads_supply_audit.py test_threads_live_inventory.py test_threads_verified_slot_idempotence.py; do
+          for pattern in test_threads_queue_bridge_preflight.py test_threads_reviewed_ingest.py test_threads_gsipa_pinned_source.py test_threads_official_review_pack.py test_threads_unreviewed_drafts.py test_threads_workflow_entrypoints.py test_threads_supply_audit.py test_threads_live_inventory.py test_threads_verified_slot_idempotence.py; do
             python -m unittest discover -s tests -p "$pattern" -v || exit 1
           done
