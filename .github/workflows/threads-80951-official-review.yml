@@ -48,6 +48,13 @@ jobs:
                 if any(t in (href+' '+text).lower() for t in ['2026','6차','recruit','download','file','pdf','hwp','채용']):
                   candidates.append({'url':href,'label':text[:200],'from':r.url})
               row['candidate_count']=len(candidates)
+              # Preserve short public source-context snippets for JS-rendered ATS.
+              markers=[]
+              for m in list(re.finditer(r'6차|2026.{0,25}채용|\\.pdf|attachment|fileName|filePath',html,flags=re.I))[:22]:
+                markers.append(html[max(0,m.start()-140):min(len(html),m.end()+260)].replace('\\n',' ')[:400])
+              row['source_snippets']=markers
+              row['script_src_count']=len(soup.select('script[src]'))
+              row['inline_scripts']=len([s for s in soup.select('script') if s.string])
             except Exception as e:row['error']=type(e).__name__+':'+str(e)[:200]
             results.append(row)
           (root/'pages.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
