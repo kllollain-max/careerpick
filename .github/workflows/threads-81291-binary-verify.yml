@@ -1,0 +1,49 @@
+name: Threads 81291 exact original PDF verification (read only)
+on:
+  push:
+    branches: [review/threads-81291-20261118]
+    paths:
+      - .github/workflows/threads-81291-binary-verify.yml
+permissions:
+  contents: read
+jobs:
+  official-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests pymupdf
+      - name: Download and independently parse the exact employer PDF bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib, requests, fitz, re, datetime
+          from zoneinfo import ZoneInfo
+          url='https://app.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb'
+          r=requests.get(url,timeout=30,headers={'User-Agent':'CareerPickExactEmployerReview/1.0'})
+          r.raise_for_status()
+          assert r.url in (url,'https://www.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb'),r.url
+          assert len(r.content)>20000 and r.content.startswith(b'%PDF-'),(len(r.content),r.content[:8])
+          p=pathlib.Path('official-81291');p.mkdir(exist_ok=True)
+          (p/'exact-original.pdf').write_bytes(r.content)
+          doc=fitz.open(stream=r.content,filetype='pdf')
+          text='\n'.join(page.get_text() for page in doc)
+          (p/'full-extracted-original.txt').write_text(text,encoding='utf-8')
+          for required in ['2026-424','남양주도시공사','역무8급','남양주시','2026','11. 26']:
+            assert required in text,('EXACT_ORIGINAL_SEMANTIC_MISMATCH',required)
+          assert len(doc)>=7, len(doc)
+          digest=hashlib.sha256(r.content).hexdigest()
+          evidence={'notice_id':'cleaneye-81291','url':url,'status':r.status_code,'bytes':len(r.content),'sha256':digest,'page_count':len(doc),'check_at_kst':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),'semantic_excerpt_verified':True,'meaning_review_independently_done_here':False,'approved_for_queue':False}
+          (p/'independent-binary-receipt.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('OFFICIAL_PDF_DIGEST_AND_TEXT',json.dumps(evidence,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: threads-81291-official-original-receipt
+          path: official-81291/
+          retention-days: 30
