@@ -30,12 +30,21 @@
     }
     return {detail:result,changed};
   }
+  function confirmedApplicationEndDay(p){
+    const proof=root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p?.id];
+    if(!p?.alio || !proof || proof.org!==p.org || proof.title!==p.title ||
+       !date(p.due) || day(date(p.due))!==proof.sourceEndDate ||
+       proof.sourceSeats!==String(p.n) || !Array.isArray(proof.sourceTerms) ||
+       !Array.isArray(p.emp) || JSON.stringify(proof.sourceTerms)!==JSON.stringify(p.emp) ||
+       !/^\d{4}-\d{2}-\d{2}$/.test(proof.endDate||'') || !date(proof.endDate))return null;
+    return proof.endDate;
+  }
   function confirmedApplicationStart(p){
     const proof=root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p.id];
     if(!p.alio || !proof || proof.org!==p.org || proof.title!==p.title ||
        !date(p.due) || day(date(p.due))!==proof.sourceEndDate)return null;
     const cutoff=confirmedApplicationCutoff(p);
-    if(!cutoff && (!/^\d{4}-\d{2}-\d{2}$/.test(proof.endDate||'') || !date(proof.endDate)))return null;
+    if(!cutoff && !confirmedApplicationEndDay(p))return null;
     const value=proof.start;
     if(typeof value!=='string' || !/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}\+09:00)?$/.test(value))return null;
     const start=date(value);
@@ -44,6 +53,9 @@
   function deadline(p, now = new Date()){
     const confirmed=confirmedApplicationCutoff(p);
     const due = confirmed || date(p.due);
+    const officialEndDay=confirmedApplicationEndDay(p);
+    // The date-only receipt day has no verified closing hour.
+    if(officialEndDay && day(now)>officialEndDay)return {cls:'closed',big:'마감',n:Infinity};
     if(p.cleaneye && ['expired','cancelled'].includes(p.receptionState))return {cls:'closed',big:p.receptionState==='cancelled'?'취소':'마감',n:Infinity};
     const dateReview=p.cleaneye && p.deadlineReviewReason==='far_future_source_date';
     const uncertain=dateReview || p.cleaneye && ['verification_pending','source_error','invalid_date'].includes(p.receptionState);
@@ -52,6 +64,7 @@
     const n = Math.round((Date.parse(day(due)) - Date.parse(day(now))) / 86400000);
     if(n < 0 || (exact && +now >= +due)) return {cls:'closed',big:'마감',n:Infinity};
     if(uncertain || reviewedStatus(p))return {cls:'verify',big:dateReview?'일정 확인':'상태 확인',n:Infinity};
+    if(officialEndDay && day(now)===officialEndDay)return {cls:'verify',big:'시각 확인',n:0};
     const start = confirmedApplicationStart(p) || date(p.start || p.startDate);
     if(start && +start > +now) return {cls:'upcoming',big:'접수 예정',n};
     if(n === 0 && !exact) return {cls:'verify',big:'시각 확인',n:0};
