@@ -152,6 +152,10 @@ def static_recruitment_posts(posts, metadata, now):
                 clock = datetime.fromisoformat(start if 'T' in start else start + 'T00:00:00+09:00')
                 if now < clock:
                     continue
+                # A date-only opening has no verified hour; keep it out of
+                # the "currently receiving applications" static list that day.
+                if 'T' not in start and now.astimezone(timezone(timedelta(hours=9))).date() == clock.date():
+                    continue
         selected.append(post)
     return selected
 
