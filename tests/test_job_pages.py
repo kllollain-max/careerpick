@@ -15,6 +15,25 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_cnuh_evergreen_fourteen_seats_are_not_presented_as_live_vacancies(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        post = next(p for p in json.loads(Path('alio.json').read_text())['posts']
+                    if p['id'] == 'a305089')
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a305089']
+        self.assertTrue(proof['application_status_unconfirmed'])
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        html = render(post, {})
+        self.assertIn('현재 남아 있는 확정 결원 14명이라는 뜻이 아닙니다', html)
+        self.assertIn('최근 연구실적 요건', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        for changed in ({'n': '15'}, {'org': '다른 기관'}, {'title': '정정 공고'},
+                        {'due': '2027-01-01T23:59:00+09:00'},
+                        {'emp': ['계약직']}, {'alio': False}):
+            changed_html = render({**post, **changed}, {})
+            self.assertNotIn('현재 남아 있는 확정 결원 14명이라는 뜻이 아닙니다', changed_html)
+        self.assertEqual(post, original)
+
     def test_wonju_care_actual_1700_cutoff_is_source_bound_and_never_rewrites_feed(self):
         from datetime import timedelta
         from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
