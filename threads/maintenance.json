@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T13:19:25Z",
-  "last_observed_at": "2026-11-18T13:19:25Z",
+  "updated_at": "2026-11-18T14:36:50Z",
+  "last_observed_at": "2026-11-18T14:36:50Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13344,47 +13344,50 @@
     "unapproved_draft_audit": "threads/audits/source-progress-cleaneye-81291-20261118-1646.json"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-18T13:19:25Z",
-    "status": "EXISTING_FUTURE_THREE_VALID_CANDIDATE_STILL_SOURCE_STALE",
-    "main_sha": "c340eef2bec7a7352dee122169b687816f27435c",
+    "observed_at": "2026-11-18T14:36:50Z",
+    "status": "SOURCE_FRESHNESS_RECOVERED_STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
+    "main_sha": "d6cb8c54c4173cc6608a76b9f61731cc129cfa15",
     "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
-    "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
-    "full_queue_status": "validated",
-    "future_ready_count": 3,
-    "ready_ids": [
-      "a307061",
-      "a307145",
-      "a307120"
-    ],
+    "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+    "full_queue_status": "validated_with_new_candidate_projection",
+    "operating_future_ready_count": 3,
+    "staged_new_ready_count": 1,
     "pending_claims": 0,
     "claims": {
       "count": 56,
-      "states": {
-        "accepted": 55,
-        "historical_verified": 1
-      },
-      "pending": 0
+      "accepted": 55,
+      "historical_verified": 1,
+      "pending": 0,
+      "candidate_slot_unclaimed": true
     },
-    "first_missing_slot": "2026-11-19T20:00:00+09:00",
+    "last_actual_media": "IMAGE",
+    "next_slot": "2026-11-19T08:00:00+09:00",
     "next_supply": {
+      "checked_at": "2026-11-18T14:36:50Z",
       "notice_id": "a307207",
       "target_slot": "2026-11-19T20:00:00+09:00",
-      "full_validator": "SOURCE_STALE",
-      "card_verify": "passed_exact_remote_assets",
-      "source_post_detail_hashes": "unchanged",
-      "staged": false,
-      "ready": false,
-      "source_collection_last_success_at": "2026-11-18T19:17:13+09:00",
-      "reason": "All source snapshots currently expire before tomorrow20; changing candidate cannot repair global snapshot freshness",
-      "review_audit": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
-      "review_audit_sha": "081e0c5fecd19eb58553e04ed0444645d5dca7b3"
+      "status": "STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
+      "full_validator": "passed",
+      "card_verify": "passed_exact_assets_pixels",
+      "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+      "source_regular_run_id": 44313885481,
+      "source_verified_at": "2026-11-18T22:28:05+09:00",
+      "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+      "stage_commit": "1b2598381764eb3221c59508f3568c1a34608189",
+      "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+      "queue_promotion": "pending_regular_preflight",
+      "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+      "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce",
+      "actual_meta_post_id": null,
+      "actual_permalink": null,
+      "main_asset_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
     },
-    "new_publications": 0,
-    "new_ready_entries": 0,
     "automation_on": true,
-    "audit_path": "threads/audits/monitor-20261118-2215-current-main-source-hold.json",
-    "audit_blob": "70ff79f124c144211cbb53c62e67e85df63d86c1",
-    "no_user_action_required": true
+    "new_publications": 0,
+    "new_ready_entries": 1,
+    "no_user_action_required": true,
+    "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+    "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce"
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20964,43 +20967,24 @@
       "late_future_collection_must_not_be_backdated": true
     },
     "latest_staging_supply": {
-      "observed_at": "2026-11-17 14:02:26 UTC",
-      "notice_id": "a307141",
-      "status": "READY_QUEUED_NOT_PUBLISHED",
-      "slot": "2026-11-18T20:00:00+09:00",
-      "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
-      "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
-      "entry_sha256": "781c8f70a78cbbd52d52047e4e20919a0b0bba8e7a49fc1d2562c79a51518446",
+      "checked_at": "2026-11-18T14:36:50Z",
+      "notice_id": "a307207",
+      "target_slot": "2026-11-19T20:00:00+09:00",
+      "status": "STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
       "full_validator": "passed",
-      "whole_remote_queue": "validated",
-      "ready_count": 4,
-      "audit_path": "threads/audits/supply-a307141-ready-20261117-2301.json",
-      "source_verified_at": "2026-11-17T22:24:43+09:00",
-      "regression_pr": 120,
-      "regression_merged": true,
+      "card_verify": "passed_exact_assets_pixels",
+      "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+      "source_regular_run_id": 44313885481,
+      "source_verified_at": "2026-11-18T22:28:05+09:00",
+      "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+      "stage_commit": "1b2598381764eb3221c59508f3568c1a34608189",
+      "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+      "queue_promotion": "pending_regular_preflight",
+      "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+      "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce",
       "actual_meta_post_id": null,
-      "next_action": "Observe existing next regular preflight/publisher; confirm actual account, main text, IMAGE,0automatic replies and Meta post_id/permalink after Nov18 20. Continue independent future supply without changing ready/reserved/posted entries.",
-      "regular_preflight_acceptance": {
-        "observed_at": "2026-11-17T15:32:52.779902+00:00",
-        "status": "regular_preflight_accepts_four_ready_not_published",
-        "regular_run_id": 44110305286,
-        "regular_report_at": "2026-11-18T00:05:33.393635+09:00",
-        "regular_conclusion": "success",
-        "ready_count": 4,
-        "ready_ids": [
-          "a306875",
-          "a306807",
-          "cleaneye-81112",
-          "a307141"
-        ],
-        "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
-        "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
-        "next_slot_missing": false,
-        "pending_claims": 0,
-        "new_meta_post_ids": [],
-        "next_slot": "2026-11-18T08:00:00+09:00",
-        "audit_path": "threads/audits/regular-preflight-four-ready-20261118-0033.json"
-      }
+      "actual_permalink": null,
+      "main_asset_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
     },
     "latest_delayed_preflight_recovery": {
       "notice_id": "a306965",
@@ -21083,47 +21067,50 @@
       "audit_blob": "8fbb769f7344297aaf1c73601f82567e81c959df"
     },
     "latest_independent_monitor_check": {
-      "observed_at": "2026-11-18T13:19:25Z",
-      "status": "EXISTING_FUTURE_THREE_VALID_CANDIDATE_STILL_SOURCE_STALE",
-      "main_sha": "c340eef2bec7a7352dee122169b687816f27435c",
+      "observed_at": "2026-11-18T14:36:50Z",
+      "status": "SOURCE_FRESHNESS_RECOVERED_STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
+      "main_sha": "d6cb8c54c4173cc6608a76b9f61731cc129cfa15",
       "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
-      "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
-      "full_queue_status": "validated",
-      "future_ready_count": 3,
-      "ready_ids": [
-        "a307061",
-        "a307145",
-        "a307120"
-      ],
+      "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+      "full_queue_status": "validated_with_new_candidate_projection",
+      "operating_future_ready_count": 3,
+      "staged_new_ready_count": 1,
       "pending_claims": 0,
       "claims": {
         "count": 56,
-        "states": {
-          "accepted": 55,
-          "historical_verified": 1
-        },
-        "pending": 0
+        "accepted": 55,
+        "historical_verified": 1,
+        "pending": 0,
+        "candidate_slot_unclaimed": true
       },
-      "first_missing_slot": "2026-11-19T20:00:00+09:00",
+      "last_actual_media": "IMAGE",
+      "next_slot": "2026-11-19T08:00:00+09:00",
       "next_supply": {
+        "checked_at": "2026-11-18T14:36:50Z",
         "notice_id": "a307207",
         "target_slot": "2026-11-19T20:00:00+09:00",
-        "full_validator": "SOURCE_STALE",
-        "card_verify": "passed_exact_remote_assets",
-        "source_post_detail_hashes": "unchanged",
-        "staged": false,
-        "ready": false,
-        "source_collection_last_success_at": "2026-11-18T19:17:13+09:00",
-        "reason": "All source snapshots currently expire before tomorrow20; changing candidate cannot repair global snapshot freshness",
-        "review_audit": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
-        "review_audit_sha": "081e0c5fecd19eb58553e04ed0444645d5dca7b3"
+        "status": "STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
+        "full_validator": "passed",
+        "card_verify": "passed_exact_assets_pixels",
+        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+        "source_regular_run_id": 44313885481,
+        "source_verified_at": "2026-11-18T22:28:05+09:00",
+        "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+        "stage_commit": "1b2598381764eb3221c59508f3568c1a34608189",
+        "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+        "queue_promotion": "pending_regular_preflight",
+        "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+        "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce",
+        "actual_meta_post_id": null,
+        "actual_permalink": null,
+        "main_asset_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
       },
-      "new_publications": 0,
-      "new_ready_entries": 0,
       "automation_on": true,
-      "audit_path": "threads/audits/monitor-20261118-2215-current-main-source-hold.json",
-      "audit_blob": "70ff79f124c144211cbb53c62e67e85df63d86c1",
-      "no_user_action_required": true
+      "new_publications": 0,
+      "new_ready_entries": 1,
+      "no_user_action_required": true,
+      "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+      "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce"
     },
     "latest_observation_status": {
       "checked_at": "2026-11-17 08:42:33 UTC",
@@ -21240,16 +21227,24 @@
     },
     "last_supply_review_at": "2026-11-18T08:45:10.714623+00:00",
     "next_approved_staging": {
-      "notice_id": "a307061",
-      "slot": "2026-11-19T08:00:00+09:00",
-      "chars": 309,
-      "media_forecast": "TEXT",
-      "stage_sha": "1e92a69a7b8fbc1bf88aa6cce339ffb7b9726c73",
-      "queue_promotion_pending": false,
-      "published": false,
-      "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
-      "queue_promoted": true,
-      "promotion_run": 44242987568
+      "checked_at": "2026-11-18T14:36:50Z",
+      "notice_id": "a307207",
+      "target_slot": "2026-11-19T20:00:00+09:00",
+      "status": "STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
+      "full_validator": "passed",
+      "card_verify": "passed_exact_assets_pixels",
+      "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+      "source_regular_run_id": 44313885481,
+      "source_verified_at": "2026-11-18T22:28:05+09:00",
+      "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+      "stage_commit": "1b2598381764eb3221c59508f3568c1a34608189",
+      "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+      "queue_promotion": "pending_regular_preflight",
+      "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+      "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce",
+      "actual_meta_post_id": null,
+      "actual_permalink": null,
+      "main_asset_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
     },
     "latest_text_publication": {
       "notice_id": "cleaneye-81112",
@@ -22403,13 +22398,13 @@
       "late_future_collection_must_not_be_backdated": true
     },
     "latest_monitor_summary": {
-      "checked_at": "2026-11-18T13:09:14Z",
-      "state_blob_sha": "cf527b78fc9524e17e5aab0ed18f0066fcd9d3cd",
+      "checked_at": "2026-11-18T14:36:50Z",
+      "state_blob_sha": "750f2eca5a4fdab52ddedf6fb0f56561c73e2f56",
       "summarize_executed": true,
-      "summary_report_sha256": "ce7ff6aab34c422905fd964eb1f0c1a542c5e5a7adf1ec0e660e3c804f406c9a",
-      "v5_windows": {
+      "summary_report_sha256": "4a4415831914180914da83ac21edaa71ae7f9e8b240b4ada0b8a677573f8bc4c",
+      "windows": {
         "24h": {
-          "verified_main_count": 11,
+          "count": 11,
           "metric_medians": {
             "views": 2202,
             "likes": 6,
@@ -22417,76 +22412,10 @@
             "reposts": 0,
             "quotes": 0
           },
-          "metric_observed_counts": {
-            "views": 11,
-            "likes": 11,
-            "replies": 11,
-            "reposts": 11,
-            "quotes": 11
-          },
-          "metric_totals": {
-            "views": 27076,
-            "likes": 66,
-            "replies": 1,
-            "reposts": 8,
-            "quotes": 1
-          },
-          "views_distribution": [
-            {
-              "post_id": "18174469135462070",
-              "views": 525
-            },
-            {
-              "post_id": "18137768440737022",
-              "views": 934
-            },
-            {
-              "post_id": "18111349063925875",
-              "views": 1076
-            },
-            {
-              "post_id": "17918956251546576",
-              "views": 1998
-            },
-            {
-              "post_id": "17919668721264551",
-              "views": 2112
-            },
-            {
-              "post_id": "17994147756077569",
-              "views": 2202
-            },
-            {
-              "post_id": "17918731521553015",
-              "views": 2231
-            },
-            {
-              "post_id": "17896425015438025",
-              "views": 3029
-            },
-            {
-              "post_id": "18121803568969931",
-              "views": 4182
-            },
-            {
-              "post_id": "18102493658425564",
-              "views": 4274
-            },
-            {
-              "post_id": "18134891626705962",
-              "views": 4513
-            }
-          ],
-          "likes_rate_percent_median": 0.21413276231263384,
-          "likes_rate_percent_observed_posts": 11,
-          "reader_replies": null,
-          "reader_replies_status": "see_per_post_author_separation_status",
-          "profile_visits": null,
-          "follow_increase": null,
-          "link_clicks": null
+          "likes_rate_median_percent": 0.21413276231263384
         },
         "72h": {
-          "verified_main_count": 8,
+          "count": 8,
           "metric_medians": {
             "views": 1803,
             "likes": 5.5,
@@ -22494,188 +22423,31 @@
             "reposts": 2,
             "quotes": 0
           },
-          "metric_observed_counts": {
-            "views": 8,
-            "likes": 8,
-            "replies": 8,
-            "reposts": 8,
-            "quotes": 8
-          },
-          "metric_totals": {
-            "views": 30340,
-            "likes": 67,
-            "replies": 0,
-            "reposts": 23,
-            "quotes": 1
-          },
-          "views_distribution": [
-            {
-              "post_id": "17986024908093257",
-              "views": 439
-            },
-            {
-              "post_id": "18137768440737022",
-              "views": 999
-            },
-            {
-              "post_id": "18080747462409277",
-              "views": 1023
-            },
-            {
-              "post_id": "18111349063925875",
-              "views": 1122
-            },
-            {
-              "post_id": "17918731521553015",
-              "views": 2484
-            },
-            {
-              "post_id": "18150019906492861",
-              "views": 4022
-            },
-            {
-              "post_id": "17922530685243848",
-              "views": 9324
-            },
-            {
-              "post_id": "18101198159539744",
-              "views": 10927
-            }
-          ],
-          "likes_rate_percent_median": 0.2745916109087464,
-          "likes_rate_percent_observed_posts": 8,
-          "reader_replies": null,
-          "reader_replies_status": "see_per_post_author_separation_status",
-          "profile_visits": null,
-          "follow_increase": null,
-          "link_clicks": null
+          "likes_rate_median_percent": 0.2745916109087464
         }
-      },
-      "latest_24h": {
-        "post_id": "18102493658425564",
-        "notice_id": "cleaneye-80848",
-        "published_at": "2026-11-17T11:41:10.482040+00:00",
-        "captured_at": "2026-11-18T11:51:30.662062+00:00",
-        "elapsed_seconds": 87020.180022,
-        "window": "24h",
-        "metrics": {
-          "views": 4274,
-          "likes": 7,
-          "replies": 1,
-          "reposts": 1,
-          "quotes": 1
-        },
-        "metric_status": {
-          "views": "observed",
-          "likes": "observed",
-          "replies": "observed",
-          "reposts": "observed",
-          "quotes": "observed"
-        },
-        "likes_rate_percent": 0.16378100140383717,
-        "status": "captured",
-        "reader_replies": null,
-        "reader_replies_status": "author_separation_unverified",
-        "first_sentence_type": "target",
-        "experiment_eligible": false,
-        "first_sentence": "서울교통공사 1~4호선 청소·미화 구직자께,",
-        "format_id": "deadline_opportunity",
-        "contract_version": 2,
-        "sector_group": null,
-        "body_chars": 293,
-        "media": "IMAGE",
-        "slot": "2026-11-17T20:00:00+09:00",
-        "slot_hour_kst": 20,
-        "job": "공무직 사원",
-        "location": "서울교통공사 1~4호선",
-        "employment": "정규직",
-        "recruitment_unit_count": 103,
-        "deadline_distance_seconds": 227929.51796
-      },
-      "latest_72h": {
-        "post_id": "18111349063925875",
-        "notice_id": "a305734",
-        "published_at": "2026-11-15T11:28:51.273502+00:00",
-        "captured_at": "2026-11-18T11:37:33.104464+00:00",
-        "elapsed_seconds": 259721.830962,
-        "window": "72h",
-        "metrics": {
-          "views": 1122,
-          "likes": 3,
-          "replies": 0,
-          "reposts": 2,
-          "quotes": 0
-        },
-        "metric_status": {
-          "views": "observed",
-          "likes": "observed",
-          "replies": "observed",
-          "reposts": "observed",
-          "quotes": "observed"
-        },
-        "likes_rate_percent": 0.267379679144385,
-        "status": "captured",
-        "reader_replies": null,
-        "reader_replies_status": "author_separation_unverified",
-        "first_sentence_type": "target",
-        "experiment_eligible": true,
-        "first_sentence": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,",
-        "format_id": "deadline_opportunity",
-        "contract_version": 2,
-        "sector_group": null,
-        "body_chars": 230,
-        "media": "TEXT",
-        "slot": "2026-11-15T20:00:00+09:00",
-        "slot_hour_kst": 20,
-        "job": "(부)연구위원",
-        "location": "세종",
-        "employment": "정규직",
-        "recruitment_unit_count": 10,
-        "deadline_distance_seconds": 1341067.726498
       },
       "account_followers": {
         "account": "hid_119",
         "scope": "account_total",
         "requested_start": "2026-11-11T11:45:18.355131+00:00",
-        "requested_end": "2026-11-18T12:52:51.280969+00:00",
+        "requested_end": "2026-11-18T14:34:05.451348+00:00",
         "observed_start": "2026-11-11T11:45:32.854727+00:00",
-        "observed_end": "2026-11-18T11:15:47.456612+00:00",
+        "observed_end": "2026-11-18T13:28:49.564560+00:00",
         "start_followers": 415,
-        "end_followers": 502,
-        "net_change": 87,
+        "end_followers": 503,
+        "net_change": 88,
         "status": "observed_interval",
         "exact_requested_boundaries": false,
         "observation_statuses": {
-          "captured": 50
+          "captured": 51
         },
         "post_attribution": null,
         "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
       },
-      "seven_day_review": {
-        "due_at": "2026-11-18T20:45:18.355131+09:00",
-        "observed_at": "2026-11-18T13:08:37.089115+00:00",
-        "state": "reviewed_insufficient_balanced_comparable_samples",
-        "condition_comparable": 1,
-        "target_comparable": 2,
-        "decision": "extend_observation_or_balance_intro_types",
-        "weights_changed": false,
-        "causal_or_statistical_winner_claim": false,
-        "limitations": [
-          "Different notices, job/region/size/deadline/employment/media/slot confounding",
-          "Raw replies author separation unverified, reader_replies null",
-          "Account follower interval not post attribution"
-        ]
-      },
+      "decision": "extend_observation_or_balance_intro_types",
       "weights_changed": false,
-      "audit_path": "threads/audits/monitor-20261118-2210-published-and-next-supply.json",
-      "latest_recheck": {
-        "checked_at": "2026-11-18T13:19:25Z",
-        "state_blob_sha": "cf527b78fc9524e17e5aab0ed18f0066fcd9d3cd",
-        "summarize_executed": true,
-        "summary_report_sha256": "f22634a31bbebcf08b4830a7360f39d9a2cae5c8360572faf0a8fb13dd9d979a",
-        "new_observations": 0,
-        "weights_changed": false
-      }
+      "current_candidate_24h_72h": "not_published_not_due",
+      "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json"
     }
   },
   "writer_ready_reviews": {
@@ -26715,29 +26487,24 @@
     }
   },
   "writer_supply_preparation_latest": {
-    "checked_at": "2026-11-18T13:09:14Z",
+    "checked_at": "2026-11-18T14:36:50Z",
     "notice_id": "a307207",
     "target_slot": "2026-11-19T20:00:00+09:00",
-    "status": "HOLD_SOURCE_STALE_NOT_STAGED",
-    "full_validator": "SOURCE_STALE",
-    "partial_fact_editorial_profile_card_checks": "passed",
-    "main_asset_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb",
-    "audit_path": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
-    "audit_blob": "081e0c5fecd19eb58553e04ed0444645d5dca7b3",
-    "next_action": [
-      "Read next normal scheduled operations receipt/current main and verify source notices remain unchanged/open",
-      "Preserve exact reviewed card pair; rebind source hashes only after actual latest source read",
-      "Run production full validate_entry/card/wholequeue/public preview, then ready staging CAS/readback and normal bridge only",
-      "No manual dispatch/collector run, timestamp fabrication or freshness bypass"
-    ],
-    "latest_recheck": {
-      "checked_at": "2026-11-18T13:19:25Z",
-      "main_sha": "c340eef2bec7a7352dee122169b687816f27435c",
-      "full_validator": "SOURCE_STALE",
-      "source_post_detail_hashes": "unchanged",
-      "card_verify": "passed",
-      "staging_unchanged": true
-    }
+    "status": "STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
+    "full_validator": "passed",
+    "card_verify": "passed_exact_assets_pixels",
+    "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+    "source_regular_run_id": 44313885481,
+    "source_verified_at": "2026-11-18T22:28:05+09:00",
+    "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+    "stage_commit": "1b2598381764eb3221c59508f3568c1a34608189",
+    "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+    "queue_promotion": "pending_regular_preflight",
+    "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+    "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce",
+    "actual_meta_post_id": null,
+    "actual_permalink": null,
+    "main_asset_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
   },
   "writer_recovery_checks": [
     {
@@ -27338,5 +27105,25 @@
       "Run production full validate_entry/card/wholequeue/public preview, then ready staging CAS/readback and normal bridge only",
       "No manual dispatch/collector run, timestamp fabrication or freshness bypass"
     ]
+  },
+  "writer_supply_recovery_20261118_2338": {
+    "checked_at": "2026-11-18T14:36:50Z",
+    "notice_id": "a307207",
+    "target_slot": "2026-11-19T20:00:00+09:00",
+    "status": "STAGING_READY_QUEUE_PROMOTION_PENDING_NOT_PUBLISHED",
+    "full_validator": "passed",
+    "card_verify": "passed_exact_assets_pixels",
+    "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+    "source_regular_run_id": 44313885481,
+    "source_verified_at": "2026-11-18T22:28:05+09:00",
+    "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+    "stage_commit": "1b2598381764eb3221c59508f3568c1a34608189",
+    "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+    "queue_promotion": "pending_regular_preflight",
+    "audit_path": "threads/audits/supply-a307207-20261119-20-staged-ready-20261118-2338.json",
+    "audit_blob": "6091ebda4ddaf87de458ce32d3519c17b095e2ce",
+    "actual_meta_post_id": null,
+    "actual_permalink": null,
+    "main_asset_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
   }
 }
