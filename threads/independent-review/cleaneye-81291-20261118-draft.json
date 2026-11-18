@@ -24,11 +24,11 @@
       2,
       5
     ],
-    "actual_pdf_binary_downloaded": false,
-    "raw_pdf_sha256": null,
-    "sha256_verified": false,
-    "source_review_method": "Web PDF extraction was inspected across the complete notice, including recruitment unit table, residency requirement, tests, application times and documents; actual PDF page screenshots were visually examined. Source PDF bytes not available in this runtime for independent hash computation.",
-    "source_binding_caveat": "A matching text extraction is not a verified immutable-byte receipt."
+    "actual_pdf_binary_downloaded": true,
+    "raw_pdf_sha256": "8054affb8c3cbd43b73b0224fd1021de03c0771ff5661726271079cd6779a844",
+    "sha256_verified": true,
+    "source_review_method": "Earlier full 7-page official PDF extracted and pages 1,2,5 visually inspected; on 2026-11-18 16:49:51 KST separately downloaded exact ORIGINAL PDF bytes through GitHub Actions; HTTP200 328236 bytes, 7 pages, sha256 recorded. Independent byte digest is not final semantic/editorial or revision approval.",
+    "source_binding_caveat": "Exact employer PDF SHA256 independently validated at 16:49:51 KST; a matching digest proves byte identity of the checked PDF, NOT absence of subsequent corrections, site/profile readiness or publisher approval."
   },
   "independent_facts": [
     {
@@ -138,11 +138,23 @@
     "requires_meta_receipt_at_post_time": true
   },
   "blockers": [
-    "Original official PDF bytes and independent SHA-256 unavailable in this runtime: never invent receipt/hash.",
+    "Exact PDF byte SHA verified, but final employer correction/cancellation, application-specific form and exact careerpick #job visual render not yet fully cleared.",
     "Precise individual applicant submission screen and exact profile #job=cleaneye-81291 visual details not verified.",
     "Only currently visible employer notices reviewed; final amendment/cancellation clearance remains incomplete.",
     "Production validate_entry and official receipt check have NOT passed; never mark as approved.",
     "After fresh evidence, validate v5 plus media alternation and run staging->CAS bridge, then double-check remote refs before any actual POST."
   ],
-  "safety_policy": "No production queue/history or other brand/system mutations; draft alone is not an approved post."
+  "safety_policy": "No production queue/history or other brand/system mutations; draft alone is not an approved post.",
+  "independent_binary_receipt": {
+    "url": "https://app.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+    "status": 200,
+    "bytes": 328236,
+    "sha256": "8054affb8c3cbd43b73b0224fd1021de03c0771ff5661726271079cd6779a844",
+    "pages": 7,
+    "checked_at": "2026-11-18T16:49:51.326170+09:00",
+    "github_run": "https://github.com/kllollain-max/careerpick/actions/runs/44261890199",
+    "artifact": "https://github.com/kllollain-max/careerpick/actions/runs/44261890199/artifacts/14408346683",
+    "original_pdf_and_fulltext_preserved": true,
+    "approved_for_queue": false
+  }
 }
