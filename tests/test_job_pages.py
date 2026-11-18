@@ -15,6 +15,38 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_source_bound_date_only_reception_end_precedes_later_publication_end(self):
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        from scripts.priority_candidate_audit import shortlist
+        from datetime import date
+        post = dict(id='a309999', alio=True, org='검증기관', title='접수기간이 더 짧은 공고',
+                    n='4', emp=['정규직'], due='2026-12-05T23:59:00+09:00')
+        original = copy.deepcopy(post)
+        proof = dict(organization=post['org'], title=post['title'],
+                     source_end_date='2026-12-05', expected_source_seats='4',
+                     source_employment=['정규직'], application_start='2026-11-24',
+                     application_end_date='2026-12-01')
+        meta = homepage_cutoff_metadata([post], {}, {post['id']: proof})
+        self.assertEqual(meta[post['id']]['endDate'], '2026-12-01')
+        self.assertEqual(meta[post['id']]['sourceSeats'], '4')
+        self.assertEqual(meta[post['id']]['sourceTerms'], ['정규직'])
+        before = datetime.fromisoformat('2026-11-30T23:59:59+09:00')
+        last_day = datetime.fromisoformat('2026-12-01T00:00:00+09:00')
+        next_day = datetime.fromisoformat('2026-12-02T00:00:00+09:00')
+        self.assertEqual(static_recruitment_posts([post], meta, before), [post])
+        self.assertEqual(static_recruitment_posts([post], meta, last_day), [])
+        self.assertEqual(static_recruitment_posts([post], meta, next_day), [])
+        report = shortlist({'posts':[post]}, date(2026,12,2),
+                           verified_windows={post['id']:proof})
+        self.assertEqual(report['excluded']['official_reception_closed_by_date'], 1)
+        for change in ({'n':'5'}, {'emp':['계약직']}, {'title':'정정공고'},
+                       {'org':'다른기관'}, {'due':'2026-12-06T23:59:00+09:00'},
+                       {'alio':False}):
+            self.assertEqual(homepage_cutoff_metadata(
+                [{**post, **change}], {}, {post['id']:proof}), {})
+        self.assertEqual(post, original)
+
+
     def test_kopo_deans_two_year_term_and_official_1800_arrival_cutoff(self):
         from datetime import timedelta
         from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
