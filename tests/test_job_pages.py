@@ -15,6 +15,29 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_evergreen_unconfirmed_status_is_displayed_and_excluded_on_homepage(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        for pid in ('a292002', 'a305089'):
+            post = posts[pid]
+            original = copy.deepcopy(post)
+            proof = VERIFIED_APPLICATION_NOTICES[pid]
+            self.assertTrue(proof['application_status_unconfirmed'])
+            metadata = homepage_cutoff_metadata([post], {}, {pid: proof})
+            self.assertIn(pid, metadata)
+            self.assertIn('실제 접수 활성 상태', metadata[pid]['statusNote'])
+            self.assertEqual(metadata[pid]['sourceSeats'], str(post['n']))
+            self.assertEqual(metadata[pid]['sourceTerms'], post['emp'])
+            self.assertEqual(static_recruitment_posts(
+                [post], metadata, datetime(2026, 11, 18, 4, 20, tzinfo=timezone.utc)), [])
+            for changed in ({'title': '정정공고'}, {'org': '변경기관'},
+                            {'n': '15'}, {'emp': ['계약직']},
+                            {'due': '2026-12-30T23:59:00+09:00'}, {'alio': False}):
+                updated = {**post, **changed}
+                self.assertEqual(homepage_cutoff_metadata([updated], {}, {pid: proof}), {})
+            self.assertEqual(post, original)
+
     def test_gnuh_trauma_2025_notice_fourteen_not_verified_live_vacancies(self):
         from datetime import date
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
