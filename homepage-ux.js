@@ -70,8 +70,15 @@
     if(n < 0 || (exact && +now >= +due)) return {cls:'closed',big:'마감',n:Infinity};
     if(uncertain || reviewedStatus(p))return {cls:'verify',big:dateReview?'일정 확인':'상태 확인',n:Infinity};
     if(officialEndDay && day(now)===officialEndDay)return {cls:'verify',big:'시각 확인',n:0};
-    const start = confirmedApplicationStart(p) || date(p.start || p.startDate);
+    const officialStart = confirmedApplicationStart(p);
+    const start = officialStart || date(p.start || p.startDate);
     if(start && +start > +now) return {cls:'upcoming',big:'접수 예정',n};
+    // A verified opening DATE has no verified opening HOUR. Do not silently
+    // promote it to an "open" job at midnight on that same KST day.
+    const startProof = root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p.id]?.start;
+    if(officialStart && typeof startProof === 'string' &&
+       /^\d{4}-\d{2}-\d{2}$/.test(startProof) && day(now) === startProof)
+      return {cls:'verify',big:'개시시각 확인',n};
     if(n === 0 && !exact) return {cls:'verify',big:'시각 확인',n:0};
     return {cls:n <= 3 ? 'hot':'open',big:n === 0 ? 'D-DAY':`D-${n}`,n};
   }
