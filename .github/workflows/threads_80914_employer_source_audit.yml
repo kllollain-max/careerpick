@@ -71,6 +71,76 @@ jobs:
               print('OFFICIAL_PDF_NOT_YET_FOUND; HOLD; NO APPROVAL / NO POST')
           PY
           python /tmp/audit_notice.py
+      - name: Independently fetch and inspect the two exact employer ZIP attachments
+        if: always()
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check pyhwp || true
+          cat > /tmp/audit_zip.py <<'PY'
+          import io, json, zipfile, pathlib, requests, hashlib, subprocess, tempfile, shutil, re
+          import xml.etree.ElementTree as ET
+          import fitz
+          dest=pathlib.Path('audit')
+          base='https://www.yjuc.or.kr/sub/content.asp?actionMode=view&cIdx=32&fboard=board_job&num=690'
+          result={}
+          session=requests.Session()
+          headers={'User-Agent':'Mozilla/5.0 CareerPickPublicNoticeReview/1.0','Referer':base}
+          for fid in (8225,8226):
+              u=f'https://www.yjuc.or.kr/fboard/common/download.asp?fboard=board_job&f_idx={fid}'
+              item={'url':u,'status':'failed','children':[]}
+              try:
+                  x=session.get(u,headers=headers,timeout=35)
+                  item['http']=x.status_code
+                  item['bytes']=len(x.content)
+                  x.raise_for_status()
+                  if len(x.content)>15000000 or not zipfile.is_zipfile(io.BytesIO(x.content)):
+                      raise ValueError('NOT_VALID_ZIP_OR_TOO_LARGE')
+                  item['sha256']=hashlib.sha256(x.content).hexdigest()
+                  (dest/f'official-{fid}.zip').write_bytes(x.content)
+                  with zipfile.ZipFile(io.BytesIO(x.content)) as z:
+                      for n,entry in enumerate(z.infolist()):
+                          if entry.is_dir() or n>=35 or entry.file_size>15_000_000:continue
+                          name=entry.filename
+                          blob=z.read(entry)
+                          child={'name':name,'bytes':len(blob),'sha256':hashlib.sha256(blob).hexdigest()}
+                          suffix=pathlib.PurePosixPath(name).suffix.lower()
+                          text=''
+                          if blob.startswith(b'%PDF-'):
+                              d=fitz.open(stream=blob,filetype='pdf')
+                              text='\\n'.join(p.get_text() for p in d)
+                              child['pages']=len(d)
+                          elif suffix in ('.hwpx','.zip') and zipfile.is_zipfile(io.BytesIO(blob)):
+                              with zipfile.ZipFile(io.BytesIO(blob)) as inner:
+                                  for sub in inner.namelist():
+                                      if sub.lower().endswith('.xml') and ('contents/' in sub.lower() or 'section' in sub.lower()):
+                                          try:
+                                              root=ET.fromstring(inner.read(sub))
+                                              text+=' '.join(t.strip() for t in root.itertext() if t and t.strip())+'\\n'
+                                          except Exception:pass
+                          elif blob.startswith(b'\\xd0\\xcf\\x11\\xe0'):
+                              exe=shutil.which('hwp5txt')
+                              if exe:
+                                  with tempfile.NamedTemporaryFile(suffix='.hwp') as f:
+                                      f.write(blob);f.flush()
+                                      done=subprocess.run([exe,'--output', '-', f.name],capture_output=True,timeout=25)
+                                      if done.returncode==0:
+                                          text=done.stdout.decode('utf-8','replace')
+                          elif suffix in ('.txt','.csv'):
+                              for enc in ('utf-8-sig','cp949'):
+                                  try:text=blob.decode(enc);break
+                                  except UnicodeDecodeError:continue
+                          child['extracted_chars']=len(text)
+                          if text:
+                              (dest/f'zip-{fid}-part-{n:02d}.txt').write_text(text[:80000],encoding='utf-8')
+                              print('ZIP_ENTRY_TEXT',fid,name,text[:3200])
+                          item['children'].append(child)
+                  item['status']='zip_verified'
+                  print('OFFICIAL_ZIP_VERIFIED',json.dumps({'fid':fid,'bytes':item['bytes'],'sha256':item['sha256'],'children':item['children']},ensure_ascii=False)[:10000])
+              except Exception as e:item['error']=repr(e)[:300];print('OFFICIAL_ZIP_ERROR',fid,repr(e)[:200])
+              result[str(fid)]=item
+          (dest/'official-zips-result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+          python /tmp/audit_zip.py
       - name: Save exact original / text / page render (read-only)
         if: always()
         uses: actions/upload-artifact@v4
