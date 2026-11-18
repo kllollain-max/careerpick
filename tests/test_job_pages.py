@@ -572,12 +572,17 @@ class JobPageTests(unittest.TestCase):
         original = copy.deepcopy(posts)
         result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS,
                                           {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES})
-        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963', 'a306875', 'a307017', 'a292472', 'a299412'}
+        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963', 'a306875', 'a307017', 'a292472', 'a299412', 'a292002', 'a305089'}
         if any(p.get('id') == 'a307149' for p in posts):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
             expected.add('a306988')  # employer-confirmed date-only window, no invented clock
         self.assertEqual(set(result), expected)
+        for pid in ('a292002', 'a305089'):
+            self.assertIn('실제 접수 활성 상태', result[pid]['statusNote'])
+            post = next(p for p in posts if p['id'] == pid)
+            self.assertEqual(result[pid]['sourceSeats'], str(post['n']))
+            self.assertEqual(result[pid]['sourceTerms'], post['emp'])
         self.assertEqual(result['a306875']['endDate'], '2026-11-20')
         self.assertNotIn('cutoff', result['a306875'])
         self.assertEqual(result['a306355']['cutoff'], '2026-11-16T10:00:00+09:00')
