@@ -73,6 +73,18 @@ jobs:
               idx=full.find(keyword)
               if idx>=0:print("EXCERPT_"+keyword+"="+repr(full[max(0,idx-160):idx+420]))
           PY
+      - name: Verify independent receipt with existing production exact-source downloader (no CAS / no Meta)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          from scripts.threads_reviewed_ingest import fetch_official_digest
+          receipt=json.loads(pathlib.Path("official-81328/receipt.json").read_text(encoding="utf-8"))
+          actual=fetch_official_digest(receipt["source_pdf_url"])
+          if actual != receipt["sha256"]:
+              raise SystemExit("OFFICIAL_SOURCE_DIGEST_MISMATCH")
+          print("PRODUCTION_OFFICIAL_DIGEST_VERIFIED="+actual)
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
