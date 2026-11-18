@@ -15,6 +15,61 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_new_add_162_mixed_and_road_four_are_source_bound(self):
+        """Nov 18 official HTML is display evidence, not 162 regular seats or a verified deadline."""
+        from datetime import date
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.priority_candidate_audit import shortlist
+        cases = [
+            (
+                'a306990', '국방과학연구소', "국방과학연구소 '27년 상반기 임용 공개채용",
+                '162', ['무기계약직', '정규직', '계약직'],
+                '공식 JOB-ALIO의 162명은 정규직·무기계약직·비정규직을 합친',
+                '정규직 162명 모집으로 해석할 수 없으며',
+            ),
+            (
+                'a307189', '한국도로공사',
+                '2026년 한국도로공사 전문연구원(AI·데이터분석) 채용 공고',
+                '4', ['무기계약직'],
+                '정규직이 아닌 무기계약직 전문연구원 4명',
+                '석사 취득 후 해당분야 3년 이상',
+            ),
+        ]
+        posts = []
+        for pid, org, title, seats, employment, notice, requirement in cases:
+            post = {'id': pid, 'alio': True, 'org': org, 'title': title,
+                    'n': seats, 'emp': employment,
+                    'due': '2026-12-02T23:59:00+09:00',
+                    'dueHasTime': False,
+                    'url': f'https://job.alio.go.kr/recruitview.do?idx={pid[1:]}',
+                    'region': '경북' if pid == 'a307189' else '전국'}
+            original = copy.deepcopy(post)
+            proof = VERIFIED_APPLICATION_NOTICES[pid]
+            self.assertEqual(proof['expected_source_seats'], post['n'])
+            self.assertEqual(proof['source_employment'], post['emp'])
+            self.assertNotIn(pid, CONFIRMED_APPLICATION_CUTOFFS)
+            self.assertNotIn('application_start', proof)
+            html = render(post, {})
+            self.assertIn(notice, html)
+            self.assertIn(requirement, html)
+            self.assertNotIn('기관 공식 확인 접수마감', html)
+            for change in ({'n': str(int(seats) + 1)},
+                           {'emp': ['정규직'] if pid == 'a307189' else ['정규직']},
+                           {'title': title + ' (정정)'}, {'org': '다른 기관'},
+                           {'due': '2026-12-03T23:59:00+09:00'},
+                           {'alio': False}):
+                stale_html = render({**post, **change}, {})
+                self.assertNotIn(notice, stale_html)
+                self.assertNotIn(requirement, stale_html)
+            self.assertEqual(post, original)
+            posts.append(post)
+        report = shortlist({'posts': posts}, date(2026, 11, 18))
+        self.assertEqual(report['regular_review_candidates'], [])
+        self.assertEqual(report['top'][0]['id'], 'a306990')
+        self.assertTrue(report['top'][0]['mixed_employment_with_regular'])
+        self.assertFalse(report['top'][0]['regular_only_classified'])
+        self.assertFalse(report['top'][1]['regular_only_classified'])
+
     def test_source_bound_date_only_reception_end_precedes_later_publication_end(self):
         from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
         from scripts.priority_candidate_audit import shortlist
