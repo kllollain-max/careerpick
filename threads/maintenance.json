@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T13:09:14Z",
-  "last_observed_at": "2026-11-18T13:09:14Z",
+  "updated_at": "2026-11-18T13:19:25Z",
+  "last_observed_at": "2026-11-18T13:19:25Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13344,16 +13344,11 @@
     "unapproved_draft_audit": "threads/audits/source-progress-cleaneye-81291-20261118-1646.json"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-18T13:09:14Z",
-    "status": "NEW_IMAGE_PUBLICATION_VERIFIED_FUTURE_THREE_VALID_NEXT_SUPPLY_FRESHNESS_HOLD",
-    "regular_run_id": 44298272711,
-    "new_meta_post_ids": [
-      "18141503863648852"
-    ],
-    "last_actual_media": "IMAGE",
+    "observed_at": "2026-11-18T13:19:25Z",
+    "status": "EXISTING_FUTURE_THREE_VALID_CANDIDATE_STILL_SOURCE_STALE",
+    "main_sha": "c340eef2bec7a7352dee122169b687816f27435c",
     "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
     "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
-    "main_sha": "90dbc7cf99974a311d6e77a540e266e7d63349eb",
     "full_queue_status": "validated",
     "future_ready_count": 3,
     "ready_ids": [
@@ -13361,30 +13356,34 @@
       "a307145",
       "a307120"
     ],
-    "approved_future_slots": [
-      "2026-11-19T08:00:00+09:00",
-      "2026-11-19T12:00:00+09:00",
-      "2026-11-19T16:00:00+09:00"
-    ],
-    "first_missing_slot": "2026-11-19T20:00:00+09:00",
     "pending_claims": 0,
     "claims": {
       "count": 56,
-      "accepted": 55,
-      "historical_verified": 1,
+      "states": {
+        "accepted": 55,
+        "historical_verified": 1
+      },
       "pending": 0
     },
-    "today_verified_count": 4,
+    "first_missing_slot": "2026-11-19T20:00:00+09:00",
     "next_supply": {
       "notice_id": "a307207",
-      "status": "HOLD_SOURCE_STALE_NOT_STAGED",
-      "audit_path": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
-      "audit_blob": "081e0c5fecd19eb58553e04ed0444645d5dca7b3",
-      "assets_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
+      "target_slot": "2026-11-19T20:00:00+09:00",
+      "full_validator": "SOURCE_STALE",
+      "card_verify": "passed_exact_remote_assets",
+      "source_post_detail_hashes": "unchanged",
+      "staged": false,
+      "ready": false,
+      "source_collection_last_success_at": "2026-11-18T19:17:13+09:00",
+      "reason": "All source snapshots currently expire before tomorrow20; changing candidate cannot repair global snapshot freshness",
+      "review_audit": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
+      "review_audit_sha": "081e0c5fecd19eb58553e04ed0444645d5dca7b3"
     },
-    "audit_path": "threads/audits/monitor-20261118-2210-published-and-next-supply.json",
-    "audit_blob": "3710ff9c4594487a83c819ca03b00f12a7748b77",
+    "new_publications": 0,
+    "new_ready_entries": 0,
     "automation_on": true,
+    "audit_path": "threads/audits/monitor-20261118-2215-current-main-source-hold.json",
+    "audit_blob": "70ff79f124c144211cbb53c62e67e85df63d86c1",
     "no_user_action_required": true
   },
   "writer_hold_alternatives": {
@@ -21084,16 +21083,11 @@
       "audit_blob": "8fbb769f7344297aaf1c73601f82567e81c959df"
     },
     "latest_independent_monitor_check": {
-      "observed_at": "2026-11-18T13:09:14Z",
-      "status": "NEW_IMAGE_PUBLICATION_VERIFIED_FUTURE_THREE_VALID_NEXT_SUPPLY_FRESHNESS_HOLD",
-      "regular_run_id": 44298272711,
-      "new_meta_post_ids": [
-        "18141503863648852"
-      ],
-      "last_actual_media": "IMAGE",
+      "observed_at": "2026-11-18T13:19:25Z",
+      "status": "EXISTING_FUTURE_THREE_VALID_CANDIDATE_STILL_SOURCE_STALE",
+      "main_sha": "c340eef2bec7a7352dee122169b687816f27435c",
       "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
       "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
-      "main_sha": "90dbc7cf99974a311d6e77a540e266e7d63349eb",
       "full_queue_status": "validated",
       "future_ready_count": 3,
       "ready_ids": [
@@ -21101,30 +21095,34 @@
         "a307145",
         "a307120"
       ],
-      "approved_future_slots": [
-        "2026-11-19T08:00:00+09:00",
-        "2026-11-19T12:00:00+09:00",
-        "2026-11-19T16:00:00+09:00"
-      ],
-      "first_missing_slot": "2026-11-19T20:00:00+09:00",
       "pending_claims": 0,
       "claims": {
         "count": 56,
-        "accepted": 55,
-        "historical_verified": 1,
+        "states": {
+          "accepted": 55,
+          "historical_verified": 1
+        },
         "pending": 0
       },
-      "today_verified_count": 4,
+      "first_missing_slot": "2026-11-19T20:00:00+09:00",
       "next_supply": {
         "notice_id": "a307207",
-        "status": "HOLD_SOURCE_STALE_NOT_STAGED",
-        "audit_path": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
-        "audit_blob": "081e0c5fecd19eb58553e04ed0444645d5dca7b3",
-        "assets_commit": "90dbc7cf99974a311d6e77a540e266e7d63349eb"
+        "target_slot": "2026-11-19T20:00:00+09:00",
+        "full_validator": "SOURCE_STALE",
+        "card_verify": "passed_exact_remote_assets",
+        "source_post_detail_hashes": "unchanged",
+        "staged": false,
+        "ready": false,
+        "source_collection_last_success_at": "2026-11-18T19:17:13+09:00",
+        "reason": "All source snapshots currently expire before tomorrow20; changing candidate cannot repair global snapshot freshness",
+        "review_audit": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
+        "review_audit_sha": "081e0c5fecd19eb58553e04ed0444645d5dca7b3"
       },
-      "audit_path": "threads/audits/monitor-20261118-2210-published-and-next-supply.json",
-      "audit_blob": "3710ff9c4594487a83c819ca03b00f12a7748b77",
+      "new_publications": 0,
+      "new_ready_entries": 0,
       "automation_on": true,
+      "audit_path": "threads/audits/monitor-20261118-2215-current-main-source-hold.json",
+      "audit_blob": "70ff79f124c144211cbb53c62e67e85df63d86c1",
       "no_user_action_required": true
     },
     "latest_observation_status": {
@@ -22669,7 +22667,15 @@
         ]
       },
       "weights_changed": false,
-      "audit_path": "threads/audits/monitor-20261118-2210-published-and-next-supply.json"
+      "audit_path": "threads/audits/monitor-20261118-2210-published-and-next-supply.json",
+      "latest_recheck": {
+        "checked_at": "2026-11-18T13:19:25Z",
+        "state_blob_sha": "cf527b78fc9524e17e5aab0ed18f0066fcd9d3cd",
+        "summarize_executed": true,
+        "summary_report_sha256": "f22634a31bbebcf08b4830a7360f39d9a2cae5c8360572faf0a8fb13dd9d979a",
+        "new_observations": 0,
+        "weights_changed": false
+      }
     }
   },
   "writer_ready_reviews": {
@@ -26723,7 +26729,15 @@
       "Preserve exact reviewed card pair; rebind source hashes only after actual latest source read",
       "Run production full validate_entry/card/wholequeue/public preview, then ready staging CAS/readback and normal bridge only",
       "No manual dispatch/collector run, timestamp fabrication or freshness bypass"
-    ]
+    ],
+    "latest_recheck": {
+      "checked_at": "2026-11-18T13:19:25Z",
+      "main_sha": "c340eef2bec7a7352dee122169b687816f27435c",
+      "full_validator": "SOURCE_STALE",
+      "source_post_detail_hashes": "unchanged",
+      "card_verify": "passed",
+      "staging_unchanged": true
+    }
   },
   "writer_recovery_checks": [
     {
