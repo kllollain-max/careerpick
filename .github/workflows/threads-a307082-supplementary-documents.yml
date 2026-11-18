@@ -54,14 +54,14 @@ jobs:
                           part_bytes=raw[pos:pos+size];pos+=size
                           if typ==67:
                               s=part_bytes.decode('utf-16le',errors='ignore')
-                              s=re.sub(r'[\\x00-\\x08\\x0b-\\x1f]',' ',s)
+                              s=''.join(ch if ord(ch)>=32 else ' ' for ch in s)
                               if s.strip():alltext.append(s.strip())
                   txt='\n'.join(alltext)
               else:
                   if not zipfile.is_zipfile(io.BytesIO(data)): raise ValueError('HWPX_ZIP_MAGIC')
                   alltext=[]
                   with zipfile.ZipFile(io.BytesIO(data)) as z:
-                      names=[n for n in z.namelist() if re.search(r'^Contents/section\\d+\\.xml$',n)]
+                      names=[n for n in z.namelist() if n.startswith('Contents/section') and n.endswith('.xml')]
                       if not names: raise ValueError('HWPX_SECTIONS_MISSING')
                       for n in sorted(names):
                           xml_bytes=z.read(n)
@@ -78,9 +78,9 @@ jobs:
                 'independent_current_download':True,'full_original_read':True,'semantic_editorial_approval':False,'cas_registered':False,'meta_posted':False}
               records.append(rec)
               print('OFFICIAL_SUPPLEMENTAL_RECEIPT',json.dumps(rec,ensure_ascii=False))
-              for s in re.split(r'[\\n\\r]+',txt):
+              for s in txt.splitlines():
                   if re.search(r'간호|경력|면허|병동|자격|교대|학력|응시|근무|직무|우대',s) and len(s.strip())>5:
-                      print('SUPPLEMENTAL_REVIEW_TEXT',label,re.sub(r'\\s+',' ',s.strip())[:1800])
+                      print('SUPPLEMENTAL_REVIEW_TEXT',label,' '.join(s.strip().split())[:1800])
               if not any(x in txt for x in ('간호','병동','응시')):
                   raise ValueError('OTHER_POSTING_DOCUMENT '+label)
           (root/'receipt.json').write_text(json.dumps(records,ensure_ascii=False,indent=2),encoding='utf-8')
