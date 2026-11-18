@@ -1,0 +1,93 @@
+name: Threads a307082 supplementary ALIO original documents (read only)
+on:
+  push:
+    branches: [review/threads-a307082-independent-20261118]
+    paths:
+      - .github/workflows/threads-a307082-supplementary-documents.yml
+permissions:
+  contents: read
+jobs:
+  independent-attachments:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install read-only document parsers
+        run: python -m pip install --quiet requests olefile
+      - name: Fetch exact ALIO job-description and application-form originals, parse and digest
+        shell: bash
+        run: |
+          python - <<'PY'
+          import io, json, hashlib, pathlib, datetime, zipfile, re, zlib, xml.etree.ElementTree as ET
+          import requests, olefile
+          from zoneinfo import ZoneInfo
+          root=pathlib.Path('a307082-supplemental-official')
+          root.mkdir(exist_ok=True)
+          jobs=[('official-job-description','3087716','hwp'),('official-application-form','3087715','hwpx')]
+          records=[]
+          for label,no,kind in jobs:
+              url=f'https://www.alio.go.kr/download/download.json?fileNo={no}'
+              r=requests.get(url,headers={'User-Agent':'Mozilla/5.0 CareerPickExactOfficial/1.0'},timeout=35)
+              r.raise_for_status()
+              if r.url != url: raise ValueError('UNEXPECTED_OFFICIAL_REDIRECT '+r.url)
+              data=r.content
+              if not 1000 < len(data) < 20000000: raise ValueError('SIZE_INVALID')
+              if kind=='hwp':
+                  if not olefile.isOleFile(io.BytesIO(data)):raise ValueError('OFFICIAL_HWP_MAGIC')
+                  ole=olefile.OleFileIO(io.BytesIO(data))
+                  sections=sorted([(p[1],p) for p in ole.listdir() if len(p)==2 and p[0]=='BodyText' and p[1].startswith('Section')])
+                  alltext=[]
+                  for name,part in sections:
+                      raw=ole.openstream(part).read()
+                      try:raw=zlib.decompress(raw,-15)
+                      except zlib.error:pass
+                      pos=0
+                      while pos+4<=len(raw):
+                          h=int.from_bytes(raw[pos:pos+4],'little');pos+=4
+                          typ=h&1023; size=(h>>20)&4095
+                          if size==4095:
+                              if pos+4>len(raw):break
+                              size=int.from_bytes(raw[pos:pos+4],'little');pos+=4
+                          if pos+size>len(raw):break
+                          part_bytes=raw[pos:pos+size];pos+=size
+                          if typ==67:
+                              s=part_bytes.decode('utf-16le',errors='ignore')
+                              s=re.sub(r'[\\x00-\\x08\\x0b-\\x1f]',' ',s)
+                              if s.strip():alltext.append(s.strip())
+                  txt='\n'.join(alltext)
+              else:
+                  if not zipfile.is_zipfile(io.BytesIO(data)): raise ValueError('HWPX_ZIP_MAGIC')
+                  alltext=[]
+                  with zipfile.ZipFile(io.BytesIO(data)) as z:
+                      names=[n for n in z.namelist() if re.search(r'^Contents/section\\d+\\.xml$',n)]
+                      if not names: raise ValueError('HWPX_SECTIONS_MISSING')
+                      for n in sorted(names):
+                          xml_bytes=z.read(n)
+                          doc=ET.fromstring(xml_bytes)
+                          for t in doc.iter():
+                              if t.tag.split('}')[-1] in ('t','text') and t.text:alltext.append(t.text)
+                  txt=' '.join(alltext)
+              if len(txt)<60: raise ValueError('EXTRACTED_TEXT_TOO_SHORT '+label)
+              sha=hashlib.sha256(data).hexdigest()
+              (root/(label+'.'+kind)).write_bytes(data)
+              (root/(label+'.txt')).write_text(txt,encoding='utf-8')
+              rec={'notice_id':'a307082','document':label,'fileNo':no,'url':url,'bytes':len(data),
+                'sha256':sha,'text_chars':len(txt),'checked_at_kst':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),
+                'independent_current_download':True,'full_original_read':True,'semantic_editorial_approval':False,'cas_registered':False,'meta_posted':False}
+              records.append(rec)
+              print('OFFICIAL_SUPPLEMENTAL_RECEIPT',json.dumps(rec,ensure_ascii=False))
+              for s in re.split(r'[\\n\\r]+',txt):
+                  if re.search(r'간호|경력|면허|병동|자격|교대|학력|응시|근무|직무|우대',s) and len(s.strip())>5:
+                      print('SUPPLEMENTAL_REVIEW_TEXT',label,re.sub(r'\\s+',' ',s.strip())[:1800])
+              if not any(x in txt for x in ('간호','병동','응시')):
+                  raise ValueError('OTHER_POSTING_DOCUMENT '+label)
+          (root/'receipt.json').write_text(json.dumps(records,ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a307082-supplemental-original-and-fulltext
+          path: a307082-supplemental-official/
+          retention-days: 30
