@@ -1423,6 +1423,8 @@ class DateOnlyReceptionMetadataTests(unittest.TestCase):
         meta=homepage_cutoff_metadata([post],{}, {'a1':proof})
         self.assertNotIn('cutoff',meta['a1'])
         self.assertEqual(static_recruitment_posts([post],meta,datetime.fromisoformat('2027-01-17T23:59:59+09:00')),[])
-        self.assertEqual(static_recruitment_posts([post],meta,datetime.fromisoformat('2027-01-18T00:00:00+09:00')),[post])
+        self.assertEqual(static_recruitment_posts([post],meta,datetime.fromisoformat('2027-01-18T00:00:00+09:00')),[])
+        self.assertEqual(static_recruitment_posts([post],meta,datetime.fromisoformat('2027-01-18T18:00:00+09:00')),[])
+        self.assertEqual(static_recruitment_posts([post],meta,datetime.fromisoformat('2027-01-19T00:00:00+09:00')),[post])
         for change in [{'title':'changed'},{'due':'2027-01-23'}]:
             self.assertEqual(homepage_cutoff_metadata([dict(post,**change)],{}, {'a1':proof}),{})
