@@ -1,0 +1,55 @@
+name: Threads 80914 independent official PDF evidence (non-publishing)
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - review/threads-80914-official-20261118-0943
+    paths:
+      - '.github/workflows/threads-80914-source-evidence.yml'
+permissions:
+  contents: read
+jobs:
+  official-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Download exact employer PDF original bytes and digest (no Meta, no queue writes)
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, urllib.request, datetime, subprocess, shutil
+          out=pathlib.Path("source-80914")
+          out.mkdir(exist_ok=True)
+          url="https://www.yjuc.or.kr/fboard/common/download.asp?fboard=board_job&f_idx=8224"
+          req=urllib.request.Request(url,headers={"User-Agent":"CareerPickSourceAudit/1.0","Accept":"application/pdf,*/*"})
+          with urllib.request.urlopen(req,timeout=45) as response:
+              status=response.status
+              mime=response.headers.get("Content-Type","")
+              data=response.read(5000001)
+          if status!=200 or len(data)>5000000 or len(data)<10000 or not data.startswith(b"%PDF-"):
+              raise SystemExit(f"OFFICIAL_PDF_UNEXPECTED_RESPONSE status={status} bytes={len(data)} mime={mime}")
+          sha=hashlib.sha256(data).hexdigest()
+          pdf=out/"official-80914.pdf"
+          pdf.write_bytes(data)
+          record={"notice_id":"cleaneye-80914","official_url":url,"status_code":status,"content_type":mime,"byte_length":len(data),"sha256":sha,"retrieved_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"human_semantic_approval":False,"meta_posted":False,"cas_registered":False}
+          if shutil.which("pdftotext"):
+              proc=subprocess.run(["pdftotext","-layout",str(pdf),"-"],capture_output=True,text=True,timeout=20)
+              if proc.returncode != 0 or "양주도시공사" not in proc.stdout or "2026" not in proc.stdout:
+                  raise SystemExit("OFFICIAL_PDF_EXTRACT_OR_IDENTITY_FAILED")
+              record["pdf_identity_terms_passed"]=True
+              record["extracted_text_characters"]=len(proc.stdout)
+              (out/"official-80914.txt").write_text(proc.stdout,encoding="utf-8")
+              # Never infer full meaning check or approval from this automated proof.
+          else:
+              record["pdf_identity_terms_passed"]=False
+          (out/"original-byte-receipt.json").write_text(json.dumps(record,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(record,ensure_ascii=False))
+          with open("/tmp/threads-80914-summary","w",encoding="utf-8") as f:
+              f.write("Official employer PDF byte check: HTTP 200; SHA256 "+sha+"; bytes "+str(len(data))+". Independent full semantic review, ATS and actual CAS remain separately required.\n")
+          PY
+          cat /tmp/threads-80914-summary >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve original file and proof as audit artifact only
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80914-official-source-readonly
+          path: source-80914/
+          retention-days: 30
