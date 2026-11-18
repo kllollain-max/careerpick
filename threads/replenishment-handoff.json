@@ -1,31 +1,25 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-18T14:16:36.568539+09:00",
-  "run_id": "44242987568",
+  "captured_at": "2026-11-18T16:32:30.502701+09:00",
+  "run_id": "44259554572",
   "source_commit": "4940a3e26f895f0c1f6f7d21746de097eebafa35",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-18T14:15:45.894572+09:00",
+    "time": "2026-11-18T16:31:41.190287+09:00",
     "future_slots": [
-      "2026-11-18T16:00:00+09:00",
       "2026-11-18T20:00:00+09:00",
       "2026-11-19T08:00:00+09:00",
       "2026-11-19T12:00:00+09:00",
       "2026-11-19T16:00:00+09:00",
       "2026-11-19T20:00:00+09:00",
       "2026-11-20T08:00:00+09:00",
-      "2026-11-20T12:00:00+09:00"
+      "2026-11-20T12:00:00+09:00",
+      "2026-11-20T16:00:00+09:00"
     ],
     "next_media": "TEXT",
-    "promoted": [
-      {
-        "notice_id": "a307061",
-        "slot": "2026-11-19T08:00:00+09:00",
-        "fingerprint": "017ba9d13648daf678fa1ce3d3ab576125430aab83e17aa6c37039c9fca62418"
-      }
-    ],
+    "promoted": [],
     "refused": [
       {
         "notice_id": "a306965",
@@ -74,22 +68,27 @@
       {
         "notice_id": "a307141",
         "reason": "SLOT_ALREADY_OCCUPIED"
+      },
+      {
+        "notice_id": "a307061",
+        "reason": "SLOT_ALREADY_OCCUPIED"
       }
     ],
-    "queue_updated": true,
+    "queue_updated": false,
     "meta_posted": false,
-    "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
+    "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
     "staged_sha": "1e92a69a7b8fbc1bf88aa6cce339ffb7b9726c73",
-    "promoted_count": 1,
-    "approved_supply_count": 3,
+    "promoted_count": 0,
+    "approved_supply_count": 2,
     "inventory_target": 8,
-    "inventory_shortfall": 5,
+    "inventory_shortfall": 6,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-18T16:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-18T16:00:00+09:00",
       "2026-11-18T20:00:00+09:00",
       "2026-11-19T08:00:00+09:00"
     ],
@@ -98,7 +97,8 @@
       "2026-11-19T16:00:00+09:00",
       "2026-11-19T20:00:00+09:00",
       "2026-11-20T08:00:00+09:00",
-      "2026-11-20T12:00:00+09:00"
+      "2026-11-20T12:00:00+09:00",
+      "2026-11-20T16:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 60,
@@ -109,7 +109,8 @@
         "2026-11-19T16:00:00+09:00",
         "2026-11-19T20:00:00+09:00",
         "2026-11-20T08:00:00+09:00",
-        "2026-11-20T12:00:00+09:00"
+        "2026-11-20T12:00:00+09:00",
+        "2026-11-20T16:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "cleaneye-80711",
@@ -2330,8 +2331,7 @@
           "evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24"
         }
       }
-    ],
-    "queue_sha_after": "c73ce0b608f1d67139d1f886726755049f3366fe"
+    ]
   },
   "writer_handoff": {
     "status": "review_required",
@@ -2340,7 +2340,8 @@
       "2026-11-19T16:00:00+09:00",
       "2026-11-19T20:00:00+09:00",
       "2026-11-20T08:00:00+09:00",
-      "2026-11-20T12:00:00+09:00"
+      "2026-11-20T12:00:00+09:00",
+      "2026-11-20T16:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "cleaneye-80711",
@@ -4996,27 +4997,129 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "cleaneye-80990",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직6급/청소년사업)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80990",
-        "suggested_slot": null
+        "source_post_sha256": "83ed5a79323bd3dc0532f4a5e078e7eda9c246982c3bcbf65c1ddc2572982897",
+        "source_detail_sha256": "0a2e7e262f69afbd32ecbd1c4cc1925df77e615e4ba20908dfb1bbbf183beaa4",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-80990/application_period",
+        "source_snapshot_checked_at": "2026-11-18T13:09:17+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-11",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-80991",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직6급/시설운영)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80991",
-        "suggested_slot": null
+        "source_post_sha256": "b228477e0f3a467c680750b42cc140b935dd14dc4a4a59b891a29c07d834ebda",
+        "source_detail_sha256": "3e34ef3fde986df97263f46e65d897a77842694eced12408664e952ab941218a",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-80991/application_period",
+        "source_snapshot_checked_at": "2026-11-18T13:09:17+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-11",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81114",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "draft_text": "재단법인 강원관광재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 하반기 (재)강원관광재단 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81114",
-        "suggested_slot": null
-      },
+        "source_post_sha256": "1cf3be281222bd939acdfb7467f716cfb2988ede630e068dab5be0b00baeb26d",
+        "source_detail_sha256": "56f55a0db6802daccc78ebd1ffbfb4dc388667e0d34f37877cc949b110f5ac44",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-81114/application_period",
+        "source_snapshot_checked_at": "2026-11-18T13:09:17+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-10",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "cleaneye-81179",
         "status": "unreviewed",
@@ -5276,14 +5379,16 @@
         "2026-11-19T16:00:00+09:00",
         "2026-11-19T20:00:00+09:00",
         "2026-11-20T08:00:00+09:00",
-        "2026-11-20T12:00:00+09:00"
+        "2026-11-20T12:00:00+09:00",
+        "2026-11-20T16:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-19T12:00:00+09:00",
         "2026-11-19T16:00:00+09:00",
         "2026-11-19T20:00:00+09:00",
         "2026-11-20T08:00:00+09:00",
-        "2026-11-20T12:00:00+09:00"
+        "2026-11-20T12:00:00+09:00",
+        "2026-11-20T16:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -5346,7 +5451,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-18T14:16:35.480675+09:00",
+          "checked_at": "2026-11-18T16:32:29.619618+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5425,13 +5530,6 @@
   "publication_audit": {
     "slots": [
       {
-        "scheduled_at": "2026-11-16T16:00:00+09:00",
-        "post_ids": [
-          "17994147756077569"
-        ],
-        "status": "recorded_publication"
-      },
-      {
         "scheduled_at": "2026-11-16T20:00:00+09:00",
         "post_ids": [
           "18134891626705962"
@@ -5481,16 +5579,16 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 8,
+    "expected_slots": 7,
+    "recorded_publications": 7,
     "receipt_success_rate": 1.0,
     "live_meta_verification_performed": false,
     "needs_attention": []
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-18T14:16:35.571405+09:00",
-    "window_start": "2026-11-16T05:16:35.571405+00:00",
+    "checked_at": "2026-11-18T16:32:29.690751+09:00",
+    "window_start": "2026-11-16T07:32:29.690751+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
@@ -5558,14 +5656,6 @@
         "is_reply": false,
         "text_available": true,
         "text_sha256": "eec6b36c266fdcb696935e51b99aefdb9dfcb24b6109547910f7f3ae2d67ec4a"
-      },
-      {
-        "post_id": "17994147756077569",
-        "timestamp": "2026-11-16T07:07:20+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DfyyB5uFbuM",
-        "is_reply": false,
-        "text_available": true,
-        "text_sha256": "bbd48e7a0e7deb8cfa5ca9cf337a281ee7335baab8df734f8470f48a760944c0"
       }
     ],
     "meta_posted": false,
