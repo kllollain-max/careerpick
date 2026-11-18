@@ -11,6 +11,30 @@ function cutoffFixture(){
   vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
   return {post,proof,context,api:context.window.CPHome};
 }
+test('unconfirmed evergreen recruitment is not shown as open and cannot survive source changes',()=>{
+  const posts=require('../alio.json').posts;
+  for(const id of ['a292002','a305089']){
+    const post=posts.find(p=>p.id===id);
+    assert(post);
+    const original=JSON.stringify(post);
+    const note='실제 접수 활성 상태와 남은 채용인원이 기관 공식 접수처에서 확인되지 않았습니다.';
+    const proof={org:post.org,title:post.title,sourceEndDate:String(post.due).slice(0,10),
+                 sourceSeats:String(post.n),sourceTerms:post.emp.slice(),statusNote:note};
+    const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[id]:proof}},Date});
+    vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
+    const api=context.window.CPHome;
+    const when=new Date('2026-11-18T04:20:00Z');
+    assert.equal(api.reviewedStatus(post),note);
+    assert.equal(api.deadline(post,when).cls,'verify');
+    assert.equal(api.deadline(post,when).big,'상태 확인');
+    for(const change of [{n:'15'},{emp:['계약직']},{title:'정정공고'},
+                         {org:'다른기관'},{due:'2026-12-30T23:59:00+09:00'},{alio:false}]){
+      const changed={...post,...change};
+      assert.equal(api.reviewedStatus(changed),'');
+    }
+    assert.equal(JSON.stringify(post),original);
+  }
+});
 test('official reception start overrides an already published ALIO notice',()=>{
   const {post,proof,api}=cutoffFixture();
   proof.start='2026-11-12T10:00:00+09:00';
