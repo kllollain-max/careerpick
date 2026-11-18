@@ -76,3 +76,10 @@
 - **아직 HOLD:** 기관 전체 최신 정정·취소/연장 공고 검토, 기관 ATS 개별 지원 버튼 현재 접수 여부, 커리어픽 #job=cleaneye-81328 상세의 실제 표시, 정확한 게시 슬롯의 24h 이내 신선도 재조회, source allowlist의 pin 검토, production `validate_entry`·`verify_official_receipt`·`threads_reviewed_ingest`, 이미지 슬롯 시 1080/360 실물 픽셀 검증, 원격 CAS가 남음. 문서 SHA 일치는 의미검증 전체나 실제 게시성공이 아님.
 - 2026-11-19 03:50 KST에서 2026-11-20 08:00 KST는 **28시간 초과**이므로 이 수집시각을 그대로 내일 08시 슬롯 승인근거로 쓸 수 없음. 24시간 제한은 완화하지 말고 **11/19 08시 KST 이후 공식 재조회·의미 재검수하고 승인**.
 - **운영 상태 불변:** 승인재고 4/8; 신규 승인0, queue CAS0, Meta POST0, 신규 게시 ID 없음. 타 브랜드/홈페이지/수집/검색/푸시는 작업 범위 밖.
+
+
+### 2026-11-19 03:56 KST — 기존 운영 원본 재다운로드 검증기 추가 통과
+
+- 실제 read-only GitHub Actions https://github.com/kllollain-max/careerpick/actions/runs/44375085521 에서 공식 PDF를 **독립적으로 재수집**(동일 207,439바이트, 공식 기관 10쪽), 이어서 **운영 코드 `scripts.threads_reviewed_ingest.fetch_official_digest`를 동일 정확 URL로 직접 실행**.
+- 로그의 `PRODUCTION_OFFICIAL_DIGEST_VERIFIED=d6ee9090ea4b53523a28353b7150b684e2e42b1c6f17fd32c1ef53037093841a` 확인. 이전 수집 때 해시와 정확히 동일하여 공식 자료 수집·production 단독 digest 경로는 통과함.
+- **유의:** 이 통과는 **`verify_official_receipt(entry)` 통합·`validate_entry`·24시간 소스 신선도·채용원서 현재 화면·정정취소 전체대조·카드 픽셀검증·CAS 승인**이 아님. 실제 입고/게시를 승인하지 않음.
