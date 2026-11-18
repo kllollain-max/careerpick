@@ -702,11 +702,16 @@ class JobPageTests(unittest.TestCase):
         }
         before = copy.deepcopy(post)
         self.assertEqual(proof['source_url'], post['url'])
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        self.assertEqual(proof['source_employment'], post['emp'])
         self.assertEqual(proof['application_start'], '2026-11-24')
         self.assertEqual(proof['application_end_date'], '2026-12-01')
         self.assertNotIn(pid, CONFIRMED_APPLICATION_CUTOFFS)
         html = render(post, {})
         self.assertIn('2026-11-24 ~ 2026-12-01 (마감시각 공식 공고 확인 필요)', html)
+        self.assertIn('대졸수준 일반전형, 대졸수준 보훈전형', html)
+        self.assertIn('TOEIC 700점 이상', html)
+        self.assertIn('입사일이 2026년 3월 15일로 표기', html)
         self.assertNotIn('기관 공식 확인 접수마감', html)
         self.assertNotIn('2026-12-01 23:59 (KST)', html)
         self.assertNotIn('type="application/ld+json"', html)
@@ -718,10 +723,12 @@ class JobPageTests(unittest.TestCase):
             [post], meta, datetime.fromisoformat('2026-11-23T23:59:59+09:00')), [])
         # Date-only evidence must not generate a fabricated 00:00/23:59 cutoff.
         for change in ({'org': '다른 기관'}, {'title': '변경 공고'},
-                       {'due': '2026-12-02T23:59:00+09:00'}, {'alio': False}):
+                       {'due': '2026-12-02T23:59:00+09:00'}, {'alio': False},
+                       {'n': '102'}, {'emp': ['계약직']}):
             altered = dict(post, **change)
             self.assertEqual(homepage_cutoff_metadata([altered], {}, {pid: proof}), {})
             self.assertNotIn('2026-11-24 ~ 2026-12-01', render(altered, {}))
+            self.assertNotIn('TOEIC 700점 이상', render(altered, {}))
         self.assertEqual(post, before)
 
     def test_nps_original_pdf_confirms_contract_and_exact_cutoff_without_raw_changes(self):
