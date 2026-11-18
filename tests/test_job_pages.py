@@ -15,6 +15,44 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_kopo_deans_two_year_term_and_official_1800_arrival_cutoff(self):
+        from datetime import timedelta
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        # This notice entered main in the latest 1077-post feed; the draft
+        # branch retains an older snapshot. Use a faithful isolated fixture.
+        post = dict(id='a307171', alio=True, type='j',
+                    org='학교법인한국폴리텍',
+                    title='한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고',
+                    n='4', emp=['정규직'],
+                    pub='2026-11-18T00:00:00+09:00',
+                    due='2026-11-25T23:59:00+09:00', dueHasTime=False,
+                    url='https://job.alio.go.kr/recruitview.do?idx=307171')
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES[post['id']]
+        cutoff = CONFIRMED_APPLICATION_CUTOFFS[post['id']]
+        self.assertEqual(cutoff, '2026-11-25T18:00:00+09:00')
+        html = render(post, {})
+        self.assertIn('임기는 2년', html)
+        self.assertIn('등기우편', html)
+        self.assertIn('중복지원은 불가', html)
+        self.assertIn('기관 공식 확인 접수마감', html)
+        self.assertIn('2026-11-25 18:00 (KST)', html)
+        meta = homepage_cutoff_metadata([post], {post['id']: cutoff}, {post['id']: proof})
+        self.assertEqual(meta[post['id']]['cutoff'], cutoff)
+        before = datetime.fromisoformat(cutoff) - timedelta(seconds=1)
+        self.assertEqual(static_recruitment_posts([post], meta, before), [post])
+        self.assertEqual(static_recruitment_posts([post], meta, datetime.fromisoformat(cutoff)), [])
+        for change in ({'n': '5'}, {'emp': ['계약직']},
+                       {'title': '정정공고'}, {'org': '다른기관'},
+                       {'due': '2026-11-26T23:59:00+09:00'}, {'alio': False}):
+            altered = {**post, **change}
+            self.assertNotIn('임기는 2년', render(altered, {}))
+            self.assertNotIn('기관 공식 확인 접수마감', render(altered, {}))
+            self.assertEqual(homepage_cutoff_metadata([altered],
+                {post['id']: cutoff}, {post['id']: proof}), {})
+        self.assertEqual(post, original)
+
     def test_evergreen_unconfirmed_status_is_displayed_and_excluded_on_homepage(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
         from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
