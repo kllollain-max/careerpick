@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "review_status": "HOLD_NOT_READY",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "cas_registered": false,
+  "entry": {
+    "notice_id": "cleaneye-81199",
+    "source": "cleaneye",
+    "official_id": "81199",
+    "scheduled_at": "2026-11-19T08:00:00+09:00",
+    "format_id": "hiring_core",
+    "prepared_at": "2026-11-18T01:23:01.566592+00:00",
+    "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+    "publication_policy_id": "careerpick-threads-v5-20261111",
+    "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+    "source_post_sha256": "f58973e06a423d4b8b94129ccfc39f59ff0bf762497feab17e639e8c9d808a02",
+    "source_detail_sha256": "260768c668feb52a5634e2403a8f39937fef75b33c7d3483e0eeba51f0761f7d",
+    "image_job": {
+      "id": "cleaneye-81199",
+      "org": "경기문화재단",
+      "title": "문화행정직",
+      "count": 1,
+      "employment": "정규직",
+      "location": "최종합격 이후 발령 예정",
+      "due": "2026-11-23",
+      "deadline_label": "2026-11-23 17:00"
+    },
+    "writer": {
+      "status": "draft",
+      "post_text": "학력·경력 제한 없는 문화예술 업무를 찾는다면,\n경기문화재단 문화행정직 6급 정규직 1명을 확인해요.\n\n임용예정일 기준 만60세 미만이며 재단 결격사유에 해당하지 않아야 해요.\n최초 근무예정지는 최종합격 이후 발령 예정이고, 순환보직·시용 및 수습기간이 적용될 수 있어요.\n\n필기는 NCS 50문항, 행정학·예술경영 각 20문항이며 인적성검사 미응시자는 불합격이에요.\n2027년 1월 1일 임용 예정이에요.\n11월 23일 17:00까지 온라인 접수하며, 모집분야 간 중복지원은 불가해요.\n\n자세한 사항은 프로필링크 확인",
+      "draft_text": null,
+      "reply_texts": [],
+      "review": {
+        "v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "학력·경력 제한 없는 문화예술 업무를 찾는다면,\n경기문화재단 문화행정직 6급 정규직 1명을 확인해요."
+            },
+            {
+              "id": "target",
+              "type": "target",
+              "text": "문화예술사업 기획·운영을 하고 싶은 분께,\n경기문화재단 문화행정직 6급 정규직 1명 모집이에요."
+            },
+            {
+              "id": "deadline",
+              "type": "deadline",
+              "text": "11월 23일 17:00 마감이에요.\n경기문화재단 문화행정직 6급 정규직 1명을 모집해요."
+            }
+          ],
+          "selected_hook_id": "condition",
+          "first_sentence_type": "condition",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "임용예정일 기준 만60세 미만",
+              "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+              "excerpt": "임용예정일 기준 만 60세 미만인 자",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "재단 결격사유에 해당하지 않아야 해요.",
+              "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+              "excerpt": "경기문화재단 취업규정 제41조(결격사유) 각 호의 어느 하나에 해당되지",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "최초 근무예정지는 최종합격 이후 발령 예정",
+              "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+              "excerpt": "일반직(문화행정직 및 학예연구직)의 최초 근무예정지는 최종합격 이후 발령 예정",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "순환보직",
+              "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+              "excerpt": "재단 순환보직 방침에 따라 최초발령 근무지에서 이동하여 타 소속기관에서 근무할 수 있으며,",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "시용 및 수습기간이 적용될 수 있어요.",
+              "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+              "excerpt": "시용근로\n  및 수습기간을 둘 수 있음",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "모집분야 간 중복지원은 불가해요.",
+              "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+              "excerpt": "모집분야(직종 및 세부직종)별 복수 및 중복 지원 불가",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "recruitment_unit": {
+            "title": "문화행정직",
+            "count": 1,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+            "excerpt": "문화행정직      -       6급   공개경쟁    문화예술사업 기획 및 운영       채용 후 발령 예정      1명"
+          },
+          "useful_point": {
+            "text": "인적성검사 미응시자는 불합격이에요.",
+            "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+            "excerpt": "인적성검사\n               미응시자는 불합격 처리"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-18T01:21:37.750194+00:00",
+            "result": "none_found",
+            "source_ref": "https://www.ggcf.kr/boards/bulletinBoards/articles",
+            "scope": "Actual first board page and exact current employer detail reread; no separate correction visible in this scope. Not whole-site absence."
+          },
+          "style_rewrites": 1,
+          "selection_reason": "원본 9쪽과 문화행정 NCS 3쪽 실제 독립 검토. 학력·경력 제한 없는 단일 정규직 1명; 기관 전체8명 및 학예연구직 장애인제한경쟁과 구분. 독자 선호 추정 없음.",
+          "public_preview": {
+            "main_text": "학력·경력 제한 없는 문화예술 업무를 찾는다면,\n경기문화재단 문화행정직 6급 정규직 1명을 확인해요.\n\n임용예정일 기준 만60세 미만이며 재단 결격사유에 해당하지 않아야 해요.\n최초 근무예정지는 최종합격 이후 발령 예정이고, 순환보직·시용 및 수습기간이 적용될 수 있어요.\n\n필기는 NCS 50문항, 행정학·예술경영 각 20문항이며 인적성검사 미응시자는 불합격이에요.\n2027년 1월 1일 임용 예정이에요.\n11월 23일 17:00까지 온라인 접수하며, 모집분야 간 중복지원은 불가해요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "presentation_style": "eligibility_info",
+          "experiment_eligible": true,
+          "length_exception_reason": "만60세 기준일, 발령예정지·순환보직 및 시용수습 가능성, 인적성 미응시 불합격, 임용예정일과 중복지원 금지를 보존함."
+        },
+        "source_refs": [
+          {
+            "url": "https://www.ggcf.kr/index.php/attachment/20642/download",
+            "checked_at": "2026-11-18T01:19:08.698321+00:00",
+            "sha256": "a7b01244b5d0ec84608fb746f446fb8ccca1a052868fdece3b679359dae30099",
+            "evidence": "〈경기문화재단 채용 공고 제2026 ­ 32호〉\n\n\n         2026년 경기문화재단 제5회 직원 채용\n              (일반직 및 운영직) 공고\n2026년도 경기문화재단 신입직원(문화행정직·학예연구직·운영직) 채용시험 계획을\n다음과 같이 공고하오니 많은 분들의 참여를 바랍니다.\n                                                               2026년   11월 12일\n                                                           경기문화재단 인사위원장\n\n 1. 채용예정 분야 직위(직급) 주요업무 인원\n               구        분                                       근무예정지\n  소속                             구분모집         채용분야              (모집단위)        인원\n          직종       세부직종     직급\n\n         문화행정직      -       6급   공개경쟁    문화예술사업 기획 및 운영       채용 후 발령 예정      1명\n\n                                 장애인\n         학예연구직      -       6급           학술연구 및 전시 기획 운영      채용 후 발령 예정      1명\n                                 제한경쟁\n                                         시설 경비 및 보안업무\n                   보안원                                       경기도박물관(용인)       1명\n                                          ※ 감시적 근로자\n\n경기문화재단             미화원                   시설 미화 등 공중위생 유지    경기북부어린이박물관(동두천)   1명\n\n                                         시설관리 (기계 전기 소방      경기창작캠퍼스(안산)      2명\n         운영직                6단계 공개경쟁\n                   시설원                   등 시설 전반 업무)\n                                         ※ 단속적 근로자           실학박물관(남양주)       1명\n                                         고객 안내 및 발권업무\n                   안내·\n                                         ※ 주업무 : 전시실 작품      백남준아트센터(용인)      1명\n                   매표원\n                                           방호 및 안내(어셔)\n\n                                        총원                                    8명\n\n ※ 장애인제한경쟁의 경우 2. 응시자격 요건 내 구분모집(장애인) 자격요건에 해당하는 자만 지원 가능\n ※ 분야별 직무내용·필요지식·관련자격·직업기초능력에 관한 사항은 NCS기반 직무기술서(별첨) 참조\n ※ 재단 순환보직 방침에 따라 최초발령 근무지에서 이동하여 타 소속기관에서 근무할 수 있으며,\n   일반직(문화행정직 및 학예연구직)의 최초 근무예정지는 최종합격 이후 발령 예정\n ※ 운영직은 기간을 정하지 않고 근로계약을 체결한 사람을 칭함(정년 만60세까지 근무 가능.\n   다만, 고령자 친화직무(보안, 미화)를 수행하는 근로자의 경우, 별도로 정하는 규칙에 의한 심사\n   를 거쳐 만65세로 연장할 수 있음.)\n\f※ 경기문화재단 임금피크제 운영규칙 및 운영직 근로자 관리규정에 따라 임금피크제도 운영\n※ 취업규정 제44조(시용근로) 및 운영직 근로자 관리 규정 제15조(계약)에 따라 시용근로\n  및 수습기간을 둘 수 있음\n※ 시설원, 보안원의 경우 기관 운영방침에 따라 근무형태(감시·단속적 근로자)가 변경될 수 있음\n\n\n2. 응시자격 요건\n\n  응시자격 기준\n ­ 공통 : 학력, 경력 제한 없음. 임용예정일 기준 만 60세 미만인 자\n ­ 운영직 시설원 : 전기·기계 등을 취급하는 직종(안전을 요하는 직무)이므로 원서접수\n                 마감일 기준으로 다음과 같은 자격 소지자에 한하여 지원할 수 있음\n                 내 용\n   구 분     (운영직 근로자 관리규정                      종 류\n                별표2)\n\n                            전기기능사, 전기산업기사, 전기기사, 전기기능장, 전기기술사, 전기공사\n   전기      전기 기능사 이상 소지자\n                            산업기사, 전기공사기사, 전기응용기술사, 건축전기설비기술사\n\n                            공조냉동기계기능사, 공조냉동기계산업기사, 공조냉동기계기사, 공조냉동\n            보일러취급기능사 또는\n   기계                       기계기술사, 보일러취급기능사, 보일러시공기능사, 보일러기능사, 에너지\n           공조냉동기능사 이상 소지자\n                            관리기능사, 에너지관리산업기사, 에너지관리기사, 에너지관리기능장\n\n※ 운영직 근로자 관리규정 별표2의 시설원 응시자격 기준에 기재된 자격증 중 국가기술자격\n  종목의 통합·명칭변경 등에 따라 현행 자격명으로 변경된 경우에는 관련 법령의 경과조치\n  에 따라 종전 명칭의 자격증 소지자도 현행 자격증 소지자와 동일하게 응시자격을 인정함.\n\n\n  구분모집(장애인) 자격요건\n\n 구분모집                             자격요건\n\n         「장애인복지법 시행령」제2조에 따른 장애인, 「국가유공자 등 예우 및 지원에 관한 법률\n         시행령」제14조제3항에 따른 상이등급기준에 해당하는 자(「보훈보상대상자 지원에 관한 법률 시행령」제8조에\n         따라 준용되는 경우 포함)\n  장애인    장애인 구분모집에 응시하고자 하는 자는 접수마감일 기준 현재까지 장애인으로 유효하게 등록되거나,\n         상이등급기준에 해당하는 자로서 유효하게 등록결정되어\n                                 ·    있어야 합니다.\n         장애인은 장애인 구분모집 외의 일반 모집단위에도 비장애인과 동일한 조건으로 응시할 수 있습니다. (단,\n         중복접수는 할 수 없음)\n\n\n\n  결격사유 기준\n ­ 공통 : 경기문화재단 취업규정 제41조(결격사유) 각 호의 어느 하나에 해당되지\n         않는 사람\n\f ① 피성년후견인\n ② 파산선고를 받고 복권되지 아니한 사람\n ③ 금고 이상의 실형을 선고받고 그 집행이 끝나거나 그 집행을 받지 아니하기로 확정된 후 5년이\n   지나지 아니한 사람\n ④ 금고 이상의 형을 선고받고 그 집행유예기간이 끝난 날부터 2년이 지나지 아니한 사람\n ⑤ 금고 이상의 형의 선고유예를 선고받고 그 선고유예기간 중에 있는 사람\n ⑥ 법원의 판결에 따라 자격이 상실되거나 정지된 사람\n ⑦ 「형법 」 제355조 및 제356조에 규정된 횡령과 배임의 죄를 범한 사람으로서 300만원 이상의 벌\n    금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 사람\n ⑧ 다음의 어느 하나에 해당하는 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이\n   확정된 후 3년이 지나지 아니한 사람\n  가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄\n  나. 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」제74조제1항제2호 및 제3호에 규정된 죄\n  다. 「스토킹범죄의 처벌 등에 관한 법률」 제2조제2호에 따른 스토킹범죄\n ⑨ 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는\n    치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유\n    예기간이 경과한 사람을 포함한다)\n  가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄\n  나. 「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년 대상 성범죄\n ⑩ 징계로 파면처분을 받은 날부터 5년이 지나지 아니한 사람\n ⑪ 징계로 해임처분을 받은 날부터 3년이 지나지 아니한 사람\n ⑫ 「형법 」 제303조 또는 「성폭력범죄의 처벌 등에 관한 특례법」 제10조에 규정된 죄를 범한 사람\n    으로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 사람\n\n\n\n\n3. 필기시험과목\n\n  직 종   세 부 직 종 (채 용 분 야)               응 시 과 목            비 고\n\n                            2교시(50분) : 공통(NCS) 50문항\n문화행정직    문화예술사업 기획 및 운영\n                            3교시(40분) : 행정학, 예술경영 각 20문항\n\n                            2교시(50분) : 공통(NCS) 50문항\n학예연구직    학술연구 및 전시 기획 운영\n                            3교시(40분) : 박물관학, 교육학 각 20문항\n\n\n         보안원, 미화원           1교시 인 (적 )성검사만 진행(필기시험 미실시 )\n 운영직\n         시설원, 안내·매표원        2교시(50분) : 공통(NCS) 50문항\n\n\n※ 1교시 인(적)성검사(210문항 30분) 병행실시하며, 면접참고자료로 활용(미응시자 불합격)\n※ NCS(직업기초능력평가) 5개영역(의사소통, 문제해결, 대인관계, 조직이해, 직업윤리 )\n  영역당 10문항씩 50문항 50분, 4지선다\n※ 전공시험 2과목 40문항 40분, 4지선다\n\f4. 심사 방법\n\n                                  구     분\n전형                                                                             비고\n        방 법            합격 기준                   평가 요소 및 배점 비율\n               평균 60점 이상이고 과목별 40점\n               이상인 사람 중 고득점자 순 합격                       NCS 직업기초능력평가(50%)\n                                            문화행정직\n               ※ 소수점 둘째자리까지 계산하고,                       전공 2과목(50%)\n                                            (문화예술사업     ① 행정학(25%)\n                동점자는 모두 합격자로 결정             기획 및 운영)\n                                                        ② 예술경영(25%)       총 90문항\n               ※ 각 시험과목은 100점 만점으로\n                                                                             - NCS(50)\n                환산하여 산정함\n                                                                             - 전공1(20)\n               ※ 문화행정직·학예연구직 필기 평균점수\n                                            학예연구직       NCS 직업기초능력평가(50%) - 전공2(20)\n                = {NCS 환산점수 + [(전공1 환산점수\n                                            (학술연구 및     전공 2과목(50%)\n                + 전공2 환산점수) ÷ 2]} ÷ 2\n                                             전시 기획      ① 박물관학(25%)\n               ※ 단일과목 응시 직렬인 운영직(시설원                    ② 교육학(25%)\n                                              운영)\n                및 안내·매표원)은 해당 과목 60점\n필기시험 종합 성적      이상을 합격 기준으로 함\n               필기시험 합격자는 선발기준 내에                       ※ 필기시험 미시행,\n               분야별 예정인원의 최대 5배수로             운영직        - 운영직 근로자 관리규정\n                                             (보안원,\n               하되, 합격선 동점자는 해당 배수를                        제9조 제3항 의거\n                                             미화원)\n               초과하더라도 모두 합격 처리                          - 인(적)성검사만 실시\n\n               (보안원, 미화원의 경우 인 (적 )성검사\n                응시자 전원 합격)\n               전 직종 대상 인적성검사 210문항을          운영직                             총 50문항\n               30분간 실시 , 검사 결과는 면접           (시설원,      NCS 직업기초능력평가(100%)\n                                                                             - NCS(50)\n                                            안내·매표원)\n               참고자료로 활용함. 인적성검사\n               미응시자는 불합격 처리\n                                             지원 자격 요건\n               적격/부적격으로 판정하며,\n       임용자격                                  필수서류 제출 여부                      자기소개서\n서류심사           심사위원의 과반수가 부적격으로\n       적격성판단                                 자료 충실도                           등 평가\n               평정한 경우 불합격 처리                 직무수행능력 평가\n               평가유형별 응시자의 평정 부여\n               산술평균 60점 이상 득점한 자 중           태도, 이해력 , 표현력(25%)\n       채점표에    고득점자 순 합격                     실무경력의 연관성(25%)                   다대다\n면접심사\n       의한 면접   심사위원 과반수가 50점 미만(문화행정         관련분야 지식 및 전문성(25%)                면접\n               직, 학예연구직)/ 40점 미만(운영직) 평      성실성 , 적극성 , 발전가능성(25%)\n               정 시 불합격\n\n  최종합격자 결정 : 모집단위별 면접시험 합격기준을 충족한 사람 중 고득점자 순\n ­ 동점자 발생 시 취업규정 제37조제2항에 의하여 아래 순위에 따라 결정함\n  1. 취업지원대상자\n  2. 채용공고상 명시한 채용분야별 우대자격 소유자\n  3. 면접위원 전원 무기명투표 결과 최다득표자\n     ※ 최다득표자가 2명 이상인 경우에는 해당 최다득표자를 대상으로 재투표함\n\f­ 모집분야별 예비합격자(합격기준 통과자에 한함, 3명)를 선발하며, 채용내정자의\n     결격사유, 임용포기 또는 임용 후 중도퇴사 등으로 결원이 발생한 경우 예비합격자를\n     그 순서에 따라 추가 임용할 수 있음 (유효기간 : 최종합격자 발표 후 90일 이내)\n\n\n5. 전형 일정\n\n구분      방   법        장   소              전형 일정                      비 고\n\n       공고기간         인터넷 공고       2026년 11월 12일 ~ 11월 23일\n                                                           인터넷 접수처 : http://\n접수\n                                      2026년 11월 16일        recruit.incruit.com/ggcf\n       입사지원         인터넷 접수\n                                 ~ 11월 23일(17:00 접수 마감)\n      필기시험 및         추후 공지\n                                   2026년 11월 29일 (예정)\n      인적성검사        (11.24. 이후)\n1차\n      필기합격발표 접수 홈페이지               2026년 12월 2일 (예정)\n                                                                필기시험 합격자 및\n       서류심사        경기문화재단          2026년 12월 3일 (예정)       대상   필기시험 면제 분야의\n                                                                 인적성검사 응시자\n2차\n      서류합격발표 접수 홈페이지               2026년 12월 4일 (예정)             적격/부적격\n\n\n       면접심사        별도 안내(수원)       2026년 12월 9일 (예정)       대상     서류전형 합격자\n3차\n      최종합격발표 접수 홈페이지               2026년 12월 10일 (예정)\n\n            신원조회                  2026년 12월 11일~12월 31일\n\n        임용예정일                    2027년 1월 1일 임용 예정\n\n※ 본 시험계획은 경기도 및 재단 사정에 따라 변경될 수 있으며, 변경사항은 재단 홈페이지 및\n     채용 홈페이지를 통해 공고함\n※ 공고 결과 모집단위별 응시인원이 선발예정인원과 같거나 적은 경우에는 시험기일\n     을 다시 정하여 재공고할 수 있음\n\n\n6. 원서 접수\n\n 지원서 접수방법\n- 인터넷 접수만 가능(접수 홈페이지 : http://recruit.incruit.com/ggcf)\n- 접수기간 : 2026. 11. 16.(월) ~ 11. 23.(월) 17:00 마감\n※ 접수기간 중 상시 접수 가능(단, 원서접수 마감일은 17시까지만 접수 가능)\n\f원서접수 시 유의사항\n- 모집분야(직종 및 세부직종)별 복수 및 중복 지원 불가\n- 최종 접수 완료 후에는 입사지원서를 수정 취소할 수 없음(접수 마감 1시간 전까\n 지 접수 홈페이지 게시판을 통하여 수정 취소 요청 가능)\n­ 원서 접수 시 본인확인을 위한 사진 파일을 반드시 등록하여야 하며, 사진 미등\n 록 등으로 본인확인이 불가능한 경우 시험 응시가 제한될 수 있음\n- 필기시험·인적성검사 및 면접시험 응시일에는 응시원서 및 본인임을 증명할 수 있는\n 신분증 필히 지참(유효 신분증 : 주민등록증, 운전면허증, 여권(기간 만료 전 ), 주\n 민등록증 발급신청서(사진 부착), 단, 필기시험 시 전자기기 사용이 제한되므로\n 모바일 신분증은 시험장 본인확인 수단으로 인정하지 않음)\n­ 장애인·임신부 등 응시자는 원서 접수 시 본인의 장애 유형에 맞는 편의 신청을\n 할 수 있음\n­ 자기소개서 작성 시 성명, 출신학교, 출신지역, 가족관계, 연령, 성별 등 직무와\n 무관한 사항이 직·간접적으로 드러나지 않도록 유의\n­ 입사지원서에 기재한 경력 및 자격사항 등은 증빙이 가능한 사항(경력증명서 및\n 건강보험자격득실확인서, 자격증 사본 등)에 한하여 작성하여야 하며, 관련 증빙서류\n 는 최종합격 이후 제출함. 다만, 응시자격·제한경쟁 자격·우대요건 및 가점 적용에\n 필요한 증빙서류는 원서접수 시 제출하여야 함\n\n제출 서류\n­ (공통) 필수 제출 서류 : 입사지원서, 자기소개서(채용 지원 시 제출)\n­ (해당자 필수) 응시자격 및 우대 요건 증빙 서류\n 운영직-시설원 : 2. 응시자격 요건 해당 자격증 및 가산특전 자격증 사본 1부\n 장애인제한경쟁 : 장애인 증명서 또는 장애인 복지카드, 상이군경 증명서 중 1부\n            (중증 장애에 해당할 경우, 중증장애인 확인서 추가 첨부)\n 취업지원대상자 관련 증명서 사본 1부(가점, 동점자 최종 선정 등)\n­ 응시자격(제한경쟁 자격 포함), 가점 및 동점자 우대요건은 원서접수 마감일 기준\n 유효하여야 하며 입사 지원 시 증빙서류를 제출함\n\f 7. 기본연봉 등 근무조건\n\n〔문화행정직·학예연구직〕\n   신규 채용직원 연봉은 경기문화재단 연봉제 운영규정 내 ‘경력환산기준표에\n                                         ’ 의거하여 경력을\n   환산한 후 ‘기본연봉표’의 적용을 받으며, 구체적 금액은 채용예정자의 경력에 따라 연봉\n   범위 내에서 다르게 정하여짐\n     구분                              내 용\n                      23,600천원 ~ 29,900천원 (각종 수당 제외)\n     6급\n                 ※ 경기도 생활임금에 미달할 경우 경기도 생활임금 적용\n              교통보조비 120,000원/월         정액급식비 140,000원/월\n   복리후생\n              복지포인트 800,000원/1년\n\n〔운영직〕\n   근무조건\n     구분                       내   용                        비고\n   초임보수                                                2027년 경기도\n              2,364,288원 / 월 209시간 기준\n   (기본급)                                               생활임금 적용\n              교통보조비 120,000원/월    정액급식비 140,000원/월\n   복리후생\n              복지포인트 800,000원/1년   명절상여금 550,000원/연2회\n ※ 4대 보험 포함, 주말근무 가능 필수\n ※ 교대근무시 월 소정근무시간 변동에 따라 달라질 수 있음(시급 변동 없음)\n\n   근무형태\n  ­ 보안원\n        근무처                        내용                      지역\n    경기도박물관        감시적 근로자 : 3조 2교대(주간, 숙직, 비번)             용인\n   ※ 기관 운영방침에 따라 근무형태가 변경될 수 있음\n  ­ 미화원\n        근무처                        내용                      지역\n  경기북부어린이박물관      일근제 : 근무표에 따른 주 5일 근무(주말 포함)            동두천\n\n  ­ 시설원\n        근무처                       내용                      지역\n   경기창작캠퍼스       단속적 근로자 : 근무표에 따른 주 5일 근무(주말 포함)         안산\n    실학박물관        단속적 근로자 : 근무표에 따른 주 5일 근무(주말 포함)         남양주\n   ※ 기관 운영방침에 따라 근무형태가 변경될 수 있음\n  ­ 안내·매표원\n        근무처                        내용                     지역\n    백남준아트센터       일근제 : 근무표에 따른 주 5일 근무(주말 포함)             용인\n\f8. 가산특전\n\n 분야     구 분                       가산 비율\n\n               시험 (과목)별 만점의 5% 또는 10%\n        취업지원   ※ 취업지원대상자 가점을 받아 합격하는 인원은 모집단위별로 선발예정인원의\n 공통\n        대상자      30%를 초과할 수 없음. 적용요건, 적용순서 및 가점합격자 상한은 관계 법령\n                 과 「보훈대상자 취업지원 업무처리지침」에 따름\n\n               각 전형(필기, 면접)에 3점(산업기사), 5점(기능장 및 기사), 10점(기술사)\n               ※ 시설원 모집분야에만 적용하며 각 전형의 합격기준을 충족한 사람에 한하여\n운영직     자격증      가점을 부여함\n(시설원)   소지자    ※ 시설원 가점은 응시자격에 해당하거나 Q-Net 국가기술자격 직무분야상 전\n                 기 또는 기계 분야 중 시설관리 직무와 관련된 자격증 중 산업기사·기사·\n                 기능장·기술사 등급에 한하여 적용하며 , 2개 이상의 자격증을 소지한 경우\n                 가장 높은 가점에 해당하는 1개만 반영함.\n\n\n\n9. 유의사항\n\n 필수서류 누락, 응시원서의 기재착오·누락 및 불성실한 기재, 온라인 서류제출\n 누락, 연락불능, 합격자 발표 미확인 등으로 인한 불이익은 응시자의 책임이며\n 필수서류가 누락된 경우에는 서류전형에서 결격 처리될 수 있음\n 외국어로 발급된 증빙서류는 한글 번역본을 함께 제출하여야 하며, 번역내용의\n 확인이 필요한 경우 공증된 번역본 등 추가 증빙자료의 제출을 요청할 수 있음\n 응시자격 또는 제출서류의 기재사항이 사실과 다르거나 결격사유에 해당하는 경우\n 에는 합격 또는 임용을 취소할 수 있음\n 채용과정 공개\n­ 최종합격자 발표일까지 선발인원, 응시인원, 전형별 합격인원 및 합격선 등을\n  재단 홈페이지 등에 공개함\n- 다만, 개인의 신상이나 사생활을 침해할 우려가 있는 경우에는 공개하지 않을\n 수 있음\n 부정합격자 등에 대한 조치\n­ 제출서류의 허위기재, 위·변조, 시험 부정행위 등 부정한 방법으로 합격한 경우\n  합격 또는 임용을 취소함\n­ 임용 후에도 부정합격 사실이 확인될 경우 임용을 취소하거나 당연퇴직 처리\n­ 비위채용자는 관련 규정에 따라 일정기간 응시 제한\n 채용비리 피해자 구제\n­ 채용비리 발생 시 피해자 특정 여부 및 피해 단계에 따라 재응시 기회 부여,\n  해당 전형 재실시, 추가합격 등 필요한 구제조치를 실시함\n­ 피해자 구제 및 순번 관리를 위해 필요한 개인정보(연락처 , 전자우편주소 등)는\n\f 응시자의 동의를 받아 관련 법령에 따라 보관·관리함\n­ 그 밖의 채용비리 피해자 구제에 관한 사항은 경기문화재단 취업규정 및 관련\n 지침에 따름\n불합격자의 이의제기신청 등\n­ 합격자 발표 후 불합격자가 이의를 제기하는 경우, 합격자발표일로부터 3일 이내\n (합격자    발표일    포함)    이의제기신청서를           서면으로   작성하여   이메일\n (hr@ggcf.or.kr)로 불합격에 대한 이의 제기 가능\n­ 접수된 이의제기신청서는 3일 이내 처리를 원칙으로 하며, 처리기간은 연장될 수 있음\n­ 답변 우편 수신을 신청할 경우, 우편법 시행령 제29조에 의거하여 우편요금은\n 이의제기 신청인 본인이 부담할 수 있음\n불합격자의 채용서류 반환 등\n­ 최종합격자 발표 후 불합격자가 채용서류 반환을 청구하는 경우, 본인 확인 후\n 청구 받은 날로부터 14일 이내 해당 채용서류 반환\n­ 채용서류 반환 청구는 합격자 발표 후 14일 이내만 가능\n­ 채용서류 반환 청구 시 특수취급우편물(등기 등)으로 청구하는 경우, 「우편법」\n 제19조에 따른 금액은 서류 반환 청구자가 부담할 수 있음\n­ 홈페이지 또는 전자우편으로 제출된 서류 및 재단의 요구 없이 자발적으로 제\n 출한 서류는 반환하지 않음\n­ 구직자의 채용서류 반환 청구기간이 지난 경우에는 채용서류 즉시 파기\n본 시험계획은 경기도 및 재단 사정에 따라 변경될 수 있으며, 변경사항이 있는 경우\n시험 실시일 7일 전까지 재단 홈페이지 및 채용 접수 홈페이지 등을 통하여 공고\n기타 자세한 사항은 채용 접수 홈페이지 ‘질문하기 ’ 게시판 이용 및 경기문화재\n단 인사팀 (메일:hr@ggcf.or.kr, 전화:031­231­7216)으로 문의\n\n\n                      2026.   11.   12.\n\n\n            경기문화재단 인사위원장\n\f"
+          },
+          {
+            "url": "https://recruit.incruit.com/ggcf/job/2611100011",
+            "checked_at": "2026-11-18T01:21:34.509207+00:00",
+            "sha256": "4889524bcff2fc293f7e5373d05cfff0ca82ea5fde369139365293f77a07f657",
+            "evidence": "(재)경기문화재단 채용정보 - 2026년 경기문화재단 제5회 직원 채용(일반직 및 운영직) 대기중 2026. 11. 16. 09:00 ~ 2026. 11. 23. 17:00 2026년 경기문화재단 제5회 직원 채용(일반직 및 운영직) 2026년 경기문화재단 제5회 직원 채용(일반직 및 운영직) 모집분야 모집분야 자격요건 채용형태 일반직-문화행정직(문화예술사업 기획 및 운영) 정규직/1명 일반직-학예연구직(학술연구 및 전시 기획 운영) [장애인제한경쟁] 관련 법령에 따른 장애인 해당자 ※ 지원 시 증빙자료 첨부 必, 공고문 확인 정규직/1명 운영직-보안원(경기도박물관) 공무직/1명 운영직-미화원(경기북부어린이박물관) 공무직/1명 운영직-시설원(경기창작캠퍼스) 관련 자격증 소지자 ※ 지원 시 증빙자료 첨부 必, 공고문 확인 공무직/2명 운영직-시설원(실학박물관) 관련 자격증 소지자 ※ 지원 시 증빙자료 첨부 必, 공고문 확인 공무직/1명 운영직-안내매표원(백남준아트센터) 공무직/1명 접수기간 및 방법 · 접수기간 : 2026년 11월 16일 09시 00분 ~ 2026년 11월 23일 17시 00분 · 접수방법 : 온라인지원서 · 접수양식 : 온라인양식(입사지원은 크롬/엣지 등의 브라우저에서 사용 가능하며 IE(인터넷 익스플로러)는 지원하지 않습니다.) · 추가 제출 : [해당자 필수] 취업지원대상자 증명서, [장애인제한경쟁 및 해당자] 장애인 증명서 또는 증빙서류(중증 해당 시 중증장애인확인서), [운영직-시설원] 지원 자격 및 가산특전 증빙서류 전형안내 · 첨부파일 : 2026년 경기문화재단 제5회 직원 채용(일반직 및 운영직) 공고문.pdf 직무설명자료(일반직_문화행정직).pdf 직무설명자료(일반직_학예연구직).pdf 직무설명자료(운영직_미화,보안,시설).pdf 직무설명자료(운영직_안내매표 및 운영스텝).pdf · 발표방법 : 채용사이트 게시 · 채용문의 : 게시판 문의 지원서 작성하기 지원서 수정하기 목록보기 ⓒ 2026. INCRUIT Corporation. all rights reserved."
+          },
+          {
+            "url": "https://www.ggcf.kr/boards/bulletinBoards/articles",
+            "status": 200,
+            "bytes": 85938,
+            "sha256": "cf902cfb61e2528d5a8cc0573adece915acc5f80e5ec9d2b53fd74f4a7553bbd",
+            "checked_at": "2026-11-18T01:21:37.750194+00:00",
+            "evidence": "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-33305936-1'); 공지 - 경기문화재단 try{ Function(\"() => {}\"); } catch(exception){ alert('지금 사용하시는 웹브라우저는 본 웹사이트를 정상적으로 이용할 수 없습니다.\\n엣지 또는 크롬 브라우저 최신 버전을 이용해주세요.'); } /* skip navigation */ function skipNavi() { jQuery('.skiptoContent').focusin(function(){ jQuery('.skiptoContent').addClass('on'); }); jQuery('.skiptoContent').focusout(function(){ jQuery('.skiptoContent').removeClass('on'); }); } 본문 바로가기 ggcf.kr gjicp. musenet. gmoma. njp. silhak. jgpm. gcm. ngcm. gcc. sscampus. ggarte. ggc. artist. nmuseum. Language Korean English Chinese Japanese 뮤지엄숍 회원가입 로그인 재단소개 재단소개 인사말 미션과 비전 연혁 연감 상징(CI) 이사회 명단 오시는 길 조직도 공모·신청 공모지원 사업공고 선정자 검색 공간대관 문화소식 프로그램 전시 교육 행사 소식안내 공지 채용 입찰 보도자료 재단사업 예술 창작지원 문화복지 예술교육 공공예술 지역 지역문화 생활문화 정책교류 경기학 유산 조사연구 문화유산 보존관리 사회공헌 뮤지엄 경기도박물관 경기도미술관 백남준아트센터 실학박물관 전곡선사박물관 경기도어린이박물관 경기북부어린이박물관 남한산성역사문화관 후원 문화이음 소개 주요후원 활동 연혁 문화이음 아카이빙 공지사항 검색 창 열기 검색어를 입력하세요. 메뉴 창 열기 function googleTranslateElementInit() { new google.translate.TranslateElement({ pageLanguage: 'ko', autoDisplay: false }, 'google_translate_element'); } function translateLanguage(lang) { const selectField = document.querySelector('.goog-te-combo'); if (selectField) { selectField.value = lang; selectField.dispatchEvent(new Event('change')); } } window.onload = function() { //googleTranslateElementInit(); translateLinks = document.querySelectorAll('.translation-links > li > a'); translateLinks.forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); document.cookie = \"googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/\"; // location.reload(); }); }); } 닫기 고객의 소리 공모지원 지지씨멤버스 ggc바로가기 네이버바로가기 페이스북바로가기 인스타그램바로가기 유튜브바로가기 카카오톡 채널바로가기 // 탑,바텀버튼 function topBtn() { const topButton = document.querySelector('.top_button'); document.addEventListener('scroll', function () { if (document.documentElement.scrollTop > 240) { topButton.style.opacity = '1'; } else { topButton.style.opacity = '0'; } }); topButton.addEventListener('click', () => { window.scrollTo({ top: 0, left: 0, }); }); }; function quickMenu() { const quickMenuItems = document.querySelectorAll('.quick_menu ul > li > p'); quickMenuItems.forEach(item => { item.style.maxWidth = \"100%\"; item.style.padding = \"0 10px\"; }); setTimeout(() => { quickMenuItems.forEach(item => { item.removeAttribute('style') }); }, 5000); }; topBtn(); // 퀵메뉴 온 오프 document.addEventListener('DOMContentLoaded', () => { const quickBut = document.querySelector('.quick_but'); const quickMenuTab = document.querySelector('.quick_menu_Tab'); // 클릭 이벤트 리스너 추가 quickBut.addEventListener('click', () => { // quick_menu_Tab의 현재 상태를 확인하고 토글 if (quickMenuTab.classList.contains('collapsed')) { quickMenuTab.classList.remove('collapsed'); // 보이기 quickBut.textContent = '닫기'; // 텍스트 변경 } else { quickMenuTab.classList.add('collapsed'); // 숨기기 quickBut.textContent = '열기'; // 텍스트 변경 } }); }); 문화소식 재단소개 공모·신청 문화소식 재단사업 후원 소식안내 프로그램 소식안내 보도자료 공지 공지 채용 입찰 $('.nav-bar-menu.active').hover(function(){ $(this).children('div:eq(1)').stop().slideToggle(100); $(this).find('.clearfix').toggleClass('on-color'); $(this).find('.float-right').toggleClass('xi-angle-down'); $(this).find('.float-right').toggleClass('xi-angle-up'); $(this).toggleClass('on-border'); }) 공모 채용 입찰 공지 분류 전체 공지사항 입찰공고 채용공고 연도 전체 2026 2025 2024 2023 2022 2021 2020 2019 현황 전체 예정 진행 종료 총 1609 개의 게시물 채용공고 진행 2026년 경기문화재단 제5회 직원 채용(일반직 및 운영직) 공고 2026.11.12 공지사항 진행 2026년 경기문화재단 온라인서비스 고객만족도조사 당첨자 발표 2026.11.09 공지사항 진행 <경기도 노동권익센터 마을노무사 지원사업> 안내 2026.07.21 입찰공고 경기역사문화유산원 불용물품 매각 입찰 공고 2026.10.22 공지사항 AI로 더 안전하게, ‘경기 안심 부동산’ 10월 12일 시범운영 시작 2026.10.08 공지사항 경기공유서비스에서 공공캠핑장 지금 바로 확인하세요 2026.10.06 공지사항 경기도와 함께 든든한 추석!! 2026.09.21 공지사항 2026년 경기문화재단 정보화사업 평가위원(후보자) 모집 안내 2026.09.07 공지사항 제 11회 선감학원 추모문화제 개최 - 2026.10.3 2026.09.01 공지사항 경기공유서비스 <장난감도서관 종합안내 서비스 OPEN> 2026.09.01 공지사항 경기도 공직유관단체 종합청렴도 평가 관련개인정보 제3자 제공사항 알림 공고 2026.07.13 공지사항 경기문화재단 CP홍보 카드 뉴스 2026.07.09 공지사항 2026년 경기도 공직유관단체 종합청렴도평가 관련 개인정보 제3자 제공사항 알림 공고 2026.07.09 공지사항 경기공유서비스 <공유랑 7월 추천> 2026.07.02 공지사항 자원안보위기 경보 발령에 따른 <에너지절약 국민행동> 2026.05.29 더보기 개인정보처리방침 이용약관 조직도 오시는길 경력증명서 지지씨 네이버 페이스북 인스타그램 유튜브 카카오톡 대표전화 031-231-7200 사업자번호 135-82-06932 대표 유정주 주소 경기도 수원시 팔달구 인계로 178 (우편번호 16488) 정보공개 정보공개청구 경영공시 사전정보공표 데이터개방 공공데이터 공공누리저작권 자료실 도서류 문서류 시청각류 경영철학 윤리경영 인권경영 안전보건경영 ESG경영 기록경영 관련 누리집 경기역사문화유산원 경기도박물관 경기도미술관 백남준아트센터 실학박물관 전곡선사박물관 경기도어린이박물관 경기북부어린이박물관 경기창작캠퍼스 경기상상캠퍼스 경기문화예술교육지원센터 지지씨 플랫폼 경기예술인의집 남한산성역사문화관 COPYRIGHT©GGCF ALL RIGHTS RESERVED. $(function() { // 더보기 $('.btn-more').click(showMore); // 뒤로가기시 페이지 데이터 불러오기 window.onpageshow = function(event) { if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) { let currentPage = localStorage.getItem('page'); localStorage.clear(); if(currentPage){ for(let i = 1; i < currentPage ; i++){ $('.btn-more').trigger('click'); } } }else { localStorage.clear(); // 파라미터에 p 있을경우 p = page let currentPage = urlParam('p'); if(currentPage){ for(let i = 1; i < currentPage ; i++){ $('.btn-more').trigger('click'); } } } } $(\".list-filter [name='application']\").change(() => { location.href = \"https://www.ggcf.kr/boards/bulletinBoards/articles?application=\" + $(\".list-filter [name='application']:checked\").val(); }); }); // 더보기 function showMore(e) { e.preventDefault(); var $more = $(this); var $container = $('.list-wrap'); var nextPage = $(this).data('page'); var lastPage = $(this).data('last-page'); var parm = $(\"form[name=notice_filter_form]\").serialize(); parm += \"&page=\"+nextPage; $.get(this.href, parm, function(data) { $container.append(data); }); $(this).data('page', (nextPage + 1)); if(nextPage == lastPage){ $more.parent('.more-btn').hide(); } // 페이지 저장 localStorage.clear(); localStorage.setItem('page', nextPage); } $(document).ready(function(){ // print $(\"a.print\").on('click', function(){ $('body').printThis(); }); // copy let url = document.location.href; $(\"a.url\").attr('data-clipboard-text', url); let clipboard = new ClipboardJS(\"a.url\"); clipboard.on('success', function(e) { alert(\"URL 복사가 완료되었습니다.\"); }); // facebook $(\"a.facebook\").on('click', function(){ let url = document.location.href; window.open(\"https://www.facebook.com/sharer/sharer.php?u=\" + encodeURIComponent(url), \"_blank\"); }); // twitter $(\"a.twitter\").on('click', function(){ let url = document.location.href; window.open(\"https://twitter.com/intent/tweet?url=\" + encodeURIComponent(url), \"_blank\"); }); // kakaotalk $(\"a.kakaotalk\").on('click', function(){ let url = document.location.href; let title = \"공지\"; let key = $(this).data('key'); Kakao.init(key); Kakao.Link.sendDefault({ objectType: 'feed', content: { title: title, imageUrl: \"https://www.ggcf.kr/userContent/images/common/logo_menu.png\", link: { webUrl: url } }, buttons: [{ title: '링크 열기', link: { webUrl: url } }] }); }); // naverblog $(\"a.naverblog\").on('click', function(){ let url = document.location.href; let title = \"공지\"; window.open(\"https://share.naver.com/web/shareView.nhn?url=\" + encodeURIComponent(url) + \"&title=\" + title, \"_blank\"); }); // 좋아요 if ($('a.like').data('like-on')) $('a.like').addClass('on'); $('a.like').click(clickLike); }); // 좋아요 function clickLike(e) { e.preventDefault(); let likeOn = $('a.like').data('like-on'); let url = $('a.like').attr('href'); $.get(url, { likeOn: likeOn }, function(data) { if(data.result == 'success'){ if(data.likeOn == '1'){ $('a.like').addClass('on'); }else{ $('a.like').removeClass('on'); } alert(data.msg); $('a.like').data('like-on', data.likeOn); }else if(data.result == 'noLogin'){ alert(data.msg); location.href = \"/login\"; }else { alert('잠시후에 다시 이용바랍니다.'); //console.log(data); } }); } // url param function urlParam(name){ var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href); if (results==null){ return null; } else{ return results[1] || 0; } } /* 지도 new daum.roughmap.Lander({ \"timestamp\" : \"1639530765826\", \"key\" : \"28fte\", \"draggable\": \"false\", }).render(); */ if(!wcs_add) var wcs_add = {}; wcs_add[\"wa\"] = \"1bc5de92e12dcf0\"; if(window.wcs) { wcs_do(); }"
+          }
+        ],
+        "fact_evidence": [
+          {
+            "field": "title",
+            "value": "문화행정직",
+            "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+            "excerpt": "문화행정직      -       6급   공개경쟁    문화예술사업 기획 및 운영       채용 후 발령 예정      1명"
+          },
+          {
+            "field": "count",
+            "value": 1,
+            "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+            "excerpt": "문화행정직      -       6급   공개경쟁    문화예술사업 기획 및 운영       채용 후 발령 예정      1명"
+          },
+          {
+            "field": "employment",
+            "value": "정규직",
+            "source_ref": "https://recruit.incruit.com/ggcf/job/2611100011",
+            "excerpt": "정규직/1명"
+          },
+          {
+            "field": "location",
+            "value": "최종합격 이후 발령 예정",
+            "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+            "excerpt": "일반직(문화행정직 및 학예연구직)의 최초 근무예정지는 최종합격 이후 발령 예정"
+          }
+        ],
+        "checked_at": "2026-11-18T01:19:08.698321+00:00",
+        "reference_at": "2026-11-18T01:24:00.951915+00:00",
+        "notice_id": "cleaneye-81199",
+        "scheduled_at": "2026-11-19T08:00:00+09:00",
+        "application_period": {
+          "start": "2026-11-16",
+          "start_date_only": true,
+          "end": "2026-11-23T17:00:00+09:00",
+          "date_only": false,
+          "official_precision_verified": true,
+          "source_ref": "https://www.ggcf.kr/index.php/attachment/20642/download",
+          "evidence": "접수기간 : 2026. 11. 16.(월) ~ 11. 23.(월) 17:00 마감",
+          "current_open_verified": false,
+          "limitation": "Pre-consent screen reachable but waiting badge contradictory; final acceptance not asserted."
+        },
+        "profile_target": {
+          "verified": false,
+          "notice_id": "cleaneye-81199",
+          "url": "https://kllollain-max.github.io/careerpick/",
+          "notice_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-81199",
+          "status": "actual_render_review_not_completed"
+        },
+        "verification_basis": "checked_official_source",
+        "missing_or_conflicting": [
+          "SOURCE_FUTURE_FRESHNESS",
+          "PROFILE_TARGET_UNVERIFIED",
+          "ATS_WAITING_LABEL_VS_REACHABLE_START_REQUIRES_FINAL_RECONCILIATION"
+        ],
+        "cta_check": "passed",
+        "media_check": "not_supplied",
+        "length_check": "measured_within_limit",
+        "target_reader": "문화예술사업 기획 및 운영 관심 독자",
+        "central_message": "문화행정 정규직1명과 공통자격·발령예정·수습·시험 주의사항",
+        "pattern_id": "P1",
+        "pre_publish_checks": [
+          "Original PDF9pages and NCS3pages actually reread",
+          "Production gate remains HOLD; no profile success fabricated"
+        ],
+        "omitted_optional_facts": [
+          "보수는 경력환산 및 생활임금 조건부라 생략",
+          "보훈가점은 모집단위별 관계법령 한계가 있어 우대 일반화하지 않음"
+        ],
+        "repetition_check": "checked"
+      }
+    }
+  },
+  "semantic_subvalidator": {
+    "status": "passed_semantic_subvalidator_only",
+    "result": {
+      "chars": 290,
+      "recommended_length": false,
+      "length_exception_reason": null,
+      "emoji_count": 0,
+      "emoji_default_met": true,
+      "first_line_chars": 26,
+      "first_line_target_met": true,
+      "recent_published_hooks_checked": 8
+    }
+  },
+  "full_production_validator": {
+    "status": "HOLD",
+    "first_error": "CLEANEYE_SOURCE_STALE"
+  },
+  "actual_source_gate_error": "CLEANEYE_SOURCE_STALE",
+  "remaining": [
+    "Future-slot collector source proof must be within24h of19Nov08; latest scheduled verification07:03Nov18 is too old for that slot",
+    "Actual profile target rendering and current source receipt ingestion not completed; verified flag not set",
+    "Full validate_entry and whole-queue gate, latest claims/media and CAS required before ready"
+  ],
+  "fresh_get_receipts": {
+    "listing": {
+      "url": "https://www.ggcf.kr/boards/bulletinBoards/articles",
+      "status": 200,
+      "bytes": 85938,
+      "sha256": "cf902cfb61e2528d5a8cc0573adece915acc5f80e5ec9d2b53fd74f4a7553bbd",
+      "checked_at": "2026-11-18T01:21:37.750194+00:00"
+    },
+    "detail": {
+      "url": "https://www.ggcf.kr/boards/bulletinBoards/articles/21705",
+      "status": 200,
+      "bytes": 59758,
+      "sha256": "5d3b92fdfd17982ab45c494585d0a8f1041ae148c6637a0941d6d1d79ccad34d",
+      "checked_at": "2026-11-18T01:21:36.606681+00:00"
+    },
+    "job-description": {
+      "url": "https://www.ggcf.kr/attachment/20648/download",
+      "status": 200,
+      "bytes": 118958,
+      "sha256": "d0792f5a29c277a3fabb6728f360346ad05e608a76fc89401cf25534aa790924",
+      "checked_at": "2026-11-18T01:21:34.788826+00:00"
+    },
+    "ats": {
+      "url": "https://recruit.incruit.com/ggcf/job/2611100011",
+      "status": 200,
+      "bytes": 14996,
+      "sha256": "4889524bcff2fc293f7e5373d05cfff0ca82ea5fde369139365293f77a07f657",
+      "checked_at": "2026-11-18T01:21:34.509207+00:00"
+    }
+  },
+  "raw_notice_get": {
+    "checked_at": "2026-11-18T01:19:08.698321+00:00",
+    "bytes": 174270,
+    "sha256": "a7b01244b5d0ec84608fb746f446fb8ccca1a052868fdece3b679359dae30099"
+  },
+  "browser_application_start": {
+    "url": "https://recruit.incruit.com/ggcf/applyagree/2611100011/",
+    "actual_observed": true,
+    "scope": "Pre-consent application starting screen only; no agreement, personal input or submission. Waiting badge remains contradictory."
+  },
+  "explicit_workplace_evidence_gate": true,
+  "observed_at": "2026-11-18T01:24:00.951915+00:00"
+}
