@@ -10,6 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute actual production exact-source verifier (no CAS/Meta)
+        shell: bash
+        run: |
+          python - <<'PY'
+          from scripts.threads_reviewed_ingest import fetch_official_digest, GSIPA_81201_PDF
+          verified=fetch_official_digest(GSIPA_81201_PDF)
+          expected='78e195b5e4f3e0afbfe2265f281a423b3b90476f2c0c6d08babf3de5e3e9c14d'
+          print('PRODUCTION_EXACT_SOURCE_SHA256='+verified)
+          if verified != expected:
+              raise SystemExit('EXACT_SOURCE_SHA_MISMATCH')
+          PY
       - name: Read exact employer PDF bytes and compare public copy (never publish)
         shell: bash
         run: |
