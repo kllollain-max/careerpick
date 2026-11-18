@@ -51,6 +51,8 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306355': '2026-11-16T10:00:00+09:00',
     'a306799': '2026-11-23T10:00:00+09:00',
     'a306662': '2026-11-18T17:00:00+09:00',
+    # Official ALIO recruitment method: 2026-11-18 17:00, not the 23:59 posting end.
+    'a306660': '2026-11-18T17:00:00+09:00',
     # Official 307034 notice HWP, section 6; ALIO fileNo=3087622, checked 2026-11-16.
     'a307034': '2026-11-20T16:00:00+09:00',
     # Official notice originals: HWP 3085542 section 6; PDF 3087571 page 2.
@@ -68,6 +70,47 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # Official ALIO HTML reviewed 2026-11-18. These do NOT count as newly
+    # extracted PDF/HWP duties; the snapshots and field counts remain intact.
+    'a306660': {
+        'organization': '한국보훈복지의료공단',
+        'title': '[원주보훈요양원] 2026년 제7차 요양보호직 공개채용',
+        'source_end_date': '2026-11-18',
+        'expected_source_seats': '12',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306660',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-03',
+        'application_end_date': '2026-11-18',
+        'role_mix_note': (
+            '요양보호직 12명 공고 중 2026년 12월 1일 즉시 임용 예정은 8명입니다. '
+            '12명 전원을 즉시 근무할 결원으로 계산하지 마세요. '
+            '요양보호사 자격증(합격증은 임용 전 자격증 제출)과 3교대 근무 가능 여부가 필수이며, '
+            '원서접수 방법은 우편·방문·이메일입니다.'
+        ),
+        'scope': 'ALIO 공식 공개 HTML: 11월3일~18일17시 원서접수, 총12명/12월1일 즉시임용 8명, 요양보호사 자격 및 3교대 조건. 첨부 PDF/HWP 바이트 검증 건수에 넣지 않음.',
+    },
+    'a307074': {
+        'organization': '분당서울대학교병원',
+        'title': '분당서울대학교병원 경력(간호직, 보건직), 신입(보건직) 직원 채용공고',
+        'source_end_date': '2026-11-26',
+        'expected_source_seats': '14',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307074',
+        'checked_on': '2026-11-18',
+        'hiring_breakdown': (
+            '경력 간호직 6명(영상의학과5·핵의학과1), 경력 보건직 2명(핵의학과), '
+            '신입 일반직인턴(보건직) 6명(진단검사의학과3·핵의학과2·신경외과1), 합계14명'
+        ),
+        'role_mix_note': (
+            'ALIO의 전체 고용형태는 정규직이지만 신입 6명은 공고 내 일반직인턴(보건직) '
+            '모집단위입니다. 전체14명을 즉시 확정 일반직 정규직 인원으로 단정하지 마세요. '
+            '경력직은 분야별 면허·종합병원 경력요건이 다르고 신입은 분야별 면허 및 '
+            '공인어학성적(TOEIC750·TOEIC Speaking IM3·NEW TEPS285 중 1개 이상)이 필수입니다. '
+            '공식 접수 시작·마감 시각은 별도로 확인해야 합니다.'
+        ),
+        'scope': 'ALIO 공식 공개 HTML의 여섯 세부분야 5+1+2+3+2+1=14명과 필수 면허/경력/영어요건. 공고 게시기간만 확인; 실제 기관 접수시간/첨부 원문 직무검토는 미확인.',
+    },
     'a306875': {
         'organization': '분당서울대학교병원',
         'title': '분당서울대학교병원 신입(업무지원직) 직원 채용 공고',
@@ -360,7 +403,9 @@ def render(post, detail, related_posts=(), notice_review=None):
             or verified_application_notice['title'] != title
             or verified_application_notice['source_end_date'] != clean(post.get('due'))[:10]
             or (verified_application_notice.get('source_employment')
-                and verified_application_notice['source_employment'] != post.get('emp')))):
+                and verified_application_notice['source_employment'] != post.get('emp'))
+            or (verified_application_notice.get('expected_source_seats') is not None
+                and verified_application_notice['expected_source_seats'] != clean(post.get('n'))))):
         verified_application_notice = {}
     verified_duties = VERIFIED_DUTIES.get(pid, {})
     # Bind editorial evidence to the exact notice, organization and title.
@@ -431,6 +476,8 @@ def render(post, detail, related_posts=(), notice_review=None):
         ),
         *(([('기관 공식 확인 고용형태별 인원', verified_application_notice['hiring_breakdown'])])
           if verified_application_notice.get('hiring_breakdown') else []),
+        *(([('공식 원문 모집단위별 확인사항', verified_application_notice['role_mix_note'])])
+          if verified_application_notice.get('role_mix_note') else []),
         ('고용형태', display_employment or '공고 확인'),
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
