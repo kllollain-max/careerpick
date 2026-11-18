@@ -203,6 +203,9 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_end_date': '2026-11-26',
         'expected_source_seats': '14',
         'source_employment': ['정규직'],
+        # The feed's single 정규직 label includes 6 general-position interns.
+        # Keep the notice searchable, but do not put 14 seats in the regular-only review queue.
+        'regular_review_hold_due_to_mixed_role_units': True,
         'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307074',
         'checked_on': '2026-11-18',
         'hiring_breakdown': (
