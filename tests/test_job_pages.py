@@ -123,6 +123,10 @@ class JobPageTests(unittest.TestCase):
         last_day = datetime.fromisoformat('2026-12-01T00:00:00+09:00')
         next_day = datetime.fromisoformat('2026-12-02T00:00:00+09:00')
         self.assertEqual(static_recruitment_posts([post], meta, before), [post])
+        opening_day = datetime.fromisoformat('2026-11-24T12:00:00+09:00')
+        after_opening_day = datetime.fromisoformat('2026-11-25T00:00:00+09:00')
+        self.assertEqual(static_recruitment_posts([post], meta, opening_day), [])
+        self.assertEqual(static_recruitment_posts([post], meta, after_opening_day), [post])
         self.assertEqual(static_recruitment_posts([post], meta, last_day), [])
         self.assertEqual(static_recruitment_posts([post], meta, next_day), [])
         report = shortlist({'posts':[post]}, date(2026,12,2),
