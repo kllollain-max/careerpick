@@ -20,7 +20,8 @@
         "exact unit 20 vs 55 total",
         "six job count breakdown",
         "date range"
-      ]
+      ],
+      "sha256": "24a9c7b949d8e1ec1415e280018517b1b6f3f095e7aa709f21640e8788d20665"
     },
     {
       "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307061",
@@ -31,7 +32,8 @@
         "customer center experience preferred",
         "written document screening then interview",
         "official attached PDF"
-      ]
+      ],
+      "sha256": "0cfd20f12cd83ee7b02912136815272a1a913fcec3f429cbbbc8b796fc98760c"
     },
     {
       "url": "https://recruit.posid.or.kr/RLISTV.inbus?idx=1&seq=R26010&type=0",
@@ -39,25 +41,47 @@
         "employer exact application notice R26010",
         "submission window 2026-11-16 16:00 to 2026-11-30 18:00",
         "attached PDF linked"
-      ]
+      ],
+      "sha256": "64fedf567e0cd220ae11254b5e24f3b8d466f52b58f361a2dd07e7e12a498296"
     }
   ],
-  "draft_text": "우체국금융개발원 2026년 10차 공개채용!\n\n서울 당산·영등포 보험고객상담 전임직(무기계약직) 20명을 모집합니다. 전체 55명과 구분되는 이 직무 인원이에요.\n\n학력 제한 없이 임용일 기준 만 18세 이상이면 지원할 수 있으며, 고객센터 상담업무 경험자를 우대해요. 블라인드 서류심사와 면접을 거치고 각 전형 평균 60점 이상 기준이 있습니다.\n\n11월 30일 월요일 18:00까지 기관 공식 채용사이트에서 온라인 접수하세요.\n\n자세한 사항은 프로필링크 확인",
-  "draft_chars": 258,
+  "draft_text": "보험 상담 경력을 살리고 싶다면?\n우체국금융개발원이 서울 당산·영등포 보험고객상담 전임직(무기계약직) 20명을 채용해요. 전체 55명 중 해당 직무 인원입니다.\n\n임용일 만 18세 이상·대한민국 국적이 필수이고, 고객센터 상담 경험자를 우대해요.\nNCS 필기 없이 블라인드 서류와 면접으로 선발하며, 각 전형 평균 60점 이상 기준이 있어요.\n\n한 공고 내 분야 중복지원은 모두 불합격입니다. 지원서는 마감 전 수정할 수 있어요.\n11월 30일 18:00까지 기관 채용포털에서 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+  "draft_chars": 294,
   "reply_texts": [],
   "hashtag_count": 0,
   "urls_in_post": 0,
   "cta": "자세한 사항은 프로필링크 확인",
   "not_approved_because": [
-    "official attached PDF not yet independently downloaded and semantically read",
-    "source receipt SHA and document text still missing",
-    "employer correction/cancellation must be re-checked",
-    "profile job view and image/pixel validation incomplete",
-    "validate_entry and production CAS not executed",
-    "fresh evidence revalidation required before scheduled slot"
+    "official PDF original and all job fact semantics now verified; however current live employer cancellation/correction final status not independently exhausted",
+    "careerpick exact job profile display not independently rendered/verified",
+    "existing collection source 2026-11-18 01:08 KST too old for 2026-11-19 08:00 slot; must await successful exact official collector digest verification without fake timestamp",
+    "full current validate_entry and production remote queue CAS approval not completed",
+    "scheduled 08:00 text-vs-image alternation and prior claim/post/readback must be checked at ingest"
   ],
   "approved_for_queue": false,
   "cas_registered": false,
   "meta_posted": false,
-  "tests_passed_for_approval": false
+  "tests_passed_for_approval": false,
+  "official_pdf_verified": {
+    "actual_retrieval_run_id": 44234117540,
+    "actual_retrieval_at_utc": "2026-11-18T03:59:08.972976+00:00",
+    "file_sha256": "f5b236f896b2c86c35ee4e1d614ee7f2a75bcbb13f21ecf1b99efefa028d6dbc",
+    "bytes": 372231,
+    "pages": 18,
+    "extracted_chars": 21066,
+    "government_pdf_url": "https://www.gojobs.go.kr/downFile.do?filenm=2026%EB%85%84+10%EC%B0%A8+%EA%B3%B5%EA%B0%9C%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf&saveGbn=employ%2F%EC%9A%B0%EC%B2%B4%EA%B5%AD%EA%B8%88%EC%9C%B5%EA%B0%9C%EB%B0%9C%EC%9B%90&uuid=1083414160359152",
+    "alio_pdf_url": "https://www.alio.go.kr/download/download.json?fileNo=3087571",
+    "both_sha256_identical": true,
+    "evidence_artifact_id": 14396651309,
+    "evidence_run_url": "https://github.com/kllollain-max/careerpick/actions/runs/44234117540",
+    "independently_read_core": [
+      "page 1: duplicate applications to two or more units disqualify all; Korean nationality; appointment-age 18 through 60",
+      "page 2: exact 2026-11-30 18:00 deadline; employer application",
+      "page 3: all 55 indefinite term; Seoul insurance customer counseling 20 vs Daegu 16 and Seoul deposits 15; cleaning 4",
+      "page 4: document blind screening then interview; average score >=60 both stages",
+      "page 8: applications may be revised before deadline",
+      "page 16-17: NCS written exam not held for counseling positions; detailed job descriptions"
+    ]
+  },
+  "pdf_independent_read_passed": true
 }
