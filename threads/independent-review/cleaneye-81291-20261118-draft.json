@@ -103,8 +103,8 @@
     "caveat": "No correction/cancellation observed on the employer's visible recent board and application landing; absence is NOT proof that every subpage/attachment remained unchanged."
   },
   "v5_draft": {
-    "post_text": "철도역 고객 응대·안전관리 업무를 찾는다면,\n남양주도시공사 일반직 역무8급 5명 모집을 확인해요.\n\n진접선·별내선 역사 영업 준비·마감, 여객서비스와 안전관리 등을 맡아요.\n전체 7명 가운데 일반직은 6명이고 역무직은 그중 5명이에요.\n\n역무8급은 공고일 전날 기준 주민등록상 남양주시 거주가 필수예요. 역무직에 별도 필수 자격증은 없어요.\n서류·필기·면접을 거치며 필기는 NCS와 철도교통 일반상식이에요.\n\n11월 26일 18시까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
-    "characters": 270,
+    "post_text": "철도역 고객 응대·안전관리 업무를 찾는다면,\n남양주도시공사 일반직(정규직) 역무8급 5명 모집을 확인해요.\n\n진접선·별내선 역사 영업 준비·마감, 여객서비스와 안전관리 등을 맡아요.\n전체 7명 중 일반직 6명, 그중 역무직은 5명이에요.\n\n역무8급은 공고일 전날 기준 남양주시 주민등록 거주가 필수예요.\n직무기술서에는 시설 일상점검 관련 안전관리자 자격도 적혀 있으니, 응시자격표와 구분해 읽어야 해요.\n서류·필기(NCS·철도교통 일반상식)·면접을 거쳐요.\n\n11월 26일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+    "characters": 300,
     "reply_texts": [],
     "cta": "자세한 사항은 프로필링크 확인",
     "cta_count": 1,
@@ -112,22 +112,22 @@
     "has_domains": false,
     "has_hashtags": false,
     "media": "undecided_pending_prior_actual_post",
-    "intended_format": "key_facts",
+    "intended_format": "eligibility",
     "reviewed_semantic_facts": [
-      "기관명",
-      "일반직 역무5명",
-      "전체7명과 구분",
-      "남양주시 거주",
-      "필수 자격증 없음",
-      "NCS·철도교통",
-      "11/26 18:00"
+      "일반직(클린아이 분류 일반정규직) 역무8급 5명",
+      "전체 공고 7명 중 일반직 6명/임기제 1명",
+      "전날 기준 남양주시 주민등록 거주",
+      "모집공고상 응시 필수자격과 직무기술서상의 시설 안전관리자 자격 구분",
+      "NCS·철도교통 필기",
+      "2026-11-26 18:00 공식 포털",
+      "PDF+스캔 직무기술서 각각 원본 독립검토"
     ],
     "proposed_slot": "2026-11-19T12:00:00+09:00",
     "publication_policy_id": "careerpick-threads-v5-20261111"
   },
   "publication_guards": {
     "requires_fresh_24h_official_source_again": true,
-    "requires_original_pdf_sha256": true,
+    "requires_original_pdf_sha256": false,
     "requires_profile_exact_job_render": false,
     "requires_precise_live_application_screen": true,
     "requires_full_correction_audit": true,
@@ -138,8 +138,8 @@
     "requires_meta_receipt_at_post_time": true
   },
   "blockers": [
-    "JD 3 scanned pages now independently image-reviewed; revised public text removes broad claim that no required safety-manager qualification exists anywhere in role. Full v5 semantic production validator and CAS still not run.",
-    "Exact PDF byte SHA verified, but final employer correction/cancellation, application-specific form and exact careerpick #job visual render not yet fully cleared.",
+    "Original PDF and scanned JD semantics, raw SHA and actual exact profile render checked. Final corrections/current application-specific screen and 24-hour admission proof still required before production stage.",
+    "Production validator mandates source-backed explicit workplace ('근무지: ...') for a Cleaneye job; official rail-duty table identifies station tasks but is not an explicit separate workplace declaration. Cannot fabricate a 근무지 evidence line to force approval.",
     "Only currently visible employer notices reviewed; final amendment/cancellation clearance remains incomplete.",
     "Production validate_entry and official receipt check have NOT passed; never mark as approved.",
     "After fresh evidence, validate v5 plus media alternation and run staging->CAS bridge, then double-check remote refs before any actual POST."
