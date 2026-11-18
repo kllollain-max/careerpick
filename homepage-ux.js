@@ -83,8 +83,11 @@
       date(p.due) && day(date(p.due))===proof.sourceEndDate ? proof : null;
   }
   function reviewedStatus(p){
-    const note=boundApplicationReview(p)?.statusNote;
-    return typeof note==='string' ? note : '';
+    const proof=boundApplicationReview(p);
+    if(!proof || typeof proof.statusNote!=='string' || !proof.statusNote.trim() ||
+       proof.sourceSeats!==String(p.n) || !Array.isArray(proof.sourceTerms) ||
+       !Array.isArray(p.emp) || JSON.stringify(proof.sourceTerms)!==JSON.stringify(p.emp))return '';
+    return proof.statusNote;
   }
   function reviewedEmployment(p){
     const review=boundApplicationReview(p)?.employment;
