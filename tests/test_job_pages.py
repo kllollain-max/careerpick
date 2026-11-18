@@ -150,6 +150,7 @@ class JobPageTests(unittest.TestCase):
             original = copy.deepcopy(post)
             proof = VERIFIED_APPLICATION_NOTICES[pid]
             self.assertTrue(proof['application_status_unconfirmed'])
+            self.assertIn('<meta name="robots" content="noindex,follow">', render(post, {}))
             metadata = homepage_cutoff_metadata([post], {}, {pid: proof})
             self.assertIn(pid, metadata)
             self.assertIn('실제 접수 활성 상태', metadata[pid]['statusNote'])
@@ -161,6 +162,7 @@ class JobPageTests(unittest.TestCase):
                             {'n': '15'}, {'emp': ['계약직']},
                             {'due': '2026-12-30T23:59:00+09:00'}, {'alio': False}):
                 updated = {**post, **changed}
+                self.assertNotIn('<meta name="robots" content="noindex,follow">', render(updated, {}))
                 self.assertEqual(homepage_cutoff_metadata([updated], {}, {pid: proof}), {})
             self.assertEqual(post, original)
 
