@@ -41,7 +41,7 @@
 
 ## 승인/배포 전 필수 차단점
 
-1. **기관 공식 PDF 원본 재다운로드·미러 SHA/바이트 일치 검증은 2026-11-18 21:59 KST 완료**. 기관 게시판을 먼저 방문해 세션을 확보해야 첨부가 PDF로 반환된다. 기존 공개 `official_url_allowed`에는 `gsipa.kr`의 해당 원본 경로가 없고, `fetch_official_digest` 직접 GET에도 세션이 없으므로 **정확한 기관 URL만 pinning + 동일 세션 fetch + 생산 테스트**를 아직 검증해야 한다. 광범위 도메인 허용 우회 금지.
+1. **기관 공식 PDF 원본 재다운로드·미러 SHA/바이트 일치 검증은 2026-11-18 21:59 KST 완료**. 기관 게시판을 먼저 방문해 세션을 확보해야 첨부가 PDF로 반환된다. 관련 좁은 URL pinning + 동일 세션 원본 GET + HTML fail-closed 보호는 **PR #136으로 main에 실제 병합 완료**(`c340eef2bec7a7352dee122169b687816f27435c`). 실제 `fetch_official_digest` 원본 SHA 실측 일치(https://github.com/kllollain-max/careerpick/actions/runs/44309985758), 3개 신규 단위테스트와 기존 Threads 회귀검사 성공. 단 이것만으로 의미검수/공고 정정·취소/24h Cleaneye 근거 검증/프로필·카드/CAS까지 통과한 것은 아니다.
 2. 공식 채용정보 1페이지 목록에 11/12 공고가 최신 최상단으로 표시되고 이후 채용 정정·취소 게시글은 보이지 않았다. 이것만으로 공지 외 채널의 부존재는 증명되지 않는다. 접수 직전 정정·취소와 Cleaneye 원본 최신 스냅샷, 지원서류를 다시 검증하라. 기관 PDF 독립 재검증 `2026-11-18T12:59:20.920043Z`은 실제값 그대로 보존하고 24시간 제한을 완화하지 않는다.
 3. `validate_entry`, `verify_official_receipt`, v5 원고·길이·매체검증, 이미지 예정이면 실제 원본 카드 픽셀 검사.
 4. 최신 운영 handoff(2026-11-18 20:38 KST)상 미래 예약은 11/19 08시 `a307061`, 12시 `a307145`, 16시 `a307120` 3건이며 첫 부족 슬롯은 11/19 20시다. 기존 예약·게시를 변경하지 말고 최신 `threads_posted.json`, 원격 claim, Meta GET 재대조 후 미사용 슬롯의 `reviewed-submissions`→CAS 경로로만 승인.
