@@ -22,11 +22,11 @@ import xml.etree.ElementTree as ET
 
 try:
     from .search_readiness import BASE, Page, same_url, schema_nodes
-    from .build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+    from .build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
     from .notice_review import resolve as resolve_notice_reviews
 except ImportError:
     from search_readiness import BASE, Page, same_url, schema_nodes
-    from build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+    from build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
     from notice_review import resolve as resolve_notice_reviews
 
 ROBOTS = 'https://kllollain-max.github.io/robots.txt'
@@ -194,6 +194,41 @@ def retry_observations(rows, loader):
     return observations
 
 
+def verified_unconfirmed_reception_exclusions(posts, missing, loader):
+    """Require exact current source terms and the actual explanatory noindex page.
+
+    A missing URL, arbitrary noindex, stale proof or unknown date alone cannot
+    excuse a sitemap omission. Keep unknown reception separate from expiry.
+    """
+    by_id = {p.get('id'): p for p in posts}
+    excluded = []
+    for pid in missing:
+        post = by_id.get(pid, {})
+        proof = VERIFIED_APPLICATION_NOTICES.get(pid, {})
+        note = proof.get('role_mix_note')
+        if (post.get('alio') is not True
+                or proof.get('application_status_unconfirmed') is not True
+                or not isinstance(note, str) or not note.strip()
+                or proof.get('organization') != post.get('org')
+                or proof.get('title') != post.get('title')
+                or proof.get('source_end_date') != str(post.get('due', ''))[:10]
+                or proof.get('expected_source_seats') != str(post.get('n'))
+                or not proof.get('source_employment')
+                or proof['source_employment'] != post.get('emp')):
+            continue
+        url = BASE + 'jobs/' + pid + '.html'
+        row, body = loader(url)
+        if row['status'] != 200 or body is None:
+            continue
+        source = body.decode('utf-8', 'replace')
+        doc = Page(source)
+        visible = ' '.join(Body(source).text)
+        if (doc.noindex and doc.canonicals == [url] and doc.h1
+                and doc.title.strip() and note in visible):
+            excluded.append(pid)
+    return sorted(excluded)
+
+
 def verified_alias_exclusions(posts, missing, urls, loader):
     """Require current public source identity AND the actual public canonical."""
     if not missing:
@@ -275,20 +310,27 @@ def run(all_urls=False, workers=4, loader=fetch):
                     return False
             active_ids = {str(p['id']) for p in feed_posts if not expired_by_source_date(p)}
             missing = sorted(pid for pid in active_ids if BASE + 'jobs/' + pid + '.html' not in urls)
+            unconfirmed = verified_unconfirmed_reception_exclusions(feed_posts, missing, loader)
+            active_ids -= set(unconfirmed)
+            missing = sorted(set(missing) - set(unconfirmed))
             aliases = verified_alias_exclusions(feed_posts, missing, urls, loader)
             missing = sorted(set(missing) - set(aliases))
-            excluded_expired = sorted(feed_ids - active_ids)
+            excluded_expired = sorted(feed_ids - active_ids - set(unconfirmed))
             report['public_feed'].update(notice_count=len(feed_ids), current_notice_count=len(active_ids),
                                          expired_notice_count=len(excluded_expired),
                                          verified_application_cutoff_exclusions=sorted(
                                              pid for pid in excluded_expired if pid in CONFIRMED_APPLICATION_CUTOFFS),
                                          verified_duplicate_alias_exclusions=aliases,
+                                         verified_unconfirmed_reception_exclusions=unconfirmed,
                                          missing_sitemap_ids=missing)
             if missing: report['errors'].append('current_notices_missing_from_sitemap')
         except (ValueError, TypeError, AttributeError): report['errors'].append('public_feed_invalid_json_or_shape')
     else: report['warnings'].append('public_feed_unverified')
     selected = urls if all_urls else [BASE + path for path in SAMPLES if BASE + path in urls]
-    if not all_urls and feed_ids: selected += [BASE + 'jobs/' + sorted(feed_ids)[-1] + '.html']
+    if not all_urls:
+        sample_ids = sorted(pid for pid in feed_ids if BASE + 'jobs/' + pid + '.html' in urls)
+        if sample_ids:
+            selected += [BASE + 'jobs/' + sample_ids[-1] + '.html']
     rows, linked = [], set()
     with ThreadPoolExecutor(max_workers=max(1, min(workers, 4))) as pool:
         futures = {pool.submit(examine, url, loader): url for url in selected}

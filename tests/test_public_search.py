@@ -18,6 +18,59 @@ def page(url, robots='', schema=''):
 
 
 class PublicSearchAuditTests(unittest.TestCase):
+    def test_unknown_reception_requires_current_source_and_actual_explanatory_noindex(self):
+        post = dict(id='a999', org='기관', title='상시모집', due='2099-12-31',
+                    alio=True, n='14', emp=['정규직'])
+        proof = dict(organization='기관', title='상시모집', source_end_date='2099-12-31',
+                     expected_source_seats='14', source_employment=['정규직'],
+                     application_status_unconfirmed=True, role_mix_note='현재 접수와 잔여인원 확인 필요')
+        base, _ = self.loader(feed=[post])
+        url = audit.BASE + 'jobs/a999.html'
+        def load(u):
+            if u != url: return base(u)
+            row, body = base(u)
+            body = page(u, '<meta name="robots" content="noindex,follow">')
+            return row, body.replace(b'</body>', proof['role_mix_note'].encode()+b'</body>')
+        with patch.dict(audit.VERIFIED_APPLICATION_NOTICES, {'a999': proof}):
+            report = audit.run(loader=load)
+        self.assertFalse(report['errors'])
+        self.assertEqual(report['public_feed']['verified_unconfirmed_reception_exclusions'], ['a999'])
+        self.assertEqual(report['public_feed']['current_notice_count'], 0)
+        self.assertEqual(report['public_feed']['expired_notice_count'], 0)
+
+    def test_stale_or_incomplete_reception_proof_does_not_hide_missing_current_url(self):
+        post = dict(id='a999', org='기관', title='상시모집', due='2099-12-31',
+                    alio=True, n='14', emp=['정규직'])
+        proof = dict(organization='기관', title='상시모집', source_end_date='2099-12-31',
+                     expected_source_seats='14', source_employment=['정규직'],
+                     application_status_unconfirmed=True, role_mix_note='현재 접수 확인 필요')
+        cases = [('org',dict(post,org='다른기관'),proof,200,True,True,True),
+                 ('title',dict(post,title='정정공고'),proof,200,True,True,True),
+                 ('date',dict(post,due='2099-12-30'),proof,200,True,True,True),
+                 ('seats',dict(post,n='13'),proof,200,True,True,True),
+                 ('employment',dict(post,emp=['계약직']),proof,200,True,True,True),
+                 ('untrusted',dict(post,alio=False),proof,200,True,True,True),
+                 ('unbound',post,dict(proof,expected_source_seats=None),200,True,True,True),
+                 ('flag',post,dict(proof,application_status_unconfirmed=False),200,True,True,True),
+                 ('missing',post,proof,404,True,True,True),
+                 ('indexable',post,proof,200,False,True,True),
+                 ('no_explanation',post,proof,200,True,False,True),
+                 ('canonical',post,proof,200,True,True,False)]
+        for label, p, evidence, status, noindex, explanation, canonical in cases:
+            with self.subTest(label=label):
+                base, _ = self.loader(feed=[p]); url=audit.BASE+'jobs/a999.html'
+                def load(u):
+                    if u != url: return base(u)
+                    row, _ = base(u); row['status']=status
+                    body=page(u if canonical else audit.BASE,
+                              '<meta name="robots" content="noindex,follow">' if noindex else '')
+                    if explanation: body=body.replace(b'</body>',proof['role_mix_note'].encode()+b'</body>')
+                    return row, body if status==200 else None
+                with patch.dict(audit.VERIFIED_APPLICATION_NOTICES, {'a999': evidence}):
+                    result=audit.run(loader=load)
+                self.assertIn('current_notices_missing_from_sitemap',result['errors'])
+                self.assertEqual(result['public_feed']['missing_sitemap_ids'],['a999'])
+
     def test_verified_application_cutoff_overrides_later_publication_end(self):
         load, _ = self.loader(feed=[{'id': 'a999', 'due': '2099-12-31T23:59:00+09:00'}])
         with patch.dict(audit.CONFIRMED_APPLICATION_CUTOFFS, {'a999': '2020-01-01T10:00:00+09:00'}):
