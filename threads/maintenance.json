@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T08:45:10.714623+00:00",
-  "last_observed_at": "2026-11-18T08:45:10.714623+00:00",
+  "updated_at": "2026-11-18T09:55:56Z",
+  "last_observed_at": "2026-11-18T09:55:56Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13334,8 +13334,8 @@
     "unapproved_draft_audit": "threads/audits/source-progress-cleaneye-81291-20261118-1646.json"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-18T08:45:10.714623+00:00",
-    "status": "ACTUAL_REGULAR_TEXT_PUBLICATION_VERIFIED",
+    "observed_at": "2026-11-18T09:55:56Z",
+    "status": "EXISTING_NEXT_TWO_VALID_NEW_SUPPLY_HELD_NOT_PUBLISHED",
     "regular_run_id": 44265327920,
     "new_meta_post_ids": [
       "17900525751613055"
@@ -13352,7 +13352,7 @@
     "next_slot": "2026-11-18T16:00:00+09:00",
     "first_missing_slot": "2026-11-19T12:00:00+09:00",
     "pending_claims": 0,
-    "audit_path": "threads/audits/published-cleaneye-81112-20261118-1715-text-verified.json",
+    "audit_path": "threads/audits/monitor-20261118-1855-source-holds.json",
     "audit_blob": "952274fc78e4eb2054952ff0d4db0c2a1ae13ccf",
     "main_sha": "1470c882ee0496c592bcb0834a0ae73e01041add",
     "latest_preflight_run": 44235413886,
@@ -13364,7 +13364,46 @@
     "pending_active_slots": [],
     "active16_full_validator": "PASS",
     "active16_grace_ends": "2026-11-18T18:00:00+09:00",
-    "media_forecast_conditional_on_active_slot": false
+    "media_forecast_conditional_on_active_slot": false,
+    "audit_sha": "26b47e9cce7db21a7e29c023bde1f56690886b3a",
+    "full_queue_validator": "passed",
+    "approved_future_slots": [
+      "2026-11-18T20:00:00+09:00",
+      "2026-11-19T08:00:00+09:00"
+    ],
+    "claims": {
+      "count": 55,
+      "states": {
+        "historical_verified": 1,
+        "accepted": 54
+      }
+    },
+    "new_ready_entries": 0,
+    "actual_new_publications": 0,
+    "source_holds": [
+      {
+        "notice_id": "cleaneye-81291",
+        "reasons": [
+          "IMAGE_LOCATION_UNSUPPORTED",
+          "NCS_REQUIRED_CERTIFICATE_SCOPE_UNRESOLVED"
+        ],
+        "audit": "threads/audits/source-progress-cleaneye-81291-20261118-1848.json"
+      },
+      {
+        "notice_id": "a307142",
+        "reasons": [
+          "ALIO_AND_SAME_ATS_ORIGINAL_PDF_PREFERENCE_5_VS_3",
+          "DISQUALIFICATION_SCOPE_DIFFERENCE"
+        ],
+        "audit": "threads/audits/source-progress-a307142-20261118-1854.json"
+      }
+    ],
+    "no_user_action_required": true,
+    "next_action": [
+      "2026-11-19T12:00:00+09:00 IMAGE supply not ready; continue independent next candidate review under existing automation",
+      "Do not count source/HOLD/draft as approved supply or publication",
+      "Observe existing 19:45 preflight and20 regular publisher, then post_id/account/body/media/replies receipt before success report"
+    ]
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -26897,5 +26936,53 @@
     "regression_merged": true,
     "actual_meta_post_id": null,
     "next_action": "Observe existing next regular preflight/publisher; confirm actual account, main text, IMAGE,0automatic replies and Meta post_id/permalink after Nov18 20. Continue independent future supply without changing ready/reserved/posted entries."
+  },
+  "writer_source_review_20261118_1855": {
+    "observed_at": "2026-11-18T09:55:56Z",
+    "status": "EXISTING_NEXT_TWO_VALID_NEW_SUPPLY_HELD_NOT_PUBLISHED",
+    "audit_path": "threads/audits/monitor-20261118-1855-source-holds.json",
+    "audit_sha": "26b47e9cce7db21a7e29c023bde1f56690886b3a",
+    "main_sha": "1470c882ee0496c592bcb0834a0ae73e01041add",
+    "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
+    "stage_sha": "1e92a69a7b8fbc1bf88aa6cce339ffb7b9726c73",
+    "full_queue_validator": "passed",
+    "approved_future_slots": [
+      "2026-11-18T20:00:00+09:00",
+      "2026-11-19T08:00:00+09:00"
+    ],
+    "first_missing_slot": "2026-11-19T12:00:00+09:00",
+    "claims": {
+      "count": 55,
+      "states": {
+        "historical_verified": 1,
+        "accepted": 54
+      }
+    },
+    "new_ready_entries": 0,
+    "actual_new_publications": 0,
+    "source_holds": [
+      {
+        "notice_id": "cleaneye-81291",
+        "reasons": [
+          "IMAGE_LOCATION_UNSUPPORTED",
+          "NCS_REQUIRED_CERTIFICATE_SCOPE_UNRESOLVED"
+        ],
+        "audit": "threads/audits/source-progress-cleaneye-81291-20261118-1848.json"
+      },
+      {
+        "notice_id": "a307142",
+        "reasons": [
+          "ALIO_AND_SAME_ATS_ORIGINAL_PDF_PREFERENCE_5_VS_3",
+          "DISQUALIFICATION_SCOPE_DIFFERENCE"
+        ],
+        "audit": "threads/audits/source-progress-a307142-20261118-1854.json"
+      }
+    ],
+    "no_user_action_required": true,
+    "next_action": [
+      "2026-11-19T12:00:00+09:00 IMAGE supply not ready; continue independent next candidate review under existing automation",
+      "Do not count source/HOLD/draft as approved supply or publication",
+      "Observe existing 19:45 preflight and20 regular publisher, then post_id/account/body/media/replies receipt before success report"
+    ]
   }
 }
