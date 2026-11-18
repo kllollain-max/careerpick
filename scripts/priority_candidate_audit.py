@@ -73,7 +73,11 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
             if (isinstance(proof, dict) and p.get('alio') is True
                     and proof.get('organization') == p.get('org')
                     and proof.get('title') == title
-                    and proof.get('source_end_date') == str(p.get('due', ''))[:10]):
+                    and proof.get('source_end_date') == str(p.get('due', ''))[:10]
+                    and (proof.get('expected_source_seats') is None
+                         or proof['expected_source_seats'] == str(p.get('n')))
+                    and (not proof.get('source_employment')
+                         or proof['source_employment'] == emp)):
                 if (proof.get('confirmed_employment') == '계약직'
                         and proof.get('source_employment') == emp):
                     reason = 'official_employment_conflict'
