@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "status": "NEW_IMAGE_PUBLICATION_VERIFIED_FUTURE_THREE_VALID_NEXT_SUPPLY_FRESHNESS_HOLD",
+  "checked_at": "2026-11-18 13:08:38 UTC",
+  "main_sha": "90dbc7cf99974a311d6e77a540e266e7d63349eb",
+  "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+  "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
+  "publication_audit": {
+    "path": "threads/audits/published-a307141-20261118-2051-image-verified.json",
+    "blob": "11683a4ad49c31ae4800b5ef3eefbbc93074b7c9"
+  },
+  "source_supply_audit": {
+    "path": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
+    "blob": "081e0c5fecd19eb58553e04ed0444645d5dca7b3",
+    "status": "HOLD_SOURCE_STALE_NOT_STAGED"
+  },
+  "automation_on": true,
+  "claims": {
+    "count": 56,
+    "accepted": 55,
+    "historical_verified": 1,
+    "pending": 0
+  },
+  "today_verified_count": 4,
+  "whole_queue_validator": "validated",
+  "future_validation": [
+    {
+      "notice_id": "a307061",
+      "scheduled_at": "2026-11-19T08:00:00+09:00",
+      "fingerprint": "017ba9d13648daf678fa1ce3d3ab576125430aab83e17aa6c37039c9fca62418",
+      "chars": 309,
+      "main_exact": true,
+      "reply": "",
+      "media": "TEXT",
+      "cta_once": true,
+      "validator": "passed"
+    },
+    {
+      "notice_id": "a307145",
+      "scheduled_at": "2026-11-19T12:00:00+09:00",
+      "fingerprint": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+      "chars": 295,
+      "main_exact": true,
+      "reply": "",
+      "media": "IMAGE",
+      "cta_once": true,
+      "validator": "passed",
+      "card": {
+        "valid": true,
+        "format": "JPEG",
+        "width": 1080,
+        "height": 1080,
+        "mode": "RGB",
+        "file_size_bytes": 110851,
+        "pixel_verification": "passed",
+        "layout_version": "careerpick-single-main-card-v2",
+        "asset_path": "threads-images/a307145.jpg",
+        "local_path": "/workspace/scratch/ef12db618a19/r46/careerpick-e2a0c829983cf8c9984bf77eef3faf98a217bebb/threads-images/a307145.jpg",
+        "sha256": "93735754da98a0323f1cb841549ba63e8336c4b1b6e82b1575eb1b3785a008f3",
+        "facts_sha256": "cd763ac1f5eb5c8a41df315d8fb40d147cc27c10c4f5a51e49fc826e3af95788",
+        "preview_asset_path": "threads-images/a307145-360.png",
+        "preview_sha256": "0869a83409ff3243e83b5c82a8b6f8b79b380ec6e67ca31d67706272c1c16c8b",
+        "reviewed_width": 360,
+        "reviewed_at": "2026-11-18T11:01:07.374883+00:00",
+        "visual_review": "attestation_and_exact_assets_verified"
+      }
+    },
+    {
+      "notice_id": "a307120",
+      "scheduled_at": "2026-11-19T16:00:00+09:00",
+      "fingerprint": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+      "chars": 299,
+      "main_exact": true,
+      "reply": "",
+      "media": "TEXT",
+      "cta_once": true,
+      "validator": "passed"
+    }
+  ],
+  "performance": {
+    "summary_sha256": "ce7ff6aab34c422905fd964eb1f0c1a542c5e5a7adf1ec0e660e3c804f406c9a",
+    "as_of": "2026-11-18T12:52:51.280969+00:00",
+    "v5_experiment_start": "2026-11-11T11:45:18.355131+00:00",
+    "windows": {
+      "24h": {
+        "verified_main_count": 11,
+        "metric_medians": {
+          "views": 2202,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 11,
+          "likes": 11,
+          "replies": 11,
+          "reposts": 11,
+          "quotes": 11
+        },
+        "metric_totals": {
+          "views": 27076,
+          "likes": 66,
+          "replies": 1,
+          "reposts": 8,
+          "quotes": 1
+        },
+        "views_distribution": [
+          {
+            "post_id": "18174469135462070",
+            "views": 525
+          },
+          {
+            "post_id": "18137768440737022",
+            "views": 934
+          },
+          {
+            "post_id": "18111349063925875",
+            "views": 1076
+          },
+          {
+            "post_id": "17918956251546576",
+            "views": 1998
+          },
+          {
+            "post_id": "17919668721264551",
+            "views": 2112
+          },
+          {
+            "post_id": "17994147756077569",
+            "views": 2202
+          },
+          {
+            "post_id": "17918731521553015",
+            "views": 2231
+          },
+          {
+            "post_id": "17896425015438025",
+            "views": 3029
+          },
+          {
+            "post_id": "18121803568969931",
+            "views": 4182
+          },
+          {
+            "post_id": "18102493658425564",
+            "views": 4274
+          },
+          {
+            "post_id": "18134891626705962",
+            "views": 4513
+          }
+        ],
+        "likes_rate_percent_median": 0.21413276231263384,
+        "likes_rate_percent_observed_posts": 11,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      },
+      "72h": {
+        "verified_main_count": 8,
+        "metric_medians": {
+          "views": 1803,
+          "likes": 5.5,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 8,
+          "likes": 8,
+          "replies": 8,
+          "reposts": 8,
+          "quotes": 8
+        },
+        "metric_totals": {
+          "views": 30340,
+          "likes": 67,
+          "replies": 0,
+          "reposts": 23,
+          "quotes": 1
+        },
+        "views_distribution": [
+          {
+            "post_id": "17986024908093257",
+            "views": 439
+          },
+          {
+            "post_id": "18137768440737022",
+            "views": 999
+          },
+          {
+            "post_id": "18080747462409277",
+            "views": 1023
+          },
+          {
+            "post_id": "18111349063925875",
+            "views": 1122
+          },
+          {
+            "post_id": "17918731521553015",
+            "views": 2484
+          },
+          {
+            "post_id": "18150019906492861",
+            "views": 4022
+          },
+          {
+            "post_id": "17922530685243848",
+            "views": 9324
+          },
+          {
+            "post_id": "18101198159539744",
+            "views": 10927
+          }
+        ],
+        "likes_rate_percent_median": 0.2745916109087464,
+        "likes_rate_percent_observed_posts": 8,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      }
+    },
+    "latest_24h": {
+      "post_id": "18102493658425564",
+      "notice_id": "cleaneye-80848",
+      "published_at": "2026-11-17T11:41:10.482040+00:00",
+      "captured_at": "2026-11-18T11:51:30.662062+00:00",
+      "elapsed_seconds": 87020.180022,
+      "window": "24h",
+      "metrics": {
+        "views": 4274,
+        "likes": 7,
+        "replies": 1,
+        "reposts": 1,
+        "quotes": 1
+      },
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "likes_rate_percent": 0.16378100140383717,
+      "status": "captured",
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "first_sentence_type": "target",
+      "experiment_eligible": false,
+      "first_sentence": "서울교통공사 1~4호선 청소·미화 구직자께,",
+      "format_id": "deadline_opportunity",
+      "contract_version": 2,
+      "sector_group": null,
+      "body_chars": 293,
+      "media": "IMAGE",
+      "slot": "2026-11-17T20:00:00+09:00",
+      "slot_hour_kst": 20,
+      "job": "공무직 사원",
+      "location": "서울교통공사 1~4호선",
+      "employment": "정규직",
+      "recruitment_unit_count": 103,
+      "deadline_distance_seconds": 227929.51796
+    },
+    "latest_72h": {
+      "post_id": "18111349063925875",
+      "notice_id": "a305734",
+      "published_at": "2026-11-15T11:28:51.273502+00:00",
+      "captured_at": "2026-11-18T11:37:33.104464+00:00",
+      "elapsed_seconds": 259721.830962,
+      "window": "72h",
+      "metrics": {
+        "views": 1122,
+        "likes": 3,
+        "replies": 0,
+        "reposts": 2,
+        "quotes": 0
+      },
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "likes_rate_percent": 0.267379679144385,
+      "status": "captured",
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "first_sentence_type": "target",
+      "experiment_eligible": true,
+      "first_sentence": "경제학 또는 관련 분야 박사학위 소지자·취득예정자라면,",
+      "format_id": "deadline_opportunity",
+      "contract_version": 2,
+      "sector_group": null,
+      "body_chars": 230,
+      "media": "TEXT",
+      "slot": "2026-11-15T20:00:00+09:00",
+      "slot_hour_kst": 20,
+      "job": "(부)연구위원",
+      "location": "세종",
+      "employment": "정규직",
+      "recruitment_unit_count": 10,
+      "deadline_distance_seconds": 1341067.726498
+    },
+    "account_followers": {
+      "account": "hid_119",
+      "scope": "account_total",
+      "requested_start": "2026-11-11T11:45:18.355131+00:00",
+      "requested_end": "2026-11-18T12:52:51.280969+00:00",
+      "observed_start": "2026-11-11T11:45:32.854727+00:00",
+      "observed_end": "2026-11-18T11:15:47.456612+00:00",
+      "start_followers": 415,
+      "end_followers": 502,
+      "net_change": 87,
+      "status": "observed_interval",
+      "exact_requested_boundaries": false,
+      "observation_statuses": {
+        "captured": 50
+      },
+      "post_attribution": null,
+      "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+    },
+    "initial_14_day_end": "2026-11-25T11:45:18.355131+00:00",
+    "intro_groups_24h": {
+      "condition": {
+        "verified_main_count": 1,
+        "metric_medians": {
+          "views": 2231,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 1,
+          "likes": 1,
+          "replies": 1,
+          "reposts": 1,
+          "quotes": 1
+        },
+        "metric_totals": {
+          "views": 2231,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 1,
+          "quotes": 0
+        },
+        "views_distribution": [
+          {
+            "post_id": "17918731521553015",
+            "views": 2231
+          }
+        ],
+        "likes_rate_percent_median": 0.2689376961004034,
+        "likes_rate_percent_observed_posts": 1,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      },
+      "target": {
+        "verified_main_count": 2,
+        "metric_medians": {
+          "views": 1005,
+          "likes": 2.5,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "metric_observed_counts": {
+          "views": 2,
+          "likes": 2,
+          "replies": 2,
+          "reposts": 2,
+          "quotes": 2
+        },
+        "metric_totals": {
+          "views": 2010,
+          "likes": 5,
+          "replies": 0,
+          "reposts": 4,
+          "quotes": 0
+        },
+        "views_distribution": [
+          {
+            "post_id": "18137768440737022",
+            "views": 934
+          },
+          {
+            "post_id": "18111349063925875",
+            "views": 1076
+          }
+        ],
+        "likes_rate_percent_median": 0.24647158561728347,
+        "likes_rate_percent_observed_posts": 2,
+        "reader_replies": null,
+        "reader_replies_status": "see_per_post_author_separation_status",
+        "profile_visits": null,
+        "follow_increase": null,
+        "link_clicks": null
+      }
+    },
+    "intro_slot_media_counts": {
+      "condition": [
+        {
+          "slot_hour_kst": 12,
+          "media": "TEXT",
+          "count": 1
+        }
+      ],
+      "target": [
+        {
+          "slot_hour_kst": 16,
+          "media": "IMAGE",
+          "count": 1
+        },
+        {
+          "slot_hour_kst": 20,
+          "media": "TEXT",
+          "count": 1
+        }
+      ]
+    },
+    "missing_intro_strata": [
+      {
+        "slot_hour_kst": 12,
+        "media": "TEXT",
+        "missing_types": [
+          "target"
+        ]
+      },
+      {
+        "slot_hour_kst": 16,
+        "media": "IMAGE",
+        "missing_types": [
+          "condition"
+        ]
+      },
+      {
+        "slot_hour_kst": 20,
+        "media": "TEXT",
+        "missing_types": [
+          "condition"
+        ]
+      }
+    ],
+    "seven_day_review": {
+      "due_at": "2026-11-18T20:45:18.355131+09:00",
+      "observed_at": "2026-11-18T13:08:37.089115+00:00",
+      "state": "reviewed_insufficient_balanced_comparable_samples",
+      "condition_comparable": 1,
+      "target_comparable": 2,
+      "decision": "extend_observation_or_balance_intro_types",
+      "weights_changed": false,
+      "causal_or_statistical_winner_claim": false,
+      "limitations": [
+        "Different notices, job/region/size/deadline/employment/media/slot confounding",
+        "Raw replies author separation unverified, reader_replies null",
+        "Account follower interval not post attribution"
+      ]
+    },
+    "decision": "extend_observation_or_balance_intro_types",
+    "current_post_24h_72h": "not_due",
+    "future_validation": [
+      {
+        "notice_id": "a307061",
+        "scheduled_at": "2026-11-19T08:00:00+09:00",
+        "fingerprint": "017ba9d13648daf678fa1ce3d3ab576125430aab83e17aa6c37039c9fca62418",
+        "chars": 309,
+        "main_exact": true,
+        "reply": "",
+        "media": "TEXT",
+        "cta_once": true,
+        "validator": "passed"
+      },
+      {
+        "notice_id": "a307145",
+        "scheduled_at": "2026-11-19T12:00:00+09:00",
+        "fingerprint": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+        "chars": 295,
+        "main_exact": true,
+        "reply": "",
+        "media": "IMAGE",
+        "cta_once": true,
+        "validator": "passed",
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 110851,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a307145.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/r46/careerpick-e2a0c829983cf8c9984bf77eef3faf98a217bebb/threads-images/a307145.jpg",
+          "sha256": "93735754da98a0323f1cb841549ba63e8336c4b1b6e82b1575eb1b3785a008f3",
+          "facts_sha256": "cd763ac1f5eb5c8a41df315d8fb40d147cc27c10c4f5a51e49fc826e3af95788",
+          "preview_asset_path": "threads-images/a307145-360.png",
+          "preview_sha256": "0869a83409ff3243e83b5c82a8b6f8b79b380ec6e67ca31d67706272c1c16c8b",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-18T11:01:07.374883+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      },
+      {
+        "notice_id": "a307120",
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
+        "fingerprint": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+        "chars": 299,
+        "main_exact": true,
+        "reply": "",
+        "media": "TEXT",
+        "cta_once": true,
+        "validator": "passed"
+      }
+    ]
+  },
+  "latest_preflight": {
+    "run_id": 44296368933,
+    "created": "2026-11-18T11:37:23Z",
+    "conclusion": "success",
+    "publish_job": "skipped_expected_preflight",
+    "head_sha": "c400e1c8351ca69ff79eecd086f77b4693f89eae"
+  },
+  "source_collection": {
+    "last_regular_run": 44283844340,
+    "conclusion": "success",
+    "source_checked_at": "2026-11-18T19:17:13+09:00",
+    "next_collection": "Observe existing scheduled operations; do not dispatch/rerun"
+  },
+  "manual_dispatch": false,
+  "new_meta_post_calls": 0,
+  "production_code_changed": false,
+  "existing_guard_prevented_unverified_ready": true,
+  "no_user_action_required": true,
+  "next_actions": [
+    "Existing normal automation continues ON; observe Nov19 07:45preflight and08actualTEXT slot",
+    "Re-read actual latest regular collector proof to resolve a307207 source freshness; no manual source write/clock update/validation bypass",
+    "Only after full candidate+card+wholequeue PASS, latest staging CAS and readback, then observe normal bridge",
+    "Collect current a307141 at actual24h/72h due, preserve elapsed_hours and missing/permission states"
+  ]
+}
