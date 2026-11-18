@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-18T07:46:52Z",
+  "repository": "kllollain-max/careerpick",
+  "account": "hid_119",
+  "main_sha": "eee9cfa71b1c0e4034fb2bcc0e25014cb05e2a55",
+  "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
+  "stage_sha": "1e92a69a7b8fbc1bf88aa6cce339ffb7b9726c73",
+  "ledger_sha": "d6a8c94139ff4c83cbdfffc6ee7b6dced5b7db65",
+  "performance_sha": "b3ed40e3f47e17b1035d2bb22d5a49ed69e565d9",
+  "active_slot": {
+    "slot": "2026-11-18T16:00:00+09:00",
+    "notice_id": "cleaneye-81112",
+    "state": "UNSTARTED_WITHIN_EXISTING_2H_GRACE",
+    "full_validator": "PASS",
+    "chars": 326,
+    "entry_sha256": "40a444398271b62e6c0b8af7a738ee752adcafc7ff06ea5900d281e47e8b8482",
+    "claim": false,
+    "record": false,
+    "post_id": null,
+    "permalink": null,
+    "grace_ends": "2026-11-18T18:00:00+09:00",
+    "dispatch_or_rerun": false
+  },
+  "latest_regular_preflight": {
+    "id": 44259554572,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "4940a3e26f895f0c1f6f7d21746de097eebafa35",
+    "updated_at": "2026-11-18T07:32:38Z",
+    "job_id": 134649292782,
+    "publish_job": "SKIPPED_BY_PREFLIGHT_DESIGN_NOT_A_POST",
+    "invalid_ready_entries": [],
+    "pending_active_slots": [
+      "2026-11-18T16:00:00+09:00"
+    ]
+  },
+  "verification": {
+    "observed_at": "2026-11-18T07:44:03.042714+00:00",
+    "full_queue_status": "validated",
+    "policy_hashes": {
+      "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+      "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+    },
+    "ready": [
+      {
+        "notice_id": "a307141",
+        "slot": "2026-11-18T20:00:00+09:00",
+        "media": "IMAGE",
+        "entry_sha256": "781c8f70a78cbbd52d52047e4e20919a0b0bba8e7a49fc1d2562c79a51518446",
+        "chars": 342,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 110992,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a307141.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/threads_r41-ryce716y/careerpick-eee9cfa71b1c0e4034fb2bcc0e25014cb05e2a55/threads-images/a307141.jpg",
+          "sha256": "3bfcae9f653e7392f124958b8ee50c8abeb2b9a606f3605642035c3bef634fd4",
+          "facts_sha256": "69b66d33a6770274f96b6ac1000404a180a0c755623b0a05904e4c1379853c00",
+          "preview_asset_path": "threads-images/a307141-360.png",
+          "preview_sha256": "3a09dc6d45087d271edd739e4c37b55e9a19b3d64cadb27dd3303455be06c2ce",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-17T13:05:33.567778+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      },
+      {
+        "notice_id": "a307061",
+        "slot": "2026-11-19T08:00:00+09:00",
+        "media": "TEXT",
+        "entry_sha256": "017ba9d13648daf678fa1ce3d3ab576125430aab83e17aa6c37039c9fca62418",
+        "chars": 309,
+        "reply_count": 0,
+        "cta_count": 1,
+        "card": null
+      }
+    ],
+    "supply": {
+      "future_slots": [
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00",
+        "2026-11-20T08:00:00+09:00",
+        "2026-11-20T12:00:00+09:00",
+        "2026-11-20T16:00:00+09:00"
+      ],
+      "approved_future_slots": [
+        "2026-11-18T20:00:00+09:00",
+        "2026-11-19T08:00:00+09:00"
+      ],
+      "missing_slots": [
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00",
+        "2026-11-20T08:00:00+09:00",
+        "2026-11-20T12:00:00+09:00",
+        "2026-11-20T16:00:00+09:00"
+      ],
+      "next_slot_missing": false,
+      "approved_inventory_count": 2,
+      "inventory_target": 8,
+      "inventory_shortfall": 6,
+      "replenishment_required": true,
+      "invalid_ready_entries": [],
+      "pending_active_slots": [
+        "2026-11-18T16:00:00+09:00"
+      ],
+      "media_forecast_conditional_on_active_slot": true
+    },
+    "source_verified_at": "2026-11-18T16:30:16+09:00",
+    "selection": {
+      "total_scanned": 1780,
+      "eligible_before_limit": 288,
+      "returned_count": 24
+    },
+    "recent8": [
+      "cleaneye-80820",
+      "a306752",
+      "a306913",
+      "cleaneye-81115",
+      "cleaneye-81249",
+      "cleaneye-80848",
+      "a306875",
+      "a306807"
+    ],
+    "performance": {
+      "24h": {
+        "verified_count": 10,
+        "medians": {
+          "views": 2157,
+          "likes": 5,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        }
+      },
+      "72h": {
+        "verified_count": 6,
+        "medians": {
+          "views": 3253,
+          "likes": 7,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        }
+      }
+    },
+    "followers": {
+      "account": "hid_119",
+      "scope": "account_total",
+      "requested_start": "2026-11-11T11:45:18.355131+00:00",
+      "requested_end": "2026-11-18T07:44:02.842362+00:00",
+      "observed_start": "2026-11-11T11:45:32.854727+00:00",
+      "observed_end": "2026-11-18T07:31:40.407557+00:00",
+      "start_followers": 415,
+      "end_followers": 500,
+      "net_change": 85,
+      "status": "observed_interval",
+      "exact_requested_boundaries": false,
+      "observation_statuses": {
+        "captured": 48
+      },
+      "post_attribution": null,
+      "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+    }
+  },
+  "claims": {
+    "total": 54,
+    "accepted": 53,
+    "historical_verified": 1,
+    "pending": 0,
+    "all_remote_blob_sha_matched": true
+  },
+  "new_candidate_progress": {
+    "notice_id": "cleaneye-81291",
+    "audit_path": "threads/audits/source-progress-cleaneye-81291-20261118-1646.json",
+    "pdf_get": {
+      "url": "https://app.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+      "final_url": "https://app.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+      "checked_at": "2026-11-18T07:44:35.003141+00:00",
+      "status": 200,
+      "bytes": 328236,
+      "sha256": "8054affb8c3cbd43b73b0224fd1021de03c0771ff5661726271079cd6779a844",
+      "pdf_magic": true
+    },
+    "full_pages_read": 7,
+    "draft_chars": 304,
+    "ready": false,
+    "staged": false,
+    "published": false,
+    "remaining": [
+      "Actual employer latest correction/current application verification",
+      "Actual exact CareerPick profile notice visual check",
+      "Full review.v5, employment/workplace evidence and original-receipt validator",
+      "Actual IMAGE card1080JPEG/360PNG visual review and hash-bound main registration if required",
+      "Full queue validator and exact latest claims/ledger/media + CAS before ready"
+    ]
+  },
+  "new_24h_observation": {
+    "post_id": "18121803568969931",
+    "notice_id": "cleaneye-81249",
+    "captured_at": "2026-11-18T07:31:40.276087+00:00",
+    "elapsed_seconds": 87548.451061,
+    "views": 4182,
+    "likes": 18,
+    "likes_rate_percent": 0.430416068866571,
+    "replies": 0,
+    "reader_reply_author_separation": "unverified",
+    "window": "24h",
+    "late_cumulative_backfilled": false
+  },
+  "performance_decision": "No editorial weight changes; type-balanced comparable sample still insufficient",
+  "source_collection": {
+    "run_id": 44259316677,
+    "conclusion": "success",
+    "updated_at": "2026-11-18T07:32:10Z",
+    "alio_last_success": "2026-11-18T16:30:16+09:00"
+  },
+  "new_meta_post": false,
+  "queue_changed": false,
+  "stage_changed": false,
+  "code_changed": false,
+  "next_actions": [
+    "Observe normal publisher active16 through existing grace; no duplicate POST/manual dispatch",
+    "Preserve20IMAGE and Nov19 08TEXT forecasts conditional on actual16 success",
+    "Continue81291 current application/profile/evidence/card review; never ready before full pass"
+  ]
+}
