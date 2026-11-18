@@ -6,6 +6,27 @@ def row(identity, due='2026-12-01', emp=None, n='20', url='https://job.alio.go.k
     return {'id':identity,'title':'공식 채용','org':'기관','due':due,'url':url,'emp':emp or [],'n':n}
 
 class PriorityAuditTests(unittest.TestCase):
+    def test_verified_same_day_cutoff_requires_current_official_count_and_employment(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        post = dict(row('a306660', due='2026-11-18T23:59:00+09:00',
+                        emp=['정규직'], n='12'),
+                    alio=True, title='요양보호직', org='보훈공단')
+        proof = {'a306660': dict(organization='보훈공단', title='요양보호직',
+                                 source_end_date='2026-11-18', expected_source_seats='12',
+                                 source_employment=['정규직'], application_start='2026-11-03',
+                                 application_cutoff='2026-11-18T17:00:00+09:00')}
+        when = datetime(2026, 11, 18, 17, 0, tzinfo=ZoneInfo('Asia/Seoul'))
+        result = shortlist({'posts': [post]}, date(2026, 11, 18),
+                           verified_windows=proof, as_of_instant=when)
+        self.assertEqual(result['excluded']['official_reception_closed'], 1)
+        for changed in ({'n': '13'}, {'emp': ['계약직']}, {'org': '변경된 기관'},
+                        {'title': '정정공고'}, {'due': '2026-11-19T23:59:00+09:00'}):
+            res = shortlist({'posts': [{**post, **changed}]}, date(2026, 11, 18),
+                            verified_windows=proof, as_of_instant=when)
+            self.assertEqual(len(res['top']), 1)
+            self.assertNotIn('official_reception_closed', res['excluded'])
+
     def test_official_contract_and_until_filled_evidence_are_held_from_regular_queue(self):
         posts=[dict(row('a1',emp=['정규직']),alio=True),dict(row('a2',emp=['정규직']),alio=True)]
         proof={p['id']:{'organization':p['org'],'title':p['title'],'source_end_date':p['due']} for p in posts}
