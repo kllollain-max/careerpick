@@ -1,0 +1,139 @@
+name: Threads v4 isolated checks
+on:
+  push:
+    branches:
+      - rebuild/threads-v4-20261115
+  pull_request:
+    paths:
+      - 'threads_v4/**'
+      - '.github/workflows/threads-v4-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run isolated queue checks
+        run: python -m unittest discover -s threads_v4 -p 'test_*.py' -v
+      - name: Generate candidate review report from existing recruitment data
+        run: |
+          mkdir -p /tmp/threads-v4
+          git fetch --no-tags --depth=1 origin refs/heads/threads-publisher-state:refs/remotes/origin/threads-publisher-state
+          git show origin/threads-publisher-state:threads/writer-queue.json > /tmp/threads-v4/queue.json
+          git show origin/threads-publisher-state:threads/reviewed-staging.json > /tmp/threads-v4/staging.json
+          python -m threads_v4.candidate_report --queue /tmp/threads-v4/queue.json --output /tmp/threads-v4/candidates.json
+          python -c 'import json; d=json.load(open("/tmp/threads-v4/candidates.json")); assert d["approved_count"] == 0; assert d["meta_posted"] is False'
+      - name: Triage candidates without unverified approval
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          from threads_v4.official_triage import triage_report
+          src=json.loads(Path("/tmp/threads-v4/candidates.json").read_text(encoding="utf-8"))
+          result=triage_report(src, datetime.now(ZoneInfo("Asia/Seoul")))
+          Path("/tmp/threads-v4/official-triage.json").write_text(json.dumps(result, ensure_ascii=False, indent=2)+"\n",encoding="utf-8")
+          print(json.dumps({"hold":result["hold_count"],"reject":result["reject_count"],"pass":result["pass_count"]},ensure_ascii=False))
+          assert result["pass_count"] == 0
+          PY
+      - name: Check saved official evidence is not auto-approved
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          from threads_v4.evidence_gate import decision
+          evidence=json.loads(Path("threads_v4/audits/a305734-official-evidence.json").read_text(encoding="utf-8"))
+          result=decision(evidence,datetime.now(ZoneInfo("Asia/Seoul")))
+          assert result["decision"]=="HOLD", result
+          Path("/tmp/threads-v4/evidence-gate.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(result,ensure_ascii=False))
+          PY
+      - name: Classify current supply outage without posting
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          from threads_v4.supply_diagnostics import supply_decision
+          root=Path("/tmp/threads-v4")
+          triage=json.loads((root/"official-triage.json").read_text(encoding="utf-8"))
+          queue=json.loads((root/"queue.json").read_text(encoding="utf-8"))
+          stage=json.loads((root/"staging.json").read_text(encoding="utf-8"))
+          try:
+            history=json.loads(Path("threads_posted.json").read_text(encoding="utf-8"))
+          except (ValueError, OSError) as exc:
+            result={"status":"HISTORY_UNREADABLE","action":"HOLD_AND_REPAIR_HISTORY_READ", "error_type":type(exc).__name__,"meta_posted":False,"missing_slots":[]}
+          else:
+            result=supply_decision(queue,stage,history,triage,datetime.now(ZoneInfo("Asia/Seoul")))
+          (root/"supply-diagnostics.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps({"status":result["status"],"action":result["action"],"missing":len(result["missing_slots"])},ensure_ascii=False))
+          PY
+      - name: Fetch official institution and ALIO pages
+        continue-on-error: true
+        run: |
+          python -m threads_v4.official_fetch --audit threads_v4/audits/a305734-official-evidence.json --output /tmp/threads-v4/official-fetch.json
+      - name: Generate unapproved factual preview
+        run: |
+          python -m threads_v4.hold_preview --audit threads_v4/audits/a305734-official-evidence.json --output /tmp/threads-v4/hold-preview.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("/tmp/threads-v4/hold-preview.json").read_text(encoding="utf-8"))
+          assert x["status"]=="HOLD_PREVIEW_ONLY"
+          assert x["queue_eligible"] is False
+          assert x["approved"] is False
+          PY
+      - name: Run safe publish preflight against real state
+        run: |
+          python -m threads_v4.publish_preflight --audit threads_v4/audits/a305734-official-evidence.json --queue /tmp/threads-v4/queue.json --staging /tmp/threads-v4/staging.json --output /tmp/threads-v4/publish-preflight.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("/tmp/threads-v4/publish-preflight.json").read_text(encoding="utf-8"))
+          assert d["status"]=="BLOCKED" and d["meta_posted"] is False
+          PY
+      - name: Verify v4 cutover remains disabled without a real Meta receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from threads_v4.cutover_gate import evaluate
+          p=json.loads(Path("/tmp/threads-v4/publish-preflight.json").read_text(encoding="utf-8"))
+          result=evaluate(verified_post=False,receipt=None,backup=False,old_disabled=False,
+                          v4_enabled=False,queue_ready=p["status"]=="REQUIRES_META_ACCOUNT_CHECK",
+                          image_reviewed=False)
+          assert result["cutover_allowed"] is False
+          Path("/tmp/threads-v4/cutover-gate.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(result,ensure_ascii=False))
+          PY
+      - name: Upload candidate review report
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-v4-candidate-review
+          path: |
+            /tmp/threads-v4/candidates.json
+            /tmp/threads-v4/staging.json
+            /tmp/threads-v4/queue.json
+            /tmp/threads-v4/official-triage.json
+            /tmp/threads-v4/evidence-gate.json
+            /tmp/threads-v4/supply-diagnostics.json
+            /tmp/threads-v4/official-fetch.json
+            /tmp/threads-v4/hold-preview.json
+            /tmp/threads-v4/publish-preflight.json
+            /tmp/threads-v4/cutover-gate.json
+          retention-days: 7
+      - name: Verify production publisher untouched
+        run: |
+          test -f .github/workflows/threads_auto.yml
+          test -f threads_posted.json
+          test -f alio.json

@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "notice_id": "a305734",
+  "decision": "HOLD",
+  "official_verified": false,
+  "source": "https://job.alio.go.kr/recruitview.do?idx=305734",
+  "institution_notice": "https://www.kipf.re.kr/kor/Plaza/Recruitment/kiRecruitment/view.do?cntNo=451",
+  "facts_from_alio": {
+    "organization": "한국조세재정연구원",
+    "title": "연구위원급(Research Fellow) 정기채용",
+    "employment": "정규직",
+    "headcount": 10,
+    "location": "세종",
+    "qualification": "경제학 또는 관련 분야 박사학위 소지자(취득 예정자 포함)",
+    "application_deadline": "2026-11-30 UTC 기준",
+    "submission": "Econ Job Market 온라인 접수"
+  },
+  "remaining_checks": [
+    "기관 원문 및 첨부 공고문 직접 확인",
+    "정정·취소 여부",
+    "기존 게시 이력 및 계정 프로필 확인",
+    "이미지 실물 검수",
+    "정확한 게시 슬롯과 UTC 마감 시각",
+    "기관 원문 HTTP 502 복구 후 확인",
+    "공고문 첨부 HTTP 403 접근 확보",
+    "UTC 마감 정확한 시각 확인"
+  ],
+  "meta_posted": false,
+  "last_verified_gate": {
+    "decision": "HOLD",
+    "reason": "MISSING_INSTITUTION_DOCUMENT_CHECKED",
+    "actions_run": 43678301824,
+    "unit_tests_passed": 25
+  },
+  "external_check": {
+    "official_alio_url": "https://job.alio.go.kr/recruitview.do?idx=305734",
+    "official_alio_access": "PASS",
+    "institution_page_access": "HTTP_502",
+    "alio_attachment_access": "HTTP_403",
+    "verified_alio_fields": [
+      "organization",
+      "title",
+      "employment",
+      "headcount",
+      "qualification",
+      "date_range",
+      "online_submission",
+      "disqualifications"
+    ],
+    "deadline_note": "Official ALIO lists 2026-11-30 UTC without exact clock; do not infer 08:59:59 KST",
+    "decision": "HOLD",
+    "reason": "INSTITUTION_DOCUMENT_AND_ATTACHMENT_UNAVAILABLE"
+  },
+  "latest_live_fetch": {
+    "actions_run": 43678729218,
+    "checked_at": "2026-11-15T13:53:57+09:00",
+    "alio": {
+      "http_status": 200,
+      "bytes": 23419,
+      "sha256": "90a6340fbe839047c5e95ac2b5904d3b06f46feafb466a69896211db7aa3fd29"
+    },
+    "institution": {
+      "http_status": 200,
+      "bytes": 280091,
+      "sha256": "8020f87432df59e4599517c0f3b53e4b577d6611d1bb8d3b03a76cc1377770e2"
+    },
+    "status": "FETCHED_NOT_VERIFIED",
+    "next": "Compare official body and attachment for eligibility, count, deadlines and corrections"
+  },
+  "official_page_content_review": {
+    "source": "https://job.alio.go.kr/recruitview.do?idx=305734",
+    "organization": "한국조세재정연구원",
+    "title": "연구위원급(Research Fellow) 정기채용",
+    "employment": "정규직",
+    "headcount": 10,
+    "location": "세종",
+    "qualification": "경제학 또는 관련 분야 박사학위 소지자(학위취득 예정자 포함)",
+    "application_window_as_published": "2026.10.06 ~ 2026.11.30",
+    "deadline_timezone": "UTC",
+    "deadline_exact_clock": "UNVERIFIED",
+    "application_channel": "https://econjobmarket.org/positions/12745",
+    "steps": "서류전형 → 면접전형 → 세미나전형",
+    "alio_attachment_status": "HTTP_403",
+    "institution_body_verified": true,
+    "correction_or_cancellation_checked": false,
+    "decision": "HOLD",
+    "checked_date": "2026-11-15",
+    "notes": "Official ALIO text read; PDF and institutional source text not independently validated; no automatic PASS",
+    "institution_body_evidence_run": 43678869008
+  },
+  "cross_source_text_evidence": {
+    "run_id": 43678869008,
+    "checked_at": "2026-11-15T13:56:10+09:00",
+    "alio_sha256": "90a6340fbe839047c5e95ac2b5904d3b06f46feafb466a69896211db7aa3fd29",
+    "institution_sha256": "8020f87432df59e4599517c0f3b53e4b577d6611d1bb8d3b03a76cc1377770e2",
+    "both_sources_agree": [
+      "institution 한국조세재정연구원",
+      "research fellow recruitment",
+      "10 posts",
+      "application 2026-10-06 to 2026-11-30 UTC",
+      "economics or related PhD or expected degree"
+    ],
+    "alio_employment": "정규직",
+    "institution_current_status": "진행중",
+    "institution_page_body_confirmed": true,
+    "correction_check": "NOT_COMPLETED",
+    "attachment_check": "NOT_COMPLETED",
+    "exact_utc_deadline_clock": "NOT_PUBLISHED_IN_CAPTURED_SNIPPET",
+    "approval": "HOLD"
+  },
+  "preview_execution": {
+    "run_id": 43678968330,
+    "generated": true,
+    "notice_id": "a305734",
+    "characters": 147,
+    "approval": "HOLD_PREVIEW_ONLY",
+    "queue_eligible": false,
+    "reason": "Official corrections and attachment, post history and image verification pending"
+  },
+  "latest_cross_source_gate": {
+    "actions_run": 43679132594,
+    "decision": "HOLD",
+    "reason": "CORRECTIONS_ATTACHMENTS_AND_DEADLINE_CLOCK_UNVERIFIED",
+    "matched": {
+      "organization": true,
+      "position": true,
+      "headcount": true,
+      "employment_from_alio": true
+    },
+    "remaining": [
+      "corrected_or_cancelled_notice_status",
+      "official_attachment_review",
+      "exact_deadline_clock",
+      "published_ledger_and_profile",
+      "image_card"
+    ],
+    "meta_posted": false
+  },
+  "production_validator_finding": {
+    "source": "main:scripts/threads_writer_queue.py",
+    "date_only_supported": true,
+    "rule": "application_period.date_only=true permits a source-supported deadline date; posting on the deadline itself requires verified closing time, otherwise APPLICATION_END_TIME_UNKNOWN",
+    "candidate_deadline": "2026-11-30",
+    "exact_clock_required_for_2026_11_15_post": false,
+    "official_document_review_still_required": true,
+    "decision": "HOLD"
+  }
+}
