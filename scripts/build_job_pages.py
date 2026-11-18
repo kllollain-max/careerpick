@@ -77,6 +77,45 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # Official JOB-ALIO public HTML rechecked 2026-11-18. These new
+    # postings are not separately audited HWP/PDF job-duty originals.
+    'a306990': {
+        'organization': '국방과학연구소',
+        'title': "국방과학연구소 '27년 상반기 임용 공개채용",
+        'source_end_date': '2026-12-02',
+        'expected_source_seats': '162',
+        'source_employment': ['무기계약직', '정규직', '계약직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306990',
+        'checked_on': '2026-11-18',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 162명은 정규직·무기계약직·비정규직을 합친 공고 전체 인원입니다. '
+            '정규직 162명 모집으로 해석할 수 없으며 각 응시코드별 고용형태·모집인원은 '
+            '기관 공고문의 모집분야 첨부에서 따로 확인해야 합니다. '
+            '2027년 3월 16일부터 근무 가능해야 하며, 연구직·기술직·관리직 정규직 지원자는 '
+            '분야별 공인영어성적 요건(예: TOEIC 700점 또는 이에 상응하는 시험)을 확인하세요. '
+            '기술기사직·행정직 정규직, 기능원 무기계약직 등은 영어 제출 대상이 서로 다릅니다. '
+            '12월 2일은 ALIO 게시 종료일이며 실제 접수 마감시각은 기관 지원화면에서 별도 확인하세요.'
+        ),
+        'scope': 'JOB-ALIO 306990 공개 HTML의 정규직·무기계약직·비정규직 혼합, 공고상 162명, 자격별 영어 제출대상과 임용예정일 확인. 각 고용형태/응시코드별 선발인원, HWP 모집분야 원본 SHA, 실제 접수시각·포털 활성은 미검증. 직무원본 검토건수에 합산하지 않음.',
+    },
+    'a307189': {
+        'organization': '한국도로공사',
+        'title': '2026년 한국도로공사 전문연구원(AI·데이터분석) 채용 공고',
+        'source_end_date': '2026-12-02',
+        'expected_source_seats': '4',
+        'source_employment': ['무기계약직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307189',
+        'checked_on': '2026-11-18',
+        'role_mix_note': (
+            '공식 JOB-ALIO 분류는 정규직이 아닌 무기계약직 전문연구원 4명입니다. '
+            '지원자는 관련 전공 박사학위, 관련 전공 석사 취득 후 해당분야 3년 이상 경력, '
+            '또는 관련 전공 학사 취득 후 해당분야 6년 이상 경력 중 하나를 충족해야 합니다. '
+            '해당분야는 AI·데이터 분석 및 모델 설계·구현 등이며, '
+            '2027년 1월 중 인턴 근무 시작부터 경북 본사 근무가 가능해야 합니다. '
+            '12월 2일은 ALIO 게시 종료일로, 실제 접수마감 시각은 기관 공고에서 확인이 필요합니다.'
+        ),
+        'scope': 'JOB-ALIO 307189 공개 HTML의 무기계약직 4명과 학위·경력 대안요건, AI 데이터 직무, 2027년 1월 경북 본사 인턴 시작 확인. 별도 PDF 직무원본과 실제 접수 시각은 미검증.',
+    },
     # New 2026-11-18 ALIO notice and employer HTML #790549, not a verified
     # HWP/HWPX job-description file. This is a fixed-term leadership appointment
     # despite the ALIO feed label "정규직". Never imply an indefinite tenure.
