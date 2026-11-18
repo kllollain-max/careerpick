@@ -25,7 +25,7 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual(proof['expected_source_seats'], post['n'])
         html = render(post, {})
         self.assertIn('현재 남아 있는 확정 결원 14명이라는 뜻이 아닙니다', html)
-        self.assertIn('최근 연구실적 요건', html)
+        self.assertIn('학위논문은 기간 제한 없음', html)
         self.assertNotIn('기관 공식 확인 접수마감', html)
         for changed in ({'n': '15'}, {'org': '다른 기관'}, {'title': '정정 공고'},
                         {'due': '2027-01-01T23:59:00+09:00'},
