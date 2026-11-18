@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-18T20:38:24.094922+09:00",
-  "run_id": "44296368933",
-  "source_commit": "c400e1c8351ca69ff79eecd086f77b4693f89eae",
+  "captured_at": "2026-11-18T22:29:38.952118+09:00",
+  "run_id": "44314092786",
+  "source_commit": "c340eef2bec7a7352dee122169b687816f27435c",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-18T20:37:34.052477+09:00",
+    "time": "2026-11-18T22:28:50.040374+09:00",
     "future_slots": [
       "2026-11-19T08:00:00+09:00",
       "2026-11-19T12:00:00+09:00",
@@ -18,7 +18,7 @@
       "2026-11-20T16:00:00+09:00",
       "2026-11-20T20:00:00+09:00"
     ],
-    "next_media": "IMAGE",
+    "next_media": "TEXT",
     "promoted": [],
     "refused": [
       {
@@ -67,7 +67,7 @@
       },
       {
         "notice_id": "a307141",
-        "reason": "SLOT_ALREADY_OCCUPIED"
+        "reason": "DUPLICATE_POST"
       },
       {
         "notice_id": "a307061",
@@ -92,10 +92,8 @@
     "inventory_shortfall": 5,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [
-      "2026-11-18T20:00:00+09:00"
-    ],
-    "media_forecast_conditional_on_active_slot": true,
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
       "2026-11-19T08:00:00+09:00",
       "2026-11-19T12:00:00+09:00",
@@ -5353,7 +5351,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-18T20:38:23.484786+09:00",
+          "checked_at": "2026-11-18T22:29:37.805811+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5479,22 +5477,37 @@
           "17900525751613055"
         ],
         "status": "recorded_publication"
+      },
+      {
+        "scheduled_at": "2026-11-18T20:00:00+09:00",
+        "post_ids": [
+          "18141503863648852"
+        ],
+        "status": "recorded_publication"
       }
     ],
-    "expected_slots": 7,
-    "recorded_publications": 7,
+    "expected_slots": 8,
+    "recorded_publications": 8,
     "receipt_success_rate": 1.0,
     "live_meta_verification_performed": false,
     "needs_attention": []
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-18T20:38:23.556985+09:00",
-    "window_start": "2026-11-16T11:38:23.556985+00:00",
+    "checked_at": "2026-11-18T22:29:37.887980+09:00",
+    "window_start": "2026-11-16T13:29:37.887980+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
     "posts": [
+      {
+        "post_id": "18141503863648852",
+        "timestamp": "2026-11-18T11:51:12+00:00",
+        "permalink": "https://www.threads.com/@hid_119/post/Df4cGHfFuME",
+        "is_reply": false,
+        "text_available": true,
+        "text_sha256": "8aa16cf0fafce62e64f30d67e9a85846b1987c9a842493520778f2d75bab8690"
+      },
       {
         "post_id": "17900525751613055",
         "timestamp": "2026-11-18T08:15:28+00:00",
