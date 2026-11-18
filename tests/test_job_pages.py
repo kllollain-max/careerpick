@@ -15,6 +15,39 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_pnuh_33_official_role_requirements_source_bound_without_unverified_cutoff(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.priority_candidate_audit import shortlist
+        from datetime import date
+        proof = VERIFIED_APPLICATION_NOTICES['a307225']
+        post = dict(id='a307225', alio=True, type='j', org='부산대학교병원',
+                    title='2026년도 일반직(간호, 행정, 보건직) 신규직원 블라인드 공개채용 모집 공고',
+                    n='33', emp=['정규직'], pub='2026-11-19T00:00:00+09:00',
+                    due='2026-12-03T23:59:00+09:00', dueHasTime=False,
+                    url='https://job.alio.go.kr/recruitview.do?idx=307225', region='부산')
+        original = copy.deepcopy(post)
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        self.assertEqual(proof['source_employment'], post['emp'])
+        self.assertNotIn('a307225', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertNotIn('application_cutoff', proof)
+        html = render(post, {})
+        self.assertIn('간호사 면허', html)
+        self.assertIn('임상경력 3년 이상', html)
+        self.assertIn('의료사회복지사 자격증', html)
+        self.assertIn('TOEIC 700점', html)
+        self.assertIn('TOEIC 600점', html)
+        self.assertIn('33명을 어느 한 분야의 인원으로 단정하지 마세요', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        for change in ({'n': '34'}, {'emp': ['비정규직']},
+                       {'title': post['title'] + ' (정정)'}, {'org': '변경병원'},
+                       {'due': '2026-12-04T23:59:00+09:00'}, {'alio': False}):
+            stale = render({**post, **change}, {})
+            self.assertNotIn('33명을 어느 한 분야의 인원으로 단정하지 마세요', stale)
+            self.assertNotIn('TOEIC 700점', stale)
+        self.assertEqual(post, original)
+        report = shortlist({'posts': [post]}, date(2026, 11, 19))
+        self.assertEqual(report['regular_review_candidates'][0]['official_reception_status'], 'unverified')
+
     def test_new_add_162_mixed_and_road_four_are_source_bound(self):
         """Nov 18 official HTML is display evidence, not 162 regular seats or a verified deadline."""
         from datetime import date
