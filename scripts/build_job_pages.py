@@ -154,9 +154,12 @@ VERIFIED_APPLICATION_NOTICES = {
             '모집단위입니다. 전체14명을 즉시 확정 일반직 정규직 인원으로 단정하지 마세요. '
             '경력직은 분야별 면허·종합병원 경력요건이 다르고 신입은 분야별 면허 및 '
             '공인어학성적(TOEIC750·TOEIC Speaking IM3·NEW TEPS285 중 1개 이상)이 필수입니다. '
-            '공식 접수 시작·마감 시각은 별도로 확인해야 합니다.'
+            '기관의 경력직 8명 전용 채용공고는 2026-11-17 12:00~11-26 23:59 접수로 확인됐습니다. '
+            '이 시각은 경력 간호직 6명·보건직 2명에만 해당합니다. '
+            '신입 일반직인턴(보건직) 6명의 기관별 실제 접수화면·마감시각은 별도 확인이 필요합니다. '
+            '경력직 확인 시각을 전체 14명 공통 접수마감으로 사용하지 마세요.'
         ),
-        'scope': 'ALIO 공식 공개 HTML의 여섯 세부분야 5+1+2+3+2+1=14명과 필수 면허/경력/영어요건. 공고 게시기간만 확인; 실제 기관 접수시간/첨부 원문 직무검토는 미확인.',
+        'scope': 'ALIO 공식 공개 HTML의 여섯 세부분야 5+1+2+3+2+1=14명과 필수 면허/경력/영어요건. 기관 경력직원 별도 접수페이지 https://snubh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=272568&systemKindCode=MRS2 에서 경력8명 11월17일12시~26일23:59 확인. 신입6명 접수화면과 원본 첨부 직무검토는 확인하지 않음.',
     },
     # ALIO official detail HTML, 2026-11-18: "상시모집" describes the posting,
     # not verified remaining vacancies or an independently live application portal.
