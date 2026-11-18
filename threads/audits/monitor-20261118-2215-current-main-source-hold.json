@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-18 13:19:25 UTC",
+  "status": "EXISTING_FUTURE_THREE_VALID_CANDIDATE_STILL_SOURCE_STALE",
+  "main_sha": "c340eef2bec7a7352dee122169b687816f27435c",
+  "state_head_at_read": "dc668feacdfd21583b35fc6df1f7c5fc4445d923",
+  "merged_pr": {
+    "number": 136,
+    "merge_commit": "c340eef2bec7a7352dee122169b687816f27435c",
+    "head": "9f87dd88146f53d2d4fe6318005fb832ff17f22b",
+    "ci_checks": [
+      {
+        "name": "live-queue-read-only",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Validate queue logic without posting",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "review",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "content-mobile",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "limits": "Exact official GSIPA source receipt fix is merged; does not approve a candidate or prove new collection/publication"
+  },
+  "history_sha": "6055549afe911cee2003df953cc6336753c83070",
+  "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+  "staging_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
+  "whole_queue_validator": "validated",
+  "future_validation": [
+    {
+      "id": "a307061",
+      "slot": "2026-11-19T08:00:00+09:00",
+      "entry_sha256": "017ba9d13648daf678fa1ce3d3ab576125430aab83e17aa6c37039c9fca62418",
+      "full_validator": "passed",
+      "media": "TEXT",
+      "main_exact": true,
+      "reply_count": 0,
+      "cta_count": 1
+    },
+    {
+      "id": "a307145",
+      "slot": "2026-11-19T12:00:00+09:00",
+      "entry_sha256": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+      "full_validator": "passed",
+      "media": "IMAGE",
+      "main_exact": true,
+      "reply_count": 0,
+      "cta_count": 1
+    },
+    {
+      "id": "a307120",
+      "slot": "2026-11-19T16:00:00+09:00",
+      "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+      "full_validator": "passed",
+      "media": "TEXT",
+      "main_exact": true,
+      "reply_count": 0,
+      "cta_count": 1
+    }
+  ],
+  "claims": {
+    "count": 56,
+    "states": {
+      "accepted": 55,
+      "historical_verified": 1
+    },
+    "pending": 0
+  },
+  "latest_regular_run": {
+    "run_id": 44298272711,
+    "attempt": 1,
+    "conclusion": "success",
+    "updated_at": "2026-11-18T11:51:37Z",
+    "head_sha": "c400e1c8351ca69ff79eecd086f77b4693f89eae",
+    "post_id": "18141503863648852",
+    "publication_previously_reported": true,
+    "no_new_meta_get_this_run": true
+  },
+  "automation_on": true,
+  "candidate": {
+    "notice_id": "a307207",
+    "target_slot": "2026-11-19T20:00:00+09:00",
+    "full_validator": "SOURCE_STALE",
+    "card_verify": "passed_exact_remote_assets",
+    "source_post_detail_hashes": "unchanged",
+    "staged": false,
+    "ready": false,
+    "source_collection_last_success_at": "2026-11-18T19:17:13+09:00",
+    "reason": "All source snapshots currently expire before tomorrow20; changing candidate cannot repair global snapshot freshness",
+    "review_audit": "threads/audits/supply-a307207-20261119-20-source-freshness-hold-20261118.json",
+    "review_audit_sha": "081e0c5fecd19eb58553e04ed0444645d5dca7b3"
+  },
+  "performance": {
+    "as_of": "2026-11-18T13:17:40.066921+00:00",
+    "summary_sha256": "f22634a31bbebcf08b4830a7360f39d9a2cae5c8360572faf0a8fb13dd9d979a",
+    "windows": {
+      "24h": {
+        "count": 11,
+        "medians": {
+          "views": 2202,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        }
+      },
+      "72h": {
+        "count": 8,
+        "medians": {
+          "views": 1803,
+          "likes": 5.5,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        }
+      }
+    },
+    "decision": "extend_observation_or_balance_intro_types",
+    "account_followers": {
+      "account": "hid_119",
+      "scope": "account_total",
+      "requested_start": "2026-11-11T11:45:18.355131+00:00",
+      "requested_end": "2026-11-18T13:17:40.066921+00:00",
+      "observed_start": "2026-11-11T11:45:32.854727+00:00",
+      "observed_end": "2026-11-18T11:15:47.456612+00:00",
+      "start_followers": 415,
+      "end_followers": 502,
+      "net_change": 87,
+      "status": "observed_interval",
+      "exact_requested_boundaries": false,
+      "observation_statuses": {
+        "captured": 50
+      },
+      "post_attribution": null,
+      "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+    }
+  },
+  "new_publications": 0,
+  "new_ready_entries": 0,
+  "production_writes_this_run": [],
+  "next_action": "Read the next existing normal collection receipt and latest main, rerun candidate/card/wholequeue without changing timestamps or guards, then staging CAS only after PASS; preserve tomorrow08/12/16 entries and no duplicate posting",
+  "user_action_required": false
+}
