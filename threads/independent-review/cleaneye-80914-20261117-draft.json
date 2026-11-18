@@ -2,7 +2,7 @@
   "schema_version": 1,
   "notice_id": "cleaneye-80914",
   "employer": "양주도시공사",
-  "review_status": "INDEPENDENT_PDF_SEMANTIC_REVIEW_DONE_NOT_APPROVED",
+  "review_status": "OFFICIAL_PDF_BYTE_DIGEST_AND_FULL_TEXT_VERIFIED_NOT_APPROVED",
   "approved_for_queue": false,
   "slot_reserved": false,
   "meta_posted": false,
@@ -19,11 +19,17 @@
     "pages": 11,
     "parsed_full_document": true,
     "semantic_read": true,
-    "method": "independent direct official PDF content extraction using TinyFish fetch_content with full 11-page text, 2026-11-17 KST",
-    "raw_pdf_sha256": null,
-    "raw_pdf_sha256_verified": false,
+    "method": "Original employer PDF fetched as HTTP 200 in read-only GitHub Action, actual bytes SHA256 and all eleven pages extracted with PyMuPDF; prior full text extraction separately confirmed",
+    "raw_pdf_sha256": "33765bd2a25f5a85a9e828ae90ec39204ce979c6e923b2291e7b9bfc9498b260",
+    "raw_pdf_sha256_verified": true,
     "actual_pdf_bytes_saved": false,
-    "visually_inspected_pages": []
+    "visually_inspected_pages": [],
+    "raw_pdf_bytes": 571775,
+    "raw_pdf_magic": "%PDF-1.6",
+    "raw_pdf_content_type": "application/smnet; Charset=utf-8",
+    "binary_checked_at": "2026-11-17T08:53:46+09:00",
+    "proof": "GitHub Actions job 133704315931 run 43983108451 original employer HTTP 200; independently SHA256 on 571775 PDF bytes; fitz read all 11 pages",
+    "raw_bytes_saved_in_repo": false
   },
   "independent_facts": [
     {
@@ -90,7 +96,10 @@
     "matching_amendment_or_cancellation_on_first_page": false,
     "all_pages_all_channels_verified": false,
     "employer_application_portal_status_verified": false,
-    "claim_no_amendment": false
+    "claim_no_amendment": false,
+    "employer_board_rechecked_at": "2026-11-17T08:53:46+09:00",
+    "employer_board_http_status": 200,
+    "first_page_no_matching_amendment_terms_observed": true
   },
   "v5_draft": {
     "post_text": "양주시 거주 청년 구직자라면,\n양주도시공사가 일반8급 운영·환경(청년) 정규직 5명을 모집해요.\n\n재활용선별장과 사업장 환경정비 업무로, 전체 채용 18명 중 해당 분야는 5명이에요. 별도 계약직 1명과 구분됩니다.\n\n공고일 전일 주민등록상 양주시 거주, 만 18~34세가 기본요건이에요. 제대군인은 복무기간에 따라 연령 상한이 1~3세 연장될 수 있어요.\n\n11월 23일 17시까지 지정 채용페이지에서 온라인 접수하며, 한 분야만 지원할 수 있어요. 필기·면접을 거칩니다.\n\n자세한 사항은 프로필링크 확인",
@@ -105,11 +114,27 @@
     "proposed_slot": "UNRESERVED_NO_CAS"
   },
   "blockers": [
-    "Actual original PDF binary bytes and independently computed SHA-256 not yet available; extracted PDF text alone is not byte-integrity proof.",
+    "Original 11-page employer PDF byte SHA was verified at 2026-11-17 08:53:46 KST; repeat current-byte digest on final intake, never treat this read as permanent validity.",
     "Only employer job-board first page checked for corrections; application portal live acceptance was not readable and other notification channels may contain amendments.",
     "Actual rendered CareerPick #job=cleaneye-80914 and official clickthrough not independently browser-verified.",
     "Full production validate_entry, verify_official_receipt and media-card test not run; never count as approved.",
     "Reviewed-submissions ingestion and CAS writer queue not performed; keep all existing 2026-11-17 slots intact."
   ],
-  "safety_policy": "No validator relaxation, no simulated timestamps, no posting or queue update"
+  "safety_policy": "No validator relaxation, no simulated timestamps, no posting or queue update",
+  "evidence_workflow": {
+    "run": "https://github.com/kllollain-max/careerpick/actions/runs/43983108451",
+    "job_id": 133704315931,
+    "workflow_commit": "6b3200a093bfb9303324973a9beaeff594c404a2",
+    "assertions": [
+      "Exact official PDF returned HTTP 200 and %PDF-1.6 magic",
+      "Raw original PDF binary length 571775 bytes and SHA256 independently computed",
+      "11 PDF pages all text-extracted and inspected against proposed unit facts",
+      "Official institution notice and job-list first page HTTP 200"
+    ],
+    "limitations": [
+      "No visual page rendering in this run",
+      "No exhaustive amendments scan across other official channels",
+      "ATS page's live accepted application status not independently confirmed"
+    ]
+  }
 }

@@ -1,0 +1,123 @@
+name: Independent official PDF receipt for Yangju 80914 (no posting)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/threads-80914-one-shot-review.yml'
+permissions:
+  contents: read
+jobs:
+  official-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Re-fetch employer PDF bytes, inspect notices and extract full text
+        shell: bash
+        run: |
+          python -m pip install --quiet requests pymupdf beautifulsoup4
+          python - <<'PY'
+          import requests, hashlib, json, re, sys
+          from bs4 import BeautifulSoup
+          import fitz
+          ses=requests.Session()
+          ses.headers.update({'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/132.0 Safari/537.36','Accept-Language':'ko-KR,ko;q=0.9'})
+          board='https://www.yjuc.or.kr/sub/content.asp?actionMode=view&cIdx=32&fboard=board_job&num=690'
+          listing='https://www.yjuc.or.kr/sub/content.asp?cIdx=32&fboard=board_job'
+          pdf='https://www.yjuc.or.kr/fboard/common/download.asp?f_idx=8224&fboard=board_job'
+          r=ses.get(board,timeout=30)
+          print('OFFICIAL_BOARD_STATUS',r.status_code,'SIZE',len(r.content),'URL',r.url)
+          print('BOARD_MATCH', '2026-111' in r.text,'DESIGNATED_APPLICATION', 'yjuc.plusrecruit.co.kr' in r.text)
+          s=ses.get(listing,timeout=30)
+          st=BeautifulSoup(s.text,'html.parser').get_text(' ',strip=True)
+          print('OFFICIAL_LIST_STATUS',s.status_code,'SIZE',len(s.content))
+          print('CORRECTION_WORD_CONTEXT',repr(' '.join(re.findall('.{0,60}(?:2026-111|정정|취소|변경).{0,60}',st)[:15])))
+          ses.headers['Referer']=board
+          d=ses.get(pdf,timeout=45,headers={'Accept':'application/pdf,*/*'})
+          print('OFFICIAL_PDF_HTTP',d.status_code,'CONTENT_TYPE',d.headers.get('Content-Type'),'LENGTH',len(d.content),'FINAL_URL',d.url)
+          print('PDF_MAGIC',repr(d.content[:12]))
+          if d.status_code!=200 or not d.content.startswith(b'%PDF-'):
+            raise RuntimeError('OFFICIAL_PDF_BINARY_NOT_VERIFIED; draft remains NOT approved')
+          sha=hashlib.sha256(d.content).hexdigest()
+          print('OFFICIAL_PDF_SHA256',sha)
+          doc=fitz.open(stream=d.content,filetype='pdf')
+          print('OFFICIAL_PDF_PAGES',len(doc))
+          all_text=[]
+          for n,p in enumerate(doc):
+            t=p.get_text()
+            all_text.append(t)
+            print('---- PAGE',n+1,'CHARS',len(t),'----')
+            print(t[:4800])
+          raw='\n'.join(all_text)
+          for term in ['운영','환경','청년','2026.11.23','17:00','양주시','만 34']:
+            print('TERM',term,term in raw)
+          with open('yangju_80914_official_receipt.json','w') as f:
+            json.dump({'pdf_url':pdf,'pdf_sha256':sha,'pdf_bytes':len(d.content),'pages':len(doc),'official_job_board_http':r.status_code,'listing_http':s.status_code,'application_url':'https://yjuc.plusrecruit.co.kr/','all_extracted_text':raw},f,ensure_ascii=False)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yangju-80914-pdf-review
+          path: yangju_80914_official_receipt.json
+          retention-days: 7
+
+  browser-target:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Read-only Chromium profile modal and employer ATS status
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          import json, time
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          opt=Options()
+          for a in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1280,900'):
+              opt.add_argument(a)
+          d=webdriver.Chrome(options=opt)
+          observations={}
+          try:
+              targets={
+                'profile':'https://kllollain-max.github.io/careerpick/#job=cleaneye-80914',
+                'ats':'https://yjuc.plusrecruit.co.kr/',
+                'ats_list':'https://yjuc.plusrecruit.co.kr/#/recruitment/list',
+                'ats_notices':'https://yjuc.plusrecruit.co.kr/#/board/notice/list'
+              }
+              for key,url in targets.items():
+                  d.set_page_load_timeout(50)
+                  d.get(url)
+                  try:
+                      WebDriverWait(d,18).until(lambda w: len(w.execute_script("return document.body?.innerText || ''"))>150)
+                  except Exception: pass
+                  # Atomic DOM snapshot avoids stale WebElement references while this SPA redraws.
+                  snap=d.execute_script("""return {body: document.body?.innerText || '',
+                    links: Array.from(document.querySelectorAll('a')).map(a=>({
+                      text: (a.innerText||'').slice(0,100), href: a.href||null
+                    }))}""")
+                  body=snap['body']
+                  anchors=snap['links']
+                  observations[key]={'requested':url,'actual':d.current_url,'title':d.title,'body_length':len(body),'body_excerpt':body[:9000],
+                                     'relevant_links':[a for a in anchors if '80914' in (a['href'] or '') or 'yjuc' in (a['href'] or '').lower() or '채용' in a['text']][:30]}
+                  d.save_screenshot('80914-'+key+'.png')
+                  print('BROWSER',key,'TITLE',d.title,'URL',d.current_url,'CHARS',len(body))
+                  print('BODY',body[:2000])
+                  print('RELEVANT',observations[key]['relevant_links'])
+              print('PROFILE_EMPLOYER_FOUND', '양주도시공사' in observations['profile']['body_excerpt'])
+              print('ATS_HAS_TEXT',len(observations['ats']['body_excerpt'])>150)
+              with open('80914-browser-review.json','w') as f:
+                  json.dump(observations,f,ensure_ascii=False,indent=2)
+          finally:
+              d.quit()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yangju-80914-browser-review
+          path: |
+            80914-browser-review.json
+            80914-profile.png
+            80914-ats.png
+          retention-days: 7
