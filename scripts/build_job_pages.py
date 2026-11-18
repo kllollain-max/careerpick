@@ -51,6 +51,8 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306355': '2026-11-16T10:00:00+09:00',
     'a306799': '2026-11-23T10:00:00+09:00',
     'a306662': '2026-11-18T17:00:00+09:00',
+    # CBNHU official application portal: 2026-11-18 12:00, not ALIO's 23:59 posting end.
+    'a306665': '2026-11-18T12:00:00+09:00',
     # Official ALIO recruitment method: 2026-11-18 17:00, not the 23:59 posting end.
     'a306660': '2026-11-18T17:00:00+09:00',
     # Official 307034 notice HWP, section 6; ALIO fileNo=3087622, checked 2026-11-16.
@@ -72,6 +74,25 @@ VERIFIED_DUTIES = json.loads(
 VERIFIED_APPLICATION_NOTICES = {
     # Official ALIO HTML reviewed 2026-11-18. These do NOT count as newly
     # extracted PDF/HWP duties; the snapshots and field counts remain intact.
+    'a306665': {
+        'organization': '충북대학교병원',
+        'title': '2026년도 제6차 충북대학교병원 신규직원 블라인드 채용 공고',
+        'source_end_date': '2026-11-18',
+        'expected_source_seats': '13',
+        'source_employment': ['정규직'],
+        'source_url': 'https://cbnuh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=270620&systemKindCode=MRS2',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-04T00:00:00+09:00',
+        'application_end_date': '2026-11-18',
+        'role_mix_note': (
+            '기관 공식 채용페이지에서 확인한 실제 원서접수 마감은 2026년 11월 18일 12:00입니다. '
+            'ALIO 게시 종료일(11월 18일)을 23:59 원서접수 마감으로 해석하면 안 됩니다. '
+            '공고 전체 모집인원 13명은 행정직(행정·회계), 의료기술직(방사선사), '
+            '원무직(조리원), 환경관리직(미화원), 시설관리직(기계) 모집분야의 합계입니다. '
+            '분야별 정확한 인원과 필수 면허·자격은 첨부 공고문을 확인하세요.'
+        ),
+        'scope': 'CBNUH 공식 채용포털 HTML에서 2026-11-04 00:00~11-18 12:00 실제 접수기간 확인. JOB-ALIO 공개 HTML은 정규직 총13명 및 6개 분야 확인. 첨부 PDF/ZIP 바이트와 분야별 인원·면허 원문은 이번에 검증하지 않았음.',
+    },
     'a306660': {
         'organization': '한국보훈복지의료공단',
         'title': '[원주보훈요양원] 2026년 제7차 요양보호직 공개채용',
