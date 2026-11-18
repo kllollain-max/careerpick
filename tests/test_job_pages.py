@@ -1276,12 +1276,17 @@ class RemainingOriginalReviewTests(unittest.TestCase):
 class DetailDisplayMetadataTests(unittest.TestCase):
     def test_export_requires_exact_identity_source_end_and_supported_field(self):
         from scripts.build_public_site import homepage_detail_corrections
-        post=dict(id='a1',alio=True,org='기관',title='공고',due='2027-01-22')
+        post=dict(id='a1',alio=True,org='기관',title='공고',due='2027-01-22',
+                  n='28',emp=['정규직'])
         proof=dict(organization='기관',title='공고',source_end_date='2027-01-22',detail_display_corrections={'disqlfcRsn':{'expected':'old','value':'checked'},'recrutNope':{'expected':'1','value':'2'}})
         before=copy.deepcopy((post,proof))
         got=homepage_detail_corrections([post],{'a1':proof},{})
         self.assertEqual(set(got['a1']['corrections']),{'disqlfcRsn'})
+        self.assertEqual(got['a1']['sourceSeats'],'28')
+        self.assertEqual(got['a1']['sourceTerms'],['정규직'])
         self.assertEqual((post,proof),before)
+        for malformed in [{'n':None},{'emp':None}]:
+            self.assertEqual(homepage_detail_corrections([dict(post,**malformed)],{'a1':proof},{}),{})
         for change in [{'title':'changed'},{'org':'other'},{'due':'2027-01-23'},{'alio':False}]:
             self.assertEqual(homepage_detail_corrections([dict(post,**change)],{'a1':proof},{}),{})
 

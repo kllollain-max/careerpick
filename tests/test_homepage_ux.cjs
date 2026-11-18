@@ -368,7 +368,9 @@ function detailCorrectionFixture(id){
   const post=require('../alio.json').posts.find(p=>p.id===id);
   const source=require('../alio-detail.json')[id];
   const reviewed=require('../scripts/verified_job_duties.json')[id];
-  const evidence={org:post.org,title:post.title,sourceEndDate:post.due.slice(0,10),corrections:JSON.parse(JSON.stringify(reviewed.detail_display_corrections))};
+  const evidence={org:post.org,title:post.title,sourceEndDate:post.due.slice(0,10),
+    sourceSeats:String(post.n),sourceTerms:post.emp.slice(),
+    corrections:JSON.parse(JSON.stringify(reviewed.detail_display_corrections))};
   const context=vm.createContext({window:{CP_VERIFIED_DETAIL_CORRECTIONS:{[id]:evidence}},Date});
   vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
   return {post,source,evidence,api:context.window.CPHome};
@@ -385,12 +387,23 @@ test('reviewed detail display fixes actual source discrepancies without changing
 });
 test('changed notice identity date or source text prevents a stale display correction',()=>{
   const {post,source,api}=detailCorrectionFixture('a306929');
-  for(const changed of [{id:'a1'},{org:'other'},{title:'other'},{due:'2027-01-23'},{alio:false}])
+  for(const changed of [{id:'a1'},{org:'other'},{title:'other'},{due:'2027-01-23'},
+                        {n:'9999'},{emp:['계약직']},{emp:[]},{alio:false}])
     assert.equal(api.reviewedDetailDisplay({...post,...changed},source).detail,source);
   for(const changed of [{recrutPblntSn:'1'},{disqlfcRsn:'new source terms'}]){
     const detail={...source,...changed};assert.equal(api.reviewedDetailDisplay(post,detail).detail,detail);
   }
   assert.equal(api.reviewedDetailDisplay(post,null).detail,null);
+});
+test('reviewed detail display requires seats and employment proof even for unchanged identity',()=>{
+  const {post,source,evidence,api}=detailCorrectionFixture('a306929');
+  delete evidence.sourceSeats;
+  assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
+  evidence.sourceSeats=String(post.n);
+  delete evidence.sourceTerms;
+  assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
+  evidence.sourceTerms=['계약직'];
+  assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
 });
 test('display metadata cannot change other fields or supply a missing expected source',()=>{
   const {post,source,evidence,api}=detailCorrectionFixture('a306929');

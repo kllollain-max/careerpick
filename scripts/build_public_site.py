@@ -115,7 +115,8 @@ def homepage_detail_corrections(posts, duties, cutoffs):
         source_end = proof.get('source_end_date') or cutoffs.get(pid, '')[:10]
         if (post.get('alio') is not True or proof.get('organization') != post.get('org')
                 or proof.get('title') != post.get('title')
-                or not source_end or str(post.get('due', ''))[:10] != source_end):
+                or not source_end or str(post.get('due', ''))[:10] != source_end
+                or post.get('n') is None or not isinstance(post.get('emp'), list)):
             continue
         changes = {field: value for field, value in proof.get('detail_display_corrections', {}).items()
                    if field in ('aplyQlfcCn', 'disqlfcRsn') and isinstance(value, dict)
@@ -123,6 +124,7 @@ def homepage_detail_corrections(posts, duties, cutoffs):
                    and isinstance(value.get('value'), str) and value['value']}
         if changes:
             result[pid] = dict(org=post['org'], title=post['title'], sourceEndDate=source_end,
+                              sourceSeats=str(post['n']), sourceTerms=list(post['emp']),
                               corrections=changes)
     return result
 

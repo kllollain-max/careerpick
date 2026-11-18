@@ -22,7 +22,10 @@
     const proof=root.CP_VERIFIED_DETAIL_CORRECTIONS?.[p?.id];
     if(!p?.alio || !det || typeof det!=='object' || Array.isArray(det) || !proof ||
        proof.org!==p.org || proof.title!==p.title || !date(p.due) ||
-       day(date(p.due))!==proof.sourceEndDate || String(det.recrutPblntSn)!==noticeKey(p))return unchanged;
+       day(date(p.due))!==proof.sourceEndDate || proof.sourceSeats!==String(p.n) ||
+       !Array.isArray(proof.sourceTerms) || !Array.isArray(p.emp) ||
+       JSON.stringify(proof.sourceTerms)!==JSON.stringify(p.emp) ||
+       String(det.recrutPblntSn)!==noticeKey(p))return unchanged;
     let result=det;const changed=[];
     for(const [field,fix] of Object.entries(proof.corrections||{})){
       if(!['aplyQlfcCn','disqlfcRsn'].includes(field) || typeof fix?.expected!=='string' ||
