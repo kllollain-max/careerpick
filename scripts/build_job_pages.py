@@ -596,6 +596,9 @@ def render(post, detail, related_posts=(), notice_review=None):
     # A verified application cutoff takes precedence over the publication end
     # date. Keep the feed intact and preserve the archived URL/bookmarks.
     closed = is_closed(application_cutoff or due)
+    # An identity-verified long-running notice is not proof of a live vacancy.
+    # Retain the accessible detail page, but do not index unconfirmed openings.
+    robots_noindex = closed or verified_application_notice.get('application_status_unconfirmed') is True
 
     official = (
         safe_url(post.get('src'))
@@ -1140,7 +1143,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     # 안내용 HTML 페이지는 그대로 유지합니다.
     # Publication end dates are not verified application deadlines. Keep the
     # useful HTML, but do not emit a JobPosting with an invented validThrough.
-    schema_json = '' if duplicate or closed or post.get('dueHasTime') is not True else (
+    schema_json = '' if duplicate or robots_noindex or post.get('dueHasTime') is not True else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
@@ -1202,7 +1205,7 @@ def render(post, detail, related_posts=(), notice_review=None):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)} | {escape(org)} | 커리어픽</title>
 <meta name="description" content="{escape(meta_description, quote=True)}">
-{'<meta name="robots" content="noindex,follow">' if closed else ''}
+{'<meta name="robots" content="noindex,follow">' if robots_noindex else ''}
 <link rel="canonical" href="{escape(canonical, quote=True)}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{escape(title, quote=True)}">
