@@ -144,5 +144,42 @@
   "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
   "remote_asset_readback_sha256_equal": true,
   "stage_readback_fingerprint_equal": true,
-  "whole_prospective_queue": "validated"
+  "whole_prospective_queue": "validated",
+  "final_observed_at": "2026-11-18 11:04:23 UTC",
+  "latest_regular_publisher_runs": [
+    {
+      "id": 44274562494,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-18T09:18:50Z",
+      "head_sha": "1470c882ee0496c592bcb0834a0ae73e01041add"
+    },
+    {
+      "id": 44265327920,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-18T08:15:52Z",
+      "head_sha": "eee9cfa71b1c0e4034fb2bcc0e25014cb05e2a55"
+    },
+    {
+      "id": 44262929981,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-18T07:58:36Z",
+      "head_sha": "eee9cfa71b1c0e4034fb2bcc0e25014cb05e2a55"
+    },
+    {
+      "id": 44259554572,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-18T07:32:38Z",
+      "head_sha": "4940a3e26f895f0c1f6f7d21746de097eebafa35"
+    }
+  ],
+  "regular_1945_or20_run_observed": false,
+  "note": "At final current run-list read, latest preflight18:18 and actual publisher17:15 remain; 19:45/20 outcome not yet observed, within regular20 two-hour grace. No extra dispatch/rerun or success claim."
 }
