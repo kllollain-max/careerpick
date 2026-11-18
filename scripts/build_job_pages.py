@@ -111,6 +111,26 @@ VERIFIED_APPLICATION_NOTICES = {
         ),
         'scope': 'ALIO 공식 공개 HTML의 여섯 세부분야 5+1+2+3+2+1=14명과 필수 면허/경력/영어요건. 공고 게시기간만 확인; 실제 기관 접수시간/첨부 원문 직무검토는 미확인.',
     },
+    # ALIO official detail HTML, 2026-11-18: "상시모집" describes the posting,
+    # not verified remaining vacancies or an independently live application portal.
+    'a305089': {
+        'organization': '충남대학교병원',
+        'title': '2026년 하반기 신규의료진(임상교수요원) 공개채용 모집공고(상시모집)',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '14',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305089',
+        'checked_on': '2026-11-18',
+        'application_status_unconfirmed': True,
+        'role_mix_note': (
+            'ALIO에는 임상교수요원 정규직 총 14명 및 상시모집으로 등록되어 있습니다. '
+            '이 숫자는 현재 남아 있는 확정 결원 14명이라는 뜻이 아닙니다. '
+            '실제 접수 가능 여부·분야별 잔여 인원은 기관 채용시스템에서 별도 확인해야 합니다. '
+            '지원자는 공식 상세의 경력요건 중 하나와 최근 연구실적 요건 중 하나를 각각 충족해야 하며, '
+            '예외 인정 여부는 기관 심의 사항입니다.'
+        ),
+        'scope': 'ALIO 공식 HTML의 정규직 의사직 14명·상시모집 표기, 경력 및 연구실적 요건 확인. 기관 접수창의 실시간 활성·잔여 결원 및 PDF 직무원본 바이트는 미검증; 현재 접수 가능 확정 또는 직무원본 검증 건수로 계산하지 않음.',
+    },
     'a306875': {
         'organization': '분당서울대학교병원',
         'title': '분당서울대학교병원 신입(업무지원직) 직원 채용 공고',
