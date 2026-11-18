@@ -99,6 +99,36 @@ jobs:
            browser.close()
           (out/'actual-browser-receipt.json').write_text(json.dumps({'notice_id':'cleaneye-81291','reviewed_sites':results,'approved_for_queue':False,'claimed_profile_exact_verified':False},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
+      - name: Inspect exact CareerPick job record and modal without modifying site or posting
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,pathlib,datetime
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
+          out=pathlib.Path('browser-81291')
+          with sync_playwright() as p:
+           browser=p.chromium.launch(headless=True)
+           page=browser.new_page(viewport={'width':390,'height':844},locale='ko-KR')
+           page.goto('https://kllollain-max.github.io/careerpick/#job=cleaneye-81291',wait_until='domcontentloaded',timeout=45000)
+           page.wait_for_timeout(12000)
+           observation=page.evaluate("""() => {
+            const id='cleaneye-81291';
+            const matches=(typeof POSTS!=='undefined' && Array.isArray(POSTS)) ? POSTS.filter(p=>p.id===id||p.sourceIds?.includes(id)).map(p=>({id:p.id,org:p.org,title:p.title,count:p.count,due:p.due,cleaneye:p.cleaneye,url:p.url,sourceIds:p.sourceIds})) : [];
+            return {hash:location.hash,post_count:typeof POSTS!=='undefined'&&Array.isArray(POSTS)?POSTS.length:null,matches,jobview_hidden:document.getElementById('jobview')?.hidden,modal_text:(document.getElementById('jvBody')?.innerText||'').slice(0,12000)}
+           }""")
+           if observation['matches'] and observation['jobview_hidden']:
+            page.evaluate("() => { if(typeof openJob==='function') openJob('cleaneye-81291',false); }")
+            page.wait_for_timeout(1500)
+            observation['after_click_modal_text']=page.locator('#jvBody').inner_text(timeout=6000)[:12000]
+            observation['after_click_hidden']=page.locator('#jobview').evaluate('(el)=>el.hidden')
+           observation['checked_at_kst']=datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat()
+           (out/'profile-exact-record-and-dialog.json').write_text(json.dumps(observation,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+           page.screenshot(path=str(out/'profile-exact-dialog.png'),full_page=False)
+           print('EXACT_PROFILE_RECORD',json.dumps({k:v for k,v in observation.items() if k not in ('modal_text','after_click_modal_text')},ensure_ascii=False))
+           print('EXACT_PROFILE_DIALOG_TEXT',(observation.get('after_click_modal_text') or observation.get('modal_text') or '')[:4000])
+           browser.close()
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: threads-81291-portal-profile-readonly
