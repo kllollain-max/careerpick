@@ -31,6 +31,12 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306937': '2026-11-20T17:00:00+09:00',
     'a306941': '2026-11-20T17:00:00+09:00',
     'a306962': '2026-11-20T17:00:00+09:00',
+    # CNUH original recruitment PDFs (ALIO fileNo 3085307/3085325/3085331)
+    # read 2026-11-19. All three require submission by 17:00 on 11/19,
+    # NOT the synthetic 23:59 ALIO publication-end clock.
+    'a306733': '2026-11-19T17:00:00+09:00',
+    'a306735': '2026-11-19T17:00:00+09:00',
+    'a306737': '2026-11-19T17:00:00+09:00',
     # ALIO official detail (not publication end), checked 2026-11-17.
     'a306755': '2026-11-20T17:00:00+09:00',
     # SNU Dental Hospital official notice: reception opens 2027-01-18 09:00.
@@ -77,6 +83,46 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # CNUH original recruitment notice PDFs read as text 2026-11-19.
+    # Independent PDF binary byte/SHA acquisition is not claimed here.
+    # Exact-source records prevent stale cutoff/field facts after ALIO changes.
+    'a306733': {
+        'organization': '충남대학교병원',
+        'title': '[대전] 2026년 11월 충남대학교병원 업무지원직(기계기사, 전기기사, 보조원, 환경사) 공개채용 공고',
+        'source_end_date': '2026-11-19',
+        'expected_source_seats': '21',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-05',
+        'application_end_date': '2026-11-19',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085307',
+        'checked_on': '2026-11-19',
+        'hiring_breakdown': '기계기사 1명, 전기기사 1명, 보조원 6명, 환경사 13명 (공식 공고문 전체 21명)',
+        'scope': '공식 공고문 PDF 텍스트에서 11월 19일 17시 온라인 원서접수 마감, 직종별 1+1+6+13명, 기계·전기 필수 자격증과 보조원·환경사 별도 필수자격 없음, 3개월 수습 및 평가를 대조함. PDF 바이너리 SHA는 이번에 독립 재계산하지 않음.',
+    },
+    'a306735': {
+        'organization': '충남대학교병원',
+        'title': '[대전,세종] 2027년도 상반기 신규의료진(임상교수요원) 공개채용 모집공고',
+        'source_end_date': '2026-11-19',
+        'expected_source_seats': '49',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-05',
+        'application_end_date': '2026-11-19',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085325',
+        'checked_on': '2026-11-19',
+        'scope': '공식 임상교수요원 모집 PDF 텍스트에서 대전·세종 전체 49명 및 11월 19일 17시 온라인 접수마감 확인. 분야별 상세인원과 실제 잔여 모집인원은 별도 검증하지 않음. PDF 바이너리 SHA 독립 재계산 없음.',
+    },
+    'a306737': {
+        'organization': '충남대학교병원',
+        'title': '[대전,세종] 2027년도 상반기 신규의료진(전임의사) 공개채용 모집공고',
+        'source_end_date': '2026-11-19',
+        'expected_source_seats': '29',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-05',
+        'application_end_date': '2026-11-19',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085331',
+        'checked_on': '2026-11-19',
+        'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, PDF 바이너리 SHA 독립 재계산 없음.',
+    },
     # JOB-ALIO public text (2026-11-19) conflicts internally: employment is
     # labeled '정규직' while the selection-stage heading is '개방형 계약직'.
     # This is a discrepancy notice only; do not assert a confirmed contract
