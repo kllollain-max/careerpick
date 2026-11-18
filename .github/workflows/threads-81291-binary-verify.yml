@@ -178,6 +178,8 @@ jobs:
              u=urljoin(board,a['href'])
              if u.startswith('https://') and urlsplit(u).hostname in ('www.ncuc.or.kr','www.nyj.go.kr'):
               candidates.append(u)
+          # Exact employer attachment URL extracted from the original 2026-424 board's fileDownload anchor; not guessed from the PDF hash.
+          candidates.insert(0,'https://www.ncuc.or.kr/File/Download/8d3bff297caac379b8a18a1608f7ce14')
           candidates=list(dict.fromkeys(candidates))
           evidence={'notice':'2026-424','candidates':candidates,'read_pdf':[],'status':'NO_DIRECT_JD_URL_VERIFIED','approved_for_queue':False}
           for u in candidates[:8]:
