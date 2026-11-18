@@ -14,7 +14,7 @@ import re
 import shutil
 import subprocess
 import tempfile
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote, urljoin, urlparse
@@ -85,7 +85,8 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         except ValueError:
             continue
         result[pid] = dict(org=post['org'], title=post['title'], sourceEndDate=source_end,
-                           start=start, endDate=end)
+                           start=start, endDate=end, sourceSeats=str(post.get('n')),
+                           sourceTerms=post.get('emp'))
     for post in posts:
         pid = post.get('id'); proof = duties.get(pid, {})
         if (pid not in result and post.get('alio') is True
@@ -135,6 +136,14 @@ def static_recruitment_posts(posts, metadata, now):
                 continue
             if proof.get('cutoff') and now >= datetime.fromisoformat(proof['cutoff']):
                 continue
+            # Date-only receipt end: never claim the final KST day certainly open.
+            end_day = proof.get('endDate')
+            if isinstance(end_day, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', end_day):
+                try:
+                    if now.astimezone(timezone(timedelta(hours=9))).date() >= date.fromisoformat(end_day):
+                        continue
+                except ValueError:
+                    pass
             start = proof.get('start')
             if start:
                 clock = datetime.fromisoformat(start if 'T' in start else start + 'T00:00:00+09:00')
