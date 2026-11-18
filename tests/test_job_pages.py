@@ -32,6 +32,10 @@ class JobPageTests(unittest.TestCase):
         self.assertNotIn('기관 공식 확인 접수마감</th><td>2026-11-18 23:59', html)
         meta = homepage_cutoff_metadata([post], {post['id']: cutoff}, {post['id']: proof})
         self.assertEqual(meta['a306660']['cutoff'], cutoff)
+        self.assertEqual(homepage_cutoff_metadata([{**post, 'n': '13'}],
+            {post['id']: cutoff}, {post['id']: proof}), {})
+        self.assertEqual(homepage_cutoff_metadata([{**post, 'emp': ['계약직']}],
+            {post['id']: cutoff}, {post['id']: proof}), {})
         instant = datetime.fromisoformat(cutoff)
         self.assertEqual(static_recruitment_posts([post], meta, instant - timedelta(seconds=1)), [post])
         self.assertEqual(static_recruitment_posts([post], meta, instant), [])
