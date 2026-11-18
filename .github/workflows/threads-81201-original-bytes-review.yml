@@ -27,7 +27,11 @@ jobs:
           report={"notice_id":"cleaneye-81201","checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"approved":False,"cas_registered":False,"meta_posted":False,"url":target}
           errors=[]
           try:
-            r=requests.get(target,headers=headers,timeout=(12,35),allow_redirects=True)
+            s=requests.Session()
+            first=s.get(base+"board.php?bo_table=recruit&wr_id=248",headers=headers,timeout=(12,35),allow_redirects=True)
+            report["employer_page_http"]=first.status_code
+            report["employer_page_final_url"]=first.url
+            r=s.get(target,headers=headers,timeout=(12,35),allow_redirects=True)
             report["employer_http"]=r.status_code
             report["employer_final_url"]=r.url
             report["employer_bytes"]=len(r.content)
