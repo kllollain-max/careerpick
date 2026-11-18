@@ -52,11 +52,10 @@
   "urls_in_post": 0,
   "cta": "자세한 사항은 프로필링크 확인",
   "not_approved_because": [
-    "official PDF original and all job fact semantics now verified; however current live employer cancellation/correction final status not independently exhausted",
-    "careerpick exact job profile display not independently rendered/verified",
-    "existing collection source 2026-11-18 01:08 KST too old for 2026-11-19 08:00 slot; must await successful exact official collector digest verification without fake timestamp",
-    "full current validate_entry and production remote queue CAS approval not completed",
-    "scheduled 08:00 text-vs-image alternation and prior claim/post/readback must be checked at ingest"
+    "formal employer correction/cancellation final scan and date of any notices must be reconfirmed before publication",
+    "2026-11-18 01:08 KST preserved ALIO collector snapshot is older than 24h at 2026-11-19 08:00 KST; do not fake source verification, await independent collector success",
+    "exact future media ordering and related card-pixel verification (if IMAGE) must be checked after intervening scheduled publications",
+    "production validate_entry + official receipt + remote claim/posts + CAS ingestion have not passed"
   ],
   "approved_for_queue": false,
   "cas_registered": false,
@@ -83,5 +82,26 @@
       "page 16-17: NCS written exam not held for counseling positions; detailed job descriptions"
     ]
   },
-  "pdf_independent_read_passed": true
+  "pdf_independent_read_passed": true,
+  "profile_actual_browser": {
+    "checked_at_utc": "2026-11-18T04:05:53.826561+00:00",
+    "run_id": 44234823464,
+    "artifact_id": 14397236069,
+    "public_job_url": "https://kllollain-max.github.io/careerpick/#job=a307061",
+    "http_status": 200,
+    "exact_notice_and_employer_visible": true,
+    "exact_recruitment_title_visible": true,
+    "official_deadline_18_00_visible": true,
+    "mobile_screenshot_artifact": "careerpick-a307061-mobile.png",
+    "read_only": true
+  },
+  "draft_contract_check": {
+    "len": 294,
+    "cta_exact_once": true,
+    "no_url": true,
+    "no_hash": true,
+    "no_auto_replies": true,
+    "preliminary_pass": true,
+    "publisher_validate_entry": "NOT_EXECUTED_NO_APPROVAL"
+  }
 }
