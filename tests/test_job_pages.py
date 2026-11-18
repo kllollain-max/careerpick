@@ -34,6 +34,43 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('현재 남아 있는 확정 결원 14명이라는 뜻이 아닙니다', changed_html)
         self.assertEqual(post, original)
 
+    def test_cbnuh_official_noon_cutoff_is_source_bound_and_does_not_rewrite_feed(self):
+        from datetime import timedelta
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        from scripts.priority_candidate_audit import shortlist
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306665']; original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a306665']
+        cutoff = CONFIRMED_APPLICATION_CUTOFFS['a306665']
+        self.assertEqual(cutoff, '2026-11-18T12:00:00+09:00')
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        self.assertEqual(proof['source_employment'], post['emp'])
+        html = render(post, {})
+        self.assertIn('2026-11-18 12:00 (KST)', html)
+        self.assertIn('공고 전체 모집인원 13명', html)
+        self.assertNotIn('기관 공식 확인 접수마감</th><td>2026-11-18 23:59', html)
+        meta = homepage_cutoff_metadata([post], {post['id']: cutoff}, {post['id']: proof})
+        self.assertEqual(meta['a306665']['cutoff'], cutoff)
+        before = datetime.fromisoformat(cutoff) - timedelta(seconds=1)
+        instant = datetime.fromisoformat(cutoff)
+        self.assertEqual(static_recruitment_posts([post], meta, before), [post])
+        self.assertEqual(static_recruitment_posts([post], meta, instant), [])
+        window = {post['id']: {**proof, 'application_cutoff': cutoff}}
+        self.assertEqual(len(shortlist({'posts': [post]}, instant.date(),
+            verified_windows=window, as_of_instant=before)['top']), 1)
+        self.assertEqual(shortlist({'posts': [post]}, instant.date(),
+            verified_windows=window, as_of_instant=instant)['excluded']['official_reception_closed'], 1)
+        for changed in ({'n': '14'}, {'org': '다른기관'}, {'title': '정정공고'},
+                        {'emp': ['계약직']}, {'due': '2026-11-19T23:59:00+09:00'},
+                        {'alio': False}):
+            altered = {**post, **changed}
+            self.assertNotIn('공고 전체 모집인원 13명', render(altered, {}))
+            self.assertNotIn('기관 공식 확인 접수마감', render(altered, {}))
+            self.assertEqual(homepage_cutoff_metadata([altered],
+                {post['id']: cutoff}, {post['id']: proof}), {})
+        self.assertEqual(post, original)
+
     def test_wonju_care_actual_1700_cutoff_is_source_bound_and_never_rewrites_feed(self):
         from datetime import timedelta
         from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
