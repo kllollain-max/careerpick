@@ -412,8 +412,8 @@ test('a verified date-only window marks future reception without inventing a fin
   proof.endDate='2027-01-17';assert.equal(api.confirmedApplicationStart(post),null);
 });
 test('official employment conflict changes only display and filter copies, and rejects stale proof',()=>{
- const p={id:'a306988',alio:true,org:'국민연금공단',title:'공고',due:'2026-12-01',emp:['정규직'],type:'j'};
- const proof={org:p.org,title:p.title,sourceEndDate:p.due,employment:{sourceTerms:['정규직'],terms:['계약직'],note:'공식PDF 계약직3~5년'}};
+ const p={id:'a306988',alio:true,org:'국민연금공단',title:'공고',due:'2026-12-01',n:'2',emp:['정규직'],type:'j'};
+ const proof={org:p.org,title:p.title,sourceEndDate:p.due,sourceSeats:'2',sourceTerms:['정규직'],employment:{sourceTerms:['정규직'],terms:['계약직'],note:'공식PDF 계약직3~5년'}};
  const ctx=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[p.id]:proof}},Date});
  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),ctx);
  const api=ctx.window.CPHome;const original=JSON.stringify(p);
@@ -421,7 +421,9 @@ test('official employment conflict changes only display and filter copies, and r
  assert.equal(api.matches(p,{employment:'정규직'}),false);
  assert.equal(api.matches(p,{employment:'비정규직'}),true);
  assert.equal(JSON.stringify(p),original);
- for(const change of [{title:'정정'},{org:'다른기관'},{due:'2026-12-02'},{alio:false},{emp:['계약직']}])assert.equal(api.reviewedEmployment({...p,...change}),null);
+ for(const change of [{title:'정정'},{org:'다른기관'},{due:'2026-12-02'},{alio:false},{n:'3'},{n:null},{emp:['계약직']},{emp:null}])assert.equal(api.reviewedEmployment({...p,...change}),null);
+ delete proof.sourceSeats;
+ assert.equal(api.reviewedEmployment(p),null,'cached proof without seat fingerprint must fail closed');
 });
 test('until-filled source evidence is status unknown without an invented start or cutoff',()=>{
  const p={id:'a292472',alio:true,org:'병원',title:'약무직',due:'2026-12-31',n:'20',emp:['정규직']};
