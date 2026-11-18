@@ -77,6 +77,29 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # 2026-11-19 fresh JOB-ALIO HTML: published 33 seats across three roles.
+    # No official per-role seat totals or application cutoff proven; no PDF/ZIP SHA claim.
+    'a307225': {
+        'organization': '부산대학교병원',
+        'title': '2026년도 일반직(간호, 행정, 보건직) 신규직원 블라인드 공개채용 모집 공고',
+        'source_end_date': '2026-12-03',
+        'expected_source_seats': '33',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307225',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 33명은 간호직(진료지원간호사), 행정직(의료사회복지사), '
+            '보건직(방사선사)을 합한 공고 전체 인원입니다. '
+            '분야별 선발인원은 확인되지 않았으므로 33명을 어느 한 분야의 인원으로 단정하지 마세요. '
+            '간호직은 간호사 면허, 병원·종합병원 또는 군병원 임상경력 3년 이상, '
+            '야간 및 교대근무 가능 요건이 있습니다. '
+            '행정직은 의료사회복지사 자격증과 영어성적(예: TOEIC 700점 이상)이 필요합니다. '
+            '보건직은 방사선사 면허증과 영어성적(예: TOEIC 600점 이상)이 필요합니다. '
+            '영어시험별 인정점수와 우대사항은 반드시 공고 원문을 대조하세요. '
+            '12월 3일은 ALIO 게시 종료일이며 실제 지원서 마감시각으로 확정하지 않았습니다.'
+        ),
+        'scope': '2026-11-19 JOB-ALIO a307225 공개 HTML에서 정규직 총33명, 세 직종별 자격·영어기준, 공고 게시기간을 확인. 개별 분야 모집인원·기관 지원창 접수 마감시각·첨부 ZIP/PDF 원본 SHA는 아직 미검증이며 직무원본 검토 건수에 추가하지 않음.',
+    },
     # Official JOB-ALIO public HTML rechecked 2026-11-18. These new
     # postings are not separately audited HWP/PDF job-duty originals.
     'a306990': {
