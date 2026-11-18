@@ -6,10 +6,17 @@ on:
       - .github/workflows/live-release-check.yml
       - scripts/verify_live_release.cjs
   workflow_dispatch:
+  workflow_run:
+    workflows: [Deploy approved CareerPick]
+    branches: [main]
+    types: [completed]
 permissions:
   contents: read
 jobs:
   verify:
+    # Only completed, successful owner-approved deployments trigger automatic live verification.
+    # Manual runs and existing push checks remain available.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
