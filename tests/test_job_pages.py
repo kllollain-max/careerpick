@@ -376,6 +376,8 @@ class JobPageTests(unittest.TestCase):
                     [post], {pid: cutoff},
                     {pid: {**VERIFIED_DUTIES[pid], **proof}})
                 self.assertEqual(meta[pid]['cutoff'], cutoff)
+                self.assertEqual(meta[pid]['sourceSeats'], str(post['n']))
+                self.assertEqual(meta[pid]['sourceTerms'], post['emp'])
                 self.assertEqual(meta[pid]['start'], start)
                 at_cutoff = datetime.fromisoformat(cutoff)
                 from datetime import timedelta
