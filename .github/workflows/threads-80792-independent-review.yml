@@ -1,0 +1,222 @@
+name: Independent SWR 80792 current source and profile review (no posting)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/threads-80792-independent-review.yml'
+      - 'threads/independent-review/cleaneye-80792-20261117-review.json'
+permissions:
+  contents: read
+jobs:
+  official-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Read current exact institutional announcement and independently digest published PDF
+        shell: bash
+        run: |
+          python -m pip install --quiet requests pymupdf beautifulsoup4
+          python - <<'PY'
+          import requests, hashlib, json, re
+          import fitz
+          from bs4 import BeautifulSoup
+          sess=requests.Session()
+          sess.headers.update({'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/132 Safari/537.36','Accept-Language':'ko-KR,ko;q=0.9'})
+          base='https://www.swr.or.kr/cpage/board/job/view.do?board_gb=job&board_seq=5890&currRow=1&menu_cd=C0003&srch_input1=00002&srch_input2=&srch_input3='
+          index='https://www.swr.or.kr/cpage/board/job.do?menu_cd=C0003&srch_input1=00002'
+          pdf='https://sejongurimal.korea.ac.kr/bbs/cdc/526/183852/download.do'
+          r=sess.get(base,timeout=30)
+          t=BeautifulSoup(r.text,'html.parser').get_text(' ',strip=True)
+          print('EMPLOYER_OFFICIAL_HTTP',r.status_code,'SIZE',len(r.content),'URL',r.url)
+          print('EMPLOYER_OFFICIAL_MATCH',all(k in t for k in ['2026년 하반기 정규직 채용공고','서울물재생시설공단','11.18','18:00']))
+          assert r.status_code==200 and '2026년 하반기 정규직 채용공고' in t
+          s=sess.get(index,timeout=30)
+          u=BeautifulSoup(s.text,'html.parser').get_text(' ',strip=True)
+          print('EMPLOYER_JOB_LIST_HTTP',s.status_code,'SIZE',len(s.content))
+          print('EMPLOYER_JOB_LIST_CANCELLATION_CONTEXT',repr(' '.join(re.findall('.{0,70}(?:하반기 정규직|정정|취소|마감변경).{0,70}',u)[:15])))
+          d=sess.get(pdf,timeout=45)
+          print('PUBLISHED_PDF_HTTP',d.status_code,'TYPE',d.headers.get('Content-Type'),'BYTES',len(d.content),'MAGIC',repr(d.content[:8]))
+          if d.status_code!=200 or not d.content.startswith(b'%PDF-'):
+              raise RuntimeError('PDF_ORIGINAL_BINARY_UNAVAILABLE_UNAPPROVED')
+          digest=hashlib.sha256(d.content).hexdigest()
+          doc=fitz.open(stream=d.content,filetype='pdf')
+          raw='\n'.join(p.get_text() for p in doc)
+          print('PUBLISHED_PDF_SHA256',digest,'PAGES',len(doc),'TEXT_CHARS',len(raw))
+          assert len(doc)==6 and all(k in raw for k in ['서울물재생시설공단','2026.11.18.','18:00','행 정','일반직 9급'])
+          for i,p in enumerate(doc):
+              print('PDF_PAGE',i+1,'TEXT',p.get_text()[:3500].replace('\n',' '))
+          with open('threads-80792-official-receipt.json','w') as f:
+              json.dump({'employer_url':base,'employer_http':r.status_code,'employer_text_hash':hashlib.sha256(r.content).hexdigest(),'employer_listing_url':index,'listing_http':s.status_code,'published_pdf_url':pdf,'pdf_sha256':digest,'pdf_bytes':len(d.content),'pdf_pages':len(doc),'extracted_pdf_text':raw,'correction_board_scope':'visible first page only, not all channels','approved':False},f,ensure_ascii=False,indent=2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-80792-official-original
+          path: threads-80792-official-receipt.json
+          retention-days: 14
+  profile-and-application:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Read exact CareerPick profile modal and employer's live application portal without posting
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          import json
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          opt=Options()
+          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1280,900'):
+              opt.add_argument(arg)
+          driver=webdriver.Chrome(options=opt)
+          observed={}
+          targets={'profile':'https://kllollain-max.github.io/careerpick/#job=cleaneye-80792',
+                  'application':'https://swr.plusrecruit.co.kr/',
+                  'application_list':'https://swr.plusrecruit.co.kr/#/recruitment/list',
+                  'application_notices':'https://swr.plusrecruit.co.kr/#/board/notice/list'}
+          try:
+              for key,url in targets.items():
+                  driver.set_page_load_timeout(45)
+                  driver.get(url)
+                  # The homepage initially renders 0 records while loading large JSON.
+                  # Wait for the exact notice modal, not generic nav text (>150 chars).
+                  try:
+                      if key=='profile':
+                          WebDriverWait(driver,75).until(lambda w:
+                              '서울물재생시설공단' in w.execute_script("return document.body?.innerText||''")
+                              or '공고를 찾을 수 없습니다' in w.execute_script("return document.body?.innerText||''"))
+                      else:
+                          WebDriverWait(driver,40).until(lambda w:
+                              '2026년 하반기 정규직' in w.execute_script("return document.body?.innerText||''")
+                              or '모집중' in w.execute_script("return document.body?.innerText||''")
+                              or '지원서 접수' in w.execute_script("return document.body?.innerText||''"))
+                  except Exception:pass
+                  info=driver.execute_script("""return {body:document.body?.innerText||'',hrefs:Array.from(document.querySelectorAll('a')).map(a=>({text:(a.innerText||'').slice(0,70),url:a.href||''}))}""")
+                  body=info['body']
+                  observed[key]={'requested':url,'actual':driver.current_url,'title':driver.title,'chars':len(body),'body':body[:11000],'links':info['hrefs'][:80]}
+                  driver.save_screenshot('threads-80792-'+key+'.png')
+                  print('BROWSER',key,'BODY_CHARS',len(body),'TITLE',driver.title,'ACTUAL',driver.current_url)
+                  print('BODY',body[:3500])
+              print('PROFILE_NOTICE_AND_EMPLOYER_MATCH',all(x in observed['profile']['body'] for x in ['서울물재생시설공단','행정']))
+              print('APPLICATION_EXACT_NOTICE_OR_LIST_VISIBLE',any('2026년 하반기 정규직' in observed[k]['body'] for k in ['application','application_list','application_notices']))
+              with open('threads-80792-browser-review.json','w') as f:
+                  json.dump(observed,f,ensure_ascii=False,indent=2)
+          finally:
+              driver.quit()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-80792-browser-review
+          path: |
+            threads-80792-browser-review.json
+            threads-80792-profile.png
+            threads-80792-application.png
+          retention-days: 14
+
+  employer-ats-detail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Independently open exact 2026 recruitment details and examine job-unit workplace evidence
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          import json
+          o=Options()
+          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1400,1000'):o.add_argument(arg)
+          d=webdriver.Chrome(options=o)
+          result={}
+          try:
+              d.get('https://swr.plusrecruit.co.kr/#/recruitment/list')
+              WebDriverWait(d,55).until(lambda x:'2026년 하반기 정규직 채용공고' in x.execute_script("return document.body.innerText"))
+              match=d.execute_script("""const a=Array.from(document.querySelectorAll('body *')).filter(x=>x.children.length===0 && (x.textContent||'').trim()==='2026년 하반기 정규직 채용공고');return a.slice(0,5).map(e=>({tag:e.tagName,outer:e.outerHTML.slice(0,350),parent:e.parentElement?.outerHTML.slice(0,750)}));""")
+              print('TARGET_CARD_ELEMENTS',json.dumps(match,ensure_ascii=False))
+              # Click the exact current recruitment card, not unrelated notices.
+              d.execute_script("""const a=Array.from(document.querySelectorAll('body *')).find(x=>x.children.length===0 && (x.textContent||'').trim()==='2026년 하반기 정규직 채용공고');if(a) (a.closest('a,button,[role=button],.cursor-pointer,[onclick]')||a.parentElement||a).click();""")
+              try:WebDriverWait(d,20).until(lambda x:'모집분야' in x.execute_script("return document.body.innerText") or '/detail/' in x.current_url or '2026년 하반기 정규직 채용공고' not in x.execute_script("return document.body.innerText"))
+              except Exception:pass
+              body=d.execute_script('return document.body.innerText')
+              print('RECRUITMENT_DETAIL_URL',d.current_url,'CHARS',len(body))
+              print('RECRUITMENT_DETAIL_BODY',body[:9000])
+              for key in ['근무장소','근무지역','근무지','배치장소','2026년 하반기','행정','정정','취소']:
+                  print('EXACT_DETAIL_TERM',key,key in body)
+              result={'url':d.current_url,'body':body,'target_elements':match,'verified_workplace_claim':False,'not_approved':True}
+              d.save_screenshot('threads-80792-recruitment-detail.png')
+              with open('threads-80792-ats-detail.json','w') as f:json.dump(result,f,ensure_ascii=False,indent=2)
+          finally:d.quit()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-80792-recruitment-detail
+          path: |
+            threads-80792-ats-detail.json
+            threads-80792-recruitment-detail.png
+          retention-days: 14
+
+  exact-9grade-administration-description:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download and independently read exact live official 9th-grade administration job description
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium pymupdf
+          python - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          from pathlib import Path
+          import json,time,hashlib,fitz
+          directory=Path.cwd()/'swr-target-attachments'
+          directory.mkdir(exist_ok=True)
+          o=Options()
+          for flag in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1300,900'):o.add_argument(flag)
+          o.add_experimental_option('prefs',{'download.default_directory':str(directory),'download.prompt_for_download':False,'safebrowsing.enabled':True,'plugins.always_open_pdf_externally':True})
+          d=webdriver.Chrome(options=o)
+          outcome={'approved':False,'exact_unit_title':'직무기술서 일반직 9급 (행정).pdf'}
+          try:
+              d.execute_cdp_cmd('Page.setDownloadBehavior',{'behavior':'allow','downloadPath':str(directory)})
+              d.get('https://swr.plusrecruit.co.kr/#/recruitment/detail/39')
+              WebDriverWait(d,45).until(lambda w:'직무기술서 일반직 9급 (행정).pdf' in w.execute_script('return document.body.innerText'))
+              elements=d.execute_script("""return Array.from(document.querySelectorAll('body *')).filter(x=>x.children.length===0&&(x.innerText||'').includes('직무기술서 일반직 9급 (행정).pdf')).slice(0,5).map(e=>({tag:e.tagName,parent:e.parentElement?.outerHTML.slice(0,1200)}));""")
+              print('OFFICIAL_JOB_DESCRIPTION_TARGET',json.dumps(elements,ensure_ascii=False))
+              clicked=d.execute_script("""let e=Array.from(document.querySelectorAll('body *')).find(x=>x.children.length===0&&(x.innerText||'').includes('직무기술서 일반직 9급 (행정).pdf'));if(!e)return false;(e.closest('a,button,[onclick]')||e.parentElement||e).click();return true;""")
+              print('CLICKED_EXACT_UNIT_ATTACHMENT',clicked)
+              for i in range(25):
+                  paths=[p for p in directory.iterdir() if p.is_file() and not p.name.endswith('.crdownload')]
+                  if paths:break
+                  time.sleep(1)
+              paths=[p for p in directory.iterdir() if p.is_file() and not p.name.endswith('.crdownload')]
+              print('DOWNLOADED_PATHS',[(p.name,p.stat().st_size) for p in paths])
+              for p in paths:
+                  b=p.read_bytes(); print('ATTACHMENT_BYTES',p.name,len(b),'MAGIC',repr(b[:8]))
+                  if b.startswith(b'%PDF-'):
+                      pdf=fitz.open(stream=b,filetype='pdf')
+                      txt='\n'.join(page.get_text() for page in pdf)
+                      sha=hashlib.sha256(b).hexdigest()
+                      print('OFFICIAL_9GRADE_DESCRIPTION_PDF_SHA256',sha,'PAGES',len(pdf),'TEXT_CHARS',len(txt))
+                      print('DESCRIPTION_TEXT',txt[:15000])
+                      for k in ['근무지역','근무지','근무장소','배치장소','서울']:
+                          print('DESCRIPTION_WORKPLACE_TERM',k,k in txt)
+                      outcome.update({'document_sha256':sha,'pages':len(pdf),'bytes':len(b),'text':txt,'pdf_origin':'Employer actual official live ATS #/recruitment/detail/39','download_time_verified_not_future':True})
+                  else: outcome['blocked']='Attachment click did not download a PDF, no approval'
+              if not paths: outcome['blocked']='Exact job description download not retrievable, no approval'
+              with open('threads-80792-unit-description.json','w') as f:json.dump(outcome,f,ensure_ascii=False,indent=2)
+          finally:d.quit()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-80792-unit-description
+          path: |
+            threads-80792-unit-description.json
+            swr-target-attachments/
+          retention-days: 14
