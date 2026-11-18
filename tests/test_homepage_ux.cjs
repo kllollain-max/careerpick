@@ -419,3 +419,21 @@ test('until-filled source evidence is status unknown without an invented start o
  assert.equal(api.reviewedStatus({...p,n:'21'}),'');
  assert.equal(api.reviewedStatus({...p,emp:['계약직']}),'');
 });
+
+test('verified date-only reception end is uncertain on final KST day and closed next day',()=>{
+  const post={id:'a309999',alio:true,org:'검증기관',title:'접수기간이 더 짧은 공고',
+    n:'4',emp:['정규직'],due:'2026-12-05T23:59:00+09:00',dueHasTime:false};
+  const proof={org:post.org,title:post.title,sourceEndDate:'2026-12-05',
+    sourceSeats:'4',sourceTerms:['정규직'],start:'2026-11-24',endDate:'2026-12-01'};
+  const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[post.id]:proof}},Date});
+  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
+  const api=context.window.CPHome;
+  assert.equal(api.deadline(post,new Date('2026-11-30T14:59:59Z')).cls,'open');
+  assert.equal(api.deadline(post,new Date('2026-11-30T15:00:00Z')).cls,'verify');
+  assert.equal(api.deadline(post,new Date('2026-12-01T14:59:59Z')).big,'시각 확인');
+  assert.equal(api.deadline(post,new Date('2026-12-01T15:00:00Z')).cls,'closed');
+  for(const change of [{n:'5'},{emp:['계약직']},{title:'수정'},
+    {org:'다른기관'},{due:'2026-12-06T23:59:00+09:00'},{alio:false}]){
+    assert.notEqual(api.deadline({...post,...change},new Date('2026-12-01T15:00:00Z')).cls,'closed');
+  }
+});
