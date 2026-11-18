@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-18 11:16:50 UTC",
+  "status": "READY_QUEUE_PROMOTED_FULL_REMOTE_VALIDATED_NOT_PUBLISHED",
+  "notice_ids": [
+    "a307145",
+    "a307120"
+  ],
+  "slots": [
+    "2026-11-19T12:00:00+09:00",
+    "2026-11-19T16:00:00+09:00"
+  ],
+  "media": [
+    "IMAGE",
+    "TEXT"
+  ],
+  "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
+  "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+  "full_actual_queue_validator": "passed",
+  "entry_fingerprints": {
+    "a307145": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+    "a307120": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543"
+  },
+  "remote_stage_queue_fingerprints_equal": true,
+  "regular_run": {
+    "id": 44293052496,
+    "attempt": 1,
+    "event": "schedule",
+    "head_sha": "c400e1c8351ca69ff79eecd086f77b4693f89eae",
+    "job_id": 134762871687,
+    "stage_queue_CAS_step": "success",
+    "publish": "skipped_expected_nonpublishing_preflight",
+    "overall": "in_progress_at_observation"
+  },
+  "actual_new_Meta_post_id": null,
+  "actual_new_permalink": null,
+  "manual_dispatch_or_rerun": false,
+  "Meta_POST": false,
+  "independent_source_audit": "threads/audits/supply-a307120-20261119-16-ready-20261118-2015.json",
+  "independent_source_audit_sha": "b41e5e6e7910e48d1e4f4e35fd8f768702f67150",
+  "next_action": "Preserve verified bytes/bodies and observe existing regular20 publisher account/Meta receipt; no catchup or extra POST."
+}
