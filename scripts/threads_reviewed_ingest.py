@@ -37,6 +37,8 @@ MAX_OFFICIAL_BYTES = 20_000_000
 # Signed download nonces rotate, but this canonical three-field reference
 # always resolves ONLY to the employer's original PDF attachment no=11.
 CLEANMETRO_2026_17_PDF = "https://cleanmetro.co.kr/bbs/download.php?bo_table=recruit&wr_id=430&no=11"
+GSIPA_81201_NOTICE = "https://www.gsipa.kr/board/bbs/board.php?bo_table=recruit&wr_id=248"
+GSIPA_81201_PDF = "https://www.gsipa.kr/board/bbs/download.php?bo_table=recruit&no=0&wr_id=248"
 
 
 def official_url_allowed(url):
@@ -56,6 +58,10 @@ def official_url_allowed(url):
         # One manually checked employer notice, not a wildcard allowlist for
         # commercial (.co.kr) recruitment sites. Keep this exact path/query:
         # other pages or attachments need their own independent review.
+        # Exactly one employer's verified 2026-110 attachment and prerequisite
+        # notice page. A session cookie must be set by viewing the notice first.
+        if host in ("gsipa.kr", "www.gsipa.kr"):
+            return url in (GSIPA_81201_NOTICE, GSIPA_81201_PDF)
         if host in ("smrtg.co.kr", "www.smrtg.co.kr"):
             return (parts.path == "/employment/stffPbanInfo.do"
                     and parts.query == "stffPbanNo=2026-0155"
@@ -141,6 +147,28 @@ def fetch_official_digest(url):
         if not re.fullmatch(r"[0-9a-f]{64}", digest):
             raise ValueError("OFFICIAL_DOCUMENT_DIGEST_INVALID")
         return digest
+    if url == GSIPA_81201_PDF:
+        # Employer's GNUBoard rejects bare deep links with an HTML access-error
+        # page. Read the exact public notice in the SAME cookie session first.
+        # Do not disable TLS checks, follow unpinned redirects, or substitute a
+        # public mirror for the employer's original.
+        import http.cookiejar
+        session = urllib.request.build_opener(
+            OfficialRedirect(), urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+        hdr = {"User-Agent": "Mozilla/5.0 CareerPickExactOfficialSource/1.0",
+               "Referer": GSIPA_81201_NOTICE}
+        notice = urllib.request.Request(GSIPA_81201_NOTICE, headers=hdr)
+        with read_response(notice, timeout=25, opener=session.open) as page:
+            if page.status != 200:
+                raise ValueError("OFFICIAL_NOTICE_UNAVAILABLE")
+        original = urllib.request.Request(GSIPA_81201_PDF, headers=hdr)
+        with read_response(original, timeout=25, opener=session.open) as page:
+            data = page.read(MAX_OFFICIAL_BYTES + 1)
+            if page.status != 200 or not data.startswith(b"%PDF-"):
+                raise ValueError("OFFICIAL_SOURCE_NOT_PDF")
+        if len(data) > MAX_OFFICIAL_BYTES:
+            raise ValueError("OFFICIAL_DOCUMENT_TOO_LARGE")
+        return hashlib.sha256(data).hexdigest()
     opener = urllib.request.build_opener(OfficialRedirect())
     req = urllib.request.Request(url, headers={"User-Agent": "CareerPickOfficialReview/1.0",
                                                 "Accept": "*/*"})
