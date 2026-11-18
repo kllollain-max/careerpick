@@ -49,7 +49,8 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         except ValueError:
             continue
         result[pid] = dict(cutoff=cutoff, org=post['org'], title=post['title'],
-                           sourceEndDate=source_end)
+                           sourceEndDate=source_end, sourceSeats=str(post.get('n')),
+                           sourceTerms=post.get('emp'))
         if (proof.get('confirmed_employment') == '계약직'
                 and proof.get('source_employment') == post.get('emp')
                 and isinstance(proof.get('employment_note'), str)):
