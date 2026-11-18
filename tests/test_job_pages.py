@@ -20,7 +20,8 @@ class JobPageTests(unittest.TestCase):
         from scripts.priority_candidate_audit import shortlist
         from datetime import date
         post = dict(id='a309999', alio=True, org='검증기관', title='접수기간이 더 짧은 공고',
-                    n='4', emp=['정규직'], due='2026-12-05T23:59:00+09:00')
+                    n='4', emp=['정규직'], due='2026-12-05T23:59:00+09:00',
+                    url='https://job.alio.go.kr/recruitview.do?idx=309999')
         original = copy.deepcopy(post)
         proof = dict(organization=post['org'], title=post['title'],
                      source_end_date='2026-12-05', expected_source_seats='4',
