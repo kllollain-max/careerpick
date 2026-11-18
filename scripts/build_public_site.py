@@ -37,6 +37,10 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         if (post.get('alio') is not True or not proof
                 or proof.get('organization') != post.get('org')
                 or proof.get('title') != post.get('title')
+                or (proof.get('expected_source_seats') is not None
+                    and proof['expected_source_seats'] != str(post.get('n')))
+                or (proof.get('source_employment')
+                    and proof['source_employment'] != post.get('emp'))
                 or str(post.get('due', ''))[:10] != source_end
                 or not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00', cutoff)):
             continue
@@ -66,6 +70,10 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         source_end = proof.get('source_end_date', '')
         if (pid in result or post.get('alio') is not True
                 or proof.get('organization') != post.get('org') or proof.get('title') != post.get('title')
+                or (proof.get('expected_source_seats') is not None
+                    and proof['expected_source_seats'] != str(post.get('n')))
+                or (proof.get('source_employment')
+                    and proof['source_employment'] != post.get('emp'))
                 or not source_end or str(post.get('due', ''))[:10] != source_end
                 or not isinstance(start, str) or not isinstance(end, str)
                 or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', start)
