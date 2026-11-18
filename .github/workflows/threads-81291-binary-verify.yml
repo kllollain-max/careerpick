@@ -123,9 +123,9 @@ jobs:
             observation['after_click_modal_text']=page.locator('#jvBody').inner_text(timeout=6000)[:12000]
             observation['after_click_hidden']=page.locator('#jobview').evaluate('(el)=>el.hidden')
            observation['checked_at_kst']=datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat()
-           (out/'profile-exact-record-and-dialog.json').write_text(json.dumps(observation,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+           (out/'profile-exact-record-and-dialog.json').write_text(json.dumps(observation,ensure_ascii=False,indent=2,default=str)+'\\n',encoding='utf-8')
            page.screenshot(path=str(out/'profile-exact-dialog.png'),full_page=False)
-           print('EXACT_PROFILE_RECORD',json.dumps({k:v for k,v in observation.items() if k not in ('modal_text','after_click_modal_text')},ensure_ascii=False))
+           print('EXACT_PROFILE_RECORD',json.dumps({k:v for k,v in observation.items() if k not in ('modal_text','after_click_modal_text')},ensure_ascii=False,default=str))
            print('EXACT_PROFILE_DIALOG_TEXT',(observation.get('after_click_modal_text') or observation.get('modal_text') or '')[:4000])
            browser.close()
           PY
