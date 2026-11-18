@@ -6,13 +6,14 @@ on:
     paths:
       - .github/workflows/threads-a307061-source-proof.yml
       - scripts/threads_a307061_official_read.py
+      - scripts/threads_a307061_profile_check.py
       - threads/independent-review/a307061-20261118-official-hold.json
 permissions:
   contents: read
 jobs:
   verify_original:
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,6 +25,11 @@ jobs:
         run: python -m pip install --quiet requests beautifulsoup4 pymupdf
       - name: Fetch employer portal, official ALIO, government GOJOBS and original PDF; fail closed
         run: python scripts/threads_a307061_official_read.py
+      - name: Independently render exact public job profile on mobile (read only)
+        run: |
+          python -m pip install --quiet playwright
+          python -m playwright install --with-deps chromium
+          python scripts/threads_a307061_profile_check.py
       - name: Retain actual PDF bytes, text and SHA-256 receipt for independent review
         if: always()
         uses: actions/upload-artifact@v4
