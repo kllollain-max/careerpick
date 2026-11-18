@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T09:55:56Z",
-  "last_observed_at": "2026-11-18T09:55:56Z",
+  "updated_at": "2026-11-18T11:02:59.824642+00:00",
+  "last_observed_at": "2026-11-18T11:02:59.824642+00:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -26496,50 +26496,26 @@
     }
   },
   "writer_supply_preparation_latest": {
-    "observed_at": "2026-11-18T06:39:59Z",
-    "status": "REGULAR_PREFLIGHT_PROMOTED_NOT_PUBLISHED",
-    "notice_id": "a307061",
-    "scheduled_at": "2026-11-19T08:00:00+09:00",
-    "media_forecast": "TEXT",
-    "chars": 309,
-    "entry_sha256": "017ba9d13648daf678fa1ce3d3ab576125430aab83e17aa6c37039c9fca62418",
-    "stage": {
-      "old_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
-      "new_sha": "1e92a69a7b8fbc1bf88aa6cce339ffb7b9726c73",
-      "commit": "4d46cceaacf8b80b229ae5e9ef252335dbdf5d50",
-      "entries_before": 12,
-      "entries_after": 13,
-      "exact_readback": true
-    },
-    "queue": {
-      "sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
-      "updated": false,
-      "entries": 43,
-      "notice_present": false,
-      "promotion_status": "AWAITING_EXISTING_SCHEDULED_PREFLIGHT",
-      "manual_dispatch": false
-    },
-    "full_validator": "PASS",
-    "whole_queue_including_candidate": "PASS",
-    "bridge_dry_run": "PASS",
-    "audit_path": "threads/audits/regular-promotion-a307061-20261118-1539.json",
-    "remaining": [
-      "Existing scheduled preflight must promote a307061 to queue by latest source/claims/media guards and CAS",
-      "Observe regular Nov19 08 publisher and actual account/Meta post_id/permalink; no trial or manual POST",
-      "Preserve Nov18 16TEXT and20IMAGE entries unchanged"
-    ],
+    "observed_at": "2026-11-18T11:02:59.824642+00:00",
+    "status": "READY_STAGED_NOT_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "notice_id": "a307145",
+    "slot": "2026-11-19T12:00:00+09:00",
+    "media": "IMAGE",
+    "body_chars": 295,
+    "stage_sha": "5163e511dcb36d56a30244d2c301bee6fa7c16c4",
     "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
-    "stage_sha": "1e92a69a7b8fbc1bf88aa6cce339ffb7b9726c73",
-    "queue_promotion_pending": false,
-    "queue_promoted": true,
-    "regular_promotion_run": 44242987568,
-    "actual_new_meta_post_id": null,
-    "actual_new_meta_permalink": null,
-    "remaining_actions": [
-      "Observe regular16TEXT/20IMAGE results with actual MetaGET/account/claims",
-      "Observe Nov19 08 actual a307061 post_id/permalink; queue is not publication",
-      "Next missing slot Nov19 12 requires independently verified new IMAGE manuscript and assets"
-    ]
+    "asset_commit": "c400e1c8351ca69ff79eecd086f77b4693f89eae",
+    "entry_sha256": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+    "full_validator": "passed",
+    "whole_prospective_queue": "validated",
+    "card_pixels": "passed",
+    "asset_remote_hashes_equal": true,
+    "stage_readback_equal": true,
+    "audit_path": "threads/audits/supply-a307145-20261119-12-ready-20261118-2002.json",
+    "audit_sha": "8d25b70d1ca49e1db529ca4fedb20f0386a815ab",
+    "actual_meta_post_id": null,
+    "actual_queue_promoted": false,
+    "next_action": "Existing regular preflight alone may promote reviewed future slot by CAS. Observe next regular20 publisher and remote accepted receipt; do not treat staged candidate as published."
   },
   "writer_recovery_checks": [
     {
@@ -26984,5 +26960,27 @@
       "Do not count source/HOLD/draft as approved supply or publication",
       "Observe existing 19:45 preflight and20 regular publisher, then post_id/account/body/media/replies receipt before success report"
     ]
+  },
+  "writer_supply_recovery_20261118_2002": {
+    "observed_at": "2026-11-18T11:02:59.824642+00:00",
+    "status": "READY_STAGED_NOT_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "notice_id": "a307145",
+    "slot": "2026-11-19T12:00:00+09:00",
+    "media": "IMAGE",
+    "body_chars": 295,
+    "stage_sha": "5163e511dcb36d56a30244d2c301bee6fa7c16c4",
+    "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
+    "asset_commit": "c400e1c8351ca69ff79eecd086f77b4693f89eae",
+    "entry_sha256": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+    "full_validator": "passed",
+    "whole_prospective_queue": "validated",
+    "card_pixels": "passed",
+    "asset_remote_hashes_equal": true,
+    "stage_readback_equal": true,
+    "audit_path": "threads/audits/supply-a307145-20261119-12-ready-20261118-2002.json",
+    "audit_sha": "8d25b70d1ca49e1db529ca4fedb20f0386a815ab",
+    "actual_meta_post_id": null,
+    "actual_queue_promoted": false,
+    "next_action": "Existing regular preflight alone may promote reviewed future slot by CAS. Observe next regular20 publisher and remote accepted receipt; do not treat staged candidate as published."
   }
 }
