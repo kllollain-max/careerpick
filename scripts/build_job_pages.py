@@ -152,6 +152,27 @@ VERIFIED_APPLICATION_NOTICES = {
         ),
         'scope': 'ALIO 공식 HTML의 정규직 의사직 14명·상시모집 표기, 경력 및 연구실적 요건 확인. 기관 접수창의 실시간 활성·잔여 결원 및 PDF 직무원본 바이트는 미검증; 현재 접수 가능 확정 또는 직무원본 검증 건수로 계산하지 않음.',
     },
+    # ALIO official HTML rechecked 2026-11-18: published count is not
+    # independently confirmed current vacancies for this long-running notice.
+    'a292002': {
+        'organization': '경상국립대학교병원',
+        'title': '권역외상센터 진료전담교수 채용공고',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '14',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=292002',
+        'checked_on': '2026-11-18',
+        'application_status_unconfirmed': True,
+        'role_mix_note': (
+            'JOB-ALIO에 정규직 진료전담교수 14명으로 등록된 공고입니다. '
+            '2025년 10월 17일~2026년 12월 31일은 ALIO 공고 게시기간이며 '
+            '현재 잔여 채용인원 14명으로 확정할 수 없습니다. '
+            '지원서 접수창의 현재 활성 상태와 실제 잔여 결원은 기관 채용시스템에서 별도 확인해야 합니다. '
+            '공식 ALIO 응시자격에는 교육 및 연구경력 통산 4년 이상 등이 명시되어 있습니다. '
+            '게시 종료일을 임의의 원서접수 마감시각으로 바꾸지 마세요.'
+        ),
+        'scope': 'JOB-ALIO 공식 HTML에서 정규직 14명·게시기간 2025-10-17~2026-12-31·경력 요건 확인. 기관 실제 접수창 활성, 잔여 인원, 원본 PDF/HWP SHA, 별도 최신 공고와의 독립 모집 여부는 미확인; 현재 접수 가능한 정규직 모집 수나 직무원본 검증 건수에 포함하지 않음.',
+    },
     'a306875': {
         'organization': '분당서울대학교병원',
         'title': '분당서울대학교병원 신입(업무지원직) 직원 채용 공고',
