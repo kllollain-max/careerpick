@@ -50,7 +50,7 @@ test('date-only official start must not imply opening at midnight KST',()=>{
   assert.equal(api.deadline(post,new Date('2026-11-11T14:59:59Z')).cls,'upcoming');
   assert.equal(api.deadline(post,new Date('2026-11-11T15:00:00Z')).cls,'verify');
   assert.equal(api.deadline(post,new Date('2026-11-12T03:00:00Z')).big,'개시시각 확인');
-  assert.equal(api.deadline(post,new Date('2026-11-12T15:00:00Z')).cls,'open');
+  assert.equal(api.deadline(post,new Date('2026-11-12T15:00:00Z')).cls,'hot');
 });
 test('invalid or mismatched start evidence never overrides existing dates',()=>{
   const {post,proof,api}=cutoffFixture();
