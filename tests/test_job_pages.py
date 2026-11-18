@@ -238,13 +238,20 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('신입 일반직인턴(보건직) 6명', html)
         self.assertIn('전체14명을 즉시 확정 일반직 정규직 인원으로 단정하지 마세요', html)
         self.assertIn('TOEIC750', html)
-        self.assertNotIn('기관 공식 확인 접수마감', html)  # no invented 23:59 clock
+        # Only the employer's career-specific eight-role notice confirms this time.
+        self.assertIn('경력직 8명 전용 채용공고는 2026-11-17 12:00~11-26 23:59', html)
+        self.assertIn('신입 일반직인턴(보건직) 6명의 기관별 실제 접수화면', html)
+        self.assertIn('전체 14명 공통 접수마감으로 사용하지 마세요', html)
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+        self.assertNotIn('a307074', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertNotIn('기관 공식 확인 접수마감', html)  # no global 23:59 cutoff
         for changed in ({'title': '정정'}, {'org': '다른 기관'},
                         {'due': '2026-11-27T23:59:00+09:00'}, {'n': '15'},
                         {'emp': ['무기계약직']}, {'alio': False}):
             updated = render({**post, **changed}, {})
             self.assertNotIn('신입 일반직인턴(보건직) 6명', updated)
             self.assertNotIn('전체14명을 즉시 확정', updated)
+            self.assertNotIn('경력직 8명 전용 채용공고는', updated)
         self.assertEqual(post, original)
 
     def test_new_postal_reception_and_original_identity_guards(self):
