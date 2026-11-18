@@ -84,7 +84,7 @@ VERIFIED_DUTIES = json.loads(
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
     # CNUH original recruitment notice PDFs read as text 2026-11-19.
-    # Independent PDF binary byte/SHA acquisition is not claimed here.
+    # PDF originals independently acquired and SHA256 checked again 2026-11-19.
     # Exact-source records prevent stale cutoff/field facts after ALIO changes.
     'a306733': {
         'organization': '충남대학교병원',
@@ -95,9 +95,10 @@ VERIFIED_APPLICATION_NOTICES = {
         'application_start': '2026-11-05',
         'application_end_date': '2026-11-19',
         'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085307',
+        'notice_source_sha256': 'd7282d69cb886e8ed87b6909b02d9c3156a1b8b36635b7934950cf0881922ea3',
         'checked_on': '2026-11-19',
         'hiring_breakdown': '기계기사 1명, 전기기사 1명, 보조원 6명, 환경사 13명 (공식 공고문 전체 21명)',
-        'scope': '공식 공고문 PDF 텍스트에서 11월 19일 17시 온라인 원서접수 마감, 직종별 1+1+6+13명, 기계·전기 필수 자격증과 보조원·환경사 별도 필수자격 없음, 3개월 수습 및 평가를 대조함. PDF 바이너리 SHA는 이번에 독립 재계산하지 않음.',
+        'scope': '공식 공고문 PDF 텍스트에서 11월 19일 17시 온라인 원서접수 마감, 직종별 1+1+6+13명, 기계·전기 필수 자격증과 보조원·환경사 별도 필수자격 없음, 3개월 수습 및 평가를 대조함. 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
     'a306735': {
         'organization': '충남대학교병원',
@@ -108,8 +109,9 @@ VERIFIED_APPLICATION_NOTICES = {
         'application_start': '2026-11-05',
         'application_end_date': '2026-11-19',
         'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085325',
+        'notice_source_sha256': 'cf5231d2d88c7645191c8dffe2c922b8408bdbaf6564d21154aa6d11037eeab2',
         'checked_on': '2026-11-19',
-        'scope': '공식 임상교수요원 모집 PDF 텍스트에서 대전·세종 전체 49명 및 11월 19일 17시 온라인 접수마감 확인. 분야별 상세인원과 실제 잔여 모집인원은 별도 검증하지 않음. PDF 바이너리 SHA 독립 재계산 없음.',
+        'scope': '공식 임상교수요원 모집 PDF 텍스트에서 대전·세종 전체 49명 및 11월 19일 17시 온라인 접수마감 확인. 분야별 상세인원과 실제 잔여 모집인원은 별도 검증하지 않음. 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
     'a306737': {
         'organization': '충남대학교병원',
@@ -120,8 +122,9 @@ VERIFIED_APPLICATION_NOTICES = {
         'application_start': '2026-11-05',
         'application_end_date': '2026-11-19',
         'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085331',
+        'notice_source_sha256': '794581a4c4239ceb707358d2245685c96239e64fbcbb0f442df7c8274fcf54a1',
         'checked_on': '2026-11-19',
-        'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, PDF 바이너리 SHA 독립 재계산 없음.',
+        'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
     # JOB-ALIO public text (2026-11-19) conflicts internally: employment is
     # labeled '정규직' while the selection-stage heading is '개방형 계약직'.
@@ -140,8 +143,8 @@ VERIFIED_APPLICATION_NOTICES = {
             '같은 공식 페이지의 전형단계별 채용정보는 개방형 계약직으로 명시합니다. '
             '따라서 정규직 1명으로만 단정하거나 계약기간을 추정하지 마세요. '
             '인천국제물류사업소장 직위이며, 지원자는 7급 이상 국가·지방공무원 1년 이상, '
-            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직·기술급 10년 '
-            '이상 등 공고의 대안 경력조건을 확인해야 합니다. '
+            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직이나 '
+            '10년 이상 기술급 등 공고의 대안 경력조건을 확인해야 합니다. '
             '원서접수 개시·마감시각 및 정확한 고용계약 조건은 공식 첨부 HWP와 기관 지원창에서 확인 필요입니다.'
         ),
         'scope': 'JOB-ALIO a307146 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
@@ -159,8 +162,8 @@ VERIFIED_APPLICATION_NOTICES = {
             '같은 공식 페이지의 전형단계별 채용정보는 개방형 계약직으로 명시합니다. '
             '따라서 정규직 1명으로만 단정하거나 계약기간을 추정하지 마세요. '
             '안동사업소장 직위이며, 지원자는 7급 이상 국가·지방공무원 1년 이상, '
-            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직·기술급 10년 '
-            '이상 등 공고의 대안 경력조건을 확인해야 합니다. '
+            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직이나 '
+            '10년 이상 기술급 등 공고의 대안 경력조건을 확인해야 합니다. '
             '원서접수 개시·마감시각 및 정확한 고용계약 조건은 공식 첨부 HWP와 기관 지원창에서 확인 필요입니다.'
         ),
         'scope': 'JOB-ALIO a307147 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
