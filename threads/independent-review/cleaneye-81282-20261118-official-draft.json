@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "notice_id": "cleaneye-81282",
-  "review_status": "independent_official_pdf_read_draft",
+  "review_status": "HOLD_REAL_APPLICATION_AND_PROFILE_AND_SOURCE_FRESHNESS",
   "approved_for_queue": false,
   "meta_posted": false,
   "cas_registered": false,
@@ -96,5 +96,63 @@
     "check employer latest corrections/cancellation, portal, posted and claim in real-time",
     "run validate_entry and verify_official_receipt; respect any image card pixel check",
     "CAS merge only if all conditions pass and previously unposted"
-  ]
+  ],
+  "latest_readonly_evidence_20261118": {
+    "original_source_pdf": {
+      "exact_url": "https://www.yongsanculture.or.kr/site/main/file/download/316",
+      "verified_at_utc": "2026-11-18T01:52:37.561094+00:00",
+      "http_status": 200,
+      "size_bytes": 284665,
+      "sha256": "57b2ecb3092b43327acd7e1f77c1e063b2ce7f1d7640e314e54f42747b320b72",
+      "pages_read": 10,
+      "origin": "Actual independent GET and full text in remote read-only runner, not copied cached digest",
+      "action_run": "https://github.com/kllollain-max/careerpick/actions/runs/44219058195",
+      "artifact_id": 14389956290,
+      "semantic_fact_review": "Existing five alternative qualifications, exact 2/9 single-unit count, 2026-11-26 24:00 were separately inspected against official issued 2026-22 PDF",
+      "source_checked_at_not_approving_future_slots": true
+    },
+    "exact_employer_ats_browser": {
+      "checked_at_utc": "2026-11-18T01:52:58.929744+00:00",
+      "final_url": "https://yongsanculture.incruit.com/main/main.asp",
+      "http_status": 200,
+      "visible_characters": 80,
+      "only_navigation_labels_visible": true,
+      "exact_live_2026_22_application_form_confirmed": false
+    },
+    "employer_notice_browser": {
+      "checked_at_utc": "2026-11-18T01:52:48.085493+00:00",
+      "http_status": 200,
+      "status": "HTML_ERROR_NOT_VALID_OFFICIAL_NOTICE_EVIDENCE",
+      "exception": "org.springframework.context.NoSuchMessageException: No message found under code 'post' for locale 'en'",
+      "note": "HTTP200 with server stacktrace must not be interpreted as correction/cancellation check success; web-indexed Korean notice independently readable"
+    },
+    "careerpick_profile_browser": {
+      "checked_at_utc": "2026-11-18T01:53:08.989223+00:00",
+      "http_status": 200,
+      "final_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-81282",
+      "page_loaded": true,
+      "exact_job_details_and_official_application_href_confirmed": false,
+      "note": "Rendered page body includes main listings; current receipt does not independently establish correct job detail modal, do not assert profile_target.verified"
+    },
+    "production_state_and_gate": {
+      "handoff_snapshot_at_kst": "2026-11-18T10:31:52.515727+09:00",
+      "approved_future_supply_count": 3,
+      "missing_future_slots": [
+        "2026-11-19T08:00:00+09:00",
+        "2026-11-19T12:00:00+09:00",
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00",
+        "2026-11-20T08:00:00+09:00"
+      ],
+      "cleaneye_snapshot_at_kst": "2026-11-18T01:08:36+09:00",
+      "latest_scheduled_collection_run": "https://github.com/kllollain-max/careerpick/actions/runs/44216145814",
+      "latest_scheduled_collection_result": "failure at 2026-11-18 10:30 KST; originals preserved; this is not a fresh validated collector receipt",
+      "missing_source_freshness_for_20261119_08_until_genuine_verified_operations_receipt": true,
+      "published_status": "NOT_POSTED",
+      "meta_post_id": null,
+      "cas_registered": false,
+      "reviewed_ingest": false,
+      "validation_production": false
+    }
+  }
 }
