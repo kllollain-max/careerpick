@@ -23,12 +23,18 @@
     "employer_official_notice_url": "https://www.yjuc.or.kr/sub/content.asp?actionMode=view&cIdx=32&fboard=board_job&fpage=1&num=690&orderby1=b_ref&orderby2=Desc&searchName=&searchOpt1=&searchOpt2=&searchOpt3=&searchOpt4=",
     "official_original_pdf": "https://www.yjuc.or.kr/fboard/common/download.asp?fboard=board_job&f_idx=8224",
     "official_pdf_pages_read": 11,
-    "original_pdf_sha256": null,
-    "original_pdf_sha_status": "PENDING_GITHUB_READONLY_ORIGINAL_BYTE_AUDIT",
+    "original_pdf_sha256": "33765bd2a25f5a85a9e828ae90ec39204ce979c6e923b2291e7b9bfc9498b260",
+    "original_pdf_sha_status": "INDEPENDENT_GET200_ORIGINAL_BYTES_SHA256_VERIFIED_GITHUB_ACTION",
     "employer_application_url": "https://yjuc.plusrecruit.co.kr/",
     "application_portal_actual_state": "SINGLE_PAGE_APP_ONLY_LOADS_DATA_LOADING__NOT_VERIFIED_ACTIVE",
     "correction_and_cancellation": "No correction seen at identified employer announcement. Exhaustive independent employer board and portal verification remains needed.",
-    "snapshot_metadata_note": "This is an editorial reading receipt, not a digest or posting approval."
+    "snapshot_metadata_note": "This is an editorial reading receipt, not a digest or posting approval.",
+    "official_original_pdf_bytes": 571775,
+    "original_byte_verified_at_utc": "2026-11-18T00:53:24.697415+00:00",
+    "original_pdf_mime": "application/smnet; Charset=utf-8 (original bytes start %PDF-)",
+    "pdf_identity_extraction_note": "Raw byte PDF check passed. Runner pdftotext not installed, so identity-term extraction there not run. Full semantic text independently read from official original through public fetch.",
+    "audit_workflow_run": "https://github.com/kllollain-max/careerpick/actions/runs/44211471611",
+    "audit_artifact_url": "https://github.com/kllollain-max/careerpick/actions/runs/44211471611/artifacts/14384639903"
   },
   "recruiting_unit": {
     "title": "일반8급 운영 환경(청년)",
@@ -55,12 +61,12 @@
     "duplicate_applications": "1개 분야, 중복 전부 무효"
   },
   "independent_review_holds": [
-    "Employer original PDF was read in entirety as text but exact fresh original-byte SHA is not available in this run; must obtain and verify, never use a guessed digest",
     "Recruitment SPA currently shows only data loading; must verify the precise employer-authorized active application session",
     "Check any newer correction/cancellation notices on official board",
     "Validate actual CareerPick profile notice rendering for job 80914",
     "Source freshness must be independently valid at 2026-11-19 08 KST: do not forge/rewrite check times",
-    "Run production validate_entry, verify_official_receipt, pixel card verification if image required, actual remote claims and posted inventory, CAS reviewed_ingest and queue_bridge"
+    "Run production validate_entry, verify_official_receipt, pixel card verification if image required, actual remote claims and posted inventory, CAS reviewed_ingest and queue_bridge",
+    "Original PDF byte SHA is independently verified; semantic interpretation is manually reviewed separately and still requires operational production checker."
   ],
   "guards": {
     "existing_scheduled_slots": "11/18 12 a306807,16 cleaneye-81112,20 a307141 — DO NOT MODIFY",
