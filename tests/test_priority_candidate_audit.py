@@ -6,6 +6,76 @@ def row(identity, due='2026-12-01', emp=None, n='20', url='https://job.alio.go.k
     return {'id':identity,'title':'공식 채용','org':'기관','due':due,'url':url,'emp':emp or [],'n':n}
 
 class PriorityAuditTests(unittest.TestCase):
+    def test_official_mixed_hiring_unit_hold_never_counts_total_as_regular_only_seats(self):
+        # a307074: eight career roles and six new general-position interns,
+        # even though the ALIO employment label contains only 정규직.
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        proof = VERIFIED_APPLICATION_NOTICES['a307074']
+        post = dict(row('a307074', due='2026-11-26T23:59:00+09:00',
+                        emp=['정규직'], n='14'), alio=True,
+                    org=proof['organization'], title=proof['title'])
+        windows = {'a307074': proof}
+        report = shortlist({'posts': [post]}, date(2026, 11, 19),
+                           verified_windows=windows)
+        self.assertEqual([p['id'] for p in report['top']], ['a307074'])
+        self.assertTrue(report['top'][0]['official_mixed_hiring_units'])
+        self.assertEqual(report['regular_review_candidates'], [])
+        self.assertEqual(report['regular_mixed_role_units_hold_ids'], ['a307074'])
+        self.assertTrue(any('mixed role-unit' in s for s in report['limitations']))
+        # A changed notice is NOT suppressed by stale verified evidence.
+        for changed in ({'n': '15'}, {'title': '정정 채용'},
+                        {'org': '변경 병원'}, {'due': '2026-11-27T23:59:00+09:00'},
+                        {'alio': False}):
+            revised = shortlist({'posts': [{**post, **changed}]}, date(2026, 11, 19),
+                                verified_windows=windows)
+            self.assertEqual(len(revised['regular_review_candidates']), 1, changed)
+            self.assertEqual(revised['regular_mixed_role_units_hold_ids'], [], changed)
+        revised_employment = shortlist(
+            {'posts': [{**post, 'emp': ['정규직', '인턴']}]}, date(2026, 11, 19),
+            verified_windows=windows)
+        self.assertEqual(revised_employment['regular_mixed_role_units_hold_ids'], [])
+        self.assertEqual(revised_employment['regular_review_candidates'], [])
+        self.assertEqual(len(revised_employment['top']), 1)
+
+    def test_cnuh_evergreen_notice_without_verified_live_capacity_is_held_from_queue(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        post = dict(row('a305089', due='2026-12-31T23:59:00+09:00',
+                        emp=['정규직'], n='14'), alio=True,
+                    org='충남대학교병원',
+                    title='2026년 하반기 신규의료진(임상교수요원) 공개채용 모집공고(상시모집)')
+        proof = {'a305089': VERIFIED_APPLICATION_NOTICES['a305089']}
+        report = shortlist({'posts': [post]}, date(2026, 11, 18), verified_windows=proof)
+        self.assertEqual(report['excluded']['official_current_status_unconfirmed'], 1)
+        self.assertEqual(report['regular_review_candidates'], [])
+        for stale in ({'title': '변경 공고'}, {'org': '변경 기관'}, {'n': '13'},
+                      {'emp': ['계약직']}, {'due': '2027-01-01T23:59:00+09:00'},
+                      {'alio': False}):
+            result = shortlist({'posts': [{**post, **stale}]},
+                               date(2026, 11, 18), verified_windows=proof)
+            self.assertEqual(len(result['top']), 1)
+            self.assertNotIn('official_current_status_unconfirmed', result['excluded'])
+
+    def test_verified_same_day_cutoff_requires_current_official_count_and_employment(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        post = dict(row('a306660', due='2026-11-18T23:59:00+09:00',
+                        emp=['정규직'], n='12'),
+                    alio=True, title='요양보호직', org='보훈공단')
+        proof = {'a306660': dict(organization='보훈공단', title='요양보호직',
+                                 source_end_date='2026-11-18', expected_source_seats='12',
+                                 source_employment=['정규직'], application_start='2026-11-03',
+                                 application_cutoff='2026-11-18T17:00:00+09:00')}
+        when = datetime(2026, 11, 18, 17, 0, tzinfo=ZoneInfo('Asia/Seoul'))
+        result = shortlist({'posts': [post]}, date(2026, 11, 18),
+                           verified_windows=proof, as_of_instant=when)
+        self.assertEqual(result['excluded']['official_reception_closed'], 1)
+        for changed in ({'n': '13'}, {'emp': ['계약직']}, {'org': '변경된 기관'},
+                        {'title': '정정공고'}, {'due': '2026-11-19T23:59:00+09:00'}):
+            res = shortlist({'posts': [{**post, **changed}]}, date(2026, 11, 18),
+                            verified_windows=proof, as_of_instant=when)
+            self.assertEqual(len(res['top']), 1)
+            self.assertNotIn('official_reception_closed', res['excluded'])
+
     def test_official_contract_and_until_filled_evidence_are_held_from_regular_queue(self):
         posts=[dict(row('a1',emp=['정규직']),alio=True),dict(row('a2',emp=['정규직']),alio=True)]
         proof={p['id']:{'organization':p['org'],'title':p['title'],'source_end_date':p['due']} for p in posts}

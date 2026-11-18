@@ -14,7 +14,7 @@ import re
 import shutil
 import subprocess
 import tempfile
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote, urljoin, urlparse
@@ -37,6 +37,10 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         if (post.get('alio') is not True or not proof
                 or proof.get('organization') != post.get('org')
                 or proof.get('title') != post.get('title')
+                or (proof.get('expected_source_seats') is not None
+                    and proof['expected_source_seats'] != str(post.get('n')))
+                or (proof.get('source_employment')
+                    and proof['source_employment'] != post.get('emp'))
                 or str(post.get('due', ''))[:10] != source_end
                 or not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00', cutoff)):
             continue
@@ -45,7 +49,8 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         except ValueError:
             continue
         result[pid] = dict(cutoff=cutoff, org=post['org'], title=post['title'],
-                           sourceEndDate=source_end)
+                           sourceEndDate=source_end, sourceSeats=str(post.get('n')),
+                           sourceTerms=post.get('emp'))
         if (proof.get('confirmed_employment') == '계약직'
                 and proof.get('source_employment') == post.get('emp')
                 and isinstance(proof.get('employment_note'), str)):
@@ -66,6 +71,10 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         source_end = proof.get('source_end_date', '')
         if (pid in result or post.get('alio') is not True
                 or proof.get('organization') != post.get('org') or proof.get('title') != post.get('title')
+                or (proof.get('expected_source_seats') is not None
+                    and proof['expected_source_seats'] != str(post.get('n')))
+                or (proof.get('source_employment')
+                    and proof['source_employment'] != post.get('emp'))
                 or not source_end or str(post.get('due', ''))[:10] != source_end
                 or not isinstance(start, str) or not isinstance(end, str)
                 or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', start)
@@ -77,7 +86,8 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
         except ValueError:
             continue
         result[pid] = dict(org=post['org'], title=post['title'], sourceEndDate=source_end,
-                           start=start, endDate=end)
+                           start=start, endDate=end, sourceSeats=str(post.get('n')),
+                           sourceTerms=post.get('emp'))
     for post in posts:
         pid = post.get('id'); proof = duties.get(pid, {})
         if (pid not in result and post.get('alio') is True
@@ -85,9 +95,16 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
                 and proof.get('title') == post.get('title')
                 and proof.get('source_end_date') == str(post.get('due', ''))[:10]
                 and proof.get('application_status_unconfirmed') is True
-                and isinstance(proof.get('status_note'), str) and proof['status_note']):
+                and (proof.get('expected_source_seats') is None
+                     or proof['expected_source_seats'] == str(post.get('n')))
+                and (not proof.get('source_employment')
+                     or proof['source_employment'] == post.get('emp'))):
+            note = proof.get('status_note')
+            if not isinstance(note, str) or not note.strip():
+                note = '실제 접수 활성 상태와 남은 채용인원이 기관 공식 접수처에서 확인되지 않았습니다.'
             result[pid] = dict(org=post['org'], title=post['title'],
-                               sourceEndDate=proof['source_end_date'], statusNote=proof['status_note'])
+                               sourceEndDate=proof['source_end_date'], statusNote=note,
+                               sourceSeats=str(post.get('n')), sourceTerms=post.get('emp'))
     return result
 
 def homepage_detail_corrections(posts, duties, cutoffs):
@@ -98,7 +115,8 @@ def homepage_detail_corrections(posts, duties, cutoffs):
         source_end = proof.get('source_end_date') or cutoffs.get(pid, '')[:10]
         if (post.get('alio') is not True or proof.get('organization') != post.get('org')
                 or proof.get('title') != post.get('title')
-                or not source_end or str(post.get('due', ''))[:10] != source_end):
+                or not source_end or str(post.get('due', ''))[:10] != source_end
+                or post.get('n') is None or not isinstance(post.get('emp'), list)):
             continue
         changes = {field: value for field, value in proof.get('detail_display_corrections', {}).items()
                    if field in ('aplyQlfcCn', 'disqlfcRsn') and isinstance(value, dict)
@@ -106,6 +124,7 @@ def homepage_detail_corrections(posts, duties, cutoffs):
                    and isinstance(value.get('value'), str) and value['value']}
         if changes:
             result[pid] = dict(org=post['org'], title=post['title'], sourceEndDate=source_end,
+                              sourceSeats=str(post['n']), sourceTerms=list(post['emp']),
                               corrections=changes)
     return result
 
@@ -120,10 +139,22 @@ def static_recruitment_posts(posts, metadata, now):
                 continue
             if proof.get('cutoff') and now >= datetime.fromisoformat(proof['cutoff']):
                 continue
+            # Date-only receipt end: never claim the final KST day certainly open.
+            end_day = proof.get('endDate')
+            if isinstance(end_day, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', end_day):
+                try:
+                    if now.astimezone(timezone(timedelta(hours=9))).date() >= date.fromisoformat(end_day):
+                        continue
+                except ValueError:
+                    pass
             start = proof.get('start')
             if start:
                 clock = datetime.fromisoformat(start if 'T' in start else start + 'T00:00:00+09:00')
                 if now < clock:
+                    continue
+                # A date-only opening has no verified hour; keep it out of
+                # the "currently receiving applications" static list that day.
+                if 'T' not in start and now.astimezone(timezone(timedelta(hours=9))).date() == clock.date():
                     continue
         selected.append(post)
     return selected

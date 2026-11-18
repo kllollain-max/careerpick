@@ -54,6 +54,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
         end = as_date(p.get('due'))
         url = p.get('url', '')
         emp = p.get('emp') if isinstance(p.get('emp'), list) else []
+        mixed_unit_hold = False
         if not isinstance(identity, str) or not re.fullmatch(r'a\d+', identity) or identity in seen:
             reason = 'duplicate_or_bad_id'
         elif not isinstance(title, str) or not title.strip():
@@ -73,7 +74,13 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
             if (isinstance(proof, dict) and p.get('alio') is True
                     and proof.get('organization') == p.get('org')
                     and proof.get('title') == title
-                    and proof.get('source_end_date') == str(p.get('due', ''))[:10]):
+                    and proof.get('source_end_date') == str(p.get('due', ''))[:10]
+                    and (proof.get('expected_source_seats') is None
+                         or proof['expected_source_seats'] == str(p.get('n')))
+                    and (not proof.get('source_employment')
+                         or proof['source_employment'] == emp)):
+                # Binding to the current source identity is required for a hold.
+                mixed_unit_hold = proof.get('regular_review_hold_due_to_mixed_role_units') is True
                 if (proof.get('confirmed_employment') == '계약직'
                         and proof.get('source_employment') == emp):
                     reason = 'official_employment_conflict'
@@ -141,7 +148,8 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                          'permanent_classified': permanent, 'regular_only_classified': regular_only,
                          'mixed_employment_with_regular': mixed_regular,
                          'triage_score': score, 'official_url': url,
-                         'official_start_day_clock_unconfirmed': start_day_clock_unknown})
+                         'official_start_day_clock_unconfirmed': start_day_clock_unknown,
+                         'official_mixed_hiring_units': mixed_unit_hold})
     selected.sort(key=lambda x: (-x['triage_score'], x['due'], x['id']))
     # A separate 20-row EDITORIAL WORK QUEUE, never a verified list of
     # independent, currently open regular positions. Keep the original
@@ -152,6 +160,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                              '금융', '은행', '신용보증', '공제', '연금', '물류')
     regular_review, held_regular, verified_duplicate_exclusions = [], [], []
     held_start_day_clock_unknown = []
+    held_mixed_role_units = []
     # Only a current-source fingerprint verified SAME-notice decision may
     # suppress a duplicate from the editor's regular-only 20-row work queue.
     # Leave the original cross-employment `top` output and public pages intact.
@@ -164,6 +173,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
         candidate['id'] for candidate in selected
         if candidate['regular_only_classified']
         and not candidate['official_start_day_clock_unconfirmed']
+        and not candidate['official_mixed_hiring_units']
         and not any(term in candidate['title'] for term in caution_terms)
         and verified_duplicate_representatives.get(candidate['id'], candidate['id']) == candidate['id']
     }
@@ -175,6 +185,9 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                 and representative in eligible_review_representatives):
             verified_duplicate_exclusions.append({
                 'id': item['id'], 'representative_id': representative})
+            continue
+        if item['official_mixed_hiring_units']:
+            held_mixed_role_units.append(item['id'])
             continue
         if item['official_start_day_clock_unconfirmed']:
             held_start_day_clock_unknown.append(item['id'])
@@ -198,6 +211,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
             'regular_review_verified_duplicate_exclusions': verified_duplicate_exclusions,
             'regular_title_conflict_hold_ids': held_regular,
             'regular_start_day_clock_unconfirmed_hold_ids': held_start_day_clock_unknown,
+            'regular_mixed_role_units_hold_ids': held_mixed_role_units,
             'limitations': ['Not a search-volume or actual popularity ranking',
                             'Reported hiring counts are source fields, not independently confirmed headcount',
                             'Mixed-employment notices report total seats, not verified regular-only seats; no regular-only score boost',
@@ -205,6 +219,7 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
                             'Known future official reception dates are excluded only on exact notice identity',
                             'Date-only evaluation cannot certify same-day opening or closing hours',
                             'A date-only reception opening TODAY is held from the current regular-20 queue when checking live KST time',
+                            'A source-bound confirmed mixed role-unit notice is held from the regular-only 20-row review queue, but retained in the broad editorial triage',
                             'An officially confirmed date-only reception END excludes only from the following calendar date',
                             'Real-time exclusion uses only identity-bound verified opening/cutoff clocks; historical --as-of remains date-only',
                             'Unknown and expired deadlines are never promoted',
@@ -231,7 +246,8 @@ def main():
                                      CONFIRMED_APPLICATION_CUTOFFS)
     windows = {}
     for pid, proof in {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES}.items():
-        if not isinstance(proof, dict) or not (proof.get('application_start') or proof.get('application_status_unconfirmed')):
+        if not isinstance(proof, dict) or not (proof.get('application_start') or proof.get('application_status_unconfirmed')
+                                               or proof.get('regular_review_hold_due_to_mixed_role_units')):
             continue
         official_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
         source_end = proof.get('source_end_date') or official_cutoff[:10]

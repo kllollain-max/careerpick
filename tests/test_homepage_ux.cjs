@@ -6,11 +6,36 @@ const home = require('../homepage-ux.js');
 const now = new Date('2026-10-29T12:00:00Z');
 function cutoffFixture(){
   const post=require('../alio.json').posts.find(p=>p.id==='a306355');
-  const proof={cutoff:'2026-11-16T10:00:00+09:00',org:post.org,title:post.title,sourceEndDate:'2026-11-16'};
+  const proof={cutoff:'2026-11-16T10:00:00+09:00',org:post.org,title:post.title,sourceEndDate:'2026-11-16',
+               sourceSeats:String(post.n),sourceTerms:post.emp.slice()};
   const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[post.id]:proof}},Date});
   vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
   return {post,proof,context,api:context.window.CPHome};
 }
+test('unconfirmed evergreen recruitment is not shown as open and cannot survive source changes',()=>{
+  const posts=require('../alio.json').posts;
+  for(const id of ['a292002','a305089']){
+    const post=posts.find(p=>p.id===id);
+    assert(post);
+    const original=JSON.stringify(post);
+    const note='실제 접수 활성 상태와 남은 채용인원이 기관 공식 접수처에서 확인되지 않았습니다.';
+    const proof={org:post.org,title:post.title,sourceEndDate:String(post.due).slice(0,10),
+                 sourceSeats:String(post.n),sourceTerms:post.emp.slice(),statusNote:note};
+    const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[id]:proof}},Date});
+    vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
+    const api=context.window.CPHome;
+    const when=new Date('2026-11-18T04:20:00Z');
+    assert.equal(api.reviewedStatus(post),note);
+    assert.equal(api.deadline(post,when).cls,'verify');
+    assert.equal(api.deadline(post,when).big,'상태 확인');
+    for(const change of [{n:'15'},{emp:['계약직']},{title:'정정공고'},
+                         {org:'다른기관'},{due:'2026-12-30T23:59:00+09:00'},{alio:false}]){
+      const changed={...post,...change};
+      assert.equal(api.reviewedStatus(changed),'');
+    }
+    assert.equal(JSON.stringify(post),original);
+  }
+});
 test('official reception start overrides an already published ALIO notice',()=>{
   const {post,proof,api}=cutoffFixture();
   proof.start='2026-11-12T10:00:00+09:00';
@@ -20,10 +45,12 @@ test('official reception start overrides an already published ALIO notice',()=>{
   assert.equal(api.deadline(p,new Date('2026-11-16T01:00:00Z')).cls,'closed');
   assert.equal(JSON.stringify(post),before);
 });
-test('date-only official start changes on Korean calendar day without invented clock',()=>{
+test('date-only official start must not imply opening at midnight KST',()=>{
   const {post,proof,api}=cutoffFixture();proof.start='2026-11-12';
   assert.equal(api.deadline(post,new Date('2026-11-11T14:59:59Z')).cls,'upcoming');
-  assert.notEqual(api.deadline(post,new Date('2026-11-11T15:00:00Z')).cls,'upcoming');
+  assert.equal(api.deadline(post,new Date('2026-11-11T15:00:00Z')).cls,'verify');
+  assert.equal(api.deadline(post,new Date('2026-11-12T03:00:00Z')).big,'개시시각 확인');
+  assert.equal(api.deadline(post,new Date('2026-11-12T15:00:00Z')).cls,'hot');
 });
 test('invalid or mismatched start evidence never overrides existing dates',()=>{
   const {post,proof,api}=cutoffFixture();
@@ -50,6 +77,18 @@ test('verified cutoff cannot transfer to a changed identity or publication end',
                        {due:'2026-11-17'},{alio:false}])
     assert.equal(api.confirmedApplicationCutoff({...post,...change}),null);
   proof.cutoff='2026-11-16';assert.equal(api.confirmedApplicationCutoff(post),null);
+});
+test('cached official cutoff does not transfer to a changed live hiring count or employment',()=>{
+  const {post,proof,api}=cutoffFixture();
+  assert(api.confirmedApplicationCutoff(post));
+  proof.start='2026-11-12';
+  for(const changes of [{n:'999'},{emp:['계약직']},{emp:['정규직','인턴']},{n:null},{emp:null}]){
+    const changed={...post,...changes};
+    assert.equal(api.confirmedApplicationCutoff(changed),null);
+    assert.equal(api.confirmedApplicationStart(changed),null);
+  }
+  delete proof.sourceSeats;
+  assert.equal(api.confirmedApplicationCutoff(post),null,'legacy cached proofs fail closed');
 });
 test('homepage wrapper keeps confirmed closure ahead of uncertain source flags',()=>{
   const {post,api,context}=cutoffFixture();
@@ -331,7 +370,9 @@ function detailCorrectionFixture(id){
   const post=require('../alio.json').posts.find(p=>p.id===id);
   const source=require('../alio-detail.json')[id];
   const reviewed=require('../scripts/verified_job_duties.json')[id];
-  const evidence={org:post.org,title:post.title,sourceEndDate:post.due.slice(0,10),corrections:JSON.parse(JSON.stringify(reviewed.detail_display_corrections))};
+  const evidence={org:post.org,title:post.title,sourceEndDate:post.due.slice(0,10),
+    sourceSeats:String(post.n),sourceTerms:post.emp.slice(),
+    corrections:JSON.parse(JSON.stringify(reviewed.detail_display_corrections))};
   const context=vm.createContext({window:{CP_VERIFIED_DETAIL_CORRECTIONS:{[id]:evidence}},Date});
   vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
   return {post,source,evidence,api:context.window.CPHome};
@@ -348,12 +389,23 @@ test('reviewed detail display fixes actual source discrepancies without changing
 });
 test('changed notice identity date or source text prevents a stale display correction',()=>{
   const {post,source,api}=detailCorrectionFixture('a306929');
-  for(const changed of [{id:'a1'},{org:'other'},{title:'other'},{due:'2027-01-23'},{alio:false}])
+  for(const changed of [{id:'a1'},{org:'other'},{title:'other'},{due:'2027-01-23'},
+                        {n:'9999'},{emp:['계약직']},{emp:[]},{alio:false}])
     assert.equal(api.reviewedDetailDisplay({...post,...changed},source).detail,source);
   for(const changed of [{recrutPblntSn:'1'},{disqlfcRsn:'new source terms'}]){
     const detail={...source,...changed};assert.equal(api.reviewedDetailDisplay(post,detail).detail,detail);
   }
   assert.equal(api.reviewedDetailDisplay(post,null).detail,null);
+});
+test('reviewed detail display requires seats and employment proof even for unchanged identity',()=>{
+  const {post,source,evidence,api}=detailCorrectionFixture('a306929');
+  delete evidence.sourceSeats;
+  assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
+  evidence.sourceSeats=String(post.n);
+  delete evidence.sourceTerms;
+  assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
+  evidence.sourceTerms=['계약직'];
+  assert.equal(api.reviewedDetailDisplay(post,source).detail,source);
 });
 test('display metadata cannot change other fields or supply a missing expected source',()=>{
   const {post,source,evidence,api}=detailCorrectionFixture('a306929');
@@ -362,7 +414,8 @@ test('display metadata cannot change other fields or supply a missing expected s
 });
 test('a verified date-only window marks future reception without inventing a final clock',()=>{
   const post=require('../alio.json').posts.find(p=>p.id==='a306963');
-  const proof={org:post.org,title:post.title,sourceEndDate:'2027-01-22',start:'2027-01-18',endDate:'2027-01-22'};
+  const proof={org:post.org,title:post.title,sourceEndDate:'2027-01-22',
+    sourceSeats:String(post.n),sourceTerms:post.emp.slice(),start:'2027-01-18',endDate:'2027-01-22'};
   const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[post.id]:proof}},Date});
   vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
   const api=context.window.CPHome;
@@ -374,8 +427,8 @@ test('a verified date-only window marks future reception without inventing a fin
   proof.endDate='2027-01-17';assert.equal(api.confirmedApplicationStart(post),null);
 });
 test('official employment conflict changes only display and filter copies, and rejects stale proof',()=>{
- const p={id:'a306988',alio:true,org:'국민연금공단',title:'공고',due:'2026-12-01',emp:['정규직'],type:'j'};
- const proof={org:p.org,title:p.title,sourceEndDate:p.due,employment:{sourceTerms:['정규직'],terms:['계약직'],note:'공식PDF 계약직3~5년'}};
+ const p={id:'a306988',alio:true,org:'국민연금공단',title:'공고',due:'2026-12-01',n:'2',emp:['정규직'],type:'j'};
+ const proof={org:p.org,title:p.title,sourceEndDate:p.due,sourceSeats:'2',sourceTerms:['정규직'],employment:{sourceTerms:['정규직'],terms:['계약직'],note:'공식PDF 계약직3~5년'}};
  const ctx=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[p.id]:proof}},Date});
  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),ctx);
  const api=ctx.window.CPHome;const original=JSON.stringify(p);
@@ -383,13 +436,35 @@ test('official employment conflict changes only display and filter copies, and r
  assert.equal(api.matches(p,{employment:'정규직'}),false);
  assert.equal(api.matches(p,{employment:'비정규직'}),true);
  assert.equal(JSON.stringify(p),original);
- for(const change of [{title:'정정'},{org:'다른기관'},{due:'2026-12-02'},{alio:false},{emp:['계약직']}])assert.equal(api.reviewedEmployment({...p,...change}),null);
+ for(const change of [{title:'정정'},{org:'다른기관'},{due:'2026-12-02'},{alio:false},{n:'3'},{n:null},{emp:['계약직']},{emp:null}])assert.equal(api.reviewedEmployment({...p,...change}),null);
+ delete proof.sourceSeats;
+ assert.equal(api.reviewedEmployment(p),null,'cached proof without seat fingerprint must fail closed');
 });
 test('until-filled source evidence is status unknown without an invented start or cutoff',()=>{
- const p={id:'a292472',alio:true,org:'병원',title:'약무직',due:'2026-12-31',emp:['정규직']};
- const ctx=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[p.id]:{org:p.org,title:p.title,sourceEndDate:p.due,statusNote:'충원여부 확인'}}},Date});
+ const p={id:'a292472',alio:true,org:'병원',title:'약무직',due:'2026-12-31',n:'20',emp:['정규직']};
+ const ctx=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[p.id]:{org:p.org,title:p.title,sourceEndDate:p.due,sourceSeats:p.n,sourceTerms:p.emp.slice(),statusNote:'충원여부 확인'}}},Date});
  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),ctx);const api=ctx.window.CPHome;
  assert.equal(api.deadline(p,new Date('2026-11-18T10:00:00+09:00')).cls,'verify');
  assert.equal(api.confirmedApplicationCutoff(p),null);assert.equal(api.confirmedApplicationStart(p),null);
  assert.equal(api.reviewedStatus({...p,title:'정정'}),'');
+ assert.equal(api.reviewedStatus({...p,n:'21'}),'');
+ assert.equal(api.reviewedStatus({...p,emp:['계약직']}),'');
+});
+
+test('verified date-only reception end is uncertain on final KST day and closed next day',()=>{
+  const post={id:'a309999',alio:true,org:'검증기관',title:'접수기간이 더 짧은 공고',
+    n:'4',emp:['정규직'],due:'2026-12-05T23:59:00+09:00',dueHasTime:false};
+  const proof={org:post.org,title:post.title,sourceEndDate:'2026-12-05',
+    sourceSeats:'4',sourceTerms:['정규직'],start:'2026-11-24',endDate:'2026-12-01'};
+  const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[post.id]:proof}},Date});
+  vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
+  const api=context.window.CPHome;
+  assert.equal(api.deadline(post,new Date('2026-11-30T14:59:59Z')).cls,'open');
+  assert.equal(api.deadline(post,new Date('2026-11-30T15:00:00Z')).cls,'verify');
+  assert.equal(api.deadline(post,new Date('2026-12-01T14:59:59Z')).big,'시각 확인');
+  assert.equal(api.deadline(post,new Date('2026-12-01T15:00:00Z')).cls,'closed');
+  for(const change of [{n:'5'},{emp:['계약직']},{title:'수정'},
+    {org:'다른기관'},{due:'2026-12-06T23:59:00+09:00'},{alio:false}]){
+    assert.notEqual(api.deadline({...post,...change},new Date('2026-12-01T15:00:00Z')).cls,'closed');
+  }
 });

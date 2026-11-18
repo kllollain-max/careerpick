@@ -31,6 +31,12 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306937': '2026-11-20T17:00:00+09:00',
     'a306941': '2026-11-20T17:00:00+09:00',
     'a306962': '2026-11-20T17:00:00+09:00',
+    # CNUH original recruitment PDFs (ALIO fileNo 3085307/3085325/3085331)
+    # read 2026-11-19. All three require submission by 17:00 on 11/19,
+    # NOT the synthetic 23:59 ALIO publication-end clock.
+    'a306733': '2026-11-19T17:00:00+09:00',
+    'a306735': '2026-11-19T17:00:00+09:00',
+    'a306737': '2026-11-19T17:00:00+09:00',
     # ALIO official detail (not publication end), checked 2026-11-17.
     'a306755': '2026-11-20T17:00:00+09:00',
     # SNU Dental Hospital official notice: reception opens 2027-01-18 09:00.
@@ -51,6 +57,15 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306355': '2026-11-16T10:00:00+09:00',
     'a306799': '2026-11-23T10:00:00+09:00',
     'a306662': '2026-11-18T17:00:00+09:00',
+    # CBNHU official application portal: 2026-11-18 12:00, not ALIO's 23:59 posting end.
+    # KOPO employer notice 790549: registered mail or weekday visit must arrive by 18:00.
+    # This is not the ALIO posting-end 23:59; no feed mutation.
+    'a307171': '2026-11-25T18:00:00+09:00',
+    'a306665': '2026-11-18T12:00:00+09:00',
+    # Official ALIO recruitment method: 2026-11-18 17:00, not the 23:59 posting end.
+    'a306660': '2026-11-18T17:00:00+09:00',
+    # Official JOB-ALIO detail 306718: Gwangju Veterans Hospital reception ends at 10:00, not ALIO's 23:59 posting end.
+    'a306718': '2026-11-18T10:00:00+09:00',
     # Official 307034 notice HWP, section 6; ALIO fileNo=3087622, checked 2026-11-16.
     'a307034': '2026-11-20T16:00:00+09:00',
     # Official notice originals: HWP 3085542 section 6; PDF 3087571 page 2.
@@ -68,6 +83,302 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # CNUH original recruitment notice PDFs read as text 2026-11-19.
+    # PDF originals independently acquired and SHA256 checked again 2026-11-19.
+    # Exact-source records prevent stale cutoff/field facts after ALIO changes.
+    'a306733': {
+        'organization': '충남대학교병원',
+        'title': '[대전] 2026년 11월 충남대학교병원 업무지원직(기계기사, 전기기사, 보조원, 환경사) 공개채용 공고',
+        'source_end_date': '2026-11-19',
+        'expected_source_seats': '21',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-05',
+        'application_end_date': '2026-11-19',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085307',
+        'notice_source_sha256': 'd7282d69cb886e8ed87b6909b02d9c3156a1b8b36635b7934950cf0881922ea3',
+        'checked_on': '2026-11-19',
+        'hiring_breakdown': '기계기사 1명, 전기기사 1명, 보조원 6명, 환경사 13명 (공식 공고문 전체 21명)',
+        'scope': '공식 공고문 PDF 텍스트에서 11월 19일 17시 온라인 원서접수 마감, 직종별 1+1+6+13명, 기계·전기 필수 자격증과 보조원·환경사 별도 필수자격 없음, 3개월 수습 및 평가를 대조함. 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
+    },
+    'a306735': {
+        'organization': '충남대학교병원',
+        'title': '[대전,세종] 2027년도 상반기 신규의료진(임상교수요원) 공개채용 모집공고',
+        'source_end_date': '2026-11-19',
+        'expected_source_seats': '49',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-05',
+        'application_end_date': '2026-11-19',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085325',
+        'notice_source_sha256': 'cf5231d2d88c7645191c8dffe2c922b8408bdbaf6564d21154aa6d11037eeab2',
+        'checked_on': '2026-11-19',
+        'scope': '공식 임상교수요원 모집 PDF 텍스트에서 대전·세종 전체 49명 및 11월 19일 17시 온라인 접수마감 확인. 분야별 상세인원과 실제 잔여 모집인원은 별도 검증하지 않음. 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
+    },
+    'a306737': {
+        'organization': '충남대학교병원',
+        'title': '[대전,세종] 2027년도 상반기 신규의료진(전임의사) 공개채용 모집공고',
+        'source_end_date': '2026-11-19',
+        'expected_source_seats': '29',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-05',
+        'application_end_date': '2026-11-19',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085331',
+        'notice_source_sha256': '794581a4c4239ceb707358d2245685c96239e64fbcbb0f442df7c8274fcf54a1',
+        'checked_on': '2026-11-19',
+        'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
+    },
+    # JOB-ALIO public text (2026-11-19) conflicts internally: employment is
+    # labeled '정규직' while the selection-stage heading is '개방형 계약직'.
+    # This is a discrepancy notice only; do not assert a confirmed contract
+    # type or duration before reading each original recruitment HWP.
+    'a307146': {
+        'organization': '(재)우체국물류지원단',
+        'title': '2027년도 우체국물류지원단 1분기 정기채용(개방형직위_인천국제물류사업소장) 공고',
+        'source_end_date': '2026-12-01',
+        'expected_source_seats': '1',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307146',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 고용형태 표에는 정규직 1명이라고 표시되지만 '
+            '같은 공식 페이지의 전형단계별 채용정보는 개방형 계약직으로 명시합니다. '
+            '따라서 정규직 1명으로만 단정하거나 계약기간을 추정하지 마세요. '
+            '인천국제물류사업소장 직위이며, 지원자는 7급 이상 국가·지방공무원 1년 이상, '
+            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직이나 '
+            '10년 이상 기술급 등 공고의 대안 경력조건을 확인해야 합니다. '
+            '원서접수 개시·마감시각 및 정확한 고용계약 조건은 공식 첨부 HWP와 기관 지원창에서 확인 필요입니다.'
+        ),
+        'scope': 'JOB-ALIO a307146 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
+    },
+    'a307147': {
+        'organization': '(재)우체국물류지원단',
+        'title': '2027년도 우체국물류지원단 1분기 정기채용(개방형직위_안동사업소장) 공고',
+        'source_end_date': '2026-12-01',
+        'expected_source_seats': '1',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307147',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 고용형태 표에는 정규직 1명이라고 표시되지만 '
+            '같은 공식 페이지의 전형단계별 채용정보는 개방형 계약직으로 명시합니다. '
+            '따라서 정규직 1명으로만 단정하거나 계약기간을 추정하지 마세요. '
+            '안동사업소장 직위이며, 지원자는 7급 이상 국가·지방공무원 1년 이상, '
+            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직이나 '
+            '10년 이상 기술급 등 공고의 대안 경력조건을 확인해야 합니다. '
+            '원서접수 개시·마감시각 및 정확한 고용계약 조건은 공식 첨부 HWP와 기관 지원창에서 확인 필요입니다.'
+        ),
+        'scope': 'JOB-ALIO a307147 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
+    },
+    # 2026-11-19 fresh JOB-ALIO HTML: published 33 seats across three roles.
+    # No official per-role seat totals or application cutoff proven; no PDF/ZIP SHA claim.
+    'a307225': {
+        'organization': '부산대학교병원',
+        'title': '2026년도 일반직(간호, 행정, 보건직) 신규직원 블라인드 공개채용 모집 공고',
+        'source_end_date': '2026-12-03',
+        'expected_source_seats': '33',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307225',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 33명은 간호직(진료지원간호사), 행정직(의료사회복지사), '
+            '보건직(방사선사)을 합한 공고 전체 인원입니다. '
+            '분야별 선발인원은 확인되지 않았으므로 33명을 어느 한 분야의 인원으로 단정하지 마세요. '
+            '간호직은 간호사 면허, 병원·종합병원 또는 군병원 임상경력 3년 이상, '
+            '야간 및 교대근무 가능 요건이 있습니다. '
+            '행정직은 의료사회복지사 자격증과 영어성적(예: TOEIC 700점 이상)이 필요합니다. '
+            '보건직은 방사선사 면허증과 영어성적(예: TOEIC 600점 이상)이 필요합니다. '
+            '영어시험별 인정점수와 우대사항은 반드시 공고 원문을 대조하세요. '
+            '12월 3일은 ALIO 게시 종료일이며 실제 지원서 마감시각으로 확정하지 않았습니다.'
+        ),
+        'scope': '2026-11-19 JOB-ALIO a307225 공개 HTML에서 정규직 총33명, 세 직종별 자격·영어기준, 공고 게시기간을 확인. 개별 분야 모집인원·기관 지원창 접수 마감시각·첨부 ZIP/PDF 원본 SHA는 아직 미검증이며 직무원본 검토 건수에 추가하지 않음.',
+    },
+    # Official JOB-ALIO public HTML rechecked 2026-11-18. These new
+    # postings are not separately audited HWP/PDF job-duty originals.
+    'a306990': {
+        'organization': '국방과학연구소',
+        'title': "국방과학연구소 '27년 상반기 임용 공개채용",
+        'source_end_date': '2026-12-02',
+        'expected_source_seats': '162',
+        'source_employment': ['무기계약직', '정규직', '계약직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306990',
+        'checked_on': '2026-11-18',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 162명은 정규직·무기계약직·비정규직을 합친 공고 전체 인원입니다. '
+            '정규직 162명 모집으로 해석할 수 없으며 각 응시코드별 고용형태·모집인원은 '
+            '기관 공고문의 모집분야 첨부에서 따로 확인해야 합니다. '
+            '2027년 3월 16일부터 근무 가능해야 하며, 연구직·기술직·관리직 정규직 지원자는 '
+            '분야별 공인영어성적 요건(예: TOEIC 700점 또는 이에 상응하는 시험)을 확인하세요. '
+            '기술기사직·행정직 정규직, 기능원 무기계약직 등은 영어 제출 대상이 서로 다릅니다. '
+            '12월 2일은 ALIO 게시 종료일이며 실제 접수 마감시각은 기관 지원화면에서 별도 확인하세요.'
+        ),
+        'scope': 'JOB-ALIO 306990 공개 HTML의 정규직·무기계약직·비정규직 혼합, 공고상 162명, 자격별 영어 제출대상과 임용예정일 확인. 각 고용형태/응시코드별 선발인원, HWP 모집분야 원본 SHA, 실제 접수시각·포털 활성은 미검증. 직무원본 검토건수에 합산하지 않음.',
+    },
+    'a307189': {
+        'organization': '한국도로공사',
+        'title': '2026년 한국도로공사 전문연구원(AI·데이터분석) 채용 공고',
+        'source_end_date': '2026-12-02',
+        'expected_source_seats': '4',
+        'source_employment': ['무기계약직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307189',
+        'checked_on': '2026-11-18',
+        'role_mix_note': (
+            '공식 JOB-ALIO 분류는 정규직이 아닌 무기계약직 전문연구원 4명입니다. '
+            '지원자는 관련 전공 박사학위, 관련 전공 석사 취득 후 해당분야 3년 이상 경력, '
+            '또는 관련 전공 학사 취득 후 해당분야 6년 이상 경력 중 하나를 충족해야 합니다. '
+            '해당분야는 AI·데이터 분석 및 모델 설계·구현 등이며, '
+            '2027년 1월 중 인턴 근무 시작부터 경북 본사 근무가 가능해야 합니다. '
+            '12월 2일은 ALIO 게시 종료일로, 실제 접수마감 시각은 기관 공고에서 확인이 필요합니다.'
+        ),
+        'scope': 'JOB-ALIO 307189 공개 HTML의 무기계약직 4명과 학위·경력 대안요건, AI 데이터 직무, 2027년 1월 경북 본사 인턴 시작 확인. 별도 PDF 직무원본과 실제 접수 시각은 미검증.',
+    },
+    # New 2026-11-18 ALIO notice and employer HTML #790549, not a verified
+    # HWP/HWPX job-description file. This is a fixed-term leadership appointment
+    # despite the ALIO feed label "정규직". Never imply an indefinite tenure.
+    'a307171': {
+        'organization': '학교법인한국폴리텍',
+        'title': '한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고',
+        'source_end_date': '2026-11-25',
+        'expected_source_seats': '4',
+        'source_employment': ['정규직'],
+        'source_url': 'https://www.kopo.ac.kr/board.do?menu=10523&mode=view&post=790549',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-18',
+        'application_end_date': '2026-11-25',
+        'role_mix_note': (
+            'ALIO에는 정규직 4명으로 등록되어 있지만 지역대학장 직위의 임기는 2년입니다. '
+            '서울강서·화성·충주·울산캠퍼스 중복지원은 불가합니다. '
+            '기관은 등기우편 또는 평일 방문접수를 받으며 2026년 11월 25일 18:00까지 '
+            '접수처에 도착한 서류만 유효하다고 안내합니다. '
+            '우편 접수자는 정상 접수 여부를 담당자에게 확인해야 합니다. '
+            'ALIO 게시 종료일의 23:59를 원서접수 마감시각으로 해석하지 마세요.'
+        ),
+        'scope': 'ALIO a307171 공개 HTML에서 정규직4명·응시자격 및 2년 임기 확인. 기관 공식 게시물 790549에서 중복지원 금지, 방문/등기우편, 11월25일18:00 도착 마감 교차 확인. 첨부 HWP/HWPX 본문·바이트 SHA 및 현재 접수실화면은 이 검증 범위 밖.',
+    },
+    # Official ALIO HTML reviewed 2026-11-18. These do NOT count as newly
+    # extracted PDF/HWP duties; the snapshots and field counts remain intact.
+    'a306665': {
+        'organization': '충북대학교병원',
+        'title': '2026년도 제6차 충북대학교병원 신규직원 블라인드 채용 공고',
+        'source_end_date': '2026-11-18',
+        'expected_source_seats': '13',
+        'source_employment': ['정규직'],
+        'source_url': 'https://cbnuh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=270620&systemKindCode=MRS2',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-04T00:00:00+09:00',
+        'application_end_date': '2026-11-18',
+        'role_mix_note': (
+            '기관 공식 채용페이지에서 확인한 실제 원서접수 마감은 2026년 11월 18일 12:00입니다. '
+            'ALIO 게시 종료일(11월 18일)을 23:59 원서접수 마감으로 해석하면 안 됩니다. '
+            '공고 전체 모집인원 13명은 행정직(행정·회계), 의료기술직(방사선사), '
+            '원무직(조리원), 환경관리직(미화원), 시설관리직(기계) 모집분야의 합계입니다. '
+            '분야별 정확한 인원과 필수 면허·자격은 첨부 공고문을 확인하세요.'
+        ),
+        'scope': 'CBNUH 공식 채용포털 HTML에서 2026-11-04 00:00~11-18 12:00 실제 접수기간 확인. JOB-ALIO 공개 HTML은 정규직 총13명 및 6개 분야 확인. 첨부 PDF/ZIP 바이트와 분야별 인원·면허 원문은 이번에 검증하지 않았음.',
+    },
+    'a306660': {
+        'organization': '한국보훈복지의료공단',
+        'title': '[원주보훈요양원] 2026년 제7차 요양보호직 공개채용',
+        'source_end_date': '2026-11-18',
+        'expected_source_seats': '12',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306660',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-03',
+        'application_end_date': '2026-11-18',
+        'role_mix_note': (
+            '요양보호직 12명 공고 중 2026년 12월 1일 즉시 임용 예정은 8명입니다. '
+            '12명 전원을 즉시 근무할 결원으로 계산하지 마세요. '
+            '요양보호사 자격증(합격증은 임용 전 자격증 제출)과 3교대 근무 가능 여부가 필수이며, '
+            '원서접수 방법은 우편·방문·이메일입니다.'
+        ),
+        'scope': 'ALIO 공식 공개 HTML: 11월3일~18일17시 원서접수, 총12명/12월1일 즉시임용 8명, 요양보호사 자격 및 3교대 조건. 첨부 PDF/HWP 바이트 검증 건수에 넣지 않음.',
+    },
+    'a306718': {
+        'organization': '한국보훈복지의료공단',
+        'title': '[광주보훈병원] 정규직 보건직 5급(임상병리사), 기능직(간호조무사, 시설_전기) 직원 채용 공고',
+        'source_end_date': '2026-11-18',
+        'expected_source_seats': '6',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306718',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-04',
+        'application_end_date': '2026-11-18',
+        'role_mix_note': (
+            '기관 공식 ALIO의 지원서 접수 마감은 2026년 11월 18일 10:00입니다. '
+            '전체 6명은 임상병리사 2명, 간호조무사 3명, 시설 전기 1명의 합계이며 '
+            '동일 분야 6명 모집이 아닙니다. 임상병리사는 면허증, 간호조무사는 자격증과 '
+            '교대 또는 상근근무 가능, 시설 전기는 전기산업기사 또는 전기공사산업기사 '
+            '이상 자격이 필요합니다. 게시 종료일 23:59를 지원 마감으로 쓰지 마세요.'
+        ),
+        'scope': 'JOB-ALIO 306718의 공개 채용 절차와 자격·분야별 2+3+1을 직접 확인함. 원본 PDF/HWP 첨부 바이트·SHA 및 세부 직무 원본 검증으로 집계하지 않음.',
+    },
+    'a307074': {
+        'organization': '분당서울대학교병원',
+        'title': '분당서울대학교병원 경력(간호직, 보건직), 신입(보건직) 직원 채용공고',
+        'source_end_date': '2026-11-26',
+        'expected_source_seats': '14',
+        'source_employment': ['정규직'],
+        # The feed's single 정규직 label includes 6 general-position interns.
+        # Keep the notice searchable, but do not put 14 seats in the regular-only review queue.
+        'regular_review_hold_due_to_mixed_role_units': True,
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307074',
+        'checked_on': '2026-11-18',
+        'hiring_breakdown': (
+            '경력 간호직 6명(영상의학과5·핵의학과1), 경력 보건직 2명(핵의학과), '
+            '신입 일반직인턴(보건직) 6명(진단검사의학과3·핵의학과2·신경외과1), 합계14명'
+        ),
+        'role_mix_note': (
+            'ALIO의 전체 고용형태는 정규직이지만 신입 6명은 공고 내 일반직인턴(보건직) '
+            '모집단위입니다. 전체14명을 즉시 확정 일반직 정규직 인원으로 단정하지 마세요. '
+            '경력직은 분야별 면허·종합병원 경력요건이 다르고 신입은 분야별 면허 및 '
+            '공인어학성적(TOEIC750·TOEIC Speaking IM3·NEW TEPS285 중 1개 이상)이 필수입니다. '
+            '기관의 경력직 8명 전용 채용공고는 2026-11-17 12:00~11-26 23:59 접수로 확인됐습니다. '
+            '이 시각은 경력 간호직 6명·보건직 2명에만 해당합니다. '
+            '신입 일반직인턴(보건직) 6명의 기관별 실제 접수화면·마감시각은 별도 확인이 필요합니다. '
+            '경력직 확인 시각을 전체 14명 공통 접수마감으로 사용하지 마세요.'
+        ),
+        'scope': 'ALIO 공식 공개 HTML의 여섯 세부분야 5+1+2+3+2+1=14명과 필수 면허/경력/영어요건. 기관 경력직원 별도 접수페이지 https://snubh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=272568&systemKindCode=MRS2 에서 경력8명 11월17일12시~26일23:59 확인. 신입6명 접수화면과 원본 첨부 직무검토는 확인하지 않음.',
+    },
+    # ALIO official detail HTML, 2026-11-18: "상시모집" describes the posting,
+    # not verified remaining vacancies or an independently live application portal.
+    'a305089': {
+        'organization': '충남대학교병원',
+        'title': '2026년 하반기 신규의료진(임상교수요원) 공개채용 모집공고(상시모집)',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '14',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=305089',
+        'checked_on': '2026-11-18',
+        'application_status_unconfirmed': True,
+        'role_mix_note': (
+            'ALIO에는 임상교수요원 정규직 총 14명 및 상시모집으로 등록되어 있습니다. '
+            '이 숫자는 현재 남아 있는 확정 결원 14명이라는 뜻이 아닙니다. '
+            '실제 접수 가능 여부·분야별 잔여 인원은 기관 채용시스템에서 별도 확인해야 합니다. '
+            '지원자는 경력요건 중 하나와 연구실적요건 중 하나를 각각 충족해야 합니다. '
+            '연구실적은 원칙적으로 최근 3년 이내이며 학위논문은 기간 제한 없음; 경력기준 예외 인정은 기관 심의 사항입니다.'
+        ),
+        'scope': 'ALIO 공식 HTML의 정규직 의사직 14명·상시모집 표기, 경력 및 연구실적 요건 확인. 기관 접수창의 실시간 활성·잔여 결원 및 PDF 직무원본 바이트는 미검증; 현재 접수 가능 확정 또는 직무원본 검증 건수로 계산하지 않음.',
+    },
+    # ALIO official HTML rechecked 2026-11-18: published count is not
+    # independently confirmed current vacancies for this long-running notice.
+    'a292002': {
+        'organization': '경상국립대학교병원',
+        'title': '권역외상센터 진료전담교수 채용공고',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '14',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=292002',
+        'checked_on': '2026-11-18',
+        'application_status_unconfirmed': True,
+        'role_mix_note': (
+            'JOB-ALIO에 정규직 진료전담교수 14명으로 등록된 공고입니다. '
+            '2025년 10월 17일~2026년 12월 31일은 ALIO 공고 게시기간이며 '
+            '현재 잔여 채용인원 14명으로 확정할 수 없습니다. '
+            '지원서 접수창의 현재 활성 상태와 실제 잔여 결원은 기관 채용시스템에서 별도 확인해야 합니다. '
+            '공식 ALIO 응시자격에는 교육 및 연구경력 통산 4년 이상 등이 명시되어 있습니다. '
+            '게시 종료일을 임의의 원서접수 마감시각으로 바꾸지 마세요.'
+        ),
+        'scope': 'JOB-ALIO 공식 HTML에서 정규직 14명·게시기간 2025-10-17~2026-12-31·경력 요건 확인. 기관 실제 접수창 활성, 잔여 인원, 원본 PDF/HWP SHA, 별도 최신 공고와의 독립 모집 여부는 미확인; 현재 접수 가능한 정규직 모집 수나 직무원본 검증 건수에 포함하지 않음.',
+    },
     'a306875': {
         'organization': '분당서울대학교병원',
         'title': '분당서울대학교병원 신입(업무지원직) 직원 채용 공고',
@@ -180,11 +491,28 @@ VERIFIED_APPLICATION_NOTICES = {
         'organization': '한국동서발전(주)',
         'title': '한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발',
         'source_end_date': '2026-12-01',
+        'expected_source_seats': '101',
+        'source_employment': ['정규직'],
         'application_start': '2026-11-24',
         'application_end_date': '2026-12-01',
         'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307149',
-        'checked_on': '2026-11-17',
-        'scope': 'Official ALIO recruitment method: published 11/17, actual application 11/24–12/01, regular positions 101 total; start/cutoff clocks unverified, not a PDF/HWP original review',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 101명은 대졸수준 일반전형, 대졸수준 보훈전형과 '
+            '고졸 일반전형을 합친 공고 전체 인원입니다. 개별 직무별 인원은 '
+            '이 공개 HTML만으로 확정하지 않습니다. '
+            '대졸수준 일반전형은 원칙적으로 TOEIC 700점 이상이 필요하지만 '
+            '보훈대상자·장애인·전문자격증 소지자에게는 공식 예외가 있습니다. '
+            '대졸수준 보훈전형은 별도의 어학 제한이 없고, '
+            '고졸 일반전형은 최종학력 기준을 확인해야 하며 전문대·대학교 '
+            '졸업자 및 졸업예정자는 지원할 수 없습니다. '
+            '원서접수는 11월 24일~12월 1일 예정이나 실제 개시·마감시각은 '
+            '확인되지 않았습니다. '
+            '또한 JOB-ALIO 일정표에는 입사일이 2026년 3월 15일로 표기되어 '
+            '2027년 상반기 채용 일정과 연도가 충돌하므로 기관 정정공고를 '
+            '확인해야 하며 2027년으로 임의 보정하지 않습니다.'
+        ),
+        'scope': '2026-11-19 JOB-ALIO a307149 HTML 직접 재확인: 전체 정규직 101명, 대졸 일반/보훈·고졸 일반 자격 및 어학 예외, 11/24~12/01 날짜만 확인, 입사일 연도 충돌. 직무별 인원·공식 PDF/ZIP 원본 SHA 및 실제 시작/종료시각 미검증.',
     },
 }
 
@@ -360,7 +688,9 @@ def render(post, detail, related_posts=(), notice_review=None):
             or verified_application_notice['title'] != title
             or verified_application_notice['source_end_date'] != clean(post.get('due'))[:10]
             or (verified_application_notice.get('source_employment')
-                and verified_application_notice['source_employment'] != post.get('emp')))):
+                and verified_application_notice['source_employment'] != post.get('emp'))
+            or (verified_application_notice.get('expected_source_seats') is not None
+                and verified_application_notice['expected_source_seats'] != clean(post.get('n'))))):
         verified_application_notice = {}
     verified_duties = VERIFIED_DUTIES.get(pid, {})
     # Bind editorial evidence to the exact notice, organization and title.
@@ -397,6 +727,9 @@ def render(post, detail, related_posts=(), notice_review=None):
     # A verified application cutoff takes precedence over the publication end
     # date. Keep the feed intact and preserve the archived URL/bookmarks.
     closed = is_closed(application_cutoff or due)
+    # An identity-verified long-running notice is not proof of a live vacancy.
+    # Retain the accessible detail page, but do not index unconfirmed openings.
+    robots_noindex = closed or verified_application_notice.get('application_status_unconfirmed') is True
 
     official = (
         safe_url(post.get('src'))
@@ -431,6 +764,8 @@ def render(post, detail, related_posts=(), notice_review=None):
         ),
         *(([('기관 공식 확인 고용형태별 인원', verified_application_notice['hiring_breakdown'])])
           if verified_application_notice.get('hiring_breakdown') else []),
+        *(([('공식 원문 모집단위별 확인사항', verified_application_notice['role_mix_note'])])
+          if verified_application_notice.get('role_mix_note') else []),
         ('고용형태', display_employment or '공고 확인'),
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
@@ -939,7 +1274,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     # 안내용 HTML 페이지는 그대로 유지합니다.
     # Publication end dates are not verified application deadlines. Keep the
     # useful HTML, but do not emit a JobPosting with an invented validThrough.
-    schema_json = '' if duplicate or closed or post.get('dueHasTime') is not True else (
+    schema_json = '' if duplicate or robots_noindex or post.get('dueHasTime') is not True else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
@@ -1001,7 +1336,7 @@ def render(post, detail, related_posts=(), notice_review=None):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)} | {escape(org)} | 커리어픽</title>
 <meta name="description" content="{escape(meta_description, quote=True)}">
-{'<meta name="robots" content="noindex,follow">' if closed else ''}
+{'<meta name="robots" content="noindex,follow">' if robots_noindex else ''}
 <link rel="canonical" href="{escape(canonical, quote=True)}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{escape(title, quote=True)}">
