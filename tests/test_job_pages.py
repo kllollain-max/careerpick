@@ -15,6 +15,55 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_wonju_care_actual_1700_cutoff_is_source_bound_and_never_rewrites_feed(self):
+        from datetime import timedelta
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306660']; original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a306660']
+        cutoff = CONFIRMED_APPLICATION_CUTOFFS['a306660']
+        self.assertEqual(cutoff, '2026-11-18T17:00:00+09:00')
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        html = render(post, {})
+        self.assertIn('2026-11-03 ~ 2026-11-18 17:00 (KST)', html)
+        self.assertIn('즉시 임용 예정은 8명', html)
+        self.assertIn('요양보호사 자격증', html)
+        self.assertNotIn('기관 공식 확인 접수마감</th><td>2026-11-18 23:59', html)
+        meta = homepage_cutoff_metadata([post], {post['id']: cutoff}, {post['id']: proof})
+        self.assertEqual(meta['a306660']['cutoff'], cutoff)
+        instant = datetime.fromisoformat(cutoff)
+        self.assertEqual(static_recruitment_posts([post], meta, instant - timedelta(seconds=1)), [post])
+        self.assertEqual(static_recruitment_posts([post], meta, instant), [])
+        for changed in ({'title': '정정'}, {'org': '다른 기관'},
+                        {'due': '2026-11-19T23:59:00+09:00'}, {'n': '13'},
+                        {'emp': ['계약직']}, {'alio': False}):
+            self.assertNotIn('즉시 임용 예정은 8명', render({**post, **changed}, {}))
+            self.assertNotIn('기관 공식 확인 접수마감', render({**post, **changed}, {}))
+        self.assertEqual(post, original)
+
+    def test_snubh_fourteen_roles_split_keeps_six_intern_positions_distinct(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a307074']; original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a307074']
+        self.assertEqual(proof['expected_source_seats'], '14')
+        self.assertEqual(proof['source_employment'], ['정규직'])
+        html = render(post, {})
+        self.assertIn('경력 간호직 6명', html)
+        self.assertIn('경력 보건직 2명', html)
+        self.assertIn('신입 일반직인턴(보건직) 6명', html)
+        self.assertIn('전체14명을 즉시 확정 일반직 정규직 인원으로 단정하지 마세요', html)
+        self.assertIn('TOEIC750', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)  # no invented 23:59 clock
+        for changed in ({'title': '정정'}, {'org': '다른 기관'},
+                        {'due': '2026-11-27T23:59:00+09:00'}, {'n': '15'},
+                        {'emp': ['무기계약직']}, {'alio': False}):
+            updated = render({**post, **changed}, {})
+            self.assertNotIn('신입 일반직인턴(보건직) 6명', updated)
+            self.assertNotIn('전체14명을 즉시 확정', updated)
+        self.assertEqual(post, original)
+
     def test_new_postal_reception_and_original_identity_guards(self):
         posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
         for pid in ['a307150','a307151']:
