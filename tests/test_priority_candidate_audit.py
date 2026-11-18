@@ -6,6 +6,37 @@ def row(identity, due='2026-12-01', emp=None, n='20', url='https://job.alio.go.k
     return {'id':identity,'title':'공식 채용','org':'기관','due':due,'url':url,'emp':emp or [],'n':n}
 
 class PriorityAuditTests(unittest.TestCase):
+    def test_official_mixed_hiring_unit_hold_never_counts_total_as_regular_only_seats(self):
+        # a307074: eight career roles and six new general-position interns,
+        # even though the ALIO employment label contains only 정규직.
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        proof = VERIFIED_APPLICATION_NOTICES['a307074']
+        post = dict(row('a307074', due='2026-11-26T23:59:00+09:00',
+                        emp=['정규직'], n='14'), alio=True,
+                    org=proof['organization'], title=proof['title'])
+        windows = {'a307074': proof}
+        report = shortlist({'posts': [post]}, date(2026, 11, 19),
+                           verified_windows=windows)
+        self.assertEqual([p['id'] for p in report['top']], ['a307074'])
+        self.assertTrue(report['top'][0]['official_mixed_hiring_units'])
+        self.assertEqual(report['regular_review_candidates'], [])
+        self.assertEqual(report['regular_mixed_role_units_hold_ids'], ['a307074'])
+        self.assertTrue(any('mixed role-unit' in s for s in report['limitations']))
+        # A changed notice is NOT suppressed by stale verified evidence.
+        for changed in ({'n': '15'}, {'title': '정정 채용'},
+                        {'org': '변경 병원'}, {'due': '2026-11-27T23:59:00+09:00'},
+                        {'alio': False}):
+            revised = shortlist({'posts': [{**post, **changed}]}, date(2026, 11, 19),
+                                verified_windows=windows)
+            self.assertEqual(len(revised['regular_review_candidates']), 1, changed)
+            self.assertEqual(revised['regular_mixed_role_units_hold_ids'], [], changed)
+        revised_employment = shortlist(
+            {'posts': [{**post, 'emp': ['정규직', '인턴']}]}, date(2026, 11, 19),
+            verified_windows=windows)
+        self.assertEqual(revised_employment['regular_mixed_role_units_hold_ids'], [])
+        self.assertEqual(revised_employment['regular_review_candidates'], [])
+        self.assertEqual(len(revised_employment['top']), 1)
+
     def test_cnuh_evergreen_notice_without_verified_live_capacity_is_held_from_queue(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
         post = dict(row('a305089', due='2026-12-31T23:59:00+09:00',
