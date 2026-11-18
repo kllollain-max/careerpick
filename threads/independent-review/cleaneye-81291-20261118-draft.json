@@ -3,7 +3,7 @@
   "notice_id": "cleaneye-81291",
   "employer": "남양주도시공사",
   "notice_number": "남양주도시공사 2026-424호",
-  "review_status": "OFFICIAL_PDF_SHA_AND_EXACT_PROFILE_CONFIRMED_HOLD_QUALIFICATION_AND_CAS",
+  "review_status": "SOURCE_PDF_AND_SCANNED_JD_VISUAL_REVIEWED_EXACT_PROFILE_VERIFIED_HOLD_PRODUCTION_VALIDATION",
   "approved_for_queue": false,
   "slot_reserved": false,
   "meta_posted": false,
@@ -138,8 +138,7 @@
     "requires_meta_receipt_at_post_time": true
   },
   "blockers": [
-    "Individual applicant submission form after clicking exact posting and complete job-description PDF/any corrections must still be reviewed.",
-    "Exact #job profile rendered correctly at 17:00 KST (6 aggregate and date-only); role-specific 5/18:00 requires separate original employer evidence and complete job description.",
+    "JD 3 scanned pages now independently image-reviewed; revised public text removes broad claim that no required safety-manager qualification exists anywhere in role. Full v5 semantic production validator and CAS still not run.",
     "Exact PDF byte SHA verified, but final employer correction/cancellation, application-specific form and exact careerpick #job visual render not yet fully cleared.",
     "Only currently visible employer notices reviewed; final amendment/cancellation clearance remains incomplete.",
     "Production validate_entry and official receipt check have NOT passed; never mark as approved.",
@@ -176,5 +175,25 @@
     "portal_status": "active_2026-11-17_09:00_to_2026-11-26_18:00",
     "note": "Actual live Chromium inspected exact hash modal; source-specific 5-person 역무 and 18:00 time MUST be stated only against employer PDF & portal, not misattributed to aggregate profile",
     "approved_for_queue": false
-  }
+  },
+  "draft_text": "철도역 고객 응대·안전관리 업무를 찾는다면,\n남양주도시공사 일반직(정규직) 역무8급 5명 모집을 확인해요.\n\n진접선·별내선 역사 영업 준비·마감, 여객서비스와 안전관리 등을 맡아요.\n전체 7명 중 일반직 6명, 그중 역무직은 5명이에요.\n\n역무8급은 공고일 전날 기준 남양주시 주민등록 거주가 필수예요.\n직무기술서에는 시설 일상점검 관련 안전관리자 자격도 적혀 있으니, 응시자격표와 구분해 읽어야 해요.\n서류·필기(NCS·철도교통 일반상식)·면접을 거쳐요.\n\n11월 26일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+  "proposed_main_text": "철도역 고객 응대·안전관리 업무를 찾는다면,\n남양주도시공사 일반직(정규직) 역무8급 5명 모집을 확인해요.\n\n진접선·별내선 역사 영업 준비·마감, 여객서비스와 안전관리 등을 맡아요.\n전체 7명 중 일반직 6명, 그중 역무직은 5명이에요.\n\n역무8급은 공고일 전날 기준 남양주시 주민등록 거주가 필수예요.\n직무기술서에는 시설 일상점검 관련 안전관리자 자격도 적혀 있으니, 응시자격표와 구분해 읽어야 해요.\n서류·필기(NCS·철도교통 일반상식)·면접을 거쳐요.\n\n11월 26일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+  "independent_job_description": {
+    "url": "https://www.ncuc.or.kr/File/Download/8d3bff297caac379b8a18a1608f7ce14",
+    "final_pdf_url": "https://www.ncuc.or.kr/File/8d3bff297caac379b8a18a1608f7ce14",
+    "sha256": "947f3955a4b057e9897102d9da438f0c9f4c5915dcb06f6fa650cf28dbdd195f",
+    "bytes": 384807,
+    "pages": 3,
+    "checked_at": "2026-11-18T17:04:00+09:00",
+    "github_run": "https://github.com/kllollain-max/careerpick/actions/runs/44263746215",
+    "scanned_image_pdf": true,
+    "semantic_review_method": "Visual review of original scanned PDF 3 pages, pages 1-3, not empty text parser",
+    "meaning_review_findings": [
+      "Rail station service includes station opening/closing, CCTV monitoring, emergency response, card and station passenger equipment maintenance",
+      "JD's 일상점검 related required credentials show 소방안전관리자 and 승강기안전관리자 in duty table, while original recruitment eligibility table for 역무8급 lists no separate recruitment credential; DO NOT equate duty-level requirements with applicant-wide eligibility",
+      "Rail automatic/telecom equipment maintenance rows list 철도교통/철도운행 안전관리자 in optional column, not global applicant eligibility"
+    ],
+    "approved_for_queue": false
+  },
+  "body_length": 300
 }
