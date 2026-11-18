@@ -57,6 +57,52 @@ jobs:
           print(text[:50000])
           print("OFFICIAL_FULL_TEXT_END")
           PY
+      - name: Read actual employer notice, application portal and existing CareerPick detail (no writes)
+        shell: bash
+        run: |
+          python -m pip install --quiet playwright==1.58.0
+          python -m playwright install chromium
+          python - <<'PY'
+          import asyncio,datetime,json,pathlib
+          from playwright.async_api import async_playwright
+          async def main():
+              out=pathlib.Path("official-81282-evidence")
+              out.mkdir(exist_ok=True)
+              results=[]
+              async with async_playwright() as p:
+                  browser=await p.chromium.launch(headless=True,args=["--no-sandbox"])
+                  urls=[
+                      ("employer_notice","https://www.yongsanculture.or.kr/site/main/archive/post/2026년-제4차-용산문화재단-직원-공개경쟁채용-공고"),
+                      ("employer_application","https://yongsanculture.incruit.com/"),
+                      ("profile_81282","https://kllollain-max.github.io/careerpick/#job=cleaneye-81282")]
+                  for name,url in urls:
+                      page=await browser.new_page(viewport={"width":390,"height":844})
+                      row={"name":name,"requested_url":url,"checked_at":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+                      try:
+                          response=await page.goto(url,wait_until="domcontentloaded",timeout=45000)
+                          await page.wait_for_timeout(9000)
+                          body=await page.locator("body").inner_text(timeout=15000)
+                          row.update({"http":response.status if response else None,
+                              "final_url":page.url,"visible_characters":len(body),
+                              "visible_text":body[:4500],
+                              "mentions_exact_job":("제4차" in body or "81282" in body),
+                              "mentions_institution":"용산문화재단" in body,
+                              "mentions_application":any(x in body for x in ("지원하기","접수중","입사지원","접수기간")),
+                              "shows_loading_only":("로딩 중" in body and len(body)<140)})
+                          await page.screenshot(path=str(out/(name+".png")),full_page=False,timeout=25000)
+                      except Exception as exc:
+                          row["error"]=str(exc)[:400]
+                      results.append(row)
+                      await page.close()
+                  await browser.close()
+              record={"scope":"81282 exact applicant and displayed profile only","read_only":True,
+                  "no_form_submission":True,"cas_registered":False,"meta_posted":False,
+                  "observations":results,
+                  "approval":"HOLD until exact application, corrections, profile and production validators independently pass"}
+              (out/"browser-review.json").write_text(json.dumps(record,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+              print("BROWSER_READ_ONLY="+json.dumps(record,ensure_ascii=False))
+          asyncio.run(main())
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
