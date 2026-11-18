@@ -15,6 +15,49 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_pola_open_position_alio_employment_discrepancy_is_disclosed_only_when_source_matches(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.priority_candidate_audit import shortlist
+        from datetime import date
+
+        feed = json.loads(Path('alio.json').read_text(encoding='utf-8'))['posts']
+        by_id = {p['id']: p for p in feed}
+        posts = []
+        for pid, place in [('a307146', '인천국제물류사업소장'),
+                           ('a307147', '안동사업소장')]:
+            post = by_id[pid]
+            original = copy.deepcopy(post)
+            proof = VERIFIED_APPLICATION_NOTICES[pid]
+            self.assertEqual(proof['organization'], post['org'])
+            self.assertEqual(proof['title'], post['title'])
+            self.assertEqual(proof['expected_source_seats'], '1')
+            self.assertEqual(proof['source_employment'], ['정규직'])
+            self.assertNotIn('confirmed_employment', proof)
+            self.assertNotIn('application_start', proof)
+            self.assertNotIn(pid, CONFIRMED_APPLICATION_CUTOFFS)
+            html = render(post, {})
+            self.assertIn(place, html)
+            self.assertIn('전형단계별 채용정보는 개방형 계약직', html)
+            self.assertIn('공식 첨부 HWP와 기관 지원창에서 확인 필요', html)
+            self.assertNotIn('공식 공고문 고용형태', html)
+            self.assertNotIn('기관 공식 확인 접수마감', html)
+            for change in ({'n': '2'}, {'emp': ['무기계약직']},
+                           {'title': post['title'] + ' 정정'}, {'org': '다른기관'},
+                           {'due': '2026-12-02T23:59:00+09:00'}, {'alio': False}):
+                stale = render({**post, **change}, {})
+                self.assertNotIn('전형단계별 채용정보는 개방형 계약직', stale)
+                self.assertNotIn('원서접수 개시·마감시각 및 정확한 고용계약 조건', stale)
+            self.assertEqual(post, original)
+            posts.append(post)
+        # The editorial regular-only queue already holds '개방형직위'
+        # title conflicts. The original source classification remains intact.
+        report = shortlist({'posts': posts}, date(2026, 11, 19))
+        self.assertEqual(report['regular_review_candidates'], [])
+        self.assertEqual(set(report['regular_title_conflict_hold_ids']),
+                         {'a307146', 'a307147'})
+        self.assertEqual({p['id'] for p in report['top']},
+                         {'a307146', 'a307147'})
+
     def test_pnuh_33_official_role_requirements_source_bound_without_unverified_cutoff(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
         from scripts.priority_candidate_audit import shortlist
