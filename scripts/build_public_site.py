@@ -93,9 +93,16 @@ def homepage_cutoff_metadata(posts, cutoffs, duties):
                 and proof.get('title') == post.get('title')
                 and proof.get('source_end_date') == str(post.get('due', ''))[:10]
                 and proof.get('application_status_unconfirmed') is True
-                and isinstance(proof.get('status_note'), str) and proof['status_note']):
+                and (proof.get('expected_source_seats') is None
+                     or proof['expected_source_seats'] == str(post.get('n')))
+                and (not proof.get('source_employment')
+                     or proof['source_employment'] == post.get('emp'))):
+            note = proof.get('status_note')
+            if not isinstance(note, str) or not note.strip():
+                note = '실제 접수 활성 상태와 남은 채용인원이 기관 공식 접수처에서 확인되지 않았습니다.'
             result[pid] = dict(org=post['org'], title=post['title'],
-                               sourceEndDate=proof['source_end_date'], statusNote=proof['status_note'])
+                               sourceEndDate=proof['source_end_date'], statusNote=note,
+                               sourceSeats=str(post.get('n')), sourceTerms=post.get('emp'))
     return result
 
 def homepage_detail_corrections(posts, duties, cutoffs):
