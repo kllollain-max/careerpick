@@ -225,6 +225,37 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('기관 공식 확인 접수마감', render({**post, **changed}, {}))
         self.assertEqual(post, original)
 
+    def test_gwangju_veterans_six_role_split_1000_official_cutoff(self):
+        from datetime import timedelta
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS, VERIFIED_APPLICATION_NOTICES
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306718']; original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a306718']
+        cutoff = CONFIRMED_APPLICATION_CUTOFFS['a306718']
+        self.assertEqual(cutoff, '2026-11-18T10:00:00+09:00')
+        self.assertEqual(post['n'], '6')
+        self.assertEqual(proof['source_employment'], post['emp'])
+        html = render(post, {})
+        self.assertIn('2026-11-04 ~ 2026-11-18 10:00 (KST)', html)
+        self.assertIn('임상병리사 2명, 간호조무사 3명, 시설 전기 1명', html)
+        self.assertIn('전기산업기사', html)
+        meta = homepage_cutoff_metadata([post], {post['id']: cutoff}, {post['id']: proof})
+        self.assertEqual(meta['a306718']['cutoff'], cutoff)
+        at = datetime.fromisoformat(cutoff)
+        self.assertEqual(static_recruitment_posts([post], meta, at - timedelta(seconds=1)), [post])
+        self.assertEqual(static_recruitment_posts([post], meta, at), [])
+        for altered in ({'n': '7'}, {'emp': ['계약직']}, {'title': '수정 공고'},
+                        {'org': '다른 기관'}, {'due': '2026-11-19T23:59:00+09:00'},
+                        {'alio': False}):
+            changed = {**post, **altered}
+            self.assertEqual(homepage_cutoff_metadata(
+                [changed], {post['id']: cutoff}, {post['id']: proof}), {})
+            changed_html = render(changed, {})
+            self.assertNotIn('임상병리사 2명, 간호조무사 3명, 시설 전기 1명', changed_html)
+            self.assertNotIn('기관 공식 확인 접수마감', changed_html)
+        self.assertEqual(post, original)
+
     def test_snubh_fourteen_roles_split_keeps_six_intern_positions_distinct(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
