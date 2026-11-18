@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-18 16:17:36 UTC",
+  "status": "NO_MATERIAL_CHANGE_FOUR_OPERATING_QUEUE_ENTRIES_VALID",
+  "main_sha": "97d3d79aa5b068d313f1f3ce42a2e52f459cd14d",
+  "validation_code_sha": "d6cb8c54c4173cc6608a76b9f61731cc129cfa15",
+  "main_change_scope": [
+    "alio-detail.json",
+    "alio.json",
+    "cleaneye.json",
+    "exam-status.json",
+    "gojobs.json",
+    "operations-status.json"
+  ],
+  "latest_source_queue_validation": "passed_4_entries_after_verified_main_snapshot_update",
+  "source_notice_ids": [
+    "a307061",
+    "a307145",
+    "a307120",
+    "a307207"
+  ],
+  "queue_sha": "72929e77f5864a4afa5d08f9966399ad3c636ba5",
+  "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+  "history_sha": "6055549afe911cee2003df953cc6336753c83070",
+  "verification": {
+    "checked_at": "2026-11-19T01:15:27.236284+09:00",
+    "future": [
+      {
+        "notice_id": "a307061",
+        "slot": "2026-11-19T08:00:00+09:00",
+        "media": "TEXT",
+        "entry_sha256": "017ba9d13648daf678fa1ce3d3ab576125430aab83e17aa6c37039c9fca62418",
+        "full_validator": "passed",
+        "chars": 309,
+        "reply_count": 0,
+        "cta_count": 1,
+        "main_exact": true
+      },
+      {
+        "notice_id": "a307145",
+        "slot": "2026-11-19T12:00:00+09:00",
+        "media": "IMAGE",
+        "entry_sha256": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+        "full_validator": "passed",
+        "chars": 295,
+        "reply_count": 0,
+        "cta_count": 1,
+        "main_exact": true,
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 110851,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a307145.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/r50/careerpick-d6cb8c54c4173cc6608a76b9f61731cc129cfa15/threads-images/a307145.jpg",
+          "sha256": "93735754da98a0323f1cb841549ba63e8336c4b1b6e82b1575eb1b3785a008f3",
+          "facts_sha256": "cd763ac1f5eb5c8a41df315d8fb40d147cc27c10c4f5a51e49fc826e3af95788",
+          "preview_asset_path": "threads-images/a307145-360.png",
+          "preview_sha256": "0869a83409ff3243e83b5c82a8b6f8b79b380ec6e67ca31d67706272c1c16c8b",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-18T11:01:07.374883+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      },
+      {
+        "notice_id": "a307120",
+        "slot": "2026-11-19T16:00:00+09:00",
+        "media": "TEXT",
+        "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+        "full_validator": "passed",
+        "chars": 299,
+        "reply_count": 0,
+        "cta_count": 1,
+        "main_exact": true
+      },
+      {
+        "notice_id": "a307207",
+        "slot": "2026-11-19T20:00:00+09:00",
+        "media": "IMAGE",
+        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+        "full_validator": "passed",
+        "chars": 314,
+        "reply_count": 0,
+        "cta_count": 1,
+        "main_exact": true,
+        "card": {
+          "valid": true,
+          "format": "JPEG",
+          "width": 1080,
+          "height": 1080,
+          "mode": "RGB",
+          "file_size_bytes": 106997,
+          "pixel_verification": "passed",
+          "layout_version": "careerpick-single-main-card-v2",
+          "asset_path": "threads-images/a307207.jpg",
+          "local_path": "/workspace/scratch/ef12db618a19/r50/careerpick-d6cb8c54c4173cc6608a76b9f61731cc129cfa15/threads-images/a307207.jpg",
+          "sha256": "8b963b684e40a961da54b8f97d324024b7434605d2825b13c29f8a347eb2dea3",
+          "facts_sha256": "f1ca022eb2b0a67c685010c268ee3d6ec0f177fba869904ce0b63d6d9d960638",
+          "preview_asset_path": "threads-images/a307207-360.png",
+          "preview_sha256": "2ab9aabd3e3f546c1e05505f0d489b3da23e603a2128e1181f59bfae5a61e4b5",
+          "reviewed_width": 360,
+          "reviewed_at": "2026-11-18T13:02:29.181654+00:00",
+          "visual_review": "attestation_and_exact_assets_verified"
+        }
+      }
+    ],
+    "policy_hashes": [
+      {
+        "path": "threads/prompts/master-v1.1.txt",
+        "sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+        "matches": true
+      },
+      {
+        "path": "threads/prompts/reach-v1.txt",
+        "sha256": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+        "matches": true
+      },
+      {
+        "path": "threads/prompts/reach-v5.txt",
+        "sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+        "matches": true
+      },
+      {
+        "path": "threads/prompts/intro-styles-v2-20261111.txt",
+        "sha256": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d",
+        "matches": true
+      }
+    ],
+    "queue_total": 47,
+    "selection_counts": {},
+    "candidates": [
+      {
+        "id": "cleaneye-80711",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-80914",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81143",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81199",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81206",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81209",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81220",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81221",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81231",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-80951",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81095",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81187",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81201",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81203",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-80989",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-80990",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-80991",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81114",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81179",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81180",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81251",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81255",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81280",
+        "org": null,
+        "title": null
+      },
+      {
+        "id": "cleaneye-81281",
+        "org": null,
+        "title": null
+      }
+    ],
+    "review_candidate_count": 922,
+    "recent8_ids": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "v5_comparison_status": "separate_cohort_not_legacy_AB; human_review_until_sufficient_verified_samples",
+    "new_publications": 0,
+    "verification_harness_note": "Use validate_entry selected image_job including card_restriction normalization, matching production; raw entry image_job is not production final card facts."
+  },
+  "regular_run": {
+    "id": 44345075888,
+    "status": "completed",
+    "conclusion": "success",
+    "run_attempt": 1,
+    "updated_at": "2026-11-18T16:16:30Z",
+    "head_sha": "d6cb8c54c4173cc6608a76b9f61731cc129cfa15",
+    "jobs": [
+      {
+        "id": 134945147637,
+        "name": "Preflight reviewed Threads drafts without posting",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134945148845,
+        "name": "Observe main-post performance without publishing",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134945151171,
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 134945956077,
+        "name": "Alert on Threads publishing failure",
+        "status": "completed",
+        "conclusion": "skipped"
+      }
+    ],
+    "preflight": [
+      {
+        "approved_supply_count": 4,
+        "promoted_count": 0,
+        "queue_updated": false,
+        "queue_sha": "72929e77f5864a4afa5d08f9966399ad3c636ba5",
+        "invalid_ready_entries": [],
+        "missing_slots": [
+          "2026-11-20T08:00:00+09:00",
+          "2026-11-20T12:00:00+09:00",
+          "2026-11-20T16:00:00+09:00",
+          "2026-11-20T20:00:00+09:00"
+        ],
+        "approved_future_slots": [
+          "2026-11-19T08:00:00+09:00",
+          "2026-11-19T12:00:00+09:00",
+          "2026-11-19T16:00:00+09:00",
+          "2026-11-19T20:00:00+09:00"
+        ]
+      }
+    ]
+  },
+  "claims": {
+    "count": 56,
+    "accepted": 55,
+    "historical_verified": 1,
+    "pending": 0,
+    "all_blobs_read": true
+  },
+  "performance": {
+    "state_sha": "788813a662e5a7889647598f9753c3d0db4eb575",
+    "as_of": "2026-11-18T16:16:29.514008+00:00",
+    "summary_sha256": "840eddef2cf3733f4d7b3bc37a7dedd3845ba4c8ff37d76aaf610d7d43e99664",
+    "windows": {
+      "24h": {
+        "count": 11,
+        "medians": {
+          "views": 2202,
+          "likes": 6,
+          "replies": 0,
+          "reposts": 0,
+          "quotes": 0
+        },
+        "likes_rate_percent_median": 0.21413276231263384
+      },
+      "72h": {
+        "count": 8,
+        "medians": {
+          "views": 1803,
+          "likes": 5.5,
+          "replies": 0,
+          "reposts": 2,
+          "quotes": 0
+        },
+        "likes_rate_percent_median": 0.2745916109087464
+      }
+    },
+    "account_followers": {
+      "account": "hid_119",
+      "scope": "account_total",
+      "requested_start": "2026-11-11T11:45:18.355131+00:00",
+      "requested_end": "2026-11-18T16:16:29.514008+00:00",
+      "observed_start": "2026-11-11T11:45:32.854727+00:00",
+      "observed_end": "2026-11-18T16:15:43.719351+00:00",
+      "start_followers": 415,
+      "end_followers": 502,
+      "net_change": 87,
+      "status": "observed_interval",
+      "exact_requested_boundaries": false,
+      "observation_statuses": {
+        "captured": 53
+      },
+      "post_attribution": null,
+      "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+    },
+    "decision": "extend_observation_or_balance_intro_types",
+    "weight_changes": 0
+  },
+  "automation_on": true,
+  "new_publications": 0,
+  "actual_new_meta_post_id": null,
+  "actual_new_permalink": null,
+  "meta_get_this_run": false,
+  "next_regular_slot": "2026-11-19T08:00:00+09:00",
+  "next_day_missing_slots": "Outside current 24-hour writer window; not relabeled approved",
+  "remote_mutations": "Only audit and maintenance; no queue/staging/history/claim/content edits, dispatch/rerun or Meta POST"
+}
