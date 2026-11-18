@@ -12,6 +12,8 @@
     const proof=root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p.id];
     if(!p.alio || !proof || proof.org!==p.org || proof.title!==p.title ||
        !date(p.due) || day(date(p.due))!==proof.sourceEndDate ||
+       proof.sourceSeats!==String(p.n) || !Array.isArray(proof.sourceTerms) ||
+       !Array.isArray(p.emp) || JSON.stringify(proof.sourceTerms)!==JSON.stringify(p.emp) ||
        !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(proof.cutoff||''))return null;
     return date(proof.cutoff);
   }
