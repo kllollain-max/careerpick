@@ -77,6 +77,48 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # JOB-ALIO public text (2026-11-19) conflicts internally: employment is
+    # labeled '정규직' while the selection-stage heading is '개방형 계약직'.
+    # This is a discrepancy notice only; do not assert a confirmed contract
+    # type or duration before reading each original recruitment HWP.
+    'a307146': {
+        'organization': '(재)우체국물류지원단',
+        'title': '2027년도 우체국물류지원단 1분기 정기채용(개방형직위_인천국제물류사업소장) 공고',
+        'source_end_date': '2026-12-01',
+        'expected_source_seats': '1',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307146',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 고용형태 표에는 정규직 1명이라고 표시되지만 '
+            '같은 공식 페이지의 전형단계별 채용정보는 개방형 계약직으로 명시합니다. '
+            '따라서 정규직 1명으로만 단정하거나 계약기간을 추정하지 마세요. '
+            '인천국제물류사업소장 직위이며, 지원자는 7급 이상 국가·지방공무원 1년 이상, '
+            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직·기술급 10년 '
+            '이상 등 공고의 대안 경력조건을 확인해야 합니다. '
+            '원서접수 개시·마감시각 및 정확한 고용계약 조건은 공식 첨부 HWP와 기관 지원창에서 확인 필요입니다.'
+        ),
+        'scope': 'JOB-ALIO a307146 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
+    },
+    'a307147': {
+        'organization': '(재)우체국물류지원단',
+        'title': '2027년도 우체국물류지원단 1분기 정기채용(개방형직위_안동사업소장) 공고',
+        'source_end_date': '2026-12-01',
+        'expected_source_seats': '1',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307147',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '공식 JOB-ALIO의 고용형태 표에는 정규직 1명이라고 표시되지만 '
+            '같은 공식 페이지의 전형단계별 채용정보는 개방형 계약직으로 명시합니다. '
+            '따라서 정규직 1명으로만 단정하거나 계약기간을 추정하지 마세요. '
+            '안동사업소장 직위이며, 지원자는 7급 이상 국가·지방공무원 1년 이상, '
+            '물류·운송 분야 민간경력 15년 이상, 또는 기관 내부 4급 사무직·기술급 10년 '
+            '이상 등 공고의 대안 경력조건을 확인해야 합니다. '
+            '원서접수 개시·마감시각 및 정확한 고용계약 조건은 공식 첨부 HWP와 기관 지원창에서 확인 필요입니다.'
+        ),
+        'scope': 'JOB-ALIO a307147 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
+    },
     # 2026-11-19 fresh JOB-ALIO HTML: published 33 seats across three roles.
     # No official per-role seat totals or application cutoff proven; no PDF/ZIP SHA claim.
     'a307225': {
