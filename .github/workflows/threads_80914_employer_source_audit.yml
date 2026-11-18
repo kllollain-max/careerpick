@@ -1,0 +1,80 @@
+name: Threads v6 80914 employer exact-source read-only audit
+on:
+  push:
+    branches:
+      - review/threads-80914-employer-source-20261119
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review-official-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Install PDF readers
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 pymupdf
+      - name: Fetch exact employer notice and attached public PDF only
+        shell: bash
+        run: |
+          mkdir -p audit
+          cat > /tmp/audit_notice.py <<'PY'
+          import requests, urllib.parse, hashlib, pathlib, json, re, fitz
+          from bs4 import BeautifulSoup
+          base = 'https://www.yjuc.or.kr/sub/content.asp?actionMode=view&cIdx=32&fboard=board_job&num=690'
+          session = requests.Session()
+          hdr = {'User-Agent':'Mozilla/5.0 (compatible; CareerPickPublicNoticeReview/1.0)','Accept':'text/html,application/pdf,*/*'}
+          result={'notice_url':base,'status':'source_unavailable','attachment_candidates':[]}
+          page=session.get(base,headers=hdr,timeout=25)
+          result['notice_http']=page.status_code
+          result['notice_bytes']=len(page.content)
+          page.raise_for_status()
+          page.encoding=page.apparent_encoding
+          html=page.text
+          pathlib.Path('audit/official-notice.html').write_bytes(page.content)
+          soup=BeautifulSoup(html,'html.parser')
+          text=soup.get_text(' ',strip=True)
+          pathlib.Path('audit/official-page.txt').write_text(text,encoding='utf-8')
+          print('OFFICIAL_NOTICE_HTTP',page.status_code,'BYTES',len(page.content))
+          print('OFFICIAL_NOTICE_TEXT',text[:2200])
+          links=[]
+          for a in soup.find_all('a',href=True):
+              href=urllib.parse.urljoin(base,a['href'])
+              caption=a.get_text(' ',strip=True)
+              if ('pdf' in href.lower() or '첨부' in caption or '공고문' in caption or 'download' in href.lower() or 'file' in href.lower()):
+                  links.append({'href':href,'caption':caption})
+          result['attachment_candidates']=links[:50]
+          print('ATTACHMENT_LINKS',json.dumps(links[:35],ensure_ascii=False))
+          visited=set()
+          for i,l in enumerate(links):
+              u=l['href']
+              p=urllib.parse.urlsplit(u)
+              if p.scheme!='https' or p.hostname not in ('www.yjuc.or.kr','yjuc.or.kr') or u in visited:continue
+              visited.add(u)
+              try:
+                  x=session.get(u,headers={**hdr,'Referer':base},timeout=30)
+                  if x.status_code!=200 or len(x.content)>15000000:continue
+                  if not x.content.startswith(b'%PDF-'):continue
+                  sha=hashlib.sha256(x.content).hexdigest()
+                  doc=fitz.open(stream=x.content,filetype='pdf')
+                  txt='\n\n'.join('=== PAGE %d ===\n%s'%(n+1,p.get_text()) for n,p in enumerate(doc))
+                  pathlib.Path('audit/official-80914.pdf').write_bytes(x.content)
+                  pathlib.Path('audit/official-80914.txt').write_text(txt,encoding='utf-8')
+                  for n in range(min(4,len(doc))):
+                      doc[n].get_pixmap(matrix=fitz.Matrix(1.6,1.6)).save('audit/page-%02d.png'%(n+1))
+                  result.update(status='pdf_downloaded',official_pdf_url=u,pdf_size=len(x.content),pdf_sha256=sha,pdf_pages=len(doc),pdf_text_chars=len(txt))
+                  print('OFFICIAL_PDF_VERIFIED URL',u,'BYTES',len(x.content),'SHA256',sha,'PAGES',len(doc),'TEXT_CHARS',len(txt))
+                  print('OFFICIAL_PDF_TEXT_START',txt[:18000])
+                  break
+              except Exception as e:print('ATTACHMENT_ATTEMPT_ERROR',repr(e)[:400])
+          pathlib.Path('audit/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+          if result['status']!='pdf_downloaded':
+              print('OFFICIAL_PDF_NOT_YET_FOUND; HOLD; NO APPROVAL / NO POST')
+          PY
+          python /tmp/audit_notice.py
+      - name: Save exact original / text / page render (read-only)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80914-employer-official-audit
+          path: audit/
+          retention-days: 14
