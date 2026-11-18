@@ -6,7 +6,8 @@ const home = require('../homepage-ux.js');
 const now = new Date('2026-10-29T12:00:00Z');
 function cutoffFixture(){
   const post=require('../alio.json').posts.find(p=>p.id==='a306355');
-  const proof={cutoff:'2026-11-16T10:00:00+09:00',org:post.org,title:post.title,sourceEndDate:'2026-11-16'};
+  const proof={cutoff:'2026-11-16T10:00:00+09:00',org:post.org,title:post.title,sourceEndDate:'2026-11-16',
+               sourceSeats:String(post.n),sourceTerms:post.emp.slice()};
   const context=vm.createContext({window:{CP_VERIFIED_APPLICATION_CUTOFFS:{[post.id]:proof}},Date});
   vm.runInContext(fs.readFileSync(require.resolve('../homepage-ux.js'),'utf8'),context);
   return {post,proof,context,api:context.window.CPHome};
@@ -74,6 +75,18 @@ test('verified cutoff cannot transfer to a changed identity or publication end',
                        {due:'2026-11-17'},{alio:false}])
     assert.equal(api.confirmedApplicationCutoff({...post,...change}),null);
   proof.cutoff='2026-11-16';assert.equal(api.confirmedApplicationCutoff(post),null);
+});
+test('cached official cutoff does not transfer to a changed live hiring count or employment',()=>{
+  const {post,proof,api}=cutoffFixture();
+  assert(api.confirmedApplicationCutoff(post));
+  proof.start='2026-11-12';
+  for(const changes of [{n:'999'},{emp:['계약직']},{emp:['정규직','인턴']},{n:null},{emp:null}]){
+    const changed={...post,...changes};
+    assert.equal(api.confirmedApplicationCutoff(changed),null);
+    assert.equal(api.confirmedApplicationStart(changed),null);
+  }
+  delete proof.sourceSeats;
+  assert.equal(api.confirmedApplicationCutoff(post),null,'legacy cached proofs fail closed');
 });
 test('homepage wrapper keeps confirmed closure ahead of uncertain source flags',()=>{
   const {post,api,context}=cutoffFixture();
