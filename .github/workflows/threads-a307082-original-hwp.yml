@@ -54,6 +54,14 @@ jobs:
           url,response=original
           data=response.content
           digest=hashlib.sha256(data).hexdigest()
+          exact_hospital_url='https://www.rch.or.kr/web/rchseoul/file/download/uu/26dbe5161e1a48cabdcdab5942b4ad9f'
+          counterpart=sess.get(exact_hospital_url,timeout=30,headers={'Referer':board})
+          print('HOSPITAL_ORIGINAL_CROSSCHECK',counterpart.status_code,len(counterpart.content),counterpart.url,hashlib.sha256(counterpart.content).hexdigest())
+          if counterpart.status_code!=200 or not olefile.isOleFile(io.BytesIO(counterpart.content)):
+            raise ValueError('HOSPITAL_ORIGINAL_NOT_HWP')
+          if hashlib.sha256(counterpart.content).hexdigest()!=digest:
+            raise ValueError('OFFICIAL_CROSS_SOURCE_HWP_DIGEST_MISMATCH')
+          print('OFFICIAL_HWP_INDEPENDENT_CROSS_SOURCE_BYTES_MATCH',digest)
           ole=olefile.OleFileIO(io.BytesIO(data))
           sections=sorted([('/'.join(part),part) for part in ole.listdir() if len(part)==2 and part[0]=='BodyText' and part[1].startswith('Section')])
           lines=[]
