@@ -47,3 +47,60 @@ jobs:
           name: threads-81291-official-original-receipt
           path: official-81291/
           retention-days: 30
+
+  portal-and-profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Independently inspect exact recruitment portal, employer notice list, and CareerPick hash detail (read only)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,pathlib,datetime,re
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
+          out=pathlib.Path('browser-81291');out.mkdir(exist_ok=True)
+          sites=[
+           ('employer_portal','https://ncuc.brms.kr/'),
+           ('employer_board','https://www.ncuc.or.kr/main/261'),
+           ('profile_exact','https://kllollain-max.github.io/careerpick/#job=cleaneye-81291'),
+          ]
+          results=[]
+          with sync_playwright() as p:
+           browser=p.chromium.launch(headless=True)
+           for name,url in sites:
+            page=browser.new_page(viewport={'width':390,'height':844},locale='ko-KR')
+            item={'site':name,'requested_url':url,'checked_at_kst':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat()}
+            try:
+             response=page.goto(url,wait_until='domcontentloaded',timeout=45000)
+             page.wait_for_timeout(9000 if name=='profile_exact' else 5000)
+             text=page.locator('body').inner_text(timeout=15000)
+             item.update({'status':response.status if response else None,'final_url':page.url,'visible_text_len':len(text),'visible_text':text[:14000],
+                          'identity_visible':'남양주도시공사' in text,
+                          'job_id_visible':'cleaneye-81291' in text,
+                          'recruitment_post_visible':'2026년도 하반기' in text,
+                          'deadline_visible':bool(re.search(r'11\\s*[.월/-]\\s*26|11월\\s*26일',text))})
+             page.screenshot(path=str(out/(name+'.png')),full_page=False)
+             (out/(name+'.txt')).write_text(text,encoding='utf-8')
+            except Exception as exc:
+             item['error']=str(exc)[:600]
+            print('SOURCE_BROWSER_'+name.upper(),json.dumps({k:v for k,v in item.items() if k!='visible_text'},ensure_ascii=False))
+            print('SOURCE_BROWSER_'+name.upper()+'_VISIBLE',item.get('visible_text','')[:4200].replace('\\n',' '))
+            results.append(item)
+            page.close()
+           browser.close()
+          (out/'actual-browser-receipt.json').write_text(json.dumps({'notice_id':'cleaneye-81291','reviewed_sites':results,'approved_for_queue':False,'claimed_profile_exact_verified':False},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: threads-81291-portal-profile-readonly
+          path: browser-81291/
+          retention-days: 30
