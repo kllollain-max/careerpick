@@ -6,6 +6,24 @@ def row(identity, due='2026-12-01', emp=None, n='20', url='https://job.alio.go.k
     return {'id':identity,'title':'공식 채용','org':'기관','due':due,'url':url,'emp':emp or [],'n':n}
 
 class PriorityAuditTests(unittest.TestCase):
+    def test_cnuh_evergreen_notice_without_verified_live_capacity_is_held_from_queue(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        post = dict(row('a305089', due='2026-12-31T23:59:00+09:00',
+                        emp=['정규직'], n='14'), alio=True,
+                    org='충남대학교병원',
+                    title='2026년 하반기 신규의료진(임상교수요원) 공개채용 모집공고(상시모집)')
+        proof = {'a305089': VERIFIED_APPLICATION_NOTICES['a305089']}
+        report = shortlist({'posts': [post]}, date(2026, 11, 18), verified_windows=proof)
+        self.assertEqual(report['excluded']['official_current_status_unconfirmed'], 1)
+        self.assertEqual(report['regular_review_candidates'], [])
+        for stale in ({'title': '변경 공고'}, {'org': '변경 기관'}, {'n': '13'},
+                      {'emp': ['계약직']}, {'due': '2027-01-01T23:59:00+09:00'},
+                      {'alio': False}):
+            result = shortlist({'posts': [{**post, **stale}]},
+                               date(2026, 11, 18), verified_windows=proof)
+            self.assertEqual(len(result['top']), 1)
+            self.assertNotIn('official_current_status_unconfirmed', result['excluded'])
+
     def test_verified_same_day_cutoff_requires_current_official_count_and_employment(self):
         from datetime import datetime
         from zoneinfo import ZoneInfo
