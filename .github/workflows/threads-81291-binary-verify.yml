@@ -134,3 +134,77 @@ jobs:
           name: threads-81291-portal-profile-readonly
           path: browser-81291/
           retention-days: 30
+
+  exact-jd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests pymupdf beautifulsoup4
+      - name: Find and read only exact original 2026-424 역무 job-description PDF attachment
+        run: |
+          python - <<'PY'
+          import requests,re,hashlib,json,pathlib,datetime
+          from urllib.parse import urljoin,urlsplit
+          from bs4 import BeautifulSoup
+          import fitz
+          out=pathlib.Path('jd-81291');out.mkdir(exist_ok=True)
+          urls=[
+           'https://www.ncuc.or.kr/main/261?action=read&action-value=a22a3b4578800c3845b258a286c7a256',
+           'https://www.nyj.go.kr/www/selectBbsNttView.do?bbsNo=67&key=2497&nttNo=551510',
+          ]
+          candidates=[]
+          for board in urls:
+           resp=requests.get(board,timeout=30)
+           resp.raise_for_status()
+           soup=BeautifulSoup(resp.text,'html.parser')
+           all_matches=soup.find_all(string=lambda s:s is not None and '직무기술서_역무' in str(s))
+           print('JD_BOARD',board,'HTTP',resp.status_code,'TITLE',soup.title.get_text(strip=True) if soup.title else '', 'matches',len(all_matches))
+           for text in all_matches[:5]:
+            n=text.parent
+            print('JD_MATCH_ELEMENT',str(n.parent)[:4500])
+            for elem in [n,n.parent,n.parent.parent] if n.parent and n.parent.parent else [n]:
+             for a in elem.find_all('a',href=True):
+              u=urljoin(board,a['href'])
+              if re.search(r'/File/[0-9a-f]{32}(?:$|[?])',u,re.I):
+               candidates.append(u)
+           for a in soup.find_all('a',href=True):
+            if '역무' in a.get_text() or '역무' in a.get('title',''):
+             u=urljoin(board,a['href'])
+             if u.startswith('https://') and urlsplit(u).hostname in ('www.ncuc.or.kr','www.nyj.go.kr'):
+              candidates.append(u)
+          candidates=list(dict.fromkeys(candidates))
+          evidence={'notice':'2026-424','candidates':candidates,'read_pdf':[],'status':'NO_DIRECT_JD_URL_VERIFIED','approved_for_queue':False}
+          for u in candidates[:8]:
+           try:
+            p=urlsplit(u)
+            if p.hostname not in ('www.ncuc.or.kr','www.nyj.go.kr') or p.scheme!='https':
+             continue
+            rr=requests.get(u,timeout=25)
+            if not rr.ok or len(rr.content)<1000 or not rr.content.startswith(b'%PDF-'):
+             continue
+            doc=fitz.open(stream=rr.content,filetype='pdf')
+            full='\n'.join(pg.get_text() for pg in doc)
+            record={'url':u,'http':rr.status_code,'bytes':len(rr.content),'sha256':hashlib.sha256(rr.content).hexdigest(),'pages':len(doc),'has_역무':'역무' in full,'has_철도':'철도' in full,'opening':full[:2200]}
+            evidence['read_pdf'].append(record)
+            if '역무' in full and ('여객' in full or '고객' in full or '철도' in full):
+             evidence['status']='JOB_DESCRIPTION_ACTUALLY_PARSED'
+             (out/'exact-역무-job-description.pdf').write_bytes(rr.content)
+             (out/'exact-역무-job-description.txt').write_text(full,encoding='utf-8')
+             break
+           except Exception as e:
+            print('JD_ATTACHMENT_UNAVAILABLE',str(e)[:400])
+          evidence['checked_at_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()
+          (out/'jd-evidence.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('JD_OFFICIAL_VERIFICATION',json.dumps(evidence,ensure_ascii=False)[:7000])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: threads-81291-official-rail-jd-review
+          path: jd-81291/
+          retention-days: 30
