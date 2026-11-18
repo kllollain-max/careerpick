@@ -15,6 +15,35 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_gnuh_trauma_2025_notice_fourteen_not_verified_live_vacancies(self):
+        from datetime import date
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        from scripts.priority_candidate_audit import shortlist
+        post = next(p for p in json.loads(Path('alio.json').read_text())['posts']
+                    if p['id'] == 'a292002')
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a292002']
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        self.assertTrue(proof['application_status_unconfirmed'])
+        html = render(post, {})
+        self.assertIn('현재 잔여 채용인원 14명으로 확정할 수 없습니다', html)
+        self.assertIn('교육 및 연구경력 통산 4년 이상', html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        report = shortlist({'posts': [post]}, date(2026, 11, 18),
+                           verified_windows={'a292002': proof})
+        self.assertEqual(report['excluded']['official_current_status_unconfirmed'], 1)
+        self.assertEqual(report['regular_review_candidates'], [])
+        for changed in ({'title': '정정 공고'}, {'org': '변경 기관'}, {'n': '15'},
+                        {'emp': ['계약직']}, {'due': '2026-12-30T23:59:00+09:00'},
+                        {'alio': False}):
+            altered = {**post, **changed}
+            self.assertNotIn('현재 잔여 채용인원 14명으로 확정할 수 없습니다',
+                             render(altered, {}))
+            revised = shortlist({'posts': [altered]}, date(2026, 11, 18),
+                                verified_windows={'a292002': proof})
+            self.assertNotIn('official_current_status_unconfirmed', revised['excluded'])
+        self.assertEqual(post, original)
+
     def test_cnuh_evergreen_fourteen_seats_are_not_presented_as_live_vacancies(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
         post = next(p for p in json.loads(Path('alio.json').read_text())['posts']
