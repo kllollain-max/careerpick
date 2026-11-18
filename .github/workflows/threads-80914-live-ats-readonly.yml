@@ -1,0 +1,62 @@
+name: Threads 80914 live ATS and profile read-only browser probe
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - review/threads-80914-official-20261118-0943
+    paths:
+      - '.github/workflows/threads-80914-live-ats-readonly.yml'
+permissions:
+  contents: read
+jobs:
+  read-only-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Install browser probes
+        run: |
+          python3 -m pip install -q playwright==1.58.0
+          python3 -m playwright install chromium
+      - name: Read real browser landing, never submit or publish
+        run: |
+          python3 - <<'PY'
+          import asyncio, datetime, json, pathlib
+          from playwright.async_api import async_playwright
+          async def main():
+              evidence=pathlib.Path('ats-readonly')
+              evidence.mkdir(exist_ok=True)
+              output={'notice_id':'cleaneye-80914','checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'read_only':True,'meta_posted':False,'cas_registered':False,'results':[]}
+              async with async_playwright() as p:
+                  browser=await p.chromium.launch(headless=True,args=['--no-sandbox'])
+                  for url,tag in [
+                      ('https://yjuc.plusrecruit.co.kr/','employer_application_portal'),
+                      ('https://kllollain-max.github.io/careerpick/#job=cleaneye-80914','existing_profile_readonly')]:
+                      page=await browser.new_page(viewport={'width':390,'height':844})
+                      row={'tag':tag,'url':url,'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat()}
+                      try:
+                          response=await page.goto(url,wait_until='domcontentloaded',timeout=45000)
+                          await page.wait_for_timeout(12000)
+                          text=await page.locator('body').inner_text(timeout=10000)
+                          row.update({'http_status':response.status if response else None,'final_url':page.url,'visible_text_chars':len(text),'visible_sample':text[:2400],
+                                      'explicit_notice_found':('양주도시공사' in text or 'cleaneye-80914' in text),
+                                      'still_loading':('데이터 로딩 중' in text and len(text)<120)})
+                          await page.screenshot(path=str(evidence/(tag+'.png')),full_page=False,timeout=25000)
+                      except Exception as exc:
+                          row['error']=str(exc)[:300]
+                      finally:
+                          output['results'].append(row)
+                          await page.close()
+                  await browser.close()
+              (evidence/'browser-observation.json').write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              print(json.dumps(output,ensure_ascii=False))
+              # A landing HTML screenshot never proves the application form was open.
+              # We deliberately do not set current_open_verified nor approve a notice.
+          asyncio.run(main())
+          PY
+      - name: Preserve observed rendered pages only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80914-ats-profile-readonly
+          path: ats-readonly/
+          retention-days: 14
