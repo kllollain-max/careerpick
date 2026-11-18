@@ -1,14 +1,12 @@
-name: Threads 81143 official HWPX independent semantic check
+name: Threads 81143 pinned employer-published HWPX review
 on:
   push:
-    branches:
-      - review/threads-81143-official-semantic-20261118-0046
-    paths:
-      - .github/workflows/threads-81143-hwpx-independent.yml
+    branches: [review/threads-81143-official-semantic-20261118-0046]
+    paths: [.github/workflows/threads-81143-hwpx-independent.yml]
 permissions:
   contents: read
 jobs:
-  original:
+  attachment:
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
@@ -17,74 +15,45 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - run: python -m pip install --quiet requests beautifulsoup4
-      - name: Read employer-owned attachments, not rehashed API excerpts
-        shell: bash
+          python-version: "3.11"
+      - run: python -m pip install --quiet requests
+      - name: Independently download exact job-description HWPX linked by employer's recruitment publication
         run: |
           python - <<'PY'
-          import datetime,hashlib,io,json,pathlib,re,urllib.parse,xml.etree.ElementTree as ET,zipfile
-          from bs4 import BeautifulSoup
-          import requests
+          import datetime, hashlib, io, json, pathlib, re, urllib.parse, xml.etree.ElementTree as ET, zipfile
           from zoneinfo import ZoneInfo
-          base="https://www.gib.re.kr/module/bbs/view.php?bdno=1&mid=%2Fnews%2Fnotice&rdno=9136"
-          alt="https://gib.re.kr/module/bbs/view.php?rdno=9136"
-          out=pathlib.Path("official-81143");out.mkdir(exist_ok=True)
-          sess=requests.Session();sess.headers.update({"User-Agent":"Mozilla/5.0 (compatible; OfficialIndependentReview/1.0)"})
-          html=None;used=None;errs=[]
-          for url in [base,alt]:
-              try:
-                  resp=sess.get(url,timeout=25);resp.raise_for_status()
-                  if "2026년 제5차 직원채용 공고" not in resp.text:raise RuntimeError("WRONG_EMPLOYER_NOTICE")
-                  html=resp.text;used=resp.url;break
-              except Exception as e: errs.append(str(e)[:200])
-          if html is None:raise RuntimeError("OFFICIAL_BOARD_NOT_RETRIEVED "+repr(errs))
-          soup=BeautifulSoup(html,"html.parser")
-          candidates=[]
-          for a in soup.select("a"):
-              txt=a.get_text(" ",strip=True)
-              parent=a.parent.get_text(" ",strip=True)[:160] if a.parent else ""
-              joined=(txt+" "+parent)
-              if any(s in joined for s in ("채용 공고문.hwpx","직무수행요건 명세서.hwpx","직원채용 공고문")):
-                  candidates.append({"text":txt,"href":a.get("href"),"onclick":a.get("onclick")})
-          (out/"file-links.json").write_text(json.dumps({"official_board":used,"candidates":candidates},ensure_ascii=False,indent=2),encoding="utf-8")
-          print("EXACT_EMPLOYER_ATTACHMENT_LINKS",json.dumps(candidates,ensure_ascii=False))
-          reviewed=[]
-          for candidate in candidates:
-              href=candidate.get("href")
-              if not href or href.startswith(("javascript:","#")):continue
-              url=urllib.parse.urljoin(used,href)
-              u=urllib.parse.urlsplit(url)
-              if u.scheme!="https" or u.hostname not in ("gib.re.kr","www.gib.re.kr"):continue
-              if len(reviewed)>=2:break
-              resp=sess.get(url,timeout=30);resp.raise_for_status()
-              raw=resp.content
-              if not zipfile.is_zipfile(io.BytesIO(raw)):continue
-              z=zipfile.ZipFile(io.BytesIO(raw))
-              entries=[name for name in z.namelist() if re.search(r"Contents/section\d+\.xml$",name,re.I)]
-              if not entries:continue
-              sections=[]
-              for name in entries:
-                  xml=ET.fromstring(z.read(name))
-                  blocks=[el.text.strip() for el in xml.iter() if el.text and el.text.strip()]
-                  sections.append("\n".join(blocks))
-              full="\n".join(sections)
-              if len(full)<200:raise RuntimeError("HWPX_TEXT_TOO_SHORT")
-              result={"url":url,"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),
-                      "sections":len(entries),"text_length":len(full),
-                      "checked_at_kst":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),
-                      "exact_original_read":True,"semantic_approval":False}
-              (out/("attachment-"+str(len(reviewed)+1)+".hwpx")).write_bytes(raw)
-              (out/("attachment-"+str(len(reviewed)+1)+".txt")).write_text(full,encoding="utf-8")
-              reviewed.append(result)
-              print("OFFICIAL_ORIGINAL_HWPX_REVIEW",json.dumps(result,ensure_ascii=False))
-              print("ORIGINAL_TEXT_START",full[:14500])
-          (out/"receipt.json").write_text(json.dumps({"board":used,"reviewed":reviewed,"manual_semantic_review_required":True,"approved_for_queue":False},ensure_ascii=False,indent=2),encoding="utf-8")
-          if len(reviewed)<2:raise RuntimeError("OFFICIAL_EXACT_HWPX_ATTACHMENTS_NOT_READ")
+          import requests
+          out=pathlib.Path("gib-81143-evidence");out.mkdir(exist_ok=True)
+          url="https://c.incru.it/newjobpost/2026/11_gib/2.%202026%EB%85%84%20%EC%A0%9C5%EC%B0%A8%20%EC%A7%81%EC%9B%90%EC%B1%84%EC%9A%A9%20%EC%A7%81%EB%AC%B4%EC%88%98%ED%96%89%EC%9A%94%EA%B1%B4%20%EB%AA%85%EC%84%B8%EC%84%9C.hwpx"
+          response=requests.get(url,timeout=30,allow_redirects=False)
+          response.raise_for_status()
+          assert response.status_code==200, ("PINNED_URL_STATUS",response.status_code)
+          raw=response.content
+          assert len(raw)>1000 and zipfile.is_zipfile(io.BytesIO(raw)), "NOT_HWPX_ORIGINAL"
+          z=zipfile.ZipFile(io.BytesIO(raw))
+          names=[n for n in z.namelist() if re.search(r"Contents/section\d+\.xml$",n,re.I)]
+          assert names,"NO_SECTION_XML"
+          text_parts=[]
+          for n in names:
+              x=ET.fromstring(z.read(n))
+              text_parts.append("\n".join(el.text.strip() for el in x.iter() if el.text and el.text.strip()))
+          full="\n".join(text_parts)
+          assert len(full)>=300,("SHORT_JOB_SPEC",len(full))
+          digest=hashlib.sha256(raw).hexdigest()
+          receipt={"notice_id":"cleaneye-81143","source":"employer recruitment publication attachment hosted at c.incru.it",
+              "source_url":url,"source_host":"c.incru.it","bytes":len(raw),"sha256":digest,
+              "sections":len(names),"text_len":len(full),"checked_at_kst":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),
+              "attachment_independently_read":True,"employer_origin_direct_verification":False,
+              "full_corrections_audited":False,"approved_for_queue":False,"meta_posted":False}
+          (out/"exact-job-spec.hwpx").write_bytes(raw)
+          (out/"full-job-spec.txt").write_text(full,encoding="utf-8")
+          (out/"source-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("PINNED_HWPX_RECEIPT",json.dumps(receipt,ensure_ascii=False))
+          print("ORIGINAL_JOB_SPEC_CONTENT",full[:16000])
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: threads-81143-original-hwpx-attachments
-          path: official-81143/
-          retention-days: 20
+          name: gib-81143-exact-job-spec-unapproved
+          path: gib-81143-evidence/
+          retention-days: 30
