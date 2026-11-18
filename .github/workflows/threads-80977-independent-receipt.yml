@@ -1,0 +1,240 @@
+name: Threads 80977 independent official review (read-only)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/threads-80977-independent-receipt.yml'
+permissions:
+  contents: read
+jobs:
+  exact-official-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Read employer original notice and attachment, without approval or posting
+        shell: bash
+        run: |
+          python -m pip install --quiet requests pymupdf beautifulsoup4
+          python - <<'PY'
+          import requests,hashlib,json,re,sys,urllib3,io,zipfile
+          from urllib.parse import urljoin
+          from bs4 import BeautifulSoup
+          import fitz
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          session=requests.Session()
+          session.headers.update({'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/132.0 Safari/537.36','Accept-Language':'ko-KR,ko;q=0.9'})
+          targets=[
+            'https://cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1',
+            'https://www.cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1',
+            'https://cbf.or.kr/twb_bbs/bbs_list.php?bcd=01_05_05_00_00&groupid=1'
+          ]
+          outcome={'notice_id':'cleaneye-80977','approved':False,'posted':False,'tls_verified':False,'reason':'Employer site certificate chain failed, so these bytes are exploration only and cannot be approval evidence until authenticated independently','official_pages':[],'attachments':[]}
+          candidates=[]
+          for url in targets:
+            try:
+              r=session.get(url,timeout=18,allow_redirects=True,verify=False)
+              soup=BeautifulSoup(r.text,'html.parser')
+              txt=soup.get_text(' ',strip=True)
+              print('WARNING_EMPLOYER_TLS_NOT_VERIFIED_APPROVAL_PROHIBITED',flush=True)
+              print('EMPLOYER_PAGE',r.status_code,r.url,'BYTES',len(r.content),'TITLE',soup.title.get_text(' ',strip=True) if soup.title else '',flush=True)
+              print('EMPLOYER_TEXT',txt[:10000],flush=True)
+              found=[]
+              for a in soup.select('a[href],a[onclick]'):
+                href=a.get('href','')
+                onclick=a.get('onclick','')
+                label=a.get_text(' ',strip=True)
+                if any(k in (href+' '+label+' '+onclick).lower() for k in ['.pdf','.hwp','.zip','download','공고문','첨부','붙임','file']):
+                  record={'href':href,'onclick':onclick,'label':label,'source':r.url}
+                  found.append(record)
+                  if href.startswith(('https://','http://','/')) and not href.startswith('javascript:'):
+                    candidates.append(urljoin(r.url,href))
+              print('EMPLOYER_ATTACHMENT_LINKS',json.dumps(found[:40],ensure_ascii=False),flush=True)
+              # Inspect actual website script definition rather than guessing a download endpoint.
+              for match in list(re.finditer(r'(?i)function\\s+opendownload\\s*\\(',r.text))[:5]:
+                print('OPENDOWNLOAD_DEFINITION',repr(r.text[match.start():match.start()+1600]),flush=True)
+              for script in soup.select('script[src]'):
+                src=urljoin(r.url,script.get('src',''))
+                if any(k in src.lower() for k in ('bbs','board','common','twb')):
+                  print('CANDIDATE_SCRIPT',src,flush=True)
+              outcome['official_pages'].append({'url':r.url,'http':r.status_code,'sha256':hashlib.sha256(r.content).hexdigest(),'bytes':len(r.content),'notice_title_visible':('제5차' in txt),'text_excerpt':txt[:7000],'attachment_links':found[:40]})
+            except Exception as exc:
+              print('EMPLOYER_PAGE_FAILED',url,str(exc)[:300],flush=True)
+              outcome['official_pages'].append({'url':url,'error':str(exc)[:200]})
+          # Do not treat a metadata hash as original-document review.
+          # Endpoints from actual official onsite JavaScript function opendownload.
+          candidates.extend([urljoin(targets[0], 'bbs_download.php?bcd=01_05_05_00_00&bn=346&num='+str(n)) for n in (0,1)])
+          seen=set()
+          for url in candidates[:25]:
+            if url in seen:continue
+            seen.add(url)
+            try:
+              r=session.get(url,timeout=25,verify=False,headers={'Referer':targets[0],'Accept':'application/pdf,application/octet-stream,*/*'})
+              body=r.content
+              rec={'url':r.url,'status':r.status_code,'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'magic':body[:12].hex(),'content_type':r.headers.get('Content-Type')}
+              print('ATTACHMENT_RECEIPT',json.dumps(rec,ensure_ascii=False),flush=True)
+              if r.status_code==200 and body.startswith(b'%PDF-'):
+                doc=fitz.open(stream=body,filetype='pdf')
+                rec['pdf_pages']=len(doc)
+                pages=[]
+                for pno,page in enumerate(doc,1):
+                  txt=page.get_text(sort=True)
+                  print('---- ORIGINAL PDF PAGE',pno,'/',len(doc),'CHARS',len(txt),'----',flush=True)
+                  print(txt[:18000],flush=True)
+                  pages.append(txt)
+                rec['full_document_text']='\n'.join(pages)[:130000]
+              elif zipfile.is_zipfile(io.BytesIO(body)):
+                with zipfile.ZipFile(io.BytesIO(body)) as archive:
+                  member_list=[]
+                  for member in archive.infolist():
+                    if member.is_dir():continue
+                    item={'name':member.filename,'bytes':member.file_size}
+                    print('EXACT_ZIP_MEMBER',repr(member.filename),'SIZE',member.file_size,flush=True)
+                    if 0<member.file_size<15_000_000:
+                      contents=archive.read(member.filename)
+                      item['sha256']=hashlib.sha256(contents).hexdigest()
+                      if contents.startswith(b'%PDF-'):
+                        pdf=fitz.open(stream=contents,filetype='pdf')
+                        item['pdf_pages']=len(pdf)
+                        item['pdf_text']='\\n'.join(page.get_text(sort=True) for page in pdf)[:80000]
+                        print('EXACT_ZIP_PDF',repr(member.filename),'PAGES',len(pdf),'SHA256',item['sha256'],flush=True)
+                        print(item['pdf_text'][:18000],flush=True)
+                    member_list.append(item)
+                  rec['zip_members']=member_list
+              outcome['attachments'].append(rec)
+            except Exception as exc:
+              print('ATTACHMENT_FAILED',url,str(exc)[:300],flush=True)
+              outcome['attachments'].append({'url':url,'error':str(exc)[:200]})
+          with open('official-80977-read-only.json','w',encoding='utf-8') as f:json.dump(outcome,f,ensure_ascii=False,indent=2)
+          print('REVIEW_ONLY_ATTACHMENT_COUNT',len(outcome['attachments']),'PDF_COUNT',sum('pdf_pages' in v for v in outcome['attachments']),flush=True)
+          PY
+      - name: Click employer's exact attachment JavaScript in a read-only browser
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium pymupdf
+          python - <<'PY'
+          import os,time,tempfile,glob,hashlib,json,io,zipfile
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+          import fitz
+          folder=tempfile.mkdtemp(prefix='official80977_')
+          o=Options()
+          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--ignore-certificate-errors','--window-size=1280,900'):
+            o.add_argument(arg)
+          o.add_experimental_option('prefs',{'download.default_directory':folder,'download.prompt_for_download':False,'download.directory_upgrade':True,'safebrowsing.enabled':True})
+          d=webdriver.Chrome(options=o)
+          try:
+            d.execute_cdp_cmd('Page.setDownloadBehavior',{'behavior':'allow','downloadPath':folder})
+            url='https://cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1'
+            d.get(url)
+            print('BROWSER_EMPOYER_TITLE',d.title,flush=True)
+            print('BROWSER_DOWNLOAD_FUNCTION_TYPE',d.execute_script('return typeof opendownload'),flush=True)
+            print('BROWSER_DOWNLOAD_FUNCTION_SOURCE',d.execute_script('return typeof opendownload === "function" ? String(opendownload).slice(0,2400): "missing"'),flush=True)
+            links=d.find_elements(By.CSS_SELECTOR,'a[href*="opendownload"]')
+            print('BROWSER_EXACT_ATTACHMENT_LINKS',[(x.text,x.get_attribute('href')) for x in links],flush=True)
+            if links:
+              links[0].click()
+              for _ in range(24):
+                found=[x for x in glob.glob(folder+'/*') if os.path.isfile(x) and not x.endswith('.crdownload')]
+                if found:break
+                time.sleep(1)
+              for file in found if 'found' in locals() else []:
+                data=open(file,'rb').read()
+                print('EMPLOYER_DOWNLOADED',os.path.basename(file),'BYTES',len(data),'SHA256',hashlib.sha256(data).hexdigest(),'MAGIC',repr(data[:12]),flush=True)
+                if data.startswith(b'%PDF-'):
+                  doc=fitz.open(stream=data,filetype='pdf')
+                  print('EMPLOYER_EXACT_PDF_PAGES',len(doc),flush=True)
+                  for i,page in enumerate(doc,1):
+                    t=page.get_text(sort=True)
+                    print('==== ORIGINAL ATTACHMENT PAGE',i,'CHARS',len(t),'====',flush=True)
+                    print(t[:21000],flush=True)
+              # Second official attached ZIP contains role-specific job descriptions.
+              if len(links)>1:
+                prior=set(glob.glob(folder+'/*'))
+                links[1].click()
+                others=[]
+                for _ in range(30):
+                  others=[x for x in glob.glob(folder+'/*') if x not in prior and os.path.isfile(x) and not x.endswith('.crdownload')]
+                  if others:break
+                  time.sleep(1)
+                print('SECOND_ATTACHMENT_FILES',len(others),flush=True)
+                for file in others:
+                  data=open(file,'rb').read()
+                  print('SECOND_EMPLOYER_ATTACHMENT_BYTES',len(data),'SHA256',hashlib.sha256(data).hexdigest(),'MAGIC',repr(data[:12]),flush=True)
+                  if zipfile.is_zipfile(io.BytesIO(data)):
+                    with zipfile.ZipFile(io.BytesIO(data)) as z:
+                      infos=z.infolist()
+                      for info in infos:
+                        print('ROLE_ATTACHMENT_MEMBER',repr(info.filename),'SIZE',info.file_size,flush=True)
+                        if info.is_dir() or info.file_size>15_000_000:continue
+                        raw=z.read(info.filename)
+                        if raw.startswith(b'%PDF-'):
+                          pdf=fitz.open(stream=raw,filetype='pdf')
+                          print('ROLE_PDF',repr(info.filename),'SHA256',hashlib.sha256(raw).hexdigest(),'PAGES',len(pdf),flush=True)
+                          for n,p in enumerate(pdf,1):
+                            print('ROLE_PDF_PAGE',n,p.get_text(sort=True)[:11000],flush=True)
+                        elif raw[:4]==b'PK\\x03\\x04':
+                          print('ROLE_INNER_ZIP',repr(info.filename),flush=True)
+            else:print('EXACT_ATTACHMENT_LINK_NOT_FOUND',flush=True)
+          finally:
+            d.quit()
+          PY
+      - name: Decode full employer role-specific HWP job descriptions independently
+        shell: bash
+        run: |
+          python -m pip install --quiet requests olefile
+          python - <<'PY'
+          import requests,zipfile,io,hashlib,olefile,zlib,re,struct,urllib3
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          url='https://cbf.or.kr/twb_bbs/bbs_download.php?bcd=01_05_05_00_00&bn=346&num=1'
+          r=requests.get(url,timeout=30,verify=False,headers={'Referer':'https://cbf.or.kr/twb_bbs/bbs_read.php?bcd=01_05_05_00_00&bn=346&groupid=1&pg=1'})
+          sha=hashlib.sha256(r.content).hexdigest()
+          print('HWP_ZIP_HTTP',r.status_code,'BYTES',len(r.content),'SHA256',sha,'TLS_VERIFIED',False,flush=True)
+          if r.status_code!=200 or sha!='521fb1cf31c5e34db02370635fabd0b22886046207aaaf8fd8767de86487c3cf':
+            raise RuntimeError('HWP_ZIP_CURRENT_BYTES_DIFFER_FROM_INDEPENDENT_RECEIPT')
+          with zipfile.ZipFile(io.BytesIO(r.content)) as archive:
+            for member in archive.infolist():
+              if not ('직무설명서' in member.filename and member.filename.endswith('.hwp')):continue
+              raw=archive.read(member)
+              print('HWP_ROLE_NAME',member.filename,'BYTES',len(raw),'SHA256',hashlib.sha256(raw).hexdigest(),flush=True)
+              ole=olefile.OleFileIO(io.BytesIO(raw))
+              names=ole.listdir()
+              print('HWP_STREAMS',names[:25],flush=True)
+              head=ole.openstream('FileHeader').read()
+              flags=int.from_bytes(head[36:40],'little')
+              compressed=bool(flags&1)
+              print('HWP_COMPRESSED',compressed,flush=True)
+              texts=[]
+              for parts in names:
+                if len(parts)!=2 or parts[0]!='BodyText' or not parts[1].startswith('Section'):continue
+                data=ole.openstream(parts).read()
+                if compressed:
+                  try:data=zlib.decompress(data,-15)
+                  except zlib.error as err:
+                    print('HWP_SECTION_UNPACK_ERROR',str(err),flush=True)
+                    continue
+                p=0
+                while p+4<=len(data):
+                  h=struct.unpack_from('<I',data,p)[0];p+=4
+                  tag=h&0x3ff;length=h>>20
+                  if length==4095:
+                    if p+4>len(data):break
+                    length=struct.unpack_from('<I',data,p)[0];p+=4
+                  if p+length>len(data):break
+                  payload=data[p:p+length];p+=length
+                  if tag==67 and length>0:
+                    s=payload.decode('utf-16le',errors='ignore')
+                    s=''.join(ch if ord(ch)>=32 or ch in ('\\t','\\n','\\r') else ' ' for ch in s)
+                    if s.strip():texts.append(s)
+              text='\n'.join(texts)
+              print('HWP_ROLE_BODY_CHARS',len(text),'PARAGRAPHS',len(texts),flush=True)
+              print('===== HWP ROLE FULL INDEPENDENT TEXT START =====',flush=True)
+              print(text[:50000],flush=True)
+              print('===== HWP ROLE FULL INDEPENDENT TEXT END =====',flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: independent-80977-source-evidence
+          path: official-80977-read-only.json
+          retention-days: 7
