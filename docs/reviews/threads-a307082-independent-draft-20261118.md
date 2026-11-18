@@ -12,6 +12,7 @@
 - 공식 접수 경로: https://www.redcross.or.kr/redrecruit
 - 잡알리오: https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082
 - 실제 HWP 원본 전문·SHA 영수증: https://github.com/kllollain-max/careerpick/actions/runs/44323493864
+- **별도 병원 원본 독립 재다운로드** GET200 / 57,856바이트: ALIO 공식 HWP 원본과 SHA-256 47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478 완전일치. 증빙 https://github.com/kllollain-max/careerpick/actions/runs/44323969751 (2026-11-18 23:25 KST).
 - 이 근거수집은 **실제 독립 의미검수를 위한 자료**이며 승인과 게시가 아님.
   
 ## v5 작성 본문 — 238자 · 미승인
@@ -27,8 +28,8 @@
 자세한 사항은 프로필링크 확인
 
 ## 승인/CAS 전 필수 검증
-1. 병원 원문 HWP와 ALIO 첨부 HWP 바이트 동일성 및 정정/취소 공지 최종 점검.
-2. 공식 지원사이트 실제 지원 화면과 커리어픽 `#job=a307082` 정확한 상세 프로필 재검증.
+1. 병원·ALIO 공식 HWP 바이트 동일성 확인 **완료**. 정정·취소 공지 전체 최종 검토는 여전히 필요.
+2. 공식 지원사이트는 외부 웹 요청 시 시간초과가 발생하여 '접수중' 직접 검증 미완료. 정확한 원서접수 화면과 커리어픽 `#job=a307082` 정확한 상세 프로필 재검증.
 3. 게시 슬롯 24시간 이내 공식 재확인, 소스 최신 SHA/필수·우대·마감/이미지카드(해당시) 대조.
 4. 실제 `validate_entry`, `verify_official_receipt`, `threads_reviewed_ingest`, `threads_queue_bridge`와 원격 CAS 재읽기 검증.
 5. `threads_posted.json`·현재 승인 3개·claim·실계정 최근 게시물을 다시 읽고 중복/일4건/미확인 POST 금지.
