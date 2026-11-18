@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T11:15:24.062580+00:00",
-  "last_observed_at": "2026-11-18T11:15:24.062580+00:00",
+  "updated_at": "2026-11-18T11:17:13Z",
+  "last_observed_at": "2026-11-18T11:17:13Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -26496,31 +26496,21 @@
     }
   },
   "writer_supply_preparation_latest": {
-    "observed_at": "2026-11-18T11:15:24.062580+00:00",
-    "status": "READY_STAGED_TEXT_NOT_QUEUE_PROMOTED_NOT_PUBLISHED",
-    "notice_id": "a307120",
-    "slot": "2026-11-19T16:00:00+09:00",
-    "media": "TEXT",
-    "body_chars": 299,
-    "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
-    "queue_sha": "c73ce0b608f1d67139d1f886726755049f3366fe",
-    "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
-    "full_validator": "passed",
-    "whole_prospective_queue": "validated",
-    "stage_readback_equal": true,
-    "queue_promoted": false,
-    "actual_meta_post_id": null,
-    "audit_path": "threads/audits/supply-a307120-20261119-16-ready-20261118-2015.json",
-    "audit_sha": "b41e5e6e7910e48d1e4f4e35fd8f768702f67150",
-    "existing_dry_bridge_approved": [
+    "observed_at": "2026-11-18T11:17:13Z",
+    "status": "READY_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "notice_ids": [
       "a307145",
       "a307120"
     ],
-    "claim_count": 55,
-    "claims_pending": 0,
-    "next_action": "Existing regular preflight may promote145IMAGE+120TEXT after validation; observe real20publisher/account/Meta receipt. No duplicate or directPOST.",
-    "latest_actual_preflight_run": 44274562494,
-    "latest_actual_publication_run": 44265327920
+    "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
+    "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+    "full_remote_validator": "passed",
+    "actual_regular_promotion_run": 44293052496,
+    "queue_CAS_step": "success",
+    "actual_Meta_post_id": null,
+    "audit_path": "threads/audits/supply-two-queue-promoted-20261118-2016.json",
+    "audit_sha": "021612b117f6c0f869c320f8693f735ff3e59e1c",
+    "next_action": "Observe regular20 publisher and actual Meta/account/text/media/replies. Current20 publisher not yet observed; preserve existing2h grace and no extra POST."
   },
   "writer_recovery_checks": [
     {
@@ -27014,5 +27004,22 @@
     "next_action": "Existing regular preflight may promote145IMAGE+120TEXT after validation; observe real20publisher/account/Meta receipt. No duplicate or directPOST.",
     "latest_actual_preflight_run": 44274562494,
     "latest_actual_publication_run": 44265327920
+  },
+  "writer_supply_recovery_20261118_2016": {
+    "observed_at": "2026-11-18T11:17:13Z",
+    "status": "READY_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "notice_ids": [
+      "a307145",
+      "a307120"
+    ],
+    "stage_sha": "72cc5c02fdffac6916f47fbf283a5911aa1cc2c0",
+    "queue_sha": "a203d22052a67e94e04da90d29474a24b13d52d2",
+    "full_remote_validator": "passed",
+    "actual_regular_promotion_run": 44293052496,
+    "queue_CAS_step": "success",
+    "actual_Meta_post_id": null,
+    "audit_path": "threads/audits/supply-two-queue-promoted-20261118-2016.json",
+    "audit_sha": "021612b117f6c0f869c320f8693f735ff3e59e1c",
+    "next_action": "Observe regular20 publisher and actual Meta/account/text/media/replies. Current20 publisher not yet observed; preserve existing2h grace and no extra POST."
   }
 }
