@@ -3,7 +3,7 @@
   "notice_id": "cleaneye-81291",
   "employer": "남양주도시공사",
   "notice_number": "남양주도시공사 2026-424호",
-  "review_status": "OFFICIAL_SEMANTIC_REVIEW_DONE_HOLD_NO_PRODUCTION_APPROVAL",
+  "review_status": "OFFICIAL_PDF_SHA_AND_EXACT_PROFILE_CONFIRMED_HOLD_QUALIFICATION_AND_CAS",
   "approved_for_queue": false,
   "slot_reserved": false,
   "meta_posted": false,
@@ -128,7 +128,7 @@
   "publication_guards": {
     "requires_fresh_24h_official_source_again": true,
     "requires_original_pdf_sha256": true,
-    "requires_profile_exact_job_render": true,
+    "requires_profile_exact_job_render": false,
     "requires_precise_live_application_screen": true,
     "requires_full_correction_audit": true,
     "requires_validate_entry": true,
@@ -138,8 +138,9 @@
     "requires_meta_receipt_at_post_time": true
   },
   "blockers": [
+    "Individual applicant submission form after clicking exact posting and complete job-description PDF/any corrections must still be reviewed.",
+    "Exact #job profile rendered correctly at 17:00 KST (6 aggregate and date-only); role-specific 5/18:00 requires separate original employer evidence and complete job description.",
     "Exact PDF byte SHA verified, but final employer correction/cancellation, application-specific form and exact careerpick #job visual render not yet fully cleared.",
-    "Precise individual applicant submission screen and exact profile #job=cleaneye-81291 visual details not verified.",
     "Only currently visible employer notices reviewed; final amendment/cancellation clearance remains incomplete.",
     "Production validate_entry and official receipt check have NOT passed; never mark as approved.",
     "After fresh evidence, validate v5 plus media alternation and run staging->CAS bridge, then double-check remote refs before any actual POST."
@@ -155,6 +156,25 @@
     "github_run": "https://github.com/kllollain-max/careerpick/actions/runs/44261890199",
     "artifact": "https://github.com/kllollain-max/careerpick/actions/runs/44261890199/artifacts/14408346683",
     "original_pdf_and_fulltext_preserved": true,
+    "approved_for_queue": false
+  },
+  "independent_browser_receipt": {
+    "checked_at": "2026-11-18T17:00:31.505448+09:00",
+    "run": "https://github.com/kllollain-max/careerpick/actions/runs/44263156042",
+    "profile_url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-81291",
+    "page_status": 200,
+    "post_count": 2032,
+    "exact_post_match": true,
+    "hash_matches_requested": true,
+    "modal_open": true,
+    "employer_in_modal": "남양주도시공사",
+    "profile_shows_notice_level_count": 6,
+    "profile_shows_notice_level_employment": "일반정규직",
+    "profile_date_only_no_exact_cutoff": "2026-11-26",
+    "official_notice_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81291",
+    "official_submission_portal": "https://ncuc.brms.kr/",
+    "portal_status": "active_2026-11-17_09:00_to_2026-11-26_18:00",
+    "note": "Actual live Chromium inspected exact hash modal; source-specific 5-person 역무 and 18:00 time MUST be stated only against employer PDF & portal, not misattributed to aggregate profile",
     "approved_for_queue": false
   }
 }
