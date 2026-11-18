@@ -95,7 +95,9 @@
   function boundApplicationReview(p){
     const proof=root.CP_VERIFIED_APPLICATION_CUTOFFS?.[p?.id];
     return p?.alio && proof && proof.org===p.org && proof.title===p.title &&
-      date(p.due) && day(date(p.due))===proof.sourceEndDate ? proof : null;
+      date(p.due) && day(date(p.due))===proof.sourceEndDate &&
+      proof.sourceSeats===String(p.n) && Array.isArray(proof.sourceTerms) &&
+      Array.isArray(p.emp) && JSON.stringify(proof.sourceTerms)===JSON.stringify(p.emp) ? proof : null;
   }
   function reviewedStatus(p){
     const proof=boundApplicationReview(p);
