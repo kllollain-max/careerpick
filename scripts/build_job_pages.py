@@ -58,6 +58,8 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a306665': '2026-11-18T12:00:00+09:00',
     # Official ALIO recruitment method: 2026-11-18 17:00, not the 23:59 posting end.
     'a306660': '2026-11-18T17:00:00+09:00',
+    # Official JOB-ALIO detail 306718: Gwangju Veterans Hospital reception ends at 10:00, not ALIO's 23:59 posting end.
+    'a306718': '2026-11-18T10:00:00+09:00',
     # Official 307034 notice HWP, section 6; ALIO fileNo=3087622, checked 2026-11-16.
     'a307034': '2026-11-20T16:00:00+09:00',
     # Official notice originals: HWP 3085542 section 6; PDF 3087571 page 2.
@@ -136,6 +138,25 @@ VERIFIED_APPLICATION_NOTICES = {
             '원서접수 방법은 우편·방문·이메일입니다.'
         ),
         'scope': 'ALIO 공식 공개 HTML: 11월3일~18일17시 원서접수, 총12명/12월1일 즉시임용 8명, 요양보호사 자격 및 3교대 조건. 첨부 PDF/HWP 바이트 검증 건수에 넣지 않음.',
+    },
+    'a306718': {
+        'organization': '한국보훈복지의료공단',
+        'title': '[광주보훈병원] 정규직 보건직 5급(임상병리사), 기능직(간호조무사, 시설_전기) 직원 채용 공고',
+        'source_end_date': '2026-11-18',
+        'expected_source_seats': '6',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306718',
+        'checked_on': '2026-11-18',
+        'application_start': '2026-11-04',
+        'application_end_date': '2026-11-18',
+        'role_mix_note': (
+            '기관 공식 ALIO의 지원서 접수 마감은 2026년 11월 18일 10:00입니다. '
+            '전체 6명은 임상병리사 2명, 간호조무사 3명, 시설 전기 1명의 합계이며 '
+            '동일 분야 6명 모집이 아닙니다. 임상병리사는 면허증, 간호조무사는 자격증과 '
+            '교대 또는 상근근무 가능, 시설 전기는 전기산업기사 또는 전기공사산업기사 '
+            '이상 자격이 필요합니다. 게시 종료일 23:59를 지원 마감으로 쓰지 마세요.'
+        ),
+        'scope': 'JOB-ALIO 306718의 공개 채용 절차와 자격·분야별 2+3+1을 직접 확인함. 원본 PDF/HWP 첨부 바이트·SHA 및 세부 직무 원본 검증으로 집계하지 않음.',
     },
     'a307074': {
         'organization': '분당서울대학교병원',
