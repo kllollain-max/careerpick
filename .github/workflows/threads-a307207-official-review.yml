@@ -61,7 +61,7 @@ jobs:
                       'research_unit_two':bool(re.search(r'(?:원급.{0,12}2|원급\\s*2)', compact)),
                       'period':'18:00' in full or '18:00' in compact
                   }
-                  required=['institution','research','regular']
+                  required=(['institution','research','regular','research_unit_two','period'] if role=='official_notice' else ['institution'])
                   if len(full)<1000 or not all(row['semantic_checks'][k] for k in required):
                       raise ValueError('ACTUAL_ORIGINAL_SEMANTIC_SOURCE_UNREADABLE')
                   (out/(role+'-fulltext.txt')).write_text(full,encoding='utf-8')
