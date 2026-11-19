@@ -868,7 +868,15 @@ def render(post, detail, related_posts=(), notice_review=None):
                 '<p>이 표는 모집인원·자격 비교입니다. 각 분야의 상세 담당업무를 새로 검증한 표가 아닙니다. '
                 '공고문에서 접수기간 11월 11~20일은 확인했지만 정확한 마감시각은 확인되지 않았습니다. '
                 '게시 종료시각을 실제 원서접수 마감시각으로 사용하지 않으며, 마감시각은 기관 공고 확인 필요입니다.</p>')
-        reception = ('<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>') if confirmed_period else ''
+        utc_label = verified_application_notice.get('utc_application_window_label')
+        # A UTC date-only recruitment window is display-only evidence. Never
+        # silently convert it into a KST 23:59 cutoff or mark it time-confirmed.
+        reception = (
+            '<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>'
+            if confirmed_period else
+            ('<p>공식 접수기간(UTC 기준): ' + escape(utc_label) + '</p>'
+             if isinstance(utc_label, str) and utc_label else '')
+        )
         if proof_url and (reception or field_review):
             application_review_html = (
                 '<section id="application-review" aria-label="공식 공고 추가 대조">'
