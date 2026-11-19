@@ -334,6 +334,44 @@ VERIFIED_APPLICATION_NOTICES = {
             '12/3 17시 접수마감 공식 공고 확인; 현재 잔여 결원·지원 제출 성공 미검증.'
         ),
     },
+    # Official a307251 HTML 2026-11-19: source-only note, NOT a duty-original audit.
+    # Nine earlier pharmacist notices coexist; independent vacancies are unproven.
+    'a307251': {
+        'organization': '경상국립대학교병원',
+        'title': '[창원경상국립대학교병원] 약무직 채용공고',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '5',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307251',
+        'checked_on': '2026-11-19',
+        'role_mix_note': (
+            '2026년 11월 19일 등록된 창원경상국립대학교병원 약무직 공고의 '
+            '정규직 채용예정 인원은 5명입니다. 공식 JOB-ALIO 응시자격은 '
+            '약사 면허증 소지자 또는 2027년 면허 취득예정자이며, '
+            '접수 마감일 현재 만 20세 이상 60세 미만과 병역 관련 조건을 '
+            '확인해야 합니다. 동일 기관에 약무직 유사 공고 9건이 이전부터 '
+            '게시되어 있으나 서로 독립된 추가 채용인지, '
+            '변경·후속공고인지 공식 원본 대조가 끝나지 않았습니다. '
+            '따라서 이전 공고의 예정인원과 5명을 임의로 합산하거나 '
+            '현재 남은 결원이 5명이라고 단정하지 마세요. '
+            '2026년 12월 31일은 ALIO 게시 종료일이며 '
+            '실제 원서접수 마감시각·기관 채용포털의 접수 활성 여부는 '
+            '별도 공식 확인이 필요합니다.'
+        ),
+        'scope': (
+            '2026-11-19 JOB-ALIO a307251 공식 HTML에서 정규직 약무직 5명, '
+            '약사 면허 또는 2027년 취득예정, 만 20~59세 지원 조건과 '
+            '게시기간 11/19~12/31을 확인. ALIO 원본 수집 1176건에서 '
+            '동일 기관의 과거 약무직 유사 게시 9건(a294598, a294624, '
+            'a297599, a298427, a303321, a305304, a292472, a299412, '
+            'a306275)을 확인했으나 공식 첨부 원본 비교를 통해 '
+            '중복/변경/별도 채용을 확정하지 않았음. '
+            '새 공고 첨부 PDF3088867·PDF3088868·HWP3088879의 '
+            '바이너리 SHA·세부 직무를 독립 판독하지 않았으므로 '
+            '직무 원본 검증 누적 건수에는 포함하지 않음. '
+            '접수 가능 여부와 잔여 결원도 별도 확인 필요.'
+        ),
+    },
     # Official JOB-ALIO public HTML rechecked 2026-11-18. These new
     # postings are not separately audited HWP/PDF job-duty originals.
     'a306990': {
