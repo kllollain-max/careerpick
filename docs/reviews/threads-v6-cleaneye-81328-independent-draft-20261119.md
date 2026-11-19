@@ -83,3 +83,18 @@
 - 실제 read-only GitHub Actions https://github.com/kllollain-max/careerpick/actions/runs/44375085521 에서 공식 PDF를 **독립적으로 재수집**(동일 207,439바이트, 공식 기관 10쪽), 이어서 **운영 코드 `scripts.threads_reviewed_ingest.fetch_official_digest`를 동일 정확 URL로 직접 실행**.
 - 로그의 `PRODUCTION_OFFICIAL_DIGEST_VERIFIED=d6ee9090ea4b53523a28353b7150b684e2e42b1c6f17fd32c1ef53037093841a` 확인. 이전 수집 때 해시와 정확히 동일하여 공식 자료 수집·production 단독 digest 경로는 통과함.
 - **유의:** 이 통과는 **`verify_official_receipt(entry)` 통합·`validate_entry`·24시간 소스 신선도·채용원서 현재 화면·정정취소 전체대조·카드 픽셀검증·CAS 승인**이 아님. 실제 입고/게시를 승인하지 않음.
+
+
+## 2026-11-19 13시대 KST — 기관 지정 채용 ATS 독립검토 보강 (HOLD)
+
+- 기관 지정 실제 지원 상세: https://pcy.career.co.kr/jobs/jobs_view.asp?ID=1003 에서 공고 전문과 지원자격·전형·접수마감·지원 링크를 독립 판독. 실제 모집은 정규직 일반직 7급 총 5명 = 행정 2, 청소년활동 2, 시설관리 기술직 1. 채용분야 간 중복지원 불가.
+- 직무 자격 원문 재대조: 행정은 관련 행정업무 경력 1년 이상 **또는** 동등 자격·능력; 활동은 청소년지도사 **또는** 관련 4년제 졸업 **또는** 관련 2년제 졸업+실무 1년 **또는** 관련 실무 2년; 시설관리 기술직은 관련 기사 **또는** 관련 산업기사+실무 1년 **또는** 동등 자격·능력. 기존 v5 309자 원고의 OR 조건과 일치.
+- 공통 조건은 정년 60세 미만, 재단 인사규정 결격사유 및 아동·청소년 관련 결격기준을 따름. 보훈·북한이탈주민·장애인·저소득층 가점은 지원자격과 구분하고 유리한 가점 1종만 적용.
+- 공개 접수사이트 상세에서 1차 필기(NCS15·일반상식15·전공20문항) → 2차 서류 → 3차 면접을 재확인. 정확한 지원 마감은 **2026-11-30 18:00 KST**, 온라인 접수.
+- 구체적 접수 진입 경로 https://pcy.career.co.kr/apply/apply_agree.asp?jobid=1003 와 기본 개인정보 동의 https://pcy.career.co.kr/apply/apply_agree.asp 를 읽기 전용으로 확인. 개인정보 입력·동의·제출 없음.
+- 공식 재단 채용게시판 https://www.pcy.or.kr/pcy/bbs/board.php?bo_table=recruitment 에 해당 2026-11-18 공고가 공지로 유지됨. 공식 지원 ATS 공지 https://pcy.career.co.kr/board/notice/default.asp?BType=1 은 조회시 '등록된 공지사항이 없습니다' 표시. 이는 모든 경로에 정정·취소가 없다는 뜻은 아니며 전수 부재 확정 금지.
+- 기관 PDF 10쪽·207439바이트 SHA256 d6ee9090ea4b53523a28353b7150b684e2e42b1c6f17fd32c1ef53037093841a 는 이전 검증 실행(03:50 KST)의 실원본 수신증. 이번 ATS HTML 조회를 PDF 바이트 독립 재다운로드·새 SHA 검증으로 오인하지 않음.
+- 13시대 실제 reviewed-staging와 writer-queue 재조회에서 **a307067 2026-11-20 12:00 KST 원고가 별도 선행 승인·등록됨**을 확인. 그 원고는 중복 생성/등록 금지. 최초 부족 예정 슬롯은 2026-11-20 16:00이며, 이 시점으로부터 24시간 이내 새 공식 원문 재검토가 필요하여 이번 13시대 근거로 승인 불가.
+- 기존 309자 v5 단일본문은 공식 ATS와 의미상 대조 완료, 본문 URL/도메인/해시태그 0·CTA 마지막 1·답글0 유지. 프로필 개별 상세, 이미지 카드 실제 픽셀, 현재 시각 production validate_entry·verify_official_receipt·CAS 검증은 이 회차에 통과한 것으로 처리하지 않음.
+
+**결론:** 기관 지정 ATS의 모든 주요 직무별 요건·정확한 기한·접수 진입 및 확인 가능한 공지 목록을 독립 검토. 기존 초안의 운영 승인 HOLD 유지(신규 승인 0, CAS 0, Meta POST 0), 기존 정규 예약 및 main/지원금픽/홈페이지/수집/검색/웹푸시 변경 금지.
