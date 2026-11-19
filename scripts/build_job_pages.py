@@ -140,6 +140,10 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_employment': ['정규직'],
         'source_url': 'https://www.knuh.kr/content/04information/02_01.asp?b_num=7452&proc_type=view',
         'checked_on': '2026-11-19',
+        # This is an until-filled notice; the original 11 seats do NOT prove
+        # present reception or remaining vacancies. Keep the useful page,
+        # but exclude it from indexed/current regular recommendations.
+        'application_status_unconfirmed': True,
         'conditional_application_window_label': (
             '2026-04-01부터 충원 시까지 (공고 효력은 2026-12-31까지; '
             '현재 접수 활성·잔여 인원 미확인)'
