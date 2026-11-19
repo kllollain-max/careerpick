@@ -85,6 +85,43 @@ jobs:
               raise SystemExit("OFFICIAL_SOURCE_DIGEST_MISMATCH")
           print("PRODUCTION_OFFICIAL_DIGEST_VERIFIED="+actual)
           PY
+      - name: Independently read live employer ATS notice and correction list (read-only)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,bs4,pathlib,json,hashlib,datetime,re
+          from zoneinfo import ZoneInfo
+          root=pathlib.Path("official-81328");root.mkdir(exist_ok=True)
+          targets={
+            "ats_job":"https://pcy.career.co.kr/jobs/jobs_view.asp?ID=1003",
+            "ats_notices":"https://pcy.career.co.kr/board/notice/default.asp?BType=1",
+            "employer_board":"https://www.pcy.or.kr/pcy/bbs/board.php?bo_table=recruitment",
+          }
+          receipts={}
+          for key,url in targets.items():
+              response=requests.get(url,timeout=25,headers={"User-Agent":"Mozilla/5.0 (compatible; CareerPickOfficialReview/1.0)"})
+              response.raise_for_status()
+              html=response.content
+              text=bs4.BeautifulSoup(html,"html.parser").get_text(" ",strip=True)
+              (root/(key+".html")).write_bytes(html)
+              (root/(key+".txt")).write_text(text,encoding="utf-8")
+              receipts[key]={"url":url,"bytes":len(html),"sha256":hashlib.sha256(html).hexdigest(),
+                             "captured_at":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat()}
+              if key=="ats_job":
+                  required=["파주시청소년재단","행정직","활동직","기술직","5명","11.30","18:00"]
+                  absent=[word for word in required if word not in text]
+                  if absent:
+                      raise RuntimeError("ATS_REQUIRED_FACT_NOT_VISIBLE:"+",".join(absent))
+                  if "2026" not in text or "2026년 제2회" not in text:
+                      raise RuntimeError("ATS_NOTICE_MISMATCH")
+              if key=="employer_board" and "2026년 제2회" not in text:
+                  raise RuntimeError("EMPLOYER_ACTIVE_LISTING_MISSING")
+          receipt={"sources":receipts,"source_collection_only":True,"approved":False,"cas_updated":False,
+                   "meta_posted":False,
+                   "correction_scope":"ATS current notice list and employer board landing page only, NOT an exhaustive all-channel correction audit"}
+          (root/"ats-and-corrections-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
+          print("READ_ONLY_ATS_AND_CORRECTION_SCOPE="+json.dumps(receipt,ensure_ascii=False))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
