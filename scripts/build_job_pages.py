@@ -28,6 +28,8 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a307150': '2026-12-01T10:00:00+09:00',
     'a307151': '2026-12-01T10:00:00+09:00',
     'a306988': '2026-12-01T18:00:00+09:00',
+    # PNUH recruitment PDF 3088502 p3: online applications through 12/03 17:00 KST.
+    'a307225': '2026-12-03T17:00:00+09:00',
     'a306937': '2026-11-20T17:00:00+09:00',
     'a306941': '2026-11-20T17:00:00+09:00',
     'a306962': '2026-11-20T17:00:00+09:00',
@@ -285,28 +287,48 @@ VERIFIED_APPLICATION_NOTICES = {
         ),
         'scope': 'JOB-ALIO a307147 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
     },
-    # 2026-11-19 fresh JOB-ALIO HTML: published 33 seats across three roles.
-    # No official per-role seat totals or application cutoff proven; no PDF/ZIP SHA claim.
+    # 2026-11-19: official PNUH notice PDF 3088502 p1/p3, plus three
+    # job-description PDFs from ZIP 3088504 checked with binary SHA256.
+    # All 33 seats belong to one notice; this is NOT 33 remaining live openings.
     'a307225': {
         'organization': '부산대학교병원',
         'title': '2026년도 일반직(간호, 행정, 보건직) 신규직원 블라인드 공개채용 모집 공고',
         'source_end_date': '2026-12-03',
         'expected_source_seats': '33',
         'source_employment': ['정규직'],
-        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307225',
+        'application_start': '2026-11-19',
+        'application_end_date': '2026-12-03',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088502',
+        'notice_source_sha256': 'a45a7bebec1929e6f18315ee8ace0aa20b59ddf6af5cb40503d206f46faa3cd2',
         'checked_on': '2026-11-19',
-        'role_mix_note': (
-            '공식 JOB-ALIO의 33명은 간호직(진료지원간호사), 행정직(의료사회복지사), '
-            '보건직(방사선사)을 합한 공고 전체 인원입니다. '
-            '분야별 선발인원은 확인되지 않았으므로 33명을 어느 한 분야의 인원으로 단정하지 마세요. '
-            '간호직은 간호사 면허, 병원·종합병원 또는 군병원 임상경력 3년 이상, '
-            '야간 및 교대근무 가능 요건이 있습니다. '
-            '행정직은 의료사회복지사 자격증과 영어성적(예: TOEIC 700점 이상)이 필요합니다. '
-            '보건직은 방사선사 면허증과 영어성적(예: TOEIC 600점 이상)이 필요합니다. '
-            '영어시험별 인정점수와 우대사항은 반드시 공고 원문을 대조하세요. '
-            '12월 3일은 ALIO 게시 종료일이며 실제 지원서 마감시각으로 확정하지 않았습니다.'
+        'hiring_breakdown': (
+            '진료지원간호사 30명 · 의료사회복지사 2명 · '
+            '산부인과 초음파실 방사선사 1명 = 정규직 총33명'
         ),
-        'scope': '2026-11-19 JOB-ALIO a307225 공개 HTML에서 정규직 총33명, 세 직종별 자격·영어기준, 공고 게시기간을 확인. 개별 분야 모집인원·기관 지원창 접수 마감시각·첨부 ZIP/PDF 원본 SHA는 아직 미검증이며 직무원본 검토 건수에 추가하지 않음.',
+        'role_mix_note': (
+            '부산대학교병원 공식 8쪽 공고문 1쪽 모집표에서 간호직30명, '
+            '행정직 의료사회복지사2명, 보건직 산부인과 방사선사1명을 확인했습니다. '
+            '간호직은 간호사면허, 병원·종합병원·군병원 임상경력3년 이상과 '
+            '야간·교대근무 가능 요건(요양병원 경력 제외)이 적용됩니다. '
+            '행정직은 의료사회복지사 자격증과 영어성적(예: TOEIC700), '
+            '보건직은 방사선사면허와 영어성적(예: TOEIC600) 등 '
+            '각 직종별 상이한 요건을 확인해야 합니다. '
+            '지원서 접수는 2026년11월19일~12월3일17시(KST)까지입니다. '
+            'ALIO 게시 마감23:59와 혼동하지 마세요. '
+            '이 33명은 공고 전체 모집정원이며 실시간 잔여인원 확인치가 아닙니다. '
+            '방사선사 직무PDF 일부 분류칸의 심장초음파 표기와 달리 '
+            '모집분야·직무 제목·주요 수행업무는 산부인과 초음파이므로 '
+            '세부 진료배치를 임의 추정하지 않습니다.'
+        ),
+        'scope': (
+            '공식 ALIO a307225 HTML과 공고PDF 3088502(263129 bytes, '
+            'SHA256 a45a7bebec1929e6f18315ee8ace0aa20b59ddf6af5cb40503d206f46faa3cd2) '
+            '1·3쪽 모집표·일정 원문 육안 대조. '
+            '직무 ZIP3088504(243748 bytes, SHA256 '
+            '5919b21c2acdd40383a34da232ab3808cc6b0ca01e904a2cb5b26dce8fca10cf) '
+            '내 간호·의료사회복지·산부인과 방사선사 직무PDF 각1쪽 판독. '
+            '12/3 17시 접수마감 공식 공고 확인; 현재 잔여 결원·지원 제출 성공 미검증.'
+        ),
     },
     # Official JOB-ALIO public HTML rechecked 2026-11-18. These new
     # postings are not separately audited HWP/PDF job-duty originals.
