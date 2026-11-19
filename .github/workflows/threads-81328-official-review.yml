@@ -10,7 +10,7 @@ permissions:
 jobs:
   independent-original:
     runs-on: ubuntu-24.04
-    timeout-minutes: 9
+    timeout-minutes: 16
     steps:
       - uses: actions/checkout@v4
         with:
@@ -121,6 +121,42 @@ jobs:
                    "correction_scope":"ATS current notice list and employer board landing page only, NOT an exhaustive all-channel correction audit"}
           (root/"ats-and-corrections-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
           print("READ_ONLY_ATS_AND_CORRECTION_SCOPE="+json.dumps(receipt,ensure_ascii=False))
+          PY
+      - name: Render CareerPick public exact job detail (read-only browser)
+        shell: bash
+        run: |
+          python -m pip install --quiet playwright
+          python -m playwright install --with-deps chromium > /dev/null
+          python - <<'PY'
+          import pathlib,json,datetime,hashlib
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
+          root=pathlib.Path("official-81328")
+          url="https://kllollain-max.github.io/careerpick/#job=cleaneye-81328"
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              page=browser.new_page(viewport={"width":1080,"height":850},device_scale_factor=1)
+              page.goto(url,wait_until="domcontentloaded",timeout=60000)
+              page.wait_for_function("""() => {
+                const overlay=document.getElementById('jobview');
+                const body=document.getElementById('jvBody');
+                return overlay && !overlay.hidden && body &&
+                    body.textContent.includes('파주시청소년재단');
+              }""",timeout=70000)
+              text=page.locator("#jvBody").inner_text()
+              must=["파주시청소년재단","2026년 제2회"]
+              absent=[x for x in must if x not in text]
+              if absent: raise RuntimeError("PUBLIC_DETAIL_IDENTITY_MISSING:"+repr(absent))
+              (root/"careerpick-public-job-detail.txt").write_text(text,encoding="utf-8")
+              page.locator("#jobview").screenshot(path=str(root/"careerpick-public-job-detail.png"))
+              stamp=datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat()
+              receipt={"url":url,"captured_at":stamp,"body_sha256":hashlib.sha256(text.encode()).hexdigest(),
+                       "detail_visible":True,"employer_verified":True,
+                       "contains_total_five":"5명" in text,"deadline_18_clock_visible":"18:00" in text or "오후 6시" in text,
+                       "text_excerpt":text[:2400],"approved":False,"published":False}
+              (root/"careerpick-public-job-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
+              print("ACTUAL_PUBLIC_JOB_DETAIL="+json.dumps(receipt,ensure_ascii=False))
+              browser.close()
           PY
       - uses: actions/upload-artifact@v4
         if: always()
