@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T04:30:11.055Z",
-  "last_observed_at": "2026-11-19T04:30:11.055Z",
+  "updated_at": "2026-11-19T13:33:19.266402+09:00",
+  "last_observed_at": "2026-11-19T13:33:19.266402+09:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13329,47 +13329,67 @@
     "post_id": null
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-19T04:30:11.055Z",
-    "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
-    "notice_id": "a307067",
-    "scheduled_at": "2026-11-20T12:00:00+09:00",
+    "observed_at": "2026-11-19T13:33:19.266402+09:00",
+    "status": "UNCHANGED_FOUR_FUTURE_DRAFTS_VALIDATED_NO_NEW_PUBLICATION",
     "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
     "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
     "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
     "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
-    "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
-    "body_chars": 261,
-    "full_remote_validator": "passed",
     "full_queue_status": "validated",
     "operating_future_ready_count": 4,
-    "ready_ids": [
-      "a307120",
-      "a307207",
-      "a307142",
-      "a307067"
+    "future_ready": [
+      {
+        "notice_id": "a307120",
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
+        "media": "TEXT",
+        "chars": 299,
+        "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307207",
+        "scheduled_at": "2026-11-19T20:00:00+09:00",
+        "media": "IMAGE",
+        "chars": 314,
+        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307142",
+        "scheduled_at": "2026-11-20T08:00:00+09:00",
+        "media": "TEXT",
+        "chars": 280,
+        "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307067",
+        "scheduled_at": "2026-11-20T12:00:00+09:00",
+        "media": "IMAGE",
+        "chars": 261,
+        "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+        "reply_count": 0
+      }
     ],
-    "approved_future_slots": [
-      "2026-11-19T16:00:00+09:00",
-      "2026-11-19T20:00:00+09:00",
-      "2026-11-20T08:00:00+09:00",
-      "2026-11-20T12:00:00+09:00"
-    ],
-    "pending_claims": 0,
     "claims": {
       "total": 58,
       "accepted": 57,
       "historical_verified": 1,
       "pending": 0
     },
+    "pending_claims": 0,
     "new_publications": 0,
-    "new_ready_saved": 1,
-    "new_queue_promoted": 1,
-    "actual_post_id": null,
-    "automation_on": true,
-    "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
-    "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
+    "new_ready_saved": 0,
+    "new_queue_promoted": 0,
+    "last_actual_post_id": "18110530775257005",
+    "last_actual_publication_already_reported": true,
     "next_regular_preflight": "2026-11-19T15:45:00+09:00",
     "next_regular_slot": "2026-11-19T16:00:00+09:00",
+    "first_missing_slot": "2026-11-20T16:00:00+09:00",
+    "first_missing_status": "outside_next24hours_and_current_source_would_exceed24h_at_target; preserve freshness threshold, existing next collection required",
+    "automation_on": true,
+    "audit_path": "threads/audits/monitor-20261119-1330-four-future-valid-r63.json",
+    "audit_blob": "400686c7ba0fce9f15f4d01cd9772c149d712c0d",
     "no_user_action_required": true
   },
   "writer_hold_alternatives": {
@@ -20106,39 +20126,27 @@
     "previous_artifact_metadata_verified": true,
     "artifact_metadata_verified_this_check": false,
     "latest_read_only_summary": {
-      "checked_at": "2026-11-19T04:30:11.055Z",
+      "checked_at": "2026-11-19T13:33:19.266402+09:00",
       "state_sha": "e9896f71def9387aada5eeef70183a3f433d4411",
       "summary": {
-        "as_of": "2026-11-19T04:23:39.559352+00:00",
+        "as_of": "2026-11-19T04:32:15.221354+00:00",
         "windows": {
           "24h": {
-            "verified_main_count": 13,
-            "metric_medians": {
-              "views": 2112,
-              "likes": 4,
-              "replies": 0,
-              "reposts": 0,
-              "quotes": 0
-            },
-            "likes_rate_percent_median": 0.21551724137931033
+            "count": 13,
+            "views_median": 2112,
+            "likes_median": 4
           },
           "72h": {
-            "verified_main_count": 8,
-            "metric_medians": {
-              "views": 1803,
-              "likes": 5.5,
-              "replies": 0,
-              "reposts": 2,
-              "quotes": 0
-            },
-            "likes_rate_percent_median": 0.2745916109087464
+            "count": 8,
+            "views_median": 1803,
+            "likes_median": 5.5
           }
         },
-        "account_followers": {
+        "followers": {
           "account": "hid_119",
           "scope": "account_total",
           "requested_start": "2026-11-11T11:45:18.355131+00:00",
-          "requested_end": "2026-11-19T04:23:39.559352+00:00",
+          "requested_end": "2026-11-19T04:32:15.221354+00:00",
           "observed_start": "2026-11-11T11:45:32.854727+00:00",
           "observed_end": "2026-11-19T04:12:21.493967+00:00",
           "start_followers": 415,
@@ -20152,10 +20160,9 @@
           "post_attribution": null,
           "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
         },
-        "decision": "extend_observation_or_balance_intro_types",
-        "automatic_weight_changes": 0
+        "decision": "extend_observation_or_balance_intro_types"
       },
-      "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+      "audit_path": "threads/audits/monitor-20261119-1330-four-future-valid-r63.json",
       "metrics_collection_not_performed_by_writer": true
     }
   },
@@ -20586,47 +20593,67 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "observed_at": "2026-11-19T04:30:11.055Z",
-      "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
-      "notice_id": "a307067",
-      "scheduled_at": "2026-11-20T12:00:00+09:00",
+      "observed_at": "2026-11-19T13:33:19.266402+09:00",
+      "status": "UNCHANGED_FOUR_FUTURE_DRAFTS_VALIDATED_NO_NEW_PUBLICATION",
       "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
       "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
       "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
       "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
-      "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
-      "body_chars": 261,
-      "full_remote_validator": "passed",
       "full_queue_status": "validated",
       "operating_future_ready_count": 4,
-      "ready_ids": [
-        "a307120",
-        "a307207",
-        "a307142",
-        "a307067"
+      "future_ready": [
+        {
+          "notice_id": "a307120",
+          "scheduled_at": "2026-11-19T16:00:00+09:00",
+          "media": "TEXT",
+          "chars": 299,
+          "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307207",
+          "scheduled_at": "2026-11-19T20:00:00+09:00",
+          "media": "IMAGE",
+          "chars": 314,
+          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307142",
+          "scheduled_at": "2026-11-20T08:00:00+09:00",
+          "media": "TEXT",
+          "chars": 280,
+          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307067",
+          "scheduled_at": "2026-11-20T12:00:00+09:00",
+          "media": "IMAGE",
+          "chars": 261,
+          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+          "reply_count": 0
+        }
       ],
-      "approved_future_slots": [
-        "2026-11-19T16:00:00+09:00",
-        "2026-11-19T20:00:00+09:00",
-        "2026-11-20T08:00:00+09:00",
-        "2026-11-20T12:00:00+09:00"
-      ],
-      "pending_claims": 0,
       "claims": {
         "total": 58,
         "accepted": 57,
         "historical_verified": 1,
         "pending": 0
       },
+      "pending_claims": 0,
       "new_publications": 0,
-      "new_ready_saved": 1,
-      "new_queue_promoted": 1,
-      "actual_post_id": null,
-      "automation_on": true,
-      "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
-      "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
+      "new_ready_saved": 0,
+      "new_queue_promoted": 0,
+      "last_actual_post_id": "18110530775257005",
+      "last_actual_publication_already_reported": true,
       "next_regular_preflight": "2026-11-19T15:45:00+09:00",
       "next_regular_slot": "2026-11-19T16:00:00+09:00",
+      "first_missing_slot": "2026-11-20T16:00:00+09:00",
+      "first_missing_status": "outside_next24hours_and_current_source_would_exceed24h_at_target; preserve freshness threshold, existing next collection required",
+      "automation_on": true,
+      "audit_path": "threads/audits/monitor-20261119-1330-four-future-valid-r63.json",
+      "audit_blob": "400686c7ba0fce9f15f4d01cd9772c149d712c0d",
       "no_user_action_required": true
     },
     "next_slot_official_preflight": {
@@ -21417,6 +21444,50 @@
       "automation_on": true,
       "audit_path": "threads/audits/published-a307145-20261119-1248-image-verified.json",
       "audit_blob": "ab0d1064174f67ad8d4c9963fdcd91f90600d4ff",
+      "no_user_action_required": true
+    },
+    "previous_hourly_check_r63": {
+      "observed_at": "2026-11-19T04:30:11.055Z",
+      "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
+      "notice_id": "a307067",
+      "scheduled_at": "2026-11-20T12:00:00+09:00",
+      "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+      "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+      "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+      "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+      "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+      "body_chars": 261,
+      "full_remote_validator": "passed",
+      "full_queue_status": "validated",
+      "operating_future_ready_count": 4,
+      "ready_ids": [
+        "a307120",
+        "a307207",
+        "a307142",
+        "a307067"
+      ],
+      "approved_future_slots": [
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00",
+        "2026-11-20T08:00:00+09:00",
+        "2026-11-20T12:00:00+09:00"
+      ],
+      "pending_claims": 0,
+      "claims": {
+        "total": 58,
+        "accepted": 57,
+        "historical_verified": 1,
+        "pending": 0
+      },
+      "new_publications": 0,
+      "new_ready_saved": 1,
+      "new_queue_promoted": 1,
+      "actual_post_id": null,
+      "automation_on": true,
+      "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+      "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
+      "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+      "next_regular_slot": "2026-11-19T16:00:00+09:00",
       "no_user_action_required": true
     }
   },
@@ -27563,5 +27634,49 @@
     "Resolve a306807 ATS same-notice actual reception view/profile path and complete final review before assigning unstarted slot; preserve291char unassigned draft.",
     "Observe Nov13 16 newly ready a306908 at existing regular slot; TEXT only if08 TEXT and12 IMAGE succeed, otherwise derive media from actual successful ledger. Exact reviewed IMAGE card is available; no backfill or new run.",
     "Resolve a306875 ward-support50 graduation-scope ambiguity and exact application-end time/current notice, correction/profile/card checks; preserve268char draft unassigned. Do not fill20 with an unverified draft."
-  ]
+  ],
+  "previous_monitor_check_r63": {
+    "observed_at": "2026-11-19T04:30:11.055Z",
+    "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
+    "notice_id": "a307067",
+    "scheduled_at": "2026-11-20T12:00:00+09:00",
+    "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+    "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+    "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+    "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+    "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+    "body_chars": 261,
+    "full_remote_validator": "passed",
+    "full_queue_status": "validated",
+    "operating_future_ready_count": 4,
+    "ready_ids": [
+      "a307120",
+      "a307207",
+      "a307142",
+      "a307067"
+    ],
+    "approved_future_slots": [
+      "2026-11-19T16:00:00+09:00",
+      "2026-11-19T20:00:00+09:00",
+      "2026-11-20T08:00:00+09:00",
+      "2026-11-20T12:00:00+09:00"
+    ],
+    "pending_claims": 0,
+    "claims": {
+      "total": 58,
+      "accepted": 57,
+      "historical_verified": 1,
+      "pending": 0
+    },
+    "new_publications": 0,
+    "new_ready_saved": 1,
+    "new_queue_promoted": 1,
+    "actual_post_id": null,
+    "automation_on": true,
+    "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+    "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
+    "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+    "next_regular_slot": "2026-11-19T16:00:00+09:00",
+    "no_user_action_required": true
+  }
 }
