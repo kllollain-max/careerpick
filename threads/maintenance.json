@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T14:44:19.020955+09:00",
-  "last_observed_at": "2026-11-19T14:44:19.020955+09:00",
+  "updated_at": "2026-11-19T15:30:02.015763+09:00",
+  "last_observed_at": "2026-11-19T15:30:02.015763+09:00",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13329,8 +13329,8 @@
     "post_id": null
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-19T14:44:19.020955+09:00",
-    "status": "REGULAR_ACTIONS_CONFIRMED_FOUR_FUTURE_READY_NO_NEW_PUBLICATION",
+    "observed_at": "2026-11-19T15:30:02.015763+09:00",
+    "status": "FOUR_FUTURE_SLOTS_UNCHANGED_VALIDATED_BEFORE16_REGULAR_RUN",
     "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
     "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
     "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
@@ -13340,35 +13340,35 @@
     "future_ready": [
       {
         "notice_id": "a307120",
-        "slot": "2026-11-19T16:00:00+09:00",
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
         "media": "TEXT",
         "chars": 299,
-        "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
-        "reply_count": 0
+        "reply_count": 0,
+        "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543"
       },
       {
         "notice_id": "a307207",
-        "slot": "2026-11-19T20:00:00+09:00",
+        "scheduled_at": "2026-11-19T20:00:00+09:00",
         "media": "IMAGE",
         "chars": 314,
-        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
-        "reply_count": 0
+        "reply_count": 0,
+        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192"
       },
       {
         "notice_id": "a307142",
-        "slot": "2026-11-20T08:00:00+09:00",
+        "scheduled_at": "2026-11-20T08:00:00+09:00",
         "media": "TEXT",
         "chars": 280,
-        "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
-        "reply_count": 0
+        "reply_count": 0,
+        "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa"
       },
       {
         "notice_id": "a307067",
-        "slot": "2026-11-20T12:00:00+09:00",
+        "scheduled_at": "2026-11-20T12:00:00+09:00",
         "media": "IMAGE",
         "chars": 261,
-        "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
-        "reply_count": 0
+        "reply_count": 0,
+        "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac"
       }
     ],
     "pending_claims": 0,
@@ -13382,9 +13382,7 @@
     "new_ready_saved": 0,
     "new_queue_promoted": 0,
     "last_actual_post_id": "18110530775257005",
-    "last_actual_post_already_reported": true,
-    "automation_on": true,
-    "regular_preflight": {
+    "latest_preflight": {
       "run_id": 44464755772,
       "run_attempt": 1,
       "status": "completed",
@@ -13392,31 +13390,17 @@
       "updated_at": "2026-11-19T05:23:52Z",
       "head_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
       "url": "https://github.com/kllollain-max/careerpick/actions/runs/44464755772",
-      "job_id": 135359743783,
-      "checked_at": "2026-11-19T14:22:58.183420+09:00",
-      "approved_supply_count": 4,
-      "approved_future_slots": [
-        "2026-11-19T16:00:00+09:00",
-        "2026-11-19T20:00:00+09:00",
-        "2026-11-20T08:00:00+09:00",
-        "2026-11-20T12:00:00+09:00"
-      ],
-      "invalid_ready_entries": [],
-      "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
-      "staged_sha": "09e51621243628b059ee607e3c8992e0814eb585",
-      "promoted_count": 0,
-      "meta_posted": false,
-      "next_slot_missing": false,
-      "inventory_shortfall": 4,
-      "inventory_target": 8,
-      "publish_job": "skipped_expected_nonpublisher"
+      "preflight_and_metrics": "success",
+      "publish": "skipped_expected_nonpublisher",
+      "new_since_prior_checkpoint": false
     },
     "next_regular_preflight": "2026-11-19T15:45:00+09:00",
     "next_regular_slot": "2026-11-19T16:00:00+09:00",
     "first_missing_slot": "2026-11-20T16:00:00+09:00",
-    "first_missing_status": "Current source13:10Nov19 older than24h at target, beyond current24h supply horizon; use next existing collection, do not relax freshness.",
-    "audit_path": "threads/audits/monitor-20261119-1442-four-ready-actions-confirmed-r64.json",
-    "audit_blob": "058c3a4a5798b514ab1262337f8cfab691e8675c",
+    "first_missing_hold": "current13:10source would exceed24h at target; wait existing nextcollection; no threshold relaxation",
+    "automation_on": true,
+    "audit_path": "threads/audits/monitor-20261119-1528-before16-four-ready-r65.json",
+    "audit_blob": "7fc600508940b5a1ccb12681cf02227f6b8f909e",
     "no_user_action_required": true
   },
   "writer_hold_alternatives": {
@@ -20153,27 +20137,29 @@
     "previous_artifact_metadata_verified": true,
     "artifact_metadata_verified_this_check": false,
     "latest_read_only_summary": {
-      "checked_at": "2026-11-19T14:44:19.020955+09:00",
+      "checked_at": "2026-11-19T15:30:02.015763+09:00",
       "state_sha": "12e85df8c665645a1aa4b992700eba66aceb4a37",
       "summary": {
-        "as_of": "2026-11-19T05:43:49.145058+00:00",
+        "as_of": "2026-11-19T06:30:01.758001+00:00",
         "windows": {
           "24h": {
             "count": 13,
             "views_median": 2112,
-            "likes_median": 4
+            "likes_median": 4,
+            "likes_rate_percent_median": 0.21551724137931033
           },
           "72h": {
             "count": 8,
             "views_median": 1803,
-            "likes_median": 5.5
+            "likes_median": 5.5,
+            "likes_rate_percent_median": 0.2745916109087464
           }
         },
         "followers": {
           "account": "hid_119",
           "scope": "account_total",
           "requested_start": "2026-11-11T11:45:18.355131+00:00",
-          "requested_end": "2026-11-19T05:43:49.145058+00:00",
+          "requested_end": "2026-11-19T06:30:01.758001+00:00",
           "observed_start": "2026-11-11T11:45:32.854727+00:00",
           "observed_end": "2026-11-19T05:22:54.935678+00:00",
           "start_followers": 415,
@@ -20189,7 +20175,7 @@
         },
         "decision": "extend_observation_or_balance_intro_types"
       },
-      "audit_path": "threads/audits/monitor-20261119-1442-four-ready-actions-confirmed-r64.json",
+      "audit_path": "threads/audits/monitor-20261119-1528-before16-four-ready-r65.json",
       "metrics_collection_not_performed_by_writer": true
     }
   },
@@ -20620,8 +20606,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "observed_at": "2026-11-19T14:44:19.020955+09:00",
-      "status": "REGULAR_ACTIONS_CONFIRMED_FOUR_FUTURE_READY_NO_NEW_PUBLICATION",
+      "observed_at": "2026-11-19T15:30:02.015763+09:00",
+      "status": "FOUR_FUTURE_SLOTS_UNCHANGED_VALIDATED_BEFORE16_REGULAR_RUN",
       "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
       "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
       "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
@@ -20631,35 +20617,35 @@
       "future_ready": [
         {
           "notice_id": "a307120",
-          "slot": "2026-11-19T16:00:00+09:00",
+          "scheduled_at": "2026-11-19T16:00:00+09:00",
           "media": "TEXT",
           "chars": 299,
-          "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
-          "reply_count": 0
+          "reply_count": 0,
+          "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543"
         },
         {
           "notice_id": "a307207",
-          "slot": "2026-11-19T20:00:00+09:00",
+          "scheduled_at": "2026-11-19T20:00:00+09:00",
           "media": "IMAGE",
           "chars": 314,
-          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
-          "reply_count": 0
+          "reply_count": 0,
+          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192"
         },
         {
           "notice_id": "a307142",
-          "slot": "2026-11-20T08:00:00+09:00",
+          "scheduled_at": "2026-11-20T08:00:00+09:00",
           "media": "TEXT",
           "chars": 280,
-          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
-          "reply_count": 0
+          "reply_count": 0,
+          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa"
         },
         {
           "notice_id": "a307067",
-          "slot": "2026-11-20T12:00:00+09:00",
+          "scheduled_at": "2026-11-20T12:00:00+09:00",
           "media": "IMAGE",
           "chars": 261,
-          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
-          "reply_count": 0
+          "reply_count": 0,
+          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac"
         }
       ],
       "pending_claims": 0,
@@ -20673,9 +20659,7 @@
       "new_ready_saved": 0,
       "new_queue_promoted": 0,
       "last_actual_post_id": "18110530775257005",
-      "last_actual_post_already_reported": true,
-      "automation_on": true,
-      "regular_preflight": {
+      "latest_preflight": {
         "run_id": 44464755772,
         "run_attempt": 1,
         "status": "completed",
@@ -20683,31 +20667,17 @@
         "updated_at": "2026-11-19T05:23:52Z",
         "head_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
         "url": "https://github.com/kllollain-max/careerpick/actions/runs/44464755772",
-        "job_id": 135359743783,
-        "checked_at": "2026-11-19T14:22:58.183420+09:00",
-        "approved_supply_count": 4,
-        "approved_future_slots": [
-          "2026-11-19T16:00:00+09:00",
-          "2026-11-19T20:00:00+09:00",
-          "2026-11-20T08:00:00+09:00",
-          "2026-11-20T12:00:00+09:00"
-        ],
-        "invalid_ready_entries": [],
-        "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
-        "staged_sha": "09e51621243628b059ee607e3c8992e0814eb585",
-        "promoted_count": 0,
-        "meta_posted": false,
-        "next_slot_missing": false,
-        "inventory_shortfall": 4,
-        "inventory_target": 8,
-        "publish_job": "skipped_expected_nonpublisher"
+        "preflight_and_metrics": "success",
+        "publish": "skipped_expected_nonpublisher",
+        "new_since_prior_checkpoint": false
       },
       "next_regular_preflight": "2026-11-19T15:45:00+09:00",
       "next_regular_slot": "2026-11-19T16:00:00+09:00",
       "first_missing_slot": "2026-11-20T16:00:00+09:00",
-      "first_missing_status": "Current source13:10Nov19 older than24h at target, beyond current24h supply horizon; use next existing collection, do not relax freshness.",
-      "audit_path": "threads/audits/monitor-20261119-1442-four-ready-actions-confirmed-r64.json",
-      "audit_blob": "058c3a4a5798b514ab1262337f8cfab691e8675c",
+      "first_missing_hold": "current13:10source would exceed24h at target; wait existing nextcollection; no threshold relaxation",
+      "automation_on": true,
+      "audit_path": "threads/audits/monitor-20261119-1528-before16-four-ready-r65.json",
+      "audit_blob": "7fc600508940b5a1ccb12681cf02227f6b8f909e",
       "no_user_action_required": true
     },
     "next_slot_official_preflight": {
@@ -21697,6 +21667,97 @@
       "actual_permalink": null,
       "audit_path": "threads/audits/supply-a307207-20261119-20-queue-confirmed-20261119-0020.json",
       "audit_blob": "c055849fb23c7e797b1d6aec4622812c8ac08808"
+    },
+    "previous_hourly_check_r65": {
+      "observed_at": "2026-11-19T14:44:19.020955+09:00",
+      "status": "REGULAR_ACTIONS_CONFIRMED_FOUR_FUTURE_READY_NO_NEW_PUBLICATION",
+      "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+      "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+      "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+      "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+      "full_queue_status": "validated",
+      "operating_future_ready_count": 4,
+      "future_ready": [
+        {
+          "notice_id": "a307120",
+          "slot": "2026-11-19T16:00:00+09:00",
+          "media": "TEXT",
+          "chars": 299,
+          "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307207",
+          "slot": "2026-11-19T20:00:00+09:00",
+          "media": "IMAGE",
+          "chars": 314,
+          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307142",
+          "slot": "2026-11-20T08:00:00+09:00",
+          "media": "TEXT",
+          "chars": 280,
+          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307067",
+          "slot": "2026-11-20T12:00:00+09:00",
+          "media": "IMAGE",
+          "chars": 261,
+          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+          "reply_count": 0
+        }
+      ],
+      "pending_claims": 0,
+      "claims": {
+        "total": 58,
+        "accepted": 57,
+        "historical_verified": 1,
+        "pending": 0
+      },
+      "new_publications": 0,
+      "new_ready_saved": 0,
+      "new_queue_promoted": 0,
+      "last_actual_post_id": "18110530775257005",
+      "last_actual_post_already_reported": true,
+      "automation_on": true,
+      "regular_preflight": {
+        "run_id": 44464755772,
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "updated_at": "2026-11-19T05:23:52Z",
+        "head_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+        "url": "https://github.com/kllollain-max/careerpick/actions/runs/44464755772",
+        "job_id": 135359743783,
+        "checked_at": "2026-11-19T14:22:58.183420+09:00",
+        "approved_supply_count": 4,
+        "approved_future_slots": [
+          "2026-11-19T16:00:00+09:00",
+          "2026-11-19T20:00:00+09:00",
+          "2026-11-20T08:00:00+09:00",
+          "2026-11-20T12:00:00+09:00"
+        ],
+        "invalid_ready_entries": [],
+        "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+        "staged_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+        "promoted_count": 0,
+        "meta_posted": false,
+        "next_slot_missing": false,
+        "inventory_shortfall": 4,
+        "inventory_target": 8,
+        "publish_job": "skipped_expected_nonpublisher"
+      },
+      "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+      "next_regular_slot": "2026-11-19T16:00:00+09:00",
+      "first_missing_slot": "2026-11-20T16:00:00+09:00",
+      "first_missing_status": "Current source13:10Nov19 older than24h at target, beyond current24h supply horizon; use next existing collection, do not relax freshness.",
+      "audit_path": "threads/audits/monitor-20261119-1442-four-ready-actions-confirmed-r64.json",
+      "audit_blob": "058c3a4a5798b514ab1262337f8cfab691e8675c",
+      "no_user_action_required": true
     }
   },
   "single_main_v2_writer_performance": {
@@ -27949,6 +28010,97 @@
     "automation_on": true,
     "audit_path": "threads/audits/monitor-20261119-1330-four-future-valid-r63.json",
     "audit_blob": "400686c7ba0fce9f15f4d01cd9772c149d712c0d",
+    "no_user_action_required": true
+  },
+  "previous_monitor_check_r65": {
+    "observed_at": "2026-11-19T14:44:19.020955+09:00",
+    "status": "REGULAR_ACTIONS_CONFIRMED_FOUR_FUTURE_READY_NO_NEW_PUBLICATION",
+    "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+    "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+    "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+    "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+    "full_queue_status": "validated",
+    "operating_future_ready_count": 4,
+    "future_ready": [
+      {
+        "notice_id": "a307120",
+        "slot": "2026-11-19T16:00:00+09:00",
+        "media": "TEXT",
+        "chars": 299,
+        "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307207",
+        "slot": "2026-11-19T20:00:00+09:00",
+        "media": "IMAGE",
+        "chars": 314,
+        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307142",
+        "slot": "2026-11-20T08:00:00+09:00",
+        "media": "TEXT",
+        "chars": 280,
+        "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307067",
+        "slot": "2026-11-20T12:00:00+09:00",
+        "media": "IMAGE",
+        "chars": 261,
+        "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+        "reply_count": 0
+      }
+    ],
+    "pending_claims": 0,
+    "claims": {
+      "total": 58,
+      "accepted": 57,
+      "historical_verified": 1,
+      "pending": 0
+    },
+    "new_publications": 0,
+    "new_ready_saved": 0,
+    "new_queue_promoted": 0,
+    "last_actual_post_id": "18110530775257005",
+    "last_actual_post_already_reported": true,
+    "automation_on": true,
+    "regular_preflight": {
+      "run_id": 44464755772,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-19T05:23:52Z",
+      "head_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/44464755772",
+      "job_id": 135359743783,
+      "checked_at": "2026-11-19T14:22:58.183420+09:00",
+      "approved_supply_count": 4,
+      "approved_future_slots": [
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00",
+        "2026-11-20T08:00:00+09:00",
+        "2026-11-20T12:00:00+09:00"
+      ],
+      "invalid_ready_entries": [],
+      "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+      "staged_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+      "promoted_count": 0,
+      "meta_posted": false,
+      "next_slot_missing": false,
+      "inventory_shortfall": 4,
+      "inventory_target": 8,
+      "publish_job": "skipped_expected_nonpublisher"
+    },
+    "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+    "next_regular_slot": "2026-11-19T16:00:00+09:00",
+    "first_missing_slot": "2026-11-20T16:00:00+09:00",
+    "first_missing_status": "Current source13:10Nov19 older than24h at target, beyond current24h supply horizon; use next existing collection, do not relax freshness.",
+    "audit_path": "threads/audits/monitor-20261119-1442-four-ready-actions-confirmed-r64.json",
+    "audit_blob": "058c3a4a5798b514ab1262337f8cfab691e8675c",
     "no_user_action_required": true
   }
 }
