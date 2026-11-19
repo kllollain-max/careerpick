@@ -15,6 +15,32 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_snubh_cleaning_ten_original_duty_and_date_only_reception_guarded(self):
+        """Exact official cleaning notice/duties; no invented cutoff time."""
+        from scripts.build_job_pages import VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306874']
+        original = copy.deepcopy(post)
+        proof = VERIFIED_DUTIES['a306874']
+        self.assertEqual((post['org'], post['title'], post['n'], post['emp']),
+                         (proof['organization'], proof['title'], '10', ['정규직']))
+        self.assertEqual(post['due'][:10], proof['source_end_date'])
+        self.assertNotIn('a306874', CONFIRMED_APPLICATION_CUTOFFS)
+        html = render(post, {})
+        for phrase in ('격리폐기물', '페이퍼타월', '정규직 미화 단일직무 10명',
+                       '11월 11~20일', '수습기간', '마감시각 공식 공고 확인 필요',
+                       'fileNo=3086117', 'fileNo=3086129'):
+            self.assertIn(phrase, html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        for change in ({'n': '11'}, {'title': post['title'] + ' 정정'},
+                       {'org': '다른 기관'}, {'due': '2026-11-21T23:59:00+09:00'},
+                       {'emp': ['계약직']}, {'alio': False}):
+            stale = render({**post, **change}, {})
+            self.assertNotIn('격리폐기물', stale)
+            self.assertNotIn('정규직 미화 단일직무 10명', stale)
+            self.assertNotIn('fileNo=3086117', stale)
+        self.assertEqual(post, original)
+
     def test_cnuh_three_official_17h_receipt_cutoffs_bound_to_exact_source(self):
         """Official PDF dates, not synthetic ALIO 23:59, govern all 3 notices."""
         from datetime import date
