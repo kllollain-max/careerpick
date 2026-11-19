@@ -1,0 +1,93 @@
+name: Threads 81201 exact employer PDF source review (read only)
+on:
+  push:
+    branches: [review/threads-81201-official-pdf-20261117]
+    paths: [.github/workflows/threads-81201-original-bytes-review.yml]
+permissions:
+  contents: read
+jobs:
+  official-pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute actual production exact-source verifier (no CAS/Meta)
+        shell: bash
+        run: |
+          python - <<'PY'
+          from scripts.threads_reviewed_ingest import fetch_official_digest, GSIPA_81201_PDF
+          verified=fetch_official_digest(GSIPA_81201_PDF)
+          expected='78e195b5e4f3e0afbfe2265f281a423b3b90476f2c0c6d08babf3de5e3e9c14d'
+          print('PRODUCTION_EXACT_SOURCE_SHA256='+verified)
+          if verified != expected:
+              raise SystemExit('EXACT_SOURCE_SHA_MISMATCH')
+          PY
+      - name: Read exact employer PDF bytes and compare public copy (never publish)
+        shell: bash
+        run: |
+          python -m pip -q install requests pymupdf
+          python - <<'PY'
+          import requests, hashlib, json, os, datetime
+          from urllib.parse import urlsplit
+          from pathlib import Path
+          import fitz
+          out=Path("source-81201-proof"); out.mkdir()
+          base="https://www.gsipa.kr/board/bbs/"
+          target=base+"download.php?bo_table=recruit&no=0&wr_id=248"
+          mirror="https://s3.ap-northeast-2.amazonaws.com/jobs.ac.kr/jobs/prd/1986446/2026%EB%85%84%20%EA%B0%95%EB%A6%89%EA%B3%BC%ED%95%99%EC%82%B0%EC%97%85%EC%A7%84%ED%9D%A5%EC%9B%90%203%EC%B0%A8%20%EC%8B%A0%EA%B7%9C%EC%9D%B8%EB%A0%A5%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0.pdf"
+          headers={"User-Agent":"Mozilla/5.0 (CareerPick exact-source-check)","Referer":base+"board.php?bo_table=recruit&wr_id=248"}
+          report={"notice_id":"cleaneye-81201","checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"approved":False,"cas_registered":False,"meta_posted":False,"url":target}
+          errors=[]
+          try:
+            s=requests.Session()
+            first=s.get(base+"board.php?bo_table=recruit&wr_id=248",headers=headers,timeout=(12,35),allow_redirects=True)
+            report["employer_page_http"]=first.status_code
+            report["employer_page_final_url"]=first.url
+            r=s.get(target,headers=headers,timeout=(12,35),allow_redirects=True)
+            report["employer_http"]=r.status_code
+            report["employer_final_url"]=r.url
+            report["employer_bytes"]=len(r.content)
+            if r.status_code!=200 or not r.content.startswith(b"%PDF-"):
+              raise ValueError("OFFICIAL_PDF_NOT_RECEIVED")
+            u=urlsplit(r.url)
+            if u.scheme!="https" or u.hostname not in ("gsipa.kr","www.gsipa.kr"):
+              raise ValueError("UNEXPECTED_OFFICIAL_HOST")
+            pdf=r.content
+            report["employer_sha256"]=hashlib.sha256(pdf).hexdigest()
+            doc=fitz.open(stream=pdf,filetype="pdf")
+            report["employer_pages"]=len(doc)
+            text="\n\n-- PAGE --\n\n".join(p.get_text(sort=True) for p in doc)
+            if "강릉과학산업진흥원" not in text or len(text)<800:
+              raise ValueError("PDF_SEMANTIC_TEXT_MISSING")
+            (out/"employer-full-text.txt").write_text(text,encoding="utf-8")
+          except Exception as e:
+            errors.append("employer:"+str(e))
+          try:
+            m=requests.get(mirror,timeout=(12,35),headers={"User-Agent":"Mozilla/5.0"},allow_redirects=True)
+            report["mirror_http"]=m.status_code
+            if m.status_code!=200 or not m.content.startswith(b"%PDF-"):
+              raise ValueError("MIRROR_PDF_NOT_RECEIVED")
+            report["mirror_sha256"]=hashlib.sha256(m.content).hexdigest()
+            report["mirror_bytes"]=len(m.content)
+          except Exception as e:
+            errors.append("mirror:"+str(e))
+          report["sha_matches"]=bool(report.get("employer_sha256") and report["employer_sha256"]==report.get("mirror_sha256"))
+          report["errors"]=errors
+          report["ready_for_semantic_approval"]=False
+          (out/"receipt.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(report,ensure_ascii=False))
+          if not report["sha_matches"] or errors:
+            raise SystemExit("OFFICIAL_BYTES_NOT_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 81201-official-employer-byte-proof
+          path: source-81201-proof/
+          if-no-files-found: warn
+          retention-days: 7
