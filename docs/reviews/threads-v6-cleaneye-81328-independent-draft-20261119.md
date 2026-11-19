@@ -98,3 +98,16 @@
 - 기존 309자 v5 단일본문은 공식 ATS와 의미상 대조 완료, 본문 URL/도메인/해시태그 0·CTA 마지막 1·답글0 유지. 프로필 개별 상세, 이미지 카드 실제 픽셀, 현재 시각 production validate_entry·verify_official_receipt·CAS 검증은 이 회차에 통과한 것으로 처리하지 않음.
 
 **결론:** 기관 지정 ATS의 모든 주요 직무별 요건·정확한 기한·접수 진입 및 확인 가능한 공지 목록을 독립 검토. 기존 초안의 운영 승인 HOLD 유지(신규 승인 0, CAS 0, Meta POST 0), 기존 정규 예약 및 main/지원금픽/홈페이지/수집/검색/웹푸시 변경 금지.
+
+
+## 2026-11-19 16:01 KST — 실제 최신 공식 PDF·ATS·공지 재수집 (운영 승인 HOLD)
+
+- 이 시각은 2026-11-20 16:00 정규 슬롯 기준 24시간 내이지만, **PDF/ATS의 신선도만 증명**하며 별도 Cleaneye 수집 스냅샷 및 프로필의 24시간 신선도는 대체하지 않는다.
+- 실제 GitHub Actions read-only 재검증: https://github.com/kllollain-max/careerpick/actions/runs/44476393164 (commit `eeb3ab4ac07b2840db2ac2e2bc5e059a3860452d`, 모든 공식 원문/운영 단독 digest/ATS 독립조회 단계 성공).
+- 재단 공식 채용 페이지에 직접 연결된 **정확한 10쪽 PDF** `https://www.pcy.or.kr/pcy/bbs/download.php?bo_table=recruitment&wr_id=903&no=0` GET200, **207,439 bytes**, 추출 전문 8,498자, SHA256 `d6ee9090ea4b53523a28353b7150b684e2e42b1c6f17fd32c1ef53037093841a`, **수신 2026-11-19 16:01:26.272076 KST**. 별개 기존 운영 `fetch_official_digest`에서 **동일 SHA 재검증 성공**. 이 사실은 **바이트 동일성**에 대한 확인이며 새 의미 승인/게시 성공은 아님.
+- 재단 지정 실제 ATS 공고 `https://pcy.career.co.kr/jobs/jobs_view.asp?ID=1003` 현재 HTML **60,469 bytes / SHA256 `39426650dd8f296a95517b67ebe7450782d411545af2bd5086f7e75b5f2f4630` / 16:01:31.854362 KST**. 제목 동일·정규직 일반직 7급 5명(행정2·청소년활동2·시설관리1), 공식 마감 **2026-11-30 18:00** 실제 페이지 본문 검증. 기존 309자 v5 본문의 AND/OR 자격·필기→서류→면접 표현과 재검토한 원문에 모순 없으나 실제 자격/정정/접수 전수검사는 별도 단계.
+- ATS 공지 목록 `https://pcy.career.co.kr/board/notice/default.asp?BType=1` **11,641 bytes / SHA256 `5f74ddc2da27453a2319711107934f736d856e328224a0b8f6137dbce09237d2` / 16:01:34.567399 KST**. 현재 조회된 목록은 별도 등록 공지를 표시하지 않음. *전체 플랫폼의 모든 정정/취소 공지 없음 판정 아님.*
+- 기관 채용게시판 목록 `https://www.pcy.or.kr/pcy/bbs/board.php?bo_table=recruitment` **52,247 bytes / SHA256 `ae969c77f2e92b84d16ce3f283fb4caaa73c272f5dbf15308e842c7cf543afdb` / 16:01:35.276493 KST**. 현재 해당 제2회 채용공고 게시 확인.
+- 원본/ATS/목록 HTML+텍스트+수신증 파일을 동일 Actions artifact에 보존. 별도 롤백 ref `backup/threads-81328-before-live-1600-20261119`. 공식 원문/ATS 실제 현재성 기반 검토 증빙을 확보했지만 **생산 승인 0, staging CAS 0, queue CAS 0, Meta POST 0**.
+- 최신 이전 운영 handoff 2026-11-19 14:23:46 KST는 승인 미래4/8, 부족 2026-11-20 16·20시 및 11-21 08·12시. 이때 수집 `cleaneye.json` 증거시각 13:11:50 KST는 **11/20 16시에서 24h 초과**하므로 `validate_entry` 검증 실패 대상. **수집기 시각을 허위 갱신하거나 증거 제한을 완화하지 않는다.** 또한 `#job=cleaneye-81328` 실제 화면의 독립 렌더 판독과 해당 슬롯 media(TEXT/IMAGE) 판정·카드 검증, 모든 원격 claim/게시 이력 재확인이 승인 전에 남음.
+- 기존 Draft #139 및 미승인 원고 보존; 신규 확정 승인/일반 큐 등록/배포/Meta 게시 없이 운영 기존 스케줄과 타 기능 보호.
