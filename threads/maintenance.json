@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T10:55:47Z",
-  "last_observed_at": "2026-11-19T10:55:47Z",
+  "updated_at": "2026-11-19T11:27:33Z",
+  "last_observed_at": "2026-11-19T11:27:33Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -104,32 +104,13 @@
     "last_update_commit_sha": "e1902ab12a555cd32746bc3942b8789f94a583ec",
     "readback_verified_at": "2026-11-19T08:46:55Z",
     "current_eligibility_check": {
-      "checked_at": "2026-11-19T10:55:47Z",
+      "checked_at": "2026-11-19T11:27:33Z",
       "total_entries": 50,
       "past_entries_preserved": true,
-      "current_publishable_ready": 4,
+      "current_publishable_ready": 3,
       "queue_blob_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
       "stage_blob_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
       "ready_slots": [
-        {
-          "notice_id": "a307207",
-          "slot": "2026-11-19T20:00:00+09:00",
-          "media": "IMAGE",
-          "chars": 314,
-          "reply_count": 0,
-          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
-          "assets": [
-            {
-              "path": "threads-images/a307207.jpg",
-              "sha256": "8b963b684e40a961da54b8f97d324024b7434605d2825b13c29f8a347eb2dea3"
-            },
-            {
-              "path": "threads-images/a307207-360.png",
-              "sha256": "2ab9aabd3e3f546c1e05505f0d489b3da23e603a2128e1181f59bfae5a61e4b5"
-            }
-          ],
-          "canonical_validation": "passed"
-        },
         {
           "notice_id": "a307142",
           "slot": "2026-11-20T08:00:00+09:00",
@@ -170,7 +151,28 @@
           "canonical_validation": "passed"
         }
       ],
-      "previous_observed_at": "2026-11-19T09:39:30Z"
+      "previous_observed_at": "2026-11-19T10:55:47Z",
+      "active_within_grace_ready": [
+        {
+          "notice_id": "a307207",
+          "slot": "2026-11-19T20:00:00+09:00",
+          "media": "IMAGE",
+          "chars": 314,
+          "reply_count": 0,
+          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+          "assets": [
+            {
+              "path": "threads-images/a307207.jpg",
+              "sha256": "8b963b684e40a961da54b8f97d324024b7434605d2825b13c29f8a347eb2dea3"
+            },
+            {
+              "path": "threads-images/a307207-360.png",
+              "sha256": "2ab9aabd3e3f546c1e05505f0d489b3da23e603a2128e1181f59bfae5a61e4b5"
+            }
+          ],
+          "canonical_validation": "passed"
+        }
+      ]
     },
     "previous_eligibility_check_r62": {
       "checked_at": "2026-11-19T01:48:12Z",
@@ -13437,15 +13439,22 @@
     "next_regular_slot": "2026-11-19T20:00:00+09:00"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-19T10:55:47Z",
-    "status": "FOUR_FUTURE_DRAFTS_VALIDATED_LATEST19H_SOURCE_PREFLIGHT1945_NOT_YET_OBSERVED",
+    "observed_at": "2026-11-19T11:27:33Z",
+    "status": "ACTIVE20_READY_VALIDATED_PUBLISHER_RUN_NOT_YET_OBSERVED_WITHIN_EXISTING_GRACE",
     "main_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
     "history_sha": "b71947f356967b03e52054a20b154bd0bacab564",
     "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
     "stage_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
-    "performance_sha": "1daa9c4dcb19b09d10a2aba210ae806f993840c4",
+    "performance_sha": "cfa8088ceecc1f3098ab162f60e44cd24cec0791",
     "full_queue_status": "validated",
-    "future_ready": [
+    "active20_full_validator": "passed",
+    "active20_run_observed": false,
+    "active20_claim_absent": true,
+    "active20_actual_post_id": null,
+    "active20_grace_ends": "2026-11-19T22:00:00+09:00",
+    "active_within_grace_count": 1,
+    "operating_future_ready_count": 3,
+    "active_and_future": [
       {
         "notice_id": "a307207",
         "slot": "2026-11-19T20:00:00+09:00",
@@ -13505,10 +13514,10 @@
         "canonical_validation": "passed"
       }
     ],
-    "operating_future_ready_count": 4,
+    "media_forecast_conditional_on_active_slot": true,
     "pending_claims": 0,
     "claims": {
-      "bodies_read": 59,
+      "all_bodies_read": 59,
       "accepted": 58,
       "historical_verified": 1,
       "pending": 0
@@ -13516,19 +13525,35 @@
     "new_publications": 0,
     "new_ready_saved": 0,
     "new_queue_promoted": 0,
-    "latest_actual_post_id": "18501961180097093",
+    "last_actual_post_id": "18501961180097093",
     "latest_actual_post_already_reported": true,
-    "preflight1945_run_observed": false,
-    "publisher20_due": false,
-    "source_snapshot": "2026-11-19T19:19:24+09:00",
-    "first_missing_slot": "2026-11-20T20:00:00+09:00",
-    "first_missing_status": "Nov20 20 slot is outside next24h at this check. Current19:19:24 collection would still exceed24h at that slot (24h40m36s); next existing refreshed collection and actual official review required before READY. Do not redate source.",
+    "latest_regular_preflight": {
+      "run_id": 44512759881,
+      "run_attempt": 1,
+      "event": "schedule",
+      "created_at": "2026-11-19T11:12:48Z",
+      "updated_at": "2026-11-19T11:13:52Z",
+      "head_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
+      "status": "completed",
+      "conclusion": "success",
+      "job_id": 135520915092,
+      "report_time": "2026-11-19T20:12:57.512332+09:00",
+      "approved_future_count": 3,
+      "invalid_ready_entries": [],
+      "pending_active_slots": [
+        "2026-11-19T20:00:00+09:00"
+      ],
+      "media_forecast_conditional_on_active_slot": true,
+      "next_slot_missing": false,
+      "exact_cron_binding": "Not exposed by read run payload/log; do not assert this is specifically19:45 rather than delayed hourly15 schedule.",
+      "publish_skipped": "Expected preflight-only branch, not counted as a new publication"
+    },
     "automation_on": true,
     "github_workflow_state": "active",
-    "audit_path": "threads/audits/monitor-20261119-1955-pre20-ready-r69.json",
-    "audit_blob": "29bd1cef706a0f56a5af5b333357796aa7c4d713",
+    "audit_path": "threads/audits/monitor-20261119-2027-active20-pending-r70.json",
+    "audit_blob": "392bfa2f765ffeb241056fb9e54cad34f124d71f",
     "no_user_action_required": true,
-    "next_action": "Observe existing19:45preflight and20:00publisher, within existing2h publication grace. Never dispatch or resend. Next existing refreshed collection before READY forNov20 20."
+    "next_action": "Continue normal20publisher observation within22KST grace; if any receipt ambiguous query before POST, no manual dispatch. PrepareNov20 20only after next existing fresh collection and full official/card review."
   },
   "writer_hold_alternatives": {
     "2026-11-08T16:00:00+09:00:a306515": {
@@ -20264,10 +20289,10 @@
     "previous_artifact_metadata_verified": true,
     "artifact_metadata_verified_this_check": false,
     "latest_read_only_summary": {
-      "observed_at": "2026-11-19T10:55:47Z",
-      "state_blob": "1daa9c4dcb19b09d10a2aba210ae806f993840c4",
+      "observed_at": "2026-11-19T11:27:33Z",
+      "state_blob": "cfa8088ceecc1f3098ab162f60e44cd24cec0791",
       "summary": {
-        "as_of": "2026-11-19T10:54:21.036707+00:00",
+        "as_of": "2026-11-19T11:25:43.665705+00:00",
         "windows": {
           "24h": {
             "count": 14,
@@ -20386,16 +20411,16 @@
           "account": "hid_119",
           "scope": "account_total",
           "requested_start": "2026-11-11T11:45:18.355131+00:00",
-          "requested_end": "2026-11-19T10:54:21.036707+00:00",
+          "requested_end": "2026-11-19T11:25:43.665705+00:00",
           "observed_start": "2026-11-11T11:45:32.854727+00:00",
-          "observed_end": "2026-11-19T09:21:07.618443+00:00",
+          "observed_end": "2026-11-19T11:12:57.941584+00:00",
           "start_followers": 415,
           "end_followers": 503,
           "net_change": 88,
           "status": "observed_interval",
           "exact_requested_boundaries": false,
           "observation_statuses": {
-            "captured": 64
+            "captured": 65
           },
           "post_attribution": null,
           "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
@@ -20403,8 +20428,8 @@
         "decision": "extend_observation_or_balance_intro_types",
         "automatic_weight_changes": 0
       },
-      "audit_path": "threads/audits/monitor-20261119-1955-pre20-ready-r69.json",
-      "new_post_24h_72h_status": "a307120 not due; no zero or estimated metrics substituted"
+      "audit_path": "threads/audits/monitor-20261119-2027-active20-pending-r70.json",
+      "new_post_24h_72h_status": "a307120 not due. a307207 not yet confirmed published; no zero or invented metrics."
     }
   },
   "last_writer_recheck": {
@@ -20789,25 +20814,6 @@
     },
     "future_ready_slots": [
       {
-        "notice_id": "a307207",
-        "slot": "2026-11-19T20:00:00+09:00",
-        "media": "IMAGE",
-        "chars": 314,
-        "reply_count": 0,
-        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
-        "assets": [
-          {
-            "path": "threads-images/a307207.jpg",
-            "sha256": "8b963b684e40a961da54b8f97d324024b7434605d2825b13c29f8a347eb2dea3"
-          },
-          {
-            "path": "threads-images/a307207-360.png",
-            "sha256": "2ab9aabd3e3f546c1e05505f0d489b3da23e603a2128e1181f59bfae5a61e4b5"
-          }
-        ],
-        "canonical_validation": "passed"
-      },
-      {
         "notice_id": "a307142",
         "slot": "2026-11-20T08:00:00+09:00",
         "media": "TEXT",
@@ -20922,15 +20928,22 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "observed_at": "2026-11-19T10:55:47Z",
-      "status": "FOUR_FUTURE_DRAFTS_VALIDATED_LATEST19H_SOURCE_PREFLIGHT1945_NOT_YET_OBSERVED",
+      "observed_at": "2026-11-19T11:27:33Z",
+      "status": "ACTIVE20_READY_VALIDATED_PUBLISHER_RUN_NOT_YET_OBSERVED_WITHIN_EXISTING_GRACE",
       "main_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
       "history_sha": "b71947f356967b03e52054a20b154bd0bacab564",
       "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
       "stage_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
-      "performance_sha": "1daa9c4dcb19b09d10a2aba210ae806f993840c4",
+      "performance_sha": "cfa8088ceecc1f3098ab162f60e44cd24cec0791",
       "full_queue_status": "validated",
-      "future_ready": [
+      "active20_full_validator": "passed",
+      "active20_run_observed": false,
+      "active20_claim_absent": true,
+      "active20_actual_post_id": null,
+      "active20_grace_ends": "2026-11-19T22:00:00+09:00",
+      "active_within_grace_count": 1,
+      "operating_future_ready_count": 3,
+      "active_and_future": [
         {
           "notice_id": "a307207",
           "slot": "2026-11-19T20:00:00+09:00",
@@ -20990,10 +21003,10 @@
           "canonical_validation": "passed"
         }
       ],
-      "operating_future_ready_count": 4,
+      "media_forecast_conditional_on_active_slot": true,
       "pending_claims": 0,
       "claims": {
-        "bodies_read": 59,
+        "all_bodies_read": 59,
         "accepted": 58,
         "historical_verified": 1,
         "pending": 0
@@ -21001,19 +21014,35 @@
       "new_publications": 0,
       "new_ready_saved": 0,
       "new_queue_promoted": 0,
-      "latest_actual_post_id": "18501961180097093",
+      "last_actual_post_id": "18501961180097093",
       "latest_actual_post_already_reported": true,
-      "preflight1945_run_observed": false,
-      "publisher20_due": false,
-      "source_snapshot": "2026-11-19T19:19:24+09:00",
-      "first_missing_slot": "2026-11-20T20:00:00+09:00",
-      "first_missing_status": "Nov20 20 slot is outside next24h at this check. Current19:19:24 collection would still exceed24h at that slot (24h40m36s); next existing refreshed collection and actual official review required before READY. Do not redate source.",
+      "latest_regular_preflight": {
+        "run_id": 44512759881,
+        "run_attempt": 1,
+        "event": "schedule",
+        "created_at": "2026-11-19T11:12:48Z",
+        "updated_at": "2026-11-19T11:13:52Z",
+        "head_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
+        "status": "completed",
+        "conclusion": "success",
+        "job_id": 135520915092,
+        "report_time": "2026-11-19T20:12:57.512332+09:00",
+        "approved_future_count": 3,
+        "invalid_ready_entries": [],
+        "pending_active_slots": [
+          "2026-11-19T20:00:00+09:00"
+        ],
+        "media_forecast_conditional_on_active_slot": true,
+        "next_slot_missing": false,
+        "exact_cron_binding": "Not exposed by read run payload/log; do not assert this is specifically19:45 rather than delayed hourly15 schedule.",
+        "publish_skipped": "Expected preflight-only branch, not counted as a new publication"
+      },
       "automation_on": true,
       "github_workflow_state": "active",
-      "audit_path": "threads/audits/monitor-20261119-1955-pre20-ready-r69.json",
-      "audit_blob": "29bd1cef706a0f56a5af5b333357796aa7c4d713",
+      "audit_path": "threads/audits/monitor-20261119-2027-active20-pending-r70.json",
+      "audit_blob": "392bfa2f765ffeb241056fb9e54cad34f124d71f",
       "no_user_action_required": true,
-      "next_action": "Observe existing19:45preflight and20:00publisher, within existing2h publication grace. Never dispatch or resend. Next existing refreshed collection before READY forNov20 20."
+      "next_action": "Continue normal20publisher observation within22KST grace; if any receipt ambiguous query before POST, no manual dispatch. PrepareNov20 20only after next existing fresh collection and full official/card review."
     },
     "next_slot_official_preflight": {
       "scheduled_at": "2026-11-19T19:45:00+09:00",
@@ -21071,7 +21100,7 @@
       "audit_path": "threads/audits/monitor-20261117-1645-text-post-verified.json",
       "audit_blob": "2d68d3ddde3cd17498a92699933dc2ef725c2305"
     },
-    "next_slot_status": "READY_REMOTE_FULL_VALIDATION_PASSED_AWAIT_EXISTING_REGULAR_EXECUTION",
+    "next_slot_status": "ACTIVE20_READY_WITHIN_GRACE_PUBLISHER_NOT_YET_OBSERVED",
     "publication_reports": {
       "17918731521553015": {
         "status": "prepared_for_current_report",
@@ -21529,15 +21558,22 @@
       "audit_blob": "f53bc067b046226d27480765c8e35e068edbad74"
     },
     "latest_independent_monitor_check": {
-      "observed_at": "2026-11-19T10:55:47Z",
-      "status": "FOUR_FUTURE_DRAFTS_VALIDATED_LATEST19H_SOURCE_PREFLIGHT1945_NOT_YET_OBSERVED",
+      "observed_at": "2026-11-19T11:27:33Z",
+      "status": "ACTIVE20_READY_VALIDATED_PUBLISHER_RUN_NOT_YET_OBSERVED_WITHIN_EXISTING_GRACE",
       "main_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
       "history_sha": "b71947f356967b03e52054a20b154bd0bacab564",
       "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
       "stage_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
-      "performance_sha": "1daa9c4dcb19b09d10a2aba210ae806f993840c4",
+      "performance_sha": "cfa8088ceecc1f3098ab162f60e44cd24cec0791",
       "full_queue_status": "validated",
-      "future_ready": [
+      "active20_full_validator": "passed",
+      "active20_run_observed": false,
+      "active20_claim_absent": true,
+      "active20_actual_post_id": null,
+      "active20_grace_ends": "2026-11-19T22:00:00+09:00",
+      "active_within_grace_count": 1,
+      "operating_future_ready_count": 3,
+      "active_and_future": [
         {
           "notice_id": "a307207",
           "slot": "2026-11-19T20:00:00+09:00",
@@ -21597,10 +21633,10 @@
           "canonical_validation": "passed"
         }
       ],
-      "operating_future_ready_count": 4,
+      "media_forecast_conditional_on_active_slot": true,
       "pending_claims": 0,
       "claims": {
-        "bodies_read": 59,
+        "all_bodies_read": 59,
         "accepted": 58,
         "historical_verified": 1,
         "pending": 0
@@ -21608,21 +21644,37 @@
       "new_publications": 0,
       "new_ready_saved": 0,
       "new_queue_promoted": 0,
-      "latest_actual_post_id": "18501961180097093",
+      "last_actual_post_id": "18501961180097093",
       "latest_actual_post_already_reported": true,
-      "preflight1945_run_observed": false,
-      "publisher20_due": false,
-      "source_snapshot": "2026-11-19T19:19:24+09:00",
-      "first_missing_slot": "2026-11-20T20:00:00+09:00",
-      "first_missing_status": "Nov20 20 slot is outside next24h at this check. Current19:19:24 collection would still exceed24h at that slot (24h40m36s); next existing refreshed collection and actual official review required before READY. Do not redate source.",
+      "latest_regular_preflight": {
+        "run_id": 44512759881,
+        "run_attempt": 1,
+        "event": "schedule",
+        "created_at": "2026-11-19T11:12:48Z",
+        "updated_at": "2026-11-19T11:13:52Z",
+        "head_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
+        "status": "completed",
+        "conclusion": "success",
+        "job_id": 135520915092,
+        "report_time": "2026-11-19T20:12:57.512332+09:00",
+        "approved_future_count": 3,
+        "invalid_ready_entries": [],
+        "pending_active_slots": [
+          "2026-11-19T20:00:00+09:00"
+        ],
+        "media_forecast_conditional_on_active_slot": true,
+        "next_slot_missing": false,
+        "exact_cron_binding": "Not exposed by read run payload/log; do not assert this is specifically19:45 rather than delayed hourly15 schedule.",
+        "publish_skipped": "Expected preflight-only branch, not counted as a new publication"
+      },
       "automation_on": true,
       "github_workflow_state": "active",
-      "audit_path": "threads/audits/monitor-20261119-1955-pre20-ready-r69.json",
-      "audit_blob": "29bd1cef706a0f56a5af5b333357796aa7c4d713",
+      "audit_path": "threads/audits/monitor-20261119-2027-active20-pending-r70.json",
+      "audit_blob": "392bfa2f765ffeb241056fb9e54cad34f124d71f",
       "no_user_action_required": true,
-      "next_action": "Observe existing19:45preflight and20:00publisher, within existing2h publication grace. Never dispatch or resend. Next existing refreshed collection before READY forNov20 20."
+      "next_action": "Continue normal20publisher observation within22KST grace; if any receipt ambiguous query before POST, no manual dispatch. PrepareNov20 20only after next existing fresh collection and full official/card review."
     },
-    "latest_observation_status": "FOUR_FUTURE_DRAFTS_VALIDATED_LATEST19H_SOURCE_PREFLIGHT1945_NOT_YET_OBSERVED",
+    "latest_observation_status": "ACTIVE20_READY_VALIDATED_PUBLISHER_RUN_NOT_YET_OBSERVED_WITHIN_EXISTING_GRACE",
     "latest_media_forecast_recovery": {
       "pr": 130,
       "main_sha": "f68d6ac0a4730a9172398aa2e042a93c9b729694",
@@ -22037,29 +22089,25 @@
       "no_user_action_required": true
     },
     "latest_regular_preflight": {
-      "run_id": 44495590250,
+      "run_id": 44512759881,
       "run_attempt": 1,
       "event": "schedule",
+      "created_at": "2026-11-19T11:12:48Z",
+      "updated_at": "2026-11-19T11:13:52Z",
+      "head_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
       "status": "completed",
       "conclusion": "success",
-      "updated_at": "2026-11-19T09:22:02Z",
-      "head_sha": "8db5eec9b9262a603241b26351feba427440d9ac",
-      "job_id": 135461815862,
-      "time": "2026-11-19T18:21:08.366555+09:00",
-      "approved_supply_count": 4,
+      "job_id": 135520915092,
+      "report_time": "2026-11-19T20:12:57.512332+09:00",
+      "approved_future_count": 3,
       "invalid_ready_entries": [],
-      "pending_active_slots": [],
-      "next_slot_missing": false,
-      "next_media": "IMAGE",
-      "publish_step_skipped": "Expected preflight-only run; not counted as publication",
-      "inventory_shortfall": 4,
-      "missing_slots": [
-        "2026-11-20T20:00:00+09:00",
-        "2026-11-21T08:00:00+09:00",
-        "2026-11-21T12:00:00+09:00",
-        "2026-11-21T16:00:00+09:00"
+      "pending_active_slots": [
+        "2026-11-19T20:00:00+09:00"
       ],
-      "queue_updated": false
+      "media_forecast_conditional_on_active_slot": true,
+      "next_slot_missing": false,
+      "exact_cron_binding": "Not exposed by read run payload/log; do not assert this is specifically19:45 rather than delayed hourly15 schedule.",
+      "publish_skipped": "Expected preflight-only branch, not counted as a new publication"
     },
     "previous_approved_staging_r64": {
       "checked_at": "2026-11-18T15:20:49Z",
@@ -22250,84 +22298,121 @@
       "no_user_action_required": true
     },
     "active_regular_slot_check": {
-      "observed_at": "2026-11-19T08:46:55Z",
-      "status": "COMPLETED_ACTUAL_TEXT_PUBLICATION_VERIFIED",
-      "main_sha": "8db5eec9b9262a603241b26351feba427440d9ac",
+      "observed_at": "2026-11-19T11:27:33Z",
+      "status": "ACTIVE20_READY_VALIDATED_PUBLISHER_RUN_NOT_YET_OBSERVED_WITHIN_EXISTING_GRACE",
+      "main_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
       "history_sha": "b71947f356967b03e52054a20b154bd0bacab564",
       "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
       "stage_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
+      "performance_sha": "cfa8088ceecc1f3098ab162f60e44cd24cec0791",
       "full_queue_status": "validated",
-      "new_publications": 1,
-      "new_ready_saved": 1,
-      "new_queue_promoted": 1,
-      "latest_actual_post_id": "18501961180097093",
-      "active16_actual_post_id": "18501961180097093",
-      "active16_run_observed": true,
-      "active16_claim_accepted": true,
-      "active16_status": "published_verified_within_existing_2h_grace",
-      "pending_claims": 0,
-      "claims": {
-        "total": 59,
-        "accepted": 58,
-        "historical_verified": 1,
-        "pending": 0,
-        "all59_bodies_read_and_latest_file_shas_matched": true,
-        "target_future_claim_absent": true
-      },
-      "operating_future_ready_count": 4,
-      "future_ready": [
+      "active20_full_validator": "passed",
+      "active20_run_observed": false,
+      "active20_claim_absent": true,
+      "active20_actual_post_id": null,
+      "active20_grace_ends": "2026-11-19T22:00:00+09:00",
+      "active_within_grace_count": 1,
+      "operating_future_ready_count": 3,
+      "active_and_future": [
         {
           "notice_id": "a307207",
-          "scheduled_at": "2026-11-19T20:00:00+09:00",
-          "chars": 314,
+          "slot": "2026-11-19T20:00:00+09:00",
           "media": "IMAGE",
-          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+          "chars": 314,
           "reply_count": 0,
-          "public_copy": "passed",
-          "card_hash_review": "passed"
+          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+          "assets": [
+            {
+              "path": "threads-images/a307207.jpg",
+              "sha256": "8b963b684e40a961da54b8f97d324024b7434605d2825b13c29f8a347eb2dea3"
+            },
+            {
+              "path": "threads-images/a307207-360.png",
+              "sha256": "2ab9aabd3e3f546c1e05505f0d489b3da23e603a2128e1181f59bfae5a61e4b5"
+            }
+          ],
+          "canonical_validation": "passed"
         },
         {
           "notice_id": "a307142",
-          "scheduled_at": "2026-11-20T08:00:00+09:00",
-          "chars": 280,
+          "slot": "2026-11-20T08:00:00+09:00",
           "media": "TEXT",
-          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+          "chars": 280,
           "reply_count": 0,
-          "public_copy": "passed",
-          "card_hash_review": "not_required_for_current_forecast"
+          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+          "assets": [],
+          "canonical_validation": "passed"
         },
         {
           "notice_id": "a307067",
-          "scheduled_at": "2026-11-20T12:00:00+09:00",
-          "chars": 261,
+          "slot": "2026-11-20T12:00:00+09:00",
           "media": "IMAGE",
-          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+          "chars": 261,
           "reply_count": 0,
-          "public_copy": "passed",
-          "card_hash_review": "passed"
+          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+          "assets": [
+            {
+              "path": "threads-images/a307067.jpg",
+              "sha256": "c1578841ac481cc025810e16863823b144ac893b6414af82607c98c6d4207d19"
+            },
+            {
+              "path": "threads-images/a307067-360.png",
+              "sha256": "3a6f53dce7ec100201b3b034d265a625800bdcee165b5013a5b300607061e7b4"
+            }
+          ],
+          "canonical_validation": "passed"
         },
         {
           "notice_id": "a307238",
-          "scheduled_at": "2026-11-20T16:00:00+09:00",
-          "chars": 331,
+          "slot": "2026-11-20T16:00:00+09:00",
           "media": "TEXT",
-          "entry_sha256": "f9fa38deea90940d689c08778990b94242ad7ff12066ef23dd5106d58d96bfb7",
+          "chars": 331,
           "reply_count": 0,
-          "public_copy": "passed",
-          "card_hash_review": "not_required_for_current_forecast"
+          "entry_sha256": "f9fa38deea90940d689c08778990b94242ad7ff12066ef23dd5106d58d96bfb7",
+          "assets": [],
+          "canonical_validation": "passed"
         }
       ],
+      "media_forecast_conditional_on_active_slot": true,
+      "pending_claims": 0,
+      "claims": {
+        "all_bodies_read": 59,
+        "accepted": 58,
+        "historical_verified": 1,
+        "pending": 0
+      },
+      "new_publications": 0,
+      "new_ready_saved": 0,
+      "new_queue_promoted": 0,
+      "last_actual_post_id": "18501961180097093",
+      "latest_actual_post_already_reported": true,
+      "latest_regular_preflight": {
+        "run_id": 44512759881,
+        "run_attempt": 1,
+        "event": "schedule",
+        "created_at": "2026-11-19T11:12:48Z",
+        "updated_at": "2026-11-19T11:13:52Z",
+        "head_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
+        "status": "completed",
+        "conclusion": "success",
+        "job_id": 135520915092,
+        "report_time": "2026-11-19T20:12:57.512332+09:00",
+        "approved_future_count": 3,
+        "invalid_ready_entries": [],
+        "pending_active_slots": [
+          "2026-11-19T20:00:00+09:00"
+        ],
+        "media_forecast_conditional_on_active_slot": true,
+        "next_slot_missing": false,
+        "exact_cron_binding": "Not exposed by read run payload/log; do not assert this is specifically19:45 rather than delayed hourly15 schedule.",
+        "publish_skipped": "Expected preflight-only branch, not counted as a new publication"
+      },
       "automation_on": true,
       "github_workflow_state": "active",
-      "media_forecast_conditional_on_preceding_success": true,
-      "first_missing_slot": "2026-11-20T20:00:00+09:00",
-      "first_missing_status": "outside_current_next24h; prepare only after fresh inputs and actual official review, preserve source freshness guard",
-      "audit_path": "threads/audits/published-a307120-and-supply-a307238-20261119-r67.json",
-      "audit_blob": "f53bc067b046226d27480765c8e35e068edbad74",
-      "no_user_action_required_for_GitHub_Meta_operation": true,
-      "next_action": "Observe existing regular preflight/publisher for a307207 IMAGE; do not regenerate successful assets or dispatch. Future media rechecked against actual successful ledger.",
-      "scheduled_at": "2026-11-19T16:00:00+09:00",
-      "actual_post_id": "18501961180097093"
+      "audit_path": "threads/audits/monitor-20261119-2027-active20-pending-r70.json",
+      "audit_blob": "392bfa2f765ffeb241056fb9e54cad34f124d71f",
+      "no_user_action_required": true,
+      "next_action": "Continue normal20publisher observation within22KST grace; if any receipt ambiguous query before POST, no manual dispatch. PrepareNov20 20only after next existing fresh collection and full official/card review."
     },
     "previous_actual_text_verification_r67": {
       "evidence_rechecked_at_utc": "2026-11-19T00:02:01.000Z",
@@ -22615,14 +22700,14 @@
       "next_action": "Observe existing regular preflight/publisher for a307207 IMAGE; do not regenerate successful assets or dispatch. Future media rechecked against actual successful ledger."
     },
     "latest_live_receipt_inventory_check": {
-      "checked_at": "2026-11-19T18:21:56.902404+09:00",
+      "checked_at": "2026-11-19T20:13:46.472805+09:00",
       "account": "hid_119",
       "post_count": 8,
       "pagination_complete": true,
       "post_id": "18501961180097093",
       "text_sha256": "33aa75415331797507060e8634fa48e330689cc9f8046900198503f29b1914fd",
-      "scope": "Remote GET inventory at18:21 confirms account/postID/permalink/textsha. This inventory has no media or own-reply scan fields; do not claim fresh media/reply verification at18:21. Last full publication verification remains17:21.",
-      "audit_path": "threads/audits/monitor-20261119-1839-four-ready-r68.json"
+      "scope": "Actual allowed runner Meta GET inventory at20:13. Last listed ID remains17:21a307120, textsha matches ledger; no fresh media/own-reply scan in inventory, no nested-reply absence claim.",
+      "audit_path": "threads/audits/monitor-20261119-2027-active20-pending-r70.json"
     },
     "previous_hourly_check_r69": {
       "observed_at": "2026-11-19T09:39:30Z",
@@ -22793,6 +22878,180 @@
         "a306943"
       ],
       "treatment": "Current immutable source files actually read and byte SHA matched; no source metadata re-dating or collector/homepage/code writes. Existing future4 passed against refreshed source without changing entries."
+    },
+    "previous_hourly_check_r70": {
+      "observed_at": "2026-11-19T10:55:47Z",
+      "status": "FOUR_FUTURE_DRAFTS_VALIDATED_LATEST19H_SOURCE_PREFLIGHT1945_NOT_YET_OBSERVED",
+      "main_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
+      "history_sha": "b71947f356967b03e52054a20b154bd0bacab564",
+      "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
+      "stage_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
+      "performance_sha": "1daa9c4dcb19b09d10a2aba210ae806f993840c4",
+      "full_queue_status": "validated",
+      "future_ready": [
+        {
+          "notice_id": "a307207",
+          "slot": "2026-11-19T20:00:00+09:00",
+          "media": "IMAGE",
+          "chars": 314,
+          "reply_count": 0,
+          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+          "assets": [
+            {
+              "path": "threads-images/a307207.jpg",
+              "sha256": "8b963b684e40a961da54b8f97d324024b7434605d2825b13c29f8a347eb2dea3"
+            },
+            {
+              "path": "threads-images/a307207-360.png",
+              "sha256": "2ab9aabd3e3f546c1e05505f0d489b3da23e603a2128e1181f59bfae5a61e4b5"
+            }
+          ],
+          "canonical_validation": "passed"
+        },
+        {
+          "notice_id": "a307142",
+          "slot": "2026-11-20T08:00:00+09:00",
+          "media": "TEXT",
+          "chars": 280,
+          "reply_count": 0,
+          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+          "assets": [],
+          "canonical_validation": "passed"
+        },
+        {
+          "notice_id": "a307067",
+          "slot": "2026-11-20T12:00:00+09:00",
+          "media": "IMAGE",
+          "chars": 261,
+          "reply_count": 0,
+          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+          "assets": [
+            {
+              "path": "threads-images/a307067.jpg",
+              "sha256": "c1578841ac481cc025810e16863823b144ac893b6414af82607c98c6d4207d19"
+            },
+            {
+              "path": "threads-images/a307067-360.png",
+              "sha256": "3a6f53dce7ec100201b3b034d265a625800bdcee165b5013a5b300607061e7b4"
+            }
+          ],
+          "canonical_validation": "passed"
+        },
+        {
+          "notice_id": "a307238",
+          "slot": "2026-11-20T16:00:00+09:00",
+          "media": "TEXT",
+          "chars": 331,
+          "reply_count": 0,
+          "entry_sha256": "f9fa38deea90940d689c08778990b94242ad7ff12066ef23dd5106d58d96bfb7",
+          "assets": [],
+          "canonical_validation": "passed"
+        }
+      ],
+      "operating_future_ready_count": 4,
+      "pending_claims": 0,
+      "claims": {
+        "bodies_read": 59,
+        "accepted": 58,
+        "historical_verified": 1,
+        "pending": 0
+      },
+      "new_publications": 0,
+      "new_ready_saved": 0,
+      "new_queue_promoted": 0,
+      "latest_actual_post_id": "18501961180097093",
+      "latest_actual_post_already_reported": true,
+      "preflight1945_run_observed": false,
+      "publisher20_due": false,
+      "source_snapshot": "2026-11-19T19:19:24+09:00",
+      "first_missing_slot": "2026-11-20T20:00:00+09:00",
+      "first_missing_status": "Nov20 20 slot is outside next24h at this check. Current19:19:24 collection would still exceed24h at that slot (24h40m36s); next existing refreshed collection and actual official review required before READY. Do not redate source.",
+      "automation_on": true,
+      "github_workflow_state": "active",
+      "audit_path": "threads/audits/monitor-20261119-1955-pre20-ready-r69.json",
+      "audit_blob": "29bd1cef706a0f56a5af5b333357796aa7c4d713",
+      "no_user_action_required": true,
+      "next_action": "Observe existing19:45preflight and20:00publisher, within existing2h publication grace. Never dispatch or resend. Next existing refreshed collection before READY forNov20 20."
+    },
+    "previous_active_regular_slot_check_r70": {
+      "observed_at": "2026-11-19T08:46:55Z",
+      "status": "COMPLETED_ACTUAL_TEXT_PUBLICATION_VERIFIED",
+      "main_sha": "8db5eec9b9262a603241b26351feba427440d9ac",
+      "history_sha": "b71947f356967b03e52054a20b154bd0bacab564",
+      "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
+      "stage_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
+      "full_queue_status": "validated",
+      "new_publications": 1,
+      "new_ready_saved": 1,
+      "new_queue_promoted": 1,
+      "latest_actual_post_id": "18501961180097093",
+      "active16_actual_post_id": "18501961180097093",
+      "active16_run_observed": true,
+      "active16_claim_accepted": true,
+      "active16_status": "published_verified_within_existing_2h_grace",
+      "pending_claims": 0,
+      "claims": {
+        "total": 59,
+        "accepted": 58,
+        "historical_verified": 1,
+        "pending": 0,
+        "all59_bodies_read_and_latest_file_shas_matched": true,
+        "target_future_claim_absent": true
+      },
+      "operating_future_ready_count": 4,
+      "future_ready": [
+        {
+          "notice_id": "a307207",
+          "scheduled_at": "2026-11-19T20:00:00+09:00",
+          "chars": 314,
+          "media": "IMAGE",
+          "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+          "reply_count": 0,
+          "public_copy": "passed",
+          "card_hash_review": "passed"
+        },
+        {
+          "notice_id": "a307142",
+          "scheduled_at": "2026-11-20T08:00:00+09:00",
+          "chars": 280,
+          "media": "TEXT",
+          "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+          "reply_count": 0,
+          "public_copy": "passed",
+          "card_hash_review": "not_required_for_current_forecast"
+        },
+        {
+          "notice_id": "a307067",
+          "scheduled_at": "2026-11-20T12:00:00+09:00",
+          "chars": 261,
+          "media": "IMAGE",
+          "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+          "reply_count": 0,
+          "public_copy": "passed",
+          "card_hash_review": "passed"
+        },
+        {
+          "notice_id": "a307238",
+          "scheduled_at": "2026-11-20T16:00:00+09:00",
+          "chars": 331,
+          "media": "TEXT",
+          "entry_sha256": "f9fa38deea90940d689c08778990b94242ad7ff12066ef23dd5106d58d96bfb7",
+          "reply_count": 0,
+          "public_copy": "passed",
+          "card_hash_review": "not_required_for_current_forecast"
+        }
+      ],
+      "automation_on": true,
+      "github_workflow_state": "active",
+      "media_forecast_conditional_on_preceding_success": true,
+      "first_missing_slot": "2026-11-20T20:00:00+09:00",
+      "first_missing_status": "outside_current_next24h; prepare only after fresh inputs and actual official review, preserve source freshness guard",
+      "audit_path": "threads/audits/published-a307120-and-supply-a307238-20261119-r67.json",
+      "audit_blob": "f53bc067b046226d27480765c8e35e068edbad74",
+      "no_user_action_required_for_GitHub_Meta_operation": true,
+      "next_action": "Observe existing regular preflight/publisher for a307207 IMAGE; do not regenerate successful assets or dispatch. Future media rechecked against actual successful ledger.",
+      "scheduled_at": "2026-11-19T16:00:00+09:00",
+      "actual_post_id": "18501961180097093"
     }
   },
   "single_main_v2_writer_performance": {
@@ -29691,5 +29950,99 @@
     "audit_path": "threads/audits/monitor-20261119-1839-four-ready-r68.json",
     "audit_blob": "d2b5d3e09de80426988dab51b0e40cf500dc4059",
     "next_action": "Observe existing19:45preflight/20publisher a307207 IMAGE; no manual dispatch or POST. Later candidate503 HOLD; next collection before ready forNov20 20."
+  },
+  "previous_monitor_check_r70": {
+    "observed_at": "2026-11-19T10:55:47Z",
+    "status": "FOUR_FUTURE_DRAFTS_VALIDATED_LATEST19H_SOURCE_PREFLIGHT1945_NOT_YET_OBSERVED",
+    "main_sha": "36ae9b0a814eba23065004781e563ec6c305c8b2",
+    "history_sha": "b71947f356967b03e52054a20b154bd0bacab564",
+    "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
+    "stage_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
+    "performance_sha": "1daa9c4dcb19b09d10a2aba210ae806f993840c4",
+    "full_queue_status": "validated",
+    "future_ready": [
+      {
+        "notice_id": "a307207",
+        "slot": "2026-11-19T20:00:00+09:00",
+        "media": "IMAGE",
+        "chars": 314,
+        "reply_count": 0,
+        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+        "assets": [
+          {
+            "path": "threads-images/a307207.jpg",
+            "sha256": "8b963b684e40a961da54b8f97d324024b7434605d2825b13c29f8a347eb2dea3"
+          },
+          {
+            "path": "threads-images/a307207-360.png",
+            "sha256": "2ab9aabd3e3f546c1e05505f0d489b3da23e603a2128e1181f59bfae5a61e4b5"
+          }
+        ],
+        "canonical_validation": "passed"
+      },
+      {
+        "notice_id": "a307142",
+        "slot": "2026-11-20T08:00:00+09:00",
+        "media": "TEXT",
+        "chars": 280,
+        "reply_count": 0,
+        "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+        "assets": [],
+        "canonical_validation": "passed"
+      },
+      {
+        "notice_id": "a307067",
+        "slot": "2026-11-20T12:00:00+09:00",
+        "media": "IMAGE",
+        "chars": 261,
+        "reply_count": 0,
+        "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+        "assets": [
+          {
+            "path": "threads-images/a307067.jpg",
+            "sha256": "c1578841ac481cc025810e16863823b144ac893b6414af82607c98c6d4207d19"
+          },
+          {
+            "path": "threads-images/a307067-360.png",
+            "sha256": "3a6f53dce7ec100201b3b034d265a625800bdcee165b5013a5b300607061e7b4"
+          }
+        ],
+        "canonical_validation": "passed"
+      },
+      {
+        "notice_id": "a307238",
+        "slot": "2026-11-20T16:00:00+09:00",
+        "media": "TEXT",
+        "chars": 331,
+        "reply_count": 0,
+        "entry_sha256": "f9fa38deea90940d689c08778990b94242ad7ff12066ef23dd5106d58d96bfb7",
+        "assets": [],
+        "canonical_validation": "passed"
+      }
+    ],
+    "operating_future_ready_count": 4,
+    "pending_claims": 0,
+    "claims": {
+      "bodies_read": 59,
+      "accepted": 58,
+      "historical_verified": 1,
+      "pending": 0
+    },
+    "new_publications": 0,
+    "new_ready_saved": 0,
+    "new_queue_promoted": 0,
+    "latest_actual_post_id": "18501961180097093",
+    "latest_actual_post_already_reported": true,
+    "preflight1945_run_observed": false,
+    "publisher20_due": false,
+    "source_snapshot": "2026-11-19T19:19:24+09:00",
+    "first_missing_slot": "2026-11-20T20:00:00+09:00",
+    "first_missing_status": "Nov20 20 slot is outside next24h at this check. Current19:19:24 collection would still exceed24h at that slot (24h40m36s); next existing refreshed collection and actual official review required before READY. Do not redate source.",
+    "automation_on": true,
+    "github_workflow_state": "active",
+    "audit_path": "threads/audits/monitor-20261119-1955-pre20-ready-r69.json",
+    "audit_blob": "29bd1cef706a0f56a5af5b333357796aa7c4d713",
+    "no_user_action_required": true,
+    "next_action": "Observe existing19:45preflight and20:00publisher, within existing2h publication grace. Never dispatch or resend. Next existing refreshed collection before READY forNov20 20."
   }
 }
