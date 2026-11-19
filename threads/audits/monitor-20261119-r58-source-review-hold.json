@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-19 01:03:21 UTC",
+  "account": "hid_119",
+  "main_sha": "37811e2ff6a2b559a49a2f86bf19dece2eb389e2",
+  "state_sha_before": "afa7dfd95ae7fb4d4a86a8770182e87a5fb986c9",
+  "history_sha": "f333a6751b3daa1ce0d25fc5acd847b2b99501c2",
+  "queue_sha": "72929e77f5864a4afa5d08f9966399ad3c636ba5",
+  "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
+  "performance_sha": "3a4c7b26375634ee24da135f1980af8b50847a04",
+  "regular_preflight_run": {
+    "id": 44425332571,
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "37811e2ff6a2b559a49a2f86bf19dece2eb389e2",
+    "updated_at": "2026-11-19T00:00:39Z",
+    "job_id": 135228600277,
+    "actual_report_time": "2026-11-19T08:59:43.948056+09:00",
+    "publication_job": "skipped_expected_nonpublishing_preflight",
+    "promoted_count": 0
+  },
+  "full_queue_status": "validated",
+  "ready": [
+    {
+      "notice_id": "a307145",
+      "slot": "2026-11-19T12:00:00+09:00",
+      "media": "IMAGE",
+      "validator": "passed",
+      "body_chars": 295,
+      "reply_count": 0,
+      "card_verified": true
+    },
+    {
+      "notice_id": "a307120",
+      "slot": "2026-11-19T16:00:00+09:00",
+      "media": "TEXT",
+      "validator": "passed",
+      "body_chars": 299,
+      "reply_count": 0,
+      "card_verified": null
+    },
+    {
+      "notice_id": "a307207",
+      "slot": "2026-11-19T20:00:00+09:00",
+      "media": "IMAGE",
+      "validator": "passed",
+      "body_chars": 314,
+      "reply_count": 0,
+      "card_verified": true
+    }
+  ],
+  "claims": {
+    "total": 57,
+    "accepted": 56,
+    "historical_verified": 1,
+    "pending": 0,
+    "read_errors": 0
+  },
+  "new_publication_count": 0,
+  "last_publication": {
+    "notice_id": "a307061",
+    "post_id": "18113932847582340",
+    "published_at": "2026-11-19T08:38:55.644463+09:00",
+    "verification": "Previously confirmed publisher official GET; current unchanged history/claim; no independent new GET this run"
+  },
+  "new_supply": {
+    "added": 0,
+    "candidate_notice_id": "a307004",
+    "status": "HOLD",
+    "audit_path": "threads/audits/recovery-source-a307004-20261119-r58.json",
+    "audit_blob": "3a7ff298268f7f574fb46ad91a1e7faa1c673a0c",
+    "blockers": [
+      "OFFICIAL_DEADLINE_TEXT_CONFLICT:11/23 table versus6/23 parenthetic",
+      "SOURCE_PROOF_STALE at2026-11-20 08:00 using last normal scheduled verified_at07:01today"
+    ],
+    "profile_actual_display_verified": true,
+    "official_hwp_originals_read": 3
+  },
+  "checks": {
+    "policy_prompt_four_sha256": "matched",
+    "full_v5_prompt_read": "unchanged current remote SHA matched previously read full bytes",
+    "existing_regression_tests_passed": 12,
+    "harness_import_error": "Initial unittest invocation wrong cwd; rerun in repository root passed12 tests",
+    "production_code_changed": false,
+    "performance_summarize_executed": true
+  },
+  "metrics": {
+    "newest_post_24h": "not_yet_due",
+    "newest_post_72h": "not_yet_due",
+    "performance_blob_unchanged": true,
+    "editorial_ratio_changed": false
+  },
+  "preservation": {
+    "automation_on": true,
+    "new_automation_created": false,
+    "main_or_site_changed": false,
+    "existing_queue_staging_claim_history_assets_changed": false,
+    "manual_dispatch_rerun_or_meta_POST": false
+  },
+  "next_action": "At next existing scheduled source success, re-read exact source receipt and choose new already-open notice resolving all material contradictions; no false ready or retroactive slot."
+}
