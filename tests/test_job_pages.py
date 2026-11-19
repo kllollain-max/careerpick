@@ -113,7 +113,9 @@ class JobPageTests(unittest.TestCase):
         self.assertTrue(known_prior.issubset({p['id'] for p in overlap}))
         self.assertNotIn('a307251', VERIFIED_DUTIES)
         self.assertNotIn('a307251', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertTrue(proof['application_status_unconfirmed'])
         html = render(post, {})
+        self.assertIn('<meta name="robots" content="noindex,follow">', html)
         for phrase in ('2027년 면허 취득예정자', '약무직 유사 공고',
                        '현재 남은 결원이 5명이라고 단정하지 마세요',
                        '실제 원서접수 마감시각', 'idx=307251'):
@@ -126,6 +128,7 @@ class JobPageTests(unittest.TestCase):
             stale = render({**post, **changed}, {})
             self.assertNotIn('약무직 유사 공고', stale)
             self.assertNotIn('2027년 면허 취득예정자', stale)
+            self.assertNotIn('<meta name="robots" content="noindex,follow">', stale)
         self.assertEqual(post, original)
 
     def test_knuh_pharmacist_eleven_conditional_vacancies_and_no_fake_cutoff(self):
@@ -1132,10 +1135,12 @@ class JobPageTests(unittest.TestCase):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
             expected.add('a306988')  # employer-confirmed date-only window, no invented clock
+        expected.add('a307251')
         self.assertEqual(set(result), expected)
-        # A notice-only overlap warning is NOT proof of an application cutoff.
-        self.assertNotIn('a307251', result)
-        for pid in ('a292002', 'a305089', 'a306182'):
+        # Unverified current reception is not a confirmed application cutoff.
+        self.assertIn('a307251', result)
+        self.assertNotIn('cutoff', result['a307251'])
+        for pid in ('a292002', 'a305089', 'a306182', 'a307251'):
             self.assertIn('실제 접수 활성 상태', result[pid]['statusNote'])
             post = next(p for p in posts if p['id'] == pid)
             self.assertEqual(result[pid]['sourceSeats'], str(post['n']))
