@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-19T18:21:57.487359+09:00",
-  "run_id": "44495590250",
-  "source_commit": "8db5eec9b9262a603241b26351feba427440d9ac",
+  "captured_at": "2026-11-19T20:13:46.922344+09:00",
+  "run_id": "44512759881",
+  "source_commit": "36ae9b0a814eba23065004781e563ec6c305c8b2",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-19T18:21:08.366555+09:00",
+    "time": "2026-11-19T20:12:57.512332+09:00",
     "future_slots": [
-      "2026-11-19T20:00:00+09:00",
       "2026-11-20T08:00:00+09:00",
       "2026-11-20T12:00:00+09:00",
       "2026-11-20T16:00:00+09:00",
       "2026-11-20T20:00:00+09:00",
       "2026-11-21T08:00:00+09:00",
       "2026-11-21T12:00:00+09:00",
-      "2026-11-21T16:00:00+09:00"
+      "2026-11-21T16:00:00+09:00",
+      "2026-11-21T20:00:00+09:00"
     ],
     "next_media": "IMAGE",
     "promoted": [],
@@ -103,15 +103,16 @@
     "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
     "staged_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
     "promoted_count": 0,
-    "approved_supply_count": 4,
+    "approved_supply_count": 3,
     "inventory_target": 8,
-    "inventory_shortfall": 4,
+    "inventory_shortfall": 5,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-19T20:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-19T20:00:00+09:00",
       "2026-11-20T08:00:00+09:00",
       "2026-11-20T12:00:00+09:00",
       "2026-11-20T16:00:00+09:00"
@@ -120,7 +121,8 @@
       "2026-11-20T20:00:00+09:00",
       "2026-11-21T08:00:00+09:00",
       "2026-11-21T12:00:00+09:00",
-      "2026-11-21T16:00:00+09:00"
+      "2026-11-21T16:00:00+09:00",
+      "2026-11-21T20:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 60,
@@ -130,7 +132,8 @@
         "2026-11-20T20:00:00+09:00",
         "2026-11-21T08:00:00+09:00",
         "2026-11-21T12:00:00+09:00",
-        "2026-11-21T16:00:00+09:00"
+        "2026-11-21T16:00:00+09:00",
+        "2026-11-21T20:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "cleaneye-80711",
@@ -168,6 +171,7 @@
         "cleaneye-81117",
         "cleaneye-81328",
         "cleaneye-81344",
+        "cleaneye-81417",
         "cleaneye-80977",
         "cleaneye-81054",
         "cleaneye-81057",
@@ -191,8 +195,7 @@
         "cleaneye-81232",
         "cleaneye-81233",
         "cleaneye-81234",
-        "cleaneye-81235",
-        "cleaneye-81002"
+        "cleaneye-81235"
       ],
       "candidates": [
         {
@@ -226,7 +229,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-02; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-80711/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-80914",
@@ -259,7 +262,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-80914/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81143",
@@ -292,7 +295,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81143/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81199",
@@ -325,7 +328,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81199/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81206",
@@ -358,7 +361,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81206/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81209",
@@ -391,7 +394,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-14; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81209/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81220",
@@ -424,7 +427,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81220/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81221",
@@ -457,7 +460,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81221/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81231",
@@ -490,7 +493,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81231/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-80951",
@@ -523,7 +526,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-24",
           "application_source_ref": "cleaneye.json#cleaneye-80951/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81095",
@@ -556,7 +559,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-24",
           "application_source_ref": "cleaneye.json#cleaneye-81095/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81187",
@@ -589,7 +592,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
           "application_source_ref": "cleaneye.json#cleaneye-81187/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81201",
@@ -622,7 +625,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
           "application_source_ref": "cleaneye.json#cleaneye-81201/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81203",
@@ -655,7 +658,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-24",
           "application_source_ref": "cleaneye.json#cleaneye-81203/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-80989",
@@ -688,7 +691,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
           "application_source_ref": "cleaneye.json#cleaneye-80989/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-80990",
@@ -721,7 +724,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
           "application_source_ref": "cleaneye.json#cleaneye-80990/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-80991",
@@ -754,7 +757,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
           "application_source_ref": "cleaneye.json#cleaneye-80991/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81114",
@@ -787,7 +790,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-25",
           "application_source_ref": "cleaneye.json#cleaneye-81114/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81179",
@@ -820,7 +823,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
           "application_source_ref": "cleaneye.json#cleaneye-81179/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81180",
@@ -853,7 +856,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
           "application_source_ref": "cleaneye.json#cleaneye-81180/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81251",
@@ -886,7 +889,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81251/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81255",
@@ -919,7 +922,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81255/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81280",
@@ -952,7 +955,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81280/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81281",
@@ -985,7 +988,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81281/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81282",
@@ -1018,7 +1021,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81282/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81283",
@@ -1051,7 +1054,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81283/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81284",
@@ -1084,7 +1087,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81284/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81285",
@@ -1117,7 +1120,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81285/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81286",
@@ -1150,7 +1153,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81286/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81287",
@@ -1183,7 +1186,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81287/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81291",
@@ -1216,7 +1219,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-26",
           "application_source_ref": "cleaneye.json#cleaneye-81291/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81183",
@@ -1249,7 +1252,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-27",
           "application_source_ref": "cleaneye.json#cleaneye-81183/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81117",
@@ -1282,7 +1285,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-30",
           "application_source_ref": "cleaneye.json#cleaneye-81117/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81328",
@@ -1315,7 +1318,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-30",
           "application_source_ref": "cleaneye.json#cleaneye-81328/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81344",
@@ -1348,7 +1351,40 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-30",
           "application_source_ref": "cleaneye.json#cleaneye-81344/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
+        },
+        {
+          "notice_id": "cleaneye-81417",
+          "org": "재단법인 전라남도사회서비스원",
+          "title": "2026년 제4차 전남장애인종합복지관 직원 채용 공고",
+          "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81417",
+          "employment": "일반정규직",
+          "recruiting_unit_title": null,
+          "recruiting_unit_count": null,
+          "recruiting_unit_scope": "unit_count_unconfirmed",
+          "selection_review_reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ],
+          "application_period": {
+            "start": "2026-11-11",
+            "end": "2026-12-01",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-81417/application_period",
+            "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-12-01"
+          },
+          "source_post_sha256": "028a84c2e6e004c15515b722e1bc4b4411ff03e76878ae77cc0cdabe93f9ad4e",
+          "source_detail_sha256": "132b6d4b2cc174df6ca9f6d1f29c1c1c15ddb76cc1d1de4e95fe2c6ee74c7f74",
+          "official_detail_fields_for_review": {
+            "고용형태 원문": "일반정규직",
+            "접수개시일 원문": "2026-11-11",
+            "접수마감일 원문": "2026-12-01",
+            "채용인원": "30"
+          },
+          "review_status": "official_review_required",
+          "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-12-01",
+          "application_source_ref": "cleaneye.json#cleaneye-81417/application_period",
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-80977",
@@ -1381,7 +1417,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
           "application_source_ref": "cleaneye.json#cleaneye-80977/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81054",
@@ -1414,7 +1450,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
           "application_source_ref": "cleaneye.json#cleaneye-81054/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81057",
@@ -1447,7 +1483,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
           "application_source_ref": "cleaneye.json#cleaneye-81057/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-80956",
@@ -1480,7 +1516,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22",
           "application_source_ref": "cleaneye.json#cleaneye-80956/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81166",
@@ -1513,7 +1549,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-22",
           "application_source_ref": "cleaneye.json#cleaneye-81166/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81192",
@@ -1546,7 +1582,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
           "application_source_ref": "cleaneye.json#cleaneye-81192/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81193",
@@ -1579,7 +1615,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
           "application_source_ref": "cleaneye.json#cleaneye-81193/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81194",
@@ -1612,7 +1648,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
           "application_source_ref": "cleaneye.json#cleaneye-81194/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81195",
@@ -1645,7 +1681,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
           "application_source_ref": "cleaneye.json#cleaneye-81195/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81196",
@@ -1678,7 +1714,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
           "application_source_ref": "cleaneye.json#cleaneye-81196/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "a307082",
@@ -1714,7 +1750,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026.11.16.~2026.11.23.",
           "application_source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-19T16:32:05+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:19:53+09:00"
         },
         {
           "notice_id": "cleaneye-81150",
@@ -1747,7 +1783,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81150/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81151",
@@ -1780,7 +1816,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81151/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81152",
@@ -1813,7 +1849,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81152/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81153",
@@ -1846,7 +1882,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81153/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81154",
@@ -1879,7 +1915,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81154/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81155",
@@ -1912,7 +1948,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81155/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81156",
@@ -1945,7 +1981,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81156/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81157",
@@ -1978,7 +2014,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81157/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81158",
@@ -2011,7 +2047,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81158/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81232",
@@ -2044,7 +2080,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81232/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81233",
@@ -2077,7 +2113,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81233/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81234",
@@ -2110,7 +2146,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81234/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         },
         {
           "notice_id": "cleaneye-81235",
@@ -2143,40 +2179,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
           "application_source_ref": "cleaneye.json#cleaneye-81235/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
-        },
-        {
-          "notice_id": "cleaneye-81002",
-          "org": "서귀포의료원",
-          "title": "직원 모집 공고-간호사(2027년도 간호과 졸업예정자)",
-          "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81002",
-          "employment": "일반정규직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-06",
-            "end": "2026-11-26",
-            "start_date_only": true,
-            "date_only": true,
-            "source_ref": "cleaneye.json#cleaneye-81002/application_period",
-            "evidence": "접수개시일 원문: 2026-11-06; 접수마감일 원문: 2026-11-26"
-          },
-          "source_post_sha256": "a8a4b0c8e2f023c85c5e3828ad3bb8d9d706eb6917ca2c98aefb0c02afe6260e",
-          "source_detail_sha256": "e058bfefcce4fc8e3ecc87c03aa2641f0c2382125a6fc1431d4a3575ab547f4a",
-          "official_detail_fields_for_review": {
-            "고용형태 원문": "일반정규직",
-            "접수개시일 원문": "2026-11-06",
-            "접수마감일 원문": "2026-11-26",
-            "채용인원": "00"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "접수개시일 원문: 2026-11-06; 접수마감일 원문: 2026-11-26",
-          "application_source_ref": "cleaneye.json#cleaneye-81002/application_period",
-          "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+          "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
         }
       ],
       "automatic_approval": false,
@@ -2359,7 +2362,8 @@
       "2026-11-20T20:00:00+09:00",
       "2026-11-21T08:00:00+09:00",
       "2026-11-21T12:00:00+09:00",
-      "2026-11-21T16:00:00+09:00"
+      "2026-11-21T16:00:00+09:00",
+      "2026-11-21T20:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "cleaneye-80711",
@@ -2397,6 +2401,7 @@
       "cleaneye-81117",
       "cleaneye-81328",
       "cleaneye-81344",
+      "cleaneye-81417",
       "cleaneye-80977",
       "cleaneye-81054",
       "cleaneye-81057",
@@ -2420,8 +2425,7 @@
       "cleaneye-81232",
       "cleaneye-81233",
       "cleaneye-81234",
-      "cleaneye-81235",
-      "cleaneye-81002"
+      "cleaneye-81235"
     ],
     "candidates": [
       {
@@ -2455,7 +2459,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-02; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-80711/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-80914",
@@ -2488,7 +2492,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-80914/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81143",
@@ -2521,7 +2525,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81143/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81199",
@@ -2554,7 +2558,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81199/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81206",
@@ -2587,7 +2591,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81206/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81209",
@@ -2620,7 +2624,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-14; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81209/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81220",
@@ -2653,7 +2657,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81220/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81221",
@@ -2686,7 +2690,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81221/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81231",
@@ -2719,7 +2723,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81231/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-80951",
@@ -2752,7 +2756,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-80951/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81095",
@@ -2785,7 +2789,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-81095/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81187",
@@ -2818,7 +2822,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-81187/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81201",
@@ -2851,7 +2855,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-81201/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81203",
@@ -2884,7 +2888,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-81203/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-80989",
@@ -2917,7 +2921,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
         "application_source_ref": "cleaneye.json#cleaneye-80989/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-80990",
@@ -2950,7 +2954,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
         "application_source_ref": "cleaneye.json#cleaneye-80990/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-80991",
@@ -2983,7 +2987,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
         "application_source_ref": "cleaneye.json#cleaneye-80991/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81114",
@@ -3016,7 +3020,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-25",
         "application_source_ref": "cleaneye.json#cleaneye-81114/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81179",
@@ -3049,7 +3053,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
         "application_source_ref": "cleaneye.json#cleaneye-81179/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81180",
@@ -3082,7 +3086,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
         "application_source_ref": "cleaneye.json#cleaneye-81180/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81251",
@@ -3115,7 +3119,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81251/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81255",
@@ -3148,7 +3152,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81255/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81280",
@@ -3181,7 +3185,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81280/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81281",
@@ -3214,7 +3218,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81281/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81282",
@@ -3247,7 +3251,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81282/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81283",
@@ -3280,7 +3284,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81283/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81284",
@@ -3313,7 +3317,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81284/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81285",
@@ -3346,7 +3350,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81285/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81286",
@@ -3379,7 +3383,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81286/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81287",
@@ -3412,7 +3416,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81287/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81291",
@@ -3445,7 +3449,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-26",
         "application_source_ref": "cleaneye.json#cleaneye-81291/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81183",
@@ -3478,7 +3482,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-27",
         "application_source_ref": "cleaneye.json#cleaneye-81183/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81117",
@@ -3511,7 +3515,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-30",
         "application_source_ref": "cleaneye.json#cleaneye-81117/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81328",
@@ -3544,7 +3548,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-30",
         "application_source_ref": "cleaneye.json#cleaneye-81328/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81344",
@@ -3577,7 +3581,40 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-30",
         "application_source_ref": "cleaneye.json#cleaneye-81344/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
+      },
+      {
+        "notice_id": "cleaneye-81417",
+        "org": "재단법인 전라남도사회서비스원",
+        "title": "2026년 제4차 전남장애인종합복지관 직원 채용 공고",
+        "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81417",
+        "employment": "일반정규직",
+        "recruiting_unit_title": null,
+        "recruiting_unit_count": null,
+        "recruiting_unit_scope": "unit_count_unconfirmed",
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "application_period": {
+          "start": "2026-11-11",
+          "end": "2026-12-01",
+          "start_date_only": true,
+          "date_only": true,
+          "source_ref": "cleaneye.json#cleaneye-81417/application_period",
+          "evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-12-01"
+        },
+        "source_post_sha256": "028a84c2e6e004c15515b722e1bc4b4411ff03e76878ae77cc0cdabe93f9ad4e",
+        "source_detail_sha256": "132b6d4b2cc174df6ca9f6d1f29c1c1c15ddb76cc1d1de4e95fe2c6ee74c7f74",
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-11",
+          "접수마감일 원문": "2026-12-01",
+          "채용인원": "30"
+        },
+        "review_status": "official_review_required",
+        "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-12-01",
+        "application_source_ref": "cleaneye.json#cleaneye-81417/application_period",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-80977",
@@ -3610,7 +3647,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
         "application_source_ref": "cleaneye.json#cleaneye-80977/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81054",
@@ -3643,7 +3680,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
         "application_source_ref": "cleaneye.json#cleaneye-81054/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81057",
@@ -3676,7 +3713,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-20",
         "application_source_ref": "cleaneye.json#cleaneye-81057/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-80956",
@@ -3709,7 +3746,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22",
         "application_source_ref": "cleaneye.json#cleaneye-80956/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81166",
@@ -3742,7 +3779,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-22",
         "application_source_ref": "cleaneye.json#cleaneye-81166/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81192",
@@ -3775,7 +3812,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
         "application_source_ref": "cleaneye.json#cleaneye-81192/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81193",
@@ -3808,7 +3845,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
         "application_source_ref": "cleaneye.json#cleaneye-81193/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81194",
@@ -3841,7 +3878,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
         "application_source_ref": "cleaneye.json#cleaneye-81194/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81195",
@@ -3874,7 +3911,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
         "application_source_ref": "cleaneye.json#cleaneye-81195/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81196",
@@ -3907,7 +3944,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-22",
         "application_source_ref": "cleaneye.json#cleaneye-81196/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "a307082",
@@ -3943,7 +3980,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026.11.16.~2026.11.23.",
         "application_source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-19T16:32:05+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:19:53+09:00"
       },
       {
         "notice_id": "cleaneye-81150",
@@ -3976,7 +4013,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81150/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81151",
@@ -4009,7 +4046,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81151/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81152",
@@ -4042,7 +4079,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81152/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81153",
@@ -4075,7 +4112,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81153/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81154",
@@ -4108,7 +4145,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81154/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81155",
@@ -4141,7 +4178,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81155/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81156",
@@ -4174,7 +4211,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81156/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81157",
@@ -4207,7 +4244,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81157/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81158",
@@ -4240,7 +4277,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81158/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81232",
@@ -4273,7 +4310,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81232/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81233",
@@ -4306,7 +4343,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81233/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81234",
@@ -4339,7 +4376,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81234/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       },
       {
         "notice_id": "cleaneye-81235",
@@ -4372,40 +4409,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81235/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
-      },
-      {
-        "notice_id": "cleaneye-81002",
-        "org": "서귀포의료원",
-        "title": "직원 모집 공고-간호사(2027년도 간호과 졸업예정자)",
-        "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81002",
-        "employment": "일반정규직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-06",
-          "end": "2026-11-26",
-          "start_date_only": true,
-          "date_only": true,
-          "source_ref": "cleaneye.json#cleaneye-81002/application_period",
-          "evidence": "접수개시일 원문: 2026-11-06; 접수마감일 원문: 2026-11-26"
-        },
-        "source_post_sha256": "a8a4b0c8e2f023c85c5e3828ad3bb8d9d706eb6917ca2c98aefb0c02afe6260e",
-        "source_detail_sha256": "e058bfefcce4fc8e3ecc87c03aa2641f0c2382125a6fc1431d4a3575ab547f4a",
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-06",
-          "접수마감일 원문": "2026-11-26",
-          "채용인원": "00"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "접수개시일 원문: 2026-11-06; 접수마감일 원문: 2026-11-26",
-        "application_source_ref": "cleaneye.json#cleaneye-81002/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00"
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00"
       }
     ],
     "automatic_approval": false,
@@ -4425,7 +4429,7 @@
         "source_detail_sha256": "f4f695669d0720a592d6e0a48830e09ba42b46b1204340578ec1c39d6f1c36d4",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-02; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-80711/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4465,7 +4469,7 @@
         "source_detail_sha256": "5e8921f33b3a7d3cdf61483dd93a22c44e96aa615e969940dc73ad6b65377bff",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-80914/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4505,7 +4509,7 @@
         "source_detail_sha256": "dec7c343cc29967627b0d1315bc1c0ef44ff57f76959c30c2bff637ec42c196e",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81143/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4545,7 +4549,7 @@
         "source_detail_sha256": "260768c668feb52a5634e2403a8f39937fef75b33c7d3483e0eeba51f0761f7d",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81199/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4585,7 +4589,7 @@
         "source_detail_sha256": "dd2bd50b48e173f552ee092d70ac4404b743c3eed336a0e80af9c7cfd117f6dc",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-13; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81206/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4625,7 +4629,7 @@
         "source_detail_sha256": "0919675bed4e5d762460299de69e650080a5a29ee65ad19852c53ddfe8276703",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-14; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81209/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4665,7 +4669,7 @@
         "source_detail_sha256": "49bb7cf8a3726b59263ab417fd0803478c88dee35e318f63ef2060bf6de045ff",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81220/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4705,7 +4709,7 @@
         "source_detail_sha256": "729bbecde2ea189a2be32f3906e5619a0d6805e61ea0b74688d6ac1229253726",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81221/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4745,7 +4749,7 @@
         "source_detail_sha256": "5405aac433705285b89587c46a01cbd34e1755ef6b97d58a248a67d8efa54486",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-23",
         "application_source_ref": "cleaneye.json#cleaneye-81231/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4785,7 +4789,7 @@
         "source_detail_sha256": "15b579b6f8b9a77808bf0d798ee7144d1bece32f5f8e969c50f2aa0d90404373",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-80951/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4825,7 +4829,7 @@
         "source_detail_sha256": "83ea3dbb67752826bca0d7f87df7b744c7f21e92f15a2bbe07d4e85cfad0106e",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-09; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-81095/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4865,7 +4869,7 @@
         "source_detail_sha256": "2408aca2ad9828a3dd2a994984a96b75b208f8d7cdfdd7f61d7f66b432a695ea",
         "application_evidence_for_review": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-81187/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -4895,27 +4899,129 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "cleaneye-81201",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-21T20:00:00+09:00",
+        "draft_text": "강릉과학산업진흥원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 강릉과학산업진흥원 3차 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81201",
-        "suggested_slot": null
+        "source_post_sha256": "63a557296ec76791cec349c9d8ec8e0722951d8af957b8dbd67147199451e4fb",
+        "source_detail_sha256": "a2cf5776c509e5d0a1243312076a39b4f0f65b7ab9b2bc9a0b9c2296b9ebc584",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
+        "application_source_ref": "cleaneye.json#cleaneye-81201/application_period",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-12",
+          "접수마감일 원문": "2026-11-24",
+          "채용인원": "4"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81203",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-21T20:00:00+09:00",
+        "draft_text": "재단법인 송파문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)송파문화재단 2026년 3차 직원 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81203",
-        "suggested_slot": null
+        "source_post_sha256": "d5a5359f305c677d6f79bcd23facca2fe1641941beb3eb60f8717da7bd6ef6f0",
+        "source_detail_sha256": "7eb55ef7cb36ae92b1551430452509392f688f94f7825acb452c496c942f708a",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-24",
+        "application_source_ref": "cleaneye.json#cleaneye-81203/application_period",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-17",
+          "접수마감일 원문": "2026-11-24",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-80989",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-21T20:00:00+09:00",
+        "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직 5급/청소년사업)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80989",
-        "suggested_slot": null
-      },
+        "source_post_sha256": "7c377fa297c6f7bb6564a5789efdf3c1ebadfdbda70f058570c54f6fabe5ccc5",
+        "source_detail_sha256": "cf93fab7140fa249478bdc2d39494c85f83e5f2297538b3463ab1ee45be07735",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-80989/application_period",
+        "source_snapshot_checked_at": "2026-11-19T19:20:21+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-11",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "cleaneye-80990",
         "status": "unreviewed",
@@ -5034,6 +5140,12 @@
         "notice_id": "cleaneye-81344",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81344",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-81417",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81417",
         "suggested_slot": null
       },
       {
@@ -5179,12 +5291,6 @@
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81235",
         "suggested_slot": null
-      },
-      {
-        "notice_id": "cleaneye-81002",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81002",
-        "suggested_slot": null
       }
     ],
     "slot_coverage": {
@@ -5192,13 +5298,15 @@
         "2026-11-20T20:00:00+09:00",
         "2026-11-21T08:00:00+09:00",
         "2026-11-21T12:00:00+09:00",
-        "2026-11-21T16:00:00+09:00"
+        "2026-11-21T16:00:00+09:00",
+        "2026-11-21T20:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-20T20:00:00+09:00",
         "2026-11-21T08:00:00+09:00",
         "2026-11-21T12:00:00+09:00",
-        "2026-11-21T16:00:00+09:00"
+        "2026-11-21T16:00:00+09:00",
+        "2026-11-21T20:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -5261,7 +5369,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-19T18:21:56.833074+09:00",
+          "checked_at": "2026-11-19T20:13:46.402188+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5309,6 +5417,7 @@
       "cleaneye-81117",
       "cleaneye-81328",
       "cleaneye-81344",
+      "cleaneye-81417",
       "cleaneye-80977",
       "cleaneye-81054",
       "cleaneye-81057",
@@ -5331,21 +5440,13 @@
       "cleaneye-81232",
       "cleaneye-81233",
       "cleaneye-81234",
-      "cleaneye-81235",
-      "cleaneye-81002"
+      "cleaneye-81235"
     ],
     "checked": 1,
     "required_next_step": "Independently read notice and attachments, cite each fact, run validate_entry and v5 checks before submission"
   },
   "publication_audit": {
     "slots": [
-      {
-        "scheduled_at": "2026-11-17T20:00:00+09:00",
-        "post_ids": [
-          "18102493658425564"
-        ],
-        "status": "recorded_publication"
-      },
       {
         "scheduled_at": "2026-11-18T08:00:00+09:00",
         "post_ids": [
@@ -5396,16 +5497,16 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 8,
+    "expected_slots": 7,
+    "recorded_publications": 7,
     "receipt_success_rate": 1.0,
     "live_meta_verification_performed": false,
     "needs_attention": []
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-19T18:21:56.902404+09:00",
-    "window_start": "2026-11-17T09:21:56.902404+00:00",
+    "checked_at": "2026-11-19T20:13:46.472805+09:00",
+    "window_start": "2026-11-17T11:13:46.472805+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
