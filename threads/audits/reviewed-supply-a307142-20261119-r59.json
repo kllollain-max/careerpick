@@ -1,0 +1,658 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-19T01:48:12Z",
+  "status": "REVIEWED_READY_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+  "repository": "kllollain-max/careerpick",
+  "account": "hid_119",
+  "main_sha": "8e7e3f39d53bd9b7ae58859ef08beb084b7f0184",
+  "automation": {
+    "id": "6ae092084b988191a23a38300212ebdc",
+    "is_enabled": true,
+    "schedule_preserved": true
+  },
+  "source_collection": {
+    "run_id": 44436936681,
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-11-19T01:29:05Z",
+    "main_snapshot_actual_git_blob_checks": "PASS",
+    "future_24h_freshness": "PASS"
+  },
+  "approved_entry": {
+    "notice_id": "a307142",
+    "source": "alio",
+    "official_id": "307142",
+    "scheduled_at": "2026-11-20T08:00:00+09:00",
+    "format_id": "hiring_core",
+    "prepared_at": "2026-11-19T10:43:22.809159+09:00",
+    "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+    "publication_policy_id": "careerpick-threads-v5-20261111",
+    "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+    "source_post_sha256": "9912afffe2309d9029f3a39f5f80a37a5ba11c272b3f5619a319cdedef48e048",
+    "source_detail_sha256": "44cd9da0570fa96c33be418175a70a04802bcb865e7cb3347047c09074e97d0e",
+    "image_job": {
+      "id": "a307142",
+      "org": "한국노동연구원",
+      "title": "연구직 연구원 직군",
+      "count": 2,
+      "employment": "정규직",
+      "location": "세종",
+      "due": "2026-12-08",
+      "deadline_label": "2026-12-08 16:00"
+    },
+    "writer": {
+      "status": "ready",
+      "draft_text": null,
+      "post_text": "인적자원 연구를 준비한다면,\n한국노동연구원 연구직 연구원 직군 정규직 2명, 세종 근무예요.\n\n경영학·경제학·사회학·행정학 등 관련 전공 석사 이상 또는 2027년 2월 말까지 석사 취득 완료자가 대상이에요.\n채용예정일 기준 만60세 이내, 남성은 공고일 기준 군필 또는 면제여야 해요.\n결격요건과 2027년 3월 5일까지 입사 가능 여부도 확인해요.\n\n서류·필기·논문발표를 거쳐요.\n학위논문 요약은 자유양식 3장 이내예요.\n12월 8일 16:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "reply_texts": [],
+      "review": {
+        "notice_id": "a307142",
+        "scheduled_at": "2026-11-20T08:00:00+09:00",
+        "verification_basis": "checked_official_source",
+        "missing_or_conflicting": [],
+        "cta_check": "passed",
+        "media_check": "not_supplied",
+        "length_check": "measured_within_limit",
+        "target_reader": "인적자원 관련 전공 석사 이상 및2027년2월말까지 석사 취득 가능한 독자",
+        "central_message": "세종 인적자원 정규직 연구원2; qualification alternatives, join date and exact16:00 close",
+        "pattern_id": "P2",
+        "pre_publish_checks": [
+          "Official notice4pages and JD2pages read fully; exact employer-original SHA equals ALIO PDF",
+          "Actual ATS272292 open status and exact application window; blank pre-consent registration reached, no data/consent/submission",
+          "Actual browser profile exactnotice AX+screenshot; employer/title/count2/regular/Sejong and degree/military/age restrictions checked",
+          "Latest main/source/history/57claims/queue/staging read; existing3future entries untouched; future media conditionalTEXT"
+        ],
+        "omitted_optional_facts": [
+          "No salary or unrestricted eligibility promise",
+          "ALIO/profile relocated-region bonus5% conflicts with employer original3%; neither number or bonus eligibility appears in body. Employer original also controls5%disabled2%noncapital; not required qualifications.",
+          "ALIO includes medical disqualification absent in attached original; body retains generic disqualification check and does not guarantee eligibility"
+        ],
+        "source_discrepancies": [
+          {
+            "field": "optional_bonus",
+            "alio": "relocated-region5%",
+            "official_pdf": "3%",
+            "treatment": "Omitted from publication; originalPDF checked, no false verification of website optional numeric table"
+          }
+        ],
+        "source_refs": [
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+            "sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a",
+            "checked_at": "2026-11-19T01:38:42.434513+00:00",
+            "bytes": 96905,
+            "document_sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a",
+            "evidence": "한국노동연구원 채용공고 제2026-9호\n\n\n\n      한국노동연구원 연구원(연구직) 채용 공고\n한국노동연구원은 국무조정실 산하 정부출연연구기관으로서, 고용·노동과 관련한 사회경제적 문제를\n연구·분석하고, 고용·노동·사회정책을 개발하며, 국민인식을 제고함으로써 공정하고 지속가능\n한 경제·사회를 지향함을 목적으로 하고 있습니다. 한국노동연구원에서 근무할 연구원(연구직)\n을 아래와 같이 채용하고자 하오니 유능하고 성실한 인재의 많은 지원을 바랍니다.\n\n\n                                                     2026. 11. 17.\n                                                한국노동연구원장\n\n              한국노동연구원은 블라인드 채용 방법에 근거하여\n           모집분야 정보를 제공하고 있으며, 채용의 기준으로 반영합니다.\n\n\n1. 채용분야\n\n     구 분          모집분야     채용인원              관련 전공\n\n 연구직 연구원 직군       인적자원                경영학, 경제학, 사회학, 행정학 등\n                             2명\n    (정규직)         관련 분야                      관련전공\n\n * 연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n\n\n2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f3. 제출서류\n\n 제출시기                         제출서류                      제출방법\n\n          개인정보 수집 및 이용에 관한 동의서\n                                                         온라인\n          입사지원서 및 자격요건 확인사항                               입력\n          *경력, 경험, 교육사항은 수료증 등으로 증명 가능한 사실만 기재\n\n          지원자격 증명서류 (학위 수여증, 졸업증명서 등)\n          * 지원자격 충족여부를 확인하는 절차로 인사담당자만 확인하며, 심사위\n 입사지원       원에게 제공하지 않음\n   시      * 학교명, 생년월일 등이 나타나지 않도록 블라인드 처리 요망\n                                                         온라인\n          학위논문                                            첨부\n          * 논문에 학교명이 나타나지 않도록 블라인드 처리요망\n\n          학위논문 요약 (자유양식, 3장 이내)\n          * 논문에 학교명이 나타나지 않도록 블라인드 처리요망\n\n          지도교수 추천서 1건 (가능한 자에 한함, 자유양식)                  추천자\n          * 추천자가 직접 klijob@kli.re.kr로 메일 제출(접수기한까지)     직접 제출\n          전형\n               학위논문 발표자료 (PPT 또는 PDF 형식)\n          자료\n               대학 및 대학원 졸업증명서(학위증명서), 졸업예정증명서,\n 논문발표          성적증명서\n 전형 전                                                    온라인\n (필기전형\n               경력 및 경험사항 관련 증명서류                          첨부\n          증빙\n합격자 대상)   서류\n               자격증 관련 증명서류\n\n               (해당자) 장애인 증명서 또는 취업지원 대상자 증명서\n\n※ 유의사항\n1. 지원서 작성 시 반드시 증명서 또는 수료증 등으로 증명 가능한 사실만 작성 바람.\n  * 특히, 경력사항과 직무관련사항 내 ‘학교교육’, ‘직업교육’, ‘기타활동(경험사항 등)’의 경우, 해당 내\n    용을 기재하기 전에 반드시 증빙서류를 미리 발급받거나 사실관계를 사전에 확인한 후 작성 바람.\n2. 본 채용은 블라인드 채용으로 학교명, 생년월일 등이 나타나지 않도록 블라인드 처리하여 제\n  출 (필요한 경우, ‘○○대학교’ 형식으로 기재)\n3. 지원자격 미달 시 응시자격을 박탈함.\n4. 논문발표전형 전(필기전형 합격자 대상) 증빙서류는 응시자의 지원서 사실관계 여부를\n  확인하는 절차로 인사담당자만 확인하며, 심사위원에게는 정보를 제공하지 않음.\n5. 증빙서류 내용이 불일치하거나(서류 미제출 포함), 허위사실 확인 시 응시자격을 박탈함.\n6. 논문발표전형 전 안내한 시간까지 기재한 ‘경력사항’, ‘직무관련사항’ 내 ‘학교교\n  육’, ‘직업교육’, ‘기타활동(경험사항 등)’에 대한 증빙서류가 제출되지 않을 경우, 논\n  문발표전형 응시 자격을 박탈함.\n\f4. 제출방법 및 기한\n 가. 제출방법: 채용시스템에 등록\n 나. 제출기한: 2026년 12월 8일(화) 16:00까지 (한국시간 기준)\n 다. 제 출 처: https://kli.recruiter.co.kr/\n\n\n5. 채용방법 및 전형일정\n\n 구분             1차: 서류전형                      2차: 필기전형                3차: 논문발표전형\n          기한 내 지원서 제출자 중\n전형대상                                        서류전형 합격자                  필기전형 합격자\n          지원자격을 충족하는 자\n                                           모집분야(인적자원)\n           지원자 제출서류 검토 및\n전형설명                                        관련전공 필기시험               논문발표 및 질의응답\n             직무 적격성 심사\n                                          (서술형, 주관식 혼합)\n\n전형일정       2026.12.10. ~ 2026.12.22.      2026.12.28. ~ 2027.1.8.   2027.1.11. ~ 2027.1.22.\n\n         1단계 심사위원 과반의 추천                                            채점 결과 80점 이상자를\n                                       채점결과 80점 이상자를\n합격기준              채점결과 80점 이상                                        인사위원회 최종심의\n         2단계                           다음 전형 대상자로 선정\n                  (1단계 통과자 대상)                                         대상자로 선정\n\n* 단계별 합격자는 연구원 홈페이지(www.kli.re.kr) 공지 또는 개별 통보 예정\n* 상기 일정은 상황에 따라 변경될 수 있으며, 일정 변경 시 홈페이지 또는 개별 안내 예정\n\n\n6. 채용전형별 우대 기준\n\n             구분                   1차: 서류전형              2차: 필기전형        3차: 논문발표 전형\n\n     비수도권 지역인재                         2%                     2%                 2%\n\n     이전지역 지역인재                         3%                     3%                 3%\n\n           장애인                         5%                     5%                 5%\n\n* 가점은 중복으로 적용하지 아니하며, 유리한 가점 1건만 적용함.\n\n\n\n ※ 우대 기준 해당자 정의\n\n        구분                                             내용\n                    대학까지의 최종학력(대학원 이상 제외) 기준으로\n  비수도권 지역인재         수도권(서울,경기,인천) 지역을 제외한 국내 소재 비수도권 대학교를\n                    졸업(예정)·중퇴한 자 또는 재학·휴학 중인 자\n                    세종특별자치시, 대전광역시, 충청도에 소재한 대학 및 고등학교를\n  이전지역 지역인재\n                    최종으로 졸업하였거나, 졸업 예정인 자\n\n       장애인          장애인고용촉진 및 직업재활법 시행령에서 정한 관련 증빙을 제출 가능한 자\n\f7. 기타\n 가. 지역인재, 장애인 등은 관련법에 의거 우대함.\n 나. 응시원서 상 기재 착오, 자격요건 부적합, 증빙서류 미비 또는 미제출, 연락 불능으로\n    인한 불이익은 응시자의 책임임.\n 다. 적격자가 없는 경우 합격자를 선발하지 않을 수 있으며 응시자가 선발 예정 인원과\n    같거나 적은 경우 재공고할 수 있음.\n 라. 최종 선순위 합격후보자의 임용 결격 사유 발생, 임용 포기, 임용 후 1개월 이내\n    조기 퇴직 등의 사유로 결원 발생 시 차순위에 따라 합격후보자를 결정할 수 있음.\n 마. 채용공고는 사정에 따라 변경될 수 있으며, 변경 사항은 재공고 후 시행할 예정임.\n 바. 입사지원서 마감일에는 접속자가 급증할 것으로 예상되니 마감 전 여유 있게\n    입사지원서 접수를 바람.\n 사. 이외 문의 사항은 본원 인사관리팀(044-287-6902, klijob@kli.re.kr) 또는 채용 홈페이지\n    Q&A를 활용하여 문의바람. 끝.\n\n\n\n               한 국 노 동 연 구 원\n\n\n\n\n                               - 4 -\n\f"
+          },
+          {
+            "url": "https://www.alio.go.kr/download/download.json?fileNo=3088055",
+            "sha256": "998f0978129052872b243a801ed2c39fc28f527b5f454f34ce837d2550d433c7",
+            "checked_at": "2026-11-19T01:38:49.241563+00:00",
+            "bytes": 71672,
+            "document_sha256": "998f0978129052872b243a801ed2c39fc28f527b5f454f34ce837d2550d433c7",
+            "evidence": "직무기술서 (직무설명자료)            한국노동연구원 연구직 연구원 직군 채용\n■ 직무명\n연구직 연구원 직군 (정규직)\n*연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n■ NCS 분류체계\n    대분류          중분류          소분류           세분류\n                                          연구사업 준비\n               연구(신규개발)                    연구진행\n                                          연구사업관리\n\n■ 기관 소개\n한국노동연구원은 국무조정실 산하 정부출연연구기관으로, 고용·노동과 관련한 사회경제적\n문제를 연구·분석하고, 고용·노동·사회정책을 개발하며, 국민인식을 제고함으로써 공정하고\n지속가능한 경제·사회를 지향함을 목적으로 하고 있습니다.\n우리나라 고용·노동 분야 유일한 국책연구기관으로서 1988년 8월 25일 개원 이래 한국 노동\n시장 및 노사관계 연구의 중추적 역할을 수행하고 있습니다.\n‘근로자의 삶의 질 제고와 일을 통한 국민행복 구현에 앞장서는 글로벌 정책연구기관’이라\n는 비전을 기치로 노동시장 및 고용정책 연구, 고용노사관계 및 노동법 연구, 노동복지·사회\n보험·산업안전 등 사회정책 연구, 인적자원관리 연구, 인사관리를 통한 일터혁신 및 혁신역량\n강화 연구, 노사관계최고지도자과정 등 다양한 분야의 연구와 사업을 추진하고 있습니다.\n■ 직무 주요 업무\n1. 인적자원 제 문제에 관한 조사, 연구와 정책대안의 개발\n2. 인적자원에 관한 정보 및 자료의 수집, 발간, 보급\n3. 인적자원에 관한 다른 연구기관과의 공동연구\n4. 정부, 국내외 공공기관 및 민간단체 등으로부터의 연구용역의 수탁\n5. 인적자원에 관한 교육, 연수 및 홍보\n■ 직무수행 세부 내용\n○ (연구사업 준비) 인적자원에 대한 이슈를 파악하고 연구사업 수요를 분석하여 연구 기간\n  내에 연구를 마칠 수 있도록 연구 계획과 추진 일정을 수립하는 등 준비 업무를 수행함\n\n○ (연구사업 진행)\n- 자료의 수집 및 생성: 인적자원 관련 연구에 필요한 자료를 수집하고 전문분야 관련\n   전문가와의 네트워크를 구축하여 의미있는 정보 및 정보원을 확보함. 또한 수집한\n   데이터의 특성 및 연구목적에 맞는 분석모형을 적용하며 적절한 분석기법을 통해\n   연구사업에 활용할 수 있는 차별화된 자료를 생성함\n- 결과도출 및 성과확산: 연구를 통해 산출한 데이터를 종합하여 결과를 도출하며, 결과를\n  바탕으로 새로운 정책 및 기존 정책의 개선사항을 제안함. 또한 연구성과가 국가정책의 수립\n  및 실행에 활용되고 공익에 기여하도록 연구 결과 및 관련 자료를 고객(수요자)에게 발표함\n\n○ (연구사업관리) 정해진 기간과 예산범위 내에서 연구사업을 마칠 수 있도록 연구사업\n  일정관리, 예산관리 업무를 수행하며 정해진 심의 및 보고 일정에 따라 과제를 수행함\n\f■ 직무 자격요건\n\n1. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사학\n    위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n2. 관련전공\n ○ 경영학, 경제학, 사회학, 행정학 등 관련 전공\n\n■ 직무 필요 지식 / 기술 / 태도\n          ○ (연구사업 준비) 연구방법론에 대한 지식\n          ○ (연구사업 진행) 조사방법론, 주제나 데이터에 적합한 분석에 대한 지식,\n           양적 및 질적인 데이터 생성 방법에 대한 지식, 데이터 특성 및\n 지식\n           분석모형에 따른 통계분석 방법에 대한 지식, 관련 분야의 이론 및\n           선행연구에 대한 지식\n          ○ (연구사업 관리) 연구방법론에 대한 지식\n          ○ (연구사업 준비) 관련 자료를 폭넓게 수집할 수 있는 능력, 수집한 자료를\n           심층적으로 분석할 수 있는 능력, 문서작성 능력, 작성한 계획서를\n           타인에게 논리적으로 발표할 수 있는 능력, 연구 목적에 맞는 이론과\n           개념을 선택할 수 있는 능력\n          ○ (연구사업 진행) 연구에 활용할 수 있는 자료를 생성하기 위한 조사기획\n           능력, 데이터를 연구 목적에 맞게 분석할 수 있는 능력, 원하는 결과\n 기술\n           도출을 위한 분석모형을 개발 및 적용할 수 있는 능력, 통계 프로그램\n           활용 기술, 보고서 구조를 기획하고 이에 따라 작성할 수 있는 능력,\n           문서작성 프로그램 활용 기술, 연구결과를 타인에게 논리적으로 설명하는\n           능력, 연구결과를 통한 정책의 문제점 및 개선 사항을 제시하는 능력,\n           프레젠테이션 능력\n          ○ (연구사업 관리) 기획능력, 협업능력, 커뮤니케이션 능력, 협상능력\n          ○ (연구사업 준비) 연구주제에 대해 문제의식을 가지고 탐구하는 자세,\n           타인의 의견을 받아들이는 태도\n          ○ (연구사업 진행) 적정 방법에 따라 자료를 분석하려는 태도, 창의적인 방법으로\n 태도\n           문제를 해결하려는 태도, 주어진 시간 내에 결과물을 완성하려는 태도\n          ○ (연구사업 관리) 타인의 의견을 경청하는 태도, 타인을 존중하고 상호\n           이해하며 함께 일하려는 태도, 논리적으로 접근하려는 자세\n\n\n\n                           - 2 -\n\f"
+          },
+          {
+            "url": "https://kli.recruiter.co.kr/mrs2/attachFile/downloadFile?fileUid=ae03bdce-951f-46f3-9d0a-262313cbf80d.pdf",
+            "sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a",
+            "checked_at": "2026-11-19T01:39:17.515320+00:00",
+            "bytes": 96905,
+            "document_sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a",
+            "evidence": "한국노동연구원 채용공고 제2026-9호\n\n\n\n      한국노동연구원 연구원(연구직) 채용 공고\n한국노동연구원은 국무조정실 산하 정부출연연구기관으로서, 고용·노동과 관련한 사회경제적 문제를\n연구·분석하고, 고용·노동·사회정책을 개발하며, 국민인식을 제고함으로써 공정하고 지속가능\n한 경제·사회를 지향함을 목적으로 하고 있습니다. 한국노동연구원에서 근무할 연구원(연구직)\n을 아래와 같이 채용하고자 하오니 유능하고 성실한 인재의 많은 지원을 바랍니다.\n\n\n                                                     2026. 11. 17.\n                                                한국노동연구원장\n\n              한국노동연구원은 블라인드 채용 방법에 근거하여\n           모집분야 정보를 제공하고 있으며, 채용의 기준으로 반영합니다.\n\n\n1. 채용분야\n\n     구 분          모집분야     채용인원              관련 전공\n\n 연구직 연구원 직군       인적자원                경영학, 경제학, 사회학, 행정학 등\n                             2명\n    (정규직)         관련 분야                      관련전공\n\n * 연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n\n\n2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f3. 제출서류\n\n 제출시기                         제출서류                      제출방법\n\n          개인정보 수집 및 이용에 관한 동의서\n                                                         온라인\n          입사지원서 및 자격요건 확인사항                               입력\n          *경력, 경험, 교육사항은 수료증 등으로 증명 가능한 사실만 기재\n\n          지원자격 증명서류 (학위 수여증, 졸업증명서 등)\n          * 지원자격 충족여부를 확인하는 절차로 인사담당자만 확인하며, 심사위\n 입사지원       원에게 제공하지 않음\n   시      * 학교명, 생년월일 등이 나타나지 않도록 블라인드 처리 요망\n                                                         온라인\n          학위논문                                            첨부\n          * 논문에 학교명이 나타나지 않도록 블라인드 처리요망\n\n          학위논문 요약 (자유양식, 3장 이내)\n          * 논문에 학교명이 나타나지 않도록 블라인드 처리요망\n\n          지도교수 추천서 1건 (가능한 자에 한함, 자유양식)                  추천자\n          * 추천자가 직접 klijob@kli.re.kr로 메일 제출(접수기한까지)     직접 제출\n          전형\n               학위논문 발표자료 (PPT 또는 PDF 형식)\n          자료\n               대학 및 대학원 졸업증명서(학위증명서), 졸업예정증명서,\n 논문발표          성적증명서\n 전형 전                                                    온라인\n (필기전형\n               경력 및 경험사항 관련 증명서류                          첨부\n          증빙\n합격자 대상)   서류\n               자격증 관련 증명서류\n\n               (해당자) 장애인 증명서 또는 취업지원 대상자 증명서\n\n※ 유의사항\n1. 지원서 작성 시 반드시 증명서 또는 수료증 등으로 증명 가능한 사실만 작성 바람.\n  * 특히, 경력사항과 직무관련사항 내 ‘학교교육’, ‘직업교육’, ‘기타활동(경험사항 등)’의 경우, 해당 내\n    용을 기재하기 전에 반드시 증빙서류를 미리 발급받거나 사실관계를 사전에 확인한 후 작성 바람.\n2. 본 채용은 블라인드 채용으로 학교명, 생년월일 등이 나타나지 않도록 블라인드 처리하여 제\n  출 (필요한 경우, ‘○○대학교’ 형식으로 기재)\n3. 지원자격 미달 시 응시자격을 박탈함.\n4. 논문발표전형 전(필기전형 합격자 대상) 증빙서류는 응시자의 지원서 사실관계 여부를\n  확인하는 절차로 인사담당자만 확인하며, 심사위원에게는 정보를 제공하지 않음.\n5. 증빙서류 내용이 불일치하거나(서류 미제출 포함), 허위사실 확인 시 응시자격을 박탈함.\n6. 논문발표전형 전 안내한 시간까지 기재한 ‘경력사항’, ‘직무관련사항’ 내 ‘학교교\n  육’, ‘직업교육’, ‘기타활동(경험사항 등)’에 대한 증빙서류가 제출되지 않을 경우, 논\n  문발표전형 응시 자격을 박탈함.\n\f4. 제출방법 및 기한\n 가. 제출방법: 채용시스템에 등록\n 나. 제출기한: 2026년 12월 8일(화) 16:00까지 (한국시간 기준)\n 다. 제 출 처: https://kli.recruiter.co.kr/\n\n\n5. 채용방법 및 전형일정\n\n 구분             1차: 서류전형                      2차: 필기전형                3차: 논문발표전형\n          기한 내 지원서 제출자 중\n전형대상                                        서류전형 합격자                  필기전형 합격자\n          지원자격을 충족하는 자\n                                           모집분야(인적자원)\n           지원자 제출서류 검토 및\n전형설명                                        관련전공 필기시험               논문발표 및 질의응답\n             직무 적격성 심사\n                                          (서술형, 주관식 혼합)\n\n전형일정       2026.12.10. ~ 2026.12.22.      2026.12.28. ~ 2027.1.8.   2027.1.11. ~ 2027.1.22.\n\n         1단계 심사위원 과반의 추천                                            채점 결과 80점 이상자를\n                                       채점결과 80점 이상자를\n합격기준              채점결과 80점 이상                                        인사위원회 최종심의\n         2단계                           다음 전형 대상자로 선정\n                  (1단계 통과자 대상)                                         대상자로 선정\n\n* 단계별 합격자는 연구원 홈페이지(www.kli.re.kr) 공지 또는 개별 통보 예정\n* 상기 일정은 상황에 따라 변경될 수 있으며, 일정 변경 시 홈페이지 또는 개별 안내 예정\n\n\n6. 채용전형별 우대 기준\n\n             구분                   1차: 서류전형              2차: 필기전형        3차: 논문발표 전형\n\n     비수도권 지역인재                         2%                     2%                 2%\n\n     이전지역 지역인재                         3%                     3%                 3%\n\n           장애인                         5%                     5%                 5%\n\n* 가점은 중복으로 적용하지 아니하며, 유리한 가점 1건만 적용함.\n\n\n\n ※ 우대 기준 해당자 정의\n\n        구분                                             내용\n                    대학까지의 최종학력(대학원 이상 제외) 기준으로\n  비수도권 지역인재         수도권(서울,경기,인천) 지역을 제외한 국내 소재 비수도권 대학교를\n                    졸업(예정)·중퇴한 자 또는 재학·휴학 중인 자\n                    세종특별자치시, 대전광역시, 충청도에 소재한 대학 및 고등학교를\n  이전지역 지역인재\n                    최종으로 졸업하였거나, 졸업 예정인 자\n\n       장애인          장애인고용촉진 및 직업재활법 시행령에서 정한 관련 증빙을 제출 가능한 자\n\f7. 기타\n 가. 지역인재, 장애인 등은 관련법에 의거 우대함.\n 나. 응시원서 상 기재 착오, 자격요건 부적합, 증빙서류 미비 또는 미제출, 연락 불능으로\n    인한 불이익은 응시자의 책임임.\n 다. 적격자가 없는 경우 합격자를 선발하지 않을 수 있으며 응시자가 선발 예정 인원과\n    같거나 적은 경우 재공고할 수 있음.\n 라. 최종 선순위 합격후보자의 임용 결격 사유 발생, 임용 포기, 임용 후 1개월 이내\n    조기 퇴직 등의 사유로 결원 발생 시 차순위에 따라 합격후보자를 결정할 수 있음.\n 마. 채용공고는 사정에 따라 변경될 수 있으며, 변경 사항은 재공고 후 시행할 예정임.\n 바. 입사지원서 마감일에는 접속자가 급증할 것으로 예상되니 마감 전 여유 있게\n    입사지원서 접수를 바람.\n 사. 이외 문의 사항은 본원 인사관리팀(044-287-6902, klijob@kli.re.kr) 또는 채용 홈페이지\n    Q&A를 활용하여 문의바람. 끝.\n\n\n\n               한 국 노 동 연 구 원\n\n\n\n\n                               - 4 -\n\f"
+          },
+          {
+            "url": "https://kli.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=272292",
+            "sha256": "a4e6404b882334b774bd4eca7364431498d9417c55c98b3df0716ee8a68b2c77",
+            "document_sha256": "a4e6404b882334b774bd4eca7364431498d9417c55c98b3df0716ee8a68b2c77",
+            "checked_at": "2026-11-19T01:41:06.623286+00:00",
+            "bytes": 10876,
+            "evidence": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\n\n\n\t\n\n\t\t\n\n\n\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n채용공고 내용\n\n    \n\n        \n\n        \n\n    \n\n    \n\n\n\n\n        \n\n            \n공고명\n\n            \n\n                \n2026-9호 연구직 연구원 직군 채용\n\n                \n            \n\n        \n\n        \n\n            \n접수기간\n\n            \n\n                \n\n                    2026.11.17(화) 16:00\n                     ~\n                    2026.12.08(화) 16:00\n                \n\n                \nD-19\n\n                \n\n                        \n                \n\n            \n\n        \n\n        \n\n           \n\n           \t\n\n                \n           \t\t\n\n\n                \n\n\n\n\n\n\n\n\n\n\n\n\n\n           \t\n\n            \n\n           \t\t\n\n\n                \n\n\n\n\n\n\n\n\n\n\n\n\n\n           \t\n\n           \n\n        \n\n        \n\t        \n\n\t        \t\n첨부파일\n\n\t        \t\n\n\t        \t\t\n\n\t\t        \t\t\n\t\t        \t\t\t\n\n2026-9호 정규직 연구원(연구직) 채용 공고문.pdf\n\n\n\t\t        \t\t\n\t\t        \t\t\t\n\n2026-9호 정규직 연구원(연구직) 채용 직무기술서.pdf\n\n\n\t\t        \t\t\n\t        \t\t\n\n\t        \t\n\n\t        \n\n        \n    \n\n\n\n\n\n\n    \n\n\n 목록\n\n    \n     \n        \n        \n        \n        \t\n\n\n 지원서 작성\n\n            \n\n\n 지원서 수정\n\n        \n     \n    \n    \n\n\n\n\n\n    \n\n\n\n\n \n\n\n\n\n\n\n\n\n\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+            "method": "Actual GET; independent browser rendered semantic checks separately recorded"
+          },
+          {
+            "url": "https://kli.recruiter.co.kr/bbs/appsite/notice/list",
+            "sha256": "172a893a057c0b4b60b69d4fc9a366f08ba1fcbde839ad6a7df0a13a5ffb8fdb",
+            "document_sha256": "172a893a057c0b4b60b69d4fc9a366f08ba1fcbde839ad6a7df0a13a5ffb8fdb",
+            "checked_at": "2026-11-19T01:41:10.586966+00:00",
+            "bytes": 8431,
+            "evidence": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\n\n\n\t\n\n\t\t\n\n\n\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\n\n\t\t\n\n\t\t\t\n\n\t\t\t\t\n제목+내용\n\n\t\t\t\t\n제목만\n\n\t\t\t\t\n내용만\n\n\t\t\t\t\n글작성자\n\n\t\t\t\n\n\t\t\t\n\n\t\t\t\t\n\n\n\n\t\t\t\n\n\t\t\n\n\t\n\n\t\n\n\t\n\n\t\t\n\t\t\n\n\t\t\t\n\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n공지\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\n\n\t\t\t\n\n\t\t\t\t\n\n\t\t\t\t\n\n\n\t\t\t\t\n\n\t\t\t\t\t\n한국노동연구원 2025-3호 기간제 연구원(전문직) 채용 공인 외국어 성적 인정 기간 안내\n\n\t\t\t\t\t\n\t\t\t\t\n\n\t\t\t\t\n\n\t\t\t\t\n\n\t\t\t\t\n\n\t\t\t\t\n\n\t\t\t\t\t\n\t\t\t\t\t2025-03-12 11:20\n\t\t\t\t\n\n\t\t\t\t\nHit. 201\n\n\t\t\t\n\n\t\t\n\n\t\t\n\t\t\n\t\t\n\t\n\n\t\n\n\t\n\t\n\n\t\t\n\n\n\t\t\n\n\t\t\t\n5\n\n\t\t\t\n10\n\n\t\t\t\n20\n\n\t\t\n\n\t\t-->\n\t\n\n\t\n\t\n\n\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+            "method": "Actual GET; independent browser rendered semantic checks separately recorded"
+          },
+          {
+            "url": "https://job.alio.go.kr/recruitview.do?idx=307142",
+            "checked_at": "2026-11-19T01:38:10.884466+00:00",
+            "sha256": "7206912b181a288538a237b9164197d7aed2499c71214b4d63155fc8164502c5",
+            "document_sha256": "7206912b181a288538a237b9164197d7aed2499c71214b4d63155fc8164502c5",
+            "evidence": "\r\n\r\n\r\n \r\n \r\n \r\n 공공기관 채용정보시스템 \r\n \r\n \r\n\r\n \r\n \t\r\n \r\n \r\n \r\n\r\n    \r\n\r\n\r\n\t\r\n\t\r\n\t\t\t\r\n\t\r\n\t\r\n\r\n\t\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n \r\n\r\n\t\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n 건너뛰기영역 \r\n\t 본문바로가기 \r\n\r\n \t\t\t\t\t\t\r\n\t  \r\n\t \r\n\t\t 이 누리집은 대한민국 공식 전자정부 누리집입니다. \r\n\t\t \r\n\t\t\t \r\n\t\t\t\t   \r\n\t\t\t \r\n\t\t\t \r\n\t\t\t\t \r\n\r\n\t\t\t\t\t\r\n\t\t\t\t\t  로그인  \r\n\t\t\t\t\t\r\n\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t\t\t  전체메뉴  \r\n\t\t\t\t \r\n\t\t\t \r\n\r\n\t\t\t 홈페이지 주메뉴 \r\n\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t\t    \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t  공공기관 채용정보  \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t \r\n\t\t\t\t\t    \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t  공공기관이란  \r\n\t\t\t\t\t\t\t  공공기관정보  \r\n\t\t\t\t\t\t\t  공공기관비교  \r\n\t\t\t\t\t\t  \r\n\t\t\t\t\t\r\n\t\t\t\t\t    \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t  공공기관 채용정보박람회  \r\n\t\t\t\t\t\t\t  \r\n\t\t\t\t\t\t\t  \r\n\t\t\t\t\t\t\t  \r\n\t\t\t\t\t\t\t  \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t  전체일정표  \r\n\t\t\t\t\t\t\t  오시는 길   -->\r\n\t\t\t\t\t\t  \r\n\t\t\t\t\t    \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t  JOB-ALIO 소개  \r\n\t\t\t\t\t\t\t  공지사항  \r\n\t\t\t\t\t\t  \r\n\t\t\t\t \r\n\t\t\t \r\n\t\t\r\n\t \r\n\t \r\n\t\t\t\t\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\t\r\n\t\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n\t \r\n\t \r\n\t\t \r\n\t\t\t 공공기관 채용정보 \r\n\t\t\t \r\n\t\t\t\t 한국노동연구원 \r\n\t\t\t\t \r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t   \r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t  \r\n\t\t\t\t\t\t한국노동연구원 연구직 연구원 직군 채용 공고\r\n\t\t\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t\t 공고 URL :\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t  https://kli.recruiter.co.kr \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t \r\n\t\t\t\t\t\r\n\t\t\t\t \r\n\t\t\t \r\n\t\t\t\r\n\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t \r\n\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 표준직무(NCS) \r\n\t\t\t\t\t\t\t  연구  \r\n\t\t\t\t\t\t\t 학력정보 \r\n\t\t\t\t\t\t\t 석사 \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 근무분야 \r\n\t\t\t\t\t\t\t 연구직 \r\n\t\t\t\t\t\t\t 채용구분 \r\n\t\t\t\t\t\t\t 신입+경력 \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 고용형태 \r\n\t\t\t\t\t\t\t 정규직 \r\n\t\t\t\t\t\t\t 대체인력여부 \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t아니오\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 근무지 \r\n\t\t\t\t\t\t\t 세종 \r\n\t\t\t\t\t\t\t 급여정보 \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t  신입 / 평균  \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 채용인원 \r\n\t\t\t\t\t\t\t 2명 \r\n\t\t\t\t\t\t\t 우대조건 \r\n\t\t\t\t\t\t\t 지역인재, 장애인 등 취업지원대상자 \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 채용기간 \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t26.11.17 ~ 26.12.08\r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 등록일 \r\n\t\t\t\t\t\t\t 2026.11.17 \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t \r\n\t\t\t\t \r\n\t\t\t \r\n\t\t\t \r\n\t\t\t\t  '한국노동연구원' 에서 진행중인 채용공고 (최근 1개월 이전 공고)  \r\n 더보기   -->\r\n\t\t\t\t  더보기   \r\n\t\t\t \r\n\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t\t 상세요강 전체보기 \r\n\t\t\t\t\t 전형단계별 채용정보 \r\n\t\t\t\t\t 첨부파일 전체보기 \r\n\t\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t\t 응시자격 \r\n\t\t\t\t\t 1. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사학위 취득을 완료하여 학위를 소지하는 자\r 2. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\r 3. 남자의 경우 채용공고일 기준 군필 또는 면제자\r 4. 연령이 채용예정일 기준 만 60세 이내인 자\r 5. 결격사유에 해당이 없는 자 \r\n\t\t\t\t\t 결격사유 \r\n\t\t\t\t\t 1. 국가공무원법 제33조 각호에 해당하는 사람\r 2. 법률에 의하여 공민권이 정지 또는 박탈된 사람\r 3. 병역의무를 기피한 사실이 있는 사람\r 4. 신체검사결과 채용실격으로 판정된 사람\r 5. 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\r 6. 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람 \r\n\t\t\t\t\t 우대내용 \r\n\t\t\t\t\t 1. 장애인, 이전지역인재 : 채용 단계별 만점의 5%\r 2. 비수도권 지역인재 : 채용 단계별 만점의 2% \r\n\t\t\t\t\t 전형절차/방법 \r\n\t\t\t\t\t 1. 제출서류\r - 학위논문\r - 학위논문 요약 (자유양식, 3장 이내)\r - 지도교수 추천서 1건 *가능한 자에 한함 (추천자가 직접 klijob@kli.re.kr로 메일 제출(접수기한까지))\r \r 2. 전형절차\r - 서류전형(1차, 2차)\r - 필기전형\r - 논문발표 전형\r - 인사위원회 심의 의결\r - 기관장 임용 발령\r \r 3. 전형단계별 선발기준 및 평가방법\r - 채용공고 : 24일간\r - 서류전형(1차) : 적, 부 심사\r - 서류전형(2차) : 1차 서류전형 결과 심사위원 과반 이상의 추천을 받은 자에 한하여 채점\r - 필기전형 : 2차 서류전형 평균점수 80점 이상인 자에 한하여 모집분야 관련전공 필기시험 실시\r - 논문발표 전형 : 필기전형 결과 평균점수 80점 이상인 자에 한하여 논문발표\r ※논문발표 전형은 현장 진행을 원칙으로 하되, 해외 체류 및 코로나19 격리상황과 같은 불가피한 경우 비대면 온라인(화상) 방식으로 진행할 수 있음\r - 인사위원회 심의 의결\r - 기관장 임용 발령 \r\n\t\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t   연구직 연구원 직군  \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t 구분 \r\n\t\t\t\t\t\t\t\t\t\t\t 선발인원 \r\n\t\t\t\t\t\t\t\t\t\t\t 응시인원 \r\n\t\t\t\t\t\t\t\t\t\t\t 결과 확정일 \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t 1차 \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t 2차 \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t 3차 \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t 최종 \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t -\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t \r\n\t\t\t\t \r\n\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t 공고문 \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t 2026-9호 정규직 연구원(연구직) 채용 공고문.pdf \r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t 입사지원서 \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t 2026-9호 정규직 연구원(연구직) 채용 입사지원서 화면.pdf \r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t 직무기술서 \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t 2026-9호 정규직 연구원(연구직) 채용 직무기술서.pdf \r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t 기타 첨부파일 \r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t 미첨부사유 \r\n\t\t\t\t\t\t\t\t    \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t \r\n\t\t\t\t \r\n\t\t\t \r\n\t\t\t \r\n\t\t\t\t\r\n\t\t\t\t  닫기  \r\n\t\t\t \r\n\r\n\t\t \r\n\t \r\n\t  \r\n \r\n\r\n\r\n\r\n \r\n\t \r\n\t \r\n\t \r\n\t \r\n\t\r\n\t \r\n\t \r\n\t \r\n \r\n\r\n \r\n\t \r\n\t \r\n \r\n\r\n\r\n\r\n\t\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\t \r\n\t\r\n\t\t \r\n\t\t\t 왼쪽으로   \r\n\t\t\t 오른쪽으로   \r\n\t\t\t 일시정지   \r\n\t\t\t 움직이기   \r\n\t\t  -->\r\n\t\r\n\t\t \r\n\t\t\t \r\n\t\t\t\t     \r\n\t\t\t\t     \r\n\t\t\t\t     \r\n\t\t\t\t     \r\n\t\t\t\t     \r\n\t\t\t  -->\r\n\t\t\t \t\t\t\r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t   \r\n\t\t\t\t \r\n\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t \r\n\t\t\t\r\n\t\t \r\n\t\t \r\n\t\t\t 하단 이용메뉴 \r\n\t\t\t \r\n\t\t\t\t\r\n\t\t\t\t  저작권정책  \r\n\t\t\t\t  이메일무단수집거부  \r\n\t\t\t\t  개인정보처리방침  \r\n\t\t\t \r\n\t\t\t   \r\n\t\t\t (우)30112 세종특별자치시 도움6로 42 정부세종청사 재정경제부  \r\n\t\t\tCopyright © 2011 Ministry of Finance and Economy. Republic of Korea. Some Right Reserved. \r\n\t\t \r\n\t \r\n\t\r\n \t\r\n\t\r\n\t  \r\n\t\t \r\n\t\t \r\n\t\t \r\n\t \t\r\n\t\r\n\t  \r\n\t  \r\n\t\r\n\t\t\r\n\t\r\n\t \r\n\t \r\n\t\t \r\n\t \r\n \r\n \r\n \r\n",
+            "method": "Actual official ALIO GET; separate employer PDF controls optional bonus numbers"
+          }
+        ],
+        "checked_at": "2026-11-19T01:38:42.434513+00:00",
+        "reference_at": "2026-11-19T10:43:22.809159+09:00",
+        "application_period": {
+          "start": "2026-11-17",
+          "start_date_only": true,
+          "end": "2026-12-08T16:00:00+09:00",
+          "date_only": false,
+          "official_precision_verified": true,
+          "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+          "evidence": "2026. 11. 17.\n                                                한국노동연구원장\n\n              한국노동연구원은 블라인드 채용 방법에 근거하여\n           모집분야 정보를 제공하고 있으며, 채용의 기준으로 반영합니다.\n\n\n1. 채용분야\n\n     구 분          모집분야     채용인원              관련 전공\n\n 연구직 연구원 직군       인적자원                경영학, 경제학, 사회학, 행정학 등\n                             2명\n    (정규직)         관련 분야                      관련전공\n\n * 연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n\n\n2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f3. 제출서류\n\n 제출시기                         제출서류                      제출방법\n\n          개인정보 수집 및 이용에 관한 동의서\n                                                         온라인\n          입사지원서 및 자격요건 확인사항                               입력\n          *경력, 경험, 교육사항은 수료증 등으로 증명 가능한 사실만 기재\n\n          지원자격 증명서류 (학위 수여증, 졸업증명서 등)\n          * 지원자격 충족여부를 확인하는 절차로 인사담당자만 확인하며, 심사위\n 입사지원       원에게 제공하지 않음\n   시      * 학교명, 생년월일 등이 나타나지 않도록 블라인드 처리 요망\n                                                         온라인\n          학위논문                                            첨부\n          * 논문에 학교명이 나타나지 않도록 블라인드 처리요망\n\n          학위논문 요약 (자유양식, 3장 이내)\n          * 논문에 학교명이 나타나지 않도록 블라인드 처리요망\n\n          지도교수 추천서 1건 (가능한 자에 한함, 자유양식)                  추천자\n          * 추천자가 직접 klijob@kli.re.kr로 메일 제출(접수기한까지)     직접 제출\n          전형\n               학위논문 발표자료 (PPT 또는 PDF 형식)\n          자료\n               대학 및 대학원 졸업증명서(학위증명서), 졸업예정증명서,\n 논문발표          성적증명서\n 전형 전                                                    온라인\n (필기전형\n               경력 및 경험사항 관련 증명서류                          첨부\n          증빙\n합격자 대상)   서류\n               자격증 관련 증명서류\n\n               (해당자) 장애인 증명서 또는 취업지원 대상자 증명서\n\n※ 유의사항\n1. 지원서 작성 시 반드시 증명서 또는 수료증 등으로 증명 가능한 사실만 작성 바람.\n  * 특히, 경력사항과 직무관련사항 내 ‘학교교육’, ‘직업교육’, ‘기타활동(경험사항 등)’의 경우, 해당 내\n    용을 기재하기 전에 반드시 증빙서류를 미리 발급받거나 사실관계를 사전에 확인한 후 작성 바람.\n2. 본 채용은 블라인드 채용으로 학교명, 생년월일 등이 나타나지 않도록 블라인드 처리하여 제\n  출 (필요한 경우, ‘○○대학교’ 형식으로 기재)\n3. 지원자격 미달 시 응시자격을 박탈함.\n4. 논문발표전형 전(필기전형 합격자 대상) 증빙서류는 응시자의 지원서 사실관계 여부를\n  확인하는 절차로 인사담당자만 확인하며, 심사위원에게는 정보를 제공하지 않음.\n5. 증빙서류 내용이 불일치하거나(서류 미제출 포함), 허위사실 확인 시 응시자격을 박탈함.\n6. 논문발표전형 전 안내한 시간까지 기재한 ‘경력사항’, ‘직무관련사항’ 내 ‘학교교\n  육’, ‘직업교육’, ‘기타활동(경험사항 등)’에 대한 증빙서류가 제출되지 않을 경우, 논\n  문발표전형 응시 자격을 박탈함.\n\f4. 제출방법 및 기한\n 가. 제출방법: 채용시스템에 등록\n 나. 제출기한: 2026년 12월 8일(화) 16:00까지 (한국시간 기준)\n 다. 제 출 처: https://kli.recruiter.co.kr/\n\n\n",
+          "current_open_verified": true,
+          "supplementary_source_ref": "https://kli.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=272292",
+          "supplementary_exact_window": "2026.11.17(화) 16:00 ~ 2026.12.08(화) 16:00",
+          "method": "PDF datedNov17 states exactDec8 16:00KST deadline; employer ATS actual browser verifies same start date and16:00 start. Canonical start retained at date precision supported byPDF, past start only."
+        },
+        "profile_target": {
+          "verified": true,
+          "notice_id": "a307142",
+          "url": "https://kllollain-max.github.io/careerpick/",
+          "notice_url": "https://kllollain-max.github.io/careerpick/#job=a307142",
+          "checked_at": "2026-11-19T10:43:22.809159+09:00",
+          "verification_method": "Actual browser rendered AX and screenshot; exactnotice/title2regularSejong and eligibility. Profile explicitly marks deadline clock unconfirmed; employer original independently supplies16:00. Optional bonus mismatch recorded, not certified."
+        },
+        "fact_evidence": [
+          {
+            "field": "title",
+            "value": "연구직 연구원 직군",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+            "excerpt": "1. 채용분야\n\n     구 분          모집분야     채용인원              관련 전공\n\n 연구직 연구원 직군       인적자원                경영학, 경제학, 사회학, 행정학 등\n                             2명\n    (정규직)         관련 분야                      관련전공\n\n * 연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n\n\n"
+          },
+          {
+            "field": "count",
+            "value": 2,
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+            "excerpt": "1. 채용분야\n\n     구 분          모집분야     채용인원              관련 전공\n\n 연구직 연구원 직군       인적자원                경영학, 경제학, 사회학, 행정학 등\n                             2명\n    (정규직)         관련 분야                      관련전공\n\n * 연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n\n\n"
+          },
+          {
+            "field": "employment",
+            "value": "정규직",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+            "excerpt": "1. 채용분야\n\n     구 분          모집분야     채용인원              관련 전공\n\n 연구직 연구원 직군       인적자원                경영학, 경제학, 사회학, 행정학 등\n                             2명\n    (정규직)         관련 분야                      관련전공\n\n * 연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n\n\n"
+          },
+          {
+            "field": "location",
+            "value": "세종",
+            "source_ref": "https://job.alio.go.kr/recruitview.do?idx=307142",
+            "excerpt": "근무지 \r\n\t\t\t\t\t\t\t 세종 \r\n\t\t\t\t\t\t\t 급여정보 \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t\t  신입 / 평균  \r\n\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t 채용인원 \r\n\t\t\t\t\t\t\t 2명 \r\n\t\t\t\t\t\t\t 우대조건 \r\n\t\t\t\t\t\t\t 지역인재, 장애인 등 취업지원대상자 \r\n\t\t\t\t\t\t \r\n\t\t\t\t\t"
+          }
+        ],
+        "repetition_check": "checked",
+        "v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "인적자원 연구를 준비한다면,\n한국노동연구원 연구직 연구원 직군 정규직 2명, 세종 근무예요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "관련 전공 석사 취득예정자도 확인해요.\n한국노동연구원 인적자원 분야 정규직 2명 채용이에요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "인적자원 조사·연구와 정책대안을 만드는 일이에요.\n한국노동연구원 정규직 연구원 2명을 모집해요."
+            }
+          ],
+          "selected_hook_id": "target",
+          "first_sentence_type": "target",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "경영학·경제학·사회학·행정학 등 관련 전공 석사 이상 또는 2027년 2월 말까지 석사 취득 완료자가 대상이에요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+              "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "관련 전공 석사 이상",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+                  "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f"
+                },
+                {
+                  "summary": "2027년 2월 말까지 석사 취득 완료자",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+                  "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f"
+                }
+              ]
+            },
+            {
+              "text": "채용예정일 기준 만60세 이내",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+              "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "남성은 공고일 기준 군필 또는 면제여야 해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+              "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "군필",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+                  "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f"
+                },
+                {
+                  "summary": "면제",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+                  "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f"
+                }
+              ]
+            },
+            {
+              "text": "결격요건과 2027년 3월 5일까지 입사 가능 여부도 확인해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+              "excerpt": "2. 지원자격\n 가. 수행업무 관련 전공 석사학위 이상 소지자 또는 2027년 2월 말까지 관련 전공 석사\n    학위 취득을 완료하여 학위를 소지하는 자\n 나. 2027년 3월 첫째 주(3월 5일까지) 내 입사 가능자\n 다. 남자의 경우 채용공고일 기준 군필 또는 면제자\n 라. 채용예정일 기준으로 연령이 우리 원 정년인 만 60세 이내인 자(본원 인사규정 제50조)\n 마. 아래 결격사유에 해당이 없는 자\n\n ※ 결격사유 (다음 각 호에 해당하는 자)\n\n   - 국가공무원법 제33조 각호에 해당하는 사람\n   - 법률에 의하여 공민권이 정지 또는 박탈된 사람\n   - 병역의무를 기피한 사실이 있는 사람\n   - 연구원의 징계에 의하여 면직조치를 받은 날로부터 2년이 경과하지 않은 사람\n   - 최근 5년 이내 타 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 사람\n\f",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "학위논문 요약은 자유양식 3장 이내예요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+            "excerpt": "학위논문 요약 (자유양식, 3장 이내)\n          * 논문에 학교명이 나타나지 않도록 블라인드 처리요망\n\n          지도교수 추천서 1건 (가능한 자에 한함, 자유양"
+          },
+          "recruitment_unit": {
+            "title": "연구직 연구원 직군",
+            "count": 2,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+            "excerpt": "1. 채용분야\n\n     구 분          모집분야     채용인원              관련 전공\n\n 연구직 연구원 직군       인적자원                경영학, 경제학, 사회학, 행정학 등\n                             2명\n    (정규직)         관련 분야                      관련전공\n\n * 연구직 연구원 직군은 연구원 – 책임연구원 – 전문위원 직급으로 구성\n\n\n"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-19T01:41:10.586966+00:00",
+            "result": "none_found",
+            "source_ref": "https://kli.recruiter.co.kr/bbs/appsite/notice/list",
+            "scope": "Actual employer ATS272292 and complete current notices board page (only one2025 foreign-language notice); current employer PDF exactly matches ALIO original. No claim every historical/external board checked. Optional bonus discrepancy resolved for this post by excluding all numeric bonus claims; no change to eligibility facts."
+          },
+          "style_rewrites": 0,
+          "selection_reason": "Verified currently open regular research unit2, enough preparation time, different research occupation; no inferred audience popularity. PriorTScandidate held because actual ATS had no recruitment.",
+          "public_preview": {
+            "main_text": "인적자원 연구를 준비한다면,\n한국노동연구원 연구직 연구원 직군 정규직 2명, 세종 근무예요.\n\n경영학·경제학·사회학·행정학 등 관련 전공 석사 이상 또는 2027년 2월 말까지 석사 취득 완료자가 대상이에요.\n채용예정일 기준 만60세 이내, 남성은 공고일 기준 군필 또는 면제여야 해요.\n결격요건과 2027년 3월 5일까지 입사 가능 여부도 확인해요.\n\n서류·필기·논문발표를 거쳐요.\n학위논문 요약은 자유양식 3장 이내예요.\n12월 8일 16:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "presentation_style": "regular_interest",
+          "experiment_eligible": false,
+          "experiment_exclusion_reason": "Source-specific qualification/expected-degree exception; no comparable performance claim."
+        },
+        "mobile_text_review": {
+          "status": "passed",
+          "checked_at": "2026-11-19T10:43:22.809159+09:00",
+          "chars": 280,
+          "main_count": 1,
+          "reply_count": 0,
+          "findings": "Actual final body read;2line opening,<=3lines per paragraph, degreeORexpected-degree pathway, military exception and inclusive age preserved; finalCTAonce."
+        }
+      }
+    }
+  },
+  "stage": {
+    "sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
+    "commit": "b95c0fecbfc6ce9275dc2ab8bcab9f8e3f70996b",
+    "entries": 17,
+    "exact_entry_readback": true
+  },
+  "queue": {
+    "sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
+    "commit": "14bf80373f4d86ef8b0a2afd706b7e5a8257ce91",
+    "entries": 48,
+    "exact_entry_readback": true,
+    "full_validator": {
+      "status": "validated",
+      "ready_entries": [
+        {
+          "scheduled_at": "2026-11-19T12:00:00+09:00",
+          "notice_id": "a307145",
+          "format_id": "eligibility",
+          "chars": 295,
+          "public_preview": {
+            "main_text": "마감일 기준 석사학위 취득자라면,\n산업연구원 연구직 임시직(위촉직) 1명, 세종 근무예요.\n\n서비스산업 정책 연구를 지원하는 휴직대체 채용이에요.\n남성은 공고일 기준 군필 또는 면제, 임용일부터 전일 근무·결격요건을 확인해요.\n2027년 1월 18일 임용 예정, 계약은 2027년 12월 17일까지예요.\n\n휴직자 조기복직·휴직연장으로 계약기간이 단축·연장되거나, 퇴직 등으로 채용이 중단될 수 있어요.\n다음 전형 참석 여부는 미회신 시 불참으로 봐요.\n12월 2일 15:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        },
+        {
+          "scheduled_at": "2026-11-19T16:00:00+09:00",
+          "notice_id": "a307120",
+          "format_id": "interest",
+          "chars": 299,
+          "public_preview": {
+            "main_text": "정보보안·개인정보보호 업무가 가능하다면,\n한국청소년정책연구원 행정원 비정규직 1명, 세종 근무예요.\n\n전산(IT) 또는 정보보호 관련 전문학사 이상, 혹은 CISA·CISSP·정보보안(산업)기사·개인정보관리사(CPPG) 중 1개 자격이 필요해요.\n임용일 기준 만60세 이하와 병역·결격요건을 확인해요.\n\n휴직대체로 서류·면접을 거쳐요.\n12월 28일 임용 예정, 계약은 2027년 8월 31일까지예요.\n접수 중인 원내 공고 간·공고 내 중복지원은 불가해요.\n\n12월 2일 17:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        },
+        {
+          "scheduled_at": "2026-11-19T20:00:00+09:00",
+          "notice_id": "a307207",
+          "format_id": "deadline_opportunity",
+          "chars": 314,
+          "public_preview": {
+            "main_text": "인사·복무 등 일반행정 업무가 가능하다면,\n한국고전번역원 행정직 부원급 기간제계약직 1명, 서울 은평 근무예요.\n\n전체 7명 중 행정직 1명이며, 만60세 미만·채용 확정 후 즉시 근무·결격요건을 확인해요.\n서류·면접으로 선발해요.\n2027년 3월 1일 임용 예정, 계약은 2028년 2월 29일까지예요.\n\n육아휴직 대체로 기간이 연장되거나 조기 종료될 수 있고, 정규직 전환은 불가해요.\n순환보직·타 직무 수행, 기관 소재지 변경 가능성도 있어요.\n\n교차지원은 서류 불합격 처리돼요.\n12월 2일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        },
+        {
+          "scheduled_at": "2026-11-20T08:00:00+09:00",
+          "notice_id": "a307142",
+          "format_id": "hiring_core",
+          "chars": 280,
+          "public_preview": {
+            "main_text": "인적자원 연구를 준비한다면,\n한국노동연구원 연구직 연구원 직군 정규직 2명, 세종 근무예요.\n\n경영학·경제학·사회학·행정학 등 관련 전공 석사 이상 또는 2027년 2월 말까지 석사 취득 완료자가 대상이에요.\n채용예정일 기준 만60세 이내, 남성은 공고일 기준 군필 또는 면제여야 해요.\n결격요건과 2027년 3월 5일까지 입사 가능 여부도 확인해요.\n\n서류·필기·논문발표를 거쳐요.\n학위논문 요약은 자유양식 3장 이내예요.\n12월 8일 16:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "editorial_policy_id": null
+        }
+      ]
+    },
+    "bridge": "Existing scripts.threads_reviewed_ingest.plan and scripts.threads_queue_bridge.merge run locally using current main; official receipt redownload and all validators PASS, queue CAS through connected GitHub. This is not an Actions dispatch/rerun and not an Actions-origin promotion."
+  },
+  "checks": {
+    "time": "2026-11-19T10:43:22.809159+09:00",
+    "chars": 280,
+    "expected_media": "TEXT",
+    "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+    "accepted": [
+      {
+        "notice_id": "a307142",
+        "slot": "2026-11-20T08:00:00+09:00",
+        "official_receipt": {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+          "sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a",
+          "verified_fact_sources": [
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+              "sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a"
+            }
+          ]
+        }
+      }
+    ],
+    "refused": [],
+    "actual_post_id": null,
+    "meta_posted": false
+  },
+  "claims": {
+    "total": 57,
+    "accepted": 56,
+    "historical_verified": 1,
+    "pending": 0,
+    "all_bodies_read": true,
+    "prewrite_paths_and_blobs_unchanged": true
+  },
+  "prior_candidate_hold": {
+    "notice_id": "a307215",
+    "status": "HOLD_NOT_READY_NOT_PUBLISHED",
+    "official_pdf": "https://www.alio.go.kr/download/download.json?fileNo=3088455",
+    "sha256": "c2eeba9cb7ff13847fbf073d9d0a7e0a446b75c57e83c08d3dfd2cf221bbb03f",
+    "review_scope": "18page PDF original; selectedunit and all common eligibility pages8-10,14-17 read; no assertion that every unrelatedunit was read",
+    "actual_browser_application_url": "https://kotsa1.career.co.kr/jobs/",
+    "actual_visible_state": "등록된 채용공고가 없습니다.",
+    "decision": "Do not infer open application from ALIO dates or static PDF. Switched to independently verified a307142; no validator bypass."
+  },
+  "regular_actions": {
+    "latest_preflight": {
+      "run_id": 44437106350,
+      "run_attempt": 1,
+      "head_sha": "37811e2ff6a2b559a49a2f86bf19dece2eb389e2",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-11-19T01:29:06Z",
+      "preflight_job": 135268625249,
+      "metrics_job": 135268625949,
+      "publish": "skipped_expected_nonpublishing_preflight",
+      "new_entry_was_created_later": true
+    },
+    "latest_actual_publication": {
+      "notice_id": "a307061",
+      "run_id": 44422442769,
+      "run_attempt": 1,
+      "post_id": "18113932847582340",
+      "permalink": "https://www.threads.com/@hid_119/post/Df5tFRWlhlg",
+      "published_at": "2026-11-19T08:38:55.644463+09:00",
+      "claim": "accepted",
+      "public_output_verification": "Stored publisher Meta GET verified exactTEXT309+account hid_119 at08:38; fresh current history+claim matched. No new direct MetaGET from this writer run.",
+      "automatic_reply_count": 0,
+      "own_replies_scope": "top_level_all_pages; no assertion of all nested replies",
+      "new_this_check": false
+    }
+  },
+  "new_candidate_publication": {
+    "post_id": null,
+    "permalink": null,
+    "status": "NOT_PUBLISHED_AWAIT_REGULAR_NOV20_08",
+    "media_forecast": "TEXT conditional on preceding regular successes; publisher recalculates, no alternation override",
+    "automatic_reply_count_planned": 0,
+    "metrics24h": "not_published",
+    "metrics72h": "not_published"
+  },
+  "performance": {
+    "state_blob": "807b8c5ce1ab1c6964d6aefaa65e5f8becaa5139",
+    "summarizer_executed": true,
+    "result": {
+      "policy_id": "careerpick-threads-v5-20261111",
+      "as_of": "2026-11-19T01:44:48.906135+00:00",
+      "experiment_start": "2026-11-11T11:45:18.355131+00:00",
+      "experiment_start_evidence": [
+        {
+          "post_id": "17896425015438025",
+          "source": "public_output_verification"
+        }
+      ],
+      "windows": {
+        "24h": {
+          "verified_main_count": 12,
+          "metric_medians": {
+            "views": 2157,
+            "likes": 5,
+            "replies": 0,
+            "reposts": 0,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 12,
+            "likes": 12,
+            "replies": 12,
+            "reposts": 12,
+            "quotes": 12
+          },
+          "metric_totals": {
+            "views": 28233,
+            "likes": 69,
+            "replies": 1,
+            "reposts": 8,
+            "quotes": 1
+          },
+          "views_distribution": [
+            {
+              "post_id": "18174469135462070",
+              "views": 525
+            },
+            {
+              "post_id": "18137768440737022",
+              "views": 934
+            },
+            {
+              "post_id": "18111349063925875",
+              "views": 1076
+            },
+            {
+              "post_id": "17926892064446840",
+              "views": 1157
+            },
+            {
+              "post_id": "17918956251546576",
+              "views": 1998
+            },
+            {
+              "post_id": "17919668721264551",
+              "views": 2112
+            },
+            {
+              "post_id": "17994147756077569",
+              "views": 2202
+            },
+            {
+              "post_id": "17918731521553015",
+              "views": 2231
+            },
+            {
+              "post_id": "17896425015438025",
+              "views": 3029
+            },
+            {
+              "post_id": "18121803568969931",
+              "views": 4182
+            },
+            {
+              "post_id": "18102493658425564",
+              "views": 4274
+            },
+            {
+              "post_id": "18134891626705962",
+              "views": 4513
+            }
+          ],
+          "likes_rate_percent_median": 0.2367120164199297,
+          "likes_rate_percent_observed_posts": 12,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        },
+        "72h": {
+          "verified_main_count": 8,
+          "metric_medians": {
+            "views": 1803,
+            "likes": 5.5,
+            "replies": 0,
+            "reposts": 2,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 8,
+            "likes": 8,
+            "replies": 8,
+            "reposts": 8,
+            "quotes": 8
+          },
+          "metric_totals": {
+            "views": 30340,
+            "likes": 67,
+            "replies": 0,
+            "reposts": 23,
+            "quotes": 1
+          },
+          "views_distribution": [
+            {
+              "post_id": "17986024908093257",
+              "views": 439
+            },
+            {
+              "post_id": "18137768440737022",
+              "views": 999
+            },
+            {
+              "post_id": "18080747462409277",
+              "views": 1023
+            },
+            {
+              "post_id": "18111349063925875",
+              "views": 1122
+            },
+            {
+              "post_id": "17918731521553015",
+              "views": 2484
+            },
+            {
+              "post_id": "18150019906492861",
+              "views": 4022
+            },
+            {
+              "post_id": "17922530685243848",
+              "views": 9324
+            },
+            {
+              "post_id": "18101198159539744",
+              "views": 10927
+            }
+          ],
+          "likes_rate_percent_median": 0.2745916109087464,
+          "likes_rate_percent_observed_posts": 8,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        }
+      },
+      "account_followers": {
+        "account": "hid_119",
+        "scope": "account_total",
+        "requested_start": "2026-11-11T11:45:18.355131+00:00",
+        "requested_end": "2026-11-19T01:44:48.906135+00:00",
+        "observed_start": "2026-11-11T11:45:32.854727+00:00",
+        "observed_end": "2026-11-19T01:28:11.690741+00:00",
+        "start_followers": 415,
+        "end_followers": 503,
+        "net_change": 88,
+        "status": "observed_interval",
+        "exact_requested_boundaries": false,
+        "observation_statuses": {
+          "captured": 59
+        },
+        "post_attribution": null,
+        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+      },
+      "automatic_weight_changes": 0,
+      "statistical_significance_claim": false,
+      "decision": "extend_observation_or_balance_intro_types",
+      "limitations": [
+        "Different notices remain an observational comparison, not randomized causal evidence.",
+        "Author-separated reader replies and post-attributed follows/profile clicks remain unavailable unless explicitly verified.",
+        "Small counts can produce unstable percentages; read absolute likes and views together.",
+        "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
+      ],
+      "collection_statuses": {
+        "captured": 40
+      },
+      "matched_24h_counts": {
+        "A": 0,
+        "B": 0
+      },
+      "matched_comparison_decision": "extend_until_comparable_samples_available",
+      "new_candidate_post_id": null,
+      "new_candidate_24h": "not_published",
+      "new_candidate_72h": "not_published"
+    }
+  },
+  "limitations": {
+    "github_actions_variables_read": "Connector fetch endpoint rejects actions/variables and actions/workflows/threads_auto.yml with INVALID_ARGUMENT HTTP400 endpoint not allowed; not claimed authenticated API permission failure. Main YAML and actual scheduled preflight/publisher gates provide separate operational evidence.",
+    "new_actions_dispatch": false,
+    "new_meta_post": false,
+    "code_changes": false,
+    "user_action_required": false
+  },
+  "next_actions": [
+    "Observe existing11:45 preflight and12:00 IMAGE publication without dispatch",
+    "Observe next regular action receipt/body/account/media and accepted claim; new a307142 remains notpublished untilNov20 08",
+    "Preserve numeric bonus discrepancy note; no optional bonus numbers used in body, no site edits",
+    "Continue existing hourly writer for next24h unstarted slots, no duplicate/new schedules"
+  ]
+}
