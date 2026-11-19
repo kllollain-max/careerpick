@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T01:48:12Z",
-  "last_observed_at": "2026-11-19T01:48:12Z",
+  "updated_at": "2026-11-19T02:29:47Z",
+  "last_observed_at": "2026-11-19T02:29:47Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13280,8 +13280,8 @@
     "post_id": null
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-19T01:48:12Z",
-    "status": "FOUR_FUTURE_READY_NEW_A307142_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "observed_at": "2026-11-19T02:29:47Z",
+    "status": "NO_MATERIAL_CHANGE_FOUR_FUTURE_READY_VALID",
     "main_sha": "8e7e3f39d53bd9b7ae58859ef08beb084b7f0184",
     "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
     "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
@@ -13304,20 +13304,18 @@
       "total": 57,
       "accepted": 56,
       "historical_verified": 1,
-      "pending": 0,
-      "all_bodies_read": true,
-      "prewrite_paths_and_blobs_unchanged": true
+      "pending": 0
     },
     "regular_preflight_run_id": 44437106350,
-    "regular_preflight_status": "success_before_new_supply; publish_expected_skipped",
+    "regular_preflight_status": "success; publish_expected_skipped_nonpublishing_schedule",
     "next_regular_preflight": "2026-11-19T11:45:00+09:00",
     "next_regular_slot": "2026-11-19T12:00:00+09:00",
     "new_publications": 0,
-    "new_ready_saved": 1,
-    "new_queue_promoted": 1,
+    "new_ready_saved": 0,
+    "new_queue_promoted": 0,
     "automation_on": true,
-    "audit_path": "threads/audits/reviewed-supply-a307142-20261119-r59.json",
-    "audit_blob": "cab3bffc1135268fd12fedc150bc2050f86e5978",
+    "audit_path": "threads/audits/monitor-20261119-r60-four-ready-valid.json",
+    "audit_blob": "5ade6317b881d4612fe6ad2c2b98bbca9e18bc8d",
     "no_user_action_required": true
   },
   "writer_hold_alternatives": {
@@ -20055,17 +20053,9 @@
     "artifact_metadata_verified_this_check": false,
     "latest_read_only_summary": {
       "state_blob": "807b8c5ce1ab1c6964d6aefaa65e5f8becaa5139",
-      "summarized_at": "2026-11-19T01:48:12Z",
+      "summarized_at": "2026-11-19T02:28:59.339228+00:00",
       "summary": {
-        "policy_id": "careerpick-threads-v5-20261111",
-        "as_of": "2026-11-19T01:44:48.906135+00:00",
-        "experiment_start": "2026-11-11T11:45:18.355131+00:00",
-        "experiment_start_evidence": [
-          {
-            "post_id": "17896425015438025",
-            "source": "public_output_verification"
-          }
-        ],
+        "as_of": "2026-11-19T02:28:59.339228+00:00",
         "windows": {
           "24h": {
             "verified_main_count": 12,
@@ -20218,7 +20208,7 @@
           "account": "hid_119",
           "scope": "account_total",
           "requested_start": "2026-11-11T11:45:18.355131+00:00",
-          "requested_end": "2026-11-19T01:44:48.906135+00:00",
+          "requested_end": "2026-11-19T02:28:59.339228+00:00",
           "observed_start": "2026-11-11T11:45:32.854727+00:00",
           "observed_end": "2026-11-19T01:28:11.690741+00:00",
           "start_followers": 415,
@@ -20232,8 +20222,6 @@
           "post_attribution": null,
           "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
         },
-        "automatic_weight_changes": 0,
-        "statistical_significance_claim": false,
         "decision": "extend_observation_or_balance_intro_types",
         "limitations": [
           "Different notices remain an observational comparison, not randomized causal evidence.",
@@ -20241,19 +20229,11 @@
           "Small counts can produce unstable percentages; read absolute likes and views together.",
           "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
         ],
-        "collection_statuses": {
-          "captured": 40
-        },
-        "matched_24h_counts": {
-          "A": 0,
-          "B": 0
-        },
-        "matched_comparison_decision": "extend_until_comparable_samples_available",
-        "new_candidate_post_id": null,
-        "new_candidate_24h": "not_published",
-        "new_candidate_72h": "not_published"
+        "automatic_weight_changes": 0,
+        "statistical_significance_claim": false
       },
-      "audit_path": "threads/audits/reviewed-supply-a307142-20261119-r59.json"
+      "audit_path": "threads/audits/monitor-20261119-r60-four-ready-valid.json",
+      "new_measurements": false
     }
   },
   "last_writer_recheck": {
@@ -20687,8 +20667,8 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "observed_at": "2026-11-19T01:48:12Z",
-      "status": "FOUR_FUTURE_READY_NEW_A307142_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+      "observed_at": "2026-11-19T02:29:47Z",
+      "status": "NO_MATERIAL_CHANGE_FOUR_FUTURE_READY_VALID",
       "main_sha": "8e7e3f39d53bd9b7ae58859ef08beb084b7f0184",
       "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
       "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
@@ -20711,20 +20691,18 @@
         "total": 57,
         "accepted": 56,
         "historical_verified": 1,
-        "pending": 0,
-        "all_bodies_read": true,
-        "prewrite_paths_and_blobs_unchanged": true
+        "pending": 0
       },
       "regular_preflight_run_id": 44437106350,
-      "regular_preflight_status": "success_before_new_supply; publish_expected_skipped",
+      "regular_preflight_status": "success; publish_expected_skipped_nonpublishing_schedule",
       "next_regular_preflight": "2026-11-19T11:45:00+09:00",
       "next_regular_slot": "2026-11-19T12:00:00+09:00",
       "new_publications": 0,
-      "new_ready_saved": 1,
-      "new_queue_promoted": 1,
+      "new_ready_saved": 0,
+      "new_queue_promoted": 0,
       "automation_on": true,
-      "audit_path": "threads/audits/reviewed-supply-a307142-20261119-r59.json",
-      "audit_blob": "cab3bffc1135268fd12fedc150bc2050f86e5978",
+      "audit_path": "threads/audits/monitor-20261119-r60-four-ready-valid.json",
+      "audit_blob": "5ade6317b881d4612fe6ad2c2b98bbca9e18bc8d",
       "no_user_action_required": true
     },
     "next_slot_official_preflight": {
@@ -21203,8 +21181,8 @@
       "audit_blob": "cd16f4d88b92864ffd7afec231b57eb46ae90bfe"
     },
     "latest_independent_monitor_check": {
-      "observed_at": "2026-11-19T01:48:12Z",
-      "status": "FOUR_FUTURE_READY_NEW_A307142_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+      "observed_at": "2026-11-19T02:29:47Z",
+      "status": "NO_MATERIAL_CHANGE_FOUR_FUTURE_READY_VALID",
       "main_sha": "8e7e3f39d53bd9b7ae58859ef08beb084b7f0184",
       "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
       "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
@@ -21227,20 +21205,18 @@
         "total": 57,
         "accepted": 56,
         "historical_verified": 1,
-        "pending": 0,
-        "all_bodies_read": true,
-        "prewrite_paths_and_blobs_unchanged": true
+        "pending": 0
       },
       "regular_preflight_run_id": 44437106350,
-      "regular_preflight_status": "success_before_new_supply; publish_expected_skipped",
+      "regular_preflight_status": "success; publish_expected_skipped_nonpublishing_schedule",
       "next_regular_preflight": "2026-11-19T11:45:00+09:00",
       "next_regular_slot": "2026-11-19T12:00:00+09:00",
       "new_publications": 0,
-      "new_ready_saved": 1,
-      "new_queue_promoted": 1,
+      "new_ready_saved": 0,
+      "new_queue_promoted": 0,
       "automation_on": true,
-      "audit_path": "threads/audits/reviewed-supply-a307142-20261119-r59.json",
-      "audit_blob": "cab3bffc1135268fd12fedc150bc2050f86e5978",
+      "audit_path": "threads/audits/monitor-20261119-r60-four-ready-valid.json",
+      "audit_blob": "5ade6317b881d4612fe6ad2c2b98bbca9e18bc8d",
       "no_user_action_required": true
     },
     "latest_observation_status": {
