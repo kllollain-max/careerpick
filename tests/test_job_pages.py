@@ -15,6 +15,35 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_kipf_ten_public_ejm_utc_deadline_and_documents_are_source_bound(self):
+        """Actual EJM accepts applications; UTC midnight is not synthetic KST 23:59."""
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a305734']
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a305734']
+        self.assertEqual((post['org'], post['title'], post['n'], post['emp']),
+                         (proof['organization'], proof['title'], '10', ['정규직']))
+        self.assertEqual(post['due'][:10], proof['source_end_date'])
+        self.assertEqual(post['dueHasTime'], False)
+        self.assertNotIn('a305734', CONFIRMED_APPLICATION_CUTOFFS)
+        html = render(post, {})
+        for phrase in ('Research Fellow', '박사학위', '추천인 3명', 'Job market paper',
+                       '2026-10-06 ~ 2026-11-30', 'midnight UTC',
+                       '한국시간 종료시각 미확정', 'accepting applications',
+                       'econjobmarket.org/positions/12745'):
+            self.assertIn(phrase, html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('2026-11-30 23:59 (KST)', html)
+        for changes in ({'n': '11'}, {'title': post['title']+' 정정'},
+                        {'org': '다른 기관'}, {'due': '2026-12-01T23:59:00+09:00'},
+                        {'emp': ['계약직']}, {'alio': False}):
+            stale = render({**post, **changes}, {})
+            self.assertNotIn('midnight UTC', stale)
+            self.assertNotIn('추천인 3명', stale)
+            self.assertNotIn('econjobmarket.org/positions/12745', stale)
+        self.assertEqual(post, original)
+
     def test_snubh_cleaning_ten_original_duty_and_date_only_reception_guarded(self):
         """Exact official cleaning notice/duties; no invented cutoff time."""
         from scripts.build_job_pages import VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
