@@ -141,6 +141,64 @@ jobs:
           (dest/'official-zips-result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
           PY
           python /tmp/audit_zip.py
+      - name: Independently inspect live ATS, careerpick detail and latest employer board (read-only)
+        if: always()
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check playwright beautifulsoup4 requests
+          python -m playwright install chromium
+          cat > /tmp/verify_live_recruitment.py <<'PY'
+          import pathlib, json, re, requests
+          from bs4 import BeautifulSoup
+          from datetime import datetime, timezone, timedelta
+          from playwright.sync_api import sync_playwright
+          dest=pathlib.Path('audit'); dest.mkdir(exist_ok=True)
+          now=datetime.now(timezone(timedelta(hours=9))).isoformat()
+          out={'checked_at':now,'target_notice':'cleaneye-80914','no_submission':True,'pages':{},'correction_scan':'unverified'}
+          targets={
+            'employer_board':'https://www.yjuc.or.kr/sub/content.asp?cIdx=32&fboard=board_job',
+            'official_application':'https://yjuc.plusrecruit.co.kr/',
+            'careerpick_detail':'https://kllollain-max.github.io/careerpick/#job=cleaneye-80914'
+          }
+          try:
+            with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for key,url in targets.items():
+                page=browser.new_page(viewport={'width':1320,'height':860},locale='ko-KR')
+                row={'url':url,'status':'not_verified'}
+                try:
+                  response=page.goto(url,wait_until='domcontentloaded',timeout=35000)
+                  page.wait_for_timeout(4500)
+                  text=page.locator('body').inner_text(timeout=10000)
+                  row.update(status='read',http=response.status if response else None,final_url=page.url,body_chars=len(text),
+                             head=text[:3500],title=page.title())
+                  (dest/f'live-{key}.txt').write_text(text,encoding='utf-8')
+                  page.screenshot(path=str(dest/f'live-{key}.png'),full_page=True,timeout=12000)
+                  if key=='official_application':
+                    row['job_identity_visible']=bool(re.search('2026|제1회|양주도시공사|채용',text))
+                    row['application_open_visible']=bool(re.search('지원서\s*작성|입사지원|원서접수|지원하기|접수중',text))
+                  elif key=='careerpick_detail':
+                    row['exact_employer_visible']='양주도시공사' in text
+                    row['exact_notice_visible']=bool(re.search('2026년 제1회 직원|80914',text))
+                  else:
+                    rows=[s.strip() for s in text.splitlines() if any(t in s for t in ['2026년 제1회 직원','정정','취소','철회','변경','연장'])]
+                    row['relevant_lines']=rows[:30]
+                    row['target_visible']=any('제1회 직원' in s for s in rows)
+                    row['correction_candidate_lines']=[s for s in rows if any(t in s for t in ('정정','취소','철회','변경','연장'))]
+                    out['correction_scan']='first_page_only' if row['target_visible'] else 'unverified'
+                except Exception as e:row['error']=repr(e)[:400]
+                out['pages'][key]=row
+                print('LIVE_CHECK',key,json.dumps(row,ensure_ascii=False)[:3000])
+                page.close()
+              browser.close()
+          except Exception as e:
+            out['browser_error']=repr(e)[:500]
+          (dest/'live-application-profile-corrections.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
+          # Never claim no corrections based only on the first board page;
+          # never call an ATS landing-page screenshot a validated application.
+          print('LIVE_AUDIT_READ_ONLY',out['checked_at'])
+          PY
+          python /tmp/verify_live_recruitment.py
       - name: Save exact original / text / page render (read-only)
         if: always()
         uses: actions/upload-artifact@v4
