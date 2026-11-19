@@ -15,6 +15,40 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_cvhd_dental_resident_eleven_official_notice_only_and_exact_identity(self):
+        """Official ALIO 5+3+3 dental resident notice; no unverified HWP duties or clock."""
+        from scripts.build_job_pages import (
+            VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES,
+            CONFIRMED_APPLICATION_CUTOFFS,
+        )
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a306992']
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a306992']
+        self.assertEqual((post['org'], post['title'], post['n'], post['emp']),
+                         (proof['organization'], proof['title'], '11', ['정규직']))
+        self.assertEqual(post['due'][:10], proof['source_end_date'])
+        self.assertFalse(post['dueHasTime'])
+        self.assertNotIn('a306992', VERIFIED_DUTIES)
+        self.assertNotIn('a306992', CONFIRMED_APPLICATION_CUTOFFS)
+        html = render(post, {})
+        for phrase in ('보철과 5명', '치주과 3명', '보존과 3명',
+                       '교육수련부 방문 제출', '중복 지원', '인턴 기수료자',
+                       '2026-11-16 ~ 2026-11-20 (마감시각 공식 공고 확인 필요)',
+                       '11월 29일 공동 필기시험', '별도 원본 육안',
+                       'job.alio.go.kr/recruitview.do?idx=306992'):
+            self.assertIn(phrase, html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('2026-11-20 23:59 (KST)', html)
+        for changes in ({'n': '12'}, {'title': post['title'] + ' 수정'},
+                        {'org': '변경 기관'}, {'due': '2026-11-21T23:59:00+09:00'},
+                        {'emp': ['계약직']}, {'alio': False}):
+            stale = render({**post, **changes}, {})
+            self.assertNotIn('보철과 5명', stale)
+            self.assertNotIn('교육수련부 방문 제출', stale)
+            self.assertNotIn('11월 29일 공동 필기시험', stale)
+        self.assertEqual(post, original)
+
     def test_kipf_ten_public_ejm_utc_deadline_and_documents_are_source_bound(self):
         """Actual EJM accepts applications; UTC midnight is not synthetic KST 23:59."""
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
