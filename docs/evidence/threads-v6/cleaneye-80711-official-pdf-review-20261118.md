@@ -83,3 +83,14 @@
 - **중요한 24시간 차단**: 현재 main `cleaneye.json` 원장상 `updated=2026-11-19T19:20:21+09:00`, Git blob `0dadf50c0a2b3f25cfb936f4673da4246071acdf`. 다음 부족 2026-11-20 20:00 KST 슬롯에서는 **24시간 39분 39초 전** 증거이므로 현행 `validate_entry`의 SOURCE_STALE 기준에 걸린다. 이 시각을 새로운 검토시각으로 바꾸거나 소스/수집기를 임의 수정하지 않는다.
 - 이 시각검토의 현재 **실제 완료 범위는 기존 카드의 원본·360px 육안/해시 확인**이다. 해당 원고·공식 원본·정정/취소·단위 인원/지역조건·커리어픽 정확한 개별 패널·카드 facts_sha256 대조·`verify_reviewed_card`·`validate_entry`·`verify_official_receipt` 및 최신 CAS 큐 승격은 **별도 미완료**. 따라서 review.v5.card_visual_review에 최종 `status=passed`를 기록하거나 생산 승인을 주장하지 않는다.
 - 이미 승인된 2026-11-20 08시/12시/16시 다른 공고 슬롯과 게시원장은 보존하고 중복 등록/Meta POST는 하지 않았다. **신규 승인0, CAS 공급0, 실제 게시0**, 첫 부족 20시. 기존 source가 정상 수집으로 갱신된 다음에도 공식 사실·최신 정정·프로필·이미지 직무단위 전체검수를 별도로 완료한 경우에만 허용된 승인 경로로 간다.
+
+## 2026-11-20 04:00 KST — 공식 9쪽 PDF·ATS v4 이미지·실제 입사지원 입구·개별 프로필 재검수 (HOLD)
+
+- 읽기 전용 [공식 재수집 실행 #44593583187](https://github.com/kllollain-max/careerpick/actions/runs/44593583187) completed/success, 실행 head 927e032b84d58288e721ea481e845d9cfeff5f1b. [실제 원본·이미지·브라우저 캡처 artifact #14565215070](https://github.com/kllollain-max/careerpick/actions/runs/44593583187/artifacts/14565215070) 14일 보존. 검토 외 Meta POST/상태 CAS 없음.
+- 공식 기관 PDF https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566 를 2026-11-20 04:00:06 KST HTTP 200 재다운로드. 236,892바이트, 9쪽, SHA256 da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb 로 11월18일 기존 원본과 바이트 일치. 전문 추출 및 실제 렌더 1·2·3쪽 원문 표와 자격요건을 읽음.
+- PDF 1쪽은 전체 정규직13 = 일반직9+업무직4 중 일반행정9급 3명을 명시. 2·3쪽은 일반행정 추가 필수자격증 없음, 충주 거주 조건 (A) 공고일 전부터 면접까지 계속 주민등록 충주 유지 OR (B) 공고일 전 주민등록상 충주 거주기간 합산 3년 이상을 구분. PDF 7쪽은 2026-11-23 18:00 KST 온라인 접수 마감.
+- 기관 지정 ATS https://cjfmc.jobnlab.co.kr/jobnotice/view/?recruitid=1007 현재 HTTP200. 제4판 안내 실물 PNG https://file.jobnlab.co.kr/cjfmc/data/jobnotice/images/252avq03O20261024172845.png 를 2026-11-20 04:00:10 HTTP200, 2,348,859바이트 SHA256 e65e8ab819fd95a0fc4a80dc160921429c8aab50f71887cb05d324c186bcb2a7 로 실제 재수신하고 800x9465 전체 다섯 구간을 열어 공식 PDF와 인원·거주 OR·기한·전형을 직접 시각 대조. 검토한 주요 항목에서 상충 발견하지 못했으나 다른 게시판을 포함한 전체 정정·취소 없음 판정은 아님.
+- 실제 ATS 작성 입구 https://cjfmc.jobnlab.co.kr/application/reg/auth/?recruitid=1007 는 04:00:10 HTTP200, 일반직-행정9급(일반행정) 선택지를 표시. 개인정보 동의, 인증, 제출 없음. 단순 접수 가능 화면 표시와 최종 지원 성공을 구분.
+- 실제 Chromium https://kllollain-max.github.io/careerpick/#job=cleaneye-80711 개별 패널을 2026-11-20 04:00:27 KST 렌더·시각확인. 공고번호80711, 기관, 일반정규직, 전체13, 자료 묶음 조회시각 2026-11-20 01:15:41 확인. 원문 18시 마감과 달리 서비스 상세에는 '시각 미확인'만 표기. UI와 수집코드는 변경금지 범위이므로 미수정.
+- 중요 생산 HOLD: 현행 Cleaneye 이미지 근무지 증거는 기관주소/소재지로 대체할 수 없음. PDF는 조직개편에 따른 '근무지 변경 가능'만 말하고 일반행정9급 3명 개별 근무지를 확정하지 않음. 거주지 충주를 확정 근무지로 꾸며 검증기를 통과시키거나 검증기 완화 금지. 최신 정정·취소 전 경로 대조, v5 검증기·card_facts SHA·official_receipt·CAS 남음.
+- 2026-11-20 20:00 KST 기준 현재 cleaneye.json 정상 수집시각 2026-11-20 01:15:41은 24시간 이내이지만 그 자체가 독립 의미승인 아님. 기존 08·12·16 승인원고·게시이력 불변. 승인0, CAS0, Meta POST0.
