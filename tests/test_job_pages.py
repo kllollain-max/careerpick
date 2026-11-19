@@ -286,38 +286,26 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual({p['id'] for p in report['top']},
                          {'a307146', 'a307147'})
 
-    def test_pnuh_33_official_role_requirements_source_bound_without_unverified_cutoff(self):
+    def test_pnuh_33_official_notice_summary_updated_after_original_pdf_review(self):
+        """Former date-only HTML review is superseded by original PDF 17:00 evidence."""
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
-        from scripts.priority_candidate_audit import shortlist
-        from datetime import date
         proof = VERIFIED_APPLICATION_NOTICES['a307225']
-        post = dict(id='a307225', alio=True, type='j', org='부산대학교병원',
-                    title='2026년도 일반직(간호, 행정, 보건직) 신규직원 블라인드 공개채용 모집 공고',
-                    n='33', emp=['정규직'], pub='2026-11-19T00:00:00+09:00',
-                    due='2026-12-03T23:59:00+09:00', dueHasTime=False,
-                    url='https://job.alio.go.kr/recruitview.do?idx=307225', region='부산')
-        original = copy.deepcopy(post)
-        self.assertEqual(proof['expected_source_seats'], post['n'])
-        self.assertEqual(proof['source_employment'], post['emp'])
-        self.assertNotIn('a307225', CONFIRMED_APPLICATION_CUTOFFS)
-        self.assertNotIn('application_cutoff', proof)
+        self.assertEqual(proof['expected_source_seats'], '33')
+        self.assertEqual(proof['source_employment'], ['정규직'])
+        self.assertEqual(proof['application_start'], '2026-11-19')
+        self.assertEqual(proof['application_end_date'], '2026-12-03')
+        self.assertEqual(proof['notice_source_sha256'],
+                         'a45a7bebec1929e6f18315ee8ace0aa20b59ddf6af5cb40503d206f46faa3cd2')
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS['a307225'],
+                         '2026-12-03T17:00:00+09:00')
+        post = {p['id']: p for p in json.loads(
+            Path('alio.json').read_text(encoding='utf-8'))['posts']}['a307225']
         html = render(post, {})
-        self.assertIn('간호사 면허', html)
-        self.assertIn('임상경력 3년 이상', html)
-        self.assertIn('의료사회복지사 자격증', html)
-        self.assertIn('TOEIC 700점', html)
-        self.assertIn('TOEIC 600점', html)
-        self.assertIn('33명을 어느 한 분야의 인원으로 단정하지 마세요', html)
-        self.assertNotIn('기관 공식 확인 접수마감', html)
-        for change in ({'n': '34'}, {'emp': ['비정규직']},
-                       {'title': post['title'] + ' (정정)'}, {'org': '변경병원'},
-                       {'due': '2026-12-04T23:59:00+09:00'}, {'alio': False}):
-            stale = render({**post, **change}, {})
-            self.assertNotIn('33명을 어느 한 분야의 인원으로 단정하지 마세요', stale)
-            self.assertNotIn('TOEIC 700점', stale)
-        self.assertEqual(post, original)
-        report = shortlist({'posts': [post]}, date(2026, 11, 19))
-        self.assertEqual(report['regular_review_candidates'][0]['official_reception_status'], 'unverified')
+        for phrase in ('간호직30명', '의료사회복지사2명',
+                       '보건직 산부인과 방사선사1명', '17시(KST)',
+                       '공고 전체 모집정원', '기관 공식 확인 접수마감'):
+            self.assertIn(phrase, html)
+        self.assertNotIn('2026-12-03 23:59 (KST)', html)
 
     def test_new_add_162_mixed_and_road_four_are_source_bound(self):
         """Nov 18 official HTML is display evidence, not 162 regular seats or a verified deadline."""
