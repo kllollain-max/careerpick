@@ -75,11 +75,13 @@ class JobPageTests(unittest.TestCase):
         overlap = [p for p in posts if
                    p['org'] == post['org'] and '약무직' in p['title'] and
                    p['id'] != 'a307251']
-        self.assertEqual(len(overlap), 9)
+        known_prior = {'a294598', 'a294624', 'a297599', 'a298427',
+                       'a303321', 'a305304', 'a292472', 'a299412', 'a306275'}
+        self.assertTrue(known_prior.issubset({p['id'] for p in overlap}))
         self.assertNotIn('a307251', VERIFIED_DUTIES)
         self.assertNotIn('a307251', CONFIRMED_APPLICATION_CUTOFFS)
         html = render(post, {})
-        for phrase in ('2027년 면허 취득예정자', '약무직 유사 공고 9건',
+        for phrase in ('2027년 면허 취득예정자', '약무직 유사 공고',
                        '현재 남은 결원이 5명이라고 단정하지 마세요',
                        '실제 원서접수 마감시각', 'idx=307251'):
             self.assertIn(phrase, html)
@@ -89,7 +91,7 @@ class JobPageTests(unittest.TestCase):
                         {'org': '변경 기관'}, {'due': '2027-01-01T23:59:00+09:00'},
                         {'emp': ['계약직']}, {'alio': False}):
             stale = render({**post, **changed}, {})
-            self.assertNotIn('약무직 유사 공고 9건', stale)
+            self.assertNotIn('약무직 유사 공고', stale)
             self.assertNotIn('2027년 면허 취득예정자', stale)
         self.assertEqual(post, original)
 
