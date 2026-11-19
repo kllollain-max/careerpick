@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-19T17:00:53.571090+09:00",
-  "run_id": "44483913500",
-  "source_commit": "b8f48c2211d2f53d8ba9966cd7c2c39d9eed9315",
+  "captured_at": "2026-11-19T18:21:57.487359+09:00",
+  "run_id": "44495590250",
+  "source_commit": "8db5eec9b9262a603241b26351feba427440d9ac",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-19T17:00:04.071458+09:00",
+    "time": "2026-11-19T18:21:08.366555+09:00",
     "future_slots": [
       "2026-11-19T20:00:00+09:00",
       "2026-11-20T08:00:00+09:00",
@@ -18,7 +18,7 @@
       "2026-11-21T12:00:00+09:00",
       "2026-11-21T16:00:00+09:00"
     ],
-    "next_media": "TEXT",
+    "next_media": "IMAGE",
     "promoted": [],
     "refused": [
       {
@@ -79,7 +79,7 @@
       },
       {
         "notice_id": "a307120",
-        "reason": "SLOT_ALREADY_OCCUPIED"
+        "reason": "DUPLICATE_POST"
       },
       {
         "notice_id": "a307207",
@@ -92,29 +92,31 @@
       {
         "notice_id": "a307067",
         "reason": "SLOT_ALREADY_OCCUPIED"
+      },
+      {
+        "notice_id": "a307238",
+        "reason": "SLOT_ALREADY_OCCUPIED"
       }
     ],
     "queue_updated": false,
     "meta_posted": false,
-    "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
-    "staged_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+    "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
+    "staged_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
     "promoted_count": 0,
-    "approved_supply_count": 3,
+    "approved_supply_count": 4,
     "inventory_target": 8,
-    "inventory_shortfall": 5,
+    "inventory_shortfall": 4,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [
-      "2026-11-19T16:00:00+09:00"
-    ],
-    "media_forecast_conditional_on_active_slot": true,
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
       "2026-11-19T20:00:00+09:00",
       "2026-11-20T08:00:00+09:00",
-      "2026-11-20T12:00:00+09:00"
+      "2026-11-20T12:00:00+09:00",
+      "2026-11-20T16:00:00+09:00"
     ],
     "missing_slots": [
-      "2026-11-20T16:00:00+09:00",
       "2026-11-20T20:00:00+09:00",
       "2026-11-21T08:00:00+09:00",
       "2026-11-21T12:00:00+09:00",
@@ -125,7 +127,6 @@
     "writer_handoff": {
       "status": "review_required",
       "missing_slots": [
-        "2026-11-20T16:00:00+09:00",
         "2026-11-20T20:00:00+09:00",
         "2026-11-21T08:00:00+09:00",
         "2026-11-21T12:00:00+09:00",
@@ -2355,7 +2356,6 @@
   "writer_handoff": {
     "status": "review_required",
     "missing_slots": [
-      "2026-11-20T16:00:00+09:00",
       "2026-11-20T20:00:00+09:00",
       "2026-11-21T08:00:00+09:00",
       "2026-11-21T12:00:00+09:00",
@@ -4418,7 +4418,7 @@
     "drafts": [
       {
         "notice_id": "cleaneye-80711",
-        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "suggested_slot": "2026-11-20T20:00:00+09:00",
         "draft_text": "충주시시설관리공단 채용 공고를 확인해 보세요.\n\n모집 공고: 2027년 제1회 충주시시설관리공단 직무중심 정규직 공개채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80711",
         "source_post_sha256": "5fd7736d45bedba0a5860c8b2c2c924d4558efe2aa924aabb6ca561252c59b5a",
@@ -4458,7 +4458,7 @@
       },
       {
         "notice_id": "cleaneye-80914",
-        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "suggested_slot": "2026-11-20T20:00:00+09:00",
         "draft_text": "양주도시공사 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제1회 직원 공개경쟁채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80914",
         "source_post_sha256": "0c1b207a752c268f350699861aefca50f8b5b1cbcaa2a45c53af613b4559441b",
@@ -4498,7 +4498,7 @@
       },
       {
         "notice_id": "cleaneye-81143",
-        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "suggested_slot": "2026-11-20T20:00:00+09:00",
         "draft_text": "경북바이오산업연구원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제5차 직원채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81143",
         "source_post_sha256": "f54def0e6611daa30f8f0479e564be4d2412b1f8bff715abc0d6fbbc10dee518",
@@ -4538,7 +4538,7 @@
       },
       {
         "notice_id": "cleaneye-81199",
-        "suggested_slot": "2026-11-20T20:00:00+09:00",
+        "suggested_slot": "2026-11-21T08:00:00+09:00",
         "draft_text": "경기문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 경기문화재단 제5회 직원채용(일반직)\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81199",
         "source_post_sha256": "f58973e06a423d4b8b94129ccfc39f59ff0bf762497feab17e639e8c9d808a02",
@@ -4578,7 +4578,7 @@
       },
       {
         "notice_id": "cleaneye-81206",
-        "suggested_slot": "2026-11-20T20:00:00+09:00",
+        "suggested_slot": "2026-11-21T08:00:00+09:00",
         "draft_text": "경기도사회적경제원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제3차 경기도사회적경제원 정규직(장애인 제한) 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81206",
         "source_post_sha256": "3ca5a3e0e282588a73927537ce721e1394414fb9e0f92b5e750438c88321cc45",
@@ -4618,7 +4618,7 @@
       },
       {
         "notice_id": "cleaneye-81209",
-        "suggested_slot": "2026-11-20T20:00:00+09:00",
+        "suggested_slot": "2026-11-21T08:00:00+09:00",
         "draft_text": "마포복지재단 채용 공고를 확인해 보세요.\n\n모집 공고: 재단법인 마포복지재단 직원(5급) 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81209",
         "source_post_sha256": "5be9f538e16b16581c75e7a6cf04302c5ff55e12866524edd0c7866c475969b6",
@@ -4658,7 +4658,7 @@
       },
       {
         "notice_id": "cleaneye-81220",
-        "suggested_slot": "2026-11-21T08:00:00+09:00",
+        "suggested_slot": "2026-11-21T12:00:00+09:00",
         "draft_text": "안성시시설관리공단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년도 제5회 직원 채용(일반직-일반행정) 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81220",
         "source_post_sha256": "3fa5a04a9c0298ccde1ac1acbefe376a9136ca8f4c51835b36bece7ac378628f",
@@ -4698,7 +4698,7 @@
       },
       {
         "notice_id": "cleaneye-81221",
-        "suggested_slot": "2026-11-21T08:00:00+09:00",
+        "suggested_slot": "2026-11-21T12:00:00+09:00",
         "draft_text": "안성시시설관리공단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년도 제5회 직원 채용(기능직-운전-청년) 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81221",
         "source_post_sha256": "af43115d1507a5d4fe91d3c63378b414e983f8c67b6afdf0697bf4e5684f3296",
@@ -4738,7 +4738,7 @@
       },
       {
         "notice_id": "cleaneye-81231",
-        "suggested_slot": "2026-11-21T08:00:00+09:00",
+        "suggested_slot": "2026-11-21T12:00:00+09:00",
         "draft_text": "속초시시설관리공단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제3회 속초시시설관리공단 신규직원(일반직) 채용 재공고\n고용형태: 일반정규직\n접수 마감: 2026-11-23 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81231",
         "source_post_sha256": "ac8d517d145f50856cd02aac60ea74bcb1f1dbdaa5ef00d69c7ec10d0eb9f30a",
@@ -4778,7 +4778,7 @@
       },
       {
         "notice_id": "cleaneye-80951",
-        "suggested_slot": "2026-11-21T12:00:00+09:00",
+        "suggested_slot": "2026-11-21T16:00:00+09:00",
         "draft_text": "울산정보산업진흥원 채용 공고를 확인해 보세요.\n\n모집 공고: (재)울산정보산업진흥원 2026년 6차 직원 채용\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80951",
         "source_post_sha256": "512bb1b2d18eb817180ba9fbba6096c0376797b00df798c8be5384f28570ef32",
@@ -4818,7 +4818,7 @@
       },
       {
         "notice_id": "cleaneye-81095",
-        "suggested_slot": "2026-11-21T12:00:00+09:00",
+        "suggested_slot": "2026-11-21T16:00:00+09:00",
         "draft_text": "재단법인 제주특별자치도 사회서비스원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제주특별자치도사회서비스원 17차 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81095",
         "source_post_sha256": "693e780e551dd40ea0537d3afa12ad917001c1241617ba705801fb56952260a7",
@@ -4858,7 +4858,7 @@
       },
       {
         "notice_id": "cleaneye-81187",
-        "suggested_slot": "2026-11-21T12:00:00+09:00",
+        "suggested_slot": "2026-11-21T16:00:00+09:00",
         "draft_text": "재단법인 전남여성가족재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제3차 정규직 직원 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81187",
         "source_post_sha256": "c6f6aebd000f856f081d3d37372ab693852a01c14ba7e3b3f2a247787a480173",
@@ -4895,129 +4895,27 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81201",
-        "suggested_slot": "2026-11-21T16:00:00+09:00",
-        "draft_text": "강릉과학산업진흥원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 강릉과학산업진흥원 3차 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81201",
-        "source_post_sha256": "63a557296ec76791cec349c9d8ec8e0722951d8af957b8dbd67147199451e4fb",
-        "source_detail_sha256": "a2cf5776c509e5d0a1243312076a39b4f0f65b7ab9b2bc9a0b9c2296b9ebc584",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-24",
-        "application_source_ref": "cleaneye.json#cleaneye-81201/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-12",
-          "접수마감일 원문": "2026-11-24",
-          "채용인원": "4"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81203",
-        "suggested_slot": "2026-11-21T16:00:00+09:00",
-        "draft_text": "재단법인 송파문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)송파문화재단 2026년 3차 직원 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81203",
-        "source_post_sha256": "d5a5359f305c677d6f79bcd23facca2fe1641941beb3eb60f8717da7bd6ef6f0",
-        "source_detail_sha256": "7eb55ef7cb36ae92b1551430452509392f688f94f7825acb452c496c942f708a",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-24",
-        "application_source_ref": "cleaneye.json#cleaneye-81203/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-17",
-          "접수마감일 원문": "2026-11-24",
-          "채용인원": "1"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-80989",
-        "suggested_slot": "2026-11-21T16:00:00+09:00",
-        "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직 5급/청소년사업)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80989",
-        "source_post_sha256": "7c377fa297c6f7bb6564a5789efdf3c1ebadfdbda70f058570c54f6fabe5ccc5",
-        "source_detail_sha256": "cf93fab7140fa249478bdc2d39494c85f83e5f2297538b3463ab1ee45be07735",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-11; 접수마감일 원문: 2026-11-25",
-        "application_source_ref": "cleaneye.json#cleaneye-80989/application_period",
-        "source_snapshot_checked_at": "2026-11-19T16:32:38+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-11",
-          "접수마감일 원문": "2026-11-25",
-          "채용인원": "1"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
       }
     ],
     "official_source_alternatives": [
+      {
+        "notice_id": "cleaneye-81201",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81201",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-81203",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81203",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-80989",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80989",
+        "suggested_slot": null
+      },
       {
         "notice_id": "cleaneye-80990",
         "status": "unreviewed",
@@ -5291,14 +5189,12 @@
     ],
     "slot_coverage": {
       "requested_slots": [
-        "2026-11-20T16:00:00+09:00",
         "2026-11-20T20:00:00+09:00",
         "2026-11-21T08:00:00+09:00",
         "2026-11-21T12:00:00+09:00",
         "2026-11-21T16:00:00+09:00"
       ],
       "draft_slots": [
-        "2026-11-20T16:00:00+09:00",
         "2026-11-20T20:00:00+09:00",
         "2026-11-21T08:00:00+09:00",
         "2026-11-21T12:00:00+09:00",
@@ -5318,7 +5214,7 @@
     "records": [
       {
         "notice_id": "cleaneye-80711",
-        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "suggested_slot": "2026-11-20T20:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80711",
         "evidence_status": "not_verified",
         "semantic_review": "required",
@@ -5327,7 +5223,7 @@
       },
       {
         "notice_id": "cleaneye-80914",
-        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "suggested_slot": "2026-11-20T20:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80914",
         "evidence_status": "not_verified",
         "semantic_review": "required",
@@ -5336,7 +5232,7 @@
       },
       {
         "notice_id": "cleaneye-81143",
-        "suggested_slot": "2026-11-20T16:00:00+09:00",
+        "suggested_slot": "2026-11-20T20:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81143",
         "evidence_status": "not_verified",
         "semantic_review": "required",
@@ -5345,7 +5241,7 @@
       },
       {
         "notice_id": "cleaneye-81199",
-        "suggested_slot": "2026-11-20T20:00:00+09:00",
+        "suggested_slot": "2026-11-21T08:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81199",
         "evidence_status": "not_verified",
         "semantic_review": "required",
@@ -5365,7 +5261,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-19T17:00:52.881638+09:00",
+          "checked_at": "2026-11-19T18:21:56.833074+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5491,22 +5387,37 @@
           "18110530775257005"
         ],
         "status": "recorded_publication"
+      },
+      {
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
+        "post_ids": [
+          "18501961180097093"
+        ],
+        "status": "recorded_publication"
       }
     ],
-    "expected_slots": 7,
-    "recorded_publications": 7,
+    "expected_slots": 8,
+    "recorded_publications": 8,
     "receipt_success_rate": 1.0,
     "live_meta_verification_performed": false,
     "needs_attention": []
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-19T17:00:52.970653+09:00",
-    "window_start": "2026-11-17T08:00:52.970653+00:00",
+    "checked_at": "2026-11-19T18:21:56.902404+09:00",
+    "window_start": "2026-11-17T09:21:56.902404+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
     "posts": [
+      {
+        "post_id": "18501961180097093",
+        "timestamp": "2026-11-19T08:21:26+00:00",
+        "permalink": "https://www.threads.com/@hid_119/post/Df6o5gmlgTJ",
+        "is_reply": false,
+        "text_available": true,
+        "text_sha256": "33aa75415331797507060e8634fa48e330689cc9f8046900198503f29b1914fd"
+      },
       {
         "post_id": "18110530775257005",
         "timestamp": "2026-11-19T03:48:10+00:00",
