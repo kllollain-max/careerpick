@@ -1092,12 +1092,14 @@ class JobPageTests(unittest.TestCase):
         original = copy.deepcopy(posts)
         result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS,
                                           {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES})
-        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963', 'a306875', 'a306874', 'a306992', 'a307251', 'a307017', 'a292472', 'a299412', 'a292002', 'a305089', 'a306182'}
+        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963', 'a306875', 'a306874', 'a306992', 'a307017', 'a292472', 'a299412', 'a292002', 'a305089', 'a306182'}
         if any(p.get('id') == 'a307149' for p in posts):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
             expected.add('a306988')  # employer-confirmed date-only window, no invented clock
         self.assertEqual(set(result), expected)
+        # A notice-only overlap warning is NOT proof of an application cutoff.
+        self.assertNotIn('a307251', result)
         for pid in ('a292002', 'a305089', 'a306182'):
             self.assertIn('실제 접수 활성 상태', result[pid]['statusNote'])
             post = next(p for p in posts if p['id'] == pid)
