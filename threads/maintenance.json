@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T00:02:01.000Z",
-  "last_observed_at": "2026-11-19T00:02:01.000Z",
+  "updated_at": "2026-11-19T01:03:21.000Z",
+  "last_observed_at": "2026-11-19T01:03:21.000Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -13340,8 +13340,8 @@
     "unapproved_draft_audit": "threads/audits/source-progress-cleaneye-81291-20261118-1646.json"
   },
   "last_monitor_check": {
-    "observed_at": "2026-11-19T00:02:01.000Z",
-    "status": "REGULAR_08_TEXT_CONFIRMED_AND_THREE_FUTURE_READY",
+    "observed_at": "2026-11-19T01:03:21.000Z",
+    "status": "THREE_FUTURE_READY_NEW_SOURCE_HOLD_NO_NEW_POST",
     "main_sha": "37811e2ff6a2b559a49a2f86bf19dece2eb389e2",
     "queue_sha": "72929e77f5864a4afa5d08f9966399ad3c636ba5",
     "stage_sha": "8499ff1175920e582efce7607089a451d33c3a77",
@@ -13359,18 +13359,20 @@
     ],
     "pending_claims": 0,
     "claims": {
+      "total": 57,
       "accepted": 56,
       "historical_verified": 1,
-      "errors": 0
+      "pending": 0,
+      "read_errors": 0
     },
-    "regular_preflight_run_id": 44421629052,
+    "regular_preflight_run_id": 44425332571,
     "regular_preflight_status": "success_approved3_promoted0",
     "next_regular_preflight": "2026-11-19T11:45:00+09:00",
     "next_regular_slot": "2026-11-19T12:00:00+09:00",
-    "new_publications": 1,
+    "new_publications": 0,
     "automation_on": true,
-    "audit_path": "threads/audits/published-a307061-20261119-0838-text-verified.json",
-    "audit_blob": "cd16f4d88b92864ffd7afec231b57eb46ae90bfe",
+    "audit_path": "threads/audits/monitor-20261119-r58-source-review-hold.json",
+    "audit_blob": "02e9d4e6cb71a15a008164c6b5fd8dca40175a35",
     "no_user_action_required": true
   },
   "writer_hold_alternatives": {
@@ -26497,20 +26499,19 @@
     }
   },
   "writer_supply_preparation_latest": {
-    "observed_at": "2026-11-19T00:02:01.000Z",
+    "observed_at": "2026-11-19T01:03:21.000Z",
+    "notice_id": "a307004",
     "target_slot": "2026-11-20T08:00:00+09:00",
     "status": "HOLD_NOT_READY",
-    "notice_id": "cleaneye-81328",
     "stage_new_entries": 0,
     "queue_new_entries": 0,
     "reason_codes": [
-      "IMAGE_LOCATION_UNSUPPORTED",
+      "OFFICIAL_DEADLINE_TEXT_CONFLICT",
       "SOURCE_PROOF_STALE"
     ],
-    "audit_path": "threads/audits/recovery-source-cleaneye-81328-20261119-r57.json",
-    "audit_blob": "4617afa9eac51f580aa33f468cbedbb3c515f95d",
-    "next_step": "Next existing scheduled source receipt plus verified workplace or alternate notice before full v5 and CAS",
-    "no_manual_POST": true
+    "audit_path": "threads/audits/recovery-source-a307004-20261119-r58.json",
+    "audit_blob": "3a7ff298268f7f574fb46ad91a1e7faa1c673a0c",
+    "next_step": "Next normal scheduled source receipt and independently resolved period, or different already-open source. No estimatedverification."
   },
   "writer_recovery_checks": [
     {
