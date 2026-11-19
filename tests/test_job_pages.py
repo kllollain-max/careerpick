@@ -15,6 +15,43 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_knuh_pharmacist_eleven_conditional_vacancies_and_no_fake_cutoff(self):
+        """Until-filled pharmacist notice is not 11 currently open independent seats."""
+        from scripts.build_job_pages import (
+            VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES,
+            CONFIRMED_APPLICATION_CUTOFFS,
+        )
+        posts = {p['id']: p for p in json.loads(
+            Path('alio.json').read_text(encoding='utf-8'))['posts']}
+        post = posts['a306182']
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a306182']
+        self.assertEqual((post['org'], post['title'], post['n'], post['emp']),
+                         (proof['organization'], proof['title'], '11', ['정규직']))
+        self.assertEqual(post['due'][:10], proof['source_end_date'])
+        self.assertFalse(post['dueHasTime'])
+        self.assertNotIn('a306182', VERIFIED_DUTIES)
+        self.assertNotIn('a306182', CONFIRMED_APPLICATION_CUTOFFS)
+        html = render(post, {})
+        for phrase in ('약사 면허증', '11명은', '충원 시까지',
+                       '2026-04-01', '2026-12-31',
+                       '현재 접수 활성·잔여 인원 미확인',
+                       '공식 충원조건부 원서접수 안내',
+                       '개별 전형', '추가 공고와 인원을 자동 합산',
+                       'b_num=7452'):
+            self.assertIn(phrase, html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('2026-12-31 23:59 (KST)', html)
+        for changes in ({'n': '10'}, {'org': '정정된 기관'},
+                        {'title': post['title'] + ' 변경'},
+                        {'due': '2027-01-01T23:59:00+09:00'},
+                        {'emp': ['비정규직']}, {'alio': False}):
+            stale = render({**post, **changes}, {})
+            self.assertNotIn('현재 접수 활성·잔여 인원 미확인', stale)
+            self.assertNotIn('b_num=7452', stale)
+            self.assertNotIn('예정인원 충원 후 접수자의 전형', stale)
+        self.assertEqual(post, original)
+
     def test_cvhd_dental_resident_eleven_official_notice_only_and_exact_identity(self):
         """Official ALIO 5+3+3 dental resident notice; no unverified HWP duties or clock."""
         from scripts.build_job_pages import (
