@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-19T02:29:47Z",
+  "status": "NO_MATERIAL_CHANGE_FOUR_FUTURE_READY_VALID",
+  "main_sha": "8e7e3f39d53bd9b7ae58859ef08beb084b7f0184",
+  "state_sha_before": "b516e2fe6be3958733efc39d38934e8b0f0981e0",
+  "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
+  "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
+  "history_sha": "f333a6751b3daa1ce0d25fc5acd847b2b99501c2",
+  "performance_sha": "807b8c5ce1ab1c6964d6aefaa65e5f8becaa5139",
+  "automation_on": true,
+  "claims": {
+    "total": 57,
+    "accepted": 56,
+    "historical_verified": 1,
+    "pending": 0
+  },
+  "full_check": {
+    "checked_at": "2026-11-19T11:28:59.582785+09:00",
+    "policy_hashes": {
+      "threads/prompts/master-v1.1.txt": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
+      "threads/prompts/reach-v1.txt": "988b5e4ee9f101ab2012a4a0694138c4f3762ecb0602b1070d2f9e94cdd2c516",
+      "threads/prompts/reach-v5.txt": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
+      "threads/prompts/intro-styles-v2-20261111.txt": "d48753223887492e4c7ad85a5332a9428b771682e4e2aa323410552eddfbe19d"
+    },
+    "entries": [
+      {
+        "notice_id": "a307145",
+        "scheduled_at": "2026-11-19T12:00:00+09:00",
+        "media_forecast": "IMAGE",
+        "chars": 295,
+        "reply_count": 0,
+        "full_validator": "PASS",
+        "card_verified": true,
+        "official_digest_recheck": null
+      },
+      {
+        "notice_id": "a307120",
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
+        "media_forecast": "TEXT",
+        "chars": 299,
+        "reply_count": 0,
+        "full_validator": "PASS",
+        "card_verified": null,
+        "official_digest_recheck": null
+      },
+      {
+        "notice_id": "a307207",
+        "scheduled_at": "2026-11-19T20:00:00+09:00",
+        "media_forecast": "IMAGE",
+        "chars": 314,
+        "reply_count": 0,
+        "full_validator": "PASS",
+        "card_verified": true,
+        "official_digest_recheck": null
+      },
+      {
+        "notice_id": "a307142",
+        "scheduled_at": "2026-11-20T08:00:00+09:00",
+        "media_forecast": "TEXT",
+        "chars": 280,
+        "reply_count": 0,
+        "full_validator": "PASS",
+        "card_verified": null,
+        "official_digest_recheck": {
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+          "sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a",
+          "verified_fact_sources": [
+            {
+              "url": "https://www.alio.go.kr/download/download.json?fileNo=3088053",
+              "sha256": "e6416c518529b26012df1509e1faf098b799d724b0b5c66b32fe1af59f9a285a"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "source_candidate_input_executed": true,
+  "whole_queue_check": "PASS",
+  "actual_changes": {
+    "new_entries": 0,
+    "new_posts": 0,
+    "new_dispatch": 0,
+    "queue_mutation": false,
+    "stage_mutation": false,
+    "code_mutation": false
+  },
+  "prior_a306965": "already_posted_do_not_duplicate",
+  "latest_confirmed_publication": {
+    "notice_id": "a307061",
+    "source": "Current main ledger and accepted claim; stored publisher official GET evidence. This writer did not make a new direct MetaGET.",
+    "new_this_check": false
+  },
+  "latest_regular_preflight": {
+    "run_id": 44437106350,
+    "run_attempt": 1,
+    "head_sha": "37811e2ff6a2b559a49a2f86bf19dece2eb389e2",
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-11-19T01:29:06Z",
+    "preflight_job": 135268625249,
+    "metrics_job": 135268625949,
+    "publish": "skipped_expected_nonpublishing_schedule"
+  },
+  "next_required_checks": {
+    "preflight": "2026-11-19T11:45:00+09:00",
+    "publish": "2026-11-19T12:00:00+09:00",
+    "notice_id": "a307145",
+    "media_forecast": "IMAGE_conditional_actual_success",
+    "new_a307142": "Already queued Nov20 08; still notpublished. Do not duplicate or modify reviewed content."
+  },
+  "performance": {
+    "summarizer_executed": true,
+    "summary": {
+      "as_of": "2026-11-19T02:28:59.339228+00:00",
+      "windows": {
+        "24h": {
+          "verified_main_count": 12,
+          "metric_medians": {
+            "views": 2157,
+            "likes": 5,
+            "replies": 0,
+            "reposts": 0,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 12,
+            "likes": 12,
+            "replies": 12,
+            "reposts": 12,
+            "quotes": 12
+          },
+          "metric_totals": {
+            "views": 28233,
+            "likes": 69,
+            "replies": 1,
+            "reposts": 8,
+            "quotes": 1
+          },
+          "views_distribution": [
+            {
+              "post_id": "18174469135462070",
+              "views": 525
+            },
+            {
+              "post_id": "18137768440737022",
+              "views": 934
+            },
+            {
+              "post_id": "18111349063925875",
+              "views": 1076
+            },
+            {
+              "post_id": "17926892064446840",
+              "views": 1157
+            },
+            {
+              "post_id": "17918956251546576",
+              "views": 1998
+            },
+            {
+              "post_id": "17919668721264551",
+              "views": 2112
+            },
+            {
+              "post_id": "17994147756077569",
+              "views": 2202
+            },
+            {
+              "post_id": "17918731521553015",
+              "views": 2231
+            },
+            {
+              "post_id": "17896425015438025",
+              "views": 3029
+            },
+            {
+              "post_id": "18121803568969931",
+              "views": 4182
+            },
+            {
+              "post_id": "18102493658425564",
+              "views": 4274
+            },
+            {
+              "post_id": "18134891626705962",
+              "views": 4513
+            }
+          ],
+          "likes_rate_percent_median": 0.2367120164199297,
+          "likes_rate_percent_observed_posts": 12,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        },
+        "72h": {
+          "verified_main_count": 8,
+          "metric_medians": {
+            "views": 1803,
+            "likes": 5.5,
+            "replies": 0,
+            "reposts": 2,
+            "quotes": 0
+          },
+          "metric_observed_counts": {
+            "views": 8,
+            "likes": 8,
+            "replies": 8,
+            "reposts": 8,
+            "quotes": 8
+          },
+          "metric_totals": {
+            "views": 30340,
+            "likes": 67,
+            "replies": 0,
+            "reposts": 23,
+            "quotes": 1
+          },
+          "views_distribution": [
+            {
+              "post_id": "17986024908093257",
+              "views": 439
+            },
+            {
+              "post_id": "18137768440737022",
+              "views": 999
+            },
+            {
+              "post_id": "18080747462409277",
+              "views": 1023
+            },
+            {
+              "post_id": "18111349063925875",
+              "views": 1122
+            },
+            {
+              "post_id": "17918731521553015",
+              "views": 2484
+            },
+            {
+              "post_id": "18150019906492861",
+              "views": 4022
+            },
+            {
+              "post_id": "17922530685243848",
+              "views": 9324
+            },
+            {
+              "post_id": "18101198159539744",
+              "views": 10927
+            }
+          ],
+          "likes_rate_percent_median": 0.2745916109087464,
+          "likes_rate_percent_observed_posts": 8,
+          "reader_replies": null,
+          "reader_replies_status": "see_per_post_author_separation_status",
+          "profile_visits": null,
+          "follow_increase": null,
+          "link_clicks": null
+        }
+      },
+      "account_followers": {
+        "account": "hid_119",
+        "scope": "account_total",
+        "requested_start": "2026-11-11T11:45:18.355131+00:00",
+        "requested_end": "2026-11-19T02:28:59.339228+00:00",
+        "observed_start": "2026-11-11T11:45:32.854727+00:00",
+        "observed_end": "2026-11-19T01:28:11.690741+00:00",
+        "start_followers": 415,
+        "end_followers": 503,
+        "net_change": 88,
+        "status": "observed_interval",
+        "exact_requested_boundaries": false,
+        "observation_statuses": {
+          "captured": 59
+        },
+        "post_attribution": null,
+        "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
+      },
+      "decision": "extend_observation_or_balance_intro_types",
+      "limitations": [
+        "Different notices remain an observational comparison, not randomized causal evidence.",
+        "Author-separated reader replies and post-attributed follows/profile clicks remain unavailable unless explicitly verified.",
+        "Small counts can produce unstable percentages; read absolute likes and views together.",
+        "Actual account observation boundaries and late cumulative counts are not backfilled to target times."
+      ],
+      "automatic_weight_changes": 0,
+      "statistical_significance_claim": false
+    },
+    "new_api_observations_this_writer": false
+  },
+  "user_action_required": false
+}
