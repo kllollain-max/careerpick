@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T03:50:45Z",
-  "last_observed_at": "2026-11-19T03:50:45Z",
+  "updated_at": "2026-11-19T04:30:11.055Z",
+  "last_observed_at": "2026-11-19T04:30:11.055Z",
   "account": "hid_119",
   "repository": "kllollain-max/careerpick",
   "activation": {
@@ -57,9 +57,97 @@
   "queue": {
     "path": "threads/writer-queue.json",
     "creation_commit_sha": "56a7f901281057cfde0a85bdc27729772270b7dc",
-    "blob_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
+    "blob_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
     "readback_verified": true,
     "ready_entries": [
+      {
+        "notice_id": "a307120",
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
+        "chars": 299,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307207",
+        "scheduled_at": "2026-11-19T20:00:00+09:00",
+        "chars": 314,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307142",
+        "scheduled_at": "2026-11-20T08:00:00+09:00",
+        "chars": 280,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307067",
+        "scheduled_at": "2026-11-20T12:00:00+09:00",
+        "chars": 261,
+        "reply_count": 0
+      }
+    ],
+    "last_update_commit_sha": "8effe92b10e78edef07ab92dc2dbbdcf0cc8afcc",
+    "readback_verified_at": "2026-11-19T04:30:11.055Z",
+    "current_eligibility_check": {
+      "checked_at": "2026-11-19T04:30:11.055Z",
+      "total_entries": 49,
+      "past_entries_preserved": true,
+      "current_publishable_ready": 4,
+      "queue_blob_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+      "stage_blob_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+      "ready_slots": [
+        {
+          "notice_id": "a307120",
+          "scheduled_at": "2026-11-19T16:00:00+09:00",
+          "chars": 299,
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307207",
+          "scheduled_at": "2026-11-19T20:00:00+09:00",
+          "chars": 314,
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307142",
+          "scheduled_at": "2026-11-20T08:00:00+09:00",
+          "chars": 280,
+          "reply_count": 0
+        },
+        {
+          "notice_id": "a307067",
+          "scheduled_at": "2026-11-20T12:00:00+09:00",
+          "chars": 261,
+          "reply_count": 0
+        }
+      ]
+    },
+    "previous_eligibility_check_r62": {
+      "checked_at": "2026-11-19T01:48:12Z",
+      "total_entries": 48,
+      "past_entries_preserved": true,
+      "current_publishable_ready": 4,
+      "queue_blob_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
+      "stage_blob_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
+      "ready_slots": [
+        {
+          "notice_id": "a307145",
+          "scheduled_at": "2026-11-19T12:00:00+09:00"
+        },
+        {
+          "notice_id": "a307120",
+          "scheduled_at": "2026-11-19T16:00:00+09:00"
+        },
+        {
+          "notice_id": "a307207",
+          "scheduled_at": "2026-11-19T20:00:00+09:00"
+        },
+        {
+          "notice_id": "a307142",
+          "scheduled_at": "2026-11-20T08:00:00+09:00"
+        }
+      ]
+    },
+    "previous_ready_entries_r62": [
       {
         "notice_id": "a307145",
         "scheduled_at": "2026-11-19T12:00:00+09:00",
@@ -88,35 +176,7 @@
         "chars": 280,
         "reply_count": 0
       }
-    ],
-    "last_update_commit_sha": "14bf80373f4d86ef8b0a2afd706b7e5a8257ce91",
-    "readback_verified_at": "2026-11-19T01:48:12Z",
-    "current_eligibility_check": {
-      "checked_at": "2026-11-19T01:48:12Z",
-      "total_entries": 48,
-      "past_entries_preserved": true,
-      "current_publishable_ready": 4,
-      "queue_blob_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
-      "stage_blob_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
-      "ready_slots": [
-        {
-          "notice_id": "a307145",
-          "scheduled_at": "2026-11-19T12:00:00+09:00"
-        },
-        {
-          "notice_id": "a307120",
-          "scheduled_at": "2026-11-19T16:00:00+09:00"
-        },
-        {
-          "notice_id": "a307207",
-          "scheduled_at": "2026-11-19T20:00:00+09:00"
-        },
-        {
-          "notice_id": "a307142",
-          "scheduled_at": "2026-11-20T08:00:00+09:00"
-        }
-      ]
-    }
+    ]
   },
   "observed_runs": [
     {
@@ -10188,15 +10248,11 @@
     "Admit A/B metrics only with same-observation official main GET ID/text/is_reply evidence. Do not retroactively promote a previously unverified observation."
   ],
   "next_actions": [
-    "Observe Nov13 08 preserved a306949 regular TEXT slot; do not change its body/assets/hash.",
-    "Observe Nov13 12 newly ready a306848 at the existing regular slot; IMAGE if08 succeeds asTEXT, otherwise determine from actual successful ledger. Never consume media alternation on preparation.",
-    "Collect later v2 24h windows through existing independent metrics job; first72h due Nov14 20:45:18.",
-    "Keep 14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights.",
-    "PR51 and other unverified candidate holds remain; no bypass, backfill, tests or reruns.",
-    "Resolve a306989 notice/JD qualification scope discrepancy and employer ATS999 block; keep243char draft unassigned, no unverified queue entry.",
-    "Resolve a306807 ATS same-notice actual reception view/profile path and complete final review before assigning unstarted slot; preserve291char unassigned draft.",
-    "Observe Nov13 16 newly ready a306908 at existing regular slot; TEXT only if08 TEXT and12 IMAGE succeed, otherwise derive media from actual successful ledger. Exact reviewed IMAGE card is available; no backfill or new run.",
-    "Resolve a306875 ward-support50 graduation-scope ambiguity and exact application-end time/current notice, correction/profile/card checks; preserve268char draft unassigned. Do not fill20 with an unverified draft."
+    "Observe existing15:45preflight and16KST a307120 regular publisher; no manual dispatch/rerun/directPOST.",
+    "Keep approved a307207 Nov19 20, a307142 Nov20 08, a307067 Nov20 12. Recheck actual-success media, source freshness and official-open status at preflight.",
+    "Next missing future slot Nov20 16: source13:10Nov19 currently exceeds24h at target; wait for existing refreshed collection then independently review a unique candidate.",
+    "Observe each actually published post24h/72h; preserve actual timestamps, no inferred link-clicks/follow conversions or weight changes.",
+    "Operations44456424116 gojobs timeout/Pages artifact absence remains external-scope incident; retained source data preserved; homepage/collector unchanged."
   ],
   "writer_holds": {
     "2026-11-07T12:00:00+09:00": {
@@ -13195,82 +13251,30 @@
     }
   },
   "last_writer_check": {
-    "checked_at": "2026-11-19T01:48:12Z",
-    "main_sha": "8e7e3f39d53bd9b7ae58859ef08beb084b7f0184",
-    "prompt_exact_bytes_verified": true,
-    "editorial_policy_exact_bytes_verified": true,
-    "editorial_v5_exact_bytes_verified": true,
-    "intro_style_hash_verified": true,
-    "contract_version": 2,
-    "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection <fresh remote queue>",
-    "input_reference_at": "2026-11-19T10:34:01.571260+09:00",
-    "source_updated": "2026-11-19T10:26:49+09:00",
-    "candidate_count": 24,
-    "review_candidate_count": 939,
-    "queue_blob_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
-    "existing_ready_validated": 3,
-    "new_ready_saved": 1,
-    "new_staged": 1,
-    "new_queue_promoted": 1,
-    "ready_entries": [
-      {
-        "notice_id": "a307145",
-        "scheduled_at": "2026-11-19T12:00:00+09:00",
-        "entry_sha256": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
-        "chars": 295,
-        "reply_count": 0
-      },
-      {
-        "notice_id": "a307120",
-        "scheduled_at": "2026-11-19T16:00:00+09:00",
-        "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
-        "chars": 299,
-        "reply_count": 0
-      },
-      {
-        "notice_id": "a307207",
-        "scheduled_at": "2026-11-19T20:00:00+09:00",
-        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
-        "chars": 314,
-        "reply_count": 0
-      },
-      {
-        "notice_id": "a307142",
-        "scheduled_at": "2026-11-20T08:00:00+09:00",
-        "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
-        "chars": 280,
-        "reply_count": 0
-      }
-    ],
-    "final_public_output_regeneration": "exact_match_single_main_reply0_current_main",
-    "audit_path": "threads/audits/reviewed-supply-a307142-20261119-r59.json",
-    "notice_id": "a307142",
-    "result": "APPROVED_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
-    "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
-    "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
-    "full_validator": "PASS",
-    "published": false,
-    "post_id": null
-  },
-  "last_monitor_check": {
-    "observed_at": "2026-11-19T03:50:45Z",
-    "status": "REGULAR_12_IMAGE_PUBLISHED_VERIFIED_FUTURE3_VALID",
-    "main_sha": "bbcd0589354d3cf60f84ad473f19f278b1ce7bb1",
-    "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
-    "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
+    "observed_at": "2026-11-19T04:30:11.055Z",
+    "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
+    "notice_id": "a307067",
+    "scheduled_at": "2026-11-20T12:00:00+09:00",
+    "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
     "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
-    "full_queue_status": "validated_after_actual12publication",
-    "operating_future_ready_count": 3,
-    "active_pending_count": 0,
+    "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+    "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+    "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+    "body_chars": 261,
+    "full_remote_validator": "passed",
+    "full_queue_status": "validated",
+    "operating_future_ready_count": 4,
     "ready_ids": [
       "a307120",
       "a307207",
-      "a307142"
+      "a307142",
+      "a307067"
     ],
     "approved_future_slots": [
       "2026-11-19T16:00:00+09:00",
       "2026-11-19T20:00:00+09:00",
-      "2026-11-20T08:00:00+09:00"
+      "2026-11-20T08:00:00+09:00",
+      "2026-11-20T12:00:00+09:00"
     ],
     "pending_claims": 0,
     "claims": {
@@ -13279,19 +13283,93 @@
       "historical_verified": 1,
       "pending": 0
     },
-    "regular_publish_run_id": 44453862479,
-    "regular_publish_run_attempt": 1,
-    "regular_publish_status": "success",
-    "post_id": "18110530775257005",
-    "permalink": "https://www.threads.com/@hid_119/post/Df6JnDuETD3",
+    "new_publications": 0,
+    "new_ready_saved": 1,
+    "new_queue_promoted": 1,
+    "actual_post_id": null,
+    "automation_on": true,
+    "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+    "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
     "next_regular_preflight": "2026-11-19T15:45:00+09:00",
     "next_regular_slot": "2026-11-19T16:00:00+09:00",
-    "new_publications": 1,
-    "new_ready_saved": 0,
-    "new_queue_promoted": 0,
+    "no_user_action_required": true,
+    "contract_version": 2,
+    "prompt_exact_bytes_verified": true,
+    "editorial_policy_exact_bytes_verified": true,
+    "editorial_v5_exact_bytes_verified": true,
+    "intro_style_hash_verified": true,
+    "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection threads/writer-queue.json",
+    "ready_entries": [
+      {
+        "notice_id": "a307120",
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
+        "chars": 299,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307207",
+        "scheduled_at": "2026-11-19T20:00:00+09:00",
+        "chars": 314,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307142",
+        "scheduled_at": "2026-11-20T08:00:00+09:00",
+        "chars": 280,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307067",
+        "scheduled_at": "2026-11-20T12:00:00+09:00",
+        "chars": 261,
+        "reply_count": 0
+      }
+    ],
+    "published": false,
+    "post_id": null
+  },
+  "last_monitor_check": {
+    "observed_at": "2026-11-19T04:30:11.055Z",
+    "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
+    "notice_id": "a307067",
+    "scheduled_at": "2026-11-20T12:00:00+09:00",
+    "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+    "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+    "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+    "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+    "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+    "body_chars": 261,
+    "full_remote_validator": "passed",
+    "full_queue_status": "validated",
+    "operating_future_ready_count": 4,
+    "ready_ids": [
+      "a307120",
+      "a307207",
+      "a307142",
+      "a307067"
+    ],
+    "approved_future_slots": [
+      "2026-11-19T16:00:00+09:00",
+      "2026-11-19T20:00:00+09:00",
+      "2026-11-20T08:00:00+09:00",
+      "2026-11-20T12:00:00+09:00"
+    ],
+    "pending_claims": 0,
+    "claims": {
+      "total": 58,
+      "accepted": 57,
+      "historical_verified": 1,
+      "pending": 0
+    },
+    "new_publications": 0,
+    "new_ready_saved": 1,
+    "new_queue_promoted": 1,
+    "actual_post_id": null,
     "automation_on": true,
-    "audit_path": "threads/audits/published-a307145-20261119-1248-image-verified.json",
-    "audit_blob": "ab0d1064174f67ad8d4c9963fdcd91f90600d4ff",
+    "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+    "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
+    "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+    "next_regular_slot": "2026-11-19T16:00:00+09:00",
     "no_user_action_required": true
   },
   "writer_hold_alternatives": {
@@ -20028,10 +20106,10 @@
     "previous_artifact_metadata_verified": true,
     "artifact_metadata_verified_this_check": false,
     "latest_read_only_summary": {
-      "state_blob": "2024841b324f8fc436deaca98c258e87f5cafb5c",
-      "summarized_at": "2026-11-19T03:50:07.503486+00:00",
+      "checked_at": "2026-11-19T04:30:11.055Z",
+      "state_sha": "e9896f71def9387aada5eeef70183a3f433d4411",
       "summary": {
-        "as_of": "2026-11-19T03:50:07.503486+00:00",
+        "as_of": "2026-11-19T04:23:39.559352+00:00",
         "windows": {
           "24h": {
             "verified_main_count": 13,
@@ -20042,81 +20120,7 @@
               "reposts": 0,
               "quotes": 0
             },
-            "metric_observed_counts": {
-              "views": 13,
-              "likes": 13,
-              "replies": 13,
-              "reposts": 13,
-              "quotes": 13
-            },
-            "metric_totals": {
-              "views": 28697,
-              "likes": 70,
-              "replies": 1,
-              "reposts": 8,
-              "quotes": 1
-            },
-            "views_distribution": [
-              {
-                "post_id": "17905918545604732",
-                "views": 464
-              },
-              {
-                "post_id": "18174469135462070",
-                "views": 525
-              },
-              {
-                "post_id": "18137768440737022",
-                "views": 934
-              },
-              {
-                "post_id": "18111349063925875",
-                "views": 1076
-              },
-              {
-                "post_id": "17926892064446840",
-                "views": 1157
-              },
-              {
-                "post_id": "17918956251546576",
-                "views": 1998
-              },
-              {
-                "post_id": "17919668721264551",
-                "views": 2112
-              },
-              {
-                "post_id": "17994147756077569",
-                "views": 2202
-              },
-              {
-                "post_id": "17918731521553015",
-                "views": 2231
-              },
-              {
-                "post_id": "17896425015438025",
-                "views": 3029
-              },
-              {
-                "post_id": "18121803568969931",
-                "views": 4182
-              },
-              {
-                "post_id": "18102493658425564",
-                "views": 4274
-              },
-              {
-                "post_id": "18134891626705962",
-                "views": 4513
-              }
-            ],
-            "likes_rate_percent_median": 0.21551724137931033,
-            "likes_rate_percent_observed_posts": 13,
-            "reader_replies": null,
-            "reader_replies_status": "see_per_post_author_separation_status",
-            "profile_visits": null,
-            "follow_increase": null,
-            "link_clicks": null
+            "likes_rate_percent_median": 0.21551724137931033
           },
           "72h": {
             "verified_main_count": 8,
@@ -20127,87 +20131,32 @@
               "reposts": 2,
               "quotes": 0
             },
-            "metric_observed_counts": {
-              "views": 8,
-              "likes": 8,
-              "replies": 8,
-              "reposts": 8,
-              "quotes": 8
-            },
-            "metric_totals": {
-              "views": 30340,
-              "likes": 67,
-              "replies": 0,
-              "reposts": 23,
-              "quotes": 1
-            },
-            "views_distribution": [
-              {
-                "post_id": "17986024908093257",
-                "views": 439
-              },
-              {
-                "post_id": "18137768440737022",
-                "views": 999
-              },
-              {
-                "post_id": "18080747462409277",
-                "views": 1023
-              },
-              {
-                "post_id": "18111349063925875",
-                "views": 1122
-              },
-              {
-                "post_id": "17918731521553015",
-                "views": 2484
-              },
-              {
-                "post_id": "18150019906492861",
-                "views": 4022
-              },
-              {
-                "post_id": "17922530685243848",
-                "views": 9324
-              },
-              {
-                "post_id": "18101198159539744",
-                "views": 10927
-              }
-            ],
-            "likes_rate_percent_median": 0.2745916109087464,
-            "likes_rate_percent_observed_posts": 8,
-            "reader_replies": null,
-            "reader_replies_status": "see_per_post_author_separation_status",
-            "profile_visits": null,
-            "follow_increase": null,
-            "link_clicks": null
+            "likes_rate_percent_median": 0.2745916109087464
           }
         },
         "account_followers": {
           "account": "hid_119",
           "scope": "account_total",
           "requested_start": "2026-11-11T11:45:18.355131+00:00",
-          "requested_end": "2026-11-19T03:50:07.503486+00:00",
+          "requested_end": "2026-11-19T04:23:39.559352+00:00",
           "observed_start": "2026-11-11T11:45:32.854727+00:00",
-          "observed_end": "2026-11-19T03:04:02.759630+00:00",
+          "observed_end": "2026-11-19T04:12:21.493967+00:00",
           "start_followers": 415,
           "end_followers": 503,
           "net_change": 88,
           "status": "observed_interval",
           "exact_requested_boundaries": false,
           "observation_statuses": {
-            "captured": 60
+            "captured": 61
           },
           "post_attribution": null,
           "limitation": "Net change belongs to the stated actual account interval, not an individual post; missing boundary snapshots are not reconstructed."
         },
         "decision": "extend_observation_or_balance_intro_types",
-        "automatic_weight_changes": 0,
-        "statistical_significance_claim": false
+        "automatic_weight_changes": 0
       },
-      "audit_path": "threads/audits/published-a307145-20261119-1248-image-verified.json",
-      "new_measurements_by_writer": false
+      "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+      "metrics_collection_not_performed_by_writer": true
     }
   },
   "last_writer_recheck": {
@@ -20554,6 +20503,12 @@
         "scheduled_at": "2026-11-20T08:00:00+09:00",
         "chars": 280,
         "reply_count": 0
+      },
+      {
+        "notice_id": "a307067",
+        "scheduled_at": "2026-11-20T12:00:00+09:00",
+        "chars": 261,
+        "reply_count": 0
       }
     ],
     "image_verification": {
@@ -20631,24 +20586,30 @@
       "audit_path": "threads/audits/single-main-v2-image-verified-20261112T0839.json"
     },
     "latest_hourly_check": {
-      "observed_at": "2026-11-19T03:50:45Z",
-      "status": "REGULAR_12_IMAGE_PUBLISHED_VERIFIED_FUTURE3_VALID",
-      "main_sha": "bbcd0589354d3cf60f84ad473f19f278b1ce7bb1",
-      "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
-      "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
+      "observed_at": "2026-11-19T04:30:11.055Z",
+      "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
+      "notice_id": "a307067",
+      "scheduled_at": "2026-11-20T12:00:00+09:00",
+      "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
       "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
-      "full_queue_status": "validated_after_actual12publication",
-      "operating_future_ready_count": 3,
-      "active_pending_count": 0,
+      "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+      "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+      "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+      "body_chars": 261,
+      "full_remote_validator": "passed",
+      "full_queue_status": "validated",
+      "operating_future_ready_count": 4,
       "ready_ids": [
         "a307120",
         "a307207",
-        "a307142"
+        "a307142",
+        "a307067"
       ],
       "approved_future_slots": [
         "2026-11-19T16:00:00+09:00",
         "2026-11-19T20:00:00+09:00",
-        "2026-11-20T08:00:00+09:00"
+        "2026-11-20T08:00:00+09:00",
+        "2026-11-20T12:00:00+09:00"
       ],
       "pending_claims": 0,
       "claims": {
@@ -20657,19 +20618,15 @@
         "historical_verified": 1,
         "pending": 0
       },
-      "regular_publish_run_id": 44453862479,
-      "regular_publish_run_attempt": 1,
-      "regular_publish_status": "success",
-      "post_id": "18110530775257005",
-      "permalink": "https://www.threads.com/@hid_119/post/Df6JnDuETD3",
+      "new_publications": 0,
+      "new_ready_saved": 1,
+      "new_queue_promoted": 1,
+      "actual_post_id": null,
+      "automation_on": true,
+      "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+      "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
       "next_regular_preflight": "2026-11-19T15:45:00+09:00",
       "next_regular_slot": "2026-11-19T16:00:00+09:00",
-      "new_publications": 1,
-      "new_ready_saved": 0,
-      "new_queue_promoted": 0,
-      "automation_on": true,
-      "audit_path": "threads/audits/published-a307145-20261119-1248-image-verified.json",
-      "audit_blob": "ab0d1064174f67ad8d4c9963fdcd91f90600d4ff",
       "no_user_action_required": true
     },
     "next_slot_official_preflight": {
@@ -21231,15 +21188,48 @@
       "media_forecast_conditional_on_active_slot": false
     },
     "latest_staging_supply_check": {
-      "observed_at": "2026-11-18 01:24:50 UTC",
-      "queue_sha": "188210ad101f573758eba2d0cb7d7db16bf23479",
-      "stage_sha": "24aef61823d2f330e7acdd01a01799a09f7870a1",
-      "validated_count": 3,
-      "next_slot": "2026-11-18T12:00:00+09:00",
-      "first_missing": "2026-11-19T08:00:00+09:00",
-      "invalid_ready_entries": [],
-      "review_progress_path": "threads/audits/review-progress-cleaneye-81199-20261118-1024.json",
-      "approved_new_entries": 0
+      "observed_at": "2026-11-19T04:30:11.055Z",
+      "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
+      "notice_id": "a307067",
+      "scheduled_at": "2026-11-20T12:00:00+09:00",
+      "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+      "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+      "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+      "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+      "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+      "body_chars": 261,
+      "full_remote_validator": "passed",
+      "full_queue_status": "validated",
+      "operating_future_ready_count": 4,
+      "ready_ids": [
+        "a307120",
+        "a307207",
+        "a307142",
+        "a307067"
+      ],
+      "approved_future_slots": [
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00",
+        "2026-11-20T08:00:00+09:00",
+        "2026-11-20T12:00:00+09:00"
+      ],
+      "pending_claims": 0,
+      "claims": {
+        "total": 58,
+        "accepted": 57,
+        "historical_verified": 1,
+        "pending": 0
+      },
+      "new_publications": 0,
+      "new_ready_saved": 1,
+      "new_queue_promoted": 1,
+      "actual_post_id": null,
+      "automation_on": true,
+      "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+      "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
+      "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+      "next_regular_slot": "2026-11-19T16:00:00+09:00",
+      "no_user_action_required": true
     },
     "latest_source_freshness_hold": {
       "checked_at": "2026-11-19T00:02:01.000Z",
@@ -21386,6 +21376,48 @@
         "Raw replies author separation unverified, reader_replies null",
         "Account follower interval not post attribution"
       ]
+    },
+    "previous_hourly_check_r62": {
+      "observed_at": "2026-11-19T03:50:45Z",
+      "status": "REGULAR_12_IMAGE_PUBLISHED_VERIFIED_FUTURE3_VALID",
+      "main_sha": "bbcd0589354d3cf60f84ad473f19f278b1ce7bb1",
+      "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
+      "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
+      "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+      "full_queue_status": "validated_after_actual12publication",
+      "operating_future_ready_count": 3,
+      "active_pending_count": 0,
+      "ready_ids": [
+        "a307120",
+        "a307207",
+        "a307142"
+      ],
+      "approved_future_slots": [
+        "2026-11-19T16:00:00+09:00",
+        "2026-11-19T20:00:00+09:00",
+        "2026-11-20T08:00:00+09:00"
+      ],
+      "pending_claims": 0,
+      "claims": {
+        "total": 58,
+        "accepted": 57,
+        "historical_verified": 1,
+        "pending": 0
+      },
+      "regular_publish_run_id": 44453862479,
+      "regular_publish_run_attempt": 1,
+      "regular_publish_status": "success",
+      "post_id": "18110530775257005",
+      "permalink": "https://www.threads.com/@hid_119/post/Df6JnDuETD3",
+      "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+      "next_regular_slot": "2026-11-19T16:00:00+09:00",
+      "new_publications": 1,
+      "new_ready_saved": 0,
+      "new_queue_promoted": 0,
+      "automation_on": true,
+      "audit_path": "threads/audits/published-a307145-20261119-1248-image-verified.json",
+      "audit_blob": "ab0d1064174f67ad8d4c9963fdcd91f90600d4ff",
+      "no_user_action_required": true
     }
   },
   "single_main_v2_writer_performance": {
@@ -27407,5 +27439,129 @@
     "full_queue_status": "validated",
     "unapproved_draft_notice": "cleaneye-81291",
     "unapproved_draft_audit": "threads/audits/source-progress-cleaneye-81291-20261118-1646.json"
-  }
+  },
+  "previous_last_writer_check_r62": {
+    "checked_at": "2026-11-19T01:48:12Z",
+    "main_sha": "8e7e3f39d53bd9b7ae58859ef08beb084b7f0184",
+    "prompt_exact_bytes_verified": true,
+    "editorial_policy_exact_bytes_verified": true,
+    "editorial_v5_exact_bytes_verified": true,
+    "intro_style_hash_verified": true,
+    "contract_version": 2,
+    "input_script": "scripts/threads_writer_input.py --limit 24 --queue-for-selection <fresh remote queue>",
+    "input_reference_at": "2026-11-19T10:34:01.571260+09:00",
+    "source_updated": "2026-11-19T10:26:49+09:00",
+    "candidate_count": 24,
+    "review_candidate_count": 939,
+    "queue_blob_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
+    "existing_ready_validated": 3,
+    "new_ready_saved": 1,
+    "new_staged": 1,
+    "new_queue_promoted": 1,
+    "ready_entries": [
+      {
+        "notice_id": "a307145",
+        "scheduled_at": "2026-11-19T12:00:00+09:00",
+        "entry_sha256": "e9e3bc1c518c05bb70f05c0b1b3ba7d06cd8a9f9cba49c97ba42bda937ce74b9",
+        "chars": 295,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307120",
+        "scheduled_at": "2026-11-19T16:00:00+09:00",
+        "entry_sha256": "ea9324516755ff7cc04169729145e778433aaa149a16b61c548f06a49a3ea543",
+        "chars": 299,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307207",
+        "scheduled_at": "2026-11-19T20:00:00+09:00",
+        "entry_sha256": "d881c5a5ecc837fd95f0c210a897fc28f60328b29a50026d78b2bb5c70a07192",
+        "chars": 314,
+        "reply_count": 0
+      },
+      {
+        "notice_id": "a307142",
+        "scheduled_at": "2026-11-20T08:00:00+09:00",
+        "entry_sha256": "6fa4a46828685c2a2cc90c4d29512a25e86b6bfd78d0e84490543839a1c08cfa",
+        "chars": 280,
+        "reply_count": 0
+      }
+    ],
+    "final_public_output_regeneration": "exact_match_single_main_reply0_current_main",
+    "audit_path": "threads/audits/reviewed-supply-a307142-20261119-r59.json",
+    "notice_id": "a307142",
+    "result": "APPROVED_STAGED_AND_QUEUE_PROMOTED_NOT_PUBLISHED",
+    "stage_sha": "7bf6cde52d416f05aaa25eed4a9edfb25c4e362b",
+    "queue_sha": "bce19651fff513f91b86c5ceabfc85fd612470c1",
+    "full_validator": "PASS",
+    "published": false,
+    "post_id": null
+  },
+  "writer_supply_recovery_20261119_1330": {
+    "observed_at": "2026-11-19T04:30:11.055Z",
+    "status": "READY_STAGED_QUEUE_PROMOTED_REMOTE_FULL_VALIDATION_PASS_NOT_PUBLISHED",
+    "notice_id": "a307067",
+    "scheduled_at": "2026-11-20T12:00:00+09:00",
+    "main_sha": "b3a135aafde63c845521319bd1b91dfd2fefc55e",
+    "history_sha": "08ebb1ab0b58a2edba57859d0f4fa7a217ca080f",
+    "queue_sha": "f1d4a593c241790e4715b17e7790f3c10dcfdc91",
+    "stage_sha": "09e51621243628b059ee607e3c8992e0814eb585",
+    "entry_sha256": "3947b3e9832c5df4f5159713f5c53f726d40e218fd9cffd2ff7197ed3711deac",
+    "body_chars": 261,
+    "full_remote_validator": "passed",
+    "full_queue_status": "validated",
+    "operating_future_ready_count": 4,
+    "ready_ids": [
+      "a307120",
+      "a307207",
+      "a307142",
+      "a307067"
+    ],
+    "approved_future_slots": [
+      "2026-11-19T16:00:00+09:00",
+      "2026-11-19T20:00:00+09:00",
+      "2026-11-20T08:00:00+09:00",
+      "2026-11-20T12:00:00+09:00"
+    ],
+    "pending_claims": 0,
+    "claims": {
+      "total": 58,
+      "accepted": 57,
+      "historical_verified": 1,
+      "pending": 0
+    },
+    "new_publications": 0,
+    "new_ready_saved": 1,
+    "new_queue_promoted": 1,
+    "actual_post_id": null,
+    "automation_on": true,
+    "audit_path": "threads/audits/supply-a307067-20261120-12-ready-20261119-r62.json",
+    "audit_blob": "7ab67a6d048e6ed99ad62cac5ea4f42bde2b5ccb",
+    "next_regular_preflight": "2026-11-19T15:45:00+09:00",
+    "next_regular_slot": "2026-11-19T16:00:00+09:00",
+    "no_user_action_required": true
+  },
+  "non_threads_source_incident_r62": {
+    "run_id": 44456424116,
+    "job_id": 135332436128,
+    "conclusion": "failure",
+    "updated_at": "2026-11-19T04:13:34Z",
+    "gojobs": "transport_timeout; failed_preserved, original preserved",
+    "pages": "No artifacts named \"github-pages\" were found",
+    "alio_last_success": "2026-11-19T13:10:50+09:00",
+    "alio_snapshot": "2026-11-19T13:10:14+09:00",
+    "treatment": "Actual ALIO feed immutable bytes SHA verified; independent official notice/card/profile/full queue all passed. Homepage/collector writes outside scope unchanged. Overall operations failure not reported as success; no manual rerun."
+  },
+  "previous_next_actions_r62": [
+    "Observe Nov13 08 preserved a306949 regular TEXT slot; do not change its body/assets/hash.",
+    "Observe Nov13 12 newly ready a306848 at the existing regular slot; IMAGE if08 succeeds asTEXT, otherwise determine from actual successful ledger. Never consume media alternation on preparation.",
+    "Collect later v2 24h windows through existing independent metrics job; first72h due Nov14 20:45:18.",
+    "Keep 14-day observation through Nov25 20:45:18; sample1 cannot establish improvement or change editorial weights.",
+    "PR51 and other unverified candidate holds remain; no bypass, backfill, tests or reruns.",
+    "Resolve a306989 notice/JD qualification scope discrepancy and employer ATS999 block; keep243char draft unassigned, no unverified queue entry.",
+    "Resolve a306807 ATS same-notice actual reception view/profile path and complete final review before assigning unstarted slot; preserve291char unassigned draft.",
+    "Observe Nov13 16 newly ready a306908 at existing regular slot; TEXT only if08 TEXT and12 IMAGE succeed, otherwise derive media from actual successful ledger. Exact reviewed IMAGE card is available; no backfill or new run.",
+    "Resolve a306875 ward-support50 graduation-scope ambiguity and exact application-end time/current notice, correction/profile/card checks; preserve268char draft unassigned. Do not fill20 with an unverified draft."
+  ]
 }
