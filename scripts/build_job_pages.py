@@ -344,6 +344,10 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_employment': ['정규직'],
         'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307251',
         'checked_on': '2026-11-19',
+        # Nine overlapping notices + unverified portal reception are not proof
+        # of five independently open vacancies. Keep the explanatory detail
+        # accessible, but do not present it as a verified current opening.
+        'application_status_unconfirmed': True,
         'role_mix_note': (
             '2026년 11월 19일 등록된 창원경상국립대학교병원 약무직 공고의 '
             '정규직 채용예정 인원은 5명입니다. 공식 JOB-ALIO 응시자격은 '
