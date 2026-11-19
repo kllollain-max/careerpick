@@ -7,6 +7,7 @@ import copy
 import json
 import re
 import tempfile
+from html import escape as html_escape
 from datetime import datetime, timezone
 from unittest.mock import patch
 from pathlib import Path
@@ -1121,14 +1122,14 @@ class JobPageTests(unittest.TestCase):
                 if evidence.get('expected_source_seats') is not None:
                     post['n'] = evidence['expected_source_seats']
             html = render(post, {})
-            self.assertIn(evidence['summary'], html)
+            self.assertIn(html_escape(evidence['summary']), html)
             self.assertIn('공식 직무기술서에서 확인한 담당업무', html)
             self.assertIn(evidence['source_url'], html)
             self.assertIn(evidence['checked_on'], html)
             unrelated = render(dict(post, title='다른 모집분야'), {})
-            self.assertNotIn(evidence['summary'], unrelated)
+            self.assertNotIn(html_escape(evidence['summary']), unrelated)
             wrong_org = render(dict(post, org='다른 기관'), {})
-            self.assertNotIn(evidence['summary'], wrong_org)
+            self.assertNotIn(html_escape(evidence['summary']), wrong_org)
 
     def test_verified_application_cutoff_expires_before_publication_end(self):
         post = {'id': 'a306355', 'alio': True, 'due': '2026-11-16T23:59:00+09:00'}
