@@ -15,6 +15,49 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_pnuh_thirty_three_role_split_and_original_1700_cutoff(self):
+        """Official PDF/ZIP proves 30+2+1 and 17:00; all editorial facts are identity-bound."""
+        from scripts.build_job_pages import (
+            VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS,
+        )
+        posts = {p['id']: p for p in json.loads(
+            Path('alio.json').read_text(encoding='utf-8'))['posts']}
+        post = posts['a307225']
+        original = copy.deepcopy(post)
+        duty = VERIFIED_DUTIES['a307225']
+        notice = VERIFIED_APPLICATION_NOTICES['a307225']
+        self.assertEqual(
+            (post['org'], post['title'], post['n'], post['emp'], post['due'][:10]),
+            (duty['organization'], duty['title'], '33', ['정규직'], '2026-12-03'),
+        )
+        self.assertEqual(notice['hiring_breakdown'],
+                         '진료지원간호사 30명 · 의료사회복지사 2명 · 산부인과 초음파실 방사선사 1명 = 정규직 총33명')
+        self.assertEqual(duty['notice_source_sha256'],
+                         'a45a7bebec1929e6f18315ee8ace0aa20b59ddf6af5cb40503d206f46faa3cd2')
+        self.assertEqual(duty['source_sha256'],
+                         '5919b21c2acdd40383a34da232ab3808cc6b0ca01e904a2cb5b26dce8fca10cf')
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS['a307225'],
+                         '2026-12-03T17:00:00+09:00')
+        self.assertFalse(post['dueHasTime'])
+        html = render(post, {})
+        for phrase in (
+            '진료지원간호사 30명', '의료사회복지사 2명', '산부인과', '방사선사 1명',
+            '2026-12-03 17:00', '기관 공식 확인 접수마감', '심장초음파',
+            '간호사면허', 'fileNo=3088502', 'fileNo=3088504',
+        ):
+            self.assertIn(phrase, html)
+        self.assertNotIn('기관 공식 확인 접수마감: 2026-12-03 23:59', html)
+        for changes in (
+            {'n': '32'}, {'title': post['title'] + ' 변경'}, {'org': '다른 기관'},
+            {'emp': ['계약직']}, {'due': '2026-12-04T23:59:00+09:00'},
+            {'alio': False},
+        ):
+            changed_html = render({**post, **changes}, {})
+            self.assertNotIn('진료지원간호사 30명', changed_html)
+            self.assertNotIn('fileNo=3088504', changed_html)
+            self.assertNotIn('기관 공식 확인 접수마감: 2026-12-03 17:00', changed_html)
+        self.assertEqual(post, original)
+
     def test_knuh_pharmacist_eleven_conditional_vacancies_and_no_fake_cutoff(self):
         """Until-filled pharmacist notice is not 11 currently open independent seats."""
         from scripts.build_job_pages import (
