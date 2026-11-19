@@ -126,6 +126,49 @@ VERIFIED_APPLICATION_NOTICES = {
         'checked_on': '2026-11-19',
         'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
+    # KNUH continuous pharmacist recruitment: official institution notice and publicly
+    # indexed PDF text checked 2026-11-19. The earlier ALIO PDF 3081708/duty
+    # 3081710 were archived in prior evidence, not byte/visually rechecked here.
+    # This is conditional-reception NOTICE guidance, NOT a verified duty or
+    # confirmation that 11 independent vacancies remain open today.
+    'a306182': {
+        'organization': '경북대학교병원',
+        'title': '2026년도 약무직 공개채용 수시모집',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '11',
+        'source_employment': ['정규직'],
+        'source_url': 'https://www.knuh.kr/content/04information/02_01.asp?b_num=7452&proc_type=view',
+        'checked_on': '2026-11-19',
+        'conditional_application_window_label': (
+            '2026-04-01부터 충원 시까지 (공고 효력은 2026-12-31까지; '
+            '현재 접수 활성·잔여 인원 미확인)'
+        ),
+        'role_mix_note': (
+            '경북대학교병원 2026년도 정규직 약무직 수시모집 공고의 11명은 '
+            '최초 채용 예정 인원입니다. 필수 지원자격은 약사 면허증 소지이며 '
+            '본원 정년 규정에 따라 만 60세 이상 지원은 제한됩니다. '
+            '원서접수는 2026년 4월 1일부터 예정인원 충원 시까지이고 '
+            '공고 자체의 효력은 2026년 12월 31일까지입니다. '
+            '공고 효력 종료일은 모든 11명이 그날까지 남아 있거나 '
+            '온라인 접수가 그날 23:59까지 열린다는 뜻이 아닙니다. '
+            '원문에 따르면 지원 순서에 따라 개별 전형을 진행하며 '
+            '예정인원 충원 후 접수자의 전형은 진행하지 않을 수 있습니다. '
+            '서류전형·면접·기재사항 증빙 확인 및 온라인 인성검사 절차를 '
+            '따르므로, 공식 지원화면에서 현재 접수 가능 여부와 '
+            '잔여 인원·수정 공고를 확인한 뒤 지원하세요. '
+            '해당 병원의 다른 약무직 과거·추가 공고와 인원을 자동 합산하거나 '
+            '약사의 구체적인 배치 부서·업무를 근거 없이 추정하지 않습니다.'
+        ),
+        'scope': (
+            '2026-11-19 기관 공식 2026년 약무직 수시모집 HTML 게시글과 '
+            '공식 공고 PDF 3039457의 공개 추출 텍스트로 11명·약사면허·'
+            '충원 시 종료/공고효력 12월 31일·개별 전형을 대조함. '
+            'PDF 원본 이미지 직접 재검증은 접근 403으로 미실시; '
+            '기존 보존 PDF 3081708/직무 PDF 3081710 바이너리·SHA를 '
+            '이번 회차에 재확인한 것은 아님. 실시간 채용사이트 접수 활성, '
+            '남은 결원 및 상세 약무업무 미검증. 직무원본 누적 불산입.'
+        ),
+    },
     # JOB-ALIO official notice HTML directly checked 2026-11-19.
     # Original recruitment JPG 3087104 and duty HWP 3087106 are recorded in
     # independent evidence but NOT visually/byte-verified in this run.
@@ -846,7 +889,7 @@ def render(post, detail, related_posts=(), notice_review=None):
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
         ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
-        ('원서 접수기간', confirmed_period or verified_application_notice.get('utc_application_window_label') or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
+        ('원서 접수기간', confirmed_period or verified_application_notice.get('utc_application_window_label') or verified_application_notice.get('conditional_application_window_label') or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
         *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
 
@@ -907,6 +950,7 @@ def render(post, detail, related_posts=(), notice_review=None):
                 '<p>이 표는 모집인원·자격 비교입니다. 각 분야의 상세 담당업무를 새로 검증한 표가 아닙니다. '
                 '공고문에서 접수기간 11월 11~20일은 확인했지만 정확한 마감시각은 확인되지 않았습니다. '
                 '게시 종료시각을 실제 원서접수 마감시각으로 사용하지 않으며, 마감시각은 기관 공고 확인 필요입니다.</p>')
+        conditional_window = verified_application_notice.get('conditional_application_window_label')
         utc_label = verified_application_notice.get('utc_application_window_label')
         # A UTC date-only recruitment window is display-only evidence. Never
         # silently convert it into a KST 23:59 cutoff or mark it time-confirmed.
@@ -914,7 +958,9 @@ def render(post, detail, related_posts=(), notice_review=None):
             '<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>'
             if confirmed_period else
             ('<p>공식 접수기간(UTC 기준): ' + escape(utc_label) + '</p>'
-             if isinstance(utc_label, str) and utc_label else '')
+             if isinstance(utc_label, str) and utc_label else
+             ('<p>공식 충원조건부 원서접수 안내: ' + escape(conditional_window) + '</p>'
+              if isinstance(conditional_window, str) and conditional_window else ''))
         )
         if proof_url and (reception or field_review):
             application_review_html = (
