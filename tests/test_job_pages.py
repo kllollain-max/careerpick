@@ -73,7 +73,8 @@ class JobPageTests(unittest.TestCase):
                          (proof['organization'], proof['title'], '11', ['정규직']))
         self.assertEqual(post['due'][:10], proof['source_end_date'])
         self.assertFalse(post['dueHasTime'])
-        self.assertNotIn('a306182', VERIFIED_DUTIES)
+        self.assertIn('a306182', VERIFIED_DUTIES)
+        self.assertEqual(VERIFIED_DUTIES['a306182']['source_sha256'], 'd36d8a1995b99faf57a5238d1d19f1b4dc4958fd2f40f122e92e3c644881fb55')
         self.assertNotIn('a306182', CONFIRMED_APPLICATION_CUTOFFS)
         html = render(post, {})
         for phrase in ('약사 면허증', '11명은', '충원 시까지',
@@ -109,13 +110,14 @@ class JobPageTests(unittest.TestCase):
                          (proof['organization'], proof['title'], '11', ['정규직']))
         self.assertEqual(post['due'][:10], proof['source_end_date'])
         self.assertFalse(post['dueHasTime'])
-        self.assertNotIn('a306992', VERIFIED_DUTIES)
+        self.assertIn('a306992', VERIFIED_DUTIES)
+        self.assertEqual(VERIFIED_DUTIES['a306992']['source_sha256'], '2974abde58a6d030771a23f6b05378a0c0a8d29b33a7134d43baf79515176fca')
         self.assertNotIn('a306992', CONFIRMED_APPLICATION_CUTOFFS)
         html = render(post, {})
         for phrase in ('보철과 5명', '치주과 3명', '보존과 3명',
                        '교육수련부 방문 제출', '중복 지원', '인턴 기수료자',
                        '2026-11-16 ~ 2026-11-20 (마감시각 공식 공고 확인 필요)',
-                       '11월 29일 공동 필기시험', '별도 원본 육안',
+                       '11월 29일 공동 필기시험', '공공의료 관련 업무',
                        'job.alio.go.kr/recruitview.do?idx=306992'):
             self.assertIn(phrase, html)
         self.assertNotIn('기관 공식 확인 접수마감', html)
@@ -131,7 +133,7 @@ class JobPageTests(unittest.TestCase):
 
     def test_kipf_ten_public_ejm_utc_deadline_and_documents_are_source_bound(self):
         """Actual EJM accepts applications; UTC midnight is not synthetic KST 23:59."""
-        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
         post = posts['a305734']
         original = copy.deepcopy(post)
@@ -141,11 +143,13 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual(post['due'][:10], proof['source_end_date'])
         self.assertEqual(post['dueHasTime'], False)
         self.assertNotIn('a305734', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertIn('a305734', VERIFIED_DUTIES)
+        self.assertEqual(VERIFIED_DUTIES['a305734']['source_sha256'], '37dd16fa018543d5ca1cc108ed2c2757570bbb723fe2cd715e4c3d2320257654')
         html = render(post, {})
         for phrase in ('Research Fellow', '박사학위', '추천인 3명', 'Job market paper',
                        '2026-10-06 ~ 2026-11-30', 'midnight UTC',
                        '한국시간 종료시각 미확정', 'accepting applications',
-                       'econjobmarket.org/positions/12745'):
+                       'econjobmarket.org/positions/12745', 'fileNo=3079033'):
             self.assertIn(phrase, html)
         self.assertNotIn('기관 공식 확인 접수마감', html)
         self.assertNotIn('2026-11-30 23:59 (KST)', html)
