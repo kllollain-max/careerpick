@@ -126,6 +126,41 @@ VERIFIED_APPLICATION_NOTICES = {
         'checked_on': '2026-11-19',
         'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
+    # Verified 2026-11-19 against official JOB-ALIO and the live EJM 12745
+    # application page. UTC deadline is date-only in ALIO; do not invent KST cutoff.
+    # This is PUBLIC NOTICE / LIVE PORTAL evidence, not new PDF job-duty verification.
+    'a305734': {
+        'organization': '한국조세재정연구원',
+        'title': '[한국조세재정연구원] 연구위원급(Research Fellow) 정기채용',
+        'source_end_date': '2026-11-30',
+        'expected_source_seats': '10',
+        'source_employment': ['정규직'],
+        'source_url': 'https://econjobmarket.org/positions/12745',
+        'checked_on': '2026-11-19',
+        'utc_application_window_label': '2026-10-06 ~ 2026-11-30 (UTC 기준·한국시간 종료시각 미확정)',
+        'role_mix_note': (
+            '한국조세재정연구원 연구위원급 정규직 전체 10명 모집입니다. '
+            '경제학 또는 관련 분야 박사학위 소지자(취득 예정자 포함)이며, '
+            'Econ Job Market 원문은 임용 시작 때까지 박사학위를 취득해야 한다고 안내합니다. '
+            '조세·재정 및 공공부문 정책 연구를 수행하고 주근무지는 세종입니다. '
+            '서류 → 면접 → 세미나 전형을 거치며, 지원서에는 영문 자기소개서(Cover letter), '
+            '이력서(CV), 연구논문(Job market paper) 및 추천인 3명의 추천서 제출이 요구됩니다. '
+            '추천서는 추천인이 EJM 시스템에서 제출하며 세부 업로드 절차를 확인하세요. '
+            '실제 공식 EJM 공고에는 2026년 11월 19일 조회 기준 '
+            '“accepting applications”로 표시됐지만 10명이 모두 남아 있다는 실시간 증거는 아닙니다. '
+            '원문 접수마감은 2026년 11월 30일 midnight UTC 표기입니다. '
+            'ALIO 게시 종료시각 23:59 KST를 원서마감으로 바꾸거나 '
+            'midnight의 해석 없이 한국시간 마감시각을 임의 확정하지 마세요.'
+        ),
+        'scope': (
+            '2026-11-19 공식 JOB-ALIO a305734 및 Econ Job Market positions/12745 '
+            '공개 HTML 직접 확인: 정규직 10명·박사(예정자 포함)·세종·정책 연구·추천서3·'
+            '접수수락 표시와 UTC 마감 표현. 제출 화면 로그인 후 최종 접수 성공까지는 '
+            '검증하지 않았음. 기존 공식 PDF 3079032·3079033 원본은 별도 이전 '
+            '증거 ZIP 보존 자료이며 이 회차에 바이너리 재검증하지 않았으므로 '
+            '새 직무원본 검증 누적으로 계산하지 않음.'
+        ),
+    },
     # JOB-ALIO public text (2026-11-19) conflicts internally: employment is
     # labeled '정규직' while the selection-stage heading is '개방형 계약직'.
     # This is a discrepancy notice only; do not assert a confirmed contract
@@ -772,7 +807,7 @@ def render(post, detail, related_posts=(), notice_review=None):
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
         ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
-        ('원서 접수기간', confirmed_period or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
+        ('원서 접수기간', confirmed_period or verified_application_notice.get('utc_application_window_label') or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
         *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
 
