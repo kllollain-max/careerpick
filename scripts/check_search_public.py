@@ -218,7 +218,11 @@ def verified_unconfirmed_reception_exclusions(posts, missing, loader):
             continue
         url = BASE + 'jobs/' + pid + '.html'
         row, body = loader(url)
-        if row['status'] != 200 or body is None:
+        # A redirect or a non-HTML response is not the reviewed detail page,
+        # even if it contains copied canonical/noindex markers and explanatory text.
+        if (row['status'] != 200 or body is None
+                or not same_url(row.get('final_url', url), url)
+                or 'html' not in str(row.get('content_type', '')).lower()):
             continue
         source = body.decode('utf-8', 'replace')
         doc = Page(source)
