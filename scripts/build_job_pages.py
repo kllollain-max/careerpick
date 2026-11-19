@@ -126,6 +126,45 @@ VERIFIED_APPLICATION_NOTICES = {
         'checked_on': '2026-11-19',
         'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
+    # JOB-ALIO official notice HTML directly checked 2026-11-19.
+    # Original recruitment JPG 3087104 and duty HWP 3087106 are recorded in
+    # independent evidence but NOT visually/byte-verified in this run.
+    # This is a notice-specific guidance update, not a new verified duty source.
+    'a306992': {
+        'organization': '한국보훈복지의료공단',
+        'title': '[중앙보훈병원]2027년 치과의사전공의(레지던트1년차) 채용공고',
+        'source_end_date': '2026-11-20',
+        'expected_source_seats': '11',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306992',
+        'checked_on': '2026-11-19',
+        'application_start': '2026-11-16',
+        'application_end_date': '2026-11-20',
+        'role_mix_note': (
+            '중앙보훈병원 치과 레지던트 1년차 공고의 전체 모집 11명은 '
+            '보철과 5명, 치주과 3명, 보존과 3명의 합계입니다. '
+            '지원자는 인턴 기수료자 또는 2027년 2월 수료예정자여야 하며, '
+            '의무사관후보생의 수련 완료 연령 조건과 공단 인사규정·성범죄 취업제한 '
+            '결격사유를 확인해야 합니다. 다른 수련병원(기관)에 중복 지원·응시할 수 없습니다. '
+            '공식 ALIO의 실제 서류 접수기간은 2026년 11월 16~20일이고 '
+            '접수방법은 중앙보훈병원 교육수련부 방문 제출입니다. '
+            '11월 29일 공동 필기시험, 12월 2일 면접, 12월 4일 합격 발표 예정이며 '
+            '기관 공지로 변경될 수 있습니다. 정확한 방문 접수 마감시각은 '
+            '공식 HTML에 명시되지 않아 23:59로 추정하지 않습니다. '
+            '교육수련부의 실제 방문 접수 가능 상태와 서류 제출시간은 방문 전 확인하세요. '
+            '이 안내는 모집절차·요건의 확인사항이지, 개별 치과 시술이나 배치업무의 '
+            '공식 직무기술서 검증이 아닙니다. 첨부 JPG의 세부 내용 및 직무 HWP는 '
+            '별도 원본 육안·바이너리 검증 후 추가 반영해야 합니다.'
+        ),
+        'scope': (
+            'JOB-ALIO a306992 공식 HTML 직접 재조회 2026-11-19: '
+            '레지던트 11명(보철5·치주3·보존3), 정규직 표시, 인턴 수료 조건, '
+            '서류 방문접수 11/16~20 및 시험·면접 날짜를 확인함. '
+            '공고 JPG 3087104·직무 HWP 3087106 원본은 기존 선행 확보 기록만 '
+            '보존하며 이 회차에 독립 재검증하지 못했음. 방문 접수 마감시각과 '
+            '당일 실제 접수창·잔여인원은 미확인, 신규 직무원본 검토수에 합산 금지.'
+        ),
+    },
     # Verified 2026-11-19 against official JOB-ALIO and the live EJM 12745
     # application page. UTC deadline is date-only in ALIO; do not invent KST cutoff.
     # This is PUBLIC NOTICE / LIVE PORTAL evidence, not new PDF job-duty verification.
