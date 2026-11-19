@@ -59,6 +59,40 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('기관 공식 확인 접수마감: 2026-12-03 17:00', changed_html)
         self.assertEqual(post, original)
 
+    def test_new_changwon_pharmacist_five_overlapping_notice_warning_source_bound(self):
+        """ALIO 5 planned seats cannot be summed with nine historic same-employer notices."""
+        from scripts.build_job_pages import (
+            VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS,
+        )
+        posts = json.loads(Path('alio.json').read_text(encoding='utf-8'))['posts']
+        post = next(p for p in posts if p['id'] == 'a307251')
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES['a307251']
+        self.assertEqual((post['org'], post['title'], post['n'], post['emp']),
+                         (proof['organization'], proof['title'], '5', ['정규직']))
+        self.assertEqual(post['due'][:10], proof['source_end_date'])
+        self.assertFalse(post['dueHasTime'])
+        overlap = [p for p in posts if
+                   p['org'] == post['org'] and '약무직' in p['title'] and
+                   p['id'] != 'a307251']
+        self.assertEqual(len(overlap), 9)
+        self.assertNotIn('a307251', VERIFIED_DUTIES)
+        self.assertNotIn('a307251', CONFIRMED_APPLICATION_CUTOFFS)
+        html = render(post, {})
+        for phrase in ('2027년 면허 취득예정자', '약무직 유사 공고 9건',
+                       '현재 남은 결원이 5명이라고 단정하지 마세요',
+                       '실제 원서접수 마감시각', 'idx=307251'):
+            self.assertIn(phrase, html)
+        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertNotIn('2026-12-31 23:59 (KST)', html)
+        for changed in ({'n': '6'}, {'title': post['title'] + ' 정정'},
+                        {'org': '변경 기관'}, {'due': '2027-01-01T23:59:00+09:00'},
+                        {'emp': ['계약직']}, {'alio': False}):
+            stale = render({**post, **changed}, {})
+            self.assertNotIn('약무직 유사 공고 9건', stale)
+            self.assertNotIn('2027년 면허 취득예정자', stale)
+        self.assertEqual(post, original)
+
     def test_knuh_pharmacist_eleven_conditional_vacancies_and_no_fake_cutoff(self):
         """Until-filled pharmacist notice is not 11 currently open independent seats."""
         from scripts.build_job_pages import (
@@ -1058,7 +1092,7 @@ class JobPageTests(unittest.TestCase):
         original = copy.deepcopy(posts)
         result = homepage_cutoff_metadata(posts, CONFIRMED_APPLICATION_CUTOFFS,
                                           {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES})
-        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963', 'a306875', 'a306874', 'a306992', 'a307017', 'a292472', 'a299412', 'a292002', 'a305089', 'a306182'}
+        expected = set(CONFIRMED_APPLICATION_CUTOFFS) | {'a306929', 'a306963', 'a306875', 'a306874', 'a306992', 'a307251', 'a307017', 'a292472', 'a299412', 'a292002', 'a305089', 'a306182'}
         if any(p.get('id') == 'a307149' for p in posts):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
