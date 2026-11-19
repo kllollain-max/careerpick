@@ -96,6 +96,40 @@ jobs:
             if re.search(r'(채용|접수|마감|자격|우대|근무|경력|면허|기간|정규직|4명|23일|11월|지원)',line):
               print('OFFICIAL_HWP_TEXT',line[:650])
           PY
+      - name: Generate official-source based v5 image card preview (unapproved, never upload to main)
+        shell: bash
+        run: |
+          python -m pip install --quiet pillow
+          python - <<'PY'
+          import pathlib,json,hashlib,datetime
+          from zoneinfo import ZoneInfo
+          from PIL import Image
+          from scripts.threads_v5 import generate_card
+          root=pathlib.Path('official-a307082')
+          source=json.loads((root/'receipt.json').read_text(encoding='utf-8'))
+          text=(root/'full-text.txt').read_text(encoding='utf-8')
+          if not (source['sha256']=='47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478' and '간호' in text and '80' in text and '10' in text):
+              raise RuntimeError('ORIGINAL_HWP_SEMANTIC_GUARD_FAILED')
+          image_job={'id':'a307082','org':'대한적십자사','title':'간호사','count':4,
+              'employment':'정규직','location':'서울','due':'2026-11-23',
+              'deadline_label':'2026-11-23 10:00','restriction':'병동 임상경력 1년 이상'}
+          target=root/'a307082-source-backed.jpg'
+          generate_card(image_job,target)
+          im=Image.open(target).convert('RGB')
+          if im.size!=(1080,1080):raise RuntimeError('CARD_RENDER_SIZE_NOT_1080')
+          preview=root/'a307082-source-backed-360.png'
+          im.resize((360,360),Image.Resampling.LANCZOS).save(preview,format='PNG')
+          data={
+            'notice_id':'a307082','status':'unapproved_visual_review_required',
+            'source_checked_at':source['checked_at_kst'],'generated_at':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),
+            'image_job':image_job,'card_path':str(target),'preview_path':str(preview),
+            'card_sha256':hashlib.sha256(target.read_bytes()).hexdigest(),
+            'preview_sha256':hashlib.sha256(preview.read_bytes()).hexdigest(),
+            'card_bytes':target.stat().st_size,'preview_bytes':preview.stat().st_size,
+            'registered_in_main':False,'cas_registered':False,'meta_posted':False}
+          (root/'card-preview-receipt.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('V5_CARD_PREVIEW_ONLY='+json.dumps(data,ensure_ascii=False))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
