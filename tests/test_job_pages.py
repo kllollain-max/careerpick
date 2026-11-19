@@ -35,7 +35,7 @@ class JobPageTests(unittest.TestCase):
                 self.assertEqual(proof['source_employment'], ['정규직'])
                 self.assertEqual(post['n'], seats)
                 self.assertEqual(post['emp'], ['정규직'])
-                self.assertIn('id="job-duties"', render(post, {}))
+                self.assertIn(proof['summary'], render(post, {}))
                 self.assertIn(pid, homepage_cutoff_metadata([post], {}, {pid: proof}))
                 for changed in (
                     {'n': '1'}, {'emp': ['계약직']},
@@ -43,7 +43,8 @@ class JobPageTests(unittest.TestCase):
                     {'due': '2027-01-01T23:59:00+09:00'}, {'alio': False},
                 ):
                     altered = {**post, **changed}
-                    self.assertNotIn('id="job-duties"', render(altered, {}))
+                    self.assertNotIn(proof['summary'], render(altered, {}))
+                    self.assertNotIn(proof['applicant_check'], render(altered, {}))
                     self.assertNotIn(
                         pid, homepage_cutoff_metadata([altered], {}, {pid: proof}))
                 self.assertEqual(post, original)
