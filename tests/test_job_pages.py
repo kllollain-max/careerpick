@@ -77,7 +77,16 @@ class JobPageTests(unittest.TestCase):
         self.assertIn('a306182', VERIFIED_DUTIES)
         self.assertEqual(VERIFIED_DUTIES['a306182']['source_sha256'], 'd36d8a1995b99faf57a5238d1d19f1b4dc4958fd2f40f122e92e3c644881fb55')
         self.assertNotIn('a306182', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertTrue(proof['application_status_unconfirmed'])
         html = render(post, {})
+        self.assertIn('<meta name="robots" content="noindex,follow">', html)
+        self.assertNotIn('type="application/ld+json"', html)
+        from scripts.priority_candidate_audit import shortlist
+        from datetime import date
+        result = shortlist({'posts': [post]}, date(2026, 11, 19),
+                           verified_windows={'a306182': proof})
+        self.assertEqual(result['excluded']['official_current_status_unconfirmed'], 1)
+        self.assertEqual(result['regular_review_candidates'], [])
         for phrase in ('약사 면허증', '11명은', '충원 시까지',
                        '2026-04-01', '2026-12-31',
                        '현재 접수 활성·잔여 인원 미확인',
@@ -95,6 +104,7 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('현재 접수 활성·잔여 인원 미확인', stale)
             self.assertNotIn('b_num=7452', stale)
             self.assertNotIn('예정인원 충원 후 접수자의 전형', stale)
+            self.assertNotIn('<meta name="robots" content="noindex,follow">', stale)
         self.assertEqual(post, original)
 
     def test_cvhd_dental_resident_eleven_official_notice_only_and_exact_identity(self):
