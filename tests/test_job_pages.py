@@ -16,6 +16,38 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+
+    def test_until_filled_pharmacist_source_guards_bind_headcount_and_employment(self):
+        """Legacy until-filled 20/19 seats cannot keep stale editorial facts after ALIO changes."""
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        from scripts.build_public_site import homepage_cutoff_metadata
+
+        posts = {p['id']: p for p in json.loads(
+            Path('alio.json').read_text(encoding='utf-8'))['posts']}
+        for pid, seats in (('a292472', '20'), ('a299412', '19')):
+            with self.subTest(pid=pid):
+                post = posts[pid]
+                original = copy.deepcopy(post)
+                proof = VERIFIED_DUTIES[pid]
+                self.assertTrue(proof['strict_source_identity'])
+                self.assertTrue(proof['application_status_unconfirmed'])
+                self.assertEqual(proof['expected_source_seats'], seats)
+                self.assertEqual(proof['source_employment'], ['정규직'])
+                self.assertEqual(post['n'], seats)
+                self.assertEqual(post['emp'], ['정규직'])
+                self.assertIn('id="job-duties"', render(post, {}))
+                self.assertIn(pid, homepage_cutoff_metadata([post], {}, {pid: proof}))
+                for changed in (
+                    {'n': '1'}, {'emp': ['계약직']},
+                    {'title': post['title'] + ' 정정'}, {'org': '다른 기관'},
+                    {'due': '2027-01-01T23:59:00+09:00'}, {'alio': False},
+                ):
+                    altered = {**post, **changed}
+                    self.assertNotIn('id="job-duties"', render(altered, {}))
+                    self.assertNotIn(
+                        pid, homepage_cutoff_metadata([altered], {}, {pid: proof}))
+                self.assertEqual(post, original)
+
     def test_pnuh_thirty_three_role_split_and_original_1700_cutoff(self):
         """Official PDF/ZIP proves 30+2+1 and 17:00; all editorial facts are identity-bound."""
         from scripts.build_job_pages import (
