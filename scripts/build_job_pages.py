@@ -701,7 +701,9 @@ def render(post, detail, related_posts=(), notice_review=None):
                 and (post.get('alio') is not True
                      or verified_duties.get('source_end_date') != clean(post.get('due'))[:10]
                      or (verified_duties.get('source_employment')
-                         and verified_duties['source_employment'] != post.get('emp'))))):
+                         and verified_duties['source_employment'] != post.get('emp'))
+                     or (verified_duties.get('expected_source_seats') is not None
+                         and verified_duties['expected_source_seats'] != clean(post.get('n')))))):
         verified_duties = {}
 
     # Exact-source display correction only: preserve collection snapshots and
