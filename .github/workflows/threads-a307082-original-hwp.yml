@@ -99,6 +99,7 @@ jobs:
       - name: Generate official-source based v5 image card preview (unapproved, never upload to main)
         shell: bash
         run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-nanum > /dev/null
           python -m pip install --quiet pillow
           python - <<'PY'
           import pathlib,json,hashlib,datetime
