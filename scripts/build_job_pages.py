@@ -128,10 +128,9 @@ VERIFIED_APPLICATION_NOTICES = {
         'checked_on': '2026-11-19',
         'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
-    # KNUH continuous pharmacist recruitment: official institution notice and publicly
-    # indexed PDF text checked 2026-11-19. The earlier ALIO PDF 3081708/duty
-    # 3081710 were archived in prior evidence, not byte/visually rechecked here.
-    # This is conditional-reception NOTICE guidance, NOT a verified duty or
+    # KNUH continuous pharmacist recruitment: official institution notice and
+    # archived ALIO notice/duty originals byte-SHA checked 2026-11-19; the
+    # duty PDF's first page was visually reviewed. Still conditional reception;
     # confirmation that 11 independent vacancies remain open today.
     'a306182': {
         'organization': '경북대학교병원',
@@ -165,16 +164,16 @@ VERIFIED_APPLICATION_NOTICES = {
             '2026-11-19 기관 공식 2026년 약무직 수시모집 HTML 게시글과 '
             '공식 공고 PDF 3039457의 공개 추출 텍스트로 11명·약사면허·'
             '충원 시 종료/공고효력 12월 31일·개별 전형을 대조함. '
-            'PDF 원본 이미지 직접 재검증은 접근 403으로 미실시; '
-            '기존 보존 PDF 3081708/직무 PDF 3081710 바이너리·SHA를 '
-            '이번 회차에 재확인한 것은 아님. 실시간 채용사이트 접수 활성, '
-            '남은 결원 및 상세 약무업무 미검증. 직무원본 누적 불산입.'
+            '보존 공고 PDF3081708 및 직무 PDF3081710의 SHA256을 독립 대조하고 '
+            '직무 PDF 1쪽을 육안 판독하여 대표 약무업무를 검증함. '
+            '실시간 채용사이트 접수 활성·잔여인원은 여전히 미확인. '
+            '이전 별도 기관 PDF3039457의 403과 이번 보존 원본검증을 혼동하지 않음.'
         ),
     },
     # JOB-ALIO official notice HTML directly checked 2026-11-19.
-    # Original recruitment JPG 3087104 and duty HWP 3087106 are recorded in
-    # independent evidence but NOT visually/byte-verified in this run.
-    # This is a notice-specific guidance update, not a new verified duty source.
+    # Recruitment JPG 3087104 was visually checked, and duty HWP 3087106
+    # SHA/BodyText read from the archived original. Scope only as explicitly
+    # written in NCS duty description; no detailed clinical tasks inferred.
     'a306992': {
         'organization': '한국보훈복지의료공단',
         'title': '[중앙보훈병원]2027년 치과의사전공의(레지던트1년차) 채용공고',
@@ -197,22 +196,22 @@ VERIFIED_APPLICATION_NOTICES = {
             '기관 공지로 변경될 수 있습니다. 정확한 방문 접수 마감시각은 '
             '공식 HTML에 명시되지 않아 23:59로 추정하지 않습니다. '
             '교육수련부의 실제 방문 접수 가능 상태와 서류 제출시간은 방문 전 확인하세요. '
-            '이 안내는 모집절차·요건의 확인사항이지, 개별 치과 시술이나 배치업무의 '
-            '공식 직무기술서 검증이 아닙니다. 첨부 JPG의 세부 내용 및 직무 HWP는 '
-            '별도 원본 육안·바이너리 검증 후 추가 반영해야 합니다.'
+            '공고 JPG 원본은 육안 판독하고 직무 HWP의 원본 SHA256과 '
+            'BodyText를 대조했습니다. 직무수행내용은 공공의료 관련 업무와 '
+            '기타 행정업무만 명시하며, 개별 치과 시술을 추가 추정하지 않습니다.'
         ),
         'scope': (
             'JOB-ALIO a306992 공식 HTML 직접 재조회 2026-11-19: '
             '레지던트 11명(보철5·치주3·보존3), 정규직 표시, 인턴 수료 조건, '
             '서류 방문접수 11/16~20 및 시험·면접 날짜를 확인함. '
-            '공고 JPG 3087104·직무 HWP 3087106 원본은 기존 선행 확보 기록만 '
-            '보존하며 이 회차에 독립 재검증하지 못했음. 방문 접수 마감시각과 '
-            '당일 실제 접수창·잔여인원은 미확인, 신규 직무원본 검토수에 합산 금지.'
+            '공고 JPG3087104 원본 SHA256·육안 판독과 직무 HWP3087106 '
+            '바이트 SHA256·BodyText 검증 완료. 구체 시술은 원문에 미기재. '
+            '방문 접수 정확한 마감시각과 실제 접수 가능 여부·잔여인원은 미확인.'
         ),
     },
     # Verified 2026-11-19 against official JOB-ALIO and the live EJM 12745
     # application page. UTC deadline is date-only in ALIO; do not invent KST cutoff.
-    # This is PUBLIC NOTICE / LIVE PORTAL evidence, not new PDF job-duty verification.
+    # Public portal evidence is separate from newly SHA-verified original job-duty PDF.
     'a305734': {
         'organization': '한국조세재정연구원',
         'title': '[한국조세재정연구원] 연구위원급(Research Fellow) 정기채용',
@@ -240,9 +239,10 @@ VERIFIED_APPLICATION_NOTICES = {
             '2026-11-19 공식 JOB-ALIO a305734 및 Econ Job Market positions/12745 '
             '공개 HTML 직접 확인: 정규직 10명·박사(예정자 포함)·세종·정책 연구·추천서3·'
             '접수수락 표시와 UTC 마감 표현. 제출 화면 로그인 후 최종 접수 성공까지는 '
-            '검증하지 않았음. 기존 공식 PDF 3079032·3079033 원본은 별도 이전 '
-            '증거 ZIP 보존 자료이며 이 회차에 바이너리 재검증하지 않았으므로 '
-            '새 직무원본 검증 누적으로 계산하지 않음.'
+            '검증하지 않았음. 기존 증거 ZIP 공고PDF3079032·직무PDF3079033 원본 바이트 SHA를 '
+            '독립 대조했으며 직무기술서 1쪽 내용을 직접 판독함. '
+            '공고 PDF의 일부 숫자는 폰트 추출 문제로 이전 육안 기록과 '
+            'EJM 공식 화면으로 대조. 잔여결원·실제 제출 성공 미검증.'
         ),
     },
     # JOB-ALIO public text (2026-11-19) conflicts internally: employment is
