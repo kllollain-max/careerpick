@@ -70,7 +70,8 @@ jobs:
                           receipt["attachment_receipts"].append(info)
                       except Exception as e:
                           receipt["errors"].append({"attachment":full,"error":str(e)[:250]})
-                  entry["attachment_links"]=links[:30]\n            print("ATTACHMENT_CANDIDATES",label,json.dumps(links[:12],ensure_ascii=False))
+                  entry["attachment_links"]=links[:30]
+            print("ATTACHMENT_CANDIDATES",label,json.dumps(links[:12],ensure_ascii=False))
               except Exception as e:
                   entry["error"]=str(e)[:350]
                   receipt["errors"].append({"source":label,"error":str(e)[:250]})
