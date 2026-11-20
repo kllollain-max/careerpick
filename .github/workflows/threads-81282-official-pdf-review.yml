@@ -1,0 +1,112 @@
+name: Threads 81282 official independent PDF fact review (no publication)
+on:
+  push:
+    branches:
+      - review/threads-81282-official-pdf-20261118-0445
+    paths:
+      - .github/workflows/threads-81282-official-pdf-review.yml
+permissions:
+  contents: read
+jobs:
+  official-pdf-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests pymupdf
+      - name: Download exact verified foundation attachment and extract full text
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,hashlib,json,pathlib,datetime,time,urllib.parse
+          import fitz
+          out=pathlib.Path("official-81282-evidence")
+          out.mkdir(exist_ok=True)
+          u="https://www.yongsanculture.or.kr/site/main/file/download/316"
+          s=requests.Session()
+          s.headers["User-Agent"]="Mozilla/5.0 CareerPick official read-only reviewer"
+          for i in range(3):
+              try:
+                  r=s.get(u,timeout=(12,35),allow_redirects=True)
+                  r.raise_for_status()
+                  break
+              except requests.RequestException:
+                  if i==2:raise
+                  time.sleep((2,4)[i])
+          host=urllib.parse.urlparse(r.url).hostname
+          if host not in ("www.yongsanculture.or.kr","yongsanculture.or.kr"):
+              raise ValueError("NON_CANONICAL_HOST")
+          data=r.content
+          if not data.startswith(b"%PDF-"):raise ValueError("OFFICIAL_ATTACHMENT_NOT_PDF")
+          sha=hashlib.sha256(data).hexdigest()
+          doc=fitz.open(stream=data,filetype="pdf")
+          pages=[p.get_text(sort=True) for p in doc]
+          text="\n\n=== page break ===\n\n".join(pages)
+          if len(text.strip())<600 or not ("용산문화재단" in text and "2026" in text):
+              raise ValueError("NO_MEANINGFUL_OFFICIAL_PDF_TEXT")
+          evidence={"notice_family":["cleaneye-81280","cleaneye-81281","cleaneye-81282","cleaneye-81283","cleaneye-81284","cleaneye-81285","cleaneye-81286","cleaneye-81287"],"source_url":u,"response_url":r.url,"checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"status":r.status_code,"length_bytes":len(data),"sha256":sha,"pages":len(doc),"page_chars":[len(x) for x in pages],"approval":False,"posted":False,"cas_registered":False}
+          (out/"receipt.json").write_text(json.dumps(evidence,ensure_ascii=False,indent=2),encoding="utf-8")
+          (out/"source-full-text.txt").write_text(text,encoding="utf-8")
+          print("OFFICIAL_RECEIPT="+json.dumps(evidence,ensure_ascii=False))
+          print("OFFICIAL_FULL_TEXT_BEGIN")
+          print(text[:50000])
+          print("OFFICIAL_FULL_TEXT_END")
+          PY
+      - name: Read actual employer notice, application portal and existing CareerPick detail (no writes)
+        shell: bash
+        run: |
+          python -m pip install --quiet playwright==1.58.0
+          python -m playwright install chromium
+          python - <<'PY'
+          import asyncio,datetime,json,pathlib
+          from playwright.async_api import async_playwright
+          async def main():
+              out=pathlib.Path("official-81282-evidence")
+              out.mkdir(exist_ok=True)
+              results=[]
+              async with async_playwright() as p:
+                  browser=await p.chromium.launch(headless=True,args=["--no-sandbox"])
+                  urls=[
+                      ("employer_notice","https://www.yongsanculture.or.kr/site/main/archive/post/2026년-제4차-용산문화재단-직원-공개경쟁채용-공고"),
+                      ("employer_application","https://yongsanculture.incruit.com/"),
+                      ("profile_81282","https://kllollain-max.github.io/careerpick/#job=cleaneye-81282")]
+                  for name,url in urls:
+                      page=await browser.new_page(viewport={"width":390,"height":844})
+                      row={"name":name,"requested_url":url,"checked_at":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+                      try:
+                          response=await page.goto(url,wait_until="domcontentloaded",timeout=45000)
+                          await page.wait_for_timeout(9000)
+                          body=await page.locator("body").inner_text(timeout=15000)
+                          row.update({"http":response.status if response else None,
+                              "final_url":page.url,"visible_characters":len(body),
+                              "visible_text":body[:4500],
+                              "mentions_exact_job":("제4차" in body or "81282" in body),
+                              "mentions_institution":"용산문화재단" in body,
+                              "mentions_application":any(x in body for x in ("지원하기","접수중","입사지원","접수기간")),
+                              "shows_loading_only":("로딩 중" in body and len(body)<140)})
+                          await page.screenshot(path=str(out/(name+".png")),full_page=False,timeout=25000)
+                      except Exception as exc:
+                          row["error"]=str(exc)[:400]
+                      results.append(row)
+                      await page.close()
+                  await browser.close()
+              record={"scope":"81282 exact applicant and displayed profile only","read_only":True,
+                  "no_form_submission":True,"cas_registered":False,"meta_posted":False,
+                  "observations":results,
+                  "approval":"HOLD until exact application, corrections, profile and production validators independently pass"}
+              (out/"browser-review.json").write_text(json.dumps(record,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+              print("BROWSER_READ_ONLY="+json.dumps(record,ensure_ascii=False))
+          asyncio.run(main())
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-81282-official-independent-pdf
+          path: official-81282-evidence/
+          if-no-files-found: warn
+          retention-days: 14
