@@ -49,6 +49,53 @@ class JobPageTests(unittest.TestCase):
                         pid, homepage_cutoff_metadata([altered], {}, {pid: proof}))
                 self.assertEqual(post, original)
 
+    def test_source_verified_cutoff_enables_jobposting_only_while_open(self):
+        """Only current source-bound employer cutoff may become JSON-LD validThrough."""
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+        posts = {p['id']: p for p in json.loads(
+            Path('alio.json').read_text(encoding='utf-8'))['posts']}
+        pnuh = posts['a307225']
+        expected_cutoff = CONFIRMED_APPLICATION_CUTOFFS['a307225']
+
+        def snapshot(post, instant):
+            with patch('scripts.build_job_pages.datetime') as clock:
+                clock.fromisoformat.side_effect = datetime.fromisoformat
+                clock.now.return_value = instant.astimezone(timezone.utc)
+                return render(post, {})
+
+        active = snapshot(pnuh, datetime(2026, 11, 21, tzinfo=timezone.utc))
+        self.assertNotIn('<meta name="robots" content="noindex,follow">', active)
+        ld_json = re.search(
+            r'<script type="application/ld\\+json">(.*?)</script>', active, re.S)
+        self.assertIsNotNone(ld_json)
+        schema = json.loads(ld_json.group(1))
+        self.assertEqual(schema['@type'], 'JobPosting')
+        self.assertEqual(schema['validThrough'], expected_cutoff)
+        self.assertEqual(schema['url'],
+                         'https://kllollain-max.github.io/careerpick/jobs/a307225.html')
+        self.assertNotEqual(schema['validThrough'], pnuh['due'])
+
+        # A source correction invalidates editorial cutoff and structured data.
+        for changes in ({'n': '32'}, {'org': '다른 기관'},
+                        {'title': pnuh['title'] + ' 변경'},
+                        {'due': '2026-12-04T23:59:00+09:00'},
+                        {'emp': ['계약직']}, {'alio': False}):
+            with self.subTest(changes=changes):
+                stale = snapshot({**pnuh, **changes},
+                                 datetime(2026, 11, 21, tzinfo=timezone.utc))
+                self.assertNotIn('type="application/ld+json"', stale)
+
+        archived = snapshot(pnuh, datetime.fromisoformat(expected_cutoff))
+        self.assertIn('<meta name="robots" content="noindex,follow">', archived)
+        self.assertNotIn('type="application/ld+json"', archived)
+
+        # Neither a date-only UTC posting nor an unconfirmed remaining vacancy
+        # becomes an eligible JobPosting because its page is publicly readable.
+        for pid in ('a305734', 'a306182'):
+            self.assertNotIn('type="application/ld+json"',
+                             snapshot(posts[pid],
+                                      datetime(2026, 11, 21, tzinfo=timezone.utc)))
+
     def test_nov20_official_cutoffs_archive_at_exact_instant(self):
         """Verified deadlines archive at 17:00/23:59 KST, not ALIO's 23:59 guess."""
         from datetime import timedelta
