@@ -1,0 +1,59 @@
+name: Threads 81143 pinned employer-published HWPX review
+on:
+  push:
+    branches: [review/threads-81143-official-semantic-20261118-0046]
+    paths: [.github/workflows/threads-81143-hwpx-independent.yml]
+permissions:
+  contents: read
+jobs:
+  attachment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet requests
+      - name: Independently download exact job-description HWPX linked by employer's recruitment publication
+        run: |
+          python - <<'PY'
+          import datetime, hashlib, io, json, pathlib, re, urllib.parse, xml.etree.ElementTree as ET, zipfile
+          from zoneinfo import ZoneInfo
+          import requests
+          out=pathlib.Path("gib-81143-evidence");out.mkdir(exist_ok=True)
+          url="https://c.incru.it/newjobpost/2026/11_gib/2.%202026%EB%85%84%20%EC%A0%9C5%EC%B0%A8%20%EC%A7%81%EC%9B%90%EC%B1%84%EC%9A%A9%20%EC%A7%81%EB%AC%B4%EC%88%98%ED%96%89%EC%9A%94%EA%B1%B4%20%EB%AA%85%EC%84%B8%EC%84%9C.hwpx"
+          response=requests.get(url,timeout=30,allow_redirects=False)
+          response.raise_for_status()
+          assert response.status_code==200, ("PINNED_URL_STATUS",response.status_code)
+          raw=response.content
+          assert len(raw)>1000 and zipfile.is_zipfile(io.BytesIO(raw)), "NOT_HWPX_ORIGINAL"
+          z=zipfile.ZipFile(io.BytesIO(raw))
+          names=[n for n in z.namelist() if re.search(r"Contents/section\d+\.xml$",n,re.I)]
+          assert names,"NO_SECTION_XML"
+          text_parts=[]
+          for n in names:
+              x=ET.fromstring(z.read(n))
+              text_parts.append("\n".join(el.text.strip() for el in x.iter() if el.text and el.text.strip()))
+          full="\n".join(text_parts)
+          assert len(full)>=300,("SHORT_JOB_SPEC",len(full))
+          digest=hashlib.sha256(raw).hexdigest()
+          receipt={"notice_id":"cleaneye-81143","source":"employer recruitment publication attachment hosted at c.incru.it",
+              "source_url":url,"source_host":"c.incru.it","bytes":len(raw),"sha256":digest,
+              "sections":len(names),"text_len":len(full),"checked_at_kst":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),
+              "attachment_independently_read":True,"employer_origin_direct_verification":False,
+              "full_corrections_audited":False,"approved_for_queue":False,"meta_posted":False}
+          (out/"exact-job-spec.hwpx").write_bytes(raw)
+          (out/"full-job-spec.txt").write_text(full,encoding="utf-8")
+          (out/"source-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("PINNED_HWPX_RECEIPT",json.dumps(receipt,ensure_ascii=False))
+          print("ORIGINAL_JOB_SPEC_CONTENT",full[:16000])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gib-81143-exact-job-spec-unapproved
+          path: gib-81143-evidence/
+          retention-days: 30
