@@ -79,6 +79,11 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual(schema['url'],
                          'https://kllollain-max.github.io/careerpick/jobs/a307225.html')
         self.assertNotEqual(schema['validThrough'], pnuh['due'])
+        # A verified, unchanged original should contribute actual role duties
+        # to JobPosting rather than the generic ALIO NCS classification.
+        self.assertIn('공식 직무기술서 검토 범위:', schema['description'])
+        self.assertIn('진료지원간호사30명', schema['description'])
+        self.assertIn('의료사회복지사2명', schema['description'])
 
         # A source correction invalidates editorial cutoff and structured data.
         for changes in ({'n': '32'}, {'org': '다른 기관'},
