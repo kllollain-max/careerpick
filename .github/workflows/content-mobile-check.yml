@@ -7,7 +7,9 @@ permissions:
 jobs:
   content-mobile:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    # Browser checks cover every reviewed page at three widths. Allow bounded
+    # apt mirror retries and full screenshot evidence without killing the job.
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
