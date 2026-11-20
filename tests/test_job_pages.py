@@ -63,6 +63,11 @@ class JobPageTests(unittest.TestCase):
                 clock.now.return_value = instant.astimezone(timezone.utc)
                 return render(post, {})
 
+        # Date-only 11/19 is interpreted in KST; 11/18 23:59 KST is
+        # still before the verified calendar opening date.
+        before_kst_date = snapshot(
+            pnuh, datetime(2026, 11, 18, 14, 59, 59, tzinfo=timezone.utc))
+        self.assertNotIn('type="application/ld+json"', before_kst_date)
         active = snapshot(pnuh, datetime(2026, 11, 21, tzinfo=timezone.utc))
         self.assertNotIn('<meta name="robots" content="noindex,follow">', active)
         ld_json = re.search(
