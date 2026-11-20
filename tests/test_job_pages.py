@@ -66,7 +66,7 @@ class JobPageTests(unittest.TestCase):
         active = snapshot(pnuh, datetime(2026, 11, 21, tzinfo=timezone.utc))
         self.assertNotIn('<meta name="robots" content="noindex,follow">', active)
         ld_json = re.search(
-            r'<script type="application/ld\\+json">(.*?)</script>', active, re.S)
+            r'<script type="application/ld[+]json">(.*?)</script>', active, re.S)
         self.assertIsNotNone(ld_json)
         schema = json.loads(ld_json.group(1))
         self.assertEqual(schema['@type'], 'JobPosting')
