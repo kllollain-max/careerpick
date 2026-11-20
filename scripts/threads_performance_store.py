@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import argparse
 import base64
+import binascii
+import hashlib
 from copy import deepcopy
 from datetime import datetime, timezone
 import json
@@ -146,11 +148,30 @@ class GitHubPerformanceState:
             return None, {"schema_version": 1, "policy_id": POLICY_ID, "observations": []}
         try:
             sha = result["sha"]
-            if not re.fullmatch(r"[0-9a-f]{40,64}", sha) or result.get("encoding") != "base64":
+            if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{40}", sha):
                 raise ValueError
-            raw = base64.b64decode("".join(result["content"].split()), validate=True)
+            encoded = result.get("content")
+            large_blob = not encoded and result.get("size", 0) > 0
+            if large_blob:
+                # GitHub Contents omits data for blobs over 1 MiB. Read only the
+                # immutable SHA returned by that exact branch/path response.
+                size = result.get("size")
+                if type(size) is not int or not 0 < size <= 20_000_000:
+                    raise ValueError
+                blob = self._request("GET", "/git/blobs/" + sha)
+                if (not isinstance(blob, dict) or blob.get("sha") != sha
+                        or blob.get("size") != size or blob.get("encoding") != "base64"):
+                    raise ValueError
+                encoded = blob["content"]
+            elif result.get("encoding") != "base64":
+                raise ValueError
+            raw = base64.b64decode("".join(encoded.split()), validate=True)
+            if large_blob:
+                actual = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+                if len(raw) != size or actual != sha:
+                    raise ValueError
             state = json.loads(raw.decode("utf-8"))
-        except (KeyError, TypeError, ValueError, UnicodeError):
+        except (KeyError, TypeError, ValueError, UnicodeError, binascii.Error):
             raise StateError("Existing measurement state could not be decoded") from None
         return sha, validate_state(state)
 
