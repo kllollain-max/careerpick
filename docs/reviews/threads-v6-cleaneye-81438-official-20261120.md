@@ -118,3 +118,11 @@
 - 데이터의 `due=2026-11-26T23:59:59+09:00` 및 `dueHasTime=false`는 **공식 18:00이 검증된 시각이라는 표시가 아니며**, 원문에 없는 임의 23:59 접수시각을 본문·카드에 쓰면 안 된다. 양주시청 공식 채용 상세를 11/20 현재 새로 읽으면 접수기간 11/19~11/26, 09:00~18:00, 경영지원 5급 1명과 6급 1명이다. 본문 11/26 18:00 보존.
 - 최신 `index.html` `openJob(id)` 구현은 `POSTS.find(x=>x.id===id || x.sourceIds?.includes(id))`로 해당 공고를 찾으며 `#job=cleaneye-81438` 해시를 초기 로딩 후 열도록 정의돼 있다. **원본 데이터 존재/코드 경로 확인이지 실제 브라우저에서 모달·링크가 보인 시각검증 결과가 아니다.** 읽기형 렌더 추출에서는 전체 목록만 추출되어 개별 모달 본문을 확인하지 못함.
 - 공식 확인 페이지: https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810 ; 공개 커리어픽 경로: https://kllollain-max.github.io/careerpick/#job=cleaneye-81438 . 최신 원본 PDF 재다운로드/정정·취소 확인 범위, 카드1080/360 실물검토, 생산 `validate_entry` 및 `verify_official_receipt`, 큐 CAS/원격 readback은 **미실행**, 본 원고는 **미승인 HOLD**. 현재 발표/예약/기존 승인 원고/게시 원장/claim/타 서비스 변경 없음.
+
+
+## 2026-11-20 22:47 KST 재수신 검증 — 공식 원본 신선성 확보, 운영 승인 HOLD
+
+- 읽기 전용 GitHub Actions `44747341700` source-receipts 작업 성공. 당시 GitHub Actions artifact `14632729574`(official-81438-receipts, ZIP SHA256 `68544970a2d7dc494c09bfe6767f6b7ccee830e22ffd69f73497e78caf9195b9`)를 생성했고 작업 로그의 2026-11-20T22:47:17.954028+09:00 실제 수신증 JSON을 재조회했다. 실행: https://github.com/kllollain-max/careerpick/actions/runs/44747341700
+- 시청 공식 상세 HTML HTTP200/220099바이트/SHA256 `928a77750c47f56609d4998b3c993e8c5d21ed7428f909ff6faa7b4f5898909e`; 고용24 HTML HTTP200/351385바이트/SHA256 `95a2715e0d9f9dfac892fa0157ad660e32cb532c2ff440f7301f9cbe11f92e81`.
+- 시청 10쪽 공고 PDF HTTP200/281584바이트/SHA256 `98a62a92891c9b26cdafc1c54895564e3757fadaf494e0475bfaebbfacc400e2`(추출 글 9420자), 1쪽 직무기술서 PDF HTTP200/79946바이트/SHA256 `0f23a210bd9bc8d17c5eddb4f8ada99eba02bc8c4fbcfadcc7005615d5fb166f`(1547자), 제출서식 HWPX HTTP200/103738바이트/SHA256 `dbe748fe28485c08f0c1e55587a6522c5eae44d9de24e00e3415beb827b25259`. 전부 이전 14:49의 첨부 해시와 일치함. 수신오류 0.
+- 이는 **24시간 이내 공식 원본 바이트 수신** 및 과거본과 동일성 확보이지, 별도 정정 공지 전수 확인이나 운영 원고 승인·재고 충원이 아니다. 여전히 전체 정정·취소, 실제 브라우저 개별 상세, 최종 299자 공고논리 대조와 production `validate_entry` / `verify_official_receipt`, IMAGE 카드 생성/360픽셀 실물검수, 이미지/큐 CAS 및 readback이 필요함. 운영 main·state·원장·Meta·다른 시스템 불변.
