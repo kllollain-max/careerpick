@@ -1,0 +1,97 @@
+name: Threads 80812 independent official HWP acquisition (no publish)
+on:
+  push:
+    branches:
+      - review/threads-80812-official-20261118-0245
+    paths:
+      - .github/workflows/threads-80812-raw-official-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  raw-official-receipt:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only official HWP parser
+        run: python -m pip install --quiet olefile requests beautifulsoup4
+      - name: Independently parse exact official municipality HWP full text and fixed raw SHA
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib,io,json,pathlib,struct,zlib,re
+          import olefile,requests
+          from datetime import datetime,timezone
+          source='https://www.icbp.go.kr/main/bbs/bbsMsgFileDown.do?bcd=etcnotice&msg_seq=928&fileno=1'
+          expected_sha='9438e45189b576f0ac3c927847789f6efeb361a8c1289734f80153a26a76d5b7'
+          evidence=pathlib.Path('official-80812-review-evidence');evidence.mkdir(exist_ok=True)
+          result={'notice_id':'cleaneye-80812','source_url':source,
+                  'checked_at_utc':datetime.now(timezone.utc).isoformat(),
+                  'downloaded':False,'parsed':False,'verified_meaning':False,'approved':False,
+                  'meta_posted':False,'cas_updated':False}
+          try:
+              resp=requests.get(source,timeout=(10,30),allow_redirects=True)
+              resp.raise_for_status()
+              if not resp.url.startswith('https://www.icbp.go.kr/'):
+                  raise ValueError('attachment redirected outside explicit official municipal host')
+              raw=resp.content;sha=hashlib.sha256(raw).hexdigest()
+              result.update(status_code=resp.status_code,sha256=sha,attachment_bytes=len(raw),downloaded=True)
+              if sha!=expected_sha:
+                  raise ValueError('original official document bytes changed; requires fresh fact-by-fact review')
+              if not olefile.isOleFile(io.BytesIO(raw)):
+                  raise ValueError('not a valid OLE HWP source')
+              ole=olefile.OleFileIO(io.BytesIO(raw))
+              flag=struct.unpack_from('<I',ole.openstream('FileHeader').read(),36)[0]
+              compressed=bool(flag&1)
+              paths=[p for p in ole.listdir() if len(p)==2 and p[0]=='BodyText' and p[1].startswith('Section')]
+              paths.sort(key=lambda p:int(p[1][7:]))
+              paras=[]
+              for p in paths:
+                  data=ole.openstream(p).read()
+                  if compressed:data=zlib.decompress(data,-15)
+                  off=0
+                  while off+4<=len(data):
+                      taginfo=struct.unpack_from('<I',data,off)[0];off+=4
+                      tag=taginfo&1023
+                      size=(taginfo>>20)&4095
+                      if size==4095:
+                          if off+4>len(data):break
+                          size=struct.unpack_from('<I',data,off)[0];off+=4
+                      if size<0 or off+size>len(data):raise ValueError('malformed HWP record, cannot claim complete text')
+                      payload=data[off:off+size];off+=size
+                      if tag==67:
+                          val=payload.decode('utf-16le','ignore')
+                          val=''.join(ch if ch.isprintable() or ch in '\n\t' else ' ' for ch in val).strip()
+                          if val:paras.append(val)
+              full='\n'.join(paras)
+              (evidence/'official-hwp-paragraph-text.txt').write_text(full,encoding='utf-8')
+              result.update(parsed=True,sections=len(paths),paragraphs=len(paras),text_length=len(full),
+                            text_sha256=hashlib.sha256(full.encode()).hexdigest(),
+                            checks={v:(v in full) for v in ['부평구시설관리공단','사무직','2026','원서접수','인천']})
+              if len(full)<1500 or not all(result['checks'].values()):
+                  raise ValueError('required original semantic markers absent; fail-closed')
+              patterns=['사무직','정규직','응시자격','인천','접수기간','원서접수','필기','가점','채용인원','채용예정','NCS','자격요건','2026. 11. 19','19명','3명','정정','취소']
+              selected=[{'paragraph_index':i,'text':p[:260]} for i,p in enumerate(paras) if any(k in p for k in patterns)]
+              (evidence/'related-original-paragraphs.json').write_text(json.dumps(selected,ensure_ascii=False,indent=2))
+              print('MUNICIPAL_HWP_TEXT_RECEIPT='+json.dumps(result,ensure_ascii=False))
+              print('ORIGINAL_RELATED_TEXT='+json.dumps(selected[:110],ensure_ascii=False))
+              print('RAW_TEXT_COMPLETE; no authorisation to approve or post')
+          except Exception as exc:
+              result['error']=str(exc)
+              raise
+          finally:
+              (evidence/'municipal-hwp-receipt.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          PY
+      - name: Preserve raw SHA and complete extracted text only; NEVER approve or post
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threads-80812-independent-raw-hwp-receipt
+          path: official-80812-review-evidence/
+          retention-days: 7
