@@ -1,5 +1,6 @@
 """No live network: CAS conflicts, uncertain writes and ledger preservation."""
 import base64
+import hashlib
 from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 import io
@@ -41,6 +42,43 @@ class PerformanceStoreTests(unittest.TestCase):
         self.assertEqual(request.get_method(), "GET")
         self.assertEqual(request.full_url,
             "https://api.github.com/repos/kllollain-max/careerpick/contents/threads/performance.json?ref=threads-publisher-state")
+
+    def test_over_one_megabyte_reads_exact_immutable_blob_and_preserves_state(self):
+        large = deepcopy(self.empty)
+        large["unrelated"]["padding"] = "x" * (1024 * 1024)
+        raw = json.dumps(large).encode()
+        sha = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+        contents = {"sha": sha, "size": len(raw), "encoding": "none", "content": ""}
+        blob = {"sha": sha, "size": len(raw), "encoding": "base64",
+                "content": base64.b64encode(raw).decode()}
+        opener = Mock(side_effect=[response(contents), response(blob)])
+        got_sha, state = store.GitHubPerformanceState("test-token-never-real", opener=opener).read()
+        self.assertEqual(got_sha, sha)
+        self.assertEqual(state, large)
+        self.assertEqual(opener.call_count, 2)
+        self.assertTrue(opener.call_args_list[1].args[0].full_url.endswith("/git/blobs/" + sha))
+        self.assertEqual(opener.call_args_list[1].args[0].get_method(), "GET")
+
+    def test_large_blob_wrong_bytes_or_sha_is_not_accepted(self):
+        large = deepcopy(self.empty)
+        large["unrelated"]["padding"] = "x" * (1024 * 1024)
+        raw = json.dumps(large).encode()
+        sha = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+        changed = raw[:-3] + b"y" + raw[-2:]
+        contents = {"sha": sha, "size": len(raw), "encoding": "none", "content": ""}
+        blob = {"sha": sha, "size": len(raw), "encoding": "base64",
+                "content": base64.b64encode(changed).decode()}
+        backend = store.GitHubPerformanceState(
+            "test-token-never-real", opener=Mock(side_effect=[response(contents), response(blob)]))
+        with self.assertRaisesRegex(store.StateError, "could not be decoded"):
+            backend.read()
+
+    def test_large_blob_metadata_over_bound_blocks_before_second_request(self):
+        contents = {"sha": "a" * 40, "size": 20_000_001, "encoding": "none", "content": ""}
+        opener = Mock(return_value=response(contents))
+        with self.assertRaisesRegex(store.StateError, "could not be decoded"):
+            store.GitHubPerformanceState("test-token-never-real", opener=opener).read()
+        opener.assert_called_once()
 
     def test_404_only_initializes_after_existing_branch_verified(self):
         error = urllib.error.HTTPError("redacted", 404, "missing", {}, None)
