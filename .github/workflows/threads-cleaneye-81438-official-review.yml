@@ -1,0 +1,87 @@
+name: Review-only 81438 official attachments (no publish)
+on:
+  push:
+    branches: [review/threads-cleaneye-81438-official-20261120]
+permissions:
+  contents: read
+jobs:
+  source-receipts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Install verified-document readers
+        run: python -m pip install --quiet requests beautifulsoup4 pymupdf
+      - name: Fetch official notice, find original attachments, write receipts only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib,hashlib,datetime,json,re,urllib.parse,requests,bs4
+          from zoneinfo import ZoneInfo
+          out=pathlib.Path("official-81438");out.mkdir(exist_ok=True)
+          sources=[
+            ("yangju", "https://yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810"),
+            ("work24", "https://www.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=VALIDATION&infoTypeGroup=tb_workinfoworknet&wantedAuthNo=KJKS002611160003"),
+          ]
+          s=requests.Session()
+          s.headers.update({"User-Agent":"Mozilla/5.0 (compatible; CareerPickPublicOfficialDocumentReview/1.0)","Accept":"text/html,application/pdf,*/*"})
+          receipt={"notice_id":"cleaneye-81438","captured_at":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),"status":"review_only_unapproved","source_receipts":[],"attachment_receipts":[],"errors":[]}
+          for label,url in sources:
+              entry={"label":label,"url":url}
+              try:
+                  r=s.get(url,timeout=24)
+                  entry.update(status_code=r.status_code,final_url=r.url,bytes=len(r.content),sha256=hashlib.sha256(r.content).hexdigest())
+                  r.raise_for_status()
+                  out.joinpath(label+"-notice.html").write_bytes(r.content)
+                  soup=bs4.BeautifulSoup(r.content,"html.parser")
+                  text=soup.get_text(" ",strip=True)
+                  entry["matching_notice"]="양주문화관광재단" in text and "채용" in text
+                  entry["notice_excerpt"]=text[max(0,text.find("2026년 재단법인 양주문화관광재단")-80):][:2400]
+                  links=[]
+                  for a in soup.find_all(["a","button"]):
+                      name=a.get_text(" ",strip=True)
+                      attrs={k:v for k,v in a.attrs.items() if any(y in k for y in ["href","onclick","down","file","data-","title"])}
+                      attrs={k:(" ".join(v) if isinstance(v,list) else str(v))[:600] for k,v in attrs.items()}
+                      candidate=" ".join([name]+list(attrs.values()))
+                      if not any(word in candidate.lower() for word in ["공고문","직무기술서",".pdf",".hwpx","down","download","파일첨부"]):continue
+                      links.append({"name":name[:200],"attrs":attrs})
+                      href=attrs.get("href","")
+                      if not href or href.startswith(("javascript:","#","mailto:")):continue
+                      full=urllib.parse.urljoin(r.url,href)
+                      parsed=urllib.parse.urlparse(full)
+                      if parsed.scheme!="https" or parsed.hostname not in ("yangju.go.kr","www.yangju.go.kr","work24.go.kr","www.work24.go.kr"):continue
+                      if len(receipt["attachment_receipts"])>=8:continue
+                      try:
+                          f=s.get(full,timeout=28)
+                          kind="pdf" if f.content.startswith(b"%PDF-") else ("hwpx" if f.content.startswith(b"PK\x03\x04") else "other")
+                          info={"source":label,"name":name[:160],"url":full,"http_status":f.status_code,"bytes":len(f.content),"sha256":hashlib.sha256(f.content).hexdigest(),"detected_type":kind}
+                          if f.ok and kind in ("pdf","hwpx"):
+                              index=len(receipt["attachment_receipts"])
+                              namefile=f"official-{label}-{index}.{kind}"
+                              out.joinpath(namefile).write_bytes(f.content)
+                              info["saved_as"]=namefile
+                              if kind=="pdf":
+                                  import fitz
+                                  doc=fitz.open(stream=f.content,filetype="pdf")
+                                  info["pages"]=len(doc)
+                                  extracted="\n".join(p.get_text() for p in doc)
+                                  out.joinpath(namefile+".txt").write_text(extracted,encoding="utf-8")
+                                  info["text_length"]=len(extracted)
+                                  info["text_sample"]=extracted[:1300]
+                          receipt["attachment_receipts"].append(info)
+                      except Exception as e:
+                          receipt["errors"].append({"attachment":full,"error":str(e)[:250]})
+                  entry["attachment_links"]=links[:30]
+              except Exception as e:
+                  entry["error"]=str(e)[:350]
+                  receipt["errors"].append({"source":label,"error":str(e)[:250]})
+              receipt["source_receipts"].append(entry)
+          out.joinpath("receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
+          print(json.dumps({"captured_at":receipt["captured_at"],"source_receipts":[{k:v for k,v in entry.items() if k!="attachment_links"} for entry in receipt["source_receipts"]],"attachment_links_count":[len(x.get("attachment_links",[])) for x in receipt["source_receipts"]],"attachment_receipts":[{k:v for k,v in a.items() if k!="text_sample"} for a in receipt["attachment_receipts"]],"errors":receipt["errors"]},ensure_ascii=False))
+          PY
+      - name: Save read-only receipts as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-81438-receipts
+          path: official-81438/
+          retention-days: 7
