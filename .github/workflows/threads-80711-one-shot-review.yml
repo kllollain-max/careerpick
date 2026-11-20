@@ -1,0 +1,139 @@
+name: "Threads 80711 official original independent read (no publishing)"
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/threads-80711-one-shot-review.yml"
+permissions:
+  contents: read
+jobs:
+  exact-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download exact employer PDF, digest and print complete official text
+        shell: bash
+        run: |
+          python -m pip install --quiet requests pymupdf beautifulsoup4
+          python - <<'PY'
+          import requests,hashlib,json,sys
+          from bs4 import BeautifulSoup
+          import pymupdf
+          root='https://www.cjfmc.or.kr/www/selectBbsNttView.do?bbsNo=7&integrDeptCode=&key=113&nttNo=15610&pageIndex=1&searchCnd=all&searchCtgry=&searchKrwd='
+          attachment='https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566'
+          s=requests.Session()
+          s.headers.update({'User-Agent':'Mozilla/5.0 Chrome/132 Safari/537.36', 'Accept-Language':'ko-KR,ko;q=0.9'})
+          page=s.get(root,timeout=35)
+          page.encoding=page.apparent_encoding
+          bt=BeautifulSoup(page.text,'html.parser').get_text(' ',strip=True)
+          print('OFFICIAL_BOARD_HTTP',page.status_code,'BYTES',len(page.content),'SOURCE_HAS_2026_97',('2026-97' in bt),'HAS_APPLICATION',('cjfmc.jobnlab.co.kr' in bt))
+          assert page.status_code==200 and '2026-97' in bt
+          doc=s.get(attachment,timeout=45,headers={'Referer':root,'Accept':'application/pdf,*/*'})
+          print('OFFICIAL_PDF_HTTP',doc.status_code,'BYTES',len(doc.content),'TYPE',doc.headers.get('Content-Type'),'MAGIC',repr(doc.content[:12]),'FINAL',doc.url)
+          if doc.status_code!=200 or not doc.content.startswith(b'%PDF-'):
+              print('FAILED_SAFE: exact original PDF not accessible; no approval')
+              raise SystemExit(2)
+          sha=hashlib.sha256(doc.content).hexdigest()
+          pdf=pymupdf.open(stream=doc.content,filetype='pdf')
+          print('OFFICIAL_PDF_SHA256',sha,'PAGES',len(pdf))
+          text='\n'.join(p.get_text() for p in pdf)
+          for i,p in enumerate(pdf):
+              txt=p.get_text()
+              print('*** VERIFIED_PDF_PAGE',i+1,'CHARS',len(txt),'***')
+              print(txt[:14000])
+          for kw in ('2026. 11. 23','2026.11.23','13명','경영','시설','자격','접수','충주','정정','취소','18:00','17:00'):
+              print('TERM',repr(kw),'FOUND',kw in text)
+          ats='https://cjfmc.jobnlab.co.kr'
+          try:
+              r=s.get(ats,timeout=25)
+              print('OFFICIAL_APPLICATION_GET',r.status_code,'FINAL',r.url,'BODY_CHARS',len(r.text))
+              print('ATS_TITLE_TEXT',BeautifulSoup(r.text,'html.parser').get_text(' ',strip=True)[:1500])
+          except Exception as e:print('OFFICIAL_APPLICATION_UNAVAILABLE',str(e)[:300])
+          with open('80711-independent-evidence.json','w',encoding='utf-8') as f:
+              json.dump({'source':root,'original_pdf':attachment,'sha256':sha,'bytes':len(doc.content),'pages':len(pdf),'extracted_text':text,'approval':False,'meta_publish':False},f,ensure_ascii=False)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 80711-original-receipt
+          path: 80711-independent-evidence.json
+          retention-days: 7
+  profile-and-card:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify actual CareerPick recruitment profile and official ATS status in browser
+        shell: bash
+        run: |
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          import json
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          opt=Options()
+          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1280,900'): opt.add_argument(arg)
+          drv=webdriver.Chrome(options=opt)
+          out={}
+          try:
+              for key,url in (
+                 ('profile','https://kllollain-max.github.io/careerpick/#job=cleaneye-80711'),
+                 ('ats','https://cjfmc.jobnlab.co.kr/jobnotice/list/'),
+                 ('detail','https://cjfmc.jobnlab.co.kr/jobnotice/view/?recruitid=1007'),
+                 ('notice','https://cjfmc.jobnlab.co.kr/board/notice/')):
+                  drv.set_page_load_timeout(45)
+                  drv.get(url)
+                  try:
+                      if key=='profile':
+                          WebDriverWait(drv,100).until(lambda d:'충주시시설관리공단' in d.execute_script("return document.body?.innerText||''"))
+                      else:
+                          WebDriverWait(drv,20).until(lambda d: len(d.execute_script("return document.body?.innerText||''"))>200)
+                  except Exception:pass
+                  body=drv.execute_script("return document.body?.innerText||''")
+                  print('BROWSER',key,'URL',drv.current_url,'LENGTH',len(body),'EMPLOYER',('충주시시설관리공단' in body),'NOTICE',('2027년 제1회' in body),'CURRENT_OPEN',('접수중' in body))
+                  print('BROWSER_BODY',key,body[:3200])
+                  drv.save_screenshot('80711-'+key+'.png')
+                  out[key]={'url':drv.current_url,'body':body[:9000],'has_exact_employer':'충주시시설관리공단' in body,'has_2027_notice':'2027년 제1회' in body}
+              out['approved']=False
+              with open('80711-browser.json','w',encoding='utf-8') as f:json.dump(out,f,ensure_ascii=False,indent=2)
+          finally:
+              drv.quit()
+          PY
+      - name: Render unapproved next-image card draft and verify actual 360px pixels
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum >/dev/null
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          from PIL import Image
+          from scripts.create_thumbnail import generate_compact_card,verify_thumbnail
+          job={'id':'cleaneye-80711','org':'충주시시설관리공단','title':'행정9급(일반행정)',
+               'count':3,'employment':'정규직','location':'충주시시설관리공단 사업장 내',
+               'due':'2026-11-23','deadline_label':'2026-11-23 18:00','restriction':'충주 거주지 요건'}
+          jpg=Path('threads-images/cleaneye-80711.jpg')
+          info=generate_compact_card(job,jpg)
+          info.update(verify_thumbnail(jpg))
+          with Image.open(jpg) as im:
+              im.load()
+              im.resize((360,360),Image.Resampling.LANCZOS).save(jpg.parent/'cleaneye-80711-360.png',format='PNG')
+          preview=jpg.parent/'cleaneye-80711-360.png'
+          with Image.open(preview) as im:
+              print('PREVIEW_MODE',im.mode,'SIZE',im.size)
+              assert im.mode=='RGB' and im.size==(360,360)
+          print('DRAFT_CARD_JPEG_BYTES',jpg.stat().st_size,'SHA',hashlib.sha256(jpg.read_bytes()).hexdigest(),'PIXEL_CHECK',info)
+          print('DRAFT_CARD_PNG_SHA',hashlib.sha256(preview.read_bytes()).hexdigest())
+          print('CARD_ASSETS_PREVIEW_ONLY_NO_APPROVAL_OR_QUEUE')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 80711-browser-card-review
+          path: |
+            80711-browser.json
+            80711-*.png
+            threads-images/cleaneye-80711.jpg
+            threads-images/cleaneye-80711-360.png
+          retention-days: 7

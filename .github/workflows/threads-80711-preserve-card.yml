@@ -1,0 +1,63 @@
+name: "Threads 80711 preserve verified card assets in isolated review branch"
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/threads-80711-preserve-card.yml"
+permissions:
+  actions: read
+  contents: write
+jobs:
+  preserve-exact-assets:
+    if: github.event.pull_request.head.repo.full_name == 'kllollain-max/careerpick' && github.head_ref == 'threads/official-80711-review-20261117-1050'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - name: Retrieve exact previously visually reviewed artifact; verify bytes and save without approval
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python -m pip install --quiet requests
+          python - <<'PY'
+          import hashlib, io, os, zipfile, requests
+          from pathlib import Path
+          url='https://api.github.com/repos/kllollain-max/careerpick/actions/artifacts/14291423398/zip'
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],
+                   'Accept':'application/vnd.github+json',
+                   'User-Agent':'CareerPick-Threads-Verified-Asset-Preserve/1.0'}
+          # Requests drops the GitHub bearer token on cross-host signed blob redirects.
+          r=requests.get(url,headers=headers,timeout=50,allow_redirects=True)
+          r.raise_for_status()
+          data=r.content
+          if len(data)>2_000_000: raise RuntimeError('ARTIFACT_OVERSIZE')
+          names={
+              'threads-images/cleaneye-80711.jpg':'c46e92148171acb5bf7c644edb93125750336c25d3fe5e45b5a588487013d38a',
+              'threads-images/cleaneye-80711-360.png':'3a3a8becf5d5d1db63b70556eff6ac9fb6baa8ecbed3e079acb413d63ad3a01c'
+          }
+          with zipfile.ZipFile(io.BytesIO(data)) as archive:
+              for path,expected in names.items():
+                  b=archive.read(path)
+                  actual=hashlib.sha256(b).hexdigest()
+                  if actual!=expected: raise RuntimeError('HASH_MISMATCH '+path)
+                  target=Path(path)
+                  if target.exists():
+                      if hashlib.sha256(target.read_bytes()).hexdigest()!=expected: raise RuntimeError('EXISTING_ASSET_CONFLICT '+path)
+                  else:
+                      target.parent.mkdir(parents=True,exist_ok=True)
+                      target.write_bytes(b)
+                  print('VERIFIED_ASSET',path,'bytes',len(b),'sha256',actual)
+          print('REVIEW_ASSET_STORED_UNAPPROVED_NO_META_NO_QUEUE')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add threads-images/cleaneye-80711.jpg threads-images/cleaneye-80711-360.png
+          if git diff --cached --quiet; then
+            echo "UNCHANGED_CORRECT_ASSETS"
+          else
+            git commit -m "Preserve original 80711 reviewed card bytes on draft review branch [skip ci]"
+            git push origin "HEAD:refs/heads/threads/official-80711-review-20261117-1050"
+          fi
