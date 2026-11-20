@@ -31,6 +31,9 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     # Bohun Hospital official full recruitment notice (2026-11-20):
     # 11/20 17:00 KST, in-person at the education/training office.
     'a306992': '2026-11-20T17:00:00+09:00',
+    # SNUBH employer recruiting portal (jobnoticeSn=271976), reviewed 2026-11-20:
+    # applications 11/11 09:00 - 11/20 23:59 KST; not the ALIO publication clock.
+    'a306874': '2026-11-20T23:59:00+09:00',
     # PNUH recruitment PDF 3088502 p3: online applications through 12/03 17:00 KST.
     'a307225': '2026-12-03T17:00:00+09:00',
     'a306937': '2026-11-20T17:00:00+09:00',
@@ -135,6 +138,22 @@ VERIFIED_APPLICATION_NOTICES = {
     # archived ALIO notice/duty originals byte-SHA checked 2026-11-19; the
     # duty PDF's first page was visually reviewed. Still conditional reception;
     # confirmation that 11 independent vacancies remain open today.
+    # Direct SNUBH hiring-portal public notice read 2026-11-20, not the PDF's date-only table.
+    # Public viewing of the application window does not prove a completed applicant submission.
+    'a306874': {
+        'organization': '분당서울대학교병원',
+        'title': '분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고',
+        'source_end_date': '2026-11-20',
+        'expected_source_seats': '10',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-11',
+        'application_end_date': '2026-11-20',
+        'source_url': 'https://snubh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=271976&systemKindCode=MRS2',
+        'checked_on': '2026-11-20',
+        'scope': ('분당서울대학교병원 공식 채용시스템 공고 271976의 2026-11-11 09:00부터 '
+                  '2026-11-20 23:59 KST까지 온라인 접수 표기, 업무지원직 미화 AA1 10명 '
+                  '공개 모집표 확인. 로그인 후 최종 제출 성공·현재 잔여 결원은 독립 검증하지 않음.'),
+    },
     'a306182': {
         'organization': '경북대학교병원',
         'title': '2026년도 약무직 공개채용 수시모집',
