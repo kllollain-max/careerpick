@@ -49,6 +49,39 @@ class JobPageTests(unittest.TestCase):
                         pid, homepage_cutoff_metadata([altered], {}, {pid: proof}))
                 self.assertEqual(post, original)
 
+    def test_nov20_official_cutoffs_archive_at_exact_instant(self):
+        """Verified deadlines archive at 17:00/23:59 KST, not ALIO's 23:59 guess."""
+        from datetime import timedelta
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+        posts = {p['id']: p for p in json.loads(
+            Path('alio.json').read_text(encoding='utf-8'))['posts']}
+        for pid in ('a306992', 'a306874'):
+            with self.subTest(pid=pid):
+                post = posts[pid]
+                original = copy.deepcopy(post)
+                cutoff = datetime.fromisoformat(CONFIRMED_APPLICATION_CUTOFFS[pid])
+                with patch('scripts.build_job_pages.datetime') as clock:
+                    clock.fromisoformat.side_effect = datetime.fromisoformat
+                    clock.now.return_value = (cutoff - timedelta(seconds=1)).astimezone(timezone.utc)
+                    before = render(post, {})
+                    clock.now.return_value = cutoff.astimezone(timezone.utc)
+                    after = render(post, {})
+                self.assertNotIn('<meta name="robots" content="noindex,follow">', before)
+                self.assertNotIn('공식 확인된 원서접수 마감시각이 지난 보관 공고', before)
+                self.assertIn('<meta name="robots" content="noindex,follow">', after)
+                self.assertIn('공식 확인된 원서접수 마감시각이 지난 보관 공고', after)
+                self.assertNotIn('type="application/ld+json"', after)
+                self.assertEqual(post, original)
+
+        # The unrelated PNUH deadline is later; do not prematurely archive it.
+        pnuh = posts['a307225']
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 20, 15, 1, tzinfo=timezone.utc)
+            live = render(pnuh, {})
+        self.assertNotIn('<meta name="robots" content="noindex,follow">', live)
+        self.assertIn('2026-12-03 17:00', live)
+
     def test_pnuh_thirty_three_role_split_and_original_1700_cutoff(self):
         """Official PDF/ZIP proves 30+2+1 and 17:00; all editorial facts are identity-bound."""
         from scripts.build_job_pages import (
