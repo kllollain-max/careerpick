@@ -1158,7 +1158,7 @@ class JobPageTests(unittest.TestCase):
             self.assertEqual(result[pid]['sourceTerms'], post['emp'])
         self.assertEqual(result['a306875']['endDate'], '2026-11-20')
         self.assertNotIn('cutoff', result['a306875'])
-        self.assertEqual(result['a306874']['endDate'], '2026-11-20')
+        self.assertNotIn('endDate', result['a306874'])
         self.assertEqual(result['a306874']['cutoff'], '2026-11-20T23:59:00+09:00')
         self.assertEqual(result['a306992']['cutoff'], '2026-11-20T17:00:00+09:00')
         self.assertEqual(result['a306992']['start'], '2026-11-16')
