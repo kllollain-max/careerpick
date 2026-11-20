@@ -1,0 +1,146 @@
+name: Threads 81220 independent official portal source inspection (read-only)
+on:
+  push:
+    branches:
+      - review/threads-81220-official-portal-20261118-0345
+    paths:
+      - .github/workflows/threads-81220-official-portal-inspect.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-official:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests beautifulsoup4
+      - name: Read official portal DOM, discover exact 1720 notice route; no publish, no approval
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime,hashlib,json,pathlib,re,time,urllib.parse,requests
+          from bs4 import BeautifulSoup
+          base="https://www.asimc.or.kr/portal/recruit/notice/list.do?mid=0302010100"
+          dest=pathlib.Path("threads-81220-official-inspect");dest.mkdir(exist_ok=True)
+          result={"notice_id":"cleaneye-81220","official_url":base,"captured_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"official_http_ok":False,"original_attachment_read":False,"meaning_verified":False,"approved":False,"cas_updated":False,"meta_posted":False}
+          try:
+              sess=requests.Session()
+              sess.headers.update({"User-Agent":"Mozilla/5.0 (compatible; CareerPick official read-only verification)"})
+              errors=[]
+              for attempt in range(3):
+                  try:
+                      response=sess.get(base,timeout=(10,20),allow_redirects=True)
+                      response.raise_for_status()
+                      break
+                  except requests.RequestException as e:
+                      errors.append(type(e).__name__+": "+str(e)[:300])
+                      if attempt==2:raise
+                      time.sleep((2,4)[attempt])
+              if urllib.parse.urlparse(response.url).hostname not in ("www.asimc.or.kr","asimc.or.kr"):
+                  raise ValueError("NON_CANONICAL_REDIRECT")
+              response.encoding=response.apparent_encoding or "utf-8"
+              source=response.text
+              sha=hashlib.sha256(response.content).hexdigest()
+              result.update(official_http_ok=True,status_code=response.status_code,response_url=response.url,bytes=len(response.content),body_sha256=sha,request_retries=len(errors),errors=errors,title=None)
+              (dest/"official-list.html").write_text(source,encoding="utf-8")
+              soup=BeautifulSoup(source,"html.parser")
+              result["title"]=soup.title.get_text(" ",strip=True) if soup.title else None
+              matched=[]
+              for el in soup.find_all(["tr","li","div","a","button"]):
+                  text=el.get_text(" ",strip=True)
+                  if "2026년도 제5회 직원 채용 공고" in text and len(text)<1500:
+                      matched.append({"element":el.name,"text":text[:1000],"html":str(el)[:4500]})
+              result["matching_elements"]=matched[:14]
+              sourcepos=source.find("2026년도 제5회 직원 채용")
+              if sourcepos<0:sourcepos=source.find("1720")
+              result["raw_context"]=source[max(0,sourcepos-1300):sourcepos+2200] if sourcepos>=0 else None
+              result["form_actions"]=[{"action":f.get("action"),"method":f.get("method"),"id":f.get("id")} for f in soup.find_all("form")][:12]
+              result["scripts"]=[str(s.get("src")) for s in soup.find_all("script") if s.get("src") and ("recruit" in s.get("src") or "board" in s.get("src"))][:15]
+              result["related_links"]=[{"text":a.get_text(" ",strip=True)[:130],"href":a.get("href"),"onclick":a.get("onclick")} for a in soup.find_all("a") if any(k in (a.get_text(" ",strip=True)+str(a.get("href"))+str(a.get("onclick"))) for k in ("1720","채용","recruit","notice"))][:40]
+              print("OFFICIAL_PORTAL_READ_ONLY="+json.dumps(result,ensure_ascii=False)[:30000])
+              if not matched:raise ValueError("OFFICIAL_TARGET_ROW_ABSENT")
+          finally:
+              (dest/"official-read-only-receipt.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+      - name: Retrieve exact employer notice 1745 via declared read-only view form
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime,hashlib,json,pathlib,urllib.parse,requests
+          from bs4 import BeautifulSoup
+          base="https://www.asimc.or.kr/portal/recruit/notice/list.do?mid=0302010100"
+          dest=pathlib.Path("threads-81220-official-inspect");dest.mkdir(exist_ok=True)
+          receipt={"target":"cleaneye-81220","official_listing_number":"1720","official_form_p_idx":"1745","captured_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"read_only":True,"detail_verified":False,"approved":False,"cas_updated":False,"meta_posted":False}
+          try:
+              sess=requests.Session()
+              sess.headers.update({"User-Agent":"Mozilla/5.0 (compatible; CareerPick public official notice review)"})
+              listing=sess.get(base,timeout=(10,20));listing.raise_for_status()
+              listing.encoding=listing.apparent_encoding or "utf-8"
+              soup=BeautifulSoup(listing.text,"html.parser")
+              anchors=[a for a in soup.select('a[data-req-form-id="view"]') if a.get_text(" ",strip=True)=="2026년도 제5회 직원 채용 공고"]
+              if len(anchors)!=1:raise ValueError("EXACT_OFFICIAL_TITLE_NOT_UNIQUE")
+              anchor=anchors[0]
+              exact_idx=anchor.get("data-req-p-idx")
+              if exact_idx!="1745":raise ValueError("P_IDX_CHANGED_DO_NOT_GUESS")
+              form=soup.find("form",id=anchor.get("data-req-form-id"))
+              if form is None:raise ValueError("NO_VIEW_FORM")
+              action=urllib.parse.urljoin(base,form.get("action",""))
+              parsed=urllib.parse.urlparse(action)
+              if parsed.hostname!="www.asimc.or.kr" or parsed.path!="/portal/recruit/notice/view.do":
+                  raise ValueError("UNEXPECTED_VIEW_ROUTE")
+              pairs={}
+              for inp in form.find_all("input"):
+                  if inp.get("name"):pairs[inp["name"]]=inp.get("value","")
+              # Match yhLib.inline.post data-req-merge-form-id=list: copy the public list search form fields.
+              merge=soup.find("form",id=anchor.get("data-req-merge-form-id"))
+              merge_fields={}
+              if merge:
+                  for inp in merge.find_all("input"):
+                      if inp.get("name"):merge_fields[inp["name"]]=inp.get("value","")
+                  for sel in merge.find_all("select"):
+                      if sel.get("name"):
+                          chosen=sel.find("option",selected=True) or sel.find("option")
+                          merge_fields[sel["name"]]=chosen.get("value","") if chosen else ""
+              for k,v in merge_fields.items():pairs.setdefault(k,v)
+              receipt.update(view_action=action,form_original_inputs=pairs,merged_list_fields=merge_fields,anchor_attrs=dict(anchor.attrs))
+              # Official /common/js/lib.js paramsOf strips data-req-p- verbatim.
+              # Do not guess camelCase: data-req-p-idx is idx, never pIdx.
+              def official_anchor_parameters(attrs):
+                  prefix="data-req-p-"
+                  return {key[len(prefix):]:value for key,value in attrs.items() if key.startswith(prefix)}
+              # Regression checks: exact observed name, unrelated metadata, no camelCase rewrite.
+              assert official_anchor_parameters({"data-req-p-idx":"1745"})=={"idx":"1745"}
+              assert official_anchor_parameters({"data-req-form-id":"view","data-req-p-idx":"1745"})=={"idx":"1745"}
+              assert official_anchor_parameters({"data-req-p-list-idx":"7"})=={"list-idx":"7"}
+              anchor_fields=official_anchor_parameters(anchor.attrs)
+              if anchor_fields!={"idx":exact_idx}:raise ValueError("UNEXPECTED_OFFICIAL_ANCHOR_PARAMETERS")
+              pairs.update(anchor_fields)
+              receipt.update(submitted_field_names=sorted(pairs),anchor_fields=anchor_fields,parameter_regression_checks=3)
+              response=sess.post(action,data=pairs,headers={"Referer":base},timeout=(10,30),allow_redirects=True)
+              response.raise_for_status()
+              if urllib.parse.urlparse(response.url).hostname!="www.asimc.or.kr":raise ValueError("UNEXPECTED_VIEW_REDIRECT")
+              response.encoding=response.apparent_encoding or "utf-8"
+              doc=BeautifulSoup(response.text,"html.parser")
+              main=doc.select_one("#conts") or doc
+              actual=main.get_text(" ",strip=True)
+              links=[{"title":a.get_text(" ",strip=True)[:150],"href":a.get("href"),"onclick":a.get("onclick"),"attrs":{k:v for k,v in a.attrs.items() if "file" in k or "req" in k}} for a in main.find_all("a") if a.get("href") or a.get("onclick")]
+              receipt.update(detail_url=response.url,detail_status=response.status_code,detail_bytes=len(response.content),detail_sha256=hashlib.sha256(response.content).hexdigest(),detail_text=actual[:22000],download_candidates=links[:100],detail_verified=("2026년도 제5회 직원 채용 공고" in actual and "안성" in doc.get_text(" ",strip=True)))
+              (dest/"exact-official-detail.html").write_text(response.text,encoding="utf-8")
+              print("OFFICIAL_EMPLOYER_DETAIL_READ_ONLY="+json.dumps(receipt,ensure_ascii=False)[:30000])
+              if not receipt["detail_verified"]:raise ValueError("OFFICIAL_NOTICE_BODY_MISSING")
+          finally:
+              (dest/"exact-official-detail-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+          PY
+      - name: Persist only HTML evidence and status, NEVER publish or CAS
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-81220-official-site-dom-evidence
+          path: threads-81220-official-inspect/
+          retention-days: 7
