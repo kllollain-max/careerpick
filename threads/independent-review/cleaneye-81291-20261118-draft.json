@@ -267,5 +267,38 @@
     "meta_posted": false,
     "slot_not_reserved": true,
     "note": "Do not put this unapproved manuscript into reviewed-submissions, staging or writer queue. Prior raw source hashes not re-dated."
+  },
+  "current_official_pdf_receipt": {
+    "checked_at": "2026-11-20T09:48:04+09:00",
+    "source": "https://app.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+    "status": 200,
+    "bytes": 328236,
+    "pages": 7,
+    "sha256": "8054affb8c3cbd43b73b0224fd1021de03c0771ff5661726271079cd6779a844",
+    "action_run_id": 44263746215,
+    "run_attempt": 2,
+    "run_conclusion": "success",
+    "artifact_id": 14589139380,
+    "artifact_name": "threads-81291-official-original-receipt",
+    "evidence_status": "exact_source_bytes_verified_not_publication_approval",
+    "limitation": "Do not infer full correction/cancellation audit, current CareerPick exact detail, live application-specific screen, explicit verified workplace, or production validation from this binary SHA."
+  },
+  "operational_readiness_20261120": {
+    "source_receipt": "verified_at_2026-11-20_09:48_04_KST",
+    "source_24h_fresh_for_proposed_20261120_20_slot": "yes_for_pdf_receipt_only; live source snapshot/review still unverified",
+    "recruitment_unit": "역무8급 5명; 전체 7명과 다름",
+    "location": "Official PDF describes station duty at 진접선·별내선, but does not explicitly state a separate '근무지/배치장소' field required by _cleaneye_workplace_evidence; do not fabricate a workplace excerpt or weaken validator.",
+    "current_blockers": [
+      "Actual source collection snapshot freshness and semantic review tied to target slot",
+      "Official correction/cancellation and ATS detail recheck",
+      "CareerPick exact panel with actual notice ID and all facts",
+      "Official explicit workplace evidence meeting current parser, if available",
+      "Full review.v5 JSON contract + validate_entry + verify_official_receipt",
+      "Image JPEG 1080+360 preview visual review if next media IMAGE",
+      "Remote CAS staging and queue readback"
+    ],
+    "approved_for_queue": false,
+    "cas_registration": false,
+    "meta_post": false
   }
 }
