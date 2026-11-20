@@ -28,6 +28,9 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a307150': '2026-12-01T10:00:00+09:00',
     'a307151': '2026-12-01T10:00:00+09:00',
     'a306988': '2026-12-01T18:00:00+09:00',
+    # Bohun Hospital official full recruitment notice (2026-11-20):
+    # 11/20 17:00 KST, in-person at the education/training office.
+    'a306992': '2026-11-20T17:00:00+09:00',
     # PNUH recruitment PDF 3088502 p3: online applications through 12/03 17:00 KST.
     'a307225': '2026-12-03T17:00:00+09:00',
     'a306937': '2026-11-20T17:00:00+09:00',
@@ -184,8 +187,8 @@ VERIFIED_APPLICATION_NOTICES = {
         'source_end_date': '2026-11-20',
         'expected_source_seats': '11',
         'source_employment': ['정규직'],
-        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=306992',
-        'checked_on': '2026-11-19',
+        'source_url': 'https://www.bohun.or.kr/seoul/na/ntt/selectNttInfo.do?mi=32253&bbsId=1158&bbsSysId=seoul&nttSn=191258',
+        'checked_on': '2026-11-20',
         'application_start': '2026-11-16',
         'application_end_date': '2026-11-20',
         'role_mix_note': (
@@ -197,9 +200,11 @@ VERIFIED_APPLICATION_NOTICES = {
             '공식 ALIO의 실제 서류 접수기간은 2026년 11월 16~20일이고 '
             '접수방법은 중앙보훈병원 교육수련부 방문 제출입니다. '
             '11월 29일 공동 필기시험, 12월 2일 면접, 12월 4일 합격 발표 예정이며 '
-            '기관 공지로 변경될 수 있습니다. 정확한 방문 접수 마감시각은 '
-            '공식 HTML에 명시되지 않아 23:59로 추정하지 않습니다. '
-            '교육수련부의 실제 방문 접수 가능 상태와 서류 제출시간은 방문 전 확인하세요. '
+            '기관 공지로 변경될 수 있습니다. 중앙보훈병원 공식 채용공고의 '
+            '전형일정표에서 2026년 11월 20일 17:00(KST)까지 '
+            '교육수련부(제3관 2층) 방문접수로 명시합니다. '
+            'ALIO 게시 종료시각 23:59를 방문접수 마감으로 혼동하지 마세요. '
+            '실제 방문 서류제출 완료는 독립 확인하지 않았습니다. '
             '공고 JPG 원본은 육안 판독하고 직무 HWP의 원본 SHA256과 '
             'BodyText를 대조했습니다. 직무수행내용은 공공의료 관련 업무와 '
             '기타 행정업무만 명시하며, 개별 치과 시술을 추가 추정하지 않습니다.'
@@ -210,7 +215,9 @@ VERIFIED_APPLICATION_NOTICES = {
             '서류 방문접수 11/16~20 및 시험·면접 날짜를 확인함. '
             '공고 JPG3087104 원본 SHA256·육안 판독과 직무 HWP3087106 '
             '바이트 SHA256·BodyText 검증 완료. 구체 시술은 원문에 미기재. '
-            '방문 접수 정확한 마감시각과 실제 접수 가능 여부·잔여인원은 미확인.'
+            '중앙보훈병원 원문 채용공고를 2026-11-20 재조회해 방문접수 '
+            '11/20 17:00(KST)과 접수처 제3관 2층을 교차확인함. '
+            '실제 현장 접수 가능 상태·서류제출 완료·잔여인원은 미확인.'
         ),
     },
     # Verified 2026-11-19 against official JOB-ALIO and the live EJM 12745

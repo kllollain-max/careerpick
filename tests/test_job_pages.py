@@ -180,7 +180,7 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual(post, original)
 
     def test_cvhd_dental_resident_eleven_official_notice_only_and_exact_identity(self):
-        """Official ALIO 5+3+3 dental resident notice; no unverified HWP duties or clock."""
+        """Official hospital notice proves 5+3+3 and 11/20 17:00 KST in-person cutoff."""
         from scripts.build_job_pages import (
             VERIFIED_APPLICATION_NOTICES, VERIFIED_DUTIES,
             CONFIRMED_APPLICATION_CUTOFFS,
@@ -195,15 +195,17 @@ class JobPageTests(unittest.TestCase):
         self.assertFalse(post['dueHasTime'])
         self.assertIn('a306992', VERIFIED_DUTIES)
         self.assertEqual(VERIFIED_DUTIES['a306992']['source_sha256'], '2974abde58a6d030771a23f6b05378a0c0a8d29b33a7134d43baf79515176fca')
-        self.assertNotIn('a306992', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS['a306992'],
+                         '2026-11-20T17:00:00+09:00')
         html = render(post, {})
         for phrase in ('보철과 5명', '치주과 3명', '보존과 3명',
                        '교육수련부 방문 제출', '중복 지원', '인턴 기수료자',
-                       '2026-11-16 ~ 2026-11-20 (마감시각 공식 공고 확인 필요)',
+                       '2026-11-16 ~ 2026-11-20 17:00 (KST)',
                        '11월 29일 공동 필기시험', '공공의료 관련 업무',
-                       'job.alio.go.kr/recruitview.do?idx=306992'):
+                       'www.bohun.or.kr/seoul/na/ntt/selectNttInfo.do'):
             self.assertIn(phrase, html)
-        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertIn('기관 공식 확인 접수마감', html)
+        self.assertIn('2026-11-20 17:00 (KST)', html)
         self.assertNotIn('2026-11-20 23:59 (KST)', html)
         for changes in ({'n': '12'}, {'title': post['title'] + ' 수정'},
                         {'org': '변경 기관'}, {'due': '2026-11-21T23:59:00+09:00'},
@@ -212,6 +214,8 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('보철과 5명', stale)
             self.assertNotIn('교육수련부 방문 제출', stale)
             self.assertNotIn('11월 29일 공동 필기시험', stale)
+            self.assertNotIn('기관 공식 확인 접수마감', stale)
+            self.assertNotIn('2026-11-20 17:00 (KST)', stale)
         self.assertEqual(post, original)
 
     def test_kipf_ten_public_ejm_utc_deadline_and_documents_are_source_bound(self):
