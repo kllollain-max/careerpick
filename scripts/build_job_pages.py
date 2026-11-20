@@ -1440,7 +1440,10 @@ def render(post, detail, related_posts=(), notice_review=None):
         duty_summary = clean(verified_duties.get('summary'))
         if duty_summary:
             summary_parts.append('공식 직무기술서 검토 범위: ' + duty_summary)
-    job_description = ' '.join(part for part in summary_parts if part)
+    # Google requires paragraph-formatted HTML for JobPosting description.
+    # Escape all source text; the JSON-LD serializer below also neutralizes '<'.
+    job_description = ''.join('<p>' + escape(part) + '</p>'
+                              for part in summary_parts if part)
 
     schema = {
         '@context': 'https://schema.org',
