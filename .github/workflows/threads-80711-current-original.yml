@@ -1,0 +1,120 @@
+name: Review-only 80711 fresh employer PDF and ATS
+on:
+  push:
+    branches:
+      - review/threads-80711-employer-pdf-20261118
+    paths:
+      - .github/workflows/threads-80711-current-original.yml
+permissions:
+  contents: read
+jobs:
+  official-read:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install read-only document extractors
+        run: python -m pip install --quiet requests beautifulsoup4 pymupdf
+      - name: Read fresh official source, revision image and correction listings
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib, requests, bs4, hashlib, json, datetime, re, urllib.parse, fitz
+          from zoneinfo import ZoneInfo
+          root=pathlib.Path("official-80711-current");root.mkdir(exist_ok=True)
+          sess=requests.Session()
+          sess.headers.update({"User-Agent":"Mozilla/5.0 (compatible; CareerPickIndependentEmployerReview/1.0)",
+                               "Accept":"text/html,application/pdf,image/png,*/*"})
+          sources={
+              "employer_notice":"https://www.cjfmc.or.kr/www/selectBbsNttView.do?bbsNo=7&key=113&nttNo=15610",
+              "employer_pdf":"https://www.cjfmc.or.kr/www/downloadBbsFile.do?atchmnflNo=3566",
+              "employer_listing":"https://www.cjfmc.or.kr/www/selectBbsNttList.do?bbsNo=7&key=113&pageIndex=1&pageUnit=10&searchCnd=all",
+              "ats_notice":"https://cjfmc.jobnlab.co.kr/jobnotice/view/?recruitid=1007",
+              "ats_revision_image":"https://file.jobnlab.co.kr/cjfmc/data/jobnotice/images/252avq03O20261024172845.png",
+              "ats_apply_entry":"https://cjfmc.jobnlab.co.kr/application/reg/auth/?recruitid=1007"
+          }
+          receipts={}
+          for key,url in sources.items():
+              response=sess.get(url,timeout=38,headers={"Referer":sources["employer_notice"]})
+              response.raise_for_status()
+              data=response.content
+              digest=hashlib.sha256(data).hexdigest()
+              captured=datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat()
+              info={"url":url,"status_code":response.status_code,"final_url":response.url,"bytes":len(data),
+                    "sha256":digest,"captured_at":captured}
+              if key=="employer_pdf":
+                  if not data.startswith(b"%PDF-"): raise ValueError("EMPLOYER_PDF_WRONG_FORMAT")
+                  document=fitz.open(stream=data,filetype="pdf")
+                  full="\n\n".join(f"=== PAGE {i+1} ===\n"+p.get_text("text") for i,p in enumerate(document))
+                  if len(document)!=9 or len(full)<4500: raise ValueError("EMPLOYER_ORIGINAL_INCOMPLETE")
+                  must=["일반행정","거주","2026","2027"]
+                  info["page_count"]=len(document)
+                  info["fulltext_characters"]=len(full)
+                  info["previous_review_digest_matches"]=digest=="da07227b779d90b282661797e3be9443b996ad3e40645d263bc3cc56eaf52cbb"
+                  info["semantic_tokens_found"]={word:word in full for word in must}
+                  (root/"employer-original.pdf").write_bytes(data)
+                  (root/"employer-fulltext.txt").write_text(full,encoding="utf-8")
+                  for keyterm in ["일반행정","거주","11. 23","11월 23","18:00","일반직"]:
+                      i=full.find(keyterm)
+                      if i>=0: print("ORIGINAL_EXCERPT_"+keyterm+"="+repr(full[max(0,i-140):i+400]))
+              elif key=="ats_revision_image":
+                  if not (data.startswith(b"\x89PNG") or data.startswith(b"\xff\xd8")):
+                      raise ValueError("ATS_REVISION_IMAGE_NOT_IMAGE")
+                  ext="png" if data.startswith(b"\x89PNG") else "jpg"
+                  (root/("ats-v4-actual."+ext)).write_bytes(data)
+                  info["requires_independent_visual_comparison"]=True
+              else:
+                  (root/(key+".html")).write_bytes(data)
+                  visible=bs4.BeautifulSoup(data,"html.parser").get_text(" ",strip=True)
+                  (root/(key+".txt")).write_text(visible,encoding="utf-8")
+                  info["visible_excerpt"]=visible[:1500]
+                  if key=="employer_notice" and ("충주시시설관리공단" not in visible or "제1회" not in visible):
+                      raise ValueError("EMPLOYER_NOTICE_IDENTITY")
+                  if key=="ats_notice" and ("충주시시설관리공단" not in visible or "제1회" not in visible):
+                      raise ValueError("ATS_NOTICE_IDENTITY")
+              receipts[key]=info
+              print("OFFICIAL_SOURCE="+json.dumps({"kind":key,**info},ensure_ascii=False))
+          result={"sources":receipts,"source_collection_only":True,"approval":False,"meta_posted":False,
+                  "correction_scope":"One employer board page and one ATS notice; other channels not comprehensively scanned",
+                  "semantic_review_required":True,"ats_v4_picture_visual_comparison_required":True}
+          (root/"independent-source-receipt.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
+          PY
+      - name: Render exact profile job via read-only Chromium
+        shell: bash
+        run: |
+          python -m pip install --quiet playwright
+          python -m playwright install chromium > /dev/null
+          python - <<'PY'
+          import pathlib,hashlib,datetime,json
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
+          root=pathlib.Path("official-80711-current")
+          url="https://kllollain-max.github.io/careerpick/#job=cleaneye-80711"
+          with sync_playwright() as pw:
+              browser=pw.chromium.launch(headless=True)
+              page=browser.new_page(viewport={"width":1080,"height":850})
+              page.goto(url,wait_until="domcontentloaded",timeout=60000)
+              page.wait_for_function("""() => {
+                  const v=document.getElementById('jobview');
+                  const b=document.getElementById('jvBody');
+                  return v && !v.hidden && b && b.textContent.includes('충주시시설관리공단');
+              }""",timeout=65000)
+              body=page.locator("#jvBody").inner_text()
+              page.locator("#jobview").screenshot(path=str(root/"careerpick-job-detail.png"))
+              r={"url":url,"captured_at":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),
+                 "visible":True,"detail_sha256":hashlib.sha256(body.encode()).hexdigest(),
+                 "notice_visible":"80711" in body,
+                 "has_official_employer":"충주시시설관리공단" in body,
+                 "excerpt":body[:2200],"approved":False,"posted":False}
+              (root/"profile-readback.json").write_text(json.dumps(r,ensure_ascii=False,indent=2),encoding="utf-8")
+              print("ACTUAL_PROFILE_DETAIL="+json.dumps(r,ensure_ascii=False))
+              browser.close()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: independent-80711-pdf-ats-v4-and-profile
+          path: official-80711-current/
+          retention-days: 14
