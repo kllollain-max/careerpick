@@ -1,0 +1,77 @@
+name: Verify original Sejongpac 2026-11 recruitment HWPX attachments (review only)
+on:
+  push:
+    branches:
+      - review/threads-81117-official-html-20261117
+    paths:
+      - .github/workflows/threads-81117-independent-attachments.yml
+permissions:
+  contents: read
+jobs:
+  read-official-attachments:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download exact employer HWPX, inspect complete original XML and record receipts
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, urllib.parse, time, json, hashlib, datetime, pathlib, zipfile, io, xml.etree.ElementTree as ET
+          base="https://www.sejongpac.or.kr/portal/cmmn/file/fileDown.do?atchFileId=b67e2cdffd554e00b209d32e6636fe65&bbsId=B0000058&fileSn="
+          root=pathlib.Path("official-81117-attachments")
+          root.mkdir(exist_ok=True)
+          receipts={}
+          for label, number in [("practical_examination",1),("veterans_bonus",2)]:
+              url=base+str(number)
+              for attempt in range(3):
+                  try:
+                      req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 CareerPick independent official HWPX review"})
+                      with urllib.request.urlopen(req,timeout=35) as resp:
+                          effective=resp.geturl()
+                          code=resp.status
+                          data=resp.read(12_000_001)
+                      if len(data)>12_000_000: raise ValueError("ATTACHMENT_TOO_LARGE")
+                      if urllib.parse.urlsplit(effective).hostname not in ("www.sejongpac.or.kr","sejongpac.or.kr"):
+                          raise ValueError("UNVERIFIED_ATTACHMENT_REDIRECT")
+                      if code!=200 or not zipfile.is_zipfile(io.BytesIO(data)):
+                          raise ValueError("NOT_A_VALID_HWPX_ZIP")
+                      break
+                  except Exception:
+                      if attempt==2: raise
+                      time.sleep((2,4)[attempt])
+              with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                  sections=sorted(n for n in archive.namelist() if n.startswith("Contents/section") and n.endswith(".xml"))
+                  if not sections: raise ValueError("NO_HWPX_SECTION_XML_"+label)
+                  texts=[]
+                  for name in sections:
+                      doc=ET.fromstring(archive.read(name))
+                      paras=[]
+                      for element in doc.iter():
+                          if element.tag.rsplit("}",1)[-1]=="t" and element.text: paras.append(element.text)
+                      texts.append("\n".join(paras))
+              full="\n\n--- SECTION ---\n\n".join(texts)
+              if len(full.strip())<100: raise ValueError("HWPX_TEXT_EXTRACTION_SHORT_"+label)
+              (root/(label+".hwpx")).write_bytes(data)
+              (root/(label+".txt")).write_text(full,encoding="utf-8")
+              receipt={"url":url,"resolved_url":effective,"http_status":code,"bytes":len(data),
+                 "sha256":hashlib.sha256(data).hexdigest(),"sections":len(sections),
+                 "extracted_characters":len(full),"checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                 "approved":False,"cas_registered":False,"meta_posted":False}
+              receipts[label]=receipt
+              print("OFFICIAL_ATTACHMENT_RECEIPT="+json.dumps({"name":label,**receipt},ensure_ascii=False))
+              print("ORIGINAL_HWPX_EXTRACT_START "+label)
+              print(full[:12000])
+              print("ORIGINAL_HWPX_EXTRACT_END "+label)
+          (root/"receipts.json").write_text(json.dumps(receipts,ensure_ascii=False,indent=2),encoding="utf-8")
+          print("NO_APPROVAL_NO_CAS_NO_META_POST")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-81117-exact-employer-hwpx-source
+          path: official-81117-attachments/
+          if-no-files-found: warn
+          retention-days: 14

@@ -1,0 +1,74 @@
+name: Threads 81117 live application and profile review (read-only)
+on:
+  push:
+    branches:
+      - review/threads-81117-official-html-20261117
+    paths:
+      - .github/workflows/threads-81117-live-browser-review.yml
+permissions:
+  contents: read
+jobs:
+  browser-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python -m pip install --quiet playwright
+      - run: python -m playwright install chromium --with-deps
+      - name: Render employer application and CareerPick exact job profile, no posting
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,datetime,pathlib,re
+          from playwright.sync_api import sync_playwright
+          out=pathlib.Path("81117-browser-evidence")
+          out.mkdir(exist_ok=True)
+          urls={
+              "official_employer_board":"https://www.sejongpac.or.kr/portal/bbs/B0000058/view.do?menuNo=200568&nttId=50240&pageIndex=",
+              "employer_application":"https://sejongpac.plusrecruit.co.kr/",
+              "careerpick_profile":"https://kllollain-max.github.io/careerpick/#job=cleaneye-81117",
+          }
+          receipts={}
+          with sync_playwright() as pw:
+              browser=pw.chromium.launch(headless=True)
+              page=browser.new_page(viewport={"width":1365,"height":850},locale="ko-KR")
+              for name,url in urls.items():
+                  result={"url":url,"checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                          "status":"not_verified"}
+                  try:
+                      response=page.goto(url,wait_until="domcontentloaded",timeout=50000)
+                      page.wait_for_timeout(9000 if name=="careerpick_profile" else 5000)
+                      content=page.locator("body").inner_text(timeout=20000)
+                      result.update({"status_code":response.status if response else None,
+                                     "final_url":page.url,
+                                     "title":page.title(),
+                                     "body_length":len(content),
+                                     "text_has_81117":("81117" in content),
+                                     "text_has_sejong":("세종문화회관" in content),
+                                     "text_has_dance":("무용" in content),
+                                     "text_has_2026_notice":("2026 서울시예술단 일반단원" in content),
+                                     "text_has_apply":any(x in content for x in ("지원하기","입사지원","접수중","지원서 작성")),
+                                     "status":"rendered"})
+                      (out/(name+".txt")).write_text(content,encoding="utf-8")
+                      page.screenshot(path=str(out/(name+".png")),full_page=False)
+                      print("LIVE_REVIEW="+json.dumps({"name":name,**result},ensure_ascii=False))
+                      print("BODY_EXCERPT_START "+name)
+                      print(content[:5500])
+                      print("BODY_EXCERPT_END "+name)
+                  except Exception as exc:
+                      result.update({"error":str(exc)[:500]})
+                      print("LIVE_REVIEW_ERROR="+json.dumps({"name":name,**result},ensure_ascii=False))
+                  receipts[name]=result
+              browser.close()
+          (out/"receipts.json").write_text(json.dumps(receipts,ensure_ascii=False,indent=2),encoding="utf-8")
+          print("NO_META_POST_NO_APPROVAL_NO_CAS")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: threads-81117-browser-profile-evidence
+          path: 81117-browser-evidence/
+          if-no-files-found: warn
+          retention-days: 14
