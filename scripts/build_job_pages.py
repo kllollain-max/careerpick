@@ -1505,8 +1505,10 @@ def render(post, detail, related_posts=(), notice_review=None):
     # application opportunity, even though its notice page is public.
     verified_reception_not_open = bool(
         verified_start and parsed_start
-        and datetime.fromisoformat(parsed_start).astimezone(timezone.utc)
-        > datetime.now(timezone.utc)
+        # Calendar-only start dates are KST, not the runner's local timezone.
+        and datetime.fromisoformat(
+            parsed_start if 'T' in parsed_start else parsed_start + 'T00:00:00+09:00'
+        ).astimezone(timezone.utc) > datetime.now(timezone.utc)
     )
     schema_json = '' if (duplicate or robots_noindex or verified_reception_not_open
                          or (not application_cutoff and post.get('dueHasTime') is not True)) else (
