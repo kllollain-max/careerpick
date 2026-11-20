@@ -1451,10 +1451,13 @@ def render(post, detail, related_posts=(), notice_review=None):
     if posted:
         schema['datePosted'] = posted
 
-    if deadline:
-        # Google's JobPosting accepts an ISO date alone when only the
-        # application end date is known. Do not publish the synthetic 23:59
-        # sorting timestamp as a verified closing time.
+    if application_cutoff:
+        # Only exact-source-verified application cutoffs may override the ALIO
+        # publication end date in Google JobPosting structured data.
+        schema['validThrough'] = application_cutoff
+    elif deadline:
+        # A date-only ALIO publication end is not a verified application
+        # cutoff. Keep it separate from the searchable JobPosting lifecycle.
         schema['validThrough'] = (
             deadline[:10] if post.get('dueHasTime') is not True else deadline
         )
@@ -1498,7 +1501,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     # 안내용 HTML 페이지는 그대로 유지합니다.
     # Publication end dates are not verified application deadlines. Keep the
     # useful HTML, but do not emit a JobPosting with an invented validThrough.
-    schema_json = '' if duplicate or robots_noindex or post.get('dueHasTime') is not True else (
+    schema_json = '' if duplicate or robots_noindex or (not application_cutoff and post.get('dueHasTime') is not True) else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
