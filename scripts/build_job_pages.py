@@ -1501,7 +1501,15 @@ def render(post, detail, related_posts=(), notice_review=None):
     # 안내용 HTML 페이지는 그대로 유지합니다.
     # Publication end dates are not verified application deadlines. Keep the
     # useful HTML, but do not emit a JobPosting with an invented validThrough.
-    schema_json = '' if duplicate or robots_noindex or (not application_cutoff and post.get('dueHasTime') is not True) else (
+    # An employer-confirmed future reception window is not yet an open
+    # application opportunity, even though its notice page is public.
+    verified_reception_not_open = bool(
+        verified_start and parsed_start
+        and datetime.fromisoformat(parsed_start).astimezone(timezone.utc)
+        > datetime.now(timezone.utc)
+    )
+    schema_json = '' if (duplicate or robots_noindex or verified_reception_not_open
+                         or (not application_cutoff and post.get('dueHasTime') is not True)) else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
