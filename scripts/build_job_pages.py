@@ -1433,6 +1433,13 @@ def render(post, detail, related_posts=(), notice_review=None):
         summary_parts.append('지원자격: ' + qualification[:900])
     if process:
         summary_parts.append('전형 절차: ' + process[:500])
+    # Only the original-backed, source-identity-bound duty review may enrich
+    # JobPosting description; generic ALIO NCS categories are not duties.
+    # This must disappear when the notice ID, title, seats or end date changes.
+    if verified_duties.get('strict_source_identity') is True:
+        duty_summary = clean(verified_duties.get('summary'))
+        if duty_summary:
+            summary_parts.append('공식 직무기술서 검토 범위: ' + duty_summary)
     job_description = ' '.join(part for part in summary_parts if part)
 
     schema = {
