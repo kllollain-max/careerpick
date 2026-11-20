@@ -998,7 +998,23 @@ class JobPageTests(unittest.TestCase):
         html = render(post, {})
         self.assertIn('2027-01-18 09:00 ~ 2027-01-22 18:00 (KST)', html)
         self.assertNotIn('2027-01-22 23:59 (KST)', html)
-        self.assertNotIn('application/ld+json', html)  # no unverified time schema
+        # An announced future intake stays out of JobPosting rich results
+        # until its institution-verified application window actually begins.
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime.fromisoformat(
+                '2027-01-18T08:59:59+09:00').astimezone(timezone.utc)
+            scheduled_html = render(post, {})
+            clock.now.return_value = datetime.fromisoformat(
+                '2027-01-18T09:00:00+09:00').astimezone(timezone.utc)
+            accepting_html = render(post, {})
+        self.assertNotIn('application/ld+json', scheduled_html)
+        self.assertIn('type="application/ld+json"', accepting_html)
+        accepting_ld = re.search(
+            r'<script type="application/ld[+]json">(.*?)</script>', accepting_html, re.S)
+        self.assertIsNotNone(accepting_ld)
+        self.assertEqual(json.loads(accepting_ld.group(1))['validThrough'],
+                         '2027-01-22T18:00:00+09:00')
         cutoffs = {'a306925': CONFIRMED_APPLICATION_CUTOFFS['a306925']}
         proofs = {'a306925': proof}
         metadata = homepage_cutoff_metadata([post], cutoffs, proofs)
