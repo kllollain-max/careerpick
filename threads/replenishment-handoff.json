@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-20T11:59:39.347637+09:00",
-  "run_id": "44664520147",
+  "captured_at": "2026-11-20T12:35:09.465832+09:00",
+  "run_id": "44668599797",
   "source_commit": "4050bd2909e7811e1e7a5b5025c1759bca63a331",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-20T11:58:49.665204+09:00",
+    "time": "2026-11-20T12:34:19.691382+09:00",
     "future_slots": [
-      "2026-11-20T12:00:00+09:00",
       "2026-11-20T16:00:00+09:00",
       "2026-11-20T20:00:00+09:00",
       "2026-11-21T08:00:00+09:00",
       "2026-11-21T12:00:00+09:00",
       "2026-11-21T16:00:00+09:00",
       "2026-11-21T20:00:00+09:00",
-      "2026-11-22T08:00:00+09:00"
+      "2026-11-22T08:00:00+09:00",
+      "2026-11-22T12:00:00+09:00"
     ],
     "next_media": "IMAGE",
     "promoted": [],
@@ -103,15 +103,16 @@
     "queue_sha": "4e4adc19aba6651aeae6592c20fe8a265b101b2b",
     "staged_sha": "45b8b638ecbdc2fdcb65a1775018e98be959c261",
     "promoted_count": 0,
-    "approved_supply_count": 2,
+    "approved_supply_count": 1,
     "inventory_target": 8,
-    "inventory_shortfall": 6,
+    "inventory_shortfall": 7,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-20T12:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-20T12:00:00+09:00",
       "2026-11-20T16:00:00+09:00"
     ],
     "missing_slots": [
@@ -120,7 +121,8 @@
       "2026-11-21T12:00:00+09:00",
       "2026-11-21T16:00:00+09:00",
       "2026-11-21T20:00:00+09:00",
-      "2026-11-22T08:00:00+09:00"
+      "2026-11-22T08:00:00+09:00",
+      "2026-11-22T12:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 60,
@@ -132,7 +134,8 @@
         "2026-11-21T12:00:00+09:00",
         "2026-11-21T16:00:00+09:00",
         "2026-11-21T20:00:00+09:00",
-        "2026-11-22T08:00:00+09:00"
+        "2026-11-22T08:00:00+09:00",
+        "2026-11-22T12:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "cleaneye-80711",
@@ -2363,7 +2366,8 @@
       "2026-11-21T12:00:00+09:00",
       "2026-11-21T16:00:00+09:00",
       "2026-11-21T20:00:00+09:00",
-      "2026-11-22T08:00:00+09:00"
+      "2026-11-22T08:00:00+09:00",
+      "2026-11-22T12:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "cleaneye-80711",
@@ -5139,27 +5143,129 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "cleaneye-81179",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "draft_text": "충북여성재단 채용 공고를 확인해 보세요.\n\n모집 공고: 충북여성재단 제4차 직원 채용(사무처장)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81179",
-        "suggested_slot": null
+        "source_post_sha256": "b285168130842eca64592a598dfabd20aef28e2185521afc2163e72fbf829d8d",
+        "source_detail_sha256": "aa0171241fffa4bd75a7a8e3055ad145a55aa57de055e8914b0404fe0511221f",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-81179/application_period",
+        "source_snapshot_checked_at": "2026-11-20T10:22:54+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-16",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81180",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "draft_text": "충북여성재단 채용 공고를 확인해 보세요.\n\n모집 공고: 충북여성재단 제5차 직원 채용 공고(연구위원, 대리-육아휴직대체)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81180",
-        "suggested_slot": null
+        "source_post_sha256": "f7b73fc0dd0b4396a01e4297fe761c7ad5e1c9a881f12df24f9690a1111d226b",
+        "source_detail_sha256": "6c07dc3ff2410c02a08ce89746fdb79b16c5fdc201d05549b55a2de49c5a8999",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-25",
+        "application_source_ref": "cleaneye.json#cleaneye-81180/application_period",
+        "source_snapshot_checked_at": "2026-11-20T10:22:54+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-16",
+          "접수마감일 원문": "2026-11-25",
+          "채용인원": "2"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81251",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "draft_text": "당진시복지재단 채용 공고를 확인해 보세요.\n\n모집 공고: [당진시복지재단] 2026년 제4차 당진시복지재단 직원 공개채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81251",
-        "suggested_slot": null
-      },
+        "source_post_sha256": "91f6fc38bdc4a99937b1606bd452ff4a0acacd1a340fde4584b775c90eaec991",
+        "source_detail_sha256": "b5671d02a671730cd07bcc4e682c46e128c6b6a5dc726086bf611e71d670c0ef",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-26",
+        "application_source_ref": "cleaneye.json#cleaneye-81251/application_period",
+        "source_snapshot_checked_at": "2026-11-20T10:22:54+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-18",
+          "접수마감일 원문": "2026-11-26",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "cleaneye-81255",
         "status": "unreviewed",
@@ -5402,7 +5508,8 @@
         "2026-11-21T12:00:00+09:00",
         "2026-11-21T16:00:00+09:00",
         "2026-11-21T20:00:00+09:00",
-        "2026-11-22T08:00:00+09:00"
+        "2026-11-22T08:00:00+09:00",
+        "2026-11-22T12:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-20T20:00:00+09:00",
@@ -5410,7 +5517,8 @@
         "2026-11-21T12:00:00+09:00",
         "2026-11-21T16:00:00+09:00",
         "2026-11-21T20:00:00+09:00",
-        "2026-11-22T08:00:00+09:00"
+        "2026-11-22T08:00:00+09:00",
+        "2026-11-22T12:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -5473,7 +5581,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-20T11:59:38.253911+09:00",
+          "checked_at": "2026-11-20T12:35:08.244034+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5552,13 +5660,6 @@
   "publication_audit": {
     "slots": [
       {
-        "scheduled_at": "2026-11-18T12:00:00+09:00",
-        "post_ids": [
-          "17905918545604732"
-        ],
-        "status": "recorded_publication"
-      },
-      {
         "scheduled_at": "2026-11-18T16:00:00+09:00",
         "post_ids": [
           "17900525751613055"
@@ -5608,16 +5709,16 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 8,
+    "expected_slots": 7,
+    "recorded_publications": 7,
     "receipt_success_rate": 1.0,
     "live_meta_verification_performed": false,
     "needs_attention": []
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-20T11:59:38.336773+09:00",
-    "window_start": "2026-11-18T02:59:38.336773+00:00",
+    "checked_at": "2026-11-20T12:35:08.334109+09:00",
+    "window_start": "2026-11-18T03:35:08.334109+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
