@@ -249,9 +249,9 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('econjobmarket.org/positions/12745', stale)
         self.assertEqual(post, original)
 
-    def test_snubh_cleaning_ten_original_duty_and_date_only_reception_guarded(self):
-        """Exact official cleaning notice/duties; no invented cutoff time."""
-        from scripts.build_job_pages import VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
+    def test_snubh_cleaning_ten_employer_portal_cutoff_guarded(self):
+        """Official employer 23:59 cutoff is distinct from ALIO PDF date-only text."""
+        from scripts.build_job_pages import VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
         post = posts['a306874']
         original = copy.deepcopy(post)
@@ -259,13 +259,18 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual((post['org'], post['title'], post['n'], post['emp']),
                          (proof['organization'], proof['title'], '10', ['정규직']))
         self.assertEqual(post['due'][:10], proof['source_end_date'])
-        self.assertNotIn('a306874', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS['a306874'],
+                         '2026-11-20T23:59:00+09:00')
+        self.assertEqual(VERIFIED_APPLICATION_NOTICES['a306874']['source_url'],
+                         'https://snubh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=271976&systemKindCode=MRS2')
         html = render(post, {})
         for phrase in ('격리폐기물', '페이퍼타월', '정규직 미화 단일직무 10명',
-                       '11월 11~20일', '수습기간', '마감시각 공식 공고 확인 필요',
+                       '11월 11일 09:00', '수습기간', '2026-11-20 23:59',
                        'fileNo=3086117', 'fileNo=3086129'):
             self.assertIn(phrase, html)
-        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertIn('기관 공식 확인 접수마감', html)
+        self.assertIn('jobnoticeSn=271976', html)
+        self.assertNotIn('마감시각 공식 공고 확인 필요', html)
         for change in ({'n': '11'}, {'title': post['title'] + ' 정정'},
                        {'org': '다른 기관'}, {'due': '2026-11-21T23:59:00+09:00'},
                        {'emp': ['계약직']}, {'alio': False}):
@@ -273,6 +278,8 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('격리폐기물', stale)
             self.assertNotIn('정규직 미화 단일직무 10명', stale)
             self.assertNotIn('fileNo=3086117', stale)
+            self.assertNotIn('기관 공식 확인 접수마감', stale)
+            self.assertNotIn('jobnoticeSn=271976', stale)
         self.assertEqual(post, original)
 
     def test_cnuh_three_official_17h_receipt_cutoffs_bound_to_exact_source(self):
@@ -1152,7 +1159,7 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual(result['a306875']['endDate'], '2026-11-20')
         self.assertNotIn('cutoff', result['a306875'])
         self.assertEqual(result['a306874']['endDate'], '2026-11-20')
-        self.assertNotIn('cutoff', result['a306874'])
+        self.assertEqual(result['a306874']['cutoff'], '2026-11-20T23:59:00+09:00')
         self.assertEqual(result['a306992']['cutoff'], '2026-11-20T17:00:00+09:00')
         self.assertEqual(result['a306992']['start'], '2026-11-16')
         self.assertNotIn('endDate', result['a306992'])
