@@ -1,0 +1,43 @@
+name: Threads isolated official source audit 80838
+on:
+  push:
+    branches:
+      - 'review/threads-80838-official-20261118-0545'
+    paths:
+      - '.github/workflows/threads-independent-source-80838.yml'
+      - 'threads/independent-review/fetch-80838-official.py'
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  read-official:
+    if: github.head_ref == 'review/threads-80838-official-20261118-0545' || github.ref_name == 'review/threads-80838-official-20261118-0545'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch and read exact official PDF (NO APPROVAL, NO POST)
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get -qq install -y poppler-utils
+          python3 threads/independent-review/fetch-80838-official.py
+      - name: Preserve independent PDF, readable text and SHA
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: careerpick-threads-cleaneye-80838-official-only
+          path: threads/independent-review/evidence-80838/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Commit source audit to isolated review branch for independent semantic inspection
+        if: success() && github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f threads/independent-review/evidence-80838/official-80838-evidence.json threads/independent-review/evidence-80838/official-80838.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "evidence(threads): preserve official 80838 PDF SHA and extracted text [skip ci]"
+            git push origin HEAD:review/threads-80838-official-20261118-0545
+          fi
