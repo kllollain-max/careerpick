@@ -1,0 +1,127 @@
+name: CareerPick Threads a307082 actual original HWP review (no publication)
+on:
+  push:
+    branches:
+      - review/threads-a307082-official-20261118-0755
+    paths:
+      - .github/workflows/threads-a307082-original-read.yml
+permissions:
+  contents: read
+jobs:
+  read-hwp:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet olefile requests
+      - name: Independently download and parse actual November 16 employer HWP; report source SHA and fact text
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests, hashlib, io, json, pathlib, olefile, zlib, struct, re, time, datetime
+          from urllib.parse import urlparse
+          evidence=pathlib.Path("official-a307082-evidence")
+          evidence.mkdir(exist_ok=True)
+          urls={
+            "employer_original":"https://www.rch.or.kr/web/rchseoul/file/download/uu/26dbe5161e1a48cabdcdab5942b4ad9f",
+            "alio_original":"https://www.alio.go.kr/download/download.json?fileNo=3087714",
+            "alio_job_description":"https://www.alio.go.kr/download/download.json?fileNo=3087716"
+          }
+          s=requests.Session()
+          s.headers.update({"User-Agent":"Mozilla/5.0 CareerPickIndependentOfficialFactCheck/1.0","Accept":"*/*"})
+          receipts={}
+          for key,url in urls.items():
+            result={"url":url,"checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+            try:
+              for retry in range(3):
+                try:
+                  r=s.get(url,timeout=(10,22),allow_redirects=True)
+                  r.raise_for_status()
+                  break
+                except requests.RequestException:
+                  if retry==2:raise
+                  time.sleep((2,4)[retry])
+              host=urlparse(r.url).hostname
+              if host not in {"www.rch.or.kr","www.alio.go.kr","alio.go.kr"}:
+                raise ValueError("UNTRUSTED_REDIRECT_HOST:"+str(host))
+              raw=r.content
+              if len(raw)<500 or len(raw)>15000000 or not olefile.isOleFile(io.BytesIO(raw)):
+                raise ValueError("NOT_HWP5_OLE_SOURCE")
+              result.update({"http_status":r.status_code,"final_url":r.url,"size_bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()})
+              (evidence/(key+".hwp")).write_bytes(raw)
+              ole=olefile.OleFileIO(io.BytesIO(raw))
+              sections=sorted([("/".join(p),p) for p in ole.listdir() if p[0]=="BodyText" and p[-1].startswith("Section")],key=lambda q:q[0])
+              parts=[]
+              for path,p in sections:
+                buf=ole.openstream(p).read()
+                try:
+                  buf=zlib.decompress(buf,-15)
+                except zlib.error:
+                  pass
+                offset=0
+                while offset+4<=len(buf):
+                  head=struct.unpack_from("<I",buf,offset)[0];offset+=4
+                  tag=head&1023;size=(head>>20)&4095
+                  if size==4095:
+                    if offset+4>len(buf):break
+                    size=struct.unpack_from("<I",buf,offset)[0];offset+=4
+                  if size<0 or offset+size>len(buf):break
+                  rec=buf[offset:offset+size];offset+=size
+                  if tag==67 and len(rec)>2:
+                    t=rec.decode("utf-16-le","ignore")
+                    t="".join(c if ord(c)>31 or c in "\n\t" else " " for c in t)
+                    t=re.sub(" +"," ",t).strip()
+                    if len(t)>1:parts.append(t)
+              extracted="\n".join(parts)
+              result.update({"sections":len(sections),"paragraphs":len(parts),"extracted_characters":len(extracted),"text_sha256":hashlib.sha256(extracted.encode()).hexdigest(),"keywords_present":{k:k in extracted for k in ["간호사","병동","2026","11","23","4명","면허","접수"]}})
+              (evidence/(key+"-text.txt")).write_text(extracted,encoding="utf-8")
+              if len(extracted)<350:raise ValueError("HWP_EXTRACT_TOO_SHORT")
+              print("ORIGINAL_HWP_"+key.upper()+"_RECEIPT="+json.dumps(result,ensure_ascii=False))
+              print("ORIGINAL_HWP_"+key.upper()+"_TEXT_BEGIN")
+              print(extracted[:25000])
+              print("ORIGINAL_HWP_"+key.upper()+"_TEXT_END")
+              result["parsed"]=True
+            except Exception as exc:
+              result["failure"]=str(exc)[:500]
+              print("ORIGINAL_HWP_"+key.upper()+"_UNAVAILABLE="+result["failure"])
+            receipts[key]=result
+          (evidence/"receipts.json").write_text(json.dumps(receipts,ensure_ascii=False,indent=2),encoding="utf-8")
+          if not receipts.get("employer_original",{}).get("parsed"):
+            raise SystemExit("REQUIRED_EMPLOYER_ORIGINAL_NOT_READ")
+          PY
+      - name: Probe live employer ATS and public profile landing without posting or auth
+        if: success()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,json,datetime,pathlib
+          ulist={
+            "employer_ATS":"https://www.redcross.or.kr/redrecruit/",
+            "ATS_official_menu":"https://www.redcross.or.kr/redrecruit/reMenuAction.do",
+            "careerpick_profile_landing":"https://kllollain-max.github.io/careerpick/"
+          }
+          results={}
+          for key,url in ulist.items():
+            record={"url":url,"actual_checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+            try:
+              response=requests.get(url,timeout=(7,15),headers={"User-Agent":"Mozilla/5.0 CareerPickSourceVerification/1.0"},allow_redirects=True)
+              record.update({"http_status":response.status_code,"final_url":response.url,"bytes":len(response.content),"contains_a307082_in_raw_html":"a307082" in response.text,"contains_nurse_in_raw_html":"간호사" in response.text,"contains_서울적십자병원_in_raw_html":"서울적십자병원" in response.text})
+            except requests.RequestException as e:
+              record["error"]=str(e)[:280]
+            print("PORTAL_READONLY_PROBE="+json.dumps({key:record},ensure_ascii=False))
+            results[key]=record
+          pathlib.Path("official-a307082-evidence/live-portal-probe.json").write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding="utf-8")
+          PY
+      - name: Preserve raw official originals and independently extracted text (no approval)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: careerpick-a307082-official-hwp-original-read
+          path: official-a307082-evidence/
+          retention-days: 14
+          if-no-files-found: warn
