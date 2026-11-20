@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-20T21:15:18.117866+09:00",
-  "run_id": "44734102732",
-  "source_commit": "17a7258dd887c56cdbabe9f3d29ae02eb546c20f",
+  "captured_at": "2026-11-20T22:37:06.042695+09:00",
+  "run_id": "44745741220",
+  "source_commit": "80343222089c71678854b44f224f4c0bfeada30c",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-20T21:14:28.892251+09:00",
+    "time": "2026-11-20T22:36:16.777643+09:00",
     "future_slots": [
       "2026-11-21T08:00:00+09:00",
       "2026-11-21T12:00:00+09:00",
@@ -1519,7 +1519,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026.11.16.~2026.11.23.",
           "application_source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-20T19:18:31+09:00"
+          "source_snapshot_checked_at": "2026-11-20T22:27:06+09:00"
         },
         {
           "notice_id": "cleaneye-81150",
@@ -3752,7 +3752,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026.11.16.~2026.11.23.",
         "application_source_ref": "alio-detail.json#307082/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-20T19:18:31+09:00"
+        "source_snapshot_checked_at": "2026-11-20T22:27:06+09:00"
       },
       {
         "notice_id": "cleaneye-81150",
@@ -5684,7 +5684,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-20T21:15:17.464670+09:00",
+          "checked_at": "2026-11-20T22:37:05.069565+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5810,18 +5810,29 @@
           "18096084227694612"
         ],
         "status": "recorded_publication"
+      },
+      {
+        "scheduled_at": "2026-11-20T20:00:00+09:00",
+        "post_ids": [],
+        "status": "missing_receipt"
       }
     ],
-    "expected_slots": 7,
+    "expected_slots": 8,
     "recorded_publications": 7,
-    "receipt_success_rate": 1.0,
+    "receipt_success_rate": 0.875,
     "live_meta_verification_performed": false,
-    "needs_attention": []
+    "needs_attention": [
+      {
+        "scheduled_at": "2026-11-20T20:00:00+09:00",
+        "post_ids": [],
+        "status": "missing_receipt"
+      }
+    ]
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-20T21:15:17.517691+09:00",
-    "window_start": "2026-11-18T12:15:17.517691+00:00",
+    "checked_at": "2026-11-20T22:37:05.142511+09:00",
+    "window_start": "2026-11-18T13:37:05.142511+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
