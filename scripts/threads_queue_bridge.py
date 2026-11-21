@@ -435,6 +435,14 @@ def run(apply=False):
                                                       'application_source_ref': item.get('selection_context', {}).get('application_period', {}).get('source_ref') if isinstance(item.get('selection_context', {}).get('application_period'), dict) else None,
                                                       'source_snapshot_checked_at': (source.get('_cleaneye', {}).get('updated') if item.get('source') == 'cleaneye' else source.get('_operations', {}).get('last_success_at'))}
                                                      for item in selection.get('candidates', [])[:100]],
+                                      'official_source_alternatives': [
+                                          {'notice_id': item['notice_id'], 'status': 'unreviewed',
+                                           'official_url_for_private_review': official_notice_url(item['source_post']),
+                                           'source_post_sha256': item['source_post_sha256'],
+                                           'source_detail_sha256': item['source_detail_sha256'],
+                                           'suggested_slot': None, 'approved_for_queue': False,
+                                           'meta_posted': False}
+                                          for item in selection.get('official_source_alternatives', [])],
                                       'automatic_approval': False,
                                       'meta_posted': False},
                       shortlisted=[{'notice_id': e.get('notice_id'),
