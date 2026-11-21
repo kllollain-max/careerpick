@@ -378,6 +378,73 @@
       ],
       "approval": false,
       "ready": false
+    },
+    {
+      "candidate_key": "kihf-2026-4-code01",
+      "job_id": null,
+      "source": "official_employer_pdf_web_rendered",
+      "status": "draft_new_distinct_notice_official_pdf_visual_read_not_approved",
+      "proposed_slot": "2026-11-22T16:00:00+09:00",
+      "slot_is_reserved": false,
+      "organization": "한국건강가정진흥원",
+      "notice": "2026년도 제4차 직원 채용 공고",
+      "selection_unit": "코드01 공무직(라급) 경영",
+      "single_recruitment_unit_count": 1,
+      "total_notice_count": 22,
+      "employment": "공무직(라급), 근무기간 별도의 정함 없음",
+      "location": "서울 중구 퇴계로",
+      "application_deadline": "2026-11-23T14:00:00+09:00",
+      "official_notice_url": "https://www.kihf.or.kr/web/lay1/bbs/S1T838C75/A/4/view.do?article_seq=1116047",
+      "official_pdf_url": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+      "official_application_url": "https://kihf.recruiter.co.kr",
+      "evidence": {
+        "checked_at": "2026-11-21T18:48:29.858+09:00",
+        "read_path": "official Korean Health Families Agency notice page + publicly rendered official 8-page PDF",
+        "pdf_pages_visual_reviewed": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "pdf_bytes_downloaded_locally": false,
+        "pdf_sha256": null,
+        "extracted_text_sha256": null,
+        "reason_sha_missing": "Official PDF rendered in web PDF viewer; direct binary download to local workspace failed. Do not invent original SHA or mark official-receipt validation passed.",
+        "recruitment_unit": "PDF p1 code01: 공무직 라급 경영 1명 서울 중구 퇴계로, 전체22명은 p2 총합계",
+        "qualifications": "PDF p2: 만 60세 미만, 학력 제한 없음, 병역법 제76조 병역의무 불이행 사실 없음, 기관 인사규정 결격사유 제외; 코드01 별도 자격필수 없음",
+        "contract": "PDF p3: 공무직(코드01~02) 근무기간 별도의 정함 없음, 주5일 09:00~18:00",
+        "selection": "PDF p5: 공무직만 필기전형; 직업공통능력 40문항 및 경영학개론 10문항",
+        "submission": "PDF p5: 2026-11-10 ~ 2026-11-23 14시 온라인 접수, p6: 중복지원·접수 불가, 온라인 증빙 미첨부시 불인정",
+        "correction_check": {
+          "result": "not_comprehensive",
+          "scope": "공식 채용공고 개별 상세와 공식 PDF를 확인함. 채용 게시판의 별도 정정·취소 전수 조회 미실시",
+          "checked_at": "2026-11-21T18:48:29.858+09:00"
+        }
+      },
+      "duplicate_check": {
+        "checked_at": "2026-11-21T18:48:29.858+09:00",
+        "exact_employer_matches_in_current_main_history_and_state_queue": 0,
+        "notice_id_unresolved": true,
+        "restriction": "공식 공고를 서비스 수집 데이터 ID와 아직 매핑하지 못해 운영 중복승인 판단 미완료"
+      },
+      "public_draft": {
+        "post_text": "경영·행정 분야 공무직을 찾는다면,\n한국건강가정진흥원 경영 공무직(라급) 1명 모집이에요.\n\n근무지는 서울 중구 퇴계로이고 근무기간은 별도 정함이 없어요. 학력 제한은 없지만 만 60세 미만이며 병역의무 불이행 사실·결격사유가 없어야 해요.\n\n서류·필기(NCS·경영학개론)·면접 순서로 뽑아요. 가점 증빙파일은 온라인 지원서에 첨부해야 인정돼요.\n\n11월 23일 14:00까지 온라인 지원은 1회만 가능해요.\n\n자세한 사항은 프로필링크 확인",
+        "chars": 246,
+        "reply_texts": [],
+        "detail_reply": "",
+        "status": "draft_only_no_production_validator_no_asset"
+      },
+      "ready": false,
+      "approval": false,
+      "requires_before_ready": [
+        "공고가 커리어픽 실제 수집 ID에 매핑되는지 확인",
+        "해당 서비스 #job 상세 UI 실제 검증",
+        "공식 PDF 원본 bytes 재다운로드 및 SHA256·추출문 SHA 기록",
+        "수정·취소 최신 재확인",
+        "현재 정책에 따른 실제 production validate_entry + 공식 GET receipt + IMAGE 카드 시각검증 + queue plan merge check_queue",
+        "최신 원격 CAS 저장 및 readback"
+      ],
+      "operator_note": "별도 공고 1건의 공식 PDF 모집단위·선발절차·마감과 246자 신규 본문 초안을 작성한 실질 진전. 저장은 감사용 backlog만; 제출물/큐/게시 작업 아님."
     }
   ],
   "other_attempts": [
@@ -430,5 +497,6 @@
     "2026-11-22T12:00:00+09:00",
     "2026-11-22T16:00:00+09:00"
   ],
-  "remaining_six_target": "나머지6건 승인·공급확보 주장 없음. 실제검수 및 새원고화 필요."
+  "remaining_six_target": "나머지6건 승인·공급확보 주장 없음. 실제검수 및 새원고화 필요.",
+  "last_enriched_at": "2026-11-21T18:48:29.858+09:00"
 }
