@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "draft_hold_not_approved",
+  "notice_id": "cleaneye-81201",
+  "proposed_slot_only": "2026-11-22T20:00:00+09:00",
+  "slot_reserved": false,
+  "queue_changed": false,
+  "meta_posted": false,
+  "recorded_at": "2026-11-21T19:47:11+09:00",
+  "verified_partial_facts": {
+    "organization": "강릉과학산업진흥원",
+    "notice_title": "2026년 강릉과학산업진흥원 제3차 신규인력 채용 공고",
+    "notice_posted_on": "2026-11-12",
+    "overall_notice_count": 4,
+    "selected_recruitment_unit": "반도체·신소재 소재·부품·공정 분야 정부 지원사업 기획·수행 성과관리 지원",
+    "grade": "6급(주임)",
+    "selected_unit_count": 1,
+    "employment": "정규직",
+    "compulsory_conditions_from_official_first_page": [
+      "진흥원 채용자격기준 6급에 해당하는 자",
+      "반도체 소재·부품·공정 분야 관련 학과 학사 이상"
+    ],
+    "preferred_not_required": "반도체 신소재 소재·부품·공정 분야 정부지원사업 수행 등 유경험자",
+    "other_units": "3급 차장 1명, 4급 과장 1명, 6급 주임 별도 정부지원사업 분야 1명",
+    "no_duplicate_application_notice": "모집 분야별 중복 지원 불가, 중복 지원 시 모두 불합격",
+    "application_end_date_unverified_by_pdf": "2026-11-24",
+    "exact_application_deadline": null,
+    "application_method": null,
+    "location": null
+  },
+  "source_evidence": [
+    {
+      "kind": "official_employer_notice",
+      "url": "https://gsipa.or.kr/board/bbs/board.php?bo_table=recruit&wr_id=248",
+      "published": "2026-11-12 17:20",
+      "scope": "Title, attached PDF link and recruitment notice page; employer date verified",
+      "sha256": null
+    },
+    {
+      "kind": "official_employer_notice_image",
+      "url": "https://gsipa.or.kr/board/data/editor/2611/27659c8b551a516841bed699d61a3e3f_1794471673_1791.png",
+      "scope": "Actual visual first-page recruitment table inspected. Selected single 6급 semiconductor recruitment unit 1, eligibility and duplicate-application exclusion",
+      "sha256": null,
+      "limitation": "Image bytes not independently downloaded; visually checked source only"
+    },
+    {
+      "kind": "official_pdf_attachment",
+      "url": "https://gsipa.or.kr/board/bbs/download.php?bo_table=recruit&no=0&wr_id=248",
+      "scope": "Attempted actual PDF request from official article",
+      "result": "Server returned HTML error page '잘못된 접근입니다.'; no PDF bytes or PDF SHA acquired",
+      "sha256": null
+    },
+    {
+      "kind": "collected_source_candidate",
+      "path": "threads/replenishment-handoff.json",
+      "blob_sha": "ea0c67deca316459c10ff18aaed842213f288402",
+      "scope": "Cleaneye notice date 2026-11-24 only; exact closing hour not verified"
+    }
+  ],
+  "unapproved_editorial_draft": "반도체 소재·부품·공정 분야 학사 이상이라면,\n강릉과학산업진흥원 정규직 6급 주임 1명 채용을 살펴보세요.\n\n정부지원사업 기획·수행과 성과관리 지원 업무예요. 관련 학과 학사 이상과 진흥원 6급 채용자격기준을 모두 확인해야 해요.\n\n같은 공고의 다른 분야와 중복지원하면 모두 불합격이에요. 11월 24일 마감 안내지만 접수 종료 시각·제출방법은 공식 공고문 PDF 확인 전이라 미확정이에요.\n\n자세한 사항은 프로필링크 확인",
+  "publication_ready": false,
+  "blockers": [
+    "Exact recruitment deadline hour and application method must be verified against employer PDF; live official link returns access error",
+    "Full source PDF and applicable AND/OR eligibility notes, corrections/cancellation within actual checked scope must be read",
+    "Real careerpick #job=cleaneye-81201 rendered detail UI not yet checked",
+    "Publication source receipt within 24h of intended slot not verified",
+    "Production validator and image/360px rendering not executed",
+    "No frozen submission, queue plan/merge or conditional asset registration performed"
+  ],
+  "duplicate_check": {
+    "snapshot_head": "989e8295e61bd29e3801de3fb3776effbdb8374e",
+    "queue_entries": 54,
+    "exact_notice_id_occurrences": 0,
+    "proposed_slot_occupied": false,
+    "source": "Latest writer-queue Git blob 7abd9476a79f4306cc98b76e79c84760677ebccb"
+  },
+  "previous_ready_preserved": [
+    "2026-11-21T20:00:00+09:00 cleaneye-81438",
+    "2026-11-22T08:00:00+09:00 a307309",
+    "2026-11-22T12:00:00+09:00 cleaneye-81432",
+    "2026-11-22T16:00:00+09:00 a306841"
+  ],
+  "next_action": "Obtain employer's actual original PDF via permitted source, independently verify exact closing time, selected unit conditions and amendments, then validate real #job UI, recheck sources after 2026-11-21T20:00 KST for the 11/22 20 slot, render/verify IMAGE if due, and only then consider CAS ready supply."
+}
