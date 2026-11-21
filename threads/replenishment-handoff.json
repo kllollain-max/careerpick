@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-21T20:28:12.827802+09:00",
-  "run_id": "44899161552",
-  "source_commit": "e2599194290ab186eb841d9338bf45229a68a112",
+  "captured_at": "2026-11-21T20:57:29.621738+09:00",
+  "run_id": "44901452654",
+  "source_commit": "7c72444562b6b73c43c73d95a15008ab98d2a887",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-21T20:27:23.314600+09:00",
+    "time": "2026-11-21T20:56:38.424468+09:00",
     "future_slots": [
       "2026-11-22T08:00:00+09:00",
       "2026-11-22T12:00:00+09:00",
@@ -18,7 +18,7 @@
       "2026-11-23T16:00:00+09:00",
       "2026-11-23T20:00:00+09:00"
     ],
-    "next_media": "IMAGE",
+    "next_media": "TEXT",
     "promoted": [],
     "refused": [
       {
@@ -99,7 +99,7 @@
       },
       {
         "notice_id": "cleaneye-81438",
-        "reason": "SLOT_ALREADY_OCCUPIED"
+        "reason": "DUPLICATE_POST"
       },
       {
         "notice_id": "a307309",
@@ -124,10 +124,8 @@
     "inventory_shortfall": 5,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [
-      "2026-11-21T20:00:00+09:00"
-    ],
-    "media_forecast_conditional_on_active_slot": true,
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
       "2026-11-22T08:00:00+09:00",
       "2026-11-22T12:00:00+09:00",
@@ -5697,7 +5695,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:10.718966+09:00",
+          "checked_at": "2026-11-21T20:57:27.010520+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5720,7 +5718,7 @@
           "sha256": "81d1becc7de26b99b68ff42c6367debee332b24ab41e4edef14296e047f58a0b",
           "size_bytes": 12973,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:10.611169+09:00",
+          "checked_at": "2026-11-21T20:57:26.617068+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5743,7 +5741,7 @@
           "sha256": "303dc4e5c85699143bdaf1e2e9f82b5a00642989aeb3293ed94b30f92066741d",
           "size_bytes": 16225,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:10.382062+09:00",
+          "checked_at": "2026-11-21T20:57:26.876300+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5766,7 +5764,7 @@
           "sha256": "a5d06872544dfa5e127aa7ebca3a2e0b8d8809e738b47124fd301db2db49d6f2",
           "size_bytes": 14015,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:10.720726+09:00",
+          "checked_at": "2026-11-21T20:57:26.759298+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5789,7 +5787,7 @@
           "sha256": "5f5ca5f2374a793fbbf0f1ec171717a86b2e5e1358035c1d803027a8f46caa1d",
           "size_bytes": 12717,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:12.334708+09:00",
+          "checked_at": "2026-11-21T20:57:28.648670+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5812,7 +5810,7 @@
           "sha256": "051ceebd2c79263373c705699ebf740aa5f8508392ad9e54ed8bbf27d2438dc7",
           "size_bytes": 14731,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:12.270551+09:00",
+          "checked_at": "2026-11-21T20:57:28.939692+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5835,7 +5833,7 @@
           "sha256": "e688331dbd9d8981933fc60b09e27f72e0b52eccc08c377ef8f343e9c250240a",
           "size_bytes": 13528,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:12.107204+09:00",
+          "checked_at": "2026-11-21T20:57:28.967590+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5858,7 +5856,7 @@
           "sha256": "1e7917ef39ee5b5dbe501a7f25145bb513a588712f6339ebefefffb59f462d51",
           "size_bytes": 14150,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-21T20:28:12.272504+09:00",
+          "checked_at": "2026-11-21T20:57:28.930285+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -6008,12 +6006,20 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-21T20:28:12.394315+09:00",
-    "window_start": "2026-11-19T11:28:12.394315+00:00",
+    "checked_at": "2026-11-21T20:57:29.035411+09:00",
+    "window_start": "2026-11-19T11:57:29.035411+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
     "posts": [
+      {
+        "post_id": "17928581553202701",
+        "timestamp": "2026-11-21T11:36:45+00:00",
+        "permalink": "https://www.threads.com/@hid_119/post/DgAI08llcdQ",
+        "is_reply": false,
+        "text_available": true,
+        "text_sha256": "ba7bfd8655c17a1fff563990f9202868ed08133087b496d3b7dc077c3a5f879a"
+      },
       {
         "post_id": "18096084227694612",
         "timestamp": "2026-11-20T08:17:25+00:00",
@@ -6037,14 +6043,6 @@
         "is_reply": false,
         "text_available": true,
         "text_sha256": "fecf2546d675e2a3303f58bfcc8ee9d14be61fec378d6d71cd1839a2adad522c"
-      },
-      {
-        "post_id": "18084817085343030",
-        "timestamp": "2026-11-19T11:53:14+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/Df7BH06lpVl",
-        "is_reply": false,
-        "text_available": true,
-        "text_sha256": "71590e31a28b1cebd4be5f2789489233e9857043f1202179e6c885cfb91ea1af"
       }
     ],
     "meta_posted": false,
