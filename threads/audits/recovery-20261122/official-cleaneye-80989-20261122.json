@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "type": "partial_official_independent_review",
+  "status": "HOLD_NOT_APPROVED",
+  "checked_at": "2026-11-22T05:50:03+09:00",
+  "notice_id": "cleaneye-80989",
+  "targeted_future_slot": "2026-11-22T20:00:00+09:00",
+  "slot_assigned": false,
+  "confirmed": {
+    "institution": "성동문화재단",
+    "recruitment_unit": "사회복지직 5급 / 청소년사업",
+    "count": 1,
+    "employment": "일반정규직",
+    "application_start": "2026-11-11",
+    "application_deadline": "2026-11-25T10:00:00+09:00",
+    "application_method": "성동문화재단 채용 홈페이지 온라인 접수만 가능, 이메일 접수 불가"
+  },
+  "evidence": [
+    {
+      "source": "성동구 공식 채용공고",
+      "url": "https://www.sd.go.kr/main/selectBbsNttView.do?bbsNo=185&key=1474&nttNo=362899&nttShowPd=24&pageIndex=2&pageUnit=10",
+      "published_at": "2026-11-09",
+      "observation": "2026-11-11부터 11-25 10:00 접수, 채용 홈페이지 접수만 가능, PDF 첨부 안내",
+      "retrieval": "web search indexed official HTML; direct opening of the site timed out",
+      "original_binary_sha256": null
+    },
+    {
+      "source": "고용24 Cleaneye 유입 원문 상세",
+      "url": "https://www.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=CLE&infoTypeGroup=tb_workinfocle&wantedAuthNo=20261105051124",
+      "observation": "사회복지직 5급 청소년사업 1명 / 일반정규직 / 온라인 접수",
+      "retrieval": "web result official government detail",
+      "original_binary_sha256": null
+    },
+    {
+      "source": "원본 Cleaneye 검색 링크",
+      "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80989",
+      "observation": "previous production official pack failed host GET; not claimed as read",
+      "retrieval": "not verified",
+      "original_binary_sha256": null
+    }
+  ],
+  "required_before_promotion": [
+    "성동구 공고 PDF 파일 원본 다운로드 및 실제 전체 표·각주·직무 자격 AND/OR·공통 결격사유 의미검수",
+    "최신 정정·취소 게시물과 접수중 상태 확인",
+    "커리어픽 #job=cleaneye-80989 실제 최종 상세화면 렌더링 직접 확인",
+    "현행 v5 글/metadata 작성과 생산 validate_entry/verify_official_receipt/public copy/check_queue 검사",
+    "승인 전 24시간 신선도 재확인 및 최신 큐/claim/posted CAS 대조"
+  ],
+  "no_approval": true,
+  "no_queue_write": true,
+  "no_meta_post": true,
+  "baseline": {
+    "main_sha": "aa1602072201215d6c3a451497df1a2f46455f08",
+    "state_parent_sha": "fd646c66714542265014bbbcd9567874a73cc342",
+    "queue_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staging_blob_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+    "preflight_run_id": 44943606748,
+    "operations_run_id": 44938478584,
+    "approved_future_stock": 3,
+    "target_stock": 8,
+    "next_slot_missing": false
+  }
+}
