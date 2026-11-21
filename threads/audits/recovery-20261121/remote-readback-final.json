@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-11-21T17:01:19.022986+09:00",
+  "status": "REMOTE_SUPPLY_READBACK_VALIDATED",
+  "state_commit": "d0979206fdf125e77a1b42a741e9755d68499444",
+  "assets_main_commit": "919da5c9df043520c20f4e5fcb640acc3baebed3",
+  "submission_blob": "0a20e1259994b2f169daf35ea846b8a49671d77a",
+  "staging_blob": "936b00c8506af0a58357a05d1d5ede1a20219af5",
+  "queue_blob": "f09b17d188ba52e5e94e4083fd5f4e7d09da8039",
+  "all_remote_json_readback_matches": true,
+  "preserved_original_queue_entries": 50,
+  "preserved_original_staging_entries": 19,
+  "entry_fingerprints": [
+    "96bf87f3b36040e35f8848dc47da1235fe0c6584a135e8fc81d2e6e7a7691637",
+    "23a4886a00b66bee8567a7442e345ed55dbfbb5e3157e20d9a7211df5ed0fc81"
+  ],
+  "check_queue_status": "validated",
+  "ready_entries": [
+    {
+      "scheduled_at": "2026-11-21T20:00:00+09:00",
+      "notice_id": "cleaneye-81438",
+      "chars": 350
+    },
+    {
+      "scheduled_at": "2026-11-22T08:00:00+09:00",
+      "notice_id": "a307309",
+      "chars": 336
+    }
+  ],
+  "supply_status": {
+    "future_slots": [
+      "2026-11-21T20:00:00+09:00",
+      "2026-11-22T08:00:00+09:00",
+      "2026-11-22T12:00:00+09:00",
+      "2026-11-22T16:00:00+09:00",
+      "2026-11-22T20:00:00+09:00",
+      "2026-11-23T08:00:00+09:00",
+      "2026-11-23T12:00:00+09:00",
+      "2026-11-23T16:00:00+09:00"
+    ],
+    "approved_future_slots": [
+      "2026-11-21T20:00:00+09:00",
+      "2026-11-22T08:00:00+09:00"
+    ],
+    "missing_slots": [
+      "2026-11-22T12:00:00+09:00",
+      "2026-11-22T16:00:00+09:00",
+      "2026-11-22T20:00:00+09:00",
+      "2026-11-23T08:00:00+09:00",
+      "2026-11-23T12:00:00+09:00",
+      "2026-11-23T16:00:00+09:00"
+    ],
+    "next_slot_missing": false,
+    "approved_inventory_count": 2,
+    "inventory_target": 8,
+    "inventory_shortfall": 6,
+    "replenishment_required": true,
+    "invalid_ready_entries": [],
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false
+  },
+  "automatic_preflight": {
+    "run_id": 44882409241,
+    "status": "completed",
+    "conclusion": "success",
+    "registered_entry_seen": "cleaneye-81438",
+    "snapshot_approved_count": 1,
+    "next_slot_missing": false,
+    "note": "This automatic run finished after first entry registration and before second entry registration."
+  },
+  "actual_posting_status": "PENDING_REGULAR_EXECUTION",
+  "meta_posted_by_this_repair": false
+}

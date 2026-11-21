@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-11-21T17:03:38.140781+09:00",
+  "status": "draft_backlog_partial_two_candidates_one_new_notice_supported_one_duplicate_blocked",
+  "scope": "다음12/16시 공급 준비용 읽기전용 공식근거 조사. 승인/ready/queue/Meta/원격변경 없음.",
+  "main_source_commit": "dc13d523b826516cc71ceabc17772ad711fae44c",
+  "source_snapshots": [
+    {
+      "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/cleaneye.json",
+      "sha256": "90629e20e96899465943c7a3685e866df606831aa200486cc6cf51e8d6e7d38d"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/threads_posted.json",
+      "sha256": "99ff5edbeba0b1b59e273fbced58b2cf1fb28ec505fd5004ee168edb47eeda3d"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/final-queue-81438.json",
+      "sha256": "fb24fcbca4ce925388c92f25c1777d9513a45504c6f29b7ecf83f6a83967947a"
+    }
+  ],
+  "excluded_in_flight_ids": [
+    "cleaneye-81438",
+    "a307309"
+  ],
+  "ready_count": 0,
+  "new_unique_notice_evidence_count": 1,
+  "conditional_duplicate_candidate_count": 1,
+  "candidates": [
+    {
+      "job_id": "cleaneye-81432",
+      "status": "draft_evidence_collected",
+      "proposed_slot": "2026-11-22T12:00:00+09:00",
+      "slot_is_reserved": false,
+      "priority": "new_notice_no_matching_employer_post_in_local_history",
+      "organization": "서울연구원",
+      "focus": "연구원(연구직 석사급) 도시정책·시정 현안",
+      "headcount": 2,
+      "whole_notice_headcount": 4,
+      "employment": "정규직",
+      "application_deadline": "2026-12-04T14:00:00+09:00",
+      "reception_status": "within_official_notice_period_at_checked_time",
+      "reception_status_limit": "접수폼 제출 가능 상태를 조작하거나 시험 제출하지 않음. 현재 원문 기간 및 목록에 근거.",
+      "official_notice_url": "https://www.seoul.go.kr/news/news_employ.do?nttNo=470749",
+      "employer_notice_url": "https://www.si.re.kr/bbs/view.do?key=2024100071&pstSn=2611190002",
+      "application_url": "https://si.recruiter.co.kr",
+      "duplicate_check": {
+        "job_id_found_in_local_posted_ids": false,
+        "job_id_found_in_local_queue": false,
+        "local_posted_count": 97,
+        "live_remote_history_rechecked": false,
+        "note": "현재 parent가 추가 등록한 81438/a307309는 제외 대상으로 별도 인지. 과거 로컬 history와 queue snapshot을 조회했으며 최신 원격 중복검사는 원고화 전에 다시 필요."
+      },
+      "verified_facts": [
+        {
+          "fact": "도시정책·시정 현안 석사급 연구원 2명. AI 분야 석사급 1명과 박사급 1명을 합쳐 전체 4명.",
+          "source": "seoul-city-notice.pdf",
+          "pages": [
+            1
+          ]
+        },
+        {
+          "fact": "해당 채용분야 또는 관련 분야 석사학위 소지자. 도시정책·도시·경제·환경·인프라·교통·관광·복지·정책·공공투자·지역학·어문 계열 등. 공고일 2026-11-20까지 유효한 자격만 인정.",
+          "source": "seoul-city-notice.pdf",
+          "pages": [
+            1,
+            3
+          ]
+        },
+        {
+          "fact": "지역·연령·성별 제한 없음. 남성은 병역법 제76조 병역의무 불이행 사실이 없어야 함. 공고일 기준 인사규정 및 관계법령 결격사유 제외. 군필·면제로 임의 축약하지 않음.",
+          "source": "seoul-city-notice.pdf",
+          "pages": [
+            2
+          ]
+        },
+        {
+          "fact": "근무장소 서초본원, 서울특별시 서초구 남부순환로 340길 57. 인사발령·운영상황에 따라 변경 가능. 정규직, 주5일 09:00~18:00.",
+          "source": "seoul-city-notice.pdf",
+          "pages": [
+            1
+          ]
+        },
+        {
+          "fact": "11/20~12/4 14:00 온라인만 접수. 최종지원 필요, 수험번호 발급 확인. 최종제출 이후 수정불가(삭제는 마감일13:00까지).",
+          "source": "seoul-city-notice.pdf",
+          "pages": [
+            6
+          ]
+        },
+        {
+          "fact": "석사학위 논문 국문요약3매이내+원문을 1PDF. 연구실적목록은 2023-11-20 이후, 대표실적 정확히2건: 각각 목록+국문요약3매이내+원문으로 2개PDF. 필수항목 누락 또는 대표실적1건/3건이상은 불합격 처리될 수 있음.",
+          "source": "seoul-city-notice.pdf",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "fact": "중복·복수접수 불가. 외국학위 취득자는 학위증명서 외 외국학위신고필증·신고내역확인화면·아포스티유 중1개이상 필수(2차제출). 연구직 블라인드 일부 완화 범위는 원문대로 적용.",
+          "source": "seoul-city-notice.pdf",
+          "pages": [
+            3,
+            8
+          ]
+        },
+        {
+          "fact": "담당은 도시정책 자료조사·분석, 설문/인터뷰, 발표자료·보고서 작성, 연구일정·예산·위탁 관련 업무지원.",
+          "source": "seoul-duties.pdf",
+          "pages": [
+            3,
+            4
+          ]
+        }
+      ],
+      "correction_check": {
+        "result": "none_found_within_checked_scope",
+        "checked_at": "2026-11-21T16:59:42.614679+09:00",
+        "urls": [
+          "https://www.si.re.kr/bbs/list.do?key=2024100071",
+          "https://www.si.re.kr/bbs/view.do?key=2024100071&pstSn=2611190002",
+          "https://www.seoul.go.kr/news/news_employ.do?nttNo=470749"
+        ],
+        "scope": "기관 채용공고 목록 첫 페이지 10건: 게시물 2611190002,2611100001,2611100002,2611100003,2610270002,2610230002,2610120004,2610130002,2610070003,2609280006 및 해당 상세/서울시 상세. 대상 공고가 최신 첫 항목. 전체 인터넷·다른 게시판·미확인 페이지의 부재를 주장하지 않음.",
+        "anomaly": "기관 게시판 제목은 제2회, 기관 첨부 파일명과 서울시 제목 및 실제 PDF는 제3회. 본문 직무·인원·마감이 일치하나 제목 차이는 기록해 둠.",
+        "source_files": [
+          "seoul-board.html",
+          "seoul-notice.html",
+          "seoul-city-notice.html"
+        ]
+      },
+      "sources": [
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-city-notice.pdf",
+          "sha256": "175a85c2687aedafd2c107dcba47237bcb600469fc7fb39619b3d203cd482193",
+          "bytes": 512316,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-city-notice.pdf",
+          "url": "https://seoulboard.seoul.go.kr/comm/getFile?srvcId=BBSTY1&upperNo=470749&fileTy=ATTACH&fileNo=1&bbsNo=166",
+          "final_url": "https://seoulboard.seoul.go.kr/comm/getFile?srvcId=BBSTY1&upperNo=470749&fileTy=ATTACH&fileNo=1&bbsNo=166",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:59.956545+09:00",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-duties.pdf",
+          "sha256": "1e3450a61eac8eef6576bdb932f7949be3487d54ce20188ec367e1ce5be62efd",
+          "bytes": 290404,
+          "url": "https://seoulboard.seoul.go.kr/comm/getFile?srvcId=BBSTY1&upperNo=470749&fileTy=ATTACH&fileNo=2&bbsNo=166",
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-duties.pdf",
+          "http_status": 200,
+          "checked_at": "2026-11-21T17:01:54.114024+09:00"
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-city-notice-pdf.txt",
+          "sha256": "d8f9c67c5a2bdaa7363ce9d8ad856048256b2d14cf70ae8c08c2f80f2bf5d04c",
+          "bytes": 24024
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-duties-pdf.txt",
+          "sha256": "aa68189bd1fca290832fa0bb8208790dcaac9759edcddd656dcdd9401a77ce85",
+          "bytes": 13126
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-board.html",
+          "sha256": "11355a107e472cb4a7c55ebfb2acdfc10375e03a5a74230fb8b31ee622811243",
+          "bytes": 98629,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-board.html",
+          "url": "https://www.si.re.kr/bbs/list.do?key=2024100071",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:42.614679+09:00"
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-notice.html",
+          "sha256": "b3b3b5a16b8d5dd6905e5547c41f4676b40080249c2ff7e958f69c704700fc6c",
+          "bytes": 91003,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-notice.html",
+          "url": "https://www.si.re.kr/bbs/view.do?key=2024100071&pstSn=2611190002",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:42.268479+09:00"
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-city-notice.html",
+          "sha256": "afb5df6a6a453c54bcfd480c58098458eca118c10bd8c348e9c48d5853cb5408",
+          "bytes": 159565,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/seoul-city-notice.html",
+          "url": "https://www.seoul.go.kr/news/news_employ.do?nttNo=470749",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:40.249684+09:00"
+        }
+      ],
+      "pdf_visual_pages_checked": [
+        1,
+        3,
+        6,
+        7
+      ],
+      "draft_note": "관련 분야 석사 보유자를 대상으로 도시정책 연구원2명 중심으로 작성. 공고일 자격기준, 대표실적2건과 학위논문 필수제출, 중복지원 제한을 누락하지 말 것. 350자 원고와 모든 restrictions의 독립 대조는 아직 하지 않았음.",
+      "remaining_before_reviewed_submission": [
+        "350자 원고 작성 및 필수조건 압축·검수",
+        "기관 제목 제2회/공식PDF 제3회 불일치 메모 보존",
+        "최신 원격 게시 이력 및 상태 중복 재확인",
+        "모든 제출서류·블라인드 예외·결격사유 원문 끝까지 독립 검수",
+        "현재 production validator 실행"
+      ],
+      "approval": false,
+      "ready": false
+    },
+    {
+      "job_id": "cleaneye-81114",
+      "status": "draft_blocked_same_original_notice",
+      "proposed_slot": "2026-11-22T16:00:00+09:00",
+      "slot_is_reserved": false,
+      "organization": "재단법인 강원관광재단",
+      "focus": "3급 팀장 해양마케팅 경력직",
+      "headcount": 1,
+      "whole_notice_headcount": 4,
+      "employment": "정규직(6개월 수습 이후 정규 임용여부 결정)",
+      "application_deadline": "2026-11-25T18:00:00+09:00",
+      "reception_status": "official_recruitment_page_currently_lists_in_progress",
+      "official_notice_url": "https://www.gwto.or.kr/www/selectBbsNttView.do?key=22&bbsNo=2&nttNo=3223",
+      "application_url": "https://gwto.select-in.co.kr/recruit/apply/recruitMain?comp_idx=157",
+      "duplicate_check": {
+        "job_id_found_in_local_posted_ids": false,
+        "job_id_found_in_local_queue": false,
+        "local_posted_count": 97,
+        "live_remote_history_rechecked": false,
+        "note": "현재 parent가 추가 등록한 81438/a307309는 제외 대상으로 별도 인지. 과거 로컬 history와 queue snapshot을 조회했으며 최신 원격 중복검사는 원고화 전에 다시 필요.",
+        "same_original_notice_already_used": true,
+        "related_posted_job_id": "cleaneye-81112",
+        "related_posted_focus": "관광콘텐츠 6급 주임 정규직2명",
+        "same_official_pdf_url": "https://www.gwto.or.kr/www/downloadBbsFile.do?atchmnflNo=5283",
+        "related_threads_url": "https://www.threads.com/@hid_119/post/Df4DaHZHPFN",
+        "decision": "자동 게시 후보로 승격하지 않음. 다른 직급이어도 기존 공식 공고 재사용이므로 중복정책 해소 전 대체 필요."
+      },
+      "verified_facts": [
+        {
+          "fact": "해양마케팅3급팀장1명, 관광콘텐츠6급2명, 해양콘텐츠6급1명으로 전체4명.",
+          "source": "gangwon-notice.pdf",
+          "pages": [
+            1
+          ]
+        },
+        {
+          "fact": "3급은 아래4경로 중 하나: 공무원6급 및6급대우3년이상; 전체근무11년이상+해당분야 실무·연구·연수경력으로 당해직급 자격인정; 국가·지자체 투자·출자·출연기관 및 관광유관기관 동일직급3년이상; 위와 동등자격 인정. 해당분야는 관광기획·마케팅·콘텐츠·홍보,MICE,크루즈,경영 등 재단사업관련.",
+          "source": "gangwon-notice.pdf",
+          "pages": [
+            3
+          ]
+        },
+        {
+          "fact": "공고일 만18세이상60세미만, 남성 군필 또는 면제, 해외여행·인사규정결격 제외, 임용절차 후 즉시근무 가능. 3급 어학성적은 필수아닌 우대; 6급어학필수와 혼동금지.",
+          "source": "gangwon-notice.pdf",
+          "pages": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "fact": "근무지는 (재)강원관광재단. 부서·업무·근무지(춘천·강릉) 변경·순환가능. 주5일40시간, 토·공휴일 근무가능. 6개월수습 후 정규임용여부 결정. 근로형태/채용분야 중복지원은 불합격.",
+          "source": "gangwon-notice.pdf",
+          "pages": [
+            1,
+            2
+          ]
+        },
+        {
+          "fact": "11/25 18:00까지 온라인접수만. 우편·방문불가. 현재공식채용화면 11/10 14:00~11/25 18:00 진행중 표기. 임용예정2027-01-25.",
+          "source": "gangwon-notice.pdf 및 gangwon-recruitmain.html",
+          "pages": [
+            11
+          ]
+        }
+      ],
+      "correction_check": {
+        "result": "none_found_within_checked_scope",
+        "checked_at": "2026-11-21T16:59:25.563584+09:00",
+        "urls": [
+          "https://www.gwto.or.kr/www/selectBbsNttList.do?bbsNo=2&key=22&pageIndex=1",
+          "https://www.gwto.or.kr/www/selectBbsNttView.do?key=22&bbsNo=2&nttNo=3223",
+          "https://gwto.select-in.co.kr/recruit/apply/recruitMain?comp_idx=157"
+        ],
+        "scope": "재단 채용공고 첫페이지 최신10건(72~63), 대상72번2026-11-10이 최신. 해당 상세 및 진행중 모집 메인. 페이지2~8·별도공지사항·전체인터넷 미조회."
+      },
+      "sources": [
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-notice.pdf",
+          "sha256": "b4f49de6a71b9d702271ff406d2598322831e1abcca4392f2830e96416b5c860",
+          "bytes": 612613,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-notice.pdf",
+          "url": "https://www.gwto.or.kr/www/downloadBbsFile.do?atchmnflNo=5283",
+          "final_url": "https://www.gwto.or.kr/www/downloadBbsFile.do?atchmnflNo=5283",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:59.340043+09:00",
+          "content_type": "application/octer-stream;charset=UTF-8"
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-notice-pdf.txt",
+          "sha256": "e11d536c800ce12529630eac8fd8367417f189afc3fd4e9359c516142d984436",
+          "bytes": 69269
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-board.html",
+          "sha256": "0bd219dc81149c0df9f71389354ef2bd359f98539778cf5e3866d3041289c56f",
+          "bytes": 53510,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-board.html",
+          "url": "https://www.gwto.or.kr/www/selectBbsNttList.do?bbsNo=2&key=22&pageIndex=1",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:25.563584+09:00"
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-employer-notice.html",
+          "sha256": "1149aaceb2a1447b224217c8fd85332e889232f0e5a254ba29005c708e006e53",
+          "bytes": 44295,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-employer-notice.html",
+          "url": "https://www.gwto.or.kr/www/selectBbsNttView.do?key=22&bbsNo=2&nttNo=3223",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:42.569221+09:00"
+        },
+        {
+          "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-recruitmain.html",
+          "sha256": "d94cf2f449c126c5c1b1e44613188d6458e718635d07fcc3042df4170e987a5e",
+          "bytes": 14385,
+          "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/gangwon-recruitmain.html",
+          "url": "https://gwto.select-in.co.kr/recruit/apply/recruitMain?comp_idx=157",
+          "http_status": 200,
+          "checked_at": "2026-11-21T16:59:23.346179+09:00"
+        }
+      ],
+      "pdf_visual_pages_checked": [
+        1,
+        2,
+        3,
+        11
+      ],
+      "draft_note": "자격과 근무지·정확한 마감은 신규 실제GET으로 보강했지만 동일원문 기게시 발견. 다음16시 공급확정으로 계산하지 말 것.",
+      "remaining_before_reviewed_submission": [
+        "기게시 동일원문 재사용 문제 해결 또는 새공고로 대체",
+        "나머지 PDF29쪽 제출서류·경력증빙·제한 전체검수",
+        "독립원고작성 및 production validator 실행"
+      ],
+      "approval": false,
+      "ready": false
+    }
+  ],
+  "other_attempts": [
+    {
+      "job_id": "cleaneye-81291",
+      "status": "blocked_existing_location_evidence_gap",
+      "source": "parent에서16:45공급자동화PR135 HOLD 전달; 로컬 공식PDF 실제GET도 추가",
+      "reason": "역무8급5명/남양주공고전일거주/11-26 18:00 확인. 직무 진접선·별내선역사와 채용명은 근무지 명시와 구분. 새 근무지 명시근거를 얻지 못해 생산 검증 통과 선언하지 않음.",
+      "evidence": {
+        "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/namyangju-notice.pdf",
+        "sha256": "8054affb8c3cbd43b73b0224fd1021de03c0771ff5661726271079cd6779a844",
+        "bytes": 328236,
+        "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/namyangju-notice.pdf",
+        "url": "https://www.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+        "final_url": "https://www.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+        "http_status": 200,
+        "checked_at": "2026-11-21T16:58:53.486606+09:00",
+        "content_type": "application/pdf"
+      },
+      "approval": false
+    },
+    {
+      "job_id": "cleaneye-81393",
+      "status": "unverified_official_board_challenge",
+      "attempt_url": "https://sftf.scherb.or.kr/sub03/sub02_01.php",
+      "reason": "HTTP200이지만783byte JS쿠키challenge만 반환. 실제채용본문·정정범위 확인 완료로 처리하지 않음. 공개검색 대학재게시 자료만으로 승인하지 않음.",
+      "evidence": {
+        "path": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/sancheong-board.html",
+        "sha256": "68f2b834829adcb4de09ef5d59e3f2be25b4c04d0537ba9575007d1bf1526900",
+        "bytes": 783,
+        "url": "https://sftf.scherb.or.kr/sub03/sub02_01.php",
+        "http_status": 200,
+        "checked_at": "2026-11-21T17:01:11.671429+09:00",
+        "file": "/workspace/scratch/344e06f0bb66/careerpick-recovery/diagnostic/next-candidates/sancheong-board.html"
+      },
+      "approval": false
+    },
+    {
+      "job_id": "cleaneye-81446",
+      "status": "unverified_official_pdf",
+      "attempt_urls": [
+        "https://junggu.seoul.kr/content.do?cid=1491178&cmsid=15450&mode=view",
+        "https://junggu.seoul.kr/content.do?cmsid=15450"
+      ],
+      "reason": "직접GET503, 검색도구open timeout. 공식채용신청사이트200은 JS shell로 원문PDF 미확보. 검색결과를 full review로 대체하지 않음.",
+      "approval": false
+    }
+  ],
+  "unfilled_target_slots": [
+    "2026-11-22T12:00:00+09:00",
+    "2026-11-22T16:00:00+09:00"
+  ],
+  "remaining_six_target": "나머지6건 승인·공급확보 주장 없음. 실제검수 및 새원고화 필요."
+}

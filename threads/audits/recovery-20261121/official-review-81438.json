@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-81438",
+  "reviewer": "independent_agent_threads_runs",
+  "reviewed_at": "2026-11-21T16:43:39.267079+09:00",
+  "review_status": "official_facts_verified_for_reviewer_handoff",
+  "authorizes_publication": false,
+  "method": "Fresh direct HTTP downloads from employer official pages/PDFs; full text read; visual review of relevant PDF pages. No prior assistant attestation re-labelled as fresh source proof.",
+  "official_notice_number": "양주시 공고 제2026-2510호",
+  "official_notice_date": "2026-11-16",
+  "employer_notice_url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+  "pdf_sources": [
+    {
+      "attachment_id": "206793",
+      "url": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+      "http_status_observed": 200,
+      "download_completed_local_file_mtime": "2026-11-21T16:39:55.789400+09:00",
+      "source_bytes": 281584,
+      "source_sha256": "98a62a92891c9b26cdafc1c54895564e3757fadaf494e0475bfaebbfacc400e2",
+      "local_pdf": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_206793.pdf",
+      "pages": 10,
+      "text_file": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_206793.txt",
+      "text_sha256": "d9fd2704efaea25822508e54029e610bf3050bb207684b142ac80b04ff4200f8",
+      "extraction_method": "pdftotext -layout; separate full direct-PDF extraction via TinyFish ttl=0 also read",
+      "visual_pages_reviewed": [
+        1,
+        2,
+        3,
+        7,
+        8
+      ]
+    },
+    {
+      "attachment_id": "206794",
+      "url": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206794",
+      "http_status_observed": 200,
+      "download_completed_local_file_mtime": "2026-11-21T16:39:55.239832+09:00",
+      "source_bytes": 79946,
+      "source_sha256": "0f23a210bd9bc8d17c5eddb4f8ada99eba02bc8c4fbcfadcc7005615d5fb166f",
+      "local_pdf": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_206794.pdf",
+      "pages": 1,
+      "text_file": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_206794.txt",
+      "text_sha256": "621ac04d105a62fb7e152463087812f649f63d33508d6fdc787644beb4752fcb",
+      "extraction_method": "pdftotext -layout; separate full direct-PDF extraction via TinyFish ttl=0 also read",
+      "visual_pages_reviewed": [
+        1
+      ]
+    }
+  ],
+  "html_sources": [
+    {
+      "name": "official_notice_page",
+      "url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+      "final_url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "received_at": "2026-11-21T16:40:57.916409+09:00",
+      "started_at": "2026-11-21T16:40:49.584404+09:00",
+      "size": 220099,
+      "sha256": "b2987e863f73783de7108050d13a23efbe46604b22b438a3560a25d67c96cbc6",
+      "path": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_notice_page.html"
+    },
+    {
+      "name": "official_list_page1",
+      "url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&nttNo=209810&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&pageIndex=1&integrDeptCode=",
+      "final_url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&nttNo=209810&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&pageIndex=1&integrDeptCode=",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "received_at": "2026-11-21T16:40:57.712122+09:00",
+      "started_at": "2026-11-21T16:40:49.585248+09:00",
+      "size": 230495,
+      "sha256": "e0312aa0188860669443850872254040ec1067388efb9e3e94e3600f62d42930",
+      "path": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_list_page1.html"
+    },
+    {
+      "name": "official_list_page2",
+      "url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&integrDeptCode=&pageIndex=2",
+      "final_url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&integrDeptCode=&pageIndex=2",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "received_at": "2026-11-21T16:40:58.481974+09:00",
+      "started_at": "2026-11-21T16:40:49.586975+09:00",
+      "size": 230311,
+      "sha256": "b10c230befb1153792fe8e72680ddbf58655147487e38ba79acac37292bc3ea1",
+      "path": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_list_page2.html"
+    },
+    {
+      "name": "cleaneye_detail_81438",
+      "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81438",
+      "error": "HTTP Error 503: Service Unavailable",
+      "kind": "HTTPError",
+      "started_at": "2026-11-21T16:40:49.587799+09:00"
+    }
+  ],
+  "unit_fact_transcription": {
+    "source": "206793#page=1",
+    "is_manual_table_transcription": true,
+    "official_table_columns": [
+      "구분",
+      "채용분야",
+      "직급(직위)",
+      "인원",
+      "주요업무"
+    ],
+    "target_row": [
+      "일반직",
+      "경영지원",
+      "6급(대리)",
+      "1명",
+      "계약·세무·물품·재산 관리; 전산·통신·보안·총무; 홈페이지·SNS 운영 등 기관 홍보"
+    ],
+    "other_row": [
+      "일반직",
+      "경영지원",
+      "5급(차장)",
+      "1명"
+    ],
+    "total_people": 2,
+    "target_people": 1
+  },
+  "verified_facts": {
+    "employer": "재단법인 양주문화관광재단",
+    "unit_title": "경영지원 6급(대리)",
+    "employment": {
+      "value": "정규직",
+      "source": "206793#page=3"
+    },
+    "location": {
+      "value": "양주문화관광재단 지정 장소",
+      "source": "206793#page=3",
+      "caution": "접수처인 양주시청3층을 확정근무지로 바꾸지 말 것"
+    },
+    "pay": {
+      "value": "호봉제, 공무원8급상당; 개인별 자격·경력에 따라 결정",
+      "source": "206793#page=3",
+      "caution": "공무원 채용이나 확정연봉으로 표현하지 말 것"
+    },
+    "duties_source": "206793#page=1;206794#page=1",
+    "qualification_logic": "다음4경로 중 하나 이상 + 공통요건",
+    "qualification_reference_date": "채용공고일 2026-11-16",
+    "qualification_routes": [
+      {
+        "route": 1,
+        "requirement": "채용 분야 석사학위 이상의 학위 취득자로서 해당 직무분야 실무경력 1년 이상",
+        "source": "206793#page=3"
+      },
+      {
+        "route": 2,
+        "requirement": "채용예정 직무분야 3년 이상 경력자",
+        "source": "206793#page=3"
+      },
+      {
+        "route": 3,
+        "requirement": "국가 및 지방자치단체에서 9급 또는 9급 상당이고 해당 직무분야 실무경력 2년 이상",
+        "source": "206793#page=3"
+      },
+      {
+        "route": 4,
+        "requirement": "국가 또는 지방자치단체 투자기관·출자출연기관이나 이에 상응하다고 인정되는 기관의 동일직급에서 해당 분야 실무경력 1년 이상",
+        "source": "206793#page=3"
+      }
+    ],
+    "recognized_fields": [
+      "경영",
+      "행정",
+      "인사·노무",
+      "회계·세무",
+      "홍보·마케팅 등"
+    ],
+    "field_relevance_decision": "채용심사위원회가 관련분야 경력인정 여부 판단",
+    "common_conditions": [
+      {
+        "value": "공고일 현재 만18세 이상 만60세 미만",
+        "source": "206793#page=2;206794#page=1"
+      },
+      {
+        "value": "성별·학력·거주지 공통제한 없음; 각 경로별 학위 및 실무요건은 별도",
+        "source": "206793#page=2,3"
+      },
+      {
+        "value": "남성은 병역을 필하였거나 면제",
+        "source": "206793#page=2;206794#page=1"
+      },
+      {
+        "value": "지방공무원법31조 및 부패방지권익위법82조 결격사유에 해당하지 않을 것",
+        "source": "206793#page=2;206794#page=1"
+      }
+    ],
+    "experience_constraints": [
+      {
+        "value": "공고일 기준 산정, 경력증명서와 건강보험 자격득실확인서 일치경력만 인정",
+        "source": "206793#page=3,8"
+      },
+      {
+        "value": "직원(정규직·계약직) 근무경력 인정; 프리랜서는 경력증명이 가능한 경우만 인정",
+        "source": "206793#page=8"
+      },
+      {
+        "value": "인턴·아르바이트·일용직 경력 미인정",
+        "source": "206793#page=8",
+        "caution": "모든 파트타임·시간제 근로로 확대하지 말 것"
+      },
+      {
+        "value": "증명서에 근무기간·직위(급)·담당업무·주당근무시간 등, 발행기관관인·담당자연락처; 민간경력은 근무처성격증빙",
+        "source": "206793#page=7,8"
+      }
+    ],
+    "conditions": [
+      {
+        "value": "직급별 중복지원 불가, 중복시 모든 지원 무효",
+        "source": "206793#page=1"
+      },
+      {
+        "value": "채용일로부터6개월 수습기간을 둘 수 있고 내부평가에 의해 임용취소될 수 있음",
+        "source": "206793#page=1",
+        "caution": "수습이 확정이라고 단정하지 말 것"
+      },
+      {
+        "value": "주40시간·주5일09~18시 기본, 근무상황에 따라 시간외·주말·휴일근무가능",
+        "source": "206793#page=3"
+      },
+      {
+        "value": "이번 선발은 보훈가점 미적용, 동점시 취업지원대상자 우선선발",
+        "source": "206793#page=8"
+      }
+    ],
+    "application": {
+      "start_date": "2026-11-19",
+      "end_at": "2026-11-26T18:00:00+09:00",
+      "deadline_rule": "접수마감일18:00 도착분",
+      "methods": [
+        "방문",
+        "이메일"
+      ],
+      "onsite": "평일09:00~18:00, 점심12:00~13:00 제외; 토·일·공휴일 제외",
+      "email": "sable0319@korea.kr",
+      "email_requirement": "제출서류목록 순서대로 모든서류1개PDF 제출 후 필히 유선 접수확인",
+      "contact_phone": "031-8082-5666",
+      "submission_location": "양주시 부흥로1533, 양주시청3층 문화관광과 문화관광재단설립팀",
+      "source": "206793#page=6,7; official_notice_page",
+      "status_at_review": "공고상 접수기간 내, 현재 원공고 유지",
+      "today_onsite_open": false,
+      "today_onsite_reason": "2026-11-21은 토요일. 방문접수는 평일에만 가능. PDF의 이메일 항목에 토요일 송부 금지 문구를 임의로 추가하지 않음."
+    }
+  },
+  "correction_check": {
+    "result": "none_found",
+    "scope_limited": true,
+    "reviewed_at": "2026-11-21T16:43:39.267079+09:00",
+    "source_received_at": [
+      "2026-11-21T16:40:57.916409+09:00",
+      "2026-11-21T16:40:57.712122+09:00",
+      "2026-11-21T16:40:58.481974+09:00"
+    ],
+    "sources": [
+      {
+        "name": "official_notice_page",
+        "url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+        "final_url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "received_at": "2026-11-21T16:40:57.916409+09:00",
+        "started_at": "2026-11-21T16:40:49.584404+09:00",
+        "size": 220099,
+        "sha256": "b2987e863f73783de7108050d13a23efbe46604b22b438a3560a25d67c96cbc6",
+        "path": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_notice_page.html"
+      },
+      {
+        "name": "official_list_page1",
+        "url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&nttNo=209810&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&pageIndex=1&integrDeptCode=",
+        "final_url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&nttNo=209810&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&pageIndex=1&integrDeptCode=",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "received_at": "2026-11-21T16:40:57.712122+09:00",
+        "started_at": "2026-11-21T16:40:49.585248+09:00",
+        "size": 230495,
+        "sha256": "e0312aa0188860669443850872254040ec1067388efb9e3e94e3600f62d42930",
+        "path": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_list_page1.html"
+      },
+      {
+        "name": "official_list_page2",
+        "url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&integrDeptCode=&pageIndex=2",
+        "final_url": "https://www.yangju.go.kr/www/selectBbsNttList.do?key=216&bbsNo=21&searchCtgry=&pageUnit=10&searchCnd=all&searchKrwd=&integrDeptCode=&pageIndex=2",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "received_at": "2026-11-21T16:40:58.481974+09:00",
+        "started_at": "2026-11-21T16:40:49.586975+09:00",
+        "size": 230311,
+        "sha256": "b10c230befb1153792fe8e72680ddbf58655147487e38ba79acac37292bc3ea1",
+        "path": "/workspace/scratch/344e06f0bb66/recovery-evidence/official_list_page2.html"
+      }
+    ],
+    "checked_scope": "양주시청 시험·채용정보(bbsNo=21,key=216) 현재 목록1·2페이지의 일반항목3879~3898 및 각 페이지 공지6개; 원공고209810(목록3892) 이후 목록항목3893~3898 총6개 전부의 제목·기관 확인; 원공고 본문과 첨부PDF206793/206794 현행내용 확인.",
+    "original_notice": {
+      "board_no": 3892,
+      "nttNo": "209810",
+      "title": "2026년 재단법인 양주문화관광재단 직원 채용 공고"
+    },
+    "newer_rows_checked": [
+      {
+        "cells": [
+          "3898",
+          "2026년도 제3회 양주시 공무직 필기시험 합격자 및 면접시험 시행계획 공고 새글",
+          "총무과",
+          "2026-12-09",
+          "2026-12-09",
+          "174"
+        ],
+        "notice_ids": [
+          "209977"
+        ]
+      },
+      {
+        "cells": [
+          "3897",
+          "2027년 양주청소년문화의집 문화강좌 강사 모집 새글",
+          "청년체육과",
+          "2026-11-24",
+          "2026-11-30",
+          "273"
+        ],
+        "notice_ids": [
+          "209951"
+        ]
+      },
+      {
+        "cells": [
+          "3896",
+          "2027년 가로환경 기동처리반 기간제근로자 채용 공고 새글",
+          "청소행정과",
+          "2026-11-30",
+          "2026-12-04",
+          "241"
+        ],
+        "notice_ids": [
+          "209937"
+        ]
+      },
+      {
+        "cells": [
+          "3895",
+          "2027년 클린하우스 환경관리자 기간제근로자 채용 공고 새글",
+          "청소행정과",
+          "2026-11-30",
+          "2026-12-04",
+          "264"
+        ],
+        "notice_ids": [
+          "209935"
+        ]
+      },
+      {
+        "cells": [
+          "3894",
+          "2027년 깨끗한 쓰레기 처리 감시원 기간제근로자 채용 공고 새글",
+          "청소행정과",
+          "2026-11-30",
+          "2026-12-04",
+          "249"
+        ],
+        "notice_ids": [
+          "209934"
+        ]
+      },
+      {
+        "cells": [
+          "3893",
+          "2027년 양주시보건소 치매안심센터 송영서비스 기간제근로자 채용공고",
+          "건강증진과",
+          "2026-11-17",
+          "2026-11-27",
+          "1142"
+        ],
+        "notice_ids": [
+          "209890"
+        ]
+      }
+    ],
+    "matched_correction_or_cancellation_rows": [],
+    "observed_result": "해당 확인범위에서 양주문화관광재단 직원 채용(209810) 정정·변경·취소·철회·재공고 표시는 발견되지 않았고, 원공고는 공지와 일반목록3892에 유지됨.",
+    "limitations": [
+      "전체 인터넷 또는 다른 공식 게시판에 정정·취소가 전혀 없다는 주장이 아님.",
+      "기관명 검색어를 넣은 최초 목록 요청은 필터가 적용되지 않은 전체목록을 반환하므로 검색완주로 계산하지 않고 실제 읽은 최신목록1·2페이지 범위로 한정함.",
+      "목록의 날짜 열은 접수시작·접수종료이며 게시등록일로 해석하지 않음.",
+      "최종 게시 직전 유효기간과 실제 운영 검수기준에 따라 다시 확인할 수 있음."
+    ]
+  },
+  "source_limitations": [
+    "Cleaneye 상세81438 직접HTTP조회는2026-11-21T16:40:49+09:00 시작후503 응답. 고용기관 공식 원문209810과 직접PDF를 이번 사실검증의 1차근거로 사용."
+  ],
+  "editorial_recommendations": [
+    "정규직1명은6급 모집단위에 한정; 전체공고2명과 혼동금지.",
+    "4개자격경로 중1개를 충족한다는 논리를 유지하며3년경력을 모든지원자의단일필수로 쓰지않음.",
+    "국가·지자체 투자·출자출연 또는 상응인정기관이라는4번째경로 기관범위를 생략하지 않음.",
+    "인턴·아르바이트·일용직경력불인정과프리랜서증빙필수표시.",
+    "방문접수는평일, 이메일은1개PDF·유선접수확인필수로간결히안내.",
+    "최종본문·이미지·큐등록·중복방지·원격게시검증은이독립출처검수와별도로수행."
+  ]
+}

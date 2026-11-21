@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "notice_id": "a307309",
+  "status": "passed",
+  "result": "pass",
+  "reviewer": "independent_agent_threads_runs",
+  "reviewed_at": "2026-11-21T16:54:51.198696+09:00",
+  "body_path": "/workspace/scratch/344e06f0bb66/recovery-next/final-copy-a307309.txt",
+  "body_sha256": "faae0fd461cf2a74e900b077728b2afe50db358988211b1ba67ba59a487d68e1",
+  "chars": 336,
+  "source_review_method": "Independently read full text freshly extracted from supplied original PDF and opened all four supplied rendered original pages. Also independently read ALIO and employer snapshots; did not copy prior reviewer verdicts.",
+  "pdf_text_reextraction_matches": true,
+  "visual_pages_opened": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "sources": [
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/alio-3089245.pdf",
+      "name": "alio-3089245.pdf",
+      "bytes": 146468,
+      "sha256": "4c7ab605d0805cebf0b90eb0f71a6be97ab329db16893f7a74edb6154186b145"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/notice.txt",
+      "name": "notice.txt",
+      "bytes": 14231,
+      "sha256": "f022d7658697d2c829569502c1eb5c481ea35620b78127475f8ea2f134344993"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/alio-live-detail.html",
+      "name": "alio-live-detail.html",
+      "bytes": 14089,
+      "sha256": "8df6d9b61e2b5b8f14563114d609aafbd47dbd00c5b8191443fe8da204157d8f"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/alio-live-detail.txt",
+      "name": "alio-live-detail.txt",
+      "bytes": 6904,
+      "sha256": "cdace224289dbddb7a4029d0c67314a65936793f78fb9715e08a8c1b371e8f90"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/hospital-notice.html",
+      "name": "hospital-notice.html",
+      "bytes": 203788,
+      "sha256": "df4a49170a41843a9f0d4d513b495b1abf9a11a3d863e757ca1763ebc9e6d7b1"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/hospital-notice.txt",
+      "name": "hospital-notice.txt",
+      "bytes": 3912,
+      "sha256": "bc94e6ee80d177f7ece8f2fb77171da524c8be8f0fae08ab526ee5e8322a8127"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/hospital-board.html",
+      "name": "hospital-board.html",
+      "bytes": 233147,
+      "sha256": "e50b27a467897d849dec69d0b342202516a6cc32073bd8fb9faadee7f2b5e514"
+    },
+    {
+      "path": "/workspace/scratch/344e06f0bb66/recovery-next/hospital-board.txt",
+      "name": "hospital-board.txt",
+      "bytes": 5428,
+      "sha256": "d64008258b8176184c505d44a01e940225b0d5cfe017c54ed38c6cc830c6296b"
+    }
+  ],
+  "checks": [
+    {
+      "claim": "병동 간호사 정규직 2명, 대한적십자사 경인권역재활병원",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=1",
+      "evidence": "단일 모집행: 간호사 / 정규직 / 병동근무 / 2명; 공고명의 대한적십자사회장 및 병원명 직접대조"
+    },
+    {
+      "claim": "인천 근무",
+      "result": "passed",
+      "source": "alio-live-detail.txt; hospital-notice.txt",
+      "evidence": "공식ALIO 근무지 인천, 고용기관 홈페이지 주소 인천광역시 연수구 원인재로263. 병원근무를 전체타지역으로확장하지않음."
+    },
+    {
+      "claim": "공고 개시 전 취득한 간호사 면허 AND 3교대 근무 가능",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=1,3",
+      "evidence": "p1두항목모두(필수)표기; p3각주 필수면허는채용공고개시일이전에취득(최종합격)한것만인정. 본문의 모두필요가AND를보존."
+    },
+    {
+      "claim": "임용일 기준 만60세미만, 남성군필 또는 면제, 결격·신체검사조건",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=1,4; alio-live-detail.txt",
+      "evidence": "나이기준일은임용일; 군필·면제는서로대체되는조건이며두개동시요건으로쓰지않음. 결격13항목및신체검사결격시취소가원문에있음."
+    },
+    {
+      "claim": "부서·업무 전환배치 가능",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=1",
+      "evidence": "병원사정에따라직종내부서및업무전환배치될수있음. 직종외전환가능이라고확대하지않음."
+    },
+    {
+      "claim": "면허와 간호학과 최소학력 성적증명서 모두 필수",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=2,3",
+      "evidence": "필수서류2건모두제출; 면허증또는면허증명서+간호학과최소학력성적증명서. 예시3종을통해간호학과최소학력기준직접확인."
+    },
+    {
+      "claim": "성적증명서 공고일기준3개월내발급, 전체누적백분위",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=2,3",
+      "evidence": "최근3개월이내발급분만인정, 전체성적누적백분위점수필수. 발급일자삭제금지와학점은행제학위증명서상세는공식자료에유지."
+    },
+    {
+      "claim": "모든 서류1개PDF, 성명유지",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=4; alio-live-detail.txt",
+      "evidence": "모든제출서류를하나의PDF로스캔온라인첨부; 성명등실적확인필요정보는유지, 기타민감편견정보삭제. 공식ALIO는성명삭제시서류미인정을명시."
+    },
+    {
+      "claim": "이번 병원 동시채용5건 중1건만지원",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=3",
+      "evidence": "동일일정경인권역재활병원채용5건중1건지원,중복모두부적격. 전체대한적십자사채용전체로범위를확대하지않음."
+    },
+    {
+      "claim": "12월7일12:00마감, 온라인접수, 2027년1월1일임용예정",
+      "result": "passed",
+      "source": "alio-3089245.pdf#page=3,4",
+      "evidence": "2026.12.7.12:00정오; 대한적십자사redrecruit온라인; 임용2027.1.1.변경가능을예정으로표현."
+    }
+  ],
+  "issues": [],
+  "required_edits": [],
+  "scope": "Body factual accuracy against independently read official snapshots. No queue approval, image approval, duplicate clearance, remote execution, or publication receipt is implied.",
+  "source_freshness_note": "The source downloads were performed by next_manuscript at times in download_receipts.json and the respective HTML receipts. This reviewer read those saved bytes at reviewed_at; did not claim a new HTTP fetch.",
+  "correction_check_review": {
+    "result": "none_found_in_supplied_official_snapshots",
+    "scope": "ALIO a307309 current notice/PDF; hospital1390 notice; hospitallatest-firstboardpage1 entries770through761.",
+    "evidence": "원공고는769로유지. 원공고보다최근항목770은작업치료사공고이며,목록770~766은11/20동시5공고.해당범위에서간호사공고정정·취소제목없음.",
+    "limitations": "전체인터넷또는다른목록페이지부재확인아님.변경가능한사실은예약게시직전운영검수절차로재확인."
+  },
+  "nonblocking_detail_notes": [
+    "공식요건의전체결격사유·필수서류발급일자보존·학점은행제학위증명서예외및블라인드삭제세부목록은원문에남겨둠.현재짧은본문은그규정을반대로안내하지않음.",
+    "본문의남성군필·면제는대체자격을나열한표현이며군필과면제를동시에요구하지않음."
+  ],
+  "remote_writes": false,
+  "meta_posted": false
+}
