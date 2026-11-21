@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "notice_id": "a307233",
+  "status": "HOLD_DRAFT_ONLY",
+  "approved_for_queue": false,
+  "queue_changed": false,
+  "meta_posted": false,
+  "reviewed_at_utc": "2026-11-21T13:45:32.772Z",
+  "proposed_next_unfilled_slot": "2026-11-22T20:00:00+09:00",
+  "slot_assigned": false,
+  "media_type": "conditional_on_confirmed_publication_history",
+  "organization": "학교법인한국폴리텍 / 바이오캠퍼스",
+  "recruitment_unit": "업무직(대학운영직_조리원)",
+  "recruitment_unit_count": 1,
+  "employment_type": "무기계약직",
+  "location": "충남 논산시 강경읍",
+  "official_application_deadline": "2026-11-25T16:00:00+09:00",
+  "application_method": "대학 지정 서식으로 전자우편 접수만 허용, 방문/우편 불가",
+  "required_conditions": {
+    "logic": "all_of",
+    "items": [
+      "임용 예정일 2026-12-21 기준 만 60세 미만",
+      "임용예정일 기준 유효한 건강진단결과서(보건증)",
+      "남성의 경우 병역필 또는 면제",
+      "임용 예정일에 근무 가능",
+      "인사규정 결격사유 없음"
+    ]
+  },
+  "useful_point": "자체 양식이 아니면 접수되지 않으며, 보건증은 임용예정일에 유효해야 함",
+  "source_observations": [
+    {
+      "kind": "official_alio_html",
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
+      "observed_at_utc": "2026-11-21T13:45:32.772Z",
+      "scope": "single unit, employment, eligibility, deadline 16:00, email-only, selection, extras",
+      "original_html_sha256": null,
+      "reason": "Tool returned extracted page text, not original byte stream"
+    },
+    {
+      "kind": "official_employer_announcement",
+      "url": "https://www.kopo.ac.kr/bio/board.do?menu=5899&mode=view&post=790764",
+      "observed_at_utc": "2026-11-21T13:45:32.772Z",
+      "scope": "employer post title and date 2026-11-19; official HWP attachment listed as 76288 bytes; address confirmed",
+      "original_html_sha256": null
+    },
+    {
+      "kind": "employer_announcements_list",
+      "url": "https://kopo.ac.kr/bio/board.do?menu=5899",
+      "observed_at_utc": "2026-11-21T13:45:32.772Z",
+      "scope": "11/19 current position and 11/06 earlier position both present, no exact-title correction identified in visible list, NOT exhaustive"
+    }
+  ],
+  "source_inventory_sha256_from_previous_snapshot": {
+    "source_post": "d6367cea07bb3df2851d4739217e05ee00a8beb1c87fc170d8d1ab91ffef991c",
+    "source_detail": "2d2ddde055a490fdecabe98853f84e8f9db43cb7b7dd8055c316bd8d126671a4",
+    "warning": "Existing handoff values, not freshly verified original file bytes"
+  },
+  "attachment_attempts": [
+    {
+      "url": "https://www.alio.go.kr/download/download.json?fileNo=3088701",
+      "type": "ALIO job description PDF",
+      "outcome": "HTTP 403 via web click; no bytes",
+      "sha256": null,
+      "parsed_pages": []
+    },
+    {
+      "url": "https://www.kopo.ac.kr/bio/down",
+      "type": "employer HWP link from recruitment post",
+      "outcome": "HTTP 404 via web click; no bytes",
+      "sha256": null,
+      "parsed_pages": []
+    }
+  ],
+  "correction_check": {
+    "status": "partial_only",
+    "checked_at_utc": "2026-11-21T13:45:32.772Z",
+    "scope": "Employer active notice + visible announcements list + specific search; 2026-11-06 older similarly named posting seen",
+    "final_clearance": false
+  },
+  "profile_ui": {
+    "status": "HOLD",
+    "url": "https://kllollain-max.github.io/careerpick/#job=a307233",
+    "actual_js_detail_verified": false,
+    "reason": "No functioning permitted interactive browser: TinyFish current wallet negative (-0.136 USD), no equivalent CUA exposed"
+  },
+  "draft_text": "조리 업무로 무기계약직을 찾는다면,\n한국폴리텍 바이오캠퍼스 대학운영직 조리원 1명을 모집해요.\n\n충남 논산 근무이고 학력 제한은 없어요. 다만 만 60세 미만이며 12월 21일 기준 유효한 보건증이 필요해요. 남성은 병역필 또는 면제 조건도 확인하세요.\n\n11월 25일 16시까지 대학 지정 양식으로 이메일 접수만 가능해요. 방문·우편은 받지 않아요.\n\n자세한 사항은 프로필링크 확인",
+  "draft_character_count": 214,
+  "final_cta_count": 1,
+  "production_validation": {
+    "validate_entry": "not_run",
+    "verify_official_receipt": "not_run",
+    "verify_reviewed_card": "not_run",
+    "threads_reviewed_ingest_plan": "not_run",
+    "threads_queue_bridge_merge": "not_run",
+    "check_queue_for_this_candidate": "not_run",
+    "reason": "Original HWP and NCS PDF bytes, all attachment-specific criteria and actual profile UI not verified"
+  },
+  "next_action": "Obtain and independently inspect employer HWP and job description through permitted official channel; check correction board and rendered #job detail; revalidate 24h freshness, complete production checks before any CAS ready entry. Do not assign occupied slots or duplicate posts."
+}
