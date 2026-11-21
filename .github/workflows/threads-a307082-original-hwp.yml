@@ -1,0 +1,139 @@
+name: Independently read official a307082 hospital HWP (no publishing)
+on:
+  push:
+    branches: [review/threads-a307082-independent-20261118]
+    paths:
+      - .github/workflows/threads-a307082-original-hwp.yml
+permissions:
+  contents: read
+jobs:
+  official-document:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python -m pip install --quiet requests beautifulsoup4 olefile
+      - name: Download official original and independently extract complete text
+        shell: bash
+        run: |
+          python - <<'PY'
+          import io, re, zlib, json, hashlib, pathlib, datetime, urllib.parse
+          import requests, olefile, bs4
+          from zoneinfo import ZoneInfo
+          out=pathlib.Path('official-a307082');out.mkdir(exist_ok=True)
+          sources=[
+            'https://www.alio.go.kr/download/download.json?fileNo=3087714'
+          ]
+          board='https://www.rch.or.kr/web/rchseoul/bbs/employment/5642?baCommSelec=false&baNotice=false&baOpenDay=true&baUse=true&bcId=employment&cp=1&sortDirection=DESC&sortOrder=BA_REGDATE'
+          sess=requests.Session()
+          sess.headers.update({'User-Agent':'Mozilla/5.0 (compatible; CareerPickOfficialReview/1.0)'})
+          page=sess.get(board,timeout=25)
+          print('OFFICIAL_BOARD',page.status_code,page.url,'서울적십자병원 정규직 간호사 신규채용' in page.text)
+          page.raise_for_status()
+          if '서울적십자병원 정규직 간호사 신규채용' not in page.text: raise ValueError('WRONG_BOARD')
+          soup=bs4.BeautifulSoup(page.text,'html.parser')
+          for a in soup.select('a'):
+            if '채용공고문(261207_정규직 간호사)' not in a.get_text(' ',strip=True): continue
+            for candidate in [a.get('href',''),a.get('onclick','')]:
+              print('OFFICIAL_ATTACHMENT_LINK',candidate[:650])
+              for v in re.findall(r'(?:/|https://)[^\'" ]*(?:download|file)[^\'" ]*',candidate,flags=re.I):
+                sources.append(urllib.parse.urljoin(board,v))
+          original=None
+          for url in sources:
+            try:
+              host=urllib.parse.urlsplit(url).hostname
+              if host not in ('www.alio.go.kr','www.rch.or.kr'): continue
+              response=sess.get(url,timeout=35,headers={'Referer':board})
+              print('ATTEMPT',url,'status',response.status_code,'size',len(response.content),'magic',response.content[:10].hex(),'final',response.url)
+              if response.status_code==200 and olefile.isOleFile(io.BytesIO(response.content)):
+                original=(url,response);break
+            except Exception as e:print('ATTEMPT_ERROR',url,type(e).__name__,str(e)[:150])
+          if not original: raise RuntimeError('NO_VERIFIABLE_OFFICIAL_HWP_ORIGINAL')
+          url,response=original
+          data=response.content
+          digest=hashlib.sha256(data).hexdigest()
+          exact_hospital_url='https://www.rch.or.kr/web/rchseoul/file/download/uu/26dbe5161e1a48cabdcdab5942b4ad9f'
+          counterpart=sess.get(exact_hospital_url,timeout=30,headers={'Referer':board})
+          print('HOSPITAL_ORIGINAL_CROSSCHECK',counterpart.status_code,len(counterpart.content),counterpart.url,hashlib.sha256(counterpart.content).hexdigest())
+          if counterpart.status_code!=200 or not olefile.isOleFile(io.BytesIO(counterpart.content)):
+            raise ValueError('HOSPITAL_ORIGINAL_NOT_HWP')
+          if hashlib.sha256(counterpart.content).hexdigest()!=digest:
+            raise ValueError('OFFICIAL_CROSS_SOURCE_HWP_DIGEST_MISMATCH')
+          print('OFFICIAL_HWP_INDEPENDENT_CROSS_SOURCE_BYTES_MATCH',digest)
+          ole=olefile.OleFileIO(io.BytesIO(data))
+          sections=sorted([('/'.join(part),part) for part in ole.listdir() if len(part)==2 and part[0]=='BodyText' and part[1].startswith('Section')])
+          lines=[]
+          for name,parts in sections:
+            blob=ole.openstream(parts).read()
+            try:blob=zlib.decompress(blob,-15)
+            except zlib.error:pass
+            pos=0
+            while pos+4<=len(blob):
+              head=int.from_bytes(blob[pos:pos+4],'little');pos+=4
+              tag=head&1023; length=(head>>20)&4095
+              if length==4095:
+                if pos+4>len(blob):break
+                length=int.from_bytes(blob[pos:pos+4],'little');pos+=4
+              if pos+length>len(blob):break
+              chunk=blob[pos:pos+length];pos+=length
+              if tag!=67:continue
+              text=chunk.decode('utf-16le',errors='ignore')
+              text=re.sub(r'[\x00-\x08\x0b-\x1f]',' ',text)
+              text=re.sub(r'\s+',' ',text).strip()
+              if text:lines.append(text)
+          full='\n'.join(lines)
+          if len(full)<300 or not ('간호사' in full and '2026' in full): raise ValueError('OFFICIAL_HWP_TEXT_INCOMPLETE')
+          (out/'original.hwp').write_bytes(data)
+          (out/'full-text.txt').write_text(full,encoding='utf-8')
+          receipt={'notice_id':'a307082','source_url':url,'final_url':response.url,'bytes':len(data),'sha256':digest,
+            'checked_at_kst':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),'section_count':len(sections),
+            'text_chars':len(full),'reviewed_semantically':False,'approved_for_queue':False}
+          (out/'receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('VERIFIED_ORIGINAL_RECEIPT',json.dumps(receipt,ensure_ascii=False))
+          for line in lines:
+            if re.search(r'(채용|접수|마감|자격|우대|근무|경력|면허|기간|정규직|4명|23일|11월|지원)',line):
+              print('OFFICIAL_HWP_TEXT',line[:650])
+          PY
+      - name: Generate official-source based v5 image card preview (unapproved, never upload to main)
+        shell: bash
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-nanum > /dev/null
+          python -m pip install --quiet pillow
+          python - <<'PY'
+          import pathlib,json,hashlib,datetime
+          from zoneinfo import ZoneInfo
+          from PIL import Image
+          from scripts.threads_v5 import generate_card
+          root=pathlib.Path('official-a307082')
+          source=json.loads((root/'receipt.json').read_text(encoding='utf-8'))
+          text=(root/'full-text.txt').read_text(encoding='utf-8')
+          if not (source['sha256']=='47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478' and '간호' in text and '80' in text and '10' in text):
+              raise RuntimeError('ORIGINAL_HWP_SEMANTIC_GUARD_FAILED')
+          image_job={'id':'a307082','org':'대한적십자사','title':'간호사','count':4,
+              'employment':'정규직','location':'서울','due':'2026-11-23',
+              'deadline_label':'2026-11-23 10:00','restriction':'병동 임상경력 1년 이상'}
+          target=root/'a307082-source-backed.jpg'
+          generate_card(image_job,target)
+          im=Image.open(target).convert('RGB')
+          if im.size!=(1080,1080):raise RuntimeError('CARD_RENDER_SIZE_NOT_1080')
+          preview=root/'a307082-source-backed-360.png'
+          im.resize((360,360),Image.Resampling.LANCZOS).save(preview,format='PNG')
+          data={
+            'notice_id':'a307082','status':'unapproved_visual_review_required',
+            'source_checked_at':source['checked_at_kst'],'generated_at':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),
+            'image_job':image_job,'card_path':str(target),'preview_path':str(preview),
+            'card_sha256':hashlib.sha256(target.read_bytes()).hexdigest(),
+            'preview_sha256':hashlib.sha256(preview.read_bytes()).hexdigest(),
+            'card_bytes':target.stat().st_size,'preview_bytes':preview.stat().st_size,
+            'registered_in_main':False,'cas_registered':False,'meta_posted':False}
+          (root/'card-preview-receipt.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('V5_CARD_PREVIEW_ONLY='+json.dumps(data,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: careerpick-threads-a307082-original-evidence
+          path: official-a307082/
+          retention-days: 30
