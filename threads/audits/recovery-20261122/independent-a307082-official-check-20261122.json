@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "review_type": "independent_official_source_crosscheck",
+  "notice_id": "a307082",
+  "reviewed_at_utc": "2026-11-21T16:54:29.831Z",
+  "review_scope": "Official ALIO HTML and matching employer posting: verified job and attached document existence. HWP binary, full attachment semantics, precise deadline and actual CareerPick JS job detail NOT verified.",
+  "status": "HOLD_NOT_APPROVED",
+  "approved_for_queue": false,
+  "queue_changed": false,
+  "meta_posted": false,
+  "slot_assigned": false,
+  "suggested_unfilled_slot_only": "2026-11-22T20:00:00+09:00",
+  "account": "hid_119",
+  "repository": "kllollain-max/careerpick",
+  "evidence": [
+    {
+      "type": "production_official_source_receipt",
+      "run_id": "44921910356",
+      "observed_at_kst": "2026-11-22T00:58:32.327534+09:00",
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+      "http_status": 200,
+      "content_type": "text/html;charset=utf-8",
+      "size_bytes": 11972,
+      "source_original_sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
+      "note": "SHA/bytes documented by latest production handoff receipt, not a newly-downloaded HWP"
+    },
+    {
+      "type": "independent_official_alio_webpage",
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+      "checked_at_utc": "2026-11-21T16:54:29.831Z",
+      "confirmed": "2026.11.16 ongoing; 대한적십자사 서울적십자병원 정규직 간호사 모집4명, 서울, 임상(병동) 경력1년 이상; 간호사면허+간호학 성적/졸업증명 AND; 11/23 deadline DATE ONLY"
+    },
+    {
+      "type": "employer_official_notice",
+      "url": "https://www.rch.or.kr/web/rchseoul/bbs/employment/5642",
+      "checked_at_utc": "2026-11-21T16:54:29.831Z",
+      "confirmed": "2026-11-16 post titled 서울적십자병원 정규직 간호사 신규채용 공고, original attachment 1. 채용공고문(261207_정규직 간호사).hwp 56.5KB, details only in attachment"
+    },
+    {
+      "type": "employer_attachment_download_attempt",
+      "url": "https://www.rch.or.kr/web/rchseoul/file/download/uu/26dbe5161e1a48cabdcdab5942b4ad9f",
+      "checked_at_utc": "2026-11-21T16:54:29.831Z",
+      "outcome": "browser extraction rejects application/octet-stream (HTTP 400 unsupported content type); independent container download failed; no HWP bytes obtained",
+      "original_binary_sha256": null
+    },
+    {
+      "type": "unverified_secondary_lead_only",
+      "url": "https://www.nursevillage.com/job/job-posting/93337",
+      "checked_at_utc": "2026-11-21T16:54:29.831Z",
+      "claim": "Nov23 10:00 deadline and extra qualifying details; NOT used as authoritative or validated"
+    }
+  ],
+  "independently_confirmed": {
+    "employer": "서울적십자병원 (대한적십자사)",
+    "title": "정규직 간호사",
+    "employment": "정규직",
+    "vacancies": 4,
+    "location": "서울",
+    "deadline_date": "2026-11-23",
+    "deadline_time": null,
+    "mandatory_all_of": [
+      "간호사 면허 증명",
+      "간호학 성적증명서 및 졸업증명서",
+      "임상(병동) 경력 1년 이상 경력증명서"
+    ],
+    "preferred_not_required": [
+      "취업지원대상자",
+      "장애인",
+      "북한이탈주민"
+    ],
+    "useful_point": "ALIO instructs removal of photo/birthdate/sex/school-name elements on submitted documents"
+  },
+  "missing": [
+    "Employer-original HWP attachment bytes and sha256, page/section semantic review",
+    "Official exact 11/23 deadline clock time (secondary result 10:00 is NOT an official confirmation)",
+    "Latest correction/cancellation coverage beyond ALIO and the matched hospital post",
+    "Actual JS rendered careerpick #job=a307082 detail checked in an approved browser",
+    "validate_entry, verify_official_receipt, public-copy checks, optional card, plan/merge/check_queue after evidence complete"
+  ],
+  "existing_ready_untouched": [
+    "a307309@2026-11-22T08:00:00+09:00",
+    "cleaneye-81432@2026-11-22T12:00:00+09:00",
+    "a306841@2026-11-22T16:00:00+09:00"
+  ],
+  "next_action": "Acquire official HWP via supported download+parse; verify deadline/time and correction, actual #job UI; only then run production validators and guarded CAS queue registration if still eligible and slot unstarted",
+  "preservation": "Do not modify writer-queue, reviewed-staging, claims or posted history; no post/dispatch"
+}
