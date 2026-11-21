@@ -1489,8 +1489,11 @@ def render(post, detail, related_posts=(), notice_review=None):
         } for region in regions]
         schema['jobLocation'] = locations if len(locations) > 1 else locations[0]
 
-    # ALIO 고용형태는 근로시간과 다른 분류입니다. 부분 문자열 검사로
-    # '무기계약직'을 TEMPORARY로 잘못 분류하거나 복수 형태를 단정하지 않습니다.
+    # Google FULL_TIME means verified full-time hours, not Korean regular
+    # employment status. ALIO 정규직 is a contract classification and does
+    # NOT by itself prove full-time hours; omit employmentType for that case.
+    # Contract/intern labels may be mapped only when the role is unambiguous.
+    # Never infer TEMPORARY for 무기계약직 or a mixed employment listing.
     if post.get('emp'):
         raw_employment = ([verified_application_notice['confirmed_employment']]
                           if verified_application_notice.get('confirmed_employment') else post['emp'])
@@ -1500,7 +1503,6 @@ def render(post, detail, related_posts=(), notice_review=None):
         if len(unique_kinds) == 1:
             employment = next(iter(unique_kinds))
             employment_type = {
-                '정규직': 'FULL_TIME',
                 '계약직': 'TEMPORARY',
                 '인턴': 'INTERN',
             }.get(employment)
@@ -2036,10 +2038,11 @@ def self_test():
     )
     assert with_time_jsonld
     assert json.loads(with_time_jsonld.group(1))['validThrough'] == '2099-10-29T23:59:00+09:00'
-    # EmploymentType is not a substring search: 무기계약직 is NOT TEMPORARY,
-    # 비정규직 is NOT 정규직, and mixed categories must not be guessed.
+    # Regular employment is not proof of full-time hours; the visible
+    # category stays in the page, but the optional JSON-LD field is omitted.
+    # Other types require an unambiguous source classification.
     for employment, expected in (
-        (['정규직'], 'FULL_TIME'),
+        (['정규직'], None),
         (['계약직'], 'TEMPORARY'),
         (['인턴'], 'INTERN'),
         (['무기계약직'], None),
