@@ -368,17 +368,31 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
             continue
         identities.update(signatures)
         unique.append(item)
+    def review_item(row, post, detail, context):
+        return {"notice_id": row["notice_id"],
+                **({"source": "cleaneye", "official_id": context["official_id"], "source_context": context} if context else {}),
+                "source_post": post, "source_detail": detail,
+                "source_post_sha256": row["source_post_sha256"], "source_detail_sha256": row["source_detail_sha256"],
+                "selection_context": {k: v for k, v in row.items() if k not in {"source_post_sha256", "source_detail_sha256"}}}
+
     items = []
     for rank, (row, post, detail, context) in enumerate(unique, 1):
         row["rank_before_limit"] = rank
         row["included_in_writer_input"] = rank <= limit
         if rank > limit:
             continue
-        items.append({"notice_id": row["notice_id"],
-                      **({"source": "cleaneye", "official_id": context["official_id"], "source_context": context} if context else {}),
-                      "source_post": post, "source_detail": detail,
-                      "source_post_sha256": row["source_post_sha256"], "source_detail_sha256": row["source_detail_sha256"],
-                      "selection_context": {k: v for k, v in row.items() if k not in {"source_post_sha256", "source_detail_sha256"}}})
+        items.append(review_item(row, post, detail, context))
+    # Keep the editorial ranking/cap unchanged, but do not let that cap remove
+    # an entire already-eligible source from read-only evidence gathering.
+    # These alternatives receive neither a draft slot nor queue approval.
+    represented = {item["selection_context"]["source"] for item in items}
+    alternative_counts, alternatives = Counter(), []
+    for row, post, detail, context in unique:
+        source_name = row["source"]
+        if source_name in represented or alternative_counts[source_name] >= 8:
+            continue
+        alternatives.append(review_item(row, post, detail, context))
+        alternative_counts[source_name] += 1
     for source_name, summary in sources.items():
         decisions = Counter(r["decision"] for r in rows if r["source"] == source_name)
         summary.update(eligible_count=decisions["eligible_for_official_review"], review_required_count=decisions["review_required"],
@@ -410,5 +424,7 @@ def build_selection(source, details, history, policy, now, limit=24, reviewed_en
         audit['preparation_time_heuristic_hours'] = 48
     review_rows = [{k: v for k, v in r.items() if k not in {"source_post_sha256", "source_detail_sha256"}}
                    for r in rows if r["decision"] == "review_required"]
+    audit["review_only_alternative_count"] = len(alternatives)
     return {"candidates": items, "selection_audit": audit, "review_candidates": review_rows,
+            "official_source_alternatives": alternatives,
             "all_blocked_notice_ids": sorted(protected), "cleaneye_status": cleaneye_status}

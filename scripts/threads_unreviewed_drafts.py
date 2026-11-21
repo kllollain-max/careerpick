@@ -16,8 +16,11 @@ def build_drafts(handoff):
         raise ValueError("UNSAFE_HANDOFF")
     slots = handoff.get("missing_slots", [])
     candidates = handoff.get("candidates", [])
+    alternatives = handoff.get("official_source_alternatives", [])
     if not isinstance(slots, list) or not isinstance(candidates, list):
         raise ValueError("INVALID_HANDOFF")
+    if not isinstance(alternatives, list):
+        raise ValueError("OFFICIAL_ALTERNATIVES_INVALID")
     drafts = []
     used_notice_ids = set()
     # Reject duplicate or malformed slot identifiers before preparing any draft.
@@ -134,10 +137,24 @@ def build_drafts(handoff):
             "official_source_alternatives": [
                 {"notice_id": candidate["notice_id"], "status": "unreviewed",
                  "official_url_for_private_review": candidate.get("official_url"),
+                 "source_post_sha256": candidate.get("source_post_sha256"),
+                 "source_detail_sha256": candidate.get("source_detail_sha256"),
                  "suggested_slot": None}
                 for candidate in candidates if isinstance(candidate, dict)
                 and isinstance(candidate.get("notice_id"), str)
-                and candidate["notice_id"] not in used_notice_ids],
+                and candidate["notice_id"] not in used_notice_ids] + [
+                {"notice_id": candidate["notice_id"], "status": "unreviewed",
+                 "official_url_for_private_review": candidate.get("official_url_for_private_review"),
+                 "source_post_sha256": candidate.get("source_post_sha256"),
+                 "source_detail_sha256": candidate.get("source_detail_sha256"),
+                 "suggested_slot": None}
+                for candidate in alternatives if isinstance(candidate, dict)
+                and isinstance(candidate.get("notice_id"), str)
+                and candidate["notice_id"] not in used_notice_ids
+                and candidate.get("status") == "unreviewed"
+                and candidate.get("approved_for_queue") is False
+                and candidate.get("meta_posted") is False
+                and candidate.get("suggested_slot") is None],
             "slot_coverage": {
                 "requested_slots": slots,
                 "draft_slots": [slot for slot in slots if slot in covered],
