@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "account": "hid_119",
+  "notice_id": "cleaneye-81255",
+  "type": "independent_official_correction_and_unit_crosscheck",
+  "checked_at_utc": "2026-11-21T18:45:05.073Z",
+  "status": "DRAFT_HOLD_INCOMPLETE",
+  "approved_for_queue": false,
+  "queue_registered": false,
+  "meta_posted": false,
+  "proposed_slot_not_reserved": "2026-11-22T20:00:00+09:00",
+  "state_head_before": "24c8e5fd7fc45228e077c5ddec49e0cc69b3f801",
+  "main_head_observed": "aa1602072201215d6c3a451497df1a2f46455f08",
+  "latest_preflight": {
+    "run_id": 44932556969,
+    "observed_at_kst": "2026-11-22T02:55:14+09:00",
+    "ready_future_count": 3,
+    "goal": 8,
+    "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staging_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39"
+  },
+  "latest_collection": {
+    "run_id": 44921816040,
+    "artifact_id": 14713713927,
+    "operation_report_verified_at_kst": "2026-11-22T00:56:57+09:00",
+    "cleaneye_verified_at_kst": "2026-11-22T00:57:26+09:00",
+    "candidate_post_sha256": "5a25e89aeae3943c6c4d8752743e7cdc68bb50e89ede0e8ce5698810d3f650e2",
+    "candidate_detail_sha256": "4b27a2a2a17368cc607b843cac95bc9013ffd0713151d38084fc272414fe989d"
+  },
+  "current_verified_scope": {
+    "notice_id": "cleaneye-81255",
+    "org": "송파구시설관리공단",
+    "notice_no": "2026-49",
+    "title": "직무능력 중심 경력 및 공개경쟁 채용(수정)",
+    "official_government_job_notice": "https://www.gojobs.go.kr/apmView.do?empmnsn=308661",
+    "current_official_government_attachment_name": "공고문11.20.(수정).hwp",
+    "local_government_mirror": "https://www.songpa.go.kr/job/selectBbsNttView.do?bbsNo=94&key=3416&nttNo=19280405&pageIndex=1&pageUnit=10",
+    "municipal_posted_date": "2026-11-16",
+    "municipal_unit_facts": [
+      {
+        "unit": "사무행정(청년) 일반직7급 경력경쟁",
+        "count": 2
+      },
+      {
+        "unit": "기술(전기·청년) 일반직7급 공개경쟁",
+        "count": 1
+      },
+      {
+        "unit": "영양사 공무직 경력경쟁",
+        "count": 1
+      }
+    ],
+    "total_count": 4,
+    "deadline_date": "2026-11-26",
+    "deadline_clock": null,
+    "application_mode": "온라인, 방문·우편·이메일 불가",
+    "application_site": "https://recruit.incruit.com/songpagongdan",
+    "municipal_pdf_listing_url": "https://www.songpa.go.kr/job/downloadBbsFile.do?atchmnflNo=167451&bbsNo=94&nttNo=19280405",
+    "pdf_preview_url": "https://www.songpa.go.kr/previewBbs.do?atchmnflNo=167451"
+  },
+  "actual_checks": [
+    {
+      "scope": "official local government HTML",
+      "result": "public page read; unit-level 2+1+1 split confirmed",
+      "at_utc": "2026-11-21T18:45:05.073Z"
+    },
+    {
+      "scope": "official central recruitment HTML",
+      "result": "revised attachment filename 11.20.(수정).hwp noted; not conflated with 11.16 PDF mirror",
+      "at_utc": "2026-11-21T18:45:05.073Z"
+    },
+    {
+      "scope": "municipal PDF binary download",
+      "result": "web retrieval rejected application/octet-stream (unsupported type); no bytes or SHA obtained",
+      "at_utc": "2026-11-21T18:45:05.073Z"
+    },
+    {
+      "scope": "municipal preview",
+      "result": "JS document viewer opened but no readable PDF page/text output; cannot claim PDF reviewed",
+      "at_utc": "2026-11-21T18:45:05.073Z"
+    },
+    {
+      "scope": "CareerPick #job=cleaneye-81255",
+      "result": "web viewer could not access deployed page; browser rendering not verified",
+      "at_utc": "2026-11-21T18:45:05.073Z"
+    },
+    {
+      "scope": "TinyFish browser wallet",
+      "result": "negative balance USD -0.136 as_of 2026-11-21T18:43:33.798Z; no browser automation attempted",
+      "at_utc": "2026-11-21T18:45:05.073Z"
+    }
+  ],
+  "source_binary_sha256": null,
+  "extracted_text_sha256": null,
+  "source_pdf_pages_checked": 0,
+  "missing": [
+    "Read current 11.20 corrected original HWP/PDF as bytes and record SHA",
+    "Exact application deadline clock time",
+    "Selected unit mandatory and preferred requirements and AND/OR semantics",
+    "Actual rendered CareerPick #job detail",
+    "Current correction/cancellation crosscheck beyond named official pages",
+    "Production validate_entry / verify_official_receipt / plan / merge / check_queue only after independent fact evidence"
+  ],
+  "safe_next_action": "Obtain current revised official attachment through supported UI/file download or alternative official PDF, validate single unit and timing, then use production validators; do not approve until UI and 24h source checks complete.",
+  "no_changes": [
+    "threads/writer-queue.json",
+    "threads/reviewed-staging.json",
+    "threads/reviewed-submissions.json",
+    "threads_posted.json",
+    "threads-claims/**"
+  ],
+  "no_publish": true
+}
