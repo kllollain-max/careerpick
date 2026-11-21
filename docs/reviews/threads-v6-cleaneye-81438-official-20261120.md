@@ -153,3 +153,11 @@
 격리 작업공간에서 GitHub 현행 카드 생성기와 동일 레이아웃의 로컬 사본으로 1080 JPEG 및 그 동일 JPEG의 LANCZOS 360 RGB PNG를 생성하고 **실제 두 이미지를 열어 한글/수치·날짜/시각·잘림·본문과의 일치 확인**. 로컬 JPEG SHA256 cd851668aa4da807fc9d1d16e0940759286bc57e93d422caa952f3b45232bb3d / 360 PNG SHA256 a7efbc7963e26d2cf410e1b277ec6a8514e0735a60b00edbf8623fd38798985e / card_facts_sha256 5c6907f8b1ebd2a2e4abf12a80b3f2ef8de08da6105f3634af77e41d62f9a0fa. 카드 제한문구 '지원자격은 네 경로 중 하나예요'는 본문에 존재. 격리 환경의 픽셀 검사는 통과하였으나 **운영 main 자산 파일과 생산 검증기 통과라고 주장하지 않음.**
 
 남은 승인 게이트: 공식 정정·취소/접수상태 최종 재확인, 개별 커리어픽 #job 실화면, 운영 코드 validate_entry·verify_official_receipt·전체 큐 검사, JPEG/PNG 원격 main 업로드 및 SHA CAS readback, 정식 review.v5 근거 및 원장·accepted claim·잠금 재확인. **07:45 이후 08:00 슬롯은 예약 진행 중일 수 있어 접근·재발송 금지**. 기존 브랜치 미승인 HOLD, main/원장/큐/Meta 무변경. 승인0/8, 신규 CAS 공급0, Meta POST0.
+
+
+## 2026-11-21 09시대 KST — 시청 최신 채용목록 3쪽 독립 조회
+
+- 2026-11-21 09시대 KST에 양주시청 공식 [시험·채용정보 목록 1쪽](https://www.yangju.go.kr/www/selectBbsNttList.do?bbsNo=21&key=216&pageIndex=1&pageUnit=10&searchCnd=all&searchKrwd=), [2쪽](https://www.yangju.go.kr/www/selectBbsNttList.do?bbsNo=21&key=216&pageIndex=2&pageUnit=10&searchCnd=all&searchKrwd=), [3쪽](https://www.yangju.go.kr/www/selectBbsNttList.do?bbsNo=21&key=216&pageIndex=3&pageUnit=10&searchCnd=all&searchKrwd=)을 새로 읽었다. 1쪽 본문에서 공지·번호3892의 동일 '2026년 재단법인 양주문화관광재단 직원 채용 공고'가 접수 시작 **11/19**, 종료 **11/26**으로 유지되고 있음을 확인. 1~3쪽 검색가능 게시 제목에서 동일 채용의 별도 정정·취소 제목은 발견하지 못함. 이는 해당 3쪽에 한정된 **게시 제목 검색**이며 내부 첨부 변경·전체 공지/기관 별도 정정 여부를 확정하지 못한다.
+- 동일 시점 [시청 공식 단독 공고](https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810)의 공개 최신 본문에서 모집분야는 **경영지원 전체2명(5급차장+6급대리)**, 접수 **11/19~11/26, 09:00~18:00**으로 재확인. 6급 단일 1명과 공식 PDF **11월26일 18:00**을 보존한다. 23:59 자동 보충 시각은 거절.
+- [커리어픽 공개 프로필 URL](https://kllollain-max.github.io/careerpick/#job=cleaneye-81438)의 웹 텍스트 추출 결과는 홈페이지 **일반 채용 목록만** 반환했고, 개별 6급 모달이 표시됐는지 검증할 수 없었다. 실제 브라우저 자동화 실행은 TinyFish 잔액 부족으로 시작조차 못했으므로 브라우저 성공·프로필 성공·카드 운영검수 성공으로 계산하지 않는다.
+- 현행 정책 v2와 검토용 337자 원고·카드 해시 자체는 유지. 원고/카드의 사전검토와 **운영 검증기는 별개**이며 실제 production validate_entry, verify_official_receipt, 전체큐 --check-queue, 원격 카드 2종 등록·큐 CAS·원격 readback은 이 점검에서 실행하지 않았다. **HOLD 유지, 신규 승인0/공급0/Meta POST0, 기게시/진행/예약/원장·claim·타 프로젝트 변경 없음.**
