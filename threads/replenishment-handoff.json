@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-21T19:00:42.497608+09:00",
-  "run_id": "44892151710",
-  "source_commit": "919da5c9df043520c20f4e5fcb640acc3baebed3",
+  "captured_at": "2026-11-21T19:59:53.159315+09:00",
+  "run_id": "44896859770",
+  "source_commit": "e2599194290ab186eb841d9338bf45229a68a112",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-21T18:59:53.235276+09:00",
+    "time": "2026-11-21T19:59:00.652364+09:00",
     "future_slots": [
       "2026-11-21T20:00:00+09:00",
       "2026-11-22T08:00:00+09:00",
@@ -104,27 +104,35 @@
       {
         "notice_id": "a307309",
         "reason": "SLOT_ALREADY_OCCUPIED"
+      },
+      {
+        "notice_id": "cleaneye-81432",
+        "reason": "SLOT_ALREADY_OCCUPIED"
+      },
+      {
+        "notice_id": "a306841",
+        "reason": "SLOT_ALREADY_OCCUPIED"
       }
     ],
     "queue_updated": false,
     "meta_posted": false,
-    "queue_sha": "f09b17d188ba52e5e94e4083fd5f4e7d09da8039",
-    "staged_sha": "936b00c8506af0a58357a05d1d5ede1a20219af5",
+    "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staged_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
     "promoted_count": 0,
-    "approved_supply_count": 2,
+    "approved_supply_count": 4,
     "inventory_target": 8,
-    "inventory_shortfall": 6,
+    "inventory_shortfall": 4,
     "replenishment_required": true,
     "invalid_ready_entries": [],
     "pending_active_slots": [],
     "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
       "2026-11-21T20:00:00+09:00",
-      "2026-11-22T08:00:00+09:00"
+      "2026-11-22T08:00:00+09:00",
+      "2026-11-22T12:00:00+09:00",
+      "2026-11-22T16:00:00+09:00"
     ],
     "missing_slots": [
-      "2026-11-22T12:00:00+09:00",
-      "2026-11-22T16:00:00+09:00",
       "2026-11-22T20:00:00+09:00",
       "2026-11-23T08:00:00+09:00",
       "2026-11-23T12:00:00+09:00",
@@ -135,8 +143,6 @@
     "writer_handoff": {
       "status": "review_required",
       "missing_slots": [
-        "2026-11-22T12:00:00+09:00",
-        "2026-11-22T16:00:00+09:00",
         "2026-11-22T20:00:00+09:00",
         "2026-11-23T08:00:00+09:00",
         "2026-11-23T12:00:00+09:00",
@@ -174,7 +180,6 @@
         "cleaneye-81417",
         "cleaneye-81393",
         "cleaneye-81413",
-        "cleaneye-81432",
         "cleaneye-81460",
         "cleaneye-80711",
         "cleaneye-80914",
@@ -202,7 +207,8 @@
         "cleaneye-78450",
         "cleaneye-80102",
         "cleaneye-80486",
-        "cleaneye-80544"
+        "cleaneye-80544",
+        "cleaneye-80956"
       ],
       "candidates": [
         {
@@ -1229,39 +1235,6 @@
           "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
         },
         {
-          "notice_id": "cleaneye-81432",
-          "org": "서울연구원",
-          "title": "서울연구원 2026년 제3회 직원(연구직) 채용 공고",
-          "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81432",
-          "employment": "일반정규직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-20",
-            "end": "2026-12-04",
-            "start_date_only": true,
-            "date_only": true,
-            "source_ref": "cleaneye.json#cleaneye-81432/application_period",
-            "evidence": "접수개시일 원문: 2026-11-20; 접수마감일 원문: 2026-12-04"
-          },
-          "source_post_sha256": "56ee3d9875ae2abf627c6b6fa6f460f0e291587ffb23ebeb53b7f38a0ad429ea",
-          "source_detail_sha256": "ff029bdc965c189802c0f46600ed14d1c0d44d4141c4a80f55a00846969511d2",
-          "official_detail_fields_for_review": {
-            "고용형태 원문": "일반정규직",
-            "접수개시일 원문": "2026-11-20",
-            "접수마감일 원문": "2026-12-04",
-            "채용인원": "4"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "접수개시일 원문: 2026-11-20; 접수마감일 원문: 2026-12-04",
-          "application_source_ref": "cleaneye.json#cleaneye-81432/application_period",
-          "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
-        },
-        {
           "notice_id": "cleaneye-81460",
           "org": "강화군복지재단",
           "title": "강화군 행복센터 센터장 채용 공고",
@@ -2184,6 +2157,121 @@
           "application_evidence": "접수개시일 원문: 2026-10-20; 접수마감일 원문: 2026-12-31",
           "application_source_ref": "cleaneye.json#cleaneye-80544/application_period",
           "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
+        },
+        {
+          "notice_id": "cleaneye-80956",
+          "org": "경상북도안동의료원",
+          "title": "2027년 신규간호사 채용공고",
+          "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80956",
+          "employment": "일반정규직",
+          "recruiting_unit_title": null,
+          "recruiting_unit_count": null,
+          "recruiting_unit_scope": "unit_count_unconfirmed",
+          "selection_review_reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ],
+          "application_period": {
+            "start": "2026-11-04",
+            "end": "2026-11-22",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "cleaneye.json#cleaneye-80956/application_period",
+            "evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22"
+          },
+          "source_post_sha256": "52814d4c017ed1220f2bac38686b5752ff1ffabe182ac0a3036092cf1b1ed9b5",
+          "source_detail_sha256": "343006dcbea58b99159f0a80f7ef9ea4206e28c1b71452f1ed3eee69642f3d74",
+          "official_detail_fields_for_review": {
+            "고용형태 원문": "일반정규직",
+            "접수개시일 원문": "2026-11-04",
+            "접수마감일 원문": "2026-11-22",
+            "채용인원": "0"
+          },
+          "review_status": "official_review_required",
+          "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22",
+          "application_source_ref": "cleaneye.json#cleaneye-80956/application_period",
+          "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
+        }
+      ],
+      "official_source_alternatives": [
+        {
+          "notice_id": "a307082",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+          "source_post_sha256": "1cdadfc2caa1873a36cbff7ac543caee5a55198c2b5fd7238f9b28d3d926e537",
+          "source_detail_sha256": "2d8ffb3626cf412a15907e612a9abe8e24d3afd9a19ae9c18f371f378b1377ee",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
+        },
+        {
+          "notice_id": "a306865",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+          "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
+          "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
+        },
+        {
+          "notice_id": "a307233",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
+          "source_post_sha256": "d6367cea07bb3df2851d4739217e05ee00a8beb1c87fc170d8d1ab91ffef991c",
+          "source_detail_sha256": "2d2ddde055a490fdecabe98853f84e8f9db43cb7b7dd8055c316bd8d126671a4",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
+        },
+        {
+          "notice_id": "a307035",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307035",
+          "source_post_sha256": "fcb6de612f873dcb88df19c1a6bb2962fe5d688ae9a3b69238d6e93209f99902",
+          "source_detail_sha256": "7e3df7dde716a6b1147252969a43161883756e76fa2458cd6ee5de7aff1e14ff",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
+        },
+        {
+          "notice_id": "a307271",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+          "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
+          "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
+        },
+        {
+          "notice_id": "a307175",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307175",
+          "source_post_sha256": "c3ed9f9ac9044d8e6d434b7a5e11bae8da8e7653bd237a5e2e55ffafa1597398",
+          "source_detail_sha256": "a606c5b24915da673775ce6496980f9ee01b2622faf49dab2958572b78c14691",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
+        },
+        {
+          "notice_id": "a307286",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307286",
+          "source_post_sha256": "cfbad8cae5131f63f121bd072a711c3a289b2c4e8f0f008b1bc01e13785a5363",
+          "source_detail_sha256": "acd6fd28bd73e0c5b840ef1ec8d373737e2703f4a1beca243b42eea953c7e229",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
+        },
+        {
+          "notice_id": "a306866",
+          "status": "unreviewed",
+          "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306866",
+          "source_post_sha256": "def2b7715ef5efa7bb7045371d8138b17b5c24c129e27e7048a474e31718384c",
+          "source_detail_sha256": "312daed657a551e295b5f3d603aab9119d99f866dd78514833d7d6ed06ff3eb1",
+          "suggested_slot": null,
+          "approved_for_queue": false,
+          "meta_posted": false
         }
       ],
       "automatic_approval": false,
@@ -2363,8 +2451,6 @@
   "writer_handoff": {
     "status": "review_required",
     "missing_slots": [
-      "2026-11-22T12:00:00+09:00",
-      "2026-11-22T16:00:00+09:00",
       "2026-11-22T20:00:00+09:00",
       "2026-11-23T08:00:00+09:00",
       "2026-11-23T12:00:00+09:00",
@@ -2402,7 +2488,6 @@
       "cleaneye-81417",
       "cleaneye-81393",
       "cleaneye-81413",
-      "cleaneye-81432",
       "cleaneye-81460",
       "cleaneye-80711",
       "cleaneye-80914",
@@ -2430,7 +2515,8 @@
       "cleaneye-78450",
       "cleaneye-80102",
       "cleaneye-80486",
-      "cleaneye-80544"
+      "cleaneye-80544",
+      "cleaneye-80956"
     ],
     "candidates": [
       {
@@ -3457,39 +3543,6 @@
         "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
       },
       {
-        "notice_id": "cleaneye-81432",
-        "org": "서울연구원",
-        "title": "서울연구원 2026년 제3회 직원(연구직) 채용 공고",
-        "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81432",
-        "employment": "일반정규직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-20",
-          "end": "2026-12-04",
-          "start_date_only": true,
-          "date_only": true,
-          "source_ref": "cleaneye.json#cleaneye-81432/application_period",
-          "evidence": "접수개시일 원문: 2026-11-20; 접수마감일 원문: 2026-12-04"
-        },
-        "source_post_sha256": "56ee3d9875ae2abf627c6b6fa6f460f0e291587ffb23ebeb53b7f38a0ad429ea",
-        "source_detail_sha256": "ff029bdc965c189802c0f46600ed14d1c0d44d4141c4a80f55a00846969511d2",
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-20",
-          "접수마감일 원문": "2026-12-04",
-          "채용인원": "4"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "접수개시일 원문: 2026-11-20; 접수마감일 원문: 2026-12-04",
-        "application_source_ref": "cleaneye.json#cleaneye-81432/application_period",
-        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
-      },
-      {
         "notice_id": "cleaneye-81460",
         "org": "강화군복지재단",
         "title": "강화군 행복센터 센터장 채용 공고",
@@ -4412,6 +4465,121 @@
         "application_evidence": "접수개시일 원문: 2026-10-20; 접수마감일 원문: 2026-12-31",
         "application_source_ref": "cleaneye.json#cleaneye-80544/application_period",
         "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
+      },
+      {
+        "notice_id": "cleaneye-80956",
+        "org": "경상북도안동의료원",
+        "title": "2027년 신규간호사 채용공고",
+        "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80956",
+        "employment": "일반정규직",
+        "recruiting_unit_title": null,
+        "recruiting_unit_count": null,
+        "recruiting_unit_scope": "unit_count_unconfirmed",
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "application_period": {
+          "start": "2026-11-04",
+          "end": "2026-11-22",
+          "start_date_only": true,
+          "date_only": true,
+          "source_ref": "cleaneye.json#cleaneye-80956/application_period",
+          "evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22"
+        },
+        "source_post_sha256": "52814d4c017ed1220f2bac38686b5752ff1ffabe182ac0a3036092cf1b1ed9b5",
+        "source_detail_sha256": "343006dcbea58b99159f0a80f7ef9ea4206e28c1b71452f1ed3eee69642f3d74",
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-04",
+          "접수마감일 원문": "2026-11-22",
+          "채용인원": "0"
+        },
+        "review_status": "official_review_required",
+        "application_evidence": "접수개시일 원문: 2026-11-04; 접수마감일 원문: 2026-11-22",
+        "application_source_ref": "cleaneye.json#cleaneye-80956/application_period",
+        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00"
+      }
+    ],
+    "official_source_alternatives": [
+      {
+        "notice_id": "a307082",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+        "source_post_sha256": "1cdadfc2caa1873a36cbff7ac543caee5a55198c2b5fd7238f9b28d3d926e537",
+        "source_detail_sha256": "2d8ffb3626cf412a15907e612a9abe8e24d3afd9a19ae9c18f371f378b1377ee",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a306865",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+        "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
+        "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a307233",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
+        "source_post_sha256": "d6367cea07bb3df2851d4739217e05ee00a8beb1c87fc170d8d1ab91ffef991c",
+        "source_detail_sha256": "2d2ddde055a490fdecabe98853f84e8f9db43cb7b7dd8055c316bd8d126671a4",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a307035",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307035",
+        "source_post_sha256": "fcb6de612f873dcb88df19c1a6bb2962fe5d688ae9a3b69238d6e93209f99902",
+        "source_detail_sha256": "7e3df7dde716a6b1147252969a43161883756e76fa2458cd6ee5de7aff1e14ff",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a307271",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+        "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
+        "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a307175",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307175",
+        "source_post_sha256": "c3ed9f9ac9044d8e6d434b7a5e11bae8da8e7653bd237a5e2e55ffafa1597398",
+        "source_detail_sha256": "a606c5b24915da673775ce6496980f9ee01b2622faf49dab2958572b78c14691",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a307286",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307286",
+        "source_post_sha256": "cfbad8cae5131f63f121bd072a711c3a289b2c4e8f0f008b1bc01e13785a5363",
+        "source_detail_sha256": "acd6fd28bd73e0c5b840ef1ec8d373737e2703f4a1beca243b42eea953c7e229",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a306866",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306866",
+        "source_post_sha256": "def2b7715ef5efa7bb7045371d8138b17b5c24c129e27e7048a474e31718384c",
+        "source_detail_sha256": "312daed657a551e295b5f3d603aab9119d99f866dd78514833d7d6ed06ff3eb1",
+        "suggested_slot": null,
+        "approved_for_queue": false,
+        "meta_posted": false
       }
     ],
     "automatic_approval": false,
@@ -4424,7 +4592,7 @@
     "drafts": [
       {
         "notice_id": "cleaneye-80951",
-        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "suggested_slot": "2026-11-22T20:00:00+09:00",
         "draft_text": "울산정보산업진흥원 채용 공고를 확인해 보세요.\n\n모집 공고: (재)울산정보산업진흥원 2026년 6차 직원 채용\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80951",
         "source_post_sha256": "512bb1b2d18eb817180ba9fbba6096c0376797b00df798c8be5384f28570ef32",
@@ -4464,7 +4632,7 @@
       },
       {
         "notice_id": "cleaneye-81095",
-        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "suggested_slot": "2026-11-22T20:00:00+09:00",
         "draft_text": "재단법인 제주특별자치도 사회서비스원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제주특별자치도사회서비스원 17차 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81095",
         "source_post_sha256": "693e780e551dd40ea0537d3afa12ad917001c1241617ba705801fb56952260a7",
@@ -4504,7 +4672,7 @@
       },
       {
         "notice_id": "cleaneye-81187",
-        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "suggested_slot": "2026-11-22T20:00:00+09:00",
         "draft_text": "재단법인 전남여성가족재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제3차 정규직 직원 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81187",
         "source_post_sha256": "c6f6aebd000f856f081d3d37372ab693852a01c14ba7e3b3f2a247787a480173",
@@ -4544,7 +4712,7 @@
       },
       {
         "notice_id": "cleaneye-81201",
-        "suggested_slot": "2026-11-22T16:00:00+09:00",
+        "suggested_slot": "2026-11-23T08:00:00+09:00",
         "draft_text": "강릉과학산업진흥원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 강릉과학산업진흥원 3차 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81201",
         "source_post_sha256": "63a557296ec76791cec349c9d8ec8e0722951d8af957b8dbd67147199451e4fb",
@@ -4584,7 +4752,7 @@
       },
       {
         "notice_id": "cleaneye-81203",
-        "suggested_slot": "2026-11-22T16:00:00+09:00",
+        "suggested_slot": "2026-11-23T08:00:00+09:00",
         "draft_text": "재단법인 송파문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)송파문화재단 2026년 3차 직원 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-24 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81203",
         "source_post_sha256": "d5a5359f305c677d6f79bcd23facca2fe1641941beb3eb60f8717da7bd6ef6f0",
@@ -4624,7 +4792,7 @@
       },
       {
         "notice_id": "cleaneye-80989",
-        "suggested_slot": "2026-11-22T16:00:00+09:00",
+        "suggested_slot": "2026-11-23T08:00:00+09:00",
         "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직 5급/청소년사업)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80989",
         "source_post_sha256": "7c377fa297c6f7bb6564a5789efdf3c1ebadfdbda70f058570c54f6fabe5ccc5",
@@ -4664,7 +4832,7 @@
       },
       {
         "notice_id": "cleaneye-80990",
-        "suggested_slot": "2026-11-22T20:00:00+09:00",
+        "suggested_slot": "2026-11-23T12:00:00+09:00",
         "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직6급/청소년사업)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80990",
         "source_post_sha256": "83ed5a79323bd3dc0532f4a5e078e7eda9c246982c3bcbf65c1ddc2572982897",
@@ -4704,7 +4872,7 @@
       },
       {
         "notice_id": "cleaneye-80991",
-        "suggested_slot": "2026-11-22T20:00:00+09:00",
+        "suggested_slot": "2026-11-23T12:00:00+09:00",
         "draft_text": "성동문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: (재)성동문화재단 직원 채용 공고(사회복지직6급/시설운영)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80991",
         "source_post_sha256": "b228477e0f3a467c680750b42cc140b935dd14dc4a4a59b891a29c07d834ebda",
@@ -4744,7 +4912,7 @@
       },
       {
         "notice_id": "cleaneye-81114",
-        "suggested_slot": "2026-11-22T20:00:00+09:00",
+        "suggested_slot": "2026-11-23T12:00:00+09:00",
         "draft_text": "재단법인 강원관광재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 하반기 (재)강원관광재단 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81114",
         "source_post_sha256": "1cf3be281222bd939acdfb7467f716cfb2988ede630e068dab5be0b00baeb26d",
@@ -4784,7 +4952,7 @@
       },
       {
         "notice_id": "cleaneye-81179",
-        "suggested_slot": "2026-11-23T08:00:00+09:00",
+        "suggested_slot": "2026-11-23T16:00:00+09:00",
         "draft_text": "충북여성재단 채용 공고를 확인해 보세요.\n\n모집 공고: 충북여성재단 제4차 직원 채용(사무처장)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81179",
         "source_post_sha256": "b285168130842eca64592a598dfabd20aef28e2185521afc2163e72fbf829d8d",
@@ -4824,7 +4992,7 @@
       },
       {
         "notice_id": "cleaneye-81180",
-        "suggested_slot": "2026-11-23T08:00:00+09:00",
+        "suggested_slot": "2026-11-23T16:00:00+09:00",
         "draft_text": "충북여성재단 채용 공고를 확인해 보세요.\n\n모집 공고: 충북여성재단 제5차 직원 채용 공고(연구위원, 대리-육아휴직대체)\n고용형태: 일반정규직\n접수 마감: 2026-11-25 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81180",
         "source_post_sha256": "f7b73fc0dd0b4396a01e4297fe761c7ad5e1c9a881f12df24f9690a1111d226b",
@@ -4864,7 +5032,7 @@
       },
       {
         "notice_id": "cleaneye-81251",
-        "suggested_slot": "2026-11-23T08:00:00+09:00",
+        "suggested_slot": "2026-11-23T16:00:00+09:00",
         "draft_text": "당진시복지재단 채용 공고를 확인해 보세요.\n\n모집 공고: [당진시복지재단] 2026년 제4차 당진시복지재단 직원 공개채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81251",
         "source_post_sha256": "91f6fc38bdc4a99937b1606bd452ff4a0acacd1a340fde4584b775c90eaec991",
@@ -4901,514 +5069,466 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81255",
-        "suggested_slot": "2026-11-23T12:00:00+09:00",
-        "draft_text": "송파구시설관리공단 채용 공고를 확인해 보세요.\n\n모집 공고: (송파구시설관리공단 공고 제2026-49호)직무능력 중심 경력및 공개경쟁 채용 공고(수정)\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81255",
-        "source_post_sha256": "5a25e89aeae3943c6c4d8752743e7cdc68bb50e89ede0e8ce5698810d3f650e2",
-        "source_detail_sha256": "4b27a2a2a17368cc607b843cac95bc9013ffd0713151d38084fc272414fe989d",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
-        "application_source_ref": "cleaneye.json#cleaneye-81255/application_period",
-        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-16",
-          "접수마감일 원문": "2026-11-26",
-          "채용인원": "4"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81280",
-        "suggested_slot": "2026-11-23T12:00:00+09:00",
-        "draft_text": "용산문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제4차 용산문화재단 직원 공개경쟁채용\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81280",
-        "source_post_sha256": "0f06c97aabb310994599a8a187e24fb2cff737623091cd72d8a7bbf5820d9755",
-        "source_detail_sha256": "7e36aa26f97df334be2328853a1cb89476daec14c1509dbbbbba3066d97c6d3e",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
-        "application_source_ref": "cleaneye.json#cleaneye-81280/application_period",
-        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-16",
-          "접수마감일 원문": "2026-11-26",
-          "채용인원": "1"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81281",
-        "suggested_slot": "2026-11-23T12:00:00+09:00",
-        "draft_text": "용산문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제4차 용산문화재단 직원 공개경쟁채용\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81281",
-        "source_post_sha256": "663f3be0934e49be7a31e534698865ee5f8eed27fb87b398f1ab7ad75eafac43",
-        "source_detail_sha256": "b59b7442b935571a8b8f2636f903bc8da90f977b5ca8fa36e9173409064f66e6",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
-        "application_source_ref": "cleaneye.json#cleaneye-81281/application_period",
-        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-16",
-          "접수마감일 원문": "2026-11-26",
-          "채용인원": "1"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81282",
-        "suggested_slot": "2026-11-23T16:00:00+09:00",
-        "draft_text": "용산문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제4차 용산문화재단 직원 공개경쟁채용\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81282",
-        "source_post_sha256": "5757f307b4e4a6b93f85d833dc049387acc0e7a92cdb0fc4302fc7bb073504df",
-        "source_detail_sha256": "ddae7b62bb8ee757e5dd0a2f9be3c74e9ceb66a9ec812f8d32d0b103e9abe963",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
-        "application_source_ref": "cleaneye.json#cleaneye-81282/application_period",
-        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-16",
-          "접수마감일 원문": "2026-11-26",
-          "채용인원": "2"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81283",
-        "suggested_slot": "2026-11-23T16:00:00+09:00",
-        "draft_text": "용산문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제4차 용산문화재단 직원 공개경쟁채용\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81283",
-        "source_post_sha256": "2c6235dec3d304e0d39edd693a8f1a39cb9fa26a824da5495abbc1ee77ca59ea",
-        "source_detail_sha256": "8158db419dda4a8909cc4a0d1a3f304468b8bbc589dc71559f5d1d851ae08cba",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
-        "application_source_ref": "cleaneye.json#cleaneye-81283/application_period",
-        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-16",
-          "접수마감일 원문": "2026-11-26",
-          "채용인원": "1"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "cleaneye-81284",
-        "suggested_slot": "2026-11-23T16:00:00+09:00",
-        "draft_text": "용산문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제4차 용산문화재단 직원 공개경쟁채용\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81284",
-        "source_post_sha256": "926ad8e827f328a2396253191a6db43031d0a82bf8ad02a42192a06b805cb74e",
-        "source_detail_sha256": "3eb1330986ccac1f5b2518cb1284809d071da7284c92f6fd2be9ece8090f216b",
-        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
-        "application_source_ref": "cleaneye.json#cleaneye-81284/application_period",
-        "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "고용형태 원문": "일반정규직",
-          "접수개시일 원문": "2026-11-16",
-          "접수마감일 원문": "2026-11-26",
-          "채용인원": "1"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
       }
     ],
     "official_source_alternatives": [
       {
+        "notice_id": "cleaneye-81255",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81255",
+        "source_post_sha256": "5a25e89aeae3943c6c4d8752743e7cdc68bb50e89ede0e8ce5698810d3f650e2",
+        "source_detail_sha256": "4b27a2a2a17368cc607b843cac95bc9013ffd0713151d38084fc272414fe989d",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-81280",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81280",
+        "source_post_sha256": "0f06c97aabb310994599a8a187e24fb2cff737623091cd72d8a7bbf5820d9755",
+        "source_detail_sha256": "7e36aa26f97df334be2328853a1cb89476daec14c1509dbbbbba3066d97c6d3e",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-81281",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81281",
+        "source_post_sha256": "663f3be0934e49be7a31e534698865ee5f8eed27fb87b398f1ab7ad75eafac43",
+        "source_detail_sha256": "b59b7442b935571a8b8f2636f903bc8da90f977b5ca8fa36e9173409064f66e6",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-81282",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81282",
+        "source_post_sha256": "5757f307b4e4a6b93f85d833dc049387acc0e7a92cdb0fc4302fc7bb073504df",
+        "source_detail_sha256": "ddae7b62bb8ee757e5dd0a2f9be3c74e9ceb66a9ec812f8d32d0b103e9abe963",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-81283",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81283",
+        "source_post_sha256": "2c6235dec3d304e0d39edd693a8f1a39cb9fa26a824da5495abbc1ee77ca59ea",
+        "source_detail_sha256": "8158db419dda4a8909cc4a0d1a3f304468b8bbc589dc71559f5d1d851ae08cba",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-81284",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81284",
+        "source_post_sha256": "926ad8e827f328a2396253191a6db43031d0a82bf8ad02a42192a06b805cb74e",
+        "source_detail_sha256": "3eb1330986ccac1f5b2518cb1284809d071da7284c92f6fd2be9ece8090f216b",
+        "suggested_slot": null
+      },
+      {
         "notice_id": "cleaneye-81285",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81285",
+        "source_post_sha256": "54b60677ff0a3f77bbb8f351c1f1dec5df14d0f43feee73aee86bf4f4405a6b2",
+        "source_detail_sha256": "6bc9c4f23d67874c7fafcc366db8c9ee515956e859548a5677f83c75826a0708",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81286",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81286",
+        "source_post_sha256": "9c0f57f7b72eda9d187db8ef2eacd7e9146c85eb8349d7d45d9076e09be98b29",
+        "source_detail_sha256": "238f3c71378cb2df46cce0177ff793f67c988dca74b3778be592e431ea8b6e4e",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81287",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81287",
+        "source_post_sha256": "47ca4db7414d780795c774869f2d6b167d8e29cf4bfc64e6b60aa76b3ff68462",
+        "source_detail_sha256": "ae54c77fb91271e754dabf5d9f40d8d55d4c24bebcf0bcc696e38b80aca4f002",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81291",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81291",
+        "source_post_sha256": "1eb7e6d86afc5644e421035f42c389a4b9b92f4b29deea3714b6fda7da0c4058",
+        "source_detail_sha256": "7a13f1594ce73104198b2cc30e3892132eae95447ec14b10a13a7960807d0dfe",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81183",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81183",
+        "source_post_sha256": "9e4675bb5a267e0f149064425eda62ef7b692fe09506eae5cef38853bb68fea9",
+        "source_detail_sha256": "1846752e6ec6838e53aedd19f6a97e59f627cd00c20ba518201e0319eb8f1dc1",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81451",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81451",
+        "source_post_sha256": "07e5e5d809dd4b88d12e555b60691fb42f50d800448ba9996f3fc050d23921e6",
+        "source_detail_sha256": "2225f15eefec614cbb7c715932d2636ef88760ea472a96ec873f98647f638663",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81117",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81117",
+        "source_post_sha256": "f179170ffd5dd820b90865c206c4059e2056e1caad998c21c685fb7c10991c21",
+        "source_detail_sha256": "f17490d6fce32b6a71bf923051d2d3047b79375b31fac7b3bb56276eb6e75038",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81328",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81328",
+        "source_post_sha256": "d8152e5625a4881a06df86aacb38e4f88d62d4928b1e390007f4ae119cb84048",
+        "source_detail_sha256": "10333508a866222666aca985cd83ab4e4fccca6295edf31f34c5d4036a87ee3d",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81344",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81344",
+        "source_post_sha256": "21e7885750de208fc92aa41c01fb05f22decfebffd851ca0c53bf9d3087b634a",
+        "source_detail_sha256": "6d14382c4c84017f04d3dea3c747884b95e2fec02cb8eed6ea44bfa2c0ab7bcf",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81446",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81446",
+        "source_post_sha256": "fc5d71f0ba0242afb1d84ab044859b9fcebd057696995a535bf6f49e0551ff29",
+        "source_detail_sha256": "cd2898c048b319e12bc70f56738460124e8607089fb017f0e7ef2697cd4a2716",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81417",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81417",
+        "source_post_sha256": "028a84c2e6e004c15515b722e1bc4b4411ff03e76878ae77cc0cdabe93f9ad4e",
+        "source_detail_sha256": "132b6d4b2cc174df6ca9f6d1f29c1c1c15ddb76cc1d1de4e95fe2c6ee74c7f74",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81393",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81393",
+        "source_post_sha256": "989cababf32bb26f587f62156701065b9edf7aa98fa4530ea6ede1286e7b21ff",
+        "source_detail_sha256": "129d5a3fcc92619e6e151c7c38e420e99200ea06c4a80252f922d05aafa259e0",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81413",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81413",
-        "suggested_slot": null
-      },
-      {
-        "notice_id": "cleaneye-81432",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81432",
+        "source_post_sha256": "4536c0ef4b5c560c1f4061e1f50f89a4bbd0c7d9ce0d564a3e805224f97c74f0",
+        "source_detail_sha256": "5d9119aea85d58289f5925879467fa79502551c0d27c70b363e9678987e73466",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81460",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81460",
+        "source_post_sha256": "3a456ef4796e390ae86e33dc4961ed177229ae7706b191121de9ea29c5188c14",
+        "source_detail_sha256": "363edab31d45e12ea809c10effb7fbdbad23ba3c66f30cfb2d337a14802f2858",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-80711",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80711",
+        "source_post_sha256": "5fd7736d45bedba0a5860c8b2c2c924d4558efe2aa924aabb6ca561252c59b5a",
+        "source_detail_sha256": "f4f695669d0720a592d6e0a48830e09ba42b46b1204340578ec1c39d6f1c36d4",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-80914",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80914",
+        "source_post_sha256": "0c1b207a752c268f350699861aefca50f8b5b1cbcaa2a45c53af613b4559441b",
+        "source_detail_sha256": "5e8921f33b3a7d3cdf61483dd93a22c44e96aa615e969940dc73ad6b65377bff",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81143",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81143",
+        "source_post_sha256": "f54def0e6611daa30f8f0479e564be4d2412b1f8bff715abc0d6fbbc10dee518",
+        "source_detail_sha256": "dec7c343cc29967627b0d1315bc1c0ef44ff57f76959c30c2bff637ec42c196e",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81199",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81199",
+        "source_post_sha256": "f58973e06a423d4b8b94129ccfc39f59ff0bf762497feab17e639e8c9d808a02",
+        "source_detail_sha256": "260768c668feb52a5634e2403a8f39937fef75b33c7d3483e0eeba51f0761f7d",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81206",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81206",
+        "source_post_sha256": "3ca5a3e0e282588a73927537ce721e1394414fb9e0f92b5e750438c88321cc45",
+        "source_detail_sha256": "dd2bd50b48e173f552ee092d70ac4404b743c3eed336a0e80af9c7cfd117f6dc",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81209",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81209",
+        "source_post_sha256": "5be9f538e16b16581c75e7a6cf04302c5ff55e12866524edd0c7866c475969b6",
+        "source_detail_sha256": "0919675bed4e5d762460299de69e650080a5a29ee65ad19852c53ddfe8276703",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81220",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81220",
+        "source_post_sha256": "3fa5a04a9c0298ccde1ac1acbefe376a9136ca8f4c51835b36bece7ac378628f",
+        "source_detail_sha256": "49bb7cf8a3726b59263ab417fd0803478c88dee35e318f63ef2060bf6de045ff",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81221",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81221",
+        "source_post_sha256": "af43115d1507a5d4fe91d3c63378b414e983f8c67b6afdf0697bf4e5684f3296",
+        "source_detail_sha256": "729bbecde2ea189a2be32f3906e5619a0d6805e61ea0b74688d6ac1229253726",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81231",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81231",
+        "source_post_sha256": "ac8d517d145f50856cd02aac60ea74bcb1f1dbdaa5ef00d69c7ec10d0eb9f30a",
+        "source_detail_sha256": "5405aac433705285b89587c46a01cbd34e1755ef6b97d58a248a67d8efa54486",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81002",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81002",
+        "source_post_sha256": "a8a4b0c8e2f023c85c5e3828ad3bb8d9d706eb6917ca2c98aefb0c02afe6260e",
+        "source_detail_sha256": "e058bfefcce4fc8e3ecc87c03aa2641f0c2382125a6fc1431d4a3575ab547f4a",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81303",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81303",
+        "source_post_sha256": "9cc08c1c39b630575da506eb8b2d7a46495721635254ac6a6d60f4e394a6fb38",
+        "source_detail_sha256": "088fb90c2985c161f73e9deda7b9236df1034e6a6c792fadd37a513fbb23f620",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81312",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81312",
+        "source_post_sha256": "7c06fb16286a40ff12546fd201538794f0411b904e1497eb3a52a5f8eea98e29",
+        "source_detail_sha256": "06342a62899b78cf6d2915d5cb0eaab1c2a1214a2bbec92063bddf2ecdfa0105",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81242",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81242",
+        "source_post_sha256": "f55622d8583600962395023f02c2e6705d0ccfbcd1da6121a2f792166256911c",
+        "source_detail_sha256": "28851a08968f33fd070994bcfb7fcec967e2117897141188b566867263f27c15",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81124",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81124",
+        "source_post_sha256": "fb8fd4065342c59d6db75555a9c905080a38a58a1f2058ffa8be3ea1bfaffbcd",
+        "source_detail_sha256": "6e35f21fe6a627ee4a76608ccf4ed5698f4f8a53a436d75f73fdaa7a98ba7b82",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81324",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81324",
+        "source_post_sha256": "3c7bab413b66cff45d439833016d4134de732f5848c102676a352da7e89c636e",
+        "source_detail_sha256": "7c680bca35c00fd5eeb8cc1c560da733631dc195c6cd7cdde8895c835654fd68",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81381",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81381",
+        "source_post_sha256": "9e51440a3a70b3036748a3190b8ce99755ce695c3b32e45f0faf942d01213258",
+        "source_detail_sha256": "2e19f277d35227fdfd3446c5fed73eefa630deaf2ccac2bf7f71330d6ff8114a",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-81441",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81441",
+        "source_post_sha256": "c4389c4eb8988b9f9b2bcbe93cf2d54bc6154788788cee02dba965ae993406db",
+        "source_detail_sha256": "6ac29fc934fd0051f5537e30d34659792454db230bf674534a240e5772f12fd3",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-70777",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=70777",
+        "source_post_sha256": "6bbeef87857b9611bc7eb59e9501463d6fc1b4fd770c55f46333c352f939cf60",
+        "source_detail_sha256": "de451dd0eef17fb03f6d972e6dda0586098028e00553a863794a9e9bdb68771b",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-71255",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=71255",
+        "source_post_sha256": "9ceff5c9823ac1c00739ecc79e73dea8c43c220823da81307104001967c5977b",
+        "source_detail_sha256": "684dd03fc9311e0a9950b2987e4e865937543b5045845d88c8cb4d94fcb253b7",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-71257",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=71257",
+        "source_post_sha256": "e66ae2ba9ece1168f74ca88a6b57a9e2fadf414cb88de12c4610584fd67fdbed",
+        "source_detail_sha256": "a3fa3ab921e17dd497d14eb0db3e4c70e0cdc503b05961b871b050cb19668482",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-71544",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=71544",
+        "source_post_sha256": "a7ab0139bacc46da1a7e2b2937c4d82e8e5ce4d8984f642acf4fb0c83b46fa67",
+        "source_detail_sha256": "608f54c9414429a821a0be06fc8498848a0e34cfd55d0fd46a5431cc900c319d",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-73729",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=73729",
+        "source_post_sha256": "f99eab6245b9ddcbd03df369af05ef986b6858cbcf34fa225a6beb3c5a2f279d",
+        "source_detail_sha256": "86d24501cfd442057b20b6dbfb70d996b48e07cc3c3ebbc3ba8863de0ebdba98",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-78449",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=78449",
+        "source_post_sha256": "22c78c45e75f845cfd68c6dadd6e4a98fac4935420c13cfd4cf097975235a4de",
+        "source_detail_sha256": "ff12aaa5fb747631a7730701bc831cb7e439559579d0c17ea0b2b5b34f6afc15",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-78450",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=78450",
+        "source_post_sha256": "22218c38e41bd47a0f2857f46881386ee15049c18d06ef443d6f4c651375f2fe",
+        "source_detail_sha256": "8236abb69e1024e5cba8432dcdea8bd6c69b6a532b1a7ca8052f9f027bc9615d",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-80102",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80102",
+        "source_post_sha256": "c3a3d5d326d0fd24555c7d5c8d987fdb21d78895ff4973d2665beeccf852d4e2",
+        "source_detail_sha256": "795a01e5bf1fba6ddde3f5e67e4462f41d495eddb2c576477056cc18de1046d3",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-80486",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80486",
+        "source_post_sha256": "b7a5a27d92118c8c925efa5ae9f273a09c106f72000623b10a50194d8999fa2c",
+        "source_detail_sha256": "8105ad8c8900795a4a0e04301f540751d72e4b6b400e6dce6620ebbf66a01fcb",
         "suggested_slot": null
       },
       {
         "notice_id": "cleaneye-80544",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80544",
+        "source_post_sha256": "be828df141ed2f465ea8ef40c87ef095ace4be709b1e050c3bcb52b336c458f7",
+        "source_detail_sha256": "50f2ff62619151e792430e237b8cef6ba1eff8b51827a69e580c05ac9f2592b6",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "cleaneye-80956",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80956",
+        "source_post_sha256": "52814d4c017ed1220f2bac38686b5752ff1ffabe182ac0a3036092cf1b1ed9b5",
+        "source_detail_sha256": "343006dcbea58b99159f0a80f7ef9ea4206e28c1b71452f1ed3eee69642f3d74",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307082",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+        "source_post_sha256": "1cdadfc2caa1873a36cbff7ac543caee5a55198c2b5fd7238f9b28d3d926e537",
+        "source_detail_sha256": "2d8ffb3626cf412a15907e612a9abe8e24d3afd9a19ae9c18f371f378b1377ee",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a306865",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+        "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
+        "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307233",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
+        "source_post_sha256": "d6367cea07bb3df2851d4739217e05ee00a8beb1c87fc170d8d1ab91ffef991c",
+        "source_detail_sha256": "2d2ddde055a490fdecabe98853f84e8f9db43cb7b7dd8055c316bd8d126671a4",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307035",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307035",
+        "source_post_sha256": "fcb6de612f873dcb88df19c1a6bb2962fe5d688ae9a3b69238d6e93209f99902",
+        "source_detail_sha256": "7e3df7dde716a6b1147252969a43161883756e76fa2458cd6ee5de7aff1e14ff",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307271",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+        "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
+        "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307175",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307175",
+        "source_post_sha256": "c3ed9f9ac9044d8e6d434b7a5e11bae8da8e7653bd237a5e2e55ffafa1597398",
+        "source_detail_sha256": "a606c5b24915da673775ce6496980f9ee01b2622faf49dab2958572b78c14691",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307286",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307286",
+        "source_post_sha256": "cfbad8cae5131f63f121bd072a711c3a289b2c4e8f0f008b1bc01e13785a5363",
+        "source_detail_sha256": "acd6fd28bd73e0c5b840ef1ec8d373737e2703f4a1beca243b42eea953c7e229",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a306866",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306866",
+        "source_post_sha256": "def2b7715ef5efa7bb7045371d8138b17b5c24c129e27e7048a474e31718384c",
+        "source_detail_sha256": "312daed657a551e295b5f3d603aab9119d99f866dd78514833d7d6ed06ff3eb1",
         "suggested_slot": null
       }
     ],
     "slot_coverage": {
       "requested_slots": [
-        "2026-11-22T12:00:00+09:00",
-        "2026-11-22T16:00:00+09:00",
         "2026-11-22T20:00:00+09:00",
         "2026-11-23T08:00:00+09:00",
         "2026-11-23T12:00:00+09:00",
         "2026-11-23T16:00:00+09:00"
       ],
       "draft_slots": [
-        "2026-11-22T12:00:00+09:00",
-        "2026-11-22T16:00:00+09:00",
         "2026-11-22T20:00:00+09:00",
         "2026-11-23T08:00:00+09:00",
         "2026-11-23T12:00:00+09:00",
@@ -5428,7 +5548,7 @@
     "records": [
       {
         "notice_id": "cleaneye-80951",
-        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "suggested_slot": "2026-11-22T20:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=80951",
         "evidence_status": "not_verified",
         "semantic_review": "required",
@@ -5437,7 +5557,7 @@
       },
       {
         "notice_id": "cleaneye-81095",
-        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "suggested_slot": "2026-11-22T20:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81095",
         "evidence_status": "not_verified",
         "semantic_review": "required",
@@ -5446,7 +5566,7 @@
       },
       {
         "notice_id": "cleaneye-81187",
-        "suggested_slot": "2026-11-22T12:00:00+09:00",
+        "suggested_slot": "2026-11-22T20:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81187",
         "evidence_status": "not_verified",
         "semantic_review": "required",
@@ -5455,15 +5575,199 @@
       },
       {
         "notice_id": "cleaneye-81201",
-        "suggested_slot": "2026-11-22T16:00:00+09:00",
+        "suggested_slot": "2026-11-23T08:00:00+09:00",
         "official_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81201",
         "evidence_status": "not_verified",
         "semantic_review": "required",
         "publisher_validate_entry": "not_run",
         "block_reason": "OFFICIAL_SOURCE_UNAVAILABLE"
+      },
+      {
+        "notice_id": "a307082",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+          "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
+          "size_bytes": 11972,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:50.151931+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 서울적십자병원 정규직 간호사 신규채용 공고 2026.11.16 / 진행중 공공기관 채용정보 기관명 대한적십자사 표준직무(NCS) 보건.의료 고용형태 정규직 학력정보 학력무관 채용구분 신입+경력 근무지 서울 근무분야 간호직 채용인원 4 우대조건 취업지원대상자, 장애인, 북한이탈주민 공고기간 26.11.16 ~ 26.11.23 응시자격 ○ 간호사 면허증 제출한 자 ○ 최소학력(간호학) 성적증명서 및 졸업증명서 제출한 자 ○ 임상(병동) 경력 1년 이상 경력증명서 제출한 자 결격사유 1. 피성년후견인과 피한정후견인 2. 파산자로서 복권되지 아니한 자 3. 금고 이상의 실형을 선고받고 그 집행이 끝나거나(집행이 끝난 것으로 보는 경우를 포함한다) 집행이 면제된 날부터 5년이 지나지 아니한 자 4. 금고이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 자 5. 금고이상의 형의 선고유예를 받은 경우에 그 선고유예기간중에 있는 자 6. 법원의 판결 또는 다른 법률에 의하여 자격이 상실 또는 정지된 자 7. 징계에 의하여 파면의 처분을 받은 때로부터 5년을 경과하지 아니한 자 8. 징계에 의하여 해임의 처분을 받은 때로부터 3년을 경과하지 아니한 자 9. 「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」 제82조에 따른 비위 면직자 등의 취업제한 적용을 받는 자 10. 공공기관에서 채용비위로 면직 또는 채용취소된 때부터 5년이 지나지 아니한 자 11. 다음 각 목의 어느 하나에 해당하는 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 자 가.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나.「정보통신망 이용촉진 및 정보보호등에 관한 법률」 제74조제1항제2호 및 제3호에 규정된 죄 다. 「스토킹범죄의 처벌 등에 관한 법률」제2조제2호에 따른 스토킹범죄 12. 미성년자에 대한 다음 각 목의 어느 하나에 해당되는 죄를 저질러 파면·해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 자(집행유예를 선고받은 후 그 집행유예기간이 경과한 자를 포함한다) 가.「성폭력범죄의 처벌 등에 관한 특례법」제2조에 따른 성폭력범죄 나.「아동·청소년의 성보호에 관한 법률」제2조제2호에 따른 아동·청소년 대상 성범죄 13. 직무와 관련하여 「형법」 제355조 및 제356조에 규정된 죄를 범한 자로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 자 ※ 대한적십자사직원운영규정 제56조(정년)에 해당되는 자(임용일 기준 만60세 이상인 자) 전형절차/방법 ○ 접수기간: 2026.11.16.~2026.11.23. ○ 서류심사 합격자 발표: 2026.11.26. ○ 면접전형: 2026.12.01. ○ 최종합격자 발표: 2026.12.04. ※ 각종 제출 서류에 ‘사진, 생년월일, 성별, 학교명’이 들어가는 부분은 삭제 후 제출 ※ 전형별 발표방법: 우리병원 홈페이지 (https://www.rch.or.kr/web/rchseoul/bbs/employment) 공고 ※ 서류심사: 모집인원의 5배수 이내 합격 ※ 면접전형: 면접위원이 채점한 평점의 평균이 15점 이상인 자 중 고득점자 순위(25점 만점) 우대내용 ○ 우대사항 - 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자 - 5.18민주유공자예우 및 단체설립에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의 규정에 의한 취업지원대상자 - 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유의증 등 환자지원 및 단체설립에관한 법률 제7조에 해당하는 자 - 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인 - 북한이탈주민 보호 및 정착지원에 관한 법률에 따른 북한이탈주민 전형단계별 채용정보 정규직 간호사 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 1. 채용공고문(261207_정규직 간호사).hwp 입사지원서 입사지원서(간호사).hwpx 직무기술서 직무기술서(간호사).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.redcross.or.kr/redrecruit 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a306865",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+          "sha256": "81d1becc7de26b99b68ff42c6367debee332b24ab41e4edef14296e047f58a0b",
+          "size_bytes": 12973,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:48.781034+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국농어촌공사 제주지역본부 공무직(청소원) 보훈ㆍ장애인 제한경쟁 채용 공고 2026.11.10 / 진행중 공공기관 채용정보 기관명 한국농어촌공사 표준직무(NCS) 경비.청소 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 제주 근무분야 공무직 채용인원 1 우대조건 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함) 공고기간 26.11.10 ~ 26.11.24 응시자격 -학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자) -「국가유공자 등 예우 및 지원에 관한 법률」등 관계법령에 따른 취업지원대상자 또는「장애인고용촉진 및 직업재활법」에 따른 장애인만 가능 -임용예정일(2027.1.1)부터 즉시 업무종사 가능자 -남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자 -공사 인사규정 제9조의 임용 결격 사유가 없는 자(공고문 참조) -근무지로 출퇴근 가능자 결격사유 인사규정 제9조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원에 임용될 수 없다. 1. 피성년후견인 또는 피한정후견인 2. 파산선고를 받고 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예 기간 중에 있는 자 6. 법원의 확정판결이나 다른 법률에 따라 자격이 상실 또는 정지된 자 7. 파면처분을 받은 날로부터 5년을 경과하지 아니한 자 8. 해임처분을 받은 날로부터 3년을 경과하지 아니한 자 10.채용신체검사 및 신원조회결과 부적격 판정을 받은 자 11.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12.「공공기관의 운영에 관한 법률」제4조에 따른 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 날로부터 5년이 지나지 아니한 자 13. 그 밖에 채용의 공정한 관리에 영향을 미치는 행위로서 부정한 행위를 한 자 또는 채용 공고문에 불합격 처리 기준으로 정한 행위를 한 자 14.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 규정된 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 15. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나. 「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄 전형절차/방법 1. 접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00 - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 2. 선발방법 가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발 - 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발 - 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음 나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발 - 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자 - 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정 3. 최종합격자 발표: 2026. 12. 14(월) 채용홈페이지에서 개별 확인 / 업무 형편에 따라 변경될 수 있음 4. 채용예정일: 2027. 1. 1. ※ 상기 일정은 업무 형편에 따라 변경될 수 있으며, 변경 시 채용 홈페이지 및 지원자 개별 안내 예정 ※ 기타 세부사항은 첨부된 채용공고문 참고 우대내용 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함) 전형단계별 채용정보 공무직(청소원) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 (채용공고문) 공무직(청소원) 보훈장애인제한경쟁채용공고.pdf 입사지원서 (입사지원서) 공무직(청소원).hwp 직무기술서 (직무기술서) 공무직(청소원).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a08a300001a1c2c68df32497&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a307233",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
+          "sha256": "303dc4e5c85699143bdaf1e2e9f82b5a00642989aeb3293ed94b30f92066741d",
+          "size_bytes": 16225,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:50.130884+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국폴리텍특성화대학 바이오캠퍼스 업무직(대학운영직_조리원) 채용공고 2026.11.19 / 진행중 공공기관 채용정보 기관명 학교법인한국폴리텍 표준직무(NCS) 음식서비스 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 충남 근무분야 운영직 채용인원 1 우대조건 취업지원대상자, 장애인, 저소득층, 다문화가족자녀, 북한이탈주민, 자립준비청년 공고기간 26.11.19 ~ 26.11.25 응시자격 ○ (연령) 만 60세 미만(정년 만 60세) ○ (학력ㆍ성별) 제한 없음 ○ 임용예정일**(2026. 12.21.) 기준 유효한 건강진단결과서(보건증) 소지자** ○ 남자의 경우 병역필 또는 면제자 ○ 학교법인 한국폴리텍 인사규정 제19조(결격사유)에 해당되지 않는 자 ○ 최종합격자 발표 후 임용예정일에 근무 가능한 자 (근무 예정일 : 2026. 12.21 ) 결격사유 ※ 학교법인 한국폴리텍 인사규정 제19조(결격사유) 1. 피성년후견인 2. 파산자로서 복권되지 아니한 자 3. 금고이상의 실형을 선고 받고, 그 집행이 종료되거나 집행을 받지 아니 하기로 확정된 후 5년이 경과되지 아니한 자 4. 금고이상의 형을 선고받고, 그 집행유예의 기간이 만료된 날로부터 2년이 경과되지 아니한 자 5. 금고이상의 형의 선고유예를 받고 그 선고유예기간 중에 있는 자 6. 법원의 판결 또는 다른 법률에 따라 자격이 상실 또는 정지된 자 6의2. 공무원 또는 교직원으로 재직기간 중 직무와 관련하여 [형법]제355조 및 제356조에 규정된 죄를 범한 자로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 자 6의3. 다음 각 목의 어느 하나에 해당하는 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 가. [성폭력범죄의 처벌 등에 관한 특례법] 제2조에 따른 성폭력범죄 나. [정보통신망 이용촉진 및 정보보호 등에 관한 법률] 제74조제1항제2호 및 제3호에 규정된 죄 다. [스토킹범죄의 처벌 등에 관한 법률] 제2조제2호에 따른 스토킹범죄 6의4. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면·해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. [성폭력범죄의 처벌 등에 관한 특례법] 제2조에 따른 성폭력범죄 나. [아동·청소년의 성보호에 관한 법률] 제2조제2호에 따른 아동·청소년대상 성범죄 7. 병역의무자로서 병역을 기피한 자 8. 전직근무기관에서 징계에 따라 파면 또는 해임된 자로서, 그 징계처분을 받은 날로부터 파면은 5년, 해임은 3년이 경과하지 아니한 자 9. 채용 신체검사 결과 불합격으로 판정된 자(단, 교원, 초빙교원, 기간제 교사에 한함) 11. [부패방지 및 국민권익위원회의 설치와 운영에 관한 법률] 제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12. 성인에 대한 [성폭력범죄의 처벌 등에 관한 특례법] 제2조에 따른 성폭력범죄 행위로 파면·해임되거나 100만원 이상의 벌금형이나 그 이상의 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 지난 사람을 포함한다)(단, 교원, 초빙교원, 기간제 교사에 한함) 13. 마약·대마 또는 향정신성의약품 중독자(단, 교원, 초빙교원, 기간제 교사에 한함) 전형절차/방법 ○ (접수기간) 2026.11.19(목)~2026.11.25(수) 16시까지 ○ (접수방법) 전자우편(이메일) (※ 방문 및 우편접수 불가) - 대학 지정 서식(붙임 1ㆍ2) 이외의 서류 접수 불가. ○ (전자우편접수) hyunhee@kopo.ac.kr(인사담당자 메일) - (전자우편 제목) “대학운영직(조리원)_성명” 기재 【 예) 대학운영직(조리원)_홍길동 】 ○ 지원서류 기재 착오 및 서명누락 등으로 인한 불이익은 응시자의 귀책사유 ○ 대학 지정 서식을 사용하지 않은 경우, 접수되지 않음 <심사방법 및 일정> ○ (서류심사) - 서류전형 심사 : 2026. 11.27(금) 11:00 - 서류전형 합격자 발표 : 2026. 11.27.(금) 17:00 - 응시자격 적격여부 확인 및 지정서류 준수 등 심사 - 합격자에 한하여 개별 통보 및 면접 일정 안내 (지원자격 미달, 원서 불성실 기재 등을 제외한 적격자 전원에게 면접심사 응시 기회 부여) ○ (면접심사) - 면접전형 일정 및 장소 : 2026. 12. 02.(수), 한국폴리텍대학 바이오캠퍼스 - 서류전형 합격자에 한하며 당해 직무수행에 필요한 교육, 경력, 자격 등 실무능력 및 적격성 검증 ○ (합격자 발표) - 발표일자 : 2026. 12.3.(목), 합격자에 한하여 개별 통보 ○ (합격자 등록) - 등록기간 : 2026. 12.3(목) ~ 2026. 12.9(화) 14:00시 까지 - 기한 내 등록서류 미제출 시 채용의사가 없는 것으로 간주하여 임용 취소. ○ (예비합격자) - 면접성적 차 순위자를 대상으로 채용인원의 2배수 이내 예비합격자를 둘 수 있으며, 이때 예비합격자 유효기간은 최종합격자 발표일로부터 수습임용기간 만료일까지로 함. - 최종합격자 중 임용포기 또는 임용 결격사유 발생 및 중도 퇴사로 결원 발생 시 별도의 조치 없이 예비합격자 중 선발 할 수 있음. ○ 대학 사정에 따라 일부 변경(상기일정 등) 될 수 있음. 우대내용 <취업지원대상자> ○ 「독립유공자예우에 관한 법률」, 「국가유공자 등 예우 및 지원에 관한법률』,「5·18민주유공자 예우에 관한 법률」, 「특수임무유공자 예우 및 단체설립에 관한 법률」, 「고엽제 후유의증 등 환자지원 및 단체설립에 관한 법률」, 「보훈보상대상자 지원에 관한 법률」에 따른 취업지원대상자 ○ 취업지원대상자 가산점수는 「국가유공자 등 예우 및 지원에 관한 법률」 제31조의 가점 합격인원 상한제(30%)에 따라 최소 모집분야 기준 선발예정인원이 4명 이상인 경우에만 적용하나, 응시인원이 채용예정인원과 같거나 적은 경우에는 가점 적용(면접전형 만점의 5% 또는 "
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a307035",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307035",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307035",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307035",
+          "sha256": "a5d06872544dfa5e127aa7ebca3a2e0b8d8809e738b47124fd301db2db49d6f2",
+          "size_bytes": 14015,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:49.757845+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 [보훈재활체육센터] 업무지원직(시설지원-청소,경비) 채용 공고 2026.11.16 / 진행중 공공기관 채용정보 기관명 한국보훈복지의료공단 표준직무(NCS) 경비.청소 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 경기 근무분야 위생직 채용인원 2 우대조건 취업지원대상자, 장애인 공고기간 26.11.16 ~ 26.11.26 응시자격 가. 업무지원직(시설지원)-청소 ① 인사규정 제18조(결격사유)에 해당하지 않는 자 ② 업무지원직 인사관리 시행세칙 제13조(정년)에 따른 정년(65세)을 초과하지 않는 자 나. 업무지원직(시설지원)-경비 ① 인사규정 제18조(결격사유)에 해당하지 않는 자 ② 업무지원직 인사관리 시행세칙 제13조(정년)에 따른 정년(65세)을 초과하지 않는 자 ③ 경비업법 제10조(경비지도사 및 경비원의 결격사유)의 결격사유에 해당하지 않는 자 ④ 일반경비원 신임교육 이수증 소지자 및 경비업법 시행령 제18조 2항에 해당하는 자 결격사유 공단 인사규정 제18조 직원의 결격사유 ① 다음 각 호의 어느 하나에 해당하는 사람은 직원에 임용될 수 없다. 1. 피성년후견인 2. 파산선고를 받은 자로서 복권되지 아니한 사람 3. 금고 이상의 실형을 선고받고 그 집행이 끝나거나(집행이 끝난 것으로 보는 경우를 포함한다) 집행이 면제된 날부터 5년이 지나지 아니한 사람 4. 금고 이상의 형의 집행유예를 선고받고 그 유예기간이 끝난 날부터 2년이 지나지 아니한 사람 5. 금고 이상의 형의 선고유예를 받은 경우에 그 선고유예 기간 중에 있는 사람 6. 법원의 판결 또는 다른 법률에 의하여 자격이 상실 또는 정지된 사람 6의2. 직무와 관련하여「형법」제355조 및 제356조에 규정된 죄를 범한 자로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 자 6의3. 다음 각 목의 어느 하나에 해당하는 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나. 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 제74조제1항제2호 및 제3호에 규정된 죄 다. 「스토킹범죄의 처벌 등에 관한 법률」 제2조제2호에 따른 스토킹범죄 6의4. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면 해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가.「성폭력범죄의 처벌 등에 관한 특례법」제2조에 따른 성폭력범죄 나.「아동 청소년의 성보호에 관한 법률」제2조제2호에 따른 아동 청소년대상 성범죄 7. 징계에 의하여 파면의 처분을 받은 때로부터 5년을 경과하지 아니한 사람 8. 징계에 의하여 해임의 처분을 받은 때로부터 3년을 경과하지 아니한 사람 9. 병역법에 의한 병역기피자 10. 신체검사 결과 감염성 질환 또는 육체적·정신적 장애로 인하여 정상적인 업무수행이 곤란하다고 인정된 사람 11. 「부패방지 및 국민권익위원회 설치와 운영에 관한 법률」제82조(비위면직자 등의 취업제한)에 해당하는 사람 12. 공단 또는 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 이후 5년을 경과하지 않은 사람 13. 노인복지법 제39조의17(노인관련기관의 취업제한 등), 「장애인복지법」 제59조의3(장애인관련기관에의 취업제한 등), 「아동 청소년의 성보호에 관한 법률」 제56조(아동 청소년 관련기관등에의 취업제한 등) 또는 「아동복지법」 제29조의3(아동관련기관의 취업제한 등)에 해당하는 사람 ② 임원 및 직원이 다음 각 호중 어느 하나에 해당되는 경우에는 적발 즉시 채용을 취소한다. 1. 채용과정에서 청탁 등 채용비위가 발생한 경우 2. 임직원의(퇴직자 포함) 가족과 친척을 부당하게 채용한 경우 전형절차/방법 ○ 1차(서류전형) - 서류접수기간: 2026.11.16.(월)~2026.11.26.(목) 14:00까지 - 접수방법: 채용지원 사이트(https://bohun.fairyhr.com) - 제출서류: (필수) 입사지원서, 자기소개서, 직무역량소개서 (해당자) 필수 지원자격 증빙서류(경비), 가점 증명서, 해당분야 경력(재직) 증명서 - 서류합격자발표일: 2026.11.30.(월) 16:00(예정) ○ 2차(면접전형) - 면접일시: 2026.12.2.(수)10:00 - 합격자 선정방법: 면접점수 60%이상자 중 고득점순 - 합격자발표일: 2026.12.4.(금) 16:00(예정) ※ 보다 자세한 내용은 첨부파일의 채용공고문 참고 우대내용 [가점] 취업지원대상자(5%~10%) 장애인(10%) 전형단계별 채용정보 업무지원직(시설지원-청소) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 업무지원직(시설지원-경비) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 업무지원직 시설지원 채용 공고.pdf 입사지원서 입사지원서 양식.pdf 직무기술서 직무기술서.pdf 기타 첨부파일 임용결격사유 자기소개서문항 자기소개서불성실작성판단기준등.pdf 미첨부 사유 원문 URL https://www.bohun.or.kr/main/na/ntt/selectNttList.do?mi=37032&bbsId=1158 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a307271",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+          "sha256": "5f5ca5f2374a793fbbf0f1ec171717a86b2e5e1358035c1d803027a8f46caa1d",
+          "size_bytes": 12717,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:52.541617+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국농어촌공사 철원화천지사 공무직(청소원) 공개경쟁 채용 공고 2026.11.20 / 진행중 공공기관 채용정보 기관명 한국농어촌공사 표준직무(NCS) 경비.청소 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 강원 근무분야 공무직 채용인원 1 우대조건 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함) 공고기간 26.11.20 ~ 26.11.30 응시자격 - 학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자) - 임용예정일(2026.12.14.)부터 즉시 업무종사 가능자 - 남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자 - 공사 인사규정 제9조의 임용 결격 사유가 없는 자(첨부 1) - 근무지로 출퇴근 가능자 결격사유 인사규정 제9조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원에 임용될 수 없다. 1. 피성년후견인 또는 피한정후견인 2. 파산선고를 받고 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예 기간 중에 있는 자 6. 법원의 확정판결이나 다른 법률에 따라 자격이 상실 또는 정지된 자 7. 파면처분을 받은 날로부터 5년을 경과하지 아니한 자 8. 해임처분을 받은 날로부터 3년을 경과하지 아니한 자 10.채용신체검사 및 신원조회결과 부적격 판정을 받은 자 11.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12.「공공기관의 운영에 관한 법률」제4조에 따른 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 날로부터 5년이 지나지 아니한 자 13. 그 밖에 채용의 공정한 관리에 영향을 미치는 행위로서 부정한 행위를 한 자 또는 채용 공고문에 불합격 처리 기준으로 정한 행위를 한 자 14.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 규정된 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 15. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나. 「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄 전형절차/방법 1. 접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00 - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 2. 선발방법 가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발 - 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발 - 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음 나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발 - 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자 - 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정 3. 최종합격자 발표: 2026. 12. 11.(금) 채용홈페이지에서 개별확인 / 업무형편에 따라 변경될 수 있음 4. 채용예정일: 2026. 12. 14.(월) ※ 상기 일정은 업무형편에 따라 변경될 수 있으며, 변경 시 채용홈페이지 및 지원자 개별 안내 예정 ※ 기타 세부사항은 첨부된 채용공고문 참고 우대내용 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함) 전형단계별 채용정보 공무직(청소원) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 공무직(청소원) 공개경쟁 채용 공고 261120.pdf 입사지원서 입사지원서 (공무직).hwp 직무기술서 직무기술서 (공무직).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1f64cbe045909&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a307175",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307175",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307175",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307175",
+          "sha256": "051ceebd2c79263373c705699ebf740aa5f8508392ad9e54ed8bbf27d2438dc7",
+          "size_bytes": 14731,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:52.477473+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국농어촌공사 천안지사, 부여지사, 서천지사, 청양지사 공무직(청소원) 보훈·장애인 제한경쟁채용공고 2026.11.18 / 진행중 공공기관 채용정보 기관명 한국농어촌공사 표준직무(NCS) 경비.청소 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 충남 근무분야 공무직 채용인원 4 우대조건 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함) 공고기간 26.11.18 ~ 26.12.03 응시자격 - 학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자) - 국가유공자 등 예우 및 지원에 관한 법률에 따른 취업지원대상자 또는 장애인 고용촉진 및 직업재활법에 따른 장애인만 지원 가능 - 임용예정일로부터 즉시 업무종사 가능자 - 남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자 - 공사 인사규정 제9조의 임용 결격사유가 없는 자(첨부1) - 근무지로 출퇴근 가능자 결격사유 인사규정 제9조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원에 임용될 수 없다. 1. 피성년후견인 또는 피한정후견인 2. 파산선고를 받고 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예 기간 중에 있는 자 6. 법원의 확정판결이나 다른 법률에 따라 자격이 상실 또는 정지된 자 7. 파면처분을 받은 날로부터 5년을 경과하지 아니한 자 8. 해임처분을 받은 날로부터 3년을 경과하지 아니한 자 10.채용신체검사 및 신원조회결과 부적격 판정을 받은 자 11.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12.「공공기관의 운영에 관한 법률」제4조에 따른 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 날로부터 5년이 지나지 아니한 자 13. 그 밖에 채용의 공정한 관리에 영향을 미치는 행위로서 부정한 행위를 한 자 또는 채용 공고문에 불합격 처리 기준으로 정한 행위를 한 자 14.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 규정된 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 15. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나. 「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄 전형절차/방법 1. 접수기간: 2026. 11. 18.(수) ~ 2026. 12. 3.(목) 13:00(접수마감일 13:00 접수에 한함) 2. 접수방법: 채용홈페이지에서 온라인 접수(https://recruit.incruit.com/ekr) 3. 선발방법 가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발 - 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발 - 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음 나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발 - 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자 - 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정 4. 최종합격자 발표: 2026. 12. 18.(금) 채용홈페이지에서 개별확인 / 업무형편에 따라 변경될 수 있음 5. 채용예정일: 2027. 1. 4.(월) ※ 기타 세부사항은 첨부된 채용공고문 참고 우대내용 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함) 전형단계별 채용정보 공무직(청소원)_천안지사 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공무직(청소원)_부여지사 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공무직(청소원)_서천지사 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공무직(청소원)_청양지사 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 공무직(청소원) 채용 공고 261118.pdf 입사지원서 입사지원서 및 자기소개서.hwpx 직무기술서 직무기술서.hwpx 기타 첨부파일 미첨부 사유 원문 URL https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1ec2b5d6e1317&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a307286",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307286",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307286",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307286",
+          "sha256": "e688331dbd9d8981933fc60b09e27f72e0b52eccc08c377ef8f343e9c250240a",
+          "size_bytes": 13528,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:52.317592+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한전KPS(주) 고리3사업소 신고리 1호기 제10차 O/H 공사 단기노무원 1차 채용 공고 2026.11.20 / 진행중 공공기관 채용정보 기관명 한전KPS(주) 표준직무(NCS) 경영.회계.사무,경비.청소,기계,전기.전자,환경.에너지.안전 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 부산 근무분야 계약직 채용인원 84 우대조건 보훈대상자, 교육수료자(안전 Patrol 제외), 직무 관련 자격증 소지자, 안전 Patrol 경력 우대 공고기간 26.11.20 ~ 26.11.26 응시자격 □ 공통사항 : 채용 예정일 즉시 근무 가능한자 □ 정비보조 1차측(관리구역) : 2026년 방사선작업종사자 교육(기본/직장) 이수자 및 이수가능자 □ 사무보조 및 정비보조 2차측(비관리구역) : 해당 없음 □ 안전 Patrol : 2026년 방사선작업종사자 교육(기본/직장) 및 건설업 기초안전보건교육 이수자 □ 장애인 : 「장애인복지법」 제2조에 따른 장애인 등록증 소지자 결격사유 □ 채용 전 신체검사 결과 결격사유가 있는 자 □ 한수원 출입관리지침에 의거 출입제한사유에 해당하는 자 □ 신원조회 결과 출입 제한사유에 해당하는 자 (채용 후 신원조회 결과 출입제한사유 발생 시 채용 즉시 취소) □ 관련법령 및 발전소 절차서에 따라 채용요건의 미충족시 채용이 취소될 수 있음 □ 채용구비서류에 허위사실이 발견된 자 □ 당사 인사규정 제9조(채용결격사유)에 해당하는 자(붙임 4 참조) □ 기타 채용기준상 부적격으로 판정된 자 전형절차/방법 1. 채용개요 가. 채용형태 : 단기노무원 나. 채용인원 : 총 84명 다. 공사기간 : 2027. 1. 30. ~ 2027. 3. 7.(변동가능) ※ 부득이한 사정으로 공사일정이 변경되는 경우 채용이 취소되거나 근무기간이 달라질 수 있음 라. 계약기간 : 공사기간에 따라 근무시작(일부 조기사역) ※ 투입되는 직무에 따라 개인별 계약기간은 상이함 마. 급여수준 : 내부 기준에 의거 산정 바. 근무지 : 한전KPS(주)고리3사업소 사. 수행직무 1) 정비보조(1차측) : 방사선 관리구역 정비보조, 부품 및 작업장 청소, 안전보조, FME 관리보조, 화재방호관리보조, 교대근무, 정비품질확인 등 2) 정비보조(2차측) : 비 방사선 구역 정비보조, 부품 및 작업장 청소(사옥포함), 안전보조, FME 관리보조, 중앙공구실 보조, 폐기물관리, 자재창고 지원 등 3) 장애인 : 안전행정업무지원, 현장 안전조치 지원, 안전용품 창고 정리정돈, 산업재해 예방 현장 안전 순찰 지원, 현장 폐기물 정리, 사옥청소 등 3) 사무보조 : 행정업무, 노무원관리 지원, 출입신청 및 인솔업무 등 4) 안전 Patrol : 안전팀 산업안전보건관련 업무보조 등 2. 전형일정 : 서류심사 및 신체검사 → 합격자 발표 가. 서류접수기간 : 2026.11.20. ~ 2026.11.26. 18:00까지 - 이메일(biz01001555@kps.co.kr) 접수 후 확인전화(051-795-7422) 요망 나. 신체검사 : 2026.11.27. ~ 2026.12.03. 다. 서류심사 : 2026.11.27. ~ 2026.12.10. 라. 최종합격자 발표 : 2026.12.11. 마. 신원조회 진행 : 2026.12.14.(월) ~ 3. 제출서류 가. 블라인드 입사지원서 및 개인정보제공동의서(입사지원서에 개인인적사항인 출신학교, 가족관계, 신체적조건 등 기재 및 사진 부착시 서류접수 불가) 나. 가점 관련 서류 다. 세부사항 공고문 참조 4. 기타사항 가. 금번 채용 근로자는「공공부문 정규직 전환 가이드라인(‘17.07.20)」상의 정규직 전환대상이 아님 나. 채용 일정은 회사 사정에 따라 달라질 수 있음 다. 미출근자 발생시 추가합격자 운영 우대내용 < 세부사항 채용공고문 참조 > 1. 공통: 보훈대상자(만점의 5%~10% 가점) - 국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호 대상자 2. 교육수료자 가점사항 (안전 Patrol 제외) 3. 직무 관련 자격증 소지자 가점사항 - 사무보조, 안전Patrol ※ 상기관련 자격증 가점은 최상위1개에 대해서만 가점 적용함 4. 안전 Patrol 경력 우대사항 ※ 상기관련 경력 가점은 해당 경력 각각에 대해 가점 적용함 전형단계별 채용정보 정비보조(1차측) 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 정비보조(2차측) 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 장애인 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 사무보조 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 안전 Patrol 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 신고리 1호기 제10차 OH 단기노무원 1차 채용 알리오 게시 채용공고문.hwp 입사지원서 입사지원서 및 개인정보제공동의서.hwp 직무기술서 신고리 1호기 제10차 OH 단기노무원 채용직무별 직무기술서.hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.kps.co.kr 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a306866",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306866",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306866",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306866",
+          "sha256": "1e7917ef39ee5b5dbe501a7f25145bb513a588712f6339ebefefffb59f462d51",
+          "size_bytes": 14150,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-21T19:59:52.388566+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 2026년 제4차 해외원전건설처 기간제근로자(통·번역사) 채용 2026.11.12 / 진행중 공공기관 채용정보 기관명 한국수력원자력(주) 표준직무(NCS) 경영.회계.사무 고용형태 비정규직 학력정보 석사 채용구분 신입+경력 근무지 경북 근무분야 계약직 채용인원 1 우대조건 취업지원대상자, 장애인 공고기간 26.11.12 ~ 26.11.27 응시자격 1. 공통사항 ○ 연령 및 성별 : 제한 없음 ○ 병역 : 병역필(면접시작일 전까지 전역 가능한자 포함) 또는 면제자 ○ 기타 : 당사 인사관리규정 제11조(결격사유) 등에 해당함이 없는 자, 채용 예정일 즉시 근무 가능한 자, 해외 근무·출장에 결격사유가 없는 자 2. 자격사항 ○ 학력 : 통번역 대학원(한국어-러시아어 통번역 전공) 학위 소지자 또는 '27년 2월 내 통번역대학원 졸업예정자 결격사유 1. 피성년후견인 또는 파산선고를 받고 복권되지 아니한 자 2. 금고 이상의 실형을 선고받고 그 집행이 끝나거나(집행이 끝난 것으로 보는 경우를 포함한다) 집행이 면제된 날부터 5년이 지나지 아니한 자 3. 금고 이상의 형의 집행유예를 선고받고 그 유예기간이 끝난 날부터 2년이 지나지 아니한 자 4. 금고 이상의 형의 선고유예를 받은 경우에 그 선고유예 기간 중에 있는 자 5. 징계로 파면처분을 받은 때부터 5년, 해임처분을 받은 때로부터 3년이 지나지 아니한 자 6. 법원의 판결 또는 법률에 의하여 자격이 상실 또는 정지된 자 7. 입사제출서류에 허위사실이 발견된 자 또는 신체검사 결과 불합격으로 판정된 자 8. 『부패방지 및 국민권익위원회의 설치와 운영에 관한 법률』 제82조에 따른 비위면직자 등의 취업제한 적용을 받은 날로부터 5년이 지나지 아니한 자 9. 다음 각목의 어느 하나에 해당하는 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 가.「성폭력범죄의 처벌 등에 관한 특례법」제2조에 따른 성폭력범죄 나.「정보통신망 이용촉진 및 정보보호 등에 관한 법률」제74조제1항제2호 및 제3호에 규정된 죄 다.「스토킹범죄의 처벌 등에 관한 법률」제2조제2호에 따른 스토킹범죄 10.『공기업·준정부기관의 경영에 관한 지침』 제16조 제5항 및 제6항에 따른 본인 또는 본인과 밀접한 관계가 있는 타인의 채용에 관한 부당한 청탁, 압력 또는 재산상의 이익 제공 등의 부정행위를 한 자 11.10호에 따른 부정행위로 인해 채용에 합격한 자 12.『공공기관의 운영에 관한 법률』에 따른 공공기관에서 10호에 따른 부정행위가 적발되어 채용이 취소된 후 5년이 지나지 아니한 자 13. 미성년자에 대하여 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 또는 「아동·청소년의 성 보호에 관한 법률」 제2조제2호에 따른 아동·청소년대상 성범죄를 범한 사람으로서 다음 각 목의 어느 하나에 해당하는 날부터 20년이 지나지 아니한 사람 가.금고 이상의 실형을 선고받고 그 집행이 끝나거나(집행이 끝난 것으로 보는 경우를 포함한다)집행이 면제된 날 나.금고 이상의 형의 집행유예를 선고받고 그 집행유예가 확정된 날 다.벌금 이하의 형을 선고받고 그 형이 확정된 날 라.치료감호를 선고받고 그 집행이 끝나거나 집행이 면제된 날 마.징계로 파면처분 또는 해임처분을 받은 날 14. 공무원 또는 공공기관의 운영에 관한 법률에서 정한 공공기관의 임직원으로 재직 중 직무와 관련하여 「형법」 제355조(횡령, 배임) 및 제356조(업무상의 횡령과 배임)에 규정된 죄를 범한 자로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 자 * 신원조사 결과 형사절차(수사,기소,재판) 진행 중인 경우, 해당 형사절차가 종료되어 채용 결격사유에 해당하지 않는다는 사실이 확정될 때까지 채용 보류 * 결격사유에 해당하는 형벌, 처분 등의 기간만료 기준일: 지원서 접수마감일 * 결격사유 13의 경우 2019년 4월 17일 이후 저지른 죄로 형 또는 치료 감호를 선고 받거나 징계로 파면·해임된 사람부터 적용 전형절차/방법 1. 지원방법 ○ 접수기간 : 2026. 11. 12.(목) ~ 2026. 11. 27.(금) 18:00 ○ 접수방법 : 입사지원서 및 제출서류를 온라인으로 작성 제출 - 온라인주소 : www.khnp.co.kr/trecruit/ ※ 기재한 내용이 사실과 다르거나 제출하지 않은 경우는 불합격 처리 (입사지원서의 개인정보는 각 전형별 본인 확인용으로만 활용) 2. 선발절차 ○ 1차 전형 - 선발인원 : 적격자 전원 - 선발방법 : 자격검증 ○ 2차전형 - 선발인원 : 선발예정인원의 1배수 - 선발방법 : 면접심사(100점)_통번역 업무수행능력 및 기본역량/가점 ○ 최종합격자 결정 - 선발인원 : 선발예정인원의 1배수 - 선발기준 : 신체검사, 신원조회, 비위면직자 확인 ※ 전형별 세부 절차 및 방법, 주의사항 등은 모집공고(첨부파일)를 참고해 주시기 바랍니다. ※ 당사 사정에 따라 전형절차 일정 및 근로시작일은 변경될 수 있음 우대내용 ○ 취업지원대상자와 장애인 가점은 2차 전형 동점자 발생시 우선순위 결정기준으로만 적용함 전형단계별 채용정보 통·번역사 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 1. [2026년 제4차 해외원전건설처 기간제근로자(통·번역사) 채용] 공고문.pdf 입사지원서 2. [2026년 제4차 해외원전건설처 기간제근로자(통·번역사) 채용] 입사지원서.pdf 직무기술서 3. [2026년 제4차 해외원전건설처 기간제근로자(통·번역사) 채용] 직무명세서.pdf 기타 첨부파일 미첨부 사유 원문 URL https://www.khnp.co.kr/trecruit/ 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
       }
     ],
-    "attempted": 4,
+    "attempted": 12,
     "max_attempts": 24,
     "unavailable_hosts": [
       "job.cleaneye.go.kr"
@@ -5496,7 +5800,6 @@
       "cleaneye-81417",
       "cleaneye-81393",
       "cleaneye-81413",
-      "cleaneye-81432",
       "cleaneye-81460",
       "cleaneye-80711",
       "cleaneye-80914",
@@ -5524,9 +5827,10 @@
       "cleaneye-78450",
       "cleaneye-80102",
       "cleaneye-80486",
-      "cleaneye-80544"
+      "cleaneye-80544",
+      "cleaneye-80956"
     ],
-    "checked": 0,
+    "checked": 8,
     "required_next_step": "Independently read notice and attachments, cite each fact, run validate_entry and v5 checks before submission"
   },
   "publication_audit": {
@@ -5609,8 +5913,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-21T19:00:41.443330+09:00",
-    "window_start": "2026-11-19T10:00:41.443330+00:00",
+    "checked_at": "2026-11-21T19:59:52.620751+09:00",
+    "window_start": "2026-11-19T10:59:52.620751+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
