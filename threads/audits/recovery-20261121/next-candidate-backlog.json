@@ -552,5 +552,86 @@
     "remaining_six_target": "나머지6건 승인·공급확보 주장 없음. 실제검수 및 새원고화 필요."
   },
   "remaining_planned_count": 4,
-  "note": "All old source download times are historical. Actual current queue and frozen entry evidence take precedence; this file does not reserve or publish."
+  "note": "All old source download times are historical. Actual current queue and frozen entry evidence take precedence; this file does not reserve or publish.",
+  "alternative_source_review_progress": [
+    {
+      "job_id": "a307271",
+      "status": "draft_hold_independent_official_html_review",
+      "proposed_slot_only": "2026-11-22T20:00:00+09:00",
+      "slot_reserved": false,
+      "ready": false,
+      "approved": false,
+      "queue_changed": false,
+      "meta_posted": false,
+      "review_recorded_at_utc": "2026-11-21T12:52:11.631Z",
+      "source_category": "official_source_alternative_alio_not_auto_approved",
+      "organization": "한국농어촌공사",
+      "recruitment_unit": "철원화천지사 공무직(청소원)",
+      "unit_count": 1,
+      "overall_notice_count": 1,
+      "employment": "무기계약직",
+      "location": "강원",
+      "exact_deadline": "2026-11-30T16:00:00+09:00",
+      "application_method": "채용 홈페이지 온라인 접수",
+      "application_site": "https://recruit.incruit.com/ekr",
+      "start_work": "2026-12-14",
+      "degree_requirement": "학력·전공 제한 없음, 다만 정년에 도달하지 아니한 자",
+      "required_conditions_logic": "정년 미도달 AND 2026-12-14 즉시 근무 가능 AND 출퇴근 가능 AND 결격사유 해당하지 않음 AND (남자의 경우 병역의무 불이행 사실 없음)",
+      "bonus_rule": "취업지원대상자: 면접전형 동점 시 우선순위에 한함",
+      "useful_point": "서류지원자가 채용인원의 5배수 이상일 경우 자기소개서·경력·고령자 항목으로 5배수 이내 평가",
+      "official_sources": [
+        {
+          "kind": "alio_official_html",
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+          "source_receipt_checked_at": "2026-11-21T20:57:28.648670+09:00",
+          "source_bytes": 12717,
+          "sha256": "5f5ca5f2374a793fbbf0f1ec171717a86b2e5e1358035c1d803027a8f46caa1d",
+          "scope": "title, employment, single unit count, degree, required conditions, 11/30 16:00, selection rule, bonus rule, application URL"
+        },
+        {
+          "kind": "employer_authorized_recruitment_page",
+          "url": "https://recruit.incruit.com/ekr/job/2611180022",
+          "scope": "recruitment unit 1 person, online application, 2026-11-20 10:00 through 2026-11-30 16:00; linked PDF existence"
+        },
+        {
+          "kind": "alio_original_pdf_link",
+          "url": "https://www.alio.go.kr/download/download.json?fileNo=3088960",
+          "status": "HOLD",
+          "access_attempt_result": "HTTP 403 from web open; no original PDF bytes or extracted text SHA"
+        },
+        {
+          "kind": "employer_original_ekr_notice",
+          "url": "https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1f64cbe045909",
+          "status": "HOLD",
+          "access_attempt_result": "Not accessible via web fetch"
+        }
+      ],
+      "downloaded_original_pdf_sha256": null,
+      "extracted_original_pdf_sha256": null,
+      "pdf_pages_visual_reviewed": [],
+      "amendments_check": {
+        "status": "partial_only",
+        "scope": "ALIO official active status and employer-authorized Incruit listing checked; full employer correction/cancellation archive not accessible",
+        "cleared": false
+      },
+      "profile_ui": {
+        "status": "HOLD",
+        "requested_url": "https://kllollain-max.github.io/careerpick/#job=a307271",
+        "reason": "Actual JS-rendered detail page not visually inspected; no confirmed equivalent interactive browser available"
+      },
+      "validated_production": false,
+      "card_visual_review": "not_run",
+      "source_freshness_for_publish": "must revalidate at actual intended publication before ready",
+      "duplicate_status": "not_ready_no_queue_entry_added",
+      "draft_text": "강원 공무직 청소원 채용을 찾는다면,\n한국농어촌공사 철원화천지사 무기계약직 1명 모집이에요.\n\n학력·전공 제한은 없지만 정년 전이어야 하고, 12월 14일부터 근무·출퇴근이 가능해야 해요. 남성은 병역의무 불이행 사실이 없어야 하고 결격사유도 확인하세요.\n\n서류전형은 지원자가 5배수 이상일 때 자기소개서·경력·고령자 항목으로 평가해요. 11월 30일 16시까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+      "draft_chars": 230,
+      "blockers": [
+        "Full original PDF and annexes not downloaded/read, so all appendix-specific restrictions not independently verified",
+        "Full amendment/cancellation search scope and final #job detail UI not verified",
+        "Production validate_entry/receipt/queue plan and IMAGE card verification not executed; no ready/CAS attempted"
+      ],
+      "next_action": "Reattempt original attachment through permitted official route and inspect all pages; verify live CareerPick #job; freshness recheck and execute production validators before conditional queue supply. Do not alter existing published/ready slots."
+    }
+  ],
+  "last_alternative_source_review_at_utc": "2026-11-21T12:52:11.631Z"
 }
