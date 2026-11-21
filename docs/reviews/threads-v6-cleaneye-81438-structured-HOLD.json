@@ -218,5 +218,72 @@
     },
     "interpretation": "Fresh official bytes match previously independently inspected originals. Hash match is not a substitute for correction/cancellation board review, profile visual verification, operational image asset upload, or production validator.",
     "status": "OFFICIAL_RAW_BYTES_CURRENT_SEMANTIC_REVIEW_PARTIALLY_DONE_APPROVAL_HOLD"
+  },
+  "latest_nonpublishing_review_20261121": {
+    "status": "HOLD_RETAINED_NO_CAS_NO_POST",
+    "official_source_remote_receipt": {
+      "run_id": "44869407559",
+      "source_main_sha": "dc13d523b826516cc71ceabc17772ad711fae44c",
+      "captured_at": "2026-11-21T14:08:56.860509+09:00",
+      "html": {
+        "url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+        "checked_at": "2026-11-21T14:08:52.904754+09:00",
+        "sha256": "4b358b44d4834465a97b305004a2ae427ffc27ca04a460162b145b90537e90c7",
+        "bytes": 220099
+      },
+      "attachments": [],
+      "attachment_status": "all_raw_pdf_sha256_captured"
+    },
+    "independent_full_pdf_read": {
+      "source": "User-provided verified official-81438-receipts.zip, same official notice PDF SHA256 as previously captured",
+      "original_notice_pdf_sha256": "98a62a92891c9b26cdafc1c54895564e3757fadaf494e0475bfaebbfacc400e2",
+      "technical_pages_extracted": 10,
+      "pages": "1-10",
+      "additional_substantive_findings": [
+        {
+          "page": 8,
+          "kind": "experience_eligibility",
+          "finding": "Internship, part-time, daily-labor work experience is not recognized as qualifying experience; freelance experience is recognized only if documentable."
+        },
+        {
+          "page": 8,
+          "kind": "bonus",
+          "finding": "Veterans' additive scoring is not applicable in this recruitment because each unit hires fewer than three; tie-break preference is distinct."
+        },
+        {
+          "page": 7,
+          "kind": "submission",
+          "finding": "All submission documents must be combined into one PDF; email submission requires telephone receipt confirmation."
+        }
+      ],
+      "interpretation": "These points are source-check results, not publication approval"
+    },
+    "official_title_list_sample": {
+      "check_scope": "Read-only retrieval of Yangju city recruitment notice list pages 1, 2, 3; not an exhaustive audit of correction channels",
+      "urls": [
+        "https://www.yangju.go.kr/www/selectBbsNttList.do?bbsNo=21&key=216&pageIndex=1&pageUnit=10",
+        "https://www.yangju.go.kr/www/selectBbsNttList.do?bbsNo=21&key=216&pageIndex=2&pageUnit=10",
+        "https://www.yangju.go.kr/www/selectBbsNttList.do?bbsNo=21&key=216&pageIndex=3&pageUnit=10"
+      ],
+      "finding": "Original Yangju Culture and Tourism Foundation notice remained visible; no separately titled correction/cancellation for this notice found in these three sampled pages.",
+      "completeness": "partial",
+      "checked_local_minute": "2026-11-21 14:41 KST run window"
+    },
+    "profile_target_check": {
+      "static_public_page_fetch": "Site rendered generic page; this does not prove the hash-selected job detail",
+      "browser_visual": "not_verified",
+      "blocker": "Existing TinyFish browser cannot start due to wallet balance insufficient (-USD 0.13); alternative independently verified visual browser is not available in this run",
+      "retries": "No repeated paid browser run performed"
+    },
+    "production_gates": {
+      "validate_entry": "not_run",
+      "verify_official_receipt": "not_run",
+      "verify_reviewed_card": "local_prior_attestation_only_not_production",
+      "queue_check": "not_run",
+      "asset_cas": "not_run",
+      "reviewed_staging_cas": "not_run",
+      "meta_post": "not_attempted"
+    },
+    "note": "Historical drafts, image hashes, source receipts and live public posts are preserved unchanged; no completed or in-progress slot can be taken over."
   }
 }
