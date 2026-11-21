@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-21T19:26:37.000+09:00",
+  "status": "SUPPLY_RESTORED_AND_CONTINUOUS_AUTOMATION_ENABLED_PENDING_REGULAR_PUBLICATION",
+  "account": "hid_119",
+  "confirmed_missed_slots": [
+    {
+      "scheduled_at": "2026-11-21T08:00:00+09:00",
+      "run_id": 44837743728,
+      "reason": "QUEUE_SLOT_MISSING",
+      "meta_post_attempted": false
+    },
+    {
+      "scheduled_at": "2026-11-21T12:00:00+09:00",
+      "run_id": 44862580964,
+      "reason": "QUEUE_SLOT_MISSING",
+      "meta_post_attempted": false
+    },
+    {
+      "scheduled_at": "2026-11-21T16:00:00+09:00",
+      "run_id": 44883323246,
+      "reason": "QUEUE_SLOT_MISSING",
+      "meta_post_attempted": false
+    }
+  ],
+  "source_supply_fix": {
+    "pr": 149,
+    "url": "https://github.com/kllollain-max/careerpick/pull/149",
+    "head": "da317af82361e66930ec984f5d735ebf319fce63",
+    "merged_sha": "e2599194290ab186eb841d9338bf45229a68a112",
+    "checks": [
+      {
+        "name": "Validate queue logic without posting",
+        "conclusion": "success",
+        "completed_at": "2026-11-21T10:16:44Z",
+        "details_url": "https://github.com/kllollain-max/careerpick/actions/runs/44893555660/job/136814314970"
+      },
+      {
+        "name": "review",
+        "conclusion": "success",
+        "completed_at": "2026-11-21T10:17:05Z",
+        "details_url": "https://github.com/kllollain-max/careerpick/actions/runs/44893555640/job/136814314924"
+      },
+      {
+        "name": "live-queue-read-only",
+        "conclusion": "success",
+        "completed_at": "2026-11-21T10:16:46Z",
+        "details_url": "https://github.com/kllollain-max/careerpick/actions/runs/44893555575/job/136814314742"
+      },
+      {
+        "name": "verify",
+        "conclusion": "success",
+        "completed_at": "2026-11-21T10:17:27Z",
+        "details_url": "https://github.com/kllollain-max/careerpick/actions/runs/44893555662/job/136814314698"
+      },
+      {
+        "name": "content-mobile",
+        "conclusion": "success",
+        "completed_at": "2026-11-21T10:22:42Z",
+        "details_url": "https://github.com/kllollain-max/careerpick/actions/runs/44893555559/job/136814314679"
+      },
+      {
+        "name": "check",
+        "conclusion": "success",
+        "completed_at": "2026-11-21T10:16:58Z",
+        "details_url": "https://github.com/kllollain-max/careerpick/actions/runs/44893555564/job/136814314588"
+      }
+    ],
+    "scope": "Preserve eligible alternative source handoff and exact source hashes; no change to publication validation or schedule."
+  },
+  "remote_supply_readback": {
+    "status": "REMOTE_SUPPLY_READBACK_VALIDATED",
+    "checked_at": "2026-11-21T19:24:43.565793+09:00",
+    "state_head": "629a72d933becffc51bd2b7484d1d653eb6b7ad9",
+    "all_payload_bytes_match": true,
+    "files": [
+      {
+        "path": "threads/writer-queue.json",
+        "sha256": "fce8318df407eb51f34c3c907e3636b832a7ce931e60a84bf4e50ee333d1be25",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/reviewed-staging.json",
+        "sha256": "9e2580914156ba6cfcbefcb1ff54eb5eed993cbad0d547acb11a6eb3c7892f5b",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/reviewed-submissions.json",
+        "sha256": "8997ee33a83e42b1058a5b282d10191c732feb885bc5e70d19760ed6bca9c667",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/production-validation.json",
+        "sha256": "724901990b0711389d0e2cd7fa0cfb295f20d051f5f64697c0848e501ed898ae",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/profile-ui-review.json",
+        "sha256": "f380ebe7f2682e9d439f5087204c4061c5d53a6d1a3a17bfd9c56e8c79785380",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/card-visual-review-81432.json",
+        "sha256": "617df2129a4eaf60feb88031ac32467777e7e929fcb71c1aaf727a92ab7e4922",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/card-visual-review-a306841.json",
+        "sha256": "6ac954b428b419fa42176631ffa2fd18a0cf06969ebdf34bcb87c14516233b61",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/official-review-81432.json",
+        "sha256": "02dcb91638cd3a241b0aef0d97ef7c0a5d6cfab133fe59a9eef74b43af692a4a",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/official-review-a306841.json",
+        "sha256": "39e4eb008ad5f5fdfc1feeb11e5fbf9a61ccdb1c71170f130659ccb5ca4af6c6",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/body-review-81432-r2.json",
+        "sha256": "5adf3cb00b6f29d94e136db2fac8cfdcc99fb4c040ee81bda9f4b62dfcc18728",
+        "bytes_match": true
+      },
+      {
+        "path": "threads/audits/recovery-20261121-evening/body-review-a306841.json",
+        "sha256": "8824db3bb5b879739fb6762b26ef876e985264178685b0fcc7519d9676529840",
+        "bytes_match": true
+      }
+    ],
+    "supply_status": {
+      "future_slots": [
+        "2026-11-21T20:00:00+09:00",
+        "2026-11-22T08:00:00+09:00",
+        "2026-11-22T12:00:00+09:00",
+        "2026-11-22T16:00:00+09:00",
+        "2026-11-22T20:00:00+09:00",
+        "2026-11-23T08:00:00+09:00",
+        "2026-11-23T12:00:00+09:00",
+        "2026-11-23T16:00:00+09:00"
+      ],
+      "approved_future_slots": [
+        "2026-11-21T20:00:00+09:00",
+        "2026-11-22T08:00:00+09:00",
+        "2026-11-22T12:00:00+09:00",
+        "2026-11-22T16:00:00+09:00"
+      ],
+      "missing_slots": [
+        "2026-11-22T20:00:00+09:00",
+        "2026-11-23T08:00:00+09:00",
+        "2026-11-23T12:00:00+09:00",
+        "2026-11-23T16:00:00+09:00"
+      ],
+      "next_slot_missing": false,
+      "approved_inventory_count": 4,
+      "inventory_target": 8,
+      "inventory_shortfall": 4,
+      "replenishment_required": true,
+      "invalid_ready_entries": [],
+      "pending_active_slots": [],
+      "media_forecast_conditional_on_active_slot": false
+    },
+    "ready_entries": [
+      {
+        "notice_id": "cleaneye-81438",
+        "scheduled_at": "2026-11-21T20:00:00+09:00",
+        "chars": 350
+      },
+      {
+        "notice_id": "a307309",
+        "scheduled_at": "2026-11-22T08:00:00+09:00",
+        "chars": 336
+      },
+      {
+        "notice_id": "cleaneye-81432",
+        "scheduled_at": "2026-11-22T12:00:00+09:00",
+        "chars": 343
+      },
+      {
+        "notice_id": "a306841",
+        "scheduled_at": "2026-11-22T16:00:00+09:00",
+        "chars": 288
+      }
+    ],
+    "meta_posted": false
+  },
+  "automation": {
+    "id": "Automation_0e5600637b208191af04ea134e64de90",
+    "title": "커리어픽 Threads 원고 공급·복구",
+    "is_enabled": true,
+    "schedule": "BEGIN:VEVENT\nDTSTART:20261116T014518Z\nRRULE:FREQ=HOURLY;INTERVAL=1\nEND:VEVENT",
+    "default_timezone": "Asia/Seoul",
+    "next_run_time": "2026-11-21T19:45:18+09:00",
+    "prompt_readback_matches": true,
+    "schedule_unchanged": true
+  },
+  "backups": {
+    "main": "backup/threads-before-source-fallback-20261121",
+    "state": "backup/threads-state-before-evening-supply-20261121"
+  },
+  "actual_posting_after_repair": "Not yet verified; next regular slot 2026-11-21T20:00:00+09:00",
+  "manual_publish_or_workflow_dispatch_performed": false
+}

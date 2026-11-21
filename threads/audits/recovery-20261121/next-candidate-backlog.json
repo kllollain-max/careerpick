@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "prepared_at": "2026-11-21T17:03:38.140781+09:00",
-  "status": "draft_backlog_progress_cleaneye_81432_copy_crosschecked_not_ready",
+  "status": "two_new_manuscripts_supplied_and_readback_verified",
   "scope": "다음12/16시 공급 준비용 읽기전용 공식근거 조사. 승인/ready/queue/Meta/원격변경 없음.",
   "main_source_commit": "dc13d523b826516cc71ceabc17772ad711fae44c",
   "source_snapshots": [
@@ -22,13 +22,13 @@
     "cleaneye-81438",
     "a307309"
   ],
-  "ready_count": 0,
-  "new_unique_notice_evidence_count": 1,
+  "ready_count": 4,
+  "new_unique_notice_evidence_count": 2,
   "conditional_duplicate_candidate_count": 1,
   "candidates": [
     {
       "job_id": "cleaneye-81432",
-      "status": "draft_text_verified_against_official_html_pending_ui_and_production",
+      "status": "independently_reviewed_and_registered_in_operating_queue",
       "proposed_slot": "2026-11-22T12:00:00+09:00",
       "slot_is_reserved": false,
       "priority": "new_notice_no_matching_employer_post_in_local_history",
@@ -193,15 +193,8 @@
         7
       ],
       "draft_note": "본문 293자 단독 원고 편집 및 시청 공식 페이지 사실 대조 완료. 운영 ready 아님. 기존 공식 PDF/직무기술서 SHA, 11/21 16:59 정정 점검은 유지. 추가 UI·생산 검증 완료 전 queue 제출 금지.",
-      "remaining_before_reviewed_submission": [
-        "350자 원고 작성 및 필수조건 압축·검수",
-        "기관 제목 제2회/공식PDF 제3회 불일치 메모 보존",
-        "최신 원격 게시 이력 및 상태 중복 재확인",
-        "모든 제출서류·블라인드 예외·결격사유 원문 끝까지 독립 검수",
-        "현재 production validator 실행"
-      ],
-      "approval": false,
-      "ready": false,
+      "approval": true,
+      "ready": true,
       "public_draft": {
         "post_text": "도시·교통·정책 분야 석사학위가 있다면,\n서울연구원 정규직 연구원 2명 채용을 확인해 보세요.\n\n서초본원 근무(발령 시 변경 가능), 관련 분야 석사학위가 필수예요. 공고일 기준 결격사유를 확인하고 남성은 병역의무 불이행 사실이 없어야 해요.\n\n석사논문 국문요약(3매 이내)+원문은 1개 PDF로, 2023년 11월 20일 이후 연구실적 중 대표실적 정확히 2건의 요약·원문은 각각 PDF로 준비해요. 중복지원 불가예요.\n\n12월 4일 14:00까지 온라인 최종지원 후 수험번호를 확인하세요.\n\n자세한 사항은 프로필링크 확인",
         "detail_reply": "",
@@ -233,6 +226,38 @@
           "official_pdf_prior_hash": "175a85c2687aedafd2c107dcba47237bcb600469fc7fb39619b3d203cd482193"
         },
         "cannot_be_approved_before": [
+          "live #job=cleaneye-81432 rendered UI independent verification (TinyFish browser attempted, insufficient wallet balance; no approved alternative CUA available in this run)",
+          "fresh issuer correction/cancellation recheck at final freeze",
+          "production validate_entry and queue checks actually passed",
+          "if IMAGE, production card full and 360px proof actual visual inspection",
+          "live last published media and no claims/locks rechecked",
+          "atomic GitHub asset and state CAS supply and readback"
+        ],
+        "status": "historical_draft_superseded_by_frozen_operating_entry",
+        "superseded_by_entry_fingerprint": "4a966a0e2e5c76740c0a97be057c9be495f724d606580f2c8ad899b7a3f5f7e2"
+      },
+      "prior_draft_status": "draft_text_verified_against_official_html_pending_ui_and_production",
+      "supplied_to_queue": true,
+      "queue_registration": {
+        "state_commit": "629a72d933becffc51bd2b7484d1d653eb6b7ad9",
+        "readback_at": "2026-11-21T19:24:43.565793+09:00",
+        "entry_fingerprint": "4a966a0e2e5c76740c0a97be057c9be495f724d606580f2c8ad899b7a3f5f7e2",
+        "evidence_directory": "threads/audits/recovery-20261121-evening",
+        "actual_posted": false
+      },
+      "remaining_before_actual_publication": [
+        "Await existing regular publisher; revalidate exact source/body/assets and fresh state at send time; verify actual Meta ID/URL and accepted claim"
+      ],
+      "historical_pending_requirements": {
+        "remaining_before_reviewed_submission": [
+          "350자 원고 작성 및 필수조건 압축·검수",
+          "기관 제목 제2회/공식PDF 제3회 불일치 메모 보존",
+          "최신 원격 게시 이력 및 상태 중복 재확인",
+          "모든 제출서류·블라인드 예외·결격사유 원문 끝까지 독립 검수",
+          "현재 production validator 실행"
+        ],
+        "requires_before_ready": null,
+        "public_draft_cannot_be_approved_before": [
           "live #job=cleaneye-81432 rendered UI independent verification (TinyFish browser attempted, insufficient wallet balance; no approved alternative CUA available in this run)",
           "fresh issuer correction/cancellation recheck at final freeze",
           "production validate_entry and queue checks actually passed",
@@ -381,9 +406,9 @@
     },
     {
       "candidate_key": "kihf-2026-4-code01",
-      "job_id": null,
+      "job_id": "a306841",
       "source": "official_employer_pdf_web_rendered",
-      "status": "draft_new_distinct_notice_official_pdf_visual_read_not_approved",
+      "status": "independently_reviewed_and_registered_in_operating_queue",
       "proposed_slot": "2026-11-22T16:00:00+09:00",
       "slot_is_reserved": false,
       "organization": "한국건강가정진흥원",
@@ -432,19 +457,36 @@
         "chars": 246,
         "reply_texts": [],
         "detail_reply": "",
-        "status": "draft_only_no_production_validator_no_asset"
+        "status": "historical_draft_superseded_by_frozen_operating_entry",
+        "superseded_by_entry_fingerprint": "ba1f4f549a08872acc7ee9f8d6743984087302dae9559e2f92ad76148c04b343"
       },
-      "ready": false,
-      "approval": false,
-      "requires_before_ready": [
-        "공고가 커리어픽 실제 수집 ID에 매핑되는지 확인",
-        "해당 서비스 #job 상세 UI 실제 검증",
-        "공식 PDF 원본 bytes 재다운로드 및 SHA256·추출문 SHA 기록",
-        "수정·취소 최신 재확인",
-        "현재 정책에 따른 실제 production validate_entry + 공식 GET receipt + IMAGE 카드 시각검증 + queue plan merge check_queue",
-        "최신 원격 CAS 저장 및 readback"
+      "ready": true,
+      "approval": true,
+      "operator_note": "별도 공고 1건의 공식 PDF 모집단위·선발절차·마감과 246자 신규 본문 초안을 작성한 실질 진전. 저장은 감사용 backlog만; 제출물/큐/게시 작업 아님.",
+      "prior_draft_status": "draft_new_distinct_notice_official_pdf_visual_read_not_approved",
+      "supplied_to_queue": true,
+      "queue_registration": {
+        "state_commit": "629a72d933becffc51bd2b7484d1d653eb6b7ad9",
+        "readback_at": "2026-11-21T19:24:43.565793+09:00",
+        "entry_fingerprint": "ba1f4f549a08872acc7ee9f8d6743984087302dae9559e2f92ad76148c04b343",
+        "evidence_directory": "threads/audits/recovery-20261121-evening",
+        "actual_posted": false
+      },
+      "remaining_before_actual_publication": [
+        "Await existing regular publisher; revalidate exact source/body/assets and fresh state at send time; verify actual Meta ID/URL and accepted claim"
       ],
-      "operator_note": "별도 공고 1건의 공식 PDF 모집단위·선발절차·마감과 246자 신규 본문 초안을 작성한 실질 진전. 저장은 감사용 backlog만; 제출물/큐/게시 작업 아님."
+      "historical_pending_requirements": {
+        "remaining_before_reviewed_submission": null,
+        "requires_before_ready": [
+          "공고가 커리어픽 실제 수집 ID에 매핑되는지 확인",
+          "해당 서비스 #job 상세 UI 실제 검증",
+          "공식 PDF 원본 bytes 재다운로드 및 SHA256·추출문 SHA 기록",
+          "수정·취소 최신 재확인",
+          "현재 정책에 따른 실제 production validate_entry + 공식 GET receipt + IMAGE 카드 시각검증 + queue plan merge check_queue",
+          "최신 원격 CAS 저장 및 readback"
+        ],
+        "public_draft_cannot_be_approved_before": null
+      }
     }
   ],
   "other_attempts": [
@@ -494,9 +536,21 @@
     }
   ],
   "unfilled_target_slots": [
-    "2026-11-22T12:00:00+09:00",
-    "2026-11-22T16:00:00+09:00"
+    "2026-11-22T20:00:00+09:00",
+    "2026-11-23T08:00:00+09:00",
+    "2026-11-23T12:00:00+09:00",
+    "2026-11-23T16:00:00+09:00"
   ],
-  "remaining_six_target": "나머지6건 승인·공급확보 주장 없음. 실제검수 및 새원고화 필요.",
-  "last_enriched_at": "2026-11-21T18:48:29.858+09:00"
+  "last_enriched_at": "2026-11-21T19:26:37.000+09:00",
+  "historical_summary_before_evening_supply": {
+    "status": "draft_backlog_progress_cleaneye_81432_copy_crosschecked_not_ready",
+    "ready_count": 0,
+    "unfilled_target_slots": [
+      "2026-11-22T12:00:00+09:00",
+      "2026-11-22T16:00:00+09:00"
+    ],
+    "remaining_six_target": "나머지6건 승인·공급확보 주장 없음. 실제검수 및 새원고화 필요."
+  },
+  "remaining_planned_count": 4,
+  "note": "All old source download times are historical. Actual current queue and frozen entry evidence take precedence; this file does not reserve or publish."
 }
