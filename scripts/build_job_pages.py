@@ -28,6 +28,14 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     'a307150': '2026-12-01T10:00:00+09:00',
     'a307151': '2026-12-01T10:00:00+09:00',
     'a306988': '2026-12-01T18:00:00+09:00',
+    # Bohun Hospital official full recruitment notice (2026-11-20):
+    # 11/20 17:00 KST, in-person at the education/training office.
+    'a306992': '2026-11-20T17:00:00+09:00',
+    # SNUBH employer recruiting portal (jobnoticeSn=271976), reviewed 2026-11-20:
+    # applications 11/11 09:00 - 11/20 23:59 KST; not the ALIO publication clock.
+    'a306874': '2026-11-20T23:59:00+09:00',
+    # PNUH recruitment PDF 3088502 p3: online applications through 12/03 17:00 KST.
+    'a307225': '2026-12-03T17:00:00+09:00',
     'a306937': '2026-11-20T17:00:00+09:00',
     'a306941': '2026-11-20T17:00:00+09:00',
     'a306962': '2026-11-20T17:00:00+09:00',
@@ -126,6 +134,147 @@ VERIFIED_APPLICATION_NOTICES = {
         'checked_on': '2026-11-19',
         'scope': '공식 전임의사 모집 PDF 텍스트에서 대전·세종 전체 29명, 지원 시 해당 진료과 전문의 자격 및 11월 19일 17시 온라인 접수마감 확인. 분야별 인원과 현재 실제 접수화면은 별도 미검증, 공식 PDF 바이너리를 별도로 확보하고 SHA256을 재계산함.',
     },
+    # KNUH continuous pharmacist recruitment: official institution notice and
+    # archived ALIO notice/duty originals byte-SHA checked 2026-11-19; the
+    # duty PDF's first page was visually reviewed. Still conditional reception;
+    # confirmation that 11 independent vacancies remain open today.
+    # Direct SNUBH hiring-portal public notice read 2026-11-20, not the PDF's date-only table.
+    # Public viewing of the application window does not prove a completed applicant submission.
+    'a306874': {
+        'organization': '분당서울대학교병원',
+        'title': '분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고',
+        'source_end_date': '2026-11-20',
+        'expected_source_seats': '10',
+        'source_employment': ['정규직'],
+        'application_start': '2026-11-11',
+        'application_end_date': '2026-11-20',
+        'source_url': 'https://snubh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=271976&systemKindCode=MRS2',
+        'checked_on': '2026-11-20',
+        'scope': ('분당서울대학교병원 공식 채용시스템 공고 271976의 2026-11-11 09:00부터 '
+                  '2026-11-20 23:59 KST까지 온라인 접수 표기, 업무지원직 미화 AA1 10명 '
+                  '공개 모집표 확인. 로그인 후 최종 제출 성공·현재 잔여 결원은 독립 검증하지 않음.'),
+    },
+    'a306182': {
+        'organization': '경북대학교병원',
+        'title': '2026년도 약무직 공개채용 수시모집',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '11',
+        'source_employment': ['정규직'],
+        'source_url': 'https://www.knuh.kr/content/04information/02_01.asp?b_num=7452&proc_type=view',
+        'checked_on': '2026-11-19',
+        # This is an until-filled notice; the original 11 seats do NOT prove
+        # present reception or remaining vacancies. Keep the useful page,
+        # but exclude it from indexed/current regular recommendations.
+        'application_status_unconfirmed': True,
+        'conditional_application_window_label': (
+            '2026-04-01부터 충원 시까지 (공고 효력은 2026-12-31까지; '
+            '현재 접수 활성·잔여 인원 미확인)'
+        ),
+        'role_mix_note': (
+            '경북대학교병원 2026년도 정규직 약무직 수시모집 공고의 11명은 '
+            '최초 채용 예정 인원입니다. 필수 지원자격은 약사 면허증 소지이며 '
+            '본원 정년 규정에 따라 만 60세 이상 지원은 제한됩니다. '
+            '원서접수는 2026년 4월 1일부터 예정인원 충원 시까지이고 '
+            '공고 자체의 효력은 2026년 12월 31일까지입니다. '
+            '공고 효력 종료일은 모든 11명이 그날까지 남아 있거나 '
+            '온라인 접수가 그날 23:59까지 열린다는 뜻이 아닙니다. '
+            '원문에 따르면 지원 순서에 따라 개별 전형을 진행하며 '
+            '예정인원 충원 후 접수자의 전형은 진행하지 않을 수 있습니다. '
+            '서류전형·면접·기재사항 증빙 확인 및 온라인 인성검사 절차를 '
+            '따르므로, 공식 지원화면에서 현재 접수 가능 여부와 '
+            '잔여 인원·수정 공고를 확인한 뒤 지원하세요. '
+            '해당 병원의 다른 약무직 과거·추가 공고와 인원을 자동 합산하거나 '
+            '약사의 구체적인 배치 부서·업무를 근거 없이 추정하지 않습니다.'
+        ),
+        'scope': (
+            '2026-11-19 기관 공식 2026년 약무직 수시모집 HTML 게시글과 '
+            '공식 공고 PDF 3039457의 공개 추출 텍스트로 11명·약사면허·'
+            '충원 시 종료/공고효력 12월 31일·개별 전형을 대조함. '
+            '보존 공고 PDF3081708 및 직무 PDF3081710의 SHA256을 독립 대조하고 '
+            '직무 PDF 1쪽을 육안 판독하여 대표 약무업무를 검증함. '
+            '실시간 채용사이트 접수 활성·잔여인원은 여전히 미확인. '
+            '이전 별도 기관 PDF3039457의 403과 이번 보존 원본검증을 혼동하지 않음.'
+        ),
+    },
+    # JOB-ALIO official notice HTML directly checked 2026-11-19.
+    # Recruitment JPG 3087104 was visually checked, and duty HWP 3087106
+    # SHA/BodyText read from the archived original. Scope only as explicitly
+    # written in NCS duty description; no detailed clinical tasks inferred.
+    'a306992': {
+        'organization': '한국보훈복지의료공단',
+        'title': '[중앙보훈병원]2027년 치과의사전공의(레지던트1년차) 채용공고',
+        'source_end_date': '2026-11-20',
+        'expected_source_seats': '11',
+        'source_employment': ['정규직'],
+        'source_url': 'https://www.bohun.or.kr/seoul/na/ntt/selectNttInfo.do?mi=32253&bbsId=1158&bbsSysId=seoul&nttSn=191258',
+        'checked_on': '2026-11-20',
+        'application_start': '2026-11-16',
+        'application_end_date': '2026-11-20',
+        'role_mix_note': (
+            '중앙보훈병원 치과 레지던트 1년차 공고의 전체 모집 11명은 '
+            '보철과 5명, 치주과 3명, 보존과 3명의 합계입니다. '
+            '지원자는 인턴 기수료자 또는 2027년 2월 수료예정자여야 하며, '
+            '의무사관후보생의 수련 완료 연령 조건과 공단 인사규정·성범죄 취업제한 '
+            '결격사유를 확인해야 합니다. 다른 수련병원(기관)에 중복 지원·응시할 수 없습니다. '
+            '공식 ALIO의 실제 서류 접수기간은 2026년 11월 16~20일이고 '
+            '접수방법은 중앙보훈병원 교육수련부 방문 제출입니다. '
+            '11월 29일 공동 필기시험, 12월 2일 면접, 12월 4일 합격 발표 예정이며 '
+            '기관 공지로 변경될 수 있습니다. 중앙보훈병원 공식 채용공고의 '
+            '전형일정표에서 2026년 11월 20일 17:00(KST)까지 '
+            '교육수련부(제3관 2층) 방문접수로 명시합니다. '
+            'ALIO 게시 종료시각 23:59를 방문접수 마감으로 혼동하지 마세요. '
+            '실제 방문 서류제출 완료는 독립 확인하지 않았습니다. '
+            '공고 JPG 원본은 육안 판독하고 직무 HWP의 원본 SHA256과 '
+            'BodyText를 대조했습니다. 직무수행내용은 공공의료 관련 업무와 '
+            '기타 행정업무만 명시하며, 개별 치과 시술을 추가 추정하지 않습니다.'
+        ),
+        'scope': (
+            'JOB-ALIO a306992 공식 HTML 직접 재조회 2026-11-19: '
+            '레지던트 11명(보철5·치주3·보존3), 정규직 표시, 인턴 수료 조건, '
+            '서류 방문접수 11/16~20 및 시험·면접 날짜를 확인함. '
+            '공고 JPG3087104 원본 SHA256·육안 판독과 직무 HWP3087106 '
+            '바이트 SHA256·BodyText 검증 완료. 구체 시술은 원문에 미기재. '
+            '중앙보훈병원 원문 채용공고를 2026-11-20 재조회해 방문접수 '
+            '11/20 17:00(KST)과 접수처 제3관 2층을 교차확인함. '
+            '실제 현장 접수 가능 상태·서류제출 완료·잔여인원은 미확인.'
+        ),
+    },
+    # Verified 2026-11-19 against official JOB-ALIO and the live EJM 12745
+    # application page. UTC deadline is date-only in ALIO; do not invent KST cutoff.
+    # Public portal evidence is separate from newly SHA-verified original job-duty PDF.
+    'a305734': {
+        'organization': '한국조세재정연구원',
+        'title': '[한국조세재정연구원] 연구위원급(Research Fellow) 정기채용',
+        'source_end_date': '2026-11-30',
+        'expected_source_seats': '10',
+        'source_employment': ['정규직'],
+        'source_url': 'https://econjobmarket.org/positions/12745',
+        'checked_on': '2026-11-19',
+        'utc_application_window_label': '2026-10-06 ~ 2026-11-30 (UTC 기준·한국시간 종료시각 미확정)',
+        'role_mix_note': (
+            '한국조세재정연구원 연구위원급 정규직 전체 10명 모집입니다. '
+            '경제학 또는 관련 분야 박사학위 소지자(취득 예정자 포함)이며, '
+            'Econ Job Market 원문은 임용 시작 때까지 박사학위를 취득해야 한다고 안내합니다. 원활한 한국어 의사소통 능력도 요구합니다. '
+            '조세·재정 및 공공부문 정책 연구를 수행하고 주근무지는 세종입니다. '
+            '서류 → 면접 → 세미나 전형을 거치며, 지원서에는 영문 자기소개서(Cover letter), '
+            '이력서(CV), 연구논문(Job market paper) 및 추천인 3명의 추천서 제출이 요구됩니다. '
+            '추천서는 추천인이 EJM 시스템에서 제출하며 세부 업로드 절차를 확인하세요. '
+            '실제 공식 EJM 공고에는 2026년 11월 21일 공개 재확인 기준 '
+            '“accepting applications”로 표시됐지만 10명이 모두 남아 있다는 실시간 증거는 아닙니다. '
+            '원문 접수마감은 2026년 11월 30일 midnight UTC 표기입니다. '
+            'ALIO 게시 종료시각 23:59 KST를 원서마감으로 바꾸거나 '
+            'midnight의 해석 없이 한국시간 마감시각을 임의 확정하지 마세요.'
+        ),
+        'scope': (
+            '2026-11-19 공식 JOB-ALIO a305734 및 2026-11-21 Econ Job Market positions/12745 '
+            '공개 HTML 직접 확인: 정규직 10명·박사(예정자 포함)·한국어 의사소통·세종·정책 연구·추천서3·'
+            '접수수락 표시와 UTC 마감 표현. 제출 화면 로그인 후 최종 접수 성공까지는 '
+            '검증하지 않았음. 기존 증거 ZIP 공고PDF3079032·직무PDF3079033 원본 바이트 SHA를 '
+            '독립 대조했으며 직무기술서 1쪽 내용을 직접 판독함. '
+            '공고 PDF의 일부 숫자는 폰트 추출 문제로 이전 육안 기록과 '
+            'EJM 공식 화면으로 대조. 잔여결원·실제 제출 성공 미검증.'
+        ),
+    },
     # JOB-ALIO public text (2026-11-19) conflicts internally: employment is
     # labeled '정규직' while the selection-stage heading is '개방형 계약직'.
     # This is a discrepancy notice only; do not assert a confirmed contract
@@ -168,28 +317,90 @@ VERIFIED_APPLICATION_NOTICES = {
         ),
         'scope': 'JOB-ALIO a307147 공개 HTML의 정규직 분류·개방형 계약직 전형명 충돌, 1명·사업소장 경력요건·게시 종료일 확인. 공고 HWP 원본 바이트/SHA, 계약기간 및 실제 접수시간은 아직 검증하지 않았으며 직무원본 검토수에 합산하지 않음.',
     },
-    # 2026-11-19 fresh JOB-ALIO HTML: published 33 seats across three roles.
-    # No official per-role seat totals or application cutoff proven; no PDF/ZIP SHA claim.
+    # 2026-11-19: official PNUH notice PDF 3088502 p1/p3, plus three
+    # job-description PDFs from ZIP 3088504 checked with binary SHA256.
+    # All 33 seats belong to one notice; this is NOT 33 remaining live openings.
     'a307225': {
         'organization': '부산대학교병원',
         'title': '2026년도 일반직(간호, 행정, 보건직) 신규직원 블라인드 공개채용 모집 공고',
         'source_end_date': '2026-12-03',
         'expected_source_seats': '33',
         'source_employment': ['정규직'],
-        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307225',
+        'application_start': '2026-11-19',
+        'application_end_date': '2026-12-03',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088502',
+        'notice_source_sha256': 'a45a7bebec1929e6f18315ee8ace0aa20b59ddf6af5cb40503d206f46faa3cd2',
         'checked_on': '2026-11-19',
-        'role_mix_note': (
-            '공식 JOB-ALIO의 33명은 간호직(진료지원간호사), 행정직(의료사회복지사), '
-            '보건직(방사선사)을 합한 공고 전체 인원입니다. '
-            '분야별 선발인원은 확인되지 않았으므로 33명을 어느 한 분야의 인원으로 단정하지 마세요. '
-            '간호직은 간호사 면허, 병원·종합병원 또는 군병원 임상경력 3년 이상, '
-            '야간 및 교대근무 가능 요건이 있습니다. '
-            '행정직은 의료사회복지사 자격증과 영어성적(예: TOEIC 700점 이상)이 필요합니다. '
-            '보건직은 방사선사 면허증과 영어성적(예: TOEIC 600점 이상)이 필요합니다. '
-            '영어시험별 인정점수와 우대사항은 반드시 공고 원문을 대조하세요. '
-            '12월 3일은 ALIO 게시 종료일이며 실제 지원서 마감시각으로 확정하지 않았습니다.'
+        'hiring_breakdown': (
+            '진료지원간호사 30명 · 의료사회복지사 2명 · '
+            '산부인과 초음파실 방사선사 1명 = 정규직 총33명'
         ),
-        'scope': '2026-11-19 JOB-ALIO a307225 공개 HTML에서 정규직 총33명, 세 직종별 자격·영어기준, 공고 게시기간을 확인. 개별 분야 모집인원·기관 지원창 접수 마감시각·첨부 ZIP/PDF 원본 SHA는 아직 미검증이며 직무원본 검토 건수에 추가하지 않음.',
+        'role_mix_note': (
+            '부산대학교병원 공식 8쪽 공고문 1쪽 모집표에서 간호직30명, '
+            '행정직 의료사회복지사2명, 보건직 산부인과 방사선사1명을 확인했습니다. '
+            '간호직은 간호사면허, 병원·종합병원·군병원 임상경력3년 이상과 '
+            '야간·교대근무 가능 요건(요양병원 경력 제외)이 적용됩니다. '
+            '행정직은 의료사회복지사 자격증과 영어성적(예: TOEIC700), '
+            '보건직은 방사선사면허와 영어성적(예: TOEIC600) 등 '
+            '각 직종별 상이한 요건을 확인해야 합니다. '
+            '지원서 접수는 2026년11월19일~12월3일17시(KST)까지입니다. '
+            'ALIO 게시 마감23:59와 혼동하지 마세요. '
+            '이 33명은 공고 전체 모집정원이며 실시간 잔여인원 확인치가 아닙니다. '
+            '방사선사 직무PDF 일부 분류칸의 심장초음파 표기와 달리 '
+            '모집분야·직무 제목·주요 수행업무는 산부인과 초음파이므로 '
+            '세부 진료배치를 임의 추정하지 않습니다.'
+        ),
+        'scope': (
+            '공식 ALIO a307225 HTML과 공고PDF 3088502(263129 bytes, '
+            'SHA256 a45a7bebec1929e6f18315ee8ace0aa20b59ddf6af5cb40503d206f46faa3cd2) '
+            '1·3쪽 모집표·일정 원문 육안 대조. '
+            '직무 ZIP3088504(243748 bytes, SHA256 '
+            '5919b21c2acdd40383a34da232ab3808cc6b0ca01e904a2cb5b26dce8fca10cf) '
+            '내 간호·의료사회복지·산부인과 방사선사 직무PDF 각1쪽 판독. '
+            '12/3 17시 접수마감 공식 공고 확인; 현재 잔여 결원·지원 제출 성공 미검증.'
+        ),
+    },
+    # Official a307251 HTML 2026-11-19: source-only note, NOT a duty-original audit.
+    # Nine earlier pharmacist notices coexist; independent vacancies are unproven.
+    'a307251': {
+        'organization': '경상국립대학교병원',
+        'title': '[창원경상국립대학교병원] 약무직 채용공고',
+        'source_end_date': '2026-12-31',
+        'expected_source_seats': '5',
+        'source_employment': ['정규직'],
+        'source_url': 'https://job.alio.go.kr/recruitview.do?idx=307251',
+        'checked_on': '2026-11-19',
+        # Nine overlapping notices + unverified portal reception are not proof
+        # of five independently open vacancies. Keep the explanatory detail
+        # accessible, but do not present it as a verified current opening.
+        'application_status_unconfirmed': True,
+        'role_mix_note': (
+            '2026년 11월 19일 등록된 창원경상국립대학교병원 약무직 공고의 '
+            '정규직 채용예정 인원은 5명입니다. 공식 JOB-ALIO 응시자격은 '
+            '약사 면허증 소지자 또는 2027년 면허 취득예정자이며, '
+            '접수 마감일 현재 만 20세 이상 60세 미만과 병역 관련 조건을 '
+            '확인해야 합니다. 동일 기관에 약무직 유사 공고가 여러 건 이전부터 '
+            '게시되어 있으나 서로 독립된 추가 채용인지, '
+            '변경·후속공고인지 공식 원본 대조가 끝나지 않았습니다. '
+            '따라서 이전 공고의 예정인원과 5명을 임의로 합산하거나 '
+            '현재 남은 결원이 5명이라고 단정하지 마세요. '
+            '2026년 12월 31일은 ALIO 게시 종료일이며 '
+            '실제 원서접수 마감시각·기관 채용포털의 접수 활성 여부는 '
+            '별도 공식 확인이 필요합니다.'
+        ),
+        'scope': (
+            '2026-11-19 JOB-ALIO a307251 공식 HTML에서 정규직 약무직 5명, '
+            '약사 면허 또는 2027년 취득예정, 만 20~59세 지원 조건과 '
+            '게시기간 11/19~12/31을 확인. ALIO 원본 수집 1176건에서 '
+            '동일 기관의 과거 약무직 유사 게시 9건(a294598, a294624, '
+            'a297599, a298427, a303321, a305304, a292472, a299412, '
+            'a306275)을 확인했으나 공식 첨부 원본 비교를 통해 '
+            '중복/변경/별도 채용을 확정하지 않았음. '
+            '새 공고 첨부 PDF3088867·PDF3088868·HWP3088879의 '
+            '바이너리 SHA·세부 직무를 독립 판독하지 않았으므로 '
+            '직무 원본 검증 누적 건수에는 포함하지 않음. '
+            '접수 가능 여부와 잔여 결원도 별도 확인 필요.'
+        ),
     },
     # Official JOB-ALIO public HTML rechecked 2026-11-18. These new
     # postings are not separately audited HWP/PDF job-duty originals.
@@ -701,7 +912,9 @@ def render(post, detail, related_posts=(), notice_review=None):
                 and (post.get('alio') is not True
                      or verified_duties.get('source_end_date') != clean(post.get('due'))[:10]
                      or (verified_duties.get('source_employment')
-                         and verified_duties['source_employment'] != post.get('emp'))))):
+                         and verified_duties['source_employment'] != post.get('emp'))
+                     or (verified_duties.get('expected_source_seats') is not None
+                         and verified_duties['expected_source_seats'] != clean(post.get('n')))))):
         verified_duties = {}
 
     # Exact-source display correction only: preserve collection snapshots and
@@ -770,7 +983,7 @@ def render(post, detail, related_posts=(), notice_review=None):
         ('학력조건', clean(post.get('edu')) or '공고 확인'),
         ('근무지역', clean(post.get('region')) or '공고 확인'),
         ('ALIO 게시 종료일 · 접수마감 원문 확인', due_display),
-        ('원서 접수기간', confirmed_period or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
+        ('원서 접수기간', confirmed_period or verified_application_notice.get('utc_application_window_label') or verified_application_notice.get('conditional_application_window_label') or ('접수 시작일 및 변경 여부는 공식 공고에서 확인' if confirmed_cutoff else '시작일·마감일·마감시각은 공식 첨부 공고에서 확인')),
         *(([('기관 공식 확인 접수마감', confirmed_cutoff)]) if confirmed_cutoff else []),
     ]
 
@@ -831,7 +1044,18 @@ def render(post, detail, related_posts=(), notice_review=None):
                 '<p>이 표는 모집인원·자격 비교입니다. 각 분야의 상세 담당업무를 새로 검증한 표가 아닙니다. '
                 '공고문에서 접수기간 11월 11~20일은 확인했지만 정확한 마감시각은 확인되지 않았습니다. '
                 '게시 종료시각을 실제 원서접수 마감시각으로 사용하지 않으며, 마감시각은 기관 공고 확인 필요입니다.</p>')
-        reception = ('<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>') if confirmed_period else ''
+        conditional_window = verified_application_notice.get('conditional_application_window_label')
+        utc_label = verified_application_notice.get('utc_application_window_label')
+        # A UTC date-only recruitment window is display-only evidence. Never
+        # silently convert it into a KST 23:59 cutoff or mark it time-confirmed.
+        reception = (
+            '<p>공식 안내에서 확인한 원서접수기간: ' + escape(confirmed_period) + '</p>'
+            if confirmed_period else
+            ('<p>공식 접수기간(UTC 기준): ' + escape(utc_label) + '</p>'
+             if isinstance(utc_label, str) and utc_label else
+             ('<p>공식 충원조건부 원서접수 안내: ' + escape(conditional_window) + '</p>'
+              if isinstance(conditional_window, str) and conditional_window else ''))
+        )
         if proof_url and (reception or field_review):
             application_review_html = (
                 '<section id="application-review" aria-label="공식 공고 추가 대조">'
@@ -1209,7 +1433,17 @@ def render(post, detail, related_posts=(), notice_review=None):
         summary_parts.append('지원자격: ' + qualification[:900])
     if process:
         summary_parts.append('전형 절차: ' + process[:500])
-    job_description = ' '.join(part for part in summary_parts if part)
+    # Only the original-backed, source-identity-bound duty review may enrich
+    # JobPosting description; generic ALIO NCS categories are not duties.
+    # This must disappear when the notice ID, title, seats or end date changes.
+    if verified_duties.get('strict_source_identity') is True:
+        duty_summary = clean(verified_duties.get('summary'))
+        if duty_summary:
+            summary_parts.append('공식 직무기술서 검토 범위: ' + duty_summary)
+    # Google requires paragraph-formatted HTML for JobPosting description.
+    # Escape all source text; the JSON-LD serializer below also neutralizes '<'.
+    job_description = ''.join('<p>' + escape(part) + '</p>'
+                              for part in summary_parts if part)
 
     schema = {
         '@context': 'https://schema.org',
@@ -1227,10 +1461,13 @@ def render(post, detail, related_posts=(), notice_review=None):
     if posted:
         schema['datePosted'] = posted
 
-    if deadline:
-        # Google's JobPosting accepts an ISO date alone when only the
-        # application end date is known. Do not publish the synthetic 23:59
-        # sorting timestamp as a verified closing time.
+    if application_cutoff:
+        # Only exact-source-verified application cutoffs may override the ALIO
+        # publication end date in Google JobPosting structured data.
+        schema['validThrough'] = application_cutoff
+    elif deadline:
+        # A date-only ALIO publication end is not a verified application
+        # cutoff. Keep it separate from the searchable JobPosting lifecycle.
         schema['validThrough'] = (
             deadline[:10] if post.get('dueHasTime') is not True else deadline
         )
@@ -1252,8 +1489,11 @@ def render(post, detail, related_posts=(), notice_review=None):
         } for region in regions]
         schema['jobLocation'] = locations if len(locations) > 1 else locations[0]
 
-    # ALIO 고용형태는 근로시간과 다른 분류입니다. 부분 문자열 검사로
-    # '무기계약직'을 TEMPORARY로 잘못 분류하거나 복수 형태를 단정하지 않습니다.
+    # Google FULL_TIME means verified full-time hours, not Korean regular
+    # employment status. ALIO 정규직 is a contract classification and does
+    # NOT by itself prove full-time hours; omit employmentType for that case.
+    # Contract/intern labels may be mapped only when the role is unambiguous.
+    # Never infer TEMPORARY for 무기계약직 or a mixed employment listing.
     if post.get('emp'):
         raw_employment = ([verified_application_notice['confirmed_employment']]
                           if verified_application_notice.get('confirmed_employment') else post['emp'])
@@ -1263,7 +1503,6 @@ def render(post, detail, related_posts=(), notice_review=None):
         if len(unique_kinds) == 1:
             employment = next(iter(unique_kinds))
             employment_type = {
-                '정규직': 'FULL_TIME',
                 '계약직': 'TEMPORARY',
                 '인턴': 'INTERN',
             }.get(employment)
@@ -1274,7 +1513,17 @@ def render(post, detail, related_posts=(), notice_review=None):
     # 안내용 HTML 페이지는 그대로 유지합니다.
     # Publication end dates are not verified application deadlines. Keep the
     # useful HTML, but do not emit a JobPosting with an invented validThrough.
-    schema_json = '' if duplicate or robots_noindex or post.get('dueHasTime') is not True else (
+    # An employer-confirmed future reception window is not yet an open
+    # application opportunity, even though its notice page is public.
+    verified_reception_not_open = bool(
+        verified_start and parsed_start
+        # Calendar-only start dates are KST, not the runner's local timezone.
+        and datetime.fromisoformat(
+            parsed_start if 'T' in parsed_start else parsed_start + 'T00:00:00+09:00'
+        ).astimezone(timezone.utc) > datetime.now(timezone.utc)
+    )
+    schema_json = '' if (duplicate or robots_noindex or verified_reception_not_open
+                         or (not application_cutoff and post.get('dueHasTime') is not True)) else (
         '<script type="application/ld+json">'
         + json.dumps(
             schema,
@@ -1789,10 +2038,11 @@ def self_test():
     )
     assert with_time_jsonld
     assert json.loads(with_time_jsonld.group(1))['validThrough'] == '2099-10-29T23:59:00+09:00'
-    # EmploymentType is not a substring search: 무기계약직 is NOT TEMPORARY,
-    # 비정규직 is NOT 정규직, and mixed categories must not be guessed.
+    # Regular employment is not proof of full-time hours; the visible
+    # category stays in the page, but the optional JSON-LD field is omitted.
+    # Other types require an unambiguous source classification.
     for employment, expected in (
-        (['정규직'], 'FULL_TIME'),
+        (['정규직'], None),
         (['계약직'], 'TEMPORARY'),
         (['인턴'], 'INTERN'),
         (['무기계약직'], None),

@@ -38,6 +38,98 @@ class PublicSearchAuditTests(unittest.TestCase):
         self.assertEqual(report['public_feed']['current_notice_count'], 0)
         self.assertEqual(report['public_feed']['expired_notice_count'], 0)
 
+    def test_knuh_unconfirmed_reception_page_and_public_search_agree(self):
+        """Real until-filled pharmacist page must pass the strict noindex omission audit."""
+        from pathlib import Path
+        from scripts.build_job_pages import render, VERIFIED_APPLICATION_NOTICES
+
+        posts = json.loads(Path('alio.json').read_text(encoding='utf-8'))['posts']
+        post = next(p for p in posts if p.get('id') == 'a306182')
+        proof = VERIFIED_APPLICATION_NOTICES['a306182']
+        self.assertTrue(proof['application_status_unconfirmed'])
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        url = audit.BASE + 'jobs/a306182.html'
+        actual_html = render(post, {}).encode('utf-8')
+        self.assertIn(b'<meta name="robots" content="noindex,follow">', actual_html)
+        self.assertIn(('href="' + url + '"').encode(), actual_html)
+        self.assertIn(proof['role_mix_note'].encode('utf-8'), actual_html)
+
+        def load_target(target_html=actual_html, status=200, final_url=None,
+                        content_type='text/html'):
+            base, _ = self.loader(feed=[post])
+            def load(u):
+                if u != url:
+                    return base(u)
+                row, _ = base(u)
+                return dict(row, status=status, final_url=final_url or url,
+                            content_type=content_type), target_html if status == 200 else None
+            return load
+
+        report = audit.run(loader=load_target())
+        self.assertEqual(report['errors'], [])
+        self.assertEqual(report['public_feed']['verified_unconfirmed_reception_exclusions'],
+                         ['a306182'])
+        self.assertEqual(report['public_feed']['missing_sitemap_ids'], [])
+
+        # The same page must NOT excuse an omitted URL if source identity changed.
+        for altered in ({'n': '10'}, {'title': post['title'] + ' 정정'},
+                        {'emp': ['비정규직']}, {'due': '2027-01-01'},
+                        {'alio': False}):
+            self.assertEqual(audit.verified_unconfirmed_reception_exclusions(
+                [{**post, **altered}], ['a306182'], load_target()), [])
+
+        bad_pages = [
+            actual_html.replace(b'<meta name="robots" content="noindex,follow">', b''),
+            actual_html.replace(('href="' + url + '"').encode(),
+                                ('href="' + audit.BASE + '"').encode()),
+            actual_html.replace(proof['role_mix_note'].encode('utf-8'), b''),
+        ]
+        for altered_page in bad_pages:
+            self.assertNotEqual(altered_page, actual_html)
+            self.assertEqual(audit.verified_unconfirmed_reception_exclusions(
+                [post], ['a306182'], load_target(altered_page)), [])
+        self.assertEqual(audit.verified_unconfirmed_reception_exclusions(
+            [post], ['a306182'], load_target(status=404)), [])
+        # A convincing HTML body is still NOT the intended detail when GitHub
+        # or an intermediary redirects, or returns bytes as non-HTML.
+        self.assertEqual(audit.verified_unconfirmed_reception_exclusions(
+            [post], ['a306182'], load_target(final_url=audit.BASE)), [])
+        self.assertEqual(audit.verified_unconfirmed_reception_exclusions(
+            [post], ['a306182'], load_target(content_type='text/plain')), [])
+
+    def test_changwon_pharmacist_unconfirmed_notice_public_search(self):
+        """New five-seat pharmacist listing needs the same strict real-page proof."""
+        from pathlib import Path
+        from scripts.build_job_pages import render, VERIFIED_APPLICATION_NOTICES
+
+        posts = json.loads(Path('alio.json').read_text(encoding='utf-8'))['posts']
+        post = next(p for p in posts if p.get('id') == 'a307251')
+        proof = VERIFIED_APPLICATION_NOTICES['a307251']
+        self.assertTrue(proof['application_status_unconfirmed'])
+        self.assertEqual(proof['expected_source_seats'], post['n'])
+        url = audit.BASE + 'jobs/a307251.html'
+        body = render(post, {}).encode('utf-8')
+        self.assertIn(b'<meta name="robots" content="noindex,follow">', body)
+        self.assertIn(proof['role_mix_note'].encode('utf-8'), body)
+        base, _ = self.loader(feed=[post])
+        def load(u):
+            if u != url:
+                return base(u)
+            row, _ = base(u)
+            return row, body
+        report = audit.run(loader=load)
+        self.assertEqual(report['errors'], [])
+        self.assertEqual(report['public_feed']['verified_unconfirmed_reception_exclusions'],
+                         ['a307251'])
+        self.assertEqual(report['public_feed']['missing_sitemap_ids'], [])
+        # Copying the page and keeping noindex is not sufficient after an
+        # official correction to employer, title, headcount or employment type.
+        for changed in ({'n': '6'}, {'title': post['title'] + ' 정정'},
+                        {'org': '다른 기관'}, {'emp': ['비정규직']},
+                        {'due': '2027-01-01'}, {'alio': False}):
+            self.assertEqual(audit.verified_unconfirmed_reception_exclusions(
+                [{**post, **changed}], ['a307251'], load), [])
+
     def test_stale_or_incomplete_reception_proof_does_not_hide_missing_current_url(self):
         post = dict(id='a999', org='기관', title='상시모집', due='2099-12-31',
                     alio=True, n='14', emp=['정규직'])

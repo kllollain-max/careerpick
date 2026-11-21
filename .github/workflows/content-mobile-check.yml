@@ -7,7 +7,9 @@ permissions:
 jobs:
   content-mobile:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    # Browser checks cover every reviewed page at three widths. Allow bounded
+    # apt mirror retries and full screenshot evidence without killing the job.
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,6 +39,11 @@ jobs:
       - run: python -m unittest discover -s tests -p test_naver_analytics_build.py
       - run: python scripts/build_public_site.py
       - run: npm install --no-save playwright@1.56.1
+      # Ubuntu mirrors occasionally return HTTP 503 during Playwright apt dependencies.
+      # APT retries transient download failures; genuine failures still fail CI.
+      - name: Configure bounded APT retries for Chromium dependencies
+        run: |
+          printf 'Acquire::Retries "3";\n' | sudo tee /etc/apt/apt.conf.d/80-playwright-retries >/dev/null
       - run: npx playwright install --with-deps chromium
       - run: node --test tests/naver_analytics_browser.cjs
       - run: node .github/scripts/check-content-mobile.cjs careerpick
