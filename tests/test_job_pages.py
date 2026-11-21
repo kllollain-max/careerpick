@@ -17,6 +17,26 @@ from scripts.build_job_pages import render
 
 class JobPageTests(unittest.TestCase):
 
+    def test_real_regular_post_does_not_claim_unverified_full_time_hours(self):
+        """ALIO 정규직 is not evidence of Google's FULL_TIME work schedule."""
+        posts = {p['id']: p for p in json.loads(
+            Path('alio.json').read_text(encoding='utf-8'))['posts']}
+        post = posts['a307225']
+        self.assertEqual(post['emp'], ['정규직'])
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 21, tzinfo=timezone.utc)
+            page = render(post, {})
+        match = re.search(
+            r'<script type="application/ld[+]json">(.*?)</script>', page, re.S)
+        self.assertIsNotNone(match)
+        schema = json.loads(match.group(1))
+        # The source-backed Korean status remains visible to applicants,
+        # while Google markup does not assert a work-hour category.
+        self.assertIn('정규직', page)
+        self.assertNotIn('employmentType', schema)
+        self.assertEqual(schema['validThrough'], '2026-12-03T17:00:00+09:00')
+
     def test_until_filled_pharmacist_source_guards_bind_headcount_and_employment(self):
         """Legacy until-filled 20/19 seats cannot keep stale editorial facts after ALIO changes."""
         from scripts.build_job_pages import VERIFIED_DUTIES
