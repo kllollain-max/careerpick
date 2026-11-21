@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-22T07:54:42.883242+09:00",
-  "run_id": "44959062621",
+  "captured_at": "2026-11-22T08:21:48.567437+09:00",
+  "run_id": "44961335621",
   "source_commit": "aa1602072201215d6c3a451497df1a2f46455f08",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-22T07:53:53.710988+09:00",
+    "time": "2026-11-22T08:21:00.055038+09:00",
     "future_slots": [
-      "2026-11-22T08:00:00+09:00",
       "2026-11-22T12:00:00+09:00",
       "2026-11-22T16:00:00+09:00",
       "2026-11-22T20:00:00+09:00",
       "2026-11-23T08:00:00+09:00",
       "2026-11-23T12:00:00+09:00",
       "2026-11-23T16:00:00+09:00",
-      "2026-11-23T20:00:00+09:00"
+      "2026-11-23T20:00:00+09:00",
+      "2026-11-24T08:00:00+09:00"
     ],
     "next_media": "TEXT",
     "promoted": [],
@@ -119,15 +119,16 @@
     "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
     "staged_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
     "promoted_count": 0,
-    "approved_supply_count": 3,
+    "approved_supply_count": 2,
     "inventory_target": 8,
-    "inventory_shortfall": 5,
+    "inventory_shortfall": 6,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-22T08:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-22T08:00:00+09:00",
       "2026-11-22T12:00:00+09:00",
       "2026-11-22T16:00:00+09:00"
     ],
@@ -136,7 +137,8 @@
       "2026-11-23T08:00:00+09:00",
       "2026-11-23T12:00:00+09:00",
       "2026-11-23T16:00:00+09:00",
-      "2026-11-23T20:00:00+09:00"
+      "2026-11-23T20:00:00+09:00",
+      "2026-11-24T08:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 60,
@@ -147,7 +149,8 @@
         "2026-11-23T08:00:00+09:00",
         "2026-11-23T12:00:00+09:00",
         "2026-11-23T16:00:00+09:00",
-        "2026-11-23T20:00:00+09:00"
+        "2026-11-23T20:00:00+09:00",
+        "2026-11-24T08:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "cleaneye-80989",
@@ -2378,7 +2381,8 @@
       "2026-11-23T08:00:00+09:00",
       "2026-11-23T12:00:00+09:00",
       "2026-11-23T16:00:00+09:00",
-      "2026-11-23T20:00:00+09:00"
+      "2026-11-23T20:00:00+09:00",
+      "2026-11-24T08:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "cleaneye-80989",
@@ -5035,33 +5039,129 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "cleaneye-81287",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-24T08:00:00+09:00",
+        "draft_text": "용산문화재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제4차 용산문화재단 직원 공개경쟁채용\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81287",
         "source_post_sha256": "47ca4db7414d780795c774869f2d6b167d8e29cf4bfc64e6b60aa76b3ff68462",
         "source_detail_sha256": "ae54c77fb91271e754dabf5d9f40d8d55d4c24bebcf0bcc696e38b80aca4f002",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-26",
+        "application_source_ref": "cleaneye.json#cleaneye-81287/application_period",
+        "source_snapshot_checked_at": "2026-11-22T00:57:26+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-16",
+          "접수마감일 원문": "2026-11-26",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81291",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-24T08:00:00+09:00",
+        "draft_text": "남양주도시공사 채용 공고를 확인해 보세요.\n\n모집 공고: 남양주도시공사 2026년도 하반기 임기제·일반직 직원 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-26 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81291",
         "source_post_sha256": "1eb7e6d86afc5644e421035f42c389a4b9b92f4b29deea3714b6fda7da0c4058",
         "source_detail_sha256": "7a13f1594ce73104198b2cc30e3892132eae95447ec14b10a13a7960807d0dfe",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-26",
+        "application_source_ref": "cleaneye.json#cleaneye-81291/application_period",
+        "source_snapshot_checked_at": "2026-11-22T00:57:26+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-17",
+          "접수마감일 원문": "2026-11-26",
+          "채용인원": "6"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81183",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-24T08:00:00+09:00",
+        "draft_text": "인천광역시서해구시설공단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제4회 연희노인복지관 정규직 직원(시설관리) 채용 공고문\n고용형태: 일반정규직\n접수 마감: 2026-11-27 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81183",
         "source_post_sha256": "9e4675bb5a267e0f149064425eda62ef7b692fe09506eae5cef38853bb68fea9",
         "source_detail_sha256": "1846752e6ec6838e53aedd19f6a97e59f627cd00c20ba518201e0319eb8f1dc1",
-        "suggested_slot": null
-      },
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-12; 접수마감일 원문: 2026-11-27",
+        "application_source_ref": "cleaneye.json#cleaneye-81183/application_period",
+        "source_snapshot_checked_at": "2026-11-22T00:57:26+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-12",
+          "접수마감일 원문": "2026-11-27",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "cleaneye-81451",
         "status": "unreviewed",
@@ -5405,14 +5505,16 @@
         "2026-11-23T08:00:00+09:00",
         "2026-11-23T12:00:00+09:00",
         "2026-11-23T16:00:00+09:00",
-        "2026-11-23T20:00:00+09:00"
+        "2026-11-23T20:00:00+09:00",
+        "2026-11-24T08:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-22T20:00:00+09:00",
         "2026-11-23T08:00:00+09:00",
         "2026-11-23T12:00:00+09:00",
         "2026-11-23T16:00:00+09:00",
-        "2026-11-23T20:00:00+09:00"
+        "2026-11-23T20:00:00+09:00",
+        "2026-11-24T08:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -5475,7 +5577,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-22T07:54:41.897364+09:00",
+          "checked_at": "2026-11-22T08:21:47.516195+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5554,13 +5656,6 @@
   "publication_audit": {
     "slots": [
       {
-        "scheduled_at": "2026-11-20T08:00:00+09:00",
-        "post_ids": [
-          "18075448427764901"
-        ],
-        "status": "recorded_publication"
-      },
-      {
         "scheduled_at": "2026-11-20T12:00:00+09:00",
         "post_ids": [
           "18121842119629316"
@@ -5602,9 +5697,9 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 4,
-    "receipt_success_rate": 0.5,
+    "expected_slots": 7,
+    "recorded_publications": 3,
+    "receipt_success_rate": 0.42857142857142855,
     "live_meta_verification_performed": false,
     "needs_attention": [
       {
@@ -5631,8 +5726,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-22T07:54:41.988169+09:00",
-    "window_start": "2026-11-19T22:54:41.988169+00:00",
+    "checked_at": "2026-11-22T08:21:47.583400+09:00",
+    "window_start": "2026-11-19T23:21:47.583400+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
