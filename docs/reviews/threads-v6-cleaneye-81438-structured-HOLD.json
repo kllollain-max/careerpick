@@ -1,0 +1,191 @@
+{
+  "schema": "careerpick-threads-v6-structured-candidate-hold-1",
+  "publication_status": "HOLD_NOT_APPROVED_NOT_SCHEDULED_NOT_POSTED",
+  "scope": {
+    "repository": "kllollain-max/careerpick",
+    "account": "@hid_119",
+    "notice_id": "cleaneye-81438",
+    "target_slot": null
+  },
+  "created_from": "Existing approved user instructions, previously locally reviewed official PDF + image ZIP, and currently read public official notice; not a fresh PDF download",
+  "prepared_source": {
+    "original_pdf": {
+      "url": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+      "sha256": "98a62a92891c9b26cdafc1c54895564e3757fadaf494e0475bfaebbfacc400e2",
+      "bytes": 281584,
+      "actual_last_received": "2026-11-20 22:47 KST (minute precision)",
+      "pages_reviewed": [
+        1,
+        3,
+        6,
+        7
+      ]
+    },
+    "official_detail": {
+      "url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+      "review_scope": "Public page text and official list entries as independently rechecked on 2026-11-21; not an all-channels correction audit"
+    },
+    "source_post_sha256": "46f3c0f292b99943f60fc5e292d55cd8b8ee4e20580e9697274b15a941ec3b33",
+    "source_detail_sha256": "f700c5e494a4ab81c0b02fb2908ce472d7376e13f806ac72ea39300dfcc9a827"
+  },
+  "image_job": {
+    "id": "cleaneye-81438",
+    "org": "재단법인 양주문화관광재단",
+    "title": "경영지원 6급(대리)",
+    "count": 1,
+    "employment": "정규직",
+    "location": "재단 지정 장소",
+    "due": "2026-11-26",
+    "deadline_label": "2026-11-26 18:00",
+    "restriction": "지원자격은 네 경로 중 하나예요"
+  },
+  "proposed_public_preview": {
+    "main_text": "경영·행정 경력자라면,\n양주문화관광재단 경영지원 6급(대리) 정규직 1명을 채용해요.\n\n자격은 4개 중 하나예요: 관련 석사 이상+실무 1년, 관련분야 경력 3년, 국가·지자체 9급 상당+실무 2년, 투자·출자출연 등 인정기관 동일직급+실무 1년.\n공고일에 18세 이상 60세 미만, 남성은 군필·면제여야 해요.\n\n5·6급 중복지원은 무효예요. 경력증명·건강보험 이력 일치가 필요해요.\n근무지는 재단 지정, 6개월 수습 가능해요.\n11월 26일 18시까지 방문·이메일 접수, 이메일은 전화 확인 필수예요.\n\n자세한 사항은 프로필링크 확인",
+    "detail_reply": "",
+    "length_including_newlines": 300,
+    "auto_reply_count": 0,
+    "cta_count": 1
+  },
+  "review_v5_proposed": {
+    "policy_id": "careerpick-threads-v5-20261111",
+    "contract_version": 2,
+    "contract_source": "threads/prompts/reach-v5.txt",
+    "verification_state": "HOLD_REQUIRE_PRODUCTION_VALIDATE_ENTRY",
+    "hook_candidates": [
+      {
+        "id": "target",
+        "type": "target",
+        "text": "경영·행정 경력자라면,\n양주문화관광재단 경영지원 6급(대리) 정규직 1명을 채용해요."
+      },
+      {
+        "id": "condition",
+        "type": "condition",
+        "text": "6급 지원은 네 가지 자격 중 하나로 판단해요.\n양주문화관광재단 정규직 경영지원 대리 1명 채용이에요."
+      },
+      {
+        "id": "deadline",
+        "type": "deadline",
+        "text": "11월 26일 18시 접수가 끝나요.\n양주문화관광재단 경영지원 6급 정규직 1명을 모집해요."
+      }
+    ],
+    "selected_hook_id": "target",
+    "first_sentence_type": "target",
+    "hook_review": {
+      "factual": true,
+      "target_clear": true,
+      "natural": true
+    },
+    "recruitment_unit": {
+      "title": "경영지원 6급(대리)",
+      "count": 1,
+      "employment": "정규직",
+      "scope": "single_recruitment_unit",
+      "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+      "excerpt": "일반직 / 경영지원 / 6급(대리) / 1명; 6급(대리) / 정규직"
+    },
+    "fact_evidence": [
+      {
+        "field": "title",
+        "value": "경영지원 6급(대리)",
+        "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+        "excerpt": "일반직 / 경영지원 / 6급(대리) / 1명"
+      },
+      {
+        "field": "count",
+        "value": 1,
+        "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+        "excerpt": "일반직 / 경영지원 / 6급(대리) / 1명"
+      },
+      {
+        "field": "employment",
+        "value": "정규직",
+        "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+        "excerpt": "6급(대리) / 정규직 / (호봉제)공무원 8급 상당"
+      },
+      {
+        "field": "location",
+        "value": "재단 지정 장소",
+        "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+        "excerpt": "근무장소 : 양주문화관광재단 지정 장소"
+      }
+    ],
+    "key_restrictions": [
+      {
+        "text": "자격은 4개 중 하나예요",
+        "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+        "excerpt": "공고일 현재 아래 자격요건 중 하나 이상을 갖춘 자",
+        "classification": "required",
+        "logic": "any_of",
+        "paths": [
+          {
+            "summary": "관련 석사 이상+실무1년",
+            "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+            "excerpt": "6급 1. 채용 분야 석사학위 이상의 학위 취득자로서 해당 직무분야 실무경력 1년 이상"
+          },
+          {
+            "summary": "관련분야 실무3년",
+            "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+            "excerpt": "6급 2. 채용예정 직무분야 3년 이상 경력자"
+          },
+          {
+            "summary": "9급 상당+실무2년",
+            "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+            "excerpt": "6급 3. 국가 및 지방자치단체에서 9급 또는 9급 상당이고 해당 직무분야 실무경력이 2년 이상"
+          },
+          {
+            "summary": "인정기관 동일직급+실무1년",
+            "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+            "excerpt": "6급 4. 국가 또는 지방자치단체 투자기관·출자출연기관이나 이에 상응하다고 인정되는 기관의 동일직급에서 해당 분야 실무경력 1년이상"
+          }
+        ]
+      },
+      {
+        "text": "공고일에 18세 이상 60세 미만, 남성은 군필·면제여야 해요",
+        "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+        "excerpt": "공고일 현재 만18세 이상 만60세 미만; 남성 병역필 또는 면제",
+        "classification": "required",
+        "logic": "all_of",
+        "paths": [
+          {
+            "summary": "공고일 나이 범위",
+            "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+            "excerpt": "공고일 현재 만18세 이상 만60세 미만"
+          },
+          {
+            "summary": "남성 대상 병역조건",
+            "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+            "excerpt": "남자의 경우 병역을 필하였거나 면제"
+          }
+        ]
+      }
+    ],
+    "useful_point": {
+      "text": "이메일은 전화 확인 필수예요",
+      "source_ref": "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+      "excerpt": "이메일 접수는 제출 후 필히 유선으로 접수 확인"
+    },
+    "correction_check": {
+      "result": "not_finally_verified",
+      "source_ref": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+      "scope": "Current official detail still advertises recruitment; reviewed limited public title listings; absence of correction in sampled pages is not an all-sources absence conclusion"
+    },
+    "style_rewrites": 1,
+    "selection_reason": "One independently read, single regular employment recruitment unit with clear four-way eligibility, important proof conditions and exact deadline",
+    "length_exception_reason": null
+  },
+  "local_card_existing": {
+    "jpeg_sha256": "cd851668aa4da807fc9d1d16e0940759286bc57e93d422caa952f3b45232bb3d",
+    "preview_sha256": "a7efbc7963e26d2cf410e1b277ec6a8514e0735a60b00edbf8623fd38798985e",
+    "facts_sha256": "5c6907f8b1ebd2a2e4abf12a80b3f2ef8de08da6105f3634af77e41d62f9a0fa",
+    "status": "LOCAL_ONLY_NOT_REGISTERED"
+  },
+  "hold_gates": [
+    "Recheck source/attachments freshness within 24h of actual approval",
+    "Complete official corrections/cancellation and application-open checks without extrapolating public title search",
+    "Independently verify CareerPick exact #job=cleaneye-81438 browser view",
+    "Run production validate_entry, verify_official_receipt, verify_reviewed_card and --check-queue",
+    "Register identical JPEG and LANCZOS PNG bytes on main using conditional atomic/CAS and verify SHA",
+    "Read claim/locks/live Meta and remotely CAS reviewed-staging/writer-queue only for a genuinely new slot"
+  ],
+  "safety": "Never count as approved, update posted ledger, send Meta POST or alter active/started slots from this document"
+}
