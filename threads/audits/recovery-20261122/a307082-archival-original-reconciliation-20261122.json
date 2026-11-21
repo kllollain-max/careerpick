@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "notice_id": "a307082",
+  "status": "draft_hold",
+  "approved_for_queue": false,
+  "queue_registered": false,
+  "slot_reserved": false,
+  "meta_posted": false,
+  "account": "hid_119",
+  "purpose": "Reconcile previously unlinked verified official HWP and actual profile image artifacts. Do not treat archival rehash as a fresh official GET.",
+  "observed_at_utc": "2026-11-21T17:46:46.956Z",
+  "state_head_before_audit": "d51d7040bd0c1e1f3ce45df4ab14897c7b78ea4d",
+  "main_head_observed": "aa1602072201215d6c3a451497df1a2f46455f08",
+  "current_production_source": {
+    "run_id": 44927441176,
+    "source": "threads/replenishment-handoff.json",
+    "source_blob_sha": "e92a455990ce6ce03d51564e28fa7bf609b60164",
+    "alio_original_html_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307082",
+    "alio_http_checked_at": "2026-11-22T01:59:10.643217+09:00",
+    "alio_http_status": 200,
+    "alio_size_bytes": 11972,
+    "alio_html_sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
+    "semantics": "current ALIO detail shows recruiting/regular_nurse/4_people and 2026-11-23 DATE ONLY; does not authoritatively supply clock time or original HWP bytes"
+  },
+  "recovered_archived_originals": {
+    "recovery_method": "Downloaded EXISTING GitHub Actions artifact; independently opened original HWP bytes and full-text locally; archived bytes NOT re-downloaded from issuer now",
+    "original_run_id": 44323969751,
+    "artifact_id": 14436476335,
+    "original_artifact_zip_sha256": "c53bb734fe8af74cb0edae45a112c850845e5eb0039e79c71a7e10342d6d9ab5",
+    "original_source_checked_at": "2026-11-18T23:25:12.920067+09:00",
+    "original_url": "https://www.alio.go.kr/download/download.json?fileNo=3087714",
+    "original_file_size": 57856,
+    "original_file_sha256": "47d48077aab0607f2107bdb3a281637c569862fb12848f739f7fca7a1dce0478",
+    "extracted_full_text_bytes": 12853,
+    "extracted_text_sha256": "4da5ff5888cd114e8b1a422d4d7ce8e960c932756c038180b7c957b16f19b5fd",
+    "verified_archived_text_sections": [
+      "모집부문 정규직 간호사 병동 3교대 4명",
+      "간호사 면허증, 간호학 졸업증명서+성적증명서, 임상(병동) 경력 1년 이상 AND",
+      "간호학 성적 누적백분위 점수 80점 이상 과락",
+      "2026-11-23 10:00 KST 온라인 접수 마감",
+      "경력증명서 근무부서+담당업무 명시, 건강보험/국민연금 가입내역 대체 불가",
+      "다른 서울적십자병원 공고와 중복지원 시 전부 과락"
+    ],
+    "not_fresh_since": "2026-11-18T23:25:12.920067+09:00"
+  },
+  "supplemental_archived_documents": [
+    {
+      "run_id": 44363784355,
+      "artifact_id": 14454259023,
+      "checked_at": "2026-11-19T02:54:29.677996+09:00",
+      "name": "official-job-description.hwp",
+      "size": 82432,
+      "sha256": "bdc646e6357740bb8bbf103814a16bd532ead87e9a70c13ab22164574cf48b69"
+    },
+    {
+      "run_id": 44363784355,
+      "artifact_id": 14454259023,
+      "checked_at": "2026-11-19T02:54:30.708336+09:00",
+      "name": "official-application-form.hwpx",
+      "size": 51060,
+      "sha256": "6656e7a562713442c6aff5d8a3e1a4a8b62d9c782f7028ba5774302edf530454"
+    }
+  ],
+  "previous_ui_evidence": {
+    "run_id": 44351724610,
+    "artifact_id": 14449202245,
+    "archive_sha256": "4c4698519877b51e9658901a771b01470340e5041b34c50e13530dcaa810a3e8",
+    "capture_started_at_utc": "2026-11-18T16:57:40.662Z",
+    "profile_url": "https://kllollain-max.github.io/careerpick/#job=a307082",
+    "profile_screenshot": "careerpick-detail.png",
+    "manual_archived_screenshot_review": "actual selected detail card shows 서울적십자병원 정규직 간호사 4명 서울 and does NOT falsely assert 23:59; visible ID is not printed in card so automated predicate detail_unambiguously_identified=false",
+    "not_fresh_current_UI": true
+  },
+  "conflict_notes": [
+    "Hospital original HWP says 공고일 만60세 미만; ALIO summary says 임용일 만60세 이상 결격. Omit age cutoff clock basis in public text until reconciled.",
+    "ALIO collection due 23:59 is date-only placeholder; verified ARCHIVED official HWP says 10:00. Do not publish a deadline time without fresh official document confirmation.",
+    "Official hospital recruitment post checked by public read-only web on 2026-11-22 remains listed with HWP; that does not establish unchanged HWP bytes."
+  ],
+  "remaining_required": [
+    "New live re-download of official original HWP; compare SHA and re-check corrections/cancellation and exact deadline",
+    "Current CareerPick #job=a307082 detail UI + current redcross individual application entry (prior capture is 3 days old)",
+    "Run actual production validate_entry/verify_official_receipt/public-copy, check_q, plan/merge with newly verified source within 24h of intended slot",
+    "Use latest published-ledger media alternation and guarded CAS; no completed or in-flight slot changes"
+  ],
+  "existing_ready_untouched": [
+    "a307309@2026-11-22T08:00:00+09:00",
+    "cleaneye-81432@2026-11-22T12:00:00+09:00",
+    "a306841@2026-11-22T16:00:00+09:00"
+  ],
+  "safety": {
+    "no_meta_post": true,
+    "no_workflow_dispatch": true,
+    "no_existing_queue_change": true,
+    "no_automatic_approval": true
+  }
+}
