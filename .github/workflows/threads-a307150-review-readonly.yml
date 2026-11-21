@@ -1,0 +1,134 @@
+name: Threads a307150 independent official original read (no approval)
+on:
+  push:
+    branches:
+      - review/threads-a307150-official-20261118-1350
+    paths:
+      - .github/workflows/threads-a307150-review-readonly.yml
+permissions:
+  contents: read
+jobs:
+  official-fact-read:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests olefile playwright
+      - run: python -m playwright install chromium
+      - name: Download and semantically read exact ALIO employer original and NCS; inspect ATS/profile read-only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime, hashlib, io, json, pathlib, re, requests, olefile, struct, zlib, time, asyncio
+          from urllib.parse import urlparse
+          from playwright.async_api import async_playwright
+          ROOT=pathlib.Path("official-a307150-evidence")
+          ROOT.mkdir(exist_ok=True)
+          urls={
+          "official_notice":"https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307150",
+          "official_employer_hwp":"https://www.alio.go.kr/download/download.json?fileNo=3088119",
+          "official_ncs_hwp":"https://www.alio.go.kr/download/download.json?fileNo=3088121",
+          }
+          receipts={}
+          s=requests.Session()
+          s.headers.update({"User-Agent":"Mozilla/5.0 CareerPickOriginalIndependentReview/20261118","Accept":"*/*"})
+          for name,url in urls.items():
+              receipt={"url":url,"checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+              try:
+                  for attempt in range(3):
+                      try:
+                          r=s.get(url,timeout=(10,25),allow_redirects=True)
+                          r.raise_for_status()
+                          break
+                      except requests.RequestException:
+                          if attempt==2: raise
+                          time.sleep(2 if attempt==0 else 4)
+                  if urlparse(r.url).hostname not in ("www.alio.go.kr","alio.go.kr","job.alio.go.kr"):
+                      raise ValueError("REDIRECT_UNTRUSTED")
+                  raw=r.content
+                  if len(raw)>18000000 or len(raw)<300:
+                      raise ValueError("SOURCE_EMPTY_OR_TOO_BIG")
+                  receipt.update(http_status=r.status_code,final_url=r.url,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+                  if name.endswith("_hwp"):
+                      if not olefile.isOleFile(io.BytesIO(raw)): raise ValueError("HWP_NOT_OLE")
+                      (ROOT/(name+".hwp")).write_bytes(raw)
+                      ole=olefile.OleFileIO(io.BytesIO(raw))
+                      sections=sorted([p for p in ole.listdir() if p[0]=="BodyText" and p[-1].startswith("Section")])
+                      textparts=[]
+                      for section in sections:
+                          data=ole.openstream(section).read()
+                          try:data=zlib.decompress(data,-15)
+                          except zlib.error:pass
+                          at=0
+                          while at+4<=len(data):
+                              header=struct.unpack_from("<I",data,at)[0];at+=4
+                              tag=header&1023;size=(header>>20)&4095
+                              if size==4095:
+                                  if at+4>len(data):break
+                                  size=struct.unpack_from("<I",data,at)[0];at+=4
+                              if at+size>len(data):break
+                              value=data[at:at+size];at+=size
+                              if tag==67 and len(value)>2:
+                                  line=value.decode("utf-16-le","ignore")
+                                  line="".join(c if ord(c)>31 or c in "\n\t" else " " for c in line)
+                                  line=re.sub(" +"," ",line).strip()
+                                  if len(line)>1:textparts.append(line)
+                      extracted="\n".join(textparts)
+                      (ROOT/(name+"-fulltext.txt")).write_text(extracted,encoding="utf-8")
+                      receipt.update(hwp_sections=len(sections),paragraphs=len(textparts),text_chars=len(extracted),text_sha256=hashlib.sha256(extracted.encode()).hexdigest(),full_text_read=True)
+                      print("READ_HWP_"+name+"="+json.dumps(receipt,ensure_ascii=False))
+                      print("FULL_TEXT_BEGIN_"+name)
+                      print(extracted[:45000])
+                      print("FULL_TEXT_END_"+name)
+                  else:
+                      html=r.text
+                      (ROOT/"alio-original-page.html").write_text(html,encoding="utf-8")
+                      receipt.update(contains_target="2027년도 우체국물류지원단" in html)
+              except Exception as exc:
+                  receipt["error"]=type(exc).__name__+":"+str(exc)[:400]
+                  print("RECEIPT_ERROR_"+name+"="+receipt["error"])
+              receipts[name]=receipt
+          async def browser():
+              records={}
+              async with async_playwright() as playwright:
+                  browser=await playwright.chromium.launch(headless=True,args=["--no-sandbox"])
+                  for key,url in {
+                      "official_application":"https://pola.plusrecruit.co.kr",
+                      "careerpick_exact_profile":"https://kllollain-max.github.io/careerpick/#job=a307150",
+                  }.items():
+                      record={"url":url,"checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+                      ctx=await browser.new_context(locale="ko-KR",viewport={"width":1280,"height":900})
+                      page=await ctx.new_page()
+                      try:
+                          resp=await page.goto(url,wait_until="domcontentloaded",timeout=35000)
+                          await page.wait_for_timeout(4500)
+                          body=await page.locator("body").inner_text(timeout=8000)
+                          record.update(http_status=resp.status if resp else None,final_url=page.url,title=await page.title(),text_chars=len(body),has_notice_id="a307150" in body,has_employer="우체국물류지원단" in body,has_driver="운전" in body,has_10="10명" in body,content_excerpt=body[:3500],links=(await page.locator("a").evaluate_all("(els)=>els.filter(e=>/운전|채용|2027/.test(e.innerText)).slice(0,20).map(e=>({text:e.innerText.trim(),href:e.href}))"))[:10])
+                          (ROOT/(key+".txt")).write_text(body,encoding="utf-8")
+                          await page.screenshot(path=str(ROOT/(key+".png")),full_page=True)
+                      except Exception as exc:
+                          record["error"]=type(exc).__name__+":"+str(exc)[:400]
+                      records[key]=record
+                      print("LIVE_BROWSER_"+key+"="+json.dumps(record,ensure_ascii=False))
+                      await ctx.close()
+                  await browser.close()
+              return records
+          try: receipts["live_browser"]=asyncio.run(browser())
+          except Exception as exc:receipts["live_browser"]={"error":str(exc)[:300]}
+          (ROOT/"receipts.json").write_text(json.dumps(receipts,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          if not receipts["official_employer_hwp"].get("full_text_read"):
+              raise SystemExit("REQUIRED_OFFICIAL_HWP_NOT_READ")
+          
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: careerpick-a307150-independent-official-original
+          path: official-a307150-evidence/
+          retention-days: 14
+          if-no-files-found: warn
