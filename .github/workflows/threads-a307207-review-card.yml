@@ -1,0 +1,71 @@
+name: Threads a307207 research 2 verified candidate card (draft only)
+on:
+  push:
+    branches:
+      - review/threads-a307207-official-original-20261118
+    paths:
+      - .github/workflows/threads-a307207-review-card.yml
+permissions:
+  contents: write
+jobs:
+  draft-card-research-regular2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install verified Korean font + Pillow
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-nanum
+          python -m pip -q install Pillow
+      - name: Render only separately-named draft card, preserve posted assets
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          from PIL import Image
+          from scripts.create_thumbnail import generate_compact_card
+          root=Path('threads/review-assets')
+          root.mkdir(parents=True,exist_ok=True)
+          job={
+             'id':'a307207','org':'한국고전번역원','title':'연구직 원급',
+             'count':2,'employment':'정규직','location':'서울 은평구',
+             'deadline_label':'2026-12-02 18:00','due':'2026-12-02',
+             'restriction':'한국학 분야 학위 필요'
+          }
+          jpg=root/'a307207-research2.jpg'
+          preview=root/'a307207-research2-360.png'
+          info=generate_compact_card(job,jpg)
+          with Image.open(jpg) as img:
+              img.load()
+              assert img.size==(1080,1080) and img.mode=='RGB'
+              resized=img.resize((360,360),Image.Resampling.LANCZOS)
+              resized.save(preview,format='PNG')
+          with Image.open(preview) as im2, Image.open(jpg) as im1:
+              assert im2.mode=='RGB' and im2.size==(360,360)
+              assert im2.tobytes()==im1.resize((360,360),Image.Resampling.LANCZOS).tobytes()
+          hashes={x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in (jpg,preview)}
+          record={'status':'DRAFT_NOT_APPROVED','notice_id':'a307207','scope':'research regular 2 only, not administration temporary 1','job':job,'renderer':info,'sha256':hashes,'verified_exact_preview':True,'cas_registered':False,'meta_posted':False}
+          (root/'a307207-research2-card-proof.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(record,ensure_ascii=False))
+          PY
+      - name: Preserve preview on review branch only (no main overwrite)
+        shell: bash
+        run: |
+          test -f threads/review-assets/a307207-research2.jpg
+          test -f threads/review-assets/a307207-research2-360.png
+          git config user.name "CareerPick Review Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add threads/review-assets/a307207-research2.jpg threads/review-assets/a307207-research2-360.png threads/review-assets/a307207-research2-card-proof.json
+          git commit -m "review(threads): retain a307207 regular researcher 2 isolated card previews [no approval]"
+          git push origin HEAD:review/threads-a307207-official-original-20261118
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: careerpick-a307207-research2-draft-card-not-approved
+          path: threads/review-assets/a307207-research2*
+          retention-days: 10

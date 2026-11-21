@@ -1,0 +1,65 @@
+name: Threads a307207 official apply/profile browser evidence (read only)
+on:
+  push:
+    branches:
+      - review/threads-a307207-official-original-20261118
+    paths:
+      - .github/workflows/threads-a307207-live-browser-review.yml
+permissions:
+  contents: read
+jobs:
+  browser-read-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip -q install playwright
+          python -m playwright install --with-deps chromium
+      - name: Inspect official live announcement and exact CareerPick modal WITHOUT changes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, re
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          root=Path('threads-a307207-browser-evidence');root.mkdir(exist_ok=True)
+          report={'notice_id':'a307207','executed_at_utc':datetime.now(timezone.utc).isoformat(),'read_only':True,'meta_posted':False,'cas_registered':False,'site_modified':False,'visits':[]}
+          urls=[
+              ('employer_notice','https://www.itkc.or.kr/bbs/boardView.do?id=2&bIdx=316518&menuId=99'),
+              ('careerpick_exact_modal','https://kllollain-max.github.io/careerpick/#job=a307207')
+          ]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for role,url in urls:
+                  row={'role':role,'requested_url':url}
+                  context=browser.new_context(viewport={'width':1280,'height':900},locale='ko-KR')
+                  page=context.new_page()
+                  try:
+                      response=page.goto(url,wait_until='domcontentloaded',timeout=40000)
+                      page.wait_for_timeout(5500 if role=='careerpick_exact_modal' else 2200)
+                      text=page.locator('body').inner_text(timeout=20000)
+                      links=page.eval_on_selector_all('a','els=>els.map(a=>({text:(a.innerText||a.textContent||"").trim().slice(0,100),href:a.href})).filter(x=>x.href&&/지원|원서|접수|채용|apply|recruit/i.test(x.text+" "+x.href)).slice(0,100)')
+                      row.update(http_status=response.status if response else None,actual_url=page.url,title=page.title(),body_length=len(text),mentions_target=('2027년 1분기 직원 신규 채용' in text if role=='employer_notice' else '한국고전번역원' in text),mentions_exact_notice=('a307207' in page.url or '한국고전번역원' in text), relevant_lines=[s.strip()[:350] for s in text.splitlines() if any(x in s for x in ('2027년 1분기','한국고전번역원','접수','지원하기','정정','취소'))][:40],official_apply_candidates=links)
+                      (root/(role+'.txt')).write_text(text[:40000],encoding='utf-8')
+                      page.screenshot(path=str(root/(role+'.png')),full_page=False)
+                  except Exception as exc:
+                      row['error']=type(exc).__name__+': '+str(exc)[:300]
+                  finally:
+                      report['visits'].append(row);context.close()
+              browser.close()
+          (root/'proof.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'checked_at_utc':report['executed_at_utc'],'read_only':True,'visits':[{k:v for k,v in row.items() if k not in ('official_apply_candidates','relevant_lines')} for row in report['visits']],'links':{r['role']:r.get('official_apply_candidates',[])[:15] for r in report['visits']}},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: careerpick-a307207-browser-apply-profile-evidence
+          path: threads-a307207-browser-evidence/
+          retention-days: 10

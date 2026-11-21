@@ -1,0 +1,104 @@
+name: Threads a307207 original-source fact proof (review only)
+on:
+  push:
+    branches:
+      - review/threads-a307207-official-original-20261118
+    paths:
+      - .github/workflows/threads-a307207-official-review.yml
+      - threads/independent-review/a307207-20261118-official-draft.md
+permissions:
+  contents: read
+jobs:
+  official-binary-fact-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PDF reader
+        run: python -m pip -q install requests pymupdf
+      - name: Re-download exact official ALIO PDF bytes and render pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests, fitz, hashlib, json, re
+          from pathlib import Path
+          from urllib.parse import urlparse
+          from datetime import datetime, timezone
+          out=Path('threads-a307207-original-proof'); out.mkdir(exist_ok=True)
+          proofs=[]
+          session=requests.Session()
+          session.headers.update({'User-Agent':'Mozilla/5.0 (CareerPick original recruitment PDF verification)', 'Accept':'application/pdf,application/octet-stream,*/*'})
+          try:
+              session.get('https://job.alio.go.kr/recruitview.do?idx=307207',timeout=20)
+          except requests.RequestException:
+              pass  # Original exact file is still independently checked.
+          for file_no,role in ((3088398,'official_notice'),(3088399,'job_description')):
+              url=f'https://www.alio.go.kr/download/download.json?fileNo={file_no}'
+              row={'role':role,'file_no':file_no,'source_url':url,'checked_at_utc':datetime.now(timezone.utc).isoformat(),'approved':False,'cas_registered':False,'meta_posted':False}
+              try:
+                  res=session.get(url,headers={'Referer':'https://job.alio.go.kr/recruitview.do?idx=307207'},timeout=(15,50))
+                  row.update(http_status=res.status_code,final_url=res.url,size_bytes=len(res.content))
+                  final=urlparse(res.url)
+                  if final.scheme!='https' or final.hostname not in ('www.alio.go.kr','alio.go.kr'):
+                      raise ValueError('OFFICIAL_HOST_REDIRECT_MISMATCH')
+                  if res.status_code!=200 or not res.content.startswith(b'%PDF-') or not 1000<len(res.content)<8000000:
+                      raise ValueError('ACTUAL_OFFICIAL_PDF_BYTES_UNAVAILABLE')
+                  row['sha256']=hashlib.sha256(res.content).hexdigest()
+                  document=fitz.open(stream=res.content,filetype='pdf')
+                  row['pages']=len(document)
+                  full='\n-- PAGE --\n'.join(page.get_text(sort=True) for page in document)
+                  compact=re.sub(r'\s+','',full)
+                  row['characters_extracted']=len(full)
+                  row['semantic_checks']={
+                      'institution':'한국고전번역원' in compact,
+                      'research':'연구직' in compact,
+                      'regular':'정규직' in compact,
+                      'research_unit_two':bool(re.search(r'(?:원급.{0,12}2|원급\\s*2)', compact)),
+                      'period':'18:00' in full or '18:00' in compact
+                  }
+                  required=(['institution','research','regular','research_unit_two','period'] if role=='official_notice' else ['institution'])
+                  if len(full)<1000 or not all(row['semantic_checks'][k] for k in required):
+                      raise ValueError('ACTUAL_ORIGINAL_SEMANTIC_SOURCE_UNREADABLE')
+                  (out/(role+'-fulltext.txt')).write_text(full,encoding='utf-8')
+                  for index in range(min(len(document),2 if role=='official_notice' else 1)):
+                      page=document[index]
+                      pix=page.get_pixmap(matrix=fitz.Matrix(1.15,1.15),alpha=False)
+                      pix.save(str(out/f'{role}-page-{index+1}.png'))
+                  row['passed']=True
+              except Exception as exc:
+                  row['passed']=False
+                  row['error']=type(exc).__name__+': '+str(exc)
+              proofs.append(row)
+          report={'notice_id':'a307207','source':'original_official_ALIO_PDF','generated_utc':datetime.now(timezone.utc).isoformat(),'approved':False,'cas_registered':False,'meta_posted':False,'files':proofs}
+          (out/'receipt.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(report,ensure_ascii=False))
+          if not all(row['passed'] for row in proofs):
+              raise SystemExit('INDEPENDENT_OFFICIAL_ORIGINAL_PDF_NOT_PROVEN')
+          PY
+      - name: Static Threads copy only (not production approval)
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('threads/independent-review/a307207-20261118-official-draft.md').read_text(encoding='utf-8')
+          copy=p.split('```text\n',1)[1].split('\n```',1)[0]
+          assert copy.count('자세한 사항은 프로필링크 확인')==1
+          assert copy.rstrip().endswith('자세한 사항은 프로필링크 확인')
+          assert not any(part in copy for part in ('http://','https://','www.','#','@'))
+          assert '정규직 2명' in copy and '12월 2일 18:00' in copy
+          assert 150<len(copy)<480
+          print('STATIC_DRAFT_CHECK_PASSED, chars='+str(len(copy)))
+          print('PRODUCTION_VALIDATE_ENTRY=NOT_RUN; CAS=NOT_RUN; META_POST=NOT_RUN')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: careerpick-a307207-original-official-pdf-review-only
+          path: threads-a307207-original-proof/
+          if-no-files-found: warn
+          retention-days: 10
