@@ -300,5 +300,33 @@
     "approved_for_queue": false,
     "cas_registration": false,
     "meta_post": false
+  },
+  "independent_readonly_20261121_1647": {
+    "status": "FRESH_EMPLOYER_APPLICATION_LANDING_CONFIRMED__PRODUCTION_HOLD",
+    "verified_at_utc": "2026-11-21T07:46:44.320Z",
+    "verified_at_type": "read_only_live_public_website_request",
+    "checked_url": "https://ncuc.brms.kr/",
+    "live_portal_text": "2026년도 하반기 남양주도시공사 임기제·일반직 직원 채용 공고; 접수마감 D-5; 2026-11-17 09:00 ~ 2026-11-26 18:00",
+    "source_ref": "https://ncuc.brms.kr/",
+    "source_scope": "Public employer ATS index today, not the applicant transaction screen or per-job final eligibility revision audit",
+    "employer_original_pdf_url": "https://app.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+    "employer_original_pdf_sha256_historical": "8054affb8c3cbd43b73b0224fd1021de03c0771ff5661726271079cd6779a844",
+    "employer_original_pdf_last_binary_receipt": "2026-11-20T09:48:04+09:00",
+    "employer_pdf_fresh_binary_recheck_this_run": false,
+    "historical_exact_profile_chromium_receipt": "https://github.com/kllollain-max/careerpick/actions/runs/44263156042",
+    "current_exact_profile_recheck_this_run": false,
+    "workplace_fact_gate": {
+      "validator": "scripts/threads_writer_queue.py:_cleaneye_workplace_evidence",
+      "requirement": "Exact source-backed location excerpt matching 근무지/근무장소/근무지역/근무예정지/배치장소/배치지역 followed by image_job.location",
+      "original_pdf_employment_duties": "역사(진접선, 별내선) 영업 준비·마감, 여객서비스, 안전관리 등",
+      "conclusion": "Duty-site description does NOT satisfy this strict employer workplace assertion. Do not fabricate 근무지: 진접선·별내선; do not loosen validator."
+    },
+    "official_correction_and_cancellation_clearance": "not_fully_verified",
+    "production_validate_entry": "not_run",
+    "card_image_review": "not_run",
+    "remote_cas_approved_queue": "not_run",
+    "meta_post": "not_attempted",
+    "total_ready_count_change": 0,
+    "decision": "HOLD; no source timestamp spoofing, no existing slot reassignment, no new publication permission"
   }
 }
