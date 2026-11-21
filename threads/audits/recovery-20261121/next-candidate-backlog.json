@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "prepared_at": "2026-11-21T17:03:38.140781+09:00",
-  "status": "draft_backlog_partial_two_candidates_one_new_notice_supported_one_duplicate_blocked",
+  "status": "draft_backlog_progress_cleaneye_81432_copy_crosschecked_not_ready",
   "scope": "다음12/16시 공급 준비용 읽기전용 공식근거 조사. 승인/ready/queue/Meta/원격변경 없음.",
   "main_source_commit": "dc13d523b826516cc71ceabc17772ad711fae44c",
   "source_snapshots": [
@@ -28,7 +28,7 @@
   "candidates": [
     {
       "job_id": "cleaneye-81432",
-      "status": "draft_evidence_collected",
+      "status": "draft_text_verified_against_official_html_pending_ui_and_production",
       "proposed_slot": "2026-11-22T12:00:00+09:00",
       "slot_is_reserved": false,
       "priority": "new_notice_no_matching_employer_post_in_local_history",
@@ -192,7 +192,7 @@
         6,
         7
       ],
-      "draft_note": "관련 분야 석사 보유자를 대상으로 도시정책 연구원2명 중심으로 작성. 공고일 자격기준, 대표실적2건과 학위논문 필수제출, 중복지원 제한을 누락하지 말 것. 350자 원고와 모든 restrictions의 독립 대조는 아직 하지 않았음.",
+      "draft_note": "본문 293자 단독 원고 편집 및 시청 공식 페이지 사실 대조 완료. 운영 ready 아님. 기존 공식 PDF/직무기술서 SHA, 11/21 16:59 정정 점검은 유지. 추가 UI·생산 검증 완료 전 queue 제출 금지.",
       "remaining_before_reviewed_submission": [
         "350자 원고 작성 및 필수조건 압축·검수",
         "기관 제목 제2회/공식PDF 제3회 불일치 메모 보존",
@@ -201,7 +201,46 @@
         "현재 production validator 실행"
       ],
       "approval": false,
-      "ready": false
+      "ready": false,
+      "public_draft": {
+        "post_text": "도시·교통·정책 분야 석사학위가 있다면,\n서울연구원 정규직 연구원 2명 채용을 확인해 보세요.\n\n서초본원 근무(발령 시 변경 가능), 관련 분야 석사학위가 필수예요. 공고일 기준 결격사유를 확인하고 남성은 병역의무 불이행 사실이 없어야 해요.\n\n석사논문 국문요약(3매 이내)+원문은 1개 PDF로, 2023년 11월 20일 이후 연구실적 중 대표실적 정확히 2건의 요약·원문은 각각 PDF로 준비해요. 중복지원 불가예요.\n\n12월 4일 14:00까지 온라인 최종지원 후 수험번호를 확인하세요.\n\n자세한 사항은 프로필링크 확인",
+        "detail_reply": "",
+        "reply_texts": [],
+        "chars": 293,
+        "publication_policy_id": "careerpick-threads-v5-20261111",
+        "review_status": "editorial_draft_only_not_production_validated",
+        "editorial_checks": {
+          "chars": 293,
+          "cta_count": 1,
+          "cta_last": true,
+          "no_urls": true,
+          "no_markdown": true,
+          "no_page_split": true
+        },
+        "official_cross_check": {
+          "date": "2026-11-21",
+          "official_url": "https://www.seoul.go.kr/news/news_employ.do?nttNo=470749",
+          "facts_checked": [
+            "city-policy research unit 2 people / full recruiting 4",
+            "regular employment / Seocho home office and transfer caveat",
+            "relevant Master's degree / 2026-11-20 notice cutoff",
+            "male military evasion disqualification, no invented blanket military-service condition",
+            "Master's thesis 3-page Korean summary plus original PDF",
+            "post-2023-11-20 listed research achievements and exactly two representative files",
+            "no duplicate applications",
+            "online final application and admission number confirmation / 2026-12-04 14:00 deadline"
+          ],
+          "official_pdf_prior_hash": "175a85c2687aedafd2c107dcba47237bcb600469fc7fb39619b3d203cd482193"
+        },
+        "cannot_be_approved_before": [
+          "live #job=cleaneye-81432 rendered UI independent verification (TinyFish browser attempted, insufficient wallet balance; no approved alternative CUA available in this run)",
+          "fresh issuer correction/cancellation recheck at final freeze",
+          "production validate_entry and queue checks actually passed",
+          "if IMAGE, production card full and 360px proof actual visual inspection",
+          "live last published media and no claims/locks rechecked",
+          "atomic GitHub asset and state CAS supply and readback"
+        ]
+      }
     },
     {
       "job_id": "cleaneye-81114",
