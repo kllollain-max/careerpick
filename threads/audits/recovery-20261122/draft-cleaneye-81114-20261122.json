@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-81114",
+  "state": "draft_hold",
+  "approved": false,
+  "queue_registered": false,
+  "created_at": "2026-11-21T15:47:08.023Z",
+  "target_repo": "kllollain-max/careerpick",
+  "account": "hid_119",
+  "contract_version": 2,
+  "planned_slot_hint": "2026-11-22T20:00:00+09:00",
+  "slot_reserved": false,
+  "media_for_slot": "pending_actual_success_ledger_check",
+  "source_refs": [
+    {
+      "source_type": "employer_official_post",
+      "url": "https://www.gwto.or.kr/www/selectBbsNttView.do?bbsNo=2&key=22&nttNo=3223&pageIndex=1",
+      "checked_at": "2026-11-21T15:47:08.023Z",
+      "section": "강원관광재단 공고 제2026-84호; 공고기간·접수마감·정규직 총4명"
+    },
+    {
+      "source_type": "employer_original_pdf_extract",
+      "url": "https://www.gwto.or.kr/www/downloadBbsFile.do?atchmnflNo=5283",
+      "checked_at": "2026-11-21T15:47:08.023Z",
+      "extract_text_sha256": "c9a91ab7745423e38db4a3c7395cb65c56f7cab0097e17c5bf7bdfec143b11e9",
+      "extract_sha_method": "SHA-256 of UTF-8 returned extraction text (26316 characters), NOT original PDF file bytes",
+      "original_pdf_binary_sha256": null,
+      "section": "1 채용분야 및 인원, 2 근무조건, 3 지원자격, 5 일정, 6 원서접수"
+    },
+    {
+      "source_type": "cleaneye_feed_historical_record",
+      "source_ref": "cleaneye.json#cleaneye-81114/application_period",
+      "source_post_sha256": "1cf3be281222bd939acdfb7467f716cfb2988ede630e068dab5be0b00baeb26d",
+      "source_detail_sha256": "56f55a0db6802daccc78ebd1ffbfb4dc388667e0d34f37877cc949b110f5ac44",
+      "source_snapshot_checked_at": "2026-11-21T10:26:41+09:00",
+      "note": "feed hashes are not employer PDF hashes"
+    }
+  ],
+  "fact_checks": {
+    "recruitment_unit": {
+      "org": "강원관광재단",
+      "title": "6급 주임 관광콘텐츠",
+      "count": 2,
+      "employment": "정규직",
+      "whole_notice_count": 4,
+      "employer_pdf_section": "1. 채용분야 및 인원"
+    },
+    "common_required": [
+      "공고일 기준 18세 미만 또는 60세 이상 지원 불가",
+      "남성은 병역필 또는 면제",
+      "해외여행 결격 및 재단 인사 결격사유 없음",
+      "임용절차 후 즉시 근무 가능"
+    ],
+    "unit_required_any_of": [
+      "TOEFL-IBT 91점 이상",
+      "TOEIC 800점 이상",
+      "New TEPS 309점 이상",
+      "G-TELP level 2 76점 이상"
+    ],
+    "language_score_validity": "2027-01-25 임용예정일 기준 유효기간(2년) 미경과, 국내 주관사 확인 가능한 성적; 세부 예외 PDF 참조",
+    "employment_notes": [
+      "6개월 수습 이후 정규 임용 여부 결정",
+      "춘천·강릉 등 변경·순환 근무 가능성"
+    ],
+    "application_deadline": "2026-11-25T18:00:00+09:00",
+    "application_method": "온라인 전용, 우편·방문 불가",
+    "duplicate_restriction": "근로형태 및 채용분야별 중복지원 불가"
+  },
+  "correction_check": {
+    "scope": "employer official recruitment board page 1 of 8, plus original 2026-11-10 post only",
+    "result": "no_separate_newer_correction_title_seen_on_page_1",
+    "not_full_board_exhaustive": true
+  },
+  "profile_check": {
+    "url": "https://kllollain-max.github.io/careerpick/#job=cleaneye-81114",
+    "status": "hold",
+    "reason": "TinyFish JS browser run not started: wallet negative USD -0.136; static fetch returned initial job listing, not selected detail panel"
+  },
+  "draft_text": "강원 관광콘텐츠 정규직을 찾는다면,\n강원관광재단 6급 주임 관광콘텐츠 2명을 모집해요.\n\n필수 어학은 토익 800·토플 iBT 91·뉴텝스 309·지텔프 레벨2 76점 중 하나예요. 임용예정일 기준 유효 성적이 필요해요.\n\n공고일 기준 만 18세 이상·60세 미만, 남성은 병역필 또는 면제여야 해요. 춘천·강릉 순환근무 가능성이 있고 6개월 수습 후 정규 임용여부를 결정해요.\n\n11월 25일 18:00 온라인 마감이며 분야 중복지원은 불가해요.\n\n자세한 사항은 프로필링크 확인",
+  "public_preview": {
+    "main_text": "강원 관광콘텐츠 정규직을 찾는다면,\n강원관광재단 6급 주임 관광콘텐츠 2명을 모집해요.\n\n필수 어학은 토익 800·토플 iBT 91·뉴텝스 309·지텔프 레벨2 76점 중 하나예요. 임용예정일 기준 유효 성적이 필요해요.\n\n공고일 기준 만 18세 이상·60세 미만, 남성은 병역필 또는 면제여야 해요. 춘천·강릉 순환근무 가능성이 있고 6개월 수습 후 정규 임용여부를 결정해요.\n\n11월 25일 18:00 온라인 마감이며 분야 중복지원은 불가해요.\n\n자세한 사항은 프로필링크 확인",
+    "detail_reply": ""
+  },
+  "length_with_spaces_newlines": 268,
+  "cta_count": 1,
+  "reply_texts": [],
+  "local_lexical_checks": {
+    "length_under_300": true,
+    "final_cta": true,
+    "no_url": true,
+    "no_hash_tags": true
+  },
+  "pending_before_ready": [
+    "PDF original byte SHA-256 (only actual extracted text SHA captured)",
+    "actual #job detail UI verification",
+    "recent complete correction/cancellation check",
+    "production validate_entry and official_receipt and public copy comparison",
+    "confirm actual last successful media; generate and visually review card if IMAGE",
+    "full atomic CAS submission+staging+queue and readback"
+  ],
+  "safety": "No changes to existing queue/staging/claims/posted history. No posts or dispatch."
+}
