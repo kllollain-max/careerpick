@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-22T10:25:38.186603+09:00",
-  "run_id": "44971330743",
+  "captured_at": "2026-11-22T12:01:24.404251+09:00",
+  "run_id": "44978610209",
   "source_commit": "9dcd89b1964788107231441c4e3d2a275d20f5a2",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-22T10:24:48.499975+09:00",
+    "time": "2026-11-22T12:00:35.614382+09:00",
     "future_slots": [
-      "2026-11-22T12:00:00+09:00",
       "2026-11-22T16:00:00+09:00",
       "2026-11-22T20:00:00+09:00",
       "2026-11-23T08:00:00+09:00",
       "2026-11-23T12:00:00+09:00",
       "2026-11-23T16:00:00+09:00",
       "2026-11-23T20:00:00+09:00",
-      "2026-11-24T08:00:00+09:00"
+      "2026-11-24T08:00:00+09:00",
+      "2026-11-24T12:00:00+09:00"
     ],
     "next_media": "IMAGE",
     "promoted": [],
@@ -119,15 +119,16 @@
     "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
     "staged_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
     "promoted_count": 0,
-    "approved_supply_count": 2,
+    "approved_supply_count": 1,
     "inventory_target": 8,
-    "inventory_shortfall": 6,
+    "inventory_shortfall": 7,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-22T12:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-22T12:00:00+09:00",
       "2026-11-22T16:00:00+09:00"
     ],
     "missing_slots": [
@@ -136,7 +137,8 @@
       "2026-11-23T12:00:00+09:00",
       "2026-11-23T16:00:00+09:00",
       "2026-11-23T20:00:00+09:00",
-      "2026-11-24T08:00:00+09:00"
+      "2026-11-24T08:00:00+09:00",
+      "2026-11-24T12:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 60,
@@ -148,7 +150,8 @@
         "2026-11-23T12:00:00+09:00",
         "2026-11-23T16:00:00+09:00",
         "2026-11-23T20:00:00+09:00",
-        "2026-11-24T08:00:00+09:00"
+        "2026-11-24T08:00:00+09:00",
+        "2026-11-24T12:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "cleaneye-80989",
@@ -2380,7 +2383,8 @@
       "2026-11-23T12:00:00+09:00",
       "2026-11-23T16:00:00+09:00",
       "2026-11-23T20:00:00+09:00",
-      "2026-11-24T08:00:00+09:00"
+      "2026-11-24T08:00:00+09:00",
+      "2026-11-24T12:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "cleaneye-80989",
@@ -5157,33 +5161,129 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "cleaneye-81451",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-24T12:00:00+09:00",
+        "draft_text": "재단법인 울산경제일자리진흥원 채용 공고를 확인해 보세요.\n\n모집 공고: 울산경제일자리진흥원장 공개모집 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-27 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81451",
         "source_post_sha256": "07e5e5d809dd4b88d12e555b60691fb42f50d800448ba9996f3fc050d23921e6",
         "source_detail_sha256": "2225f15eefec614cbb7c715932d2636ef88760ea472a96ec873f98647f638663",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-20; 접수마감일 원문: 2026-11-27",
+        "application_source_ref": "cleaneye.json#cleaneye-81451/application_period",
+        "source_snapshot_checked_at": "2026-11-22T00:57:26+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-20",
+          "접수마감일 원문": "2026-11-27",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81117",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-24T12:00:00+09:00",
+        "draft_text": "세종문화회관 채용 공고를 확인해 보세요.\n\n모집 공고: 2026 서울시예술단 일반단원 공개채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-30 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81117",
         "source_post_sha256": "f179170ffd5dd820b90865c206c4059e2056e1caad998c21c685fb7c10991c21",
         "source_detail_sha256": "f17490d6fce32b6a71bf923051d2d3047b79375b31fac7b3bb56276eb6e75038",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-10; 접수마감일 원문: 2026-11-30",
+        "application_source_ref": "cleaneye.json#cleaneye-81117/application_period",
+        "source_snapshot_checked_at": "2026-11-22T00:57:26+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-10",
+          "접수마감일 원문": "2026-11-30",
+          "채용인원": "17"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "cleaneye-81328",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-24T12:00:00+09:00",
+        "draft_text": "재단법인 파주시청소년재단 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 제2회 파주시청소년재단 직원(일반직) 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-30 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81328",
         "source_post_sha256": "d8152e5625a4881a06df86aacb38e4f88d62d4928b1e390007f4ae119cb84048",
         "source_detail_sha256": "10333508a866222666aca985cd83ab4e4fccca6295edf31f34c5d4036a87ee3d",
-        "suggested_slot": null
-      },
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-30",
+        "application_source_ref": "cleaneye.json#cleaneye-81328/application_period",
+        "source_snapshot_checked_at": "2026-11-22T00:57:26+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-18",
+          "접수마감일 원문": "2026-11-30",
+          "채용인원": "5"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "cleaneye-81344",
         "status": "unreviewed",
@@ -5504,7 +5604,8 @@
         "2026-11-23T12:00:00+09:00",
         "2026-11-23T16:00:00+09:00",
         "2026-11-23T20:00:00+09:00",
-        "2026-11-24T08:00:00+09:00"
+        "2026-11-24T08:00:00+09:00",
+        "2026-11-24T12:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-22T20:00:00+09:00",
@@ -5512,7 +5613,8 @@
         "2026-11-23T12:00:00+09:00",
         "2026-11-23T16:00:00+09:00",
         "2026-11-23T20:00:00+09:00",
-        "2026-11-24T08:00:00+09:00"
+        "2026-11-24T08:00:00+09:00",
+        "2026-11-24T12:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -5575,7 +5677,7 @@
           "sha256": "73727c1ade0ac28087c0167e11ee6ed4d5e581c718d203f3f6b5a718b3485760",
           "size_bytes": 11972,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-22T10:25:37.504863+09:00",
+          "checked_at": "2026-11-22T12:01:23.459908+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5654,13 +5756,6 @@
   "publication_audit": {
     "slots": [
       {
-        "scheduled_at": "2026-11-20T12:00:00+09:00",
-        "post_ids": [
-          "18121842119629316"
-        ],
-        "status": "recorded_publication"
-      },
-      {
         "scheduled_at": "2026-11-20T16:00:00+09:00",
         "post_ids": [
           "18096084227694612"
@@ -5702,9 +5797,9 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 4,
-    "receipt_success_rate": 0.5,
+    "expected_slots": 7,
+    "recorded_publications": 3,
+    "receipt_success_rate": 0.42857142857142855,
     "live_meta_verification_performed": false,
     "needs_attention": [
       {
@@ -5731,8 +5826,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-22T10:25:37.587245+09:00",
-    "window_start": "2026-11-20T01:25:37.587245+00:00",
+    "checked_at": "2026-11-22T12:01:23.548813+09:00",
+    "window_start": "2026-11-20T03:01:23.548813+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
