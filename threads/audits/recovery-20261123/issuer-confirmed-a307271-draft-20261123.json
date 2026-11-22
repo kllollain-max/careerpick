@@ -168,5 +168,56 @@
       "production writer_inputs, inspect_bundle, validate_entry, verify_official_receipt, verify_reviewed_card, plan, merge, check_queue not run locally"
     ],
     "note": "The record is a new source evidence reconciliation only, not a new ready entry or a duplicate HOLD decision. No workflow dispatch/rerun or Meta POST requested."
+  },
+  "provenance_inspect_bundle_20261123_0649": {
+    "status": "passed",
+    "validation_scope": "read_only_unchanged_collection_provenance; no official_notice_or_queue_approval",
+    "inspected_at_kst": "2026-11-23T06:49:22+09:00",
+    "production_function": "scripts.threads_source_verification.inspect_bundle copied verbatim from main blob 93b99925e300f6b9ddaa83db0b5b745999e09f6d in an isolated local module",
+    "run_id": 45058225645,
+    "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/45058225645",
+    "run_path": ".github/workflows/operations.yml",
+    "run_event": "schedule",
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "head_sha": "bb33a73d4923294a17115150d3a3d08b0f7f6097",
+    "artifact_id": 14768093638,
+    "operation_zip_bytes": 6069,
+    "operation_zip_sha256": "30e82531ae50f4d3151287233d20a68adf8440003d2f44e1ad136ea38bf84d34",
+    "source_file_sha256": {
+      "alio.json": "df636378c4b1f43ec20f884656cffc6c170fe9486fdfb9ce3e26792217e6352e",
+      "alio-detail.json": "ac3a1c6060622b951d6477abfc6d398cffb7422bf0587defba56a0be1c462c8f",
+      "cleaneye.json": "a483defebb622d0d11a012c89d2abc49e26300878f068afde3762ede3ca4e43b"
+    },
+    "inspector_returned_verified_at": {
+      "alio": "2026-11-23T04:00:52+09:00",
+      "cleaneye": "2026-11-23T04:01:24+09:00"
+    },
+    "latest_preflight_read_only": {
+      "run_id": 45069241677,
+      "checked_at": "2026-11-23T05:57:28.383500+09:00",
+      "approved_supply_count": 0,
+      "inventory_target": 8,
+      "next_slot_missing": true,
+      "next_slot": "2026-11-23T08:00:00+09:00",
+      "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+      "staging_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+      "account": "hid_119",
+      "last_meta_get_confirmed_post_id": "18203041492385442",
+      "no_new_post_20261123_as_of": "2026-11-23T05:57:28.383500+09:00"
+    },
+    "not_completed": [
+      "production_writer_inputs_local_run",
+      "issuer_original_pdf_byte_SHA",
+      "live_issuer_correction_full_scan",
+      "actual_site_job_rendered_UI",
+      "production_image_card_360_visual_review",
+      "validate_entry_and_CAS_queue_supply"
+    ],
+    "new_ready": 0,
+    "queue_or_staging_mutated": false,
+    "meta_post_requested": false,
+    "no_manual_dispatch": true,
+    "next_action": "Use verified source proof as input for real production writer_inputs; independently complete official attachment, actual UI, IMAGE card, and check_queue before any new ready promotion"
   }
 }
