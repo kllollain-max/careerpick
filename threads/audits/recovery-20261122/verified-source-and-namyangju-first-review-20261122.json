@@ -53,9 +53,13 @@
     "official_pdf_visually_checked_pages_one_based": [
       1,
       2,
-      3
+      3,
+      4,
+      5,
+      6,
+      7
     ],
-    "pdf_source": "Employer's public PDF opened and rendered by read-only web screenshot tool; binary bytes/sha256 NOT available, entire PDF not visually inspected.",
+    "pdf_source": "2026-11-23 read-only employer PDF all 7 page images reviewed in browser/PDF screenshots; employer original bytes and byte SHA256 are not available; no claim of binary official receipt verification",
     "total_posted_jobs": 7,
     "regular_jobs_total": 6,
     "regular_8th_grade_station_operations": 5,
@@ -71,13 +75,33 @@
     "correction_check_scope": "Employer PDF plus municipal 2026-11-16 post and public recruitment portal landing page checked; entire later amendment/cancellation index not exhaustively checked.",
     "text_draft_not_approved": "남양주 거주 조건에 해당한다면,\n남양주도시공사 일반직 역무8급 5명 채용을 확인해 보세요.\n\n진접선·별내선 역사 영업 준비, 여객서비스와 안전관리 업무예요. 공고일 전날 기준 주민등록상 남양주시 거주가 필수예요. 공업8급 필수자격증은 역무8급 요건과 구분해야 해요.\n\n11월 26일 오후 6시까지 채용 홈페이지에서 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
     "missing": [
-      "Official PDF original binary SHA and full PDF pages, live correction/cancellation beyond observed notices",
+      "Official PDF original binary SHA, live correction/cancellation beyond observed notices",
       "Rendered CareerPick #job=cleaneye-81291 final detail and currently open state; TinyFish wallet -0.136 USD, no authorized CUA available",
       "Production validate_entry/public-copy/verify_official_receipt and card generation+1080/360 visual review",
       "Exact unit-record mapping, guarded CAS plan/merge/check_queue and source-age revalidation near slot"
     ],
     "preview_only": true,
-    "approved_for_queue": false
+    "approved_for_queue": false,
+    "full_page_review_addendum": {
+      "inspected_at_utc": "2026-11-22T20:52:47.766Z",
+      "public_employer_pdf_url": "https://www.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+      "rendered_page_count": 7,
+      "page_1": "General regular: 역무8급 5명, 공업8급 1명; fixed-term 청소년지도7급 1명. Unit total 5 distinct from regular total 6.",
+      "page_2": "Station operations mandatory eligibility is residence registered in Namyangju as of day before November 16 announcement. HVAC license applies only technical grade, not station operations.",
+      "page_3": "Public competition takes document, written, interview; for station operations technical license is not mandatory; field-specific mandatory license only HVAC.",
+      "page_4": "Station operations written exam NCS five competencies 50 questions plus rail-transport general knowledge 50 questions; bonus points are preference not required eligibility.",
+      "page_5": "Online applications November 17 09:00 to November 26 18:00 KST. Station operations certificate copy requirement explicitly excluded.",
+      "page_6": "Employer announcement schedule: written exam scheduled December 5, document results December 2, subject to changes.",
+      "page_7": "Prohibits mistaken certificate dates and allows schedule changes; corrections/cancellation bulletin still needs independent latest completeness check.",
+      "still_unverified": [
+        "Employer PDF raw bytes SHA256 and production independent fetch",
+        "Actual rendered CareerPick #job=cleaneye-81291 UI",
+        "Employer correction/cancellation index exhaustive newest checking",
+        "Production 1080 and 360px card actual pixels + publisher validator + policy/source age and immutable CAS queue supply"
+      ],
+      "candidate_status": "HOLD_UNAPPROVED",
+      "approved_for_queue": false
+    }
   },
   "no_changes": [
     "threads/writer-queue.json",
@@ -86,5 +110,52 @@
     "threads_posted.json",
     "threads-claims/**"
   ],
-  "new_post_id": null
+  "new_post_id": null,
+  "followup_20261123_0550": {
+    "source_check": "Downloaded authenticated operations artifact and same-run Pages archive; computed SHA256 for both, and compared raw ALIO/detail/Cleaneye bytes from Pages tar to original report (all match), but did not run production inspect_bundle in this execution.",
+    "latest_completed_operations_id": 45058225645,
+    "operations_run_url": "https://github.com/kllollain-max/careerpick/actions/runs/45058225645",
+    "operation_artifact_id": 14768093638,
+    "operation_zip_sha256": "30e82531ae50f4d3151287233d20a68adf8440003d2f44e1ad136ea38bf84d34",
+    "pages_artifact_id": 14768352800,
+    "pages_zip_sha256": "81832eec9251e04a0f75a8170a4f9623fbf8ddb49bb15a5575ad678e7614f2eb",
+    "sources": [
+      {
+        "name": "alio.json",
+        "sha256": "df636378c4b1f43ec20f884656cffc6c170fe9486fdfb9ce3e26792217e6352e",
+        "byte_length": 878937
+      },
+      {
+        "name": "alio-detail.json",
+        "sha256": "ac3a1c6060622b951d6477abfc6d398cffb7422bf0587defba56a0be1c462c8f",
+        "byte_length": 5392258
+      },
+      {
+        "name": "cleaneye.json",
+        "sha256": "a483defebb622d0d11a012c89d2abc49e26300878f068afde3762ede3ca4e43b",
+        "byte_length": 2570673
+      }
+    ],
+    "alio_verified_at_from_receipt": "2026-11-23T04:00:52+09:00",
+    "cleaneye_snapshot_at_from_receipt": "2026-11-23T00:56:44+09:00",
+    "latest_preflight_run_id": 45063740213,
+    "latest_preflight_status": "failure",
+    "preflight_at": "2026-11-23T04:58:43.566571+09:00",
+    "queue_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staging_blob_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+    "ready": 0,
+    "target": 8,
+    "next_missing_slot": "2026-11-23T08:00:00+09:00",
+    "next_media": "IMAGE",
+    "invalid_ready_entries": [],
+    "live_inventory_checked_at": "2026-11-23T04:59:32.408542+09:00",
+    "latest_post_id": "18203041492385442",
+    "new_post_confirmed": false,
+    "tinyfish_wallet_usd": "-0.136",
+    "local_browser_network_available": false,
+    "approved_entries_added": 0,
+    "queue_changed": false,
+    "manual_dispatch": false,
+    "meta_post": false
+  }
 }
