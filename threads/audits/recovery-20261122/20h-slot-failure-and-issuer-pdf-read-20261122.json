@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "observed_at_kst": "2026-11-22T20:46:28+09:00",
+  "source_branch": "threads-publisher-state",
+  "base_state_sha": "9571a64b250c895d6ca8cdd9e33d0c385a24712e",
+  "account": "hid_119",
+  "new_meta_posts_requested": 0,
+  "post_state": {
+    "slot_kst": "2026-11-22T20:00:00+09:00",
+    "run_id": 45018121837,
+    "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/45018121837",
+    "run_conclusion": "failure",
+    "publish_job_id": 137194764551,
+    "job_log": "QUEUE_SLOT_MISSING: no approved manuscript; Meta POST skipped",
+    "meta_post_executed": false,
+    "live_meta_inventory_checked_at": "2026-11-22T20:27:23.979016+09:00",
+    "live_meta_inventory_last_post_id": "18203041492385442",
+    "caveat": "Absence observed at 20:27 only; do not infer a newer GET or republish authorization"
+  },
+  "inventory": {
+    "future_approved_count": 0,
+    "target": 8,
+    "source": "threads/replenishment-handoff.json",
+    "handoff_blob_sha": "7221d5a0710c88d288cfbc914a39c75b0a4d404f",
+    "queue_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb"
+  },
+  "source_receipt": {
+    "operations_run_id": 45010053173,
+    "operation_artifact_id": 14749232529,
+    "artifact_zip_sha256": "355f80ec585bf346dddc4fc3b958e63579cd05ff68aaa86c28ff57793379affe",
+    "pages_artifact_id": 14749388080,
+    "pages_zip_sha256": "9c9f47f77d4b2fde75860eca8b4521fa366eba32efdf6eb7dfd6e7ca5716ee2c",
+    "checked_exact_source_hash_matches": [
+      "alio.json",
+      "alio-detail.json",
+      "cleaneye.json"
+    ],
+    "method": "local sha256 comparison against official operation artifact report; production inspect_bundle not executed"
+  },
+  "candidate_read": {
+    "notice_id": "cleaneye-81282",
+    "issuer_pdf_url": "https://yongsanculture.or.kr/site/main/file/download/316",
+    "text_extraction_status": "issuer PDF text actually retrieved via read-only content extraction; raw bytes unavailable, not a byte-level receipt",
+    "factual_excerpt_pages": [
+      2,
+      3,
+      8
+    ],
+    "recruitment_unit": "용산문화재단 일반직 8급(주임), 공연예술팀 기획공연/프로그램기획 등 2명",
+    "eligibility": "일반직 8급 다섯 대안 중 한 가지 이상 및 공통조건",
+    "application_deadline": "2026-11-26 24:00 KST online",
+    "official_correction_check": "not independently complete",
+    "careerpick_job_ui": "not verified: browser automation wallet blocked; extracted first-loading page cannot prove #job detail",
+    "production_checks": "not run",
+    "approval_status": "HOLD",
+    "slot_assigned": false
+  },
+  "next_action": "Revalidate issuer file bytes/correction and rendered #job and image card; run production checks only for unstarted fresh future slots. No dispatch/retry/POST."
+}
