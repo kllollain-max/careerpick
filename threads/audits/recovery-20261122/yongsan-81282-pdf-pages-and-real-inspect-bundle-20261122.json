@@ -119,10 +119,12 @@
       },
       "report_verified_at": {
         "alio": "2026-11-22T18:58:19+09:00",
-        "cleaneye": "2026-11-22T18:59:25+09:00"
+        "cleaneye": null
       },
       "verification_method": "Downloaded both actual GitHub connector ZIPs, verified SHA256 against artifact digests; opened nested Pages artifact.tar and directly hashed all three raw source files, compared with operation report's source_hashes/source_sha256. This is byte-level cross-check, not direct execution of production inspect_bundle nor writer_inputs.",
-      "writer_inputs_run": false
+      "writer_inputs_run": false,
+      "report_cleaneye_started_at": "2026-11-22T18:58:51+09:00",
+      "report_cleaneye_note": "Cleaneye unchanged report contains started_at but no verified_at field; do not invent a completion or verification clock time. Full operation completed at 2026-11-22T18:59:54Z per GitHub Actions metadata."
     },
     "latest_preflight": {
       "run_id": 45010147533,
