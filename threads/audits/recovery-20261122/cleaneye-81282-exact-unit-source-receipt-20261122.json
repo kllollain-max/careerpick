@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "kind": "independent_new_source_unit_mapping_and_production_receipt_recheck",
+  "account": "hid_119",
+  "source": "kllollain-max/careerpick",
+  "checked_in_run_at_kst": "2026-11-22T15:50:11+09:00",
+  "current_main_sha_observed": "d36f44d3fdc31735156591a648cff9441ef59f5a",
+  "state_before": "c9c5fb57fcdaa1973f57ce52bae2f2ee39035adf",
+  "notice_id": "cleaneye-81282",
+  "target": "2026-11-22T20:00:00+09:00 (suggested only; not reserved)",
+  "status": "HOLD_EVIDENCE_ADVANCED_NOT_APPROVED",
+  "approved_for_queue": false,
+  "registered": false,
+  "posted": false,
+  "collected_source_verification": {
+    "production_function": "scripts.threads_source_verification.inspect_bundle",
+    "code_blob_sha": "93b99925e300f6b9ddaa83db0b5b745999e09f6d",
+    "run_id": 44983468487,
+    "artifact_id": 14739181289,
+    "archive_digest": "sha256:4aa0189feab82376bda16df2586fb4ba1013a47f429012294ed79cf39ae6a4ed",
+    "validations": "run+artifact provenance, digest, ZIP structure, Git head, source bytes, original receipt timestamps verified with exact function body",
+    "times_kst": {
+      "alio": "2026-11-22T13:05:46+09:00",
+      "cleaneye": "2026-11-22T13:06:24+09:00"
+    },
+    "bytes_sha256": {
+      "alio.json": "7daed380d058ef84c543f33885a5dba710ad0505d1c3e6ee75cca6c7bed5fc35",
+      "alio-detail.json": "8f4936e38cfe367a6f32098f858a0613c1594b1d5be4be84af9f70cae9489d68",
+      "cleaneye.json": "8800cf24e3926638e18d3dc450bd059fd31980698ebd1316c85c078efa82d000"
+    },
+    "source_originals_mutated": false
+  },
+  "new_exact_id_mapping": {
+    "feed_record_path": "cleaneye.json / posts / id=cleaneye-81282 / cleaneyeDetail",
+    "official_cleaneye_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81282",
+    "employer": "용산문화재단",
+    "employer_notice_title": "2026년 제4차 용산문화재단 직원 공개경쟁채용",
+    "employment": "일반정규직",
+    "class_grade": "주임(8급)",
+    "count": 2,
+    "activity": "기획공연 제작 및 프로그램 기획 등",
+    "feed_application_start_date_only": "2026-11-16",
+    "feed_application_end_date_only": "2026-11-26",
+    "feed_updated_raw": "2026-11-17",
+    "feed_application_state": "모집중",
+    "adjacent_notice_controls": {
+      "cleaneye-81280": {
+        "grade": "대리(7급)",
+        "count": 1,
+        "role": "기획공연 제작 및 문화예술 프로그램 기획 등"
+      },
+      "cleaneye-81281": {
+        "grade": "주임(8급)",
+        "count": 1,
+        "role": "경영지원팀 기획/인사/감사/회계"
+      },
+      "cleaneye-81283": {
+        "grade": "주임(8급)",
+        "count": 1,
+        "role": "공연 시설 하우스 운영"
+      }
+    },
+    "conclusion": "Unique Cleaneye ID 81282 explicitly records 8급 2명 and 공연 프로그램 기획; it aligns with the uniquely matching 2-person 공연예술팀 unit in the public PDF. Prior ID-to-unit association was inferred from the PDF; now independently corroborated by exact official API ID record. Not yet a completed publisher review."
+  },
+  "official_crosscheck": {
+    "issuer_board": "https://www.yongsanculture.or.kr/site/main/archive/post/category/jobNotice",
+    "issuer_notice": "https://www.yongsanculture.or.kr/site/main/archive/post/2026%EB%85%84-%EC%A0%9C4%EC%B0%A8-%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8-%EC%A7%81%EC%9B%90-%EA%B3%B5%EA%B0%9C%EA%B2%BD%EC%9F%81%EC%B1%84%EC%9A%A9-%EA%B3%B5%EA%B3%A0",
+    "issuer_pdf_link": "https://www.yongsanculture.or.kr/site/main/file/download/316",
+    "publicly_hosted_pdf": "https://www.gacf.kr/gears_pds/board/12472/%EB%B6%99%EC%9E%84.%202026%EB%85%84%20%EC%A0%9C4%EC%B0%A8%20%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8%20%EC%A7%81%EC%9B%90%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+    "actual_visual_pages_checked": [
+      2,
+      3,
+      8
+    ],
+    "selected_unit": "일반직 8급 (주임) 공연예술팀 2명; 기획공연 제작·프로그램 기획·공연장 홍보마케팅·관객 개발",
+    "pdf_deadline": "2026-11-26 24:00 KST; note feed stores date only",
+    "issuer_original_download_issue": "HTTP 400 unsupported application/octet-stream; no issuer file bytes or sha",
+    "correction_scope": "issuer visible recruiting-board latest listing, not all correction sources",
+    "cross_source_byte_identity": false
+  },
+  "remaining_required": [
+    "Issuer original PDF raw bytes and digest; independent semantic check of exactly same current file",
+    "Issuer corrections/cancellation and application portal precise cutoff recheck",
+    "Current actual JavaScript-rendered CareerPick #job=cleaneye-81282 and recruiting status",
+    "After official validation, actual 16h post result and IMAGE/TEXT last-success review; card 1080+360 visual review if IMAGE",
+    "Production validate_entry/public-copy/verify_official_receipt; guarded plan, merge, check_queue and CAS remote readback"
+  ],
+  "operational_preservation": {
+    "queue_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staging_blob_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+    "approved_future_count_at_last_preflight": 1,
+    "approved_slot": "2026-11-22T16:00:00+09:00 a306841",
+    "missing_next": "2026-11-22T20:00:00+09:00",
+    "no_queue_or_staging_change": true,
+    "no_dispatch": true,
+    "no_meta_post": true
+  }
+}
