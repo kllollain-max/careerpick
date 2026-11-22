@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-11-22T09:53:02.440Z",
+  "scope": "unapproved draft evidence only; never queue approval or posting",
+  "notice_id": "cleaneye-81282",
+  "slot_not_reserved": true,
+  "remote_read": {
+    "branch": "threads-publisher-state",
+    "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staging_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+    "handoff_run_id": "45005328626",
+    "handoff_captured_at": "2026-11-22T18:00:18.159582+09:00",
+    "approved_future_count": 0,
+    "inventory_goal": 8,
+    "missing_next_slot": "2026-11-22T20:00:00+09:00",
+    "next_media": "IMAGE"
+  },
+  "source_bundle_verification": {
+    "operation_run_id": 44998070764,
+    "artifact_id": 14744836443,
+    "zip_sha256": "5170dd4c87b05b094e82ef38d264df8c2ccbb520946a560798ca3c565ae376f6",
+    "checked_method": "local faithful copy of current production scripts.threads_source_verification.inspect_bundle with original artifact ZIP and actual Pages source file bytes; no source snapshot timestamps modified",
+    "result": "passed",
+    "alio_verified_at": "2026-11-22T16:24:49+09:00",
+    "cleaneye_verified_at": "2026-11-22T16:25:26+09:00",
+    "source_file_sha256": {
+      "alio.json": "7daed380d058ef84c543f33885a5dba710ad0505d1c3e6ee75cca6c7bed5fc35",
+      "alio-detail.json": "8f4936e38cfe367a6f32098f858a0613c1594b1d5be4be84af9f70cae9489d68",
+      "cleaneye.json": "8800cf24e3926638e18d3dc450bd059fd31980698ebd1316c85c078efa82d000"
+    }
+  },
+  "source_candidate": {
+    "cleaneye_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81282",
+    "source_post_sha256": "5757f307b4e4a6b93f85d833dc049387acc0e7a92cdb0fc4302fc7bb073504df",
+    "source_detail_sha256": "ddae7b62bb8ee757e5dd0a2f9be3c74e9ceb66a9ec812f8d32d0b103e9abe963",
+    "snapshot_position": "cleaneye.json/posts cleaneye-81282",
+    "org": "용산문화재단",
+    "unit": "일반직 8급 공연예술팀 공연기획/홍보마케팅",
+    "count": 2
+  },
+  "independent_pdf_review": {
+    "url": "https://www.gacf.kr/gears_pds/board/12472/%EB%B6%99%EC%9E%84.%202026%EB%85%84%20%EC%A0%9C4%EC%B0%A8%20%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8%20%EC%A7%81%EC%9B%90%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+    "hosting": "external Korean arts public organization hosting copied issued PDF; publisher-original raw download not obtained",
+    "document_title": "2026년 제4차 용산문화재단 직원 공개경쟁채용 공고",
+    "notice_no": "용산문화재단 공고 제2026-22호",
+    "issued_on": "2026-11-16",
+    "web_pdf_text_and_page_screens_read": [
+      2,
+      3,
+      8
+    ],
+    "facts": {
+      "overall_count": 9,
+      "selected_unit_count": 2,
+      "selected_grade": "일반직 8급 주임",
+      "selected_work": "공연기획·공연장 홍보마케팅·관객 개발",
+      "eligibility_alternatives": "five OR routes for general grade 8; do not turn OR into AND",
+      "common_terms": "18+ at notice, no region or gender limitation, military condition, immediate availability on appointment",
+      "closing": "2026-11-26 24:00 KST online",
+      "required_documents": "career certificate must specify duties/dates and match NHIS employment record",
+      "selection": "document, written exam, personality test, interview"
+    },
+    "conflict_resolution": "2026-11-24 date on third-party theater notice pertains to different stage-technical recruitment; full issued notice's selected general-grade unit has 2026-11-26 24:00; publisher online intake requires final check",
+    "source_bytes_sha256": null
+  },
+  "unapproved_draft": {
+    "post_text": "공연기획·홍보 경력자라면,\n용산문화재단 일반직 8급 공연예술팀 정규직 2명 모집이에요.\n\n전문학사 이상+관련경력 1년, 공연·예술·홍보 실무경력 4년 등 5개 필수자격 경로 중 하나를 충족해야 해요. 공통 결격·병역 기준도 확인하세요.\n\n온라인으로 11월 26일 24:00까지 지원해요. 일반직은 서류·필기·인성검사·면접을 거치며, 경력증명서와 건강보험 이력이 일치해야 해요.\n\n자세한 사항은 프로필링크 확인",
+    "characters": 228,
+    "auto_reply": 0,
+    "cta_count": 1
+  },
+  "required_before_operational_ready": [
+    "publisher attachment byte retrieval and SHA",
+    "publisher current correction/cancellation and exact intake status",
+    "actual #job=cleaneye-81282 rendered detailed UI",
+    "production source verification attach and writer_inputs/validate_entry/verify_official_receipt",
+    "IMAGE original production renderer JPEG and actual 360x360 PNG visual review",
+    "CAS reviewed submission/staging/queue registration and readback"
+  ],
+  "write_policy": {
+    "no_existing_entries_modified": true,
+    "no_manual_post": true,
+    "no_workflow_dispatch": true,
+    "no_publisher_run_started": true
+  }
+}
