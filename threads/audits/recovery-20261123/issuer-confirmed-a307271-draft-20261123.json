@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "status": "unapproved_draft",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "checked_at_utc": "2026-11-22T18:45:48.313Z",
+  "scope": "careerpick Threads @hid_119 official independent candidate review; no queue or posting changes",
+  "remote_state_before": {
+    "branch": "threads-publisher-state",
+    "head_sha": "a31624176fa30f9a22ce2b749fdf54b585675223",
+    "queue_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staging_blob_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+    "posted_blob_sha": "d1e3e9d4a181d5ae6eeeaee4298b7743c7a75a8e"
+  },
+  "preflight": {
+    "run_id": 45051942153,
+    "checked_at_kst": "2026-11-23T02:54:19.891894+09:00",
+    "next_slot": "2026-11-23T08:00:00+09:00",
+    "ready_future": 0,
+    "target": 8,
+    "preflight_next_media": "IMAGE",
+    "last_live_post_id": "18203041492385442",
+    "no_manual_dispatch": true
+  },
+  "candidate": {
+    "notice_id": "a307271",
+    "employer": "한국농어촌공사",
+    "actual_hiring_office": "철원화천지사",
+    "recruitment_unit": "공무직(청소원)",
+    "confirmed_unit_count": 1,
+    "employment": "무기계약직",
+    "work_site": "강원도 철원군 동송읍",
+    "hours": "주5일/하루4시간",
+    "monthly_wage_krw": 1146500,
+    "start_requirement": "2026-12-14 즉시 근무 가능",
+    "age_requirement": "정년 미도달(연령 일반 제한 없음)",
+    "qualifications": {
+      "mandatory_all": [
+        "정년 미도달",
+        "2026-12-14 즉시 근무 가능",
+        "철원 동송읍 출퇴근 가능",
+        "인사규정 임용 결격사유 없음"
+      ],
+      "conditional_male": "병역법 제76조의 병역의무 불이행 사실 없음",
+      "unrestricted": [
+        "학력",
+        "전공",
+        "성별"
+      ]
+    },
+    "preference": "취업지원대상자는 면접전형 동점 시에만 우선순위",
+    "apply_by": "2026-11-30T16:00:00+09:00",
+    "apply_method": "채용 홈페이지 온라인 접수",
+    "source_due_time_placeholder": "2026-11-30T23:59:00+09:00; dueHasTime=false; NOT an official deadline"
+  },
+  "official_sources": [
+    {
+      "kind": "official_alio_detail",
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+      "checked_at_kst": "2026-11-23T02:54:18.231137+09:00",
+      "source_byte_sha256": "not_available_for_this_exact_candidate_in_current-audit; preflight full source collected",
+      "preflight_size_bytes": 12717
+    },
+    {
+      "kind": "official_employer_notice",
+      "url": "https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1f64cbe045909&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437",
+      "reviewed_from": "publisher page actual text, confirmed appointment date, part-time hours/pay, period and exact employer; employer page visible, original attachment not downloaded"
+    }
+  ],
+  "draft": {
+    "main_text": "하루 4시간 근무하는 강원 공공기관 일자리를 찾는다면 확인해 보세요.\n한국농어촌공사 철원화천지사에서 공무직 청소원 1명을 채용해요. 무기계약직으로 주 5일, 하루 4시간 근무하며 월 급여는 114만 6,500원이에요. 학력·전공·성별 제한은 없지만 정년에 도달하지 않아야 하고, 12월 14일부터 근무하며 철원 동송읍으로 출퇴근할 수 있어야 해요. 11월 30일 16시까지 온라인 접수예요.\n자세한 사항은 프로필링크 확인",
+    "chars": 235,
+    "sha256": "ae2692a7979eda3190bc06e2f907f03a35142104c92046b6949f53569260530a",
+    "detail_reply": "",
+    "cta_count": 1,
+    "contains_url": false,
+    "contains_hashtags": false,
+    "contract_version_target": 2,
+    "category": "information-first only; unapproved"
+  },
+  "remaining_checks": [
+    "download and hash employer PDF original (ALIO attachment GET 403 and employer PDF download 400 seen through public read path)",
+    "review all official PDF pages, footnotes and correction/cancellation scope",
+    "confirm actual rendered careerpick #job=a307271 browser detail (web fetch of JS fragment failed)",
+    "generate and visually review production 1080 JPEG and derived 360 PNG for next IMAGE slot",
+    "load all exact current production prompts and run validate_entry, verify_official_receipt, verify_reviewed_card, reviewed_ingest.plan, queue bridge merge, check_queue",
+    "read latest remote SHA and CAS-save reviewed entry only once all checks pass"
+  ],
+  "notes": [
+    "No ready entry created, no slot reserved, no IMAGE claimed to have passed review",
+    "The employer page is a direct source; the separate source PDF was not retrieved and its SHA is unknown",
+    "This is a candidate in the 02:54 producer handoff but not in posted history or current queue",
+    "Official data supersedes date-only synthetic 23:59 placeholder; future publication must use 16:00 KST"
+  ]
+}
