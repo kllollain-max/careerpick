@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "account": "hid_119",
+  "review_status": "HOLD_NOT_APPROVED",
+  "queue_registered": false,
+  "publish_requested": false,
+  "source_verification": {
+    "method": "Production scripts.threads_source_verification.inspect_bundle function body from main blob 93b99925e300f6b9ddaa83db0b5b745999e09f6d, executed locally on actual workflow artifact ZIP and exact Pages artifact source bytes; no source timestamp changed.",
+    "result": "passed",
+    "run_id": 45010053173,
+    "run_url": "https://github.com/kllollain-max/careerpick/actions/runs/45010053173",
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "head_sha": "4e873f17cba714903783ea8da19fc30d670fdc9d",
+    "operation_artifact_id": 14749232529,
+    "operation_artifact_sha256": "355f80ec585bf346dddc4fc3b958e63579cd05ff68aaa86c28ff57793379affe",
+    "pages_artifact_id": 14749388080,
+    "pages_digest": "9c9f47f77d4b2fde75860eca8b4521fa366eba32efdf6eb7dfd6e7ca5716ee2c",
+    "source_file_sha256": {
+      "alio.json": "7daed380d058ef84c543f33885a5dba710ad0505d1c3e6ee75cca6c7bed5fc35",
+      "alio-detail.json": "8f4936e38cfe367a6f32098f858a0613c1594b1d5be4be84af9f70cae9489d68",
+      "cleaneye.json": "8800cf24e3926638e18d3dc450bd059fd31980698ebd1316c85c078efa82d000"
+    },
+    "inspector_result": {
+      "alio": "2026-11-22T18:58:19+09:00",
+      "cleaneye": "2026-11-22T18:58:51+09:00"
+    },
+    "publisher_writer_inputs_full": "NOT_RUN",
+    "reason": "Complete publisher source/dependency files unavailable in this isolated local runtime; source proof alone cannot approve drafts."
+  },
+  "current_remote_state": {
+    "state_parent_sha": "0d17119ded1827b6d63c165237f0ca9bdb50bc71",
+    "main_head_sha": "4e873f17cba714903783ea8da19fc30d670fdc9d",
+    "handoff_blob_sha": "beb716cda66c72afc7c6cefc02e57423ca09e778",
+    "queue_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "staging_blob_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+    "approved_future_count": 0,
+    "target": 8,
+    "next_missing_slot": "2026-11-23T08:00:00+09:00",
+    "preflight_run_id": 45019590355,
+    "preflight_status": "failure",
+    "last_success_meta_post_id": "18203041492385442",
+    "last_live_meta_get": "2026-11-22T20:55:27.920421+09:00",
+    "last_live_meta_get_no_20h_post": true
+  },
+  "candidate_first_review": {
+    "notice_id": "cleaneye-81291",
+    "org": "남양주도시공사",
+    "notice_number": "2026-424",
+    "issuer_pdf_url": "https://www.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+    "municipal_notice_url": "https://nyj.go.kr/www/selectBbsNttView.do?bbsNo=67&key=2497&nttNo=551510&pageIndex=1&pageUnit=10&searchCnd=all",
+    "application_site": "https://ncuc.brms.kr/",
+    "official_pdf_visually_checked_pages_one_based": [
+      1,
+      2,
+      3
+    ],
+    "pdf_source": "Employer's public PDF opened and rendered by read-only web screenshot tool; binary bytes/sha256 NOT available, entire PDF not visually inspected.",
+    "total_posted_jobs": 7,
+    "regular_jobs_total": 6,
+    "regular_8th_grade_station_operations": 5,
+    "regular_8th_grade_technical_hvac": 1,
+    "fixed_term_youth_guidance_7th_grade": 1,
+    "single_unit_target": "일반직 역무8급 5명, 진접선·별내선 역사 영업/여객서비스/안전관리",
+    "eligibility": "역무8급: 2026-11-16 공고일 전일(2026-11-15) 기준 주민등록상 남양주시 거주. 공통 결격사유 적용. 공업8급의 공조냉동 자격증과 임기제 청소년지도7급 경력 요건은 역무8급 필수조건이 아님.",
+    "deadline": "2026-11-26T18:00:00+09:00",
+    "start": "2026-11-17T09:00:00+09:00",
+    "source_verified_in_portal": "Recruitment landing page currently shows same application window; a static read, not authenticated completion of application UI.",
+    "published_notice_date": "2026-11-16",
+    "source_feed_record": "cleaneye-81291 refers to all 6 regular positions, not a unique five-person unit. Unit-level mapping must be independently reconciled before queue entry.",
+    "correction_check_scope": "Employer PDF plus municipal 2026-11-16 post and public recruitment portal landing page checked; entire later amendment/cancellation index not exhaustively checked.",
+    "text_draft_not_approved": "남양주 거주 조건에 해당한다면,\n남양주도시공사 일반직 역무8급 5명 채용을 확인해 보세요.\n\n진접선·별내선 역사 영업 준비, 여객서비스와 안전관리 업무예요. 공고일 전날 기준 주민등록상 남양주시 거주가 필수예요. 공업8급 필수자격증은 역무8급 요건과 구분해야 해요.\n\n11월 26일 오후 6시까지 채용 홈페이지에서 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "missing": [
+      "Official PDF original binary SHA and full PDF pages, live correction/cancellation beyond observed notices",
+      "Rendered CareerPick #job=cleaneye-81291 final detail and currently open state; TinyFish wallet -0.136 USD, no authorized CUA available",
+      "Production validate_entry/public-copy/verify_official_receipt and card generation+1080/360 visual review",
+      "Exact unit-record mapping, guarded CAS plan/merge/check_queue and source-age revalidation near slot"
+    ],
+    "preview_only": true,
+    "approved_for_queue": false
+  },
+  "no_changes": [
+    "threads/writer-queue.json",
+    "threads/reviewed-staging.json",
+    "threads/reviewed-submissions.json",
+    "threads_posted.json",
+    "threads-claims/**"
+  ],
+  "new_post_id": null
+}
