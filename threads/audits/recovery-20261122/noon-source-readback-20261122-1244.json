@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "source_bytes_and_preflight_readback_not_approval",
+  "recorded_at_utc": "2026-11-22T03:44:25.174Z",
+  "scope": "kllollain-max/careerpick @hid_119; read-only observation and proof persistence",
+  "source": {
+    "workflow_run_id": 44971172220,
+    "operation_artifact_id": 14733249469,
+    "operation_zip_sha256": "b70b5617b20d30c4cdd968d694fb885f9edb1987894c0820aed7fb36d7ff03fc",
+    "github_pages_artifact_id": 14733333741,
+    "pages_zip_sha256": "e1581ab321330402678079a3e094ced35aebd2636acfd6300cba44653aa28ce2",
+    "verified_source_files": [
+      {
+        "path": "alio.json",
+        "size_bytes": 873874,
+        "sha256": "7daed380d058ef84c543f33885a5dba710ad0505d1c3e6ee75cca6c7bed5fc35",
+        "report_match": true
+      },
+      {
+        "path": "alio-detail.json",
+        "size_bytes": 5357818,
+        "sha256": "8f4936e38cfe367a6f32098f858a0613c1594b1d5be4be84af9f70cae9489d68",
+        "report_match": true
+      },
+      {
+        "path": "cleaneye.json",
+        "size_bytes": 2570523,
+        "sha256": "8800cf24e3926638e18d3dc450bd059fd31980698ebd1316c85c078efa82d000",
+        "report_match": true
+      }
+    ],
+    "alio_verified_at": "2026-11-22T10:23:18+09:00",
+    "alio_original_source_snapshot_at": "2026-11-22T00:56:32+09:00",
+    "cleaneye_original_source_snapshot_at": "2026-11-22T00:57:26+09:00",
+    "verification_scope": "Confirmed GitHub artifact ZIP digests and unmodified source bytes against original operation report; did not run production inspect_bundle or writer_inputs in this environment"
+  },
+  "publisher": {
+    "latest_preflight_run_id": 44981271094,
+    "preflight_at_kst": "2026-11-22T12:34:51.396723+09:00",
+    "future_ready_count": 1,
+    "target_count": 8,
+    "ready_slots": [
+      "2026-11-22T16:00:00+09:00"
+    ],
+    "missing_first_slot": "2026-11-22T20:00:00+09:00",
+    "missing_count": 7,
+    "invalid_ready_entries": [],
+    "next_slot_missing": false,
+    "official_alternatives_are_not_approved": true
+  },
+  "meta_inventory": {
+    "checked_at_kst": "2026-11-22T12:35:39.708024+09:00",
+    "account": "hid_119",
+    "pages_read": 1,
+    "pagination_complete": true,
+    "latest_post_id": "18129067321906823",
+    "latest_post_kst": "2026-11-22T08:26:41+09:00",
+    "last_observed_post_permalink": "https://www.threads.com/@hid_119/post/DgBaExkCU6K",
+    "observed_12_slot_post": false,
+    "caveat": "12:00 KST publication not observed as of GET; still within existing delayed-post allowance. No manual dispatch or additional POST authorized."
+  },
+  "mutations": {
+    "queue": false,
+    "staging": false,
+    "submissions": false,
+    "claim": false,
+    "publish": false,
+    "automation_schedule": false
+  },
+  "next_step": "Monitor existing publisher/accepted claim and official Meta GET, independently validate a new candidate before any 20:00 queue supply; no automatic approval or duplicate publication."
+}
