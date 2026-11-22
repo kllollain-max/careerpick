@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "purpose": "First-time read-only review of newly collected ALIO candidate; not an approved queue item or publication authorization",
+  "run_local_date": "2026-11-23",
+  "account": "hid_119",
+  "repository": "kllollain-max/careerpick",
+  "main_snapshot": {
+    "latest_observed_commit": "bb33a73d4923294a17115150d3a3d08b0f7f6097",
+    "commit_title": "Update validated public recruitment snapshots",
+    "operations_status_last_success_at": "2026-11-23T00:56:17+09:00",
+    "operations_status_snapshot_at": "2026-11-23T00:55:50+09:00",
+    "alio_git_blob_sha": "dfe0fe85bd281c9310e7b854df44dacb5b73a851",
+    "alio_detail_git_blob_sha": "7f0d2153b7d89f067563961a93bfcad1730bcd0b",
+    "source_receipt_status": "latest operations run artifact not identified in this review; do not reuse 2026-11-22 22:09 receipt"
+  },
+  "last_remote_publisher_observation": {
+    "observed_at": "2026-11-23T00:57:45.088879+09:00",
+    "handoff_run_id": "45041063878",
+    "queue_git_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+    "queue_entries": 54,
+    "future_ready_count": 0,
+    "next_slot": "2026-11-23T08:00:00+09:00",
+    "next_media": "IMAGE",
+    "last_meta_inventory_checked_at": "2026-11-23T00:57:44.401057+09:00",
+    "latest_post_id": "18203041492385442",
+    "no_new_meta_post_claimed": true
+  },
+  "candidate": {
+    "notice_id": "a307284",
+    "organization": "한국수력원자력(주)",
+    "title": "2026년도 제5차 신입사원(고졸수준) 선발",
+    "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307284",
+    "source_status": "진행중",
+    "official_source_read": "Current live ALIO details show regular employment, recruitment total 40, published 2026-11-23, and public notice period ending 2026-12-08; these are not independently verified single-unit headcounts or the precise application deadline time.",
+    "eligibility_logic": {
+      "all_conditions": [
+        "2026 current student at meister high school or specialized high school of the relevant base municipality hosting a nuclear plant",
+        "2nd-year student in a mechanical or electrical/electronics related department",
+        "school principal recommendation"
+      ],
+      "at_least_one": [
+        "academic rank within the top 30% through semester 1 of 2nd year",
+        "qualifying relevant vocational skills competition award under the listed competition rules"
+      ],
+      "later_stage_requirements": "ALIO describes additional completion/English-test and 2028 graduation requirements for final hiring; full recruitment PDF still required"
+    },
+    "official_attachment_url": "https://www.alio.go.kr/download/download.json?fileNo=3089063",
+    "official_attachment_fetch": "HTTP 403 in available read path",
+    "candidate_status": "HOLD_DRAFT_ONLY",
+    "not_ready_reasons": [
+      "official attachment original bytes and per-unit 40-person breakdown not independently verified",
+      "official corrections/cancellation completeness not confirmed",
+      "actual CareerPick #job=a307284 detail UI not rendered",
+      "production IMAGE and 360px preview not generated or visually approved",
+      "latest source verification bundle and production writer_inputs/validate_entry/official_receipt/queue_merge/check_queue not executed"
+    ],
+    "public_text_draft": "2026년 마이스터고 또는 원전 소재 지역 특성화고의 기계·전기전자 관련 학과 2학년이라면 한국수력원자력 신입 채용을 살펴보세요.\n학교장 추천과 성적 상위 30% 또는 관련 기능경기대회 입상 요건이 필요해요. 총 40명 선발 공고지만 직무별 인원은 모집요강 확인이 필요해요. 최종 전형에도 별도 자격 기준이 있어요.\n자세한 사항은 프로필링크 확인",
+    "draft_not_final": true
+  },
+  "safety": {
+    "ready_created": false,
+    "queue_or_staging_changed": false,
+    "meta_post_requested": false,
+    "workflow_dispatch_requested": false,
+    "stopped_automations_reenabled": false,
+    "no_time_or_sha_fabrication": true
+  },
+  "next_steps": [
+    "Identify latest successful scheduled operations.yml run for 2026-11-23 00:56 collection and retrieve digest-verified artifact",
+    "Read issuer recruitment PDF and exact unit counts/time; recheck corrections",
+    "Render actual site #job detail with allowed browser",
+    "Build and visually verify production IMAGE and 360 preview",
+    "Run all current production validation and conditional atomic queue supply only for an untouched future slot"
+  ]
+}
