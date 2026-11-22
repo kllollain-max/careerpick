@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "source_recruitment_unit_mapping_correction",
+  "observed_at_utc": "2026-11-22T05:49:28.233Z",
+  "scope": "new independent check of actual operation artifact and live original snapshot bytes",
+  "account": "hid_119",
+  "repo": "kllollain-max/careerpick",
+  "source_operation_run": 44983468487,
+  "source_artifact_id": 14739181289,
+  "source_pages_artifact_id": 14739181262,
+  "source_artifact_sha256": "4aa0189feab82376bda16df2586fb4ba1013a47f429012294ed79cf39ae6a4ed",
+  "source_sha256": {
+    "cleaneye.json": "8800cf24e3926638e18d3dc450bd059fd31980698ebd1316c85c078efa82d000",
+    "alio.json": "7daed380d058ef84c543f33885a5dba710ad0505d1c3e6ee75cca6c7bed5fc35",
+    "alio-detail.json": "8f4936e38cfe367a6f32098f858a0613c1594b1d5be4be84af9f70cae9489d68"
+  },
+  "source_receipt": {
+    "cleaneye_snapshot_at_kst": "2026-11-22T00:57:26+09:00",
+    "cleaneye_verification_time_kst": "2026-11-22T13:06:24+09:00",
+    "alio_verification_time_kst": "2026-11-22T13:05:46+09:00",
+    "all_three_original_files_byte_sha256_match_operations_report": true,
+    "source_data_changed": false
+  },
+  "correction": {
+    "notice_id": "cleaneye-81114",
+    "old_review_record": "threads/audits/recovery-20261122/independent-pdf-visual-cleaneye-81114-20261122.json",
+    "issue": "Old mirror-based draft associated cleaneye-81114 with 6급 관광콘텐츠 신규 2명, but the exact Cleaneye 81114 row independently verified from Pages source has 채용인원=1 and 채용구분=경력; therefore the mapping to a two-person newcomer unit is CONTRADICTED.",
+    "exact_cleaneye_evidence": {
+      "id": "cleaneye-81114",
+      "채용인원": 1,
+      "채용구분": "경력",
+      "고용형태": "일반정규직",
+      "채용제목": "2026년 하반기 (재)강원관광재단 채용 공고",
+      "모집분야": "경영·회계·사무",
+      "접수마감일": "2026-11-25"
+    },
+    "other_row": {
+      "id": "cleaneye-81112",
+      "채용인원": 3,
+      "채용구분": "신입"
+    },
+    "third_party_pdf_units": {
+      "3급_해양마케팅_경력": 1,
+      "6급_관광콘텐츠_신규": 2,
+      "6급_해양콘텐츠_신규": 1
+    },
+    "decision": "DO_NOT_APPROVE_81114_AS_6급_관광콘텐츠_2; 3급 경력 one-person unit is consistent but not certified as exact identifier by issuer.",
+    "source_url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81114",
+    "current_issuer_pdf_byte_equivalence": "not verified"
+  },
+  "independent_crosscheck": {
+    "notice_id": "cleaneye-81282",
+    "feed_count": 2,
+    "feed_grade": "주임(8급)",
+    "feed_duties": "기획공연 제작 및 프로그램 기획 등",
+    "feed_source_post_sha256": "5757f307b4e4a6b93f85d833dc049387acc0e7a92cdb0fc4302fc7bb073504df",
+    "feed_source_detail_sha256": "ddae7b62bb8ee757e5dd0a2f9be3c74e9ceb66a9ec812f8d32d0b103e9abe963",
+    "corresponding_public_pdf_line": "일반직 8급 주임 공연예술팀 기획공연 및 홍보마케팅 2명, unique 2-person row among 9 total",
+    "issuer_official_post": "https://www.yongsanculture.or.kr/site/main/archive/post/2026%EB%85%84-%EC%A0%9C4%EC%B0%A8-%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8-%EC%A7%81%EC%9B%90-%EA%B3%B5%EA%B0%9C%EA%B2%BD%EC%9F%81%EC%B1%84%EC%9A%A9-%EA%B3%B5%EA%B3%A0",
+    "public_cross_agency_pdf": "https://www.gacf.kr/gears_pds/board/12472/%EB%B6%99%EC%9E%84.%202026%EB%85%84%20%EC%A0%9C4%EC%B0%A8%20%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8%20%EC%A7%81%EC%9B%90%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+    "pdf_visual_pages_one_based": [
+      2,
+      3,
+      8
+    ],
+    "deadline_from_mirror": "2026-11-26T24:00:00+09:00",
+    "mapping_status": "strong_content_match_not_direct_live_cleaneye_GET",
+    "issuer_pdf_original_binary": "not retrieved",
+    "issuer_pdf_sha256": null,
+    "issuer_current_correction_full_scan": "not completed",
+    "careerpick_hash_job_detail_render": "not verified",
+    "publisher_validator": "not run",
+    "status": "DRAFT_HOLD"
+  },
+  "no_queue_write": true,
+  "no_staging_write": true,
+  "no_submission_change": true,
+  "no_meta_post": true,
+  "automatic_approval": false,
+  "next_actions": [
+    "Never promote cleaneye-81114 as a two-person tourist-content unit; reconcile employer 3급 and Cleaneye source per ID",
+    "For 81282 obtain original issuer PDF byte digest, current corrections, rendered actual CareerPick detail, card and production validation before ready",
+    "For 16:00 and later verify actual accepted claim, main history, Meta GET on normal schedule; do not manual post"
+  ],
+  "current_branch_parent_sha": "84421983a886ddccc6ec12f019ae56e0bc5d8655"
+}
