@@ -93,5 +93,80 @@
     "The employer page is a direct source; the separate source PDF was not retrieved and its SHA is unknown",
     "This is a candidate in the 02:54 producer handoff but not in posted history or current queue",
     "Official data supersedes date-only synthetic 23:59 placeholder; future publication must use 16:00 KST"
-  ]
+  ],
+  "followup_20261123_0403": {
+    "type": "independent_latest_operation_and_preflight_source_hash_reconciliation",
+    "observed_at_from_preflight": "2026-11-23T04:03:42.010396+09:00",
+    "read_only_operation": {
+      "run_id": 45058225645,
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/45058225645",
+      "path": ".github/workflows/operations.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "head_sha": "bb33a73d4923294a17115150d3a3d08b0f7f6097",
+      "operation_artifact_id": 14768093638,
+      "operation_zip_sha256": "30e82531ae50f4d3151287233d20a68adf8440003d2f44e1ad136ea38bf84d34",
+      "pages_artifact_id": 14768352800,
+      "pages_zip_sha256": "81832eec9251e04a0f75a8170a4f9623fbf8ddb49bb15a5575ad678e7614f2eb",
+      "original_source_verification": {
+        "alio.json": {
+          "byte_length": 878937,
+          "sha256": "df636378c4b1f43ec20f884656cffc6c170fe9486fdfb9ce3e26792217e6352e",
+          "matches_report": true
+        },
+        "alio-detail.json": {
+          "byte_length": 5392258,
+          "sha256": "ac3a1c6060622b951d6477abfc6d398cffb7422bf0587defba56a0be1c462c8f",
+          "matches_report": true
+        },
+        "cleaneye.json": {
+          "byte_length": 2570673,
+          "sha256": "a483defebb622d0d11a012c89d2abc49e26300878f068afde3762ede3ca4e43b",
+          "matches_report": true
+        }
+      },
+      "source_status": "unchanged",
+      "source_snapshot_alio": "2026-11-23T00:55:50+09:00",
+      "source_snapshot_cleaneye": "2026-11-23T00:56:44+09:00",
+      "verified_alio": "2026-11-23T04:00:52+09:00",
+      "note": "Verified original source bytes extracted from this run's Pages tar match the operation artifact reported SHA-256. No invented freshness or changed=true. This comparison is not a claim to have executed production inspect_bundle."
+    },
+    "preflight": {
+      "run_id": 45058467327,
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/45058467327",
+      "status": "failure",
+      "created_at_utc": "2026-11-22T19:02:39Z",
+      "artifact_id": 14768775349,
+      "artifact_zip_sha256": "0537ccacc0e30b25ed0a7a277900c67edf69be084abe4a6e2eaf3a117cf3ac8d",
+      "preflight_at": "2026-11-23T04:02:51.665988+09:00",
+      "ready": 0,
+      "inventory_target": 8,
+      "missing": 8,
+      "next_slot": "2026-11-23T08:00:00+09:00",
+      "next_media": "IMAGE",
+      "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+      "staging_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+      "next_slot_missing": true,
+      "invalid_ready_entries": [],
+      "latest_meta_get": "2026-11-23T04:03:42.010396+09:00",
+      "latest_meta_post_id": "18203041492385442",
+      "meta_scan_complete": true
+    },
+    "unchanged": [
+      "threads/writer-queue.json",
+      "threads/reviewed-staging.json",
+      "threads/reviewed-submissions.json",
+      "threads_posted.json",
+      "threads-claims/**"
+    ],
+    "new_ready": 0,
+    "new_meta_posts": 0,
+    "blocking": [
+      "official attachments full byte hash, issuer correction check and rendered #job UI remain unverified",
+      "IMAGE original and 360px card actual visual review not done",
+      "production writer_inputs, inspect_bundle, validate_entry, verify_official_receipt, verify_reviewed_card, plan, merge, check_queue not run locally"
+    ],
+    "note": "The record is a new source evidence reconciliation only, not a new ready entry or a duplicate HOLD decision. No workflow dispatch/rerun or Meta POST requested."
+  }
 }
