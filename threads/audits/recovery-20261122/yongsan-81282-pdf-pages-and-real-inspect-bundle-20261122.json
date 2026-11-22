@@ -82,5 +82,60 @@
     "no_manual_post": true,
     "no_workflow_dispatch": true,
     "no_publisher_run_started": true
+  },
+  "publisher_original_and_source_followup": {
+    "observed_at": "2026-11-22T19:44:36+09:00",
+    "official_publisher_listing_url": "https://yongsanculture.or.kr/site/main/archive/post/2026%EB%85%84-%EC%A0%9C4%EC%B0%A8-%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8-%EC%A7%81%EC%9B%90-%EA%B3%B5%EA%B0%9C%EA%B2%BD%EC%9F%81%EC%B1%84%EC%9A%A9-%EA%B3%B5%EA%B3%A0",
+    "official_publisher_attachment_url": "https://yongsanculture.or.kr/site/main/file/download/316",
+    "publisher_attachment_display": "2026년 제4차 용산문화재단 직원 채용 공고문.pdf (278.0KB)",
+    "application_link_from_publisher": "https://yongsanculture.incruit.com",
+    "publisher_correction_board_checked_url": "https://yongsanculture.or.kr/site/main/archive/post/category/jobNotice",
+    "publisher_correction_board_visible_scope": "first current visible recruitment listing page; latest shown is 2026-11-16 original #4; no separately labelled amendment/cancellation visible within this one page; no inference about other pages or private notices",
+    "original_pdf_raw_bytes_downloaded": false,
+    "original_pdf_sha256": null,
+    "raw_access_attempts": [
+      "Web PDF link download/316 returned HTTP 400 unsupported content-type application/octet-stream to web extractor",
+      "container.download on the same official URL failed"
+    ],
+    "ui_check_attempts": [
+      "TinyFish browser run not started: wallet balance -$0.136, non-retryable",
+      "Read-only web open for CareerPick #job hash did not render detail; actual #job UI remains unverified"
+    ],
+    "updated_operations_evidence": {
+      "run_id": 45010053173,
+      "artifact_id": 14749232529,
+      "source_artifact_id": 14749388080,
+      "run_status": "completed success",
+      "workflow": ".github/workflows/operations.yml",
+      "event": "schedule",
+      "branch": "main",
+      "head_sha": "4e873f17cba714903783ea8da19fc30d670fdc9d",
+      "operation_zip_sha256": "355f80ec585bf346dddc4fc3b958e63579cd05ff68aaa86c28ff57793379affe",
+      "pages_zip_sha256": "9c9f47f77d4b2fde75860eca8b4521fa366eba32efdf6eb7dfd6e7ca5716ee2c",
+      "matched_source_file_sha256": {
+        "alio.json": "7daed380d058ef84c543f33885a5dba710ad0505d1c3e6ee75cca6c7bed5fc35",
+        "alio-detail.json": "8f4936e38cfe367a6f32098f858a0613c1594b1d5be4be84af9f70cae9489d68",
+        "cleaneye.json": "8800cf24e3926638e18d3dc450bd059fd31980698ebd1316c85c078efa82d000"
+      },
+      "report_verified_at": {
+        "alio": "2026-11-22T18:58:19+09:00",
+        "cleaneye": "2026-11-22T18:59:25+09:00"
+      },
+      "verification_method": "Downloaded both actual GitHub connector ZIPs, verified SHA256 against artifact digests; opened nested Pages artifact.tar and directly hashed all three raw source files, compared with operation report's source_hashes/source_sha256. This is byte-level cross-check, not direct execution of production inspect_bundle nor writer_inputs.",
+      "writer_inputs_run": false
+    },
+    "latest_preflight": {
+      "run_id": 45010147533,
+      "scheduled_at": "2026-11-22T20:00:00+09:00",
+      "run_completed_failure": true,
+      "reason": "THREADS_SUPPLY_EMPTY",
+      "approved_future_slots": 0,
+      "inventory_target": 8,
+      "source_branch": "threads-publisher-state",
+      "queue_blob_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb"
+    },
+    "operational_ready": false,
+    "queue_modified": false,
+    "meta_post_requested": false
   }
 }
