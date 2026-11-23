@@ -24,6 +24,14 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Original official notice clocks, read 2026-11-24; never publication clocks.
+    'a307141': '2026-12-01T18:00:00+09:00',
+    'a306989': '2026-11-27T18:00:00+09:00',
+    'a307240': '2026-12-04T18:00:00+09:00',
+    'a307142': '2026-12-08T16:00:00+09:00',
+    'a307309': '2026-12-07T12:00:00+09:00',
+    'a306807': '2026-11-25T16:00:00+09:00',
+
     'a307171': '2026-11-25T18:00:00+09:00',
     'a306848': '2026-11-26T16:00:00+09:00',
     # Official JBUH and PNUKH HWP schedules; KDIS English PDF p9 EST conversion.
@@ -86,7 +94,6 @@ CONFIRMED_APPLICATION_CUTOFFS = {
     # CBNHU official application portal: 2026-11-18 12:00, not ALIO's 23:59 posting end.
     # KOPO employer notice 790549: registered mail or weekday visit must arrive by 18:00.
     # This is not the ALIO posting-end 23:59; no feed mutation.
-    'a307171': '2026-11-25T18:00:00+09:00',
     'a306665': '2026-11-18T12:00:00+09:00',
     # Official ALIO recruitment method: 2026-11-18 17:00, not the 23:59 posting end.
     'a306660': '2026-11-18T17:00:00+09:00',
@@ -109,6 +116,103 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a307141': {'organization': '한국개발연구원',
+ 'title': '2026년 4분기 2차 한국개발연구원(KDI) 직원 채용 공고(연구직)',
+ 'source_end_date': '2026-12-01',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '3',
+ 'checked_on': '2026-11-24',
+ 'scope': '공공투자관리센터 경제·경영2명 및 에너지·경제1명',
+ 'application_start': '2026-11-17',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088049',
+ 'role_mix_note': '공공투자관리센터 연구원 총3명(경제·경영2명, 에너지·경제1명)입니다. 석사 이상 또는 취득예정이 지원자격이며 관련 전공·실무경험·통계프로그램·CPA/CFA '
+                  '등은 분야별 우대조건입니다. 전문자격증을 모두 필수로 요구하는 공고가 아닙니다.',
+ 'application_end_date': '2026-12-01',
+ 'hiring_breakdown': '경제·경영2명 + 에너지·경제1명 = 총3명 · 시용6개월 후 평가'},
+    'a306989': {'organization': '한국교육개발원',
+ 'title': '2026년도 제10차 직원 채용 공고',
+ 'source_end_date': '2026-11-27',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '2',
+ 'checked_on': '2026-11-24',
+ 'scope': '교육학·정책학 연구직 부연구위원2명',
+ 'application_start': '2026-11-12',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3087076',
+ 'role_mix_note': '교육학(교과교육 제외) 또는 정책학 분야 부연구위원2명입니다. 접수마감일 현재 박사학위 소지 조건을 확인해야 하며 향후 취득예정만으로 지원 가능하다고 소개하지 '
+                  '않습니다. 학위·전공과 수행업무 관련 지식은 원문의 자격표를 함께 확인하세요.',
+ 'application_end_date': '2026-11-27'},
+    'a307240': {'organization': '한국원자력안전기술원',
+ 'title': '한국원자력안전기술원 2027년 상반기 정규직 직원 채용(보훈제한경쟁)',
+ 'source_end_date': '2026-12-04',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '2',
+ 'checked_on': '2026-11-24',
+ 'scope': '정보기술(보훈)1명·경영관리(보훈)1명; ZIP 내18·19번 HWP',
+ 'application_start': '2026-11-19',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088743',
+ 'role_mix_note': '정보기술(보훈)1명과 경영관리(보훈)1명, 합계2명 모두 취업지원대상자 제한경쟁입니다. 정보기술은 관련 전공 학사 이상, 경영관리는 학력·전공 제한 없음입니다. '
+                  '이2명은 통합 원문32명 안에 포함되므로 일반 공고 인원에 다시 더하지 않습니다.',
+ 'application_end_date': '2026-12-04',
+ 'hiring_breakdown': '정보기술(보훈)1명 + 경영관리(보훈)1명 = 총2명 · 통합 원문32명 안에 포함'},
+    'a307142': {'organization': '한국노동연구원',
+ 'title': '한국노동연구원 연구직 연구원 직군 채용 공고',
+ 'source_end_date': '2026-12-08',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '2',
+ 'checked_on': '2026-11-24',
+ 'scope': '인적자원 분야 석사급 연구직 연구원2명',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088053',
+ 'role_mix_note': '인적자원 분야 연구원2명이며 경영학·경제학·사회학·행정학 등 관련 전공 석사 이상 또는2027년2월 말 취득완료 예정자가 대상입니다.2027년3월 첫째 '
+                  '주(3월5일까지) 입사 가능, 남성 공고일 기준 군필·면제, 채용예정일 정년60세 이내 조건을 확인하세요.',
+ 'application_end_date': '2026-12-08'},
+    'a307309': {'organization': '대한적십자사',
+ 'title': '경인권역재활병원 정규직 간호사 채용 공고(2027.1.1.)',
+ 'source_end_date': '2026-12-07',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '2',
+ 'checked_on': '2026-11-24',
+ 'scope': '경인권역재활병원 병동 간호사2명',
+ 'application_start': '2026-11-20',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3089245',
+ 'role_mix_note': '정규직 간호사2명이며 간호사 면허와3교대 가능이 모두 필수입니다. 임용일 기준 만60세 미만, 남성 병역필·면제 및 결격요건을 확인하세요. '
+                  '경인권역재활병원(인천) 근무이며 병원 사정에 따른 직종 내 전환배치가 가능합니다.',
+ 'application_end_date': '2026-12-07'},
+    'a306807': {'organization': '한국고용정보원',
+ 'title': '2026년도 한국고용정보원 3차 직원(기록물관리) 채용 공고',
+ 'source_end_date': '2026-11-25',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '1',
+ 'checked_on': '2026-11-24',
+ 'scope': '일반직5급 기록물관리1명',
+ 'application_start': '2026-11-12',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085726',
+ 'role_mix_note': '일반직5급(대리) 기록물관리1명입니다. ALIO 신입 분류와 별개로 기록물관리 전문요원 자격 취득 이후 관련 업무2년 이상이 필수입니다. 사서 업무는 제외되므로 '
+                  '자격 취득 전 경력이나 사서 경력만 합산해 충족한다고 판단하지 마세요.',
+ 'application_end_date': '2026-11-25'},
+    'a305393': {'organization': '전남대학교병원',
+ 'title': '2026년도 전임의사 상시 공개채용 변경 공고',
+ 'source_end_date': '2026-12-31',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '57',
+ 'checked_on': '2026-11-24',
+ 'scope': '상시채용 현재 접수·잔여인원 확인 제한',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3077448',
+ 'role_mix_note': '공식 공고문 첨부는 Fasoo DRM으로 보호되어 본문을 확인할 수 없었습니다.57명은 게시된 모집인원이며 현재 잔여 결원이나 접수 활성은 확인되지 않았습니다.',
+ 'application_status_unconfirmed': True,
+ 'conditional_application_window_label': '현재 접수 활성·잔여 인원 미확인 (공식 접수처 확인 필요)'},
+    'a306275': {'organization': '경상국립대학교병원',
+ 'title': '약무직(면허소지자, 면허취득예정자) 채용 공고',
+ 'source_end_date': '2026-12-31',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '24',
+ 'checked_on': '2026-11-24',
+ 'scope': '상시채용 현재 접수·잔여인원 확인 제한',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3082265',
+ 'role_mix_note': '공식 공고문은2026년10월23일부터 충원 시까지24명 이내 모집을 안내합니다.24명은 최초 상한이며 현재 잔여인원이 아닙니다. 마감일16시 제출 규정은 있으나 '
+                  '확정 마감일은 없어12월31일16시로 결합하지 않습니다. 현재 개별 공고 접수 활성은 확인되지 않았습니다.',
+ 'application_status_unconfirmed': True,
+ 'conditional_application_window_label': '현재 접수 활성·잔여 인원 미확인 (공식 접수처 확인 필요)'},
+
     'a307171': {'organization': '학교법인한국폴리텍',
  'title': '한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고',
  'source_end_date': '2026-11-25',
@@ -118,7 +222,7 @@ VERIFIED_APPLICATION_NOTICES = {
  'scope': '지역대학장 캠퍼스 운영·교육 총괄',
  'application_start': '2026-11-18T09:00:00+09:00',
  'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088229',
- 'role_mix_note': '서울강서·화성·충주·울산 4개 캠퍼스 지역대학장 총4명이며 캠퍼스 간 중복지원은 불가합니다. ALIO 정규직 분류와 별개로 원문 임기는2년이고 원칙상 '
+ 'role_mix_note': '서울강서·화성·충주·울산 4개 캠퍼스 지역대학장 총4명이며 캠퍼스 간 중복지원은 불가합니다. ALIO 정규직 분류와 별개로 원문 임기는 2년이고 원칙상 '
                   '정년65세, 내부 교직원은 내규가 적용됩니다. 학력·자격증·경력 구체요건은 모두가 아니라 하나 이상 충족하는 방식입니다.',
  'application_end_date': '2026-11-25',
  'hiring_breakdown': '서울강서·화성·충주·울산 지역대학장 총4명 · 임기2년, 캠퍼스 간 중복지원 불가'},
@@ -734,26 +838,6 @@ VERIFIED_APPLICATION_NOTICES = {
     # New 2026-11-18 ALIO notice and employer HTML #790549, not a verified
     # HWP/HWPX job-description file. This is a fixed-term leadership appointment
     # despite the ALIO feed label "정규직". Never imply an indefinite tenure.
-    'a307171': {
-        'organization': '학교법인한국폴리텍',
-        'title': '한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고',
-        'source_end_date': '2026-11-25',
-        'expected_source_seats': '4',
-        'source_employment': ['정규직'],
-        'source_url': 'https://www.kopo.ac.kr/board.do?menu=10523&mode=view&post=790549',
-        'checked_on': '2026-11-18',
-        'application_start': '2026-11-18',
-        'application_end_date': '2026-11-25',
-        'role_mix_note': (
-            'ALIO에는 정규직 4명으로 등록되어 있지만 지역대학장 직위의 임기는 2년입니다. '
-            '서울강서·화성·충주·울산캠퍼스 중복지원은 불가합니다. '
-            '기관은 등기우편 또는 평일 방문접수를 받으며 2026년 11월 25일 18:00까지 '
-            '접수처에 도착한 서류만 유효하다고 안내합니다. '
-            '우편 접수자는 정상 접수 여부를 담당자에게 확인해야 합니다. '
-            'ALIO 게시 종료일의 23:59를 원서접수 마감시각으로 해석하지 마세요.'
-        ),
-        'scope': 'ALIO a307171 공개 HTML에서 정규직4명·응시자격 및 2년 임기 확인. 기관 공식 게시물 790549에서 중복지원 금지, 방문/등기우편, 11월25일18:00 도착 마감 교차 확인. 첨부 HWP/HWPX 본문·바이트 SHA 및 현재 접수실화면은 이 검증 범위 밖.',
-    },
     # Official ALIO HTML reviewed 2026-11-18. These do NOT count as newly
     # extracted PDF/HWP duties; the snapshots and field counts remain intact.
     'a306665': {
