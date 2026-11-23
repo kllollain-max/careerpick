@@ -1,0 +1,212 @@
+name: Threads 81291 exact original PDF verification (read only)
+on:
+  push:
+    branches: [review/threads-81291-20261118]
+    paths:
+      - .github/workflows/threads-81291-binary-verify.yml
+permissions:
+  contents: read
+jobs:
+  official-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests pymupdf
+      - name: Download and independently parse the exact employer PDF bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib, requests, fitz, re, datetime
+          from zoneinfo import ZoneInfo
+          url='https://app.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb'
+          r=requests.get(url,timeout=30,headers={'User-Agent':'CareerPickExactEmployerReview/1.0'})
+          r.raise_for_status()
+          assert r.url in (url,'https://www.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb'),r.url
+          assert len(r.content)>20000 and r.content.startswith(b'%PDF-'),(len(r.content),r.content[:8])
+          p=pathlib.Path('official-81291');p.mkdir(exist_ok=True)
+          (p/'exact-original.pdf').write_bytes(r.content)
+          doc=fitz.open(stream=r.content,filetype='pdf')
+          text='\n'.join(page.get_text() for page in doc)
+          (p/'full-extracted-original.txt').write_text(text,encoding='utf-8')
+          for required in ['2026-424','남양주도시공사','역무8급','남양주시','2026','11. 26']:
+            assert required in text,('EXACT_ORIGINAL_SEMANTIC_MISMATCH',required)
+          assert len(doc)>=7, len(doc)
+          digest=hashlib.sha256(r.content).hexdigest()
+          evidence={'notice_id':'cleaneye-81291','url':url,'status':r.status_code,'bytes':len(r.content),'sha256':digest,'page_count':len(doc),'check_at_kst':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),'semantic_excerpt_verified':True,'meaning_review_independently_done_here':False,'approved_for_queue':False}
+          (p/'independent-binary-receipt.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('OFFICIAL_PDF_DIGEST_AND_TEXT',json.dumps(evidence,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: threads-81291-official-original-receipt
+          path: official-81291/
+          retention-days: 30
+
+  portal-and-profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Independently inspect exact recruitment portal, employer notice list, and CareerPick hash detail (read only)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,pathlib,datetime,re
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
+          out=pathlib.Path('browser-81291');out.mkdir(exist_ok=True)
+          sites=[
+           ('employer_portal','https://ncuc.brms.kr/'),
+           ('employer_board','https://www.ncuc.or.kr/main/261'),
+           ('profile_exact','https://kllollain-max.github.io/careerpick/#job=cleaneye-81291'),
+          ]
+          results=[]
+          with sync_playwright() as p:
+           browser=p.chromium.launch(headless=True)
+           for name,url in sites:
+            page=browser.new_page(viewport={'width':390,'height':844},locale='ko-KR')
+            item={'site':name,'requested_url':url,'checked_at_kst':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat()}
+            try:
+             response=page.goto(url,wait_until='domcontentloaded',timeout=45000)
+             page.wait_for_timeout(9000 if name=='profile_exact' else 5000)
+             text=page.locator('body').inner_text(timeout=15000)
+             item.update({'status':response.status if response else None,'final_url':page.url,'visible_text_len':len(text),'visible_text':text[:14000],
+                          'identity_visible':'남양주도시공사' in text,
+                          'job_id_visible':'cleaneye-81291' in text,
+                          'recruitment_post_visible':'2026년도 하반기' in text,
+                          'deadline_visible':bool(re.search(r'11\\s*[.월/-]\\s*26|11월\\s*26일',text))})
+             page.screenshot(path=str(out/(name+'.png')),full_page=False)
+             (out/(name+'.txt')).write_text(text,encoding='utf-8')
+            except Exception as exc:
+             item['error']=str(exc)[:600]
+            print('SOURCE_BROWSER_'+name.upper(),json.dumps({k:v for k,v in item.items() if k!='visible_text'},ensure_ascii=False))
+            print('SOURCE_BROWSER_'+name.upper()+'_VISIBLE',item.get('visible_text','')[:4200].replace('\\n',' '))
+            results.append(item)
+            page.close()
+           browser.close()
+          (out/'actual-browser-receipt.json').write_text(json.dumps({'notice_id':'cleaneye-81291','reviewed_sites':results,'approved_for_queue':False,'claimed_profile_exact_verified':False},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Inspect exact CareerPick job record and modal without modifying site or posting
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,pathlib,datetime
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
+          out=pathlib.Path('browser-81291')
+          with sync_playwright() as p:
+           browser=p.chromium.launch(headless=True)
+           page=browser.new_page(viewport={'width':390,'height':844},locale='ko-KR')
+           page.goto('https://kllollain-max.github.io/careerpick/#job=cleaneye-81291',wait_until='domcontentloaded',timeout=45000)
+           page.wait_for_timeout(12000)
+           observation=page.evaluate("""() => {
+            const id='cleaneye-81291';
+            const matches=(typeof POSTS!=='undefined' && Array.isArray(POSTS)) ? POSTS.filter(p=>p.id===id||p.sourceIds?.includes(id)).map(p=>({id:p.id,org:p.org,title:p.title,count:p.count,due:p.due,cleaneye:p.cleaneye,url:p.url,sourceIds:p.sourceIds})) : [];
+            return {hash:location.hash,post_count:typeof POSTS!=='undefined'&&Array.isArray(POSTS)?POSTS.length:null,matches,jobview_hidden:document.getElementById('jobview')?.hidden,modal_text:(document.getElementById('jvBody')?.innerText||'').slice(0,12000)}
+           }""")
+           if observation['matches'] and observation['jobview_hidden']:
+            page.evaluate("() => { if(typeof openJob==='function') openJob('cleaneye-81291',false); }")
+            page.wait_for_timeout(1500)
+            observation['after_click_modal_text']=page.locator('#jvBody').inner_text(timeout=6000)[:12000]
+            observation['after_click_hidden']=page.locator('#jobview').evaluate('(el)=>el.hidden')
+           observation['checked_at_kst']=datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat()
+           (out/'profile-exact-record-and-dialog.json').write_text(json.dumps(observation,ensure_ascii=False,indent=2,default=str)+'\\n',encoding='utf-8')
+           page.screenshot(path=str(out/'profile-exact-dialog.png'),full_page=False)
+           print('EXACT_PROFILE_RECORD',json.dumps({k:v for k,v in observation.items() if k not in ('modal_text','after_click_modal_text')},ensure_ascii=False,default=str))
+           print('EXACT_PROFILE_DIALOG_TEXT',(observation.get('after_click_modal_text') or observation.get('modal_text') or '')[:4000])
+           browser.close()
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: threads-81291-portal-profile-readonly
+          path: browser-81291/
+          retention-days: 30
+
+  exact-jd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests pymupdf beautifulsoup4
+      - name: Find and read only exact original 2026-424 역무 job-description PDF attachment
+        run: |
+          python - <<'PY'
+          import requests,re,hashlib,json,pathlib,datetime
+          from urllib.parse import urljoin,urlsplit
+          from bs4 import BeautifulSoup
+          import fitz
+          out=pathlib.Path('jd-81291');out.mkdir(exist_ok=True)
+          urls=[
+           'https://www.ncuc.or.kr/main/261?action=read&action-value=a22a3b4578800c3845b258a286c7a256',
+           'https://www.nyj.go.kr/www/selectBbsNttView.do?bbsNo=67&key=2497&nttNo=551510',
+          ]
+          candidates=[]
+          for board in urls:
+           resp=requests.get(board,timeout=30)
+           resp.raise_for_status()
+           soup=BeautifulSoup(resp.text,'html.parser')
+           all_matches=soup.find_all(string=lambda s:s is not None and '직무기술서_역무' in str(s))
+           print('JD_BOARD',board,'HTTP',resp.status_code,'TITLE',soup.title.get_text(strip=True) if soup.title else '', 'matches',len(all_matches))
+           for text in all_matches[:5]:
+            n=text.parent
+            print('JD_MATCH_ELEMENT',str(n.parent)[:4500])
+            for elem in [n,n.parent,n.parent.parent] if n.parent and n.parent.parent else [n]:
+             for a in elem.find_all('a',href=True):
+              u=urljoin(board,a['href'])
+              if re.search(r'/File/[0-9a-f]{32}(?:$|[?])',u,re.I):
+               candidates.append(u)
+           for a in soup.find_all('a',href=True):
+            if '역무' in a.get_text() or '역무' in a.get('title',''):
+             u=urljoin(board,a['href'])
+             if u.startswith('https://') and urlsplit(u).hostname in ('www.ncuc.or.kr','www.nyj.go.kr'):
+              candidates.append(u)
+          # Exact employer attachment URL extracted from the original 2026-424 board's fileDownload anchor; not guessed from the PDF hash.
+          candidates.insert(0,'https://www.ncuc.or.kr/File/Download/8d3bff297caac379b8a18a1608f7ce14')
+          candidates=list(dict.fromkeys(candidates))
+          evidence={'notice':'2026-424','candidates':candidates,'read_pdf':[],'status':'NO_DIRECT_JD_URL_VERIFIED','approved_for_queue':False}
+          for u in candidates[:8]:
+           try:
+            p=urlsplit(u)
+            if p.hostname not in ('www.ncuc.or.kr','www.nyj.go.kr') or p.scheme!='https':
+             continue
+            rr=requests.get(u,timeout=25)
+            if not rr.ok or len(rr.content)<1000 or not rr.content.startswith(b'%PDF-'):
+             continue
+            doc=fitz.open(stream=rr.content,filetype='pdf')
+            full='\n'.join(pg.get_text() for pg in doc)
+            record={'url':u,'http':rr.status_code,'bytes':len(rr.content),'sha256':hashlib.sha256(rr.content).hexdigest(),'pages':len(doc),'has_역무':'역무' in full,'has_철도':'철도' in full,'opening':full[:2200]}
+            evidence['read_pdf'].append(record)
+            if '역무' in full and ('여객' in full or '고객' in full or '철도' in full):
+             evidence['status']='JOB_DESCRIPTION_ACTUALLY_PARSED'
+             (out/'exact-역무-job-description.pdf').write_bytes(rr.content)
+             (out/'exact-역무-job-description.txt').write_text(full,encoding='utf-8')
+             break
+           except Exception as e:
+            print('JD_ATTACHMENT_UNAVAILABLE',str(e)[:400])
+          evidence['checked_at_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()
+          (out/'jd-evidence.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('JD_OFFICIAL_VERIFICATION',json.dumps(evidence,ensure_ascii=False)[:7000])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: threads-81291-official-rail-jd-review
+          path: jd-81291/
+          retention-days: 30
