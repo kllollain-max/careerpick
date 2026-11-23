@@ -1784,6 +1784,47 @@ if __name__ == '__main__':
 
 
 class OriginalNoticeComparisonTests(unittest.TestCase):
+
+    def test_amended_group_preserves_old_exact_pair_without_collapsing_new_34_seats(self):
+        from scripts.notice_review import resolve
+        posts = {p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        details = json.loads(Path('alio-detail.json').read_text())
+        rules = json.loads(Path('scripts/verified_notice_reviews.json').read_text())
+        reviews = resolve(list(posts.values()), details, rules)
+        self.assertEqual(reviews['a305959']['decision'], 'same_notice')
+        self.assertEqual(reviews['a305959']['representative_id'], 'a306724')
+        self.assertEqual(reviews['a307302']['decision'], 'amended_notice')
+        latest = render(posts['a307302'], details['a307302'], notice_review=reviews['a307302'])
+        self.assertIn('jobs/a307302.html', latest)
+        self.assertIn('총34명으로 수정', latest)
+        self.assertNotIn('동일 채용의 대표 공고 보기', latest)
+        for target in ('a307302','a305959','a000000'):
+            changed = copy.deepcopy(rules)
+            changed[0]['members'][0]['same_source_representative'] = target
+            self.assertNotIn('a305959', resolve(list(posts.values()),details,changed))
+        changed = copy.deepcopy(rules)
+        changed[0]['members'][1]['same_source_representative'] = 'a305959'
+        self.assertNotIn('a305959', resolve(list(posts.values()),details,changed))
+        changed = copy.deepcopy(rules)
+        changed[0]['members'][0]['sources'].pop()
+        self.assertNotIn('a305959', resolve(list(posts.values()),details,changed))
+        changed_posts = copy.deepcopy(list(posts.values()))
+        next(p for p in changed_posts if p['id']=='a307302')['n']='35'
+        self.assertNotIn('a305959', resolve(changed_posts,details,rules))
+
+    def test_yangyang_and_samcheok_different_contracts_keep_both_pages(self):
+        from scripts.notice_review import load
+        posts = {p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        details = json.loads(Path('alio-detail.json').read_text())
+        reviews = load(Path('.'))
+        for pid,place in [('a307298','양양권역'),('a307299','삼척권역')]:
+            html = render(posts[pid],details[pid],notice_review=reviews[pid])
+            self.assertIn(place,html)
+            self.assertIn('2026-12-04 18:00 (KST)',html)
+            self.assertIn('href="https://kllollain-max.github.io/careerpick/jobs/'+pid+'.html"',html)
+            self.assertNotIn('동일 채용의 대표 공고 보기',html)
+            self.assertEqual(reviews[pid]['decision'],'distinct_notice')
+
     def setUp(self):
         from scripts.notice_review import resolve
         self.posts = json.loads(Path('alio.json').read_text())['posts']
@@ -1792,7 +1833,7 @@ class OriginalNoticeComparisonTests(unittest.TestCase):
         self.reviews = resolve(self.posts, self.details, self.rules)
 
     def test_only_original_confirmed_pair_canonicalizes_and_keeps_bookmark_content(self):
-        self.assertEqual(len(self.reviews), 56)
+        self.assertEqual(len(self.reviews), 60)
         for old, new in [('a305959','a306724'), ('a306564','a306800')]:
             post = next(p for p in self.posts if p['id'] == old)
             before = copy.deepcopy(post)

@@ -24,6 +24,9 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Separate Yangyang/Samcheok HWPX originals, sectionIII (not publication-end clocks).
+    'a307298': '2026-12-04T18:00:00+09:00',
+    'a307299': '2026-12-04T18:00:00+09:00',
     # Official KLI PDF section4 and KIET PDF section5 (24:00 is next-day00:00).
     'a306470': '2026-12-10T16:00:00+09:00',
     'a307170': '2026-12-10T00:00:00+09:00',
@@ -96,6 +99,36 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a307298': {'organization': '주택관리공단(주)',
+     'title': '육아휴직 대체직 채용공고(주택관리공단 강원지사)',
+     'source_end_date': '2026-12-04',
+     'expected_source_seats': '1',
+     'source_employment': ['계약직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3089175',
+     'checked_on': '2026-11-23',
+     'application_start': '2026-11-20',
+     'application_end_date': '2026-12-04',
+     'scope': '공식 HWPX의 모집표·계약기간·원서접수 일정',
+     'hiring_breakdown': '양양권역 관리소(3군단영동주거지원센터) 기술직 육아휴직 대체직 1명',
+     'role_mix_note': '양양권역 관리소(3군단영동주거지원센터)의 별도 기술직1명 모집으로 계약 종료 예정일은2027년12월14일입니다. 기간 만료 후 '
+                      '고용관계가 소멸되는 대체직이며 정규직 전환을 보장하는 공고가 아닙니다. 원서접수는 2026년11월20일~12월4일18시까지 온라인 '
+                      '접수로 안내합니다. 다른 권역 공고와 근무지·계약기간을 혼용하지 마세요. 원문에는 행정·기술 직무요건 공통표가 함께 있지만 이 '
+                      '모집표의 선발 직무는 기술직입니다.'},
+    'a307299': {'organization': '주택관리공단(주)',
+     'title': '육아휴직 대체직 채용공고(주택관리공단 강원지사)',
+     'source_end_date': '2026-12-04',
+     'expected_source_seats': '1',
+     'source_employment': ['계약직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3089178',
+     'checked_on': '2026-11-23',
+     'application_start': '2026-11-20',
+     'application_end_date': '2026-12-04',
+     'scope': '공식 HWPX의 모집표·계약기간·원서접수 일정',
+     'hiring_breakdown': '삼척권역 관리소(주거행복지원센터) 기술직 육아휴직 대체직 1명',
+     'role_mix_note': '삼척권역 관리소(주거행복지원센터)의 별도 기술직1명 모집으로 계약 종료 예정일은2028년1월3일입니다. 기간 만료 후 고용관계가 '
+                      '소멸되는 대체직이며 정규직 전환을 보장하는 공고가 아닙니다. 원서접수는 2026년11월20일~12월4일18시까지 온라인 접수로 '
+                      '안내합니다. 다른 권역 공고와 근무지·계약기간을 혼용하지 마세요. 원문에는 행정·기술 직무요건 공통표가 함께 있지만 이 모집표의 선발 '
+                      '직무는 기술직입니다.'},
     'a306012': {'organization': '한국개발연구원',
      'title': 'KDI 연구위원급 채용 공고',
      'source_end_date': '2026-12-02',
@@ -2005,7 +2038,7 @@ def main():
     suspected_duplicates.sort(key=lambda item: (item['organization'], item['title'], item['deadline']))
     quality['original_review_page_ids'] = len(notice_reviews)
     quality['confirmed_duplicate_alias_pages'] = sum(v.get('representative_id') != pid for pid, v in notice_reviews.items() if v['decision'] == 'same_notice')
-    quality['verified_editorial_unique_notices'] = len({notice_reviews.get(pid, {}).get('representative_id') or pid for row in quality_rows if row['detail_fields']['verified_editorial_duties'] for pid in [row['id']]})
+    quality['verified_editorial_unique_notices'] = len({(notice_reviews[pid]['representative_id'] if notice_reviews.get(pid, {}).get('decision') == 'same_notice' else pid) for row in quality_rows if row['detail_fields']['verified_editorial_duties'] for pid in [row['id']]})
     quality['official_original_review_groups'] = len({tuple(v['peer_ids']) for v in notice_reviews.values()})
     quality['unreviewed_duplicate_candidate_groups'] = sum(not set(g['ids']).issubset(notice_reviews) for g in suspected_duplicates)
     quality['suspected_duplicate_groups'] = len(suspected_duplicates)
