@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-23T12:27:15.169069+09:00",
+  "scope": "Append independently reviewed next-morning manuscript to existing publisher state without dispatching a publication",
+  "base_state_commit": "f5ec40d76dc34e00f450577556e7e2b2dad5abf7",
+  "asset_commit": "b651724639d6c98b7bebcd668f3de3b8ff7f99c2",
+  "new_entry": {
+    "notice_id": "a307035",
+    "scheduled_at": "2026-11-24T08:00:00+09:00",
+    "title": "보훈재활체육센터 시설지원-청소",
+    "unit_count": 1,
+    "planned_media": "IMAGE",
+    "entry_sha256": "40b266450ad302d0ebe97c755ff6048409ed7b492e4c39aa7d2a365912abae04"
+  },
+  "preserved_queue_count": 56,
+  "preserved_staging_count": 25,
+  "preserved_submission_count": 6,
+  "supply": {
+    "future_slots": [
+      "2026-11-23T16:00:00+09:00",
+      "2026-11-23T20:00:00+09:00",
+      "2026-11-24T08:00:00+09:00",
+      "2026-11-24T12:00:00+09:00",
+      "2026-11-24T16:00:00+09:00",
+      "2026-11-24T20:00:00+09:00",
+      "2026-11-25T08:00:00+09:00",
+      "2026-11-25T12:00:00+09:00"
+    ],
+    "approved_future_slots": [
+      "2026-11-23T16:00:00+09:00",
+      "2026-11-23T20:00:00+09:00",
+      "2026-11-24T08:00:00+09:00"
+    ],
+    "missing_slots": [
+      "2026-11-24T12:00:00+09:00",
+      "2026-11-24T16:00:00+09:00",
+      "2026-11-24T20:00:00+09:00",
+      "2026-11-25T08:00:00+09:00",
+      "2026-11-25T12:00:00+09:00"
+    ],
+    "next_slot_missing": false,
+    "approved_inventory_count": 3,
+    "inventory_target": 8,
+    "inventory_shortfall": 5,
+    "replenishment_required": true,
+    "invalid_ready_entries": [],
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false
+  },
+  "validation": "Original production functions including live official PDF GET, frozen copy equality, full image and 360 preview verification, ingest, merge and full queue checks passed",
+  "actual_ui_review": "Root read the fully rendered #jobview AX and screenshot. Whole notice2; selected cleaning1 independently verified against official PDF.",
+  "independent_review": "next_notice_prepare independently verified main notice, annex, additional application form3087398 and job description3087399. Public copy passed; no additional mandatory license, career or sex restriction for selected cleaning unit.",
+  "start_precision": "Original PDF states start date only and this is preserved in application_period. Issuer09:00 opening evidence is separately retained in existing start_source_ref/start_evidence. Current and planned publication are both after the established opening date. No composite source excerpt or guard weakening.",
+  "automation_recovery": {
+    "updated_at": "2026-11-23T03:22:09.572955+00:00",
+    "prompt_only_updated": true,
+    "enabled_schedule_account_result_conversation_preserved": true,
+    "independent_readback_passed": true,
+    "next_scheduled_supply_run": "2026-11-23T12:45:18+09:00",
+    "instructions": "Read current remote state first; use proven normal official-PDF download and actual final UI review; complete production validation and CAS; verify real normal publications."
+  },
+  "unpublished_status": "Supply registration is not proof of a Threads publication. No dispatch/rerun/run_now/additional Meta POST was performed.",
+  "hold_preserved": "a307233 health-certificate validity date conflict; not approved."
+}

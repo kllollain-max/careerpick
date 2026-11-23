@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "notice_id": "a307035",
+  "reviewer": "next_notice_prepare",
+  "checked_at": "2026-11-23T12:27:27.936080+09:00",
+  "entry_path": "/workspace/scratch/692183e9c930/third_notice/a307035-entry.json",
+  "entry_canonical_sha256": "528feba9443c2d4b0a49340580808ac6ccc5611abbc2fd2faac6056654c67787",
+  "entry_file_sha256": "40b266450ad302d0ebe97c755ff6048409ed7b492e4c39aa7d2a365912abae04",
+  "independent_semantic_review": "passed",
+  "entry_modified": false,
+  "remote_mutation": false,
+  "review_basis": "Actual original PDF bytes independently extracted with pdftotext, original page images 1-3 visually inspected, official center HTML read, additional original ALIO attachments 3087398 and 3087399 independently fetched and read; job-description page1 and application page2 rendered and visually inspected. No dependence on writer pass flags.",
+  "source_files": [
+    {
+      "path": "/workspace/scratch/692183e9c930/third_notice/a307035-3087397.pdf",
+      "size_bytes": 229841,
+      "sha256": "a0724f236153f1c8259b66ad675595002276094daf0d0849f3c1ad8cb4333172"
+    },
+    {
+      "path": "/workspace/scratch/692183e9c930/third_notice/a307035-3087400.pdf",
+      "size_bytes": 169599,
+      "sha256": "7caa8df76f9448d425c6415d3e242f4a1a8d92707b0ead67c46a1a8c05dc9aa8"
+    },
+    {
+      "path": "/workspace/scratch/692183e9c930/third_notice/a307035-center-notice.html",
+      "size_bytes": 65294,
+      "sha256": "66e93c1cc2957bbc9fa3a597fcca17148f078a8fdb30cc722b9f38ce77d1836e"
+    },
+    {
+      "path": "/workspace/scratch/692183e9c930/next_notice/a307035-audit/3087398.pdf",
+      "size_bytes": 92704,
+      "sha256": "f0c7f6fa1031e2f84c380d73f38cd1e5d8ad1263ee3d3c9fa6fda9adb89e8e19"
+    },
+    {
+      "path": "/workspace/scratch/692183e9c930/next_notice/a307035-audit/3087399.pdf",
+      "size_bytes": 100789,
+      "sha256": "776ca155cbff29a365a29a30b86542e27fa48fbd5564412cab80c54fd25df6dc"
+    },
+    {
+      "path": "/workspace/scratch/692183e9c930/next_notice/a307035-embedded-notice.jpg",
+      "size_bytes": 597595,
+      "sha256": "2320d2fa4b6b879a532334150b0ae5d3a06dbc080637b4cec3f335abc38d8634"
+    }
+  ],
+  "additional_attachment_receipts": [
+    {
+      "url": "https://www.alio.go.kr/download/download.json?fileNo=3087398",
+      "http_status": 200,
+      "content_type": "application/pdf;charset=utf-8",
+      "size_bytes": 92704,
+      "sha256": "f0c7f6fa1031e2f84c380d73f38cd1e5d8ad1263ee3d3c9fa6fda9adb89e8e19",
+      "checked_at": "2026-11-23T12:25:44.762714+09:00",
+      "path": "/workspace/scratch/692183e9c930/next_notice/a307035-audit/3087398.pdf",
+      "independent_read_completed": true
+    },
+    {
+      "url": "https://www.alio.go.kr/download/download.json?fileNo=3087399",
+      "http_status": 200,
+      "content_type": "application/pdf;charset=utf-8",
+      "size_bytes": 100789,
+      "sha256": "776ca155cbff29a365a29a30b86542e27fa48fbd5564412cab80c54fd25df6dc",
+      "checked_at": "2026-11-23T12:25:45.246149+09:00",
+      "path": "/workspace/scratch/692183e9c930/next_notice/a307035-audit/3087399.pdf",
+      "independent_read_completed": true
+    }
+  ],
+  "public_text_checks": {
+    "chars": 220,
+    "post_count": 1,
+    "reply_count": 0,
+    "fixed_cta_count": 1,
+    "fixed_cta_final": true,
+    "url_or_hashtag_found": false,
+    "body_sha256": "4dfbad78989ac768279a5d2c7206246fb4d086d7bde98cd3b18a575872c4c9c4"
+  },
+  "fact_findings": [
+    {
+      "claim": "청소 1명, 무기계약직",
+      "evidence": "Main PDF page1 recruitment table labels 업무지원직(시설지원)-청소, 정규직-무기계약직, 1명. Distinct security row is another 1 person; whole-notice count2 is not used as cleaning count."
+    },
+    {
+      "claim": "수원, 오전7시 시작, 주5일 하루8시간, 수습3개월",
+      "evidence": "Main PDF page2 cleaning row: 보훈재활체육센터(경기도 수원시 장안구 광교산로71), 주5일(40시간), 1일8시간(07:00~16:00/휴게시간1시간포함), 수습3개월."
+    },
+    {
+      "claim": "정년65세이하, 공단결격미해당, 지정일근무가능",
+      "evidence": "Main PDF page1 cleaning required conditions are 공단 인사규정18조 결격미해당 AND 시행세칙13조 정년65세를초과하지않는자. Main PDF 기타사항 requires availability from designated start date. Appendix2 specifies the disqualifications. No guard-specific license/training was mixed into cleaning."
+    },
+    {
+      "claim": "11월26일14:00 온라인접수",
+      "evidence": "Main PDF page3 schedule says 2026.11.16~11.26 14:00, 채용지원사이트 접수; rendered footnote explicitly excludes visiting/postal applications. Body online wording is accurate."
+    },
+    {
+      "claim": "자기소개서각문항 및 직무역량소개서300~700자",
+      "evidence": "Attachment3087400 appendix3 explicitly states each self-introduction question minimum300/max700 and competence introduction minimum300/max700. Attachment3087398 form corroborates minimum300 and about700 per item; precise maximum is supported by appendix3."
+    },
+    {
+      "claim": "추가첨부필수조건누락없음",
+      "evidence": "3087399 cleaning job-description general/education/required qualification each says 공고문 참조. Knowledge and skills describe duties; no additional degree/license/experience requirement. 3087398 form requests proof consistency and truthful entries and warns against identity disclosures; it adds no different eligibility or count/deadline."
+    }
+  ],
+  "application_start_precision_decision": {
+    "status": "original_source_precision_and_separate_official_time_supported",
+    "primary_pdf_start": "2026-11-16",
+    "primary_pdf_has_opening_clock": false,
+    "official_employer_start": "2026-11-16T09:00:00+09:00",
+    "employer_exact_text": "11. 16.(월) 오전 9시 이후 지원 가능",
+    "employer_source_ref": "https://www.bohun.or.kr/rsc/na/ntt/selectNttInfo.do?mi=34259&nttSn=191348",
+    "existing_entry_paths": {
+      "writer.review.application_period.start": "2026-11-16",
+      "writer.review.application_period.start_date_only": true,
+      "writer.review.application_period.start_source_ref": "https://www.bohun.or.kr/rsc/na/ntt/selectNttInfo.do?mi=34259&nttSn=191348",
+      "writer.review.application_period.start_evidence": "11. 16.(월) 오전 9시 이후 지원 가능"
+    },
+    "decision": "Preserve frozen original schema: primary period retains exact date-only precision of cited PDF, employer09:00 remains explicitly retained in separate source/evidence. Current review and November24 08:00 planned publication are after both supported starts and before exact end. No public claim of unknown or midnight start. No production-code/guard alteration or artificial combined excerpt needed. No contrary mandatory policy requirement identified."
+  },
+  "limitations": [
+    "This is semantic and source-text review; root separately performs final state/head/claim/dedup and live receipt checks.",
+    "Original PDF text extraction has font mapping warnings; key recruitment and schedule tables were visually checked against actual rendered pages."
+  ]
+}
