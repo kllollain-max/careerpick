@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "editorial_revision_of_existing_unapproved_draft",
+  "notice_id": "a307271",
+  "account": "hid_119",
+  "status": "unapproved_draft",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "slot_assignment": null,
+  "previous_draft_path": "threads/audits/recovery-20261123-evening/a307271-distinct-open-recruitment-official-draft-20261123.json",
+  "checked_at_kst": "2026-11-24T04:48:31+09:00",
+  "source_main_sha": "eed341cdcd0704c9afcebbf49880175f6fca0116",
+  "preflight": {
+    "run_id": 45246943715,
+    "observed_at": "2026-11-24T04:15:14.075202+09:00",
+    "approved_supply_count": 1,
+    "next_slot_missing": false,
+    "invalid_ready_entries": [],
+    "next_missing_slot": "2026-11-24T12:00:00+09:00"
+  },
+  "revision": {
+    "reader_question": "보훈·장애인 제한경쟁인지 공개경쟁인지",
+    "search_evidence": "official title and earlier separate restricted notice; search volume unverified",
+    "change": "Replaced generic introduction with explicit question/answer; clarified eligibility conditions and the veteran tie-break rather than an application restriction. Prior draft preserved.",
+    "post_text": "한국농어촌공사 철원화천지사 청소원, 보훈·장애인만 지원할 수 있나요?\n아니요. 이번 공무직(무기계약직) 1명 채용은 공개경쟁이에요.\n\n학력·전공·성별 제한은 없어요. 정년(만 65세) 미도달, 12월 14일부터 근무 가능, 출퇴근 가능, 병역(남성)·임용 결격 기준 충족이 필요해요.\n\n취업지원대상자는 면접 동점자 우선이에요. 하루 4시간, 월 114만 6,500원이며 11월 30일 16시까지 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "char_count": 248,
+    "reply_texts": [],
+    "cta_count": 1
+  },
+  "sources": [
+    {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+      "finding": "Official current public competition, one indefinite cleaner, age exception for retirement, appointment/commute/military/disqualification conditions; veteran tie-break at interview."
+    },
+    {
+      "url": "https://recruit.incruit.com/ekr/job/2611180022",
+      "finding": "One public service worker, online application through Nov 30 16:00."
+    },
+    {
+      "url": "https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1f64cbe045909&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437",
+      "finding": "Official issuer HTML confirms hours, pay, retirement age, location and deadline."
+    },
+    {
+      "url": "https://www.gojobs.go.kr/apmView.do?empmnsn=400098",
+      "finding": "Government repost explicitly shows no disability recruitment/preference designation."
+    }
+  ],
+  "source_verification": {
+    "operation_run": 45246764757,
+    "operation_artifact": 14854197743,
+    "operation_sha256": "8aceed639aeca966a73783d37f473ee8eb3419612d41cb59f72f50cc736bff4d",
+    "pages_artifact": 14852988825,
+    "pages_sha256": "4daaac2420044240441cfab61d0c21e36b05fc698dfbd9954e8f685e06ec4697",
+    "build_report_source_hashes_matched": 8,
+    "verification_method": "actual downloaded ZIP SHA256 and tar member bytes compared against build-report.json; production inspect_bundle not run"
+  },
+  "remaining": {
+    "official_pdf": "ALIO attachment GET 403; EKR web reader unsupported octet-stream, direct local GET DNS failure; original PDF bytes not verified",
+    "correction_check": "exact official pages compared, complete correction/cancellation scope not yet verified",
+    "profile_ui": "not verified",
+    "astra": "independent gpt-6.2-astra invocation not available among discovered tools; no passing result or model-call receipt",
+    "production_validation": "not completed"
+  },
+  "operation": "Audit revision only; no queue, staging, submissions, schedule, publisher or Meta writes."
+}
