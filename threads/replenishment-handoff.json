@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-23T17:12:54.990905+09:00",
-  "run_id": "45136666054",
-  "source_commit": "219a711f712cea61cdc3bd42278e7c717a6df9a8",
+  "captured_at": "2026-11-23T17:47:38.416254+09:00",
+  "run_id": "45141355968",
+  "source_commit": "3c4bc1d1048a1fa442e12860ff98bc68b208f8d0",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-23T17:12:05.321943+09:00",
+    "time": "2026-11-23T17:46:48.477321+09:00",
     "future_slots": [
       "2026-11-23T20:00:00+09:00",
       "2026-11-24T08:00:00+09:00",
@@ -18,7 +18,7 @@
       "2026-11-25T12:00:00+09:00",
       "2026-11-25T16:00:00+09:00"
     ],
-    "next_media": "IMAGE",
+    "next_media": "TEXT",
     "promoted": [],
     "refused": [
       {
@@ -115,7 +115,7 @@
       },
       {
         "notice_id": "a307175",
-        "reason": "SLOT_ALREADY_OCCUPIED"
+        "reason": "DUPLICATE_POST"
       },
       {
         "notice_id": "a307024",
@@ -136,10 +136,8 @@
     "inventory_shortfall": 6,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [
-      "2026-11-23T16:00:00+09:00"
-    ],
-    "media_forecast_conditional_on_active_slot": true,
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
       "2026-11-23T20:00:00+09:00",
       "2026-11-24T08:00:00+09:00"
@@ -216,13 +214,13 @@
         "cleaneye-80486",
         "cleaneye-80544",
         "cleaneye-81329",
-        "a307271",
         "cleaneye-81082",
         "cleaneye-81448",
+        "a307271",
         "cleaneye-81092",
-        "a306865",
         "cleaneye-80980",
         "a307233",
+        "a306865",
         "cleaneye-81403",
         "cleaneye-81374"
       ],
@@ -1911,42 +1909,6 @@
           "source_snapshot_checked_at": "2026-11-23T16:50:28+09:00"
         },
         {
-          "notice_id": "a307271",
-          "org": "한국농어촌공사",
-          "title": "한국농어촌공사 철원화천지사 공무직(청소원) 공개경쟁 채용 공고",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
-          "employment": "무기계약직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-20",
-            "end": "2026-11-30T16:00:00+09:00",
-            "start_date_only": true,
-            "date_only": false,
-            "source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
-            "evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00"
-          },
-          "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
-          "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
-          "official_detail_fields_for_review": {
-            "aplyQlfcCn": "- 학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n- 임용예정일(2026.12.14.)부터 즉시 업무종사 가능자\r\n- 남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n- 공사 인사규정 제9조의 임용 결격 사유가 없는 자(첨부 1)\r\n- 근무지로 출퇴근 가능자",
-            "hireTypeNmLst": "무기계약직",
-            "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함)",
-            "recrutNope": "1",
-            "recrutSe": "R2030",
-            "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 11.(금) 채용홈페이지에서 개별확인 / 업무형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2026. 12. 14.(월)\r\n※ 상기 일정은 업무형편에 따라 변경될 수 있으며, 변경 시 채용홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
-            "workRgnNmLst": "강원"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00",
-          "application_source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
-        },
-        {
           "notice_id": "cleaneye-81082",
           "org": "한국여성수련원",
           "title": "(재)한국여성수련원 제4회 공무직(청소팀) 직원 채용 공고",
@@ -2013,6 +1975,42 @@
           "source_snapshot_checked_at": "2026-11-23T16:50:28+09:00"
         },
         {
+          "notice_id": "a307271",
+          "org": "한국농어촌공사",
+          "title": "한국농어촌공사 철원화천지사 공무직(청소원) 공개경쟁 채용 공고",
+          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+          "employment": "무기계약직",
+          "recruiting_unit_title": null,
+          "recruiting_unit_count": null,
+          "recruiting_unit_scope": "unit_count_unconfirmed",
+          "selection_review_reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ],
+          "application_period": {
+            "start": "2026-11-20",
+            "end": "2026-11-30T16:00:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
+            "evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00"
+          },
+          "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
+          "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
+          "official_detail_fields_for_review": {
+            "aplyQlfcCn": "- 학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n- 임용예정일(2026.12.14.)부터 즉시 업무종사 가능자\r\n- 남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n- 공사 인사규정 제9조의 임용 결격 사유가 없는 자(첨부 1)\r\n- 근무지로 출퇴근 가능자",
+            "hireTypeNmLst": "무기계약직",
+            "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함)",
+            "recrutNope": "1",
+            "recrutSe": "R2030",
+            "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 11.(금) 채용홈페이지에서 개별확인 / 업무형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2026. 12. 14.(월)\r\n※ 상기 일정은 업무형편에 따라 변경될 수 있으며, 변경 시 채용홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
+            "workRgnNmLst": "강원"
+          },
+          "review_status": "official_review_required",
+          "application_evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00",
+          "application_source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
+          "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
+        },
+        {
           "notice_id": "cleaneye-81092",
           "org": "용인시청소년미래재단",
           "title": "2026년 제7회 직원채용",
@@ -2044,42 +2042,6 @@
           "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-24",
           "application_source_ref": "cleaneye.json#cleaneye-81092/application_period",
           "source_snapshot_checked_at": "2026-11-23T16:50:28+09:00"
-        },
-        {
-          "notice_id": "a306865",
-          "org": "한국농어촌공사",
-          "title": "한국농어촌공사 제주지역본부 공무직(청소원) 보훈ㆍ장애인 제한경쟁 채용 공고",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
-          "employment": "무기계약직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-10",
-            "end": "2026-11-24T16:00:00+09:00",
-            "start_date_only": true,
-            "date_only": false,
-            "source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
-            "evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00"
-          },
-          "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
-          "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
-          "official_detail_fields_for_review": {
-            "aplyQlfcCn": "-학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n-「국가유공자 등 예우 및 지원에 관한 법률」등 관계법령에 따른 취업지원대상자 또는「장애인고용촉진 및 직업재활법」에 따른 장애인만 가능\r\n-임용예정일(2027.1.1)부터 즉시 업무종사 가능자\r\n-남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n-공사 인사규정 제9조의 임용 결격 사유가 없는 자(공고문 참조)\r\n-근무지로 출퇴근 가능자",
-            "hireTypeNmLst": "무기계약직",
-            "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함)",
-            "recrutNope": "1",
-            "recrutSe": "R2030",
-            "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 14(월) 채용홈페이지에서 개별 확인 / 업무 형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2027. 1. 1.\r\n※ 상기 일정은 업무 형편에 따라 변경될 수 있으며, 변경 시 채용 홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
-            "workRgnNmLst": "제주"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00",
-          "application_source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
         },
         {
           "notice_id": "cleaneye-80980",
@@ -2148,6 +2110,42 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간) 2026.11.19(목)~2026.11.25(수) 16시까지",
           "application_source_ref": "alio-detail.json#307233/scrnprcdrMthdExpln",
+          "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
+        },
+        {
+          "notice_id": "a306865",
+          "org": "한국농어촌공사",
+          "title": "한국농어촌공사 제주지역본부 공무직(청소원) 보훈ㆍ장애인 제한경쟁 채용 공고",
+          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+          "employment": "무기계약직",
+          "recruiting_unit_title": null,
+          "recruiting_unit_count": null,
+          "recruiting_unit_scope": "unit_count_unconfirmed",
+          "selection_review_reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ],
+          "application_period": {
+            "start": "2026-11-10",
+            "end": "2026-11-24T16:00:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
+            "evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00"
+          },
+          "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
+          "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
+          "official_detail_fields_for_review": {
+            "aplyQlfcCn": "-학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n-「국가유공자 등 예우 및 지원에 관한 법률」등 관계법령에 따른 취업지원대상자 또는「장애인고용촉진 및 직업재활법」에 따른 장애인만 가능\r\n-임용예정일(2027.1.1)부터 즉시 업무종사 가능자\r\n-남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n-공사 인사규정 제9조의 임용 결격 사유가 없는 자(공고문 참조)\r\n-근무지로 출퇴근 가능자",
+            "hireTypeNmLst": "무기계약직",
+            "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함)",
+            "recrutNope": "1",
+            "recrutSe": "R2030",
+            "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 14(월) 채용홈페이지에서 개별 확인 / 업무 형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2027. 1. 1.\r\n※ 상기 일정은 업무 형편에 따라 변경될 수 있으며, 변경 시 채용 홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
+            "workRgnNmLst": "제주"
+          },
+          "review_status": "official_review_required",
+          "application_evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00",
+          "application_source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
           "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
         },
         {
@@ -2454,13 +2452,13 @@
       "cleaneye-80486",
       "cleaneye-80544",
       "cleaneye-81329",
-      "a307271",
       "cleaneye-81082",
       "cleaneye-81448",
+      "a307271",
       "cleaneye-81092",
-      "a306865",
       "cleaneye-80980",
       "a307233",
+      "a306865",
       "cleaneye-81403",
       "cleaneye-81374"
     ],
@@ -4149,42 +4147,6 @@
         "source_snapshot_checked_at": "2026-11-23T16:50:28+09:00"
       },
       {
-        "notice_id": "a307271",
-        "org": "한국농어촌공사",
-        "title": "한국농어촌공사 철원화천지사 공무직(청소원) 공개경쟁 채용 공고",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
-        "employment": "무기계약직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-20",
-          "end": "2026-11-30T16:00:00+09:00",
-          "start_date_only": true,
-          "date_only": false,
-          "source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
-          "evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00"
-        },
-        "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
-        "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "- 학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n- 임용예정일(2026.12.14.)부터 즉시 업무종사 가능자\r\n- 남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n- 공사 인사규정 제9조의 임용 결격 사유가 없는 자(첨부 1)\r\n- 근무지로 출퇴근 가능자",
-          "hireTypeNmLst": "무기계약직",
-          "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함)",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 11.(금) 채용홈페이지에서 개별확인 / 업무형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2026. 12. 14.(월)\r\n※ 상기 일정은 업무형편에 따라 변경될 수 있으며, 변경 시 채용홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
-          "workRgnNmLst": "강원"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00",
-        "application_source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
-      },
-      {
         "notice_id": "cleaneye-81082",
         "org": "한국여성수련원",
         "title": "(재)한국여성수련원 제4회 공무직(청소팀) 직원 채용 공고",
@@ -4251,6 +4213,42 @@
         "source_snapshot_checked_at": "2026-11-23T16:50:28+09:00"
       },
       {
+        "notice_id": "a307271",
+        "org": "한국농어촌공사",
+        "title": "한국농어촌공사 철원화천지사 공무직(청소원) 공개경쟁 채용 공고",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+        "employment": "무기계약직",
+        "recruiting_unit_title": null,
+        "recruiting_unit_count": null,
+        "recruiting_unit_scope": "unit_count_unconfirmed",
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "application_period": {
+          "start": "2026-11-20",
+          "end": "2026-11-30T16:00:00+09:00",
+          "start_date_only": true,
+          "date_only": false,
+          "source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
+          "evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00"
+        },
+        "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
+        "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "- 학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n- 임용예정일(2026.12.14.)부터 즉시 업무종사 가능자\r\n- 남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n- 공사 인사규정 제9조의 임용 결격 사유가 없는 자(첨부 1)\r\n- 근무지로 출퇴근 가능자",
+          "hireTypeNmLst": "무기계약직",
+          "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함)",
+          "recrutNope": "1",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 11.(금) 채용홈페이지에서 개별확인 / 업무형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2026. 12. 14.(월)\r\n※ 상기 일정은 업무형편에 따라 변경될 수 있으며, 변경 시 채용홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
+          "workRgnNmLst": "강원"
+        },
+        "review_status": "official_review_required",
+        "application_evidence": "접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00",
+        "application_source_ref": "alio-detail.json#307271/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
+      },
+      {
         "notice_id": "cleaneye-81092",
         "org": "용인시청소년미래재단",
         "title": "2026년 제7회 직원채용",
@@ -4282,42 +4280,6 @@
         "application_evidence": "접수개시일 원문: 2026-11-18; 접수마감일 원문: 2026-11-24",
         "application_source_ref": "cleaneye.json#cleaneye-81092/application_period",
         "source_snapshot_checked_at": "2026-11-23T16:50:28+09:00"
-      },
-      {
-        "notice_id": "a306865",
-        "org": "한국농어촌공사",
-        "title": "한국농어촌공사 제주지역본부 공무직(청소원) 보훈ㆍ장애인 제한경쟁 채용 공고",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
-        "employment": "무기계약직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-10",
-          "end": "2026-11-24T16:00:00+09:00",
-          "start_date_only": true,
-          "date_only": false,
-          "source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
-          "evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00"
-        },
-        "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
-        "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "-학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n-「국가유공자 등 예우 및 지원에 관한 법률」등 관계법령에 따른 취업지원대상자 또는「장애인고용촉진 및 직업재활법」에 따른 장애인만 가능\r\n-임용예정일(2027.1.1)부터 즉시 업무종사 가능자\r\n-남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n-공사 인사규정 제9조의 임용 결격 사유가 없는 자(공고문 참조)\r\n-근무지로 출퇴근 가능자",
-          "hireTypeNmLst": "무기계약직",
-          "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함)",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 14(월) 채용홈페이지에서 개별 확인 / 업무 형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2027. 1. 1.\r\n※ 상기 일정은 업무 형편에 따라 변경될 수 있으며, 변경 시 채용 홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
-          "workRgnNmLst": "제주"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00",
-        "application_source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
       },
       {
         "notice_id": "cleaneye-80980",
@@ -4386,6 +4348,42 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간) 2026.11.19(목)~2026.11.25(수) 16시까지",
         "application_source_ref": "alio-detail.json#307233/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
+      },
+      {
+        "notice_id": "a306865",
+        "org": "한국농어촌공사",
+        "title": "한국농어촌공사 제주지역본부 공무직(청소원) 보훈ㆍ장애인 제한경쟁 채용 공고",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+        "employment": "무기계약직",
+        "recruiting_unit_title": null,
+        "recruiting_unit_count": null,
+        "recruiting_unit_scope": "unit_count_unconfirmed",
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "application_period": {
+          "start": "2026-11-10",
+          "end": "2026-11-24T16:00:00+09:00",
+          "start_date_only": true,
+          "date_only": false,
+          "source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
+          "evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00"
+        },
+        "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
+        "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "-학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자)\r\n-「국가유공자 등 예우 및 지원에 관한 법률」등 관계법령에 따른 취업지원대상자 또는「장애인고용촉진 및 직업재활법」에 따른 장애인만 가능\r\n-임용예정일(2027.1.1)부터 즉시 업무종사 가능자\r\n-남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자\r\n-공사 인사규정 제9조의 임용 결격 사유가 없는 자(공고문 참조)\r\n-근무지로 출퇴근 가능자",
+          "hireTypeNmLst": "무기계약직",
+          "prefCn": "국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함)",
+          "recrutNope": "1",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "1. 접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00\r\n - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 \r\n2. 선발방법\r\n가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발\r\n- 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발\r\n- 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음\r\n나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발\r\n- 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자\r\n- 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정\r\n3. 최종합격자 발표: 2026. 12. 14(월) 채용홈페이지에서 개별 확인 / 업무 형편에 따라 변경될 수 있음\r\n4. 채용예정일: 2027. 1. 1.\r\n※ 상기 일정은 업무 형편에 따라 변경될 수 있으며, 변경 시 채용 홈페이지 및 지원자 개별 안내 예정\r\n※ 기타 세부사항은 첨부된 채용공고문 참고",
+          "workRgnNmLst": "제주"
+        },
+        "review_status": "official_review_required",
+        "application_evidence": "접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00",
+        "application_source_ref": "alio-detail.json#306865/scrnprcdrMthdExpln",
         "source_snapshot_checked_at": "2026-11-23T16:49:49+09:00"
       },
       {
@@ -5451,14 +5449,6 @@
         "suggested_slot": null
       },
       {
-        "notice_id": "a307271",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
-        "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
-        "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
-        "suggested_slot": null
-      },
-      {
         "notice_id": "cleaneye-81082",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81082",
@@ -5475,19 +5465,19 @@
         "suggested_slot": null
       },
       {
+        "notice_id": "a307271",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+        "source_post_sha256": "1a06be223e4027c53bbdd19f2e2036238025b4e8c60813bdfd86e161e3292316",
+        "source_detail_sha256": "f8a323ac11eb6dc569c946d66df0cdb045e5686ce7ea54d37388031ec30e82ce",
+        "suggested_slot": null
+      },
+      {
         "notice_id": "cleaneye-81092",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81092",
         "source_post_sha256": "dc69d56ac1ee23369fbca3b410254aac82ac0836b173390a4afb1aef0b957e37",
         "source_detail_sha256": "acf53c6a43b1593952a4aa694e311263d48f43ce5a1f955f386b1ce056af2c7a",
-        "suggested_slot": null
-      },
-      {
-        "notice_id": "a306865",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
-        "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
-        "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
         "suggested_slot": null
       },
       {
@@ -5504,6 +5494,14 @@
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307233",
         "source_post_sha256": "d6367cea07bb3df2851d4739217e05ee00a8beb1c87fc170d8d1ab91ffef991c",
         "source_detail_sha256": "2d2ddde055a490fdecabe98853f84e8f9db43cb7b7dd8055c316bd8d126671a4",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a306865",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+        "source_post_sha256": "4f3b7419c7e7774bb0060120c9d45b34721f36f121e1af723ed105c26fadcf71",
+        "source_detail_sha256": "75d7c7ca4a0d2e59521e25b1f614739029802b286987db1fec5b17c6a31a8d34",
         "suggested_slot": null
       },
       {
@@ -5601,34 +5599,11 @@
           "sha256": "5f5ca5f2374a793fbbf0f1ec171717a86b2e5e1358035c1d803027a8f46caa1d",
           "size_bytes": 12717,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-23T17:12:54.113098+09:00",
+          "checked_at": "2026-11-23T17:47:37.708197+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
           "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국농어촌공사 철원화천지사 공무직(청소원) 공개경쟁 채용 공고 2026.11.20 / 진행중 공공기관 채용정보 기관명 한국농어촌공사 표준직무(NCS) 경비.청소 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 강원 근무분야 공무직 채용인원 1 우대조건 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함) 공고기간 26.11.20 ~ 26.11.30 응시자격 - 학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자) - 임용예정일(2026.12.14.)부터 즉시 업무종사 가능자 - 남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자 - 공사 인사규정 제9조의 임용 결격 사유가 없는 자(첨부 1) - 근무지로 출퇴근 가능자 결격사유 인사규정 제9조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원에 임용될 수 없다. 1. 피성년후견인 또는 피한정후견인 2. 파산선고를 받고 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예 기간 중에 있는 자 6. 법원의 확정판결이나 다른 법률에 따라 자격이 상실 또는 정지된 자 7. 파면처분을 받은 날로부터 5년을 경과하지 아니한 자 8. 해임처분을 받은 날로부터 3년을 경과하지 아니한 자 10.채용신체검사 및 신원조회결과 부적격 판정을 받은 자 11.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12.「공공기관의 운영에 관한 법률」제4조에 따른 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 날로부터 5년이 지나지 아니한 자 13. 그 밖에 채용의 공정한 관리에 영향을 미치는 행위로서 부정한 행위를 한 자 또는 채용 공고문에 불합격 처리 기준으로 정한 행위를 한 자 14.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 규정된 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 15. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나. 「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄 전형절차/방법 1. 접수기간: 2026. 11. 20.(금) ~ 2026. 11. 30.(월) 16:00 - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 2. 선발방법 가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발 - 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발 - 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음 나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발 - 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자 - 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정 3. 최종합격자 발표: 2026. 12. 11.(금) 채용홈페이지에서 개별확인 / 업무형편에 따라 변경될 수 있음 4. 채용예정일: 2026. 12. 14.(월) ※ 상기 일정은 업무형편에 따라 변경될 수 있으며, 변경 시 채용홈페이지 및 지원자 개별 안내 예정 ※ 기타 세부사항은 첨부된 채용공고문 참고 우대내용 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생 시 우선순위 적용에 한함) 전형단계별 채용정보 공무직(청소원) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 공무직(청소원) 공개경쟁 채용 공고 261120.pdf 입사지원서 입사지원서 (공무직).hwp 직무기술서 직무기술서 (공무직).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1f64cbe045909&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437 클립보드에 주소가 복사 되었습니다."
-        },
-        "text_requires_independent_review": true,
-        "notice_body_has_text": true,
-        "draft_text_has_notice": false
-      },
-      {
-        "notice_id": "a306865",
-        "suggested_slot": null,
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
-        "evidence_status": "bytes_fetched_for_review",
-        "semantic_review": "required",
-        "publisher_validate_entry": "not_run",
-        "source": {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
-          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
-          "sha256": "81d1becc7de26b99b68ff42c6367debee332b24ab41e4edef14296e047f58a0b",
-          "size_bytes": 12973,
-          "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-23T17:12:54.146011+09:00",
-          "pdf_magic_valid": false,
-          "text_available": true,
-          "official_page_title": "잡알리오",
-          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국농어촌공사 제주지역본부 공무직(청소원) 보훈ㆍ장애인 제한경쟁 채용 공고 2026.11.10 / 진행중 공공기관 채용정보 기관명 한국농어촌공사 표준직무(NCS) 경비.청소 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 제주 근무분야 공무직 채용인원 1 우대조건 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함) 공고기간 26.11.10 ~ 26.11.24 응시자격 -학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자) -「국가유공자 등 예우 및 지원에 관한 법률」등 관계법령에 따른 취업지원대상자 또는「장애인고용촉진 및 직업재활법」에 따른 장애인만 가능 -임용예정일(2027.1.1)부터 즉시 업무종사 가능자 -남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자 -공사 인사규정 제9조의 임용 결격 사유가 없는 자(공고문 참조) -근무지로 출퇴근 가능자 결격사유 인사규정 제9조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원에 임용될 수 없다. 1. 피성년후견인 또는 피한정후견인 2. 파산선고를 받고 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예 기간 중에 있는 자 6. 법원의 확정판결이나 다른 법률에 따라 자격이 상실 또는 정지된 자 7. 파면처분을 받은 날로부터 5년을 경과하지 아니한 자 8. 해임처분을 받은 날로부터 3년을 경과하지 아니한 자 10.채용신체검사 및 신원조회결과 부적격 판정을 받은 자 11.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12.「공공기관의 운영에 관한 법률」제4조에 따른 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 날로부터 5년이 지나지 아니한 자 13. 그 밖에 채용의 공정한 관리에 영향을 미치는 행위로서 부정한 행위를 한 자 또는 채용 공고문에 불합격 처리 기준으로 정한 행위를 한 자 14.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 규정된 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 15. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나. 「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄 전형절차/방법 1. 접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00 - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 2. 선발방법 가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발 - 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발 - 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음 나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발 - 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자 - 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정 3. 최종합격자 발표: 2026. 12. 14(월) 채용홈페이지에서 개별 확인 / 업무 형편에 따라 변경될 수 있음 4. 채용예정일: 2027. 1. 1. ※ 상기 일정은 업무 형편에 따라 변경될 수 있으며, 변경 시 채용 홈페이지 및 지원자 개별 안내 예정 ※ 기타 세부사항은 첨부된 채용공고문 참고 우대내용 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함) 전형단계별 채용정보 공무직(청소원) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 (채용공고문) 공무직(청소원) 보훈장애인제한경쟁채용공고.pdf 입사지원서 (입사지원서) 공무직(청소원).hwp 직무기술서 (직무기술서) 공무직(청소원).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a08a300001a1c2c68df32497&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437 클립보드에 주소가 복사 되었습니다."
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
@@ -5647,11 +5622,34 @@
           "sha256": "303dc4e5c85699143bdaf1e2e9f82b5a00642989aeb3293ed94b30f92066741d",
           "size_bytes": 16225,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-23T17:12:54.402267+09:00",
+          "checked_at": "2026-11-23T17:47:37.282891+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
           "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국폴리텍특성화대학 바이오캠퍼스 업무직(대학운영직_조리원) 채용공고 2026.11.19 / 진행중 공공기관 채용정보 기관명 학교법인한국폴리텍 표준직무(NCS) 음식서비스 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 충남 근무분야 운영직 채용인원 1 우대조건 취업지원대상자, 장애인, 저소득층, 다문화가족자녀, 북한이탈주민, 자립준비청년 공고기간 26.11.19 ~ 26.11.25 응시자격 ○ (연령) 만 60세 미만(정년 만 60세) ○ (학력ㆍ성별) 제한 없음 ○ 임용예정일**(2026. 12.21.) 기준 유효한 건강진단결과서(보건증) 소지자** ○ 남자의 경우 병역필 또는 면제자 ○ 학교법인 한국폴리텍 인사규정 제19조(결격사유)에 해당되지 않는 자 ○ 최종합격자 발표 후 임용예정일에 근무 가능한 자 (근무 예정일 : 2026. 12.21 ) 결격사유 ※ 학교법인 한국폴리텍 인사규정 제19조(결격사유) 1. 피성년후견인 2. 파산자로서 복권되지 아니한 자 3. 금고이상의 실형을 선고 받고, 그 집행이 종료되거나 집행을 받지 아니 하기로 확정된 후 5년이 경과되지 아니한 자 4. 금고이상의 형을 선고받고, 그 집행유예의 기간이 만료된 날로부터 2년이 경과되지 아니한 자 5. 금고이상의 형의 선고유예를 받고 그 선고유예기간 중에 있는 자 6. 법원의 판결 또는 다른 법률에 따라 자격이 상실 또는 정지된 자 6의2. 공무원 또는 교직원으로 재직기간 중 직무와 관련하여 [형법]제355조 및 제356조에 규정된 죄를 범한 자로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 자 6의3. 다음 각 목의 어느 하나에 해당하는 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 가. [성폭력범죄의 처벌 등에 관한 특례법] 제2조에 따른 성폭력범죄 나. [정보통신망 이용촉진 및 정보보호 등에 관한 법률] 제74조제1항제2호 및 제3호에 규정된 죄 다. [스토킹범죄의 처벌 등에 관한 법률] 제2조제2호에 따른 스토킹범죄 6의4. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면·해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. [성폭력범죄의 처벌 등에 관한 특례법] 제2조에 따른 성폭력범죄 나. [아동·청소년의 성보호에 관한 법률] 제2조제2호에 따른 아동·청소년대상 성범죄 7. 병역의무자로서 병역을 기피한 자 8. 전직근무기관에서 징계에 따라 파면 또는 해임된 자로서, 그 징계처분을 받은 날로부터 파면은 5년, 해임은 3년이 경과하지 아니한 자 9. 채용 신체검사 결과 불합격으로 판정된 자(단, 교원, 초빙교원, 기간제 교사에 한함) 11. [부패방지 및 국민권익위원회의 설치와 운영에 관한 법률] 제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12. 성인에 대한 [성폭력범죄의 처벌 등에 관한 특례법] 제2조에 따른 성폭력범죄 행위로 파면·해임되거나 100만원 이상의 벌금형이나 그 이상의 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 지난 사람을 포함한다)(단, 교원, 초빙교원, 기간제 교사에 한함) 13. 마약·대마 또는 향정신성의약품 중독자(단, 교원, 초빙교원, 기간제 교사에 한함) 전형절차/방법 ○ (접수기간) 2026.11.19(목)~2026.11.25(수) 16시까지 ○ (접수방법) 전자우편(이메일) (※ 방문 및 우편접수 불가) - 대학 지정 서식(붙임 1ㆍ2) 이외의 서류 접수 불가. ○ (전자우편접수) hyunhee@kopo.ac.kr(인사담당자 메일) - (전자우편 제목) “대학운영직(조리원)_성명” 기재 【 예) 대학운영직(조리원)_홍길동 】 ○ 지원서류 기재 착오 및 서명누락 등으로 인한 불이익은 응시자의 귀책사유 ○ 대학 지정 서식을 사용하지 않은 경우, 접수되지 않음 <심사방법 및 일정> ○ (서류심사) - 서류전형 심사 : 2026. 11.27(금) 11:00 - 서류전형 합격자 발표 : 2026. 11.27.(금) 17:00 - 응시자격 적격여부 확인 및 지정서류 준수 등 심사 - 합격자에 한하여 개별 통보 및 면접 일정 안내 (지원자격 미달, 원서 불성실 기재 등을 제외한 적격자 전원에게 면접심사 응시 기회 부여) ○ (면접심사) - 면접전형 일정 및 장소 : 2026. 12. 02.(수), 한국폴리텍대학 바이오캠퍼스 - 서류전형 합격자에 한하며 당해 직무수행에 필요한 교육, 경력, 자격 등 실무능력 및 적격성 검증 ○ (합격자 발표) - 발표일자 : 2026. 12.3.(목), 합격자에 한하여 개별 통보 ○ (합격자 등록) - 등록기간 : 2026. 12.3(목) ~ 2026. 12.9(화) 14:00시 까지 - 기한 내 등록서류 미제출 시 채용의사가 없는 것으로 간주하여 임용 취소. ○ (예비합격자) - 면접성적 차 순위자를 대상으로 채용인원의 2배수 이내 예비합격자를 둘 수 있으며, 이때 예비합격자 유효기간은 최종합격자 발표일로부터 수습임용기간 만료일까지로 함. - 최종합격자 중 임용포기 또는 임용 결격사유 발생 및 중도 퇴사로 결원 발생 시 별도의 조치 없이 예비합격자 중 선발 할 수 있음. ○ 대학 사정에 따라 일부 변경(상기일정 등) 될 수 있음. 우대내용 <취업지원대상자> ○ 「독립유공자예우에 관한 법률」, 「국가유공자 등 예우 및 지원에 관한법률』,「5·18민주유공자 예우에 관한 법률」, 「특수임무유공자 예우 및 단체설립에 관한 법률」, 「고엽제 후유의증 등 환자지원 및 단체설립에 관한 법률」, 「보훈보상대상자 지원에 관한 법률」에 따른 취업지원대상자 ○ 취업지원대상자 가산점수는 「국가유공자 등 예우 및 지원에 관한 법률」 제31조의 가점 합격인원 상한제(30%)에 따라 최소 모집분야 기준 선발예정인원이 4명 이상인 경우에만 적용하나, 응시인원이 채용예정인원과 같거나 적은 경우에는 가점 적용(면접전형 만점의 5% 또는 "
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": false
+      },
+      {
+        "notice_id": "a306865",
+        "suggested_slot": null,
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306865",
+          "sha256": "81d1becc7de26b99b68ff42c6367debee332b24ab41e4edef14296e047f58a0b",
+          "size_bytes": 12973,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-23T17:47:37.421985+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국농어촌공사 제주지역본부 공무직(청소원) 보훈ㆍ장애인 제한경쟁 채용 공고 2026.11.10 / 진행중 공공기관 채용정보 기관명 한국농어촌공사 표준직무(NCS) 경비.청소 고용형태 무기계약직 학력정보 학력무관 채용구분 신입+경력 근무지 제주 근무분야 공무직 채용인원 1 우대조건 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함) 공고기간 26.11.10 ~ 26.11.24 응시자격 -학력, 전공, 성별, 연령 제한 없음(단, 정년에 도달하지 아니한 자) -「국가유공자 등 예우 및 지원에 관한 법률」등 관계법령에 따른 취업지원대상자 또는「장애인고용촉진 및 직업재활법」에 따른 장애인만 가능 -임용예정일(2027.1.1)부터 즉시 업무종사 가능자 -남자의 경우, 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자 -공사 인사규정 제9조의 임용 결격 사유가 없는 자(공고문 참조) -근무지로 출퇴근 가능자 결격사유 인사규정 제9조(결격사유) 다음 각 호의 어느 하나에 해당하는 자는 직원에 임용될 수 없다. 1. 피성년후견인 또는 피한정후견인 2. 파산선고를 받고 복권되지 아니한 자 3. 금고 이상의 형을 받고 그 집행이 종료되거나 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 자 4. 금고 이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 자 5. 금고 이상의 형의 선고유예를 받고 그 선고유예 기간 중에 있는 자 6. 법원의 확정판결이나 다른 법률에 따라 자격이 상실 또는 정지된 자 7. 파면처분을 받은 날로부터 5년을 경과하지 아니한 자 8. 해임처분을 받은 날로부터 3년을 경과하지 아니한 자 10.채용신체검사 및 신원조회결과 부적격 판정을 받은 자 11.「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 12.「공공기관의 운영에 관한 법률」제4조에 따른 다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 날로부터 5년이 지나지 아니한 자 13. 그 밖에 채용의 공정한 관리에 영향을 미치는 행위로서 부정한 행위를 한 자 또는 채용 공고문에 불합격 처리 기준으로 정한 행위를 한 자 14.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 규정된 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 15. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가. 「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나. 「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄 전형절차/방법 1. 접수기간: 2026. 11. 10(화) ~ 2026. 11. 24(화) 16:00 - 접수방법: 채용 홈페이지(https://recruit.incruit.com/ekr)를 통한 온라인 접수 2. 선발방법 가. 서류전형(100점): 제출서류를 바탕으로 응시자격 및 지원서 작성적합도(불성실 기재여부 등) 심사를 통한 적합자 전원 선발 - 단, 응시인원이 채용인원의 5배수 이상인 경우 서류평가(자기소개서 60점, 경력 20점, 고령자 20점)를 통해 5배수 이내 선발 - 동점자 발생 시 동점자 전원 합격처리 및 동점자를 포함한 대상자가 5배수를 초과할 수 있음 나. 면접전형(100점): 직무적합성(40점)과 직무수행능력(60점)을 평가하여 고득점자 순으로 선발 - 동점자 처리 기준: (1순위) 취업지원대상자 (2순위) 서류전형 고득점자 - 면접 세부일정 및 면접장소 등은 면접전형 대상자(서류전형 합격자)에게 별도 안내 예정 3. 최종합격자 발표: 2026. 12. 14(월) 채용홈페이지에서 개별 확인 / 업무 형편에 따라 변경될 수 있음 4. 채용예정일: 2027. 1. 1. ※ 상기 일정은 업무 형편에 따라 변경될 수 있으며, 변경 시 채용 홈페이지 및 지원자 개별 안내 예정 ※ 기타 세부사항은 첨부된 채용공고문 참고 우대내용 국가유공자 등 취업지원대상자(면접전형에서 동점자 발생시 우선순위 적용에 한함) 전형단계별 채용정보 공무직(청소원) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 (채용공고문) 공무직(청소원) 보훈장애인제한경쟁채용공고.pdf 입사지원서 (입사지원서) 공무직(청소원).hwp 직무기술서 (직무기술서) 공무직(청소원).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a08a300001a1c2c68df32497&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437 클립보드에 주소가 복사 되었습니다."
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
@@ -5791,12 +5789,20 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-23T17:12:54.482785+09:00",
-    "window_start": "2026-11-21T08:12:54.482785+00:00",
+    "checked_at": "2026-11-23T17:47:37.789038+09:00",
+    "window_start": "2026-11-21T08:47:37.789038+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
     "posts": [
+      {
+        "post_id": "18036600668888597",
+        "timestamp": "2026-11-23T08:31:37+00:00",
+        "permalink": "https://www.threads.com/@hid_119/post/DgE9OxWlpfF",
+        "is_reply": false,
+        "text_available": true,
+        "text_sha256": "10de90eacaaf7d7d7cbadf456923821cd021f74203ad9953214d5f95c63374bf"
+      },
       {
         "post_id": "18203041492385442",
         "timestamp": "2026-11-22T08:09:26+00:00",
