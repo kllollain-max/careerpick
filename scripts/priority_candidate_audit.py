@@ -25,6 +25,33 @@ def verified_kst_clock(value):
     except ValueError:
         return None
 
+def bound_application_cutoff(post, proof):
+    """Use a cross-date clock only with complete, unchanged source terms."""
+    if (not isinstance(proof, dict) or post.get('alio') is not True
+            or proof.get('organization') != post.get('org')
+            or proof.get('title') != post.get('title')
+            or proof.get('source_end_date') != str(post.get('due', ''))[:10]
+            or proof.get('expected_source_seats') != str(post.get('n'))
+            or not proof.get('source_employment')
+            or proof['source_employment'] != post.get('emp')):
+        return None
+    cutoff = verified_kst_clock(proof.get('application_cutoff'))
+    if cutoff is None:
+        return None
+    end = proof.get('application_end_date')
+    if end is not None and end != cutoff.date().isoformat():
+        return None
+    start = proof.get('application_start')
+    if start:
+        start_clock = verified_kst_clock(start)
+        start_day = as_date(start)
+        if (start_clock is None and (not isinstance(start, str)
+                or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', start))):
+            return None
+        if not start_day or start_day > cutoff.date() or (start_clock and start_clock > cutoff):
+            return None
+    return cutoff
+
 def seat_count(value):
     if isinstance(value, int) and not isinstance(value, bool):
         return value if 1 <= value <= 5000 else None
@@ -55,13 +82,14 @@ def shortlist(feed, today, limit=30, verified_windows=None, as_of_instant=None,
         url = p.get('url', '')
         emp = p.get('emp') if isinstance(p.get('emp'), list) else []
         mixed_unit_hold = False
+        bound_clock = bound_application_cutoff(p, verified_windows.get(identity, {}))
         if not isinstance(identity, str) or not re.fullmatch(r'a\d+', identity) or identity in seen:
             reason = 'duplicate_or_bad_id'
         elif not isinstance(title, str) or not title.strip():
             reason = 'missing_title'
         elif not end:
             reason = 'unknown_deadline'
-        elif end < today:
+        elif (bound_clock.date() if bound_clock else end) < today:
             reason = 'expired'
         elif not isinstance(url, str) or urlsplit(url).scheme != 'https' or urlsplit(url).hostname != 'job.alio.go.kr':
             reason = 'unverified_source'

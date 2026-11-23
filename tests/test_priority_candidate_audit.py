@@ -7,6 +7,29 @@ def row(identity, due='2026-12-01', emp=None, n='20', url='https://job.alio.go.k
 
 class PriorityAuditTests(unittest.TestCase):
 
+    def test_est_deadline_next_korea_day_overrides_posting_date_only_with_complete_proof(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        post=dict(row('a88',due='2026-12-04',emp=['정규직'],n='6'),alio=True)
+        proof=dict(organization=post['org'],title=post['title'],source_end_date='2026-12-04',
+                   expected_source_seats='6',source_employment=['정규직'],
+                   application_cutoff='2026-12-05T13:59:00+09:00',application_end_date='2026-12-05')
+        now=datetime(2026,12,5,12,0,tzinfo=ZoneInfo('Asia/Seoul'))
+        report=shortlist({'posts':[post]},now.date(),verified_windows={'a88':proof},as_of_instant=now)
+        self.assertEqual(report['eligible_rows'],1)
+        later=now.replace(hour=14)
+        report=shortlist({'posts':[post]},later.date(),verified_windows={'a88':proof},as_of_instant=later)
+        self.assertEqual(report['eligible_rows'],0)
+        self.assertEqual(report['excluded']['official_reception_closed'],1)
+        for change in ({'expected_source_seats':'7'},{'source_employment':['계약직']},
+                       {'source_end_date':'2026-12-03'}, {'title':'다른 공고'},
+                       {'application_end_date':'2026-12-04'},
+                       {'application_start':'2026-12-06'},
+                       {'application_cutoff':'2026-12-05T25:59:00+09:00'}):
+            report=shortlist({'posts':[post]},now.date(),verified_windows={'a88':{**proof,**change}},as_of_instant=now)
+            self.assertEqual(report['eligible_rows'],0)
+
+
     def test_cli_honors_official_cutoff_even_without_a_verified_start_date(self):
         import json
         import tempfile
