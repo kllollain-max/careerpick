@@ -24,6 +24,8 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Official KINS notice image, section7, directly read 2026-11-23.
+    'a307238': '2026-12-04T18:00:00+09:00',
     # Separate Yangyang/Samcheok HWPX originals, sectionIII (not publication-end clocks).
     'a307298': '2026-12-04T18:00:00+09:00',
     'a307299': '2026-12-04T18:00:00+09:00',
@@ -99,6 +101,24 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a307238': {'organization': '한국원자력안전기술원',
+     'title': '한국원자력안전기술원 2027년 상반기 정규직 직원 채용',
+     'source_end_date': '2026-12-04',
+     'expected_source_seats': '30',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088729',
+     'checked_on': '2026-11-23',
+     'scope': '공식 모집표의 전형별 인원·학력·필수자격·접수일정',
+     'role_mix_note': 'ALIO 수집 인원은30명이지만 공식 첨부 모집표는 일반채용29명·국가보훈 제한경쟁2명·필수면허 제한경쟁1명으로 합계32명입니다. 두 '
+                      '수치를 임의로 합산하거나 모두 같은 지원조건으로 보지 말고 기관 최신 정정 공고에서 확정 인원을 확인하세요. 연구직의 대다수 분야는 '
+                      '석사 이상, 정보기술은 학사 이상이며 경영관리는 학력 제한이 없습니다. 공통 영어성적 기준·면제 조건과 분야별 필수자격은 각각 '
+                      '확인해야 합니다.',
+     'hiring_breakdown': '공식 첨부: 일반29명 + 보훈2명 + 필수면허1명 = 32명 · ALIO 수집30명과 불일치',
+     'hiring_breakdown_label': '공식 모집표와 수집 인원의 차이',
+     'source_headcount_conflict': True,
+     'regular_review_hold_due_to_mixed_role_units': True,
+     'application_start': '2026-11-19',
+     'application_end_date': '2026-12-04'},
     'a307298': {'organization': '주택관리공단(주)',
      'title': '육아휴직 대체직 채용공고(주택관리공단 강원지사)',
      'source_end_date': '2026-12-04',
@@ -1105,10 +1125,10 @@ def render(post, detail, related_posts=(), notice_review=None):
     fields = [
         ('기관명', org),
         (
-            '모집인원',
+            '수집 모집인원 · 공식 첨부와 불일치' if verified_application_notice.get('source_headcount_conflict') else '모집인원',
             count_label(post.get('n'))
         ),
-        *(([('기관 공식 확인 고용형태별 인원', verified_application_notice['hiring_breakdown'])])
+        *(([(verified_application_notice.get('hiring_breakdown_label', '기관 공식 확인 고용형태별 인원'), verified_application_notice['hiring_breakdown'])])
           if verified_application_notice.get('hiring_breakdown') else []),
         *(([('공식 원문 모집단위별 확인사항', verified_application_notice['role_mix_note'])])
           if verified_application_notice.get('role_mix_note') else []),
@@ -1656,6 +1676,7 @@ def render(post, detail, related_posts=(), notice_review=None):
         ).astimezone(timezone.utc) > datetime.now(timezone.utc)
     )
     schema_json = '' if (duplicate or robots_noindex or verified_reception_not_open
+                         or verified_application_notice.get('source_headcount_conflict') is True
                          or (not application_cutoff and post.get('dueHasTime') is not True)) else (
         '<script type="application/ld+json">'
         + json.dumps(
