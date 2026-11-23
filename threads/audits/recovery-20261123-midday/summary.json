@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-23T12:14:23.829629+09:00",
+  "status": "approved_entries_verified_pending_state_commit",
+  "account": "hid_119",
+  "main_assets_commit": "99041e0686c66cb5aeea6e225a196896410ae223",
+  "state_base_commit": "06c9bfb4e041cb8809c11340490b817a9571debb",
+  "causes": [
+    {
+      "stage": "08:00 scheduled publication",
+      "run_id": 45083580016,
+      "error": "QUEUE_SLOT_MISSING",
+      "meta_post_skipped": true
+    },
+    {
+      "stage": "12:10 supply preflight",
+      "run_id": 45104341215,
+      "error": "THREADS_SUPPLY_EMPTY",
+      "publish_job_skipped": true,
+      "not_evidence_of_12h_publish_run": true
+    },
+    {
+      "stage": "content review",
+      "issue": "Search extractor could not handle official PDF MIME application/octet-stream; standard public urllib GET retrieved actual PDF successfully. TinyFish budget block did not prevent independent CUA final-detail review."
+    }
+  ],
+  "resolved_steps": [
+    "Exact public issuer PDF bytes and current ALIO read and hashed.",
+    "Actual final #job UI rendered and independently inspected.",
+    "Original1080JPEG and360PNG inspected, exact asset and facts hashes verified.",
+    "All production validators and fresh official GET digest checks passed.",
+    "Existing54queue entries and23staging entries preserved, new2 entries append only."
+  ],
+  "entries": [
+    {
+      "notice_id": "a307175",
+      "scheduled_at": "2026-11-23T16:00:00+09:00",
+      "fingerprint": "d760f5f28f8f5e600b2941855ee40adb60b647e09bbddc474d8e9dfe050fb3ff",
+      "chars": 202
+    },
+    {
+      "notice_id": "a307024",
+      "scheduled_at": "2026-11-23T20:00:00+09:00",
+      "fingerprint": "066dae5c7f4ce236c3a0bda58855b2d80e91fc39da2460bd3262defb697789d5",
+      "chars": 229
+    }
+  ],
+  "valid_future_inventory": 2,
+  "inventory_target": 8,
+  "freshness_hours": 24,
+  "no_manual_dispatch": true,
+  "no_meta_post": true,
+  "publication_result": "Pending regular future publisher and official Meta receipt; supply validation is not publication success."
+}
