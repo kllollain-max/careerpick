@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "unapproved_source_recon",
+  "status": "research_complete_source_original_pending",
+  "ready": false,
+  "publication_allowed": false,
+  "slot_assignment": null,
+  "account": "hid_119",
+  "notice_id": "cleaneye-81128",
+  "recorded_at_kst": "2026-11-24T03:52:00+09:00",
+  "source_head_before": {
+    "main": "eed341cdcd0704c9afcebbf49880175f6fca0116",
+    "state": "72df5dc2141ce489f2ab009dde579815e3c34e7b"
+  },
+  "candidate_source": {
+    "source": "verified production replenishment handoff's cleaneye official candidate",
+    "notice_id": "cleaneye-81128",
+    "org": "양산시시설관리공단",
+    "title": "직원(일반직/행정, 기계, 전기, 환경, 체육) 공개채용 공고",
+    "employment": "일반정규직",
+    "start_date": "2026-11-23",
+    "end_date": "2026-11-30",
+    "date_only": true,
+    "deadline_clock_verified": false
+  },
+  "actual_research": [
+    {
+      "role": "official_issuer_notice",
+      "url": "https://www.yssisul.or.kr/sisul/board/BBSMSTR_G/article/12463",
+      "observed": "2026-11-24T03:52:00+09:00",
+      "method": "web opened institution's own 2026-11-10 recruitment posting, listed downloadable original attachments",
+      "facts": [
+        "announcement posted 2026-11-10",
+        "job series includes 일반직/업무직/현업직, not interchangeable",
+        "original 모집공고 hwpx attachment and separate 응시원서/전자우편 접수방법 hwpx",
+        "separate NCS job descriptions for 기계/전기/체육/행정/환경"
+      ],
+      "raw_html_receipt_sha256": null
+    },
+    {
+      "role": "official_2026_original_recruitment_hwpx",
+      "url": "https://www.yssisul.or.kr/sisul/file/download/15715",
+      "observed": "2026-11-24T03:52:00+09:00",
+      "method": "official page's original attachment link clicked via web",
+      "result": "web extraction explicitly rejected content-type application/haansofthwpx; container Python urllib normal GET failed temporary DNS resolution (not permission denial); actual file bytes not obtained",
+      "raw_bytes_sha256": null,
+      "whole_original_read": false
+    },
+    {
+      "role": "issuer_electrical_job_description_pdf",
+      "url": "https://www.yssisul.or.kr/sisul/file/download/15719",
+      "observed": "2026-11-24T03:52:00+09:00",
+      "method": "web PDF open and direct screenshot page 1 of 17",
+      "pdf_total_pages": 17,
+      "visually_checked_pages": [
+        1
+      ],
+      "observed_fact": "First page is generic electrical work-unit record with authoring date 2023-11-27, not current 2026 competition criteria; cannot treat NCS work-task description as 2026 mandatory eligibility",
+      "raw_pdf_bytes_sha256": null
+    },
+    {
+      "role": "correction_scope",
+      "url": "https://www.yssisul.or.kr/sisul/",
+      "observed": "2026-11-24T03:52:00+09:00",
+      "method": "official institution home and linked recruitment posting; full separate corrections/updates board NOT exhaustively searched",
+      "confirmed_no_correction": false
+    }
+  ],
+  "question_candidate": "양산시시설관리공단 일반직 전기 7급, 전기 관련 자격증이 반드시 필요한가요?",
+  "question_status": "unanswerable_until_original_hwpx_full_read",
+  "publication_draft": null,
+  "hold_reasons": [
+    "Original 2026 recruitment HWPX full text not acquired; unit-specific headcount, exact eligibility AND/OR, application path/time cannot be independently confirmed",
+    "Date-only cleaneye deadline must not be silently promoted to 23:59 (third-party presentation is not official)",
+    "Current CareerPick #job detailed rendered UI and 1080/360 image proof not performed",
+    "gpt-6.2-astra independent reviewer/reviewer recheck not available in current tool set; no PASS may be invented",
+    "Source and correction freshness must be rechecked within 24h of planned posting"
+  ],
+  "next_safe_step": "Use an authorized non-bypassing original-HWPX byte GET / text extraction path; separately validate 2026 eligible unit and exact time, official correction page, rendered CareerPick detail, approved production test suite, then independent gpt-6.2-astra review before any ready CAS mutation",
+  "operation_effects": {
+    "files_only": [
+      "threads/audits/recovery-20261124-early/cleaneye-81128-yangsan-issuer-attachment-map-hold-20261124.json"
+    ],
+    "queue_mutated": false,
+    "staging_mutated": false,
+    "submissions_mutated": false,
+    "posted_mutated": false,
+    "meta_post_attempted": false,
+    "manual_workflow_dispatch": false,
+    "discontinued_task_reactivated": false
+  }
+}
