@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "new_independent_official_date_discrepancy_and_unapproved_draft",
+  "checked_at_utc": "2026-11-23T13:56:21.109Z",
+  "target_account": "hid_119",
+  "notice_id": "cleaneye-81251",
+  "status": "unapproved_draft",
+  "ready": false,
+  "publication_allowed": false,
+  "meta_posted": false,
+  "slot_assignment": null,
+  "current_state_head_at_preparation": "f80563d604c78ded5ffde2f392bc2ae269cf7ff7",
+  "current_main_head_at_preparation": "894678f0e7373591c43a9a5ddf77c0ba94f1ea8f",
+  "existing_future_stock_from_verified_handoff": {
+    "captured_at": "2026-11-23T22:36:52.599644+09:00",
+    "approved_supply_count": 1,
+    "inventory_target": 8,
+    "next_slot_missing": false,
+    "first_missing_slot": "2026-11-24T12:00:00+09:00"
+  },
+  "official_evidence": [
+    {
+      "type": "issuer_city_publication",
+      "url": "https://www.dangjin.go.kr/prog/empmnPblanc/kor/sub03_02_02/view.do?cntno=4308",
+      "published_at": "2026-11-16",
+      "observed_status": "접수중",
+      "recruitment_title": "2026년 제4차 당진시복지재단 직원 공개채용 공고",
+      "application_open": "2026-11-18T09:00:00+09:00",
+      "application_close": "2026-11-26T18:00:00+09:00",
+      "attachment_listed": "2026년 제4차 당진시복지재단 직원 공개채용 공고.pdf (230kb)",
+      "raw_pdf_fetched": false,
+      "raw_pdf_sha256": null
+    },
+    {
+      "type": "government_work24_cle_detail",
+      "url": "https://m.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=CLE&infoTypeGroup=tb_workinfocle&wantedAuthNo=20261116101147",
+      "facts": "기관 당진시복지재단, 일반정규직, 주임, 1명, 충남, 지역제한 없음, 이사회 운영/자원/안전보건/보안/소프트웨어/서무"
+    },
+    {
+      "type": "non_authoritative_aggregator_inconsistent_clock",
+      "url": "https://gochodaejob.com/jd/76d35792-3774-4738-815f-ed4216e1fa42",
+      "displayed_deadline": "2026-11-26T23:59",
+      "do_not_use_as_official_deadline": true
+    },
+    {
+      "type": "non_authoritative_aggregator_inconsistent_clock_2",
+      "url": "https://zighang.com/recruitment/7f87ca73-1585-4322-a0e6-dd7e115015af",
+      "displayed_deadline": "2026-11-26T23:59",
+      "do_not_use_as_official_deadline": true
+    }
+  ],
+  "critical_finding": "Same position is widely aggregated as 23:59, but official city posting unambiguously says 18:00; never copy date-only automated 23:59:59 or third-party 23:59.",
+  "job_unit_provisional": {
+    "recruiting_unit": "일반직 주임",
+    "count": 1,
+    "employer": "당진시복지재단",
+    "employment": "일반정규직",
+    "location": "충남 당진",
+    "scope": "secondary detailed source plus official issuer title; full issuer PDF not reviewed; unit title needs original verification"
+  },
+  "draft": {
+    "text": "당진에서 공공기관 사무직을 찾는 분이라면 확인하세요.\n당진시복지재단이 일반정규직 주임 1명을 모집해요.\n\n재단 이사회 운영과 자원·안전보건·보안·소프트웨어 관리, 부서 서무를 맡아요. 지역 제한은 없는 것으로 고용24에 표시돼 있어요.\n\n당진시 공식 채용공고 기준 11월 26일 18시 접수 마감이에요. 지원 자격·증빙서류는 공고문 확인이 필요해요.\n\n자세한 사항은 프로필링크 확인",
+    "char_count": 213,
+    "reply_count": 0,
+    "cta_count": 1,
+    "publishable": false
+  },
+  "hold_requirements": [
+    "Issuer original PDF actual bytes+SHA256 and full page-by-page qualifications, correction check",
+    "Exact cleaneye-81251 recruiting unit / full eligibility, submission method and closing time validated against issuer PDF",
+    "Real CareerPick #job=cleaneye-81251 rendered UI AX and screenshot",
+    "Latest claims/posted/queue full duplicate detection and live source freshness for actual slot",
+    "Full approved production validator pipeline plus actual IMAGE 1080/360 visual review if required"
+  ],
+  "changes": "Only new audit evidence document. No queue/staging/submissions/claim modification. No Meta POST, dispatch, rerun, automation change."
+}
