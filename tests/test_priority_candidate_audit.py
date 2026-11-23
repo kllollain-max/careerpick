@@ -6,6 +6,35 @@ def row(identity, due='2026-12-01', emp=None, n='20', url='https://job.alio.go.k
     return {'id':identity,'title':'공식 채용','org':'기관','due':due,'url':url,'emp':emp or [],'n':n}
 
 class PriorityAuditTests(unittest.TestCase):
+
+    def test_cli_honors_official_cutoff_even_without_a_verified_start_date(self):
+        import json
+        import tempfile
+        from pathlib import Path
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from unittest.mock import patch
+        from scripts.priority_candidate_audit import main
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        proof = VERIFIED_APPLICATION_NOTICES['a306470']
+        self.assertNotIn('application_start', proof)
+        post = dict(row('a306470', due='2026-12-10', emp=['정규직'], n='6'),
+                    alio=True, org=proof['organization'], title=proof['title'])
+        class FrozenClock(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls(2026,12,10,17,0,tzinfo=ZoneInfo('Asia/Seoul'))
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / 'alio.json'
+            output = Path(folder) / 'report.json'
+            source.write_text(json.dumps({'posts':[post]}))
+            with patch('sys.argv', ['audit', '--source', str(source), '--output', str(output)]), \
+                 patch('scripts.priority_candidate_audit.datetime', FrozenClock):
+                main()
+            result = json.loads(output.read_text())
+            self.assertEqual(result['eligible_rows'], 0)
+            self.assertEqual(result['excluded']['official_reception_closed'], 1)
+
     def test_official_mixed_hiring_unit_hold_never_counts_total_as_regular_only_seats(self):
         # a307074: eight career roles and six new general-position interns,
         # even though the ALIO employment label contains only 정규직.

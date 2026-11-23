@@ -247,7 +247,8 @@ def main():
     windows = {}
     for pid, proof in {**VERIFIED_DUTIES, **VERIFIED_APPLICATION_NOTICES}.items():
         if not isinstance(proof, dict) or not (proof.get('application_start') or proof.get('application_status_unconfirmed')
-                                               or proof.get('regular_review_hold_due_to_mixed_role_units')):
+                                               or proof.get('regular_review_hold_due_to_mixed_role_units')
+                                               or CONFIRMED_APPLICATION_CUTOFFS.get(pid)):
             continue
         official_cutoff = CONFIRMED_APPLICATION_CUTOFFS.get(pid, '')
         source_end = proof.get('source_end_date') or official_cutoff[:10]

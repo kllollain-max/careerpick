@@ -24,6 +24,9 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Official KLI PDF section4 and KIET PDF section5 (24:00 is next-day00:00).
+    'a306470': '2026-12-10T16:00:00+09:00',
+    'a307170': '2026-12-10T00:00:00+09:00',
     # Official KHNP recruitment PDF 3089063 p9; school recommendation has a different deadline.
     'a307284': '2026-12-08T15:00:00+09:00',
     # Official notice originals, read 2026-11-18; postal reception opens 11/24.
@@ -93,6 +96,70 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a306012': {'organization': '한국개발연구원',
+     'title': 'KDI 연구위원급 채용 공고',
+     'source_end_date': '2026-12-02',
+     'expected_source_seats': '8',
+     'source_employment': ['정규직'],
+     'source_url': 'https://econjobmarket.org/positions/12824',
+     'checked_on': '2026-11-23',
+     'scope': '경제 전반의 정책 연구·자료 분석·연구보고서 작성',
+     'role_mix_note': '세종 근무 부연구위원 8명 모집으로, 경제학 또는 관련 분야 박사학위 소지자나 2027년 8월 말까지 취득예정자가 대상입니다. 최초 '
+                      '임용계약은 3년이며 연구실적·평가에 따라 재임용이 거부될 수 있습니다. 추천서 3부와 이력서·연구논문을 준비하세요. 원문 HWP는 '
+                      '12월 2일 24:00 UTC, EJM은 12월 2일 midnight UTC로 표현하므로 한국시간 23:59로 바꾸지 말고 접수처에 '
+                      '정확한 시각을 확인하세요.',
+     'utc_application_window_label': '2026-12-02 24:00 UTC(공고문) · 12월2일 midnight UTC(EJM); 한국시간 '
+                                     '종료시각 기관 확인 필요'},
+    'a306470': {'organization': '한국노동연구원',
+     'title': '한국노동연구원 연구위원 직군 채용 공고',
+     'source_end_date': '2026-12-10',
+     'expected_source_seats': '6',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3083482',
+     'checked_on': '2026-11-23',
+     'scope': '노동·인사조직·노사관계 분야의 연구 기획·진행·관리',
+     'role_mix_note': '노동시장·불평등·정책분석 3명과 인사조직관리·노사관계·산업안전·산재보험 3명, 총6명입니다. 모집분야 박사 또는 2027년 8월 말까지 '
+                      '취득 조건, 채용예정일 기준 만60세 이내와 남성 공고일 기준 군필·면제 조건을 확인하세요. 지원서와 추천서 2건 모두 '
+                      '2026년12월10일16시(KST)까지입니다.',
+     'hiring_breakdown': '노동시장·불평등·정책분석 3명 · 인사조직관리·노사관계·산업안전·산재보험 3명 = 총6명'},
+    'a307170': {'organization': '산업연구원',
+     'title': '2027년 박사학위(예정)자 채용 공고(부연구위원 직급)',
+     'source_end_date': '2026-12-09',
+     'expected_source_seats': '6',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088222',
+     'checked_on': '2026-11-23',
+     'scope': '산업정책·산업전환·통상·경제전망·지역경제 연구',
+     'role_mix_note': '경제학 전 분야 부연구위원 총6명입니다. 경제학 또는 관련 분야 박사 취득자·예정자가 대상이며 예정자는 임용일 전에 학위를 취득해야 '
+                      '합니다. 남성은 공고일 현재 군필·면제, 임용일부터 현업 전일근무 가능, 임용예정일 기준 만60세 미만 조건을 확인하세요. 공고문 원문 '
+                      '마감은 2026년12월9일24:00 한국시간으로, 다음 날 12월10일00:00(KST)과 같은 시각입니다.',
+     'application_end_date': '2026-12-10'},
+    'a299289': {'organization': '부산대학교병원',
+     'title': '2025년도 일반직(약무직) 신규직원 블라인드 공개채용 상시모집 공고(양산)',
+     'source_end_date': '2026-12-31',
+     'expected_source_seats': '10',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3043002',
+     'checked_on': '2026-11-23',
+     'scope': '양산 약무직 대표 업무: 처방 검토·조제·약품정보·교육',
+     'role_mix_note': '최초 모집 10명은 현재 남은 결원 수가 아닙니다. 약사 면허 소지자 또는 2026년 취득예정자가 대상이며 면허 취득 후3년 경과자는 '
+                      '원문이 요구하는 면허신고 확인증을 점검하세요. 충원 시까지 모집 공고이나 현재 연결된 개별 접수 링크는 2026년11월23일 '
+                      'HTTP404였으므로 현재 접수 활성과 잔여인원은 확인되지 않았습니다.',
+     'application_status_unconfirmed': True,
+     'conditional_application_window_label': '충원 시까지 (현재 접수 활성·잔여 인원 미확인)'},
+    'a294598': {'organization': '경상국립대학교병원',
+     'title': '[창원경상국립대학교병원] 약무직 채용 공고',
+     'source_end_date': '2026-12-31',
+     'expected_source_seats': '8',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3016764',
+     'checked_on': '2026-11-23',
+     'scope': '창원 약무직 대표 업무: 조제·약품관리·임상약료',
+     'role_mix_note': '공식 최초 인원은8명 이내로 현재 잔여 결원8명을 뜻하지 않습니다. 약사 면허 또는2026년 면허 취득예정, 원서접수 마감일 현재 '
+                      '만20세 이상60세 미만과 남성 군필·면제 조건을 확인하세요. 2025년10월17일부터 충원 시까지 공고이며 현재 해당 공고의 접수 '
+                      '활성은 확인되지 않았습니다.',
+     'application_status_unconfirmed': True,
+     'conditional_application_window_label': '충원 시까지 (현재 접수 활성·잔여 인원 미확인)'},
     'a307227': {'organization': '에너지경제연구원',
      'title': '[에너지경제연구원] 2027년도 상반기 정규직(부연구위원 이상) 채용공고',
      'source_end_date': '2026-12-11',

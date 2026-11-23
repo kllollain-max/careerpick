@@ -17,6 +17,42 @@ from scripts.build_job_pages import render
 
 class JobPageTests(unittest.TestCase):
 
+    def test_research_deadline_timezones_and_recommendation_counts_are_distinct(self):
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        cases = {
+            'a306012': ('24:00 UTC', 'midnight UTC', '추천서 3부', '최초 임용계약은 3년'),
+            'a306470': ('2026-12-10 16:00', '추천서 2건', '노동시장·불평등·정책분석 3명'),
+            'a307170': ('2026-12-10 00:00', '12월9일24:00', '추천서3부'),
+        }
+        for identity, phrases in cases.items():
+            post = posts[identity]
+            html = render(post, {})
+            for phrase in phrases:
+                self.assertIn(phrase, html)
+            self.assertNotIn(post['due'][:10] + ' 23:59 (KST)', html)
+            changed = render({**post, 'n': '999'}, {})
+            for phrase in phrases:
+                self.assertNotIn(phrase, changed)
+        self.assertNotIn('a306012', CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS['a307170'], '2026-12-10T00:00:00+09:00')
+
+    def test_old_until_filled_pharmacist_pages_keep_duties_without_claiming_live_vacancies(self):
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        for identity in ('a299289', 'a294598'):
+            post = posts[identity]
+            original = copy.deepcopy(post)
+            html = render(post, {})
+            self.assertIn('noindex,follow', html)
+            self.assertIn('현재 접수 활성·잔여 인원 미확인', html)
+            self.assertIn('처방', html)
+            self.assertNotIn('"@type": "JobPosting"', html)
+            self.assertNotIn('기관 공식 확인 접수마감', html)
+            self.assertEqual(post, original)
+            changed = render({**post, 'n':'999'}, {})
+            self.assertNotIn('공식 충원조건부 원서접수 안내', changed)
+
+
     def test_khnp_school_recommendation_is_not_an_open_high_school_application(self):
         from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
@@ -1321,7 +1357,7 @@ class JobPageTests(unittest.TestCase):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
             expected.add('a306988')  # employer-confirmed date-only window, no invented clock
-        expected.add('a307251')
+        expected.update(('a307251', 'a299289', 'a294598'))
         self.assertEqual(set(result), expected)
         # Unverified current reception is not a confirmed application cutoff.
         self.assertIn('a307251', result)
