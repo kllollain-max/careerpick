@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "new_independent_issuer_source_discovery_unapproved",
+  "notice_id": "cleaneye-81497",
+  "account": "hid_119",
+  "slot_assignment": null,
+  "planning_only_next_missing_slot": "2026-11-24T12:00:00+09:00",
+  "status": "draft_research_unapproved",
+  "publication_allowed": false,
+  "meta_posted": false,
+  "verified_sources": {
+    "cleaneye": {
+      "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81497",
+      "recruitment_name": "경상북도 김천의료원 정규직 간호사 채용",
+      "employment_field": "일반정규직",
+      "position": "간호사",
+      "recruitment_count_from_feed": 6,
+      "license_field": "간호사 면허증",
+      "start_date_field": "2026-11-23",
+      "deadline_date_field": "2026-12-06",
+      "deadline_clock_confirmed": false,
+      "exact_recruitment_unit_check_pending": true,
+      "collection_artifact_run_id": 45111393778,
+      "collection_artifact_id": 14789174978,
+      "final_source_file": "cleaneye.json",
+      "final_source_file_sha256": "d94c018adddd039a835789ec634df6f26ffe0fbb5ec5ffcdc0f966a128494f26"
+    },
+    "official_province_issuer": {
+      "url": "https://www.gb.go.kr/Main/exam_info/page.do?BD_CODE=chulja_job&B_NUM=515261901&B_STEP=515261900&V_NUM=&cmd=2&mnu_uid=15141",
+      "posted_at": "2026-11-23 10:21:27 KST",
+      "notice_no": "김천의료원 공고 제2026-114호",
+      "issuer": "경상북도 김천의료원장",
+      "title": "경상북도 김천의료원 정규직 간호사 채용 공고",
+      "exact_issuer_title_match": true,
+      "original_pdf_filename": "6채용 공고 (간호사일반7).pdf",
+      "attachment_url": "https://www.gb.go.kr/Common/board_egov/download.jsp?B_ORDER=1&B_STEP=515261900",
+      "original_pdf_bytes_available": false,
+      "original_pdf_sha256": null,
+      "inspection_limit": "web extractor returned 400 Unsupported content-type application/octet-stream, not origin HTTP 403"
+    }
+  },
+  "newest_operations": {
+    "run_id": 45111393778,
+    "workflow": ".github/workflows/operations.yml",
+    "event": "schedule",
+    "branch": "main",
+    "conclusion": "failure",
+    "source_collection_report": "ALIO and Cleaneye collection completed with changed source bytes, but deployment failed",
+    "failure_stage": "actions/deploy-pages@v4",
+    "failed_step_message": "Fetching artifact metadata failed; No artifacts named github-pages were found for this workflow run",
+    "github_pages_artifact_id": 14789174978,
+    "operation_artifact_id": 14790201222,
+    "operation_zip_sha256": "16da4ac5498e93d82b4d82410372ffcca3fdff359afb54851f66b72277a9986c",
+    "pages_zip_sha256": "a8ae660db515442071395a2f4414a04e5b38c77ac4a4104cefa657da6fc60f66",
+    "collection_updated_data_not_equal_deployed_public_site": true,
+    "official_source_verification_bypass_not_allowed": true
+  },
+  "approval_remaining": [
+    "Download exact public issuer PDF raw bytes and calculate SHA256; inspect complete text and relevant pages",
+    "Review full eligibility with AND/OR, number for single unit, actual closing clock, correction/cancellation pages",
+    "Confirm CareerPick fully rendered #job=cleaneye-81497 screen with equivalent allowed UI tool",
+    "Determine next media by latest successful Meta receipt; if image, render and visually review production 1080 JPEG and exact 360 PNG",
+    "Run current production writer_inputs, validate_entry, master_public_copy, verify_reviewed_card if image, verify_official_receipt with actual issuer GET, reviewed_ingest.plan, queue_bridge.merge, check_queue, verified_supply_status",
+    "Check receipt freshness both now and planned publishing time, latest queue/claim/posted; CAS register only after full review"
+  ],
+  "record_scope": "New candidate research only. No official attachment byte claim, no ready/staging/queue change, no additional Meta POST or rerun."
+}
