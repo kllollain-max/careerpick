@@ -24,6 +24,8 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Official KHNP recruitment PDF 3089063 p9; school recommendation has a different deadline.
+    'a307284': '2026-12-08T15:00:00+09:00',
     # Official notice originals, read 2026-11-18; postal reception opens 11/24.
     'a307150': '2026-12-01T10:00:00+09:00',
     'a307151': '2026-12-01T10:00:00+09:00',
@@ -91,6 +93,32 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a307227': {'organization': '에너지경제연구원',
+     'title': '[에너지경제연구원] 2027년도 상반기 정규직(부연구위원 이상) 채용공고',
+     'source_end_date': '2026-12-11',
+     'expected_source_seats': '5',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088653',
+     'checked_on': '2026-11-23',
+     'scope': '에너지·자원·국제협력 정책 연구: 일반 분야',
+     'role_mix_note': '5명 이내의 일반 분야 연구직 모집입니다. 관련 전공 박사(2027년 9월 이내 취득예정 포함) 요건과 2027년 8월까지 입사 가능 조건이 '
+                      '함께 있어 본인의 학위 일정 적용은 기관에 확인하세요. 처음부터 무조건 정규 임용되는 방식이 아니라 초임계약 1년 후 평가를 통한 정규직 '
+                      '임용입니다. 원문은 12월 11일까지로 날짜만 명시하므로 정확한 마감시각·시간대는 공식 접수처 확인이 필요합니다.',
+     'hiring_breakdown': '일반 분야 부연구위원 이상 5명 이내 · 초임계약 1년 후 평가를 통한 정규직 임용'},
+    'a307284': {'organization': '한국수력원자력(주)',
+     'title': '2026년도 제5차 신입사원(고졸수준) 선발',
+     'source_end_date': '2026-12-08',
+     'expected_source_seats': '40',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3089063',
+     'checked_on': '2026-11-23',
+     'scope': '기계 16명·전기전자 24명: 발전설비 정비',
+     'role_mix_note': '기계16명과 전기전자24명, 합계40명입니다. 누구나 지원하는 일반 고졸채용이 아니라 2026년 현재 마이스터고 또는 원전 소재 기초자치단체 '
+                      '내 특성화고의 해당 관련학과 2학년 재학생 중 학교장 추천을 받은 지원자가 대상입니다. 학교 추천서류 마감은 11월 23일, 추천받은 지원자의 '
+                      '입사지원서 마감은 12월 8일 15시로 서로 다릅니다.',
+     'hiring_breakdown': '기계 16명 · 전기전자 24명 = 총40명',
+     'application_start': '2026-11-23',
+     'application_end_date': '2026-12-08'},
     # CNUH original recruitment notice PDFs read as text 2026-11-19.
     # PDF originals independently acquired and SHA256 checked again 2026-11-19.
     # Exact-source records prevent stale cutoff/field facts after ALIO changes.
@@ -141,6 +169,7 @@ VERIFIED_APPLICATION_NOTICES = {
     # Direct SNUBH hiring-portal public notice read 2026-11-20, not the PDF's date-only table.
     # Public viewing of the application window does not prove a completed applicant submission.
     'a306874': {
+        'reader_scope': '병원 공식 채용시스템에서 미화 10명과 11월 20일 23:59 접수마감을 확인했습니다. 현재 종료된 접수입니다.',
         'organization': '분당서울대학교병원',
         'title': '분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고',
         'source_end_date': '2026-11-20',
@@ -155,6 +184,7 @@ VERIFIED_APPLICATION_NOTICES = {
                   '공개 모집표 확인. 로그인 후 최종 제출 성공·현재 잔여 결원은 독립 검증하지 않음.'),
     },
     'a306182': {
+        'reader_scope': '약사 면허·최초 예정인원 11명·충원 시 종료 조건을 확인했습니다. 현재 접수 가능 여부와 남은 인원은 확인되지 않았습니다.',
         'organization': '경북대학교병원',
         'title': '2026년도 약무직 공개채용 수시모집',
         'source_end_date': '2026-12-31',
@@ -201,6 +231,7 @@ VERIFIED_APPLICATION_NOTICES = {
     # SHA/BodyText read from the archived original. Scope only as explicitly
     # written in NCS duty description; no detailed clinical tasks inferred.
     'a306992': {
+        'reader_scope': '보철·치주·보존과 합계 11명과 11월 20일 17시 방문접수 마감을 확인했습니다. 특정 치과 시술 업무는 원문에 명시되지 않았습니다.',
         'organization': '한국보훈복지의료공단',
         'title': '[중앙보훈병원]2027년 치과의사전공의(레지던트1년차) 채용공고',
         'source_end_date': '2026-11-20',
@@ -243,6 +274,7 @@ VERIFIED_APPLICATION_NOTICES = {
     # application page. UTC deadline is date-only in ALIO; do not invent KST cutoff.
     # Public portal evidence is separate from newly SHA-verified original job-duty PDF.
     'a305734': {
+        'reader_scope': '공식 접수 페이지에서 박사학위 요건·추천서 3건·UTC 마감 표기를 확인했습니다. 현재 남은 인원이나 최종 제출 성공까지 확인한 것은 아닙니다.',
         'organization': '한국조세재정연구원',
         'title': '[한국조세재정연구원] 연구위원급(Research Fellow) 정기채용',
         'source_end_date': '2026-11-30',
@@ -321,6 +353,7 @@ VERIFIED_APPLICATION_NOTICES = {
     # job-description PDFs from ZIP 3088504 checked with binary SHA256.
     # All 33 seats belong to one notice; this is NOT 33 remaining live openings.
     'a307225': {
+        'reader_scope': '공식 모집표의 직종별 인원·지원조건과 접수일정을 확인했습니다. 방사선사 직무자료의 분류 표기 불일치는 기관 확인이 필요합니다.',
         'organization': '부산대학교병원',
         'title': '2026년도 일반직(간호, 행정, 보건직) 신규직원 블라인드 공개채용 모집 공고',
         'source_end_date': '2026-12-03',
@@ -1060,7 +1093,7 @@ def render(post, detail, related_posts=(), notice_review=None):
             application_review_html = (
                 '<section id="application-review" aria-label="공식 공고 추가 대조">'
                 '<h2>공식 공고와 추가 대조한 지원 정보</h2>' + reception + field_review
-                + '<p class="muted">대조 범위: ' + escape(verified_application_notice.get('scope', ''))
+                + '<p class="muted">대조 범위: ' + escape(verified_application_notice.get('reader_scope', verified_application_notice.get('scope', '')))
                 + '</p><p><a href="' + escape(proof_url, quote=True)
                 + '" target="_blank" rel="noopener noreferrer">대조한 공식 원문</a> · 확인일: '
                 + escape(proof_date) + ' · 최신 정정 공고가 우선합니다.</p></section>')
@@ -1221,7 +1254,7 @@ def render(post, detail, related_posts=(), notice_review=None):
         duties_checklist_html = (
             '<section id="job-duties" aria-label="공식 직무기술서 확인 요약">'
             '<h2>공식 직무기술서에서 확인한 담당업무</h2>'
-            f'<h3>{escape(verified_duties["scope"])}</h3>'
+            f'<h3>{escape(verified_duties.get("reader_scope", verified_duties["scope"]))}</h3>'
             f'<p>{escape(verified_duties["summary"])}</p>'
             f'<p class="source-note">지원 전 비교: {escape(verified_duties["applicant_check"])}</p>'
             '<p>모든 모집분야를 검증한 것은 아닙니다. 위 범위 이외의 담당업무·인원·근무조건은 공식 원문 확인 필요.</p>'
