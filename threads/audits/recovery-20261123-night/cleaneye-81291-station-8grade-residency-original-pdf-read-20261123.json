@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "kind": "new_candidate_official_pdf_semantic_visual_review_and_question_focused_astra_handoff_unapproved",
+  "account": "hid_119",
+  "notice_id": "cleaneye-81291",
+  "status": "unapproved_draft",
+  "ready": false,
+  "publication_allowed": false,
+  "meta_posted": false,
+  "slot_assignment": null,
+  "planning_slot_only": "2026-11-24T12:00:00+09:00",
+  "reviewed_at_utc": "2026-11-23T14:54:12.824Z",
+  "read_only_heads": {
+    "main": "894678f0e7373591c43a9a5ddf77c0ba94f1ea8f",
+    "state": "acad4e43441a7ad8517656ec72319880ca7c8f4b"
+  },
+  "observed_inventory": {
+    "queue_total": 57,
+    "staging_total": 26,
+    "submissions_total": 7,
+    "approved_future_count": 1,
+    "approved_future_notice_id": "a307035",
+    "shortfall_from_target_8": 7,
+    "last_posted_notice_id": "a307024",
+    "last_posted_id": "18139398091672356",
+    "last_posted_media": "TEXT"
+  },
+  "duplicate_check": {
+    "queue": false,
+    "staging": false,
+    "submissions": false,
+    "posted_ids": false,
+    "claim_latest_for_future_slot": "not_independently_read; do not promote"
+  },
+  "official_sources": [
+    {
+      "role": "issuer_original_pdf_host",
+      "url": "https://m.ncuc.or.kr/File/56f2d4dcad4dd49dba834a95119fecfb",
+      "doc_no": "2026-424",
+      "date": "2026-11-16",
+      "web_read": "PDF text and screenshot key pages 1,2,5,6 (zero-index 0,1,4,5)",
+      "raw_bytes_downloaded": false,
+      "raw_byte_sha256": null,
+      "fetch_note": "web extracted and visually rendered PDF; local Python urllib and container download cannot resolve/retrieve origin; not a substitute for original-byte receipt"
+    },
+    {
+      "role": "issuer_recruiting_portal",
+      "url": "https://ncuc.brms.kr/",
+      "visible_window": "2026-11-17 09:00 to 2026-11-26 18:00",
+      "source_observation": "search and web read; official current homepage"
+    },
+    {
+      "role": "issuer_jobs_board_first_page",
+      "url": "https://app.ncuc.or.kr/main/261?action=list&page=1",
+      "source_observation": "2026-11-16 posting listed; no separate correction found in visible first-page result; not comprehensive correction check"
+    },
+    {
+      "role": "cleaneye_collection",
+      "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81291",
+      "aggregate_general_positions": 6,
+      "do_not_use_as_selected_unit_count": true
+    }
+  ],
+  "facts": {
+    "total_headcount": 7,
+    "permanent_fulltime_total": 6,
+    "temporary_headcount": 1,
+    "selected_unit": "일반직 역무8급",
+    "selected_unit_count": 5,
+    "selected_unit_work": "진접선·별내선 역사 영업 준비/마감, 여객서비스, 안전관리",
+    "residency_required": "공고일 전일 주민등록상 남양주시 거주자",
+    "residency_anchor_date": "2026-11-15",
+    "other_positions": "일반직 공업8급 1명은 자격증 필요; 임기제 청소년지도7급 1명은 별도 자격·경력 필요",
+    "selected_unit_certificate_requirement": "역무8급 필수 자격증 요구 없음",
+    "selection": "서류심사+필기시험+면접시험",
+    "application_close": "2026-11-26T18:00:00+09:00",
+    "application_method": "온라인 접수, 공식 홈페이지 ncuc.brms.kr",
+    "source_ranges": "PDF printed p.1 recruitment row, p.2 residence row, p.5 documents/qualification exception, p.6 application dates"
+  },
+  "actual_visual_review": {
+    "pdf_0_based_pages": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "result": "facts read and visually compared for job row, locality restriction, required-submissions exception, deadline",
+    "careerpick_job_detail_ax_screenshot": "not_done; no authorized CUA browser presently available",
+    "card_1080_360": "not_generated; operational approval and IMAGE render/review still gated"
+  },
+  "search_question": {
+    "query_intent": "남양주도시공사 역무8급 지원 자격 남양주 전입 기준일",
+    "main_question": "공고 후 남양주로 전입하면 역무8급에 지원할 수 있나요?",
+    "answer": "아니요. 공고일 전일인 2026-11-15 주민등록상 남양주시 거주중인 자에 한함",
+    "hook_candidates": [
+      "남양주도시공사 역무8급 5명, 지금 전입해도 지원할 수 있을까요?",
+      "남양주도시공사 역무8급 지원, 11월 15일 이후 전입자는 될까요?",
+      "남양주도시공사 역무8급은 자격증 없이도 지원할 수 있나요?"
+    ]
+  },
+  "draft": {
+    "post_text": "남양주도시공사 역무8급 5명, 지금 전입해도 지원할 수 있을까요?\n아니요. 2026년 11월 15일(공고일 전일) 주민등록상 남양주시 거주자만 지원할 수 있어요.\n\n진접선·별내선 역사 운영, 여객서비스·안전관리 업무예요. 일반직 공개경쟁이며 역무8급은 필수 자격증이 없어요. 서류·필기·면접을 거쳐요.\n\n11월 26일 18시까지 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "char_count": 211,
+    "reply_texts": [],
+    "cta_count": 1,
+    "public_preview": {
+      "main_text": "남양주도시공사 역무8급 5명, 지금 전입해도 지원할 수 있을까요?\n아니요. 2026년 11월 15일(공고일 전일) 주민등록상 남양주시 거주자만 지원할 수 있어요.\n\n진접선·별내선 역사 운영, 여객서비스·안전관리 업무예요. 일반직 공개경쟁이며 역무8급은 필수 자격증이 없어요. 서류·필기·면접을 거쳐요.\n\n11월 26일 18시까지 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+      "detail_reply": ""
+    },
+    "editorial_precheck": "question on first line answered immediately; locality date explicit; no URL/hashtags; one CTA; source facts cited outside public text"
+  },
+  "requested_independent_final_review": {
+    "model": "gpt-6.2-astra",
+    "status": "NOT_RUN_TOOL_UNAVAILABLE",
+    "reason": "No separate model-invocation tool exposed to this automation runtime. Do not mislabel GPT-6 self-check as Astra or mark pass.",
+    "items_to_supply": [
+      "post_text",
+      "original issuer PDF raw bytes and SHA when available",
+      "official PDF pages (1,2,5,6)",
+      "actual 1080 card and 360 preview when IMAGE",
+      "official correction and rendered CareerPick job detail"
+    ],
+    "rerun_after_edit": "same model required before ready"
+  },
+  "hold_gates": [
+    "original issuer PDF actual GET bytes/size/SHA + full text/page review and correction completeness",
+    "fully rendered CareerPick #job=cleaneye-81291 AX + screenshot",
+    "independent gpt-6.2-astra full draft/source/card final review and revision recheck",
+    "policy/source hash validation and production validate_entry/master_public_copy/verify_official_receipt/reviewed_ingest.plan/queue_bridge.merge/check_queue/verified_supply_status",
+    "fresh official source/correction checked within 24h of actual future slot; latest claim and all posted+queue lock CAS",
+    "if IMAGE render production JPEG 1080 + actual 360 PNG and visually verify prior to CAS"
+  ],
+  "changes": "Only unapproved audit artifact. No ready/queue/staging/submission change, no Meta POST, no rerun/dispatch, no automation change."
+}
