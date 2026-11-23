@@ -71,13 +71,23 @@ def blocked(values):
     return any({'noindex', 'none'} & set(re.split(r'[\s,]+', value.lower())) for value in values)
 
 
-def run(project, loader=fetch):
+def run(project, loader=fetch, expected_publisher_id=None):
     if project not in {'careerpick', 'supportpick'}: raise ValueError('unknown_project')
+    if expected_publisher_id is not None and (not isinstance(expected_publisher_id, str)
+            or not re.fullmatch(r'pub-\d{16}', expected_publisher_id)):
+        raise ValueError('invalid_expected_publisher_id')
     base = HOST + project + '/'
     report = {'checkedAt': datetime.now(timezone.utc).isoformat(), 'project': project,
               'registrationSite': HOST.rstrip('/'), 'independentPathRegistration': False,
               'errors': [], 'unverified': [], 'observations': {},
               'indexing': 'not_observed', 'adsenseApproval': 'not_observed'}
+    # A self-consistent host meta/ads.txt pair is not proof of the review account.
+    # This optional input never changes a publisher setting or sends ad requests.
+    if expected_publisher_id is not None:
+        report['warnings'] = []
+        report['accountBinding'] = {'expectedPublisherId': expected_publisher_id,
+                                    'adsTxtRecord': 'unverified',
+                                    'hostMetaMatchesExpected': None}
     def read(url):
         item, raw = loader(url)
         report['observations'][url] = item
@@ -91,6 +101,20 @@ def run(project, loader=fetch):
     sitemap_item, xml = read(base + 'sitemap.xml')
     try:
         publishers = Head(root).publishers if root_item['status'] == 200 else None
+        if expected_publisher_id is not None:
+            binding = report['accountBinding']
+            if publishers is not None:
+                binding['hostPublisherMeta'] = publishers
+                binding['hostMetaMatchesExpected'] = publishers == ['ca-' + expected_publisher_id]
+                if not binding['hostMetaMatchesExpected']:
+                    report['warnings'].append('host_meta_differs_from_expected_publisher; review_shared_host_ownership')
+            if ads_item['status'] == 200:
+                entries = [[v.strip() for v in line.split('#', 1)[0].split(',')]
+                           for line in ads.decode().splitlines()]
+                expected = ['google.com', expected_publisher_id, 'DIRECT', 'f08c47fec0942fa0']
+                binding['adsTxtRecord'] = 'present' if expected in entries else 'missing'
+                if binding['adsTxtRecord'] == 'missing':
+                    report['errors'].append('expected_account_ads_txt_record_missing')
         if publishers is not None and (len(publishers) != 1 or not re.fullmatch(r'ca-pub-\d{16}', publishers[0])):
             report['errors'].append('missing_or_ambiguous_host_publisher_meta')
         elif publishers and ads_item['status'] == 200:
@@ -157,8 +181,9 @@ def run(project, loader=fetch):
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(); p.add_argument('--project', required=True, choices=['careerpick', 'supportpick'])
+    p.add_argument('--expected-publisher-id', help='Explicit review-account ID, pub- plus 16 digits; not inferred from host meta')
     p.add_argument('--output', default='public-readiness-report.json'); args = p.parse_args()
-    result = run(args.project)
+    result = run(args.project, expected_publisher_id=args.expected_publisher_id)
     Path(args.output).write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(result, ensure_ascii=False, indent=2))
     raise SystemExit(1 if result['errors'] else 2 if result['unverified'] else 0)
