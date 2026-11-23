@@ -59,8 +59,8 @@
   ],
   "editorial": {
     "contract_version": 2,
-    "main_text": "천안에서 공무직 청소원 일자리를 찾는다면 확인해 보세요.\n한국농어촌공사 천안지사가 무기계약직 청소원 1명을 모집해요.\n\n지원 대상은 취업지원대상자 또는 장애인이에요. 두 조건 모두가 필요한 것은 아니며, 정년 미도달과 근무지 출퇴근 가능 등 공통조건도 확인해야 해요.\n\n12월 3일 13시까지 온라인 접수예요. 부여·서천·청양지사도 각각 1명씩 별도로 모집해요.\n\n자세한 사항은 프로필링크 확인",
-    "main_character_count": 220,
+    "main_text": "천안에서 공무직 청소원 일자리를 찾는다면 확인해 보세요.\n한국농어촌공사 천안지사가 무기계약직 청소원 1명을 모집해요.\n\n지원 대상은 취업지원대상자 또는 장애인이에요. 두 조건 모두 필요하지는 않아요. 정년 미도달·출퇴근 가능 등 공통조건도 확인하세요.\n\n주5일 하루 4시간 근무이고, 부여·서천·청양지사도 각 1명씩 별도 모집해요. 12월 3일 13시까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+    "main_character_count": 226,
     "reply_texts": [],
     "auto_reply_count": 0,
     "cta": "자세한 사항은 프로필링크 확인",
@@ -71,7 +71,7 @@
       "천안·부여·서천·청양 4개 지사 청소원 채용, 조건부터 확인해요."
     ],
     "selected_hook_index": 1,
-    "additional_rewrite_count": 0
+    "additional_rewrite_count": 1
   },
   "unverified_requirements": [
     "employer linked original PDF bytes not downloaded, no PDF original SHA/page/footnote semantic review",
@@ -162,5 +162,73 @@
     "new_post": 0,
     "no_dispatch": true,
     "no_post": true
+  },
+  "followup_20261123_1152": {
+    "status": "partial_review_improved_unapproved",
+    "evidence_observed_at": "2026-11-23T11:52:34+09:00",
+    "official_employer_notice": {
+      "url": "https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1ec2b5d6e1317&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437",
+      "read_method": "read-only TinyFish content extraction",
+      "exact_units": {
+        "천안지사": 1,
+        "부여지사": 1,
+        "서천지사": 1,
+        "청양지사": 1
+      },
+      "schedule": "주5일 하루4시간",
+      "employment_duration": "채용일부터 정년 만65세까지",
+      "requirement_logic": "취업지원대상자 또는 장애인; either-or, additional common eligibility requirements apply",
+      "application": "온라인, 2026-12-03T13:00:00+09:00",
+      "correction_scope": "This issuer post and current recruiting portal only; full corrections board and attachments not checked",
+      "raw_bytes_sha256": null
+    },
+    "actual_recruiting_page": {
+      "url": "https://recruit.incruit.com/ekr/job/2611160020",
+      "observed_status": "모집중",
+      "units": "4 branches × 1 person",
+      "deadline": "2026-12-03T13:00:00+09:00",
+      "checked_via": "live content extraction; original attachment download still blocked"
+    },
+    "public_detail_partial": {
+      "deployed_standalone_url": "https://kllollain-max.github.io/careerpick/jobs/a307175.html",
+      "display_title": "한국농어촌공사 천안지사, 부여지사, 서천지사, 청양지사 공무직(청소원) 보훈·장애인 제한경쟁채용공고",
+      "visible_employment": "무기계약직",
+      "visible_total_count": 4,
+      "visible_data_source_time": "2026-11-23T10:28:21+09:00",
+      "hash_route_url": "https://kllollain-max.github.io/careerpick/#job=a307175",
+      "hash_route_result": "Content fetch returned app's initial listing, not the rendered #job final detail. Browser interaction unavailable because TinyFish wallet -$0.13. LIVE_HASH_DETAIL_HOLD",
+      "actual_hash_final_detail_verified": false
+    },
+    "latest_actual_source_artifacts": {
+      "workflow_run": 45094741272,
+      "artifact_operation_id": 14782419398,
+      "operation_sha256": "0a8a6c73e54929dca0ebb6dba05825f8bbf142ed6ce77652982e7b6c95a247f7",
+      "artifact_pages_id": 14782504956,
+      "pages_sha256": "671b5386721e9692af40c3b2e8afaf8f33c8a1ef25795ecf840fb7ac7fec7ae3",
+      "actual_pages_sha256": {
+        "alio.json": "8b4c8f8559059251c56393e8c51d05c23363a9bb6a293eb91131653d07d6d822",
+        "alio-detail.json": "058bc1b1b84a603d00959df0f4e7a051ef47c3c1a219f52839b1fe2624678834",
+        "cleaneye.json": "6eab0cdaf5661c3aa680ea12b4ee21a2c155e94e5a616889872a534825566c99"
+      },
+      "note": "The changed=true operation report has pre-update hashes different from the newly built Pages artifact; no unchanged-source verification time may be re-stamped. Verified the actual ZIP bytes against artifact digests and Pages source files against the build-report."
+    },
+    "draft_revision": {
+      "characters": 226,
+      "updated_claim": "주5일 하루4시간",
+      "basis": "official employer HTML",
+      "publication_policy": "contract_version=2",
+      "approved": false
+    },
+    "remaining": [
+      "official original PDF bytes and footnotes not independently reviewed",
+      "full corrections check",
+      "final actual JavaScript #job detail review",
+      "live media order and required card 1080+360 visual inspection",
+      "production validators and CAS approval not run"
+    ],
+    "queue_modified": false,
+    "staging_modified": false,
+    "meta_posted": false,
+    "handoff_approved": false
   }
 }
