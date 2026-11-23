@@ -17,6 +17,50 @@ from scripts.build_job_pages import render
 
 class JobPageTests(unittest.TestCase):
 
+    def test_khnp_school_recommendation_is_not_an_open_high_school_application(self):
+        from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a307284']
+        html = render(post, {})
+        for phrase in ('기계 16명', '전기전자 24명', '학교장 추천', '2학년 재학생',
+                       '2026-12-08 15:00', '정부유통 전자문서', '학교 추천서류 마감은 11월 23일'):
+            self.assertIn(phrase, html)
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS['a307284'], '2026-12-08T15:00:00+09:00')
+        self.assertNotIn('2026-12-08 23:59 (KST)', html)
+        for change in ({'n':'41'}, {'emp':['계약직']}, {'org':'다른 기관'},
+                       {'title':'다른 공고'}, {'due':'2026-12-09'}, {'alio':False}):
+            changed = render({**post, **change}, {})
+            self.assertNotIn('기계 16명 · 전기전자 24명', changed)
+            self.assertNotIn('fileNo=3089065', changed)
+            self.assertNotIn('기관 공식 확인 접수마감: 2026-12-08 15:00', changed)
+
+    def test_keei_initial_contract_and_unconfirmed_deadline_clock_remain_explicit(self):
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a307227']
+        html = render(post, {})
+        for phrase in ('5명 이내', '초임계약 1년 후 평가', '울산 본원', '정확한 마감시각',
+                       'EconJobMarket', '2027년 8월', '2027년 9월', 'fileNo=3088654'):
+            self.assertIn(phrase, html)
+        self.assertNotIn('2026-12-11 23:59 (KST)', html)
+        for change in ({'n':'6'}, {'emp':['계약직']}, {'title':'다른 공고'},
+                       {'due':'2026-12-12'}, {'alio':False}):
+            changed = render({**post, **change}, {})
+            self.assertNotIn('초임계약 1년 후 평가', changed)
+            self.assertNotIn('fileNo=3088654', changed)
+
+
+    def test_verification_fingerprints_stay_out_of_reader_headings(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        for identity in ('a307225', 'a306874', 'a306182', 'a306992', 'a305734'):
+            proof = VERIFIED_DUTIES[identity]
+            html = render(posts[identity], {})
+            self.assertIn('<h3>' + html_escape(proof['reader_scope']) + '</h3>', html)
+            self.assertNotIn(proof['source_sha256'], html)
+            self.assertEqual(len(proof['source_sha256']), 64)
+            self.assertIn(proof['source_url'], html)
+
+
     def test_real_regular_post_does_not_claim_unverified_full_time_hours(self):
         """ALIO 정규직 is not evidence of Google's FULL_TIME work schedule."""
         posts = {p['id']: p for p in json.loads(
