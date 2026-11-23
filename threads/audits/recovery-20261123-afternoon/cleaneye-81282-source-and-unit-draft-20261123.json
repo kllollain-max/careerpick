@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "independent_candidate_source_review_not_operational_approval",
+  "notice_id": "cleaneye-81282",
+  "official_id": "81282",
+  "status": "draft_unapproved",
+  "slot_assignment": null,
+  "planning_only_next_missing_slot": "2026-11-24T12:00:00+09:00",
+  "collected_at": "2026-11-23T04:46:13.055Z",
+  "account": "hid_119",
+  "publication_allowed": false,
+  "meta_posted": false,
+  "source_snapshot": {
+    "checked_at": "2026-11-23T10:29:20+09:00",
+    "source_post_sha256": "5757f307b4e4a6b93f85d833dc049387acc0e7a92cdb0fc4302fc7bb073504df",
+    "source_detail_sha256": "ddae7b62bb8ee757e5dd0a2f9be3c74e9ceb66a9ec812f8d32d0b103e9abe963",
+    "note": "SHA above are Cleaneye collected source fields, NOT the original attached PDF or independent correction-page bytes"
+  },
+  "official_employer_post": {
+    "url": "https://yongsanculture.or.kr/site/main/archive/post/2026%EB%85%84-%EC%A0%9C4%EC%B0%A8-%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8-%EC%A7%81%EC%9B%90-%EA%B3%B5%EA%B0%9C%EA%B2%BD%EC%9F%81%EC%B1%84%EC%9A%A9-%EA%B3%B5%EA%B3%A0",
+    "title": "2026년 제4차 용산문화재단 직원 공개경쟁채용 공고",
+    "published": "2026-11-16",
+    "recruitment_attachments_listed": [
+      "2026년 제4차 용산문화재단 직원 채용 공고문.pdf (278.0KB)"
+    ],
+    "official_attachment_url": "https://yongsanculture.or.kr/site/main/file/download/316",
+    "official_attachment_get_status": "binary bytes unavailable: web extractor returned 400 Unsupported content-type application/octet-stream; not an actual origin 403",
+    "attachment_sha256": null
+  },
+  "independent_visual_review": {
+    "mirror_document_url": "https://www.gacf.kr/gears_pds/board/12472/%EB%B6%99%EC%9E%84.%202026%EB%85%84%20%EC%A0%9C4%EC%B0%A8%20%EC%9A%A9%EC%82%B0%EB%AC%B8%ED%99%94%EC%9E%AC%EB%8B%A8%20%EC%A7%81%EC%9B%90%20%EC%B1%84%EC%9A%A9%20%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf",
+    "mirror_note": "PDF posted on another public cultural institution (gacf.kr), same issuer and posting title; exact attachment byte equality with original employer file NOT established",
+    "verified_page_numbers": [
+      2,
+      3,
+      8
+    ],
+    "verified_facts": [
+      "p2 general employee grade 8 performance arts team creative production + promotion 2 positions",
+      "p3 general employee grade 8 must meet at least 1 of 5 career/eligibility routes; common minimum age 18 and no degree/location restriction",
+      "p8 application 2026-11-16 through 2026-11-26 24:00; online only; required career evidence with job description and duration",
+      "p6-8 general grade 8 follows document screening, written exam, personality test, interview"
+    ],
+    "mirror_pdf_sha256": null
+  },
+  "correction_check": {
+    "official_employer_listing_url": "https://yongsanculture.or.kr/site/main/archive/post/category/jobNotice",
+    "official_listing_scope": "first listing page with 2026-11-16 notice as newest; no newer correction/cancellation in that listing at inspection; not a comprehensive guarantee",
+    "discrepancy": "An NTOK jobboard repost states registration ending '24.(목) 24:00', whereas issuer-titled PDF and Cleaneye feed show November 26 24:00. Do not copy the repost date; recheck the issuer download before approval.",
+    "non_authoritative_repost": "https://www.ntok.go.kr/staff/community/jobboard/detail/163"
+  },
+  "reviewed_unit": {
+    "employer": "용산문화재단",
+    "team": "공연예술팀",
+    "grade": "일반직 8급 주임",
+    "recruitment_count": 2,
+    "employment": "일반정규직",
+    "work_tasks": [
+      "기획공연 제작·문화예술 프로그램 기획",
+      "공연장 홍보마케팅·관객 개발"
+    ],
+    "eligibility_logic": "one_of_five OR, not ALL; common conditions separately AND",
+    "application_deadline_kst": "2026-11-26T24:00",
+    "application_method": "온라인"
+  },
+  "draft_text": "문화예술 공연 기획 경력이 있다면 용산문화재단 일반직 8급 채용을 확인해 보세요. 공연예술팀 주임 2명을 뽑고, 기획공연 제작·프로그램 기획과 공연장 홍보·관객 개발을 맡아요.\n\n지원하려면 일반직 8급 자격기준 5가지 중 하나 이상을 충족해야 해요. 지역 제한은 없고 서류·필기·인성검사·면접을 거쳐요. 11월 26일 24시까지 온라인 접수이며, 경력증명서에는 담당업무와 기간이 명시돼야 해요.\n\n자세한 사항은 프로필링크 확인",
+  "draft_codepoint_length": 238,
+  "reply_text": "",
+  "cta_count": 1,
+  "approval_gates_remaining": [
+    "direct issuer PDF actual bytes + SHA256 + content and employer mirror equivalence",
+    "exact Cleaneye notice 81282 field-to-unit mapping official detail UI",
+    "CareerPick #job=cleaneye-81282 dynamically rendered detail AX/screenshots",
+    "all latest correction/withdrawal checks with exact scope",
+    "latest production policy/prompt SHA; validate_entry; verify_official_receipt with actual official GET; master public copy; reviewed_ingest.plan; queue_bridge.merge; check_queue",
+    "IMAGE card 1080 JPEG+360 PNG real pixel review and asset CAS if actual successful-post alternation requires IMAGE",
+    "24-hour source freshness at future posting time; safe CAS preserving prior items"
+  ],
+  "operation": "source-and-unit review draft only; no queue/staging/submission change, no POST, no manual rerun"
+}
