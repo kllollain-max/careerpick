@@ -195,9 +195,12 @@ VERIFIED_APPLICATION_NOTICES = {
  'source_employment': ['정규직'],
  'expected_source_seats': '57',
  'checked_on': '2026-11-24',
- 'scope': '상시채용 현재 접수·잔여인원 확인 제한',
- 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3077448',
- 'role_mix_note': '공식 공고문 첨부는 Fasoo DRM으로 보호되어 본문을 확인할 수 없었습니다.57명은 게시된 모집인원이며 현재 잔여 결원이나 접수 활성은 확인되지 않았습니다.',
+ 'scope': '기관 개별 공고253676의 접수기간·직접 제출 안내; DRM 공고문 본문 미확인',
+ 'source_url': 'https://cnuh.recruiter.co.kr/app/jobnotice/view?jobnoticeSn=253676&systemKindCode=MRS2',
+ 'role_mix_note': '공식 공고문 첨부는 Fasoo DRM으로 보호되어 본문을 확인할 수 없었습니다.57명은 게시된 모집인원이며 현재 잔여 결원이나 접수 활성은 확인되지 않았습니다. '
+                  '기관 개별 공고253676의 공개 접수기간 표시는2026년5월12일14시~12월31일18시이며 온라인 접수가 아니므로 접수처로 직접 제출해야 합니다. 이 표시는 '
+                  '현재57명이 남아 있다는 증거가 아니며, 충원 여부와 제출 장소·수령 가능 시간은 기관에 확인하세요. 기관에서 내려받은 같은 공고문도 DRM 보호본이므로 본문을 '
+                  '읽은 것으로 주장하지 않습니다.',
  'application_status_unconfirmed': True,
  'conditional_application_window_label': '현재 접수 활성·잔여 인원 미확인 (공식 접수처 확인 필요)'},
     'a306275': {'organization': '경상국립대학교병원',

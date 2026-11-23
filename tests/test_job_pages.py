@@ -16,6 +16,20 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_cnuh_exact_portal_window_does_not_certify_remaining_evergreen_vacancies(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        p=posts['a305393'];original=copy.deepcopy(p);html=render(p,{})
+        for phrase in ('2026년5월12일14시~12월31일18시','온라인 접수가 아니므로 접수처로 직접 제출','현재57명이 남아 있다는 증거가 아니며','DRM 보호본'):
+            self.assertIn(phrase,html)
+        self.assertIn('jobnoticeSn=253676&amp;systemKindCode=MRS2',html)
+        self.assertTrue(VERIFIED_APPLICATION_NOTICES[p['id']]['application_status_unconfirmed'])
+        self.assertNotIn(p['id'],CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertIn('noindex,follow',html)
+        self.assertNotIn('"@type": "JobPosting"',html)
+        self.assertNotIn('2026년5월12일14시~12월31일18시',render({**p,'n':'56'},{}))
+        self.assertEqual(p,original)
+
     def test_new_six_originals_preserve_deadlines_and_applicant_decisions(self):
         from scripts.build_job_pages import VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
         from scripts.build_public_site import homepage_cutoff_metadata
