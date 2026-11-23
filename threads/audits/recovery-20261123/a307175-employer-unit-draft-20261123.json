@@ -93,5 +93,74 @@
   },
   "queue_change": false,
   "post_change": false,
-  "required_next_action": "First obtain employer PDF bytes and independently inspect exact target unit and any corrections; render live #job and production card, run all production validators; only then CAS move approved entry into existing future unstarted slot."
+  "required_next_action": "First obtain employer PDF bytes and independently inspect exact target unit and any corrections; render live #job and production card, run all production validators; only then CAS move approved entry into existing future unstarted slot.",
+  "followup_20261123_1045": {
+    "status": "additional_independent_issuer_source_review_no_queue_approval",
+    "actual_issuer_notice": {
+      "url": "https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1ec2b5d6e1317&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437",
+      "observed_at_kst": "2026-11-23T10:44:55+09:00",
+      "review_medium": "independently fetched rendered official issuer webpage text, not the byte-exact linked PDF",
+      "title_matches_alio": true,
+      "posted_date": "2026-11-18",
+      "target_unit": "천안지사 공무직 청소원 1명",
+      "other_units": "부여·서천·청양지사 각 1명; total 4",
+      "work_hours": "주 5일, 1일 4시간",
+      "retirement": "채용예정일~정년 만 65세",
+      "employment": "공무직 무기계약직",
+      "eligibility": "법정 취업지원대상자 OR 등록 장애인만; AND가 아님",
+      "actual_application_deadline": "2026-12-03T13:00:00+09:00",
+      "appointment_expected": "2027-01-04",
+      "employer_contact": "041-339-1816",
+      "scope": "Only this issuer notice body and its linked current recruitment portal were checked; full correction/cancellation board was not exhaustively reviewed.",
+      "linked_pdf_status": "not_retrieved: official www.alio.go.kr download GET 403 and issuer board attachment returned unsupported application/octet-stream; PDF byte SHA/page/footnote verification unavailable"
+    },
+    "actual_live_careerpick_detail_attempt": {
+      "url": "https://kllollain-max.github.io/careerpick/#job=a307175",
+      "result": "TinyFish read-only rendered extraction returned only '← 목록공유' for #jobview, not independently populated job detail; thus LIVE_JOB_DETAIL_NOT_VERIFIED",
+      "passed": false
+    },
+    "latest_collection_proof": {
+      "run_id": 45094741272,
+      "run_path": ".github/workflows/operations.yml",
+      "event": "schedule",
+      "status": "completed",
+      "conclusion": "success",
+      "artifact_id": 14782419398,
+      "operation_zip_sha256": "0a8a6c73e54929dca0ebb6dba05825f8bbf142ed6ce77652982e7b6c95a247f7",
+      "pages_artifact_id": 14782504956,
+      "pages_zip_sha256": "671b5386721e9692af40c3b2e8afaf8f33c8a1ef25795ecf840fb7ac7fec7ae3",
+      "source_files_from_actual_pages_artifact": {
+        "alio.json": "8b4c8f8559059251c56393e8c51d05c23363a9bb6a293eb91131653d07d6d822",
+        "alio-detail.json": "058bc1b1b84a603d00959df0f4e7a051ef47c3c1a219f52839b1fe2624678834",
+        "cleaneye.json": "6eab0cdaf5661c3aa680ea12b4ee21a2c155e94e5a616889872a534825566c99"
+      },
+      "operation_changed": true,
+      "cleaneye_changed": true,
+      "verified_at_alio": "2026-11-23T10:28:53+09:00",
+      "collected_at_cleaneye": "2026-11-23T10:29:20+09:00",
+      "code_source": "scripts/threads_source_verification.py at main SHA a4b60fa70b1fa30dc719091b4e568e05614a3153",
+      "inspect_bundle_function_reproduced_locally": "source_verification_stamps={}; ZIP and run provenance matched, but changed=true means this artifact cannot certify unchanged bytes as a fresh timestamp",
+      "snapshot_vs_receipt_mismatch_reason": "Operation report pre-update source SHA values differ from the newly changed Pages data. Page asset hashes match the current build-report; do not graft previous receipt into newly changed source.",
+      "artificial_timestamp_refresh": false
+    },
+    "remote_preflight": {
+      "run_id": 45094857305,
+      "checked_at": "2026-11-23T10:29:52.111862+09:00",
+      "main_sha": "a4b60fa70b1fa30dc719091b4e568e05614a3153",
+      "queue_sha": "7abd9476a79f4306cc98b76e79c84760677ebccb",
+      "staging_sha": "a9415452a957fed2cc38f7c8d2b92c405c13dd39",
+      "next_slot": "2026-11-23T12:00:00+09:00",
+      "approved_supply_count": 0,
+      "target": 8,
+      "next_slot_missing": true,
+      "meta_live_inventory_checked_at": "2026-11-23T10:30:42.885763+09:00",
+      "last_post_id": "18203041492385442",
+      "new_post_in_2026_11_23": false
+    },
+    "remaining": "Original issuer PDF bytes and correction scope, genuine #job dialog, actual next IMAGE card 1080/360 visual review, complete production validators and CAS approval; all must pass before promotion.",
+    "newly_approved": 0,
+    "new_post": 0,
+    "no_dispatch": true,
+    "no_post": true
+  }
 }
