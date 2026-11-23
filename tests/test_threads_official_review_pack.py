@@ -166,6 +166,63 @@ class EvidencePacketTests(unittest.TestCase):
 
 
 
+    def test_yangju_81438_pinned_official_city_notice_and_annexes_never_autoapprove(self):
+        from scripts.threads_official_review_pack import (
+            CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES,
+            independently_located_notice,
+        )
+        from scripts.threads_reviewed_ingest import official_url_allowed
+
+        pin = CANONICAL_REVIEW_URLS["cleaneye-81438"]
+        fallback = "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81438"
+        draft = {
+            "notice_id": "cleaneye-81438", "status": "unreviewed",
+            "source_post_sha256": pin["source_post_sha256"],
+            "source_detail_sha256": pin["source_detail_sha256"],
+            "official_url_for_private_review": fallback,
+        }
+        annexes = CANONICAL_REVIEW_ANNEXES["cleaneye-81438"]
+        self.assertEqual(len(annexes), 2)
+        self.assertEqual(independently_located_notice(draft), pin["url"])
+        self.assertTrue(all(official_url_allowed(x) for x in [pin["url"], *annexes]))
+
+        seen = []
+        def fetched(url):
+            seen.append(url)
+            return {
+                "url": url, "sha256": "a" * 64, "size_bytes": 281584,
+                "pdf_magic_valid": url in annexes,
+                "checked_at": "2026-11-21T11:45:00+09:00",
+            }
+        packet = build_packet({
+            "status": "review_required", "approved_for_queue": False,
+            "drafts": [draft],
+        }, fetch=fetched)
+        self.assertEqual(seen, [pin["url"], *annexes])
+        self.assertEqual(packet["checked"], 1)
+        self.assertEqual(packet["records"][0]["attachment_status"],
+                         "all_raw_pdf_sha256_captured")
+        self.assertFalse(packet["approved_for_queue"])
+        self.assertFalse(packet["automatic_approval"])
+        self.assertFalse(packet["meta_posted"])
+        self.assertEqual(packet["records"][0]["publisher_validate_entry"],
+                         "not_run")
+        self.assertEqual(packet["records"][0]["semantic_review"], "required")
+
+        # Source identity change invalidates the exact pin and prevents annex
+        # digests from being attributed to another posting or a newer version.
+        changed = dict(draft, source_detail_sha256="b" * 64)
+        self.assertEqual(independently_located_notice(changed), fallback)
+        seen.clear()
+        second = build_packet({
+            "status": "review_required", "approved_for_queue": False,
+            "drafts": [changed],
+        }, fetch=fetched)
+        self.assertEqual(seen, [fallback])
+        self.assertNotIn("attachment_receipts", second["records"][0])
+        different_id = dict(draft, notice_id="cleaneye-81439")
+        self.assertEqual(independently_located_notice(different_id), fallback)
+
     def test_cleaneye_81115_pinned_two_real_pdf_sources_are_review_only(self):
         from scripts.threads_official_review_pack import (
             CANONICAL_REVIEW_URLS, CANONICAL_REVIEW_ANNEXES, independently_located_notice)

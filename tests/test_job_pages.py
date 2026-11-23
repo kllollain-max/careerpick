@@ -348,7 +348,7 @@ class JobPageTests(unittest.TestCase):
         html = render(post, {})
         for phrase in ('Research Fellow', '박사학위', '추천인 3명', 'Job market paper',
                        '2026-10-06 ~ 2026-11-30', 'midnight UTC',
-                       '원활한 한국어 의사소통', '2026년 11월 21일 공개 재확인',
+                       '원활한 한국어 의사소통', '2026년 11월 23일 공개 재확인',
                        '전일제(full-time)', 'ALIO의 정규직 분류만으로 추정한 근로시간이 아닙니다',
                        '한국시간 종료시각 미확정', 'accepting applications',
                        'econjobmarket.org/positions/12745', 'fileNo=3079033'):

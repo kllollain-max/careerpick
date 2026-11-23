@@ -48,6 +48,15 @@ CANONICAL_REVIEW_URLS = {
     # Exact city-facility employer posting, matched to one Cleaneye 81115
     # snapshot. The attached 22-page notice and three-page job description
     # remain independent editorial review material, never auto-approval.
+    # Exact Yangju city recruitment notice for one identified Yangju Culture
+    # Tourism Foundation job record. Fingerprint both Cleaneye snapshots so
+    # similarly titled future postings cannot inherit these source URLs.
+    # City-hosted notice and annexes are review-only evidence, never approval.
+    "cleaneye-81438": {
+        "source_post_sha256": "46f3c0f292b99943f60fc5e292d55cd8b8ee4e20580e9697274b15a941ec3b33",
+        "source_detail_sha256": "f700c5e494a4ab81c0b02fb2908ce472d7376e13f806ac72ea39300dfcc9a827",
+        "url": "https://www.yangju.go.kr/www/selectBbsNttView.do?bbsNo=21&key=216&nttNo=209810",
+    },
     "cleaneye-81115": {
         "source_post_sha256": "c2be94b6d942146ecb2f7abd5db2bb322c37e8add110f45d6fb3014575288305",
         "source_detail_sha256": "c74f8386011d789fa568f6d731b80d723fea7ac14f92661f57642b60316b66cb",
@@ -58,6 +67,12 @@ CANONICAL_REVIEW_URLS = {
 # Exact attachments published with the independently located 2026-17 employer
 # advert. These URLs were checked individually; none implies editorial approval.
 CANONICAL_REVIEW_ANNEXES = {
+    # Two exact PDF attachments published with Yangju notice 2026-2510.
+    # Digest receipts cannot substitute for reading and validating the rules.
+    "cleaneye-81438": [
+        "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206793",
+        "https://www.yangju.go.kr/www/downloadBbsFile.do?key=216&bbsNo=21&atchmnflNo=206794",
+    ],
     "cleaneye-80848": [
             "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%841.%20%EC%B1%84%EC%9A%A9%EA%B2%B0%EA%B2%A9%EC%82%AC%EC%9C%A0%20%EA%B4%80%EB%A0%A8.pdf",
             "https://c.incru.it/newjobpost/2026/10_cleanmetro/%EB%B6%99%EC%9E%842.%20%EC%84%9C%EB%A5%98%EC%A0%84%ED%98%95%20%ED%8F%89%EA%B0%80%EA%B8%B0%EC%A4%80.pdf",
