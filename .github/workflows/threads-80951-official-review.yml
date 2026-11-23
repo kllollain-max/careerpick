@@ -1,0 +1,95 @@
+name: Review only — UIPA 80951 official attachment
+on:
+  push:
+    branches:
+      - review/threads-80951-independent-20261119
+    paths:
+      - .github/workflows/threads-80951-official-review.yml
+permissions:
+  contents: read
+jobs:
+  original-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install document readers
+        run: python -m pip install --quiet requests beautifulsoup4 pymupdf
+      - name: Download only employer-controlled source and record exact bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,bs4,hashlib,json,pathlib,re,urllib.parse,datetime,sys
+          from zoneinfo import ZoneInfo
+          root=pathlib.Path('official-80951');root.mkdir(exist_ok=True)
+          base='https://www.uipa.or.kr/webuser/recruit/list.html'
+          ats='https://uipa.careerlink.kr/'
+          session=requests.Session()
+          session.headers.update({'User-Agent':'Mozilla/5.0 (compatible; CareerPickOfficialEvidence/1.0)'})
+          results=[]; candidates=[]
+          for url in [base,ats,'https://uipa.careerlink.kr/jobs/RC20260518029462']:
+            row={'requested_url':url}
+            try:
+              r=session.get(url,timeout=22);row.update({'status':r.status_code,'url':r.url,'bytes':len(r.content),'sha256':hashlib.sha256(r.content).hexdigest()})
+              if urllib.parse.urlsplit(r.url).hostname not in {'www.uipa.or.kr','uipa.or.kr','uipa.careerlink.kr'}:raise RuntimeError('HOST_CHANGED')
+              r.raise_for_status()
+              if 'text/html' not in r.headers.get('content-type',''):raise RuntimeError('NOT_HTML')
+              html=r.text
+              (root/('page-'+str(len(results))+'.html')).write_text(html,encoding='utf-8')
+              row['mentions_6th']=bool(re.search(r'2026.{0,25}6차',html))
+              soup=bs4.BeautifulSoup(html,'html.parser')
+              for a in soup.find_all('a',href=True):
+                text=a.get_text(' ',strip=True)
+                href=urllib.parse.urljoin(r.url,a['href'])
+                part=urllib.parse.urlsplit(href)
+                if part.hostname not in {'www.uipa.or.kr','uipa.or.kr','uipa.careerlink.kr'}:continue
+                if any(t in (href+' '+text).lower() for t in ['2026','6차','recruit','download','file','pdf','hwp','채용']):
+                  candidates.append({'url':href,'label':text[:200],'from':r.url})
+              row['candidate_count']=len(candidates)
+              # Preserve short public source-context snippets for JS-rendered ATS.
+              markers=[]
+              for m in list(re.finditer(r'6차|2026.{0,25}채용|\\.pdf|attachment|fileName|filePath',html,flags=re.I))[:22]:
+                markers.append(html[max(0,m.start()-140):min(len(html),m.end()+260)].replace('\\n',' ')[:400])
+              row['source_snippets']=markers
+              row['script_src_count']=len(soup.select('script[src]'))
+              row['inline_scripts']=len([s for s in soup.select('script') if s.string])
+            except Exception as e:row['error']=type(e).__name__+':'+str(e)[:200]
+            results.append(row)
+          (root/'pages.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
+          (root/'links.json').write_text(json.dumps(candidates,ensure_ascii=False,indent=2),encoding='utf-8')
+          exact=[]
+          for v in candidates:
+            if not any(s in (v['url']+' '+v['label']).lower() for s in ['.pdf','.hwp','download','첨부']):continue
+            if v['url'] in exact:continue
+            exact.append(v['url'])
+          receipts=[]
+          for url in exact[:14]:
+            try:
+              r=session.get(url,timeout=30,headers={'Referer':base})
+              doc={'url':url,'status':r.status_code,'bytes':len(r.content),'sha256':hashlib.sha256(r.content).hexdigest(),'magic':r.content[:12].hex()}
+              if r.status_code==200 and r.content.startswith(b'%PDF-') and 1000<len(r.content)<15000000:
+                import fitz
+                pdf=fitz.open(stream=r.content,filetype='pdf')
+                text='\n\n'.join('==PAGE %d==\n%s'%(i+1,p.get_text()) for i,p in enumerate(pdf))
+                doc.update({'pages':len(pdf),'text_chars':len(text),'contains_6th':bool(re.search('2026.{0,25}6차',text))})
+                if doc['contains_6th']:
+                  name='original-'+str(len(receipts))+'.pdf';(root/name).write_bytes(r.content)
+                  (root/(name+'.txt')).write_text(text,encoding='utf-8')
+                  doc['saved_as']=name
+              receipts.append(doc)
+            except Exception as e: receipts.append({'url':url,'error':type(e).__name__+':'+str(e)[:180]})
+          report={'fetched_at':datetime.datetime.now(ZoneInfo('Asia/Seoul')).isoformat(),'official_hosts':['www.uipa.or.kr','uipa.or.kr','uipa.careerlink.kr'],'pages':results,'attachments':receipts,'review_only':True,'approved_for_queue':False,'meta_posted':False}
+          (root/'receipt.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('OFFICIAL_REVIEW_RECEIPT',json.dumps(report,ensure_ascii=False)[:10000])
+          if not any(d.get('saved_as') for d in receipts):raise RuntimeError('EXACT_6TH_OFFICIAL_PDF_NOT_YET_VERIFIED')
+          PY
+      - name: Preserve source audit even on failed document extraction
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-80951-readonly-source
+          path: official-80951/
+          if-no-files-found: warn
+          retention-days: 30
