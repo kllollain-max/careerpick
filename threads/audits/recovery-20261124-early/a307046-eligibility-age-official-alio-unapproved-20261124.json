@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "unapproved_official_html_semantic_review",
+  "status": "draft_hold",
+  "ready": false,
+  "publication_allowed": false,
+  "meta_posted": false,
+  "account": "hid_119",
+  "notice_id": "a307046",
+  "slot_assignment": null,
+  "planning_priority": "future missing regular slot; not assigned",
+  "recorded_at_utc": "2026-11-23T17:44:16Z",
+  "question": "한국도로공사서비스 광주·전남 수납원, 만 65세면 지원할 수 있나요?",
+  "official_evidence": [
+    {
+      "field": "employer/unit/headcount",
+      "value": "한국도로공사서비스 광주전남권역본부 기간제 수납원 전체 96명",
+      "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
+      "evidence": "공고 제목, 고용형태 비정규직, 근무분야 수납원, 채용인원 96",
+      "scope": "지역별/영업소별 세분 인원은 첨부 공고로 재검증 필요"
+    },
+    {
+      "field": "age_required",
+      "value": "채용공고일 2026-11-16 기준 만65세 미만",
+      "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
+      "evidence": "응시자격: 채용공고일 기준 만 65세 미만"
+    },
+    {
+      "field": "application",
+      "value": "이메일 접수, 2026-11-16~2026-11-30 예정; closing clock NOT independently verified",
+      "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
+      "evidence": "전형절차: E-mail 접수, 날짜만 제공"
+    },
+    {
+      "field": "restrictions",
+      "value": "학력 성별 제한 없음, 인사규정 제5조 결격사유 없음",
+      "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046"
+    }
+  ],
+  "source_receipts": [
+    {
+      "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
+      "official_html_sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
+      "size_bytes": 12777,
+      "checked_at": "2026-11-24T02:17:32.785562+09:00",
+      "method": "actual GitHub scheduled operation official HTML GET; seen in latest verified replenishment handoff run 45225860953"
+    },
+    {
+      "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
+      "method": "web.run open official ALIO visible page independently; facts verified against same employment/count/age/application text",
+      "raw_bytes_sha256": null
+    },
+    {
+      "source_url": "https://www.alio.go.kr/download/download.json?fileNo=3087456",
+      "method": "web.run followed official PDF link",
+      "result": "403 Forbidden; not a verified PDF receipt",
+      "raw_bytes_sha256": null
+    }
+  ],
+  "draft": {
+    "text": "한국도로공사서비스 광주·전남 수납원, 만 65세면 지원할 수 있나요?\n아니요. 2026년 11월 16일 공고일 기준 만 65세 미만이어야 해요.\n\n이번 광주전남권역본부 기간제 채용은 수납원 총 96명을 모집하며 학력·성별 제한은 없어요. 단, 인사규정상 결격사유에 해당하면 안 돼요.\n\n지원서는 이메일로 접수하며 11월 30일 마감 예정이에요. 정확한 마감시각과 사업장별 인원은 첨부 공고문을 확인하세요.\n\n자세한 사항은 프로필링크 확인",
+    "char_count": 244,
+    "headline_question": true,
+    "next_line_direct_answer": true,
+    "cta_count": 1,
+    "reply_count": 0,
+    "public_url_count": 0,
+    "hashtags": 0
+  },
+  "correction_check": {
+    "status": "not_complete",
+    "reason": "Employer primary correction board and original PDF not fully verified"
+  },
+  "web_ui": {
+    "careerpick_job_detail_rendered": false,
+    "AX_verified": false,
+    "screenshot_verified": false
+  },
+  "image_review": {
+    "status": "not_run",
+    "reason": "Draft is not approved for a future media slot; cannot infer final image/text slot from forecast"
+  },
+  "astra": {
+    "required_model": "gpt-6.2-astra",
+    "independent_review_status": "not_invoked",
+    "reason": "No separate gpt-6.2-astra invocation interface available within this execution; cannot claim review passed",
+    "passed": false,
+    "recheck_passed": false
+  },
+  "production_tests": {
+    "validate_entry": "not_run",
+    "master_public_copy": "not_run",
+    "verify_official_receipt": "not_run",
+    "queue_bridge_merge": "not_run",
+    "check_queue": "not_run",
+    "reason": "Independent model and original source/UI review preconditions missing; no ready promotion"
+  },
+  "changes": {
+    "audit_only": true,
+    "queue": false,
+    "staging": false,
+    "submissions": false,
+    "claims": false,
+    "posted": false,
+    "meta_post": false
+  },
+  "remote_state_before_write": "dc6001bdee766575a3054a358101dbfccb903b7c"
+}
