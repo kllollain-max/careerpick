@@ -17,6 +17,35 @@ from scripts.build_job_pages import render
 
 class JobPageTests(unittest.TestCase):
 
+    def test_final_six_notices_preserve_real_deadlines_scopes_and_training_gate(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
+        posts = {p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        cases = {
+            'a307248': ('전주22명', '군산10명', '조교수2년·부교수4년·교수6년', '2026-12-08 17:00'),
+            'a307249': ('전주 본원14명', '군산분원', '임용기간은1년', '2026-12-08 17:00'),
+            'a306819': ('연간3개 학기4과목', '공식 채용공고문에서 확인한 담당업무', '2026-12-05 13:59'),
+            'a306403': ('국제거시', '공식 채용공고문에서 확인한 담당업무', '12월1일 midnight UTC', '우대로', '필수로'),
+        }
+        for pid,phrases in cases.items():
+            post=posts[pid];original=copy.deepcopy(post);html=render(post,{})
+            for phrase in phrases:self.assertIn(phrase,html)
+            self.assertEqual(post,original)
+            changed=render({**post,'n':'999'},{})
+            for phrase in phrases:self.assertNotIn(phrase,changed)
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS['a306819'],'2026-12-05T13:59:00+09:00')
+        self.assertNotIn('a306403',CONFIRMED_APPLICATION_CUTOFFS)
+        for pid,count in [('a307315','8'),('a307314','6')]:
+            self.assertEqual(posts[pid]['n'],count)
+            self.assertNotIn(pid,VERIFIED_DUTIES)  # curriculum is not actual assigned duties
+            html=render(posts[pid],{})
+            self.assertIn('2026-11-30 09:00',html)
+            self.assertIn('2026-12-08 17:00',html)
+            self.assertIn('방문접수만',html)
+            self.assertIn('2026년11월23일 확인 시점에는 접수예정',html)
+            self.assertNotIn('"@type": "JobPosting"',html)
+            self.assertNotIn('<h2>공식 직무기술서에서 확인한 담당업무</h2>',html)
+
+
     def test_kins_30_feed_versus_32_original_is_explicit_and_never_structured_as_confirmed(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
         from scripts.priority_candidate_audit import shortlist
@@ -204,12 +233,12 @@ class JobPageTests(unittest.TestCase):
         self.assertNotEqual(schema['validThrough'], pnuh['due'])
         # A verified, unchanged original should contribute actual role duties
         # to JobPosting rather than the generic ALIO NCS classification.
-        self.assertIn('공식 직무기술서 검토 범위:', schema['description'])
+        self.assertIn('공식 원문 업무 검토 범위:', schema['description'])
         self.assertIn('진료지원간호사30명', schema['description'])
         self.assertIn('의료사회복지사2명', schema['description'])
         self.assertTrue(schema['description'].startswith('<p>'))
         self.assertIn('</p><p>', schema['description'])
-        self.assertIn('<p>공식 직무기술서 검토 범위:', schema['description'])
+        self.assertIn('<p>공식 원문 업무 검토 범위:', schema['description'])
 
         # A source correction invalidates editorial cutoff and structured data.
         for changes in ({'n': '32'}, {'org': '다른 기관'},
@@ -1455,7 +1484,7 @@ class JobPageTests(unittest.TestCase):
                     post['n'] = evidence['expected_source_seats']
             html = render(post, {})
             self.assertIn(html_escape(evidence['summary']), html)
-            self.assertIn('공식 직무기술서에서 확인한 담당업무', html)
+            self.assertIn(html_escape(evidence.get('reader_heading', '공식 직무기술서에서 확인한 담당업무')), html)
             self.assertIn(evidence['source_url'], html)
             self.assertIn(evidence['checked_on'], html)
             unrelated = render(dict(post, title='다른 모집분야'), {})

@@ -28,11 +28,19 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch({headless:true});
   const results = [];
   try {
+    let applicationIds = [];
+    if (project === 'careerpick') {
+      // Include notice-only reception reviews as well as duty/duplicate reviews.
+      const firstLine = (await fs.readFile(path.join(root, 'homepage-ux.js'), 'utf8')).split('\n')[0];
+      const prefix = 'window.CP_VERIFIED_APPLICATION_CUTOFFS = ';
+      assert(firstLine.startsWith(prefix) && firstLine.endsWith(';'));
+      applicationIds = Object.keys(JSON.parse(firstLine.slice(prefix.length, -1)));
+    }
     const pages = project === 'careerpick' ? [
       'privacy.html',
       ...(await fs.readdir('guides')).filter(name => name.endsWith('.html'))
         .sort().map(name => 'guides/' + name),
-      ...[...new Set([...Object.keys(JSON.parse(await fs.readFile('scripts/verified_job_duties.json', 'utf8'))),
+      ...[...new Set([...applicationIds, ...Object.keys(JSON.parse(await fs.readFile('scripts/verified_job_duties.json', 'utf8'))),
         ...JSON.parse(await fs.readFile('scripts/verified_notice_reviews.json', 'utf8')).flatMap(review => review.members.map(member => member.id))])].map(id => 'jobs/' + id + '.html'),
     ] : ['benefits/149200000026/', 'privacy.html'];
     await fs.mkdir('mobile-evidence', {recursive:true});

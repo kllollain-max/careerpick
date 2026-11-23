@@ -24,6 +24,12 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Official JBUH and PNUKH HWP schedules; KDIS English PDF p9 EST conversion.
+    'a307248': '2026-12-08T17:00:00+09:00',
+    'a307249': '2026-12-08T17:00:00+09:00',
+    'a307315': '2026-12-08T17:00:00+09:00',
+    'a307314': '2026-12-08T17:00:00+09:00',
+    'a306819': '2026-12-05T13:59:00+09:00',
     # Official KINS notice image, section7, directly read 2026-11-23.
     'a307238': '2026-12-04T18:00:00+09:00',
     # Separate Yangyang/Samcheok HWPX originals, sectionIII (not publication-end clocks).
@@ -101,6 +107,93 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a307248': {'organization': '전북대학교병원',
+     'title': '2027년 1차 임상교수요원(임상교수, 입원진료전담교수) 채용 공고',
+     'source_end_date': '2026-12-08',
+     'expected_source_seats': '32',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088830',
+     'checked_on': '2026-11-23',
+     'scope': '소화기내과·심장내과 임상교수 직무의 확인 범위',
+     'role_mix_note': '본원 전주22명(임상교수12·입원진료전담교수10)과 군산분원10명(임상교수9·입원진료전담교수1), 합계32명입니다. 전문의 자격과 '
+                      '직급별 교육·연구실적 기준을 구분하세요. 전임의 또는 수련병원 전문의 경력1년 요건에는 입원진료전담교수 예외가 있습니다. ALIO '
+                      '정규직 분류와 별개로 원문 임용기간은 조교수2년·부교수4년·교수6년이며 실적심사 후 재임용 가능입니다.',
+     'application_start': '2026-11-19',
+     'application_end_date': '2026-12-08',
+     'hiring_breakdown': '전주22명(임상12·입원진료전담10) + 군산10명(임상9·입원진료전담1) = 총32명'},
+    'a307249': {'organization': '전북대학교병원',
+     'title': '2027년 1차 전임의사 채용 공고',
+     'source_end_date': '2026-12-08',
+     'expected_source_seats': '15',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088833',
+     'checked_on': '2026-11-23',
+     'scope': '심장내과·혈액종양내과 전임의사 직무의 확인 범위',
+     'role_mix_note': '전주 본원14명과 군산분원 신경외과1명, 합계15명입니다. 인턴·레지던트 수료자 또는2027년 상반기 수료예정자와 전문의 자격 소지자 '
+                      '또는2027년 상반기 취득예정자 요건을 확인하세요. ALIO는 정규직으로 분류하지만 원문 전임의사 임용기간은1년으로 명시됩니다. '
+                      '임상교수32명 공고와 모집분야·인원을 합산하지 마세요.',
+     'application_start': '2026-11-19',
+     'application_end_date': '2026-12-08',
+     'hiring_breakdown': '전주 본원14명 + 군산분원 신경외과1명 = 총15명'},
+    'a306819': {'organization': 'KDI국제정책대학원',
+     'title': '[KDI국제정책대학원] 2027년도 전임교원 채용공고',
+     'source_end_date': '2026-12-04',
+     'expected_source_seats': '6',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085768',
+     'checked_on': '2026-11-23',
+     'scope': '공식 공고에 명시된 영어 강의와 교육·연구 역할',
+     'role_mix_note': '국제경제학·경영전략·행정학·산업정책·공공정책AI/데이터사이언스·개발경제학·국제정치경제학·경제학 일반8개 모집분야 전체에서6명 '
+                      '이내입니다. 각 분야6명으로 합산하지 마세요. 관련 박사 또는2027년8월31일까지 취득예정 조건과 영어 강의 역량을 확인하세요. '
+                      '영문 원문 마감12월4일23:59 EST(UTC-5)는 한국시간12월5일13:59입니다.',
+     'application_end_date': '2026-12-05'},
+    'a306403': {'organization': '대외경제정책연구원',
+     'title': '대외경제정책연구원(KIEP) 정규직 박사급(해외) 채용 공고',
+     'source_end_date': '2026-12-01',
+     'expected_source_seats': '8',
+     'source_employment': ['정규직'],
+     'source_url': 'https://econjobmarket.org/positions/12906',
+     'checked_on': '2026-11-23',
+     'scope': '공식 모집표의 국제거시·국제금융·무역통상 등 연구업무',
+     'role_mix_note': '정규직 부연구위원 이상 전 분야8명으로, 경제학 또는 관련 박사나 이에 준하는 학위,2027년 박사 취득예정자 중2027년 근무 '
+                      '가능자가 지원 대상입니다. 국문 공고는 한국어·영어 능통을 우대라고 하나 EJM 영문 공고는 두 언어 능통을 필수로 표현하므로 기관에 '
+                      '적용 요건을 확인하세요. 마감은12월1일 자정 UTC 원문을 유지하며 KST23:59로 바꾸지 않습니다.',
+     'utc_application_window_label': '2026-10-27 ~ 2026-12-01 자정 UTC(공고문) · 12월1일 midnight '
+                                     'UTC(EJM); 한국시간 종료시각 접수처 확인 필요'},
+    'a307315': {'organization': '부산대학교병원',
+     'title': '2027년도 부산대학교한방병원 전공의(일반수련의) 모집 공고',
+     'source_end_date': '2026-12-08',
+     'expected_source_seats': '8',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3089274',
+     'checked_on': '2026-11-23',
+     'scope': '공식 전공의 모집 HWP의 수련과정별 정원·응시자격·방문접수 일정',
+     'role_mix_note': '일반수련의(인턴)8명 모집으로 다른 수련과정의 인원을 중복 합산하지 마세요. 전문수련의6명은 '
+                      '한방내과·침구과·한방부인과·한방소아과·한방신경정신과·한방재활의학과 각1명입니다. 일반수련의는 한의사면허 또는 국가고시 합격(예정), '
+                      '전문수련의는 일반수련의 수료(예정) 조건을 구분하세요. 실제 원서접수는2026년11월30일09시부터12월8일17시까지로 2026년11월23일 확인 시점에는 '
+                      '접수예정이며 방문접수만 가능합니다. 부산대 한방병원 입구 임시접수처에 마감까지 도착해야 하고 평일09~17시, 점심12~13시 및 '
+                      '주말 제외 조건을 확인하세요. 전문수련의는12월10일 필기·면접을 진행하고 일반수련의 필기는 국시성적으로 갈음하며 '
+                      '면접은2027년1월19일입니다. 첨부 교과과정은 수련교육 내용으로 실제 개인별 배치·담당업무 확인자료로 대체하지 않았습니다.',
+     'hiring_breakdown': '일반수련의(인턴)8명 · ALIO 정규직 분류와 실제 수련모집 조건을 구분',
+     'application_start': '2026-11-30T09:00:00+09:00',
+     'application_end_date': '2026-12-08'},
+    'a307314': {'organization': '부산대학교병원',
+     'title': '2027년도 부산대학교한방병원 전공의(전문수련의) 모집 공고',
+     'source_end_date': '2026-12-08',
+     'expected_source_seats': '6',
+     'source_employment': ['정규직'],
+     'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3089270',
+     'checked_on': '2026-11-23',
+     'scope': '공식 전공의 모집 HWP의 수련과정별 정원·응시자격·방문접수 일정',
+     'role_mix_note': '전문수련의(레지던트1년차)6명 모집으로 다른 수련과정의 인원을 중복 합산하지 마세요. 전문수련의6명은 '
+                      '한방내과·침구과·한방부인과·한방소아과·한방신경정신과·한방재활의학과 각1명입니다. 일반수련의는 한의사면허 또는 국가고시 합격(예정), '
+                      '전문수련의는 일반수련의 수료(예정) 조건을 구분하세요. 실제 원서접수는2026년11월30일09시부터12월8일17시까지로 2026년11월23일 확인 시점에는 '
+                      '접수예정이며 방문접수만 가능합니다. 부산대 한방병원 입구 임시접수처에 마감까지 도착해야 하고 평일09~17시, 점심12~13시 및 '
+                      '주말 제외 조건을 확인하세요. 전문수련의는12월10일 필기·면접을 진행하고 일반수련의 필기는 국시성적으로 갈음하며 '
+                      '면접은2027년1월19일입니다. 첨부 교과과정은 수련교육 내용으로 실제 개인별 배치·담당업무 확인자료로 대체하지 않았습니다.',
+     'hiring_breakdown': '전문수련의(레지던트1년차)6명 · ALIO 정규직 분류와 실제 수련모집 조건을 구분',
+     'application_start': '2026-11-30T09:00:00+09:00',
+     'application_end_date': '2026-12-08'},
     'a307238': {'organization': '한국원자력안전기술원',
      'title': '한국원자력안전기술원 2027년 상반기 정규직 직원 채용',
      'source_end_date': '2026-12-04',
@@ -1372,8 +1465,8 @@ def render(post, detail, related_posts=(), notice_review=None):
     )
     if verified_duties:
         duties_checklist_html = (
-            '<section id="job-duties" aria-label="공식 직무기술서 확인 요약">'
-            '<h2>공식 직무기술서에서 확인한 담당업무</h2>'
+            '<section id="job-duties" aria-label="공식 원문 담당업무 확인 요약">'
+            f'<h2>{escape(verified_duties.get("reader_heading", "공식 직무기술서에서 확인한 담당업무"))}</h2>'
             f'<h3>{escape(verified_duties.get("reader_scope", verified_duties["scope"]))}</h3>'
             f'<p>{escape(verified_duties["summary"])}</p>'
             f'<p class="source-note">지원 전 비교: {escape(verified_duties["applicant_check"])}</p>'
@@ -1592,7 +1685,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     if verified_duties.get('strict_source_identity') is True:
         duty_summary = clean(verified_duties.get('summary'))
         if duty_summary:
-            summary_parts.append('공식 직무기술서 검토 범위: ' + duty_summary)
+            summary_parts.append('공식 원문 업무 검토 범위: ' + duty_summary)
     # Google requires paragraph-formatted HTML for JobPosting description.
     # Escape all source text; the JSON-LD serializer below also neutralizes '<'.
     job_description = ''.join('<p>' + escape(part) + '</p>'
