@@ -16,13 +16,64 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_new_six_originals_preserve_deadlines_and_applicant_decisions(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.build_public_site import homepage_cutoff_metadata
+        posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        cases={
+            'a307141': ('2026-12-01 18:00', '경제·경영2명', '에너지·경제1명', '시용계약', '미응시는 지원 포기'),
+            'a306989': ('2026-11-27 18:00', '교과교육 제외', '마감일 현재 박사학위', '1년 시보임용'),
+            'a307240': ('2026-12-04 18:00', '정보기술(보훈)1명', '경영관리(보훈)1명', '통합 원문32명 안에 포함', '보훈이라는 이유만으로 영어 제출이 자동 면제'),
+            'a307142': ('2026-12-08 16:00', '자료 수집과 분석모형', '추천서1부는 가능한', '논술/주관식 필기'),
+            'a307309': ('2026-12-07 12:00', '12시는 정오', '면허와3교대 가능이 모두 필수', '최소학력 성적증명서'),
+            'a306807': ('2026-11-25 16:00', '자격 취득 이후 관련 업무2년 이상', '사서 업무는 제외', '2026년11월12일~25일16시'),
+        }
+        for pid, phrases in cases.items():
+            p=posts[pid];original=copy.deepcopy(p);page=render(p,{})
+            for text in phrases:self.assertIn(text,page)
+            self.assertEqual(p,original)
+            proof=VERIFIED_APPLICATION_NOTICES[pid]
+            meta=homepage_cutoff_metadata([p],CONFIRMED_APPLICATION_CUTOFFS,{pid:proof})
+            self.assertEqual(meta[pid]['cutoff'],CONFIRMED_APPLICATION_CUTOFFS[pid])
+            for change in ({'n':'999'}, {'emp':['계약직']}, {'due':'2027-12-31'}, {'org':'다른 기관'}, {'title':'정정 공고'}, {'alio':False}):
+                changed={**p,**change}
+                self.assertNotIn(VERIFIED_DUTIES[pid]['summary'],render(changed,{}))
+                self.assertEqual(homepage_cutoff_metadata([changed],CONFIRMED_APPLICATION_CUTOFFS,{pid:proof}),{})
+        self.assertNotIn('application_start',VERIFIED_APPLICATION_NOTICES['a307142'])
+        self.assertEqual(VERIFIED_APPLICATION_NOTICES['a306807']['application_start'],'2026-11-12')
+
+    def test_two_unconfirmed_evergreen_notices_are_not_current_vacancy_claims(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
+        posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        for pid in ('a305393','a306275'):
+            p=posts[pid];proof=VERIFIED_APPLICATION_NOTICES[pid]
+            html=render(p,{})
+            self.assertIn('noindex,follow',html)
+            self.assertIn('현재 접수 활성',html)
+            self.assertNotIn('"@type": "JobPosting"',html)
+            self.assertNotIn(pid,CONFIRMED_APPLICATION_CUTOFFS)
+            metadata=homepage_cutoff_metadata([p],{}, {pid:proof})
+            self.assertEqual(static_recruitment_posts([p],metadata,datetime.fromisoformat('2026-11-24T10:00:00+09:00')),[])
+            self.assertNotIn('cutoff',metadata[pid])
+        self.assertIn('Fasoo DRM',render(posts['a305393'],{}))
+        self.assertIn('충원 시까지24명 이내',render(posts['a306275'],{}))
+
+    def test_editorial_notice_and_cutoff_literal_keys_are_unique(self):
+        import ast
+        tree=ast.parse(Path('scripts/build_job_pages.py').read_text())
+        for node in tree.body:
+            if isinstance(node,ast.Assign) and isinstance(node.value,ast.Dict):
+                keys=[ast.literal_eval(k) for k in node.value.keys]
+                self.assertEqual(len(keys),len(set(keys)),node.targets[0].id)
+
     def test_polytech_kangwon_kisdi_preserve_actual_units_and_reception(self):
         from scripts.build_job_pages import VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
         from scripts.priority_candidate_audit import shortlist
         from datetime import date
         posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
         cases={
-            'a307171': ('캠퍼스 운영', '임기는2년', '중복지원은 불가', '2026-11-25 18:00'),
+            'a307171': ('캠퍼스 운영', '임기는 2년', '중복지원은 불가', '2026-11-25 18:00'),
             'a306848': ('보훈 추천', '매니저1명', '매니저3명', '71점 미만', '2026-11-26 16:00'),
             'a306563': ('ICT 산업', '추천서3부', '비공식 성적표 가능', '공식 채용공고문에서 확인한 담당업무'),
         }
@@ -1434,7 +1485,7 @@ class JobPageTests(unittest.TestCase):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
             expected.add('a306988')  # employer-confirmed date-only window, no invented clock
-        expected.update(('a307251', 'a299289', 'a294598', 'a306563'))
+        expected.update(('a307251', 'a299289', 'a294598', 'a306563', 'a305393', 'a306275'))
         self.assertEqual(result['a306563']['endDate'], '2026-11-30')
         self.assertNotIn('cutoff', result['a306563'])
         self.assertEqual(set(result), expected)
