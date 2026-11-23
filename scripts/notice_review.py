@@ -31,7 +31,8 @@ def resolve(posts, details, rules=None):
         if rule.get('decision') not in ('same_notice', 'distinct_notice', 'amended_notice'):
             continue
         representative = rule.get('representative_id')
-        if rule['decision'] == 'same_notice' and representative not in ids:
+        if (rule['decision'] == 'same_notice' or
+                (rule['decision'] == 'amended_notice' and representative is not None)) and representative not in ids:
             continue
         if any(pid not in by_id or not isinstance(details.get(pid), dict) or
                fingerprint(by_id[pid], details[pid]) != member.get('fingerprint')
@@ -45,10 +46,27 @@ def resolve(posts, details, rules=None):
             continue
         if rule['decision'] == 'same_notice' and (any(len(p) != 2 for p in proofs) or len({tuple(s['sha256'] for s in p) for p in proofs}) != 1):
             continue
+        # A revised group may contain an unchanged duplicate pair alongside
+        # a genuinely amended notice. Keep that old verified canonical only
+        # when BOTH originals and the relevant source terms still match.
+        aliases = {m['id']: m['same_source_representative'] for m in members
+                   if m.get('same_source_representative') is not None}
+        by_member = {m['id']: m for m in members}
+        if aliases and (rule['decision'] != 'amended_notice' or any(
+                target not in ids or target == pid or target in aliases
+                or len(by_member[pid]['sources']) != 2
+                or len(by_member.get(target, {}).get('sources', [])) != 2
+                or tuple(x['sha256'] for x in by_member[pid]['sources']) !=
+                   tuple(x['sha256'] for x in by_member[target]['sources'])
+                or any(by_id[pid].get(k) != by_id[target].get(k)
+                       for k in ('org', 'title', 'n', 'emp', 'due'))
+                for pid, target in aliases.items())):
+            continue
         used.update(ids)
         for member in members:
-            result[member['id']] = dict(member, decision=rule['decision'],
-                representative_id=representative, checked_on=rule['checked_on'], peer_ids=ids,
+            result[member['id']] = dict(member,
+                decision='same_notice' if member['id'] in aliases else rule['decision'],
+                representative_id=aliases.get(member['id'], representative), checked_on=rule['checked_on'], peer_ids=ids,
                 publish_note=rule.get('publish_note', True))
     return result
 
