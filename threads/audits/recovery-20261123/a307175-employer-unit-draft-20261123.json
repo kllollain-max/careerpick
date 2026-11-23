@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "unapproved_draft",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "notice_id": "a307175",
+  "proposed_slot": "2026-11-23T12:00:00+09:00",
+  "proposed_slot_is_unassigned": true,
+  "employer": "한국농어촌공사",
+  "employment": "무기계약직",
+  "target_recruitment_unit": "공무직(청소원)_천안지사",
+  "target_recruitment_unit_count": 1,
+  "other_units": [
+    {
+      "unit": "부여지사",
+      "count": 1
+    },
+    {
+      "unit": "서천지사",
+      "count": 1
+    },
+    {
+      "unit": "청양지사",
+      "count": 1
+    }
+  ],
+  "total_count": 4,
+  "mandatory": {
+    "eligibility_logic": "취업지원대상자 OR 장애인 (공고 근거), NOT both",
+    "retirement": "정년 도달 전",
+    "commute": "출퇴근 가능",
+    "other": "임용일 즉시 근무 가능, 남성 병역의무 불이행 사실 없음, 공사 결격사유 해당 없음"
+  },
+  "application": {
+    "deadline": "2026-12-03T13:00:00+09:00",
+    "method": "official online recruitment portal; not email or mail"
+  },
+  "source_refs": [
+    {
+      "url": "https://recruit.incruit.com/ekr/job/2611160020",
+      "type": "employer_recruitment_portal_job_detail",
+      "checked_on": "2026-11-23",
+      "read_scope": "visible table lists 4 named units as 1 person each; application deadline 13:00; attached PDF link listed but its bytes not obtained; correction scope limited to this page",
+      "source_sha256": null
+    },
+    {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307175",
+      "type": "official_alio_preflight_html",
+      "checked_at": "2026-11-23T08:55:01.877518+09:00",
+      "source_sha256": "051ceebd2c79263373c705699ebf740aa5f8508392ad9e54ed8bbf27d2438dc7",
+      "review_source": "threads/replenishment-handoff.json official_evidence in remote publisher-state",
+      "source_scope": "official HTML independent GET in production preflight; exact job eligibility and deadline read from captured page"
+    },
+    {
+      "url": "https://github.com/kllollain-max/careerpick/actions/runs/45085705163",
+      "type": "remote_preflight_run",
+      "source_scope": "read-only evidence for ALIO HTML and missing future slots"
+    }
+  ],
+  "editorial": {
+    "contract_version": 2,
+    "main_text": "천안에서 공무직 청소원 일자리를 찾는다면 확인해 보세요.\n한국농어촌공사 천안지사가 무기계약직 청소원 1명을 모집해요.\n\n지원 대상은 취업지원대상자 또는 장애인이에요. 두 조건 모두가 필요한 것은 아니며, 정년 미도달과 근무지 출퇴근 가능 등 공통조건도 확인해야 해요.\n\n12월 3일 13시까지 온라인 접수예요. 부여·서천·청양지사도 각각 1명씩 별도로 모집해요.\n\n자세한 사항은 프로필링크 확인",
+    "main_character_count": 220,
+    "reply_texts": [],
+    "auto_reply_count": 0,
+    "cta": "자세한 사항은 프로필링크 확인",
+    "style": "eligibility_info",
+    "hook_candidates": [
+      "천안 청소원 공무직 1명 채용이에요.",
+      "취업지원대상자나 장애인이라면 천안 공무직 채용을 확인하세요.",
+      "천안·부여·서천·청양 4개 지사 청소원 채용, 조건부터 확인해요."
+    ],
+    "selected_hook_index": 1,
+    "additional_rewrite_count": 0
+  },
+  "unverified_requirements": [
+    "employer linked original PDF bytes not downloaded, no PDF original SHA/page/footnote semantic review",
+    "employer entire corrections/cancellations notice list not fully checked",
+    "deployed CareerPick #job=a307175 browser UI not independently rendered and checked",
+    "actual final publication prior-media parity not rechecked for future slot",
+    "production validate_entry/verify_official_receipt/ingest.plan/bridge.merge/check_queue not run",
+    "IMAGE original 1080 JPEG and 360 PNG not generated or visually inspected; no image assets may be published"
+  ],
+  "provenance": {
+    "main_sha": "bb33a73d4923294a17115150d3a3d08b0f7f6097",
+    "state_sha_before": "b3702482cda0b0e0e562cb02f8aace5b9ca2a672",
+    "queue_entries_read": 54,
+    "staging_entries_read": 23,
+    "latest_preflight_run": 45085705163,
+    "official_html_checked_at": "2026-11-23T08:55:01.877518+09:00",
+    "source_collection_run": 45074698034,
+    "source_collection_artifact_id": 14774103348
+  },
+  "queue_change": false,
+  "post_change": false,
+  "required_next_action": "First obtain employer PDF bytes and independently inspect exact target unit and any corrections; render live #job and production card, run all production validators; only then CAS move approved entry into existing future unstarted slot."
+}
