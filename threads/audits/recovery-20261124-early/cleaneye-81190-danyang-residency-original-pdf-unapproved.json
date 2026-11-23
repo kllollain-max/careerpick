@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-81190",
+  "date_kst": "2026-11-24",
+  "status": "draft_unapproved",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "scheduled_at": null,
+  "reviewer_model_requested": "gpt-6.2-astra",
+  "reviewer_model_invoked": false,
+  "reviewer_model_status": "unavailable_in_current_toolset",
+  "source_commit": "bf8890cc97c8de4c1dc9e7bd105f6f9a78a7ca28",
+  "state_head_before": "e5356faf372820f00256509a73a63762c71b65b9",
+  "source_snapshot": {
+    "run_id": 45275968221,
+    "captured_at": "2026-11-24T07:05:05.285406+09:00",
+    "source_post_sha256": "363dab7e9733456abc5e3784b0e1f661baf9d4d62e89c85ded6d566e51b8317d",
+    "source_detail_sha256": "5b957514a32c46f8aae085b4d9ea183ac36091c05c3ad2372b76f937b422bfb0"
+  },
+  "sources": [
+    {
+      "url": "https://www.dytc.or.kr/main/66",
+      "finding": "공고 목록 첫 페이지에서 11월 12일 공고 및 최신 목록 확인. 해당 목록에 별도 정정/취소 게시물은 보이지 않음. 전 게시판 완전조회 아님."
+    },
+    {
+      "url": "https://www.dytc.or.kr/main/66?action=read&action-value=646e40be226a714f243626bf4b8e933b",
+      "finding": "제2026-48호 게시글 및 공식 첨부 다운로드 링크 확인."
+    },
+    {
+      "url": "https://www.dytc.or.kr/File/Download/bc7ee842a5bc97580fc0b4089ce425da",
+      "finding": "웹 도구에서 11페이지 PDF 열기 성공. 1,6쪽 실제 화면 확인, 4~11쪽 텍스트의 전형·서류·마감·근무 조건 대조. 로컬 urllib GET은 Errno -3 DNS 실패, 원본 바이트/해시 미확보.",
+      "pages_reviewed_visually": [
+        1,
+        6
+      ],
+      "sha256": null
+    },
+    {
+      "url": "https://cloudapi.dytc.or.kr/File/bc7ee842a5bc97580fc0b4089ce425da",
+      "finding": "동일 공고번호의 웹 추출문 및 1,5,6쪽 화면 확인. 일정표 이메일에서 추출문에 숫자 누락 발견. 공식 직접 다운로드 텍스트와 두 실제 화면은 일치. 본문에는 주소를 넣지 않음.",
+      "pages_reviewed_visually": [
+        1,
+        5,
+        6
+      ]
+    }
+  ],
+  "facts": {
+    "unit": "일반직 7급 일반행정",
+    "count": 2,
+    "employment": "정규직(2027-01-04부터 정년까지)",
+    "residency": "공고일 이전부터 최종시험일까지 단양군 주민등록 유지",
+    "age": "미성년자 제외, 임용예정일 현재 만 60세 도달 제외",
+    "other_required": "남성 병역법 76조 불이행 사실 없음, 인사규정 21조 결격 없음, 2027-01-04부터 근무 가능",
+    "deadline": "2026-11-30T18:00:00+09:00",
+    "application": "전자우편 또는 등기우편 도착/수신 기준, 방문 불가",
+    "useful_point": "주소변동사항 기재한 주민등록초본 공고일 이후 발행분 제출",
+    "appointment": "최종합격 후 신체검사·신원조회 이상 없을 경우 임용"
+  },
+  "editorial_question_basis": "기관명과 일반행정 직무명은 공식 공고에서 확인. 전입 가능 여부는 편집 예상 질문이며 실제 검색량 확인 없음.",
+  "draft": "단양관광공사 일반행정 7급 2명, 지금 단양군으로 전입해도 지원할 수 있나요?\n아니요. 11월 12일 공고일 이전부터 최종시험일까지 주민등록상 단양군 주소를 계속 유지해야 해요.\n\n학력·성별 제한은 없지만 미성년자와 임용일 만 60세 도달자는 제외돼요. 남성 병역·결격 기준과 2027년 1월 4일 근무 가능 조건도 충족해야 해요.\n\n11월 30일 18시까지 이메일 또는 등기우편 도착분만 인정하며 방문접수는 안 돼요.\n\n자세한 사항은 프로필링크 확인",
+  "draft_chars": 252,
+  "hold_reasons": [
+    "PDF 원본 바이트 SHA 미확보",
+    "실제 CareerPick 상세 UI 미검수",
+    "독립 Astra 모델 호출 수단 미확보",
+    "생산 validate_entry/official receipt/queue 검증 미실행",
+    "필요시 카드 원본 및 360px 검수"
+  ],
+  "duplicate_check": {
+    "queue": 0,
+    "staging": 0,
+    "posted": 0
+  },
+  "notes": "미승인 참고 자료만 추가. 승인 큐 및 기존 제출물은 변경 금지."
+}
