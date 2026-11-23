@@ -17,6 +17,29 @@ from scripts.build_job_pages import render
 
 class JobPageTests(unittest.TestCase):
 
+    def test_kins_30_feed_versus_32_original_is_explicit_and_never_structured_as_confirmed(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        from scripts.priority_candidate_audit import shortlist
+        from datetime import date
+        posts = {p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a307238']
+        original = copy.deepcopy(post)
+        html = render(post,{})
+        for phrase in ('수집 모집인원 · 공식 첨부와 불일치', '일반29명 + 보훈2명 + 필수면허1명 = 32명',
+                       '2026-12-04 18:00', '규제정책', '정보기술', '경영관리', '별도 가점이 없다고'):
+            self.assertIn(phrase,html)
+        self.assertNotIn('"@type": "JobPosting"',html)
+        self.assertEqual(post,original)
+        result=shortlist({'posts':[post]},date(2026,11,23),
+                         verified_windows={'a307238':VERIFIED_APPLICATION_NOTICES['a307238']})
+        self.assertNotIn('a307238',[p['id'] for p in result['regular_review_candidates']])
+        self.assertIn('a307238',result['regular_mixed_role_units_hold_ids'])
+        for change in ({'n':'32'},{'title':'다른 공고'},{'emp':['계약직']},{'due':'2026-12-05'},{'alio':False}):
+            changed=render({**post,**change},{})
+            self.assertNotIn('수집 모집인원 · 공식 첨부와 불일치',changed)
+            self.assertNotIn('fileNo=3088731',changed)
+
+
     def test_research_deadline_timezones_and_recommendation_counts_are_distinct(self):
         from scripts.build_job_pages import CONFIRMED_APPLICATION_CUTOFFS
         posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
