@@ -24,6 +24,8 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    'a307171': '2026-11-25T18:00:00+09:00',
+    'a306848': '2026-11-26T16:00:00+09:00',
     # Official JBUH and PNUKH HWP schedules; KDIS English PDF p9 EST conversion.
     'a307248': '2026-12-08T17:00:00+09:00',
     'a307249': '2026-12-08T17:00:00+09:00',
@@ -107,6 +109,48 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    'a307171': {'organization': '학교법인한국폴리텍',
+ 'title': '한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고',
+ 'source_end_date': '2026-11-25',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '4',
+ 'checked_on': '2026-11-24',
+ 'scope': '지역대학장 캠퍼스 운영·교육 총괄',
+ 'application_start': '2026-11-18T09:00:00+09:00',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088229',
+ 'role_mix_note': '서울강서·화성·충주·울산 4개 캠퍼스 지역대학장 총4명이며 캠퍼스 간 중복지원은 불가합니다. ALIO 정규직 분류와 별개로 원문 임기는2년이고 원칙상 '
+                  '정년65세, 내부 교직원은 내규가 적용됩니다. 학력·자격증·경력 구체요건은 모두가 아니라 하나 이상 충족하는 방식입니다.',
+ 'application_end_date': '2026-11-25',
+ 'hiring_breakdown': '서울강서·화성·충주·울산 지역대학장 총4명 · 임기2년, 캠퍼스 간 중복지원 불가'},
+    'a306848': {'organization': '(주)강원랜드',
+ 'title': '㈜강원랜드 2026년 2차 서비스지원직(보훈) 채용 공고',
+ 'source_end_date': '2026-11-26',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '4',
+ 'checked_on': '2026-11-24',
+ 'scope': '복지시설 매니저 공통 직무와 여성 전용시설 담당 범위',
+ 'application_start': '2026-11-12T16:00:00+09:00',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3085970',
+ 'role_mix_note': 'ALIO 제목은 보훈 공고이지만 첨부 원문의 총4명은 보훈 추천이 필수인 복지시설 매니저1명과 여성 복지시설 매니저3명의 합계입니다. 보훈 추천1명은 '
+                  '강원동부보훈지청 추천이 필요하고 여성3명은 여성 전용시설 업무 수행이 가능한 여성 조건입니다. 전체4명을 보훈 추천 인원이나 모두에게 열려 있는 같은 모집단위로 '
+                  '소개하지 않습니다.',
+ 'application_end_date': '2026-11-26',
+ 'hiring_breakdown': '첨부 원문 전체4명 = 보훈 추천 복지시설 매니저1명 + 여성 복지시설 매니저3명',
+ 'source_role_scope_conflict': True,
+ 'regular_review_hold_due_to_mixed_role_units': True},
+    'a306563': {'organization': '정보통신정책연구원',
+ 'title': '정보통신정책연구원 정규직 직원(연구책임자) 채용 공고',
+ 'source_end_date': '2026-11-30',
+ 'source_employment': ['정규직'],
+ 'expected_source_seats': '4',
+ 'checked_on': '2026-11-24',
+ 'scope': '공식 영문 채용공고의 ICT 정책연구 업무',
+ 'application_start': '2026-11-01',
+ 'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3084258',
+ 'role_mix_note': '기관 공식 채용안내는 연구책임자4인과 접수기간11월1일~30일을 안내합니다. 영어 공고는 경제학 또는 관련 분야 박사학위 소지자나2027년8월 이내 취득예정자 '
+                  '및 한국어 유창성을 요구합니다. 11월30일의 정확한 마감시각·시간대는 공식 공고 확인 필요이며23:59 KST로 임의 변환하지 않습니다.',
+ 'application_end_date': '2026-11-30'},
+
     'a307248': {'organization': '전북대학교병원',
      'title': '2027년 1차 임상교수요원(임상교수, 입원진료전담교수) 채용 공고',
      'source_end_date': '2026-12-08',
@@ -1770,6 +1814,7 @@ def render(post, detail, related_posts=(), notice_review=None):
     )
     schema_json = '' if (duplicate or robots_noindex or verified_reception_not_open
                          or verified_application_notice.get('source_headcount_conflict') is True
+                         or verified_application_notice.get('source_role_scope_conflict') is True
                          or (not application_cutoff and post.get('dueHasTime') is not True)) else (
         '<script type="application/ld+json">'
         + json.dumps(

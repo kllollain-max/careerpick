@@ -16,6 +16,31 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_polytech_kangwon_kisdi_preserve_actual_units_and_reception(self):
+        from scripts.build_job_pages import VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.priority_candidate_audit import shortlist
+        from datetime import date
+        posts={p['id']:p for p in json.loads(Path('alio.json').read_text())['posts']}
+        cases={
+            'a307171': ('캠퍼스 운영', '임기는2년', '중복지원은 불가', '2026-11-25 18:00'),
+            'a306848': ('보훈 추천', '매니저1명', '매니저3명', '71점 미만', '2026-11-26 16:00'),
+            'a306563': ('ICT 산업', '추천서3부', '비공식 성적표 가능', '공식 채용공고문에서 확인한 담당업무'),
+        }
+        for pid,phrases in cases.items():
+            original=copy.deepcopy(posts[pid]);page=render(posts[pid],{})
+            for phrase in phrases:self.assertIn(phrase,page)
+            self.assertEqual(posts[pid],original)
+            changed=render({**posts[pid],'n':'999'},{})
+            self.assertNotIn(VERIFIED_DUTIES[pid]['summary'],changed)
+        self.assertNotIn('a306563',CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertNotIn('"@type": "JobPosting"',render(posts['a306848'],{}))
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES
+        p=posts['a306848'];proof={**VERIFIED_APPLICATION_NOTICES[p['id']],
+            'application_cutoff':CONFIRMED_APPLICATION_CUTOFFS[p['id']]}
+        result=shortlist({'posts':[p]},date(2026,11,24),verified_windows={p['id']:proof})
+        self.assertEqual(result['eligible_rows'],1)
+        self.assertEqual(result['regular_review_candidates'],[])
+
 
     def test_final_six_notices_preserve_real_deadlines_scopes_and_training_gate(self):
         from scripts.build_job_pages import VERIFIED_DUTIES, CONFIRMED_APPLICATION_CUTOFFS
@@ -1409,7 +1434,9 @@ class JobPageTests(unittest.TestCase):
             expected.add('a307149')
         if any(p.get('id') == 'a306988' for p in posts):
             expected.add('a306988')  # employer-confirmed date-only window, no invented clock
-        expected.update(('a307251', 'a299289', 'a294598'))
+        expected.update(('a307251', 'a299289', 'a294598', 'a306563'))
+        self.assertEqual(result['a306563']['endDate'], '2026-11-30')
+        self.assertNotIn('cutoff', result['a306563'])
         self.assertEqual(set(result), expected)
         # Unverified current reception is not a confirmed application cutoff.
         self.assertIn('a307251', result)

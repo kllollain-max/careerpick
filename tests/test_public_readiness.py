@@ -11,6 +11,39 @@ audit = importlib.util.module_from_spec(spec); spec.loader.exec_module(audit)
 
 
 class HostAuditTests(unittest.TestCase):
+    def test_review_account_cannot_be_inferred_from_a_self_consistent_wrong_host(self):
+        load, _, _ = self.fixture('careerpick')
+        result = audit.run('careerpick', load, expected_publisher_id='pub-4206368432511517')
+        self.assertIn('expected_account_ads_txt_record_missing', result['errors'])
+        self.assertEqual(result['accountBinding']['adsTxtRecord'], 'missing')
+        self.assertFalse(result['accountBinding']['hostMetaMatchesExpected'])
+        self.assertEqual(result['adsenseApproval'], 'not_observed')
+
+    def test_shared_host_may_list_both_publishers_without_claiming_meta_alignment(self):
+        load, _, bodies = self.fixture('careerpick')
+        bodies[audit.HOST + 'ads.txt'] += b'\ngoogle.com, pub-4206368432511517, DIRECT, f08c47fec0942fa0 # review account\n'
+        result = audit.run('careerpick', load, expected_publisher_id='pub-4206368432511517')
+        self.assertEqual(result['errors'], [])
+        self.assertEqual(result['accountBinding']['adsTxtRecord'], 'present')
+        self.assertFalse(result['accountBinding']['hostMetaMatchesExpected'])
+        self.assertEqual(len(result['warnings']), 1)
+
+    def test_unavailable_ads_txt_is_not_a_missing_account_record(self):
+        load, _, _ = self.fixture('careerpick')
+        def unavailable(url):
+            return ({'status':503}, b'') if url.endswith('ads.txt') else load(url)
+        result = audit.run('careerpick', unavailable, expected_publisher_id='pub-4206368432511517')
+        self.assertTrue(result['unverified'])
+        self.assertEqual(result['accountBinding']['adsTxtRecord'], 'unverified')
+        self.assertNotIn('expected_account_ads_txt_record_missing', result['errors'])
+
+    def test_invalid_expected_account_is_rejected_before_any_network_call(self):
+        for value in [42, [], '4206368432511517', 'ca-pub-4206368432511517', 'pub-42', 'pub-4206368432511517\n']:
+            with self.subTest(value=value), patch.object(audit, 'fetch') as loader:
+                with self.assertRaisesRegex(ValueError, 'invalid_expected_publisher_id'):
+                    audit.run('careerpick', loader, expected_publisher_id=value)
+                loader.assert_not_called()
+
     def test_transient_transport_recovers_with_bounded_attempts(self):
         sequence = [({'status': 503}, b''),
                     ({'status': 'unverified', 'error': 'URLError'}, b''),
