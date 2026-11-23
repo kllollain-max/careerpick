@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-24T07:05:05.285406+09:00",
-  "run_id": "45275968221",
-  "source_commit": "c5f79bcf39d15fb8cb5daabec09ffddae22da6be",
+  "captured_at": "2026-11-24T08:07:17.856691+09:00",
+  "run_id": "45285815163",
+  "source_commit": "bf8890cc97c8de4c1dc9e7bd105f6f9a78a7ca28",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-24T07:04:13.615512+09:00",
+    "time": "2026-11-24T08:06:25.347283+09:00",
     "future_slots": [
-      "2026-11-24T08:00:00+09:00",
       "2026-11-24T12:00:00+09:00",
       "2026-11-24T16:00:00+09:00",
       "2026-11-24T20:00:00+09:00",
       "2026-11-25T08:00:00+09:00",
       "2026-11-25T12:00:00+09:00",
       "2026-11-25T16:00:00+09:00",
-      "2026-11-25T20:00:00+09:00"
+      "2026-11-25T20:00:00+09:00",
+      "2026-11-26T08:00:00+09:00"
     ],
     "next_media": "IMAGE",
     "promoted": [],
@@ -131,16 +131,16 @@
     "queue_sha": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
     "staged_sha": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
     "promoted_count": 0,
-    "approved_supply_count": 1,
+    "approved_supply_count": 0,
     "inventory_target": 8,
-    "inventory_shortfall": 7,
+    "inventory_shortfall": 8,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
-    "approved_future_slots": [
+    "pending_active_slots": [
       "2026-11-24T08:00:00+09:00"
     ],
+    "media_forecast_conditional_on_active_slot": true,
+    "approved_future_slots": [],
     "missing_slots": [
       "2026-11-24T12:00:00+09:00",
       "2026-11-24T16:00:00+09:00",
@@ -148,9 +148,10 @@
       "2026-11-25T08:00:00+09:00",
       "2026-11-25T12:00:00+09:00",
       "2026-11-25T16:00:00+09:00",
-      "2026-11-25T20:00:00+09:00"
+      "2026-11-25T20:00:00+09:00",
+      "2026-11-26T08:00:00+09:00"
     ],
-    "next_slot_missing": false,
+    "next_slot_missing": true,
     "source_candidate_count": 60,
     "writer_handoff": {
       "status": "review_required",
@@ -161,7 +162,8 @@
         "2026-11-25T08:00:00+09:00",
         "2026-11-25T12:00:00+09:00",
         "2026-11-25T16:00:00+09:00",
-        "2026-11-25T20:00:00+09:00"
+        "2026-11-25T20:00:00+09:00",
+        "2026-11-26T08:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "cleaneye-81183",
@@ -2472,7 +2474,8 @@
       "2026-11-25T08:00:00+09:00",
       "2026-11-25T12:00:00+09:00",
       "2026-11-25T16:00:00+09:00",
-      "2026-11-25T20:00:00+09:00"
+      "2026-11-25T20:00:00+09:00",
+      "2026-11-26T08:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "cleaneye-81183",
@@ -5447,6 +5450,126 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
+      },
+      {
+        "notice_id": "cleaneye-81303",
+        "suggested_slot": "2026-11-26T08:00:00+09:00",
+        "draft_text": "강원특별자치도삼척의료원 채용 공고를 확인해 보세요.\n\n모집 공고: 공고2026-72 정규직 간호사(간호직8급) 채용공고\n고용형태: 일반정규직\n접수 마감: 2026-11-27 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81303",
+        "source_post_sha256": "9cc08c1c39b630575da506eb8b2d7a46495721635254ac6a6d60f4e394a6fb38",
+        "source_detail_sha256": "088fb90c2985c161f73e9deda7b9236df1034e6a6c792fadd37a513fbb23f620",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-27",
+        "application_source_ref": "cleaneye.json#cleaneye-81303/application_period",
+        "source_snapshot_checked_at": "2026-11-24T01:20:53+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-17",
+          "접수마감일 원문": "2026-11-27",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "cleaneye-81312",
+        "suggested_slot": "2026-11-26T08:00:00+09:00",
+        "draft_text": "경기도의료원 채용 공고를 확인해 보세요.\n\n모집 공고: 경기도의료원 포천병원 간호사 (정규직) 신규 채용 공고\n고용형태: 일반정규직\n접수 마감: 2026-11-27 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81312",
+        "source_post_sha256": "7c06fb16286a40ff12546fd201538794f0411b904e1497eb3a52a5f8eea98e29",
+        "source_detail_sha256": "06342a62899b78cf6d2915d5cb0eaab1c2a1214a2bbec92063bddf2ecdfa0105",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-17; 접수마감일 원문: 2026-11-27",
+        "application_source_ref": "cleaneye.json#cleaneye-81312/application_period",
+        "source_snapshot_checked_at": "2026-11-24T01:20:53+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-17",
+          "접수마감일 원문": "2026-11-27",
+          "채용인원": "3"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "cleaneye-81242",
+        "suggested_slot": "2026-11-26T08:00:00+09:00",
+        "draft_text": "홍성의료원 채용 공고를 확인해 보세요.\n\n모집 공고: 조건부정규직 의료업무보조(전산처리사) 모집공고\n고용형태: 일반정규직\n접수 마감: 2026-11-29 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
+        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81242",
+        "source_post_sha256": "f55622d8583600962395023f02c2e6705d0ccfbcd1da6121a2f792166256911c",
+        "source_detail_sha256": "28851a08968f33fd070994bcfb7fcec967e2117897141188b566867263f27c15",
+        "application_evidence_for_review": "접수개시일 원문: 2026-11-16; 접수마감일 원문: 2026-11-29",
+        "application_source_ref": "cleaneye.json#cleaneye-81242/application_period",
+        "source_snapshot_checked_at": "2026-11-24T01:20:53+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "고용형태 원문": "일반정규직",
+          "접수개시일 원문": "2026-11-16",
+          "접수마감일 원문": "2026-11-29",
+          "채용인원": "1"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       }
     ],
     "official_source_alternatives": [
@@ -5560,30 +5683,6 @@
         "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81291",
         "source_post_sha256": "1eb7e6d86afc5644e421035f42c389a4b9b92f4b29deea3714b6fda7da0c4058",
         "source_detail_sha256": "7a13f1594ce73104198b2cc30e3892132eae95447ec14b10a13a7960807d0dfe",
-        "suggested_slot": null
-      },
-      {
-        "notice_id": "cleaneye-81303",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81303",
-        "source_post_sha256": "9cc08c1c39b630575da506eb8b2d7a46495721635254ac6a6d60f4e394a6fb38",
-        "source_detail_sha256": "088fb90c2985c161f73e9deda7b9236df1034e6a6c792fadd37a513fbb23f620",
-        "suggested_slot": null
-      },
-      {
-        "notice_id": "cleaneye-81312",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81312",
-        "source_post_sha256": "7c06fb16286a40ff12546fd201538794f0411b904e1497eb3a52a5f8eea98e29",
-        "source_detail_sha256": "06342a62899b78cf6d2915d5cb0eaab1c2a1214a2bbec92063bddf2ecdfa0105",
-        "suggested_slot": null
-      },
-      {
-        "notice_id": "cleaneye-81242",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81242",
-        "source_post_sha256": "f55622d8583600962395023f02c2e6705d0ccfbcd1da6121a2f792166256911c",
-        "source_detail_sha256": "28851a08968f33fd070994bcfb7fcec967e2117897141188b566867263f27c15",
         "suggested_slot": null
       },
       {
@@ -5835,7 +5934,8 @@
         "2026-11-25T08:00:00+09:00",
         "2026-11-25T12:00:00+09:00",
         "2026-11-25T16:00:00+09:00",
-        "2026-11-25T20:00:00+09:00"
+        "2026-11-25T20:00:00+09:00",
+        "2026-11-26T08:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-24T12:00:00+09:00",
@@ -5844,7 +5944,8 @@
         "2026-11-25T08:00:00+09:00",
         "2026-11-25T12:00:00+09:00",
         "2026-11-25T16:00:00+09:00",
-        "2026-11-25T20:00:00+09:00"
+        "2026-11-25T20:00:00+09:00",
+        "2026-11-26T08:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -5907,7 +6008,7 @@
           "sha256": "5f5ca5f2374a793fbbf0f1ec171717a86b2e5e1358035c1d803027a8f46caa1d",
           "size_bytes": 12717,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:02.236348+09:00",
+          "checked_at": "2026-11-24T08:07:13.915474+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5930,7 +6031,7 @@
           "sha256": "303dc4e5c85699143bdaf1e2e9f82b5a00642989aeb3293ed94b30f92066741d",
           "size_bytes": 16225,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:02.416023+09:00",
+          "checked_at": "2026-11-24T08:07:13.880870+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5953,7 +6054,7 @@
           "sha256": "81d1becc7de26b99b68ff42c6367debee332b24ab41e4edef14296e047f58a0b",
           "size_bytes": 12973,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:02.383051+09:00",
+          "checked_at": "2026-11-24T08:07:13.313470+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5976,7 +6077,7 @@
           "sha256": "e688331dbd9d8981933fc60b09e27f72e0b52eccc08c377ef8f343e9c250240a",
           "size_bytes": 13528,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:02.352561+09:00",
+          "checked_at": "2026-11-24T08:07:14.345009+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -5999,7 +6100,7 @@
           "sha256": "1e7917ef39ee5b5dbe501a7f25145bb513a588712f6339ebefefffb59f462d51",
           "size_bytes": 14150,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:04.508616+09:00",
+          "checked_at": "2026-11-24T08:07:16.666669+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -6022,7 +6123,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:04.381037+09:00",
+          "checked_at": "2026-11-24T08:07:16.805654+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -6045,7 +6146,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:04.063004+09:00",
+          "checked_at": "2026-11-24T08:07:16.562917+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -6068,7 +6169,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-24T07:05:04.111159+09:00",
+          "checked_at": "2026-11-24T08:07:16.183379+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -6102,6 +6203,9 @@
       "cleaneye-81251",
       "cleaneye-81255",
       "cleaneye-81280",
+      "cleaneye-81303",
+      "cleaneye-81312",
+      "cleaneye-81242",
       "cleaneye-80989",
       "cleaneye-80990",
       "cleaneye-80991",
@@ -6116,9 +6220,6 @@
       "cleaneye-81286",
       "cleaneye-81287",
       "cleaneye-81291",
-      "cleaneye-81303",
-      "cleaneye-81312",
-      "cleaneye-81242",
       "cleaneye-81124",
       "cleaneye-81324",
       "cleaneye-81381",
@@ -6147,13 +6248,6 @@
   },
   "publication_audit": {
     "slots": [
-      {
-        "scheduled_at": "2026-11-22T08:00:00+09:00",
-        "post_ids": [
-          "18129067321906823"
-        ],
-        "status": "recorded_publication"
-      },
       {
         "scheduled_at": "2026-11-22T12:00:00+09:00",
         "post_ids": [
@@ -6198,9 +6292,9 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 5,
-    "receipt_success_rate": 0.625,
+    "expected_slots": 7,
+    "recorded_publications": 4,
+    "receipt_success_rate": 0.5714285714285714,
     "live_meta_verification_performed": false,
     "needs_attention": [
       {
@@ -6222,8 +6316,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-24T07:05:04.575340+09:00",
-    "window_start": "2026-11-21T22:05:04.575340+00:00",
+    "checked_at": "2026-11-24T08:07:16.891500+09:00",
+    "window_start": "2026-11-21T23:07:16.891500+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
