@@ -14576,6 +14576,240 @@
           "final_first_sentence": "학력 제한 없는 경영 공무직을 찾는다면,"
         }
       }
+    },
+    {
+      "observation_id": "1b57836f1dadda197078e077e81bbf0b10ecd5145a8af3f9518af6d0bae2cec7",
+      "post_id": "18096084227694612",
+      "window": "72h",
+      "captured_at": "2026-11-23T08:31:56.916564+00:00",
+      "published_at": "2026-11-20T08:17:29.244540+00:00",
+      "elapsed_seconds": 260067.672024,
+      "delay_seconds": 867.672024,
+      "timing": "within_one_hour",
+      "comparable_milestone": true,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 3188,
+        "likes": 4,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.12547051442910914,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "18096084227694612",
+        "checked_at": "2026-11-23T08:31:56.680018+00:00",
+        "reason": null,
+        "expected_text_sha256": "008f440d2f69497be889c8bccec7179477c7bf3b7b9bdd7ad4078b25fb040f61",
+        "actual_text_sha256": "008f440d2f69497be889c8bccec7179477c7bf3b7b9bdd7ad4078b25fb040f61",
+        "actual_first_sentence": "학력 제한 없는 행정직을 찾는다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "18096084227694612",
+        "notice_id": "a307238",
+        "published_at": "2026-11-20T08:17:29.244540+00:00",
+        "scheduled_at": "2026-11-20T16:00:00+09:00",
+        "slot_hour_kst": 16,
+        "actual_hour_kst": 17,
+        "body_chars": 331,
+        "first_sentence": "학력 제한 없는 행정직을 찾는다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "target",
+              "type": "target",
+              "text": "학력 제한 없는 행정직을 찾는다면,\n한국원자력안전기술원 경영관리 정규직 4명, 대전 본원 근무예요."
+            },
+            {
+              "id": "condition",
+              "type": "condition",
+              "text": "영어 기준과 제출면제 요건을 먼저 확인해요.\n한국원자력안전기술원 경영관리 정규직 4명을 모집해요."
+            },
+            {
+              "id": "job",
+              "type": "job",
+              "text": "경영기획·인사·예산 등 기관 운영을 맡는 일이에요.\n한국원자력안전기술원 경영관리 정규직 4명 채용이에요."
+            }
+          ],
+          "selected_hook_id": "target",
+          "first_sentence_type": "target",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "정년 만61세 이내",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "연령/성별 제한 없음 (단, 기관 정년 만61세 이내인 자로 한함)",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "남성은 임용예정일 전까지 군필 또는 면제여야 해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "남성은 임용 예정일 전까지 병역필 가능한 자 또는 면제자",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "군필",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+                  "excerpt": "남성은 임용 예정일 전까지 병역필 가능한 자 또는 면제자"
+                },
+                {
+                  "summary": "면제",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+                  "excerpt": "남성은 임용 예정일 전까지 병역필 가능한 자 또는 면제자"
+                }
+              ]
+            },
+            {
+              "text": "토익700점 등 공인영어 기준 또는 증빙 가능한 제출면제 요건이 있어요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "업무 수행을 위한 기본 어학(영어) 역량을 갖춘 자(아래 표의 공인영어성적 보유자)\n영어성적의 유효기간 최근 2년 이내의 성적(응시원서 접수마감일 기준)\n인사혁신처 국가공무원 채용시스템 어학성적 사전등록에 등록된 어학성적의 경우 시험응시 연도의 5년 후 12월 31일까지\n영어성적의 불인정 국외응시, 조회불가 성적, 특별시험 성적 등; 응시원서 접수마감일 기준 유효기간이 도과한 성적\n공인영어성적 기준표(TOEIC 700점 기준)\n구분 TOEIC New TEPS TOEFL iBT FLEX G-TELP Lv.2 TOEIC Speaking OPIc TEPS Speaking\n일반응시자 700 264 79 625 65 IM2(120) IM2 51\n청각장애인(중증) 350(275) 153(128) 21(-) 375 해당 없음\n청각장애인(중증)은 듣기부분을 제외한 나머지 부분의 성적 점수를 인정\n표에 제시한 점수 이상일 경우 응시자격을 갖춘 것으로 판정하며, 점수화하여 반영하지는 않음(심사위원에게 공개되지 아니함)\n제출면제자 <향후 증빙 가능한 자에 한함>\n영어를 공용어로 사용하는 국가에서 거주하며 학위를 취득한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 근무한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 석·박사 후 연수생으로 연수한 자",
+              "classification": "required",
+              "logic": "any_of",
+              "paths": [
+                {
+                  "summary": "공인영어 기준",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+                  "excerpt": "업무 수행을 위한 기본 어학(영어) 역량을 갖춘 자(아래 표의 공인영어성적 보유자)\n영어성적의 유효기간 최근 2년 이내의 성적(응시원서 접수마감일 기준)\n인사혁신처 국가공무원 채용시스템 어학성적 사전등록에 등록된 어학성적의 경우 시험응시 연도의 5년 후 12월 31일까지\n영어성적의 불인정 국외응시, 조회불가 성적, 특별시험 성적 등; 응시원서 접수마감일 기준 유효기간이 도과한 성적\n공인영어성적 기준표(TOEIC 700점 기준)\n구분 TOEIC New TEPS TOEFL iBT FLEX G-TELP Lv.2 TOEIC Speaking OPIc TEPS Speaking\n일반응시자 700 264 79 625 65 IM2(120) IM2 51\n청각장애인(중증) 350(275) 153(128) 21(-) 375 해당 없음\n청각장애인(중증)은 듣기부분을 제외한 나머지 부분의 성적 점수를 인정\n표에 제시한 점수 이상일 경우 응시자격을 갖춘 것으로 판정하며, 점수화하여 반영하지는 않음(심사위원에게 공개되지 아니함)\n제출면제자 <향후 증빙 가능한 자에 한함>\n영어를 공용어로 사용하는 국가에서 거주하며 학위를 취득한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 근무한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 석·박사 후 연수생으로 연수한 자"
+                },
+                {
+                  "summary": "증빙 가능한 제출면제 요건",
+                  "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+                  "excerpt": "업무 수행을 위한 기본 어학(영어) 역량을 갖춘 자(아래 표의 공인영어성적 보유자)\n영어성적의 유효기간 최근 2년 이내의 성적(응시원서 접수마감일 기준)\n인사혁신처 국가공무원 채용시스템 어학성적 사전등록에 등록된 어학성적의 경우 시험응시 연도의 5년 후 12월 31일까지\n영어성적의 불인정 국외응시, 조회불가 성적, 특별시험 성적 등; 응시원서 접수마감일 기준 유효기간이 도과한 성적\n공인영어성적 기준표(TOEIC 700점 기준)\n구분 TOEIC New TEPS TOEFL iBT FLEX G-TELP Lv.2 TOEIC Speaking OPIc TEPS Speaking\n일반응시자 700 264 79 625 65 IM2(120) IM2 51\n청각장애인(중증) 350(275) 153(128) 21(-) 375 해당 없음\n청각장애인(중증)은 듣기부분을 제외한 나머지 부분의 성적 점수를 인정\n표에 제시한 점수 이상일 경우 응시자격을 갖춘 것으로 판정하며, 점수화하여 반영하지는 않음(심사위원에게 공개되지 아니함)\n제출면제자 <향후 증빙 가능한 자에 한함>\n영어를 공용어로 사용하는 국가에서 거주하며 학위를 취득한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 근무한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 석·박사 후 연수생으로 연수한 자"
+                }
+              ]
+            },
+            {
+              "text": "중증 청각장애인은 별도 기준이에요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "업무 수행을 위한 기본 어학(영어) 역량을 갖춘 자(아래 표의 공인영어성적 보유자)\n영어성적의 유효기간 최근 2년 이내의 성적(응시원서 접수마감일 기준)\n인사혁신처 국가공무원 채용시스템 어학성적 사전등록에 등록된 어학성적의 경우 시험응시 연도의 5년 후 12월 31일까지\n영어성적의 불인정 국외응시, 조회불가 성적, 특별시험 성적 등; 응시원서 접수마감일 기준 유효기간이 도과한 성적\n공인영어성적 기준표(TOEIC 700점 기준)\n구분 TOEIC New TEPS TOEFL iBT FLEX G-TELP Lv.2 TOEIC Speaking OPIc TEPS Speaking\n일반응시자 700 264 79 625 65 IM2(120) IM2 51\n청각장애인(중증) 350(275) 153(128) 21(-) 375 해당 없음\n청각장애인(중증)은 듣기부분을 제외한 나머지 부분의 성적 점수를 인정\n표에 제시한 점수 이상일 경우 응시자격을 갖춘 것으로 판정하며, 점수화하여 반영하지는 않음(심사위원에게 공개되지 아니함)\n제출면제자 <향후 증빙 가능한 자에 한함>\n영어를 공용어로 사용하는 국가에서 거주하며 학위를 취득한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 근무한 자\n영어를 업무에 주 언어로 사용하는 외국 소재 기관(국공립기관, 원자력기구, 대학)에서 1년 이상 석·박사 후 연수생으로 연수한 자",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "결격요건도 확인해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "5. 결격사유\n「국가공무원법」 제33조 각 호의 어느 하나에 해당하는 자\n병역의무를 기피한 사실이 있는 자\n신체검사 결과 채용실격으로 인정된 자\n구비서류를 미제출 또는 허위로 제출하거나 부정한 방법으로 채용시험에 응시한 자\n스마트글래스, 초소형카메라 및 AI 등을 활용하여 채용시험에 응시한 경우 부정한 방법으로 채용시험에 응시한 것으로 간주\n「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」 제82조에 해당하는 자\n다른 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 채용이 취소된 자(다만, 채용이 취소된 날부터 5년이 경과한 경우는 제외)",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "2027년 3월 1일 임용 예정, 3개월 이내 수습평가 후 정규직 채용을 결정해요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "2. 임용예정일\n2027. 3. 1.(월)\n임용일정은 기관사정 등에 따라 변경될 수 있으며, 변경 시 기술원 채용 홈페이지 공지 게시 예정\n3개월 이내의 수습근무를 거쳐 평가를 실시한 후 적격자에 한해 정규직으로 채용함",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "일정 기간 다른 지역에 근무할 수 있어요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "3. 근무조건\n직종 근무시간 근무지 보수수준\n연구직, 행정직 주5일(40시간) 대전 본원 기관 내부 규정에 따름\n근무지는 대전 본원이나, 일정기간 원자력발전소 소재 지역 등 기관이 지정하는 장소에서 근무할 수 있음",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "인성검사 미응시는 불합격이에요.",
+              "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+              "excerpt": "인성검사 미응시 시 불합격 처리(종합면접 응시자격 미부여)",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "useful_point": {
+            "text": "인성검사 미응시는 불합격이에요.",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+            "excerpt": "인성검사 미응시 시 불합격 처리(종합면접 응시자격 미부여)"
+          },
+          "recruitment_unit": {
+            "title": "경영관리",
+            "count": 4,
+            "employment": "정규직",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.alio.go.kr/download/download.json?fileNo=3088729",
+            "excerpt": "한국원자력안전기술원 2027년도 상반기 정규직 직원 채용 공고\n1. 채용분야 및 채용인원\n<일반채용 전형>\n직종 채용분야 인원 최소학력 우대자격증(가산점부여)\n행정직 경영관리 4명 제한없음 -"
+          },
+          "correction_check": {
+            "checked_at": "2026-11-19T08:36:28.702609+00:00",
+            "result": "none_found",
+            "source_ref": "https://kins.recruiter.co.kr/bbs/appsite/notice/list",
+            "scope": "Actual complete current official ATS notices page, soleJul16/2026 advance-plan notice, current home list/general272885 and separately veteran272886; current general notice open17:00Nov19–18:00Dec4. No correction/cancellation shown in checked current recruitment and notice board. No claim all historical/external boards searched."
+          },
+          "style_rewrites": 1,
+          "selection_reason": "Newly opened regular general administrative unit4 with two weeks preparation and occupation/institution diversity; currently collected16:31 snapshot supports unstartedNov20 16slot within24h. No guessed salary/popularity.",
+          "public_preview": {
+            "main_text": "학력 제한 없는 행정직을 찾는다면,\n한국원자력안전기술원 경영관리 정규직 4명, 대전 본원 근무예요.\n\n정년 만61세 이내, 남성은 임용예정일 전까지 군필 또는 면제여야 해요.\n토익700점 등 공인영어 기준 또는 증빙 가능한 제출면제 요건이 있어요.\n중증 청각장애인은 별도 기준이에요. 결격요건도 확인해요.\n\n필기·서류·전공면접·인성검사·종합면접을 거쳐요.\n인성검사 미응시는 불합격이에요.\n\n2027년 3월 1일 임용 예정, 3개월 이내 수습평가 후 정규직 채용을 결정해요.\n일정 기간 다른 지역에 근무할 수 있어요.\n12월 4일 18:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "presentation_style": "regular_interest",
+          "experiment_eligible": false,
+          "experiment_exclusion_reason": "Mandatory English alternative/exceptions, age, military and probation require source-specific long copy; no balanced causal performance inference.",
+          "length_exception_reason": "Preserve English threshold OR evidenced exemption and hearing exception, inclusive61 age, male military OR, disqualifications, probation condition, possible other-region work, appointment and exact18:00 deadline."
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "interest",
+        "media": "TEXT",
+        "org": "한국원자력안전기술원",
+        "job": "경영관리",
+        "employment": "정규직",
+        "recruitment_unit_count": 4,
+        "location": "대전 본원",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {},
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-12-04T18:00:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 1212150.75546,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "18096084227694612",
+          "checked_at": "2026-11-23T08:31:56.680018+00:00",
+          "reason": null,
+          "expected_text_sha256": "008f440d2f69497be889c8bccec7179477c7bf3b7b9bdd7ad4078b25fb040f61",
+          "actual_text_sha256": "008f440d2f69497be889c8bccec7179477c7bf3b7b9bdd7ad4078b25fb040f61",
+          "actual_first_sentence": "학력 제한 없는 행정직을 찾는다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "학력 제한 없는 행정직을 찾는다면,"
+        }
+      }
     }
   ],
   "account_observations": [
