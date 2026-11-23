@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "unapproved_new_candidate_official_issuer_html_semantic_read_question_draft",
+  "account": "hid_119",
+  "repository": "kllollain-max/careerpick",
+  "notice_id": "cleaneye-81292",
+  "source_scope": "newly investigated candidate, not overlapping prior cleaneye-81291",
+  "status": "unapproved_draft",
+  "ready": false,
+  "slot_assignment": null,
+  "planning_slot_only": "2026-11-24T12:00:00+09:00",
+  "publication_allowed": false,
+  "meta_posted": false,
+  "recorded_at_utc": "2026-11-23T15:47:31.588Z",
+  "read_only_heads": {
+    "main": "894678f0e7373591c43a9a5ddf77c0ba94f1ea8f",
+    "state": "e67ef6d1ecca18f8e9875ddeaba4f2e0b7406ced"
+  },
+  "inventory_before": {
+    "writer_queue_total": 57,
+    "reviewed_staging_total": 26,
+    "reviewed_submissions_total": 7,
+    "verified_future_ready_count": 1,
+    "verified_future_slot": "2026-11-24T08:00:00+09:00",
+    "verified_future_notice": "a307035",
+    "missing_future_slots": 7,
+    "next_media_from_latest_success": "IMAGE",
+    "last_successful_post": "18139398091672356",
+    "last_successful_post_notice": "a307024",
+    "last_successful_post_media": "TEXT",
+    "preflight_run_id": 45204335241,
+    "preflight_observed_at_kst": "2026-11-24T00:22:43+09:00",
+    "new_ready_registered_this_run": 0
+  },
+  "official_source_refs": [
+    {
+      "role": "recruitment_issuer_official_post",
+      "url": "https://ccrf.saramin.co.kr/service/ccrf/4036/applicant/apply/recruit_default.asp",
+      "document_number": "2026-78",
+      "posting_date": "2026-11-17",
+      "checked_at_utc": "2026-11-23T15:47:31.588Z",
+      "read_method": "web.run open extracted actual issuer-hosted public recruitment content; text inspected to end",
+      "original_document_bytes_retained": false,
+      "raw_source_sha256": null,
+      "notes": "Not a raw-byte SHA/HTTP receipt; raw digest and production verifier must be completed before approval",
+      "evidence_sections": [
+        "채용인원 및 분야",
+        "응시자격",
+        "전형절차",
+        "전형일정",
+        "제출서류"
+      ]
+    },
+    {
+      "role": "issuer_recruitment_FAQ_bounded_correction_check",
+      "url": "https://ccrf.saramin.co.kr/service/ccrf/4036/applicant/notice/notice.asp",
+      "checked_at_utc": "2026-11-23T15:47:31.588Z",
+      "read_method": "search/open visible FAQ and notice summary only",
+      "correction_status": "No correction observed in examined public snippet; not a comprehensive full-board absence determination",
+      "notes": "Official posting itself states changes would be announced on issuer site; refresh prior to any queue promotion"
+    }
+  ],
+  "selected_unit": {
+    "employer": "재단법인 청주시활성화재단",
+    "title": "일반직 7급 도시·농촌·상권·마을공동체·행정(경영)",
+    "employment": "일반정규직",
+    "count": 2,
+    "location": "청주시",
+    "duties": "사업 기획·실행, 신규사업 발굴, 일반행정",
+    "field_evidence": "official posting 1. 채용인원 및 분야"
+  },
+  "eligibility": {
+    "logical_structure": "(related educational course completed OR related field work experience OR prior civil service grade 9 or higher) AND age 18~60 AND Cheongju residency on 2026-11-17 notice date AND male military service completed/exempt if male AND no disqualification",
+    "related_training_can_qualify_without_experience": true,
+    "qualifying_evidence": "official posting 2. 응시자격 subsection 가/나",
+    "age": "18세 이상 60세 이하",
+    "residency_anchor": "모집공고일 현재 청주시 거주자, 2026-11-17",
+    "military_service": "남자는 병역을 필하거나 면제",
+    "missing_or_ambiguous": "Official notice does not define concrete course equivalence; do not claim all courses qualify"
+  },
+  "application": {
+    "open_date": "2026-11-23",
+    "close_at_kst": "2026-11-27T18:00:00+09:00",
+    "method": "issuer recruitment portal, online only; visits/post excluded",
+    "close_evidence": "official posting sections 5. 전형일정 and 6. 기타사항",
+    "official_site": "https://ccrf.saramin.co.kr"
+  },
+  "review_notes": {
+    "critical_nonobvious_facts": [
+      "Unit 2 not an unrelated pool count",
+      "Qualification alternatives are OR not AND; formal academic course recognized with proof",
+      "Residence must hold at 11/17 announcement date, not only on application day",
+      "Closing 18:00, not calendar midnight",
+      "NCS subject score threshold and interview exist; do not claim selection solely by documents",
+      "No veterans score bonus because only 2 positions per issuer posting"
+    ],
+    "unsupported_claims_omitted": [
+      "search-volume claim",
+      "instant eligibility guarantee",
+      "salary-benefit guarantee",
+      "any later revised notice absent across all bulletin pages"
+    ]
+  },
+  "editorial": {
+    "question": "청주시활성화재단 일반직 7급, 관련 경력이 없어도 지원할 수 있나요?",
+    "search_expression_hypothesis": "청주시활성화재단 7급 신입 관련경력 없어도 지원 교육과정",
+    "search_volume_measured": false,
+    "hook_candidates": [
+      "청주시활성화재단 일반직 7급, 관련 경력이 없어도 지원할 수 있나요?",
+      "청주시활성화재단 일반직 7급 2명, 교육과정 이수만으로 지원 가능할까요?",
+      "청주시활성화재단 채용, 11월 17일 이후 청주 전입자는 지원될까요?"
+    ],
+    "selected_draft": "청주시활성화재단 일반직 7급, 관련 경력이 없어도 지원할 수 있나요?\n네. 채용 분야와 관련된 교육과정을 이수했다면 실무경력 없이도 7급 응시자격 세 경로 중 하나를 충족해요.\n\n다만 11월 17일 공고일 현재 청주시 거주자이고 18~60세여야 해요. 도시·농촌·상권·마을공동체·행정 분야 정규직 2명을 모집해요.\n\n11월 27일 18시까지 온라인 접수하며, NCS 필기와 면접을 거쳐요.\n\n자세한 사항은 프로필링크 확인",
+    "char_count": 235,
+    "reply_texts": [],
+    "public_preview": {
+      "main_text": "청주시활성화재단 일반직 7급, 관련 경력이 없어도 지원할 수 있나요?\n네. 채용 분야와 관련된 교육과정을 이수했다면 실무경력 없이도 7급 응시자격 세 경로 중 하나를 충족해요.\n\n다만 11월 17일 공고일 현재 청주시 거주자이고 18~60세여야 해요. 도시·농촌·상권·마을공동체·행정 분야 정규직 2명을 모집해요.\n\n11월 27일 18시까지 온라인 접수하며, NCS 필기와 면접을 거쳐요.\n\n자세한 사항은 프로필링크 확인",
+      "detail_reply": ""
+    },
+    "cta_count": 1,
+    "has_public_urls_or_tags": false,
+    "independent_final_review": {
+      "requested_model": "gpt-6.2-astra",
+      "status": "NOT_EXECUTED_NO_INDEPENDENT_MODEL_CALL_TOOL",
+      "pass": false,
+      "corrections_rechecked": false,
+      "notes": "Do not present a GPT-6 self-check as Astra; do not promote without actual independent model receipt and after-edit recheck"
+    }
+  },
+  "hold_gates": [
+    "Source raw-byte receipt and SHA unavailable in current runtime; production verifier must perform real official GET",
+    "Issuer correction/withdrawal full range recheck and freshness within 24h at planned publication",
+    "Actual full #job=cleaneye-81292 rendered AX/screenshot inspection not performed",
+    "gpt-6.2-astra independent final review and same model recheck not performed",
+    "Check last published media and if IMAGE generate and visually review 1080 JPEG and 360 PNG",
+    "Production validate_entry/public-copy/official-receipt/ingest-plan/merge/check_queue/verified_supply_status and new claim+post readback required before ready"
+  ],
+  "changes": "New unapproved candidate audit only. No queue/staging/submission/posted/claim/Meta mutations; no workflows triggered or rerun by operator."
+}
