@@ -1,0 +1,72 @@
+{
+  "notice_id": "a307039",
+  "status": "HOLD",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "review_date_kst": "2026-11-24",
+  "run_started_at": "2026-11-24T09:45:20+09:00",
+  "main_observed": "1901a32b0909fb2d9f77c386911d6c382d8e44a8",
+  "state_parent": "b03f76638e038a74b9ce881c33bcad68eed54c2e",
+  "source_handoff_run": "45293496854",
+  "source_handoff_captured_at": "2026-11-24T09:01:10.763879+09:00",
+  "source_post_sha256": "f16474e21b80d750b3ae3c3cdbf65c2d4309b4fa79b7738ac2bbf4d8e6801922",
+  "source_detail_sha256": "18fe06e67a42dd43f2e2bbd6f53b267daec15179d6c481db26342dd009c8ea59",
+  "sources": [
+    {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
+      "scope": "공식 상세 본문",
+      "facts": "기간제 후생담당원 1명, 만55세 이상, 마감 기준 진단일 1년 이내의 건강진단 이상 없음, 2026-12-02 14:00 인터넷 접수"
+    },
+    {
+      "url": "https://www.iwest.co.kr/iwest/919/subview.do?enc=Zm5jdDF8QEB8JTJGYmJzJTJGaXdlc3QlMkYxNzklMkYyNjAwNyUyRmFydGNsVmlldy5kbyUzRnBhZ2UlM0QxJTI2c3JjaENvbHVtbiUzRCUyNnNyY2hXcmQlM0QlMjZiYnNDbFNlcSUzRCUyNmJic09wZW5XcmRTZXElM0QlMjZyZ3NCZ25kZVN0ciUzRCUyNnJnc0VuZGRlU3RyJTNEJTI2aXNWaWV3TWluZSUzRGZhbHNlJTI2cGFzc3dvcmQlM0QlMjY%3D",
+      "scope": "기관 채용공고 HTML 본문 §1~8 및 유의사항",
+      "facts": "군산 구내식당 조리·배식 등, 기간제 1명, 채용일부터 2028-12-31(조정 가능), 주40시간, 세전 월 평균 약340만원, 정규직 전환 대상 아님",
+      "conflict": "§3의 만55세 이상과 연령 제한 없음이 동시에 존재. ALIO는 만55세 이상 명시. 첨부 확인 또는 기관 정정 확인 전 확정 승인 금지."
+    },
+    {
+      "url": "https://www.iwest.co.kr/iwest/501/subview.do",
+      "scope": "공식 채용목록에 같은 제목과 1명 확인"
+    },
+    {
+      "url": "https://recruit.incruit.com/iwest/",
+      "scope": "기관 지정 접수 포털, 상세 접수 활성 여부 미확인"
+    }
+  ],
+  "correction_check": {
+    "query": "site:iwest.co.kr 군산발전본부 후생담당원 정정 2026 11월",
+    "result": "검색 결과 없음; 기관 게시판 목록 확인 범위만, 정정 없음 확정 아님"
+  },
+  "attachment_checks": [
+    {
+      "url": "https://www.alio.go.kr/download/download.json?fileNo=3087427",
+      "error": "HTTP 403"
+    },
+    {
+      "url": "https://www.iwest.co.kr/sites/iwest/files/2026_recruit/20261117_%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8.hwp",
+      "error": "web HTTP 400 unsupported application/x-hwp; local urllib temporary failure in name resolution"
+    },
+    {
+      "url": "https://www.iwest.co.kr/sites/iwest/files/2026_recruit/20261117_%EC%A7%81%EB%AC%B4%EA%B8%B0%EC%88%A0%EC%84%9C.hwp",
+      "error": "web HTTP 400 unsupported application/x-hwp"
+    }
+  ],
+  "original_bytes_verified": false,
+  "source_attachment_sha256": null,
+  "search_intent": "기간제 채용 후 정규직 전환 여부 (편집 질문, 검색량 실측 없음)",
+  "draft_text": "한국서부발전 군산발전본부 후생담당원, 정규직으로 전환되나요?\n아니요. 인력 공백을 채우는 기간제 1명으로 정규직 전환 대상이 아니에요.\n\n채용일부터 2028년 12월 31일까지 주 40시간 근무하며 계약기간은 조정될 수 있어요. 공고상 만 55세 이상 및 건강진단 요건이 있고, 남성 병역·결격·근무 가능 조건도 확인해야 해요.\n\n12월 2일 14시까지 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+  "draft_chars": 225,
+  "media": "TEXT forecast only; no slot assignment",
+  "astra_review": {
+    "requested_model": "gpt-6.2-astra",
+    "status": "not_run",
+    "reason": "독립 지정 모델 호출 도구 미확보"
+  },
+  "hold_reasons": [
+    "기관 HTML 연령 조건 상충",
+    "원본 HWP 전문과 바이트 SHA 미확보",
+    "실제 커리어픽 상세 UI 미검수",
+    "독립 Astra 미실행",
+    "생산 검증 미완료"
+  ],
+  "next_action": "공식 첨부와 기관 정정 여부 및 실제 UI를 확인하고 독립 검수자에게 전달. 큐에 승격하지 않음."
+}
