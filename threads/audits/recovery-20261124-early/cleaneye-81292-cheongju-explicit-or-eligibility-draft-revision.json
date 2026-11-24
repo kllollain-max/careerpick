@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-81292",
+  "kind": "editorial_revision_of_existing_unapproved_draft",
+  "account": "hid_119",
+  "status": "unapproved_draft",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "slot_assignment": null,
+  "planning_slot_only": "2026-11-25T08:00:00+09:00",
+  "run_reference_kst": "2026-11-24T23:45:20+09:00",
+  "prior_draft_path": "threads/audits/recovery-20261124-early/cleaneye-81292-cheongju-7grade-qualification-official-html-unapproved.json",
+  "prior_draft_blob": "7b7069c55f474b9ad4cad5c3551dc9f4003e3aa1",
+  "source_main_sha": "6db8d1479e1195ddc0417f13fe61e12a0071e3e4",
+  "state_head_before": "1e5112c7ed0143a1b49864dd2fb0bc43efc9b778",
+  "source_evidence": [
+    {
+      "url": "https://ccrf.saramin.co.kr/service/ccrf/4036/applicant/apply/recruit_default.asp",
+      "scope": "기관 공식 채용공고 검색 색인 전문, 4일 전 크롤링 표기; 이번 직접 열기 TimeoutError. 원본 바이트나 신규 직접 조회 영수증으로 사용하지 않음.",
+      "sections": [
+        "2. 응시자격",
+        "5. 전형일정",
+        "7. 기타 유의사항"
+      ],
+      "finding": "교육과정 이수 또는 관련 직무 경력 또는 공무원 9급 이상 경력, 공고일 청주시 거주·18~60세·남성 병역필/면제·결격사유 미해당, 11/27 18시 온라인 접수."
+    },
+    {
+      "url": "https://m.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=CLE&infoTypeGroup=tb_workinfocle&wantedAuthNo=20261117081147",
+      "scope": "이번 공식 고용24 상세 HTML 웹 열람, 2명·일반정규직·청주시 지역제한·신입·11/23~27 온라인 접수 대조. 마감 시각과 상세 자격은 기관 원문 우선.",
+      "raw_sha256": null
+    }
+  ],
+  "revision": {
+    "post_text": "청주시활성화재단 일반직 7급, 실무경력이 없어도 지원할 수 있나요?\n네. 관련 교육과정 이수, 관련 직무 경력, 공무원 9급 이상 근무 경력 중 하나를 충족하면 돼요.\n\n정규직 2명으로, 11월 17일 공고일 현재 청주시 거주자이면서 18~60세여야 해요. 남성은 병역필·면제, 공통 결격사유 미해당 조건도 충족해야 해요.\n\n11월 27일 18시까지 온라인 접수하고 NCS 필기와 면접을 거쳐요.\n\n자세한 사항은 프로필링크 확인",
+    "char_count": 239,
+    "cta_count": 1,
+    "reply_texts": [],
+    "improvements": [
+      "기존 본문의 '세 경로 중 하나'를 실제 세 가지 OR 조건으로 풀어 지원자가 판단 가능하게 함.",
+      "기존 본문에서 누락된 공통 결격사유 요건 명시.",
+      "공고일 기준 거주지와 접수 시각 보존."
+    ]
+  },
+  "hold_reasons": [
+    "ASTRA_INDEPENDENT_REVIEW_NOT_AVAILABLE",
+    "OFFICIAL_RAW_BYTES_AND_PDF_RECEIPT_NOT_VERIFIED",
+    "OFFICIAL_NOTICE_AND_CORRECTION_PAGE_TIMEOUT",
+    "PROFILE_UI_NOT_VERIFIED",
+    "PRODUCTION_VALIDATION_NOT_RUN"
+  ],
+  "notes": "편집 검토본만 저장. 원문 검수 시각 갱신, 승인 큐 승격, 수동 게시 및 모델 검수 통과 주장 금지."
+}
