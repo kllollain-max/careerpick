@@ -24,6 +24,7 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    'a307286': '2026-11-26T18:00:00+09:00',
     'a307276': '2026-12-04T12:00:00+09:00',
     'a306990': '2026-12-02T15:00:00+09:00',
     'a307285': '2026-12-04T14:00:00+09:00',
