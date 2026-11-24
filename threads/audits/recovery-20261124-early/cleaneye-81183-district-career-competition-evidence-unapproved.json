@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-81183",
+  "status": "unapproved",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "run_reference": "2026-11-24T15:45:20+09:00",
+  "observed_state_head": "95159bfde6cfd9b6bdd19c1fa36710587c7f66aa",
+  "official_sources": [
+    {
+      "url": "https://www.seohae.go.kr/open_content/main/bbs/bbsMsgDetail.do?bcd=job&msg_seq=5105&pgdiv=part",
+      "observation": "공식 구청 게시물 HTML 확인. 2026-11-12 게시, 접수기간 2026-11-12~2026-11-27, 시설관리 정규직 경력경쟁 블라인드 채용으로 명시. 공고문 HWP 97KByte 및 미리보기 표시는 있으나 원본 파일 바이트와 세부 내용 미확보.",
+      "original_sha256": null
+    },
+    {
+      "url": "https://isyncc.or.kr/archive/6020/247",
+      "observation": "복지관 공식 게시물 검색 결과에서 2026-11-12 공고 및 HWP 97.0K 확인. 직접 웹 열기 시간 초과, 로컬 정상 GET DNS Errno -3.",
+      "original_sha256": null
+    },
+    {
+      "url": "https://isyncc.or.kr/archive/6020",
+      "observation": "검색 결과의 최신 채용정보 첫 페이지에 해당 제4회 공고 및 별개 제5·6회 공고 표시. 이 범위에 정정/취소 제목은 관측되지 않았으나 완전한 정정 검증은 아님."
+    }
+  ],
+  "source_gap": "수집 정보의 신입/경력 표시와 달리 공식 구청 제목에 경력경쟁 명시. 경력 필수 여부·기간·예외를 원문 없이 판단하지 않는다. 비공식 사이트의 23:59 마감 및 자격증 요약을 채택하지 않는다.",
+  "proposed_question": "연희노인복지관 정규직 시설관리, 경력 없이도 지원할 수 있나요?",
+  "draft_text": null,
+  "remaining": [
+    "공식 HWP 원본과 SHA-256 확보, 경력 및 필수 자격 논리와 모집인원·정확한 접수시각·접수방법 확인",
+    "정정·취소 실제 최신 확인",
+    "커리어픽 상세 UI",
+    "gpt-6.2-astra 독립 검수 및 재확인",
+    "생산 검증 및 CAS 승인 큐 등록"
+  ],
+  "astra_review": "not_run_no_callable_model_tool",
+  "queue_sha": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+  "staging_sha": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
+  "handoff_run_id": "45333338101",
+  "approved_future_count_at_handoff": 0,
+  "inventory_target": 8
+}
