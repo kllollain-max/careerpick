@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "official_html_review_unapproved",
+  "notice_id": "a306917",
+  "account": "hid_119",
+  "status": "unapproved_draft",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "slot_assignment": null,
+  "review_date_kst": "2026-11-24",
+  "main_sha": "a56d75818783ca694aea1fe23bb0b316f4a29591",
+  "state_parent_sha": "ab34be06cb2574561ffa7632dde98282327b44e7",
+  "source_post_sha256": "525db093a91db1ed145f570548a1d700a1bc3dd928b195cd9ea708c3d3afc670",
+  "source_detail_sha256": "4a87202628567a2a12c810e1fead82d9407cc14033fd7bb03c44b4d60b84a15e",
+  "source_hash_note": "Copied current handoff source IDs, not independent official-document hashes.",
+  "sources": [
+    {
+      "url": "https://www.igbf.kr/gugak_web/?idx=330384&state=view&sub_num=762",
+      "finding": "Issuer full HTML sections 1-8: one fixed term maternity leave replacement (홍보·디자인), 2 years of relevant documented experience as of Nov 11, 2029-04-10 contract end, Seoul, military condition, application exception (direct or postal after inquiry), no email."
+    },
+    {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306917",
+      "finding": "Confirms 1, relevant 2-year experience, Seoul, Nov 26 18:00; summary omits male military condition and direct/postal exception."
+    },
+    {
+      "url": "https://www.igbf.kr/gugak_web/?state=list&sub_num=762",
+      "finding": "First page shows original Nov 11 notice and unrelated Nov 23 internship only newer listing; no correction or cancellation title observed within scope."
+    }
+  ],
+  "search_evidence": "Search results confirm official job title and related career requirement; search volume not verified.",
+  "hook_candidates": [
+    "국악방송 홍보·디자인 계약직, 경력 2년 미만도 지원할 수 있나요?",
+    "국악방송 육아휴직 대체 홍보직, 계약기간은 언제까지인가요?",
+    "국악방송 홍보·디자인 채용, 온라인 접수가 어렵다면 어떻게 하나요?"
+  ],
+  "post_text": "국악방송 홍보·디자인 계약직, 경력 2년 미만도 지원할 수 있나요?\n아니요. 11월 11일 공고일 기준 홍보 및 디자인 편집 관련 경력 2년 이상을 증빙해야 해요.\n\n육아휴직 대체 1명, 서울 근무로 2029년 4월 10일까지 계약이에요. 학력·연령·성별 제한은 없고 남성 군필·면제 및 결격 기준을 충족해야 해요.\n\n11월 26일 18시까지 온라인 접수해요. 온라인이 어렵다면 방문·우편 접수를 문의할 수 있고 이메일은 불가해요.\n\n자세한 사항은 프로필링크 확인",
+  "char_count": 259,
+  "reply_texts": [],
+  "cta_count": 1,
+  "remaining": {
+    "astra": "No separately callable gpt-6.2-astra reviewer tool discovered; not invoked.",
+    "official_pdf": "ALIO 403; issuer public PDF and job description return unsupported octet-stream via web reader; normal local GET failed DNS for both fileIdx=11112,11113. Raw bytes/hash/visual verification not completed.",
+    "profile_ui": "Not verified",
+    "production_validation": "Not completed"
+  },
+  "preflight": {
+    "run_id": 45353224645,
+    "observed_at": "2026-11-24T17:07:26.057239+09:00",
+    "approved_supply_count": 0,
+    "next_media": "TEXT"
+  },
+  "operation": "Audit draft only. No queue, staging, claim, publisher or Meta changes."
+}
