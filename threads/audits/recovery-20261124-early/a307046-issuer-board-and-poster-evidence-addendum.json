@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "unapproved_source_evidence_addendum",
+  "notice_id": "a307046",
+  "observed_window_kst": "2026-11-24 13:45–13:46 KST",
+  "original_audit": {
+    "path": "threads/audits/recovery-20261124-early/a307046-eligibility-age-official-alio-unapproved-20261124.json",
+    "blob_sha": "fef2287aaf1bc4134302b784e9adb6345f55e2a0"
+  },
+  "source_state_head": "88fe366914569d4ad5f6780ec7693c6dfd5b1de0",
+  "operational_evidence": {
+    "run_id": "45325022098",
+    "handoff_captured_at": "2026-11-24T13:15:51.411364+09:00",
+    "alio_source_checked_at": "2026-11-24T13:15:49.814962+09:00",
+    "alio_html_sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
+    "alio_size_bytes": 12777,
+    "approved_supply_count": 0,
+    "next_media": "TEXT",
+    "queue_blob": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+    "staging_blob": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5"
+  },
+  "new_evidence": [
+    {
+      "url": "https://www.exservice.co.kr/boad/bd_recruit/egoread.php?bd=1&itm=&pg=1&seq=4899&txt=",
+      "method": "public web page actually read",
+      "finding": "Issuer page confirms 광주전남권역본부 기간제근로자, 2026-11-16 through 2026-11-30; exposes original PDF and ZIP links. No time or per-location counts in visible page."
+    },
+    {
+      "url": "https://www.exservice.co.kr/admincenter/files/upload/%25EA%25B3%25B5%25EA%25B3%25A0%25EC%2582%25AC%25EC%25A7%2584.png",
+      "method": "issuer poster actually opened and visually inspected",
+      "finding": "Poster independently displays employer, temporary employment and November 16–30 application dates; directs applicants to attached notice for details. Not the CareerPick production card. Raw bytes not obtained."
+    },
+    {
+      "url": "https://www.exservice.co.kr/boad/bd_recruit/egolist.php?bd=1",
+      "method": "issuer recruitment board page 1 actually read",
+      "finding": "Latest visible row matches exact posting and dates. No correction/cancellation for this specific posting on the visible first page; no claim of exhaustive correction search."
+    },
+    {
+      "url": "https://www.exservice.co.kr/boad/bd_recruit/egofiledown.php?bd=1&fseq=1376&ftype=0&key=202611161009263440592",
+      "method": "official link followed; separate normal urllib GET attempted",
+      "result": "Web extractor reports unsupported content-type file/unknown (400); local GET fails [Errno -3] Temporary failure in name resolution. No PDF raw bytes, hash, or page review obtained."
+    }
+  ],
+  "remaining": [
+    "exact closing clock",
+    "original PDF recruitment-unit and contract conditions",
+    "full correction check",
+    "actual CareerPick job UI",
+    "separate gpt-6.2-astra call and recheck",
+    "production checks"
+  ],
+  "astra": {
+    "status": "not_invoked",
+    "reason": "No separate Astra invocation tool found; no substitute approval"
+  },
+  "ready": false,
+  "approved_for_queue": false,
+  "slot_assignment": null,
+  "meta_posted": false,
+  "changes": "addendum only; original draft, queue, staging, claims and posting history preserved"
+}
