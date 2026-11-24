@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "notice_id": "a307361",
+  "status": "HOLD",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "review_date_kst": "2026-11-25",
+  "target_slot_for_planning": "2026-11-25T08:00:00+09:00",
+  "slot_assigned": false,
+  "source_state_commit": "e38f5699037dc777c1e6e1a6ea75d6aa75dcf155",
+  "main_commit": "ffc2e465b3852cdaa38a5af182c4f5513397a85b",
+  "source_handoff": {
+    "run_id": "45423809308",
+    "captured_at": "2026-11-25T00:18:51.827033+09:00",
+    "blob_sha": "612e87099544ce58a6065ad54b9989db45b9cbb1"
+  },
+  "sources": [
+    {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307361",
+      "basis": "Actual remote preflight source receipt and visible excerpt read from current handoff; not a direct successful GET in this review.",
+      "checked_at": "2026-11-25T00:18:48.695529+09:00",
+      "document_sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
+      "size_bytes": 12873,
+      "findings": "Title general open competition; eligibility explicitly limits to veterans employment-support beneficiaries OR disabled persons. One indefinite-term cleaning role. Closing 12/9 16:00."
+    },
+    {
+      "url": "https://recruit.incruit.com/ekr/job/2611230009",
+      "basis": "Direct web rendered text review",
+      "findings": "Issuer recruiting portal title general open competition, open 11/24 00:00 to 12/9 16:00, links a PDF; clicking the PDF returned same HTML, not PDF."
+    },
+    {
+      "url": "https://www.gojobs.go.kr/apmView.do?empmnsn=400273",
+      "basis": "Direct web rendered text review via public original notice link",
+      "findings": "Official government posting header shows start and end 12/9, disability recruitment field none. Body states 11/24 to 12/9 16:00, Gunsan, one cleaning position, retirement 65, commuting required, no regional restriction, accommodation and shuttle not provided. Body does not include ALIO's veteran/disability-only condition."
+    },
+    {
+      "url": "https://www.gojobs.go.kr/apmView.do?empmnsn=306685",
+      "basis": "Direct web search of earlier government posting",
+      "findings": "Distinct earlier veteran/disability restricted competition 10/29–11/13; not proof of terms of current notice."
+    }
+  ],
+  "search_expressions": [
+    "한국농어촌공사 금강사업단 일반공개경쟁 청소원 2026 12 9",
+    "한국농어촌공사 금강사업단 일반공개경쟁 2026.11.24"
+  ],
+  "search_volume_measured": false,
+  "decision_question": "한국농어촌공사 금강사업단 청소원, 보훈·장애인만 지원할 수 있나요?",
+  "unresolved": [
+    "Current official ALIO eligibility excerpt conflicts with government notice body and general competition title; cannot settle by omitting restriction.",
+    "Government portal start-date header 12/9 conflicts with body and application portal 11/24.",
+    "Original PDF byte retrieval and full semantic review incomplete; government attachment web fetch reports unsupported application/octet-stream; local urllib official application and raw GitHub endpoints report Errno -3 temporary name resolution failure.",
+    "Independent gpt-6.2-astra invocation and final confirmation not available in current tools; no approval asserted.",
+    "Actual final profile job UI, official correction scope and production validation incomplete."
+  ],
+  "next_step": "Obtain and read current original PDF with actual GET, check official corrections and reconcile eligibility and start date before drafting an affirmative or negative answer. Keep existing queue unchanged.",
+  "existing_queue": {
+    "blob_sha": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+    "entries": 57,
+    "future_entries": 0
+  },
+  "existing_staging": {
+    "blob_sha": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
+    "entries": 26,
+    "future_entries": 0
+  },
+  "existing_submissions": {
+    "blob_sha": "932c23b9e71d131c22b2a263b5846998b5741033",
+    "entries": 7
+  },
+  "astras_review_status": "not_performed",
+  "public_copy": null
+}
