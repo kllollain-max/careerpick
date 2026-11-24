@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "new_candidate_partial_official_review",
+  "notice_id": "a307021",
+  "account": "hid_119",
+  "status": "unapproved_draft",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "slot_assignment": null,
+  "observation_run": "45364726900",
+  "observed_handoff_at": "2026-11-24T18:24:39.169642+09:00",
+  "source_main_sha": "a56d75818783ca694aea1fe23bb0b316f4a29591",
+  "source_state_sha": "5ede5f066bbd61f286a675af9394f62ba943f2d5",
+  "reader_question": "정책관리 분야의 계약기간과 임용 시점",
+  "search_expression": "한국나노기술원 2026년 7차 위촉연구원 채용 정책관리",
+  "search_volume_verified": false,
+  "partial_draft": {
+    "post_text": "한국나노기술원 위촉연구원 정책관리(경기도과제), 계약기간도 다른 분야와 같나요?\n아니요. 이 분야는 2026년 12월 중 채용 예정이며 입사일부터 1년 계약이에요.\n\n성별·연령 제한은 없고 지정 임용일부터 근무할 수 있어야 해요. 남성 병역필·면제 및 해외여행·인사규정 결격 기준도 확인하세요.\n\n11월 30일 오전 10시까지 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "char_count": 210,
+    "reply_texts": [],
+    "cta_count": 1,
+    "not_publishable_reason": "분야별 모집인원 및 필수 학력/경력 미확인. 전체 16명을 정책관리 인원으로 사용하지 않음."
+  },
+  "sources": [
+    {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307021",
+      "finding": "정책관리(경기도과제)는 2026년 12월 임용 예정, 입사일로부터 1년 계약. 전체 16명은 여러 분야 합계. 접수 11월30일 10시, 입사유예 불가.",
+      "production_receipt": {
+        "checked_at": "2026-11-24T18:24:37.736058+09:00",
+        "sha256": "a3372d8d157985c9b34c03c74ad28c9e7fa73ab8dd53bd90915dc20e782be356",
+        "size_bytes": 24185
+      }
+    },
+    {
+      "url": "https://www.kanc.re.kr/gnb04/snb02_02.do?cid=5767&mode=view",
+      "finding": "기관 공고 제목 및 11월30일 10시 접수 종료 확인. 상세 자격/모집표는 HWP에 있음."
+    },
+    {
+      "url": "https://recruit.incruit.com/kanc/job/2611130012",
+      "finding": "모집중 표시 및 접수종료 11월30일 10시 재확인. 웹 텍스트에서 모집단위 표 확인 불가."
+    }
+  ],
+  "correction_check": {
+    "status": "incomplete",
+    "scope": "공식 채용 ATS 목록에 7차 공고 모집중. 기관 목록은 3주 전 캐시여서 최신 정정 부재 판단 불가."
+  },
+  "remaining": {
+    "attachment": "ALIO HWP 3087262: HTTP 403; 기관 첨부는 웹에서 다운로드 URL이 정상 추출되지 않음",
+    "unit_count": "not_verified",
+    "unit_qualifications": "not_verified",
+    "profile_ui": "not_verified",
+    "astra": "no independent invocation tool available; no pass recorded",
+    "production_validation": "not_run"
+  },
+  "operation": "Audit only; no queue/staging/submissions/schedule/publisher/Meta writes",
+  "preserved_blobs": {
+    "queue": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+    "staging": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
+    "handoff": "431b0a48e32424cfb5672bd2e3efb17071350098",
+    "submissions": "932c23b9e71d131c22b2a263b5846998b5741033"
+  }
+}
