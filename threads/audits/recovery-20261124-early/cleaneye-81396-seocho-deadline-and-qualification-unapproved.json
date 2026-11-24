@@ -1,0 +1,81 @@
+{
+  "notice_id": "cleaneye-81396",
+  "run_started_at": "2026-11-24T22:45:20+09:00",
+  "status": "unapproved_draft",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "scheduled_at": null,
+  "possible_next_slot": "2026-11-25T08:00:00+09:00",
+  "source_main": "a0f60e9a30b115a290ee8ee2ea44f96932e1f291",
+  "source_state": "1a68325c9fa56dffa8c2ff3f62d115f8c57b092a",
+  "source_post_sha256": "054dd3c62744a6f3975f5073edf24c782af55681a7293c2464e3b2be98ca9956",
+  "source_detail_sha256": "43ffb25fb5e1a2d8f72f3b1c596e1509397766f19a107d3007aed25d2f23bef6",
+  "source_snapshot_checked_at": "2026-11-24T16:35:00+09:00",
+  "sources": [
+    {
+      "url": "https://www.seocho.go.kr/site/seocho/ex/bbs/View.do?bcIdx=412761&cbIdx=57",
+      "type": "official_district_html_web_read",
+      "notice_number": "2026-34",
+      "notice_date": "2026-11-19",
+      "facts": {
+        "unit": "복지사업팀 대리(4급)",
+        "count": 1,
+        "employment": "정규직",
+        "location": "서울 서초구",
+        "deadline": "2026-11-30T14:00:00+09:00",
+        "application": "이메일",
+        "required": "공고에 명시된 기관에서 3년 이상 근무한 경력 및 사회복지 분야 자격증 소지",
+        "preferred": "채용 분야 업무 수행 경력",
+        "common": "만 65세 이하, 남성 병역필 또는 면제, 법정 결격 미해당",
+        "start_expected": "2026-12-14",
+        "work": "주 40시간, 09~18시, 상황에 따라 시간외·주말·휴일 근무 가능"
+      },
+      "attachment": "공고 HWPX 767.92 KB, 응시원서 HWP 136.5 KB",
+      "raw_sha256": null
+    },
+    {
+      "url": "https://m.work24.go.kr/wk/a/b/1500/empDetailAuthView.do?infoTypeCd=CLE&infoTypeGroup=tb_workinfocle&wantedAuthNo=20261119011116",
+      "type": "official_aggregator_html",
+      "facts": "정규직 1명, 경력, 지역 제한 없음, 11/23~11/30, 마감 시각 미표시"
+    },
+    {
+      "url": "https://gongjunmojob.com/jd/4d1d09ae-247e-40dd-85af-0745dced3b86",
+      "type": "search_discovery_only_not_approval",
+      "discrepancy": "23:59 표시, 구청 공고 14:00과 불일치; 사회복지사 2급 이상 우대 표시도 구청 필수 자격증 서술과 차이"
+    },
+    {
+      "url": "https://www.seocho.go.kr/site/seocho/ex/bbs/View.do?bcIdx=412395&cbIdx=57",
+      "type": "different_earlier_notice",
+      "notice_number": "2026-29",
+      "notice_date": "2026-11-02",
+      "unit": "돌봄사업팀 대리; 현재 복지사업팀과 구별"
+    }
+  ],
+  "correction_check": {
+    "result": "incomplete",
+    "scope": "구청 현재 공고와 별도 11/2 공고 비교, 재단 홈페이지 접근 403, 최신 정정 게시판 확인 미완료"
+  },
+  "draft_text": "서초복지돌봄재단 복지사업팀 대리, 11월 30일 저녁에도 접수할 수 있나요?\n아니요. 11월 30일 14시까지 이메일로 접수해야 해요.\n\n서울 정규직 1명으로, 공고에 명시된 공공·민간 기관 등에서 3년 이상 근무한 경력과 사회복지 분야 자격증이 모두 필요해요. 채용 분야 경력은 우대예요.\n\n만 65세 이하, 남성 병역필·면제 및 결격 기준도 확인하세요. 12월 14일 채용 예정이에요.\n\n자세한 사항은 프로필링크 확인",
+  "body_chars": 235,
+  "hook_candidates": [
+    "서초복지돌봄재단 복지사업팀 대리, 11월 30일 저녁에도 접수할 수 있나요?",
+    "서초복지돌봄재단 대리, 복지 분야 경력만 인정되나요?",
+    "서초복지돌봄재단 복지사업팀 정규직 1명, 어떤 자격이 필요할까요?"
+  ],
+  "selected_hook": 0,
+  "hold_reasons": [
+    "ASTRA_INDEPENDENT_REVIEW_NOT_AVAILABLE",
+    "OFFICIAL_ATTACHMENT_BYTES_NOT_VERIFIED",
+    "RAW_GET_DNS_FAILURE: [Errno -3] Temporary failure in name resolution",
+    "EXACT_CERTIFICATE_LEVEL_UNRESOLVED",
+    "CORRECTION_CHECK_INCOMPLETE",
+    "PROFILE_UI_NOT_VERIFIED",
+    "PRODUCTION_VALIDATION_NOT_RUN"
+  ],
+  "queue_match": 0,
+  "posted_match": false,
+  "queue_blob": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+  "staging_blob": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
+  "posted_blob": "216e4f294e3f526ed78a986fc28bdd9f629e0f4d",
+  "notes": "검색 결과에 실재하는 마감 표기 차이가 질문 선정 근거이며 검색량은 미확인. 원문 전체 및 독립 모델 미검수, 승인 금지. 기존 큐·원장 무수정."
+}
