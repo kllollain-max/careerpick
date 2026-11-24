@@ -1,0 +1,166 @@
+name: Review only — employer original 81328 PDF
+on:
+  push:
+    branches:
+      - review/threads-cleaneye-81328-official-20261119
+    paths:
+      - .github/workflows/threads-81328-official-review.yml
+permissions:
+  contents: read
+jobs:
+  independent-original:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install PDF text reader
+        run: python -m pip install --quiet requests beautifulsoup4 pymupdf
+      - name: Download employer original + extract complete text, never publish
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib,requests,bs4,urllib.parse,hashlib,json,datetime,re
+          from zoneinfo import ZoneInfo
+          import fitz
+          root=pathlib.Path("official-81328");root.mkdir(exist_ok=True)
+          board="https://www.pcy.or.kr/pcy/bbs/board.php?bo_table=recruitment&wr_id=903"
+          session=requests.Session()
+          hdr={"User-Agent":"Mozilla/5.0 (compatible; CareerPickIndependentOfficialCheck/1.0)","Accept":"text/html,application/pdf,*/*"}
+          resp=session.get(board,headers=hdr,timeout=25)
+          resp.raise_for_status()
+          if "파주시청소년재단" not in resp.text or "2026년 제2회" not in resp.text:
+              raise RuntimeError("EMPLOYER_NOTICE_IDENTITY_FAIL")
+          (root/"employer-notice.html").write_text(resp.text,encoding="utf-8")
+          soup=bs4.BeautifulSoup(resp.text,"html.parser")
+          links=[]
+          for a in soup.select("a[href]"):
+              text=a.get_text(" ",strip=True)
+              href=urllib.parse.urljoin(board,a.get("href"))
+              parts=urllib.parse.urlsplit(href)
+              if parts.hostname not in ("www.pcy.or.kr","pcy.or.kr"):
+                  continue
+              if ("공고문" in text or "download.php" in parts.path) and "903" not in parts.path:
+                  links.append((href,text))
+          print("PINNED_EMPLOYER_PAGE="+board)
+          print("ATTACHMENT_CANDIDATES="+json.dumps(links,ensure_ascii=False))
+          pdf=None;chosen=None
+          for href,title in links[:10]:
+              try:
+                  r=session.get(href,headers=hdr,timeout=30)
+                  if r.status_code==200 and r.content.startswith(b"%PDF-") and len(r.content)<20000000:
+                      pdf=r.content;chosen=href;break
+              except requests.RequestException:
+                  pass
+          if pdf is None:
+              raise RuntimeError("EMPLOYER_ORIGINAL_PDF_UNAVAILABLE")
+          digest=hashlib.sha256(pdf).hexdigest()
+          (root/"original.pdf").write_bytes(pdf)
+          document=fitz.open(stream=pdf,filetype="pdf")
+          pages=[page.get_text("text") for page in document]
+          full="\n\n".join("==PAGE "+str(i+1)+"==\n"+t for i,t in enumerate(pages))
+          (root/"fulltext.txt").write_text(full,encoding="utf-8")
+          if len(full.strip())<500:
+              raise RuntimeError("PDF_TEXT_INCOMPLETE")
+          receipt={"source_page":board,"source_pdf_url":chosen,"sha256":digest,
+            "bytes":len(pdf),"page_count":len(pages),"text_chars":len(full),
+            "captured_at":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat(),
+            "review_status":"source_collection_only","approved":False,"meta_posted":False}
+          (root/"receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
+          print("OFFICIAL_RECEIPT="+json.dumps(receipt,ensure_ascii=False))
+          for keyword in ["행정직","활동직","기술직","응시원서","11.30","11월 30","18:00","자격"]:
+              idx=full.find(keyword)
+              if idx>=0:print("EXCERPT_"+keyword+"="+repr(full[max(0,idx-160):idx+420]))
+          PY
+      - name: Verify independent receipt with existing production exact-source downloader (no CAS / no Meta)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          from scripts.threads_reviewed_ingest import fetch_official_digest
+          receipt=json.loads(pathlib.Path("official-81328/receipt.json").read_text(encoding="utf-8"))
+          actual=fetch_official_digest(receipt["source_pdf_url"])
+          if actual != receipt["sha256"]:
+              raise SystemExit("OFFICIAL_SOURCE_DIGEST_MISMATCH")
+          print("PRODUCTION_OFFICIAL_DIGEST_VERIFIED="+actual)
+          PY
+      - name: Independently read live employer ATS notice and correction list (read-only)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,bs4,pathlib,json,hashlib,datetime,re
+          from zoneinfo import ZoneInfo
+          root=pathlib.Path("official-81328");root.mkdir(exist_ok=True)
+          targets={
+            "ats_job":"https://pcy.career.co.kr/jobs/jobs_view.asp?ID=1003",
+            "ats_notices":"https://pcy.career.co.kr/board/notice/default.asp?BType=1",
+            "employer_board":"https://www.pcy.or.kr/pcy/bbs/board.php?bo_table=recruitment",
+          }
+          receipts={}
+          for key,url in targets.items():
+              response=requests.get(url,timeout=25,headers={"User-Agent":"Mozilla/5.0 (compatible; CareerPickOfficialReview/1.0)"})
+              response.raise_for_status()
+              html=response.content
+              text=bs4.BeautifulSoup(html,"html.parser").get_text(" ",strip=True)
+              (root/(key+".html")).write_bytes(html)
+              (root/(key+".txt")).write_text(text,encoding="utf-8")
+              receipts[key]={"url":url,"bytes":len(html),"sha256":hashlib.sha256(html).hexdigest(),
+                             "captured_at":datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat()}
+              if key=="ats_job":
+                  required=["파주시청소년재단","행정직","활동직","기술직","5명","11.30","18:00"]
+                  absent=[word for word in required if word not in text]
+                  if absent:
+                      raise RuntimeError("ATS_REQUIRED_FACT_NOT_VISIBLE:"+",".join(absent))
+                  if "2026" not in text or "2026년 제2회" not in text:
+                      raise RuntimeError("ATS_NOTICE_MISMATCH")
+              if key=="employer_board" and "2026년 제2회" not in text:
+                  raise RuntimeError("EMPLOYER_ACTIVE_LISTING_MISSING")
+          receipt={"sources":receipts,"source_collection_only":True,"approved":False,"cas_updated":False,
+                   "meta_posted":False,
+                   "correction_scope":"ATS current notice list and employer board landing page only, NOT an exhaustive all-channel correction audit"}
+          (root/"ats-and-corrections-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
+          print("READ_ONLY_ATS_AND_CORRECTION_SCOPE="+json.dumps(receipt,ensure_ascii=False))
+          PY
+      - name: Render CareerPick public exact job detail (read-only browser)
+        shell: bash
+        run: |
+          python -m pip install --quiet playwright
+          python -m playwright install --with-deps chromium > /dev/null
+          python - <<'PY'
+          import pathlib,json,datetime,hashlib
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
+          root=pathlib.Path("official-81328")
+          url="https://kllollain-max.github.io/careerpick/#job=cleaneye-81328"
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              page=browser.new_page(viewport={"width":1080,"height":850},device_scale_factor=1)
+              page.goto(url,wait_until="domcontentloaded",timeout=60000)
+              page.wait_for_function("""() => {
+                const overlay=document.getElementById('jobview');
+                const body=document.getElementById('jvBody');
+                return overlay && !overlay.hidden && body &&
+                    body.textContent.includes('파주시청소년재단');
+              }""",timeout=70000)
+              text=page.locator("#jvBody").inner_text()
+              must=["파주시청소년재단","2026년 제2회"]
+              absent=[x for x in must if x not in text]
+              if absent: raise RuntimeError("PUBLIC_DETAIL_IDENTITY_MISSING:"+repr(absent))
+              (root/"careerpick-public-job-detail.txt").write_text(text,encoding="utf-8")
+              page.locator("#jobview").screenshot(path=str(root/"careerpick-public-job-detail.png"))
+              stamp=datetime.datetime.now(ZoneInfo("Asia/Seoul")).isoformat()
+              receipt={"url":url,"captured_at":stamp,"body_sha256":hashlib.sha256(text.encode()).hexdigest(),
+                       "detail_visible":True,"employer_verified":True,
+                       "contains_total_five":"5명" in text,"deadline_18_clock_visible":"18:00" in text or "오후 6시" in text,
+                       "text_excerpt":text[:2400],"approved":False,"published":False}
+              (root/"careerpick-public-job-receipt.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding="utf-8")
+              print("ACTUAL_PUBLIC_JOB_DETAIL="+json.dumps(receipt,ensure_ascii=False))
+              browser.close()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: official-81328-original-and-text
+          path: official-81328/
+          retention-days: 20
