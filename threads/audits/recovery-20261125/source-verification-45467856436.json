@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "independent_source_artifact_verification",
+  "observed_at": "2026-11-25T04:48:13.981520+09:00",
+  "main_sha": "9194c1a2486d589392794933f859570f8e8adc0a",
+  "state_before": "97d7b5d954000fa550ec0fbbafe0da3b8440f0d6",
+  "operations_run_id": 45467856436,
+  "preflight_run_id": 45468119376,
+  "artifact_verification": [
+    {
+      "id": 14955473428,
+      "sha256": "61f88af8ae4f52905aba39b9bfb471d6486093d26a72c909fda50120252ae6e6",
+      "zip_integrity": "passed"
+    },
+    {
+      "id": 14955463455,
+      "sha256": "c30d6d4d55dea43899d6e0fbd3470838593250e2dc7e7080dd2aa11d73118611",
+      "zip_integrity": "passed"
+    },
+    {
+      "id": 14955976212,
+      "sha256": "4b0ef3a85a06f6bdd6aab679975e83a44b983b55134f688becd4099965107f88",
+      "zip_integrity": "passed"
+    }
+  ],
+  "source_bytes": {
+    "alio.json": {
+      "sha256": "8b380532be487236922bf077b70d6266c7cd3c17849fbedcae4dd94571dc60ac",
+      "size": 942981
+    },
+    "alio-detail.json": {
+      "sha256": "eb42b65610c10358b48e97ca0f5924c9f73eae87e98054c09c3386f2703e8fdd",
+      "size": 5794417
+    },
+    "cleaneye.json": {
+      "sha256": "24e2bd6f0976a0b79f145c8daad8793313339fd5d59fb027a6cdab72d8415765"
+    }
+  },
+  "production_verifier": {
+    "path": "scripts/threads_source_verification.py",
+    "git_blob": "93b99925e300f6b9ddaa83db0b5b745999e09f6d",
+    "function": "inspect_bundle",
+    "result": {
+      "alio": "2026-11-25T04:13:43+09:00"
+    }
+  },
+  "cleaneye": {
+    "status": "failed_preserved",
+    "error": "excess_records",
+    "freshness_renewed": false
+  },
+  "preflight": {
+    "ready": 0,
+    "target": 8,
+    "next_slot": "2026-11-25T08:00:00+09:00",
+    "next_media": "TEXT",
+    "queue_blob": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+    "queue_count": 57,
+    "staging_blob": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
+    "staging_count": 26
+  },
+  "limitations": {
+    "independent_astra": "not_invoked_no_available_tool",
+    "individual_official_review": "not_completed",
+    "local_writer_inputs": "not_run",
+    "queue_approval": false,
+    "publication": false
+  },
+  "scope": "Collection freshness evidence only; no semantic review, approval or existing operational state mutation."
+}
