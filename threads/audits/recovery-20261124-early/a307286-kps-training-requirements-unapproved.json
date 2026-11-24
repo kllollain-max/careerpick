@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "notice_id": "a307286",
+  "status": "draft_unapproved",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "scheduled_at": null,
+  "source_main_sha": "2cacc05a094dc90197a09946c45515de90a5e08c",
+  "state_head_before": "084a230be7c64616aa732d61bdf164e15b3546c0",
+  "source_snapshot": {
+    "run_id": 45386003798,
+    "checked_at": "2026-11-24T20:39:19.231040+09:00",
+    "source_post_sha256": "cfbad8cae5131f63f121bd072a711c3a289b2c4e8f0f008b1bc01e13785a5363",
+    "source_detail_sha256": "acd6fd28bd73e0c5b840ef1ec8d373737e2703f4a1beca243b42eea953c7e229",
+    "official_mobile_html_sha256": "e688331dbd9d8981933fc60b09e27f72e0b52eccc08c377ef8f343e9c250240a",
+    "bytes": 13528
+  },
+  "sources": [
+    {
+      "url": "https://www.kps.co.kr/web/company/recruit/posting/rolling.do",
+      "finding": "기관 공식 첫 페이지 11월20~26일 비정규직 전체 84명, 해당 ALIO 상세 링크 확인. 첫 페이지에 정정/취소 제목 미발견. 전체 조회 아님."
+    },
+    {
+      "url": "https://job.alio.go.kr/recruitview.do?idx=307286",
+      "finding": "기관 공식 링크를 통한 데스크톱 상세 원문 직접 열람. 2차측 비관리구역 정비보조 별도 자격 없음, 공통 즉시 근무 가능, 신체검사/출입/신원조회/결격, 계약기간 직무별 차이, 정규직 전환 제외, 11월26일 18시 이메일 제출 후 확인전화 대조. 전체 84명을 2차측 인원으로 표시하지 않음."
+    },
+    {
+      "url": "https://www.alio.go.kr/download/download.json?fileNo=3089086",
+      "error": "web HTTP 403; urllib DNS Errno -3",
+      "original_sha256": null
+    },
+    {
+      "url": "https://www.alio.go.kr/download/download.json?fileNo=3089109",
+      "error": "web HTTP 403",
+      "original_sha256": null
+    }
+  ],
+  "question_basis": "공식 직무별 자격 차이에서 도출한 질문. 실제 검색량 미확인.",
+  "draft": "한전KPS 고리3사업소 정비보조(2차측), 방사선 교육을 받아야 지원할 수 있나요?\n아니요. 비관리구역 정비보조는 별도 교육 이수 자격이 없어요. 채용 예정일부터 근무 가능해야 하고 신체검사·신원조회·출입 및 결격 기준을 충족해야 해요.\n\n부산 단기 계약직으로 정규직 전환 대상이 아니에요. 공사기간은 2027년 1월 30일~3월 7일이며 개인별 계약기간은 달라질 수 있어요.\n11월 26일 18시까지 이메일 접수 후 확인전화를 해요.\n\n자세한 사항은 프로필링크 확인",
+  "character_count": 261,
+  "reply_texts": [],
+  "reviewer_model_requested": "gpt-6.2-astra",
+  "reviewer_model_invoked": false,
+  "hold_reasons": [
+    "2차측 단일 모집단위 인원 및 전체 첨부 미확인",
+    "Astra 독립 호출 수단 미확인",
+    "실제 상세 UI 미검수",
+    "생산 검증 미실행: 로컬 raw.githubusercontent.com DNS Errno -3"
+  ],
+  "duplicate_check": {
+    "queue": false,
+    "staging": false,
+    "posted_ids": false
+  },
+  "publication_snapshot": {
+    "run_id": 45386003798,
+    "checked_at": "2026-11-24T20:39:19.356965+09:00",
+    "post_ids_today": [
+      "18156674197549984"
+    ],
+    "ready_count": 0
+  },
+  "operation": "신규 미승인 검토본만 추가. 큐/원장/게시기/예약 변경 없음."
+}
