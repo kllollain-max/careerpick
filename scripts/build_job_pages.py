@@ -24,6 +24,8 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # Sangju Red Cross Hospital: four official notices share the same cutoff.
+    'a307336': '2026-12-09T18:00:00+09:00',
     # Original official notice clocks, read 2026-11-24; never publication clocks.
     'a307141': '2026-12-01T18:00:00+09:00',
     'a306989': '2026-11-27T18:00:00+09:00',
