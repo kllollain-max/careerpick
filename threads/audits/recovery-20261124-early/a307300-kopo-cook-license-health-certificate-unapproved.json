@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "unapproved_new_candidate_and_new_collection_receipt",
+  "notice_id": "a307300",
+  "account": "hid_119",
+  "status": "unapproved_draft",
+  "ready": false,
+  "slot_assignment": null,
+  "publication_allowed": false,
+  "meta_posted": false,
+  "recorded_at_utc": "2026-11-24T10:47:28Z",
+  "heads": {
+    "main": "2cacc05a094dc90197a09946c45515de90a5e08c",
+    "state": "38939db1d662a79c1dde4de1fae400f516c120b9"
+  },
+  "latest_preflight": {
+    "run_id": 45364726900,
+    "captured_at": "2026-11-24T18:24:39.169642+09:00",
+    "ready_count": 0,
+    "target": 8,
+    "next_media": "TEXT",
+    "live_inventory_checked_at": "2026-11-24T18:24:38.478548+09:00",
+    "latest_verified_post_id": "18156674197549984"
+  },
+  "source_refs": [
+    {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307300",
+      "method": "web extracted official detail read",
+      "lines": "5–27,48–71",
+      "original_sha256": null
+    },
+    {
+      "url": "https://www.kopo.ac.kr/namdaegu/board.do?menu=10548&mode=view&post=790940",
+      "method": "web extracted issuer HTML read",
+      "lines": "541–557",
+      "original_sha256": null
+    },
+    {
+      "url": "https://www.kopo.ac.kr/namdaegu/board.do?menu=10548",
+      "method": "first page of issuer list checked; 4th notice pinned and older 1st–3rd notices separate; no correction or cancellation title on this page; no claim beyond this scope"
+    }
+  ],
+  "official_attachment_attempts": [
+    {
+      "url": "https://www.alio.go.kr/download/download.json?fileNo=3089183",
+      "error": "HTTP 403"
+    },
+    {
+      "url": "https://www.kopo.ac.kr/namdaegu/down",
+      "error": "HTTP 404 from extracted download link, no usable bytes"
+    }
+  ],
+  "facts": {
+    "employment": "무기계약직",
+    "unit": "대학운영직(조리사)",
+    "count": 1,
+    "location": "대구 남대구캠퍼스",
+    "eligibility": "조리사 면허 및 임용예정일 기준 유효 보건증 필수; 동일 업무 경력 우대; 학력·성별 제한 없음, 정년 만60세, 남성 병역필/면제, 결격사유 미해당, 최종합격 발표 후 즉시 근무",
+    "application": "12월 2일 마감 날짜만 확인, 지정양식 이메일 접수",
+    "exact_deadline": null,
+    "issuer_post_date": "2026-11-20",
+    "alio_start_date": "2026-11-24"
+  },
+  "editorial": {
+    "question": "한국폴리텍대학 남대구캠퍼스 조리사, 관련 경력 없이도 지원할 수 있나요?",
+    "search_expression": "한국폴리텍 남대구 조리사 채용 경력 면허 보건증",
+    "search_volume_measured": false,
+    "draft_text": "한국폴리텍대학 남대구캠퍼스 조리사, 관련 경력 없이도 지원할 수 있나요?\n네. 경력은 우대사항이고 조리사 면허와 임용예정일에 유효한 보건증이 모두 필요해요.\n\n무기계약직 1명으로 학력·성별 제한은 없고 정년은 만 60세예요. 남성은 병역필·면제, 결격사유 미해당, 최종합격 발표 후 즉시 근무 조건도 충족해야 해요.\n\n12월 2일까지 지정양식으로 이메일 접수해요.\n\n자세한 사항은 프로필링크 확인",
+    "chars": 221,
+    "reply_texts": [],
+    "cta_count": 1,
+    "independent_astra_review": {
+      "status": "NOT_EXECUTED_NO_INDEPENDENT_MODEL_CALL_TOOL",
+      "pass": false
+    }
+  },
+  "new_collection_evidence": {
+    "run_id": 45373965942,
+    "artifact_id": 14909992973,
+    "zip_sha256": "3f7e8550e457eabda1c95fd088ec7eaed9b95593fd66d6bc9dedafb9318ab318",
+    "zip_digest_match": true,
+    "pages_artifact_id": 14910318359,
+    "pages_zip_sha256": "4ccdaea095a22acff40e64d1c81b82e3d74499464dc759c7f1171c7e6319e9da",
+    "pages_digest_match": true,
+    "alio_verified_at": "2026-11-24T19:21:54+09:00",
+    "alio_new": 13,
+    "alio_modified": 2,
+    "alio_unconfirmed": 13,
+    "alio_total": 1314,
+    "alio_report_status": "changed",
+    "cleaneye_status": "failed_preserved",
+    "cleaneye_error": "excess_records",
+    "cleaneye_successful_list_responses": 0,
+    "overall": "partial_or_failed",
+    "deployment": "success",
+    "public_check": "success",
+    "page_source_sha256": {
+      "alio": "a0da34ca2166895a608868f99dfdd6a9e641658f19ca2baa15316d59bf3fcceb",
+      "alio_detail": "5c471433175c2919ccc847b301d659052cb89169d6dbab9ca362c39f4d997b0d",
+      "cleaneye": "24e2bd6f0976a0b79f145c8daad8793313339fd5d59fb027a6cdab72d8415765"
+    },
+    "receipt_source_sha256": {
+      "alio": "c3fbaf79e945d9e73ae68b0e1727f66422ab8f4cc076f119a71b87c7019986e3",
+      "alio_detail": "0d84a60e5a6e58d90e7d6d501cbcd0f6589a225e171f6063201077d1f946e37a"
+    },
+    "freshness_note": "Production inspect_bundle code read: unchanged-only proof cannot refresh timestamps for changed ALIO or failed Cleaneye. Not executed; no source freshness proof asserted. Pages actual source bytes verified against build report, not confused with different collection receipt hashes."
+  },
+  "holds": [
+    "official PDF bytes and exact deadline, full qualification and employment conditions, official receipt",
+    "local DNS EAI_AGAIN: raw.githubusercontent.com and official hosts",
+    "actual rendered UI not verified",
+    "independent Astra call and recheck unavailable",
+    "production writer/entry/receipt/plan/merge/check not run; no promotion"
+  ],
+  "unchanged_blobs": {
+    "threads/writer-queue.json": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+    "threads/reviewed-staging.json": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
+    "threads/reviewed-submissions.json": "932c23b9e71d131c22b2a263b5846998b5741033",
+    "threads/replenishment-handoff.json": "431b0a48e32424cfb5672bd2e3efb17071350098"
+  },
+  "changes": "Audit only. No queue or publisher changes; no manual execution, no Meta POST."
+}
