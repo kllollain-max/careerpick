@@ -1,0 +1,104 @@
+{
+  "notice_id": "cleaneye-81446",
+  "status": "HOLD",
+  "approved": false,
+  "scheduled_at": null,
+  "observed_date_kst": "2026-11-25",
+  "reference_run_started_at": "2026-11-25T07:45:20+09:00",
+  "preflight_run_id": 45498424143,
+  "preflight_capture": "2026-11-25T07:11:48+09:00",
+  "main_observed": "9194c1a2486d589392794933f859570f8e8adc0a",
+  "state_base": "0857ec3a25d26ea733d0386dfb75bb7243c7791d",
+  "official_notice": {
+    "issuer": "서울특별시 중구시설관리공단",
+    "notice_number": "2026-216",
+    "issued_date": "2026-11-20",
+    "detail": "https://www.e-junggu.or.kr/fmcs/252?action=read&action-value=2ce5414f07289312f0b1ffb16d2cb849",
+    "pdf": "https://www.e-junggu.or.kr/File/Download/99367dd908c8631c51ce0952060254c6",
+    "pdf_pages": 8,
+    "web_page_render_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "raw_pdf_sha256": null,
+    "raw_pdf_received": false,
+    "raw_get_attempts": 2,
+    "raw_get_error": "URLError [Errno -3] Temporary failure in name resolution",
+    "facts": [
+      {
+        "page": 1,
+        "total": 9,
+        "admin_grade7": 4,
+        "communications_grade6": 1,
+        "mechanical_grade7": 2,
+        "electrical_grade7": 2,
+        "electrical_youth_only": true,
+        "work": "일반직 정년 만 60세, 주 40시간, 순환근무 가능"
+      },
+      {
+        "page": 2,
+        "admin_age": "공고일 기준 만 19세 이상 만 60세 미만",
+        "residency": "제한 없음",
+        "probation": "6개월, 보수 100%, 평가 후 정규 임용 여부 결정",
+        "eligibility_or": [
+          "국가 또는 지방공무원 9급 이상 재직",
+          "법정 공공기관 해당 직급 또는 사원급 1년 이상 재직",
+          "민간법인기업체 해당 분야 경력 3년 이상",
+          "이에 준한다고 인정되는 자격"
+        ],
+        "disqualifications": "인사규정 제12조 및 관련 법령"
+      },
+      {
+        "page": 5,
+        "deadline": "2026-11-30T18:00:00+09:00"
+      },
+      {
+        "page": 6,
+        "application": "https://junggufmcs.fairyhr.com",
+        "documents": "가점 증빙은 지원 시, 필기 합격자 필수 경력 증빙은 12월 15일 18시까지"
+      },
+      {
+        "page": 8,
+        "restriction": "진행 중인 공단 채용공고 중복지원 불가, 최신 응시만 적용"
+      }
+    ]
+  },
+  "correction_check": {
+    "scope": "기관 채용게시판 첫 페이지 및 공고명 정정·취소 공개 검색",
+    "result": "확인 범위 내 별도 정정 미발견",
+    "complete": false
+  },
+  "application_check": {
+    "official_home": "https://junggufmcs.fairyhr.com/",
+    "web_extracted_text": "진행 중 채용공고 0 건",
+    "specific_detail": "https://junggufmcs.fairyhr.com/announcement/detail/87",
+    "specific_detail_discovered_via": "https://pknujob.pknu.ac.kr/42/37?action=view&bbsId=11&no=29598",
+    "specific_detail_web_result": "읽을 수 있는 본문 없음",
+    "actual_rendered_active_status": null,
+    "conclusion": "공고상 접수기간과 추출 화면 불일치 가능성; 실제 렌더링 후 판단, 접수종료로 단정하지 않음"
+  },
+  "draft": {
+    "body": "서울 중구시설관리공단 행정 7급, 민간기업 경력으로 지원할 수 있나요?\n네. 민간법인기업체 해당 분야 경력 3년 이상이면 직무 자격기준을 충족해요. 공무원 9급 이상 재직, 공공기관 해당 직급·사원급 1년 이상 재직, 이에 준하는 인정 자격도 가능해요.\n\n일반직 4명, 공고일 기준 만 19세 이상~60세 미만, 거주지 제한 없음. 6개월 수습 평가 후 정규 임용 여부가 결정돼요. 결격사유도 확인하세요.\n\n공고상 11월 30일 18시 온라인 마감이에요.\n\n자세한 사항은 프로필링크 확인",
+    "chars": 272,
+    "sha256": "e15095d0fcf7b2e767a335b8b82e440c6c1763852125a51ac43440b0d23f114b",
+    "media": "TEXT candidate only",
+    "search_expression_basis": "실제 검색 결과에 기관명·하반기 정기채용 확인; 질문은 공식 자격표에서 도출, 검색량 미확인",
+    "astra_review": "not_run_no_available_exact_model_call",
+    "production_validation": "not_run",
+    "careerpick_rendered_detail": "not_verified"
+  },
+  "remaining": [
+    "공식 PDF 원본 바이트 및 SHA256 확보",
+    "실제 접수 화면 및 커리어픽 상세 확인",
+    "gpt-6.2-astra 독립 검수 및 수정본 재확인",
+    "운영 검증 및 최신 claim 확인"
+  ],
+  "publication": "not_attempted",
+  "queue_mutation": false
+}
