@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "notice_id": "cleaneye-81455",
+  "status": "HOLD",
+  "approved_for_queue": false,
+  "scheduled_at": null,
+  "meta_posted": false,
+  "review_date_kst": "2026-11-25",
+  "source_run_id": "45446294894",
+  "source_handoff_captured_at": "2026-11-25T02:15:23.574395+09:00",
+  "state_parent": "b96e59e7e48b0b1d7df133ec1e99a72413028710",
+  "main_observed": "9194c1a2486d589392794933f859570f8e8adc0a",
+  "source_post_sha256": "5a81c435ff1fd2051c66ed0eb658170c5464364956146b1ad03238c3a3ff7c94",
+  "source_detail_sha256": "a840f2862d4b22adb5f66189637616a4c32547115e1aab1f02347497b0e9cbb1",
+  "search_intent": "평택시국제교류재단 행정 5급 채용 경력 인정 조건; 검색 결과 존재 확인, 검색량 미측정",
+  "sources": [
+    {
+      "url": "https://pief.or.kr/kor/board/list.do?bbsId=sub03_04",
+      "scope": "기관 공식 채용목록 첫 페이지, 11월 20일 공고 일치; 해당 제목의 정정·취소 별도 게시물 발견되지 않음, 범위 한정"
+    },
+    {
+      "url": "https://recruit.incruit.com/pief/job/2611200005",
+      "scope": "기관 지정 개별 접수 페이지",
+      "facts": "모집중, 2026-11-24 00:00~2026-11-30 18:00, 공고 참고자료 ZIP 링크"
+    },
+    {
+      "url": "https://jlab.incruit.com/jobs/2611200002778",
+      "scope": "기관명으로 게시된 인크루트 공고 전문 HTML; 모집표, 근무조건, 자격기준, 서류 및 접수방법 검토",
+      "facts": "행정5급 정규직 1명, 일반행정 및 경제교류 사업; 법인/관련 기관 4년 이상 또는 공무원 9급직 이상 또는 이에 상당하는 사람의 기준 제시; 공무원 경력 경로를 4년 필수로 합치지 않음. 법인 등기 및 근로계약, 4대보험 확인내역서 또는 최근 3개월 경력증명서 기준. 수습 3개월 평가, 남성 병역필/면제, 정년60, 결격조건, 동일일 시험 중복 금지."
+    },
+    {
+      "url": "https://job.cleaneye.go.kr/user/ypCareersData.do?idx=81455",
+      "result": "web inaccessible"
+    }
+  ],
+  "draft_text": "평택시국제교류재단 행정 5급, 공무원 9급 경력도 인정되나요?\n네. 법인·관련 기관 4년 이상 근무 경력 외에 공무원 9급 이상 또는 이에 상당하는 자격 기준도 있어요.\n\n정규직 1명으로 평택에서 일반행정·경제교류 업무를 맡고, 수습 3개월 후 평가를 받아요. 정년 60세, 남성 병역필·면제 및 결격 기준을 확인하세요.\n\n같은 날 시행하는 채용시험 중복지원은 불가해요. 11월 30일 18시까지 온라인 접수해요.\n\n자세한 사항은 프로필링크 확인",
+  "chars": 249,
+  "reply_texts": [],
+  "media_forecast": "TEXT",
+  "review": {
+    "astra_model": "gpt-6.2-astra",
+    "astra_status": "not_invoked",
+    "reason": "separate model invocation tool not exposed; not a pass",
+    "original_attachment_bytes_verified": false,
+    "profile_ui_verified": false,
+    "publisher_validate_entry": "not_run",
+    "source_sha256_for_issuer_document": null
+  },
+  "hold_reasons": [
+    "기관 원본 첨부 바이트 및 직무기술서 미검증",
+    "공무원 9급직 이상 또는 이에 상당하는 사람 인정범위와 자격경로 논리 원본 재확인",
+    "별도 Astra 검수 미실행",
+    "실제 상세 UI 및 생산 검증 미완료"
+  ],
+  "protected_blobs": {
+    "queue": "4fe8f78d71580b937ff933b0d6a1f14a9bfcb8d8",
+    "staging": "fb2fbcbba3df59a9d6929ab4b8df0d8b98e0e1a5",
+    "posted": "216e4f294e3f526ed78a986fc28bdd9f629e0f4d"
+  },
+  "next_action": "기관 원본 및 정정 확인, 실제 상세 UI, 별도 Astra 검수 후 생산 검증; ready 아님"
+}
