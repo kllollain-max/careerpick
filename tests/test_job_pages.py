@@ -760,12 +760,16 @@ class JobPageTests(unittest.TestCase):
             proof = VERIFIED_APPLICATION_NOTICES[pid]
             self.assertEqual(proof['expected_source_seats'], post['n'])
             self.assertEqual(proof['source_employment'], post['emp'])
-            self.assertNotIn(pid, CONFIRMED_APPLICATION_CUTOFFS)
+            self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS.get(pid),
+                             "2026-12-02T15:00:00+09:00" if pid == "a306990" else None)
             self.assertNotIn('application_start', proof)
             html = render(post, {})
             self.assertIn(notice, html)
             self.assertIn(requirement, html)
-            self.assertNotIn('기관 공식 확인 접수마감', html)
+            if pid == 'a306990':
+                self.assertIn('2026-12-02 15:00 (KST)', html)
+            else:
+                self.assertNotIn('기관 공식 확인 접수마감', html)
             for change in ({'n': str(int(seats) + 1)},
                            {'emp': ['정규직'] if pid == 'a307189' else ['정규직']},
                            {'title': title + ' (정정)'}, {'org': '다른 기관'},
@@ -1340,7 +1344,7 @@ class JobPageTests(unittest.TestCase):
             self.assertNotIn('기관 공식 확인 접수마감', render(altered, {}))
         self.assertEqual(post, original)
 
-    def test_eastwest_307149_official_reception_dates_preserve_unknown_clock(self):
+    def test_eastwest_307149_official_pdf_confirms_cutoff(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
         from scripts.build_public_site import homepage_cutoff_metadata, static_recruitment_posts
         pid = 'a307149'
@@ -1359,15 +1363,15 @@ class JobPageTests(unittest.TestCase):
         self.assertEqual(proof['source_employment'], post['emp'])
         self.assertEqual(proof['application_start'], '2026-11-24')
         self.assertEqual(proof['application_end_date'], '2026-12-01')
-        self.assertNotIn(pid, CONFIRMED_APPLICATION_CUTOFFS)
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS[pid], "2026-12-01T17:00:00+09:00")
         html = render(post, {})
-        self.assertIn('2026-11-24 ~ 2026-12-01 (마감시각 공식 공고 확인 필요)', html)
+        self.assertIn('2026-11-24 ~ 2026-12-01 17:00 (KST)', html)
         self.assertIn('대졸수준 일반전형, 대졸수준 보훈전형', html)
         self.assertIn('TOEIC 700점 이상', html)
         self.assertIn('입사일이 2026년 3월 15일로 표기', html)
-        self.assertNotIn('기관 공식 확인 접수마감', html)
+        self.assertIn('기관 공식 확인 접수마감', html)
         self.assertNotIn('2026-12-01 23:59 (KST)', html)
-        self.assertNotIn('type="application/ld+json"', html)
+        self.assertNotIn('2026-12-01T23:59:00+09:00', html)
         meta = homepage_cutoff_metadata([post], {}, {pid: proof})
         self.assertEqual(meta[pid]['start'], '2026-11-24')
         self.assertEqual(meta[pid]['endDate'], '2026-12-01')
