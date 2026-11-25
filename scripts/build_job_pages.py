@@ -24,6 +24,8 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # KIPF official fixed-term recruitment PDF 3087160, application section.
+    'a307001': '2026-11-27T10:00:00+09:00',
     # Food Safety Information Service official notice, application instructions.
     'a307027': '2026-11-27T17:00:00+09:00',
     # KOSII employer notice, application instructions on page 5.
@@ -131,6 +133,31 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # Official KIPF recruitment PDF 3087160, sections 1–4; source text read 2026-11-25.
+    'a307001': {
+        'organization': '한국조세재정연구원',
+        'title': '[한국조세재정연구원] 2026년도 제6차 위촉직 직원모집',
+        'source_end_date': '2026-11-27',
+        'source_employment': ['정규직'],
+        'expected_source_seats': '14',
+        'confirmed_employment': '계약직',
+        'employment_note': 'ALIO는 정규직으로 분류하지만 공식 공고문은 전체14명을 계약직(위촉직)으로 명시합니다. 분야별 계약 종료일 또는 계약기간을 확인하세요.',
+        'application_start': '2026-11-13',
+        'application_end_date': '2026-11-27',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3087160',
+        'notice_source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3087161',
+        'checked_on': '2026-11-25',
+        'scope': '공식 공고문 및 직무기술서 PDF의 추출 본문 대조: 모집표·자격·접수·계약조건. 파일 바이너리 해시 별도 미확인.',
+        'hiring_breakdown': '성과관리팀6명 + 세법연구팀·PEMNA운영팀·정부투자분석센터·세정연구센터·전략연구팀·정책평가팀·재정전망센터·재정전망센터(연구윤리출판팀 겸직) 각1명 = 계약직14명',
+        'role_mix_note': (
+            '성과관리팀6명은 재정사업 평가자료 관리와 평가 운영을 지원하며 관련 전공 석사 이상(2027년2월 취득예정 포함)이 대상입니다. '
+            '세법연구팀은 관련 석사 또는 학사 이상과 변호사·회계사·세무사 중 해당 자격 경로가 있습니다. '
+            '서울 PEMNA운영팀은 지정 전공 학사 이상과 원어민 수준 영어·해외출장·영문보고서 작성 요건을 모두 충족해야 합니다. '
+            '재정전망센터 겸직은 학사 취득자(졸업예정 제외)로 출판·연구윤리 업무를 담당합니다. '
+            '전략연구팀과 정책평가팀 간 중복지원은 불가합니다. 성과관리팀은 채용일부터9개월, 정부투자분석센터는8개월 등 계약기간이 다릅니다. '
+            '공식 마감은 11월27일 오전10시이며 원문 접수처 kipf.recruiter.co.kr에서 최신 접수 상태를 확인하세요.'
+        ),
+    },
     'a307141': {'organization': '한국개발연구원',
  'title': '2026년 4분기 2차 한국개발연구원(KDI) 직원 채용 공고(연구직)',
  'source_end_date': '2026-12-01',
