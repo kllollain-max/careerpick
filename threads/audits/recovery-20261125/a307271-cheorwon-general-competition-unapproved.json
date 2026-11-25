@@ -183,5 +183,127 @@
     "queue_write": false,
     "meta_posted": false,
     "next": "Use these exact public government attachment routes in a normally network-enabled execution; preserve original receipt and existing draft. Full attachment and actual CareerPick detail UI must pass before production checks and CAS supply."
+  },
+  "attachment_semantic_review_20261125_1342": {
+    "checked_at": "2026-11-25T13:42:01.854392+09:00",
+    "main_sha": "90fe64fb7c97777d86018ee5dbb62820b352b849",
+    "state_observed": "5cc73d5690fd55f72e146f724705daa5eda27cef",
+    "prior_blob": "71fe810e5049c0685c763ef897cc834a58cbb283",
+    "pr170_merge": "47a48d8f24961af5bff92d90de62d4068e8cf2a2",
+    "scope": "Existing audit only; no approval or slot reservation; PDF full-text semantic review and HWP paragraph text extraction, local rendered PDF key-page visual review",
+    "artifact": {
+      "run_id": 45546967295,
+      "artifact_id": 14992430276,
+      "sha256": "3aedfd3dac7cc999f07863f44fcd74afd8d564316d223beaab276dfe12cbee10",
+      "size_bytes": 500648,
+      "zip_crc": "passed",
+      "all_three_file_sizes_and_sha256_match_manifest": true,
+      "source_collection_not_local_get": true
+    },
+    "documents": [
+      {
+        "name": "notice.pdf",
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3088960",
+        "size": 418362,
+        "sha256": "87f3c3b2201bfddc40c3c67cf2d83bc3763f203deac99da3e42492da027ef033",
+        "receipt_checked_at": "2026-11-25T13:29:12.445310+09:00",
+        "pages": 14,
+        "full_text_sha256": "f2c80793d5b51c13714f5bc05b856e9d0425a208c50955cd31c3d351ac398831",
+        "visual_review_pages": [
+          1,
+          2,
+          3,
+          4,
+          8,
+          14
+        ],
+        "extraction": "pdftotext -layout; all 14 pages read, all rendered, key pages visually reviewed"
+      },
+      {
+        "name": "application.hwp",
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3088961",
+        "size": 55296,
+        "sha256": "61b03cc0712549878de0482c384627bf581365f325b484d66aa017b3cc19eb5f",
+        "receipt_checked_at": "2026-11-25T13:29:13.564008+09:00",
+        "text_sha256": "4d3535b0b94af5073747f15454882f6ea4dd91bc1d4b9c888c3a772a899475be",
+        "method": "CFB/OLE FileHeader and Section0; raw deflate HWP paragraph records decoded (76 records); text read, HWP visual layout not verified"
+      },
+      {
+        "name": "job-description.hwp",
+        "url": "https://www.alio.go.kr/download/download.json?fileNo=3088962",
+        "size": 79360,
+        "sha256": "83df527d5478e58dd841de98faf00cdc6c4a036712b896f0bc86317a3bf45f60",
+        "receipt_checked_at": "2026-11-25T13:29:15.160521+09:00",
+        "text_sha256": "3faabefed82089ee1fa0b675e038f7cefb62c9914e42d3babddcd2a606052cc6",
+        "method": "CFB/OLE FileHeader and Section0; raw deflate HWP paragraph records decoded (50 records); text read; HWP visual layout not verified; PDF appendix 6 visual reviewed"
+      }
+    ],
+    "review_mode": "same_model_two_pass_fallback",
+    "actual_model": "GPT-6.2",
+    "astra_invoked": false,
+    "independent_model_review": false,
+    "first_pass_findings": [
+      "PDF p1 general competition, one cleaner, Dongsongeup Cheorwon, indefinite until retirement 65; five days four hours daily; gross KRW 1,146,500/month, performance pay separate",
+      "PDF p1 eligibility AND: retirement not reached, immediate work from Dec 14, commuting, no disqualification (p8), male applicants no military-duty nonperformance; no educational/major/gender limits",
+      "PDF p2-3 no veteran bonus for <=3 hires; interview tie-break priority veteran then document score; at least five applicants triggers document score; p3-4 deadline Nov 30 16:00 online",
+      "PDF pp9-10 and separate HWP application text are not identical: HWP self-introduction 100–300 characters, PDF form 300 max and screening disqualification below 30%; HWP appendix numbering differs and evidence wording differs. Do not publish a definitive self-introduction minimum or document-proof simplification until reconciled.",
+      "PDF p14 and separate job-description HWP substantive job duties and education/major match. Age unrestricted in generic job description subject to p1 retirement rule."
+    ],
+    "edits": [
+      "Avoid implication retirement alone suffices; separate all mandatory eligibility requirements",
+      "Add verified gross monthly pay and working hours",
+      "No self-introduction length claim or unsupported details; preserve fixed CTA and explicit deadline"
+    ],
+    "revised_draft": "한국농어촌공사 철원화천지사 청소원, 보훈·장애인 대상자만 지원할 수 있나요?\n아니요. 11월 20일 일반공개경쟁은 학력·전공·성별 제한이 없어요.\n\n강원 철원 공무직(무기계약직) 1명, 주 5일 하루 4시간, 월 114만6,500원(세전)이에요.\n정년(만 65세) 미도달, 출퇴근·12월 14일 즉시 근무 가능, 임용 결격사유 없음이 필수예요. 남성은 병역의무 불이행 사실이 없어야 해요.\n\n취업지원대상자는 면접 동점 시 우선해요. 11월 30일 16시 온라인 마감이에요.\n\n자세한 사항은 프로필링크 확인",
+    "body_chars": 282,
+    "body_sha256": "81c69251fdad4b53a5d50cda56e8a7cdcd8168912cfab81771596b5f523495f0",
+    "second_pass_result": {
+      "status": "partial_pass_hold",
+      "pdf_facts_and_final_body_match": true,
+      "hwp_text_read": true,
+      "cta_count": 1,
+      "cta_last": true,
+      "question_answer": true,
+      "url_or_hashtag": false,
+      "attachment_form_discrepancy": "not asserted in public draft; conservative HOLD pending official clarification of application form if required",
+      "final_ui_verified": false,
+      "production_validation": "not_run",
+      "reviewed_submission_created": false
+    },
+    "source_html": {
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+      "checked_at": "2026-11-25T13:29:03.987297+09:00",
+      "sha256": "5f5ca5f2374a793fbbf0f1ec171717a86b2e5e1358035c1d803027a8f46caa1d",
+      "size_bytes": 12717,
+      "source": "same scheduled artifact official-evidence; HTML text crosschecked by web today"
+    },
+    "correction_check": {
+      "scope": "issuer board page 1 entries 588–579 (Nov 23–Nov 3), ALIO visible ongoing, designated ATS visible recruiting and exact cutoff; public correction search",
+      "result": "no correction/cancellation found in checked scope; not exhaustive",
+      "urls": [
+        "https://www.ekr.or.kr/index.krc?contentUid=8a8bb3529665d7140199501cd3ef6280",
+        "https://recruit.incruit.com/ekr/job/2611180022",
+        "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271"
+      ]
+    },
+    "duplicate_observation": {
+      "queue_count": 57,
+      "staging_count": 26,
+      "submissions_count": 7,
+      "posted_ids_count": 104,
+      "notice_found": false,
+      "slot_16_claim": "404 not found; not publication authorization",
+      "ready_count": 0,
+      "preflight_run": 45546967295,
+      "live_meta_receipt_checked_at": "2026-11-25T13:29:15.224834+09:00",
+      "live_posts_today": 0
+    },
+    "remaining": [
+      "actual CareerPick #job=a307271 rendered UI (web open inaccessible; local DNS Errno -3; do not bypass restrictions)",
+      "complete current production checks and official receipt revalidation, reconcile HWP/PDF application differences if required",
+      "latest claim/queue/history and freshness check before CAS supply; no queue writes until all pass"
+    ],
+    "queue_write": false,
+    "meta_posted": false
   }
 }
