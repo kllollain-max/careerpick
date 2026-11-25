@@ -2829,8 +2829,8 @@
       "source": "alio",
       "official_id": "307039",
       "scheduled_at": "2026-11-26T16:00:00+09:00",
-      "format_id": "eligibility",
-      "prepared_at": "2026-11-26T04:50:16.768+09:00",
+      "format_id": "interest",
+      "prepared_at": "2026-11-26T04:50:53.997+09:00",
       "prompt_sha256": "d6da0567d9590ecaa1e1fe3dc35f4667964fc7727570cdcb3af44b93a0e2d4df",
       "publication_policy_id": "careerpick-threads-v5-20261111",
       "publication_policy_sha256": "891e69f93cfc5a8b4cbeff9877fda36b5675a44a4daad067da48e6a6e1407f4d",
@@ -2848,7 +2848,7 @@
       },
       "writer": {
         "status": "ready",
-        "post_text": "전북 군산에서 만 55세 이상을 대상으로 한 채용이에요.\n한국서부발전 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요.\n공고 마감일 기준 1년 이내 건강진단 결과 이상이 없어야 해요.\n12월 2일 14:00까지 온라인 접수예요.\n자세한 사항은 프로필링크 확인",
+        "post_text": "전북 군산에서 만 55세 이상을 대상으로 한 채용이에요.\n한국서부발전(주) 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요.\n\n공고 마감일 기준 1년 이내 실시한 건강진단 결과에 이상이 없어야 해요.\n12월 2일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
         "draft_text": null,
         "reply_texts": [],
         "review": {
@@ -2856,7 +2856,7 @@
           "scheduled_at": "2026-11-26T16:00:00+09:00",
           "verification_basis": "checked_official_source",
           "checked_at": "2026-11-26T04:09:56.429053+09:00",
-          "reference_at": "2026-11-26T04:50:16.768+09:00",
+          "reference_at": "2026-11-26T04:50:53.997+09:00",
           "source_refs": [
             {
               "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
@@ -2878,7 +2878,8 @@
           "pre_publish_checks": [
             "Actual ALIO official HTML from 04:09 preflight run 45682402960, direct official page read in this turn and employer job list and designated ATS confirm 모집중, 군산 1명, 12/2 14:00. Latest employer list first page no correction/cancellation visible; no claim about all pages.",
             "Exact a307039 exists in current main and last successfully deployed snapshot ecd7046695c5747a7c8b7041f819679cd0be6eeb, detail shows 12/2 14:00. Latest operations failed deployment; live UI render not claimed.",
-            "16:00 IMAGE forecast conditional on actual preceding two successes; no card review claimed. Existing production preflight must generate missing card and intake must pass; not an approved queue insertion."
+            "16:00 IMAGE forecast conditional on actual preceding two successes; no card review claimed. Existing production preflight must generate missing card and intake must pass; not an approved queue insertion.",
+            "Production source scripts/threads_v5.py FORMATS, copy_check and _hooks inspected: corrected 16 slot format_id to interest, canonical institution spelling and required blank line separators; no production execution claimed."
           ],
           "omitted_optional_facts": [
             "전체 자격 판정이 아님. 병역, 결격, 명시기한 내 근무 가능 등 기타 요건은 공식 공고 참조."
@@ -2939,12 +2940,12 @@
               {
                 "id": "target",
                 "type": "target",
-                "text": "전북 군산에서 만 55세 이상을 대상으로 한 채용이에요.\n한국서부발전 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요."
+                "text": "전북 군산에서 만 55세 이상을 대상으로 한 채용이에요.\n한국서부발전(주) 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요."
               },
               {
                 "id": "job",
                 "type": "job",
-                "text": "한국서부발전 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요."
+                "text": "한국서부발전(주) 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요."
               },
               {
                 "id": "deadline",
@@ -2968,7 +2969,7 @@
                 "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039"
               },
               {
-                "text": "공고 마감일 기준 1년 이내 건강진단 결과 이상이 없어야 해요.",
+                "text": "공고 마감일 기준 1년 이내 실시한 건강진단 결과에 이상이 없어야 해요.",
                 "excerpt": "건강 진단결과 이상이 없는 자(공고 마감일 기준 진단일 1년 이내)",
                 "classification": "required",
                 "logic": "single",
@@ -2984,7 +2985,7 @@
               "excerpt": "한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고 2026.11.17 / 진행중 공공기관 채용정보 기관명 한국서부발전(주) 표준직무(NCS) 음식서비스 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 전북 근무분야 계약직 채용인원 1"
             },
             "useful_point": {
-              "text": "공고 마감일 기준 1년 이내 건강진단 결과 이상이 없어야 해요.",
+              "text": "공고 마감일 기준 1년 이내 실시한 건강진단 결과에 이상이 없어야 해요.",
               "source_ref": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
               "excerpt": "건강 진단결과 이상이 없는 자(공고 마감일 기준 진단일 1년 이내)"
             },
@@ -2994,10 +2995,10 @@
               "checked_at": "2026-11-26T04:50:16.768+09:00",
               "scope": "ALIO original marked 진행중; employer official list https://www.iwest.co.kr/iwest/919/subview.do first page and designated ATS https://recruit.incruit.com/iwest/job/2611090017 marked 모집중 and same deadline, no correction/cancellation in checked sources. No universal guarantee."
             },
-            "style_rewrites": 0,
+            "style_rewrites": 1,
             "selection_reason": "Single unit, energy sector, official source and employer ATS match, fresh, 16:00 first missing slot; 04:09 live account and current queue/staging/posted history checked; IMAGE conditional.",
             "public_preview": {
-              "main_text": "전북 군산에서 만 55세 이상을 대상으로 한 채용이에요.\n한국서부발전 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요.\n공고 마감일 기준 1년 이내 건강진단 결과 이상이 없어야 해요.\n12월 2일 14:00까지 온라인 접수예요.\n자세한 사항은 프로필링크 확인",
+              "main_text": "전북 군산에서 만 55세 이상을 대상으로 한 채용이에요.\n한국서부발전(주) 군산발전본부 기간제 후생담당원(비정규직) 1명을 모집해요.\n\n공고 마감일 기준 1년 이내 실시한 건강진단 결과에 이상이 없어야 해요.\n12월 2일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
               "detail_reply": ""
             },
             "experiment_eligible": false,
