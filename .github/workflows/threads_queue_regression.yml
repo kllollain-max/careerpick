@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'scripts/threads_*.py'
+      - 'scripts/threads_live_detail_review.cjs'
+      - 'tests/test_threads_live_detail_review.cjs'
       - 'tests/test_threads*.py'
       - '.github/workflows/threads_auto.yml'
       - '.github/workflows/threads_queue_regression.yml'
@@ -29,3 +31,5 @@ jobs:
           for pattern in test_threads_queue_bridge_preflight.py test_threads_reviewed_ingest.py test_threads_gsipa_pinned_source.py test_threads_official_review_pack.py test_threads_unreviewed_drafts.py test_threads_workflow_entrypoints.py test_threads_supply_audit.py test_threads_live_inventory.py test_threads_verified_slot_idempotence.py; do
             python -m unittest discover -s tests -p "$pattern" -v || exit 1
           done
+      - name: Check pinned public UI evidence contract without network or posting
+        run: node --test tests/test_threads_live_detail_review.cjs

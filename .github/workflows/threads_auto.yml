@@ -132,6 +132,18 @@ jobs:
         run: python -m scripts.threads_live_inventory
       - name: Persist replenishment handoff for the independent writer
         run: python -m scripts.threads_supply_audit --persist
+      - name: Capture pinned live CareerPick detail for independent semantic review only
+        continue-on-error: true
+        timeout-minutes: 3
+        env:
+          THREADS_CLAIM_TOKEN: ''
+          THREADS_ACCESS_TOKEN: ''
+        run: |
+          if [ -f threads-official-raw-review/manifest.json ] && node -e "const m=require('./scripts/threads_live_detail_review.cjs');process.exit(m.eligible(require('./threads-official-raw-review/manifest.json'))?0:1)"; then
+            node --test tests/test_threads_live_detail_review.cjs
+            npm install --prefix "$RUNNER_TEMP/cp-threads-ui" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.56.1
+            NODE_PATH="$RUNNER_TEMP/cp-threads-ui/node_modules" node scripts/threads_live_detail_review.cjs
+          fi
       - name: Flag missing approved supply with actionable diagnostics
         run: |
           python - <<'PY'
@@ -177,6 +189,7 @@ jobs:
             threads-unreviewed-drafts.json
             threads-official-evidence.json
             threads-official-raw-review/
+            threads-live-detail-review/
             threads-supply-audit.json
             threads-live-inventory.json
           if-no-files-found: ignore
