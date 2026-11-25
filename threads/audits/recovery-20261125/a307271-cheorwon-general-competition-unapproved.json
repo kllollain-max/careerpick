@@ -130,5 +130,58 @@
     },
     "queue_write": false,
     "meta_posted": false
+  },
+  "attachment_route_recovery_20261125_1044": {
+    "scope": "new official attachment routes and fresh existing scheduled-run HTML receipt; no new manuscript, no approval or publication",
+    "reference_date": "2026-11-25",
+    "main_observed": "538e8247b5392623e6712d6930ab2e3f538210f8",
+    "state_parent": "f83ac9b2ec4a8594ec00d7e9ccef2334fbff885d",
+    "previous_audit_blob": "960345db935c63e76fb3fd9fe8cd5d196805a127",
+    "official_html_receipt": {
+      "run_id": "45526512175",
+      "checked_at": "2026-11-25T10:33:36.891761+09:00",
+      "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+      "sha256": "5f5ca5f2374a793fbbf0f1ec171717a86b2e5e1358035c1d803027a8f46caa1d",
+      "size_bytes": 12717,
+      "content_type": "text/html;charset=utf-8",
+      "receipt_observed_via": "existing scheduled preflight handoff, not new local binary download",
+      "same_sha_as_prior": true
+    },
+    "new_alternative_routes": [
+      {
+        "url": "https://www.cwg.go.kr/www/selectBbsNttView.do?bbsNo=29&key=1662&nttNo=322202",
+        "evidence": "철원군 공식 게시판 검색 결과: 11/23 게시, 동일 파일명 261120.pdf, 1명과 11/30 16시 마감 및 직무 일치. 직접 페이지 재조회 TimeoutError. 게시판 검색 결과만 확인."
+      },
+      {
+        "url": "https://www.korea.kr/common/download.do?fileId=145822501&tblKey=GBD",
+        "discovered_via": "https://jiwon.knowhow-it.com/jobs/400098",
+        "evidence": "외부 색인이 연결한 정부 정책브리핑 파일 URL. 웹 다운로드 application/x-download 미지원, 로컬 urllib DNS Errno -3. 실제 PDF 바이트 미확보."
+      },
+      {
+        "url": "https://www.korea.kr/common/docViewer.do?fileId=145822501&tblKey=GBD",
+        "evidence": "정부 문서뷰어는 HTML 셸만 반환, 실제 문서 본문/페이지 확인 불가."
+      },
+      {
+        "url": "https://www.gojobs.go.kr/downFile.do?filenm=%EA%B3%B5%EB%AC%B4%EC%A7%81%28%EC%B2%AD%EC%86%8C%EC%9B%90%29+%EA%B3%B5%EA%B0%9C%EA%B2%BD%EC%9F%81+%EC%B1%84%EC%9A%A9+%EA%B3%B5%EA%B3%A0+261120.pdf&saveGbn=employ%2F%ED%95%9C%EA%B5%AD%EB%86%8D%EC%96%B4%EC%B4%8C%EA%B3%B5%EC%82%AC&uuid=8102845090577316",
+        "discovered_via": "https://www.gongwork.com/job/400098/ and official listing https://www.gojobs.go.kr/apmView.do?empmnsn=400098",
+        "evidence": "나라일터 동일 명칭 첨부 링크; 웹 application/octet-stream 미지원, 로컬 urllib DNS Errno -3. 실제 PDF 바이트 미확보."
+      }
+    ],
+    "new_verified_html_fact": "지원인원이 모집인원의 5배수 이상이면 서류평가 자기소개서 60점·경력 20점·고령자 20점, 5배수 이내 선발 및 동점자 전원 합격. 기존 본문 변경 없이 보조 검수 근거로 보존.",
+    "production_validation": "not_run; attachment and actual rendered detail still unverified",
+    "duplicate_check": {
+      "queue_count": 57,
+      "staging_count": 26,
+      "submissions_count": 7,
+      "posted_ids_count": 104,
+      "notice_found": false,
+      "slot_12_claim_file": "404 not found at observed state head; not permission to publish"
+    },
+    "ready_count": 0,
+    "live_meta_receipt_checked_at": "2026-11-25T10:33:40.855114+09:00",
+    "live_posts_today": 0,
+    "queue_write": false,
+    "meta_posted": false,
+    "next": "Use these exact public government attachment routes in a normally network-enabled execution; preserve original receipt and existing draft. Full attachment and actual CareerPick detail UI must pass before production checks and CAS supply."
   }
 }
