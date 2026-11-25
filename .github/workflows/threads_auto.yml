@@ -141,6 +141,15 @@ jobs:
         run: |
           if [ -f threads-official-raw-review/manifest.json ] && node -e "const m=require('./scripts/threads_live_detail_review.cjs');process.exit(m.eligible(require('./threads-official-raw-review/manifest.json'))?0:1)"; then
             node --test tests/test_threads_live_detail_review.cjs
+            # The isolated browser must have a real Korean-capable system font.
+            # Do not treat missing-glyph screenshots as visual evidence.
+            if [ -z "$(fc-list :lang=ko family)" ]; then
+              sudo apt-get update -qq
+              sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+              fc-cache -f
+            fi
+            test -n "$(fc-list :lang=ko family)"
+            fc-match -f '%{family}\n' 'sans-serif:lang=ko'
             npm install --prefix "$RUNNER_TEMP/cp-threads-ui" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.56.1
             NODE_PATH="$RUNNER_TEMP/cp-threads-ui/node_modules" node scripts/threads_live_detail_review.cjs
           fi
