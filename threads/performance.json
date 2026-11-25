@@ -16312,6 +16312,245 @@
           "final_first_sentence": "도시·교통·정책 분야 석사라면,"
         }
       }
+    },
+    {
+      "observation_id": "9e4920ff79a90c82f5d701e957347851a0f102a73be6b9005518074c03993483",
+      "post_id": "18203041492385442",
+      "window": "72h",
+      "captured_at": "2026-11-25T08:10:56.830916+00:00",
+      "published_at": "2026-11-22T08:09:29.958712+00:00",
+      "elapsed_seconds": 259286.872204,
+      "delay_seconds": 86.872204,
+      "timing": "within_one_hour",
+      "comparable_milestone": true,
+      "status": "captured",
+      "error_code": null,
+      "metrics": {
+        "views": 5424,
+        "likes": 26,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0
+      },
+      "likes_rate_percent": 0.47935103244837757,
+      "metric_status": {
+        "views": "observed",
+        "likes": "observed",
+        "replies": "observed",
+        "reposts": "observed",
+        "quotes": "observed"
+      },
+      "reader_replies": null,
+      "reader_replies_status": "author_separation_unverified",
+      "automated_detail_reply_id": null,
+      "site_visits": null,
+      "profile_link_clicks": null,
+      "applications": null,
+      "public_verification": {
+        "status": "verified",
+        "post_id": "18203041492385442",
+        "checked_at": "2026-11-25T08:10:56.533717+00:00",
+        "reason": null,
+        "expected_text_sha256": "f99f8bda4fd2b4875e8a04f2ee9fde1b1852b10e7c1d19b671ca8c798ca7e305",
+        "actual_text_sha256": "f99f8bda4fd2b4875e8a04f2ee9fde1b1852b10e7c1d19b671ca8c798ca7e305",
+        "actual_first_sentence": "학력 제한 없는 경영 공무직을 찾는다면,",
+        "is_reply": false
+      },
+      "metadata": {
+        "post_id": "18203041492385442",
+        "notice_id": "a306841",
+        "published_at": "2026-11-22T08:09:29.958712+00:00",
+        "scheduled_at": "2026-11-22T16:00:00+09:00",
+        "slot_hour_kst": 16,
+        "actual_hour_kst": 17,
+        "body_chars": 288,
+        "first_sentence": "학력 제한 없는 경영 공무직을 찾는다면,",
+        "editorial_v5": {
+          "policy_id": "careerpick-threads-v5-20261111",
+          "contract_version": 2,
+          "restrictions_complete": true,
+          "fact_consistency_check": "passed",
+          "hook_candidates": [
+            {
+              "id": "education_condition",
+              "type": "condition",
+              "text": "학력 제한 없는 경영 공무직을 찾는다면,\n한국건강가정진흥원 경영 공무직(라급) 1명 모집이에요."
+            },
+            {
+              "id": "management_target",
+              "type": "target",
+              "text": "경영관리 업무를 맡을 공무직 채용이에요.\n한국건강가정진흥원 경영 공무직(라급) 1명, 서울 근무예요."
+            },
+            {
+              "id": "deadline",
+              "type": "deadline",
+              "text": "11월 23일 14:00에 접수가 끝나요.\n한국건강가정진흥원 경영 공무직(라급) 1명 공고예요."
+            }
+          ],
+          "selected_hook_id": "education_condition",
+          "first_sentence_type": "condition",
+          "hook_review": {
+            "factual": true,
+            "target_clear": true,
+            "natural": true
+          },
+          "key_restrictions": [
+            {
+              "text": "학력 제한 없는",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "□ 지원 자격\n ◦ 연령: 만 60세 미만인 자\n ◦ 학력: 제한없음\n ◦ 병역:「병역법」제76조에서 정한 병역의무 불이행 사실이 없는 자\n ◦ 한국건강가정진흥원 「인사규정」 제11조 결격사유에 해당하지 않는 자\n ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "만 60세 미만",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "□ 지원 자격\n ◦ 연령: 만 60세 미만인 자\n ◦ 학력: 제한없음\n ◦ 병역:「병역법」제76조에서 정한 병역의무 불이행 사실이 없는 자\n ◦ 한국건강가정진흥원 「인사규정」 제11조 결격사유에 해당하지 않는 자\n ",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "병역의무 불이행 사실",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "◦ 병역:「병역법」제76조에서 정한 병역의무 불이행 사실이 없는 자",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "임용일 결격사유가 없어야 해요.",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "◦ 임용일 기준으로 한국건강가정진흥원 인사규정 제11조 결격사유에 해당하지 않아야 하며, 이를",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "이전·전보 시 변경 가능",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "◦ 근로조건에 기재된 근무지는 사무실 이전 또는 임용 이후 전보 등에 따라 변경될 수 있습니다.",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "수습은 3개월 이내예요.",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "◦ 수습 기간은 3개월 이내로 한국건강가정진흥원 내부 규정에 따릅니다.",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "임용유예·영리겸직은 불가해요.",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "◦ 학업 등을 이유로 한 임용 유예는 허용되지 않으며, 임용일 기준 개인사업 또는 영리 목적의\n 업무에 겸직할 수 없습니다.\n",
+              "classification": "required",
+              "logic": "single"
+            },
+            {
+              "text": "지원서는 중복 없이 1회만 제출해요.",
+              "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+              "excerpt": "◦ 입사지원서는 모집 분야별로 중복 접수할 수 없으며, 1회만 제출할 수 있습니다.",
+              "classification": "required",
+              "logic": "single"
+            }
+          ],
+          "recruitment_unit": {
+            "title": "경영",
+            "count": 1,
+            "employment": "공무직(라급)",
+            "scope": "single_recruitment_unit",
+            "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+            "excerpt": "코드    고용형태   채용분야      근무지        인원                  직무내용\n\n      공무직\n01           경영     서울 중구 퇴계로     1    ○ 경영관리 및 운영\n      (라급)\n\n      공무직"
+          },
+          "useful_point": {
+            "text": "가점 증빙은 온라인 첨부해야 인정되고",
+            "source_ref": "https://www.kihf.or.kr/download.do?uuid=823573ad-0547-4242-91a2-170b83ed5a02.pdf",
+            "excerpt": "◦ 온라인 지원시 증빙 파일이 첨부되지 않은 경우, 인정되지 않습니다."
+          },
+          "correction_check": {
+            "checked_at": "2026-11-21T19:11:16.722029+09:00",
+            "result": "none_found",
+            "source_ref": "https://www.kihf.or.kr/web/lay1/bbs/S1T838C75/A/4/list.do",
+            "scope": "Employer recruitment board first page: newest entries122 through113, starting2026-11-09 and ending2025-11-17; notice1116047, its originalPDF and ALIO306841 attachments. Target122 remains newest; no later correction/cancellation appeared in actually read board titles or target page.",
+            "limitations": "Only the retrieved first recruitment-board page and exact notice were checked; other menus, old board pages and all internet were not searched. Recheck before publication."
+          },
+          "style_rewrites": 1,
+          "selection_reason": "Previously unposted code01 with separately verified one-person unit; no degree restriction and ongoing application until11/23 14:00; selected for public administrative-role diversity, without invented audience popularity.",
+          "public_preview": {
+            "main_text": "학력 제한 없는 경영 공무직을 찾는다면,\n한국건강가정진흥원 경영 공무직(라급) 1명 모집이에요.\n\n서울 중구 퇴계로 근무(이전·전보 시 변경 가능), 근무기간은 정함이 없고 수습은 3개월 이내예요.\n만 60세 미만이며 병역의무 불이행 사실·임용일 결격사유가 없어야 해요.\n\n서류·필기·면접을 거쳐 12월 30일 임용 예정이에요. 임용유예·영리겸직은 불가해요.\n가점 증빙은 온라인 첨부해야 인정되고, 지원서는 중복 없이 1회만 제출해요.\n\n11월 23일 14:00까지 온라인 접수예요.\n\n자세한 사항은 프로필링크 확인",
+            "detail_reply": ""
+          },
+          "card_restriction": "만 60세 미만",
+          "presentation_style": "eligibility_info",
+          "comparison_context": {
+            "role": "경영",
+            "location": "서울 중구 퇴계로",
+            "unit_count": 1,
+            "planned_media": "TEXT conditional on actual prior publication",
+            "views": null,
+            "followers": null
+          },
+          "experiment_eligible": false,
+          "experiment_exclusion_reason": "Operational replenishment; no measured comparative outcome.",
+          "card_visual_review": {
+            "notice_id": "a306841",
+            "status": "passed",
+            "reviewed_at": "2026-11-21T19:15:26.000+09:00",
+            "reviewed_width": 360,
+            "asset_path": "threads-images/a306841.jpg",
+            "preview_asset_path": "threads-images/a306841-360.png",
+            "sha256": "7014c4a45b8cb3ff76b892ba28af57f9ecaa3e17d8f6d18b72867f1ea6a95677",
+            "preview_sha256": "80d24dff94c15f360b413bcbc7011555f0ae000a9b08c401cedfaae8944bb5d8",
+            "facts_sha256": "4cbba5203d957fb2e95aaaef2141d742c37bd6bb1dffc4fd37b850e0c7efdf31",
+            "layout_version": "careerpick-single-main-card-v2",
+            "actual_visual_inspection": "Both original1080JPEG and360PNG opened and inspected. Management, public-service permanent-contract gradeLa1 vacancy, Korean Institute for Healthy Family name, November23 14:00 deadline and under60 restriction readable and unclipped; no URL/QR."
+          }
+        },
+        "post_attributed_profile_visits": null,
+        "post_attributed_follow_increase": null,
+        "post_attributed_link_clicks": null,
+        "format_id": "interest",
+        "media": "TEXT",
+        "org": "한국건강가정진흥원",
+        "job": "경영",
+        "employment": "공무직(라급)",
+        "recruitment_unit_count": 1,
+        "location": "서울 중구 퇴계로",
+        "audience_scope": null,
+        "audience_breadth": null,
+        "notice_type": null,
+        "comparison_context": {
+          "role": "경영",
+          "location": "서울 중구 퇴계로",
+          "unit_count": 1,
+          "planned_media": "TEXT conditional on actual prior publication",
+          "views": null,
+          "followers": null
+        },
+        "institution_interest": null,
+        "interest_evidence": null,
+        "comparison_group": null,
+        "comparison_group_evidence": null,
+        "deadline": "2026-11-23T14:00:00+09:00",
+        "deadline_date_only": false,
+        "deadline_distance_seconds": 75030.041288,
+        "detail_reply_status": null,
+        "detail_reply_id": null,
+        "public_verification": {
+          "status": "verified",
+          "post_id": "18203041492385442",
+          "checked_at": "2026-11-25T08:10:56.533717+00:00",
+          "reason": null,
+          "expected_text_sha256": "f99f8bda4fd2b4875e8a04f2ee9fde1b1852b10e7c1d19b671ca8c798ca7e305",
+          "actual_text_sha256": "f99f8bda4fd2b4875e8a04f2ee9fde1b1852b10e7c1d19b671ca8c798ca7e305",
+          "actual_first_sentence": "학력 제한 없는 경영 공무직을 찾는다면,",
+          "is_reply": false
+        },
+        "hook": {
+          "eligible": false,
+          "reason": "legacy_or_missing_policy",
+          "hook_type": null,
+          "final_first_sentence": "학력 제한 없는 경영 공무직을 찾는다면,"
+        }
+      }
     }
   ],
   "account_observations": [
