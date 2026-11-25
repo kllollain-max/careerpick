@@ -50,5 +50,85 @@
     "reason": "QUEUE_SLOT_MISSING",
     "post_step": "skipped"
   },
-  "search_expression": "한국농어촌공사 철원화천지사 청소원 지원자격 (editorial search formulation, not volume measurement)"
+  "search_expression": "한국농어촌공사 철원화천지사 청소원 지원자격 (editorial search formulation, not volume measurement)",
+  "fallback_review_20261125_0941": {
+    "run_context": "2026-11-25 09:41 KST 회차",
+    "main_sha": "9b501a3a717c7863b6302480ec75672e90ffd955",
+    "state_parent": "0321b003f3489a4d729a751bc48d353f91b4c712",
+    "prior_blob": "e17672ae1fb511f5d1d34d748a409495b9b6a7a0",
+    "review_mode": "same_model_two_pass_fallback",
+    "actual_model": "GPT-6.2",
+    "astra_invoked": false,
+    "independent_model_review": false,
+    "scope": "accessible official HTML semantic review; full attachment, actual detail UI and production validation not completed",
+    "first_pass_findings": [
+      "기관 채용게시판 상세에서 정년 만65세 명시 확인: 기존 모호한 정년 표현 보완",
+      "하루 4시간/주 5일 근무 확인: 전일제로 오해할 수 있는 기존 문안 개선",
+      "기관 공식 목록에서 11월4일 보훈·장애인 제한경쟁과 11월20일 공개경쟁을 별개 공고로 확인",
+      "ALIO와 지정접수처 마감 11월30일 16시 일치; 정년 미도달, 출퇴근, 즉시근무, 남성 병역, 결격 및 동점 우대 구분"
+    ],
+    "edits": [
+      "정년 만65세 명시",
+      "주5일 하루4시간 추가",
+      "강원 철원 명시",
+      "질문과 즉답 및 CTA 유지"
+    ],
+    "revised_draft": "한국농어촌공사 철원화천지사 청소원, 보훈·장애인 대상자만 지원할 수 있나요?\n아니요. 11월 20일 일반공개경쟁은 학력·전공·성별 제한 없이 정년(만 65세)에 도달하지 않은 사람이 대상이에요.\n\n강원 철원 공무직(무기계약직) 1명, 하루 4시간·주 5일 근무예요. 출퇴근과 12월 14일 즉시 근무가 가능하고 임용 결격사유가 없어야 해요. 남성은 병역의무 불이행 사실이 없어야 해요.\n\n취업지원대상자는 면접 동점 시 우선해요. 11월 30일 16시 온라인 마감이에요.\n\n자세한 사항은 프로필링크 확인",
+    "second_pass_result": {
+      "status": "partial_pass_hold",
+      "visible_official_facts_consistent": true,
+      "checks": {
+        "chars": 280,
+        "cta_count": 1,
+        "cta_last": true,
+        "url_or_tag": false,
+        "question_answer": true
+      },
+      "full_attachment_verified": false,
+      "final_ui_verified": false,
+      "production_validation": "not_run",
+      "reason": "공식 첨부 원본 GET/실제 상세 화면 차단으로 전체 검수 통과 아님"
+    },
+    "evidence_refs": [
+      {
+        "url": "https://www.ekr.or.kr/planweb/board/view.krc?dataUid=8a8bb352a1e76c7a01a1f64cbe045909&page=1&boardUid=402880317cc0644a017cc5e8000f06b7&contentUid=8a8bb3529665d7140199501cd3ef6280&searchType=&keyword=&categoryUid1=&categoryUid2=8a8bb3529665d714019951996437",
+        "scope": "issuer public HTML detail: work hours, retirement age, location, eligibility, deadline; web extraction not original byte receipt"
+      },
+      {
+        "url": "https://www.ekr.or.kr/index.krc?contentUid=8a8bb3529665d7140199501cd3ef6280",
+        "scope": "issuer board page 1, list items 588–579; latest 11/20 public competition and 11/4 separate limited competition; no correction found in this limited scope"
+      },
+      {
+        "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307271",
+        "scope": "fresh visible official HTML; original bytes not acquired this run"
+      },
+      {
+        "url": "https://recruit.incruit.com/ekr/job/2611180022",
+        "scope": "designated ATS, recruiting status and deadline"
+      },
+      {
+        "url": "https://www.gojobs.go.kr/apmView.do?empmnsn=400098",
+        "scope": "official government crosscheck"
+      }
+    ],
+    "policy_sha256_verified": 4,
+    "source_attachment_errors": {
+      "alio": "web HTTP 403 fileNo3088960",
+      "ekr": "web unsupported application/octet-stream; local urllib 2 attempts Errno -3 DNS",
+      "ats": "attachment action returned HTML"
+    },
+    "ui_errors": {
+      "tinyfish": "wallet_out_of_funds; execution not started",
+      "local_chromium": "net::ERR_BLOCKED_BY_ADMINISTRATOR"
+    },
+    "queue_observation": {
+      "count": 57,
+      "staging": 26,
+      "submissions": 7,
+      "ready": 0,
+      "preflight_run": "45514377527"
+    },
+    "queue_write": false,
+    "meta_posted": false
+  }
 }
