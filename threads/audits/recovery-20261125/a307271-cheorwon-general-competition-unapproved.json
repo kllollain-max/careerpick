@@ -363,5 +363,36 @@
     "queue_write": false,
     "meta_posted": false,
     "next": "Fix Korean font availability in existing read-only evidence workflow; inspect actual screenshots and final production checks before supplying future unstarted slot."
+  },
+  "live_mobile_visual_review_20261125_1711": {
+    "status": "passed_for_ui_evidence",
+    "main_sha": "e1818f33d1e93000de76c8ac608bf4ae1d6c6bf7",
+    "run_id": 45574037607,
+    "artifact_id": 15003143333,
+    "artifact_sha256": "905fc7980fd91cca5571082ad63e2b3bbb921937ae836e9ec18c76dafd532a56",
+    "checked_at": "2026-11-25T17:11:46.575+09:00",
+    "checked_at_basis": "scheduled screenshot capture time; human-readable screenshots inspected afterward",
+    "http_status": 200,
+    "automated_checks_passed": 11,
+    "visual_review": "Opened both real 390px mobile captures. Korean glyphs render normally in title, facts and eligibility. Detail shows one indefinite cleaner role, Gangwon, no education requirement and the five eligibility lines; 11/30 16:00 is in the detailed application section, while the summary correctly directs users to the official notice.",
+    "screenshot_sha256": {
+      "top": "45e7946be20249abc794034d30d0dcdc190812d7e7e55f302bed6e15cdef9b68",
+      "eligibility": "30ff6c8d12a6d787ea07a8d83cf1d80cd13094a91e982ac099983e45b2d38f4b"
+    },
+    "official_notice_receipt": {
+      "digester": "scripts.threads_reviewed_ingest.fetch_official_digest",
+      "live_fetch_passed": true,
+      "sha256": "87f3c3b2201bfddc40c3c67cf2d83bc3763f203deac99da3e42492da027ef033"
+    },
+    "approved_supply_count": 0,
+    "live_posts_today": 0,
+    "live_inventory_checked_at": "2026-11-25T17:11:14.193111+09:00",
+    "remaining": [
+      "Official PDF and separate application HWP differ on self-introduction instructions. No authoritative clarification found or claimed.",
+      "Full final-entry production validation and approved queue ingest are pending."
+    ],
+    "approved_for_queue": false,
+    "queue_write": false,
+    "meta_posted": false
   }
 }
