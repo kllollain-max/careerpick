@@ -108,6 +108,20 @@ jobs:
           else
             echo 'No independently reviewed submissions supplied; cannot synthesize approval from candidate data.'
           fi
+      - name: Prepare exact missing image bytes for writer visual review only
+        continue-on-error: true
+        timeout-minutes: 3
+        env:
+          THREADS_ACCESS_TOKEN: ''
+        run: |
+          if [ -f threads-reviewed-ingest-report.json ] && python -m scripts.threads_card_transfer --needed; then
+            python -m pip install Pillow
+            if [ ! -f /usr/share/fonts/truetype/nanum/NanumGothicBold.ttf ] && [ ! -f /usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc ]; then
+              sudo apt-get update -qq
+              sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+            fi
+            python -m scripts.threads_card_transfer
+          fi
       - name: Promote only existing publisher-validated staged entries by CAS
         run: python scripts/threads_queue_bridge.py --apply --output threads-queue-preflight.json
       - name: Export missing-slot writer handoff (no automatic approval)
@@ -199,6 +213,7 @@ jobs:
             threads-official-evidence.json
             threads-official-raw-review/
             threads-live-detail-review/
+            threads-card-transfer/
             threads-supply-audit.json
             threads-live-inventory.json
           if-no-files-found: ignore
