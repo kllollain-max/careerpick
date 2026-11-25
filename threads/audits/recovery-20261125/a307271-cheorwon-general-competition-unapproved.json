@@ -305,5 +305,63 @@
     ],
     "queue_write": false,
     "meta_posted": false
+  },
+  "live_detail_review_20261125_1643": {
+    "scope": "Existing audit continuation; actual deployed browser capture and independent semantic review, no approval or publication.",
+    "main_sha": "0dc814e393ce6c3a8beb4763c5341482be059b74",
+    "state_parent": "6db48e203029fe5f5952b1f7b4659c160de1ce66",
+    "prior_blob": "70eebb2fa85d2b0df29fc15364938eefb4abe83e",
+    "run_id": 45570267644,
+    "artifact_id": 15002275040,
+    "artifact_sha256": "9c0625705c575b96229477131784b01b7dacbc8edb8cb322d4cb54bfe7a047e1",
+    "artifact_bytes": 564571,
+    "zip_crc_passed": true,
+    "raw_documents": {
+      "all_three_manifest_sha_size_and_prior_bytes_match": true,
+      "checked_at_range": [
+        "2026-11-25T16:43:06.270982+09:00",
+        "2026-11-25T16:43:08.759197+09:00"
+      ]
+    },
+    "live_detail": {
+      "url": "https://kllollain-max.github.io/careerpick/#job=a307271",
+      "checked_at": "2026-11-25T16:43:31.840+09:00",
+      "http_status": 200,
+      "manifest_checks_passed": 11,
+      "rendered_detail_sha256": "5fce4391e67af10840f9c943364e91dbf0c08d34081cf28c47075a7d9d108aff",
+      "top_png_sha256": "a8a4e4c152e03ac44564f1300102af357dc373d7f6566bb2613b94c8117a87ae",
+      "eligibility_png_sha256": "5ef1a0660cbf376b4ed8f771072f2b65a93113b6808e80b71dc6fdbb50694e66",
+      "all_three_files_size_sha_verified": true,
+      "semantic_review": "Actual rendered dialog text, rows, sections and links read: exact notice and employer, 1 hire, indefinite contract, Gangwon, mandatory eligibility and veteran tie-break match official sources. Header explicitly labels date as ALIO posting end and time unconfirmed; detailed screening section states Nov 30 16:00 and online submission, no conflicting asserted cutoff. No claim that header confirms exact deadline.",
+      "semantic_text_match": true,
+      "visual_review": "Both actual PNGs opened; Hangul renders as missing-glyph boxes, so mobile visual legibility not verified. This is consistent with missing Korean font in runner, not proof that users' devices have same problem.",
+      "visual_pass": false
+    },
+    "review_mode": "same_model_two_pass_fallback",
+    "actual_model": "GPT-6.2",
+    "astra_invoked": false,
+    "independent_model_review": false,
+    "body_sha256": "81c69251fdad4b53a5d50cda56e8a7cdcd8168912cfab81771596b5f523495f0",
+    "body_unchanged": true,
+    "second_pass_result": "partial_pass_hold; no new draft; source semantics and rendered UI text match, visual screenshot and current production verification outstanding; original application-form discrepancy retained.",
+    "duplicate_check": {
+      "queue_count": 57,
+      "staging_count": 26,
+      "submissions_count": 7,
+      "notice_found_in_queue_staging_submissions_or_posted": false,
+      "slot_20_claim": "404 at state read; not authorization",
+      "next_media": "TEXT",
+      "pending_active_slots": [],
+      "ready_count": 0
+    },
+    "live_meta": {
+      "checked_at": "2026-11-25T16:43:08.836088+09:00",
+      "today_posts": 0,
+      "pagination_complete": true
+    },
+    "local_production_attempt": "git ls-remote normal HTTPS GET failed: Could not resolve host github.com; new entry validate/receipt/merge not completed",
+    "queue_write": false,
+    "meta_posted": false,
+    "next": "Fix Korean font availability in existing read-only evidence workflow; inspect actual screenshots and final production checks before supplying future unstarted slot."
   }
 }
