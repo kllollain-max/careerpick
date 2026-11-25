@@ -125,6 +125,9 @@ jobs:
         run: python scripts/threads_unreviewed_drafts.py --input threads-writer-handoff.json --output threads-unreviewed-drafts.json
       - name: Capture independent live official-source evidence for review (no approval)
         run: python -m scripts.threads_official_review_pack --input threads-unreviewed-drafts.json --output threads-official-evidence.json
+      - name: Preserve pinned original recruitment attachments for independent review only
+        continue-on-error: true
+        run: python -m scripts.threads_raw_review_artifacts
       - name: Read actual recent Threads receipts without publishing
         run: python -m scripts.threads_live_inventory
       - name: Persist replenishment handoff for the independent writer
@@ -173,6 +176,7 @@ jobs:
             threads-writer-handoff.json
             threads-unreviewed-drafts.json
             threads-official-evidence.json
+            threads-official-raw-review/
             threads-supply-audit.json
             threads-live-inventory.json
           if-no-files-found: ignore
