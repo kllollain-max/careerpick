@@ -16,6 +16,41 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_kipf_fixed_term_307001_corrects_contract_and_cutoff(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.build_public_site import homepage_cutoff_metadata
+        posts = {p['id']: p for p in json.loads(Path('alio.json').read_text())['posts']}
+        post = posts['a307001']
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES[post['id']]
+        cutoff = '2026-11-27T10:00:00+09:00'
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS[post['id']], cutoff)
+        self.assertEqual(post['emp'], ['정규직'])
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 26, 23, 0, tzinfo=timezone.utc)
+            page = render(post, {})
+            self.assertIn('계약직14명', page)
+            self.assertIn('2026-11-27 10:00', page)
+            self.assertIn('성과관리팀6명', page)
+            self.assertIn('졸업예정 제외', page)
+            schema = json.loads(re.search(r'<script type="application/ld[+]json">(.*?)</script>', page, re.S).group(1))
+            self.assertEqual(schema['employmentType'], 'TEMPORARY')
+            self.assertEqual(schema['validThrough'], cutoff)
+            clock.now.return_value = datetime.fromisoformat(cutoff).astimezone(timezone.utc)
+            closed = render(post, {})
+            self.assertIn('noindex,follow', closed)
+            self.assertNotIn('type="application/ld+json"', closed)
+        metadata = homepage_cutoff_metadata([post], CONFIRMED_APPLICATION_CUTOFFS, {post['id']: proof})
+        self.assertEqual(metadata[post['id']]['employment']['terms'], ['계약직'])
+        self.assertEqual(metadata[post['id']]['cutoff'], cutoff)
+        for change in ({'n': '15'}, {'title': '정정 공고'}, {'org': '다른 기관'},
+                       {'due': '2026-12-01'}, {'emp': ['계약직']}, {'alio': False}):
+            altered = {**post, **change}
+            self.assertNotIn(proof['employment_note'], render(altered, {}))
+            self.assertEqual(homepage_cutoff_metadata([altered], CONFIRMED_APPLICATION_CUTOFFS, {post['id']: proof}), {})
+        self.assertEqual(post, original)
+
     def test_new_six_originals_preserve_deadlines_and_applicant_decisions(self):
         from scripts.build_job_pages import VERIFIED_DUTIES, VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
         from scripts.build_public_site import homepage_cutoff_metadata
