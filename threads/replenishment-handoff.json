@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-27T07:09:14.872803+09:00",
-  "run_id": "45902871505",
+  "captured_at": "2026-11-27T08:11:51.841206+09:00",
+  "run_id": "45909440057",
   "source_commit": "01e57455d023c296725aaa9660824388bff6694a",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-27T07:09:07.074060+09:00",
+    "time": "2026-11-27T08:11:42.577539+09:00",
     "future_slots": [
-      "2026-11-27T08:00:00+09:00",
       "2026-11-27T12:00:00+09:00",
       "2026-11-27T16:00:00+09:00",
       "2026-11-27T20:00:00+09:00",
       "2026-11-28T08:00:00+09:00",
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
-      "2026-11-28T20:00:00+09:00"
+      "2026-11-28T20:00:00+09:00",
+      "2026-11-29T08:00:00+09:00"
     ],
     "next_media": "IMAGE",
     "promoted": [],
@@ -167,15 +167,16 @@
     "queue_sha": "abeec71083b69b6752849a649175b1fdc47f6477",
     "staged_sha": "9c0063ba27c2a3cee0d4694281c45c273f5dec97",
     "promoted_count": 0,
-    "approved_supply_count": 4,
+    "approved_supply_count": 3,
     "inventory_target": 8,
-    "inventory_shortfall": 4,
+    "inventory_shortfall": 5,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-27T08:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-27T08:00:00+09:00",
       "2026-11-27T12:00:00+09:00",
       "2026-11-27T16:00:00+09:00",
       "2026-11-27T20:00:00+09:00"
@@ -184,7 +185,8 @@
       "2026-11-28T08:00:00+09:00",
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
-      "2026-11-28T20:00:00+09:00"
+      "2026-11-28T20:00:00+09:00",
+      "2026-11-29T08:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 24,
@@ -194,7 +196,8 @@
         "2026-11-28T08:00:00+09:00",
         "2026-11-28T12:00:00+09:00",
         "2026-11-28T16:00:00+09:00",
-        "2026-11-28T20:00:00+09:00"
+        "2026-11-28T20:00:00+09:00",
+        "2026-11-29T08:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "a307361",
@@ -1269,7 +1272,8 @@
       "2026-11-28T08:00:00+09:00",
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
-      "2026-11-28T20:00:00+09:00"
+      "2026-11-28T20:00:00+09:00",
+      "2026-11-29T08:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "a307361",
@@ -2687,33 +2691,138 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "a307310",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(1) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307310",
         "source_post_sha256": "e3d9b9b3ab2dfb6391c5a6fa4806115f7c32214debabd589c47a6d5cb4537f11",
         "source_detail_sha256": "8935482cb1b433dfc695254be8e7da8144223a21d782ef885f0361289da0ef59",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
+        "application_source_ref": "alio-detail.json#307310/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T01:18:46+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ (필수) 물리치료사 면허증 소지자\r\n○ (필수) NDT, 보바스, PNF, TONA 중 1개 이상 자격 소지자(120시간 이상 이수)\r\n ※ 중추신경계발달재활치료 심평원 청구 가능 자격 확인\r\n○ 소아운동치료 경력 보유자 우대",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "1. 서류 심사 우선 합격 대상(취업지원 대상자, 장애인)\r\n○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5·18민주유공자예우 및 단체설립에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제19조의 규정에 의한 취업지원 대상자\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9에 해당하는 자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n※ 서류 심사 우선 합격 대상자 중 서류 과락 점수 미달자는 우선 합격자에서 제외\r\n※ 채용 인원이 3명 이하인 경우 취업지원 대상자는 우선 합격에서 제외\r\n\r\n2. 전형별 가점 대상자\r\n1) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제1호 및 독립유공자예우에 관한 법률 제16조제3항제1호, 5.18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제1호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제1호, 보훈보상대상자 지원에 관한 법률 제35조제1항제1호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제1호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n2) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제2호 및 독립유공자예우에 관한 법률 제16조제3항제2호, 5·18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제2호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제2호, 보훈보상대상자 지원에 관한 법률 제35조제1항제2호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제2호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n3) 장애인고용촉진 및 직업재활법 제2조1호 규정에 의한 장애인 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n4) 북한이탈주민의 보호 및 정착지원에 관한 법률에 따른 북한이탈주민 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n※ 가점 부여 시 전형 점수가 만점의 40% 미만인 경우 가산하지 않음. 다만, 서류 전형은 예외로 함\r\n※ ‘1), 2)’에 해당하여 가점을 받아 합격하는 인원은 전체 선발 인원의 30%를 초과할 수 없음\r\n※ 채용 예정 인원이 3명 이하인 경우 ‘1), 2)’에 해당하는 자는 각 전형별 가점을 부여하지 않음. 단, 응시자가 채용 예정 인원과 같거나 더 적을 경우에는 가점을 부여함",
+          "recrutNope": "1",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 20. ~ 2026. 12. 7.\r\n2. 서류전형 발표 : 2026. 12. 10.\r\n3. 면접전형 : 2026. 12.15.\r\n4. 최종합격자 발표 : 2026. 12. 22.\r\n5. 임용예정일 : 2027. 1. 1.\r\n\r\n○ 1차 서류전형 : 모집인원의 5배수\r\n○ 2차 면접전형 : 서류전형 합격자\r\n\r\n※ 성명 삭제 시 제출서류 미인정",
+          "workRgnNmLst": "인천"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "a307311",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(2) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307311",
         "source_post_sha256": "464b8383ffb1ef846b270a0842bb34e5d8126a11919b24e8539176fe2748090c",
         "source_detail_sha256": "096fbc7cfb857dde80d79fd2265eb0a2d1ba2eeb5332ca3bfda94b0a36858489",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
+        "application_source_ref": "alio-detail.json#307311/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T01:18:46+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ (필수) 물리치료사 면허증 소지자\r\n○ (필수) NDT, 보바스, PNF, TONA 중 1개 이상 자격 소지자(120시간 이상 이수)\r\n ※ 중추신경계발달재활치료 심평원 청구 가능 자격 확인\r\n○ 소아운동치료 경력 보유자 우대",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "1. 서류 심사 우선 합격 대상(취업지원 대상자, 장애인)\r\n○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5·18민주유공자예우 및 단체설립에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제19조의 규정에 의한 취업지원 대상자\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9에 해당하는 자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n※ 서류 심사 우선 합격 대상자 중 서류 과락 점수 미달자는 우선 합격자에서 제외\r\n※ 채용 인원이 3명 이하인 경우 취업지원 대상자는 우선 합격에서 제외\r\n\r\n2. 전형별 가점 대상자\r\n1) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제1호 및 독립유공자예우에 관한 법률 제16조제3항제1호, 5.18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제1호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제1호, 보훈보상대상자 지원에 관한 법률 제35조제1항제1호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제1호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n2) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제2호 및 독립유공자예우에 관한 법률 제16조제3항제2호, 5·18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제2호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제2호, 보훈보상대상자 지원에 관한 법률 제35조제1항제2호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제2호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n3) 장애인고용촉진 및 직업재활법 제2조1호 규정에 의한 장애인 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n4) 북한이탈주민의 보호 및 정착지원에 관한 법률에 따른 북한이탈주민 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n※ 가점 부여 시 전형 점수가 만점의 40% 미만인 경우 가산하지 않음. 다만, 서류 전형은 예외로 함\r\n※ ‘1), 2)’에 해당하여 가점을 받아 합격하는 인원은 전체 선발 인원의 30%를 초과할 수 없음\r\n※ 채용 예정 인원이 3명 이하인 경우 ‘1), 2)’에 해당하는 자는 각 전형별 가점을 부여하지 않음. 단, 응시자가 채용 예정 인원과 같거나 더 적을 경우에는 가점을 부여함",
+          "recrutNope": "1",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 20. ~ 2026. 12. 7.\r\n2. 서류전형 발표 : 2026. 12. 10.\r\n3. 면접전형 : 2026. 12.15.\r\n4. 최종합격자 발표 : 2026. 12. 22.\r\n5. 임용예정일 : 2027. 1. 1.\r\n\r\n○ 1차 서류전형 : 모집인원의 5배수\r\n○ 2차 면접전형 : 서류전형 합격자\r\n\r\n※ 성명 삭제 시 제출서류 미인정",
+          "workRgnNmLst": "인천"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "a307312",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(3) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307312",
         "source_post_sha256": "3b5f1e0d25ff4ec0ead11ddb2ded9d4d98f77aabd34f74d1417930854867980f",
         "source_detail_sha256": "8f7929694920ce9f1b8a2d5d7c4d4ca4e1d29746429a847fd0ea0dd8a03d4f89",
-        "suggested_slot": null
-      },
+        "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
+        "application_source_ref": "alio-detail.json#307312/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T01:18:46+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ (필수) 물리치료사 면허증 소지자\r\n○ (필수) NDT, 보바스, PNF, TONA 중 1개 이상 자격 소지자(120시간 이상 이수)\r\n ※ 중추신경계발달재활치료 심평원 청구 가능 자격 확인",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "1. 서류 심사 우선 합격 대상(취업지원 대상자, 장애인)\r\n○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5·18민주유공자예우 및 단체설립에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제19조의 규정에 의한 취업지원 대상자\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9에 해당하는 자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n※ 서류 심사 우선 합격 대상자 중 서류 과락 점수 미달자는 우선 합격자에서 제외\r\n※ 채용 인원이 3명 이하인 경우 취업지원 대상자는 우선 합격에서 제외\r\n\r\n2. 전형별 가점 대상자\r\n1) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제1호 및 독립유공자예우에 관한 법률 제16조제3항제1호, 5.18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제1호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제1호, 보훈보상대상자 지원에 관한 법률 제35조제1항제1호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제1호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n2) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제2호 및 독립유공자예우에 관한 법률 제16조제3항제2호, 5·18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제2호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제2호, 보훈보상대상자 지원에 관한 법률 제35조제1항제2호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제2호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n3) 장애인고용촉진 및 직업재활법 제2조1호 규정에 의한 장애인 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n4) 북한이탈주민의 보호 및 정착지원에 관한 법률에 따른 북한이탈주민 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n※ 가점 부여 시 전형 점수가 만점의 40% 미만인 경우 가산하지 않음. 다만, 서류 전형은 예외로 함\r\n※ ‘1), 2)’에 해당하여 가점을 받아 합격하는 인원은 전체 선발 인원의 30%를 초과할 수 없음\r\n※ 채용 예정 인원이 3명 이하인 경우 ‘1), 2)’에 해당하는 자는 각 전형별 가점을 부여하지 않음. 단, 응시자가 채용 예정 인원과 같거나 더 적을 경우에는 가점을 부여함",
+          "recrutNope": "1",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 20. ~ 2026. 12. 7.\r\n2. 서류전형 발표 : 2026. 12. 10.\r\n3. 면접전형 : 2026. 12.15.\r\n4. 최종합격자 발표 : 2026. 12. 22.\r\n5. 임용예정일 : 2027. 1. 1.\r\n\r\n○ 1차 서류전형 : 모집인원의 5배수\r\n○ 2차 면접전형 : 서류전형 합격자\r\n\r\n※ 성명 삭제 시 제출서류 미인정",
+          "workRgnNmLst": "인천"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "a307313",
         "status": "unreviewed",
@@ -2792,13 +2901,15 @@
         "2026-11-28T08:00:00+09:00",
         "2026-11-28T12:00:00+09:00",
         "2026-11-28T16:00:00+09:00",
-        "2026-11-28T20:00:00+09:00"
+        "2026-11-28T20:00:00+09:00",
+        "2026-11-29T08:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-28T08:00:00+09:00",
         "2026-11-28T12:00:00+09:00",
         "2026-11-28T16:00:00+09:00",
-        "2026-11-28T20:00:00+09:00"
+        "2026-11-28T20:00:00+09:00",
+        "2026-11-29T08:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -2825,7 +2936,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:11.699708+09:00",
+          "checked_at": "2026-11-27T08:11:47.252248+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2848,7 +2959,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:11.685840+09:00",
+          "checked_at": "2026-11-27T08:11:47.203301+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2871,7 +2982,7 @@
           "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
           "size_bytes": 11152,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:12.015802+09:00",
+          "checked_at": "2026-11-27T08:11:47.031851+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2894,7 +3005,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:11.409945+09:00",
+          "checked_at": "2026-11-27T08:11:47.324514+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2917,7 +3028,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:13.994994+09:00",
+          "checked_at": "2026-11-27T08:11:49.753703+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2940,7 +3051,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:13.579375+09:00",
+          "checked_at": "2026-11-27T08:11:49.895258+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2963,7 +3074,7 @@
           "sha256": "a3372d8d157985c9b34c03c74ad28c9e7fa73ab8dd53bd90915dc20e782be356",
           "size_bytes": 24185,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:13.874026+09:00",
+          "checked_at": "2026-11-27T08:11:50.349459+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2986,7 +3097,7 @@
           "sha256": "ab221824163ce36666f053ab9e956a0538edfe77459b5fa0d5f64013fa68fa5e",
           "size_bytes": 17367,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T07:09:13.842256+09:00",
+          "checked_at": "2026-11-27T08:11:49.936566+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3006,11 +3117,6 @@
   },
   "publication_audit": {
     "slots": [
-      {
-        "scheduled_at": "2026-11-25T08:00:00+09:00",
-        "post_ids": [],
-        "status": "missing_receipt"
-      },
       {
         "scheduled_at": "2026-11-25T12:00:00+09:00",
         "post_ids": [],
@@ -3057,16 +3163,11 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
+    "expected_slots": 7,
     "recorded_publications": 5,
-    "receipt_success_rate": 0.625,
+    "receipt_success_rate": 0.7142857142857143,
     "live_meta_verification_performed": false,
     "needs_attention": [
-      {
-        "scheduled_at": "2026-11-25T08:00:00+09:00",
-        "post_ids": [],
-        "status": "missing_receipt"
-      },
       {
         "scheduled_at": "2026-11-25T12:00:00+09:00",
         "post_ids": [],
@@ -3081,8 +3182,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-27T07:09:14.099510+09:00",
-    "window_start": "2026-11-24T22:09:14.099510+00:00",
+    "checked_at": "2026-11-27T08:11:50.485697+09:00",
+    "window_start": "2026-11-24T23:11:50.485697+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
