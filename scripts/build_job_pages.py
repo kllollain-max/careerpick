@@ -24,6 +24,7 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    'a307132': '2026-12-02T11:00:00+09:00',
     # KIPF official fixed-term recruitment PDF 3087160, application section.
     'a307001': '2026-11-27T10:00:00+09:00',
     # Food Safety Information Service official notice, application instructions.
@@ -133,6 +134,29 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # Employer HTML notice 36988, sections 1–2, and official ALIO 307132; checked 2026-11-26.
+    'a307132': {
+        'organization': '한국청소년활동진흥원',
+        'title': '2026년 제3차 한국청소년활동진흥원 직원(일반직, 공무직) 채용 공고',
+        'source_end_date': '2026-12-02',
+        'source_employment': ['무기계약직', '정규직'],
+        'expected_source_seats': '7',
+        'application_start': '2026-11-17',
+        'application_end_date': '2026-12-02',
+        'source_url': 'https://www.kywa.or.kr/about/about05_5_view.jsp?bgubun=&currPage=1&searchText=&searchColumn=&searchTextEn=&no=36988',
+        'checked_on': '2026-11-26',
+        'scope': '기관 공식 HTML 모집표 및 전형일정과 ALIO 응시자격·전형절차 대조. HWP·ZIP 직무 원본 전문 및 개별 접수 활성은 미확인.',
+        'hiring_breakdown': '일반직 활동운영1명 + 공무직 조리1명·조리보조4명·생활관 관리1명 = 총7명',
+        'role_mix_note': (
+            '영덕 해양센터 활동운영1명은 청소년 프로그램 기획·운영 가능자가 대상이며 채용형 인턴입니다. '
+            '같은 센터의 조리1명은 수습으로 조리기능사 이상 자격과 관련 경력4년 이상이 모두 필수입니다. '
+            '조리보조4명은 평창1명·김제2명·봉화1명으로 단체급식 및 교대근무 가능 조건이며 조리 라급의 경력요건을 그대로 적용하지 않습니다. '
+            '천안 생활관 관리1명은 고객관리·야간근무 가능 조건입니다. '
+            '일반직·공무직의 면접 평가 구성이 다르고, 채용형 인턴·수습 3개월 평가 결과에 따라 임용되지 않을 수 있습니다. '
+            '같은 기간의 기관 기간제 공고까지 중복지원하면 무효입니다. 공식 마감은 12월2일 오전11시입니다. '
+            '지원자가 예정인원의 2배수 미만이면 접수기간이 연장될 수 있습니다. 채용사이트에서 개별 접수 활성은 확인되지 않아 실제 지원 가능 여부 및 최신 변경사항을 기관에 확인하세요.'
+        ),
+    },
     # Official KIPF recruitment PDF 3087160, sections 1–4; source text read 2026-11-25.
     'a307001': {
         'organization': '한국조세재정연구원',
