@@ -16,6 +16,32 @@ from scripts.build_job_pages import render
 
 
 class JobPageTests(unittest.TestCase):
+    def test_kywa_307132_preserves_roles_deadline_and_source_identity(self):
+        from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
+        from scripts.build_public_site import homepage_cutoff_metadata
+        post = next(p for p in json.loads(Path('alio.json').read_text())['posts'] if p['id'] == 'a307132')
+        original = copy.deepcopy(post)
+        proof = VERIFIED_APPLICATION_NOTICES[post['id']]
+        cutoff = '2026-12-02T11:00:00+09:00'
+        self.assertEqual(CONFIRMED_APPLICATION_CUTOFFS[post['id']], cutoff)
+        with patch('scripts.build_job_pages.datetime') as clock:
+            clock.fromisoformat.side_effect = datetime.fromisoformat
+            clock.now.return_value = datetime(2026, 11, 26, 1, 0, tzinfo=timezone.utc)
+            page = render(post, {})
+            for phrase in ('일반직 활동운영1명', '조리보조4명', '관련 경력4년 이상', '평창1명·김제2명·봉화1명', '2026-12-02 11:00', '개별 접수 활성은 확인되지 않아'):
+                self.assertIn(phrase, page)
+            clock.now.return_value = datetime.fromisoformat(cutoff).astimezone(timezone.utc)
+            closed = render(post, {})
+            self.assertIn('noindex,follow', closed)
+            self.assertNotIn('"@type": "JobPosting"', closed)
+        metadata = homepage_cutoff_metadata([post], CONFIRMED_APPLICATION_CUTOFFS, {post['id']: proof})
+        self.assertEqual(metadata[post['id']]['cutoff'], cutoff)
+        for change in ({'n': '8'}, {'title': '정정 공고'}, {'org': '다른 기관'}, {'due': '2026-12-03'}, {'emp': ['정규직']}, {'alio': False}):
+            altered = {**post, **change}
+            self.assertNotIn(proof['hiring_breakdown'], render(altered, {}))
+            self.assertEqual(homepage_cutoff_metadata([altered], CONFIRMED_APPLICATION_CUTOFFS, {post['id']: proof}), {})
+        self.assertEqual(post, original)
+
     def test_kipf_fixed_term_307001_corrects_contract_and_cutoff(self):
         from scripts.build_job_pages import VERIFIED_APPLICATION_NOTICES, CONFIRMED_APPLICATION_CUTOFFS
         from scripts.build_public_site import homepage_cutoff_metadata
