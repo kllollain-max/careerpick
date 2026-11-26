@@ -208,6 +208,20 @@ def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
         seen.add(nid)
         candidates.append(draft)
 
+    # Reserve just one early evidence attempt for a later, potentially simpler
+    # notice. A count of one and explicit time are review hints, never proof
+    # of a recruitment unit or approval. Keep all other candidates in order.
+    if 2 <= limit < len(candidates):
+        for index in range(limit, len(candidates)):
+            draft = candidates[index]
+            fields = draft.get("official_detail_fields_for_review")
+            evidence = str(draft.get("application_evidence_for_review") or "")
+            if (isinstance(fields, dict)
+                    and str(fields.get("recrutNope", "")) == "1"
+                    and re.search(r"(?<!\d)(?:[01]?\d|2[0-3]):[0-5]\d(?!\d)", evidence)):
+                candidates.insert(limit - 1, candidates.pop(index))
+                break
+
     def capture(draft):
         nid = draft['notice_id']
         url = independently_located_notice(draft)

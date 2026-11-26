@@ -343,5 +343,30 @@ class EvidencePacketTests(unittest.TestCase):
         self.assertFalse(packet["approved_for_queue"])
         self.assertFalse(packet["meta_posted"])
 
+
+    def test_later_single_count_with_explicit_time_gets_one_evidence_attempt(self):
+        drafts = []
+        for i in range(12):
+            drafts.append({"notice_id": "a" + str(i), "status": "unreviewed",
+                           "official_url_for_private_review":
+                               self.url + "/" + str(i),
+                           "official_detail_fields_for_review": {
+                               "recrutNope": "1" if i in (8, 10, 11) else "2"},
+                           "application_evidence_for_review":
+                               "2026.12.03. 16:00" if i in (9, 10, 11)
+                               else "2026.12.03."})
+        packet = build_packet({"status": "review_required", "approved_for_queue": False,
+                               "drafts": drafts},
+                              fetch=lambda url: {"url": url, "sha256": "a" * 64})
+        self.assertEqual([x["notice_id"] for x in packet["records"]],
+                         ["a" + str(i) for i in (0, 1, 2, 3, 4, 5, 6, 10)])
+        self.assertEqual(packet["checked"], 8)
+        self.assertFalse(packet["automatic_approval"])
+        self.assertFalse(packet["approved_for_queue"])
+        self.assertFalse(packet["meta_posted"])
+        self.assertTrue(all(x["publisher_validate_entry"] == "not_run"
+                            for x in packet["records"]))
+
+
 if __name__ == "__main__":
     unittest.main()
