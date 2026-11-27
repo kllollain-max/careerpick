@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-28T06:15:55.942019+09:00",
-  "run_id": "46069115426",
+  "captured_at": "2026-11-28T08:10:06.923857+09:00",
+  "run_id": "46080902681",
   "source_commit": "e52b5348f761573e243e4f20dbcbc913f874d165",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-28T06:15:48.098248+09:00",
+    "time": "2026-11-28T08:09:58.390103+09:00",
     "future_slots": [
-      "2026-11-28T08:00:00+09:00",
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
       "2026-11-28T20:00:00+09:00",
       "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
-      "2026-11-29T20:00:00+09:00"
+      "2026-11-29T20:00:00+09:00",
+      "2026-11-30T08:00:00+09:00"
     ],
     "next_media": "IMAGE",
     "promoted": [],
@@ -175,15 +175,16 @@
     "queue_sha": "61fa907988a8bc0cb19f5b565c0916a0760210c1",
     "staged_sha": "dfcce70cfe6b25a7fcaca715789f5e50087d3b65",
     "promoted_count": 0,
-    "approved_supply_count": 2,
+    "approved_supply_count": 1,
     "inventory_target": 8,
-    "inventory_shortfall": 6,
+    "inventory_shortfall": 7,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-28T08:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-28T08:00:00+09:00",
       "2026-11-28T12:00:00+09:00"
     ],
     "missing_slots": [
@@ -192,7 +193,8 @@
       "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
-      "2026-11-29T20:00:00+09:00"
+      "2026-11-29T20:00:00+09:00",
+      "2026-11-30T08:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 23,
@@ -204,7 +206,8 @@
         "2026-11-29T08:00:00+09:00",
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
-        "2026-11-29T20:00:00+09:00"
+        "2026-11-29T20:00:00+09:00",
+        "2026-11-30T08:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "a307361",
@@ -1244,7 +1247,8 @@
       "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
-      "2026-11-29T20:00:00+09:00"
+      "2026-11-29T20:00:00+09:00",
+      "2026-11-30T08:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "a307361",
@@ -2883,33 +2887,138 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "a307324",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "draft_text": "한국장애인고용공단 채용 공고를 확인해 보세요.\n\n모집 공고: [한국장애인고용공단 대전직업능력개발원] 특정업무직(운전원) 채용\n고용형태: 무기계약직,비정규직\n접수 마감: 2026-11-30 14:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307324",
         "source_post_sha256": "7530ce3170ed0d8021a7ef3ba46f74de4b1939faa67263eafaebc355cbb65a09",
         "source_detail_sha256": "5b28db9b04ef423a744d46188ca8b516635dfc6d67c37220e27da89a34088dc7",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수기간: 2026. 11. 23.(월) ~ 2026. 11. 30.(월) 14:00까지",
+        "application_source_ref": "alio-detail.json#307324/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ 「국가공무원법」 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 60세)\r\n   - 서류접수 마감일 기준 만 18세 이상 및 공단 정년에 의거 만 60세 미만인 자\r\n○ 공단 「인사규정」 제12조(결격사유)에 저촉되지 않아야 하며, (전문)대학교 재학생 및 휴학생 또는 취업이 결정된 자는 응시 제외 대상자로 함\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n○ 1종 대형면허를 소지한 자로 대형버스 운전 경력 유경험자\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "hireTypeNmLst": "무기계약직,비정규직",
+          "prefCn": "○ 「독립유공자 예우에 관한 법률」 제16조, 「국가유공자 등 예우 및 지원에 관한 법률」 제29조, 「5.18 민주유공자 예우에 관한 법률」 제22조, 「특수임무유공자 예우 및 단체설립에 관한 법률」 제24조 및 「고엽제후유의증 등 환자지원 및 단체설립에 관한 법률」, 「보훈보상대상자 지원에 관한 법률」에 의한 취업지원대상자(전형 단계마다 만점의 5% ~ 10% 가점 부여)\r\n○ 「장애인복지법」 제2조에 따라 등록한 장애인 전형단계별 만점의 5%\r\n   ※ 다만, 「장애인고용촉진 및 직업재활법」상 중증장애인은 전형단계별 만점의 10% 적용\r\n○ 우대요건 및 가점은 관련 증빙서류를 제출하는 때에만 인정되며, 원서접수 마감일 기준으로 요건을 충족한 경우에만 인정\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복될 때는 본인에게 유리한 것 하나만 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "recrutNope": "1",
+          "recrutSe": "R2020",
+          "scrnprcdrMthdExpln": "<모집기간 및 지원방법>\r\n1. 접수기간: 2026. 11. 23.(월) ~ 2026. 11. 30.(월) 14:00까지\r\n2. 제출서류: (소정양식) 응시원서, 경력 및 경험기술서, 자기소개서, 개인정보동의서 각 1부, 우대사항 증빙서류(해당자만)\r\n3. 접수방법: 전자메일, 우편, 방문 접수 등\r\n- 제출처: (34325) 대전광역시 대덕구 신일동로 70 대전직업능력개발원 채용담당자\r\n- 접수 이메일: ct3@kead.or.kr\r\n※ 메일제목: “특정업무직(운전원) 응시원서_(성명)”\r\n※ 마감일 14:00까지 도착 분에 한함. (☎ 042-366-5439)\r\n- 응시원서 작성내용에 대하여는 추후 증빙서류 제출요구 및 사실여부를 조회할 예정이며, 허위의 내용이 작성·제출된 경우 불합격 처리\r\n\r\n<전형방법>\r\n1. 채용방법: 공개채용\r\n2. 전형절차: 응시원서 접수 > 1차 서류전형 > 2차 면접전형\r\n\r\n<전형일정>\r\n1. 서류전형(5배수): 2026. 12. 2.(수) 예정\r\n※ 서류전형 지원자가 모집인원 5배수에 미달하는 경우, 서류심사를 생략 및 해당 배수 미만으로 합격자 결정 가능\r\n2.  서류전형 결과발표: 2026. 12. 2.(수) 예정\r\n2. 면접전형(1배수): 2026. 12. 7.(월) 예정\r\n3. 최종합격자 발표: 2026. 12. 9.(수) 예정\r\n4. 채용예정일: 2027. 1. 4.(월) 예정\r\n* 상기 일정은 기관 사정으로 인하여 변동될 수 있음(변동 시 개별 통보)\r\n\r\n** 기타 자세한 사항은 첨부파일 참고**",
+          "workRgnNmLst": "대전"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "a307343",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "draft_text": "한국장애인고용공단 채용 공고를 확인해 보세요.\n\n모집 공고: [한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용\n고용형태: 무기계약직,비정규직\n접수 마감: 2026-12-04 18:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
         "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
         "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
+        "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "(1) 공통자격\r\n○ 국가공무원법 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 65세)\r\n- 서류접수 마감일 기준 만 18세 이상* 및 공단 정년에 의거 만 65세 미만인 자\r\n  * 단, 친권자 또는 후견인의 동의서 제출자는 제외\r\n○ 공단「인사규정」제12조(결격사유)에 해당하지 않는 자\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n\r\n(2) 필수자격\r\n○ 일반경비원 신임교육 이수자로 주/야간 교대근무가 가능한 자\r\n\r\n- 채용 당시「경비업법」제13조제2항에 따른 일반경비원 신임교육을 받은 지 3년이 지나지 않은 사람\r\n\r\n○ 일반경비원 신임교육 이수요건 제외 대상(「경비업법 시행령」제18조2항)\r\n- 일반경비원 또는 특수경비원 신임교육을 받은 사람으로서 채용 전 3년 이내에 경비 업무에 종사한 경력이 있는 사람\r\n-「경찰공무원법」에 따른 경찰공무원으로 근무한 경력이 있는 사람\r\n-「대통령 등의 경호에 관한 법률」에 따른 경호공무원 또는 별정직공무원으로 근무한 경력이 있는 사람\r\n-「군인사법」에 따른 부사관 이상으로 근무한 경력이 있는 사람\r\n- 경비지도사 자격이 있는 사람\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "hireTypeNmLst": "무기계약직,비정규직",
+          "prefCn": "○ 독립유공자 예우에 관한 법률 제16조, 국가유공자 등 예우 및 지원에 관한 법률 제29조, 5.18 민주유공자 예우에 관한 법률 제22조, 특수임무유공자 예우 및 단체설립에 관한 법률 제24조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 의한 취업지원대상자(전형 단계마다 만점의 5%, 10% 가점 부여)\r\n○ 장애인고용촉진 및 직업재활법에 따른 장애인(전형 단계마다 만점의 5%, 10%가점 부여)\r\n※ 중·경증 여부는 장애인고용촉진 및 직업재활법 시행령 제3조, 제4조에 따르며, 경증장애인 5%, 중증장애인 10% 가점 부여\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복되는 경우에는 본인에게 유리한 것 하나만을 가산 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "recrutNope": "4",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "가. 접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지\r\n나. 접수방법: 전자메일 접수만 가능(방문, 우편접수 불가)\r\n※ 접수마감일 18:00까지 전자메일 접수분에 한하며, 서류제출 후 유선확인 요망\r\n(이메일 주소) choi0413@kead.or.kr\r\n※ 이메일 제목\r\n-‘특정업무직(경비원) 응시원서(성명)’\r\n(전화번호) 031-8058-4218\r\n- 서류심사 및 결과발표: 2026.12.08.(화)\r\n※ 채용예정인원의 5배수 선발\r\n- 증빙서류 제출기간: 2026.12.08.(화) ~ 2026.12.10.(목)\r\n※ 자격 및 경력사항, 취업지원대상자 및 장애인 증빙 자료 등\r\n다. 면접시험\r\n- 일시 및 장소: 2026.12.10.(목) , 경기남부직업능력개발원 회의실\r\n- 평가기준: 면접점수(100)\r\n라. 최종합격자 발표: 2026.12.11.(금) 예정, 개별통보\r\n마. 임용예정일: 2027.01.01.(금)\r\n\r\n※ 상기일정은 기관 사정으로 변동 될 수 있음\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "workRgnNmLst": "경기"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "a307177",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "draft_text": "한국보훈복지의료공단 채용 공고를 확인해 보세요.\n\n모집 공고: [전주보훈요양원] 보훈특별고용 직원 채용 공고\n고용형태: 정규직,무기계약직\n접수 마감: 2026-12-03 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307177",
         "source_post_sha256": "6af36a703fc6111aad68a994248a874339599e425dc7c704bd0dc2d3ee60924f",
         "source_detail_sha256": "38f37226f4ae810bce673c726136b6f9992179ed958762a6155f73b6e4dad42d",
-        "suggested_slot": null
-      },
+        "application_evidence_for_review": "지원서 접수: 2026. 11. 18.(수) ~ 2026. 12. 03.(목) 10:00까지",
+        "application_source_ref": "alio-detail.json#307177/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "□ 공통 필수요건\r\nㆍ학력, 전공, 나이, 성별 등 제한 없음\r\n ※ 단, 임용일 기준 해당 채용분야의 정년 미만인 자(요양보호사·세탁 60세, 청소 65세)\r\nㆍ남성의 경우 군필 또는 면제자\r\nㆍ공단 인사규정 채용 결격사유에 해당하지 않는 자 \r\nㆍ「국가유공자 등 예우 및 지원에 관한 법률」 제29조 등 관련 법령에 따라 취업지원대상자 기준에 해당하는 자 중 전북동부보훈지청의 입사지원 추천을 받은 자\r\n\r\n□ 채용분야별 필수요건\r\n ○ 요양보호직(요양보호사)\r\n  ㆍ 요양보호사 자격증 소지자\r\n  ㆍ 3교대 근무 가능한 자\r\n\r\n ○ 업무지원직(세탁)\r\n  ㆍ 공통 필수요건 충족자\r\n\r\n ○ 업무지원직(청소)\r\n  ㆍ 공통 필수요건 충족자\r\n\r\n※ 모든 채용분야는 공통 필수요건을 충족하여야 함",
+          "hireTypeNmLst": "정규직,무기계약직",
+          "prefCn": "○ 가산점\r\n- 취업지원대상자 면접전형 만점의 5 또는 10%, 장애인 면접전형 만점의 10%",
+          "recrutNope": "3",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "○ (1차) 서류전형\r\n- 지원서 접수: 2026. 11. 18.(수) ~ 2026. 12. 03.(목) 10:00까지\r\n- 접수방법: 채용지원사이트를 통한 온라인 접수(https://bohun.fairyhr.com)\r\n- 자격요건 충족자 선발\r\n- 합격자 발표: 2026. 12. 04.(금) 17:00 예정\r\n\r\n○ (2차) 면접전형\r\n- 면접일시: 2026. 12. 8.(화) 10:00 예정\r\n- 블라인드 면접 실시\r\n- 면접전형 60점 미만 시 불합격\r\n\r\n○ 최종합격자 결정\r\n- 면접전형(100점 만점 기준) 가점 포함한 점수가 60점 이상인 자 중 고득점 순\r\n- 합격자 발표: 2026. 12. 9.(수)\r\n- 임용예정일: 2026. 12. 28.(월)\r\n\r\n※ 세부사항은 첨부파일의 채용 공고문을 참조",
+          "workRgnNmLst": "전북"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "a307565",
         "status": "unreviewed",
@@ -2934,7 +3043,8 @@
         "2026-11-29T08:00:00+09:00",
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
-        "2026-11-29T20:00:00+09:00"
+        "2026-11-29T20:00:00+09:00",
+        "2026-11-30T08:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-28T16:00:00+09:00",
@@ -2942,7 +3052,8 @@
         "2026-11-29T08:00:00+09:00",
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
-        "2026-11-29T20:00:00+09:00"
+        "2026-11-29T20:00:00+09:00",
+        "2026-11-30T08:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -2969,7 +3080,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:52.308977+09:00",
+          "checked_at": "2026-11-28T08:10:03.371241+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2992,7 +3103,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:52.483347+09:00",
+          "checked_at": "2026-11-28T08:10:03.745413+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3015,7 +3126,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:52.591653+09:00",
+          "checked_at": "2026-11-28T08:10:03.183184+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3038,7 +3149,7 @@
           "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
           "size_bytes": 11152,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:52.415692+09:00",
+          "checked_at": "2026-11-28T08:10:03.247612+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3061,7 +3172,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:54.033794+09:00",
+          "checked_at": "2026-11-28T08:10:05.535646+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3084,7 +3195,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:54.477090+09:00",
+          "checked_at": "2026-11-28T08:10:05.829965+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3107,7 +3218,7 @@
           "sha256": "a3372d8d157985c9b34c03c74ad28c9e7fa73ab8dd53bd90915dc20e782be356",
           "size_bytes": 24185,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:54.457002+09:00",
+          "checked_at": "2026-11-28T08:10:05.953364+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3130,7 +3241,7 @@
           "sha256": "ef004e83700b48f2c59a4375ff1e10e24b159e0bb4c9b42bda674421e3799773",
           "size_bytes": 13529,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T06:15:54.287033+09:00",
+          "checked_at": "2026-11-28T08:10:05.752287+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3150,13 +3261,6 @@
   },
   "publication_audit": {
     "slots": [
-      {
-        "scheduled_at": "2026-11-26T08:00:00+09:00",
-        "post_ids": [
-          "18026619005948289"
-        ],
-        "status": "recorded_publication"
-      },
       {
         "scheduled_at": "2026-11-26T12:00:00+09:00",
         "post_ids": [
@@ -3207,16 +3311,16 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 8,
+    "expected_slots": 7,
+    "recorded_publications": 7,
     "receipt_success_rate": 1.0,
     "live_meta_verification_performed": false,
     "needs_attention": []
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-28T06:15:54.611740+09:00",
-    "window_start": "2026-11-25T21:15:54.611740+00:00",
+    "checked_at": "2026-11-28T08:10:06.070891+09:00",
+    "window_start": "2026-11-25T23:10:06.070891+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
