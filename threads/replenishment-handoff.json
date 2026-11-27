@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-27T17:07:24.795934+09:00",
-  "run_id": "45963173011",
-  "source_commit": "e5283d162242bc42be65ac176f51502c02587a22",
+  "captured_at": "2026-11-27T17:38:12.975439+09:00",
+  "run_id": "45967144476",
+  "source_commit": "becf7f0fe47ff0c532bc87317b3e3b3f2bf66ec2",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-27T17:07:11.264997+09:00",
+    "time": "2026-11-27T17:38:02.672359+09:00",
     "future_slots": [
       "2026-11-27T20:00:00+09:00",
       "2026-11-28T08:00:00+09:00",
@@ -18,14 +18,8 @@
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00"
     ],
-    "next_media": "IMAGE",
-    "promoted": [
-      {
-        "notice_id": "a307417",
-        "slot": "2026-11-28T08:00:00+09:00",
-        "fingerprint": "d1597eaa2440d2207c499e1f521e14f646b6ede454dd4eee9ed61394cf263e52"
-      }
-    ],
+    "next_media": "TEXT",
+    "promoted": [],
     "refused": [
       {
         "notice_id": "a306965",
@@ -161,27 +155,29 @@
       },
       {
         "notice_id": "a307465",
-        "reason": "SLOT_ALREADY_OCCUPIED"
+        "reason": "DUPLICATE_POST"
       },
       {
         "notice_id": "a307420",
         "reason": "SLOT_ALREADY_OCCUPIED"
+      },
+      {
+        "notice_id": "a307417",
+        "reason": "SLOT_ALREADY_OCCUPIED"
       }
     ],
-    "queue_updated": true,
+    "queue_updated": false,
     "meta_posted": false,
-    "queue_sha": "abeec71083b69b6752849a649175b1fdc47f6477",
+    "queue_sha": "17866f4a2e548f389cb8da44f3cc7f7b5af76143",
     "staged_sha": "7351f84183d73dff4a372a74ab82d73e97a2e673",
-    "promoted_count": 1,
+    "promoted_count": 0,
     "approved_supply_count": 2,
     "inventory_target": 8,
     "inventory_shortfall": 6,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [
-      "2026-11-27T16:00:00+09:00"
-    ],
-    "media_forecast_conditional_on_active_slot": true,
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
       "2026-11-27T20:00:00+09:00",
       "2026-11-28T08:00:00+09:00"
@@ -209,10 +205,10 @@
       "candidate_notice_ids": [
         "a307361",
         "a307046",
-        "a307396",
         "a307039",
-        "a307524",
         "a307280",
+        "a307396",
+        "a307524",
         "a307413",
         "a307021",
         "a306979",
@@ -304,42 +300,6 @@
           "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
         },
         {
-          "notice_id": "a307396",
-          "org": "한전KPS(주)",
-          "title": "한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
-          "employment": "비정규직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-25",
-            "end": "2026-12-01",
-            "start_date_only": true,
-            "date_only": true,
-            "source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-            "evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)"
-          },
-          "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
-          "source_detail_sha256": "02e2ae3012d0df97575ae3d56be1f8c4671daebed8e6fb42d2633916c0f032f0",
-          "official_detail_fields_for_review": {
-            "aplyQlfcCn": "○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자\r\n※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조",
-            "hireTypeNmLst": "비정규직",
-            "prefCn": "○ 보훈대상자(면접전형 만점의 5~10% 가점)\r\n-국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자\r\n※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.)",
-            "recrutNope": "1",
-            "recrutSe": "R2030",
-            "scrnprcdrMthdExpln": "1. 채용개요\r\n○ 채용인원: 사무보조 1명\r\n○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음)\r\n2. 근무조건\r\n○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능)\r\n○ 근무지:  한빛1발전소(전남광주통합특별시 영광군)  \r\n* 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음.\r\n○ 근무기간; 2026.12.11.~2027.4.30.\r\n* 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음\r\n○ 보수 및 복리후생\r\n- 일급(협의 후 결정)\r\n- 4대보험\r\n- 숙식 제공 불가/통근버스 없음\r\n- 근무지 변경 시 출장비 지급\r\n3. 전형방법\r\n○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표\r\n○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화)\r\n○ 면접일정 : 2026. 12. 3.(목)\r\n○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월)\r\n○ 최종합격자발표일: 2026. 12. 8.(화)\r\n○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062\r\n※ 전형일정은 회사 사정에 따라 달라질 수 있음\r\n○ 제출서류\r\n - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부\r\n※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가\r\n -우대사항 증빙서류 : 국가유공자증(사본) 1부",
-            "workRgnNmLst": "전남광주"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
-          "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
-        },
-        {
           "notice_id": "a307039",
           "org": "한국서부발전(주)",
           "title": "한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고",
@@ -376,42 +336,6 @@
           "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
         },
         {
-          "notice_id": "a307524",
-          "org": "한전KPS(주)",
-          "title": "한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
-          "employment": "비정규직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-27T14:00:00+09:00",
-            "end": "2026-12-03T10:00:00+09:00",
-            "start_date_only": false,
-            "date_only": false,
-            "source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
-            "evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00"
-          },
-          "source_post_sha256": "f1b9e77ccfd67770ba082e5d42b6ad342bffcab1f717494d2ef54a1ff3fc195c",
-          "source_detail_sha256": "655318811d05ce8ae37bb3c3a828b9bc837ce83cd1773f068baf745d4d18d6e1",
-          "official_detail_fields_for_review": {
-            "aplyQlfcCn": "채용예정일 즉시 근무가능한 자",
-            "hireTypeNmLst": "비정규직",
-            "prefCn": "보훈대상자(각 전형단계별 만점의 5%~10% 가점)",
-            "recrutNope": "1",
-            "recrutSe": "R2030",
-            "scrnprcdrMthdExpln": "1. 채용인원: 1명\r\n2. 채용분야: 단기노무원(사무보조)\r\n3. 고용형태: 비정규직\r\n4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능\r\n5. 근로예정기간: 2026.12.16.~2027.05.31.\r\n6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실\r\n-사무실 위치: 경상남도 창원시 의창구 북면 달천길52\r\n7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표\r\n8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00\r\n9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수\r\n- 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr)\r\n10. 면접전형: 2026.12.04.(금)\r\n11. 신체검사: 2026.12.07.(월)\r\n12. 합격자발표: 2026.12.11.(금)\r\n13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음\r\n\r\n※세부사항 채용공고문 참조",
-            "workRgnNmLst": "경남"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00",
-          "application_source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
-        },
-        {
           "notice_id": "a307280",
           "org": "한국전력공사",
           "title": "기간제근로자(대체인력) 채용공고 [대전세종충남본부 아산지사, 금산지사]",
@@ -445,6 +369,78 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지",
           "application_source_ref": "alio-detail.json#307280/scrnprcdrMthdExpln",
+          "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
+        },
+        {
+          "notice_id": "a307396",
+          "org": "한전KPS(주)",
+          "title": "한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)",
+          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+          "employment": "비정규직",
+          "recruiting_unit_title": null,
+          "recruiting_unit_count": null,
+          "recruiting_unit_scope": "unit_count_unconfirmed",
+          "selection_review_reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ],
+          "application_period": {
+            "start": "2026-11-25",
+            "end": "2026-12-01",
+            "start_date_only": true,
+            "date_only": true,
+            "source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
+            "evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)"
+          },
+          "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
+          "source_detail_sha256": "02e2ae3012d0df97575ae3d56be1f8c4671daebed8e6fb42d2633916c0f032f0",
+          "official_detail_fields_for_review": {
+            "aplyQlfcCn": "○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자\r\n※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조",
+            "hireTypeNmLst": "비정규직",
+            "prefCn": "○ 보훈대상자(면접전형 만점의 5~10% 가점)\r\n-국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자\r\n※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.)",
+            "recrutNope": "1",
+            "recrutSe": "R2030",
+            "scrnprcdrMthdExpln": "1. 채용개요\r\n○ 채용인원: 사무보조 1명\r\n○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음)\r\n2. 근무조건\r\n○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능)\r\n○ 근무지:  한빛1발전소(전남광주통합특별시 영광군)  \r\n* 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음.\r\n○ 근무기간; 2026.12.11.~2027.4.30.\r\n* 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음\r\n○ 보수 및 복리후생\r\n- 일급(협의 후 결정)\r\n- 4대보험\r\n- 숙식 제공 불가/통근버스 없음\r\n- 근무지 변경 시 출장비 지급\r\n3. 전형방법\r\n○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표\r\n○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화)\r\n○ 면접일정 : 2026. 12. 3.(목)\r\n○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월)\r\n○ 최종합격자발표일: 2026. 12. 8.(화)\r\n○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062\r\n※ 전형일정은 회사 사정에 따라 달라질 수 있음\r\n○ 제출서류\r\n - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부\r\n※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가\r\n -우대사항 증빙서류 : 국가유공자증(사본) 1부",
+            "workRgnNmLst": "전남광주"
+          },
+          "review_status": "official_review_required",
+          "application_evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
+          "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
+          "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
+        },
+        {
+          "notice_id": "a307524",
+          "org": "한전KPS(주)",
+          "title": "한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집",
+          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
+          "employment": "비정규직",
+          "recruiting_unit_title": null,
+          "recruiting_unit_count": null,
+          "recruiting_unit_scope": "unit_count_unconfirmed",
+          "selection_review_reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ],
+          "application_period": {
+            "start": "2026-11-27T14:00:00+09:00",
+            "end": "2026-12-03T10:00:00+09:00",
+            "start_date_only": false,
+            "date_only": false,
+            "source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
+            "evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00"
+          },
+          "source_post_sha256": "f1b9e77ccfd67770ba082e5d42b6ad342bffcab1f717494d2ef54a1ff3fc195c",
+          "source_detail_sha256": "655318811d05ce8ae37bb3c3a828b9bc837ce83cd1773f068baf745d4d18d6e1",
+          "official_detail_fields_for_review": {
+            "aplyQlfcCn": "채용예정일 즉시 근무가능한 자",
+            "hireTypeNmLst": "비정규직",
+            "prefCn": "보훈대상자(각 전형단계별 만점의 5%~10% 가점)",
+            "recrutNope": "1",
+            "recrutSe": "R2030",
+            "scrnprcdrMthdExpln": "1. 채용인원: 1명\r\n2. 채용분야: 단기노무원(사무보조)\r\n3. 고용형태: 비정규직\r\n4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능\r\n5. 근로예정기간: 2026.12.16.~2027.05.31.\r\n6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실\r\n-사무실 위치: 경상남도 창원시 의창구 북면 달천길52\r\n7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표\r\n8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00\r\n9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수\r\n- 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr)\r\n10. 면접전형: 2026.12.04.(금)\r\n11. 신체검사: 2026.12.07.(월)\r\n12. 합격자발표: 2026.12.11.(금)\r\n13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음\r\n\r\n※세부사항 채용공고문 참조",
+            "workRgnNmLst": "경남"
+          },
+          "review_status": "official_review_required",
+          "application_evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00",
+          "application_source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
           "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
         },
         {
@@ -1058,20 +1054,6 @@
         }
       },
       {
-        "notice_id": "a307396",
-        "org": "한전KPS(주)",
-        "title": "한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)",
-        "employment": "비정규직",
-        "application_period": {
-          "start": "2026-11-25",
-          "end": "2026-12-01",
-          "start_date_only": true,
-          "date_only": true,
-          "source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-          "evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)"
-        }
-      },
-      {
         "notice_id": "a307039",
         "org": "한국서부발전(주)",
         "title": "한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고",
@@ -1086,20 +1068,6 @@
         }
       },
       {
-        "notice_id": "a307524",
-        "org": "한전KPS(주)",
-        "title": "한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집",
-        "employment": "비정규직",
-        "application_period": {
-          "start": "2026-11-27T14:00:00+09:00",
-          "end": "2026-12-03T10:00:00+09:00",
-          "start_date_only": false,
-          "date_only": false,
-          "source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
-          "evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00"
-        }
-      },
-      {
         "notice_id": "a307280",
         "org": "한국전력공사",
         "title": "기간제근로자(대체인력) 채용공고 [대전세종충남본부 아산지사, 금산지사]",
@@ -1111,6 +1079,34 @@
           "date_only": false,
           "source_ref": "alio-detail.json#307280/scrnprcdrMthdExpln",
           "evidence": "접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지"
+        }
+      },
+      {
+        "notice_id": "a307396",
+        "org": "한전KPS(주)",
+        "title": "한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)",
+        "employment": "비정규직",
+        "application_period": {
+          "start": "2026-11-25",
+          "end": "2026-12-01",
+          "start_date_only": true,
+          "date_only": true,
+          "source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
+          "evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)"
+        }
+      },
+      {
+        "notice_id": "a307524",
+        "org": "한전KPS(주)",
+        "title": "한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집",
+        "employment": "비정규직",
+        "application_period": {
+          "start": "2026-11-27T14:00:00+09:00",
+          "end": "2026-12-03T10:00:00+09:00",
+          "start_date_only": false,
+          "date_only": false,
+          "source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
+          "evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00"
         }
       },
       {
@@ -1197,8 +1193,7 @@
           "evidence": "접수기간: 2026.11.16.~2026.12.02."
         }
       }
-    ],
-    "queue_sha_after": "17866f4a2e548f389cb8da44f3cc7f7b5af76143"
+    ]
   },
   "writer_handoff": {
     "status": "review_required",
@@ -1213,10 +1208,10 @@
     "candidate_notice_ids": [
       "a307361",
       "a307046",
-      "a307396",
       "a307039",
-      "a307524",
       "a307280",
+      "a307396",
+      "a307524",
       "a307413",
       "a307021",
       "a306979",
@@ -1308,42 +1303,6 @@
         "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
       },
       {
-        "notice_id": "a307396",
-        "org": "한전KPS(주)",
-        "title": "한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
-        "employment": "비정규직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-25",
-          "end": "2026-12-01",
-          "start_date_only": true,
-          "date_only": true,
-          "source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-          "evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)"
-        },
-        "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
-        "source_detail_sha256": "02e2ae3012d0df97575ae3d56be1f8c4671daebed8e6fb42d2633916c0f032f0",
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자\r\n※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조",
-          "hireTypeNmLst": "비정규직",
-          "prefCn": "○ 보훈대상자(면접전형 만점의 5~10% 가점)\r\n-국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자\r\n※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.)",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 채용개요\r\n○ 채용인원: 사무보조 1명\r\n○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음)\r\n2. 근무조건\r\n○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능)\r\n○ 근무지:  한빛1발전소(전남광주통합특별시 영광군)  \r\n* 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음.\r\n○ 근무기간; 2026.12.11.~2027.4.30.\r\n* 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음\r\n○ 보수 및 복리후생\r\n- 일급(협의 후 결정)\r\n- 4대보험\r\n- 숙식 제공 불가/통근버스 없음\r\n- 근무지 변경 시 출장비 지급\r\n3. 전형방법\r\n○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표\r\n○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화)\r\n○ 면접일정 : 2026. 12. 3.(목)\r\n○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월)\r\n○ 최종합격자발표일: 2026. 12. 8.(화)\r\n○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062\r\n※ 전형일정은 회사 사정에 따라 달라질 수 있음\r\n○ 제출서류\r\n - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부\r\n※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가\r\n -우대사항 증빙서류 : 국가유공자증(사본) 1부",
-          "workRgnNmLst": "전남광주"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
-        "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
-      },
-      {
         "notice_id": "a307039",
         "org": "한국서부발전(주)",
         "title": "한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고",
@@ -1380,42 +1339,6 @@
         "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
       },
       {
-        "notice_id": "a307524",
-        "org": "한전KPS(주)",
-        "title": "한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
-        "employment": "비정규직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-27T14:00:00+09:00",
-          "end": "2026-12-03T10:00:00+09:00",
-          "start_date_only": false,
-          "date_only": false,
-          "source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
-          "evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00"
-        },
-        "source_post_sha256": "f1b9e77ccfd67770ba082e5d42b6ad342bffcab1f717494d2ef54a1ff3fc195c",
-        "source_detail_sha256": "655318811d05ce8ae37bb3c3a828b9bc837ce83cd1773f068baf745d4d18d6e1",
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "채용예정일 즉시 근무가능한 자",
-          "hireTypeNmLst": "비정규직",
-          "prefCn": "보훈대상자(각 전형단계별 만점의 5%~10% 가점)",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 채용인원: 1명\r\n2. 채용분야: 단기노무원(사무보조)\r\n3. 고용형태: 비정규직\r\n4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능\r\n5. 근로예정기간: 2026.12.16.~2027.05.31.\r\n6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실\r\n-사무실 위치: 경상남도 창원시 의창구 북면 달천길52\r\n7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표\r\n8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00\r\n9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수\r\n- 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr)\r\n10. 면접전형: 2026.12.04.(금)\r\n11. 신체검사: 2026.12.07.(월)\r\n12. 합격자발표: 2026.12.11.(금)\r\n13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음\r\n\r\n※세부사항 채용공고문 참조",
-          "workRgnNmLst": "경남"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00",
-        "application_source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
-      },
-      {
         "notice_id": "a307280",
         "org": "한국전력공사",
         "title": "기간제근로자(대체인력) 채용공고 [대전세종충남본부 아산지사, 금산지사]",
@@ -1449,6 +1372,78 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지",
         "application_source_ref": "alio-detail.json#307280/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
+      },
+      {
+        "notice_id": "a307396",
+        "org": "한전KPS(주)",
+        "title": "한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+        "employment": "비정규직",
+        "recruiting_unit_title": null,
+        "recruiting_unit_count": null,
+        "recruiting_unit_scope": "unit_count_unconfirmed",
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "application_period": {
+          "start": "2026-11-25",
+          "end": "2026-12-01",
+          "start_date_only": true,
+          "date_only": true,
+          "source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
+          "evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)"
+        },
+        "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
+        "source_detail_sha256": "02e2ae3012d0df97575ae3d56be1f8c4671daebed8e6fb42d2633916c0f032f0",
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자\r\n※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "○ 보훈대상자(면접전형 만점의 5~10% 가점)\r\n-국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자\r\n※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.)",
+          "recrutNope": "1",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "1. 채용개요\r\n○ 채용인원: 사무보조 1명\r\n○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음)\r\n2. 근무조건\r\n○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능)\r\n○ 근무지:  한빛1발전소(전남광주통합특별시 영광군)  \r\n* 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음.\r\n○ 근무기간; 2026.12.11.~2027.4.30.\r\n* 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음\r\n○ 보수 및 복리후생\r\n- 일급(협의 후 결정)\r\n- 4대보험\r\n- 숙식 제공 불가/통근버스 없음\r\n- 근무지 변경 시 출장비 지급\r\n3. 전형방법\r\n○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표\r\n○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화)\r\n○ 면접일정 : 2026. 12. 3.(목)\r\n○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월)\r\n○ 최종합격자발표일: 2026. 12. 8.(화)\r\n○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062\r\n※ 전형일정은 회사 사정에 따라 달라질 수 있음\r\n○ 제출서류\r\n - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부\r\n※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가\r\n -우대사항 증빙서류 : 국가유공자증(사본) 1부",
+          "workRgnNmLst": "전남광주"
+        },
+        "review_status": "official_review_required",
+        "application_evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
+        "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
+      },
+      {
+        "notice_id": "a307524",
+        "org": "한전KPS(주)",
+        "title": "한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
+        "employment": "비정규직",
+        "recruiting_unit_title": null,
+        "recruiting_unit_count": null,
+        "recruiting_unit_scope": "unit_count_unconfirmed",
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "application_period": {
+          "start": "2026-11-27T14:00:00+09:00",
+          "end": "2026-12-03T10:00:00+09:00",
+          "start_date_only": false,
+          "date_only": false,
+          "source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
+          "evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00"
+        },
+        "source_post_sha256": "f1b9e77ccfd67770ba082e5d42b6ad342bffcab1f717494d2ef54a1ff3fc195c",
+        "source_detail_sha256": "655318811d05ce8ae37bb3c3a828b9bc837ce83cd1773f068baf745d4d18d6e1",
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "채용예정일 즉시 근무가능한 자",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "보훈대상자(각 전형단계별 만점의 5%~10% 가점)",
+          "recrutNope": "1",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "1. 채용인원: 1명\r\n2. 채용분야: 단기노무원(사무보조)\r\n3. 고용형태: 비정규직\r\n4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능\r\n5. 근로예정기간: 2026.12.16.~2027.05.31.\r\n6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실\r\n-사무실 위치: 경상남도 창원시 의창구 북면 달천길52\r\n7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표\r\n8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00\r\n9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수\r\n- 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr)\r\n10. 면접전형: 2026.12.04.(금)\r\n11. 신체검사: 2026.12.07.(월)\r\n12. 합격자발표: 2026.12.11.(금)\r\n13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음\r\n\r\n※세부사항 채용공고문 참조",
+          "workRgnNmLst": "경남"
+        },
+        "review_status": "official_review_required",
+        "application_evidence": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00",
+        "application_source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
         "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00"
       },
       {
@@ -2124,51 +2119,8 @@
         "meta_posted": false
       },
       {
-        "notice_id": "a307396",
-        "suggested_slot": "2026-11-28T12:00:00+09:00",
-        "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)\n고용형태: 비정규직\n접수 마감: 2026-12-01 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
-        "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
-        "source_detail_sha256": "02e2ae3012d0df97575ae3d56be1f8c4671daebed8e6fb42d2633916c0f032f0",
-        "application_evidence_for_review": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
-        "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자\r\n※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조",
-          "hireTypeNmLst": "비정규직",
-          "prefCn": "○ 보훈대상자(면접전형 만점의 5~10% 가점)\r\n-국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자\r\n※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.)",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 채용개요\r\n○ 채용인원: 사무보조 1명\r\n○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음)\r\n2. 근무조건\r\n○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능)\r\n○ 근무지:  한빛1발전소(전남광주통합특별시 영광군)  \r\n* 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음.\r\n○ 근무기간; 2026.12.11.~2027.4.30.\r\n* 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음\r\n○ 보수 및 복리후생\r\n- 일급(협의 후 결정)\r\n- 4대보험\r\n- 숙식 제공 불가/통근버스 없음\r\n- 근무지 변경 시 출장비 지급\r\n3. 전형방법\r\n○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표\r\n○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화)\r\n○ 면접일정 : 2026. 12. 3.(목)\r\n○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월)\r\n○ 최종합격자발표일: 2026. 12. 8.(화)\r\n○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062\r\n※ 전형일정은 회사 사정에 따라 달라질 수 있음\r\n○ 제출서류\r\n - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부\r\n※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가\r\n -우대사항 증빙서류 : 국가유공자증(사본) 1부",
-          "workRgnNmLst": "전남광주"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
         "notice_id": "a307039",
-        "suggested_slot": "2026-11-28T16:00:00+09:00",
+        "suggested_slot": "2026-11-28T12:00:00+09:00",
         "draft_text": "한국서부발전(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고\n고용형태: 비정규직\n접수 마감: 2026-12-02 14:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
         "source_post_sha256": "f16474e21b80d750b3ae3c3cdbf65c2d4309b4fa79b7738ac2bbf4d8e6801922",
@@ -2193,49 +2145,6 @@
           "recrutSe": "R2030",
           "scrnprcdrMthdExpln": "* 지원서 접수\r\n- 접수기간: 2026. 11. 17.(화) 09:00 ∼ 2026. 12. 02.(수) 14:00\r\n- 접수방법: 인터넷 접수\r\n* 전형방법\r\n- 1차: 서류 전형\r\n- 2차: 면접 전형\r\n- 최종: 합격자 발표(신원조회 및 신체검사 후)\r\n※ 상세내용 붙임1의 채용공고문 참조",
           "workRgnNmLst": "전북"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "a307524",
-        "suggested_slot": "2026-11-28T16:00:00+09:00",
-        "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집\n고용형태: 비정규직\n접수 마감: 2026-12-03 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
-        "source_post_sha256": "f1b9e77ccfd67770ba082e5d42b6ad342bffcab1f717494d2ef54a1ff3fc195c",
-        "source_detail_sha256": "655318811d05ce8ae37bb3c3a828b9bc837ce83cd1773f068baf745d4d18d6e1",
-        "application_evidence_for_review": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00",
-        "application_source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "채용예정일 즉시 근무가능한 자",
-          "hireTypeNmLst": "비정규직",
-          "prefCn": "보훈대상자(각 전형단계별 만점의 5%~10% 가점)",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 채용인원: 1명\r\n2. 채용분야: 단기노무원(사무보조)\r\n3. 고용형태: 비정규직\r\n4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능\r\n5. 근로예정기간: 2026.12.16.~2027.05.31.\r\n6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실\r\n-사무실 위치: 경상남도 창원시 의창구 북면 달천길52\r\n7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표\r\n8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00\r\n9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수\r\n- 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr)\r\n10. 면접전형: 2026.12.04.(금)\r\n11. 신체검사: 2026.12.07.(월)\r\n12. 합격자발표: 2026.12.11.(금)\r\n13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음\r\n\r\n※세부사항 채용공고문 참조",
-          "workRgnNmLst": "경남"
         },
         "required_review": {
           "official_notice_and_attachments": "not_verified",
@@ -2279,6 +2188,92 @@
           "recrutSe": "R2010",
           "scrnprcdrMthdExpln": "□ 채용인원 : 배전담당(가) 2명\r\n\r\n□ 1차 서류전형\r\n ○ 평가기준 : 자격증 점수(배점 40점) \r\n ○ 선발배수 : 7배수 (동점자 발생 시 전원 합격 처리)\r\n  ※ 모집단위별 응시인원이 1차전형 선발배수를 초과하지 않을 경우 서류전형 생략 및 전원합격 처리 가능\r\n\r\n□ 2차 면접전형\r\n ○ 평가기준 : 개별 면접점수(100점)\r\n ○ 선발배수 : 1배수 (동점자 발생 시 1. 취업지원대상자 2. 자격증 가점 순으로 우선선발)\r\n\r\n□ 접수기간 및 방법\r\n ○ 접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지\r\n ○ 지원방법 : 채용홈페이지 접수(http://recruit.kepco.co.kr/sangsi)\r\n   - 지원분야 [아산지사] 배전담당(가), [금산지사] 배전담당(가) 중 택1(중복지원불가)\r\n\r\n ※ 기타 자세한 사항은 붙임 채용공고문 참조",
           "workRgnNmLst": "충남"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a307396",
+        "suggested_slot": "2026-11-28T16:00:00+09:00",
+        "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)\n고용형태: 비정규직\n접수 마감: 2026-12-01 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+        "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
+        "source_detail_sha256": "02e2ae3012d0df97575ae3d56be1f8c4671daebed8e6fb42d2633916c0f032f0",
+        "application_evidence_for_review": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
+        "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자\r\n※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "○ 보훈대상자(면접전형 만점의 5~10% 가점)\r\n-국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자\r\n※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.)",
+          "recrutNope": "1",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "1. 채용개요\r\n○ 채용인원: 사무보조 1명\r\n○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음)\r\n2. 근무조건\r\n○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능)\r\n○ 근무지:  한빛1발전소(전남광주통합특별시 영광군)  \r\n* 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음.\r\n○ 근무기간; 2026.12.11.~2027.4.30.\r\n* 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음\r\n○ 보수 및 복리후생\r\n- 일급(협의 후 결정)\r\n- 4대보험\r\n- 숙식 제공 불가/통근버스 없음\r\n- 근무지 변경 시 출장비 지급\r\n3. 전형방법\r\n○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표\r\n○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화)\r\n○ 면접일정 : 2026. 12. 3.(목)\r\n○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월)\r\n○ 최종합격자발표일: 2026. 12. 8.(화)\r\n○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062\r\n※ 전형일정은 회사 사정에 따라 달라질 수 있음\r\n○ 제출서류\r\n - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부\r\n※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가\r\n -우대사항 증빙서류 : 국가유공자증(사본) 1부",
+          "workRgnNmLst": "전남광주"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      },
+      {
+        "notice_id": "a307524",
+        "suggested_slot": "2026-11-28T16:00:00+09:00",
+        "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집\n고용형태: 비정규직\n접수 마감: 2026-12-03 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
+        "source_post_sha256": "f1b9e77ccfd67770ba082e5d42b6ad342bffcab1f717494d2ef54a1ff3fc195c",
+        "source_detail_sha256": "655318811d05ce8ae37bb3c3a828b9bc837ce83cd1773f068baf745d4d18d6e1",
+        "application_evidence_for_review": "지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00",
+        "application_source_ref": "alio-detail.json#307524/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T16:36:12+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "채용예정일 즉시 근무가능한 자",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "보훈대상자(각 전형단계별 만점의 5%~10% 가점)",
+          "recrutNope": "1",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "1. 채용인원: 1명\r\n2. 채용분야: 단기노무원(사무보조)\r\n3. 고용형태: 비정규직\r\n4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능\r\n5. 근로예정기간: 2026.12.16.~2027.05.31.\r\n6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실\r\n-사무실 위치: 경상남도 창원시 의창구 북면 달천길52\r\n7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표\r\n8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00\r\n9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수\r\n- 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr)\r\n10. 면접전형: 2026.12.04.(금)\r\n11. 신체검사: 2026.12.07.(월)\r\n12. 합격자발표: 2026.12.11.(금)\r\n13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음\r\n\r\n※세부사항 채용공고문 참조",
+          "workRgnNmLst": "경남"
         },
         "required_review": {
           "official_notice_and_attachments": "not_verified",
@@ -2888,7 +2883,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:20.927880+09:00",
+          "checked_at": "2026-11-27T17:38:09.178968+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2911,7 +2906,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:21.215257+09:00",
+          "checked_at": "2026-11-27T17:38:09.080892+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2922,31 +2917,8 @@
         "draft_text_has_notice": true
       },
       {
-        "notice_id": "a307396",
-        "suggested_slot": "2026-11-28T12:00:00+09:00",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
-        "evidence_status": "bytes_fetched_for_review",
-        "semantic_review": "required",
-        "publisher_validate_entry": "not_run",
-        "source": {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
-          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
-          "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
-          "size_bytes": 11152,
-          "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:20.879781+09:00",
-          "pdf_magic_valid": false,
-          "text_available": true,
-          "official_page_title": "잡알리오",
-          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무) 2026.11.25 / 진행중 공공기관 채용정보 기관명 한전KPS(주) 표준직무(NCS) 경영.회계.사무 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 전남광주 근무분야 사무직 채용인원 1 우대조건 보훈대상자(면접전형 만점의 5~10% 가점) ※ 국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자 공고기간 26.11.25 ~ 26.12.01 응시자격 ○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자 ※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조 결격사유 ○ 신체검사결과 부적격으로 판정된 자 ○ 채용구비서류에 허위사실이 발견된 자 ○ 기타 채용기준상 부적격으로 판정된 자 전형절차/방법 1. 채용개요 ○ 채용인원: 사무보조 1명 ○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음) 2. 근무조건 ○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능) ○ 근무지: 한빛1발전소(전남광주통합특별시 영광군) * 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음. ○ 근무기간; 2026.12.11.~2027.4.30. * 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음 ○ 보수 및 복리후생 - 일급(협의 후 결정) - 4대보험 - 숙식 제공 불가/통근버스 없음 - 근무지 변경 시 출장비 지급 3. 전형방법 ○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표 ○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화) ○ 면접일정 : 2026. 12. 3.(목) ○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월) ○ 최종합격자발표일: 2026. 12. 8.(화) ○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062 ※ 전형일정은 회사 사정에 따라 달라질 수 있음 ○ 제출서류 - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부 ※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가 -우대사항 증빙서류 : 국가유공자증(사본) 1부 우대내용 ○ 보훈대상자(면접전형 만점의 5~10% 가점) -국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자 ※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.) 전형단계별 채용정보 사무보조 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 한전KPS 원자력정비기술센터 단기노무원사무보조 모집공고ALIO 2.hwpx 입사지원서 원자력정비기술센터 단기노무원 입사지원서.hwp 직무기술서 직무기술서 사무보조.hwp 기타 첨부파일 개인정보 수집 이용 제공동의서.hwp 미첨부 사유 원문 URL https://www.kps.co.kr 클립보드에 주소가 복사 되었습니다."
-        },
-        "text_requires_independent_review": true,
-        "notice_body_has_text": true,
-        "draft_text_has_notice": true
-      },
-      {
         "notice_id": "a307039",
-        "suggested_slot": "2026-11-28T16:00:00+09:00",
+        "suggested_slot": "2026-11-28T12:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -2957,34 +2929,11 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:20.711800+09:00",
+          "checked_at": "2026-11-27T17:38:08.420328+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
           "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고 2026.11.17 / 진행중 공공기관 채용정보 기관명 한국서부발전(주) 표준직무(NCS) 음식서비스 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 전북 근무분야 계약직 채용인원 1 우대조건 장애인 등 ※ 상세내용 붙임1의 채용공고문 참조 공고기간 26.11.17 ~ 26.12.02 응시자격 - 만 55세 이상 고령자(학력, 성별 제한 없음) - 식품위생법 제40조 및 동법 시행규칙 제29조에 의한 건강 진단결과 이상이 없는 자(공고 마감일 기준 진단일 1년 이내) - (남자의 경우)병역 의무를 필하였거나 면제된 자 - 당사 인사관리규정 제10조의 결격사유가 없는 자 - 합격 후 명시기한 내 근무가 가능한 자 결격사유 당사 인사관리규정 제10조의 결격사유가 없는 자 ※ 상세내용 붙임1의 채용공고문 참조 전형절차/방법 * 지원서 접수 - 접수기간: 2026. 11. 17.(화) 09:00 ∼ 2026. 12. 02.(수) 14:00 - 접수방법: 인터넷 접수 * 전형방법 - 1차: 서류 전형 - 2차: 면접 전형 - 최종: 합격자 발표(신원조회 및 신체검사 후) ※ 상세내용 붙임1의 채용공고문 참조 우대내용 * 장애인: 면접 전형 만점의 10% ※ 상세내용 붙임1의 채용공고문 참조 전형단계별 채용정보 후생담당원(기간제근로자) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 붙임1. 채용공고문.hwp 입사지원서 붙임1. 채용공고문.hwp 직무기술서 붙임2. 직무기술서.hwp 기타 첨부파일 미첨부 사유 원문 URL https://recruit.incruit.com/iwest/ 클립보드에 주소가 복사 되었습니다."
-        },
-        "text_requires_independent_review": true,
-        "notice_body_has_text": true,
-        "draft_text_has_notice": true
-      },
-      {
-        "notice_id": "a307524",
-        "suggested_slot": "2026-11-28T16:00:00+09:00",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
-        "evidence_status": "bytes_fetched_for_review",
-        "semantic_review": "required",
-        "publisher_validate_entry": "not_run",
-        "source": {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
-          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
-          "sha256": "3fe715bb90e4371a60d3ac9ce1357f742690684a42cc0a11e376613e6595cb54",
-          "size_bytes": 9634,
-          "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:23.367040+09:00",
-          "pdf_magic_valid": false,
-          "text_available": true,
-          "official_page_title": "잡알리오",
-          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집 2026.11.27 / 진행중 공공기관 채용정보 기관명 한전KPS(주) 표준직무(NCS) 경영.회계.사무 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 경남 근무분야 계약직 채용인원 1 우대조건 보훈대상자(각 전형단계별 만점의 5%~10% 가점) 공고기간 26.11.27 ~ 26.12.03 응시자격 채용예정일 즉시 근무가능한 자 결격사유 신체검사결과 부적격으로 판정된 자 채용구비서류에 허위사실이 발견된 자 기타 채용기준상 부적격으로 판전된 자 전형절차/방법 1. 채용인원: 1명 2. 채용분야: 단기노무원(사무보조) 3. 고용형태: 비정규직 4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능 5. 근로예정기간: 2026.12.16.~2027.05.31. 6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실 -사무실 위치: 경상남도 창원시 의창구 북면 달천길52 7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표 8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00 9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수 - 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr) 10. 면접전형: 2026.12.04.(금) 11. 신체검사: 2026.12.07.(월) 12. 합격자발표: 2026.12.11.(금) 13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음 ※세부사항 채용공고문 참조 우대내용 보훈대상자(각 전형단계별 만점의 5%~10% 가점) 전형단계별 채용정보 사무보조 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 단기노무원 채용공고(함안지점_261216_사무보조).hwp 입사지원서 블라인드 지원서 양식(개인정보동의서 포함_사무보조).hwp 직무기술서 단기노무원 직무기술서(사무보조).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.kps.co.kr 클립보드에 주소가 복사 되었습니다."
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
@@ -3003,11 +2952,57 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:23.865669+09:00",
+          "checked_at": "2026-11-27T17:38:08.669262+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
           "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 기간제근로자(대체인력) 채용공고 [대전세종충남본부 아산지사, 금산지사] 2026.11.20 / 진행중 공공기관 채용정보 기관명 한국전력공사 표준직무(NCS) 전기.전자 고용형태 비정규직 학력정보 학력무관 채용구분 신입 근무지 충남 근무분야 기술직 채용인원 2 우대조건 취업지원대상자(동점자 처리 시 우선순위 적용) ※ 자세한 사항은 붙임 채용공고문 참조 공고기간 26.11.20 ~ 26.12.04 응시자격 □ 학력 및 연령 : 제한없음 □ 병역 : 병역법 제76조에서 정한 병역의무 불이행 사실이 없는 자 □ 신체조건 : 색맹이 아닌 자 □ 지원자격 ○ [배전담당(가)] : 필수 1,2,3,4 모두 보유 - 필수 1 : 가공배전전공 이상 또는 지중배전전공 이상 - 필수 2 : 전기기능사 이상 또는 전기공사 산업기사 이상 - 필수 3 : 자동차 운전면허 1종 대형 - 필수 4 : 기중기운전기능사 또는 이동식크레인 및 고소작업대 조종자격 교육 이수 □ 기타 : 채용구분별 근무시작일부터 근무가 가능한 자 ※ 기타 자세한 사항은 붙임 채용공고문 참조 결격사유 □ 당사 인사관리규정 제11조 신규채용자의 결격사유에 해당하는 자 □ 병역법 제76조에서 정한 병역의무 불이행자 ※ 기타 자세한 사항은 붙임 채용공고문 참조 전형절차/방법 □ 채용인원 : 배전담당(가) 2명 □ 1차 서류전형 ○ 평가기준 : 자격증 점수(배점 40점) ○ 선발배수 : 7배수 (동점자 발생 시 전원 합격 처리) ※ 모집단위별 응시인원이 1차전형 선발배수를 초과하지 않을 경우 서류전형 생략 및 전원합격 처리 가능 □ 2차 면접전형 ○ 평가기준 : 개별 면접점수(100점) ○ 선발배수 : 1배수 (동점자 발생 시 1. 취업지원대상자 2. 자격증 가점 순으로 우선선발) □ 접수기간 및 방법 ○ 접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지 ○ 지원방법 : 채용홈페이지 접수(http://recruit.kepco.co.kr/sangsi) - 지원분야 [아산지사] 배전담당(가), [금산지사] 배전담당(가) 중 택1(중복지원불가) ※ 기타 자세한 사항은 붙임 채용공고문 참조 우대내용 □ 취업지원대상자 : 면접전형 동점자 처리 시 우선순위 적용 ※ 자세한 사항은 채용공고문 참조 전형단계별 채용정보 [아산지사] 배전담당(가) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : [금산지사] 배전담당(가) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 1.채용공고문.pdf 입사지원서 입사지원서.hwp 직무기술서 직무기술서.pdf 기타 첨부파일 신규채용자의 결격사유.pdf 개인정보수집이용 동의서 및 윤리서약 동의서.hwp 미첨부 사유 원문 URL http://recruit.kepco.co.kr/sangsi 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": true
+      },
+      {
+        "notice_id": "a307396",
+        "suggested_slot": "2026-11-28T16:00:00+09:00",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+          "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
+          "size_bytes": 11152,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-27T17:38:11.299847+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무) 2026.11.25 / 진행중 공공기관 채용정보 기관명 한전KPS(주) 표준직무(NCS) 경영.회계.사무 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 전남광주 근무분야 사무직 채용인원 1 우대조건 보훈대상자(면접전형 만점의 5~10% 가점) ※ 국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자 공고기간 26.11.25 ~ 26.12.01 응시자격 ○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자 ※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조 결격사유 ○ 신체검사결과 부적격으로 판정된 자 ○ 채용구비서류에 허위사실이 발견된 자 ○ 기타 채용기준상 부적격으로 판정된 자 전형절차/방법 1. 채용개요 ○ 채용인원: 사무보조 1명 ○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음) 2. 근무조건 ○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능) ○ 근무지: 한빛1발전소(전남광주통합특별시 영광군) * 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음. ○ 근무기간; 2026.12.11.~2027.4.30. * 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음 ○ 보수 및 복리후생 - 일급(협의 후 결정) - 4대보험 - 숙식 제공 불가/통근버스 없음 - 근무지 변경 시 출장비 지급 3. 전형방법 ○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표 ○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화) ○ 면접일정 : 2026. 12. 3.(목) ○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월) ○ 최종합격자발표일: 2026. 12. 8.(화) ○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062 ※ 전형일정은 회사 사정에 따라 달라질 수 있음 ○ 제출서류 - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부 ※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가 -우대사항 증빙서류 : 국가유공자증(사본) 1부 우대내용 ○ 보훈대상자(면접전형 만점의 5~10% 가점) -국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자 ※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.) 전형단계별 채용정보 사무보조 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 한전KPS 원자력정비기술센터 단기노무원사무보조 모집공고ALIO 2.hwpx 입사지원서 원자력정비기술센터 단기노무원 입사지원서.hwp 직무기술서 직무기술서 사무보조.hwp 기타 첨부파일 개인정보 수집 이용 제공동의서.hwp 미첨부 사유 원문 URL https://www.kps.co.kr 클립보드에 주소가 복사 되었습니다."
+        },
+        "text_requires_independent_review": true,
+        "notice_body_has_text": true,
+        "draft_text_has_notice": true
+      },
+      {
+        "notice_id": "a307524",
+        "suggested_slot": "2026-11-28T16:00:00+09:00",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
+        "evidence_status": "bytes_fetched_for_review",
+        "semantic_review": "required",
+        "publisher_validate_entry": "not_run",
+        "source": {
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307524",
+          "sha256": "3fe715bb90e4371a60d3ac9ce1357f742690684a42cc0a11e376613e6595cb54",
+          "size_bytes": 9634,
+          "content_type": "text/html;charset=utf-8",
+          "checked_at": "2026-11-27T17:38:12.038234+09:00",
+          "pdf_magic_valid": false,
+          "text_available": true,
+          "official_page_title": "잡알리오",
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한전KPS(주) 부산경남전력지사 함안지점 단기노무원(사무보조) 모집 2026.11.27 / 진행중 공공기관 채용정보 기관명 한전KPS(주) 표준직무(NCS) 경영.회계.사무 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 경남 근무분야 계약직 채용인원 1 우대조건 보훈대상자(각 전형단계별 만점의 5%~10% 가점) 공고기간 26.11.27 ~ 26.12.03 응시자격 채용예정일 즉시 근무가능한 자 결격사유 신체검사결과 부적격으로 판정된 자 채용구비서류에 허위사실이 발견된 자 기타 채용기준상 부적격으로 판전된 자 전형절차/방법 1. 채용인원: 1명 2. 채용분야: 단기노무원(사무보조) 3. 고용형태: 비정규직 4. 근무시간: 주 5일, 1일 8시간 근무를 원칙으로 하되, 현장사정에 따라 변동가능 5. 근로예정기간: 2026.12.16.~2027.05.31. 6. 근 무 지: 한전KPS(주) 부산경남전력지사 함안지점 사무실 -사무실 위치: 경상남도 창원시 의창구 북면 달천길52 7. 전형절차: 서류접수-> 면접-> 신체검사 후 합격자발표 8. 지원서접수기간: 2026.11.27.(금) 14:00 ~2026.12.03.(목) 10:00 9. 지원방법: 블라인드 입사지원서, 개인정보제공동의서 이메일접수 - 연락처: 함안지점 담당자(전화: 055-583-9471, 이메일: ghdghddl@kps.co.kr) 10. 면접전형: 2026.12.04.(금) 11. 신체검사: 2026.12.07.(월) 12. 합격자발표: 2026.12.11.(금) 13. 기타: 전형일정은 회사 사정에 의해 일부 변경될 수 있음 ※세부사항 채용공고문 참조 우대내용 보훈대상자(각 전형단계별 만점의 5%~10% 가점) 전형단계별 채용정보 사무보조 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 단기노무원 채용공고(함안지점_261216_사무보조).hwp 입사지원서 블라인드 지원서 양식(개인정보동의서 포함_사무보조).hwp 직무기술서 단기노무원 직무기술서(사무보조).hwp 기타 첨부파일 미첨부 사유 원문 URL https://www.kps.co.kr 클립보드에 주소가 복사 되었습니다."
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
@@ -3026,7 +3021,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:23.215399+09:00",
+          "checked_at": "2026-11-27T17:38:11.054861+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3049,7 +3044,7 @@
           "sha256": "a3372d8d157985c9b34c03c74ad28c9e7fa73ab8dd53bd90915dc20e782be356",
           "size_bytes": 24185,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T17:07:24.172803+09:00",
+          "checked_at": "2026-11-27T17:38:11.893731+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3127,12 +3122,20 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-27T17:07:24.293329+09:00",
-    "window_start": "2026-11-25T08:07:24.293329+00:00",
+    "checked_at": "2026-11-27T17:38:12.186918+09:00",
+    "window_start": "2026-11-25T08:38:12.186918+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
     "posts": [
+      {
+        "post_id": "18114183686230810",
+        "timestamp": "2026-11-27T08:28:25+00:00",
+        "permalink": "https://www.threads.com/@hid_119/post/DgPQC2KnHxf",
+        "is_reply": false,
+        "text_available": true,
+        "text_sha256": "b2589cca3f5080d130fa481796b8116eb548c93a461f43e40491fa9a8cb41695"
+      },
       {
         "post_id": "17994774680865726",
         "timestamp": "2026-11-27T03:52:01+00:00",
