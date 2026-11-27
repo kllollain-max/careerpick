@@ -1,0 +1,78 @@
+name: Threads a307082 live profile and applicant screen audit (read only)
+on:
+  push:
+    branches:
+      - review/threads-a307082-independent-20261118
+    paths:
+      - .github/workflows/threads-a307082-profile-verify.yml
+permissions:
+  contents: read
+jobs:
+  profile-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless browser for public GET-only checks
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Inspect actual public CareerPick detail and official Red Cross application entry
+        shell: bash
+        run: |
+          mkdir -p threads-readonly-evidence
+          node <<'JS'
+          const fs = require('fs');
+          const {chromium} = require('playwright');
+          const evidence={started_at:new Date().toISOString(),notice_id:'a307082',
+            read_only:true,meta_posted:false,queue_updated:false,queries:[]};
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            for(const config of [
+              {kind:'careerpick_detail',url:'https://kllollain-max.github.io/careerpick/#job=a307082',screenshot:'careerpick-detail.png'},
+              {kind:'hospital_official_notice',url:'https://www.rch.or.kr/web/rchseoul/bbs/employment/5642',screenshot:'hospital-official-notice.png'},
+              {kind:'official_application_portal',url:'https://www.redcross.or.kr/redrecruit/',screenshot:'redcross-application.png'}
+            ]){
+              const page=await browser.newPage({viewport:{width:1440,height:900},locale:'ko-KR'});
+              const out={kind:config.kind,requested_url:config.url};
+              try{
+                const response=await page.goto(config.url,{waitUntil:'domcontentloaded',timeout:40000});
+                await page.waitForTimeout(4500);
+                out.http_status=response?.status()||null;
+                out.final_url=page.url();
+                out.title=await page.title();
+                const visible=await page.locator('body').innerText({timeout:10000});
+                const terms=['a307082','서울적십자병원','간호사','4명','2026.11.23','11월 23일','10:00','정규직','채용공고'];
+                out.visible_terms=Object.fromEntries(terms.map(s=>[s,visible.includes(s)]));
+                out.visible_length=visible.length;
+                out.visible_excerpt=visible.slice(0,1600);
+                out.evidence_windows=[];
+                for(const term of terms){let at=visible.indexOf(term); if(at>=0)out.evidence_windows.push({term,text:visible.slice(Math.max(0,at-180),Math.min(visible.length,at+350))});}
+                out.relevant_anchors=await page.locator('a[href]').evaluateAll(nodes=>nodes.filter(n=>/redcross|alio|307082|간호사|지원|채용/i.test(n.innerText+' '+n.href)).slice(0,22).map(n=>({label:n.innerText?.trim().slice(0,90),href:n.href})));
+                out.detail_unambiguously_identified=Boolean(out.visible_terms['a307082']&&out.visible_terms['서울적십자병원']&&out.visible_terms['간호사']&&out.visible_terms['정규직']&&out.visible_terms['4명']);
+                await page.screenshot({path:'threads-readonly-evidence/'+config.screenshot,fullPage:false});
+              }catch(err){out.error=String(err).slice(0,550);}
+              evidence.queries.push(out);
+              console.log('PUBLIC_READONLY_AUDIT='+JSON.stringify({...out,visible_excerpt:undefined,evidence_windows:out.evidence_windows?.slice(0,5)}));
+              await page.close();
+            }
+            await browser.close();
+            evidence.finished_at=new Date().toISOString();
+            fs.writeFileSync('threads-readonly-evidence/report.json',JSON.stringify(evidence,null,2)+'\n');
+            if(!evidence.queries.some(q=>q.kind==='careerpick_detail'&&q.detail_unambiguously_identified)){
+              console.error('CAREERPICK_PROFILE_NOT_FULLY_VERIFIED: HOLD, no CAS or publication');
+            }
+          })().catch(err=>{fs.writeFileSync('threads-readonly-evidence/error.txt',String(err));process.exitCode=1;});
+          JS
+      - name: Preserve public read-only evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a307082-public-profile-readonly
+          path: threads-readonly-evidence/
+          retention-days: 7
