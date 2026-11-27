@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-27T10:38:31.230292+09:00",
-  "run_id": "45923685561",
-  "source_commit": "0849fb81f6c999e95c55e6ed4ab0ddfbef3f0233",
+  "captured_at": "2026-11-27T12:14:06.549206+09:00",
+  "run_id": "45932918250",
+  "source_commit": "75371c78fd8cea1666b0f6f974880a6c4b778432",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-27T10:38:22.878010+09:00",
+    "time": "2026-11-27T12:13:54.729043+09:00",
     "future_slots": [
-      "2026-11-27T12:00:00+09:00",
       "2026-11-27T16:00:00+09:00",
       "2026-11-27T20:00:00+09:00",
       "2026-11-28T08:00:00+09:00",
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
       "2026-11-28T20:00:00+09:00",
-      "2026-11-29T08:00:00+09:00"
+      "2026-11-29T08:00:00+09:00",
+      "2026-11-29T12:00:00+09:00"
     ],
     "next_media": "TEXT",
     "promoted": [],
@@ -167,15 +167,16 @@
     "queue_sha": "abeec71083b69b6752849a649175b1fdc47f6477",
     "staged_sha": "9c0063ba27c2a3cee0d4694281c45c273f5dec97",
     "promoted_count": 0,
-    "approved_supply_count": 3,
+    "approved_supply_count": 2,
     "inventory_target": 8,
-    "inventory_shortfall": 5,
+    "inventory_shortfall": 6,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
+    "pending_active_slots": [
+      "2026-11-27T12:00:00+09:00"
+    ],
+    "media_forecast_conditional_on_active_slot": true,
     "approved_future_slots": [
-      "2026-11-27T12:00:00+09:00",
       "2026-11-27T16:00:00+09:00",
       "2026-11-27T20:00:00+09:00"
     ],
@@ -184,7 +185,8 @@
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
       "2026-11-28T20:00:00+09:00",
-      "2026-11-29T08:00:00+09:00"
+      "2026-11-29T08:00:00+09:00",
+      "2026-11-29T12:00:00+09:00"
     ],
     "next_slot_missing": false,
     "source_candidate_count": 22,
@@ -195,7 +197,8 @@
         "2026-11-28T12:00:00+09:00",
         "2026-11-28T16:00:00+09:00",
         "2026-11-28T20:00:00+09:00",
-        "2026-11-29T08:00:00+09:00"
+        "2026-11-29T08:00:00+09:00",
+        "2026-11-29T12:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "a307361",
@@ -1197,7 +1200,8 @@
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
       "2026-11-28T20:00:00+09:00",
-      "2026-11-29T08:00:00+09:00"
+      "2026-11-29T08:00:00+09:00",
+      "2026-11-29T12:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "a307361",
@@ -2670,33 +2674,138 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "a307313",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 작업치료사 채용 공고(2027.1.4.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307313",
         "source_post_sha256": "7199fd016df68e14001673be4b1bbd5debcf77aa5a64a3283315664eb7f65397",
         "source_detail_sha256": "96fcb6b7cc26e22590214f40fa1d03f29517ae808f8b269b17f9a396d56848ea",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
+        "application_source_ref": "alio-detail.json#307313/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T10:34:35+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ (필수) 작업치료사 면허증 소지자\r\n○ 소아작업치료 경력 보유자 우대",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "1. 서류 심사 우선 합격 대상(취업지원 대상자, 장애인)\r\n○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5·18민주유공자예우 및 단체설립에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제19조의 규정에 의한 취업지원 대상자\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9에 해당하는 자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n※ 서류 심사 우선 합격 대상자 중 서류 과락 점수 미달자는 우선 합격자에서 제외\r\n※ 채용 인원이 3명 이하인 경우 취업지원 대상자는 우선 합격에서 제외\r\n\r\n2. 전형별 가점 대상자\r\n1) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제1호 및 독립유공자예우에 관한 법률 제16조제3항제1호, 5.18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제1호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제1호, 보훈보상대상자 지원에 관한 법률 제35조제1항제1호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제1호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n2) 국가유공자 등 예우 및 지원에 관한 법률 제31조제1항제2호 및 독립유공자예우에 관한 법률 제16조제3항제2호, 5·18민주유공자예우 및 단체설립에 관한 법률 제22조제1항제2호 및 특수임무유공자 예우 및 단체설립에 관한 법률 제24조제1항제2호, 보훈보상대상자 지원에 관한 법률 제35조제1항제2호 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률 제7조의9제2항제2호의 규정에 의거 취업지원 대상자 증명서를 제출한 자 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n3) 장애인고용촉진 및 직업재활법 제2조1호 규정에 의한 장애인 : 각 전형별로 만점의 10%를 응시자의 점수에 가산\r\n4) 북한이탈주민의 보호 및 정착지원에 관한 법률에 따른 북한이탈주민 : 각 전형별로 만점의 5%를 응시자의 점수에 가산\r\n※ 가점 부여 시 전형 점수가 만점의 40% 미만인 경우 가산하지 않음. 다만, 서류 전형은 예외로 함\r\n※ ‘1), 2)’에 해당하여 가점을 받아 합격하는 인원은 전체 선발 인원의 30%를 초과할 수 없음\r\n※ 채용 예정 인원이 3명 이하인 경우 ‘1), 2)’에 해당하는 자는 각 전형별 가점을 부여하지 않음. 단, 응시자가 채용 예정 인원과 같거나 더 적을 경우에는 가점을 부여함",
+          "recrutNope": "1",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 20. ~ 2026. 12. 7.\r\n2. 서류전형 발표 : 2026. 12. 10.\r\n3. 면접전형 : 2026. 12.15.\r\n4. 최종합격자 발표 : 2026. 12. 22.\r\n5. 임용예정일 : 2027. 1. 4.\r\n\r\n○ 1차 서류전형 : 모집인원의 5배수\r\n○ 2차 면접전형 : 서류전형 합격자\r\n\r\n※ 성명 삭제 시 제출서류 미인정",
+          "workRgnNmLst": "인천"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "a307338",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 상주적십자병원 비정규직 장애인 고용원(보조원) 모집 공고\n고용형태: 비정규직\n접수 마감: 2026-12-09 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307338",
         "source_post_sha256": "87ade70db57036ad60e28a8694c8bcbab166db0d2a49c358dd953ffb642d0403",
         "source_detail_sha256": "cd1b1948ded195a6e95eaaa53e8d7a312517f0a7f8472368093cfd59ba2ac31f",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수기간 : 2026. 11. 23.(월) ~ 2026. 12. 9.(수) / 장애인 고용공단 경북지사, 054-450-3012, yy2829@kead.or.kr",
+        "application_source_ref": "alio-detail.json#307338/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T10:34:35+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ 장애인복지법상 등록장애인 또는 국가유공 장애인으로 장애인 고용공단의 추천을 받은 자",
+          "hireTypeNmLst": "비정규직",
+          "prefCn": "-",
+          "recrutNope": "2",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "○ 접수기간 : 2026. 11. 23.(월) ~ 2026. 12. 9.(수) / 장애인 고용공단 경북지사, 054-450-3012, yy2829@kead.or.kr\r\n - 접수방법 : 장애인 고용공단 경북지사 추천(접수) \r\n○ 면접전형 : 2026. 12. 22.(화)\r\n○ 최종합격자 발표 : 2026. 12. 29.(화) 15:00\r\n○ 임용예정일 : 2027. 1. 4.(월) / 2027. 2. 15.(월)\r\n\r\n※ 서류전형 : 장애인 고용공단 추천서로 갈음함\r\n※ 면접전형 : 면접위원이 채점한 평점의 평균이 15점 이상인 자 중 성적 순위(25점 만점)\r\n\r\n※ 각종 제출 서류에 ‘사진, 생년월일, 성별, 학교명’이 들어가는 부분은 삭제 후 제출\r\n※ 전형별 발표방법 : 상주적십자병원 홈페이지 (www.rch.or.kr/sangju) 공고",
+          "workRgnNmLst": "경북"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "a307341",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "draft_text": "국악방송 채용 공고를 확인해 보세요.\n\n모집 공고: 국악방송 체험형 인턴(장애인) 채용 공고\n고용형태: 청년인턴(체험형)\n접수 마감: 2026-12-08 18:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
         "source_post_sha256": "c315c9528c5554af2aae756635cd1a4965c517b65327b33275ea89c5090b8ed1",
         "source_detail_sha256": "c02eec954ea0bf8e0f717e93ac38b642bebd327418f197524e68216a2366b04e",
-        "suggested_slot": null
-      },
+        "application_evidence_for_review": "서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00",
+        "application_source_ref": "alio-detail.json#307341/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-27T10:34:35+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "채용분야 : 방송행정(라디오) 1명, 방송행정(TV) 1명\r\n\r\n[필수응시자격]\r\n- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인\r\n\r\n[공통응시자격]\r\n- 서울 근무 가능자\r\n- 학력, 성별, 연령 제한 없음\r\n- 「국가공무원법」제33조 및「국악방송 인사규정」제21조의 결격사유가 없는 자",
+          "hireTypeNmLst": "청년인턴(체험형)",
+          "prefCn": "- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인(서류전형 시 가점 5% 적용)\r\n- 「국가유공자 등 예우 및 지원에 관한 법률」 등 보훈관계법률에 따른 가점 대상자(각 전형별 가점 5~10%적용) 단,「국가유공자 등 예우 및 지원에 관한 법률」제31조3항에 따라 응시자의 수가 선발예정 인원(1명)과 동일한 경우에만 가점 적용)\r\n※ 중복적용하지 아니하고 유리한 우대사항 하나만 인정",
+          "recrutNope": "2",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "전형절차 : 1차 서류전형(5배수) - 2차 면접전형(1배수)\r\n전형방법 : 국악방송 채용시스템(http://gugakfm.saramin.co.kr)을 통해 접수\r\n\r\n전형세부일정\r\n\r\n-  공고 및 서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00\r\n-  서류전형 기간 : 2026.12.09.(수) ~ 2026.12.15.(화) \r\n-  서류전형 합격자 발표 : 2026.12.16.(수)\r\n-  면접전형 일자 : 2026.12.22.(화)\r\n-  인사위원회 개최 : 2026.12.29.(화)\r\n-  최종합격자 발표 : 2026.12.30.(수)\r\n   ※ 상기 일정은 사정상 변경될 수 있으며, 변경 시 국악방송 홈페이지를 통해 안내 예정\r\n   ※ 전형별 결과는 홈페이지(https://www.igbf.kr/) 공지 및 개별 통지\r\n   ※ 최종합격자의 임용포기, 합격취소, 결격사유, 퇴직 등의 사정 또는 최종합격자가 임용된 날로부터 3개월 이내에 퇴직하여 결원이 발생한 경우 합격자 발표일로부터 6개월 이내에 불합격 기준에 해당하지 아니하는 사람 중에서 면접전형 평정 우수자 순으로 추가 합격자를 결정할 수 있음",
+          "workRgnNmLst": "서울"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
+      }
+    ],
+    "official_source_alternatives": [
       {
         "notice_id": "a307324",
         "status": "unreviewed",
@@ -2736,14 +2845,16 @@
         "2026-11-28T12:00:00+09:00",
         "2026-11-28T16:00:00+09:00",
         "2026-11-28T20:00:00+09:00",
-        "2026-11-29T08:00:00+09:00"
+        "2026-11-29T08:00:00+09:00",
+        "2026-11-29T12:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-28T08:00:00+09:00",
         "2026-11-28T12:00:00+09:00",
         "2026-11-28T16:00:00+09:00",
         "2026-11-28T20:00:00+09:00",
-        "2026-11-29T08:00:00+09:00"
+        "2026-11-29T08:00:00+09:00",
+        "2026-11-29T12:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -2770,7 +2881,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:27.644721+09:00",
+          "checked_at": "2026-11-27T12:13:59.906286+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2793,7 +2904,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:27.647496+09:00",
+          "checked_at": "2026-11-27T12:13:59.730981+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2816,7 +2927,7 @@
           "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
           "size_bytes": 11152,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:27.641653+09:00",
+          "checked_at": "2026-11-27T12:13:59.661510+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2839,7 +2950,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:27.309295+09:00",
+          "checked_at": "2026-11-27T12:13:59.489048+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2862,7 +2973,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:29.875012+09:00",
+          "checked_at": "2026-11-27T12:14:01.817803+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2885,7 +2996,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:29.444617+09:00",
+          "checked_at": "2026-11-27T12:14:01.560056+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2908,7 +3019,7 @@
           "sha256": "a3372d8d157985c9b34c03c74ad28c9e7fa73ab8dd53bd90915dc20e782be356",
           "size_bytes": 24185,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:30.570566+09:00",
+          "checked_at": "2026-11-27T12:14:01.440668+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -2919,27 +3030,38 @@
         "draft_text_has_notice": true
       },
       {
-        "notice_id": "a306979",
-        "suggested_slot": "2026-11-28T16:00:00+09:00",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306979",
+        "notice_id": "a307417",
+        "suggested_slot": "2026-11-28T20:00:00+09:00",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307417",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
         "publisher_validate_entry": "not_run",
         "source": {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306979",
-          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306979",
-          "sha256": "ab221824163ce36666f053ab9e956a0538edfe77459b5fa0d5f64013fa68fa5e",
-          "size_bytes": 17367,
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307417",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307417",
+          "sha256": "adb78ad0c1c12785c0e6bb326f4926db193ba0d163124d0dfdc0a5f0d3ed211d",
+          "size_bytes": 13011,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-27T10:38:29.938854+09:00",
+          "checked_at": "2026-11-27T12:14:01.572369+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
-          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한국공정거래조정원 2026년 제5차 기간제 근로자 채용 공고 2026.11.16 / 진행중 공공기관 채용정보 기관명 한국공정거래조정원 표준직무(NCS) 경영.회계.사무,정보통신,연구 고용형태 비정규직 학력정보 학력무관,석사 채용구분 신입 근무지 서울 근무분야 행정직,사무직,연구직,전산직,계약직 채용인원 6 우대조건 [공통] ㅇ 장애인 등 취업보호(지원)대상자, [경쟁영향평가 석사급 연구 전문인력(석사급 제한경쟁)] ㅇ 경제학, 법학 관련 박사학위 소지자 ㅇ 「변호사법」 제4조에 따른 변호사 자격증 소지자, [정보화 전문인력(정보화 제한경쟁)] ㅇ AI챔피언 인증(블랙·블루·그린) 보유자 ㅇ AICE Associate, 데이터분석전문가(ADP), 빅데이터분석기사 자격 보유자, [가맹점주 단체등록 심사 전문인력(가맹거래사 제한경쟁)] ㅇ 가맹거래사 취득 후 관련 업무 경험 1년 이상 보유자 ㅇ Excel 등 MS Office 활용 능력 우수한 경우, 정보처리·사무자동화, 컴퓨터활용능력, MOS, ITQ 등 OA 관련 자격 보유자, [가맹점주 단체등록 심사 업무지원 인력] ㅇ Excel 등 MS Office 활용 능력 우수한 경우, 정보처리·사무자동화, 컴퓨터활용능력, MOS, ITQ 등 OA 관련 자격 보유자 공고기간 26.11.16 ~ 26.12.01 응시자격 [공통] ㅇ 성별, 연령 제한 없음 - 단, 채용예정일 기준 우리 원 인사규정상 정년(만 60세) 미만인 자 ㅇ 병역의무대상자의 경우 군필자 또는 면제자 ㅇ 우리 원 인사규정에 의한 채용결격사유에 해당되지 않는 자 ※ 채용결격사유(우리 원 인사규정 제10조)* - 국가공무원법 제33조 각 호의 어느 하나에 해당하는 자 - 병역법에 의한 병역기피자 -「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」제82조에 따른 비위면직자 등 취업제한 적용을 받는 자 ㅇ 2027. 1. 25.(월)부터 근무 가능한 자 * 특정 신체적 조건이 필요하지 않은 직무로 신체검사 생략 및 채용결격사유 내 미포함 [경쟁영향평가 석사급 연구 전문인력(석사급 제한경쟁)] ㅇ (필수) 경제학, 법학, 정책학, 행정학 석사학위 소지자 또는 2027년 1월(근무개시 예정일)이전 동 학위 취득 예정자* * 2027년 1월(근무개시 예정일) 이전 학위 미취득 시 합격 취소 [정보화 전문인력(정보화 제한경쟁)] ㅇ (필수) 아래 자격 중 1개 이상 보유자 또는 정보화 관련 업무 6개월 이상 경력자 - 정보통신·정보보안 기사 또는 산업기사 - 사무자동화 기사 또는 산업기사 - 정보처리 기사 또는 산업기사 - 국제공인정보시스템 감사사(CISA) - 국제공인정보시스템 보안전문가(CISSP) [가맹점주 단체등록 심사 전문인력(가맹거래사 제한경쟁)] ㅇ (필수) 가맹거래사 [가맹점주 단체등록 심사 업무지원 인력] ㅇ 제한 없음 결격사유 ㅁ 채용결격사유(우리 원 인사규정 제10조) ㅇ 국가공무원법 제33조 각 호의 어느 하나에 해당하는 자 ㅇ 병역법에 의한 병역기피자 ㅇ 「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」 제82조에 따른 비위면직자 등의 취업제한 적용을 받는 자 * 특정 신체적 조건이 필요하지 않은 직무로 신체검사 생략 및 채용결격사유 내 미포함 전형절차/방법 ㅁ 원서접수 : 2026. 11. 16.(월) ~ 2026. 12. 1.(화) ㅇ 온라인 지원 : https://kofair.fairyhr.com/ ※ 2026. 12. 1.(화) 낮 12:00 접수마감 (최종제출 기준) ㅁ 서류전형(예정) : 2026. 12. 2.(수) ~ 2026. 12. 22.(화) ㅇ 심사대상 : 응시자 전원 ㅇ 심사내용 : 자격사항, 교육사항, 경력사항, 자기소개서 평가 ㅇ 선발인원 : 부문별 채용예정인원 5배수 범위 내 ※ 서류전형 만점의 60%미만 득점자는 후순위 전형 제외 ㅇ 합격자 발표 : 2026. 12. 22.(화) 예정 - 문자 및 채용 누리집 내 개별통지 ㅁ 면접전형(예정) : 2026. 12 28.(월) ~ 2026. 12. 30.(수) 중 1일 ㅇ 심사대상 : 서류전형 합격자 ㅇ 심사내용 : 경험면접, 상황면접, 자기소개서 기반 인성면접 실시(다대다) - 배점: 직업기초능력(10점), 직무수행능력(10점), 인성 및 태도(10점) ㅇ 선발인원 : 부문별 채용예정인원 1배수 ※ 면접전형 만점의 60%미만 득점자는 채용대상 제외 ㅇ 면접일정 및 장소는 서류전형 합격자 발표 시 개별공지 ㅁ 채용서류 진위여부확인 : 면접 후 ~ 2027. 1. 5.(화) ㅇ 입사지원서 기재사항 점검, 서류 진위여부 확인 및 기관 경력 조회(경력회보서 회신) 실시 ㅁ 채용점검위원회 : 2027. 1. 8.(금) ~ 2027. 1. 11.(월) ㅇ 당해 채용의 관계법령 준수여부 및 내부규정 이행여부 점검 ㅇ 채용점검위원회 심의결과 특이사항 없을 경우 합격자 발표 ㅁ 최종합격자 발표 : 별도 공지 ㅇ 개별공지 : 2027. 1. 18.(월) 예정 ㅇ 채용예정일: 2027. 1. 25.(월) ※ 기관 사정에 따라 단계별 전형일정 등 변경 시 별도 공지예정 우대내용 [공통] ㅁ 취업보호(지원) 대상자별 가점비율 내역 - 각 전형절차별 만점 기준으로 매 전형에 가점 적용 ㅇ 「국가유공자 등 예우 및 지원에 관한 법률」 제29조 : 5∼10% ㅇ 「독립유공자 예우에 관한 법률」 제16조 : 5∼10% ㅇ 「보훈보상대상자 지원에 관한 법률」 제33조 : 5∼10% ㅇ 「고엽제후유의증 등 환자지원 및 단체설립에 관한 법률」 제7조의9 : 5∼10% ㅇ 「5·18 민주유공자 예우 및 단체설립에 관한 법률」 제20조 : 5∼10% ㅇ 「특수임무유공자 예우 및 단체설립에 관한 법률」 제19조 : 5∼10% ㅇ 「장애인고용촉진 및 직업재활법」 제2조 및 시행령 제3조 : 5% ※ 보훈대상자는 중복 가점사항이 있는 경우 가장 유리한 가점비율 1개만 인정하되, 「국가유공자 등 예우 및 지원에 관한 법률」 제31조 제3항에 근거하여 가점합격자가 발생하지 않을 수 있음 ※ 보훈대상자의 가점 비율은 지원자 본인이 국가보훈부 등에서 확인하여 기재하고, 채용공"
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 [무등산] 2027년 무등산국립공원 국립공원지킴이 채용 공고 2026.11.25 / 진행중 공공기관 채용정보 기관명 국립공원공단 표준직무(NCS) 환경.에너지.안전 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 전남광주 근무분야 계약직 채용인원 12 우대조건 국립공원 지역주민, 관련분야 경력자, 취업지원대상자, 봉사활동 실적 보유자, 취업취약계층 공고기간 26.11.25 ~ 26.12.09 응시자격 - 학력·전공, 나이 제한 없음(만18세이상) - 공단 인사규정 제18조(결격사유)에 해당하지 않는 자 - 소득·자산 기준초과자는 참여 제한(세부사항 공고문 참조) - 직접일자리사업 반복 및 중복 참여자는 참여 제한(세부사항 공고문 참조) 결격사유 1. 피성년후견인 2. 파산선고를 받고 복권되지 아니한 사람 3. 금고 이상의 실형을 선고받고 그 집행이 끝나거나(집행이 끝난 것으로 보는 경우를 포함한다) 집행이 면제된 날부터 5년이 지나지 아니한 사람 4. 금고 이상의 형의 집행유예를 선고받고 그 유예기간이 끝난 날부터 2년이 지나지 아니한 사람 5. 금고 이상의 형의 선고유예를 받은 경우에 그 선고유예 기간 중에 있는 사람 6. 법원의 판결 또는 다른 법률에 따라 자격이 상실되거나 정지된 사람 7. 공직자로 재직기간 중 직무와 관련하여 「형법」 제355조 및 제356조에 규정된 죄를 범한 사람으로서 300만원 이상의 벌금형을 선고받고 그 형이 확정된 후 2년이 지나지 아니한 사람 8. 다음 각 목의 어느 하나에 해당하는 죄를 범한 사람으로서 100만원 이상의 벌금형을 선고받고 그 형이 확정된 후 3년이 지나지 아니한 사람 가.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나.「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 제74조제1항제2호 및 제3호에 규정된 죄 다.「스토킹범죄의 처벌 등에 관한 법률」 제2조제2호에 따른 스토킹범죄 9. 미성년자에 대한 다음 각 목의 어느 하나에 해당하는 죄를 저질러 파면ㆍ해임되거나 형 또는 치료감호를 선고받아 그 형 또는 치료감호가 확정된 사람(집행유예를 선고받은 후 그 집행유예기간이 경과한 사람을 포함한다) 가.「성폭력범죄의 처벌 등에 관한 특례법」 제2조에 따른 성폭력범죄 나.「아동ㆍ청소년의 성보호에 관한 법률」 제2조제2호에 따른 아동ㆍ청소년대상 성범죄 10. 징계로 파면처분을 받은 때부터 5년이 지나지 아니한 사람 11. 징계로 해임처분을 받은 때부터 3년이 지나지 아니한 사람 12. 공공기관에서 부정한 방법으로 채용된 사실이 적발되어 임용 취소된 때부터 5년이 경과하지 않은 사람 13. 15세 미만인 사람(「초ㆍ중등교육법」에 따른 중학교에 재학 중인 18세 미만인 사람을 포함한다) 중 고용노동부장관이 발급한 취직인허증을 지니지 않은 사람 14. 「병역법」 제76조제1항 각 호의 어느 하나에 해당하는 사람 15. 공직자로 재직 중 직무와 관련된 부패행위로 당연퇴직, 파면 또는 해임된 후 5년이 지나지 아니한 사람 16. 공직자였던 사람으로서 재직 중 직무와 관련된 부패행위로 벌금 300만원 이상의 형을 선고받고 그 형이 확정된(집행유예를 선고받은 후 그 집행유예기간이 경과한 경우를 포함한다) 후 5년이 지나지 아니한 사람 전형절차/방법 - 공고 및 접수: 2026. 11. 25.(수)~ 2026. 12.9.(수) 18:00 까지 - 일모아시스템 조회: 2026. 12.10.(목)~2026. 12. 23.(수) - 서류전형 합격자발표: 2026.12.24.(목) - 면접전형: 2026.12.28.(월) - 최종 합격자 발표: 2026.12.29.(화) - 근로계약 체결(예정): 2027.1.1.(금) 우대내용 ① 저소득층(가구원의 소득합계가 기준 중위소득 60% 이하), ② 장애인, ③ 6개월 이상 장기실직자(구직신청일 기준), ④ 결혼이민자, ⑤ 여성가장, ⑥ 성매매피해자, ⑦ 한부모가족 지원법에 의한 지원대상자, ⑧ 북한이탈주민, ⑨ 위기청소년, ⑩ 갱생보호대상자, ⑪ 수형자로서 출소 후 6개월 미만자 ⑫ 노숙인 전형단계별 채용정보 국립공원지킴이(녹색순찰대) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 채용공고문(2027년 무등산국립공원 국립공원지킴이).hwp 입사지원서 (첨부1) 국립공원지킴이사업 참여 신청서 및 개인정보 수집동의서(필수).hwp 직무기술서 (첨부4) NCS 기반 채용 직무 설명자료(녹색순찰대).hwp 기타 첨부파일 (첨부2) 경력증명서.hwp (첨부3) 반복참여 제한 안내문.hwp 미첨부 사유 원문 URL https://www.knps.or.kr/front/portal/recruit/recruitDtl.do?menuNo=7070064&emplyId=EMPM020099 클립보드에 주소가 복사 되었습니다."
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
-        "draft_text_has_notice": true
+        "draft_text_has_notice": true,
+        "employer_recruitment_board_receipt": {
+          "url": "https://www.knps.or.kr/front/portal/recruit/recruitDtl.do?menuNo=7070064&emplyId=EMPM020099",
+          "status": "board_bytes_fetched_for_independent_review",
+          "correction_absence_verified": false,
+          "publisher_validate_entry": "not_run",
+          "sha256": "3aa010086e5a8fca07cd92b7d1252b3c290f0de4b6cdf50b97cdd2dcfb53679e",
+          "size_bytes": 77371,
+          "checked_at": "2026-11-27T12:14:03.090603+09:00",
+          "target_notice_visible": true,
+          "semantic_review": "required"
+        }
       }
     ],
     "attempted": 8,
@@ -2951,11 +3073,6 @@
   },
   "publication_audit": {
     "slots": [
-      {
-        "scheduled_at": "2026-11-25T12:00:00+09:00",
-        "post_ids": [],
-        "status": "missing_receipt"
-      },
       {
         "scheduled_at": "2026-11-25T16:00:00+09:00",
         "post_ids": [],
@@ -3004,16 +3121,11 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
+    "expected_slots": 7,
     "recorded_publications": 6,
-    "receipt_success_rate": 0.75,
+    "receipt_success_rate": 0.8571428571428571,
     "live_meta_verification_performed": false,
     "needs_attention": [
-      {
-        "scheduled_at": "2026-11-25T12:00:00+09:00",
-        "post_ids": [],
-        "status": "missing_receipt"
-      },
       {
         "scheduled_at": "2026-11-25T16:00:00+09:00",
         "post_ids": [],
@@ -3023,8 +3135,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-27T10:38:30.711569+09:00",
-    "window_start": "2026-11-25T01:38:30.711569+00:00",
+    "checked_at": "2026-11-27T12:14:05.529128+09:00",
+    "window_start": "2026-11-25T03:14:05.529128+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
