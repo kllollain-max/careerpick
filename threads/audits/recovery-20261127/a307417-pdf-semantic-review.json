@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "notice_id": "a307417",
+  "status": "source_semantic_review_completed_not_approved",
+  "approved_for_queue": false,
+  "meta_posted": false,
+  "scheduled_at": null,
+  "next_missing_slot_observed": "2026-11-28T08:00:00+09:00",
+  "source_commit": "75371c78fd8cea1666b0f6f974880a6c4b778432",
+  "state_head_at_review": "96241fefa08cce5679ef211570bb5ad653303338",
+  "run_id": "45935573350",
+  "artifact": {
+    "id": 15170004940,
+    "sha256": "69c064632688c5c54a575ee86c95ccf5f68b739d347ea30cf61e1de59b0edd7f",
+    "path": "threads-official-raw-review/a307417/notice.pdf",
+    "verified_zip_digest": true
+  },
+  "pdf": {
+    "url": "https://www.knps.or.kr/portal/file/cdown.do?fileId=w2nychgk7yxFPuOMtBtMbg%3D%3D&fileNo=0&tfId=TF006",
+    "checked_at": "2026-11-27T12:41:14.161194+09:00",
+    "sha256": "c038f1f9feeccf4ce4310a185d12db4ac9b83d418f315edd968654feb3533530",
+    "size_bytes": 346295,
+    "pages": 7,
+    "pdf_magic_and_sha_verified": true,
+    "extracted_text_sha256": "c944a17c6bbe8678e5e19d4a6ac6a2f8f2b45711b62a838c6c7c257bde6018f4",
+    "read_all_text": true,
+    "visually_reviewed_pages": [
+      1,
+      2,
+      3
+    ]
+  },
+  "official_page": {
+    "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307417",
+    "sha256": "adb78ad0c1c12785c0e6bb326f4926db193ba0d163124d0dfdc0a5f0d3ed211d",
+    "checked_at": "2026-11-27T12:41:10.539552+09:00",
+    "status": "진행중"
+  },
+  "employer_board": {
+    "url": "https://www.knps.or.kr/front/portal/recruit/recruitDtl.do?menuNo=7070064&emplyId=EMPM020099",
+    "sha256": "3b9c7acc606aa94f8e10e152c96a3a93a6ccdc525f1554e2e002fdbb85c08a4b",
+    "checked_at": "2026-11-27T12:41:12.115976+09:00",
+    "status": "진행중",
+    "correction_check_scope": "ALIO 상세, 기관 상세 및 해당 상세의 최신 10건 채용목록, 기관 도메인 정정·취소·변경 검색 결과에 해당 정정·취소 표시 없음; 전 게시판의 부재를 보장하지 않음"
+  },
+  "review": {
+    "mode": "current_model_single_fact_comparison",
+    "astra_invoked": false,
+    "independent_model_review": false,
+    "checked_at": "2026-11-27T12:48:29+09:00",
+    "recruitment_unit": {
+      "title": "국립공원지킴이(녹색순찰대)",
+      "count": 12,
+      "source": "PDF p1 모집행"
+    },
+    "employment": "2027.1.1.~2027.12.31. 기간제 (PDF p2)",
+    "location": "무등산국립공원(동구, 북구) (PDF p2)",
+    "pay": "월 약237만원(세전) (PDF p2)",
+    "deadline": "2026-12-09T18:00:00+09:00 (PDF p3/ALIO)",
+    "qualification": "만18세 이상, 학력·전공 제한 없음, 결격사유·소득·자산·직접일자리 반복 및 중복참여 제한 (PDF p1,6,7)",
+    "useful_point": "휴일 및 공휴일 근무 원칙 (PDF p2)",
+    "notes": [
+      "소득/자산 세부 기준과 공제, 반복 참여 예외는 PDF 6~7쪽에 있어 본문에서 완결 자격 판정하지 않음",
+      "PDF 3쪽 접수방법 방문·우편, 5쪽 일반 온라인 접수 첨부 문구 혼재: 접수방식 본문 미사용, 지원 시 공식 공고 확인",
+      "예산 감액시 모집인원 축소 가능 PDF p6; 현재 공고상 12명"
+    ],
+    "candidate_public_copy": "국립공원공단 무등산국립공원지킴이(녹색순찰대) 12명을 모집해요.\n광주 동구·북구 근무, 2027년 1~12월 기간제로 월 약 237만원(세전)이에요.\n만 18세 이상, 학력·전공 제한은 없지만 결격사유·소득·재산 및 직접일자리 반복·중복 참여 제한을 확인해야 해요.\n12월 9일 18시 마감이며 휴일·공휴일 근무가 원칙이에요.\n자세한 사항은 프로필링크 확인",
+    "chars": 199,
+    "lines": 5,
+    "cta_count": 1,
+    "reply_texts": [],
+    "duplicate_check": {
+      "queue_blob": "abeec71083b69b6752849a649175b1fdc47f6477",
+      "staging_blob": "9c0063ba27c2a3cee0d4694281c45c273f5dec97",
+      "posted_blob": "3e36a9b0320e85abcd4f95dde1fdc81063b16655",
+      "notice_absent_in_all_three": true
+    }
+  },
+  "production_validation": {
+    "status": "not_run",
+    "reason": "git ls-remote failed: Could not resolve host: github.com; local production code and live official GET not available in this run",
+    "image_review": "not_run_media_unconfirmed",
+    "queue_registration": "not_performed"
+  }
+}
