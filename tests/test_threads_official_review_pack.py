@@ -367,6 +367,32 @@ class EvidencePacketTests(unittest.TestCase):
         self.assertTrue(all(x["publisher_validate_entry"] == "not_run"
                             for x in packet["records"]))
 
+    def test_pinned_mudeungsan_gets_bounded_evidence_slot_and_board_receipt(self):
+        from scripts.threads_official_review_pack import CANONICAL_REVIEW_BOARDS
+        pin = CANONICAL_REVIEW_BOARDS["a307417"]
+        drafts = [{"notice_id": str(i), "status": "unreviewed",
+                   "official_url_for_private_review": self.url + "/" + str(i)}
+                  for i in range(12)]
+        drafts[9].update(notice_id="a307417",
+                         source_post_sha256=pin["source_post_sha256"],
+                         source_detail_sha256=pin["source_detail_sha256"])
+        bundle = {"status": "review_required", "approved_for_queue": False, "drafts": drafts}
+        def fetch(url):
+            return {"url": url, "sha256": "a" * 64, "visible_text_excerpt": pin["expected_notice"]}
+        result = build_packet(bundle, fetch=fetch)
+        self.assertEqual(result["checked"], 8)
+        self.assertEqual(result["attempted"], 8)
+        self.assertEqual([r["notice_id"] for r in result["records"]],
+                         [str(i) for i in range(7)] + ["a307417"])
+        receipt = result["records"][-1]["employer_recruitment_board_receipt"]
+        self.assertEqual(receipt["status"], "board_bytes_fetched_for_independent_review")
+        self.assertFalse(receipt["correction_absence_verified"])
+        self.assertFalse(result["approved_for_queue"])
+        self.assertFalse(result["meta_posted"])
+        drafts[9]["source_detail_sha256"] = "0" * 64
+        changed = build_packet(bundle, fetch=fetch)
+        self.assertNotIn("a307417", [r["notice_id"] for r in changed["records"]])
+
 
 if __name__ == "__main__":
     unittest.main()
