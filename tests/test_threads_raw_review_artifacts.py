@@ -59,6 +59,26 @@ class RawReviewTests(unittest.TestCase):
             self.assertFalse(result["approved_for_queue"])
             self.assertFalse(result["meta_posted"])
 
+    def test_mudeungsan_pin_collects_only_exact_candidate_and_pdf(self):
+        bundle = {"status": "review_required", "approved_for_queue": False,
+                  "drafts": [{"notice_id": m.MUDEUNGSAN_NOTICE, "status": "unreviewed",
+                              "source_post_sha256": m.MUDEUNGSAN_POST_SHA,
+                              "source_detail_sha256": m.MUDEUNGSAN_DETAIL_SHA}]}
+        with tempfile.TemporaryDirectory() as d:
+            args = dict(notice=m.MUDEUNGSAN_NOTICE, post_sha=m.MUDEUNGSAN_POST_SHA,
+                        detail_sha=m.MUDEUNGSAN_DETAIL_SHA, deadline=m.MUDEUNGSAN_DEADLINE,
+                        documents=m.MUDEUNGSAN_DOCUMENTS)
+            def fetch(url):
+                self.assertEqual(url, "https://www.knps.or.kr/portal/file/cdown.do?fileId=w2nychgk7yxFPuOMtBtMbg%3D%3D&fileNo=0&tfId=TF006")
+                return b"%PDF-test-only", url, "application/octet-stream"
+            result = m.capture(bundle, Path(d), fetch, self.now(), **args)
+            self.assertEqual(result["documents"][0]["status"], "raw_bytes_captured_for_review")
+            self.assertEqual(result["documents"][0]["sha256"], hashlib.sha256((Path(d) / "notice.pdf").read_bytes()).hexdigest())
+            self.assertFalse(result["approved_for_queue"])
+            self.assertFalse(result["meta_posted"])
+            bundle["drafts"][0]["source_detail_sha256"] = "0" * 64
+            self.assertEqual(m.capture(bundle, Path(d), lambda u: self.fail("unexpected GET"), self.now(), **args)["documents"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

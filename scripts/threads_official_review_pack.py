@@ -91,6 +91,12 @@ CANONICAL_REVIEW_ANNEXES = {
 # evidence for correction review, never confirmation that every other board
 # contains no amendment, and never automatic editorial approval.
 CANONICAL_REVIEW_BOARDS = {
+    "a307417": {
+        "source_post_sha256": "b3a52f04564d142583f5d90b3866c2e384d97d79414b626128f8749ea67f95c5",
+        "source_detail_sha256": "50fcceca68d11f84611f382082ee5672fd350ce36bf6f34a67465b9cecedcc5e",
+        "url": "https://www.knps.or.kr/front/portal/recruit/recruitDtl.do?menuNo=7070064&emplyId=EMPM020099",
+        "expected_notice": "2027년 무등산국립공원 국립공원지킴이 채용 공고",
+    },
     "cleaneye-80848": {
         "source_post_sha256": "60f60ec1399d17fc1cf09cae49d3365377ee78ff20f4bb584a15398fc14c8ada",
         "source_detail_sha256": "f342ddd996f5d36479de4899f66d7e4d97355a1f6c28c252913b399a7b9a6371",
@@ -212,15 +218,26 @@ def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
     # notice. A count of one and explicit time are review hints, never proof
     # of a recruitment unit or approval. Keep all other candidates in order.
     if 2 <= limit < len(candidates):
-        for index in range(limit, len(candidates)):
-            draft = candidates[index]
-            fields = draft.get("official_detail_fields_for_review")
-            evidence = str(draft.get("application_evidence_for_review") or "")
-            if (isinstance(fields, dict)
-                    and str(fields.get("recrutNope", "")) == "1"
-                    and re.search(r"(?<!\d)(?:[01]?\d|2[0-3]):[0-5]\d(?!\d)", evidence)):
-                candidates.insert(limit - 1, candidates.pop(index))
-                break
+        # Reserve at most one existing evidence slot for the explicitly
+        # reviewed, fingerprint-bound KNPS candidate; do not raise the budget.
+        # This is evidence acquisition order, not publication ranking.
+        pin = CANONICAL_REVIEW_BOARDS["a307417"]
+        pinned_index = next((i for i, draft in enumerate(candidates)
+                             if draft.get("notice_id") == "a307417"
+                             and draft.get("source_post_sha256") == pin["source_post_sha256"]
+                             and draft.get("source_detail_sha256") == pin["source_detail_sha256"]), None)
+        if pinned_index is not None and pinned_index >= limit:
+            candidates.insert(limit - 1, candidates.pop(pinned_index))
+        elif pinned_index is None:
+            for index in range(limit, len(candidates)):
+                draft = candidates[index]
+                fields = draft.get("official_detail_fields_for_review")
+                evidence = str(draft.get("application_evidence_for_review") or "")
+                if (isinstance(fields, dict)
+                        and str(fields.get("recrutNope", "")) == "1"
+                        and re.search(r"(?<!\d)(?:[01]?\d|2[0-3]):[0-5]\d(?!\d)", evidence)):
+                    candidates.insert(limit - 1, candidates.pop(index))
+                    break
 
     def capture(draft):
         nid = draft['notice_id']

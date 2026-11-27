@@ -19,6 +19,16 @@ DOCUMENTS = (
     ("job-description.hwp", bytes.fromhex("d0cf11e0a1b11ae1"), (ALIO + "3088962",)),
 )
 
+# Exact institution PDF linked from the current, separately read KNPS notice.
+# Preserve the legacy pin and its output; the new pin has its own subdirectory.
+MUDEUNGSAN_NOTICE = "a307417"
+MUDEUNGSAN_POST_SHA = "b3a52f04564d142583f5d90b3866c2e384d97d79414b626128f8749ea67f95c5"
+MUDEUNGSAN_DETAIL_SHA = "50fcceca68d11f84611f382082ee5672fd350ce36bf6f34a67465b9cecedcc5e"
+MUDEUNGSAN_DEADLINE = datetime(2026, 12, 9, 18, tzinfo=KST)
+MUDEUNGSAN_DOCUMENTS = (
+    ("notice.pdf", b"%PDF-", ("https://www.knps.or.kr/portal/file/cdown.do?fileId=w2nychgk7yxFPuOMtBtMbg%3D%3D&fileNo=0&tfId=TF006",)),
+)
+
 
 def fetch_public(url):
     import urllib.request
@@ -35,21 +45,23 @@ def fetch_public(url):
         return response.read(MAX_BYTES + 1), final, response.headers.get("Content-Type", "")
 
 
-def capture(bundle, out, fetch=fetch_public, now=None):
+def capture(bundle, out, fetch=fetch_public, now=None, *, notice=NOTICE,
+            post_sha=POST_SHA, detail_sha=DETAIL_SHA, deadline=DEADLINE,
+            documents=DOCUMENTS):
     now = now or datetime.now(KST)
-    manifest = {"notice_id": NOTICE, "automatic_approval": False,
+    manifest = {"notice_id": notice, "automatic_approval": False,
                 "approved_for_queue": False, "meta_posted": False,
                 "semantic_review": "required", "documents": []}
     if (bundle.get("status") != "review_required" or bundle.get("approved_for_queue") is not False
-            or now >= DEADLINE):
+            or now >= deadline):
         return manifest
     candidates = bundle.get("drafts", []) + bundle.get("official_source_alternatives", [])
-    if not any(isinstance(c, dict) and c.get("notice_id") == NOTICE
-               and c.get("status") == "unreviewed" and c.get("source_post_sha256") == POST_SHA
-               and c.get("source_detail_sha256") == DETAIL_SHA for c in candidates):
+    if not any(isinstance(c, dict) and c.get("notice_id") == notice
+               and c.get("status") == "unreviewed" and c.get("source_post_sha256") == post_sha
+               and c.get("source_detail_sha256") == detail_sha for c in candidates):
         return manifest
     out.mkdir(parents=True, exist_ok=True)
-    for filename, magic, urls in DOCUMENTS:
+    for filename, magic, urls in documents:
         item = {"name": filename, "status": "unverified", "attempts": []}
         for url in urls:
             try:
@@ -78,6 +90,13 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("Pinned raw-document review artifacts:", sum(d["status"] == "raw_bytes_captured_for_review" for d in manifest["documents"]), "; approved: 0; posted: 0")
+    extra_out = out / MUDEUNGSAN_NOTICE
+    extra = capture(bundle, extra_out, notice=MUDEUNGSAN_NOTICE,
+                    post_sha=MUDEUNGSAN_POST_SHA, detail_sha=MUDEUNGSAN_DETAIL_SHA,
+                    deadline=MUDEUNGSAN_DEADLINE, documents=MUDEUNGSAN_DOCUMENTS)
+    if extra["documents"]:
+        (extra_out / "manifest.json").write_text(json.dumps(extra, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print("Mudeungsan pinned raw-document review artifacts:", sum(d["status"] == "raw_bytes_captured_for_review" for d in extra["documents"]), "; approved: 0; posted: 0")
 
 
 if __name__ == "__main__":
