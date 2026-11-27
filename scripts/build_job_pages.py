@@ -24,6 +24,8 @@ DETAIL = ROOT / 'alio-detail.json'
 OUT = ROOT / 'jobs'
 BASE = 'https://kllollain-max.github.io/careerpick'
 CONFIRMED_APPLICATION_CUTOFFS = {
+    # ITKC official recruitment PDF 3088398, section 7.
+    'a307207': '2026-12-02T18:00:00+09:00',
     'a307132': '2026-12-02T11:00:00+09:00',
     # KIPF official fixed-term recruitment PDF 3087160, application section.
     'a307001': '2026-11-27T10:00:00+09:00',
@@ -134,6 +136,28 @@ VERIFIED_DUTIES = json.loads(
 # ALIO official detailed recruitment text, not an independently read PDF/HWP
 # job-duty original. Keep this proof separate from VERIFIED_DUTIES counts.
 VERIFIED_APPLICATION_NOTICES = {
+    # ITKC recruitment PDF 3088398 sections 1–9 and ALIO 307207, checked 2026-11-27.
+    'a307207': {
+        'organization': '한국고전번역원',
+        'title': '2027년 1분기 직원 신규 채용',
+        'source_end_date': '2026-12-02',
+        'source_employment': ['정규직', '계약직'],
+        'expected_source_seats': '7',
+        'application_start': '2026-11-18',
+        'application_end_date': '2026-12-02',
+        'source_url': 'https://www.alio.go.kr/download/download.json?fileNo=3088398',
+        'checked_on': '2026-11-27',
+        'scope': '공식 공고문 PDF 추출 본문의 모집표·응시자격·근무조건·접수 및 제출서류와 ALIO 대조. 바이너리 해시·표 시각 검증 및 개별 접수 활성은 미확인.',
+        'hiring_breakdown': '정규직 교수1명·연구직 원급2명 + 기간제 연구직3명·행정직1명 = 총7명',
+        'role_mix_note': (
+            '교수는 강의·연구·학생지도를 담당하며 한국학 분야 학위와 관련 경력(박사14년, 석사17년, 학사19년) 또는 공고상 동등 자격을 확인해야 합니다. '
+            '정규직 연구직은 고전 문헌 정리·번역 및 연구·정책기획을 담당하며 한국학 분야 학위(2027년2월 졸업예정 포함)와 박사 또는 석사3년·학사5년·전문학사7년 관련 경력 또는 동등 자격을 확인하세요. '
+            '기간제 연구직은 문헌 정리·수집 및 영인서 편찬 2명과 번역·성과보급 사업 보조 1명으로 학사 이상 또는 전문학사 후 관련 경력2년 등 공고의 자격을 확인해야 합니다. '
+            '기간제 행정직1명은 인사·복무 등 일반행정입니다. 기간제 연구직①·②는 2027년12월31일까지, 연구직③·행정직은 2028년2월29일까지이며 육아휴직 대체 계약은 조기 종료 또는 연장 가능하고 정규직 전환이 불가합니다. '
+            '공고상 주40시간이며 정규직 연구직은 한문번역·논술 및 인적성 검사를 준비해야 합니다. 교차지원은 서류심사 불합격 처리되고 최종 제출 후 지원서 삭제가 불가능합니다. '
+            '온라인 접수 마감은 12월2일 오후6시입니다. 개별 접수 활성 및 정정 여부는 기관에서 최종 확인하세요.'
+        ),
+    },
     # Employer HTML notice 36988, sections 1–2, and official ALIO 307132; checked 2026-11-26.
     'a307132': {
         'organization': '한국청소년활동진흥원',
