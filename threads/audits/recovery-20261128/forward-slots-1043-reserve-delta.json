@@ -1,0 +1,87 @@
+{
+  "observed_run_started_kst": "2026-11-28T10:43:03+09:00",
+  "prior_record": "threads/audits/recovery-20261128/forward-slots-1018-source-delta.json",
+  "handoff": {
+    "blob_sha": "85780da8c06e5ee72f609001efbd4bb65f496d50",
+    "captured_at": "2026-11-28T10:30:32.102886+09:00",
+    "run_id": "46093410515",
+    "source_commit": "ca83ed9f5b2d93df3b27b8100d92ef55b0c88a4b",
+    "official_source_records": 8,
+    "approved_supply_count": 1,
+    "inventory_target": 8,
+    "invalid_ready_entries": [],
+    "queue_sha": "61fa907988a8bc0cb19f5b565c0916a0760210c1",
+    "posted_sha": "5a9955e4ec2b49908dbed0d9edc558e994d4bbff"
+  },
+  "queue_read": {
+    "method": "fetch_blob JSON parsed",
+    "entries": 68,
+    "posted_ids": 114,
+    "posted_records": 119,
+    "duplicate_notice_ids": [
+      "a307271"
+    ],
+    "not_in_exact_queue_or_posted_ids": [
+      "a307324",
+      "a307039",
+      "a307341",
+      "a307565"
+    ]
+  },
+  "slots": [
+    {
+      "slot": "2026-11-28T12:00:00+09:00",
+      "notice_id": "a307524",
+      "state": "ready per latest production preflight and direct queue read",
+      "media": "TEXT"
+    },
+    {
+      "slot": "2026-11-28T16:00:00+09:00",
+      "state": "missing_ready",
+      "media": "IMAGE",
+      "reserve": "a307324"
+    },
+    {
+      "slot": "2026-11-28T20:00:00+09:00",
+      "state": "missing_ready",
+      "media": "TEXT",
+      "reserve": "a307039"
+    },
+    {
+      "slot": "2026-11-29T08:00:00+09:00",
+      "state": "missing_ready",
+      "media": "IMAGE",
+      "reserve": "a307341"
+    }
+  ],
+  "publication": {
+    "slot": "2026-11-28T08:00:00+09:00",
+    "id": "18140511127651232",
+    "permalink": "https://www.threads.com/@hid_119/post/DgQ4hxgjzwJ",
+    "inventory_checked_at": "2026-11-28T10:30:31.029839+09:00"
+  },
+  "new_evidence": {
+    "notice_id": "a307039",
+    "source_sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
+    "source_checked_at": "2026-11-28T10:30:28.115697+09:00",
+    "size_bytes": 9246,
+    "source_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
+    "source": "existing scheduled official evidence pack",
+    "semantic_review": "not production approved"
+  },
+  "reserve_delta": {
+    "notice_id": "a307565",
+    "state": "reserve_only",
+    "source": "https://www.rch.or.kr/web/rchyoungju/bbs/employment/1478",
+    "official_count_image": "https://www.rch.or.kr/web/rchyoungju/file/image/uu/1b23f8f3df8e4e3395e5715bffeace1e",
+    "official_deadline_image": "https://www.rch.or.kr/web/rchyoungju/file/image/uu/28b1f0fa934645f3910c5118c92805d3",
+    "official_general_age_image": "https://www.rch.or.kr/web/rchyoungju/file/image/uu/a3867dbf553f449dabe924f3088341a5",
+    "facts": "영주적십자병원 경북 영주시, 정규직 간호팀 간호사 26명(전체 정규직·계약직 43명과 구분), 간호사 면허 또는 2027년 국가시험 응시대상 졸업예정자, 3교대, 졸업예정자는 면허 취득 이후 임용, 2026-12-14 10:00 마감, 채용분야 중복 지원 불가. 공고일 정년 만60세 기준 확인.",
+    "correction_check": "기관 홈페이지에서 11/27 공고가 최신 채용공고로 표시됨; 별도 정정·취소 전문 검증 미완료. 목록 링크는 오래된 검색 캐시. 원본 이미지 시각 열람, raw bytes SHA 미확보."
+  },
+  "blocker": "Local DNS socket.getaddrinfo for github.com, raw.githubusercontent.com, job.alio.go.kr, www.kead.or.kr returned gaierror(-3, Temporary failure in name resolution). No local production validation or official receipt revalidation performed.",
+  "new_approved": 0,
+  "queue_changed": false,
+  "meta_post_initiated": false,
+  "next": "Reuse official source receipt; complete real production checks and CAS on nearest empty slot when normal network route returns; a307271 already published, do not reuse."
+}
