@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-28T10:30:32.102886+09:00",
-  "run_id": "46093410515",
+  "captured_at": "2026-11-28T12:06:42.925171+09:00",
+  "run_id": "46101242958",
   "source_commit": "ca83ed9f5b2d93df3b27b8100d92ef55b0c88a4b",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-28T10:30:22.423303+09:00",
+    "time": "2026-11-28T12:06:35.595070+09:00",
     "future_slots": [
-      "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
       "2026-11-28T20:00:00+09:00",
       "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
       "2026-11-29T20:00:00+09:00",
-      "2026-11-30T08:00:00+09:00"
+      "2026-11-30T08:00:00+09:00",
+      "2026-11-30T12:00:00+09:00"
     ],
     "next_media": "TEXT",
     "promoted": [],
@@ -175,16 +175,16 @@
     "queue_sha": "61fa907988a8bc0cb19f5b565c0916a0760210c1",
     "staged_sha": "dfcce70cfe6b25a7fcaca715789f5e50087d3b65",
     "promoted_count": 0,
-    "approved_supply_count": 1,
+    "approved_supply_count": 0,
     "inventory_target": 8,
-    "inventory_shortfall": 7,
+    "inventory_shortfall": 8,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [],
-    "media_forecast_conditional_on_active_slot": false,
-    "approved_future_slots": [
+    "pending_active_slots": [
       "2026-11-28T12:00:00+09:00"
     ],
+    "media_forecast_conditional_on_active_slot": true,
+    "approved_future_slots": [],
     "missing_slots": [
       "2026-11-28T16:00:00+09:00",
       "2026-11-28T20:00:00+09:00",
@@ -192,9 +192,10 @@
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
       "2026-11-29T20:00:00+09:00",
-      "2026-11-30T08:00:00+09:00"
+      "2026-11-30T08:00:00+09:00",
+      "2026-11-30T12:00:00+09:00"
     ],
-    "next_slot_missing": false,
+    "next_slot_missing": true,
     "source_candidate_count": 23,
     "writer_handoff": {
       "status": "review_required",
@@ -205,7 +206,8 @@
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
-        "2026-11-30T08:00:00+09:00"
+        "2026-11-30T08:00:00+09:00",
+        "2026-11-30T12:00:00+09:00"
       ],
       "candidate_notice_ids": [
         "a307361",
@@ -1246,7 +1248,8 @@
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
       "2026-11-29T20:00:00+09:00",
-      "2026-11-30T08:00:00+09:00"
+      "2026-11-30T08:00:00+09:00",
+      "2026-11-30T12:00:00+09:00"
     ],
     "candidate_notice_ids": [
       "a307361",
@@ -3014,26 +3017,95 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      }
-    ],
-    "official_source_alternatives": [
+      },
       {
         "notice_id": "a307403",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-30T12:00:00+09:00",
+        "draft_text": "한국보훈복지의료공단 채용 공고를 확인해 보세요.\n\n모집 공고: [수원보훈요양원] 직원(간호조무사, 요양보호사, 미화, 청년인턴) 채용\n고용형태: 정규직,무기계약직,청년인턴(체험형)\n접수 마감: 2026-12-08 17:30 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307403",
         "source_post_sha256": "52737d5fccf4d9a8428f948cee6bbc4e1b2697edb8e8720c112630defc9c0491",
         "source_detail_sha256": "35aadd6ae749d7ef97a711e6341d63b03fe9855aabae0b58632ec402b99e61cb",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30",
+        "application_source_ref": "alio-detail.json#307403/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "○ 복지기능직(간호조무사)\r\n  - 간호조무사 자격증 소지자\r\n  - 간호조무사 자격증을 취득한 후 의료법에 따른 병원급 이상 의료기관, 사회복지사업법에 따른 사회복지시설 또는 노인장기요양보험법에 따른 장기요양기관에서 간호 업무를 수행한 경력이 3년 이상인 자(각 경력 합산 가능)\r\n  - 3교대 근무가 가능한 자\r\n  - 공단 인사규정 제44조에서 정하는 정년(60세)을 초과하지 않는 자\r\n\r\n○ 요양보호직(요양보호사)\r\n  - 요양보호사 자격증 소지자\r\n  - 공단 인사규정 제44조에서 정하는 정년(60세)을 초과하지 않는 자\r\n  - 3교대 근무 가능한 자\r\n  - 남자의 경우 병역을 필하였거나 면제된 자\r\n\r\n○ 업무지원직(미화)-무기계약직\r\n  - 청소업무 가능자\r\n  - 학력제한 없음, 정년규정(65세)을 초과하지 않는 자\r\n  - 남자의 경우 병역을 필하였거나 면제된 자\r\n\r\n○ 청년인턴(체험형)\r\n  - 사회복지사 2급 이상 소지자\r\n  - 청년고용촉진 특별법령에 따른 만15세 이상 만34세 이하인 청년",
+          "hireTypeNmLst": "정규직,무기계약직,청년인턴(체험형)",
+          "prefCn": "○ 취업지원 대상자 : 「국가유공자 등 예우 및 지원에 관한 법률」 및 이를 준용하는 법률에 의한 취업지원 대상자 → 각 시험별 만점의 5% 또는 10%\r\n○ 장애인 : 「장애인 고용촉진 및 직업재활법」 제2조 및 시행령 제3조에 따른 장애인 → 각 시험별 만점의 10%\r\n○ 기초생활 수급자 : 「국민기초생활 보장법」제2조에 따른 수급자 → 필기시험 만점의 5%\r\n○ 한부모 가족 : 「한부모가족지원법」제5조에 따른 지원대상자에 해당하는 기간이 계속하여 2년 이상인 사람  → 필기시험 만점의 5%\r\n○ 북한이탈 주민 : 「북한이탈주민의 보호 및 정착지원에 관한 법률」제2조에 따른 북한이탈주민 → 필기시험 만점의 5%\r\n○ 다문화 가족 : 「다문화가족지원법」제2조에 따른 다문화가족의 구성원 → 필기시험 만점의 5%\r\n○ 경력단절 여성 : 「여성의 경제활동 촉진과 경력단절 예방법」제2조제1호에 따른 경력단절여성으로서 1년 이상 해당하고 있는 사람 → 필기시험 만점의 5%\r\n○ 자립준비 청년 : 「아동복지법」제38조제2항에 따른 자립지원 대상자  → 필기시험 만점의 5%\r\n○ 공단 근무 경력자 : 보훈공단의 직원(별정직, 체험형 청년인턴 제외)으로 공고일 기준 3년 내 1년 이상 근무경력을 보유한 사람 → 필기시험 만점의 5%\r\n○ 우수 청년인턴 : 보훈공단 청년인턴 3개월 이상 근무자 중 우수 청년인턴 선발자  → 필기시험 만점의 3%\r\n○ 청년인턴 : 보훈공단 청년인턴 3개월 이상 근무자  → 필기시험 만점의 2%",
+          "recrutNope": "11",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "1. 지원서 접수기간\r\n  - 공고 및 접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30\r\n2. 지원방법\r\n  - 간호조무사, 청년인턴 : 온라인 접수\r\n  - 요양보호사, 업무지원직(미화) : 이메일, 등기우편, 방문 접수\r\n3. 서류합격자 발표(공통) : 2026. 12. 10.(목)\r\n4. 필기시험(간호조무사만 해당) : 2026. 12. 12(토) \r\n5. 필기 합격자 발표(간호조무사만 해당) : 2026. 12. 15.(화)\r\n6. 면접시험(공통) : 2026. 12. 17.(목)\r\n7. 최종 합격자 발표 : 2026. 12. 21.(월)\r\n※ 보다 자세한 사항은 붙임의 공고문 첨부파일을 확인하여 주시기 바랍니다.",
+          "workRgnNmLst": "경기"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       },
       {
         "notice_id": "a307565",
-        "status": "unreviewed",
+        "suggested_slot": "2026-11-30T12:00:00+09:00",
+        "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: [영주적십자병원] 정규직(간호사, 사무보조원, 조리사, 간호조무사, 병동도우미, 보험심사간호사), 육아휴직대체(사무보조원, 간호조무사) 공개채용 공고\n고용형태: 정규직,비정규직\n접수 마감: 2026-12-14 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
         "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
         "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
-        "suggested_slot": null
+        "application_evidence_for_review": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
+        "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "1. 정규직 사무보조원\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n2. 정규직 조리사\r\n- 조리사 자격증 소지자\r\n※ 근무시간 : 06시~19시\r\n\r\n3. 정규직 간호사\r\n- 간호사 면허증 소지자 또는 졸업예정자로서 2027년 간호사 국가시험 응시대상자\r\n- 3교대 근무 가능자\r\n- 최초임용일로부터 1년 이내 순차 임용\r\n- 졸업예정자는 면허 취득 이후 임용\r\n\r\n4. 정규직 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 3교대 근무 가능자\r\n\r\n5. 정규직 병동도우미\r\n- 요양보호사 자격증 소지자\r\n\r\n6. 정규직 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n7. 정규직 간호사(보험심사)\r\n 간호사 면허증 소지자\r\n- 보험 심사 업무 가능자\r\n- 보건의료정보관리사, 보험심사관리사, 보험심사평가사 소지자 우대\r\n\r\n8. 육아휴직대체 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n- 계약기간 :’27.1.1. ~ ’27.12.31.\r\n\r\n9. 육아휴직대체 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 계약기간 :’27.3.1. ~ ’28.6.29.",
+          "hireTypeNmLst": "정규직,비정규직",
+          "prefCn": "○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5.18민주유공자예우에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의 규정에 의한 취업지원대상자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유증 등 환자지원 및 단체 설립에 관한 법률 제7조에 해당하는 자\r\n\r\n* 취업지원대상자 증명서 제출자에 한함\r\n* 모든 제출 서류에 사진, 생년, 성별, 학교명이 들어가는 부분은 삭제 후 제출",
+          "recrutNope": "43",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00\r\n○ 접수방법\r\n1) 홈페이지 접수: https://www.redcross.or.kr/redrecruit/\r\n2) 방문접수 (기능직(조리사)에 한함)\r\n※ 기능직(조리사)의 경우, 홈페이지 접수 또는 방문 접수를 함께 시행하며, 방문 접수는 공휴일 및 주말 접수 불가\r\n가) (방문 접수) 응시원서 배부처: 영주적십자병원 3층 총무팀 또는 영주적십자병원 홈페이지 (https://www.rch.or.kr/web/rchyoungju/main)\r\n나) (방문 접수) 응시원서 제출처: 영주적십자병원 3층 총무팀 인사담당자 앞\r\n※ 접수마감일 10:00까지 접수분에 한함\r\n2. 서류전형 합격자발표 : 2026. 12. 17.(목)\r\n\r\n3. 면접시험 : 2026. 12. 21.(월) ~ 2026. 12. 22.(화)\r\n\r\n4. 채용검증위원회 : 2026. 12. 23.(수)\r\n\r\n5. 최종합격자발표 : 2026. 12. 24.(목)\r\n\r\n6. 채용검진 및 서류검증 : 2026. 12. 24.(목)~ 2026. 12 . 31.(목)\r\n\r\n7. 채용예정일자\r\n- 2027. 1. 1. 자, 2027. 3. 1.자\r\n\r\n○ 1차 서류전형 : 모집인원의 7배수\r\n\r\n○ 2차 면접전형 : 서류전형 합격자(60점 이상인 자 중 성적 순위, 미만인인 자는 불합격)",
+          "workRgnNmLst": "경북"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       }
     ],
+    "official_source_alternatives": [],
     "slot_coverage": {
       "requested_slots": [
         "2026-11-28T16:00:00+09:00",
@@ -3042,7 +3114,8 @@
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
-        "2026-11-30T08:00:00+09:00"
+        "2026-11-30T08:00:00+09:00",
+        "2026-11-30T12:00:00+09:00"
       ],
       "draft_slots": [
         "2026-11-28T16:00:00+09:00",
@@ -3051,7 +3124,8 @@
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
-        "2026-11-30T08:00:00+09:00"
+        "2026-11-30T08:00:00+09:00",
+        "2026-11-30T12:00:00+09:00"
       ],
       "no_draft_slots": [],
       "approved_slots": [],
@@ -3078,7 +3152,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:27.966669+09:00",
+          "checked_at": "2026-11-28T12:06:39.888300+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3101,7 +3175,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:28.115697+09:00",
+          "checked_at": "2026-11-28T12:06:39.408047+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3124,7 +3198,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:28.432598+09:00",
+          "checked_at": "2026-11-28T12:06:39.592506+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3147,7 +3221,7 @@
           "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
           "size_bytes": 11152,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:27.856119+09:00",
+          "checked_at": "2026-11-28T12:06:39.462771+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3170,7 +3244,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:30.627979+09:00",
+          "checked_at": "2026-11-28T12:06:42.143901+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3193,7 +3267,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:30.894793+09:00",
+          "checked_at": "2026-11-28T12:06:41.984408+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3216,7 +3290,7 @@
           "sha256": "ab221824163ce36666f053ab9e956a0538edfe77459b5fa0d5f64013fa68fa5e",
           "size_bytes": 17367,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:30.891923+09:00",
+          "checked_at": "2026-11-28T12:06:42.017051+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3239,7 +3313,7 @@
           "sha256": "ef004e83700b48f2c59a4375ff1e10e24b159e0bb4c9b42bda674421e3799773",
           "size_bytes": 13529,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T10:30:30.348889+09:00",
+          "checked_at": "2026-11-28T12:06:42.141782+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3259,13 +3333,6 @@
   },
   "publication_audit": {
     "slots": [
-      {
-        "scheduled_at": "2026-11-26T12:00:00+09:00",
-        "post_ids": [
-          "18057848201815251"
-        ],
-        "status": "recorded_publication"
-      },
       {
         "scheduled_at": "2026-11-26T16:00:00+09:00",
         "post_ids": [
@@ -3316,16 +3383,16 @@
         "status": "recorded_publication"
       }
     ],
-    "expected_slots": 8,
-    "recorded_publications": 8,
+    "expected_slots": 7,
+    "recorded_publications": 7,
     "receipt_success_rate": 1.0,
     "live_meta_verification_performed": false,
     "needs_attention": []
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-28T10:30:31.029839+09:00",
-    "window_start": "2026-11-26T01:30:31.029839+00:00",
+    "checked_at": "2026-11-28T12:06:42.259184+09:00",
+    "window_start": "2026-11-26T03:06:42.259184+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
