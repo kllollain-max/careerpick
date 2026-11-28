@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-28T17:45:25+09:00",
+  "observed_state": "15fb6db8caef86b129133ee84d1cb640297f3cad",
+  "main": "356d8ad1e9ebf67b22d5e6f29b0ec4187835e850",
+  "run_id": 46123451473,
+  "artifact_id": 15254401583,
+  "notice_id": "a307529",
+  "scheduled_at": "2026-11-28T20:00:00+09:00",
+  "actual_rejection": "ENTRY_FORMAT_MISMATCH",
+  "fix": {
+    "field": "format_id",
+    "from": "interest",
+    "to": "deadline_opportunity",
+    "basis": "scripts/threads_v5.py FORMATS; scripts/threads_writer_queue.py validate_entry"
+  },
+  "prior_submission_count": 21,
+  "prior_entry_preserved": true,
+  "body_and_card_unchanged": true,
+  "approval_confirmed": false,
+  "meta_posted": false,
+  "remaining": "Existing scheduled ingest must independently revalidate before promotion. No manual dispatch.",
+  "future_candidates": [
+    {
+      "slot": "2026-11-29T08:00:00+09:00",
+      "notice_id": "a307324"
+    },
+    {
+      "slot": "2026-11-29T12:00:00+09:00",
+      "notice_id": "a307341"
+    },
+    {
+      "slot": "2026-11-29T16:00:00+09:00",
+      "notice_id": "a307565"
+    }
+  ]
+}
