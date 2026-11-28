@@ -1,0 +1,54 @@
+{
+  "observed_at": "2026-11-28T19:52:25+09:00",
+  "prior_record": "threads/audits/recovery-20261128/forward-slots-1848-reference-time.json",
+  "run_id": 46133352088,
+  "artifact_id": 15258537679,
+  "actual_rejection": "V5_CORRECTION_CHECK_TIME",
+  "notice_id": "a307529",
+  "submission_commit": "313544cd39a678a407d00a69ed23c522cdb9c193",
+  "submission_blob": "c4b97cef5dc0de1cdc966b0a340b4de7161bc4ab",
+  "source_sha256": "ef004e83700b48f2c59a4375ff1e10e24b159e0bb4c9b42bda674421e3799773",
+  "source_checked_at_preserved": "2026-11-28T16:30:19.929455+09:00",
+  "correction_checked_at": "2026-11-28T19:49:47+09:00",
+  "queue_sha": "61fa907988a8bc0cb19f5b565c0916a0760210c1",
+  "staging_sha": "dfcce70cfe6b25a7fcaca715789f5e50087d3b65",
+  "posted_sha": "faa778ddaf89f21d287ed0377396e3f5201b26be",
+  "approved_supply_count": 0,
+  "new_approved": 0,
+  "slots": [
+    {
+      "slot": "2026-11-28T20:00:00+09:00",
+      "candidate": "a307529",
+      "state": "corrected submission only; production approval unconfirmed"
+    },
+    {
+      "slot": "2026-11-29T08:00:00+09:00",
+      "candidate": "a307324",
+      "state": "reserve",
+      "source": "https://www.kead.or.kr/bbs/deptgongji/bbsView.do?bbsCnId=217789&bbsCode=deptgongji&menuId=MENU0895&pageIndex=1"
+    },
+    {
+      "slot": "2026-11-29T12:00:00+09:00",
+      "candidate": "a307341",
+      "state": "reserve",
+      "source": "https://www.igbf.kr/gugak_web/?idx=331560&state=view&sub_num=762"
+    },
+    {
+      "slot": "2026-11-29T16:00:00+09:00",
+      "candidate": "a307565",
+      "state": "reserve",
+      "source": "https://www.rch.or.kr/web/rchyoungju/bbs/employment/1478"
+    }
+  ],
+  "duplicate_check": "all four absent queue/staging/posted on reread",
+  "reserve_limit": "fresh official page facts read; actual receipt and production approval incomplete; media conditional on actual successful publication",
+  "local_direct_get_error": "gaierror(-3, Temporary failure in name resolution)",
+  "publication": {
+    "last_inventory": "2026-11-28T19:04:00.196277+09:00",
+    "today_count": 2,
+    "slot16": "missing",
+    "slot20": "not confirmed"
+  },
+  "meta_post_initiated": false,
+  "next": "existing scheduled production ingest; recheck fresh proof, claims and media, prioritize nearest missing slot; no dispatch"
+}
