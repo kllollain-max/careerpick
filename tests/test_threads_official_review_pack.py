@@ -394,5 +394,43 @@ class EvidencePacketTests(unittest.TestCase):
         self.assertNotIn("a307417", [r["notice_id"] for r in changed["records"]])
 
 
+    def test_reviewed_reserves_receive_bounded_receipt_budget(self):
+        drafts = [{"notice_id": str(i), "status": "unreviewed",
+                   "official_url_for_private_review": self.url + "/" + str(i)}
+                  for i in range(12)]
+        reserves = [
+            ("a307341", "c315c9528c5554af2aae756635cd1a4965c517b65327b33275ea89c5090b8ed1",
+             "c02eec954ea0bf8e0f717e93ac38b642bebd327418f197524e68216a2366b04e"),
+            ("a307565", "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
+             "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a"),
+            ("a307324", "7530ce3170ed0d8021a7ef3ba46f74de4b1939faa67263eafaebc355cbb65a09",
+             "5b28db9b04ef423a744d46188ca8b516635dfc6d67c37220e27da89a34088dc7"),
+        ]
+        later = [{"notice_id": nid, "status": "unreviewed",
+                  "source_post_sha256": post, "source_detail_sha256": detail,
+                  "official_url_for_private_review": self.url + "/" + nid}
+                 for nid, post, detail in reserves]
+        bundle = {"status": "review_required", "approved_for_queue": False,
+                  "drafts": drafts + later[:2], "official_source_alternatives": later[2:]}
+        def fetch(url):
+            return {"url": url, "sha256": "a" * 64}
+        result = build_packet(bundle, fetch=fetch)
+        self.assertEqual([r["notice_id"] for r in result["records"]],
+                         [str(i) for i in range(5)] + [r[0] for r in reserves])
+        self.assertEqual(result["attempted"], 8)
+        self.assertEqual(result["checked"], 8)
+        self.assertFalse(result["approved_for_queue"])
+        self.assertFalse(result["automatic_approval"])
+        self.assertFalse(result["meta_posted"])
+        self.assertTrue(all(r["publisher_validate_entry"] == "not_run"
+                            for r in result["records"]))
+        later[0]["source_detail_sha256"] = "0" * 64
+        changed = build_packet(bundle, fetch=fetch)
+        self.assertNotIn("a307341", [r["notice_id"] for r in changed["records"]])
+        self.assertEqual(changed["attempted"], 8)
+        small = build_packet(bundle, fetch=fetch, limit=1, max_attempts=1)
+        self.assertEqual([r["notice_id"] for r in small["records"]], ["0"])
+
+
 if __name__ == "__main__":
     unittest.main()

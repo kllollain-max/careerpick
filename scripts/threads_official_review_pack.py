@@ -214,10 +214,36 @@ def build_packet(bundle, fetch=read_official, limit=8, max_attempts=24):
         seen.add(nid)
         candidates.append(draft)
 
+    # Reuse the existing receipt budget for the three manually reviewed reserves
+    # identified in the 2026-11-28 21:48 state audit. Exact source fingerprints
+    # are required. This is evidence acquisition only, never approval or ranking.
+    reserve_fingerprints = {
+        "a307341": ("c315c9528c5554af2aae756635cd1a4965c517b65327b33275ea89c5090b8ed1",
+                    "c02eec954ea0bf8e0f717e93ac38b642bebd327418f197524e68216a2366b04e"),
+        "a307565": ("02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
+                    "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a"),
+        "a307324": ("7530ce3170ed0d8021a7ef3ba46f74de4b1939faa67263eafaebc355cbb65a09",
+                    "5b28db9b04ef423a744d46188ca8b516635dfc6d67c37220e27da89a34088dc7"),
+    }
+    selected_reserves = []
+    if 2 <= limit < len(candidates):
+        for nid, fingerprints in reserve_fingerprints.items():
+            match = next((d for d in candidates if d.get("notice_id") == nid
+                          and (d.get("source_post_sha256"), d.get("source_detail_sha256"))
+                          == fingerprints), None)
+            if match is not None:
+                selected_reserves.append(match)
+            if len(selected_reserves) >= min(3, limit - 1):
+                break
+    if selected_reserves:
+        other = [d for d in candidates if d not in selected_reserves]
+        keep = limit - len(selected_reserves)
+        candidates = other[:keep] + selected_reserves + other[keep:]
+
     # Reserve just one early evidence attempt for a later, potentially simpler
     # notice. A count of one and explicit time are review hints, never proof
     # of a recruitment unit or approval. Keep all other candidates in order.
-    if 2 <= limit < len(candidates):
+    if not selected_reserves and 2 <= limit < len(candidates):
         # Reserve at most one existing evidence slot for the explicitly
         # reviewed, fingerprint-bound KNPS candidate; do not raise the budget.
         # This is evidence acquisition order, not publication ranking.
