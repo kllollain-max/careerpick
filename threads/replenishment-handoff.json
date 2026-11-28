@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-28T08:35:28.092973+09:00",
-  "run_id": "46083301456",
-  "source_commit": "e52b5348f761573e243e4f20dbcbc913f874d165",
+  "captured_at": "2026-11-28T09:02:13.480298+09:00",
+  "run_id": "46085680122",
+  "source_commit": "ca83ed9f5b2d93df3b27b8100d92ef55b0c88a4b",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-28T08:35:19.425206+09:00",
+    "time": "2026-11-28T09:02:03.918771+09:00",
     "future_slots": [
       "2026-11-28T12:00:00+09:00",
       "2026-11-28T16:00:00+09:00",
@@ -18,7 +18,7 @@
       "2026-11-29T20:00:00+09:00",
       "2026-11-30T08:00:00+09:00"
     ],
-    "next_media": "IMAGE",
+    "next_media": "TEXT",
     "promoted": [],
     "refused": [
       {
@@ -163,7 +163,7 @@
       },
       {
         "notice_id": "a307417",
-        "reason": "SLOT_ALREADY_OCCUPIED"
+        "reason": "DUPLICATE_POST"
       },
       {
         "notice_id": "a307524",
@@ -180,10 +180,8 @@
     "inventory_shortfall": 7,
     "replenishment_required": true,
     "invalid_ready_entries": [],
-    "pending_active_slots": [
-      "2026-11-28T08:00:00+09:00"
-    ],
-    "media_forecast_conditional_on_active_slot": true,
+    "pending_active_slots": [],
+    "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
       "2026-11-28T12:00:00+09:00"
     ],
@@ -229,10 +227,10 @@
         "a307338",
         "a307341",
         "a307324",
-        "a307343",
         "a307177",
-        "a307565",
-        "a307403"
+        "a307343",
+        "a307403",
+        "a307565"
       ],
       "candidates": [
         {
@@ -920,42 +918,6 @@
           "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
         },
         {
-          "notice_id": "a307343",
-          "org": "한국장애인고용공단",
-          "title": "[한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
-          "employment": "무기계약직,비정규직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-23",
-            "end": "2026-12-04T18:00:00+09:00",
-            "start_date_only": true,
-            "date_only": false,
-            "source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-            "evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지"
-          },
-          "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
-          "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
-          "official_detail_fields_for_review": {
-            "aplyQlfcCn": "(1) 공통자격\r\n○ 국가공무원법 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 65세)\r\n- 서류접수 마감일 기준 만 18세 이상* 및 공단 정년에 의거 만 65세 미만인 자\r\n  * 단, 친권자 또는 후견인의 동의서 제출자는 제외\r\n○ 공단「인사규정」제12조(결격사유)에 해당하지 않는 자\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n\r\n(2) 필수자격\r\n○ 일반경비원 신임교육 이수자로 주/야간 교대근무가 가능한 자\r\n\r\n- 채용 당시「경비업법」제13조제2항에 따른 일반경비원 신임교육을 받은 지 3년이 지나지 않은 사람\r\n\r\n○ 일반경비원 신임교육 이수요건 제외 대상(「경비업법 시행령」제18조2항)\r\n- 일반경비원 또는 특수경비원 신임교육을 받은 사람으로서 채용 전 3년 이내에 경비 업무에 종사한 경력이 있는 사람\r\n-「경찰공무원법」에 따른 경찰공무원으로 근무한 경력이 있는 사람\r\n-「대통령 등의 경호에 관한 법률」에 따른 경호공무원 또는 별정직공무원으로 근무한 경력이 있는 사람\r\n-「군인사법」에 따른 부사관 이상으로 근무한 경력이 있는 사람\r\n- 경비지도사 자격이 있는 사람\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-            "hireTypeNmLst": "무기계약직,비정규직",
-            "prefCn": "○ 독립유공자 예우에 관한 법률 제16조, 국가유공자 등 예우 및 지원에 관한 법률 제29조, 5.18 민주유공자 예우에 관한 법률 제22조, 특수임무유공자 예우 및 단체설립에 관한 법률 제24조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 의한 취업지원대상자(전형 단계마다 만점의 5%, 10% 가점 부여)\r\n○ 장애인고용촉진 및 직업재활법에 따른 장애인(전형 단계마다 만점의 5%, 10%가점 부여)\r\n※ 중·경증 여부는 장애인고용촉진 및 직업재활법 시행령 제3조, 제4조에 따르며, 경증장애인 5%, 중증장애인 10% 가점 부여\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복되는 경우에는 본인에게 유리한 것 하나만을 가산 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-            "recrutNope": "4",
-            "recrutSe": "R2030",
-            "scrnprcdrMthdExpln": "가. 접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지\r\n나. 접수방법: 전자메일 접수만 가능(방문, 우편접수 불가)\r\n※ 접수마감일 18:00까지 전자메일 접수분에 한하며, 서류제출 후 유선확인 요망\r\n(이메일 주소) choi0413@kead.or.kr\r\n※ 이메일 제목\r\n-‘특정업무직(경비원) 응시원서(성명)’\r\n(전화번호) 031-8058-4218\r\n- 서류심사 및 결과발표: 2026.12.08.(화)\r\n※ 채용예정인원의 5배수 선발\r\n- 증빙서류 제출기간: 2026.12.08.(화) ~ 2026.12.10.(목)\r\n※ 자격 및 경력사항, 취업지원대상자 및 장애인 증빙 자료 등\r\n다. 면접시험\r\n- 일시 및 장소: 2026.12.10.(목) , 경기남부직업능력개발원 회의실\r\n- 평가기준: 면접점수(100)\r\n라. 최종합격자 발표: 2026.12.11.(금) 예정, 개별통보\r\n마. 임용예정일: 2027.01.01.(금)\r\n\r\n※ 상기일정은 기관 사정으로 변동 될 수 있음\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-            "workRgnNmLst": "경기"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
-          "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
-        },
-        {
           "notice_id": "a307177",
           "org": "한국보훈복지의료공단",
           "title": "[전주보훈요양원] 보훈특별고용 직원 채용 공고",
@@ -992,11 +954,11 @@
           "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
         },
         {
-          "notice_id": "a307565",
-          "org": "대한적십자사",
-          "title": "[영주적십자병원] 정규직(간호사, 사무보조원, 조리사, 간호조무사, 병동도우미, 보험심사간호사), 육아휴직대체(사무보조원, 간호조무사) 공개채용 공고",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
-          "employment": "정규직,비정규직",
+          "notice_id": "a307343",
+          "org": "한국장애인고용공단",
+          "title": "[한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용",
+          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
+          "employment": "무기계약직,비정규직",
           "recruiting_unit_title": null,
           "recruiting_unit_count": null,
           "recruiting_unit_scope": "unit_count_unconfirmed",
@@ -1004,27 +966,27 @@
             "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
           ],
           "application_period": {
-            "start": "2026-11-27",
-            "end": "2026-12-14T10:00:00+09:00",
+            "start": "2026-11-23",
+            "end": "2026-12-04T18:00:00+09:00",
             "start_date_only": true,
             "date_only": false,
-            "source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
-            "evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00"
+            "source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
+            "evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지"
           },
-          "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
-          "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
+          "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
+          "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
           "official_detail_fields_for_review": {
-            "aplyQlfcCn": "1. 정규직 사무보조원\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n2. 정규직 조리사\r\n- 조리사 자격증 소지자\r\n※ 근무시간 : 06시~19시\r\n\r\n3. 정규직 간호사\r\n- 간호사 면허증 소지자 또는 졸업예정자로서 2027년 간호사 국가시험 응시대상자\r\n- 3교대 근무 가능자\r\n- 최초임용일로부터 1년 이내 순차 임용\r\n- 졸업예정자는 면허 취득 이후 임용\r\n\r\n4. 정규직 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 3교대 근무 가능자\r\n\r\n5. 정규직 병동도우미\r\n- 요양보호사 자격증 소지자\r\n\r\n6. 정규직 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n7. 정규직 간호사(보험심사)\r\n 간호사 면허증 소지자\r\n- 보험 심사 업무 가능자\r\n- 보건의료정보관리사, 보험심사관리사, 보험심사평가사 소지자 우대\r\n\r\n8. 육아휴직대체 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n- 계약기간 :’27.1.1. ~ ’27.12.31.\r\n\r\n9. 육아휴직대체 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 계약기간 :’27.3.1. ~ ’28.6.29.",
-            "hireTypeNmLst": "정규직,비정규직",
-            "prefCn": "○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5.18민주유공자예우에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의 규정에 의한 취업지원대상자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유증 등 환자지원 및 단체 설립에 관한 법률 제7조에 해당하는 자\r\n\r\n* 취업지원대상자 증명서 제출자에 한함\r\n* 모든 제출 서류에 사진, 생년, 성별, 학교명이 들어가는 부분은 삭제 후 제출",
-            "recrutNope": "43",
-            "recrutSe": "R2010",
-            "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00\r\n○ 접수방법\r\n1) 홈페이지 접수: https://www.redcross.or.kr/redrecruit/\r\n2) 방문접수 (기능직(조리사)에 한함)\r\n※ 기능직(조리사)의 경우, 홈페이지 접수 또는 방문 접수를 함께 시행하며, 방문 접수는 공휴일 및 주말 접수 불가\r\n가) (방문 접수) 응시원서 배부처: 영주적십자병원 3층 총무팀 또는 영주적십자병원 홈페이지 (https://www.rch.or.kr/web/rchyoungju/main)\r\n나) (방문 접수) 응시원서 제출처: 영주적십자병원 3층 총무팀 인사담당자 앞\r\n※ 접수마감일 10:00까지 접수분에 한함\r\n2. 서류전형 합격자발표 : 2026. 12. 17.(목)\r\n\r\n3. 면접시험 : 2026. 12. 21.(월) ~ 2026. 12. 22.(화)\r\n\r\n4. 채용검증위원회 : 2026. 12. 23.(수)\r\n\r\n5. 최종합격자발표 : 2026. 12. 24.(목)\r\n\r\n6. 채용검진 및 서류검증 : 2026. 12. 24.(목)~ 2026. 12 . 31.(목)\r\n\r\n7. 채용예정일자\r\n- 2027. 1. 1. 자, 2027. 3. 1.자\r\n\r\n○ 1차 서류전형 : 모집인원의 7배수\r\n\r\n○ 2차 면접전형 : 서류전형 합격자(60점 이상인 자 중 성적 순위, 미만인인 자는 불합격)",
-            "workRgnNmLst": "경북"
+            "aplyQlfcCn": "(1) 공통자격\r\n○ 국가공무원법 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 65세)\r\n- 서류접수 마감일 기준 만 18세 이상* 및 공단 정년에 의거 만 65세 미만인 자\r\n  * 단, 친권자 또는 후견인의 동의서 제출자는 제외\r\n○ 공단「인사규정」제12조(결격사유)에 해당하지 않는 자\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n\r\n(2) 필수자격\r\n○ 일반경비원 신임교육 이수자로 주/야간 교대근무가 가능한 자\r\n\r\n- 채용 당시「경비업법」제13조제2항에 따른 일반경비원 신임교육을 받은 지 3년이 지나지 않은 사람\r\n\r\n○ 일반경비원 신임교육 이수요건 제외 대상(「경비업법 시행령」제18조2항)\r\n- 일반경비원 또는 특수경비원 신임교육을 받은 사람으로서 채용 전 3년 이내에 경비 업무에 종사한 경력이 있는 사람\r\n-「경찰공무원법」에 따른 경찰공무원으로 근무한 경력이 있는 사람\r\n-「대통령 등의 경호에 관한 법률」에 따른 경호공무원 또는 별정직공무원으로 근무한 경력이 있는 사람\r\n-「군인사법」에 따른 부사관 이상으로 근무한 경력이 있는 사람\r\n- 경비지도사 자격이 있는 사람\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+            "hireTypeNmLst": "무기계약직,비정규직",
+            "prefCn": "○ 독립유공자 예우에 관한 법률 제16조, 국가유공자 등 예우 및 지원에 관한 법률 제29조, 5.18 민주유공자 예우에 관한 법률 제22조, 특수임무유공자 예우 및 단체설립에 관한 법률 제24조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 의한 취업지원대상자(전형 단계마다 만점의 5%, 10% 가점 부여)\r\n○ 장애인고용촉진 및 직업재활법에 따른 장애인(전형 단계마다 만점의 5%, 10%가점 부여)\r\n※ 중·경증 여부는 장애인고용촉진 및 직업재활법 시행령 제3조, 제4조에 따르며, 경증장애인 5%, 중증장애인 10% 가점 부여\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복되는 경우에는 본인에게 유리한 것 하나만을 가산 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+            "recrutNope": "4",
+            "recrutSe": "R2030",
+            "scrnprcdrMthdExpln": "가. 접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지\r\n나. 접수방법: 전자메일 접수만 가능(방문, 우편접수 불가)\r\n※ 접수마감일 18:00까지 전자메일 접수분에 한하며, 서류제출 후 유선확인 요망\r\n(이메일 주소) choi0413@kead.or.kr\r\n※ 이메일 제목\r\n-‘특정업무직(경비원) 응시원서(성명)’\r\n(전화번호) 031-8058-4218\r\n- 서류심사 및 결과발표: 2026.12.08.(화)\r\n※ 채용예정인원의 5배수 선발\r\n- 증빙서류 제출기간: 2026.12.08.(화) ~ 2026.12.10.(목)\r\n※ 자격 및 경력사항, 취업지원대상자 및 장애인 증빙 자료 등\r\n다. 면접시험\r\n- 일시 및 장소: 2026.12.10.(목) , 경기남부직업능력개발원 회의실\r\n- 평가기준: 면접점수(100)\r\n라. 최종합격자 발표: 2026.12.11.(금) 예정, 개별통보\r\n마. 임용예정일: 2027.01.01.(금)\r\n\r\n※ 상기일정은 기관 사정으로 변동 될 수 있음\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+            "workRgnNmLst": "경기"
           },
           "review_status": "official_review_required",
-          "application_evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
-          "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
+          "application_evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
+          "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
           "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
         },
         {
@@ -1061,6 +1023,42 @@
           "review_status": "official_review_required",
           "application_evidence": "접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30",
           "application_source_ref": "alio-detail.json#307403/scrnprcdrMthdExpln",
+          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        },
+        {
+          "notice_id": "a307565",
+          "org": "대한적십자사",
+          "title": "[영주적십자병원] 정규직(간호사, 사무보조원, 조리사, 간호조무사, 병동도우미, 보험심사간호사), 육아휴직대체(사무보조원, 간호조무사) 공개채용 공고",
+          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
+          "employment": "정규직,비정규직",
+          "recruiting_unit_title": null,
+          "recruiting_unit_count": null,
+          "recruiting_unit_scope": "unit_count_unconfirmed",
+          "selection_review_reasons": [
+            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+          ],
+          "application_period": {
+            "start": "2026-11-27",
+            "end": "2026-12-14T10:00:00+09:00",
+            "start_date_only": true,
+            "date_only": false,
+            "source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
+            "evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00"
+          },
+          "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
+          "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
+          "official_detail_fields_for_review": {
+            "aplyQlfcCn": "1. 정규직 사무보조원\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n2. 정규직 조리사\r\n- 조리사 자격증 소지자\r\n※ 근무시간 : 06시~19시\r\n\r\n3. 정규직 간호사\r\n- 간호사 면허증 소지자 또는 졸업예정자로서 2027년 간호사 국가시험 응시대상자\r\n- 3교대 근무 가능자\r\n- 최초임용일로부터 1년 이내 순차 임용\r\n- 졸업예정자는 면허 취득 이후 임용\r\n\r\n4. 정규직 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 3교대 근무 가능자\r\n\r\n5. 정규직 병동도우미\r\n- 요양보호사 자격증 소지자\r\n\r\n6. 정규직 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n7. 정규직 간호사(보험심사)\r\n 간호사 면허증 소지자\r\n- 보험 심사 업무 가능자\r\n- 보건의료정보관리사, 보험심사관리사, 보험심사평가사 소지자 우대\r\n\r\n8. 육아휴직대체 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n- 계약기간 :’27.1.1. ~ ’27.12.31.\r\n\r\n9. 육아휴직대체 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 계약기간 :’27.3.1. ~ ’28.6.29.",
+            "hireTypeNmLst": "정규직,비정규직",
+            "prefCn": "○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5.18민주유공자예우에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의 규정에 의한 취업지원대상자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유증 등 환자지원 및 단체 설립에 관한 법률 제7조에 해당하는 자\r\n\r\n* 취업지원대상자 증명서 제출자에 한함\r\n* 모든 제출 서류에 사진, 생년, 성별, 학교명이 들어가는 부분은 삭제 후 제출",
+            "recrutNope": "43",
+            "recrutSe": "R2010",
+            "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00\r\n○ 접수방법\r\n1) 홈페이지 접수: https://www.redcross.or.kr/redrecruit/\r\n2) 방문접수 (기능직(조리사)에 한함)\r\n※ 기능직(조리사)의 경우, 홈페이지 접수 또는 방문 접수를 함께 시행하며, 방문 접수는 공휴일 및 주말 접수 불가\r\n가) (방문 접수) 응시원서 배부처: 영주적십자병원 3층 총무팀 또는 영주적십자병원 홈페이지 (https://www.rch.or.kr/web/rchyoungju/main)\r\n나) (방문 접수) 응시원서 제출처: 영주적십자병원 3층 총무팀 인사담당자 앞\r\n※ 접수마감일 10:00까지 접수분에 한함\r\n2. 서류전형 합격자발표 : 2026. 12. 17.(목)\r\n\r\n3. 면접시험 : 2026. 12. 21.(월) ~ 2026. 12. 22.(화)\r\n\r\n4. 채용검증위원회 : 2026. 12. 23.(수)\r\n\r\n5. 최종합격자발표 : 2026. 12. 24.(목)\r\n\r\n6. 채용검진 및 서류검증 : 2026. 12. 24.(목)~ 2026. 12 . 31.(목)\r\n\r\n7. 채용예정일자\r\n- 2027. 1. 1. 자, 2027. 3. 1.자\r\n\r\n○ 1차 서류전형 : 모집인원의 7배수\r\n\r\n○ 2차 면접전형 : 서류전형 합격자(60점 이상인 자 중 성적 순위, 미만인인 자는 불합격)",
+            "workRgnNmLst": "경북"
+          },
+          "review_status": "official_review_required",
+          "application_evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
+          "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
           "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
         }
       ],
@@ -1270,10 +1268,10 @@
       "a307338",
       "a307341",
       "a307324",
-      "a307343",
       "a307177",
-      "a307565",
-      "a307403"
+      "a307343",
+      "a307403",
+      "a307565"
     ],
     "candidates": [
       {
@@ -1961,42 +1959,6 @@
         "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
       },
       {
-        "notice_id": "a307343",
-        "org": "한국장애인고용공단",
-        "title": "[한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
-        "employment": "무기계약직,비정규직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-23",
-          "end": "2026-12-04T18:00:00+09:00",
-          "start_date_only": true,
-          "date_only": false,
-          "source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-          "evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지"
-        },
-        "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
-        "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "(1) 공통자격\r\n○ 국가공무원법 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 65세)\r\n- 서류접수 마감일 기준 만 18세 이상* 및 공단 정년에 의거 만 65세 미만인 자\r\n  * 단, 친권자 또는 후견인의 동의서 제출자는 제외\r\n○ 공단「인사규정」제12조(결격사유)에 해당하지 않는 자\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n\r\n(2) 필수자격\r\n○ 일반경비원 신임교육 이수자로 주/야간 교대근무가 가능한 자\r\n\r\n- 채용 당시「경비업법」제13조제2항에 따른 일반경비원 신임교육을 받은 지 3년이 지나지 않은 사람\r\n\r\n○ 일반경비원 신임교육 이수요건 제외 대상(「경비업법 시행령」제18조2항)\r\n- 일반경비원 또는 특수경비원 신임교육을 받은 사람으로서 채용 전 3년 이내에 경비 업무에 종사한 경력이 있는 사람\r\n-「경찰공무원법」에 따른 경찰공무원으로 근무한 경력이 있는 사람\r\n-「대통령 등의 경호에 관한 법률」에 따른 경호공무원 또는 별정직공무원으로 근무한 경력이 있는 사람\r\n-「군인사법」에 따른 부사관 이상으로 근무한 경력이 있는 사람\r\n- 경비지도사 자격이 있는 사람\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-          "hireTypeNmLst": "무기계약직,비정규직",
-          "prefCn": "○ 독립유공자 예우에 관한 법률 제16조, 국가유공자 등 예우 및 지원에 관한 법률 제29조, 5.18 민주유공자 예우에 관한 법률 제22조, 특수임무유공자 예우 및 단체설립에 관한 법률 제24조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 의한 취업지원대상자(전형 단계마다 만점의 5%, 10% 가점 부여)\r\n○ 장애인고용촉진 및 직업재활법에 따른 장애인(전형 단계마다 만점의 5%, 10%가점 부여)\r\n※ 중·경증 여부는 장애인고용촉진 및 직업재활법 시행령 제3조, 제4조에 따르며, 경증장애인 5%, 중증장애인 10% 가점 부여\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복되는 경우에는 본인에게 유리한 것 하나만을 가산 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-          "recrutNope": "4",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "가. 접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지\r\n나. 접수방법: 전자메일 접수만 가능(방문, 우편접수 불가)\r\n※ 접수마감일 18:00까지 전자메일 접수분에 한하며, 서류제출 후 유선확인 요망\r\n(이메일 주소) choi0413@kead.or.kr\r\n※ 이메일 제목\r\n-‘특정업무직(경비원) 응시원서(성명)’\r\n(전화번호) 031-8058-4218\r\n- 서류심사 및 결과발표: 2026.12.08.(화)\r\n※ 채용예정인원의 5배수 선발\r\n- 증빙서류 제출기간: 2026.12.08.(화) ~ 2026.12.10.(목)\r\n※ 자격 및 경력사항, 취업지원대상자 및 장애인 증빙 자료 등\r\n다. 면접시험\r\n- 일시 및 장소: 2026.12.10.(목) , 경기남부직업능력개발원 회의실\r\n- 평가기준: 면접점수(100)\r\n라. 최종합격자 발표: 2026.12.11.(금) 예정, 개별통보\r\n마. 임용예정일: 2027.01.01.(금)\r\n\r\n※ 상기일정은 기관 사정으로 변동 될 수 있음\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-          "workRgnNmLst": "경기"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
-        "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
-      },
-      {
         "notice_id": "a307177",
         "org": "한국보훈복지의료공단",
         "title": "[전주보훈요양원] 보훈특별고용 직원 채용 공고",
@@ -2033,11 +1995,11 @@
         "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
       },
       {
-        "notice_id": "a307565",
-        "org": "대한적십자사",
-        "title": "[영주적십자병원] 정규직(간호사, 사무보조원, 조리사, 간호조무사, 병동도우미, 보험심사간호사), 육아휴직대체(사무보조원, 간호조무사) 공개채용 공고",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
-        "employment": "정규직,비정규직",
+        "notice_id": "a307343",
+        "org": "한국장애인고용공단",
+        "title": "[한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
+        "employment": "무기계약직,비정규직",
         "recruiting_unit_title": null,
         "recruiting_unit_count": null,
         "recruiting_unit_scope": "unit_count_unconfirmed",
@@ -2045,27 +2007,27 @@
           "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
         ],
         "application_period": {
-          "start": "2026-11-27",
-          "end": "2026-12-14T10:00:00+09:00",
+          "start": "2026-11-23",
+          "end": "2026-12-04T18:00:00+09:00",
           "start_date_only": true,
           "date_only": false,
-          "source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
-          "evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00"
+          "source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
+          "evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지"
         },
-        "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
-        "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
+        "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
+        "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
         "official_detail_fields_for_review": {
-          "aplyQlfcCn": "1. 정규직 사무보조원\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n2. 정규직 조리사\r\n- 조리사 자격증 소지자\r\n※ 근무시간 : 06시~19시\r\n\r\n3. 정규직 간호사\r\n- 간호사 면허증 소지자 또는 졸업예정자로서 2027년 간호사 국가시험 응시대상자\r\n- 3교대 근무 가능자\r\n- 최초임용일로부터 1년 이내 순차 임용\r\n- 졸업예정자는 면허 취득 이후 임용\r\n\r\n4. 정규직 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 3교대 근무 가능자\r\n\r\n5. 정규직 병동도우미\r\n- 요양보호사 자격증 소지자\r\n\r\n6. 정규직 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n7. 정규직 간호사(보험심사)\r\n 간호사 면허증 소지자\r\n- 보험 심사 업무 가능자\r\n- 보건의료정보관리사, 보험심사관리사, 보험심사평가사 소지자 우대\r\n\r\n8. 육아휴직대체 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n- 계약기간 :’27.1.1. ~ ’27.12.31.\r\n\r\n9. 육아휴직대체 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 계약기간 :’27.3.1. ~ ’28.6.29.",
-          "hireTypeNmLst": "정규직,비정규직",
-          "prefCn": "○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5.18민주유공자예우에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의 규정에 의한 취업지원대상자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유증 등 환자지원 및 단체 설립에 관한 법률 제7조에 해당하는 자\r\n\r\n* 취업지원대상자 증명서 제출자에 한함\r\n* 모든 제출 서류에 사진, 생년, 성별, 학교명이 들어가는 부분은 삭제 후 제출",
-          "recrutNope": "43",
-          "recrutSe": "R2010",
-          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00\r\n○ 접수방법\r\n1) 홈페이지 접수: https://www.redcross.or.kr/redrecruit/\r\n2) 방문접수 (기능직(조리사)에 한함)\r\n※ 기능직(조리사)의 경우, 홈페이지 접수 또는 방문 접수를 함께 시행하며, 방문 접수는 공휴일 및 주말 접수 불가\r\n가) (방문 접수) 응시원서 배부처: 영주적십자병원 3층 총무팀 또는 영주적십자병원 홈페이지 (https://www.rch.or.kr/web/rchyoungju/main)\r\n나) (방문 접수) 응시원서 제출처: 영주적십자병원 3층 총무팀 인사담당자 앞\r\n※ 접수마감일 10:00까지 접수분에 한함\r\n2. 서류전형 합격자발표 : 2026. 12. 17.(목)\r\n\r\n3. 면접시험 : 2026. 12. 21.(월) ~ 2026. 12. 22.(화)\r\n\r\n4. 채용검증위원회 : 2026. 12. 23.(수)\r\n\r\n5. 최종합격자발표 : 2026. 12. 24.(목)\r\n\r\n6. 채용검진 및 서류검증 : 2026. 12. 24.(목)~ 2026. 12 . 31.(목)\r\n\r\n7. 채용예정일자\r\n- 2027. 1. 1. 자, 2027. 3. 1.자\r\n\r\n○ 1차 서류전형 : 모집인원의 7배수\r\n\r\n○ 2차 면접전형 : 서류전형 합격자(60점 이상인 자 중 성적 순위, 미만인인 자는 불합격)",
-          "workRgnNmLst": "경북"
+          "aplyQlfcCn": "(1) 공통자격\r\n○ 국가공무원법 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 65세)\r\n- 서류접수 마감일 기준 만 18세 이상* 및 공단 정년에 의거 만 65세 미만인 자\r\n  * 단, 친권자 또는 후견인의 동의서 제출자는 제외\r\n○ 공단「인사규정」제12조(결격사유)에 해당하지 않는 자\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n\r\n(2) 필수자격\r\n○ 일반경비원 신임교육 이수자로 주/야간 교대근무가 가능한 자\r\n\r\n- 채용 당시「경비업법」제13조제2항에 따른 일반경비원 신임교육을 받은 지 3년이 지나지 않은 사람\r\n\r\n○ 일반경비원 신임교육 이수요건 제외 대상(「경비업법 시행령」제18조2항)\r\n- 일반경비원 또는 특수경비원 신임교육을 받은 사람으로서 채용 전 3년 이내에 경비 업무에 종사한 경력이 있는 사람\r\n-「경찰공무원법」에 따른 경찰공무원으로 근무한 경력이 있는 사람\r\n-「대통령 등의 경호에 관한 법률」에 따른 경호공무원 또는 별정직공무원으로 근무한 경력이 있는 사람\r\n-「군인사법」에 따른 부사관 이상으로 근무한 경력이 있는 사람\r\n- 경비지도사 자격이 있는 사람\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "hireTypeNmLst": "무기계약직,비정규직",
+          "prefCn": "○ 독립유공자 예우에 관한 법률 제16조, 국가유공자 등 예우 및 지원에 관한 법률 제29조, 5.18 민주유공자 예우에 관한 법률 제22조, 특수임무유공자 예우 및 단체설립에 관한 법률 제24조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 의한 취업지원대상자(전형 단계마다 만점의 5%, 10% 가점 부여)\r\n○ 장애인고용촉진 및 직업재활법에 따른 장애인(전형 단계마다 만점의 5%, 10%가점 부여)\r\n※ 중·경증 여부는 장애인고용촉진 및 직업재활법 시행령 제3조, 제4조에 따르며, 경증장애인 5%, 중증장애인 10% 가점 부여\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복되는 경우에는 본인에게 유리한 것 하나만을 가산 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "recrutNope": "4",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "가. 접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지\r\n나. 접수방법: 전자메일 접수만 가능(방문, 우편접수 불가)\r\n※ 접수마감일 18:00까지 전자메일 접수분에 한하며, 서류제출 후 유선확인 요망\r\n(이메일 주소) choi0413@kead.or.kr\r\n※ 이메일 제목\r\n-‘특정업무직(경비원) 응시원서(성명)’\r\n(전화번호) 031-8058-4218\r\n- 서류심사 및 결과발표: 2026.12.08.(화)\r\n※ 채용예정인원의 5배수 선발\r\n- 증빙서류 제출기간: 2026.12.08.(화) ~ 2026.12.10.(목)\r\n※ 자격 및 경력사항, 취업지원대상자 및 장애인 증빙 자료 등\r\n다. 면접시험\r\n- 일시 및 장소: 2026.12.10.(목) , 경기남부직업능력개발원 회의실\r\n- 평가기준: 면접점수(100)\r\n라. 최종합격자 발표: 2026.12.11.(금) 예정, 개별통보\r\n마. 임용예정일: 2027.01.01.(금)\r\n\r\n※ 상기일정은 기관 사정으로 변동 될 수 있음\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "workRgnNmLst": "경기"
         },
         "review_status": "official_review_required",
-        "application_evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
-        "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
+        "application_evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
+        "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
         "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
       },
       {
@@ -2102,6 +2064,42 @@
         "review_status": "official_review_required",
         "application_evidence": "접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30",
         "application_source_ref": "alio-detail.json#307403/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+      },
+      {
+        "notice_id": "a307565",
+        "org": "대한적십자사",
+        "title": "[영주적십자병원] 정규직(간호사, 사무보조원, 조리사, 간호조무사, 병동도우미, 보험심사간호사), 육아휴직대체(사무보조원, 간호조무사) 공개채용 공고",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
+        "employment": "정규직,비정규직",
+        "recruiting_unit_title": null,
+        "recruiting_unit_count": null,
+        "recruiting_unit_scope": "unit_count_unconfirmed",
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "application_period": {
+          "start": "2026-11-27",
+          "end": "2026-12-14T10:00:00+09:00",
+          "start_date_only": true,
+          "date_only": false,
+          "source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
+          "evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00"
+        },
+        "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
+        "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "1. 정규직 사무보조원\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n2. 정규직 조리사\r\n- 조리사 자격증 소지자\r\n※ 근무시간 : 06시~19시\r\n\r\n3. 정규직 간호사\r\n- 간호사 면허증 소지자 또는 졸업예정자로서 2027년 간호사 국가시험 응시대상자\r\n- 3교대 근무 가능자\r\n- 최초임용일로부터 1년 이내 순차 임용\r\n- 졸업예정자는 면허 취득 이후 임용\r\n\r\n4. 정규직 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 3교대 근무 가능자\r\n\r\n5. 정규직 병동도우미\r\n- 요양보호사 자격증 소지자\r\n\r\n6. 정규직 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n7. 정규직 간호사(보험심사)\r\n 간호사 면허증 소지자\r\n- 보험 심사 업무 가능자\r\n- 보건의료정보관리사, 보험심사관리사, 보험심사평가사 소지자 우대\r\n\r\n8. 육아휴직대체 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n- 계약기간 :’27.1.1. ~ ’27.12.31.\r\n\r\n9. 육아휴직대체 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 계약기간 :’27.3.1. ~ ’28.6.29.",
+          "hireTypeNmLst": "정규직,비정규직",
+          "prefCn": "○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5.18민주유공자예우에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의 규정에 의한 취업지원대상자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유증 등 환자지원 및 단체 설립에 관한 법률 제7조에 해당하는 자\r\n\r\n* 취업지원대상자 증명서 제출자에 한함\r\n* 모든 제출 서류에 사진, 생년, 성별, 학교명이 들어가는 부분은 삭제 후 제출",
+          "recrutNope": "43",
+          "recrutSe": "R2010",
+          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00\r\n○ 접수방법\r\n1) 홈페이지 접수: https://www.redcross.or.kr/redrecruit/\r\n2) 방문접수 (기능직(조리사)에 한함)\r\n※ 기능직(조리사)의 경우, 홈페이지 접수 또는 방문 접수를 함께 시행하며, 방문 접수는 공휴일 및 주말 접수 불가\r\n가) (방문 접수) 응시원서 배부처: 영주적십자병원 3층 총무팀 또는 영주적십자병원 홈페이지 (https://www.rch.or.kr/web/rchyoungju/main)\r\n나) (방문 접수) 응시원서 제출처: 영주적십자병원 3층 총무팀 인사담당자 앞\r\n※ 접수마감일 10:00까지 접수분에 한함\r\n2. 서류전형 합격자발표 : 2026. 12. 17.(목)\r\n\r\n3. 면접시험 : 2026. 12. 21.(월) ~ 2026. 12. 22.(화)\r\n\r\n4. 채용검증위원회 : 2026. 12. 23.(수)\r\n\r\n5. 최종합격자발표 : 2026. 12. 24.(목)\r\n\r\n6. 채용검진 및 서류검증 : 2026. 12. 24.(목)~ 2026. 12 . 31.(목)\r\n\r\n7. 채용예정일자\r\n- 2027. 1. 1. 자, 2027. 3. 1.자\r\n\r\n○ 1차 서류전형 : 모집인원의 7배수\r\n\r\n○ 2차 면접전형 : 서류전형 합격자(60점 이상인 자 중 성적 순위, 미만인인 자는 불합격)",
+          "workRgnNmLst": "경북"
+        },
+        "review_status": "official_review_required",
+        "application_evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
+        "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
         "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
       }
     ],
@@ -2932,49 +2930,6 @@
         "meta_posted": false
       },
       {
-        "notice_id": "a307343",
-        "suggested_slot": "2026-11-30T08:00:00+09:00",
-        "draft_text": "한국장애인고용공단 채용 공고를 확인해 보세요.\n\n모집 공고: [한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용\n고용형태: 무기계약직,비정규직\n접수 마감: 2026-12-04 18:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
-        "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
-        "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
-        "application_evidence_for_review": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
-        "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "(1) 공통자격\r\n○ 국가공무원법 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 65세)\r\n- 서류접수 마감일 기준 만 18세 이상* 및 공단 정년에 의거 만 65세 미만인 자\r\n  * 단, 친권자 또는 후견인의 동의서 제출자는 제외\r\n○ 공단「인사규정」제12조(결격사유)에 해당하지 않는 자\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n\r\n(2) 필수자격\r\n○ 일반경비원 신임교육 이수자로 주/야간 교대근무가 가능한 자\r\n\r\n- 채용 당시「경비업법」제13조제2항에 따른 일반경비원 신임교육을 받은 지 3년이 지나지 않은 사람\r\n\r\n○ 일반경비원 신임교육 이수요건 제외 대상(「경비업법 시행령」제18조2항)\r\n- 일반경비원 또는 특수경비원 신임교육을 받은 사람으로서 채용 전 3년 이내에 경비 업무에 종사한 경력이 있는 사람\r\n-「경찰공무원법」에 따른 경찰공무원으로 근무한 경력이 있는 사람\r\n-「대통령 등의 경호에 관한 법률」에 따른 경호공무원 또는 별정직공무원으로 근무한 경력이 있는 사람\r\n-「군인사법」에 따른 부사관 이상으로 근무한 경력이 있는 사람\r\n- 경비지도사 자격이 있는 사람\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-          "hireTypeNmLst": "무기계약직,비정규직",
-          "prefCn": "○ 독립유공자 예우에 관한 법률 제16조, 국가유공자 등 예우 및 지원에 관한 법률 제29조, 5.18 민주유공자 예우에 관한 법률 제22조, 특수임무유공자 예우 및 단체설립에 관한 법률 제24조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 의한 취업지원대상자(전형 단계마다 만점의 5%, 10% 가점 부여)\r\n○ 장애인고용촉진 및 직업재활법에 따른 장애인(전형 단계마다 만점의 5%, 10%가점 부여)\r\n※ 중·경증 여부는 장애인고용촉진 및 직업재활법 시행령 제3조, 제4조에 따르며, 경증장애인 5%, 중증장애인 10% 가점 부여\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복되는 경우에는 본인에게 유리한 것 하나만을 가산 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-          "recrutNope": "4",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "가. 접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지\r\n나. 접수방법: 전자메일 접수만 가능(방문, 우편접수 불가)\r\n※ 접수마감일 18:00까지 전자메일 접수분에 한하며, 서류제출 후 유선확인 요망\r\n(이메일 주소) choi0413@kead.or.kr\r\n※ 이메일 제목\r\n-‘특정업무직(경비원) 응시원서(성명)’\r\n(전화번호) 031-8058-4218\r\n- 서류심사 및 결과발표: 2026.12.08.(화)\r\n※ 채용예정인원의 5배수 선발\r\n- 증빙서류 제출기간: 2026.12.08.(화) ~ 2026.12.10.(목)\r\n※ 자격 및 경력사항, 취업지원대상자 및 장애인 증빙 자료 등\r\n다. 면접시험\r\n- 일시 및 장소: 2026.12.10.(목) , 경기남부직업능력개발원 회의실\r\n- 평가기준: 면접점수(100)\r\n라. 최종합격자 발표: 2026.12.11.(금) 예정, 개별통보\r\n마. 임용예정일: 2027.01.01.(금)\r\n\r\n※ 상기일정은 기관 사정으로 변동 될 수 있음\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
-          "workRgnNmLst": "경기"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
         "notice_id": "a307177",
         "suggested_slot": "2026-11-30T08:00:00+09:00",
         "draft_text": "한국보훈복지의료공단 채용 공고를 확인해 보세요.\n\n모집 공고: [전주보훈요양원] 보훈특별고용 직원 채용 공고\n고용형태: 정규직,무기계약직\n접수 마감: 2026-12-03 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
@@ -3016,23 +2971,66 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
+      },
+      {
+        "notice_id": "a307343",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "draft_text": "한국장애인고용공단 채용 공고를 확인해 보세요.\n\n모집 공고: [한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용\n고용형태: 무기계약직,비정규직\n접수 마감: 2026-12-04 18:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
+        "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
+        "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
+        "application_evidence_for_review": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
+        "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
+        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "recruiting_unit_for_review": {
+          "title": null,
+          "count": null,
+          "scope": "unit_count_unconfirmed",
+          "verification_status": "not_verified"
+        },
+        "selection_review_reasons": [
+          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
+        ],
+        "official_detail_fields_for_review": {
+          "aplyQlfcCn": "(1) 공통자격\r\n○ 국가공무원법 제33조에 저촉되지 않는 자\r\n○ 학력은 제한 없으며, 연령은 공단 정년규정에 따름 (만 65세)\r\n- 서류접수 마감일 기준 만 18세 이상* 및 공단 정년에 의거 만 65세 미만인 자\r\n  * 단, 친권자 또는 후견인의 동의서 제출자는 제외\r\n○ 공단「인사규정」제12조(결격사유)에 해당하지 않는 자\r\n○ 최종합격자 발표 후 임용 시 즉시 근무가능한 자, 근무 불가능 시 합격 취소\r\n\r\n(2) 필수자격\r\n○ 일반경비원 신임교육 이수자로 주/야간 교대근무가 가능한 자\r\n\r\n- 채용 당시「경비업법」제13조제2항에 따른 일반경비원 신임교육을 받은 지 3년이 지나지 않은 사람\r\n\r\n○ 일반경비원 신임교육 이수요건 제외 대상(「경비업법 시행령」제18조2항)\r\n- 일반경비원 또는 특수경비원 신임교육을 받은 사람으로서 채용 전 3년 이내에 경비 업무에 종사한 경력이 있는 사람\r\n-「경찰공무원법」에 따른 경찰공무원으로 근무한 경력이 있는 사람\r\n-「대통령 등의 경호에 관한 법률」에 따른 경호공무원 또는 별정직공무원으로 근무한 경력이 있는 사람\r\n-「군인사법」에 따른 부사관 이상으로 근무한 경력이 있는 사람\r\n- 경비지도사 자격이 있는 사람\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "hireTypeNmLst": "무기계약직,비정규직",
+          "prefCn": "○ 독립유공자 예우에 관한 법률 제16조, 국가유공자 등 예우 및 지원에 관한 법률 제29조, 5.18 민주유공자 예우에 관한 법률 제22조, 특수임무유공자 예우 및 단체설립에 관한 법률 제24조 및 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 의한 취업지원대상자(전형 단계마다 만점의 5%, 10% 가점 부여)\r\n○ 장애인고용촉진 및 직업재활법에 따른 장애인(전형 단계마다 만점의 5%, 10%가점 부여)\r\n※ 중·경증 여부는 장애인고용촉진 및 직업재활법 시행령 제3조, 제4조에 따르며, 경증장애인 5%, 중증장애인 10% 가점 부여\r\n○ 상기 우대사항 중 2개 이상의 우대 조건이 중복되는 경우에는 본인에게 유리한 것 하나만을 가산 적용\r\n\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "recrutNope": "4",
+          "recrutSe": "R2030",
+          "scrnprcdrMthdExpln": "가. 접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지\r\n나. 접수방법: 전자메일 접수만 가능(방문, 우편접수 불가)\r\n※ 접수마감일 18:00까지 전자메일 접수분에 한하며, 서류제출 후 유선확인 요망\r\n(이메일 주소) choi0413@kead.or.kr\r\n※ 이메일 제목\r\n-‘특정업무직(경비원) 응시원서(성명)’\r\n(전화번호) 031-8058-4218\r\n- 서류심사 및 결과발표: 2026.12.08.(화)\r\n※ 채용예정인원의 5배수 선발\r\n- 증빙서류 제출기간: 2026.12.08.(화) ~ 2026.12.10.(목)\r\n※ 자격 및 경력사항, 취업지원대상자 및 장애인 증빙 자료 등\r\n다. 면접시험\r\n- 일시 및 장소: 2026.12.10.(목) , 경기남부직업능력개발원 회의실\r\n- 평가기준: 면접점수(100)\r\n라. 최종합격자 발표: 2026.12.11.(금) 예정, 개별통보\r\n마. 임용예정일: 2027.01.01.(금)\r\n\r\n※ 상기일정은 기관 사정으로 변동 될 수 있음\r\n※ 자세한 내용은 공고문을 참조해주시기 바랍니다.",
+          "workRgnNmLst": "경기"
+        },
+        "required_review": {
+          "official_notice_and_attachments": "not_verified",
+          "recruiting_unit_and_headcount": "not_verified",
+          "employment_type": "not_verified",
+          "eligibility_and_restrictions": "not_verified",
+          "application_window": "not_verified",
+          "profile_target": "not_verified",
+          "v5_copy_and_image": "not_verified",
+          "publisher_validate_entry": "not_run"
+        },
+        "status": "unreviewed",
+        "requires_official_source_review": true,
+        "approved_for_queue": false,
+        "meta_posted": false
       }
     ],
     "official_source_alternatives": [
-      {
-        "notice_id": "a307565",
-        "status": "unreviewed",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
-        "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
-        "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
-        "suggested_slot": null
-      },
       {
         "notice_id": "a307403",
         "status": "unreviewed",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307403",
         "source_post_sha256": "52737d5fccf4d9a8428f948cee6bbc4e1b2697edb8e8720c112630defc9c0491",
         "source_detail_sha256": "35aadd6ae749d7ef97a711e6341d63b03fe9855aabae0b58632ec402b99e61cb",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307565",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
+        "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
+        "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
         "suggested_slot": null
       }
     ],
@@ -3080,7 +3078,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:24.631443+09:00",
+          "checked_at": "2026-11-28T09:02:08.453660+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3103,7 +3101,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:24.476476+09:00",
+          "checked_at": "2026-11-28T09:02:08.219383+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3126,7 +3124,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:24.276230+09:00",
+          "checked_at": "2026-11-28T09:02:08.681434+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3149,7 +3147,7 @@
           "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
           "size_bytes": 11152,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:24.436711+09:00",
+          "checked_at": "2026-11-28T09:02:08.286571+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3172,7 +3170,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:27.094722+09:00",
+          "checked_at": "2026-11-28T09:02:11.970447+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3195,7 +3193,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:26.616835+09:00",
+          "checked_at": "2026-11-28T09:02:11.629661+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3218,7 +3216,7 @@
           "sha256": "a3372d8d157985c9b34c03c74ad28c9e7fa73ab8dd53bd90915dc20e782be356",
           "size_bytes": 24185,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:26.796631+09:00",
+          "checked_at": "2026-11-28T09:02:12.126031+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3241,7 +3239,7 @@
           "sha256": "ef004e83700b48f2c59a4375ff1e10e24b159e0bb4c9b42bda674421e3799773",
           "size_bytes": 13529,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T08:35:26.904865+09:00",
+          "checked_at": "2026-11-28T09:02:11.926781+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3319,12 +3317,20 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-28T08:35:27.202343+09:00",
-    "window_start": "2026-11-25T23:35:27.202343+00:00",
+    "checked_at": "2026-11-28T09:02:12.247812+09:00",
+    "window_start": "2026-11-26T00:02:12.247812+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
     "posts": [
+      {
+        "post_id": "18140511127651232",
+        "timestamp": "2026-11-27T23:41:25+00:00",
+        "permalink": "https://www.threads.com/@hid_119/post/DgQ4hxgjzwJ",
+        "is_reply": false,
+        "text_available": true,
+        "text_sha256": "52f95ebfe3bcae4ff025ac193f20e5e77f26898f21291c1299c2e4d22656ef71"
+      },
       {
         "post_id": "18134358925772092",
         "timestamp": "2026-11-27T11:46:54+00:00",
@@ -3380,14 +3386,6 @@
         "is_reply": false,
         "text_available": true,
         "text_sha256": "6aa86e1cdd8f6ad762d4213795b87123f127c23224b0884eee8e33a3e7db2775"
-      },
-      {
-        "post_id": "18026619005948289",
-        "timestamp": "2026-11-25T23:39:21+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DgLutibiXJc",
-        "is_reply": false,
-        "text_available": true,
-        "text_sha256": "1aae8cb485c75437756ee90a9ba77d37cf89d149b6161bf2117972c04b96d497"
       }
     ],
     "meta_posted": false,
