@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-29T00:59:51.343191+09:00",
-  "run_id": "46162727295",
-  "source_commit": "80cc1866402bb75ac77d173b3f38701ff14f8c80",
+  "captured_at": "2026-11-29T02:02:05.056446+09:00",
+  "run_id": "46168249490",
+  "source_commit": "814d43275135b5af0adf22eb6ffadaa39f64f699",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-29T00:59:42.768108+09:00",
+    "time": "2026-11-29T02:01:53.912134+09:00",
     "future_slots": [
       "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
@@ -19,7 +19,13 @@
       "2026-11-30T20:00:00+09:00"
     ],
     "next_media": "IMAGE",
-    "promoted": [],
+    "promoted": [
+      {
+        "notice_id": "a307341",
+        "slot": "2026-11-29T12:00:00+09:00",
+        "fingerprint": "38f5f23ac5f2deb4b347e943208e82f7bbd41cd43489c21e3b68522876ddd232"
+      }
+    ],
     "refused": [
       {
         "notice_id": "a306965",
@@ -174,23 +180,23 @@
         "reason": "SLOT_ALREADY_OCCUPIED"
       }
     ],
-    "queue_updated": false,
+    "queue_updated": true,
     "meta_posted": false,
     "queue_sha": "09eed21553999ba5de807c7869aef7320785fd46",
-    "staged_sha": "2c6116febb819f5809e0e6cb95de23ea31ee6d03",
-    "promoted_count": 0,
-    "approved_supply_count": 1,
+    "staged_sha": "966dbbcfd666b4081589a963ae5b3a318539faa6",
+    "promoted_count": 1,
+    "approved_supply_count": 2,
     "inventory_target": 8,
-    "inventory_shortfall": 7,
+    "inventory_shortfall": 6,
     "replenishment_required": true,
     "invalid_ready_entries": [],
     "pending_active_slots": [],
     "media_forecast_conditional_on_active_slot": false,
     "approved_future_slots": [
-      "2026-11-29T08:00:00+09:00"
+      "2026-11-29T08:00:00+09:00",
+      "2026-11-29T12:00:00+09:00"
     ],
     "missing_slots": [
-      "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
       "2026-11-29T20:00:00+09:00",
       "2026-11-30T08:00:00+09:00",
@@ -199,11 +205,10 @@
       "2026-11-30T20:00:00+09:00"
     ],
     "next_slot_missing": false,
-    "source_candidate_count": 22,
+    "source_candidate_count": 21,
     "writer_handoff": {
       "status": "review_required",
       "missing_slots": [
-        "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
         "2026-11-30T08:00:00+09:00",
@@ -228,7 +233,6 @@
         "a307312",
         "a307313",
         "a307338",
-        "a307341",
         "a307177",
         "a307343",
         "a307324",
@@ -270,7 +274,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026. 11.24. ~ 2026. 12.9. 16:00(접수마감일 16:00 접수에 한함)",
           "application_source_ref": "alio-detail.json#307361/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307039",
@@ -306,7 +310,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026. 11. 17.(화) 09:00 ∼ 2026. 12. 02.(수) 14:00",
           "application_source_ref": "alio-detail.json#307039/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307280",
@@ -342,7 +346,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지",
           "application_source_ref": "alio-detail.json#307280/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307413",
@@ -378,7 +382,7 @@
           "review_status": "official_review_required",
           "application_evidence": "지원서접수기간 : 2026.11.25. 12:00 ~2026.12.11. 12:00",
           "application_source_ref": "alio-detail.json#307413/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307046",
@@ -414,7 +418,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026.11.16.(월)~2026.11.30.(월) 예정",
           "application_source_ref": "alio-detail.json#307046/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307396",
@@ -450,7 +454,7 @@
           "review_status": "official_review_required",
           "application_evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
           "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307326",
@@ -486,7 +490,7 @@
           "review_status": "official_review_required",
           "application_evidence": "원서접수: 2026.11.23.(월) ~ 2026.12.08.(화)",
           "application_source_ref": "alio-detail.json#307326/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307021",
@@ -522,7 +526,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026.11.13.(금) ∼ 2026.11.30.(월) 10시까지",
           "application_source_ref": "alio-detail.json#307021/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a306979",
@@ -558,7 +562,7 @@
           "review_status": "official_review_required",
           "application_evidence": "원서접수 : 2026. 11. 16.(월) ~ 2026. 12. 1.(화)",
           "application_source_ref": "alio-detail.json#306979/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307089",
@@ -594,7 +598,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026.11.16.~2026.12.02.",
           "application_source_ref": "alio-detail.json#307089/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307090",
@@ -630,7 +634,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026.11.16.~2026.12.02.",
           "application_source_ref": "alio-detail.json#307090/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307310",
@@ -666,7 +670,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
           "application_source_ref": "alio-detail.json#307310/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307311",
@@ -702,7 +706,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
           "application_source_ref": "alio-detail.json#307311/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307312",
@@ -738,7 +742,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
           "application_source_ref": "alio-detail.json#307312/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307313",
@@ -774,7 +778,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
           "application_source_ref": "alio-detail.json#307313/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307338",
@@ -810,43 +814,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 23.(월) ~ 2026. 12. 9.(수) / 장애인 고용공단 경북지사, 054-450-3012, yy2829@kead.or.kr",
           "application_source_ref": "alio-detail.json#307338/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
-        },
-        {
-          "notice_id": "a307341",
-          "org": "국악방송",
-          "title": "국악방송 체험형 인턴(장애인) 채용 공고",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
-          "employment": "청년인턴(체험형)",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-23",
-            "end": "2026-12-08T18:00:00+09:00",
-            "start_date_only": true,
-            "date_only": false,
-            "source_ref": "alio-detail.json#307341/scrnprcdrMthdExpln",
-            "evidence": "서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00"
-          },
-          "source_post_sha256": "c315c9528c5554af2aae756635cd1a4965c517b65327b33275ea89c5090b8ed1",
-          "source_detail_sha256": "c02eec954ea0bf8e0f717e93ac38b642bebd327418f197524e68216a2366b04e",
-          "official_detail_fields_for_review": {
-            "aplyQlfcCn": "채용분야 : 방송행정(라디오) 1명, 방송행정(TV) 1명\r\n\r\n[필수응시자격]\r\n- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인\r\n\r\n[공통응시자격]\r\n- 서울 근무 가능자\r\n- 학력, 성별, 연령 제한 없음\r\n- 「국가공무원법」제33조 및「국악방송 인사규정」제21조의 결격사유가 없는 자",
-            "hireTypeNmLst": "청년인턴(체험형)",
-            "prefCn": "- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인(서류전형 시 가점 5% 적용)\r\n- 「국가유공자 등 예우 및 지원에 관한 법률」 등 보훈관계법률에 따른 가점 대상자(각 전형별 가점 5~10%적용) 단,「국가유공자 등 예우 및 지원에 관한 법률」제31조3항에 따라 응시자의 수가 선발예정 인원(1명)과 동일한 경우에만 가점 적용)\r\n※ 중복적용하지 아니하고 유리한 우대사항 하나만 인정",
-            "recrutNope": "2",
-            "recrutSe": "R2010",
-            "scrnprcdrMthdExpln": "전형절차 : 1차 서류전형(5배수) - 2차 면접전형(1배수)\r\n전형방법 : 국악방송 채용시스템(http://gugakfm.saramin.co.kr)을 통해 접수\r\n\r\n전형세부일정\r\n\r\n-  공고 및 서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00\r\n-  서류전형 기간 : 2026.12.09.(수) ~ 2026.12.15.(화) \r\n-  서류전형 합격자 발표 : 2026.12.16.(수)\r\n-  면접전형 일자 : 2026.12.22.(화)\r\n-  인사위원회 개최 : 2026.12.29.(화)\r\n-  최종합격자 발표 : 2026.12.30.(수)\r\n   ※ 상기 일정은 사정상 변경될 수 있으며, 변경 시 국악방송 홈페이지를 통해 안내 예정\r\n   ※ 전형별 결과는 홈페이지(https://www.igbf.kr/) 공지 및 개별 통지\r\n   ※ 최종합격자의 임용포기, 합격취소, 결격사유, 퇴직 등의 사정 또는 최종합격자가 임용된 날로부터 3개월 이내에 퇴직하여 결원이 발생한 경우 합격자 발표일로부터 6개월 이내에 불합격 기준에 해당하지 아니하는 사람 중에서 면접전형 평정 우수자 순으로 추가 합격자를 결정할 수 있음",
-            "workRgnNmLst": "서울"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00",
-          "application_source_ref": "alio-detail.json#307341/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307177",
@@ -882,7 +850,7 @@
           "review_status": "official_review_required",
           "application_evidence": "지원서 접수: 2026. 11. 18.(수) ~ 2026. 12. 03.(목) 10:00까지",
           "application_source_ref": "alio-detail.json#307177/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307343",
@@ -918,7 +886,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
           "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307324",
@@ -954,7 +922,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간: 2026. 11. 23.(월) ~ 2026. 11. 30.(월) 14:00까지",
           "application_source_ref": "alio-detail.json#307324/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307403",
@@ -990,7 +958,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30",
           "application_source_ref": "alio-detail.json#307403/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         },
         {
           "notice_id": "a307565",
@@ -1026,7 +994,7 @@
           "review_status": "official_review_required",
           "application_evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
           "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+          "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
         }
       ],
       "official_source_alternatives": [],
@@ -1202,12 +1170,12 @@
           "evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7."
         }
       }
-    ]
+    ],
+    "queue_sha_after": "54dde46b629f8035c83c0f199482b714b0f74e1b"
   },
   "writer_handoff": {
     "status": "review_required",
     "missing_slots": [
-      "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
       "2026-11-29T20:00:00+09:00",
       "2026-11-30T08:00:00+09:00",
@@ -1232,7 +1200,6 @@
       "a307312",
       "a307313",
       "a307338",
-      "a307341",
       "a307177",
       "a307343",
       "a307324",
@@ -1274,7 +1241,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026. 11.24. ~ 2026. 12.9. 16:00(접수마감일 16:00 접수에 한함)",
         "application_source_ref": "alio-detail.json#307361/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307039",
@@ -1310,7 +1277,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026. 11. 17.(화) 09:00 ∼ 2026. 12. 02.(수) 14:00",
         "application_source_ref": "alio-detail.json#307039/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307280",
@@ -1346,7 +1313,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지",
         "application_source_ref": "alio-detail.json#307280/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307413",
@@ -1382,7 +1349,7 @@
         "review_status": "official_review_required",
         "application_evidence": "지원서접수기간 : 2026.11.25. 12:00 ~2026.12.11. 12:00",
         "application_source_ref": "alio-detail.json#307413/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307046",
@@ -1418,7 +1385,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026.11.16.(월)~2026.11.30.(월) 예정",
         "application_source_ref": "alio-detail.json#307046/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307396",
@@ -1454,7 +1421,7 @@
         "review_status": "official_review_required",
         "application_evidence": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
         "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307326",
@@ -1490,7 +1457,7 @@
         "review_status": "official_review_required",
         "application_evidence": "원서접수: 2026.11.23.(월) ~ 2026.12.08.(화)",
         "application_source_ref": "alio-detail.json#307326/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307021",
@@ -1526,7 +1493,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026.11.13.(금) ∼ 2026.11.30.(월) 10시까지",
         "application_source_ref": "alio-detail.json#307021/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a306979",
@@ -1562,7 +1529,7 @@
         "review_status": "official_review_required",
         "application_evidence": "원서접수 : 2026. 11. 16.(월) ~ 2026. 12. 1.(화)",
         "application_source_ref": "alio-detail.json#306979/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307089",
@@ -1598,7 +1565,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026.11.16.~2026.12.02.",
         "application_source_ref": "alio-detail.json#307089/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307090",
@@ -1634,7 +1601,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026.11.16.~2026.12.02.",
         "application_source_ref": "alio-detail.json#307090/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307310",
@@ -1670,7 +1637,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307310/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307311",
@@ -1706,7 +1673,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307311/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307312",
@@ -1742,7 +1709,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307312/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307313",
@@ -1778,7 +1745,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307313/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307338",
@@ -1814,43 +1781,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 23.(월) ~ 2026. 12. 9.(수) / 장애인 고용공단 경북지사, 054-450-3012, yy2829@kead.or.kr",
         "application_source_ref": "alio-detail.json#307338/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
-      },
-      {
-        "notice_id": "a307341",
-        "org": "국악방송",
-        "title": "국악방송 체험형 인턴(장애인) 채용 공고",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
-        "employment": "청년인턴(체험형)",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-23",
-          "end": "2026-12-08T18:00:00+09:00",
-          "start_date_only": true,
-          "date_only": false,
-          "source_ref": "alio-detail.json#307341/scrnprcdrMthdExpln",
-          "evidence": "서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00"
-        },
-        "source_post_sha256": "c315c9528c5554af2aae756635cd1a4965c517b65327b33275ea89c5090b8ed1",
-        "source_detail_sha256": "c02eec954ea0bf8e0f717e93ac38b642bebd327418f197524e68216a2366b04e",
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "채용분야 : 방송행정(라디오) 1명, 방송행정(TV) 1명\r\n\r\n[필수응시자격]\r\n- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인\r\n\r\n[공통응시자격]\r\n- 서울 근무 가능자\r\n- 학력, 성별, 연령 제한 없음\r\n- 「국가공무원법」제33조 및「국악방송 인사규정」제21조의 결격사유가 없는 자",
-          "hireTypeNmLst": "청년인턴(체험형)",
-          "prefCn": "- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인(서류전형 시 가점 5% 적용)\r\n- 「국가유공자 등 예우 및 지원에 관한 법률」 등 보훈관계법률에 따른 가점 대상자(각 전형별 가점 5~10%적용) 단,「국가유공자 등 예우 및 지원에 관한 법률」제31조3항에 따라 응시자의 수가 선발예정 인원(1명)과 동일한 경우에만 가점 적용)\r\n※ 중복적용하지 아니하고 유리한 우대사항 하나만 인정",
-          "recrutNope": "2",
-          "recrutSe": "R2010",
-          "scrnprcdrMthdExpln": "전형절차 : 1차 서류전형(5배수) - 2차 면접전형(1배수)\r\n전형방법 : 국악방송 채용시스템(http://gugakfm.saramin.co.kr)을 통해 접수\r\n\r\n전형세부일정\r\n\r\n-  공고 및 서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00\r\n-  서류전형 기간 : 2026.12.09.(수) ~ 2026.12.15.(화) \r\n-  서류전형 합격자 발표 : 2026.12.16.(수)\r\n-  면접전형 일자 : 2026.12.22.(화)\r\n-  인사위원회 개최 : 2026.12.29.(화)\r\n-  최종합격자 발표 : 2026.12.30.(수)\r\n   ※ 상기 일정은 사정상 변경될 수 있으며, 변경 시 국악방송 홈페이지를 통해 안내 예정\r\n   ※ 전형별 결과는 홈페이지(https://www.igbf.kr/) 공지 및 개별 통지\r\n   ※ 최종합격자의 임용포기, 합격취소, 결격사유, 퇴직 등의 사정 또는 최종합격자가 임용된 날로부터 3개월 이내에 퇴직하여 결원이 발생한 경우 합격자 발표일로부터 6개월 이내에 불합격 기준에 해당하지 아니하는 사람 중에서 면접전형 평정 우수자 순으로 추가 합격자를 결정할 수 있음",
-          "workRgnNmLst": "서울"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00",
-        "application_source_ref": "alio-detail.json#307341/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307177",
@@ -1886,7 +1817,7 @@
         "review_status": "official_review_required",
         "application_evidence": "지원서 접수: 2026. 11. 18.(수) ~ 2026. 12. 03.(목) 10:00까지",
         "application_source_ref": "alio-detail.json#307177/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307343",
@@ -1922,7 +1853,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
         "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307324",
@@ -1958,7 +1889,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간: 2026. 11. 23.(월) ~ 2026. 11. 30.(월) 14:00까지",
         "application_source_ref": "alio-detail.json#307324/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307403",
@@ -1994,7 +1925,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30",
         "application_source_ref": "alio-detail.json#307403/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       },
       {
         "notice_id": "a307565",
@@ -2030,7 +1961,7 @@
         "review_status": "official_review_required",
         "application_evidence": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
         "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00"
       }
     ],
     "official_source_alternatives": [],
@@ -2044,14 +1975,14 @@
     "drafts": [
       {
         "notice_id": "a307361",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "draft_text": "한국농어촌공사 채용 공고를 확인해 보세요.\n\n모집 공고: 한국농어촌공사 금강사업단 공무직(청소원) 일반공개경쟁 채용 공고\n고용형태: 무기계약직\n접수 마감: 2026-12-09 16:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307361",
         "source_post_sha256": "69d2b121e8d77095f2d2758072ab9c2dc7e4bbf32b47bffea4e56060c89e75fe",
         "source_detail_sha256": "959c10afd2062bafb102d1de9cf8294bc8b6bdf18b2873b30315e4f822fb6f26",
         "application_evidence_for_review": "접수기간: 2026. 11.24. ~ 2026. 12.9. 16:00(접수마감일 16:00 접수에 한함)",
         "application_source_ref": "alio-detail.json#307361/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2087,14 +2018,14 @@
       },
       {
         "notice_id": "a307039",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "draft_text": "한국서부발전(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고\n고용형태: 비정규직\n접수 마감: 2026-12-02 14:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
         "source_post_sha256": "f16474e21b80d750b3ae3c3cdbf65c2d4309b4fa79b7738ac2bbf4d8e6801922",
         "source_detail_sha256": "18fe06e67a42dd43f2e2bbd6f53b267daec15179d6c481db26342dd009c8ea59",
         "application_evidence_for_review": "접수기간: 2026. 11. 17.(화) 09:00 ∼ 2026. 12. 02.(수) 14:00",
         "application_source_ref": "alio-detail.json#307039/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2130,14 +2061,14 @@
       },
       {
         "notice_id": "a307280",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "draft_text": "한국전력공사 채용 공고를 확인해 보세요.\n\n모집 공고: 기간제근로자(대체인력) 채용공고 [대전세종충남본부 아산지사, 금산지사]\n고용형태: 비정규직\n접수 마감: 2026-12-04 14:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307280",
         "source_post_sha256": "c04672f9c3553ab04d0791b937de9cbee4d7a4eaa2824c6cbe6c2a7f8c41ff39",
         "source_detail_sha256": "95358327208cf31c3ab28d6b7e953fe9a11c907f0c1724d08240c7bfc92c1eeb",
         "application_evidence_for_review": "접수기간 : 2026. 11. 20(금) 14:00 ~ 2026. 12. 4(금) 14:00까지",
         "application_source_ref": "alio-detail.json#307280/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2173,14 +2104,14 @@
       },
       {
         "notice_id": "a307413",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS(주)부산경남전력지사 통영지점 단기노무원(설비안전관리보조) 모집\n고용형태: 비정규직\n접수 마감: 2026-12-11 12:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307413",
         "source_post_sha256": "773afcc02f03701146f98c7e12943f574e65a8de144903e7c2f7d44fca07d99f",
         "source_detail_sha256": "c14c4097fe8ca00b6eaedb7d243c9aa423ffbd2a0929adab5c0bd221a6d743b1",
         "application_evidence_for_review": "지원서접수기간 : 2026.11.25. 12:00 ~2026.12.11. 12:00",
         "application_source_ref": "alio-detail.json#307413/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2216,14 +2147,14 @@
       },
       {
         "notice_id": "a307046",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "draft_text": "한국도로공사서비스(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한국도로공사서비스(주) 광주전남권역본부 기간제근로자 채용 공고\n고용형태: 비정규직\n접수 마감: 2026-11-30 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
         "source_post_sha256": "4a42dcacbfdcb08b81995a24ff5ad83ac952b650a968337bc0c2ed160c640b54",
         "source_detail_sha256": "a94cf2038ef16f21fc022506dc5077491c81cb5a3695eeefc36007bc937d9f6a",
         "application_evidence_for_review": "접수기간 : 2026.11.16.(월)~2026.11.30.(월) 예정",
         "application_source_ref": "alio-detail.json#307046/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2259,14 +2190,14 @@
       },
       {
         "notice_id": "a307396",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)\n고용형태: 비정규직\n접수 마감: 2026-12-01 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
         "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
         "source_detail_sha256": "02e2ae3012d0df97575ae3d56be1f8c4671daebed8e6fb42d2633916c0f032f0",
         "application_evidence_for_review": "서류접수기한 : 2026.11.25.~2026. 12. 1.(화)",
         "application_source_ref": "alio-detail.json#307396/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2302,14 +2233,14 @@
       },
       {
         "notice_id": "a307326",
-        "suggested_slot": "2026-11-29T20:00:00+09:00",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
         "draft_text": "KDI국제정책대학원 채용 공고를 확인해 보세요.\n\n모집 공고: [KDI국제정책대학원] 2026년 제12차 인턴 직원 채용 공고(교육행정)\n고용형태: 비정규직\n접수 마감: 2026-12-08 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307326",
         "source_post_sha256": "eb64e8bc613f32b531541f719c13826d23765930176c5df341949442e2b840e0",
         "source_detail_sha256": "e5460f2b3b5cdf8e2b4f1c5d209c19d51a81435c52741c8a9f52f16842fca867",
         "application_evidence_for_review": "원서접수: 2026.11.23.(월) ~ 2026.12.08.(화)",
         "application_source_ref": "alio-detail.json#307326/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2345,14 +2276,14 @@
       },
       {
         "notice_id": "a307021",
-        "suggested_slot": "2026-11-29T20:00:00+09:00",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
         "draft_text": "한국나노기술원 채용 공고를 확인해 보세요.\n\n모집 공고: 2026년 7차 직원(위촉연구원(과제 수행)) 채용 공고\n고용형태: 비정규직\n접수 마감: 2026-11-30 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307021",
         "source_post_sha256": "6ea327e28839e3746a07ab51e50f955dd2125bb16b327665c9989831db534c5c",
         "source_detail_sha256": "908f14dbf446b9c41e69ce8dec00ccda6fb86424b342633d24aa3f11a95d8e9d",
         "application_evidence_for_review": "접수기간 : 2026.11.13.(금) ∼ 2026.11.30.(월) 10시까지",
         "application_source_ref": "alio-detail.json#307021/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2388,14 +2319,14 @@
       },
       {
         "notice_id": "a306979",
-        "suggested_slot": "2026-11-29T20:00:00+09:00",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
         "draft_text": "한국공정거래조정원 채용 공고를 확인해 보세요.\n\n모집 공고: 한국공정거래조정원 2026년 제5차 기간제 근로자 채용 공고\n고용형태: 비정규직\n접수 마감: 2026-12-01 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306979",
         "source_post_sha256": "4f0d6d0951b709dda8852e8f9a248218a486031b8652e90f413bfe85f5484aa0",
         "source_detail_sha256": "e5e91a527c352f332e7f134e98b5d27c035685ed19261b843c7ebe99bb2d5513",
         "application_evidence_for_review": "원서접수 : 2026. 11. 16.(월) ~ 2026. 12. 1.(화)",
         "application_source_ref": "alio-detail.json#306979/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2431,14 +2362,14 @@
       },
       {
         "notice_id": "a307089",
-        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "suggested_slot": "2026-11-30T12:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 서울적십자병원 계약직(병동 의료지원(A)) 신규채용 공고\n고용형태: 비정규직\n접수 마감: 2026-12-02 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307089",
         "source_post_sha256": "8c8b95c6dffca05891d5663d222edfe779fee7de15be5da04ee36b70d5516833",
         "source_detail_sha256": "2ba358458f125601ad55ffba4da11fb0eba7e14124c129c835cf4be88112d19b",
         "application_evidence_for_review": "접수기간: 2026.11.16.~2026.12.02.",
         "application_source_ref": "alio-detail.json#307089/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2474,14 +2405,14 @@
       },
       {
         "notice_id": "a307090",
-        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "suggested_slot": "2026-11-30T12:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 서울적십자병원 계약직(병동 의료지원(B)) 신규채용 공고\n고용형태: 비정규직\n접수 마감: 2026-12-02 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307090",
         "source_post_sha256": "9bcc0239d545b69ec1c28139eaad4bcb19e150b931342344dedbafff8e188803",
         "source_detail_sha256": "1e702c75bfa87f799568076c3b805f7cb4c874e84791d786a4f2e92ee69a70b7",
         "application_evidence_for_review": "접수기간: 2026.11.16.~2026.12.02.",
         "application_source_ref": "alio-detail.json#307090/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2517,14 +2448,14 @@
       },
       {
         "notice_id": "a307310",
-        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "suggested_slot": "2026-11-30T12:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(1) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307310",
         "source_post_sha256": "e3d9b9b3ab2dfb6391c5a6fa4806115f7c32214debabd589c47a6d5cb4537f11",
         "source_detail_sha256": "8935482cb1b433dfc695254be8e7da8144223a21d782ef885f0361289da0ef59",
         "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307310/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2560,14 +2491,14 @@
       },
       {
         "notice_id": "a307311",
-        "suggested_slot": "2026-11-30T12:00:00+09:00",
+        "suggested_slot": "2026-11-30T16:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(2) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307311",
         "source_post_sha256": "464b8383ffb1ef846b270a0842bb34e5d8126a11919b24e8539176fe2748090c",
         "source_detail_sha256": "096fbc7cfb857dde80d79fd2265eb0a2d1ba2eeb5332ca3bfda94b0a36858489",
         "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307311/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2603,14 +2534,14 @@
       },
       {
         "notice_id": "a307312",
-        "suggested_slot": "2026-11-30T12:00:00+09:00",
+        "suggested_slot": "2026-11-30T16:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(3) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307312",
         "source_post_sha256": "3b5f1e0d25ff4ec0ead11ddb2ded9d4d98f77aabd34f74d1417930854867980f",
         "source_detail_sha256": "8f7929694920ce9f1b8a2d5d7c4d4ca4e1d29746429a847fd0ea0dd8a03d4f89",
         "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307312/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2646,14 +2577,14 @@
       },
       {
         "notice_id": "a307313",
-        "suggested_slot": "2026-11-30T12:00:00+09:00",
+        "suggested_slot": "2026-11-30T16:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 작업치료사 채용 공고(2027.1.4.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307313",
         "source_post_sha256": "7199fd016df68e14001673be4b1bbd5debcf77aa5a64a3283315664eb7f65397",
         "source_detail_sha256": "96fcb6b7cc26e22590214f40fa1d03f29517ae808f8b269b17f9a396d56848ea",
         "application_evidence_for_review": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7.",
         "application_source_ref": "alio-detail.json#307313/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2689,14 +2620,14 @@
       },
       {
         "notice_id": "a307338",
-        "suggested_slot": "2026-11-30T16:00:00+09:00",
+        "suggested_slot": "2026-11-30T20:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 상주적십자병원 비정규직 장애인 고용원(보조원) 모집 공고\n고용형태: 비정규직\n접수 마감: 2026-12-09 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307338",
         "source_post_sha256": "87ade70db57036ad60e28a8694c8bcbab166db0d2a49c358dd953ffb642d0403",
         "source_detail_sha256": "cd1b1948ded195a6e95eaaa53e8d7a312517f0a7f8472368093cfd59ba2ac31f",
         "application_evidence_for_review": "접수기간 : 2026. 11. 23.(월) ~ 2026. 12. 9.(수) / 장애인 고용공단 경북지사, 054-450-3012, yy2829@kead.or.kr",
         "application_source_ref": "alio-detail.json#307338/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2731,58 +2662,15 @@
         "meta_posted": false
       },
       {
-        "notice_id": "a307341",
-        "suggested_slot": "2026-11-30T16:00:00+09:00",
-        "draft_text": "국악방송 채용 공고를 확인해 보세요.\n\n모집 공고: 국악방송 체험형 인턴(장애인) 채용 공고\n고용형태: 청년인턴(체험형)\n접수 마감: 2026-12-08 18:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
-        "source_post_sha256": "c315c9528c5554af2aae756635cd1a4965c517b65327b33275ea89c5090b8ed1",
-        "source_detail_sha256": "c02eec954ea0bf8e0f717e93ac38b642bebd327418f197524e68216a2366b04e",
-        "application_evidence_for_review": "서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00",
-        "application_source_ref": "alio-detail.json#307341/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "채용분야 : 방송행정(라디오) 1명, 방송행정(TV) 1명\r\n\r\n[필수응시자격]\r\n- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인\r\n\r\n[공통응시자격]\r\n- 서울 근무 가능자\r\n- 학력, 성별, 연령 제한 없음\r\n- 「국가공무원법」제33조 및「국악방송 인사규정」제21조의 결격사유가 없는 자",
-          "hireTypeNmLst": "청년인턴(체험형)",
-          "prefCn": "- 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인(서류전형 시 가점 5% 적용)\r\n- 「국가유공자 등 예우 및 지원에 관한 법률」 등 보훈관계법률에 따른 가점 대상자(각 전형별 가점 5~10%적용) 단,「국가유공자 등 예우 및 지원에 관한 법률」제31조3항에 따라 응시자의 수가 선발예정 인원(1명)과 동일한 경우에만 가점 적용)\r\n※ 중복적용하지 아니하고 유리한 우대사항 하나만 인정",
-          "recrutNope": "2",
-          "recrutSe": "R2010",
-          "scrnprcdrMthdExpln": "전형절차 : 1차 서류전형(5배수) - 2차 면접전형(1배수)\r\n전형방법 : 국악방송 채용시스템(http://gugakfm.saramin.co.kr)을 통해 접수\r\n\r\n전형세부일정\r\n\r\n-  공고 및 서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00\r\n-  서류전형 기간 : 2026.12.09.(수) ~ 2026.12.15.(화) \r\n-  서류전형 합격자 발표 : 2026.12.16.(수)\r\n-  면접전형 일자 : 2026.12.22.(화)\r\n-  인사위원회 개최 : 2026.12.29.(화)\r\n-  최종합격자 발표 : 2026.12.30.(수)\r\n   ※ 상기 일정은 사정상 변경될 수 있으며, 변경 시 국악방송 홈페이지를 통해 안내 예정\r\n   ※ 전형별 결과는 홈페이지(https://www.igbf.kr/) 공지 및 개별 통지\r\n   ※ 최종합격자의 임용포기, 합격취소, 결격사유, 퇴직 등의 사정 또는 최종합격자가 임용된 날로부터 3개월 이내에 퇴직하여 결원이 발생한 경우 합격자 발표일로부터 6개월 이내에 불합격 기준에 해당하지 아니하는 사람 중에서 면접전형 평정 우수자 순으로 추가 합격자를 결정할 수 있음",
-          "workRgnNmLst": "서울"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
         "notice_id": "a307177",
-        "suggested_slot": "2026-11-30T16:00:00+09:00",
+        "suggested_slot": "2026-11-30T20:00:00+09:00",
         "draft_text": "한국보훈복지의료공단 채용 공고를 확인해 보세요.\n\n모집 공고: [전주보훈요양원] 보훈특별고용 직원 채용 공고\n고용형태: 정규직,무기계약직\n접수 마감: 2026-12-03 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307177",
         "source_post_sha256": "6af36a703fc6111aad68a994248a874339599e425dc7c704bd0dc2d3ee60924f",
         "source_detail_sha256": "38f37226f4ae810bce673c726136b6f9992179ed958762a6155f73b6e4dad42d",
         "application_evidence_for_review": "지원서 접수: 2026. 11. 18.(수) ~ 2026. 12. 03.(목) 10:00까지",
         "application_source_ref": "alio-detail.json#307177/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2825,7 +2713,7 @@
         "source_detail_sha256": "2bf7a9dacc427a8827bede5f65aa426678534f1b8c40a6a99919dee918b0f968",
         "application_evidence_for_review": "접수기간: 2026.11.23.(월) ∼ 2026.12.04.(금) 18:00 까지",
         "application_source_ref": "alio-detail.json#307343/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
+        "source_snapshot_checked_at": "2026-11-29T00:59:04+09:00",
         "recruiting_unit_for_review": {
           "title": null,
           "count": null,
@@ -2858,92 +2746,6 @@
         "requires_official_source_review": true,
         "approved_for_queue": false,
         "meta_posted": false
-      },
-      {
-        "notice_id": "a307403",
-        "suggested_slot": "2026-11-30T20:00:00+09:00",
-        "draft_text": "한국보훈복지의료공단 채용 공고를 확인해 보세요.\n\n모집 공고: [수원보훈요양원] 직원(간호조무사, 요양보호사, 미화, 청년인턴) 채용\n고용형태: 정규직,무기계약직,청년인턴(체험형)\n접수 마감: 2026-12-08 17:30 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307403",
-        "source_post_sha256": "52737d5fccf4d9a8428f948cee6bbc4e1b2697edb8e8720c112630defc9c0491",
-        "source_detail_sha256": "35aadd6ae749d7ef97a711e6341d63b03fe9855aabae0b58632ec402b99e61cb",
-        "application_evidence_for_review": "접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30",
-        "application_source_ref": "alio-detail.json#307403/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "○ 복지기능직(간호조무사)\r\n  - 간호조무사 자격증 소지자\r\n  - 간호조무사 자격증을 취득한 후 의료법에 따른 병원급 이상 의료기관, 사회복지사업법에 따른 사회복지시설 또는 노인장기요양보험법에 따른 장기요양기관에서 간호 업무를 수행한 경력이 3년 이상인 자(각 경력 합산 가능)\r\n  - 3교대 근무가 가능한 자\r\n  - 공단 인사규정 제44조에서 정하는 정년(60세)을 초과하지 않는 자\r\n\r\n○ 요양보호직(요양보호사)\r\n  - 요양보호사 자격증 소지자\r\n  - 공단 인사규정 제44조에서 정하는 정년(60세)을 초과하지 않는 자\r\n  - 3교대 근무 가능한 자\r\n  - 남자의 경우 병역을 필하였거나 면제된 자\r\n\r\n○ 업무지원직(미화)-무기계약직\r\n  - 청소업무 가능자\r\n  - 학력제한 없음, 정년규정(65세)을 초과하지 않는 자\r\n  - 남자의 경우 병역을 필하였거나 면제된 자\r\n\r\n○ 청년인턴(체험형)\r\n  - 사회복지사 2급 이상 소지자\r\n  - 청년고용촉진 특별법령에 따른 만15세 이상 만34세 이하인 청년",
-          "hireTypeNmLst": "정규직,무기계약직,청년인턴(체험형)",
-          "prefCn": "○ 취업지원 대상자 : 「국가유공자 등 예우 및 지원에 관한 법률」 및 이를 준용하는 법률에 의한 취업지원 대상자 → 각 시험별 만점의 5% 또는 10%\r\n○ 장애인 : 「장애인 고용촉진 및 직업재활법」 제2조 및 시행령 제3조에 따른 장애인 → 각 시험별 만점의 10%\r\n○ 기초생활 수급자 : 「국민기초생활 보장법」제2조에 따른 수급자 → 필기시험 만점의 5%\r\n○ 한부모 가족 : 「한부모가족지원법」제5조에 따른 지원대상자에 해당하는 기간이 계속하여 2년 이상인 사람  → 필기시험 만점의 5%\r\n○ 북한이탈 주민 : 「북한이탈주민의 보호 및 정착지원에 관한 법률」제2조에 따른 북한이탈주민 → 필기시험 만점의 5%\r\n○ 다문화 가족 : 「다문화가족지원법」제2조에 따른 다문화가족의 구성원 → 필기시험 만점의 5%\r\n○ 경력단절 여성 : 「여성의 경제활동 촉진과 경력단절 예방법」제2조제1호에 따른 경력단절여성으로서 1년 이상 해당하고 있는 사람 → 필기시험 만점의 5%\r\n○ 자립준비 청년 : 「아동복지법」제38조제2항에 따른 자립지원 대상자  → 필기시험 만점의 5%\r\n○ 공단 근무 경력자 : 보훈공단의 직원(별정직, 체험형 청년인턴 제외)으로 공고일 기준 3년 내 1년 이상 근무경력을 보유한 사람 → 필기시험 만점의 5%\r\n○ 우수 청년인턴 : 보훈공단 청년인턴 3개월 이상 근무자 중 우수 청년인턴 선발자  → 필기시험 만점의 3%\r\n○ 청년인턴 : 보훈공단 청년인턴 3개월 이상 근무자  → 필기시험 만점의 2%",
-          "recrutNope": "11",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 지원서 접수기간\r\n  - 공고 및 접수(공통) : 2026. 11. 24.(화) ~ 2026. 12. 8.(화) 17:30\r\n2. 지원방법\r\n  - 간호조무사, 청년인턴 : 온라인 접수\r\n  - 요양보호사, 업무지원직(미화) : 이메일, 등기우편, 방문 접수\r\n3. 서류합격자 발표(공통) : 2026. 12. 10.(목)\r\n4. 필기시험(간호조무사만 해당) : 2026. 12. 12(토) \r\n5. 필기 합격자 발표(간호조무사만 해당) : 2026. 12. 15.(화)\r\n6. 면접시험(공통) : 2026. 12. 17.(목)\r\n7. 최종 합격자 발표 : 2026. 12. 21.(월)\r\n※ 보다 자세한 사항은 붙임의 공고문 첨부파일을 확인하여 주시기 바랍니다.",
-          "workRgnNmLst": "경기"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "a307565",
-        "suggested_slot": "2026-11-30T20:00:00+09:00",
-        "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: [영주적십자병원] 정규직(간호사, 사무보조원, 조리사, 간호조무사, 병동도우미, 보험심사간호사), 육아휴직대체(사무보조원, 간호조무사) 공개채용 공고\n고용형태: 정규직,비정규직\n접수 마감: 2026-12-14 10:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
-        "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
-        "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
-        "application_evidence_for_review": "접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00",
-        "application_source_ref": "alio-detail.json#307565/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "1. 정규직 사무보조원\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n2. 정규직 조리사\r\n- 조리사 자격증 소지자\r\n※ 근무시간 : 06시~19시\r\n\r\n3. 정규직 간호사\r\n- 간호사 면허증 소지자 또는 졸업예정자로서 2027년 간호사 국가시험 응시대상자\r\n- 3교대 근무 가능자\r\n- 최초임용일로부터 1년 이내 순차 임용\r\n- 졸업예정자는 면허 취득 이후 임용\r\n\r\n4. 정규직 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 3교대 근무 가능자\r\n\r\n5. 정규직 병동도우미\r\n- 요양보호사 자격증 소지자\r\n\r\n6. 정규직 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n\r\n7. 정규직 간호사(보험심사)\r\n 간호사 면허증 소지자\r\n- 보험 심사 업무 가능자\r\n- 보건의료정보관리사, 보험심사관리사, 보험심사평가사 소지자 우대\r\n\r\n8. 육아휴직대체 사무보조원(접수수납)\r\n- 컴퓨터활용능력 2급이상 또는워드프로세스(1급)소지자\r\n- 계약기간 :’27.1.1. ~ ’27.12.31.\r\n\r\n9. 육아휴직대체 간호조무사\r\n- 간호조무사 자격증 소지자\r\n- 계약기간 :’27.3.1. ~ ’28.6.29.",
-          "hireTypeNmLst": "정규직,비정규직",
-          "prefCn": "○ 국가유공자 등 예우 및 지원에 관한 법률 제29조 및 독립유공자예우에 관한 법률 제16조에 해당하는 자\r\n○ 5.18민주유공자예우에 관한 법률 제20조 및 특수임무유공자 예우 및 단체설립에 관한 법률 제 19조의 규정에 의한 취업지원대상자\r\n○ 장애인고용촉진 및 직업재활법 제2조 제1호 규정에 의한 장애인\r\n○ 보훈보상대상자 지원에 관한 법률 제33조 및 고엽제후유증 등 환자지원 및 단체 설립에 관한 법률 제7조에 해당하는 자\r\n\r\n* 취업지원대상자 증명서 제출자에 한함\r\n* 모든 제출 서류에 사진, 생년, 성별, 학교명이 들어가는 부분은 삭제 후 제출",
-          "recrutNope": "43",
-          "recrutSe": "R2010",
-          "scrnprcdrMthdExpln": "1. 접수기간 : 2026. 11. 27.(금) ∼ 2026. 12. 14.(월) 10:00\r\n○ 접수방법\r\n1) 홈페이지 접수: https://www.redcross.or.kr/redrecruit/\r\n2) 방문접수 (기능직(조리사)에 한함)\r\n※ 기능직(조리사)의 경우, 홈페이지 접수 또는 방문 접수를 함께 시행하며, 방문 접수는 공휴일 및 주말 접수 불가\r\n가) (방문 접수) 응시원서 배부처: 영주적십자병원 3층 총무팀 또는 영주적십자병원 홈페이지 (https://www.rch.or.kr/web/rchyoungju/main)\r\n나) (방문 접수) 응시원서 제출처: 영주적십자병원 3층 총무팀 인사담당자 앞\r\n※ 접수마감일 10:00까지 접수분에 한함\r\n2. 서류전형 합격자발표 : 2026. 12. 17.(목)\r\n\r\n3. 면접시험 : 2026. 12. 21.(월) ~ 2026. 12. 22.(화)\r\n\r\n4. 채용검증위원회 : 2026. 12. 23.(수)\r\n\r\n5. 최종합격자발표 : 2026. 12. 24.(목)\r\n\r\n6. 채용검진 및 서류검증 : 2026. 12. 24.(목)~ 2026. 12 . 31.(목)\r\n\r\n7. 채용예정일자\r\n- 2027. 1. 1. 자, 2027. 3. 1.자\r\n\r\n○ 1차 서류전형 : 모집인원의 7배수\r\n\r\n○ 2차 면접전형 : 서류전형 합격자(60점 이상인 자 중 성적 순위, 미만인인 자는 불합격)",
-          "workRgnNmLst": "경북"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
       }
     ],
     "official_source_alternatives": [
@@ -2954,11 +2756,26 @@
         "source_post_sha256": "7530ce3170ed0d8021a7ef3ba46f74de4b1939faa67263eafaebc355cbb65a09",
         "source_detail_sha256": "5b28db9b04ef423a744d46188ca8b516635dfc6d67c37220e27da89a34088dc7",
         "suggested_slot": null
+      },
+      {
+        "notice_id": "a307403",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307403",
+        "source_post_sha256": "52737d5fccf4d9a8428f948cee6bbc4e1b2697edb8e8720c112630defc9c0491",
+        "source_detail_sha256": "35aadd6ae749d7ef97a711e6341d63b03fe9855aabae0b58632ec402b99e61cb",
+        "suggested_slot": null
+      },
+      {
+        "notice_id": "a307565",
+        "status": "unreviewed",
+        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
+        "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
+        "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
+        "suggested_slot": null
       }
     ],
     "slot_coverage": {
       "requested_slots": [
-        "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
         "2026-11-30T08:00:00+09:00",
@@ -2967,7 +2784,6 @@
         "2026-11-30T20:00:00+09:00"
       ],
       "draft_slots": [
-        "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
         "2026-11-30T08:00:00+09:00",
@@ -2989,7 +2805,7 @@
     "records": [
       {
         "notice_id": "a307361",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307361",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3000,7 +2816,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:46.850321+09:00",
+          "checked_at": "2026-11-29T02:02:00.906506+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3012,7 +2828,7 @@
       },
       {
         "notice_id": "a307039",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3023,7 +2839,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:46.823296+09:00",
+          "checked_at": "2026-11-29T02:02:01.009091+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3035,7 +2851,7 @@
       },
       {
         "notice_id": "a307280",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307280",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3046,7 +2862,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:46.683919+09:00",
+          "checked_at": "2026-11-29T02:02:01.881959+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3058,7 +2874,7 @@
       },
       {
         "notice_id": "a307413",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307413",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3069,7 +2885,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:47.121686+09:00",
+          "checked_at": "2026-11-29T02:02:01.005749+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3081,7 +2897,7 @@
       },
       {
         "notice_id": "a307046",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3092,7 +2908,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:50.379643+09:00",
+          "checked_at": "2026-11-29T02:02:03.617082+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3103,23 +2919,23 @@
         "draft_text_has_notice": true
       },
       {
-        "notice_id": "a307341",
-        "suggested_slot": "2026-11-30T16:00:00+09:00",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
+        "notice_id": "a307396",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
         "publisher_validate_entry": "not_run",
         "source": {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
-          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
-          "sha256": "babe346c2f260f95ab28279e7e9ad569557af6e7c083f34e1af3ed7fab31e8eb",
-          "size_bytes": 11287,
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+          "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
+          "size_bytes": 11152,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:50.072177+09:00",
+          "checked_at": "2026-11-29T02:02:04.013319+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
-          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 국악방송 체험형 인턴(장애인) 채용 공고 2026.11.23 / 진행중 공공기관 채용정보 기관명 국악방송 표준직무(NCS) 문화.예술.디자인.방송 고용형태 청년인턴(체험형) 학력정보 학력무관 채용구분 신입 근무지 서울 근무분야 계약직 채용인원 2 우대조건 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인, 「국가유공자 등 예우 및 지원에 관한 법률」 등 보훈관계법률에 따른 가점 대상자 공고기간 26.11.23 ~ 26.12.08 응시자격 채용분야 : 방송행정(라디오) 1명, 방송행정(TV) 1명 [필수응시자격] - 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인 [공통응시자격] - 서울 근무 가능자 - 학력, 성별, 연령 제한 없음 - 「국가공무원법」제33조 및「국악방송 인사규정」제21조의 결격사유가 없는 자 결격사유 「국가공무원법」제33조 및「국악방송 인사규정」제21조의 결격사유 전형절차/방법 전형절차 : 1차 서류전형(5배수) - 2차 면접전형(1배수) 전형방법 : 국악방송 채용시스템(http://gugakfm.saramin.co.kr)을 통해 접수 전형세부일정 - 공고 및 서류접수 기간 : 2026.11.23.(월) ~ 2026.12.08.(화) 18:00 - 서류전형 기간 : 2026.12.09.(수) ~ 2026.12.15.(화) - 서류전형 합격자 발표 : 2026.12.16.(수) - 면접전형 일자 : 2026.12.22.(화) - 인사위원회 개최 : 2026.12.29.(화) - 최종합격자 발표 : 2026.12.30.(수) ※ 상기 일정은 사정상 변경될 수 있으며, 변경 시 국악방송 홈페이지를 통해 안내 예정 ※ 전형별 결과는 홈페이지(https://www.igbf.kr/) 공지 및 개별 통지 ※ 최종합격자의 임용포기, 합격취소, 결격사유, 퇴직 등의 사정 또는 최종합격자가 임용된 날로부터 3개월 이내에 퇴직하여 결원이 발생한 경우 합격자 발표일로부터 6개월 이내에 불합격 기준에 해당하지 아니하는 사람 중에서 면접전형 평정 우수자 순으로 추가 합격자를 결정할 수 있음 우대내용 - 「장애인고용촉진 및 직업재활법」제2조에 의한 장애인(서류전형 시 가점 5% 적용) - 「국가유공자 등 예우 및 지원에 관한 법률」 등 보훈관계법률에 따른 가점 대상자(각 전형별 가점 5~10%적용) 단,「국가유공자 등 예우 및 지원에 관한 법률」제31조3항에 따라 응시자의 수가 선발예정 인원(1명)과 동일한 경우에만 가점 적용) ※ 중복적용하지 아니하고 유리한 우대사항 하나만 인정 전형단계별 채용정보 방송행정(라디오) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 방송행정(TV) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 국악방송 체험형 인턴(장애인) 채용 공고.pdf 입사지원서 (참고자료) 입사지원서.pdf 직무기술서 국악방송_직무기술서_방송행정.pdf 기타 첨부파일 채용서류 반환청구서.hwp 미첨부 사유 원문 URL https://www.igbf.kr/gugak_web/?sub_num=762&state=view&idx=331560 클립보드에 주소가 복사 되었습니다."
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무) 2026.11.25 / 진행중 공공기관 채용정보 기관명 한전KPS(주) 표준직무(NCS) 경영.회계.사무 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 전남광주 근무분야 사무직 채용인원 1 우대조건 보훈대상자(면접전형 만점의 5~10% 가점) ※ 국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자 공고기간 26.11.25 ~ 26.12.01 응시자격 ○ 당사 인사규정 제9조 채용결격사유에 해당되지 아니한 자 ※ 당사 인사규정 제9조 채용결격사유는 모집공고문 참조 결격사유 ○ 신체검사결과 부적격으로 판정된 자 ○ 채용구비서류에 허위사실이 발견된 자 ○ 기타 채용기준상 부적격으로 판정된 자 전형절차/방법 1. 채용개요 ○ 채용인원: 사무보조 1명 ○ 채용형태: 단기노무원(계약기간 만료 후 고용관계 소멸, 정규직 전환 혜택 없음) 2. 근무조건 ○ 근무시간: 주5일, 1일 8시간 근무(단, 사업소 사정에 따라 변경가능) ○ 근무지: 한빛1발전소(전남광주통합특별시 영광군) * 위 근무지 외 용역 일정에 따라 타지역으로 근무장소가 변경될 수 있음. ○ 근무기간; 2026.12.11.~2027.4.30. * 현장작업 공정과 여건에 따라 근무기간 및 장소는 달라질 수 있음 ○ 보수 및 복리후생 - 일급(협의 후 결정) - 4대보험 - 숙식 제공 불가/통근버스 없음 - 근무지 변경 시 출장비 지급 3. 전형방법 ○ 전형절차 : 서류접수>면접 전형>신체검사>최종합격자발표 ○ 서류접수기한 : 2026.11.25.~2026. 12. 1.(화) ○ 면접일정 : 2026. 12. 3.(목) ○ 신체검사 : 2026. 12. 4.(금)~2026. 12. 7.(월) ○ 최종합격자발표일: 2026. 12. 8.(화) ○ 접수방법 및 문의처 : 이메일 (biz01000444@kps.co.kr) 접수/사업기획부 054-778-6062 ※ 전형일정은 회사 사정에 따라 달라질 수 있음 ○ 제출서류 - 공통: 입사지원서 1부(지원자 서명본), 개인정보제공동의서 1부 ※ 입사지원서에 개인 인적사항인 출신지역,가족관계,신체적 조건,학력 등 기재 및 사진부착 시 서류접수 불가 -우대사항 증빙서류 : 국가유공자증(사본) 1부 우대내용 ○ 보훈대상자(면접전형 만점의 5~10% 가점) -국가유공자 등 예우 및 지원에 관한 법률 제29조의 규정에 의한 취업보호대상자 ※ 「국가유공자 등 예우 및 지원에 관한 법률」제31조 제3항에 의거, 채용인원 3명 이하인 경우 보훈대상자 가점 미적용(단, 응시자의 수가 선발예정인원과 같거나 그보다 적은 경우에는 그러하지 아니함.) 전형단계별 채용정보 사무보조 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 2차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 한전KPS 원자력정비기술센터 단기노무원사무보조 모집공고ALIO 2.hwpx 입사지원서 원자력정비기술센터 단기노무원 입사지원서.hwp 직무기술서 직무기술서 사무보조.hwp 기타 첨부파일 개인정보 수집 이용 제공동의서.hwp 미첨부 사유 원문 URL https://www.kps.co.kr 클립보드에 주소가 복사 되었습니다."
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
@@ -3127,7 +2943,7 @@
       },
       {
         "notice_id": "a307565",
-        "suggested_slot": "2026-11-30T20:00:00+09:00",
+        "suggested_slot": null,
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307565",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3138,7 +2954,7 @@
           "sha256": "c91a53e95006ba88119d3c3b24f2f6ee4ca6f17fe6a35443555e5d2811f6d43c",
           "size_bytes": 18859,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:50.244112+09:00",
+          "checked_at": "2026-11-29T02:02:04.114108+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3146,7 +2962,7 @@
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
-        "draft_text_has_notice": true
+        "draft_text_has_notice": false
       },
       {
         "notice_id": "a307324",
@@ -3161,7 +2977,7 @@
           "sha256": "8ab324e831caa467d543794f5e5d5a398036492f7bc5ed35712c7d53d3491ec0",
           "size_bytes": 13369,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-29T00:59:49.496819+09:00",
+          "checked_at": "2026-11-29T02:02:04.010576+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3253,8 +3069,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-29T00:59:50.492935+09:00",
-    "window_start": "2026-11-26T15:59:50.492935+00:00",
+    "checked_at": "2026-11-29T02:02:04.264499+09:00",
+    "window_start": "2026-11-26T17:02:04.264499+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
