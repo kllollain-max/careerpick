@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-11-28T20:32:19.248755+09:00",
-  "run_id": "46140316103",
+  "captured_at": "2026-11-28T20:59:18.702537+09:00",
+  "run_id": "46142385488",
   "source_commit": "356d8ad1e9ebf67b22d5e6f29b0ec4187835e850",
   "status": "independent_review_required",
   "automatic_approval": false,
   "meta_posted": false,
   "preflight": {
-    "time": "2026-11-28T20:32:09.036666+09:00",
+    "time": "2026-11-28T20:59:05.493861+09:00",
     "future_slots": [
       "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
@@ -19,7 +19,13 @@
       "2026-11-30T20:00:00+09:00"
     ],
     "next_media": "IMAGE",
-    "promoted": [],
+    "promoted": [
+      {
+        "notice_id": "a307529",
+        "slot": "2026-11-29T08:00:00+09:00",
+        "fingerprint": "700260e916bf71cad2151d1e51a33f225611b23c75840fac39edd1075255f80e"
+      }
+    ],
     "refused": [
       {
         "notice_id": "a306965",
@@ -170,21 +176,22 @@
         "reason": "DUPLICATE_POST"
       }
     ],
-    "queue_updated": false,
+    "queue_updated": true,
     "meta_posted": false,
     "queue_sha": "61fa907988a8bc0cb19f5b565c0916a0760210c1",
-    "staged_sha": "dfcce70cfe6b25a7fcaca715789f5e50087d3b65",
-    "promoted_count": 0,
-    "approved_supply_count": 0,
+    "staged_sha": "2c6116febb819f5809e0e6cb95de23ea31ee6d03",
+    "promoted_count": 1,
+    "approved_supply_count": 1,
     "inventory_target": 8,
-    "inventory_shortfall": 8,
+    "inventory_shortfall": 7,
     "replenishment_required": true,
     "invalid_ready_entries": [],
     "pending_active_slots": [],
     "media_forecast_conditional_on_active_slot": false,
-    "approved_future_slots": [],
+    "approved_future_slots": [
+      "2026-11-29T08:00:00+09:00"
+    ],
     "missing_slots": [
-      "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
       "2026-11-29T20:00:00+09:00",
@@ -193,12 +200,11 @@
       "2026-11-30T16:00:00+09:00",
       "2026-11-30T20:00:00+09:00"
     ],
-    "next_slot_missing": true,
-    "source_candidate_count": 23,
+    "next_slot_missing": false,
+    "source_candidate_count": 22,
     "writer_handoff": {
       "status": "review_required",
       "missing_slots": [
-        "2026-11-29T08:00:00+09:00",
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
@@ -216,7 +222,6 @@
         "a307046",
         "a306979",
         "a307326",
-        "a307529",
         "a307021",
         "a307089",
         "a307090",
@@ -519,42 +524,6 @@
           "review_status": "official_review_required",
           "application_evidence": "원서접수: 2026.11.23.(월) ~ 2026.12.08.(화)",
           "application_source_ref": "alio-detail.json#307326/scrnprcdrMthdExpln",
-          "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
-        },
-        {
-          "notice_id": "a307529",
-          "org": "건축공간연구원",
-          "title": "건축공간연구원 위촉직 모집",
-          "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307529",
-          "employment": "비정규직",
-          "recruiting_unit_title": null,
-          "recruiting_unit_count": null,
-          "recruiting_unit_scope": "unit_count_unconfirmed",
-          "selection_review_reasons": [
-            "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-          ],
-          "application_period": {
-            "start": "2026-11-27",
-            "end": "2026-12-14T14:00:00+09:00",
-            "start_date_only": true,
-            "date_only": false,
-            "source_ref": "alio-detail.json#307529/scrnprcdrMthdExpln",
-            "evidence": "접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00"
-          },
-          "source_post_sha256": "82643eb1173560fcc4c9aef435bb24f4b7d0807914c9979309b39da4bae36afa",
-          "source_detail_sha256": "e6450f0a58b9d0db5612875d7cb43ac8d017f6bd4cccf5cb9628881b1970749a",
-          "official_detail_fields_for_review": {
-            "aplyQlfcCn": "<공통 응시자격>\r\no 국가공무원법 제33조의 결격사유가 없는 자\r\no 최근 5년 이내 공공기관에서 부정한 방법으로 채용되어 채용이 취소된 사실이 없는 자\r\no 법률에 의하여 공민권이 정지 또는 박탈되지 아니한 자\r\no 남자일 경우 병역필 또는 면제자\r\n※ 제출된 서류에 허위가 있을 때에는 합격 또는 임용을 취소할 수 있음\r\n※ 최종합격자로 결정되더라도 결격사유조회, 학위검증 등에서 결격사유가 판명될 경우 임용이 취소될 수 있음\r\n\r\n<모집분야 지원자격>\r\no (위촉연구원) 공간AI·빅데이터본부 육아휴직 대체 : 1명\r\n- 석사 학위 소지자\r\n- 건축, 도시, 조경 등 관련분야 전공자 우대",
-            "hireTypeNmLst": "비정규직",
-            "prefCn": "o 장애인고용촉진 및 직업재활법률상 기준에 해당하는 자 : 전형별 5점 가점\r\no 국가유공자 등 예우 및 지원에 관한 법률 등 보훈관계법률에 따른 가점 대상자 : 전형별 만점의 5% 또는 10% 가점\r\no 청년인턴 경험자\r\n- 건축공간연구원 인턴 경험자(6개월 이상 연속 근무) : 서류전형 3점 가점\r\n- 경제·인문사회연구회 및 소관 연구기관 인턴 경험자(6개월 이상 연속 근무) : 서류전형 2점 가점\r\n※ 가점항목 중복 시 지원자에게 가장 유리한 1개 항목만 적용",
-            "recrutNope": "1",
-            "recrutSe": "R2030",
-            "scrnprcdrMthdExpln": "1. 접수방법: 온라인 접수(우편, E-mail, 방문 접수 불가)\r\no AURI 입사지원 페이지(http://recruit.auri.re.kr) → 채용공고 선택 → 「지원서 등록」 선택 → 내용작성 및 제출서류 첨부 후 등록\r\no 접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00\r\n\r\n2. 전형절차 및 방법\r\no 1차 서류전형\r\n- 배점: 100점\r\n- 합격배수: 채용분야별 모집인원의 3배수\r\n- 합격기준: 만점의 80% 이상 득점자 중 고득점자순\r\n- 전형일정: 2026.12.16.(수) (합격자 발표: 2026.12.17.(목) 예정)\r\no 2차 면접전형\r\n- 배점: 100점\r\n- 합격배수: 채용분야별 모집인원의 1배수\r\n- 합격기준: 만점의 80% 이상 득점자 중 고득점자순\r\n- 전형일정: 2026.12.21.(월) (※ 2026.12.22.(화) 이후 최종합격자 발표 예정)\r\n\r\n※ 1차 전형(서류전형) 합격자에 한하여 2차 전형(면접전형) 응시자격을 부여함\r\n※ 1차 전형(서류전형) 결과 합격선상 동점자가 있는 경우, 전원 합격 처리\r\n※ 2차 전형(면접전형) 결과 합격선상 동점자가 있는 경우 아래 순위에 의하여 최종합격자를 선정\r\n1. 「국가유공자 등 예우 및 지원에 관한 법률」에 따른 취업지원대상자\r\n2. 「장애인고용촉진 및 직업재활법」에 따른 장애인\r\n3. 청년인턴(연구원, 경제·인문사회연구회 및 소관 연구기관) 6개월 이상 연속 근무 경험자\r\n4. 이전 모든 전형(서류전형, 면접전형)의 총점의 고득점자\r\n5. 서류전형 고득점자순으로 결정\r\n6. 면접전형 심사표 내 평정 상위항목(1번→5번)순으로 고득점자로 결정\r\n※ 모든 전형마다 예비합격자를 선정할 수 있으며, 전형별 예비합격자는 전형별 만점의 80% 이상 득점한 자중 고득점 순으로 최대 2명까지 선정\r\n- 예비합격자 선정 과정에서 동점자가 발생하는 경우, 상기 '최종합격자 선정 동점자 처리기준'을 준용하여 순위를 부여\r\n※ 전형별 합격자는 개별 통지하며 채용시스템에 접속하여 확인 가능\r\n※ 상기 일정은 연구원 사정에 따라 변경될 수 있으며, 변경되는 경우 전형별 합격자 안내 시 통지\r\n※ 자세한 사항은 첨부파일의 채용공고문 참조",
-            "workRgnNmLst": "세종"
-          },
-          "review_status": "official_review_required",
-          "application_evidence": "접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00",
-          "application_source_ref": "alio-detail.json#307529/scrnprcdrMthdExpln",
           "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
         },
         {
@@ -1180,20 +1149,6 @@
         }
       },
       {
-        "notice_id": "a307529",
-        "org": "건축공간연구원",
-        "title": "건축공간연구원 위촉직 모집",
-        "employment": "비정규직",
-        "application_period": {
-          "start": "2026-11-27",
-          "end": "2026-12-14T14:00:00+09:00",
-          "start_date_only": true,
-          "date_only": false,
-          "source_ref": "alio-detail.json#307529/scrnprcdrMthdExpln",
-          "evidence": "접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00"
-        }
-      },
-      {
         "notice_id": "a307021",
         "org": "한국나노기술원",
         "title": "2026년 7차 직원(위촉연구원(과제 수행)) 채용 공고",
@@ -1234,13 +1189,27 @@
           "source_ref": "alio-detail.json#307090/scrnprcdrMthdExpln",
           "evidence": "접수기간: 2026.11.16.~2026.12.02."
         }
+      },
+      {
+        "notice_id": "a307310",
+        "org": "대한적십자사",
+        "title": "경인권역재활병원 비정규직(대체인력) 물리치료사(1) 채용 공고(2027.1.1.)",
+        "employment": "비정규직",
+        "application_period": {
+          "start": "2026-11-20",
+          "end": "2026-12-07",
+          "start_date_only": true,
+          "date_only": true,
+          "source_ref": "alio-detail.json#307310/scrnprcdrMthdExpln",
+          "evidence": "접수기간 : 2026. 11. 20. ~ 2026. 12. 7."
+        }
       }
-    ]
+    ],
+    "queue_sha_after": "09eed21553999ba5de807c7869aef7320785fd46"
   },
   "writer_handoff": {
     "status": "review_required",
     "missing_slots": [
-      "2026-11-29T08:00:00+09:00",
       "2026-11-29T12:00:00+09:00",
       "2026-11-29T16:00:00+09:00",
       "2026-11-29T20:00:00+09:00",
@@ -1258,7 +1227,6 @@
       "a307046",
       "a306979",
       "a307326",
-      "a307529",
       "a307021",
       "a307089",
       "a307090",
@@ -1561,42 +1529,6 @@
         "review_status": "official_review_required",
         "application_evidence": "원서접수: 2026.11.23.(월) ~ 2026.12.08.(화)",
         "application_source_ref": "alio-detail.json#307326/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
-      },
-      {
-        "notice_id": "a307529",
-        "org": "건축공간연구원",
-        "title": "건축공간연구원 위촉직 모집",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307529",
-        "employment": "비정규직",
-        "recruiting_unit_title": null,
-        "recruiting_unit_count": null,
-        "recruiting_unit_scope": "unit_count_unconfirmed",
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "application_period": {
-          "start": "2026-11-27",
-          "end": "2026-12-14T14:00:00+09:00",
-          "start_date_only": true,
-          "date_only": false,
-          "source_ref": "alio-detail.json#307529/scrnprcdrMthdExpln",
-          "evidence": "접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00"
-        },
-        "source_post_sha256": "82643eb1173560fcc4c9aef435bb24f4b7d0807914c9979309b39da4bae36afa",
-        "source_detail_sha256": "e6450f0a58b9d0db5612875d7cb43ac8d017f6bd4cccf5cb9628881b1970749a",
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "<공통 응시자격>\r\no 국가공무원법 제33조의 결격사유가 없는 자\r\no 최근 5년 이내 공공기관에서 부정한 방법으로 채용되어 채용이 취소된 사실이 없는 자\r\no 법률에 의하여 공민권이 정지 또는 박탈되지 아니한 자\r\no 남자일 경우 병역필 또는 면제자\r\n※ 제출된 서류에 허위가 있을 때에는 합격 또는 임용을 취소할 수 있음\r\n※ 최종합격자로 결정되더라도 결격사유조회, 학위검증 등에서 결격사유가 판명될 경우 임용이 취소될 수 있음\r\n\r\n<모집분야 지원자격>\r\no (위촉연구원) 공간AI·빅데이터본부 육아휴직 대체 : 1명\r\n- 석사 학위 소지자\r\n- 건축, 도시, 조경 등 관련분야 전공자 우대",
-          "hireTypeNmLst": "비정규직",
-          "prefCn": "o 장애인고용촉진 및 직업재활법률상 기준에 해당하는 자 : 전형별 5점 가점\r\no 국가유공자 등 예우 및 지원에 관한 법률 등 보훈관계법률에 따른 가점 대상자 : 전형별 만점의 5% 또는 10% 가점\r\no 청년인턴 경험자\r\n- 건축공간연구원 인턴 경험자(6개월 이상 연속 근무) : 서류전형 3점 가점\r\n- 경제·인문사회연구회 및 소관 연구기관 인턴 경험자(6개월 이상 연속 근무) : 서류전형 2점 가점\r\n※ 가점항목 중복 시 지원자에게 가장 유리한 1개 항목만 적용",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 접수방법: 온라인 접수(우편, E-mail, 방문 접수 불가)\r\no AURI 입사지원 페이지(http://recruit.auri.re.kr) → 채용공고 선택 → 「지원서 등록」 선택 → 내용작성 및 제출서류 첨부 후 등록\r\no 접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00\r\n\r\n2. 전형절차 및 방법\r\no 1차 서류전형\r\n- 배점: 100점\r\n- 합격배수: 채용분야별 모집인원의 3배수\r\n- 합격기준: 만점의 80% 이상 득점자 중 고득점자순\r\n- 전형일정: 2026.12.16.(수) (합격자 발표: 2026.12.17.(목) 예정)\r\no 2차 면접전형\r\n- 배점: 100점\r\n- 합격배수: 채용분야별 모집인원의 1배수\r\n- 합격기준: 만점의 80% 이상 득점자 중 고득점자순\r\n- 전형일정: 2026.12.21.(월) (※ 2026.12.22.(화) 이후 최종합격자 발표 예정)\r\n\r\n※ 1차 전형(서류전형) 합격자에 한하여 2차 전형(면접전형) 응시자격을 부여함\r\n※ 1차 전형(서류전형) 결과 합격선상 동점자가 있는 경우, 전원 합격 처리\r\n※ 2차 전형(면접전형) 결과 합격선상 동점자가 있는 경우 아래 순위에 의하여 최종합격자를 선정\r\n1. 「국가유공자 등 예우 및 지원에 관한 법률」에 따른 취업지원대상자\r\n2. 「장애인고용촉진 및 직업재활법」에 따른 장애인\r\n3. 청년인턴(연구원, 경제·인문사회연구회 및 소관 연구기관) 6개월 이상 연속 근무 경험자\r\n4. 이전 모든 전형(서류전형, 면접전형)의 총점의 고득점자\r\n5. 서류전형 고득점자순으로 결정\r\n6. 면접전형 심사표 내 평정 상위항목(1번→5번)순으로 고득점자로 결정\r\n※ 모든 전형마다 예비합격자를 선정할 수 있으며, 전형별 예비합격자는 전형별 만점의 80% 이상 득점한 자중 고득점 순으로 최대 2명까지 선정\r\n- 예비합격자 선정 과정에서 동점자가 발생하는 경우, 상기 '최종합격자 선정 동점자 처리기준'을 준용하여 순위를 부여\r\n※ 전형별 합격자는 개별 통지하며 채용시스템에 접속하여 확인 가능\r\n※ 상기 일정은 연구원 사정에 따라 변경될 수 있으며, 변경되는 경우 전형별 합격자 안내 시 통지\r\n※ 자세한 사항은 첨부파일의 채용공고문 참조",
-          "workRgnNmLst": "세종"
-        },
-        "review_status": "official_review_required",
-        "application_evidence": "접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00",
-        "application_source_ref": "alio-detail.json#307529/scrnprcdrMthdExpln",
         "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00"
       },
       {
@@ -2115,7 +2047,7 @@
     "drafts": [
       {
         "notice_id": "a307361",
-        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
         "draft_text": "한국농어촌공사 채용 공고를 확인해 보세요.\n\n모집 공고: 한국농어촌공사 금강사업단 공무직(청소원) 일반공개경쟁 채용 공고\n고용형태: 무기계약직\n접수 마감: 2026-12-09 16:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307361",
         "source_post_sha256": "69d2b121e8d77095f2d2758072ab9c2dc7e4bbf32b47bffea4e56060c89e75fe",
@@ -2158,7 +2090,7 @@
       },
       {
         "notice_id": "a307039",
-        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
         "draft_text": "한국서부발전(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한국서부발전(주) 군산발전본부 후생담당원(기간제근로자) 모집공고\n고용형태: 비정규직\n접수 마감: 2026-12-02 14:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
         "source_post_sha256": "f16474e21b80d750b3ae3c3cdbf65c2d4309b4fa79b7738ac2bbf4d8e6801922",
@@ -2201,7 +2133,7 @@
       },
       {
         "notice_id": "a307280",
-        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
         "draft_text": "한국전력공사 채용 공고를 확인해 보세요.\n\n모집 공고: 기간제근로자(대체인력) 채용공고 [대전세종충남본부 아산지사, 금산지사]\n고용형태: 비정규직\n접수 마감: 2026-12-04 14:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307280",
         "source_post_sha256": "c04672f9c3553ab04d0791b937de9cbee4d7a4eaa2824c6cbe6c2a7f8c41ff39",
@@ -2244,7 +2176,7 @@
       },
       {
         "notice_id": "a307396",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS 원자력정비기술센터 단기노무원(사무보조)모집(영광근무)\n고용형태: 비정규직\n접수 마감: 2026-12-01 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
         "source_post_sha256": "ff3a226b5525b371c07ddcd7a295d06d3f90187a7faa77706a038c39b881ecf1",
@@ -2287,7 +2219,7 @@
       },
       {
         "notice_id": "a307413",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "draft_text": "한전KPS(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한전KPS(주)부산경남전력지사 통영지점 단기노무원(설비안전관리보조) 모집\n고용형태: 비정규직\n접수 마감: 2026-12-11 12:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307413",
         "source_post_sha256": "773afcc02f03701146f98c7e12943f574e65a8de144903e7c2f7d44fca07d99f",
@@ -2330,7 +2262,7 @@
       },
       {
         "notice_id": "a307046",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "draft_text": "한국도로공사서비스(주) 채용 공고를 확인해 보세요.\n\n모집 공고: 한국도로공사서비스(주) 광주전남권역본부 기간제근로자 채용 공고\n고용형태: 비정규직\n접수 마감: 2026-11-30 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
         "source_post_sha256": "4a42dcacbfdcb08b81995a24ff5ad83ac952b650a968337bc0c2ed160c640b54",
@@ -2373,7 +2305,7 @@
       },
       {
         "notice_id": "a306979",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "draft_text": "한국공정거래조정원 채용 공고를 확인해 보세요.\n\n모집 공고: 한국공정거래조정원 2026년 제5차 기간제 근로자 채용 공고\n고용형태: 비정규직\n접수 마감: 2026-12-01 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306979",
         "source_post_sha256": "4f0d6d0951b709dda8852e8f9a248218a486031b8652e90f413bfe85f5484aa0",
@@ -2416,7 +2348,7 @@
       },
       {
         "notice_id": "a307326",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "draft_text": "KDI국제정책대학원 채용 공고를 확인해 보세요.\n\n모집 공고: [KDI국제정책대학원] 2026년 제12차 인턴 직원 채용 공고(교육행정)\n고용형태: 비정규직\n접수 마감: 2026-12-08 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307326",
         "source_post_sha256": "eb64e8bc613f32b531541f719c13826d23765930176c5df341949442e2b840e0",
@@ -2440,49 +2372,6 @@
           "recrutNope": "1",
           "recrutSe": "R2030",
           "scrnprcdrMthdExpln": "가. 원서접수: 2026.11.23.(월) ~ 2026.12.08.(화)\r\n나. 서류전형: 2026.12.09.(수) ~ 2026.12.16.(수)\r\n다. 면접전형: 2026.12.17.(목) ~ 2026.12.28.(월) \r\n라. 임용(예정):2027.01.04.(월) ~ 2027.01.08.(금)",
-          "workRgnNmLst": "세종"
-        },
-        "required_review": {
-          "official_notice_and_attachments": "not_verified",
-          "recruiting_unit_and_headcount": "not_verified",
-          "employment_type": "not_verified",
-          "eligibility_and_restrictions": "not_verified",
-          "application_window": "not_verified",
-          "profile_target": "not_verified",
-          "v5_copy_and_image": "not_verified",
-          "publisher_validate_entry": "not_run"
-        },
-        "status": "unreviewed",
-        "requires_official_source_review": true,
-        "approved_for_queue": false,
-        "meta_posted": false
-      },
-      {
-        "notice_id": "a307529",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
-        "draft_text": "건축공간연구원 채용 공고를 확인해 보세요.\n\n모집 공고: 건축공간연구원 위촉직 모집\n고용형태: 비정규직\n접수 마감: 2026-12-14 14:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
-        "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307529",
-        "source_post_sha256": "82643eb1173560fcc4c9aef435bb24f4b7d0807914c9979309b39da4bae36afa",
-        "source_detail_sha256": "e6450f0a58b9d0db5612875d7cb43ac8d017f6bd4cccf5cb9628881b1970749a",
-        "application_evidence_for_review": "접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00",
-        "application_source_ref": "alio-detail.json#307529/scrnprcdrMthdExpln",
-        "source_snapshot_checked_at": "2026-11-28T04:12:28+09:00",
-        "recruiting_unit_for_review": {
-          "title": null,
-          "count": null,
-          "scope": "unit_count_unconfirmed",
-          "verification_status": "not_verified"
-        },
-        "selection_review_reasons": [
-          "OFFICIAL_DETAIL_AND_UNIT_REVIEW_REQUIRED"
-        ],
-        "official_detail_fields_for_review": {
-          "aplyQlfcCn": "<공통 응시자격>\r\no 국가공무원법 제33조의 결격사유가 없는 자\r\no 최근 5년 이내 공공기관에서 부정한 방법으로 채용되어 채용이 취소된 사실이 없는 자\r\no 법률에 의하여 공민권이 정지 또는 박탈되지 아니한 자\r\no 남자일 경우 병역필 또는 면제자\r\n※ 제출된 서류에 허위가 있을 때에는 합격 또는 임용을 취소할 수 있음\r\n※ 최종합격자로 결정되더라도 결격사유조회, 학위검증 등에서 결격사유가 판명될 경우 임용이 취소될 수 있음\r\n\r\n<모집분야 지원자격>\r\no (위촉연구원) 공간AI·빅데이터본부 육아휴직 대체 : 1명\r\n- 석사 학위 소지자\r\n- 건축, 도시, 조경 등 관련분야 전공자 우대",
-          "hireTypeNmLst": "비정규직",
-          "prefCn": "o 장애인고용촉진 및 직업재활법률상 기준에 해당하는 자 : 전형별 5점 가점\r\no 국가유공자 등 예우 및 지원에 관한 법률 등 보훈관계법률에 따른 가점 대상자 : 전형별 만점의 5% 또는 10% 가점\r\no 청년인턴 경험자\r\n- 건축공간연구원 인턴 경험자(6개월 이상 연속 근무) : 서류전형 3점 가점\r\n- 경제·인문사회연구회 및 소관 연구기관 인턴 경험자(6개월 이상 연속 근무) : 서류전형 2점 가점\r\n※ 가점항목 중복 시 지원자에게 가장 유리한 1개 항목만 적용",
-          "recrutNope": "1",
-          "recrutSe": "R2030",
-          "scrnprcdrMthdExpln": "1. 접수방법: 온라인 접수(우편, E-mail, 방문 접수 불가)\r\no AURI 입사지원 페이지(http://recruit.auri.re.kr) → 채용공고 선택 → 「지원서 등록」 선택 → 내용작성 및 제출서류 첨부 후 등록\r\no 접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00\r\n\r\n2. 전형절차 및 방법\r\no 1차 서류전형\r\n- 배점: 100점\r\n- 합격배수: 채용분야별 모집인원의 3배수\r\n- 합격기준: 만점의 80% 이상 득점자 중 고득점자순\r\n- 전형일정: 2026.12.16.(수) (합격자 발표: 2026.12.17.(목) 예정)\r\no 2차 면접전형\r\n- 배점: 100점\r\n- 합격배수: 채용분야별 모집인원의 1배수\r\n- 합격기준: 만점의 80% 이상 득점자 중 고득점자순\r\n- 전형일정: 2026.12.21.(월) (※ 2026.12.22.(화) 이후 최종합격자 발표 예정)\r\n\r\n※ 1차 전형(서류전형) 합격자에 한하여 2차 전형(면접전형) 응시자격을 부여함\r\n※ 1차 전형(서류전형) 결과 합격선상 동점자가 있는 경우, 전원 합격 처리\r\n※ 2차 전형(면접전형) 결과 합격선상 동점자가 있는 경우 아래 순위에 의하여 최종합격자를 선정\r\n1. 「국가유공자 등 예우 및 지원에 관한 법률」에 따른 취업지원대상자\r\n2. 「장애인고용촉진 및 직업재활법」에 따른 장애인\r\n3. 청년인턴(연구원, 경제·인문사회연구회 및 소관 연구기관) 6개월 이상 연속 근무 경험자\r\n4. 이전 모든 전형(서류전형, 면접전형)의 총점의 고득점자\r\n5. 서류전형 고득점자순으로 결정\r\n6. 면접전형 심사표 내 평정 상위항목(1번→5번)순으로 고득점자로 결정\r\n※ 모든 전형마다 예비합격자를 선정할 수 있으며, 전형별 예비합격자는 전형별 만점의 80% 이상 득점한 자중 고득점 순으로 최대 2명까지 선정\r\n- 예비합격자 선정 과정에서 동점자가 발생하는 경우, 상기 '최종합격자 선정 동점자 처리기준'을 준용하여 순위를 부여\r\n※ 전형별 합격자는 개별 통지하며 채용시스템에 접속하여 확인 가능\r\n※ 상기 일정은 연구원 사정에 따라 변경될 수 있으며, 변경되는 경우 전형별 합격자 안내 시 통지\r\n※ 자세한 사항은 첨부파일의 채용공고문 참조",
           "workRgnNmLst": "세종"
         },
         "required_review": {
@@ -2545,7 +2434,7 @@
       },
       {
         "notice_id": "a307089",
-        "suggested_slot": "2026-11-29T20:00:00+09:00",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 서울적십자병원 계약직(병동 의료지원(A)) 신규채용 공고\n고용형태: 비정규직\n접수 마감: 2026-12-02 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307089",
         "source_post_sha256": "8c8b95c6dffca05891d5663d222edfe779fee7de15be5da04ee36b70d5516833",
@@ -2588,7 +2477,7 @@
       },
       {
         "notice_id": "a307090",
-        "suggested_slot": "2026-11-29T20:00:00+09:00",
+        "suggested_slot": "2026-11-30T08:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 서울적십자병원 계약직(병동 의료지원(B)) 신규채용 공고\n고용형태: 비정규직\n접수 마감: 2026-12-02 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307090",
         "source_post_sha256": "9bcc0239d545b69ec1c28139eaad4bcb19e150b931342344dedbafff8e188803",
@@ -2674,7 +2563,7 @@
       },
       {
         "notice_id": "a307311",
-        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "suggested_slot": "2026-11-30T12:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(2) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307311",
         "source_post_sha256": "464b8383ffb1ef846b270a0842bb34e5d8126a11919b24e8539176fe2748090c",
@@ -2717,7 +2606,7 @@
       },
       {
         "notice_id": "a307312",
-        "suggested_slot": "2026-11-30T08:00:00+09:00",
+        "suggested_slot": "2026-11-30T12:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 경인권역재활병원 비정규직(대체인력) 물리치료사(3) 채용 공고(2027.1.1.)\n고용형태: 비정규직\n접수 마감: 2026-12-07 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307312",
         "source_post_sha256": "3b5f1e0d25ff4ec0ead11ddb2ded9d4d98f77aabd34f74d1417930854867980f",
@@ -2803,7 +2692,7 @@
       },
       {
         "notice_id": "a307338",
-        "suggested_slot": "2026-11-30T12:00:00+09:00",
+        "suggested_slot": "2026-11-30T16:00:00+09:00",
         "draft_text": "대한적십자사 채용 공고를 확인해 보세요.\n\n모집 공고: 상주적십자병원 비정규직 장애인 고용원(보조원) 모집 공고\n고용형태: 비정규직\n접수 마감: 2026-12-09 (마감 시각 원문 확인)\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307338",
         "source_post_sha256": "87ade70db57036ad60e28a8694c8bcbab166db0d2a49c358dd953ffb642d0403",
@@ -2846,7 +2735,7 @@
       },
       {
         "notice_id": "a307341",
-        "suggested_slot": "2026-11-30T12:00:00+09:00",
+        "suggested_slot": "2026-11-30T16:00:00+09:00",
         "draft_text": "국악방송 채용 공고를 확인해 보세요.\n\n모집 공고: 국악방송 체험형 인턴(장애인) 채용 공고\n고용형태: 청년인턴(체험형)\n접수 마감: 2026-12-08 18:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
         "source_post_sha256": "c315c9528c5554af2aae756635cd1a4965c517b65327b33275ea89c5090b8ed1",
@@ -2932,7 +2821,7 @@
       },
       {
         "notice_id": "a307343",
-        "suggested_slot": "2026-11-30T16:00:00+09:00",
+        "suggested_slot": "2026-11-30T20:00:00+09:00",
         "draft_text": "한국장애인고용공단 채용 공고를 확인해 보세요.\n\n모집 공고: [한국장애인고용공단 경기남부직업능력개발원] 특정업무직(경비원) 채용\n고용형태: 무기계약직,비정규직\n접수 마감: 2026-12-04 18:00 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307343",
         "source_post_sha256": "8e2b068594396c6c5005595757b075bd73248d46d6d8f70391116441b70d7349",
@@ -2975,7 +2864,7 @@
       },
       {
         "notice_id": "a307403",
-        "suggested_slot": "2026-11-30T16:00:00+09:00",
+        "suggested_slot": "2026-11-30T20:00:00+09:00",
         "draft_text": "한국보훈복지의료공단 채용 공고를 확인해 보세요.\n\n모집 공고: [수원보훈요양원] 직원(간호조무사, 요양보호사, 미화, 청년인턴) 채용\n고용형태: 정규직,무기계약직,청년인턴(체험형)\n접수 마감: 2026-12-08 17:30 +0900\n\n지원 자격과 모집 인원은 공식 공고문에서 확인해 주세요.\n\n자세한 사항은 프로필링크 확인",
         "official_url_for_private_review": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307403",
         "source_post_sha256": "52737d5fccf4d9a8428f948cee6bbc4e1b2697edb8e8720c112630defc9c0491",
@@ -3072,7 +2961,6 @@
     ],
     "slot_coverage": {
       "requested_slots": [
-        "2026-11-29T08:00:00+09:00",
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
@@ -3082,7 +2970,6 @@
         "2026-11-30T20:00:00+09:00"
       ],
       "draft_slots": [
-        "2026-11-29T08:00:00+09:00",
         "2026-11-29T12:00:00+09:00",
         "2026-11-29T16:00:00+09:00",
         "2026-11-29T20:00:00+09:00",
@@ -3105,7 +2992,7 @@
     "records": [
       {
         "notice_id": "a307361",
-        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307361",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3116,7 +3003,7 @@
           "sha256": "91764478da7d99369ea6c63fb946cd6d866659511abda4a5f64a3aebb39c8d6d",
           "size_bytes": 12873,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:14.492653+09:00",
+          "checked_at": "2026-11-28T20:59:13.791275+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3128,7 +3015,7 @@
       },
       {
         "notice_id": "a307039",
-        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3139,7 +3026,7 @@
           "sha256": "d6c5184604f059ece96a96bcf14ffac6f72b0904a3cb223d0bfd2fd3319ff867",
           "size_bytes": 9246,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:14.674512+09:00",
+          "checked_at": "2026-11-28T20:59:13.712341+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3151,7 +3038,7 @@
       },
       {
         "notice_id": "a307280",
-        "suggested_slot": "2026-11-29T08:00:00+09:00",
+        "suggested_slot": "2026-11-29T12:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307280",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3162,7 +3049,7 @@
           "sha256": "659e4d750e04be368792caa3cf2d486bb513ad83912a55db5d147314e1a3259f",
           "size_bytes": 11352,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:15.273036+09:00",
+          "checked_at": "2026-11-28T20:59:13.801734+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3174,7 +3061,7 @@
       },
       {
         "notice_id": "a307396",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3185,7 +3072,7 @@
           "sha256": "f850f237b694e25fd841ed7715c0ec603417ca325b8fe9198404e1d7273f2634",
           "size_bytes": 11152,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:13.743242+09:00",
+          "checked_at": "2026-11-28T20:59:13.572430+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3197,7 +3084,7 @@
       },
       {
         "notice_id": "a307413",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307413",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3208,7 +3095,7 @@
           "sha256": "c8e6c393b18f4dd4bc89693364e166279bbb645e22698468aced7ca084aa36ac",
           "size_bytes": 10808,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:17.753853+09:00",
+          "checked_at": "2026-11-28T20:59:17.721339+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3220,7 +3107,7 @@
       },
       {
         "notice_id": "a307046",
-        "suggested_slot": "2026-11-29T12:00:00+09:00",
+        "suggested_slot": "2026-11-29T16:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307046",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3231,7 +3118,7 @@
           "sha256": "02e7a9cc4ee2ad308143aa7833282c3cf9944743712614804970cc165ea90931",
           "size_bytes": 12777,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:18.128340+09:00",
+          "checked_at": "2026-11-28T20:59:17.743397+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3243,7 +3130,7 @@
       },
       {
         "notice_id": "a306979",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
         "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=306979",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
@@ -3254,7 +3141,7 @@
           "sha256": "ab221824163ce36666f053ab9e956a0538edfe77459b5fa0d5f64013fa68fa5e",
           "size_bytes": 17367,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:17.402829+09:00",
+          "checked_at": "2026-11-28T20:59:17.413916+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
@@ -3265,23 +3152,23 @@
         "draft_text_has_notice": true
       },
       {
-        "notice_id": "a307529",
-        "suggested_slot": "2026-11-29T16:00:00+09:00",
-        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307529",
+        "notice_id": "a307326",
+        "suggested_slot": "2026-11-29T20:00:00+09:00",
+        "official_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307326",
         "evidence_status": "bytes_fetched_for_review",
         "semantic_review": "required",
         "publisher_validate_entry": "not_run",
         "source": {
-          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307529",
-          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307529",
-          "sha256": "ef004e83700b48f2c59a4375ff1e10e24b159e0bb4c9b42bda674421e3799773",
-          "size_bytes": 13529,
+          "url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307326",
+          "final_url": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307326",
+          "sha256": "f82d3a2880f371a6a0eb8056086a6b10076ff2590112d93dbdd23ec97e15563e",
+          "size_bytes": 9310,
           "content_type": "text/html;charset=utf-8",
-          "checked_at": "2026-11-28T20:32:18.175479+09:00",
+          "checked_at": "2026-11-28T20:59:17.575655+09:00",
           "pdf_magic_valid": false,
           "text_available": true,
           "official_page_title": "잡알리오",
-          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 건축공간연구원 위촉직 모집 2026.11.27 / 진행중 공공기관 채용정보 기관명 건축공간연구원 표준직무(NCS) 연구 고용형태 비정규직 학력정보 석사 채용구분 신입+경력 근무지 세종 근무분야 연구직 채용인원 1 우대조건 국가유공자 등 예우 및 지원에 관한 법률 등 보훈관계법률에 따른 가점 대상자, 장애인 고용촉진 및 직업재활법률 해당자, 건축공간연구원, 경제·인문사회연구회 및 소관 연구기관 인턴 6개월 이상 연속 근무자 공고기간 26.11.27 ~ 26.12.14 응시자격 <공통 응시자격> o 국가공무원법 제33조의 결격사유가 없는 자 o 최근 5년 이내 공공기관에서 부정한 방법으로 채용되어 채용이 취소된 사실이 없는 자 o 법률에 의하여 공민권이 정지 또는 박탈되지 아니한 자 o 남자일 경우 병역필 또는 면제자 ※ 제출된 서류에 허위가 있을 때에는 합격 또는 임용을 취소할 수 있음 ※ 최종합격자로 결정되더라도 결격사유조회, 학위검증 등에서 결격사유가 판명될 경우 임용이 취소될 수 있음 <모집분야 지원자격> o (위촉연구원) 공간AI·빅데이터본부 육아휴직 대체 : 1명 - 석사 학위 소지자 - 건축, 도시, 조경 등 관련분야 전공자 우대 결격사유 o 국가공무원법 제33조의 결격사유 o 최근 5년이내 공공기관에서 부정한 방법으로 채용되어 채용이 취소된 사실이 있는 자 o 법률에 의하여 공민권이 정지 또는 박탈된 자 o 다음의 경우 합격 또는 임용을 취소하며 향후 5년간 본 연구원 채용시험 응시자격이 제한될 수 있음 - 학위논문과 관련하여 표절 등 연구윤리 위반 행위가 발견되거나 그 외 결격사유가 발생한 경우(지원 시 제출한 서류의 내용이 사실과 다르거나 허위로 판명될 경우 등) - 지원서 등을 허위로 작성하거나 증빙서류를 위·변조하는 경우 - 합격자 본인 또는 합격자와 밀접한 관계가 있는 타인이 채용에 관한 부당한 청탁, 압력 또는 재산상의 이익 제공 등의 부정행위를 한 경우 o 최종합격자로 결정되더라도 신원조사, 학위검증 등에서 결격사유가 판명될 경우 임용이 취소될 수 있음 ※ 자세한 사항은 첨부파일의 채용공고문 참조 전형절차/방법 1. 접수방법: 온라인 접수(우편, E-mail, 방문 접수 불가) o AURI 입사지원 페이지(http://recruit.auri.re.kr) → 채용공고 선택 → 「지원서 등록」 선택 → 내용작성 및 제출서류 첨부 후 등록 o 접수기간: 2026.11.27.(금) ~ 2026.12.14.(월) 14:00 2. 전형절차 및 방법 o 1차 서류전형 - 배점: 100점 - 합격배수: 채용분야별 모집인원의 3배수 - 합격기준: 만점의 80% 이상 득점자 중 고득점자순 - 전형일정: 2026.12.16.(수) (합격자 발표: 2026.12.17.(목) 예정) o 2차 면접전형 - 배점: 100점 - 합격배수: 채용분야별 모집인원의 1배수 - 합격기준: 만점의 80% 이상 득점자 중 고득점자순 - 전형일정: 2026.12.21.(월) (※ 2026.12.22.(화) 이후 최종합격자 발표 예정) ※ 1차 전형(서류전형) 합격자에 한하여 2차 전형(면접전형) 응시자격을 부여함 ※ 1차 전형(서류전형) 결과 합격선상 동점자가 있는 경우, 전원 합격 처리 ※ 2차 전형(면접전형) 결과 합격선상 동점자가 있는 경우 아래 순위에 의하여 최종합격자를 선정 1. 「국가유공자 등 예우 및 지원에 관한 법률」에 따른 취업지원대상자 2. 「장애인고용촉진 및 직업재활법」에 따른 장애인 3. 청년인턴(연구원, 경제·인문사회연구회 및 소관 연구기관) 6개월 이상 연속 근무 경험자 4. 이전 모든 전형(서류전형, 면접전형)의 총점의 고득점자 5. 서류전형 고득점자순으로 결정 6. 면접전형 심사표 내 평정 상위항목(1번→5번)순으로 고득점자로 결정 ※ 모든 전형마다 예비합격자를 선정할 수 있으며, 전형별 예비합격자는 전형별 만점의 80% 이상 득점한 자중 고득점 순으로 최대 2명까지 선정 - 예비합격자 선정 과정에서 동점자가 발생하는 경우, 상기 '최종합격자 선정 동점자 처리기준'을 준용하여 순위를 부여 ※ 전형별 합격자는 개별 통지하며 채용시스템에 접속하여 확인 가능 ※ 상기 일정은 연구원 사정에 따라 변경될 수 있으며, 변경되는 경우 전형별 합격자 안내 시 통지 ※ 자세한 사항은 첨부파일의 채용공고문 참조 우대내용 o 장애인고용촉진 및 직업재활법률상 기준에 해당하는 자 : 전형별 5점 가점 o 국가유공자 등 예우 및 지원에 관한 법률 등 보훈관계법률에 따른 가점 대상자 : 전형별 만점의 5% 또는 10% 가점 o 청년인턴 경험자 - 건축공간연구원 인턴 경험자(6개월 이상 연속 근무) : 서류전형 3점 가점 - 경제·인문사회연구회 및 소관 연구기관 인턴 경험자(6개월 이상 연속 근무) : 서류전형 2점 가점 ※ 가점항목 중복 시 지원자에게 가장 유리한 1개 항목만 적용 전형단계별 채용정보 (위촉연구원) 공간AI·빅데이터본부 육아휴직 대체 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 1. [건축공간연구원] 위촉직 채용공고문.pdf 입사지원서 2. [건축공간연구원] 입사지원서.pdf 직무기술서 3. [건축공간연구원] 직무기술서.pdf 기타 첨부파일 4. [건축공간연구원] 수행계획서양식.hwp 미첨부 사유 원문 URL https://recruit.auri.re.kr 클립보드에 주소가 복사 되었습니다."
+          "visible_text_excerpt": "잡알리오 채용정보 상세 보기 공유하기 [KDI국제정책대학원] 2026년 제12차 인턴 직원 채용 공고(교육행정) 2026.11.23 / 진행중 공공기관 채용정보 기관명 KDI국제정책대학원 표준직무(NCS) 교육.자연.사회과학 고용형태 비정규직 학력정보 학력무관 채용구분 신입+경력 근무지 세종 근무분야 행정직,계약직 채용인원 1 우대조건 국가유공자, 장애인, 비수도권 및 이전지역 인재 공고기간 26.11.23 ~ 26.12.08 응시자격 가. 「국가공무원법」 제33조 각 호에 해당하지 아니한 자 나. 법률에 의하여 공민권이 정지 또는 박탈되지 아니한 자 다. 병역법 제76조(병역의무 불이행자에 대한 제재)에서 정한 병역의무 불이행 사실이 없는자 라. 「부패방지 및 국민권익위원회의 설치와 운영에 관한 법률」 제82조 제1항 각 호에 해당하지 아니한 자 마. 최근 5년 이내 공공기관에서 부정한 방법으로 채용되어 채용이 취소된 사실이 없는 자 바. 해외여행에 결격사유가 없는 자 사. 청년고용법시행령 제2조에 해당하는 자(만34세 이하) 아. 임용일부터 전일제 근무 가능한 자 결격사유 가. 채용비리 입사자(부정청탁으로 입사한 자 포함), 결격사유가 확인된 자는 그 사실이 확인된 즉시 합격 취소 또는 입사 이후에도 징계해고 또는 직 권면직 처리합니다. 나. 허위기재 또는 기재착오, 증빙서류 미제출 등에 따른 불이익은 응시자 본인의 책임이며, 기재내용이 사실과 다를 경우 합격을 취소할 수 있습니다 전형절차/방법 가. 원서접수: 2026.11.23.(월) ~ 2026.12.08.(화) 나. 서류전형: 2026.12.09.(수) ~ 2026.12.16.(수) 다. 면접전형: 2026.12.17.(목) ~ 2026.12.28.(월) 라. 임용(예정):2027.01.04.(월) ~ 2027.01.08.(금) 우대내용 [붙임] 직무기술서 참고 전형단계별 채용정보 교육행정(입학팀) 1차 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 최종 : 선발인원 명 / 응시인원 명 전형단계별 결과확정일 : 공고문 (12차 인턴) 채용 공고문.pdf 입사지원서 직무기술서 (12차 인턴) 직무기술서.pdf 기타 첨부파일 미첨부 사유 입사지원서의 경우, 채용사이트 직접 지원으로 미첨부 원문 URL https://kdischool.recruiter.co.kr 클립보드에 주소가 복사 되었습니다."
         },
         "text_requires_independent_review": true,
         "notice_body_has_text": true,
@@ -3359,8 +3246,8 @@
   },
   "live_inventory": {
     "schema_version": 1,
-    "checked_at": "2026-11-28T20:32:18.313920+09:00",
-    "window_start": "2026-11-26T11:32:18.313920+00:00",
+    "checked_at": "2026-11-28T20:59:17.857130+09:00",
+    "window_start": "2026-11-26T11:59:17.857130+00:00",
     "account": "hid_119",
     "pages_read": 1,
     "pagination_complete": true,
@@ -3412,14 +3299,6 @@
         "is_reply": false,
         "text_available": true,
         "text_sha256": "db9b97e1f685101e4c7c569c5d74b0ceb5582229e56e0fda683c589ec65e1f0a"
-      },
-      {
-        "post_id": "17917308822506825",
-        "timestamp": "2026-11-26T11:50:21+00:00",
-        "permalink": "https://www.threads.com/@hid_119/post/DgNCXkoFcZ7",
-        "is_reply": false,
-        "text_available": true,
-        "text_sha256": "d524577018138b354376c2f24819af3bddb3f81542f50f8f43dff1642288dd59"
       }
     ],
     "meta_posted": false,
