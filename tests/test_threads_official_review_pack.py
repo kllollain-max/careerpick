@@ -432,5 +432,40 @@ class EvidencePacketTests(unittest.TestCase):
         self.assertEqual([r["notice_id"] for r in small["records"]], ["0"])
 
 
+    def test_reserve_exact_employer_fact_sources_stay_unapproved(self):
+        from scripts.threads_official_review_pack import (
+            CANONICAL_REVIEW_URLS, independently_located_notice)
+        from scripts.threads_reviewed_ingest import official_url_allowed
+        for nid, expected in (
+            ("a307324", "https://www.kead.or.kr/bbs/deptgongji/bbsView.do?pageIndex=1&menuId=MENU0895&bbsCode=deptgongji&bbsCnId=217789"),
+            ("a307565", "https://www.rch.or.kr/web/rchyoungju/file/image/uu/1b23f8f3df8e4e3395e5715bffeace1e"),
+        ):
+            with self.subTest(notice_id=nid):
+                pin = CANONICAL_REVIEW_URLS[nid]
+                fallback = "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=" + nid[1:]
+                draft = {"notice_id": nid, "status": "unreviewed",
+                         "source_post_sha256": pin["source_post_sha256"],
+                         "source_detail_sha256": pin["source_detail_sha256"],
+                         "official_url_for_private_review": fallback}
+                self.assertEqual(independently_located_notice(draft), expected)
+                self.assertTrue(official_url_allowed(expected))
+                seen = []
+                def fetched(url):
+                    seen.append(url)
+                    return {"url": url, "sha256": "a" * 64,
+                            "content_type": "image/png" if nid == "a307565" else "text/html"}
+                packet = build_packet({"status": "review_required",
+                                       "approved_for_queue": False,
+                                       "drafts": [draft]}, fetch=fetched)
+                self.assertEqual(seen, [expected])
+                self.assertEqual(packet["attempted"], 1)
+                self.assertFalse(packet["approved_for_queue"])
+                self.assertFalse(packet["meta_posted"])
+                self.assertEqual(packet["records"][0]["publisher_validate_entry"], "not_run")
+                self.assertEqual(packet["records"][0]["semantic_review"], "required")
+                for field in ("source_post_sha256", "source_detail_sha256"):
+                    self.assertEqual(independently_located_notice(dict(draft, **{field: "0" * 64})), fallback)
+
+
 if __name__ == "__main__":
     unittest.main()

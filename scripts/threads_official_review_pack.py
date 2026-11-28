@@ -32,6 +32,20 @@ KST = ZoneInfo("Asia/Seoul")
 # Cleaneye source snapshot. Never treat a similarly named future notice as
 # the same source. No semantics, publication, or approval is implied here.
 CANONICAL_REVIEW_URLS = {
+    # For two already reviewed reserves, ALIO has the general notice but not
+    # the exact employment contract or the individual recruiting-unit count.
+    # Use the existing bounded evidence attempt for the exact employer fact
+    # source instead. Both source fingerprints must still match. No approval.
+    "a307324": {
+        "source_post_sha256": "7530ce3170ed0d8021a7ef3ba46f74de4b1939faa67263eafaebc355cbb65a09",
+        "source_detail_sha256": "5b28db9b04ef423a744d46188ca8b516635dfc6d67c37220e27da89a34088dc7",
+        "url": "https://www.kead.or.kr/bbs/deptgongji/bbsView.do?pageIndex=1&menuId=MENU0895&bbsCode=deptgongji&bbsCnId=217789",
+    },
+    "a307565": {
+        "source_post_sha256": "02d55f5750529edc0a6fe6168a3a80a1faed33e74d0542a5fbb446d4cbd82266",
+        "source_detail_sha256": "917ffe360f9483cc8ce4ec311d26d97237b53d72cc1e0e0aa3dcf89b906b0c1a",
+        "url": "https://www.rch.or.kr/web/rchyoungju/file/image/uu/1b23f8f3df8e4e3395e5715bffeace1e",
+    },
     "cleaneye-80820": {
         "source_post_sha256": "8d3752df0454401d33229336de56bbfebe204a1337ee98ca1ac6a87f458528f1",
         "source_detail_sha256": "c67be70000794ee30457361c24cb0ba633e4efc2d2b145790074b1dde8b0834e",
