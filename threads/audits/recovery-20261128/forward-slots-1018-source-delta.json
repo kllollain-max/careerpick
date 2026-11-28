@@ -1,0 +1,101 @@
+{
+  "session_started_at": "2026-11-28T10:18:09+09:00",
+  "prior_record": "threads/audits/recovery-20261128/forward-slots-0840.json",
+  "state_parent": "532813cb87945183286131c2b08e917100de8618",
+  "main_sha": "ca83ed9f5b2d93df3b27b8100d92ef55b0c88a4b",
+  "handoff": {
+    "sha": "34ab51fa986e74351f5d39b4be5f695257636e1d",
+    "captured_at": "2026-11-28T09:02:13.480298+09:00",
+    "run_id": "46085680122",
+    "queue_sha": "61fa907988a8bc0cb19f5b565c0916a0760210c1",
+    "staging_sha": "dfcce70cfe6b25a7fcaca715789f5e50087d3b65",
+    "approved_supply_count": 1,
+    "inventory_target": 8,
+    "invalid_ready_entries": [],
+    "source_candidate_count": 23
+  },
+  "queue_read": {
+    "entries": 68,
+    "forward_entries": [
+      "a307524"
+    ],
+    "method": "fetch_blob; JSON parsed; unchanged from previous audit"
+  },
+  "publication": {
+    "slot": "2026-11-28T08:00:00+09:00",
+    "post_id": "18140511127651232",
+    "permalink": "https://www.threads.com/@hid_119/post/DgQ4hxgjzwJ",
+    "claim_blob": "f278041dc6c621f8b599b5b7f2bfb3155a755710",
+    "live_inventory_checked_at": "2026-11-28T09:02:12.247812+09:00",
+    "new_meta_get_in_this_session": false
+  },
+  "slots": [
+    {
+      "slot": "2026-11-28T12:00:00+09:00",
+      "notice_id": "a307524",
+      "state": "existing_ready_per_preflight_and_queue",
+      "media": "TEXT",
+      "checked_at": "2026-11-27T20:35:36.712108+09:00"
+    },
+    {
+      "slot": "2026-11-28T16:00:00+09:00",
+      "reserve": "a307324",
+      "state": "missing_ready",
+      "media": "IMAGE"
+    },
+    {
+      "slot": "2026-11-28T20:00:00+09:00",
+      "reserve": "a307039",
+      "state": "missing_ready",
+      "media": "TEXT"
+    },
+    {
+      "slot": "2026-11-29T08:00:00+09:00",
+      "reserve": "a307341",
+      "state": "missing_ready",
+      "media": "IMAGE"
+    }
+  ],
+  "future_claim_reads": "404 for all four specified paths at state parent; no claim written",
+  "source_delta": [
+    {
+      "notice_id": "a307324",
+      "official_sources": [
+        "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307324",
+        "https://www.kead.or.kr/bbs/deptgongji/bbsView.do?bbsCnId=217789&bbsCode=deptgongji&menuId=MENU0895&pageIndex=1"
+      ],
+      "new_confirmed": "Employer notice confirms one driver, Daejeon Daedeok-gu, class 1 large license AND large bus experience, age 18 to under 60 at deadline, immediate availability and exclusions, 3-month fixed-term trial and indefinite contract only if performance satisfactory, deadline 11/30 14:00."
+    },
+    {
+      "notice_id": "a307039",
+      "official_sources": [
+        "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307039",
+        "https://recruit.incruit.com/iwest/job/2611090017"
+      ],
+      "new_confirmed": "Exact employer ATS detail located: 모집중, 11/17 09:00–12/02 14:00. ALIO one fixed-term welfare worker, age 55+, health examination within one year of deadline; employer attachment not fetched as bytes."
+    },
+    {
+      "notice_id": "a307341",
+      "official_sources": [
+        "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307341",
+        "https://www.igbf.kr/gugak_web/?idx=331560&state=view&sub_num=762"
+      ],
+      "new_confirmed": "Employer table confirms radio 1 vs TV 1, disability eligibility, Seoul, deadline 12/08 18:00, internship through 2027/06/30. Employer common criteria omit age wording present in ALIO, do not assert age condition. Refresh source snapshot before approval for 11/29 slot."
+    }
+  ],
+  "alternate": {
+    "notice_id": "a307396",
+    "official_source": "https://job.alio.go.kr/mobile2021/recruit/recruitView.do?idx=307396",
+    "facts": "한전KPS 영광 한빛1발전소 사무보조 단기노무원 1명, 주5일 8시간 원칙, 정규직 전환 혜택 없음, 12/1 접수 마감(시간 미확인). 유사 이전 공고 a307241과 구분하며 정정·재공고 여부 및 게시 이력 재대조 필요.",
+    "state": "reserve_only"
+  },
+  "correction_check": "Official pages reviewed and focused correction/cancellation searches for driver and broadcaster; no explicit correction seen in returned pages; not exhaustive. No raw receipt or SHA claimed for web extracted text.",
+  "blocker": "Actual local DNS resolution of github.com, raw.githubusercontent.com and job.alio.go.kr returned gaierror(-3) Temporary failure in name resolution; raw source receipt and production validation cannot be completed here.",
+  "review_mode": "official_text_crosscheck_only",
+  "astra_invoked": false,
+  "production_validation": "not executed",
+  "new_approved": 0,
+  "queue_changed": false,
+  "meta_post_initiated": false,
+  "next": "Use exact employer notice links above; run actual receipt and production validation when normal network path returns; approve nearest empty slot with CAS and readback; preserve image/text and 24h source freshness."
+}
